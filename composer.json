@@ -1,0 +1,22 @@
+{
+    "name": "walk/battle.loc",
+    "authors": [
+        {
+            "name": "WalkWeb",
+            "email": "av18775@list.ru"
+        }
+    ],
+    "require": {
+      "ext-mysqli": "*",
+      "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Battle\\": "src/Battle/",
+            "Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    }
+}
