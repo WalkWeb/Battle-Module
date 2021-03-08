@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Effect;
 
 use Battle\Effect\Change\ChangeCollection;
-use Battle\Unit;
+use Battle\Unit\Unit;
 
 class Effect
 {

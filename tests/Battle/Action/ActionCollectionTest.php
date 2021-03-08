@@ -32,7 +32,7 @@ class ActionCollectionTest extends TestCase
         $actionCollection = new ActionCollection([$action]);
 
         foreach ($actionCollection->getActions() as $action) {
-            $this->assertInstanceOf(DamageAction::class, $action);
+            self::assertInstanceOf(DamageAction::class, $action);
         }
     }
 

@@ -7,7 +7,7 @@ namespace Battle\Effect;
 use Battle\Effect\Change\Change;
 use Battle\Effect\Change\ChangeCollection;
 use Battle\Effect\Change\ChangeException;
-use Battle\Unit;
+use Battle\Unit\Unit;
 
 class EffectFactory
 {
@@ -95,7 +95,6 @@ class EffectFactory
      * @param array $changes
      * @return ChangeCollection
      * @throws ChangeException
-     * @throws EffectException
      */
     private static function createChangeCollection(array $changes): ChangeCollection
     {

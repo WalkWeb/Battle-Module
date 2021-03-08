@@ -29,13 +29,13 @@ class PriestTest extends TestCase
 
         $priest = $actionUnit->getClass();
 
-        $this->assertEquals(UnitClassInterface::PRIEST, $priest->getId());
+        self::assertEquals(UnitClassInterface::PRIEST, $priest->getId());
 
         $actionCollection = $priest->getAbility($actionUnit, $enemyCommand, $actionCommand);
 
         foreach ($actionCollection->getActions() as $action) {
-            $this->assertContainsOnlyInstancesOf(GreatHealAction::class, [$action]);
-            $this->assertEquals($actionUnit->getDamage() * 3, $action->getPower());
+            self::assertContainsOnlyInstancesOf(GreatHealAction::class, [$action]);
+            self::assertEquals($actionUnit->getDamage() * 3, $action->getPower());
         }
     }
 }

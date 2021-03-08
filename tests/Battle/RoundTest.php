@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Battle;
 
 use Battle\Chat\Chat;
 use Battle\Classes\ClassFactoryException;
@@ -35,11 +35,11 @@ class RoundTest extends TestCase
             $nextNumberStroke = 3;
 
             $round = new Round($leftCommand, $rightCommand, $startCommand, new BattleStatistic(), new Chat());
-            $this->assertEquals($round->handle(), $nextCommand);
-            $this->assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
+            self::assertEquals($round->handle(), $nextCommand);
+            self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
 
         } catch (CommandException | UnitFactoryException | RoundException | ActionCollectionException $e) {
-            $this->fail($e->getMessage());
+            self::fail($e->getMessage());
         }
     }
 
@@ -63,11 +63,11 @@ class RoundTest extends TestCase
             $nextNumberStroke = 2;
 
             $round = new Round($leftCommand, $rightCommand, $startCommand, new BattleStatistic(), new Chat());
-            $this->assertEquals($round->handle(), $nextCommand);
-            $this->assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
+            self::assertEquals($round->handle(), $nextCommand);
+            self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
 
         } catch (CommandException | UnitFactoryException | RoundException | ActionCollectionException $e) {
-            $this->fail($e->getMessage());
+            self::fail($e->getMessage());
         }
     }
 }

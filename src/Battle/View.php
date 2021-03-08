@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Battle;
 
+use Battle\Unit\Unit;
+
 class View
 {
     /** @var Command */

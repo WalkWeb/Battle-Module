@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Battle\Statistics;
 
-use Battle\Classes\ClassFactoryException;
 use Battle\Command;
-use Battle\Exception\ActionCollectionException;
-use Battle\Exception\CommandException;
 use Battle\Statistic\BattleStatistic;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 
@@ -22,7 +20,7 @@ class BattleStatisticsTest extends TestCase
         $statistics->increasedRound();
         $statistics->increasedRound();
 
-        $this->assertEquals(4, $statistics->getRoundNumber());
+        self::assertEquals(4, $statistics->getRoundNumber());
     }
 
     public function testStrokeNumber(): void
@@ -33,7 +31,7 @@ class BattleStatisticsTest extends TestCase
         $statistics->increasedStroke();
         $statistics->increasedStroke();
 
-        $this->assertEquals(4, $statistics->getStrokeNumber());
+        self::assertEquals(4, $statistics->getStrokeNumber());
     }
 
     public function testRoundAndStrokeNumber(): void
@@ -46,15 +44,12 @@ class BattleStatisticsTest extends TestCase
         $statistics->increasedStroke();
         $statistics->increasedRound();
 
-        $this->assertEquals(4, $statistics->getRoundNumber());
-        $this->assertEquals(3, $statistics->getStrokeNumber());
+        self::assertEquals(4, $statistics->getRoundNumber());
+        self::assertEquals(3, $statistics->getStrokeNumber());
     }
 
     /**
-     * @throws ActionCollectionException
-     * @throws Factory\UnitFactoryException
-     * @throws CommandException
-     * @throws ClassFactoryException
+     * @throws Exception
      */
     public function testUnitCausedDamage(): void
     {
@@ -70,7 +65,7 @@ class BattleStatisticsTest extends TestCase
             $action->handle();
             //$defendUnit->applyAction($action);
             $statistics->addUnitAction($action);
-            $this->assertEquals(20, $statistics->getUnitsStatistics()[$attackUnit->getName()]->getCausedDamage());
+            self::assertEquals(20, $statistics->getUnitsStatistics()[$attackUnit->getName()]->getCausedDamage());
         }
 
         // Делаем 10 ударов
@@ -88,6 +83,6 @@ class BattleStatisticsTest extends TestCase
             }
         }
 
-        $this->assertEquals(150, $statistics->getUnitsStatistics()[$attackUnit->getName()]->getCausedDamage());
+        self::assertEquals(150, $statistics->getUnitsStatistics()[$attackUnit->getName()]->getCausedDamage());
     }
 }

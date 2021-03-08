@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Battle\Unit;
 
 use Battle\Classes\ClassFactory;
 use Battle\Classes\ClassFactoryException;
@@ -11,11 +11,9 @@ use Battle\Command;
 use Battle\Effect\Change\ChangeException;
 use Battle\Effect\EffectException;
 use Battle\Effect\EffectFactory;
-use Battle\Exception\CommandException;
-use Battle\Exception\DamageActionException;
-use Battle\Unit;
+use Battle\Unit\Unit;
 use Battle\Action\DamageAction;
-use Battle\Exception\UserException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
@@ -51,16 +49,16 @@ class UnitTest extends TestCase
             $attackClass
         );
 
-        $this->assertInstanceOf(Unit::class, $unit);
-        $this->assertEquals($this->attackName, $unit->getName());
-        $this->assertEquals($this->attackDamage, $unit->getDamage());
-        $this->assertEquals($this->attackLife, $unit->getLife());
-        $this->assertEquals($this->attackLife, $unit->getTotalLife());
-        $this->assertEquals($this->attackAttackSpeed, $unit->getAttackSpeed());
-        $this->assertFalse($unit->isAction());
-        $this->assertTrue($unit->isAlive());
-        $this->assertTrue($unit->isMelee());
-        $this->assertEquals($attackClass->getId(), $unit->getClass()->getId());
+        self::assertInstanceOf(Unit::class, $unit);
+        self::assertEquals($this->attackName, $unit->getName());
+        self::assertEquals($this->attackDamage, $unit->getDamage());
+        self::assertEquals($this->attackLife, $unit->getLife());
+        self::assertEquals($this->attackLife, $unit->getTotalLife());
+        self::assertEquals($this->attackAttackSpeed, $unit->getAttackSpeed());
+        self::assertFalse($unit->isAction());
+        self::assertTrue($unit->isAlive());
+        self::assertTrue($unit->isMelee());
+        self::assertEquals($attackClass->getId(), $unit->getClass()->getId());
     }
 
     public function testCreateFail(): void
@@ -70,49 +68,43 @@ class UnitTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws DamageActionException
+     * @throws Exception
      */
     public function testApplyDamage(): void
     {
         $attackClass = ClassFactory::create($this->attackClassId);
         $defendClass = ClassFactory::create($this->defendClassId);
 
-        try {
-            $attackUnit = new Unit(
-                $this->attackName,
-                $this->attackDamage,
-                $this->attackAttackSpeed,
-                $this->attackLife,
-                $this->attackMelee,
-                $attackClass
-            );
+        $attackUnit = new Unit(
+            $this->attackName,
+            $this->attackDamage,
+            $this->attackAttackSpeed,
+            $this->attackLife,
+            $this->attackMelee,
+            $attackClass
+        );
 
-            $defendUnit = new Unit(
-                $this->defendName,
-                $this->defendDamage,
-                $this->defendAttackSpeed,
-                $this->defendLife,
-                $this->defendMelee,
-                $defendClass
-            );
+        $defendUnit = new Unit(
+            $this->defendName,
+            $this->defendDamage,
+            $this->defendAttackSpeed,
+            $this->defendLife,
+            $this->defendMelee,
+            $defendClass
+        );
 
-            $defendCommand = new Command([$defendUnit]);
-            $action = new DamageAction($attackUnit, $defendCommand);
+        $defendCommand = new Command([$defendUnit]);
+        $action = new DamageAction($attackUnit, $defendCommand);
 
-            $action->handle();
+        $action->handle();
 
-            $this->assertEquals($this->defendLife - $attackUnit->getDamage(), $defendUnit->getLife());
+        self::assertEquals($this->defendLife - $attackUnit->getDamage(), $defendUnit->getLife());
 
-            $action2 = new DamageAction($attackUnit, $defendCommand);
-            $action2->handle();
+        $action2 = new DamageAction($attackUnit, $defendCommand);
+        $action2->handle();
 
-            $this->assertEquals(0, $defendUnit->getLife());
-            $this->assertFalse($defendUnit->isAlive());
-        } catch (UserException $e) {
-            $this->fail($e->getMessage());
-        }
+        self::assertEquals(0, $defendUnit->getLife());
+        self::assertFalse($defendUnit->isAlive());
     }
 
     /**
@@ -134,11 +126,11 @@ class UnitTest extends TestCase
         );
 
         $unit->madeAction();
-        $this->assertTrue($unit->isAction());
-        $this->assertEquals(0, $unit->getConcentration());
+        self::assertTrue($unit->isAction());
+        self::assertEquals(0, $unit->getConcentration());
         $unit->newRound();
-        $this->assertFalse($unit->isAction());
-        $this->assertEquals(Unit::NEW_ROUND_ADD_CONS, $unit->getConcentration());
+        self::assertFalse($unit->isAction());
+        self::assertEquals(Unit::NEW_ROUND_ADD_CONS, $unit->getConcentration());
     }
 
     /**
@@ -166,7 +158,7 @@ class UnitTest extends TestCase
         $effects = $unit->getEffects();
 
         foreach ($effects as $effectItem) {
-            $this->assertEquals($effect, $effectItem);
+            self::assertEquals($effect, $effectItem);
         }
     }
 }

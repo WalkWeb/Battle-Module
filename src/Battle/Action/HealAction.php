@@ -7,7 +7,7 @@ namespace Battle\Action;
 use Battle\Chat\Message;
 use Battle\Command;
 use Battle\Exception\UserException;
-use Battle\Unit;
+use Battle\Unit\Unit;
 
 class HealAction implements ActionInterface
 {

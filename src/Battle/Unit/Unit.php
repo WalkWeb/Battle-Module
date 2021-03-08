@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle;
+namespace Battle\Unit;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
@@ -10,9 +10,11 @@ use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Chat\Message;
 use Battle\Classes\UnitClassInterface;
+use Battle\Command;
 use Battle\Effect\Effect;
 use Battle\Effect\EffectCollection;
 use Battle\Exception\UserException;
+use Battle\Tools;
 use Exception;
 use Battle\Exception\ActionCollectionException;
 

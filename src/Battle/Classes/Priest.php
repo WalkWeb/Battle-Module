@@ -9,7 +9,7 @@ use Battle\Action\GreatHealAction;
 use Battle\Action\HealAction;
 use Battle\Command;
 use Battle\Exception\ActionCollectionException;
-use Battle\Unit;
+use Battle\Unit\Unit;
 
 class Priest extends UnitClass
 {

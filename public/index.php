@@ -8,7 +8,7 @@ use Battle\Chat\Chat;
 use Battle\Classes\ClassFactory;
 use Battle\Command;
 use Battle\Statistic\BattleStatistic;
-use Battle\Unit;
+use Battle\Unit\Unit;
 
 try {
     $warrior = ClassFactory::create(1);

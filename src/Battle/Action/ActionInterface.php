@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
-use Battle\Unit;
+use Battle\Unit\Unit;
 
 interface ActionInterface
 {

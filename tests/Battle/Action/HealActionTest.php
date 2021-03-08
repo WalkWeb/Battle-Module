@@ -33,11 +33,11 @@ class HealActionTest extends TestCase
         $actionCollection = $unit->getHealAction($alliesCommand);
 
         foreach ($actionCollection->getActions() as $action) {
-            $this->assertContainsOnlyInstancesOf(HealAction::class, [$action]);
+            self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
             $message = $action->handle();
         }
 
 
-        $this->assertEquals(self::NO_TARGET, $message);
+        self::assertEquals(self::NO_TARGET, $message);
     }
 }

@@ -16,9 +16,9 @@ class ChangeTest extends TestCase
 
         $change = new Change($data['type'], $data['increased'], $data['multiplier'], $data['power']);
 
-        $this->assertEquals($data['type'], $change->getType());
-        $this->assertEquals($data['increased'], $change->isIncreased());
-        $this->assertEquals($data['multiplier'], $change->isMultiplier());
-        $this->assertEquals($data['power'], $change->getPower());
+        self::assertEquals($data['type'], $change->getType());
+        self::assertEquals($data['increased'], $change->isIncreased());
+        self::assertEquals($data['multiplier'], $change->isMultiplier());
+        self::assertEquals($data['power'], $change->getPower());
     }
 }

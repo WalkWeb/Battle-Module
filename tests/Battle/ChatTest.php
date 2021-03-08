@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Battle;
 
 use PHPUnit\Framework\TestCase;
 use Battle\Chat\Chat;
@@ -16,6 +16,6 @@ class ChatTest extends TestCase
         $chat->add($messages[0]);
         $chat->add($messages[1]);
         $chat->add($messages[2]);
-        $this->assertEquals($messages, $chat->getAll());
+        self::assertEquals($messages, $chat->getAll());
     }
 }

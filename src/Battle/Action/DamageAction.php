@@ -7,7 +7,7 @@ namespace Battle\Action;
 use Battle\Command;
 use Battle\Exception\DamageActionException;
 use Battle\Exception\UserException;
-use Battle\Unit;
+use Battle\Unit\Unit;
 
 class DamageAction implements ActionInterface
 {

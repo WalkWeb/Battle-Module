@@ -31,7 +31,7 @@ class DamageActionTest extends TestCase
         $defendUnit = UnitFactory::create(2);
         $defendCommand = new Command([$defendUnit]);
         $action = new DamageAction($unit, $defendCommand);
-        $this->assertInstanceOf(DamageAction::class, $action);
+        self::assertInstanceOf(DamageAction::class, $action);
     }
 
     public function testCreateFail(): void
@@ -54,8 +54,8 @@ class DamageActionTest extends TestCase
         $defendCommand = new Command([$defendUnit]);
         $action = new DamageAction($unit, $defendCommand);
         $message = $action->handle();
-        $this->assertEquals($unit->getDamage(), $action->getPower());
-        $this->assertEquals(self::MESSAGE, $message);
+        self::assertEquals($unit->getDamage(), $action->getPower());
+        self::assertEquals(self::MESSAGE, $message);
     }
 
     /**
@@ -74,9 +74,9 @@ class DamageActionTest extends TestCase
         $action = new DamageAction($actionUnit, $defendCommand);
         $action->handle();
 
-        $this->assertEquals(20, $action->getPower());
-        $this->assertEquals($actionUnit->getName(), $action->getActionUnit()->getName());
-        $this->assertEquals($defendUnit->getName(), $action->getTargetUnit()->getName());
+        self::assertEquals(20, $action->getPower());
+        self::assertEquals($actionUnit->getName(), $action->getActionUnit()->getName());
+        self::assertEquals($defendUnit->getName(), $action->getTargetUnit()->getName());
     }
 
     /**
@@ -95,8 +95,8 @@ class DamageActionTest extends TestCase
 
         foreach ($actionCollection->getActions() as $action) {
             $action->handle();
-            $this->assertEquals(30, $action->getPower());
-            $this->assertEquals(20, $action->getFactualPower());
+            self::assertEquals(30, $action->getPower());
+            self::assertEquals(20, $action->getFactualPower());
         }
     }
 }

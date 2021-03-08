@@ -12,7 +12,7 @@ class UnitStatistic
     /** @var int - Нанесенный юнитом урон */
     private $causedDamage = 0;
 
-    /** @var int - Полученый юнитом урон */
+    /** @var int - Полученный юнитом урон */
     private $takenDamage = 0;
 
     /** @var int - Убил юнитов */

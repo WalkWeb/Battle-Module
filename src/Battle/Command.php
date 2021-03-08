@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle;
 
 use Battle\Exception\CommandException;
+use Battle\Unit\Unit;
 
 class Command
 {

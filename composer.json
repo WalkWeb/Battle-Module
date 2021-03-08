@@ -1,5 +1,6 @@
 {
     "name": "walk/battle.loc",
+    "description": "Battle module for browser game",
     "authors": [
         {
             "name": "WalkWeb",

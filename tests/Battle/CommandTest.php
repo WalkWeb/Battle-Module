@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Battle;
 
 use Battle\Classes\ClassFactoryException;
 use Battle\Command;
 use Battle\Exception\CommandException;
-use Battle\Unit;
+use Battle\Unit\Unit;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -19,33 +19,28 @@ class CommandTest extends TestCase
      * Проверяем успешное создание команды
      *
      * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitFactoryException
      */
     public function testCreate(): void
     {
-        try {
-            $unit = UnitFactory::create(1);
-            $command = new Command([$unit]);
-            $this->assertInstanceOf(Command::class, $command);
-        } catch (UnitFactoryException | CommandException $e) {
-            $this->fail($e->getMessage());
-        }
-
+        $unit = UnitFactory::create(1);
+        $command = new Command([$unit]);
+        self::assertInstanceOf(Command::class, $command);
     }
 
     /**
      * Проверяем соответствие переданных юнитов и тех, что возвращает команда
      *
      * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitFactoryException
      */
     public function testCommandUnits(): void
     {
-        try {
-            $units = [UnitFactory::create(1), UnitFactory::create(2)];
-            $command = new Command($units);
-            $this->assertEquals($units, $command->getUnits());
-        } catch (UnitFactoryException | CommandException $e) {
-            $this->fail($e->getMessage());
-        }
+        $units = [UnitFactory::create(1), UnitFactory::create(2)];
+        $command = new Command($units);
+        self::assertEquals($units, $command->getUnits());
     }
 
     /**
@@ -61,8 +56,8 @@ class CommandTest extends TestCase
         $rangeUnit = UnitFactory::create(5);
         $command = new Command([$meleeUnit, $rangeUnit]);
 
-        $this->assertEquals([$meleeUnit], $command->getMeleeUnits());
-        $this->assertEquals([$rangeUnit], $command->getRangeUnits());
+        self::assertEquals([$meleeUnit], $command->getMeleeUnits());
+        self::assertEquals([$rangeUnit], $command->getRangeUnits());
     }
 
     /**
@@ -77,9 +72,9 @@ class CommandTest extends TestCase
         $rangeUnit = UnitFactory::create(5);
         $command = new Command([$rangeUnit]);
 
-        $this->assertFalse($command->existMeleeUnits());
-        $this->assertEquals([], $command->getMeleeUnits());
-        $this->assertEquals([$rangeUnit], $command->getRangeUnits());
+        self::assertFalse($command->existMeleeUnits());
+        self::assertEquals([], $command->getMeleeUnits());
+        self::assertEquals([$rangeUnit], $command->getRangeUnits());
     }
 
     /**
@@ -94,13 +89,11 @@ class CommandTest extends TestCase
         $meleeUnit = UnitFactory::create(10);
         $rangeUnit = UnitFactory::create(5);
         $command = new Command([$meleeUnit, $rangeUnit]);
-        $this->assertFalse($command->existMeleeUnits());
+        self::assertFalse($command->existMeleeUnits());
     }
 
     /**
      * Проверяем неуспешное создание команды - не передан массив юнитов
-     *
-     * @throws CommandException
      */
     public function testCreateFail(): void
     {
@@ -135,71 +128,64 @@ class CommandTest extends TestCase
      * Проверяем корректное возвращение юнита для атаки и наличие живых юнитов в команде
      *
      * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitFactoryException
      */
     public function testGetUserFromAttack(): void
     {
-        try {
-            $unit = UnitFactory::create(1);
-            $command = new Command([$unit]);
-            $defined = $command->getUnitForAttacks();
+        $unit = UnitFactory::create(1);
+        $command = new Command([$unit]);
+        $defined = $command->getUnitForAttacks();
 
-            $this->assertTrue($command->isAlive());
-            $this->assertInstanceOf(Unit::class, $defined);
-            $this->assertEquals($unit->getName(), $defined->getName());
-            $this->assertTrue($defined->isAlive());
-            $this->assertTrue($defined->getLife() > 0);
-        } catch (UnitFactoryException | CommandException $e) {
-            $this->fail($e->getMessage());
-        }
+        self::assertTrue($command->isAlive());
+        self::assertInstanceOf(Unit::class, $defined);
+        self::assertEquals($unit->getName(), $defined->getName());
+        self::assertTrue($defined->isAlive());
+        self::assertTrue($defined->getLife() > 0);
     }
 
     /**
      * Проверяем корректное отсутствие юнитов для атаки и отсутствие живых юнитов в команде
      *
      * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitFactoryException
      */
     public function testNoUnitFromAttack(): void
     {
-        try {
-            $unit = UnitFactory::createDeadUnit();
-            $command = new Command([$unit]);
-            $this->assertEquals(null, $command->getUnitForAction());
-            $this->assertEquals(null, $command->getUnitForAttacks());
-            $this->assertEquals(false, $command->isAlive());
-        } catch (UnitFactoryException | CommandException $e) {
-            $this->fail($e->getMessage());
-        }
+        $unit = UnitFactory::createDeadUnit();
+        $command = new Command([$unit]);
+        self::assertEquals(null, $command->getUnitForAction());
+        self::assertEquals(null, $command->getUnitForAttacks());
+        self::assertEquals(false, $command->isAlive());
     }
 
     /**
-     * Проверяем, что все юниты походили и начало нового раунда - все юниты опять могут ходить
+     * Проверяем, что все юниты походили и на начало нового раунда - все юниты опять могут ходить
      *
      * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitFactoryException
      */
     public function testAllUnitAction(): void
     {
-        try {
-            $units = [UnitFactory::create(1), UnitFactory::create(2)];
-            $command = new Command($units);
+        $units = [UnitFactory::create(1), UnitFactory::create(2)];
+        $command = new Command($units);
 
-            $firstActionUnit = $command->getUnitForAction();
-            $firstActionUnit->madeAction();
-            $secondActionUnit = $command->getUnitForAction();
-            $secondActionUnit->madeAction();
+        $firstActionUnit = $command->getUnitForAction();
+        $firstActionUnit->madeAction();
+        $secondActionUnit = $command->getUnitForAction();
+        $secondActionUnit->madeAction();
 
-            $this->assertEquals(null, $command->getUnitForAction());
+        self::assertEquals(null, $command->getUnitForAction());
 
-            $command->newRound();
+        $command->newRound();
 
-            $firstActionUnit = $command->getUnitForAction();
-            $firstActionUnit->madeAction();
-            $secondActionUnit = $command->getUnitForAction();
-            $secondActionUnit->madeAction();
+        $firstActionUnit = $command->getUnitForAction();
+        $firstActionUnit->madeAction();
+        $secondActionUnit = $command->getUnitForAction();
+        $secondActionUnit->madeAction();
 
-            $this->assertEquals(null, $command->getUnitForAction());
-
-        } catch (UnitFactoryException | CommandException $e) {
-            $this->fail($e->getMessage());
-        }
+        self::assertEquals(null, $command->getUnitForAction());
     }
 }

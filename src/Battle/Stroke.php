@@ -6,6 +6,7 @@ namespace Battle;
 
 use Battle\Statistic\BattleStatistic;
 use Battle\Chat\Chat;
+use Battle\Unit\Unit;
 
 class Stroke
 {

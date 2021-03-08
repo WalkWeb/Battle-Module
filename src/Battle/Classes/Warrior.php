@@ -8,7 +8,7 @@ use Battle\Action\ActionCollection;
 use Battle\Action\HeavyStrikeAction;
 use Battle\Command;
 use Battle\Exception\ActionCollectionException;
-use Battle\Unit;
+use Battle\Unit\Unit;
 
 class Warrior extends UnitClass
 {

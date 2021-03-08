@@ -24,9 +24,9 @@ class UnitStatisticsTest extends TestCase
 
         $unitStatistics->addKillingUnit();
 
-        $this->assertEquals(45, $unitStatistics->getCausedDamage());
-        $this->assertEquals(60, $unitStatistics->getTakenDamage());
-        $this->assertEquals(1, $unitStatistics->getKilling());
-        $this->assertEquals($name, $unitStatistics->getName());
+        self::assertEquals(45, $unitStatistics->getCausedDamage());
+        self::assertEquals(60, $unitStatistics->getTakenDamage());
+        self::assertEquals(1, $unitStatistics->getKilling());
+        self::assertEquals($name, $unitStatistics->getName());
     }
 }

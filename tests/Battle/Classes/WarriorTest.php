@@ -29,13 +29,13 @@ class WarriorTest extends TestCase
 
         $warrior = $actionUnit->getClass();
 
-        $this->assertEquals(UnitClassInterface::WARRIOR, $warrior->getId());
+        self::assertEquals(UnitClassInterface::WARRIOR, $warrior->getId());
 
         $actionCollection = $warrior->getAbility($actionUnit, $enemyCommand, $actionCommand);
 
         foreach ($actionCollection->getActions() as $action) {
-            $this->assertContainsOnlyInstancesOf(HeavyStrikeAction::class, [$action]);
-            $this->assertEquals($actionUnit->getDamage() * 2.5, $action->getPower());
+            self::assertContainsOnlyInstancesOf(HeavyStrikeAction::class, [$action]);
+            self::assertEquals($actionUnit->getDamage() * 2.5, $action->getPower());
         }
     }
 }

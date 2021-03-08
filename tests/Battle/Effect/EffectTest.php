@@ -48,25 +48,25 @@ class EffectTest extends TestCase
             $changesDuration
         );
 
-        $this->assertEquals($data['id'], $effect->getId());
-        $this->assertEquals($data['name'], $effect->getName());
-        $this->assertEquals($data['description'], $effect->getDescription());
-        $this->assertEquals($data['duration'], $effect->getDuration());
-        $this->assertEquals($data['duration'], $effect->getTotalDuration());
-        $this->assertEquals($unit, $effect->getUnit());
+        self::assertEquals($data['id'], $effect->getId());
+        self::assertEquals($data['name'], $effect->getName());
+        self::assertEquals($data['description'], $effect->getDescription());
+        self::assertEquals($data['duration'], $effect->getDuration());
+        self::assertEquals($data['duration'], $effect->getTotalDuration());
+        self::assertEquals($unit, $effect->getUnit());
 
         $changesApply = $effect->getChangesApply();
-        $this->assertCount(count($data['change_apply']), $changesApply->getChanges());
+        self::assertCount(count($data['change_apply']), $changesApply->getChanges());
 
         foreach ($changesApply->getChanges() as $change) {
-            $this->assertContainsOnlyInstancesOf(Change::class, [$change]);
-            $this->assertEquals($data['change_apply'][0]['type'], $change->getType());
-            $this->assertEquals($data['change_apply'][0]['increased'], $change->isIncreased());
-            $this->assertEquals($data['change_apply'][0]['multiplier'], $change->isMultiplier());
-            $this->assertEquals($data['change_apply'][0]['power'], $change->getPower());
+            self::assertContainsOnlyInstancesOf(Change::class, [$change]);
+            self::assertEquals($data['change_apply'][0]['type'], $change->getType());
+            self::assertEquals($data['change_apply'][0]['increased'], $change->isIncreased());
+            self::assertEquals($data['change_apply'][0]['multiplier'], $change->isMultiplier());
+            self::assertEquals($data['change_apply'][0]['power'], $change->getPower());
         }
 
         $changesDuration = $effect->getChangesDuration();
-        $this->assertCount(count($data['change_duration']), $changesDuration->getChanges());
+        self::assertCount(count($data['change_duration']), $changesDuration->getChanges());
     }
 }

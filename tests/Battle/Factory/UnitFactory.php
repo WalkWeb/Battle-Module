@@ -6,7 +6,7 @@ namespace Tests\Battle\Factory;
 
 use Battle\Classes\ClassFactory;
 use Battle\Classes\ClassFactoryException;
-use Battle\Unit;
+use Battle\Unit\Unit;
 
 class UnitFactory
 {

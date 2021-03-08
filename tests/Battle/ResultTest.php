@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Battle;
 
 use Battle\Classes\ClassFactoryException;
 use PHPUnit\Framework\TestCase;
@@ -16,22 +16,20 @@ class ResultTest extends TestCase
 {
     /**
      * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws ResultException
+     * @throws UnitFactoryException
      */
     public function testCreate(): void
     {
-        try {
-            $leftCommand = CommandFactory::createLeftCommand();
-            $rightCommand = CommandFactory::createRightCommand();
+        $leftCommand = CommandFactory::createLeftCommand();
+        $rightCommand = CommandFactory::createRightCommand();
 
-            $result = new Result($leftCommand, $rightCommand, $winner = 2);
+        $result = new Result($leftCommand, $rightCommand, $winner = 2);
 
-            $this->assertInstanceOf(Result::class, $result);
-            $this->assertEquals($leftCommand, $result->getLeftCommand());
-            $this->assertEquals($rightCommand, $result->getRightCommand());
-            $this->assertEquals($winner, $result->getWinner());
-
-        } catch (ResultException | CommandException | UnitFactoryException $e) {
-            $this->fail($e->getMessage());
-        }
+        self::assertInstanceOf(Result::class, $result);
+        self::assertEquals($leftCommand, $result->getLeftCommand());
+        self::assertEquals($rightCommand, $result->getRightCommand());
+        self::assertEquals($winner, $result->getWinner());
     }
 }

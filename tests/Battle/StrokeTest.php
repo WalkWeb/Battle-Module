@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Battle;
 
 use Battle\Chat\Chat;
 use Battle\Classes\ClassFactory;
@@ -14,7 +14,7 @@ use Battle\Exception\CommandException;
 use Battle\Statistic\BattleStatistic;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke;
-use Battle\Unit;
+use Battle\Unit\Unit;
 use Throwable;
 
 class StrokeTest extends TestCase
@@ -71,9 +71,9 @@ class StrokeTest extends TestCase
 
             $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new BattleStatistic(), new Chat());
 
-            $this->assertInstanceOf(Stroke::class, $stroke);
+            self::assertInstanceOf(Stroke::class, $stroke);
         } catch (CommandException $e) {
-            $this->fail();
+            self::fail();
         }
     }
 
@@ -95,9 +95,9 @@ class StrokeTest extends TestCase
             $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new BattleStatistic(), new Chat());
             $stroke->handle();
 
-            $this->assertEquals($this->defendLife - $this->attackUnit->getDamage(), $this->defendUnit->getLife());
+            self::assertEquals($this->defendLife - $this->attackUnit->getDamage(), $this->defendUnit->getLife());
         } catch (CommandException $e) {
-            $this->fail($e->getMessage());
+            self::fail($e->getMessage());
         }
     }
 }
