@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace Battle;
 
+use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
 class View
 {
-    /** @var Command */
+    /** @var CommandInterface */
     private $leftCommand;
 
-    /** @var Command */
+    /** @var CommandInterface */
     private $rightCommand;
 
-    public function __construct(Command $leftCommand, Command $rightCommand)
+    public function __construct(CommandInterface $leftCommand, CommandInterface $rightCommand)
     {
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Classes;
 
 use Battle\Action\ActionCollection;
-use Battle\Command;
+use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
 interface UnitClassInterface
@@ -14,5 +14,5 @@ interface UnitClassInterface
     public const PRIEST  = 2;
 
     public function getId(): int;
-    public function getAbility(UnitInterface $actionUnit, Command $enemyCommand, Command $alliesCommand): ActionCollection;
+    public function getAbility(UnitInterface $actionUnit, CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
 }

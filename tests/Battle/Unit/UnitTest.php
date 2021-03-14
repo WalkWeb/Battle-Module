@@ -7,7 +7,7 @@ namespace Tests\Battle\Unit;
 use Battle\Classes\ClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
-use Battle\Command;
+use Battle\Command\Command;
 use Battle\Effect\Change\ChangeException;
 use Battle\Effect\EffectException;
 use Battle\Effect\EffectFactory;

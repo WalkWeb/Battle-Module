@@ -6,7 +6,7 @@ require_once __DIR__ . '/../public/style.html';
 use Battle\Battle;
 use Battle\Chat\Chat;
 use Battle\Classes\ClassFactory;
-use Battle\Command;
+use Battle\Command\Command;
 use Battle\Statistic\BattleStatistic;
 use Battle\Unit\Unit;
 

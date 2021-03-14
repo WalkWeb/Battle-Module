@@ -8,7 +8,7 @@ use Battle\Chat\Chat;
 use Battle\Classes\ClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
-use Battle\Command;
+use Battle\Command\Command;
 use Battle\Exception\CommandException;
 use Battle\Statistic\BattleStatistic;
 use PHPUnit\Framework\TestCase;

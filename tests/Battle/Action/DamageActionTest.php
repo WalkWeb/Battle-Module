@@ -6,11 +6,10 @@ namespace Tests\Battle\Action;
 
 use Battle\Action\DamageAction;
 use Battle\Classes\ClassFactoryException;
-use Battle\Command;
+use Battle\Command\Command;
 use Battle\Exception\ActionCollectionException;
 use Battle\Exception\CommandException;
 use Battle\Exception\DamageActionException;
-use Battle\Exception\UserException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -45,7 +44,6 @@ class DamageActionTest extends TestCase
      * @throws CommandException
      * @throws DamageActionException
      * @throws UnitFactoryException
-     * @throws UserException
      */
     public function testApplyAction(): void
     {
@@ -63,7 +61,6 @@ class DamageActionTest extends TestCase
      * @throws CommandException
      * @throws DamageActionException
      * @throws UnitFactoryException
-     * @throws UserException
      */
     public function testActionUnit(): void
     {
@@ -80,7 +77,6 @@ class DamageActionTest extends TestCase
     }
 
     /**
-     * @throws ActionCollectionException
      * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException

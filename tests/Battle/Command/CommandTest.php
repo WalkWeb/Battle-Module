@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle;
+namespace Tests\Battle\Command;
 
 use Battle\Classes\ClassFactoryException;
-use Battle\Command;
+use Battle\Command\Command;
 use Battle\Exception\CommandException;
 use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle;
 
+use Battle\Command\CommandInterface;
 use Battle\Exception\RoundException;
 use Battle\Exception\CommandException;
 use Battle\Statistic\BattleStatistic;
@@ -18,10 +19,10 @@ class Round
     private const END_STROKE   = 'End Stroke';
     private const HR           = '<hr>';
 
-    /** @var Command */
+    /** @var CommandInterface */
     private $leftCommand;
 
-    /** @var Command */
+    /** @var CommandInterface */
     private $rightCommand;
 
     /** @var int - Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand */
@@ -40,8 +41,8 @@ class Round
     private $debug;
 
     /**
-     * @param Command $leftCommand
-     * @param Command $rightCommand
+     * @param CommandInterface $leftCommand
+     * @param CommandInterface $rightCommand
      * @param int $actionCommand
      * @param BattleStatistic $statistics
      * @param Chat $chat
@@ -49,8 +50,8 @@ class Round
      * @throws RoundException
      */
     public function __construct(
-        Command $leftCommand,
-        Command $rightCommand,
+        CommandInterface $leftCommand,
+        CommandInterface $rightCommand,
         int $actionCommand,
         BattleStatistic $statistics,
         Chat $chat,

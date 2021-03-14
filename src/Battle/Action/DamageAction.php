@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
-use Battle\Command;
+use Battle\Command\CommandInterface;
 use Battle\Exception\DamageActionException;
 use Battle\Unit\UnitInterface;
 
@@ -18,13 +18,13 @@ class DamageAction implements ActionInterface
     /** @var UnitInterface */
     private $targetUnit;
 
-    /** @var Command */
+    /** @var CommandInterface */
     private $enemyCommand;
 
     /** @var int */
     private $factualPower;
 
-    public function __construct(UnitInterface $actionUnit, Command $enemyCommand)
+    public function __construct(UnitInterface $actionUnit, CommandInterface $enemyCommand)
     {
         $this->actionUnit = $actionUnit;
         $this->enemyCommand = $enemyCommand;

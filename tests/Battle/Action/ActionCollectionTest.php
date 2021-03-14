@@ -7,7 +7,7 @@ namespace Tests\Battle\Action;
 use Battle\Action\ActionCollection;
 use Battle\Action\DamageAction;
 use Battle\Classes\ClassFactoryException;
-use Battle\Command;
+use Battle\Command\Command;
 use Battle\Exception\ActionCollectionException;
 use Battle\Exception\CommandException;
 use PHPUnit\Framework\TestCase;
@@ -22,7 +22,7 @@ class ActionCollectionTest extends TestCase
      * @throws UnitFactoryException
      * @throws ClassFactoryException
      */
-    public function testCreateSuccess(): void
+    public function testCreateActionCollectionSuccess(): void
     {
         $unit = UnitFactory::create(1);
         $defendUnit = UnitFactory::create(2);
@@ -39,7 +39,7 @@ class ActionCollectionTest extends TestCase
     /**
      * @throws ActionCollectionException
      */
-    public function testCreateFail(): void
+    public function testCreateActionCollectionFail(): void
     {
         $this->expectException(ActionCollectionException::class);
         new ActionCollection(['action']);

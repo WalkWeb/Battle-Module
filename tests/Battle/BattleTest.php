@@ -8,7 +8,7 @@ use Battle\Chat\Chat;
 use Battle\Statistic\BattleStatistic;
 use PHPUnit\Framework\TestCase;
 use Battle\Battle;
-use Battle\Command;
+use Battle\Command\Command;
 use Tests\Battle\Factory\UnitFactory;
 use Exception;
 

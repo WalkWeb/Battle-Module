@@ -10,7 +10,7 @@ use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Chat\Message;
 use Battle\Classes\UnitClassInterface;
-use Battle\Command;
+use Battle\Command\CommandInterface;
 use Battle\Effect\Effect;
 use Battle\Effect\EffectCollection;
 use Battle\Tools;
@@ -88,13 +88,13 @@ class Unit implements UnitInterface
     }
 
     /**
-     * @param Command $enemyCommand
-     * @param Command $alliesCommand
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
      * @return ActionCollection
      * @throws ActionCollectionException
      * @throws Exception
      */
-    public function getAction(Command $enemyCommand, Command $alliesCommand): ActionCollection
+    public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         if ($this->concentration >= self::MAX_CONS) {
             $this->concentration = 0;
@@ -173,11 +173,11 @@ class Unit implements UnitInterface
     }
 
     /**
-     * @param Command $defendingCommand
+     * @param CommandInterface $defendingCommand
      * @return ActionCollection
      * @throws ActionCollectionException
      */
-    public function getDamageAction(Command $defendingCommand): ActionCollection
+    public function getDamageAction(CommandInterface $defendingCommand): ActionCollection
     {
         $attacks = $this->calculateAttackSpeed();
         $array = [];
@@ -190,11 +190,11 @@ class Unit implements UnitInterface
     }
 
     /**
-     * @param Command $alliesCommand
+     * @param CommandInterface $alliesCommand
      * @return ActionCollection
      * @throws ActionCollectionException
      */
-    public function getHealAction(Command $alliesCommand): ActionCollection
+    public function getHealAction(CommandInterface $alliesCommand): ActionCollection
     {
         return new ActionCollection([new HealAction($this, $alliesCommand)]);
     }

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Battle;
+namespace Battle\Command;
 
 use Battle\Exception\CommandException;
 use Battle\Unit\UnitInterface;
 
-class Command
+class Command implements CommandInterface
 {
     /**
      * TODO Переделать с массива на UnitCollection
@@ -47,6 +47,7 @@ class Command
         return false;
     }
 
+    // todo no tests
     public function isAction(): bool
     {
         foreach ($this->units as $unit) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle;
 
+use Battle\Command\CommandInterface;
 use Battle\Statistic\BattleStatistic;
 use Battle\Chat\Chat;
 use Battle\Unit\UnitInterface;
@@ -16,10 +17,10 @@ class Stroke
     /** @var UnitInterface - Юнит совершающий действие (атаку) */
     private $actionUnit;
 
-    /** @var Command */
+    /** @var CommandInterface */
     private $leftCommand;
 
-    /** @var Command */
+    /** @var CommandInterface */
     private $rightCommand;
 
     /** @var BattleStatistic */
@@ -34,8 +35,8 @@ class Stroke
     /**
      * @param int $actionCommand
      * @param UnitInterface $actionUnit
-     * @param Command $leftCommand
-     * @param Command $rightCommand
+     * @param CommandInterface $leftCommand
+     * @param CommandInterface $rightCommand
      * @param BattleStatistic $statistics
      * @param Chat $chat
      * @param bool $debug
@@ -43,8 +44,8 @@ class Stroke
     public function __construct(
         int $actionCommand,
         UnitInterface $actionUnit,
-        Command $leftCommand,
-        Command $rightCommand,
+        CommandInterface $leftCommand,
+        CommandInterface $rightCommand,
         BattleStatistic $statistics,
         Chat $chat,
         bool $debug = false

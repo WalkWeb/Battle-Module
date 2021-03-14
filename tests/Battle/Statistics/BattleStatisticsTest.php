@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Statistics;
 
-use Battle\Command;
+use Battle\Command\Command;
 use Battle\Statistic\BattleStatistic;
 use Exception;
 use PHPUnit\Framework\TestCase;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle;
 
 use Battle\Chat\Chat;
+use Battle\Command\CommandInterface;
 use Battle\Exception\BattleException;
 use Battle\Exception\CommandException;
 use Battle\Exception\RoundException;
@@ -15,10 +16,10 @@ use Battle\Exception\ResultException;
 
 class Battle
 {
-    /** @var Command */
+    /** @var CommandInterface */
     private $leftCommand;
 
-    /** @var Command */
+    /** @var CommandInterface */
     private $rightCommand;
 
     /** @var int - Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand */
@@ -37,16 +38,16 @@ class Battle
     private $chat;
 
     /**
-     * @param Command $leftCommand
-     * @param Command $rightCommand
+     * @param CommandInterface $leftCommand
+     * @param CommandInterface $rightCommand
      * @param BattleStatistic $statistics
      * @param Chat $chat
      * @param bool $debug
      * @throws Exception
      */
     public function __construct(
-        Command $leftCommand,
-        Command $rightCommand,
+        CommandInterface $leftCommand,
+        CommandInterface $rightCommand,
         BattleStatistic $statistics,
         Chat $chat,
         bool $debug = true

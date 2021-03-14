@@ -7,7 +7,7 @@ namespace Tests\Battle\Classes;
 use Battle\Action\HeavyStrikeAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
-use Battle\Command;
+use Battle\Command\Command;
 use Battle\Exception\CommandException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;

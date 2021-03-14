@@ -5,29 +5,30 @@ declare(strict_types=1);
 namespace Tests\Battle\Factory;
 
 use Battle\Classes\ClassFactoryException;
-use Battle\Command;
+use Battle\Command\Command;
+use Battle\Command\CommandInterface;
 use Battle\Exception\CommandException;
 
 class CommandFactory
 {
     /**
-     * @return Command
+     * @return CommandInterface
      * @throws CommandException
      * @throws UnitFactoryException
      * @throws ClassFactoryException
      */
-    public static function createLeftCommand(): Command
+    public static function createLeftCommand(): CommandInterface
     {
         return new Command([UnitFactory::create(1)]);
     }
 
     /**
-     * @return Command
+     * @return CommandInterface
      * @throws CommandException
      * @throws UnitFactoryException
      * @throws ClassFactoryException
      */
-    public static function createRightCommand(): Command
+    public static function createRightCommand(): CommandInterface
     {
         return new Command([UnitFactory::create(2)]);
     }

@@ -7,7 +7,7 @@ namespace Battle\Unit;
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
 use Battle\Classes\UnitClassInterface;
-use Battle\Command;
+use Battle\Command\CommandInterface;
 use Battle\Effect\Effect;
 
 /**
@@ -36,11 +36,11 @@ interface UnitInterface
      *
      * TODO Переделать на ActionCollection
      *
-     * @param Command $enemyCommand
-     * @param Command $alliesCommand
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
      * @return ActionCollection
      */
-    public function getAction(Command $enemyCommand, Command $alliesCommand): ActionCollection;
+    public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
 
     /**
      * Универсальный метод, через который мы применяем действие к юниту. Какое бы это действие не было - удар, лечение,
@@ -118,18 +118,18 @@ interface UnitInterface
     /**
      * TODO На удаление, действие у юнита получается только через getAction()
      *
-     * @param Command $defendingCommand
+     * @param CommandInterface $defendingCommand
      * @return ActionCollection
      */
-    public function getDamageAction(Command $defendingCommand): ActionCollection;
+    public function getDamageAction(CommandInterface $defendingCommand): ActionCollection;
 
     /**
      * TODO На удаление, действие у юнита получается только через getAction()
      *
-     * @param Command $alliesCommand
+     * @param CommandInterface $alliesCommand
      * @return ActionCollection
      */
-    public function getHealAction(Command $alliesCommand): ActionCollection;
+    public function getHealAction(CommandInterface $alliesCommand): ActionCollection;
 
     /**
      * Возвращает количество концентрации юнита

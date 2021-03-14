@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Chat\Message;
-use Battle\Command;
-use Battle\Unit\UnitException;
+use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
 class HealAction implements ActionInterface
@@ -19,13 +18,13 @@ class HealAction implements ActionInterface
     /** @var UnitInterface */
     private $targetUnit;
 
-    /** @var Command */
+    /** @var CommandInterface */
     private $alliesCommand;
 
     /** @var int */
     private $factualPower = 0;
 
-    public function __construct(UnitInterface $actionUnit, Command $alliesCommand)
+    public function __construct(UnitInterface $actionUnit, CommandInterface $alliesCommand)
     {
         $this->actionUnit = $actionUnit;
         $this->alliesCommand = $alliesCommand;
@@ -33,7 +32,6 @@ class HealAction implements ActionInterface
 
     /**
      * @return string
-     * @throws UnitException
      */
     public function handle(): string
     {

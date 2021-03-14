@@ -6,8 +6,7 @@ namespace Tests\Battle\Action;
 
 use Battle\Action\HealAction;
 use Battle\Classes\ClassFactoryException;
-use Battle\Command;
-use Battle\Exception\ActionCollectionException;
+use Battle\Command\Command;
 use Battle\Exception\CommandException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
@@ -18,9 +17,8 @@ class HealActionTest extends TestCase
     private const NO_TARGET = '<b>unit_1</b> [100/100] wanted to use heal, but no one';
 
     /**
-     * @throws CommandException
      * @throws ClassFactoryException
-     * @throws ActionCollectionException
+     * @throws CommandException
      * @throws UnitFactoryException
      */
     public function testCreate(): void
