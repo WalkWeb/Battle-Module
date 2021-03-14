@@ -34,8 +34,6 @@ interface UnitInterface
      *
      * Это может быть обычный удар, или использование способности, или ничего (если он, например, оглушен)
      *
-     * TODO Переделать на ActionCollection
-     *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
@@ -45,8 +43,6 @@ interface UnitInterface
     /**
      * Универсальный метод, через который мы применяем действие к юниту. Какое бы это действие не было - удар, лечение,
      * применение эффекта или что-то другое
-     *
-     * TODO Переделать на ActionCollection
      *
      * @param ActionInterface $action
      * @return string

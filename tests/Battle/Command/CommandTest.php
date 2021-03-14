@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Command;
 
+use Battle\Action\DamageAction;
+use Battle\Classes\ClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Exception\CommandException;
+use Battle\Exception\DamageActionException;
+use Battle\Unit\Unit;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;
@@ -122,7 +126,7 @@ class CommandTest extends TestCase
     }
 
     /**
-     * Проверяем корректное возвращение юнита для атаки и наличие живых юнитов в команде
+     * Проверяем корректное возвращение юнита получения удара
      *
      * @throws ClassFactoryException
      * @throws CommandException
@@ -184,5 +188,48 @@ class CommandTest extends TestCase
         $secondActionUnit->madeAction();
 
         self::assertEquals(null, $command->getUnitForAction());
+    }
+
+    /**
+     * Проверяем корректное возвращение юнита для совершения хода
+     *
+     * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitFactoryException
+     */
+    public function testGetUnitForActionOne(): void
+    {
+        $unit = UnitFactory::create(1);
+        $command = new Command([$unit]);
+
+        self::assertEquals($unit, $command->getUnitForAction());
+    }
+
+    /**
+     * Проверяем корректное отсутствие юнитов для хода, когда один может ходить но мертвый, другой - живой но уже ходил
+     *
+     * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws DamageActionException
+     */
+    public function testGetUnitForActionNothing(): void
+    {
+        $unit1 = new Unit('User 1', 15, 1, 110, true, ClassFactory::create(1));
+        $unit2 = new Unit('User 2', 12, 1, 95, false, ClassFactory::create(2));
+        $unit3 = new Unit('User 3', 120, 1, 300, true, ClassFactory::create(1));
+
+        $command = new Command([$unit1, $unit2]);
+
+        // вначале юнит присутствует
+        self::assertInstanceOf(UnitInterface::class, $command->getUnitForAction());
+
+        // убиваем первого юнита
+        $action = new DamageAction($unit3, $command);
+        $action->handle();
+
+        // указываем, что второй юнит походил
+        $unit2->madeAction();
+
+        self::assertNull($command->getUnitForAction());
     }
 }

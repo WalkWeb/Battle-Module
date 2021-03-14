@@ -47,11 +47,10 @@ class Command implements CommandInterface
         return false;
     }
 
-    // todo no tests
     public function isAction(): bool
     {
         foreach ($this->units as $unit) {
-            if (!$unit->isAction()) {
+            if ($unit->isAlive() && !$unit->isAction()) {
                 return true;
             }
         }
