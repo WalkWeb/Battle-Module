@@ -1,3 +1,6 @@
 .idea
 .phpunit.result.cache
 vendor/
+
+# result code coverage (php vendor/bin/phpunit --coverage-html html)
+html/
