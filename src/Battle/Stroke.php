@@ -6,14 +6,14 @@ namespace Battle;
 
 use Battle\Statistic\BattleStatistic;
 use Battle\Chat\Chat;
-use Battle\Unit\Unit;
+use Battle\Unit\UnitInterface;
 
 class Stroke
 {
     /** @var int - Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand */
     private $actionCommand;
 
-    /** @var Unit - Юнит совершающий действие (атаку) */
+    /** @var UnitInterface - Юнит совершающий действие (атаку) */
     private $actionUnit;
 
     /** @var Command */
@@ -33,7 +33,7 @@ class Stroke
 
     /**
      * @param int $actionCommand
-     * @param Unit $actionUnit
+     * @param UnitInterface $actionUnit
      * @param Command $leftCommand
      * @param Command $rightCommand
      * @param BattleStatistic $statistics
@@ -42,7 +42,7 @@ class Stroke
      */
     public function __construct(
         int $actionCommand,
-        Unit $actionUnit,
+        UnitInterface $actionUnit,
         Command $leftCommand,
         Command $rightCommand,
         BattleStatistic $statistics,
@@ -59,9 +59,6 @@ class Stroke
         $this->debug = $debug;
     }
 
-    /**
-     * @throws Exception\ActionCollectionException
-     */
     public function handle(): void
     {
         if ($this->debug) {

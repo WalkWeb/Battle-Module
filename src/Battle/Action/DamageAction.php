@@ -6,17 +6,16 @@ namespace Battle\Action;
 
 use Battle\Command;
 use Battle\Exception\DamageActionException;
-use Battle\Exception\UserException;
-use Battle\Unit\Unit;
+use Battle\Unit\UnitInterface;
 
 class DamageAction implements ActionInterface
 {
     protected const NAME = 'normal attack';
 
-    /** @var Unit */
+    /** @var UnitInterface */
     private $actionUnit;
 
-    /** @var Unit */
+    /** @var UnitInterface */
     private $targetUnit;
 
     /** @var Command */
@@ -25,7 +24,7 @@ class DamageAction implements ActionInterface
     /** @var int */
     private $factualPower;
 
-    public function __construct(Unit $actionUnit, Command $enemyCommand)
+    public function __construct(UnitInterface $actionUnit, Command $enemyCommand)
     {
         $this->actionUnit = $actionUnit;
         $this->enemyCommand = $enemyCommand;
@@ -34,7 +33,6 @@ class DamageAction implements ActionInterface
     /**
      * @return string
      * @throws DamageActionException
-     * @throws UserException
      */
     public function handle(): string
     {
@@ -51,12 +49,12 @@ class DamageAction implements ActionInterface
         return $this->targetUnit->applyAction($this);
     }
 
-    public function getActionUnit(): Unit
+    public function getActionUnit(): UnitInterface
     {
         return $this->actionUnit;
     }
 
-    public function getTargetUnit(): Unit
+    public function getTargetUnit(): UnitInterface
     {
         return $this->targetUnit;
     }
@@ -81,7 +79,7 @@ class DamageAction implements ActionInterface
         return static::NAME;
     }
 
-    private function getDefinedUnit(): ?Unit
+    private function getDefinedUnit(): ?UnitInterface
     {
         if ((!$this->actionUnit->isMelee()) || ($this->actionUnit->isMelee() && !$this->enemyCommand->existMeleeUnits())) {
             return $this->enemyCommand->getUnitForAttacks();

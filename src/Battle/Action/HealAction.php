@@ -6,17 +6,17 @@ namespace Battle\Action;
 
 use Battle\Chat\Message;
 use Battle\Command;
-use Battle\Exception\UserException;
-use Battle\Unit\Unit;
+use Battle\Unit\UnitException;
+use Battle\Unit\UnitInterface;
 
 class HealAction implements ActionInterface
 {
     protected const NAME = 'heal';
 
-    /** @var Unit */
+    /** @var UnitInterface */
     private $actionUnit;
 
-    /** @var Unit */
+    /** @var UnitInterface */
     private $targetUnit;
 
     /** @var Command */
@@ -25,7 +25,7 @@ class HealAction implements ActionInterface
     /** @var int */
     private $factualPower = 0;
 
-    public function __construct(Unit $actionUnit, Command $alliesCommand)
+    public function __construct(UnitInterface $actionUnit, Command $alliesCommand)
     {
         $this->actionUnit = $actionUnit;
         $this->alliesCommand = $alliesCommand;
@@ -33,7 +33,7 @@ class HealAction implements ActionInterface
 
     /**
      * @return string
-     * @throws UserException
+     * @throws UnitException
      */
     public function handle(): string
     {
@@ -46,12 +46,12 @@ class HealAction implements ActionInterface
         return $this->targetUnit->applyAction($this);
     }
 
-    public function getActionUnit(): Unit
+    public function getActionUnit(): UnitInterface
     {
         return $this->actionUnit;
     }
 
-    public function getTargetUnit(): Unit
+    public function getTargetUnit(): UnitInterface
     {
         return $this->targetUnit;
     }

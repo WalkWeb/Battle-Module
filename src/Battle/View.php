@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Battle;
 
-use Battle\Unit\Unit;
+use Battle\Unit\UnitInterface;
 
 class View
 {
@@ -55,7 +55,7 @@ class View
                 </div>';
     }
 
-    private function getUnitView(Unit $unit): string
+    private function getUnitView(UnitInterface $unit): string
     {
         $action = $unit->isAction() ? 'yes' : 'no';
         $alive = $unit->isAlive() ? 'yes' : 'no';
@@ -80,7 +80,7 @@ class View
                                 ' . $unit->getLife() . '/' . $unit->getTotalLife() . '
                             </div>
                         </td>
-                        <td>' . $unit->getConcentration() . '/' . Unit::MAX_CONS . '</td>
+                        <td>' . $unit->getConcentration() . '/' . UnitInterface::MAX_CONS . '</td>
                         <td class="' . $this->getBgClass($unit->isAction()) . '">' . $action . '</td>
                         <td>' . $alive . '</td>
                     </tr>

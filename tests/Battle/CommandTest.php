@@ -7,7 +7,7 @@ namespace Tests\Battle;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command;
 use Battle\Exception\CommandException;
-use Battle\Unit\Unit;
+use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -138,7 +138,7 @@ class CommandTest extends TestCase
         $defined = $command->getUnitForAttacks();
 
         self::assertTrue($command->isAlive());
-        self::assertInstanceOf(Unit::class, $defined);
+        self::assertInstanceOf(UnitInterface::class, $defined);
         self::assertEquals($unit->getName(), $defined->getName());
         self::assertTrue($defined->isAlive());
         self::assertTrue($defined->getLife() > 0);

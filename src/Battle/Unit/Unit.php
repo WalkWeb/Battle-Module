@@ -13,16 +13,12 @@ use Battle\Classes\UnitClassInterface;
 use Battle\Command;
 use Battle\Effect\Effect;
 use Battle\Effect\EffectCollection;
-use Battle\Exception\UserException;
 use Battle\Tools;
 use Exception;
 use Battle\Exception\ActionCollectionException;
 
-class Unit
+class Unit implements UnitInterface
 {
-    public const NEW_ROUND_ADD_CONS = 500;
-    public const MAX_CONS = 1000;
-
     /**
      * @var string - Имя юнита. Это может быть имя персонажа игрока, имя монстра или NPC
      */
@@ -111,7 +107,7 @@ class Unit
     /**
      * @param ActionInterface $action
      * @return string - Сообщение о произошедшем действии
-     * @throws UserException
+     * @throws UnitException
      */
     public function applyAction(ActionInterface $action): string
     {
@@ -122,7 +118,7 @@ class Unit
             return $this->applyHeal($action);
         }
 
-        throw new UserException(UserException::UNDEFINED_ACTION);
+        throw new UnitException(UnitException::UNDEFINED_ACTION);
     }
 
     public function isAction(): bool

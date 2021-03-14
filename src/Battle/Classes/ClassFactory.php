@@ -7,6 +7,8 @@ namespace Battle\Classes;
 class ClassFactory
 {
     /**
+     * TODO добавить массив-маппинг классов в формате ['id' => 'className'] и создавать классы без if проверок
+     *
      * @param int $classId
      * @return UnitClassInterface
      * @throws ClassFactoryException

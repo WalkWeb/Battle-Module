@@ -13,6 +13,7 @@ use Battle\Effect\EffectException;
 use Battle\Effect\EffectFactory;
 use Battle\Unit\Unit;
 use Battle\Action\DamageAction;
+use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Throwable;
@@ -49,7 +50,7 @@ class UnitTest extends TestCase
             $attackClass
         );
 
-        self::assertInstanceOf(Unit::class, $unit);
+        self::assertInstanceOf(UnitInterface::class, $unit);
         self::assertEquals($this->attackName, $unit->getName());
         self::assertEquals($this->attackDamage, $unit->getDamage());
         self::assertEquals($this->attackLife, $unit->getLife());

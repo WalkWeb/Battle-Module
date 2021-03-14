@@ -9,11 +9,11 @@ use Battle\Classes\ClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command;
-use Battle\Exception\ActionCollectionException;
 use Battle\Exception\CommandException;
 use Battle\Statistic\BattleStatistic;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke;
+use Battle\Unit\UnitInterface;
 use Battle\Unit\Unit;
 use Throwable;
 
@@ -33,10 +33,10 @@ class StrokeTest extends TestCase
     private $defendMelee  = true;
     private $defendClass = UnitClassInterface::PRIEST;
 
-    /** @var Unit */
+    /** @var UnitInterface */
     private $attackUnit;
 
-    /** @var Unit */
+    /** @var UnitInterface */
     private $defendUnit;
 
     /**
@@ -84,20 +84,16 @@ class StrokeTest extends TestCase
     }
 
     /**
-     * @throws ActionCollectionException
+     * @throws CommandException
      */
     public function testAction(): void
     {
-        try {
-            $leftCommand = new Command([$this->attackUnit]);
-            $rightCommand = new Command([$this->defendUnit]);
+        $leftCommand = new Command([$this->attackUnit]);
+        $rightCommand = new Command([$this->defendUnit]);
 
-            $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new BattleStatistic(), new Chat());
-            $stroke->handle();
+        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new BattleStatistic(), new Chat());
+        $stroke->handle();
 
-            self::assertEquals($this->defendLife - $this->attackUnit->getDamage(), $this->defendUnit->getLife());
-        } catch (CommandException $e) {
-            self::fail($e->getMessage());
-        }
+        self::assertEquals($this->defendLife - $this->attackUnit->getDamage(), $this->defendUnit->getLife());
     }
 }

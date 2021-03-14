@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Effect;
 
 use Battle\Effect\Change\ChangeCollection;
-use Battle\Unit\Unit;
+use Battle\Unit\UnitInterface;
 
 class Effect
 {
@@ -25,7 +25,7 @@ class Effect
     private $description;
 
     /**
-     * @var Unit
+     * @var UnitInterface
      */
     private $unit;
 
@@ -53,7 +53,7 @@ class Effect
         int $id,
         string $name,
         string $description,
-        Unit $unit,
+        UnitInterface $unit,
         int $duration,
         ChangeCollection $changesApply,
         ChangeCollection $changesDuration
@@ -74,7 +74,7 @@ class Effect
         return $this->id;
     }
 
-    public function getUnit(): Unit
+    public function getUnit(): UnitInterface
     {
         return $this->unit;
     }

@@ -52,7 +52,7 @@ class Result
         return $this->winner;
     }
 
-    public function getWinnerTest(): string
+    public function getWinnerText(): string
     {
         return $this->winner === 1 ? self::LEFT_COMMAND_WIN : self::RIGHT_COMMAND_WIN;
     }

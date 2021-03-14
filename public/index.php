@@ -33,7 +33,7 @@ try {
         echo '<p>' . $message . '</p>';
     }
 
-    echo '<h1>' . $result->getWinnerTest() . '</h1>';
+    echo '<h1>' . $result->getWinnerText() . '</h1>';
 
     echo '<p>Количество раундов: ' . $battle->getStatistics()->getRoundNumber() . '</p>';
     echo '<p>Количество ходов: ' . $battle->getStatistics()->getStrokeNumber() . '</p>';

@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Battle;
 
 use Battle\Exception\CommandException;
-use Battle\Unit\Unit;
+use Battle\Unit\UnitInterface;
 
 class Command
 {
     /**
-     * @var Unit[]
+     * TODO Переделать с массива на UnitCollection
+     *
+     * @var UnitInterface[]
      */
     private $units;
 
@@ -26,7 +28,7 @@ class Command
         }
 
         foreach ($units as $unit) {
-            if (!$unit instanceof Unit) {
+            if (!$unit instanceof UnitInterface) {
                 throw new CommandException(CommandException::INCORRECT_USER);
             }
         }
@@ -56,7 +58,7 @@ class Command
         return false;
     }
 
-    public function getUnitForAttacks(): ?Unit
+    public function getUnitForAttacks(): ?UnitInterface
     {
         $aliveUnits = [];
 
@@ -73,7 +75,7 @@ class Command
         return $aliveUnits[array_rand($aliveUnits)];
     }
 
-    public function getMeleeUnitForAttacks(): ?Unit
+    public function getMeleeUnitForAttacks(): ?UnitInterface
     {
         $meleeAliveUnits = [];
 
@@ -90,7 +92,7 @@ class Command
         return $meleeAliveUnits[array_rand($meleeAliveUnits)];
     }
 
-    public function getUnitForHeal(): ?Unit
+    public function getUnitForHeal(): ?UnitInterface
     {
         $unitForHeal = [];
 
@@ -110,10 +112,10 @@ class Command
     /**
      * Возвращает случайного юнита, готового совершить действие
      *
-     * @return Unit|null
+     * @return UnitInterface|null
      * @throws CommandException
      */
-    public function getUnitForAction(): ?Unit
+    public function getUnitForAction(): ?UnitInterface
     {
         if (!$this->isAction() || !$this->isAlive()) {
             return null;
@@ -135,7 +137,7 @@ class Command
     }
 
     /**
-     * @return Unit[]
+     * @return UnitInterface[]
      */
     public function getUnits(): array
     {

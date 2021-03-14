@@ -7,7 +7,7 @@ namespace Battle\Effect;
 use Battle\Effect\Change\Change;
 use Battle\Effect\Change\ChangeCollection;
 use Battle\Effect\Change\ChangeException;
-use Battle\Unit\Unit;
+use Battle\Unit\UnitInterface;
 
 class EffectFactory
 {
@@ -46,12 +46,12 @@ class EffectFactory
 
     /**
      * @param int $id
-     * @param Unit $unit
+     * @param UnitInterface $unit
      * @return Effect
      * @throws ChangeException
      * @throws EffectException
      */
-    public static function create(int $id, Unit $unit): Effect
+    public static function create(int $id, UnitInterface $unit): Effect
     {
         if (!array_key_exists($id, self::$effects)) {
             throw new EffectException(EffectException::NO_EFFECT);
@@ -67,12 +67,12 @@ class EffectFactory
 
     /**
      * @param array $data
-     * @param Unit $unit
+     * @param UnitInterface $unit
      * @return Effect
      * @throws ChangeException
      * @throws EffectException
      */
-    private static function createEffect(array $data, Unit $unit): Effect
+    private static function createEffect(array $data, UnitInterface $unit): Effect
     {
         if (
             !array_key_exists('id', $data) || !is_int($data['id']) ||

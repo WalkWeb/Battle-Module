@@ -8,7 +8,7 @@ use Battle\Action\ActionCollection;
 use Battle\Action\HeavyStrikeAction;
 use Battle\Command;
 use Battle\Exception\ActionCollectionException;
-use Battle\Unit\Unit;
+use Battle\Unit\UnitInterface;
 
 class Warrior extends UnitClass
 {
@@ -20,13 +20,13 @@ class Warrior extends UnitClass
     }
 
     /**
-     * @param Unit $actionUnit
+     * @param UnitInterface $actionUnit
      * @param Command $enemyCommand
      * @param Command $alliesCommand
      * @return ActionCollection
      * @throws ActionCollectionException
      */
-    public function getAbility(Unit $actionUnit, Command $enemyCommand, Command $alliesCommand): ActionCollection
+    public function getAbility(UnitInterface $actionUnit, Command $enemyCommand, Command $alliesCommand): ActionCollection
     {
         return new ActionCollection([new HeavyStrikeAction($actionUnit, $enemyCommand)]);
     }

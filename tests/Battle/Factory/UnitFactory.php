@@ -6,6 +6,7 @@ namespace Tests\Battle\Factory;
 
 use Battle\Classes\ClassFactory;
 use Battle\Classes\ClassFactoryException;
+use Battle\Unit\UnitInterface;
 use Battle\Unit\Unit;
 
 class UnitFactory
@@ -63,11 +64,11 @@ class UnitFactory
 
     /**
      * @param int $template
-     * @return Unit
+     * @return UnitInterface
      * @throws UnitFactoryException
      * @throws ClassFactoryException
      */
-    public static function create(int $template): Unit
+    public static function create(int $template): UnitInterface
     {
         if (empty(self::$units[$template])) {
             throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
@@ -88,7 +89,7 @@ class UnitFactory
      * @throws ClassFactoryException
      * @throws UnitFactoryException
      */
-    public static function createDeadUnit(): Unit
+    public static function createDeadUnit(): UnitInterface
     {
         return self::create(10);
     }
