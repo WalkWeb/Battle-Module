@@ -7,9 +7,7 @@ namespace Battle;
 use Battle\Chat\Chat;
 use Battle\Command\CommandInterface;
 use Battle\Exception\BattleException;
-use Battle\Exception\CommandException;
 use Battle\Exception\RoundException;
-use Battle\Exception\ActionCollectionException;
 use Battle\Statistic\BattleStatistic;
 use Exception;
 use Battle\Exception\ResultException;
@@ -65,9 +63,7 @@ class Battle
      * Обрабатывает бой, возвращая массив итоговых характеристик юнитов
      *
      * @return Result
-     * @throws ActionCollectionException
      * @throws BattleException
-     * @throws CommandException
      * @throws ResultException
      * @throws RoundException
      */

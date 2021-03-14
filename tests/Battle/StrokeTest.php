@@ -15,7 +15,6 @@ use PHPUnit\Framework\TestCase;
 use Battle\Stroke;
 use Battle\Unit\UnitInterface;
 use Battle\Unit\Unit;
-use Throwable;
 
 class StrokeTest extends TestCase
 {
@@ -63,24 +62,17 @@ class StrokeTest extends TestCase
         );
     }
 
+    /**
+     * @throws CommandException
+     */
     public function testCreate(): void
     {
-        try {
-            $leftCommand = new Command([$this->attackUnit]);
-            $rightCommand = new Command([$this->defendUnit]);
+        $leftCommand = new Command([$this->attackUnit]);
+        $rightCommand = new Command([$this->defendUnit]);
 
-            $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new BattleStatistic(), new Chat());
+        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new BattleStatistic(), new Chat());
 
-            self::assertInstanceOf(Stroke::class, $stroke);
-        } catch (CommandException $e) {
-            self::fail();
-        }
-    }
-
-    public function testCreateFail(): void
-    {
-        $this->expectException(Throwable::class);
-        new Stroke();
+        self::assertInstanceOf(Stroke::class, $stroke);
     }
 
     /**

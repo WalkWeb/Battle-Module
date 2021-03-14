@@ -7,7 +7,6 @@ namespace Tests\Battle;
 use Battle\Chat\Chat;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
-use Battle\Exception\ActionCollectionException;
 use Battle\Exception\CommandException;
 use Battle\Exception\RoundException;
 use Battle\Round;
@@ -23,51 +22,47 @@ class RoundTest extends TestCase
      * Проверяем корректную смену действующий команды
      *
      * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws RoundException
+     * @throws UnitFactoryException
      */
     public function testNextCommand(): void
     {
-        try {
-            $leftCommand = CommandFactory::createLeftCommand();
-            $rightCommand = CommandFactory::createRightCommand();
-            $startCommand = 1;
-            $nextCommand = 2;
-            // Юниты делают по одному ходу, соответственно следующий, после раунда, ход будет 3
-            $nextNumberStroke = 3;
+        $leftCommand = CommandFactory::createLeftCommand();
+        $rightCommand = CommandFactory::createRightCommand();
+        $startCommand = 1;
+        $nextCommand = 2;
+        // Юниты делают по одному ходу, соответственно следующий, после раунда, ход будет 3
+        $nextNumberStroke = 3;
 
-            $round = new Round($leftCommand, $rightCommand, $startCommand, new BattleStatistic(), new Chat());
-            self::assertEquals($round->handle(), $nextCommand);
-            self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
-
-        } catch (CommandException | UnitFactoryException | RoundException | ActionCollectionException $e) {
-            self::fail($e->getMessage());
-        }
+        $round = new Round($leftCommand, $rightCommand, $startCommand, new BattleStatistic(), new Chat());
+        self::assertEquals($round->handle(), $nextCommand);
+        self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }
 
     /**
      * Проверяем корректную смену действующий когда в действующей команде нет юнитов, способных совершить действие
      *
      * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws RoundException
+     * @throws UnitFactoryException
      */
     public function testNextCommandNoAction(): void
     {
-        try {
-            $leftUnit = UnitFactory::create(1);
-            $rightUnit = UnitFactory::create(2);
-            $leftUnit->madeAction();
-            $leftCommand = new Command([$leftUnit]);
-            $rightCommand = new Command([$rightUnit]);
+        $leftUnit = UnitFactory::create(1);
+        $rightUnit = UnitFactory::create(2);
+        $leftUnit->madeAction();
+        $leftCommand = new Command([$leftUnit]);
+        $rightCommand = new Command([$rightUnit]);
 
-            $startCommand = 1;
-            $nextCommand = 2;
-            // В этом раунде походит только юнит из правой команды, соответственно счетчик увеличится только на 1
-            $nextNumberStroke = 2;
+        $startCommand = 1;
+        $nextCommand = 2;
+        // В этом раунде походит только юнит из правой команды, соответственно счетчик увеличится только на 1
+        $nextNumberStroke = 2;
 
-            $round = new Round($leftCommand, $rightCommand, $startCommand, new BattleStatistic(), new Chat());
-            self::assertEquals($round->handle(), $nextCommand);
-            self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
-
-        } catch (CommandException | UnitFactoryException | RoundException | ActionCollectionException $e) {
-            self::fail($e->getMessage());
-        }
+        $round = new Round($leftCommand, $rightCommand, $startCommand, new BattleStatistic(), new Chat());
+        self::assertEquals($round->handle(), $nextCommand);
+        self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }
 }

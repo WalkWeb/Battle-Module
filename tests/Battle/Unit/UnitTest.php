@@ -16,7 +16,6 @@ use Battle\Action\DamageAction;
 use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Throwable;
 
 class UnitTest extends TestCase
 {
@@ -60,12 +59,6 @@ class UnitTest extends TestCase
         self::assertTrue($unit->isAlive());
         self::assertTrue($unit->isMelee());
         self::assertEquals($attackClass->getId(), $unit->getClass()->getId());
-    }
-
-    public function testCreateFail(): void
-    {
-        $this->expectException(Throwable::class);
-        new Unit();
     }
 
     /**

@@ -7,11 +7,11 @@ namespace Tests\Battle\Command;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Exception\CommandException;
+use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
-use Throwable;
 
 class CommandTest extends TestCase
 {
@@ -39,8 +39,14 @@ class CommandTest extends TestCase
     public function testCommandUnits(): void
     {
         $units = [UnitFactory::create(1), UnitFactory::create(2)];
+
+        $collection = new UnitCollection();
+        foreach ($units as $unit) {
+            $collection->add($unit);
+        }
+
         $command = new Command($units);
-        self::assertEquals($units, $command->getUnits());
+        self::assertEquals($collection, $command->getUnits());
     }
 
     /**
@@ -90,15 +96,6 @@ class CommandTest extends TestCase
         $rangeUnit = UnitFactory::create(5);
         $command = new Command([$meleeUnit, $rangeUnit]);
         self::assertFalse($command->existMeleeUnits());
-    }
-
-    /**
-     * Проверяем неуспешное создание команды - не передан массив юнитов
-     */
-    public function testCreateFail(): void
-    {
-        $this->expectException(Throwable::class);
-        new Command();
     }
 
     /**

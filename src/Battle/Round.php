@@ -6,7 +6,6 @@ namespace Battle;
 
 use Battle\Command\CommandInterface;
 use Battle\Exception\RoundException;
-use Battle\Exception\CommandException;
 use Battle\Statistic\BattleStatistic;
 use Battle\Chat\Chat;
 
@@ -58,15 +57,12 @@ class Round
         bool $debug = false
     )
     {
-        if ($actionCommand !== 1 && $actionCommand !== 2) {
-            throw new RoundException(RoundException::INCORRECT_START_COMMAND);
-        }
-
+        $this->validateActionCommand($actionCommand);
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;
+        $this->actionCommand = $actionCommand;
         $this->statistics = $statistics;
         $this->chat = $chat;
-        $this->actionCommand = $actionCommand;
         $this->debug = $debug;
     }
 
@@ -77,8 +73,6 @@ class Round
      * живы - сбрасываются параметры $action у юнитов и начинается новый раунд.
      *
      * @return int
-     * @throws CommandException
-     * @throws Exception\ActionCollectionException
      * @throws RoundException
      */
     public function handle(): int
@@ -125,14 +119,25 @@ class Round
         throw new RoundException(RoundException::UNEXPECTED_ENDING);
     }
 
+    /**
+     * Возвращает статистику дополненную информацией по текущему раунду
+     *
+     * @return BattleStatistic
+     */
     public function getStatistics(): BattleStatistic
     {
         return $this->statistics;
     }
 
     /**
+     * Выполняет один ход:
+     *
+     * 1. Добавляет сообщение в чат о новом ходе
+     * 2. Выполняет ход
+     * 3. Добавляет сообщение в чат о завершении хода
+     * 4. Добавляет разделительную линию (todo на удаление, объекты не должны выводить html)
+     *
      * @param Stroke $stroke
-     * @throws Exception\ActionCollectionException
      */
     private function executeStroke(Stroke $stroke): void
     {
@@ -141,23 +146,59 @@ class Round
         $this->chat->add(self::END_STROKE . ' #' . $this->statistics->getStrokeNumber());
         $this->chat->add(self::HR);
     }
-    
-    private function endBattle(): int
-    {
-        $this->chat->add(self::END);
-        return $this->actionCommand;
-    }
 
+    /**
+     * Стартует раунд:
+     *
+     * 1. В чат добавляет сообщение о том, что раунд стартовал
+     */
     private function startRound(): void
     {
         $this->chat->add(self::START_ROUND . ' #' . $this->statistics->getRoundNumber());
     }
 
+    /**
+     * Завершает раунд:
+     *
+     * 1. В чат добавляет сообщение о том, что раунд завершен
+     * 2. Обоим командам сообщается, что раунд завершен
+     * 3. Возвращается номер команды, которая будет делать следующий ход
+     *
+     * @return int
+     */
     private function endRound(): int
     {
         $this->chat->add(self::END_ROUND);
         $this->leftCommand->newRound();
         $this->rightCommand->newRound();
         return $this->actionCommand;
+    }
+
+    /**
+     * Завершает бой:
+     *
+     * 1. В чат добавляет сообщение о том, что бой завершен
+     * 2. handle() должен вернуть номер команды, которая ходит следующей, но так как бой закончился - нам не важно,
+     *    что отдавать, и отдаем просто 0
+     *
+     * @return int
+     */
+    private function endBattle(): int
+    {
+        $this->chat->add(self::END);
+        return 0;
+    }
+
+    /**
+     * Проверяет корректность номера активной команды - может иметь значение только 1 или 2
+     *
+     * @param int $actionCommand
+     * @throws RoundException
+     */
+    private function validateActionCommand(int $actionCommand): void
+    {
+        if ($actionCommand !== 1 && $actionCommand !== 2) {
+            throw new RoundException(RoundException::INCORRECT_START_COMMAND);
+        }
     }
 }

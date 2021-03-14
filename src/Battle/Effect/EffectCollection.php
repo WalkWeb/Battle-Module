@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Effect;
 
+// todo use Trait, implements  Iterator, Countable
 class EffectCollection
 {
     /**

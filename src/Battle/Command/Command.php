@@ -5,20 +5,18 @@ declare(strict_types=1);
 namespace Battle\Command;
 
 use Battle\Exception\CommandException;
+use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 
 class Command implements CommandInterface
 {
     /**
-     * TODO Переделать с массива на UnitCollection
-     *
-     * @var UnitInterface[]
+     * @var UnitCollection
      */
     private $units;
 
     /**
-     * Command constructor.
-     * @param array $units
+     * @param array $units todo получать сразу UnitCollection
      * @throws CommandException
      */
     public function __construct(array $units)
@@ -27,13 +25,15 @@ class Command implements CommandInterface
             throw new CommandException(CommandException::NO_UNITS);
         }
 
+        $this->units = new UnitCollection();
+
         foreach ($units as $unit) {
             if (!$unit instanceof UnitInterface) {
                 throw new CommandException(CommandException::INCORRECT_USER);
             }
-        }
 
-        $this->units = $units;
+            $this->units->add($unit);
+        }
     }
 
     public function isAlive(): bool
@@ -125,7 +125,7 @@ class Command implements CommandInterface
         $actionUnits = [];
 
         foreach ($this->units as $unit) {
-            if ($this->isAlive() && !$unit->isAction()) {
+            if ($unit->isAlive() && !$unit->isAction()) {
                 $actionUnits[] = $unit;
             }
         }
@@ -138,9 +138,9 @@ class Command implements CommandInterface
     }
 
     /**
-     * @return UnitInterface[]
+     * @return UnitCollection
      */
-    public function getUnits(): array
+    public function getUnits(): UnitCollection
     {
         return $this->units;
     }
