@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Battle\Result;
 use Tests\Battle\Factory\CommandFactory;
 use Battle\Exception\ResultException;
-use Battle\Exception\CommandException;
+use Battle\Command\CommandException;
 use Tests\Battle\Factory\UnitFactoryException;
 
 class ResultTest extends TestCase

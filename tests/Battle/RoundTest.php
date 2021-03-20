@@ -7,7 +7,7 @@ namespace Tests\Battle;
 use Battle\Chat\Chat;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
-use Battle\Exception\CommandException;
+use Battle\Command\CommandException;
 use Battle\Exception\RoundException;
 use Battle\Round;
 use Battle\Statistic\BattleStatistic;

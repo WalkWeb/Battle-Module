@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Command;
 
-use Battle\Exception\CommandException;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 

@@ -9,7 +9,7 @@ use Battle\Action\DamageAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Exception\ActionCollectionException;
-use Battle\Exception\CommandException;
+use Battle\Command\CommandException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;

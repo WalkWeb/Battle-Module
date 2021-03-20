@@ -7,13 +7,11 @@ namespace Tests\Battle\Action;
 use Battle\Action\DamageAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
-use Battle\Exception\ActionCollectionException;
-use Battle\Exception\CommandException;
+use Battle\Command\CommandException;
 use Battle\Exception\DamageActionException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
-use Throwable;
 
 class DamageActionTest extends TestCase
 {
@@ -31,12 +29,6 @@ class DamageActionTest extends TestCase
         $defendCommand = new Command([$defendUnit]);
         $action = new DamageAction($unit, $defendCommand);
         self::assertInstanceOf(DamageAction::class, $action);
-    }
-
-    public function testCreateFail(): void
-    {
-        $this->expectException(Throwable::class);
-        new DamageAction();
     }
 
     /**

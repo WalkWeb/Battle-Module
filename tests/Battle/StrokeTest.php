@@ -9,7 +9,7 @@ use Battle\Classes\ClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\Command;
-use Battle\Exception\CommandException;
+use Battle\Command\CommandException;
 use Battle\Statistic\BattleStatistic;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke;

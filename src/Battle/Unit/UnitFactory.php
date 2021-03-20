@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit;
 
 use Battle\Classes\ClassFactory;
-use Exception;
+use Battle\Classes\ClassFactoryException;
 
 class UnitFactory
 {
@@ -26,7 +26,8 @@ class UnitFactory
      *
      * @param array $data
      * @return UnitInterface
-     * @throws Exception
+     * @throws UnitException
+     * @throws ClassFactoryException
      */
     public static function create(array $data): UnitInterface
     {

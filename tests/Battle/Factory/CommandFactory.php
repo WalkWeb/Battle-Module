@@ -7,7 +7,7 @@ namespace Tests\Battle\Factory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Command\CommandInterface;
-use Battle\Exception\CommandException;
+use Battle\Command\CommandException;
 
 class CommandFactory
 {

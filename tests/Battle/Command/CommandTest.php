@@ -8,7 +8,7 @@ use Battle\Action\DamageAction;
 use Battle\Classes\ClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
-use Battle\Exception\CommandException;
+use Battle\Command\CommandException;
 use Battle\Exception\DamageActionException;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitCollection;
