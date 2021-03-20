@@ -10,7 +10,9 @@ use Battle\Exception\BattleException;
 use Battle\Exception\RoundException;
 use Battle\Statistic\BattleStatistic;
 use Exception;
-use Battle\Exception\ResultException;
+use Battle\Result\ResultException;
+use Battle\Result\Result;
+use Battle\Result\ResultInterface;
 
 class Battle
 {
@@ -62,12 +64,12 @@ class Battle
     /**
      * Обрабатывает бой, возвращая массив итоговых характеристик юнитов
      *
-     * @return Result
+     * @return ResultInterface
      * @throws BattleException
      * @throws ResultException
      * @throws RoundException
      */
-    public function handle(): Result
+    public function handle(): ResultInterface
     {
         $i = 0;
 

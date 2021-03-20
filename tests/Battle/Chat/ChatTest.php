@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle;
+namespace Tests\Battle\Chat;
 
 use PHPUnit\Framework\TestCase;
 use Battle\Chat\Chat;

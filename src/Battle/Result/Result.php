@@ -2,16 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Battle;
+namespace Battle\Result;
 
 use Battle\Command\CommandInterface;
-use Battle\Exception\ResultException;
 
-class Result
+class Result implements ResultInterface
 {
-    private const LEFT_COMMAND_WIN = 'Left command win';
-    private const RIGHT_COMMAND_WIN = 'Right command win';
-
     /** @var CommandInterface */
     private $leftCommand;
 
