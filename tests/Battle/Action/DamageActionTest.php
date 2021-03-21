@@ -24,10 +24,11 @@ class DamageActionTest extends TestCase
      */
     public function testCreate(): void
     {
-        $unit = UnitFactory::create(1);
-        $defendUnit = UnitFactory::create(2);
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = new Command([$defendUnit]);
-        $action = new DamageAction($unit, $defendCommand);
+        $alliesCommand = new Command([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
         self::assertInstanceOf(DamageAction::class, $action);
     }
 
@@ -39,10 +40,11 @@ class DamageActionTest extends TestCase
      */
     public function testApplyAction(): void
     {
-        $unit = UnitFactory::create(1);
-        $defendUnit = UnitFactory::create(2);
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = new Command([$defendUnit]);
-        $action = new DamageAction($unit, $defendCommand);
+        $alliesCommand = new Command([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
         $message = $action->handle();
         self::assertEquals($unit->getDamage(), $action->getPower());
         self::assertEquals(self::MESSAGE, $message);
@@ -56,11 +58,11 @@ class DamageActionTest extends TestCase
      */
     public function testActionUnit(): void
     {
-        $actionUnit = UnitFactory::create(1);
-        $defendUnit = UnitFactory::create(2);
+        $actionUnit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = new Command([$defendUnit]);
-
-        $action = new DamageAction($actionUnit, $defendCommand);
+        $alliesCommand = new Command([$actionUnit]);
+        $action = new DamageAction($actionUnit, $defendCommand, $alliesCommand);
         $action->handle();
 
         self::assertEquals(20, $action->getPower());
@@ -75,11 +77,12 @@ class DamageActionTest extends TestCase
      */
     public function testFactualDamage(): void
     {
-        $attackerUnit = UnitFactory::create(2);
-        $defendUnit = UnitFactory::create(4);
-        $defendCommand = new Command([$defendUnit]);
+        $attackerUnit = UnitFactory::createByTemplate(2);
+        $enemyUnit = UnitFactory::createByTemplate(4);
+        $enemyCommand = new Command([$enemyUnit]);
+        $alliesCommand = new Command([$attackerUnit]);
 
-        $actionCollection = $attackerUnit->getDamageAction($defendCommand);
+        $actionCollection = $attackerUnit->getDamageAction($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection->getActions() as $action) {
             $action->handle();

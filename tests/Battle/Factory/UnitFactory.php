@@ -68,7 +68,7 @@ class UnitFactory
      * @throws UnitFactoryException
      * @throws ClassFactoryException
      */
-    public static function create(int $template): UnitInterface
+    public static function createByTemplate(int $template): UnitInterface
     {
         if (empty(self::$units[$template])) {
             throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
@@ -91,6 +91,6 @@ class UnitFactory
      */
     public static function createDeadUnit(): UnitInterface
     {
-        return self::create(10);
+        return self::createByTemplate(10);
     }
 }

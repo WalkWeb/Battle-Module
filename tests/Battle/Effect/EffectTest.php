@@ -23,7 +23,7 @@ class EffectTest extends TestCase
     {
         $data = EffectFactory::getAll()[2];
 
-        $unit = UnitFactory::create(1);
+        $unit = UnitFactory::createByTemplate(1);
 
         $change = new Change(
             $data['change_apply'][0]['type'],

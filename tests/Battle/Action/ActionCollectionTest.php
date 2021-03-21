@@ -24,10 +24,11 @@ class ActionCollectionTest extends TestCase
      */
     public function testCreateActionCollectionSuccess(): void
     {
-        $unit = UnitFactory::create(1);
-        $defendUnit = UnitFactory::create(2);
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = new Command([$defendUnit]);
-        $action = new DamageAction($unit, $defendCommand);
+        $alliesCommand = new Command([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
 
         $actionCollection = new ActionCollection([$action]);
 

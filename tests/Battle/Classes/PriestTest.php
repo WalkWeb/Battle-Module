@@ -22,8 +22,8 @@ class PriestTest extends TestCase
      */
     public function testCreate(): void
     {
-        $actionUnit = UnitFactory::create(5);
-        $enemyUnit = UnitFactory::create(1);
+        $actionUnit = UnitFactory::createByTemplate(5);
+        $enemyUnit = UnitFactory::createByTemplate(1);
         $actionCommand = new Command([$actionUnit]);
         $enemyCommand = new Command([$enemyUnit]);
 

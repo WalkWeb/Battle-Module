@@ -101,7 +101,7 @@ class Unit implements UnitInterface
             return $this->class->getAbility($this, $enemyCommand, $alliesCommand);
         }
 
-        return $this->getDamageAction($enemyCommand);
+        return $this->getDamageAction($enemyCommand, $alliesCommand);
     }
 
     /**
@@ -173,30 +173,32 @@ class Unit implements UnitInterface
     }
 
     /**
-     * @param CommandInterface $defendingCommand
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
      * @return ActionCollection
      * @throws ActionCollectionException
      */
-    public function getDamageAction(CommandInterface $defendingCommand): ActionCollection
+    public function getDamageAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         $attacks = $this->calculateAttackSpeed();
         $array = [];
 
         for ($i = 0; $i < $attacks; $i++) {
-            $array[] = new DamageAction($this, $defendingCommand);
+            $array[] = new DamageAction($this, $enemyCommand, $alliesCommand);
         }
 
         return new ActionCollection($array);
     }
 
     /**
+     * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
      * @throws ActionCollectionException
      */
-    public function getHealAction(CommandInterface $alliesCommand): ActionCollection
+    public function getHealAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
-        return new ActionCollection([new HealAction($this, $alliesCommand)]);
+        return new ActionCollection([new HealAction($this, $enemyCommand, $alliesCommand)]);
     }
 
     public function getConcentration(): int

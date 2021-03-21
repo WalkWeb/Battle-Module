@@ -114,18 +114,20 @@ interface UnitInterface
     /**
      * TODO На удаление, действие у юнита получается только через getAction()
      *
-     * @param CommandInterface $defendingCommand
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
      * @return ActionCollection
      */
-    public function getDamageAction(CommandInterface $defendingCommand): ActionCollection;
+    public function getDamageAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
 
     /**
      * TODO На удаление, действие у юнита получается только через getAction()
      *
+     * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
      */
-    public function getHealAction(CommandInterface $alliesCommand): ActionCollection;
+    public function getHealAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
 
     /**
      * Возвращает количество концентрации юнита

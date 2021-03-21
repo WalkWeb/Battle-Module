@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Classes;
 
+// TODO Переименовать в AbstractUnitClass
+
 abstract class UnitClass implements UnitClassInterface
 {
 

@@ -26,8 +26,12 @@ class Warrior extends UnitClass
      * @return ActionCollection
      * @throws ActionCollectionException
      */
-    public function getAbility(UnitInterface $actionUnit, CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
+    public function getAbility(
+        UnitInterface $actionUnit,
+        CommandInterface $enemyCommand,
+        CommandInterface $alliesCommand
+    ): ActionCollection
     {
-        return new ActionCollection([new HeavyStrikeAction($actionUnit, $enemyCommand)]);
+        return new ActionCollection([new HeavyStrikeAction($actionUnit, $enemyCommand, $alliesCommand)]);
     }
 }

@@ -19,7 +19,7 @@ class CommandFactory
      */
     public static function createLeftCommand(): CommandInterface
     {
-        return new Command([UnitFactory::create(1)]);
+        return new Command([UnitFactory::createByTemplate(1)]);
     }
 
     /**
@@ -30,6 +30,6 @@ class CommandFactory
      */
     public static function createRightCommand(): CommandInterface
     {
-        return new Command([UnitFactory::create(2)]);
+        return new Command([UnitFactory::createByTemplate(2)]);
     }
 }

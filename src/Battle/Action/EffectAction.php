@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
-class EffectAction
+class EffectAction extends AbstractAction
 {
 
 }

@@ -24,17 +24,18 @@ class HealActionTest extends TestCase
     public function testCreate(): void
     {
         $message = '';
-        $unit = UnitFactory::create(1);
-        $alliesUnit = UnitFactory::create(2);
+        $unit = UnitFactory::createByTemplate(1);
+        $alliesUnit = UnitFactory::createByTemplate(2);
+        $enemyUnit = UnitFactory::createByTemplate(3);
         $alliesCommand = new Command([$unit, $alliesUnit]);
+        $enemyCommand = new Command([$enemyUnit]);
 
-        $actionCollection = $unit->getHealAction($alliesCommand);
+        $actionCollection = $unit->getHealAction($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection->getActions() as $action) {
             self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
             $message = $action->handle();
         }
-
 
         self::assertEquals(self::NO_TARGET, $message);
     }

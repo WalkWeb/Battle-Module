@@ -55,11 +55,12 @@ class BattleStatisticsTest extends TestCase
     {
         $statistics = new BattleStatistic();
 
-        $attackUnit = UnitFactory::create(1);
-        $defendUnit = UnitFactory::create(2);
-        $defendCommand = new Command([$defendUnit]);
+        $attackUnit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $enemyCommand = new Command([$defendUnit]);
+        $alliesCommand = new Command([$attackUnit]);
 
-        $actionCollection = $attackUnit->getDamageAction($defendCommand);
+        $actionCollection = $attackUnit->getDamageAction($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection->getActions() as $action) {
             $action->handle();
@@ -70,11 +71,11 @@ class BattleStatisticsTest extends TestCase
 
         // Делаем 10 ударов
         for ($i = 0; $i < 10; $i++) {
-            $actionCollection = $attackUnit->getDamageAction($defendCommand);
+            $actionCollection = $attackUnit->getDamageAction($enemyCommand, $alliesCommand);
 
             foreach ($actionCollection->getActions() as $action) {
 
-                if (!$defendCommand->isAlive()) {
+                if (!$enemyCommand->isAlive()) {
                     break;
                 }
 

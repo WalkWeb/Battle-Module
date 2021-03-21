@@ -28,7 +28,7 @@ class CommandTest extends TestCase
      */
     public function testCreate(): void
     {
-        $unit = UnitFactory::create(1);
+        $unit = UnitFactory::createByTemplate(1);
         $command = new Command([$unit]);
         self::assertInstanceOf(Command::class, $command);
     }
@@ -42,7 +42,7 @@ class CommandTest extends TestCase
      */
     public function testCommandUnits(): void
     {
-        $units = [UnitFactory::create(1), UnitFactory::create(2)];
+        $units = [UnitFactory::createByTemplate(1), UnitFactory::createByTemplate(2)];
 
         $collection = new UnitCollection();
         foreach ($units as $unit) {
@@ -62,8 +62,8 @@ class CommandTest extends TestCase
      */
     public function testMeleeAndRangeUnits(): void
     {
-        $meleeUnit = UnitFactory::create(1);
-        $rangeUnit = UnitFactory::create(5);
+        $meleeUnit = UnitFactory::createByTemplate(1);
+        $rangeUnit = UnitFactory::createByTemplate(5);
         $command = new Command([$meleeUnit, $rangeUnit]);
 
         self::assertEquals([$meleeUnit], $command->getMeleeUnits());
@@ -79,7 +79,7 @@ class CommandTest extends TestCase
      */
     public function testNoMeleeUnits(): void
     {
-        $rangeUnit = UnitFactory::create(5);
+        $rangeUnit = UnitFactory::createByTemplate(5);
         $command = new Command([$rangeUnit]);
 
         self::assertFalse($command->existMeleeUnits());
@@ -96,8 +96,8 @@ class CommandTest extends TestCase
      */
     public function testNoAliveMeleeUnits(): void
     {
-        $meleeUnit = UnitFactory::create(10);
-        $rangeUnit = UnitFactory::create(5);
+        $meleeUnit = UnitFactory::createByTemplate(10);
+        $rangeUnit = UnitFactory::createByTemplate(5);
         $command = new Command([$meleeUnit, $rangeUnit]);
         self::assertFalse($command->existMeleeUnits());
     }
@@ -134,7 +134,7 @@ class CommandTest extends TestCase
      */
     public function testGetUserFromAttack(): void
     {
-        $unit = UnitFactory::create(1);
+        $unit = UnitFactory::createByTemplate(1);
         $command = new Command([$unit]);
         $defined = $command->getUnitForAttacks();
 
@@ -170,7 +170,7 @@ class CommandTest extends TestCase
      */
     public function testAllUnitAction(): void
     {
-        $units = [UnitFactory::create(1), UnitFactory::create(2)];
+        $units = [UnitFactory::createByTemplate(1), UnitFactory::createByTemplate(2)];
         $command = new Command($units);
 
         $firstActionUnit = $command->getUnitForAction();
@@ -199,7 +199,7 @@ class CommandTest extends TestCase
      */
     public function testGetUnitForActionOne(): void
     {
-        $unit = UnitFactory::create(1);
+        $unit = UnitFactory::createByTemplate(1);
         $command = new Command([$unit]);
 
         self::assertEquals($unit, $command->getUnitForAction());
@@ -218,18 +218,19 @@ class CommandTest extends TestCase
         $unit2 = new Unit('User 2', 12, 1, 95, false, ClassFactory::create(2));
         $unit3 = new Unit('User 3', 120, 1, 300, true, ClassFactory::create(1));
 
-        $command = new Command([$unit1, $unit2]);
+        $alliesCommand = new Command([$unit1, $unit2]);
+        $enemyCommand = new Command([$unit3]);
 
         // вначале юнит присутствует
-        self::assertInstanceOf(UnitInterface::class, $command->getUnitForAction());
+        self::assertInstanceOf(UnitInterface::class, $alliesCommand->getUnitForAction());
 
-        // убиваем первого юнита
-        $action = new DamageAction($unit3, $command);
+        // убиваем первого юнита ($alliesCommand и $enemyCommand переставлены местами - это правильно, ходит вражеская команда)
+        $action = new DamageAction($unit3, $alliesCommand, $enemyCommand);
         $action->handle();
 
         // указываем, что второй юнит походил
         $unit2->madeAction();
 
-        self::assertNull($command->getUnitForAction());
+        self::assertNull($alliesCommand->getUnitForAction());
     }
 }

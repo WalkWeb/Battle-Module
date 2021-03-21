@@ -22,8 +22,8 @@ class WarriorTest extends TestCase
      */
     public function testCreate(): void
     {
-        $actionUnit = UnitFactory::create(1);
-        $enemyUnit = UnitFactory::create(2);
+        $actionUnit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
         $actionCommand = new Command([$actionUnit]);
         $enemyCommand = new Command([$enemyUnit]);
 

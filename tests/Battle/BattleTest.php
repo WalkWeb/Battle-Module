@@ -21,8 +21,8 @@ class BattleTest extends TestCase
      */
     public function testHandleBattleSuccess(): void
     {
-        $unit1 = UnitFactory::create(1);
-        $unit2 = UnitFactory::create(2);
+        $unit1 = UnitFactory::createByTemplate(1);
+        $unit2 = UnitFactory::createByTemplate(2);
         $command1 = new Command([$unit1]);
         $command2 = new Command([$unit2]);
 

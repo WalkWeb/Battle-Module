@@ -50,8 +50,8 @@ class RoundTest extends TestCase
      */
     public function testNextCommandNoAction(): void
     {
-        $leftUnit = UnitFactory::create(1);
-        $rightUnit = UnitFactory::create(2);
+        $leftUnit = UnitFactory::createByTemplate(1);
+        $rightUnit = UnitFactory::createByTemplate(2);
         $leftUnit->madeAction();
         $leftCommand = new Command([$leftUnit]);
         $rightCommand = new Command([$rightUnit]);

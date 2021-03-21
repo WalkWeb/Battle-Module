@@ -24,7 +24,7 @@ class EffectFactoryTest extends TestCase
      */
     public function testCreate(): void
     {
-        $unit = UnitFactory::create(1);
+        $unit = UnitFactory::createByTemplate(1);
         $effect = EffectFactory::create(1, $unit);
         $data = EffectFactory::getAll()[1];
 

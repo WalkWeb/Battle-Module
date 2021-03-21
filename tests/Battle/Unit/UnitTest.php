@@ -66,6 +66,7 @@ class UnitTest extends TestCase
      */
     public function testApplyDamage(): void
     {
+
         $attackClass = ClassFactory::create($this->attackClassId);
         $defendClass = ClassFactory::create($this->defendClassId);
 
@@ -87,14 +88,16 @@ class UnitTest extends TestCase
             $defendClass
         );
 
-        $defendCommand = new Command([$defendUnit]);
-        $action = new DamageAction($attackUnit, $defendCommand);
+        $enemyCommand = new Command([$defendUnit]);
+        $alliesCommand = new Command([$attackUnit]);
+
+        $action = new DamageAction($attackUnit, $enemyCommand, $alliesCommand);
 
         $action->handle();
 
         self::assertEquals($this->defendLife - $attackUnit->getDamage(), $defendUnit->getLife());
 
-        $action2 = new DamageAction($attackUnit, $defendCommand);
+        $action2 = new DamageAction($attackUnit, $enemyCommand, $alliesCommand);
         $action2->handle();
 
         self::assertEquals(0, $defendUnit->getLife());
