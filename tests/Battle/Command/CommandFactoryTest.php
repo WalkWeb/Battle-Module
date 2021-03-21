@@ -29,6 +29,7 @@ class CommandFactoryTest extends TestCase
             $class = ClassFactory::create($data[$i]['class']);
 
             self::assertEquals($data[$i]['name'], $unit->getName());
+            self::assertEquals($data[$i]['avatar'], $unit->getAvatar());
             self::assertEquals($data[$i]['damage'], $unit->getDamage());
             self::assertEquals($data[$i]['attack_speed'], $unit->getAttackSpeed());
             self::assertEquals($data[$i]['life'], $unit->getTotalLife());
@@ -50,6 +51,7 @@ class CommandFactoryTest extends TestCase
                 [
                     [
                         'name'         => 'Skeleton',
+                        'avatar'       => 'url avatar 1',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
                         'life'         => 80,
@@ -58,6 +60,7 @@ class CommandFactoryTest extends TestCase
                     ],
                     [
                         'name'         => 'Ghost',
+                        'avatar'       => 'url avatar 2',
                         'damage'       => 11,
                         'attack_speed' => 0.9,
                         'life'         => 75,

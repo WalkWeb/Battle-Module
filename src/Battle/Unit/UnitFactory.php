@@ -17,6 +17,7 @@ class UnitFactory
      *
      * [
      *     'name'         => 'Skeleton',
+     *     'avatar'       => '/images/avas/monsters/003.png',
      *     'damage'       => 15,
      *     'attack_speed' => 1.2,
      *     'life'         => 80,
@@ -33,6 +34,10 @@ class UnitFactory
     {
         if (!array_key_exists('name', $data) || !is_string($data['name'])) {
             throw new UnitException(UnitException::INCORRECT_NAME);
+        }
+
+        if (!array_key_exists('avatar', $data) || !is_string($data['avatar'])) {
+            throw new UnitException(UnitException::INCORRECT_AVATAR);
         }
 
         if (!array_key_exists('damage', $data) || !is_int($data['damage'])) {
@@ -59,6 +64,7 @@ class UnitFactory
 
         return new Unit(
             $data['name'],
+            $data['avatar'],
             $data['damage'],
             $data['attack_speed'],
             $data['life'],

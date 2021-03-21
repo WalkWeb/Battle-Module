@@ -14,6 +14,7 @@ class UnitFactory
     private static $units = [
         1  => [
             'name'         => 'unit_1',
+            'avatar'       => '/images/avas/humans/human001.jpg',
             'damage'       => 20,
             'attack_speed' => 1.00,
             'life'         => 100,
@@ -22,6 +23,7 @@ class UnitFactory
         ],
         2  => [
             'name'         => 'unit_2',
+            'avatar'       => '/images/avas/humans/human002.jpg',
             'damage'       => 30,
             'attack_speed' => 1.00,
             'life'         => 150,
@@ -30,6 +32,7 @@ class UnitFactory
         ],
         3  => [
             'name'         => 'unit_3',
+            'avatar'       => '/images/avas/humans/human003.jpg',
             'damage'       => 15,
             'attack_speed' => 1.00,
             'life'         => 120,
@@ -38,6 +41,7 @@ class UnitFactory
         ],
         4  => [
             'name'         => 'unit_4',
+            'avatar'       => '/images/avas/humans/human004.jpg',
             'damage'       => 15,
             'attack_speed' => 1.00,
             'life'         => 20,
@@ -46,6 +50,7 @@ class UnitFactory
         ],
         5  => [
             'name'         => 'unit_5',
+            'avatar'       => '/images/avas/monsters/003.png',
             'damage'       => 15,
             'attack_speed' => 1.00,
             'life'         => 80,
@@ -54,6 +59,7 @@ class UnitFactory
         ],
         10 => [
             'name'         => 'dead_unit',
+            'avatar'       => '/images/avas/monsters/005.png',
             'damage'       => 35,
             'attack_speed' => 1.00,
             'life'         => 0,
@@ -76,6 +82,7 @@ class UnitFactory
 
         return new Unit(
             self::$units[$template]['name'],
+            self::$units[$template]['avatar'],
             self::$units[$template]['damage'],
             self::$units[$template]['attack_speed'],
             self::$units[$template]['life'],

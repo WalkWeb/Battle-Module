@@ -20,6 +20,7 @@ use PHPUnit\Framework\TestCase;
 class UnitTest extends TestCase
 {
     private $attackName = 'attack_unit';
+    private $attackAvatar = 'attack_unit_ava';
     private $attackDamage = 40;
     private $attackAttackSpeed = 1.00;
     private $attackLife = 100;
@@ -27,6 +28,7 @@ class UnitTest extends TestCase
     private $attackClassId = UnitClassInterface::WARRIOR;
 
     private $defendName = 'defend_unit';
+    private $defendAvatar = 'defend_unit_ava';
     private $defendDamage = 30;
     private $defendAttackSpeed = 1.00;
     private $defendLife = 60;
@@ -42,6 +44,7 @@ class UnitTest extends TestCase
 
         $unit = new Unit(
             $this->attackName,
+            $this->attackAvatar,
             $this->attackDamage,
             $this->attackAttackSpeed,
             $this->attackLife,
@@ -51,6 +54,7 @@ class UnitTest extends TestCase
 
         self::assertInstanceOf(UnitInterface::class, $unit);
         self::assertEquals($this->attackName, $unit->getName());
+        self::assertEquals($this->attackAvatar, $unit->getAvatar());
         self::assertEquals($this->attackDamage, $unit->getDamage());
         self::assertEquals($this->attackLife, $unit->getLife());
         self::assertEquals($this->attackLife, $unit->getTotalLife());
@@ -72,6 +76,7 @@ class UnitTest extends TestCase
 
         $attackUnit = new Unit(
             $this->attackName,
+            $this->attackAvatar,
             $this->attackDamage,
             $this->attackAttackSpeed,
             $this->attackLife,
@@ -81,6 +86,7 @@ class UnitTest extends TestCase
 
         $defendUnit = new Unit(
             $this->defendName,
+            $this->defendAvatar,
             $this->defendDamage,
             $this->defendAttackSpeed,
             $this->defendLife,
@@ -115,6 +121,7 @@ class UnitTest extends TestCase
 
         $unit = new Unit(
             $this->attackName,
+            $this->attackAvatar,
             $this->attackDamage,
             $this->attackAttackSpeed,
             $this->attackLife,
@@ -141,6 +148,7 @@ class UnitTest extends TestCase
 
         $unit = new Unit(
             $this->attackName,
+            $this->attackAvatar,
             $this->attackDamage,
             $this->attackAttackSpeed,
             $this->attackLife,

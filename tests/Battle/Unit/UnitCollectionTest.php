@@ -19,9 +19,8 @@ class UnitCollectionTest extends TestCase
     {
         $collection = new UnitCollection();
 
-        $collection->add(new Unit('User 1', 15, 1, 110, true, ClassFactory::create(1)));
-        $collection->add(new Unit('User 2', 12, 1, 95, false, ClassFactory::create(2)));
-
+        $collection->add(new Unit('User 1', 'avatar 1', 15, 1, 110, true, ClassFactory::create(1)));
+        $collection->add(new Unit('User 2', 'avatar 2', 12, 1, 95, false, ClassFactory::create(2)));
 
         self::assertCount(2, $collection);
 

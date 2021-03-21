@@ -19,18 +19,20 @@ use Battle\Unit\Unit;
 class StrokeTest extends TestCase
 {
     private $attackerName   = 'first_unit';
+    private $attackAvatar   = 'first_unit_ava';
     private $attackerDamage = 20;
     private $attackerAttackSpeed = 1.00;
     private $attackerLife   = 100;
     private $attackerMelee  = true;
-    private $attackerClass = UnitClassInterface::WARRIOR;
+    private $attackerClass  = UnitClassInterface::WARRIOR;
 
     private $defendName   = 'second_unit';
+    private $defendAvatar = 'second_unit_ava';
     private $defendDamage = 25;
     private $defendAttackSpeed = 1.00;
     private $defendLife   = 70;
     private $defendMelee  = true;
-    private $defendClass = UnitClassInterface::PRIEST;
+    private $defendClass  = UnitClassInterface::PRIEST;
 
     /** @var UnitInterface */
     private $attackUnit;
@@ -45,6 +47,7 @@ class StrokeTest extends TestCase
     {
         $this->attackUnit = new Unit(
             $this->attackerName,
+            $this->attackAvatar,
             $this->attackerDamage,
             $this->attackerAttackSpeed,
             $this->attackerLife,
@@ -54,6 +57,7 @@ class StrokeTest extends TestCase
 
         $this->defendUnit = new Unit(
             $this->defendName,
+            $this->defendAvatar,
             $this->defendDamage,
             $this->defendAttackSpeed,
             $this->defendLife,

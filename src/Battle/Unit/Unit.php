@@ -16,12 +16,19 @@ use Battle\Effect\EffectCollection;
 use Exception;
 use Battle\Exception\ActionCollectionException;
 
+// TODO Добавить AbstractUnit, вынеся в него базовые геттеры, оставив в Unit только реальную логику
+
 class Unit implements UnitInterface
 {
     /**
      * @var string - Имя юнита. Это может быть имя персонажа игрока, имя монстра или NPC
      */
     private $name;
+
+    /**
+     * @var string - URL к картинке-аватару юнита
+     */
+    private $avatar;
 
     /**
      * @var int - Урон
@@ -70,6 +77,7 @@ class Unit implements UnitInterface
 
     public function __construct(
         string $name,
+        string $avatar,
         int $damage,
         float $attackSpeed,
         int $life,
@@ -78,6 +86,7 @@ class Unit implements UnitInterface
     )
     {
         $this->name = $name;
+        $this->avatar = $avatar;
         $this->damage = $damage;
         $this->attackSpeed = $attackSpeed;
         $this->life = $this->totalLife = $life;
@@ -265,5 +274,13 @@ class Unit implements UnitInterface
         $action->setFactualPower($this->life - $primordialLife);
 
         return Message::heal($action);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar(): string
+    {
+        return $this->avatar;
     }
 }

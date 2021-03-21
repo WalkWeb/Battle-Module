@@ -17,6 +17,7 @@ class ResultTest extends TestCase
     /**
      * @throws ClassFactoryException
      * @throws CommandException
+     * @throws ResultException
      * @throws UnitFactoryException
      */
     public function testCreateResultSuccess(): void

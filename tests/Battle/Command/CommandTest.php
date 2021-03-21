@@ -214,9 +214,9 @@ class CommandTest extends TestCase
      */
     public function testGetUnitForActionNothing(): void
     {
-        $unit1 = new Unit('User 1', 15, 1, 110, true, ClassFactory::create(1));
-        $unit2 = new Unit('User 2', 12, 1, 95, false, ClassFactory::create(2));
-        $unit3 = new Unit('User 3', 120, 1, 300, true, ClassFactory::create(1));
+        $unit1 = new Unit('User 1', 'ava 1', 15, 1, 110, true, ClassFactory::create(1));
+        $unit2 = new Unit('User 2', 'ava 2',12, 1, 95, false, ClassFactory::create(2));
+        $unit3 = new Unit('User 3', 'ava 3',120, 1, 300, true, ClassFactory::create(1));
 
         $alliesCommand = new Command([$unit1, $unit2]);
         $enemyCommand = new Command([$unit3]);

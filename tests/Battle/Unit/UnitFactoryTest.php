@@ -25,6 +25,7 @@ class UnitFactoryTest extends TestCase
         $class = ClassFactory::create($data['class']);
 
         self::assertEquals($data['name'], $unit->getName());
+        self::assertEquals($data['avatar'], $unit->getAvatar());
         self::assertEquals($data['damage'], $unit->getDamage());
         self::assertEquals($data['attack_speed'], $unit->getAttackSpeed());
         self::assertEquals($data['life'], $unit->getTotalLife());
@@ -52,6 +53,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'life'         => 80,
@@ -71,6 +73,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // отсутствует name
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'life'         => 80,
@@ -83,6 +86,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // некорректный name
                     'name'         => 123,
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'life'         => 80,
@@ -93,8 +97,34 @@ class UnitFactoryTest extends TestCase
             ],
             [
                 [
+                    // отсутствует avatar
+                    'name'         => 'Skeleton',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_AVATAR,
+            ],
+            [
+                [
+                    // некорректный avatar
+                    'name'         => 'Skeleton',
+                    'avatar'       => ['ava' => '/images/avas/monsters/003.png'],
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_AVATAR,
+            ],
+            [
+                [
                     // отсутствует damage
                     'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'attack_speed' => 1.2,
                     'life'         => 80,
                     'melee'        => true,
@@ -106,6 +136,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // некорректный damage
                     'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15.3,
                     'attack_speed' => 1.2,
                     'life'         => 80,
@@ -118,6 +149,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // отсутствует attack_speed
                     'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'life'         => 80,
                     'melee'        => true,
@@ -129,6 +161,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // некорректный attack_speed
                     'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1,
                     'life'         => 80,
@@ -141,6 +174,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // отсутствует life
                     'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'melee'        => true,
@@ -152,6 +186,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // некорректный life
                     'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'life'         => 80.0,
@@ -164,6 +199,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // отсутствует melee
                     'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'life'         => 80,
@@ -175,6 +211,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // некорректный melee
                     'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'life'         => 80,
@@ -187,6 +224,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // отсутствует class
                     'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'life'         => 80,
@@ -198,6 +236,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // некорректный class
                     'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'life'         => 80,
