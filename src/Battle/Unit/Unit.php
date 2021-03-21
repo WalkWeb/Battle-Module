@@ -13,7 +13,6 @@ use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Effect\Effect;
 use Battle\Effect\EffectCollection;
-use Battle\Tools;
 use Exception;
 use Battle\Exception\ActionCollectionException;
 
@@ -177,6 +176,7 @@ class Unit implements UnitInterface
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
      * @throws ActionCollectionException
+     * @throws Exception
      */
     public function getDamageAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
@@ -238,11 +238,15 @@ class Unit implements UnitInterface
         return Message::damage($action);
     }
 
+    /**
+     * @return int
+     * @throws Exception
+     */
     private function calculateAttackSpeed(): int
     {
         $result = (int)floor($this->attackSpeed);
         $residue = $this->attackSpeed - $result;
-        if (($residue > 0) && ($residue * 100 > Tools::rand(0, 100))) {
+        if (($residue > 0) && ($residue * 100 > random_int(0, 100))) {
             $result++;
         }
 
