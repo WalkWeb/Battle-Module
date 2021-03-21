@@ -8,7 +8,13 @@ use Battle\Chat\Message;
 
 class HealAction extends AbstractAction
 {
-    protected const NAME = 'heal';
+    protected const NAME          = 'heal';
+    protected const HANDLE_METHOD = 'applyHealAction';
+
+    public function getHandleMethod(): string
+    {
+        return self::HANDLE_METHOD;
+    }
 
     /**
      * @return string

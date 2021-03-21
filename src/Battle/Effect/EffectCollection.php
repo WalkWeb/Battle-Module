@@ -4,25 +4,27 @@ declare(strict_types=1);
 
 namespace Battle\Effect;
 
-// todo use Trait, implements  Iterator, Countable
-class EffectCollection
+use Battle\Traits\CollectionTrait;
+use Countable;
+use Iterator;
+
+class EffectCollection implements Iterator, Countable
 {
+    use CollectionTrait;
+
     /**
      * @var Effect[]
      */
-    private $effects;
+    private $elements = [];
 
     public function add(Effect $effect): void
     {
-        $this->effects[] = $effect;
+        $this->elements[] = $effect;
     }
 
-    /**
-     * @return Effect[]
-     */
-    public function getEffects(): array
+    public function current(): Effect
     {
-        return $this->effects;
+        return current($this->elements);
     }
 
     public function newRound(): void

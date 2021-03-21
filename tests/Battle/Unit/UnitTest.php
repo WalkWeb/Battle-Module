@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
-use Battle\Classes\ClassFactory;
+use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\Command;
@@ -40,7 +40,7 @@ class UnitTest extends TestCase
      */
     public function testCreate(): void
     {
-        $attackClass = ClassFactory::create($this->attackClassId);
+        $attackClass = UnitClassFactory::create($this->attackClassId);
 
         $unit = new Unit(
             $this->attackName,
@@ -71,8 +71,8 @@ class UnitTest extends TestCase
     public function testApplyDamage(): void
     {
 
-        $attackClass = ClassFactory::create($this->attackClassId);
-        $defendClass = ClassFactory::create($this->defendClassId);
+        $attackClass = UnitClassFactory::create($this->attackClassId);
+        $defendClass = UnitClassFactory::create($this->defendClassId);
 
         $attackUnit = new Unit(
             $this->attackName,
@@ -117,7 +117,7 @@ class UnitTest extends TestCase
      */
     public function testAction(): void
     {
-        $attackClass = ClassFactory::create($this->attackClassId);
+        $attackClass = UnitClassFactory::create($this->attackClassId);
 
         $unit = new Unit(
             $this->attackName,
@@ -144,7 +144,7 @@ class UnitTest extends TestCase
      */
     public function testAddEffect(): void
     {
-        $attackClass = ClassFactory::create($this->attackClassId);
+        $attackClass = UnitClassFactory::create($this->attackClassId);
 
         $unit = new Unit(
             $this->attackName,

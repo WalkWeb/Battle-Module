@@ -6,7 +6,7 @@ namespace Battle\Classes;
 
 // TODO Переименовать в AbstractUnitClass
 
-abstract class UnitClass implements UnitClassInterface
+abstract class AbstractUnitClass implements UnitClassInterface
 {
 
 }

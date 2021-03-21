@@ -10,7 +10,7 @@ use Battle\Command\CommandInterface;
 use Battle\Exception\ActionCollectionException;
 use Battle\Unit\UnitInterface;
 
-class Priest extends UnitClass
+class Priest extends AbstractUnitClass
 {
     private $id = UnitClassInterface::PRIEST;
 

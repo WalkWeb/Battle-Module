@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
-use Battle\Classes\ClassFactory;
+use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitCollection;
@@ -19,8 +19,8 @@ class UnitCollectionTest extends TestCase
     {
         $collection = new UnitCollection();
 
-        $collection->add(new Unit('User 1', 'avatar 1', 15, 1, 110, true, ClassFactory::create(1)));
-        $collection->add(new Unit('User 2', 'avatar 2', 12, 1, 95, false, ClassFactory::create(2)));
+        $collection->add(new Unit('User 1', 'avatar 1', 15, 1, 110, true, UnitClassFactory::create(1)));
+        $collection->add(new Unit('User 2', 'avatar 2', 12, 1, 95, false, UnitClassFactory::create(2)));
 
         self::assertCount(2, $collection);
 

@@ -5,14 +5,14 @@ require_once __DIR__ . '/../public/style.html';
 
 use Battle\Battle;
 use Battle\Chat\Chat;
-use Battle\Classes\ClassFactory;
+use Battle\Classes\UnitClassFactory;
 use Battle\Command\Command;
 use Battle\Statistic\BattleStatistic;
 use Battle\Unit\Unit;
 
 try {
-    $warrior = ClassFactory::create(1);
-    $priest = ClassFactory::create(2);
+    $warrior = UnitClassFactory::create(1);
+    $priest = UnitClassFactory::create(2);
 
     $unit1 = new Unit('Warrior', '/images/avas/humans/human001.jpg', 15, 1, 110, true, $warrior);
     $unit2 = new Unit('Priest', '/images/avas/humans/human004.jpg', 12, 1, 95, false, $priest);

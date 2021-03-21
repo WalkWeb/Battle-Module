@@ -9,6 +9,7 @@ use Battle\Action\ActionInterface;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Effect\Effect;
+use Battle\Effect\EffectCollection;
 
 /**
  * Одна боевая единица.
@@ -162,9 +163,7 @@ interface UnitInterface
     /**
      * Возвращает эффекты на юните
      *
-     * TODO Должен возвращать не массив а EffectCollection
-     *
-     * @return array
+     * @return EffectCollection
      */
-    public function getEffects(): array;
+    public function getEffects(): EffectCollection;
 }

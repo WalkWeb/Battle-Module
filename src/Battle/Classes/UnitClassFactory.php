@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Classes;
 
-// TODO Переименовать в UnitClassFactory
-
-class ClassFactory
+class UnitClassFactory
 {
     /**
      * TODO добавить массив-маппинг классов в формате ['id' => 'className'] и создавать классы без if проверок

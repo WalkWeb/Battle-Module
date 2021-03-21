@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Battle\Command;
 
 use Battle\Unit\UnitFactory;
+use Battle\Unit\UnitInterface;
 use Exception;
 
 class CommandFactory
 {
     /**
+     * Создает команду на основании массива юнитов или данных по юнитам
+     *
      * @param array $data
      * @return CommandInterface
      * @throws CommandException
@@ -20,6 +23,15 @@ class CommandFactory
         $i = 1;
 
         foreach ($data as $datum) {
+
+            if (is_object($datum) && !($datum instanceof UnitInterface)) {
+                throw new CommandException(CommandException::INCORRECT_OBJECT_UNIT);
+            }
+
+            if ($datum instanceof UnitInterface) {
+                $units[] = $datum;
+                continue;
+            }
 
             if (!is_array($datum)) {
                 throw new CommandException(CommandException::INCORRECT_UNIT_DATA);

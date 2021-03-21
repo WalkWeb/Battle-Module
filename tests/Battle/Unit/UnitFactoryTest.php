@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
-use Battle\Classes\ClassFactory;
+use Battle\Classes\UnitClassFactory;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
 use Exception;
@@ -22,7 +22,7 @@ class UnitFactoryTest extends TestCase
     public function testUnitFactorySuccess(array $data): void
     {
         $unit = UnitFactory::create($data);
-        $class = ClassFactory::create($data['class']);
+        $class = UnitClassFactory::create($data['class']);
 
         self::assertEquals($data['name'], $unit->getName());
         self::assertEquals($data['avatar'], $unit->getAvatar());

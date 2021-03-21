@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Factory;
 
-use Battle\Classes\ClassFactory;
+use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Unit\UnitInterface;
 use Battle\Unit\Unit;
@@ -87,7 +87,7 @@ class UnitFactory
             self::$units[$template]['attack_speed'],
             self::$units[$template]['life'],
             self::$units[$template]['melee'],
-            ClassFactory::create(self::$units[$template]['class'])
+            UnitClassFactory::create(self::$units[$template]['class'])
         );
     }
 

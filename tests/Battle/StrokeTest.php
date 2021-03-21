@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle;
 
 use Battle\Chat\Chat;
-use Battle\Classes\ClassFactory;
+use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\Command;
@@ -52,7 +52,7 @@ class StrokeTest extends TestCase
             $this->attackerAttackSpeed,
             $this->attackerLife,
             $this->attackerMelee,
-            ClassFactory::create($this->attackerClass)
+            UnitClassFactory::create($this->attackerClass)
         );
 
         $this->defendUnit = new Unit(
@@ -62,7 +62,7 @@ class StrokeTest extends TestCase
             $this->defendAttackSpeed,
             $this->defendLife,
             $this->defendMelee,
-            ClassFactory::create($this->defendClass)
+            UnitClassFactory::create($this->defendClass)
         );
     }
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
-use Battle\Classes\ClassFactory;
+use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 
 class UnitFactory
@@ -69,7 +69,7 @@ class UnitFactory
             $data['attack_speed'],
             $data['life'],
             $data['melee'],
-            ClassFactory::create($data['class'])
+            UnitClassFactory::create($data['class'])
         );
     }
 }

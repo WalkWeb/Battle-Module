@@ -8,11 +8,64 @@ use Battle\Unit\UnitInterface;
 
 interface ActionInterface
 {
+    /**
+     * Название метода в классе Unit, который будет обрабатывать данное событие
+     *
+     * @return string
+     */
+    public function getHandleMethod(): string;
+
+    /**
+     * Применение события
+     *
+     * @return string
+     */
     public function handle(): string;
+
+    /**
+     * Название события, используется для создания сообщений в чате
+     *
+     * @return string
+     */
     public function getNameAction(): string;
+
+    /**
+     * Возвращает юнита совершающего действие
+     *
+     * @return UnitInterface
+     */
     public function getActionUnit(): UnitInterface;
+
+    /**
+     * Возвращает юнита к которому применяется действие
+     *
+     * @return UnitInterface
+     */
     public function getTargetUnit(): UnitInterface;
+
+    /**
+     * Возвращает силу действия (например, силу удара или силу лечения)
+     *
+     * @return mixed
+     */
     public function getPower();
+
+    /**
+     * Задает фактическую силу действия
+     *
+     * Например, у юнита осталось 5 здоровья и он получает 50 удара. В этом случае фактический удар будет на 5 здоровья
+     *
+     * Этот параметр необходим, например, для корректного расчета вампиризма
+     *
+     * @param int $factualPower
+     * @return mixed
+     */
     public function setFactualPower(int $factualPower);
-    public function getFactualPower();
+
+    /**
+     * Возвращает фактическую силу действия
+     *
+     * @return int
+     */
+    public function getFactualPower(): int;
 }
