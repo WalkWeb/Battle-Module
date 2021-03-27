@@ -48,12 +48,13 @@ class CommandFactoryTest extends TestCase
     /**
      * @dataProvider failDataProvider
      * @param array $data
+     * @param string $error
      * @throws CommandException
      */
-    public function testCommandFactoryCreateFromDataFail(array $data): void
+    public function testCommandFactoryCreateFromDataFail(array $data, string $error): void
     {
         $this->expectException(CommandException::class);
-        $this->expectErrorMessage(UnitException::INCORRECT_NAME . ' (1 element)');
+        $this->expectErrorMessage($error);
         CommandFactory::create($data);
     }
 
@@ -122,9 +123,9 @@ class CommandFactoryTest extends TestCase
     {
         return [
             [
+                // отсутствует name
                 [
                     [
-                        // отсутствует name
                         'avatar'       => 'url avatar 1',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -133,6 +134,14 @@ class CommandFactoryTest extends TestCase
                         'class'        => 1,
                     ],
                 ],
+                UnitException::INCORRECT_NAME . ' (1 element)',
+            ],
+            [
+                // string вместо array данных по юниту
+                [
+                    'string',
+                ],
+                CommandException::INCORRECT_UNIT_DATA,
             ],
         ];
     }
