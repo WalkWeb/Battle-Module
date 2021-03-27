@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Battle;
 
 use Battle\Chat\Chat;
+use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Exception\BattleException;
 use Battle\Round\RoundFactory;
 use Battle\Statistic\BattleStatistic;
 use Exception;
@@ -13,45 +15,58 @@ use Exception;
 class BattleFactory
 {
     /**
-     * TODO Переделать фабрику следующим образом:
-     * TODO - из обязательных параметров - только массив юнитов
-     * TODO - все остальные параметры - не обязательные
-     *
-     * @param CommandInterface $leftCommand
-     * @param CommandInterface $rightCommand
-     * @param BattleStatistic $statistics
-     * @param Chat $chat
+     * @param array $data
+     * @param BattleStatistic|null $statistics
+     * @param Chat|null $chat
      * @param bool|null $debug
      * @param RoundFactory|null $roundFactory
      * @return BattleInterface
      * @throws Exception
      */
     public static function create(
-        CommandInterface $leftCommand,
-        CommandInterface $rightCommand,
-        BattleStatistic $statistics,
-        Chat $chat,
+        array $data,
+        ?BattleStatistic $statistics = null,
+        ?Chat $chat = null,
         ?bool $debug = true,
         ?RoundFactory $roundFactory = null
     ): BattleInterface
     {
         return new Battle(
-            $leftCommand,
-            $rightCommand,
-            $statistics,
-            $chat,
-            $debug,
+            self::createCommand($data, BattleInterface::LEFT_COMMAND),
+            self::createCommand($data, BattleInterface::RIGHT_COMMAND),
+            $statistics ?? new BattleStatistic(),
+            $chat ?? new Chat(),
+            $debug ?? true,
             $roundFactory
         );
     }
 
-    public function createLeftCommand(array $data): CommandInterface
+    /**
+     * @param array $data
+     * @param string $command
+     * @return CommandInterface
+     * @throws BattleException
+     * @throws Command\CommandException
+     */
+    public static function createCommand(array $data, string $command): CommandInterface
     {
-        // todo
-    }
+        $commandData = [];
 
-    public function createRightCommand(): CommandInterface
-    {
-        // todo
+        foreach ($data as $datum) {
+
+            if (!is_array($datum)) {
+                throw new BattleException(BattleException::INCORRECT_UNIT_DATA);
+            }
+
+            if (!array_key_exists(BattleInterface::COMMAND_PARAMETER, $datum)) {
+                throw new BattleException(BattleException::NO_COMMAND_PARAMETER);
+            }
+
+            if ($datum[BattleInterface::COMMAND_PARAMETER] === $command) {
+                $commandData[] = $datum;
+            }
+        }
+
+        return CommandFactory::create($commandData);
     }
 }

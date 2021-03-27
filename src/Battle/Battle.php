@@ -118,4 +118,6 @@ class Battle implements BattleInterface
     {
         return $this->statistics;
     }
+
+
 }
