@@ -99,7 +99,7 @@ class Battle implements BattleInterface
             // Проверяем живых в командах
             if (!$this->leftCommand->isAlive() || !$this->rightCommand->isAlive()) {
                 $winner = !$this->leftCommand->isAlive() ? 2 : 1;
-                return new Result($this->leftCommand, $this->rightCommand, $winner);
+                return new Result($this->leftCommand, $this->rightCommand, $winner, $this->chat);
             }
 
             $this->statistics->increasedRound();
@@ -118,6 +118,4 @@ class Battle implements BattleInterface
     {
         return $this->statistics;
     }
-
-
 }

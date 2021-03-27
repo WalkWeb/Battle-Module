@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Verdana, sans-serif;
+    background: #151515;
+    color: #999;
+}
+
+hr {
+    border: none;
+    color: #666;
+    background-color: #666;
+    height: 1px;
+}
+
+p, h1 {
+    font-family: Verdana, sans-serif;
+    text-align: center;
+    color: #999;
+}
+
+p {
+    padding: 4px;
+}
+
+table {
+    border: 0;
+    width: 100%;
+}
+
+td {
+    border: 1px solid #777;
+}
+
+div.row {
+    width: 90%;
+    margin: 0 auto;
+}
+
+div.unit {
+    width: 90%;
+    margin: 15px auto;
+}
+
+div.unit table {
+    border-collapse: collapse;
+    font-size: 70%;
+}
+
+div.unit table thead {
+    color: #555;
+    text-align: center;
+}
+
+div.unit table td {
+    padding: 2px;
+}
+
+div.unit table tbody {
+    color: #999;
+    text-align: center;
+}
+
+td.w25 {
+    width: 25%;
+}
+
+td.w50 {
+    width: 50%;
+}
+
+td.life_bar {
+    width: 80px;
+}
+
+div.life_bar {
+    width: 80px;
+    height: 20px;
+    background: #252525;
+}
+
+div.life {
+    height: 20px;
+    background: #454545;
+}
+
+div.life_text {
+    width: 80px;
+    height: 20px;
+    margin-top: -20px;
+}
+
+.c4 {
+    background: #252525;
+}
+
+.c6 {
+    background: #454545;
+}
+
+.avatar_box {
+    width: 40px;
+    height: 50px;
+    background-size: contain;
+}

@@ -2,6 +2,7 @@
 
 namespace Battle\Result;
 
+use Battle\Chat\Chat;
 use Battle\Command\CommandInterface;
 
 interface ResultInterface
@@ -13,4 +14,5 @@ interface ResultInterface
     public function getRightCommand(): CommandInterface;
     public function getWinner(): int;
     public function getWinnerText(): string;
+    public function getChat(): Chat;
 }

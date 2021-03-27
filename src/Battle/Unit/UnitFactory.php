@@ -44,11 +44,14 @@ class UnitFactory
             throw new UnitException(UnitException::INCORRECT_DAMAGE);
         }
 
-        // todo normalize attack speed - 1.0 value convert to 1 json value. Need change 1 => 1.0
-
-        if (!array_key_exists('attack_speed', $data) || !is_float($data['attack_speed'])) {
+        if (!array_key_exists('attack_speed', $data) || !is_float($data['attack_speed'])) { // todo or int
             throw new UnitException(UnitException::INCORRECT_ATTACK_SPEED);
         }
+
+        // todo normalize attack speed - 1.0 value convert to 1 json value. Need change 1 => 1.0
+//        if (is_int($data['attack_speed'])) {
+//            $data['attack_speed'] = (float)($data['attack_speed']);
+//        }
 
         if (!array_key_exists('life', $data) || !is_int($data['life'])) {
             throw new UnitException(UnitException::INCORRECT_LIFE);

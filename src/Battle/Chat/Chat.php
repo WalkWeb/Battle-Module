@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Chat;
 
+// TODO По факту это никакой не чат, а хранилище html кода - переделать
 class Chat
 {
     /** @var array */
@@ -14,7 +15,7 @@ class Chat
         $this->messages[] = $message;
     }
 
-    public function getAll(): array
+    public function getMessages(): array
     {
         return $this->messages;
     }

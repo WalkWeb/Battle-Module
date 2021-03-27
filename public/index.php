@@ -1,36 +1,61 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../public/style.html';
+require_once __DIR__ . '/../public/html.html';
 
-use Battle\Battle;
-use Battle\Chat\Chat;
-use Battle\Classes\UnitClassFactory;
-use Battle\Command\Command;
-use Battle\Statistic\BattleStatistic;
-use Battle\Unit\Unit;
+use Battle\BattleFactory;
+
+$data = [
+    [
+        'name'         => 'Warrior',
+        'avatar'       => '/images/avas/humans/human001.jpg',
+        'damage'       => 15,
+        'attack_speed' => 1.0,
+        'life'         => 110,
+        'melee'        => true,
+        'class'        => 1,
+        'command'      => 'left',
+    ],
+    [
+        'name'         => 'Priest',
+        'avatar'       => '/images/avas/humans/human004.jpg',
+        'damage'       => 12,
+        'attack_speed' => 1.0,
+        'life'         => 95,
+        'melee'        => false,
+        'class'        => 2,
+        'command'      => 'left',
+    ],
+    [
+        'name'         => 'Skeleton',
+        'avatar'       => '/images/avas/monsters/005.png',
+        'damage'       => 25,
+        'attack_speed' => 1.5,
+        'life'         => 165,
+        'melee'        => true,
+        'class'        => 1,
+        'command'      => 'right',
+    ],
+    [
+        'name'         => 'Necro',
+        'avatar'       => '/images/avas/monsters/006.png',
+        'damage'       => 10,
+        'attack_speed' => 1.0,
+        'life'         => 80,
+        'melee'        => false,
+        'class'        => 2,
+        'command'      => 'right',
+    ],
+];
 
 try {
-    $warrior = UnitClassFactory::create(1);
-    $priest = UnitClassFactory::create(2);
 
-    $unit1 = new Unit('Warrior', '/images/avas/humans/human001.jpg', 15, 1, 110, true, $warrior);
-    $unit2 = new Unit('Priest', '/images/avas/humans/human004.jpg', 12, 1, 95, false, $priest);
-    $unit3 = new Unit('Skeleton', '/images/avas/monsters/005.png', 25, 1.5, 165, true, $warrior);
-    $unit4 = new Unit('Necro', '/images/avas/monsters/006.png', 10, 1, 75, false, $priest);
-
-    $leftCommand = new Command([$unit1, $unit2]);
-    $rightCommand = new Command([$unit3, $unit4]);
-    $chat = new Chat();
-
-    $battle = new Battle($leftCommand, $rightCommand, new BattleStatistic(), $chat);
-
+    $battle = BattleFactory::create($data);
     $result = $battle->handle();
+    $views = $result->getChat()->getMessages();
 
-    $messages = $chat->getAll();
-
-    foreach ($messages as $message) {
-        echo '<p>' . $message . '</p>';
+    foreach ($views as $view) {
+        echo $view;
     }
 
     echo '<h1>' . $result->getWinnerText() . '</h1>';

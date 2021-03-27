@@ -148,10 +148,10 @@ class Round implements RoundInterface
      */
     private function executeStroke(StrokeInterface $stroke): void
     {
-        $this->chat->add(self::START_STROKE . ' #' . $this->statistics->getStrokeNumber());
+        $this->chat->add('<p>' . self::START_STROKE . ' #' . $this->statistics->getStrokeNumber() . '</p>');
         $stroke->handle();
-        $this->chat->add(self::END_STROKE . ' #' . $this->statistics->getStrokeNumber());
-        $this->chat->add(self::HR);
+        $this->chat->add('<p>' . self::END_STROKE . ' #' . $this->statistics->getStrokeNumber() . '</p>');
+        $this->chat->add('<p>' . self::HR . '</p>');
     }
 
     /**
@@ -161,7 +161,7 @@ class Round implements RoundInterface
      */
     private function startRound(): void
     {
-        $this->chat->add(self::START_ROUND . ' #' . $this->statistics->getRoundNumber());
+        $this->chat->add('<p>' . self::START_ROUND . ' #' . $this->statistics->getRoundNumber() . '</p>');
     }
 
     /**
@@ -175,7 +175,7 @@ class Round implements RoundInterface
      */
     private function endRound(): int
     {
-        $this->chat->add(self::END_ROUND);
+        $this->chat->add('<p>' . self::END_ROUND . '</p>');
         $this->leftCommand->newRound();
         $this->rightCommand->newRound();
         return $this->actionCommand;
@@ -192,7 +192,7 @@ class Round implements RoundInterface
      */
     private function endBattle(): int
     {
-        $this->chat->add(self::END);
+        $this->chat->add('<p>' . self::END . '</p>');
         return 0;
     }
 

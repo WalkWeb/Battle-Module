@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result;
 
+use Battle\Chat\Chat;
 use Battle\Classes\ClassFactoryException;
 use PHPUnit\Framework\TestCase;
 use Battle\Result\Result;
@@ -25,7 +26,7 @@ class ResultTest extends TestCase
         $leftCommand = CommandFactory::createLeftCommand();
         $rightCommand = CommandFactory::createRightCommand();
 
-        $result = new Result($leftCommand, $rightCommand, $winner = 2);
+        $result = new Result($leftCommand, $rightCommand, $winner = 2, new Chat());
 
         self::assertInstanceOf(Result::class, $result);
         self::assertEquals($leftCommand, $result->getLeftCommand());
@@ -45,6 +46,6 @@ class ResultTest extends TestCase
         $rightCommand = CommandFactory::createRightCommand();
 
         $this->expectException(ResultException::class);
-        new Result($leftCommand, $rightCommand, $winner = 3);
+        new Result($leftCommand, $rightCommand, $winner = 3, new Chat());
     }
 }
