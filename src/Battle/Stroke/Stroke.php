@@ -8,7 +8,7 @@ use Battle\Command\CommandInterface;
 use Battle\Statistic\BattleStatistic;
 use Battle\Chat\Chat;
 use Battle\Unit\UnitInterface;
-use Battle\View;
+use Battle\View\ViewFactory;
 
 class Stroke implements StrokeInterface
 {
@@ -33,8 +33,10 @@ class Stroke implements StrokeInterface
     /** @var bool */
     private $debug;
 
+    /** @var ViewFactory */
+    private $viewFactory;
+
     /**
-     * Stroke constructor.
      * @param int $actionCommand
      * @param UnitInterface $actionUnit
      * @param CommandInterface $leftCommand
@@ -42,6 +44,7 @@ class Stroke implements StrokeInterface
      * @param BattleStatistic $statistics
      * @param Chat $chat
      * @param bool|null $debug
+     * @param ViewFactory|null $viewFactory
      */
     public function __construct(
         int $actionCommand,
@@ -50,7 +53,8 @@ class Stroke implements StrokeInterface
         CommandInterface $rightCommand,
         BattleStatistic $statistics,
         Chat $chat,
-        ?bool $debug = false
+        ?bool $debug = false,
+        ?ViewFactory $viewFactory = null
     )
     {
         $this->actionCommand = $actionCommand;
@@ -60,6 +64,7 @@ class Stroke implements StrokeInterface
         $this->statistics = $statistics;
         $this->chat = $chat;
         $this->debug = $debug;
+        $this->viewFactory = $viewFactory ?? new ViewFactory();
     }
 
     /**
@@ -68,8 +73,8 @@ class Stroke implements StrokeInterface
     public function handle(): void
     {
         if ($this->debug) {
-            $view = new View($this->leftCommand, $this->rightCommand);
-            $this->chat->add($view());
+            $view = $this->viewFactory->create();
+            $this->chat->add($view->render($this->leftCommand, $this->rightCommand));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -95,8 +100,8 @@ class Stroke implements StrokeInterface
         $this->actionUnit->madeAction();
 
         if ($this->debug) {
-            $view = new View($this->leftCommand, $this->rightCommand);
-            $this->chat->add($view());
+            $view = $this->viewFactory->create();
+            $this->chat->add($view->render($this->leftCommand, $this->rightCommand));
         }
     }
 }

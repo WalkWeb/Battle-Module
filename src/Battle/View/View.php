@@ -2,45 +2,45 @@
 
 declare(strict_types=1);
 
-namespace Battle;
+namespace Battle\View;
 
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
-class View
+/**
+ * TODO Подумать, как можно вынести конкретный html код в отдельные шаблоны
+ *
+ * @package Battle\View
+ */
+class View implements ViewInterface
 {
-    /** @var CommandInterface */
-    private $leftCommand;
-
-    /** @var CommandInterface */
-    private $rightCommand;
-
-    public function __construct(CommandInterface $leftCommand, CommandInterface $rightCommand)
-    {
-        $this->leftCommand = $leftCommand;
-        $this->rightCommand = $rightCommand;
-    }
-
-    public function __invoke(): string
+    /**
+     * Генерирует html-код для отображения текущего состояния сражающихся команд
+     *
+     * @param CommandInterface $leftCommand
+     * @param CommandInterface $rightCommand
+     * @return string
+     */
+    public function render(CommandInterface $leftCommand, CommandInterface $rightCommand): string
     {
         $leftMeleeUnits = '';
         $leftRangeUnits = '';
         $rightMeleeUnits = '';
         $rightRangeUnits = '';
 
-        foreach ($this->leftCommand->getMeleeUnits() as $unit) {
+        foreach ($leftCommand->getMeleeUnits() as $unit) {
             $leftMeleeUnits .= $this->getUnitView($unit);
         }
 
-        foreach ($this->leftCommand->getRangeUnits() as $unit) {
+        foreach ($leftCommand->getRangeUnits() as $unit) {
             $leftRangeUnits .= $this->getUnitView($unit);
         }
 
-        foreach ($this->rightCommand->getMeleeUnits() as $unit) {
+        foreach ($rightCommand->getMeleeUnits() as $unit) {
             $rightMeleeUnits .= $this->getUnitView($unit);
         }
 
-        foreach ($this->rightCommand->getRangeUnits() as $unit) {
+        foreach ($rightCommand->getRangeUnits() as $unit) {
             $rightRangeUnits .= $this->getUnitView($unit);
         }
 
@@ -56,6 +56,10 @@ class View
                 </div>';
     }
 
+    /**
+     * @param UnitInterface $unit
+     * @return string
+     */
     private function getUnitView(UnitInterface $unit): string
     {
         $action = $unit->isAction() ? 'yes' : 'no';
@@ -92,11 +96,20 @@ class View
         </div>';
     }
 
+    /**
+     * @param int $value
+     * @param int $max
+     * @return int
+     */
     private function getWidth(int $value, int $max): int
     {
         return (int)($value / $max * 100);
     }
 
+    /**
+     * @param bool $value
+     * @return string
+     */
     private function getBgClass(bool $value): string
     {
         return $value ? 'c6' : 'c4';
