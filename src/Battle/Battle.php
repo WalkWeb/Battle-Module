@@ -7,7 +7,8 @@ namespace Battle;
 use Battle\Chat\Chat;
 use Battle\Command\CommandInterface;
 use Battle\Exception\BattleException;
-use Battle\Exception\RoundException;
+use Battle\Round\RoundException;
+use Battle\Round\RoundFactory;
 use Battle\Statistic\BattleStatistic;
 use Exception;
 use Battle\Result\ResultException;
@@ -37,12 +38,16 @@ class Battle
     /** @var Chat */
     private $chat;
 
+    /** @var RoundFactory */
+    private $roundFactory;
+
     /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param BattleStatistic $statistics
      * @param Chat $chat
      * @param bool $debug
+     * @param RoundFactory|null $roundFactory
      * @throws Exception
      */
     public function __construct(
@@ -50,7 +55,8 @@ class Battle
         CommandInterface $rightCommand,
         BattleStatistic $statistics,
         Chat $chat,
-        bool $debug = true
+        bool $debug = true,
+        ?RoundFactory $roundFactory = null
     )
     {
         $this->leftCommand = $leftCommand;
@@ -59,6 +65,7 @@ class Battle
         $this->chat = $chat;
         $this->actionCommand = random_int(1, 2);
         $this->debug = $debug;
+        $this->roundFactory = $roundFactory ?? new RoundFactory();
     }
 
     /**
@@ -74,7 +81,7 @@ class Battle
         $i = 0;
 
         while ($i < $this->maxRound) {
-            $round = new Round(
+            $round = $this->roundFactory->create(
                 $this->leftCommand,
                 $this->rightCommand,
                 $this->actionCommand,

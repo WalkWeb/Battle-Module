@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Battle;
+namespace Battle\Round;
 
 use Battle\Command\CommandInterface;
-use Battle\Exception\RoundException;
 use Battle\Statistic\BattleStatistic;
 use Battle\Chat\Chat;
+use Battle\Stroke;
 
-class Round
+class Round implements RoundInterface
 {
     private const END          = 'Battle end';
     private const START_ROUND  = 'Start new round';
