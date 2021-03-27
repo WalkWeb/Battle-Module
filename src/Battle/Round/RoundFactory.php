@@ -7,6 +7,7 @@ namespace Battle\Round;
 use Battle\Chat\Chat;
 use Battle\Command\CommandInterface;
 use Battle\Statistic\BattleStatistic;
+use Battle\Stroke\StrokeFactory;
 
 class RoundFactory
 {
@@ -20,7 +21,8 @@ class RoundFactory
      * @param int $actionCommand
      * @param BattleStatistic $statistics
      * @param Chat $chat
-     * @param bool $debug
+     * @param bool|null $debug
+     * @param StrokeFactory|null $strokeFactory
      * @return RoundInterface
      * @throws RoundException
      */
@@ -30,7 +32,8 @@ class RoundFactory
         int $actionCommand,
         BattleStatistic $statistics,
         Chat $chat,
-        bool $debug = false
+        ?bool $debug = false,
+        ?StrokeFactory $strokeFactory = null
     ): RoundInterface
     {
         return new Round(
@@ -39,7 +42,8 @@ class RoundFactory
             $actionCommand,
             $statistics,
             $chat,
-            $debug
+            $debug,
+            $strokeFactory
         );
     }
 }

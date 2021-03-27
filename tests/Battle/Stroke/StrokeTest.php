@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle;
+namespace Tests\Battle\Stroke;
 
 use Battle\Chat\Chat;
 use Battle\Classes\UnitClassFactory;
@@ -12,7 +12,7 @@ use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Statistic\BattleStatistic;
 use PHPUnit\Framework\TestCase;
-use Battle\Stroke;
+use Battle\Stroke\Stroke;
 use Battle\Unit\UnitInterface;
 use Battle\Unit\Unit;
 

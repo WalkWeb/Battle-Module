@@ -7,7 +7,8 @@ namespace Battle\Round;
 use Battle\Command\CommandInterface;
 use Battle\Statistic\BattleStatistic;
 use Battle\Chat\Chat;
-use Battle\Stroke;
+use Battle\Stroke\StrokeFactory;
+use Battle\Stroke\StrokeInterface;
 
 class Round implements RoundInterface
 {
@@ -39,13 +40,17 @@ class Round implements RoundInterface
     /** @var bool */
     private $debug;
 
+    /** @var StrokeFactory */
+    private $strokeFactory;
+
     /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param int $actionCommand
      * @param BattleStatistic $statistics
      * @param Chat $chat
-     * @param bool $debug
+     * @param bool|null $debug
+     * @param StrokeFactory|null $strokeFactory
      * @throws RoundException
      */
     public function __construct(
@@ -54,7 +59,8 @@ class Round implements RoundInterface
         int $actionCommand,
         BattleStatistic $statistics,
         Chat $chat,
-        bool $debug = false
+        ?bool $debug = false,
+        ?StrokeFactory $strokeFactory = null
     )
     {
         $this->validateActionCommand($actionCommand);
@@ -64,6 +70,7 @@ class Round implements RoundInterface
         $this->statistics = $statistics;
         $this->chat = $chat;
         $this->debug = $debug;
+        $this->strokeFactory = $strokeFactory ?? new StrokeFactory();
     }
 
     /**
@@ -87,7 +94,7 @@ class Round implements RoundInterface
             if ($actionUnit) {
 
                 // Выполняем один ход - т.е. действие одного юнита
-                $stroke = new Stroke(
+                $stroke = $this->strokeFactory->create(
                     $this->actionCommand,
                     $actionUnit,
                     $this->leftCommand,
@@ -137,9 +144,9 @@ class Round implements RoundInterface
      * 3. Добавляет сообщение в чат о завершении хода
      * 4. Добавляет разделительную линию (todo на удаление, объекты не должны выводить html)
      *
-     * @param Stroke $stroke
+     * @param StrokeInterface $stroke
      */
-    private function executeStroke(Stroke $stroke): void
+    private function executeStroke(StrokeInterface $stroke): void
     {
         $this->chat->add(self::START_STROKE . ' #' . $this->statistics->getStrokeNumber());
         $stroke->handle();

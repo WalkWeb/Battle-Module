@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Battle;
+namespace Battle\Stroke;
 
 use Battle\Command\CommandInterface;
 use Battle\Statistic\BattleStatistic;
 use Battle\Chat\Chat;
 use Battle\Unit\UnitInterface;
+use Battle\View;
 
-class Stroke
+class Stroke implements StrokeInterface
 {
     /** @var int - Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand */
     private $actionCommand;
@@ -33,13 +34,14 @@ class Stroke
     private $debug;
 
     /**
+     * Stroke constructor.
      * @param int $actionCommand
      * @param UnitInterface $actionUnit
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param BattleStatistic $statistics
      * @param Chat $chat
-     * @param bool $debug
+     * @param bool|null $debug
      */
     public function __construct(
         int $actionCommand,
@@ -48,7 +50,7 @@ class Stroke
         CommandInterface $rightCommand,
         BattleStatistic $statistics,
         Chat $chat,
-        bool $debug = false
+        ?bool $debug = false
     )
     {
         $this->actionCommand = $actionCommand;
@@ -60,6 +62,9 @@ class Stroke
         $this->debug = $debug;
     }
 
+    /**
+     * Совершает ход одного юнита в бою
+     */
     public function handle(): void
     {
         if ($this->debug) {

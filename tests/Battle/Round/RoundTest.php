@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle;
+namespace Tests\Battle\Round;
 
 use Battle\Chat\Chat;
 use Battle\Classes\ClassFactoryException;
