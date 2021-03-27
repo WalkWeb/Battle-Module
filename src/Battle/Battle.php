@@ -15,7 +15,7 @@ use Battle\Result\ResultException;
 use Battle\Result\Result;
 use Battle\Result\ResultInterface;
 
-class Battle
+class Battle implements BattleInterface
 {
     /** @var CommandInterface */
     private $leftCommand;
@@ -46,7 +46,7 @@ class Battle
      * @param CommandInterface $rightCommand
      * @param BattleStatistic $statistics
      * @param Chat $chat
-     * @param bool $debug
+     * @param bool|null $debug
      * @param RoundFactory|null $roundFactory
      * @throws Exception
      */
@@ -55,7 +55,7 @@ class Battle
         CommandInterface $rightCommand,
         BattleStatistic $statistics,
         Chat $chat,
-        bool $debug = true,
+        ?bool $debug = true,
         ?RoundFactory $roundFactory = null
     )
     {
@@ -70,6 +70,9 @@ class Battle
 
     /**
      * Обрабатывает бой, возвращая массив итоговых характеристик юнитов
+     *
+     * TODO Когда бой заканчивается - не хватает еще одного заключительного рендера команд (на текущем последнем рендере
+     * TODO проигравшая команда имеет живого юнита)
      *
      * @return ResultInterface
      * @throws BattleException
@@ -107,6 +110,8 @@ class Battle
     }
 
     /**
+     * Возвращает статистику по бою
+     *
      * @return BattleStatistic
      */
     public function getStatistics(): BattleStatistic
