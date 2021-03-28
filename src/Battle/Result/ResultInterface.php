@@ -4,6 +4,7 @@ namespace Battle\Result;
 
 use Battle\Chat\Chat;
 use Battle\Command\CommandInterface;
+use Battle\Statistic\Statistic;
 
 interface ResultInterface
 {
@@ -15,4 +16,5 @@ interface ResultInterface
     public function getWinner(): int;
     public function getWinnerText(): string;
     public function getChat(): Chat;
+    public function getStatistic(): Statistic;
 }

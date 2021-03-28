@@ -3,7 +3,6 @@
 namespace Battle;
 
 use Battle\Result\ResultInterface;
-use Battle\Statistic\Statistic;
 
 interface BattleInterface
 {
@@ -17,11 +16,4 @@ interface BattleInterface
      * @return ResultInterface
      */
     public function handle(): ResultInterface;
-
-    /**
-     * Возвращает статистику по бою
-     *
-     * @return Statistic
-     */
-    public function getStatistics(): Statistic;
 }

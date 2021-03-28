@@ -99,7 +99,7 @@ class Battle implements BattleInterface
             // Проверяем живых в командах
             if (!$this->leftCommand->isAlive() || !$this->rightCommand->isAlive()) {
                 $winner = !$this->leftCommand->isAlive() ? 2 : 1;
-                return new Result($this->leftCommand, $this->rightCommand, $winner, $this->chat);
+                return new Result($this->leftCommand, $this->rightCommand, $winner, $this->chat, $this->statistics);
             }
 
             $this->statistics->increasedRound();
@@ -107,17 +107,5 @@ class Battle implements BattleInterface
         }
 
         throw new BattleException(BattleException::UNEXPECTED_ENDING_BATTLE);
-    }
-
-    /**
-     * Возвращает статистику по бою
-     *
-     * TODO убрать статистику - она будет возвращаться из Result
-     *
-     * @return Statistic
-     */
-    public function getStatistics(): Statistic
-    {
-        return $this->statistics;
     }
 }

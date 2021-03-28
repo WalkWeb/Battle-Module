@@ -31,7 +31,7 @@ class BattleTest extends TestCase
 
         self::assertEquals(2, $result->getWinner());
         self::assertInstanceOf(Battle::class, $battle);
-        self::assertTrue($battle->getStatistics()->getRoundNumber() > 2);
-        self::assertTrue($battle->getStatistics()->getStrokeNumber() > 4);
+        self::assertTrue($result->getStatistic()->getRoundNumber() > 2);
+        self::assertTrue($result->getStatistic()->getStrokeNumber() > 4);
     }
 }

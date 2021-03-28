@@ -6,6 +6,7 @@ namespace Battle\Result;
 
 use Battle\Chat\Chat;
 use Battle\Command\CommandInterface;
+use Battle\Statistic\Statistic;
 
 class Result implements ResultInterface
 {
@@ -21,7 +22,8 @@ class Result implements ResultInterface
     /** @var Chat */
     private $chat;
 
-    // TODO Добавить статистику
+    /** @var Statistic */
+    private $statistic;
 
     /**
      * @param CommandInterface $leftCommand
@@ -30,7 +32,13 @@ class Result implements ResultInterface
      * @param Chat $chat
      * @throws ResultException
      */
-    public function __construct(CommandInterface $leftCommand, CommandInterface $rightCommand, int $winner, Chat $chat)
+    public function __construct(
+        CommandInterface $leftCommand,
+        CommandInterface $rightCommand,
+        int $winner,
+        Chat $chat,
+        Statistic $statistic
+    )
     {
         if ($winner !== 1 && $winner !== 2) {
             throw new ResultException(ResultException::INCORRECT_WINNER);
@@ -40,6 +48,7 @@ class Result implements ResultInterface
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;
         $this->chat = $chat;
+        $this->statistic = $statistic;
     }
 
     public function getLeftCommand(): CommandInterface
@@ -65,5 +74,10 @@ class Result implements ResultInterface
     public function getChat(): Chat
     {
         return $this->chat;
+    }
+
+    public function getStatistic(): Statistic
+    {
+        return $this->statistic;
     }
 }

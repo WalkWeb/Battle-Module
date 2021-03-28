@@ -60,10 +60,10 @@ try {
 
     echo '<h1>' . $result->getWinnerText() . '</h1>';
 
-    echo '<p>Количество раундов: ' . $battle->getStatistics()->getRoundNumber() . '</p>';
-    echo '<p>Количество ходов: ' . $battle->getStatistics()->getStrokeNumber() . '</p>';
+    echo '<p>Количество раундов: ' . $result->getStatistic()->getRoundNumber() . '</p>';
+    echo '<p>Количество ходов: ' . $result->getStatistic()->getStrokeNumber() . '</p>';
 
-    foreach ($battle->getStatistics()->getUnitsStatistics() as $unit) {
+    foreach ($result->getStatistic()->getUnitsStatistics() as $unit) {
         echo
             '<p><b>' . $unit->getName() . '</b>' .
             '<br />Caused Damage: ' . $unit->getCausedDamage() .
@@ -71,8 +71,8 @@ try {
             '<br />Killing: ' . $unit->getKilling() . '</p>';
     }
 
-    echo '<p>На обработку боя ушло: ' . $battle->getStatistics()->getRuntime() . ' ms</p>';
-    echo '<p>Расход памяти: ' . $battle->getStatistics()->getMemoryCost() . '</p>';
+    echo '<p>На обработку боя ушло: ' . $result->getStatistic()->getRuntime() . ' ms</p>';
+    echo '<p>Расход памяти: ' . $result->getStatistic()->getMemoryCostClipped() . '</p>';
 
 } catch (Exception $e) {
     die($e->getMessage());
