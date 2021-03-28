@@ -3,6 +3,7 @@
 namespace Battle\Statistic;
 
 use Battle\Action\ActionInterface;
+use Battle\Statistic\UnitStatistic\UnitStatistic;
 
 interface StatisticInterface
 {
@@ -43,4 +44,27 @@ interface StatisticInterface
      * @return UnitStatistic[]
      */
     public function getUnitsStatistics(): array;
+
+    /**
+     * Возвращает количество миллисекунд ушедших на обработку боя
+     *
+     * @return float
+     */
+    public function getRuntime(): float;
+
+    /**
+     * Возвращает количество байт памяти затраченной на обработку боя
+     *
+     * @return int
+     */
+    public function getMemoryCost(): int;
+
+    /**
+     * Возвращает количество затраченной памяти в сокращенном варианте (т.е. не 440808, а 430 kb)
+     *
+     * Т.е. в удобном виде для восприятия человеком
+     *
+     * @return string
+     */
+    public function getMemoryCostClipped(): string;
 }

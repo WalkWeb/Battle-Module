@@ -112,6 +112,8 @@ class Battle implements BattleInterface
     /**
      * Возвращает статистику по бою
      *
+     * TODO убрать статистику - она будет возвращаться из Result
+     *
      * @return Statistic
      */
     public function getStatistics(): Statistic

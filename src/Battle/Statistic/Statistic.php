@@ -36,6 +36,40 @@ class Statistic implements StatisticInterface
      */
     private $unitsStatistics = [];
 
+    /**
+     * Время начала боя
+     *
+     * @var float
+     */
+    private $startTime;
+
+    /**
+     * Затраченное время на выполнения боя
+     *
+     * @var float
+     */
+    private $runtime;
+
+    /**
+     * Затраченная память на начало боя
+     *
+     * @var int
+     */
+    private $startMemory;
+
+    /**
+     * Количество байт памяти затраченных на выполнение боя
+     *
+     * @var int
+     */
+    private $memoryCost;
+
+    public function __construct()
+    {
+        $this->startTime = microtime(true);
+        $this->startMemory = memory_get_peak_usage();
+    }
+
     public function increasedRound(): void
     {
         $this->roundNumber++;
@@ -82,6 +116,38 @@ class Statistic implements StatisticInterface
     }
 
     /**
+     * @return float
+     */
+    public function getRuntime(): float
+    {
+        if ($this->runtime === null) {
+            $this->runtime = round((microtime(true) - $this->startTime) * 1000, 2);
+        }
+
+        return $this->runtime;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMemoryCost(): int
+    {
+        if ($this->memoryCost === null) {
+            $this->memoryCost = memory_get_peak_usage() - $this->startMemory;
+        }
+
+        return $this->memoryCost;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMemoryCostClipped(): string
+    {
+        return $this->convert($this->getMemoryCost());
+    }
+
+    /**
      * Возвращает статистику по конкретному юниту
      *
      * @param string $name
@@ -107,6 +173,7 @@ class Statistic implements StatisticInterface
 
             $defendUnit = $action->getTargetUnit();
             if (!$defendUnit->isAlive()) {
+                // todo В подсчете убитых юнитов есть ошибка - убитых получается больше, чем юнитов в команде противников
                 $unit->addKillingUnit();
             }
 
@@ -138,5 +205,16 @@ class Statistic implements StatisticInterface
             $unit = $this->getUnitStatistics($action->getTargetUnit()->getName());
             $unit->addTakenDamage($action->getFactualPower());
         }
+    }
+
+    /**
+     * @param int $size
+     * @return string
+     */
+    private function convert(int $size): string
+    {
+        $unit = ['byte', 'kb', 'mb', 'gb', 'tb', 'pb'];
+        $i = (int)floor(log($size, 1024));
+        return round($size / 1024**$i, 2) . ' ' . $unit[$i];
     }
 }

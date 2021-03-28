@@ -21,6 +21,8 @@ class Result implements ResultInterface
     /** @var Chat */
     private $chat;
 
+    // TODO Добавить статистику
+
     /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand

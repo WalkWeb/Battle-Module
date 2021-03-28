@@ -86,4 +86,35 @@ class StatisticsTest extends TestCase
 
         self::assertEquals(150, $statistics->getUnitsStatistics()[$attackUnit->getName()]->getCausedDamage());
     }
+
+    /**
+     * Тест на время обработки боя
+     */
+    public function testStatisticsRuntime(): void
+    {
+        $statistic = new Statistic();
+
+        // 5 миллисекунд
+        usleep(5000);
+
+        self::assertIsFloat($statistic->getRuntime());
+
+        // Время выполнения больше 5 миллисекунд и меньше 6 (реально уходит 5.10 - 5.30 миллисекунд)
+        self::assertTrue($statistic->getRuntime() > 5 && $statistic->getRuntime() < 6);
+    }
+
+    /**
+     * Тест на затраченную память
+     * @throws Exception
+     */
+    public function testStatisticsMemoryCost(): void
+    {
+        $statistic = new Statistic();
+
+        random_bytes(1000000);
+
+        // Расход памяти будет немного разным в зависимости от контекста выполнения теста, по этому проверяем примерно
+        self::assertTrue($statistic->getMemoryCost() > 950000 && $statistic->getMemoryCost() < 970000);
+        self::assertIsString($statistic->getMemoryCostClipped());
+    }
 }

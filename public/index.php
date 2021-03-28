@@ -71,6 +71,9 @@ try {
             '<br />Killing: ' . $unit->getKilling() . '</p>';
     }
 
+    echo '<p>На обработку боя ушло: ' . $battle->getStatistics()->getRuntime() . ' ms</p>';
+    echo '<p>Расход памяти: ' . $battle->getStatistics()->getMemoryCost() . '</p>';
+
 } catch (Exception $e) {
     die($e->getMessage());
 }
