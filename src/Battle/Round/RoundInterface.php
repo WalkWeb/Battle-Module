@@ -2,7 +2,7 @@
 
 namespace Battle\Round;
 
-use Battle\Statistic\BattleStatistic;
+use Battle\Statistic\Statistic;
 
 interface RoundInterface
 {
@@ -23,7 +23,7 @@ interface RoundInterface
     /**
      * Возвращает статистику дополненную информацией по текущему раунду
      *
-     * @return BattleStatistic
+     * @return Statistic
      */
-    public function getStatistics(): BattleStatistic;
+    public function getStatistics(): Statistic;
 }

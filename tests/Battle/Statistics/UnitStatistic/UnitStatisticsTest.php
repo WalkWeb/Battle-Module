@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Statistics;
+namespace Tests\Battle\Statistics\UnitStatistic;
 
-use Battle\Statistic\UnitStatistic;
+use Battle\Statistic\UnitStatistic\UnitStatistic;
 use PHPUnit\Framework\TestCase;
 
 class UnitStatisticsTest extends TestCase

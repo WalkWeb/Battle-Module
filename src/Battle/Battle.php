@@ -9,7 +9,7 @@ use Battle\Command\CommandInterface;
 use Battle\Exception\BattleException;
 use Battle\Round\RoundException;
 use Battle\Round\RoundFactory;
-use Battle\Statistic\BattleStatistic;
+use Battle\Statistic\Statistic;
 use Exception;
 use Battle\Result\ResultException;
 use Battle\Result\Result;
@@ -32,7 +32,7 @@ class Battle implements BattleInterface
     /** @var bool */
     private $debug;
 
-    /** @var BattleStatistic */
+    /** @var Statistic */
     private $statistics;
 
     /** @var Chat */
@@ -44,7 +44,7 @@ class Battle implements BattleInterface
     /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
-     * @param BattleStatistic $statistics
+     * @param Statistic $statistics
      * @param Chat $chat
      * @param bool|null $debug
      * @param RoundFactory|null $roundFactory
@@ -53,7 +53,7 @@ class Battle implements BattleInterface
     public function __construct(
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
-        BattleStatistic $statistics,
+        Statistic $statistics,
         Chat $chat,
         ?bool $debug = true,
         ?RoundFactory $roundFactory = null
@@ -112,9 +112,9 @@ class Battle implements BattleInterface
     /**
      * Возвращает статистику по бою
      *
-     * @return BattleStatistic
+     * @return Statistic
      */
-    public function getStatistics(): BattleStatistic
+    public function getStatistics(): Statistic
     {
         return $this->statistics;
     }

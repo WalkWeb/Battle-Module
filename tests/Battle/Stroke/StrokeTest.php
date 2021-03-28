@@ -10,7 +10,7 @@ use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
-use Battle\Statistic\BattleStatistic;
+use Battle\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke\Stroke;
 use Battle\Unit\UnitInterface;
@@ -74,7 +74,7 @@ class StrokeTest extends TestCase
         $leftCommand = new Command([$this->attackUnit]);
         $rightCommand = new Command([$this->defendUnit]);
 
-        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new BattleStatistic(), new Chat());
+        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new Statistic(), new Chat());
 
         self::assertInstanceOf(Stroke::class, $stroke);
     }
@@ -87,7 +87,7 @@ class StrokeTest extends TestCase
         $leftCommand = new Command([$this->attackUnit]);
         $rightCommand = new Command([$this->defendUnit]);
 
-        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new BattleStatistic(), new Chat());
+        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new Statistic(), new Chat());
         $stroke->handle();
 
         self::assertEquals($this->defendLife - $this->attackUnit->getDamage(), $this->defendUnit->getLife());

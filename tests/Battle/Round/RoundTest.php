@@ -10,7 +10,7 @@ use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Round\RoundException;
 use Battle\Round\Round;
-use Battle\Statistic\BattleStatistic;
+use Battle\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\CommandFactory;
 use Tests\Battle\Factory\UnitFactory;
@@ -35,7 +35,7 @@ class RoundTest extends TestCase
         // Юниты делают по одному ходу, соответственно следующий, после раунда, ход будет 3
         $nextNumberStroke = 3;
 
-        $round = new Round($leftCommand, $rightCommand, $startCommand, new BattleStatistic(), new Chat());
+        $round = new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new Chat());
         self::assertEquals($round->handle(), $nextCommand);
         self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }
@@ -61,7 +61,7 @@ class RoundTest extends TestCase
         // В этом раунде походит только юнит из правой команды, соответственно счетчик увеличится только на 1
         $nextNumberStroke = 2;
 
-        $round = new Round($leftCommand, $rightCommand, $startCommand, new BattleStatistic(), new Chat());
+        $round = new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new Chat());
         self::assertEquals($round->handle(), $nextCommand);
         self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }

@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Tests\Battle\Statistics;
 
 use Battle\Command\Command;
-use Battle\Statistic\BattleStatistic;
+use Battle\Statistic\Statistic;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 
-class BattleStatisticsTest extends TestCase
+class StatisticsTest extends TestCase
 {
     public function testRoundNumber(): void
     {
-        $statistics = new BattleStatistic();
+        $statistics = new Statistic();
 
         $statistics->increasedRound();
         $statistics->increasedRound();
@@ -25,7 +25,7 @@ class BattleStatisticsTest extends TestCase
 
     public function testStrokeNumber(): void
     {
-        $statistics = new BattleStatistic();
+        $statistics = new Statistic();
 
         $statistics->increasedStroke();
         $statistics->increasedStroke();
@@ -36,7 +36,7 @@ class BattleStatisticsTest extends TestCase
 
     public function testRoundAndStrokeNumber(): void
     {
-        $statistics = new BattleStatistic();
+        $statistics = new Statistic();
 
         $statistics->increasedRound();
         $statistics->increasedStroke();
@@ -53,7 +53,7 @@ class BattleStatisticsTest extends TestCase
      */
     public function testUnitCausedDamage(): void
     {
-        $statistics = new BattleStatistic();
+        $statistics = new Statistic();
 
         $attackUnit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);

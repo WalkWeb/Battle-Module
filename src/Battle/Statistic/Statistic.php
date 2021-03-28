@@ -6,8 +6,12 @@ namespace Battle\Statistic;
 
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
+use Battle\Statistic\UnitStatistic\UnitStatistic;
 
-class BattleStatistic
+/**
+ * @package Battle\Statistic
+ */
+class Statistic implements StatisticInterface
 {
     /**
      * Дублируется со счетчиком в Battle по той причине, что статистики в бою может и не быть, но подсчет раундов в
@@ -26,6 +30,8 @@ class BattleStatistic
     private $strokeNumber = 1;
 
     /**
+     * TODO Переделать на UnitStatisticCollection
+     *
      * @var array - Статистика по юнитам
      */
     private $unitsStatistics = [];
@@ -50,6 +56,13 @@ class BattleStatistic
         return $this->strokeNumber;
     }
 
+    /**
+     * Добавляет действие юнита для расчета суммарного полученного и нанесенного урона
+     *
+     * TODO Добавить подсчет суммарного лечения
+     *
+     * @param ActionInterface $action
+     */
     public function addUnitAction(ActionInterface $action): void
     {
         if ($action instanceof DamageAction) {
@@ -59,6 +72,8 @@ class BattleStatistic
     }
 
     /**
+     * Возвращает статистику по всем юнитам
+     *
      * @return UnitStatistic[]
      */
     public function getUnitsStatistics(): array
@@ -66,6 +81,12 @@ class BattleStatistic
         return $this->unitsStatistics;
     }
 
+    /**
+     * Возвращает статистику по конкретному юниту
+     *
+     * @param string $name
+     * @return UnitStatistic
+     */
     private function getUnitStatistics(string $name): UnitStatistic
     {
         // todo Проверка на существование
@@ -73,6 +94,11 @@ class BattleStatistic
         return $this->unitsStatistics[$name];
     }
 
+    /**
+     * Суммирует нанесенный юнитом урон
+     *
+     * @param ActionInterface $action
+     */
     private function countingCausedDamage(ActionInterface $action): void
     {
         if (!array_key_exists($action->getActionUnit()->getName(), $this->unitsStatistics)) {
@@ -97,6 +123,11 @@ class BattleStatistic
         }
     }
 
+    /**
+     * Суммирует полученный урон юнитом
+     *
+     * @param ActionInterface $action
+     */
     private function countingTakenDamage(ActionInterface $action): void
     {
         if (!array_key_exists($action->getTargetUnit()->getName(), $this->unitsStatistics)) {

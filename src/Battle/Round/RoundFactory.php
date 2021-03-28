@@ -6,7 +6,7 @@ namespace Battle\Round;
 
 use Battle\Chat\Chat;
 use Battle\Command\CommandInterface;
-use Battle\Statistic\BattleStatistic;
+use Battle\Statistic\Statistic;
 use Battle\Stroke\StrokeFactory;
 
 class RoundFactory
@@ -19,7 +19,7 @@ class RoundFactory
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param int $actionCommand
-     * @param BattleStatistic $statistics
+     * @param Statistic $statistics
      * @param Chat $chat
      * @param bool|null $debug
      * @param StrokeFactory|null $strokeFactory
@@ -30,7 +30,7 @@ class RoundFactory
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         int $actionCommand,
-        BattleStatistic $statistics,
+        Statistic $statistics,
         Chat $chat,
         ?bool $debug = false,
         ?StrokeFactory $strokeFactory = null

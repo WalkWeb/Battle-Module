@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Round;
 
 use Battle\Command\CommandInterface;
-use Battle\Statistic\BattleStatistic;
+use Battle\Statistic\Statistic;
 use Battle\Chat\Chat;
 use Battle\Stroke\StrokeFactory;
 use Battle\Stroke\StrokeInterface;
@@ -31,7 +31,7 @@ class Round implements RoundInterface
     /** @var int */
     private $maxStroke = 50;
 
-    /** @var BattleStatistic */
+    /** @var Statistic */
     private $statistics;
 
     /** @var Chat */
@@ -47,7 +47,7 @@ class Round implements RoundInterface
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param int $actionCommand
-     * @param BattleStatistic $statistics
+     * @param Statistic $statistics
      * @param Chat $chat
      * @param bool|null $debug
      * @param StrokeFactory|null $strokeFactory
@@ -57,7 +57,7 @@ class Round implements RoundInterface
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         int $actionCommand,
-        BattleStatistic $statistics,
+        Statistic $statistics,
         Chat $chat,
         ?bool $debug = false,
         ?StrokeFactory $strokeFactory = null
@@ -129,9 +129,9 @@ class Round implements RoundInterface
     /**
      * Возвращает статистику дополненную информацией по текущему раунду
      *
-     * @return BattleStatistic
+     * @return Statistic
      */
-    public function getStatistics(): BattleStatistic
+    public function getStatistics(): Statistic
     {
         return $this->statistics;
     }

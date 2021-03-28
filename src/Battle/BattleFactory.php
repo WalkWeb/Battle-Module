@@ -9,14 +9,14 @@ use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Exception\BattleException;
 use Battle\Round\RoundFactory;
-use Battle\Statistic\BattleStatistic;
+use Battle\Statistic\Statistic;
 use Exception;
 
 class BattleFactory
 {
     /**
      * @param array $data
-     * @param BattleStatistic|null $statistics
+     * @param Statistic|null $statistics
      * @param Chat|null $chat
      * @param bool|null $debug
      * @param RoundFactory|null $roundFactory
@@ -25,7 +25,7 @@ class BattleFactory
      */
     public static function create(
         array $data,
-        ?BattleStatistic $statistics = null,
+        ?Statistic $statistics = null,
         ?Chat $chat = null,
         ?bool $debug = true,
         ?RoundFactory $roundFactory = null
@@ -34,7 +34,7 @@ class BattleFactory
         return new Battle(
             self::createCommand($data, BattleInterface::LEFT_COMMAND),
             self::createCommand($data, BattleInterface::RIGHT_COMMAND),
-            $statistics ?? new BattleStatistic(),
+            $statistics ?? new Statistic(),
             $chat ?? new Chat(),
             $debug ?? true,
             $roundFactory

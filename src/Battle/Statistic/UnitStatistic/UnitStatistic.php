@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Battle\Statistic;
+namespace Battle\Statistic\UnitStatistic;
 
-class UnitStatistic
+class UnitStatistic implements UnitStatisticInterface
 {
     /** @var string - Имя юнита */
     private $name;
@@ -26,11 +26,17 @@ class UnitStatistic
         $this->name = $name;
     }
 
+    /**
+     * @param int $damage
+     */
     public function addCausedDamage(int $damage): void
     {
         $this->causedDamage += $damage;
     }
 
+    /**
+     * @param int $damage
+     */
     public function addTakenDamage(int $damage): void
     {
         $this->takenDamage += $damage;

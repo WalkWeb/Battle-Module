@@ -6,7 +6,7 @@ namespace Battle\Stroke;
 
 use Battle\Chat\Chat;
 use Battle\Command\CommandInterface;
-use Battle\Statistic\BattleStatistic;
+use Battle\Statistic\Statistic;
 use Battle\Unit\UnitInterface;
 
 class StrokeFactory
@@ -20,7 +20,7 @@ class StrokeFactory
      * @param UnitInterface $actionUnit
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
-     * @param BattleStatistic $statistics
+     * @param Statistic $statistics
      * @param Chat $chat
      * @param bool|null $debug
      * @return StrokeInterface
@@ -30,7 +30,7 @@ class StrokeFactory
         UnitInterface $actionUnit,
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
-        BattleStatistic $statistics,
+        Statistic $statistics,
         Chat $chat,
         ?bool $debug = false
     ): StrokeInterface

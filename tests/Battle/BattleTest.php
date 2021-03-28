@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle;
 
 use Battle\Chat\Chat;
-use Battle\Statistic\BattleStatistic;
+use Battle\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
 use Battle\Battle;
 use Battle\Command\Command;
@@ -26,7 +26,7 @@ class BattleTest extends TestCase
         $command1 = new Command([$unit1]);
         $command2 = new Command([$unit2]);
 
-        $battle = new Battle($command1, $command2, new BattleStatistic(), new Chat());
+        $battle = new Battle($command1, $command2, new Statistic(), new Chat());
         $result = $battle->handle();
 
         self::assertEquals(2, $result->getWinner());
