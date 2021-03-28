@@ -10,7 +10,7 @@ use Battle\Action\DamageAction;
 class BattleStatistic
 {
     /**
-     * Дублируется со счетчиков в Battle по той причине, что статистики в бою может и не быть, но подсчет раундов в
+     * Дублируется со счетчиком в Battle по той причине, что статистики в бою может и не быть, но подсчет раундов в
      * любом случае нужен
      *
      * @var int - Количество раундов
@@ -18,7 +18,7 @@ class BattleStatistic
     private $roundNumber = 1;
 
     /***
-     * Дублируется со счетчиков в Battle по той причине, что статистики в бою может и не быть, но подсчет ходов в любом
+     * Дублируется со счетчиком в Battle по той причине, что статистики в бою может и не быть, но подсчет ходов в любом
      * случае нужен
      *
      * @var int - Количество ходов
@@ -68,6 +68,8 @@ class BattleStatistic
 
     private function getUnitStatistics(string $name): UnitStatistic
     {
+        // todo Проверка на существование
+
         return $this->unitsStatistics[$name];
     }
 

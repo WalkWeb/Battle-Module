@@ -6,8 +6,15 @@ namespace Battle\Classes;
 
 class UnitClassFactory
 {
+    private static $map = [
+        1 => Warrior::class,
+        2 => Priest::class,
+    ];
+
     /**
-     * TODO добавить массив-маппинг классов в формате ['id' => 'className'] и создавать классы без if проверок
+     * Создает класс юнита на основе ID класса
+     *
+     * От класса зависят способности, которые юнит будет применять в бою
      *
      * @param int $classId
      * @return UnitClassInterface
@@ -15,13 +22,17 @@ class UnitClassFactory
      */
     public static function create(int $classId): UnitClassInterface
     {
-        if ($classId === UnitClassInterface::WARRIOR) {
-            return new Warrior();
-        }
-        if ($classId === UnitClassInterface::PRIEST) {
-            return new Priest();
+        if (!array_key_exists($classId, self::$map)) {
+            throw new ClassFactoryException(ClassFactoryException::UNDEFINED_CLASS_ID);
         }
 
-        throw new ClassFactoryException(ClassFactoryException::UNDEFINED_CLASS_ID);
+        $className = self::$map[$classId];
+        $class = new $className;
+
+        if (!($class instanceof UnitClassInterface)) {
+            throw new ClassFactoryException(ClassFactoryException::INCORRECT_CLASS);
+        }
+
+        return $class;
     }
 }

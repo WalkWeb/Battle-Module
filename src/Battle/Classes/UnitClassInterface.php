@@ -13,6 +13,26 @@ interface UnitClassInterface
     public const WARRIOR = 1;
     public const PRIEST  = 2;
 
+    /**
+     * Возвращает ID класса
+     *
+     * @return int
+     */
     public function getId(): int;
-    public function getAbility(UnitInterface $actionUnit, CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
+
+    /**
+     * Возвращает способность данного класса для использования её в бою
+     *
+     * Так как способность может состоять сразу из нескольких действий - возвращается ActionCollection
+     *
+     * @param UnitInterface $actionUnit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return ActionCollection
+     */
+    public function getAbility(
+        UnitInterface $actionUnit,
+        CommandInterface $enemyCommand,
+        CommandInterface $alliesCommand
+    ): ActionCollection;
 }
