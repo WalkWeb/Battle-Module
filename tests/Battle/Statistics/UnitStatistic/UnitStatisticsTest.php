@@ -22,10 +22,15 @@ class UnitStatisticsTest extends TestCase
         $unitStatistics->addTakenDamage(20);
         $unitStatistics->addTakenDamage(20);
 
+        $unitStatistics->addHeal(10);
+        $unitStatistics->addHeal(10);
+        $unitStatistics->addHeal(10);
+
         $unitStatistics->addKillingUnit();
 
         self::assertEquals(45, $unitStatistics->getCausedDamage());
         self::assertEquals(60, $unitStatistics->getTakenDamage());
+        self::assertEquals(30, $unitStatistics->getHeal());
         self::assertEquals(1, $unitStatistics->getKilling());
         self::assertEquals($name, $unitStatistics->getName());
     }

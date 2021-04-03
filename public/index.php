@@ -68,6 +68,7 @@ try {
             '<p><b>' . $unit->getName() . '</b>' .
             '<br />Caused Damage: ' . $unit->getCausedDamage() .
             '<br />Taken Damage: ' . $unit->getTakenDamage() .
+            '<br />Heal: ' . $unit->getHeal() .
             '<br />Killing: ' . $unit->getKilling() . '</p>';
     }
 

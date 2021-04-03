@@ -6,16 +6,29 @@ namespace Battle\Statistic\UnitStatistic;
 
 class UnitStatistic implements UnitStatisticInterface
 {
-    /** @var string - Имя юнита */
+    /**
+     * @var string - Имя юнита
+     */
     private $name;
 
-    /** @var int - Нанесенный юнитом урон */
+    /**
+     * @var int - Нанесенный юнитом урон
+     */
     private $causedDamage = 0;
 
-    /** @var int - Полученный юнитом урон */
+    /**
+     * @var int - Полученный юнитом урон
+     */
     private $takenDamage = 0;
 
-    /** @var int - Убил юнитов */
+    /**
+     * @var int - Суммарное вылеченное здоровье юнитом
+     */
+    private $heal = 0;
+
+    /**
+     * @var int - Убил юнитов
+     */
     private $killing = 0;
 
     /**
@@ -40,6 +53,14 @@ class UnitStatistic implements UnitStatisticInterface
     public function addTakenDamage(int $damage): void
     {
         $this->takenDamage += $damage;
+    }
+
+    /**
+     * @param int $heal
+     */
+    public function addHeal(int $heal): void
+    {
+        $this->heal += $heal;
     }
 
     public function addKillingUnit(): void
@@ -69,6 +90,14 @@ class UnitStatistic implements UnitStatisticInterface
     public function getTakenDamage(): int
     {
         return $this->takenDamage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeal(): int
+    {
+        return $this->heal;
     }
 
     /**

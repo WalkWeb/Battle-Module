@@ -85,6 +85,8 @@ class Command implements CommandInterface
 
     public function getUnitForHeal(): ?UnitInterface
     {
+        // TODO Ошибка: выбираются мертвые юниты
+
         $unitForHeal = [];
 
         foreach ($this->units as $unit) {

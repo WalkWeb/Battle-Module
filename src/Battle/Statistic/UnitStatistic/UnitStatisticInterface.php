@@ -19,6 +19,13 @@ interface UnitStatisticInterface
     public function addTakenDamage(int $damage): void;
 
     /**
+     * Добавляет вылеченное здоровье юнитом
+     *
+     * @param int $heal
+     */
+    public function addHeal(int $heal): void;
+
+    /**
      * Увеличивает количество убитых юнитом противников на 1
      */
     public function addKillingUnit(): void;
@@ -43,6 +50,13 @@ interface UnitStatisticInterface
      * @return int
      */
     public function getTakenDamage(): int;
+
+    /**
+     * Возвращает суммарное вылеченное здоровье юнитом
+     *
+     * @return int
+     */
+    public function getHeal(): int;
 
     /**
      * Возвращает количество убитых противников юнитом

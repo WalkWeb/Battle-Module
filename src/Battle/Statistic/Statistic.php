@@ -6,6 +6,7 @@ namespace Battle\Statistic;
 
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
+use Battle\Action\HealAction;
 use Battle\Statistic\UnitStatistic\UnitStatistic;
 use Battle\Statistic\UnitStatistic\UnitStatisticCollection;
 use Battle\Statistic\UnitStatistic\UnitStatisticInterface;
@@ -94,8 +95,6 @@ class Statistic implements StatisticInterface
     /**
      * Добавляет действие юнита для расчета суммарного полученного и нанесенного урона
      *
-     * TODO Добавить подсчет суммарного лечения
-     *
      * @param ActionInterface $action
      * @throws StatisticException
      */
@@ -104,6 +103,9 @@ class Statistic implements StatisticInterface
         if ($action instanceof DamageAction) {
             $this->countingCausedDamage($action);
             $this->countingTakenDamage($action);
+        }
+        if ($action instanceof HealAction) {
+            $this->countingHeal($action);
         }
     }
 
@@ -207,6 +209,24 @@ class Statistic implements StatisticInterface
         } else {
             $unit = $this->getUnitStatistics($action->getTargetUnit()->getName());
             $unit->addTakenDamage($action->getFactualPower());
+        }
+    }
+
+    /**
+     * Суммирует суммарное лечение юнитом
+     *
+     * @param ActionInterface $action
+     * @throws StatisticException
+     */
+    private function countingHeal(ActionInterface $action): void
+    {
+        if (!$this->unitsStatistics->existUnitByName($action->getActionUnit()->getName())) {
+            $unit = new UnitStatistic($action->getActionUnit()->getName());
+            $unit->addHeal($action->getFactualPower());
+            $this->unitsStatistics->add($unit);
+        } else {
+            $unit = $this->getUnitStatistics($action->getActionUnit()->getName());
+            $unit->addHeal($action->getFactualPower());
         }
     }
 
