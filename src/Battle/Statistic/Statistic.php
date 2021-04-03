@@ -177,7 +177,6 @@ class Statistic implements StatisticInterface
 
             $defendUnit = $action->getTargetUnit();
             if (!$defendUnit->isAlive()) {
-                // todo В подсчете убитых юнитов есть ошибка - убитых получается больше, чем юнитов в команде противников
                 $unit->addKillingUnit();
             }
 

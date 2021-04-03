@@ -11,10 +11,11 @@ class ViewFactory
      *
      * Фабрика простая, и создана для того, чтобы в Stroke отвязаться от конкретной реализации
      *
+     * @param string|null $templateDir
      * @return ViewInterface
      */
-    public function create(): ViewInterface
+    public function create(?string $templateDir = __DIR__ . '/../../../templates/'): ViewInterface
     {
-        return new View();
+        return new View($templateDir);
     }
 }
