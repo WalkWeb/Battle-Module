@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit;
 
 use Battle\Action\ActionCollection;
+use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
@@ -12,7 +13,6 @@ use Battle\Chat\Message;
 use Battle\Command\CommandInterface;
 use Battle\Effect\Effect;
 use Exception;
-use Battle\Exception\ActionCollectionException;
 
 class Unit extends AbstractUnit
 {
@@ -25,7 +25,6 @@ class Unit extends AbstractUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
-     * @throws ActionCollectionException
      * @throws Exception
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
@@ -44,7 +43,6 @@ class Unit extends AbstractUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
-     * @throws ActionCollectionException
      * @throws Exception
      */
     public function getDamageAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
@@ -65,7 +63,7 @@ class Unit extends AbstractUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
-     * @throws ActionCollectionException
+     * @throws ActionException
      */
     public function getHealAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
@@ -111,24 +109,26 @@ class Unit extends AbstractUnit
     /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
      *
+     * @uses applyDamageAction, applyHealAction
      * @param ActionInterface $action
      * @return string - Сообщение о произошедшем действии
-     * @throws UnitException
+     * @throws Exception
      */
     public function applyAction(ActionInterface $action): string
     {
-        // TODO Метод обрабатывающий Action брать из самого Action, тем самым избавляемся от if if if
+        $method = $action->getHandleMethod();
 
-        if ($action instanceof DamageAction) {
-            return $this->applyDamageAction($action);
-        }
-        if ($action instanceof HealAction) {
-            return $this->applyHealAction($action);
+        if (!method_exists($this, $method)) {
+            throw new UnitException(UnitException::UNDEFINED_ACTION_METHOD);
         }
 
-        throw new UnitException(UnitException::UNDEFINED_ACTION);
+        return $this->$method($action);
     }
 
+    /**
+     * @param DamageAction $action
+     * @return string
+     */
     private function applyDamageAction(DamageAction $action): string
     {
         $primordialLife = $this->life;
@@ -143,6 +143,10 @@ class Unit extends AbstractUnit
         return Message::damage($action);
     }
 
+    /**
+     * @param HealAction $action
+     * @return string
+     */
     private function applyHealAction(HealAction $action): string
     {
         $primordialLife = $this->life;
