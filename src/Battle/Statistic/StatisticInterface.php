@@ -4,6 +4,7 @@ namespace Battle\Statistic;
 
 use Battle\Action\ActionInterface;
 use Battle\Statistic\UnitStatistic\UnitStatistic;
+use Battle\Statistic\UnitStatistic\UnitStatisticCollection;
 
 interface StatisticInterface
 {
@@ -41,9 +42,9 @@ interface StatisticInterface
     /**
      * Возвращает статистику по всем юнитам
      *
-     * @return UnitStatistic[]
+     * @return UnitStatisticCollection
      */
-    public function getUnitsStatistics(): array;
+    public function getUnitsStatistics(): UnitStatisticCollection;
 
     /**
      * Возвращает количество миллисекунд ушедших на обработку боя

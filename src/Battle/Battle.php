@@ -70,9 +70,6 @@ class Battle implements BattleInterface
     /**
      * Обрабатывает бой, возвращая результат выполнения
      *
-     * TODO Когда бой заканчивается - не хватает еще одного заключительного рендера команд (на текущем последнем рендере
-     * TODO проигравшая команда имеет живого юнита)
-     *
      * @return ResultInterface
      * @throws BattleException
      * @throws ResultException

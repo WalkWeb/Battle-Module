@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class UnitStatisticsTest extends TestCase
 {
-    public function testBase(): void
+    public function testUnitStatistics(): void
     {
         $name = 'Unit_stats';
         $unitStatistics = new UnitStatistic($name);

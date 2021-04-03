@@ -12,7 +12,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class StatisticsTest extends TestCase
 {
-    public function testRoundNumber(): void
+    public function testStatisticsRoundNumber(): void
     {
         $statistics = new Statistic();
 
@@ -23,7 +23,7 @@ class StatisticsTest extends TestCase
         self::assertEquals(4, $statistics->getRoundNumber());
     }
 
-    public function testStrokeNumber(): void
+    public function testStatisticsStrokeNumber(): void
     {
         $statistics = new Statistic();
 
@@ -34,7 +34,7 @@ class StatisticsTest extends TestCase
         self::assertEquals(4, $statistics->getStrokeNumber());
     }
 
-    public function testRoundAndStrokeNumber(): void
+    public function testStatisticsRoundAndStrokeNumber(): void
     {
         $statistics = new Statistic();
 
@@ -51,7 +51,7 @@ class StatisticsTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testUnitCausedDamage(): void
+    public function testStatisticsUnitCausedDamage(): void
     {
         $statistics = new Statistic();
 
@@ -64,9 +64,8 @@ class StatisticsTest extends TestCase
 
         foreach ($actionCollection->getActions() as $action) {
             $action->handle();
-            //$defendUnit->applyAction($action);
             $statistics->addUnitAction($action);
-            self::assertEquals(20, $statistics->getUnitsStatistics()[$attackUnit->getName()]->getCausedDamage());
+            self::assertEquals(20, $statistics->getUnitsStatistics()->getUnitByName($attackUnit->getName())->getCausedDamage());
         }
 
         // Делаем 10 ударов
@@ -84,7 +83,7 @@ class StatisticsTest extends TestCase
             }
         }
 
-        self::assertEquals(150, $statistics->getUnitsStatistics()[$attackUnit->getName()]->getCausedDamage());
+        self::assertEquals(150, $statistics->getUnitsStatistics()->getUnitByName($attackUnit->getName())->getCausedDamage());
     }
 
     /**

@@ -7,6 +7,8 @@ namespace Battle\Statistic;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Statistic\UnitStatistic\UnitStatistic;
+use Battle\Statistic\UnitStatistic\UnitStatisticCollection;
+use Battle\Statistic\UnitStatistic\UnitStatisticInterface;
 
 /**
  * @package Battle\Statistic
@@ -30,11 +32,9 @@ class Statistic implements StatisticInterface
     private $strokeNumber = 1;
 
     /**
-     * TODO Переделать на UnitStatisticCollection
-     *
-     * @var array - Статистика по юнитам
+     * @var UnitStatisticCollection - Статистика по юнитам
      */
-    private $unitsStatistics = [];
+    private $unitsStatistics;
 
     /**
      * Время начала боя
@@ -64,8 +64,9 @@ class Statistic implements StatisticInterface
      */
     private $memoryCost;
 
-    public function __construct()
+    public function __construct(?UnitStatisticCollection $collection = null)
     {
+        $this->unitsStatistics = $collection ?? new UnitStatisticCollection();
         $this->startTime = microtime(true);
         $this->startMemory = memory_get_peak_usage();
     }
@@ -96,6 +97,7 @@ class Statistic implements StatisticInterface
      * TODO Добавить подсчет суммарного лечения
      *
      * @param ActionInterface $action
+     * @throws StatisticException
      */
     public function addUnitAction(ActionInterface $action): void
     {
@@ -108,9 +110,9 @@ class Statistic implements StatisticInterface
     /**
      * Возвращает статистику по всем юнитам
      *
-     * @return UnitStatistic[]
+     * @return UnitStatisticCollection
      */
-    public function getUnitsStatistics(): array
+    public function getUnitsStatistics(): UnitStatisticCollection
     {
         return $this->unitsStatistics;
     }
@@ -151,23 +153,23 @@ class Statistic implements StatisticInterface
      * Возвращает статистику по конкретному юниту
      *
      * @param string $name
-     * @return UnitStatistic
+     * @return UnitStatisticInterface
+     * @throws StatisticException
      */
-    private function getUnitStatistics(string $name): UnitStatistic
+    private function getUnitStatistics(string $name): UnitStatisticInterface
     {
-        // todo Проверка на существование
-
-        return $this->unitsStatistics[$name];
+        return $this->unitsStatistics->getUnitByName($name);
     }
 
     /**
      * Суммирует нанесенный юнитом урон
      *
      * @param ActionInterface $action
+     * @throws StatisticException
      */
     private function countingCausedDamage(ActionInterface $action): void
     {
-        if (!array_key_exists($action->getActionUnit()->getName(), $this->unitsStatistics)) {
+        if (!$this->unitsStatistics->existUnitByName($action->getActionUnit()->getName())) {
             $unit = new UnitStatistic($action->getActionUnit()->getName());
             $unit->addCausedDamage($action->getFactualPower());
 
@@ -177,7 +179,7 @@ class Statistic implements StatisticInterface
                 $unit->addKillingUnit();
             }
 
-            $this->unitsStatistics[$action->getActionUnit()->getName()] = $unit;
+            $this->unitsStatistics->add($unit);
         } else {
             $unit = $this->getUnitStatistics($action->getActionUnit()->getName());
 
@@ -194,13 +196,14 @@ class Statistic implements StatisticInterface
      * Суммирует полученный урон юнитом
      *
      * @param ActionInterface $action
+     * @throws StatisticException
      */
     private function countingTakenDamage(ActionInterface $action): void
     {
-        if (!array_key_exists($action->getTargetUnit()->getName(), $this->unitsStatistics)) {
+        if (!$this->unitsStatistics->existUnitByName($action->getTargetUnit()->getName())) {
             $unit = new UnitStatistic($action->getTargetUnit()->getName());
             $unit->addTakenDamage($action->getFactualPower());
-            $this->unitsStatistics[$action->getTargetUnit()->getName()] = $unit;
+            $this->unitsStatistics->add($unit);
         } else {
             $unit = $this->getUnitStatistics($action->getTargetUnit()->getName());
             $unit->addTakenDamage($action->getFactualPower());
