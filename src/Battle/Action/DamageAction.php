@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
-use Battle\Exception\DamageActionException;
 use Battle\Unit\UnitInterface;
 
 class DamageAction extends AbstractAction
@@ -19,18 +18,18 @@ class DamageAction extends AbstractAction
 
     /**
      * @return string
-     * @throws DamageActionException
+     * @throws ActionException
      */
     public function handle(): string
     {
         if (!$this->enemyCommand->isAlive()) {
-            throw new DamageActionException(DamageActionException::NO_DEFINED);
+            throw new ActionException(ActionException::NO_DEFINED);
         }
 
         $this->targetUnit = $this->getDefinedUnit();
 
         if (!$this->targetUnit) {
-            throw new DamageActionException(DamageActionException::NO_DEFINED_AGAIN);
+            throw new ActionException(ActionException::NO_DEFINED_AGAIN);
         }
 
         return $this->targetUnit->applyAction($this);

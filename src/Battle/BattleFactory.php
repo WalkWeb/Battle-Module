@@ -7,7 +7,6 @@ namespace Battle;
 use Battle\Chat\Chat;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Exception\BattleException;
 use Battle\Round\RoundFactory;
 use Battle\Statistic\Statistic;
 use Exception;
@@ -36,7 +35,7 @@ class BattleFactory
             self::createCommand($data, BattleInterface::RIGHT_COMMAND),
             $statistics ?? new Statistic(),
             $chat ?? new Chat(),
-            $debug ?? true,
+            $debug,
             $roundFactory
         );
     }

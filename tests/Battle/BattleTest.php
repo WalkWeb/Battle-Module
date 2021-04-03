@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Battle;
 
+use Battle\BattleException;
+use Battle\BattleFactory;
 use Battle\Chat\Chat;
 use Battle\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
@@ -33,5 +35,44 @@ class BattleTest extends TestCase
         self::assertInstanceOf(Battle::class, $battle);
         self::assertTrue($result->getStatistic()->getRoundNumber() > 2);
         self::assertTrue($result->getStatistic()->getStrokeNumber() > 4);
+    }
+
+    /**
+     * Тест на бой в котором сражающиеся очень толстые но с очень небольшим уроном - и бой заканчивается по лимиту
+     * раундов
+     *
+     * @throws Exception
+     */
+    public function testHandleBattleLimitRound(): void
+    {
+        $data = [
+            [
+                'name'         => 'Warrior',
+                'avatar'       => '/images/avas/humans/human001.jpg',
+                'damage'       => 7,
+                'attack_speed' => 1.0,
+                'life'         => 1500,
+                'melee'        => true,
+                'class'        => 1,
+                'command'      => 'left',
+            ],
+            [
+                'name'         => 'Skeleton',
+                'avatar'       => '/images/avas/monsters/005.png',
+                'damage'       => 5,
+                'attack_speed' => 1.5,
+                'life'         => 1650,
+                'melee'        => true,
+                'class'        => 1,
+                'command'      => 'right',
+            ],
+        ];
+
+        $battle = BattleFactory::create($data);
+
+        $this->expectException(BattleException::class);
+        $this->expectExceptionMessage(BattleException::UNEXPECTED_ENDING_BATTLE);
+
+        $battle->handle();
     }
 }

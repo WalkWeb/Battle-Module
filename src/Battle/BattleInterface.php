@@ -11,7 +11,7 @@ interface BattleInterface
     public const RIGHT_COMMAND     = 'right';
 
     /**
-     * Обрабатывает бой, возвращая массив итоговых характеристик юнитов
+     * Обрабатывает бой, возвращая результат выполнения
      *
      * @return ResultInterface
      */

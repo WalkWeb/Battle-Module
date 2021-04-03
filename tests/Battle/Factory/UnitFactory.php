@@ -57,6 +57,15 @@ class UnitFactory
             'melee'        => false,
             'class'        => 2,
         ],
+        6 => [
+            'name'         => 'unit_6',
+            'avatar'       => '/images/avas/monsters/003.png',
+            'damage'       => 12,
+            'attack_speed' => 1.1,
+            'life'         => 50,
+            'melee'        => false,
+            'class'        => 2,
+        ],
         10 => [
             'name'         => 'dead_unit',
             'avatar'       => '/images/avas/monsters/005.png',

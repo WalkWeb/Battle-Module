@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
-use Battle\Exception\ActionCollectionException;
-
 class ActionCollection
 {
     /**
@@ -15,13 +13,13 @@ class ActionCollection
 
     /**
      * @param array $actions
-     * @throws ActionCollectionException
+     * @throws ActionException
      */
     public function __construct(array $actions)
     {
         foreach ($actions as $action) {
             if (!$action instanceof ActionInterface) {
-                throw new ActionCollectionException(ActionCollectionException::INCORRECT_ACTION);
+                throw new ActionException(ActionException::INCORRECT_ACTION);
             }
             $this->actions[] = $action;
         }

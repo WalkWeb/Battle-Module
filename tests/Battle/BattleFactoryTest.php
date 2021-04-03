@@ -8,7 +8,7 @@ use Battle\BattleFactory;
 use Battle\BattleInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Exception\BattleException;
+use Battle\BattleException;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
@@ -51,7 +51,18 @@ class BattleFactoryTest extends TestCase
         self::assertEquals($expectCommand, $command);
     }
 
-    // todo testBattleFactoryCreateCommandFail
+    /**
+     * @dataProvider failDataProvider
+     * @param array $data
+     * @param string $error
+     * @throws Exception
+     */
+    public function testBattleFactoryCreateCommandFail(array $data, string $error): void
+    {
+        $this->expectException(BattleException::class);
+        $this->expectExceptionMessage($error);
+        BattleFactory::create($data);
+    }
 
     /**
      * @return array
@@ -203,6 +214,35 @@ class BattleFactoryTest extends TestCase
                 BattleInterface::RIGHT_COMMAND,
             ],
 
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function failDataProvider(): array
+    {
+        return [
+            [
+                [
+                    'unit_string_data'
+                ],
+                BattleException::INCORRECT_UNIT_DATA,
+            ],
+            [
+                [
+                    [
+                        'name'         => 'Skeleton',
+                        'avatar'       => '/images/avas/monsters/003.png',
+                        'damage'       => 15,
+                        'attack_speed' => 1.2,
+                        'life'         => 80,
+                        'melee'        => true,
+                        'class'        => 1,
+                    ],
+                ],
+                BattleException::NO_COMMAND_PARAMETER
+            ],
         ];
     }
 }

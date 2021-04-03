@@ -9,7 +9,7 @@ use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
-use Battle\Exception\DamageActionException;
+use Battle\Action\ActionException;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
@@ -210,7 +210,7 @@ class CommandTest extends TestCase
      *
      * @throws ClassFactoryException
      * @throws CommandException
-     * @throws DamageActionException
+     * @throws ActionException
      */
     public function testGetUnitForActionNothing(): void
     {

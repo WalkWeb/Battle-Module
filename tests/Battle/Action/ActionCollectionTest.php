@@ -8,7 +8,7 @@ use Battle\Action\ActionCollection;
 use Battle\Action\DamageAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
-use Battle\Exception\ActionCollectionException;
+use Battle\Action\ActionException;
 use Battle\Command\CommandException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
@@ -17,7 +17,7 @@ use Tests\Battle\Factory\UnitFactoryException;
 class ActionCollectionTest extends TestCase
 {
     /**
-     * @throws ActionCollectionException
+     * @throws ActionException
      * @throws CommandException
      * @throws UnitFactoryException
      * @throws ClassFactoryException
@@ -38,11 +38,11 @@ class ActionCollectionTest extends TestCase
     }
 
     /**
-     * @throws ActionCollectionException
+     * @throws ActionException
      */
     public function testCreateActionCollectionFail(): void
     {
-        $this->expectException(ActionCollectionException::class);
+        $this->expectException(ActionException::class);
         new ActionCollection(['action']);
     }
 }

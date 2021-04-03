@@ -8,7 +8,7 @@ use Battle\Action\DamageAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
-use Battle\Exception\DamageActionException;
+use Battle\Action\ActionException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -35,7 +35,7 @@ class DamageActionTest extends TestCase
     /**
      * @throws ClassFactoryException
      * @throws CommandException
-     * @throws DamageActionException
+     * @throws ActionException
      * @throws UnitFactoryException
      */
     public function testApplyAction(): void
@@ -53,7 +53,7 @@ class DamageActionTest extends TestCase
     /**
      * @throws ClassFactoryException
      * @throws CommandException
-     * @throws DamageActionException
+     * @throws ActionException
      * @throws UnitFactoryException
      */
     public function testActionUnit(): void
