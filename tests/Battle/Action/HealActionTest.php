@@ -8,6 +8,7 @@ use Battle\Action\HealAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
+use Battle\Command\CommandFactory;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -27,8 +28,8 @@ class HealActionTest extends TestCase
         $unit = UnitFactory::createByTemplate(1);
         $alliesUnit = UnitFactory::createByTemplate(2);
         $enemyUnit = UnitFactory::createByTemplate(3);
-        $alliesCommand = new Command([$unit, $alliesUnit]);
-        $enemyCommand = new Command([$enemyUnit]);
+        $alliesCommand = CommandFactory::create([$unit, $alliesUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $actionCollection = $unit->getHealAction($enemyCommand, $alliesCommand);
 

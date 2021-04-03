@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Command;
 
+use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -19,7 +20,7 @@ class CommandFactory
      */
     public static function create(array $data): CommandInterface
     {
-        $units = [];
+        $units = new UnitCollection();
         $i = 1;
 
         foreach ($data as $datum) {
@@ -29,7 +30,7 @@ class CommandFactory
             }
 
             if ($datum instanceof UnitInterface) {
-                $units[] = $datum;
+                $units->add($datum);
                 continue;
             }
 
@@ -38,7 +39,7 @@ class CommandFactory
             }
 
             try {
-                $units[] = UnitFactory::create($datum);
+                $units->add(UnitFactory::create($datum));
             } catch (Exception $e) {
                 throw new CommandException($e->getMessage() . ' (' . $i . ' element)');
             }

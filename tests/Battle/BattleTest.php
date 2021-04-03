@@ -10,8 +10,7 @@ use Battle\Chat\Chat;
 use Battle\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
 use Battle\Battle;
-use Battle\Command\Command;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Battle\Factory\CommandFactory;
 use Exception;
 
 class BattleTest extends TestCase
@@ -23,12 +22,10 @@ class BattleTest extends TestCase
      */
     public function testHandleBattleSuccess(): void
     {
-        $unit1 = UnitFactory::createByTemplate(1);
-        $unit2 = UnitFactory::createByTemplate(2);
-        $command1 = new Command([$unit1]);
-        $command2 = new Command([$unit2]);
+        $leftCommand = CommandFactory::createLeftCommand();
+        $rightCommand = CommandFactory::createRightCommand();
 
-        $battle = new Battle($command1, $command2, new Statistic(), new Chat());
+        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new Chat());
         $result = $battle->handle();
 
         self::assertEquals(2, $result->getWinner());

@@ -7,9 +7,9 @@ namespace Tests\Battle\Action;
 use Battle\Action\ActionCollection;
 use Battle\Action\DamageAction;
 use Battle\Classes\ClassFactoryException;
-use Battle\Command\Command;
 use Battle\Action\ActionException;
 use Battle\Command\CommandException;
+use Battle\Command\CommandFactory;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -26,8 +26,8 @@ class ActionCollectionTest extends TestCase
     {
         $unit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
-        $defendCommand = new Command([$defendUnit]);
-        $alliesCommand = new Command([$unit]);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
         $action = new DamageAction($unit, $defendCommand, $alliesCommand);
 
         $actionCollection = new ActionCollection([$action]);

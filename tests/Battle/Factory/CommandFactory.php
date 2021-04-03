@@ -8,6 +8,7 @@ use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Command\CommandInterface;
 use Battle\Command\CommandException;
+use Battle\Unit\UnitCollection;
 
 class CommandFactory
 {
@@ -19,7 +20,9 @@ class CommandFactory
      */
     public static function createLeftCommand(): CommandInterface
     {
-        return new Command([UnitFactory::createByTemplate(1)]);
+        $unitCollection = new UnitCollection();
+        $unitCollection->add(UnitFactory::createByTemplate(1));
+        return new Command($unitCollection);
     }
 
     /**
@@ -30,6 +33,8 @@ class CommandFactory
      */
     public static function createRightCommand(): CommandInterface
     {
-        return new Command([UnitFactory::createByTemplate(2)]);
+        $unitCollection = new UnitCollection();
+        $unitCollection->add(UnitFactory::createByTemplate(2));
+        return new Command($unitCollection);
     }
 }

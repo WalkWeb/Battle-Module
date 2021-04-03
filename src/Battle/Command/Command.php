@@ -15,24 +15,16 @@ class Command implements CommandInterface
     private $units;
 
     /**
-     * @param array $units todo получать сразу UnitCollection
+     * @param UnitCollection $units
      * @throws CommandException
      */
-    public function __construct(array $units)
+    public function __construct(UnitCollection $units)
     {
         if (count($units) === 0) {
             throw new CommandException(CommandException::NO_UNITS);
         }
 
-        $this->units = new UnitCollection();
-
-        foreach ($units as $unit) {
-            if (!$unit instanceof UnitInterface) {
-                throw new CommandException(CommandException::INCORRECT_USER);
-            }
-
-            $this->units->add($unit);
-        }
+        $this->units = $units;
     }
 
     public function isAlive(): bool

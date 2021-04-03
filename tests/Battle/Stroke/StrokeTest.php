@@ -8,9 +8,10 @@ use Battle\Chat\Chat;
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
-use Battle\Command\Command;
 use Battle\Command\CommandException;
+use Battle\Command\CommandFactory;
 use Battle\Statistic\Statistic;
+use Battle\Statistic\StatisticException;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke\Stroke;
 use Battle\Unit\UnitInterface;
@@ -71,8 +72,8 @@ class StrokeTest extends TestCase
      */
     public function testCreate(): void
     {
-        $leftCommand = new Command([$this->attackUnit]);
-        $rightCommand = new Command([$this->defendUnit]);
+        $leftCommand = CommandFactory::create([$this->attackUnit]);
+        $rightCommand = CommandFactory::create([$this->defendUnit]);
 
         $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new Statistic(), new Chat());
 
@@ -81,11 +82,12 @@ class StrokeTest extends TestCase
 
     /**
      * @throws CommandException
+     * @throws StatisticException
      */
     public function testAction(): void
     {
-        $leftCommand = new Command([$this->attackUnit]);
-        $rightCommand = new Command([$this->defendUnit]);
+        $leftCommand = CommandFactory::create([$this->attackUnit]);
+        $rightCommand = CommandFactory::create([$this->defendUnit]);
 
         $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new Statistic(), new Chat());
         $stroke->handle();

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Statistics;
 
-use Battle\Command\Command;
+use Battle\Command\CommandFactory;
 use Battle\Statistic\Statistic;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -57,8 +57,8 @@ class StatisticsTest extends TestCase
 
         $attackUnit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
-        $enemyCommand = new Command([$defendUnit]);
-        $alliesCommand = new Command([$attackUnit]);
+        $enemyCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$attackUnit]);
 
         $actionCollection = $attackUnit->getDamageAction($enemyCommand, $alliesCommand);
 

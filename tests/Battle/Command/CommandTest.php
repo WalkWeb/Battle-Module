@@ -10,6 +10,7 @@ use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Action\ActionException;
+use Battle\Command\CommandFactory;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
@@ -29,7 +30,7 @@ class CommandTest extends TestCase
     public function testCreate(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $command = new Command([$unit]);
+        $command = CommandFactory::create([$unit]);
         self::assertInstanceOf(Command::class, $command);
     }
 
@@ -49,7 +50,7 @@ class CommandTest extends TestCase
             $collection->add($unit);
         }
 
-        $command = new Command($units);
+        $command = CommandFactory::create($units);
         self::assertEquals($collection, $command->getUnits());
     }
 
@@ -64,7 +65,7 @@ class CommandTest extends TestCase
     {
         $meleeUnit = UnitFactory::createByTemplate(1);
         $rangeUnit = UnitFactory::createByTemplate(5);
-        $command = new Command([$meleeUnit, $rangeUnit]);
+        $command = CommandFactory::create([$meleeUnit, $rangeUnit]);
 
         self::assertEquals([$meleeUnit], $command->getMeleeUnits());
         self::assertEquals([$rangeUnit], $command->getRangeUnits());
@@ -80,7 +81,7 @@ class CommandTest extends TestCase
     public function testNoMeleeUnits(): void
     {
         $rangeUnit = UnitFactory::createByTemplate(5);
-        $command = new Command([$rangeUnit]);
+        $command = CommandFactory::create([$rangeUnit]);
 
         self::assertFalse($command->existMeleeUnits());
         self::assertEquals([], $command->getMeleeUnits());
@@ -98,7 +99,7 @@ class CommandTest extends TestCase
     {
         $meleeUnit = UnitFactory::createByTemplate(10);
         $rangeUnit = UnitFactory::createByTemplate(5);
-        $command = new Command([$meleeUnit, $rangeUnit]);
+        $command = CommandFactory::create([$meleeUnit, $rangeUnit]);
         self::assertFalse($command->existMeleeUnits());
     }
 
@@ -110,7 +111,7 @@ class CommandTest extends TestCase
     public function testNoUnits(): void
     {
         $this->expectException(CommandException::class);
-        new Command([]);
+        new Command(new UnitCollection());
     }
 
     /**
@@ -122,7 +123,7 @@ class CommandTest extends TestCase
     {
         $this->expectException(CommandException::class);
         $array = ['name' => 'unit', 'damage' => 10, 'life' => 100];
-        new Command([(object)$array]);
+        CommandFactory::create([(object)$array]);
     }
 
     /**
@@ -135,7 +136,7 @@ class CommandTest extends TestCase
     public function testGetUserFromAttack(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $command = new Command([$unit]);
+        $command = CommandFactory::create([$unit]);
         $defined = $command->getUnitForAttacks();
 
         self::assertTrue($command->isAlive());
@@ -155,7 +156,7 @@ class CommandTest extends TestCase
     public function testNoUnitFromAttack(): void
     {
         $unit = UnitFactory::createDeadUnit();
-        $command = new Command([$unit]);
+        $command = CommandFactory::create([$unit]);
         self::assertEquals(null, $command->getUnitForAction());
         self::assertEquals(null, $command->getUnitForAttacks());
         self::assertEquals(false, $command->isAlive());
@@ -171,7 +172,7 @@ class CommandTest extends TestCase
     public function testAllUnitAction(): void
     {
         $units = [UnitFactory::createByTemplate(1), UnitFactory::createByTemplate(2)];
-        $command = new Command($units);
+        $command = CommandFactory::create($units);
 
         $firstActionUnit = $command->getUnitForAction();
         $firstActionUnit->madeAction();
@@ -200,7 +201,7 @@ class CommandTest extends TestCase
     public function testGetUnitForActionOne(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $command = new Command([$unit]);
+        $command = CommandFactory::create([$unit]);
 
         self::assertEquals($unit, $command->getUnitForAction());
     }
@@ -218,8 +219,8 @@ class CommandTest extends TestCase
         $unit2 = new Unit('User 2', 'ava 2',12, 1, 95, false, UnitClassFactory::create(2));
         $unit3 = new Unit('User 3', 'ava 3',120, 1, 300, true, UnitClassFactory::create(1));
 
-        $alliesCommand = new Command([$unit1, $unit2]);
-        $enemyCommand = new Command([$unit3]);
+        $alliesCommand = CommandFactory::create([$unit1, $unit2]);
+        $enemyCommand = CommandFactory::create([$unit3]);
 
         // вначале юнит присутствует
         self::assertInstanceOf(UnitInterface::class, $alliesCommand->getUnitForAction());

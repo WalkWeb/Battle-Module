@@ -6,13 +6,13 @@ namespace Tests\Battle\Round;
 
 use Battle\Chat\Chat;
 use Battle\Classes\ClassFactoryException;
-use Battle\Command\Command;
 use Battle\Command\CommandException;
+use Battle\Command\CommandFactory;
 use Battle\Round\RoundException;
 use Battle\Round\Round;
 use Battle\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
-use Tests\Battle\Factory\CommandFactory;
+use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 
@@ -28,8 +28,8 @@ class RoundTest extends TestCase
      */
     public function testNextCommand(): void
     {
-        $leftCommand = CommandFactory::createLeftCommand();
-        $rightCommand = CommandFactory::createRightCommand();
+        $leftCommand = TestCommandFactory::createLeftCommand();
+        $rightCommand = TestCommandFactory::createRightCommand();
         $startCommand = 1;
         $nextCommand = 2;
         // Юниты делают по одному ходу, соответственно следующий, после раунда, ход будет 3
@@ -53,8 +53,8 @@ class RoundTest extends TestCase
         $leftUnit = UnitFactory::createByTemplate(1);
         $rightUnit = UnitFactory::createByTemplate(2);
         $leftUnit->madeAction();
-        $leftCommand = new Command([$leftUnit]);
-        $rightCommand = new Command([$rightUnit]);
+        $leftCommand = CommandFactory::create([$leftUnit]);
+        $rightCommand = CommandFactory::create([$rightUnit]);
 
         $startCommand = 1;
         $nextCommand = 2;

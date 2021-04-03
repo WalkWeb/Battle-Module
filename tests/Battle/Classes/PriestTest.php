@@ -9,6 +9,7 @@ use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
+use Battle\Command\CommandFactory;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -24,8 +25,8 @@ class PriestTest extends TestCase
     {
         $actionUnit = UnitFactory::createByTemplate(5);
         $enemyUnit = UnitFactory::createByTemplate(1);
-        $actionCommand = new Command([$actionUnit]);
-        $enemyCommand = new Command([$enemyUnit]);
+        $actionCommand = CommandFactory::create([$actionUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $priest = $actionUnit->getClass();
 

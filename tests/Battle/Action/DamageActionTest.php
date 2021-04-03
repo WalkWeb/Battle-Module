@@ -6,9 +6,9 @@ namespace Tests\Battle\Action;
 
 use Battle\Action\DamageAction;
 use Battle\Classes\ClassFactoryException;
-use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Action\ActionException;
+use Battle\Command\CommandFactory;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -26,8 +26,8 @@ class DamageActionTest extends TestCase
     {
         $unit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
-        $defendCommand = new Command([$defendUnit]);
-        $alliesCommand = new Command([$unit]);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
         $action = new DamageAction($unit, $defendCommand, $alliesCommand);
         self::assertInstanceOf(DamageAction::class, $action);
     }
@@ -42,8 +42,8 @@ class DamageActionTest extends TestCase
     {
         $unit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
-        $defendCommand = new Command([$defendUnit]);
-        $alliesCommand = new Command([$unit]);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
         $action = new DamageAction($unit, $defendCommand, $alliesCommand);
         $message = $action->handle();
         self::assertEquals($unit->getDamage(), $action->getPower());
@@ -60,8 +60,8 @@ class DamageActionTest extends TestCase
     {
         $actionUnit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
-        $defendCommand = new Command([$defendUnit]);
-        $alliesCommand = new Command([$actionUnit]);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$actionUnit]);
         $action = new DamageAction($actionUnit, $defendCommand, $alliesCommand);
         $action->handle();
 
@@ -79,8 +79,8 @@ class DamageActionTest extends TestCase
     {
         $attackerUnit = UnitFactory::createByTemplate(2);
         $enemyUnit = UnitFactory::createByTemplate(4);
-        $enemyCommand = new Command([$enemyUnit]);
-        $alliesCommand = new Command([$attackerUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+        $alliesCommand = CommandFactory::create([$attackerUnit]);
 
         $actionCollection = $attackerUnit->getDamageAction($enemyCommand, $alliesCommand);
 

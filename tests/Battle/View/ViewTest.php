@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Tests\Battle\View;
 
 use Battle\Classes\ClassFactoryException;
-use Battle\Command\Command;
 use Battle\Command\CommandException;
+use Battle\Command\CommandFactory;
 use Battle\View\View;
 use PHPUnit\Framework\TestCase;
-use Tests\Battle\Factory\CommandFactory;
+use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 
@@ -24,8 +24,8 @@ class ViewTest extends TestCase
      */
     public function testViewRenderMelee(): void
     {
-        $leftCommand = CommandFactory::createLeftCommand();
-        $rightCommand = CommandFactory::createRightCommand();
+        $leftCommand = TestCommandFactory::createLeftCommand();
+        $rightCommand = TestCommandFactory::createRightCommand();
         $view = new View();
 
         $html = $view->render($leftCommand, $rightCommand);
@@ -114,8 +114,8 @@ EOT;
         $lifeUnit = UnitFactory::createByTemplate(5);
         $rightUnit = UnitFactory::createByTemplate(6);
 
-        $leftCommand = new Command([$lifeUnit]);
-        $rightCommand = new Command([$rightUnit]);
+        $leftCommand = CommandFactory::create([$lifeUnit]);
+        $rightCommand = CommandFactory::create([$rightUnit]);
         $view = new View();
 
         $html = $view->render($leftCommand, $rightCommand);

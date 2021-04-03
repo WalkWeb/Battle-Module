@@ -7,7 +7,7 @@ namespace Tests\Battle\Unit;
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
-use Battle\Command\Command;
+use Battle\Command\CommandFactory;
 use Battle\Effect\Change\ChangeException;
 use Battle\Effect\EffectException;
 use Battle\Effect\EffectFactory;
@@ -94,8 +94,8 @@ class UnitTest extends TestCase
             $defendClass
         );
 
-        $enemyCommand = new Command([$defendUnit]);
-        $alliesCommand = new Command([$attackUnit]);
+        $enemyCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$attackUnit]);
 
         $action = new DamageAction($attackUnit, $enemyCommand, $alliesCommand);
 
