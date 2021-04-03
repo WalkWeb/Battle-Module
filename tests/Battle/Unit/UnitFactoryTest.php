@@ -51,11 +51,22 @@ class UnitFactoryTest extends TestCase
     {
         return [
             [
+                // attack_speed float
                 [
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                // attack_speed int - такой вариант также доступен
+                [
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1,
                     'life'         => 80,
                     'melee'        => true,
                     'class'        => 1,
@@ -163,7 +174,7 @@ class UnitFactoryTest extends TestCase
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
-                    'attack_speed' => 1,
+                    'attack_speed' => '1',
                     'life'         => 80,
                     'melee'        => true,
                     'class'        => 1,
