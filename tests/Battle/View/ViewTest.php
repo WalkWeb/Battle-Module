@@ -28,7 +28,7 @@ class ViewTest extends TestCase
         $rightCommand = TestCommandFactory::createRightCommand();
         $view = (new ViewFactory)->create();
 
-        $html = $view->render($leftCommand, $rightCommand);
+        $html = $view->renderCommandView($leftCommand, $rightCommand);
 
         $expectHtml = <<<EOT
 <div class="row">
@@ -114,7 +114,7 @@ EOT;
         $rightCommand = CommandFactory::create([$rightUnit]);
         $view = (new ViewFactory)->create();
 
-        $html = $view->render($leftCommand, $rightCommand);
+        $html = $view->renderCommandView($leftCommand, $rightCommand);
 
         $expectHtml = <<<EOT
 <div class="row">

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\View;
 
 use Battle\Command\CommandInterface;
+use Battle\Result\ResultInterface;
 use Battle\Unit\UnitInterface;
 
 /**
@@ -25,6 +26,15 @@ class View implements ViewInterface
         $this->templateDir = $templateDir;
     }
 
+    public function renderResult(ResultInterface $result): string
+    {
+        ob_start();
+
+        require $this->templateDir . 'battle/result.template.php';
+
+        return ob_get_clean();
+    }
+
     /**
      * Формирует html-код для отображения текущего состояния сражающихся команд
      *
@@ -32,7 +42,7 @@ class View implements ViewInterface
      * @param CommandInterface $rightCommand
      * @return string
      */
-    public function render(CommandInterface $leftCommand, CommandInterface $rightCommand): string
+    public function renderCommandView(CommandInterface $leftCommand, CommandInterface $rightCommand): string
     {
         $leftMeleeUnits = '';
         $leftRangeUnits = '';
@@ -71,7 +81,7 @@ class View implements ViewInterface
     {
         ob_start();
 
-        require $this->templateDir . 'unit/unit.template.php';
+        require $this->templateDir . 'battle/unit/unit.template.php';
 
         return ob_get_clean();
     }

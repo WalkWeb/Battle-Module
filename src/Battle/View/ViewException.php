@@ -10,4 +10,5 @@ class ViewException extends Exception
 {
     public const MISSING_UNIT    = 'Render error: missing unit';
     public const MISSING_COMMAND = 'Render error: missing command';
+    public const MISSING_RESULT  = 'Render error: missing result battle';
 }

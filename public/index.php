@@ -1,9 +1,9 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../public/html.html';
 
 use Battle\BattleFactory;
+use Battle\View\ViewFactory;
 
 $data = [
     [
@@ -50,30 +50,10 @@ $data = [
 
 try {
 
+    $view = (new ViewFactory())->create();
     $battle = BattleFactory::create($data);
     $result = $battle->handle();
-    $views = $result->getChat()->getMessages();
-
-    foreach ($views as $view) {
-        echo $view;
-    }
-
-    echo '<h1>' . $result->getWinnerText() . '</h1>';
-
-    echo '<p>Количество раундов: ' . $result->getStatistic()->getRoundNumber() . '</p>';
-    echo '<p>Количество ходов: ' . $result->getStatistic()->getStrokeNumber() . '</p>';
-
-    foreach ($result->getStatistic()->getUnitsStatistics() as $unit) {
-        echo
-            '<p><b>' . $unit->getName() . '</b>' .
-            '<br />Caused Damage: ' . $unit->getCausedDamage() .
-            '<br />Taken Damage: ' . $unit->getTakenDamage() .
-            '<br />Heal: ' . $unit->getHeal() .
-            '<br />Killing: ' . $unit->getKilling() . '</p>';
-    }
-
-    echo '<p>На обработку боя ушло: ' . $result->getStatistic()->getRuntime() . ' ms</p>';
-    echo '<p>Расход памяти: ' . $result->getStatistic()->getMemoryCostClipped() . '</p>';
+    echo $view->renderResult($result);
 
 } catch (Exception $e) {
     die($e->getMessage());

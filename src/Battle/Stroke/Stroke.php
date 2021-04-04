@@ -76,7 +76,7 @@ class Stroke implements StrokeInterface
     {
         if ($this->debug) {
             $view = $this->viewFactory->create();
-            $this->chat->add($view->render($this->leftCommand, $this->rightCommand));
+            $this->chat->add($view->renderCommandView($this->leftCommand, $this->rightCommand));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ class Stroke implements StrokeInterface
 
         if ($this->debug) {
             $view = $this->viewFactory->create();
-            $this->chat->add($view->render($this->leftCommand, $this->rightCommand));
+            $this->chat->add($view->renderCommandView($this->leftCommand, $this->rightCommand));
         }
     }
 }
