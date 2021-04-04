@@ -18,6 +18,4 @@ interface CommandInterface
     public function getRangeUnits(): array;
     public function existMeleeUnits(): bool;
     public function newRound(): void;
-    //public function isAction(): bool;
-    //public function getUnitForHeal(): ?UnitInterface;
 }

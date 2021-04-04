@@ -11,6 +11,11 @@ use Exception;
 abstract class AbstractUnit implements UnitInterface
 {
     /**
+     * @var string
+     */
+    protected $id;
+
+    /**
      * @var string - Имя юнита. Это может быть имя персонажа игрока, имя монстра или NPC
      */
     protected $name;
@@ -66,6 +71,7 @@ abstract class AbstractUnit implements UnitInterface
     protected $class;
 
     public function __construct(
+        string $id,
         string $name,
         string $avatar,
         int $damage,
@@ -75,6 +81,7 @@ abstract class AbstractUnit implements UnitInterface
         UnitClassInterface $class
     )
     {
+        $this->id = $id;
         $this->name = $name;
         $this->avatar = $avatar;
         $this->damage = $damage;
@@ -83,6 +90,16 @@ abstract class AbstractUnit implements UnitInterface
         $this->melee = $melee;
         $this->class = $class;
         $this->effects = new EffectCollection();
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function isAction(): bool
@@ -103,11 +120,6 @@ abstract class AbstractUnit implements UnitInterface
     public function isMelee(): bool
     {
         return $this->melee;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
     }
 
     public function getAvatar(): string

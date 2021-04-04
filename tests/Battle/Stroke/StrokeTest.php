@@ -19,6 +19,7 @@ use Battle\Unit\Unit;
 
 class StrokeTest extends TestCase
 {
+    private $attackerId     = 'e9734617-2894-4af4-85ff-67bb30de0500';
     private $attackerName   = 'first_unit';
     private $attackAvatar   = 'first_unit_ava';
     private $attackerDamage = 20;
@@ -27,6 +28,7 @@ class StrokeTest extends TestCase
     private $attackerMelee  = true;
     private $attackerClass  = UnitClassInterface::WARRIOR;
 
+    private $defendId     = 'a385c54d-ad29-4071-b362-898b88a6d0c8';
     private $defendName   = 'second_unit';
     private $defendAvatar = 'second_unit_ava';
     private $defendDamage = 25;
@@ -47,6 +49,7 @@ class StrokeTest extends TestCase
     public function setUp(): void
     {
         $this->attackUnit = new Unit(
+            $this->attackerId,
             $this->attackerName,
             $this->attackAvatar,
             $this->attackerDamage,
@@ -57,6 +60,7 @@ class StrokeTest extends TestCase
         );
 
         $this->defendUnit = new Unit(
+            $this->defendId,
             $this->defendName,
             $this->defendAvatar,
             $this->defendDamage,

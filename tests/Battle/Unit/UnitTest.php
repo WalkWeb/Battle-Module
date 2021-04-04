@@ -16,6 +16,7 @@ use PHPUnit\Framework\TestCase;
 
 class UnitTest extends TestCase
 {
+    private $attackId = '3bc9b8be-8cbd-44b4-a935-cd435d905d1b';
     private $attackName = 'attack_unit';
     private $attackAvatar = 'attack_unit_ava';
     private $attackDamage = 40;
@@ -24,6 +25,7 @@ class UnitTest extends TestCase
     private $attackMelee = true;
     private $attackClassId = UnitClassInterface::WARRIOR;
 
+    private $defendId = 'de03e3b9-21d1-439d-b336-8c7f000e5f59';
     private $defendName = 'defend_unit';
     private $defendAvatar = 'defend_unit_ava';
     private $defendDamage = 30;
@@ -40,6 +42,7 @@ class UnitTest extends TestCase
         $attackClass = UnitClassFactory::create($this->attackClassId);
 
         $unit = new Unit(
+            $this->attackId,
             $this->attackName,
             $this->attackAvatar,
             $this->attackDamage,
@@ -50,6 +53,7 @@ class UnitTest extends TestCase
         );
 
         self::assertInstanceOf(UnitInterface::class, $unit);
+        self::assertEquals($this->attackId, $unit->getId());
         self::assertEquals($this->attackName, $unit->getName());
         self::assertEquals($this->attackAvatar, $unit->getAvatar());
         self::assertEquals($this->attackDamage, $unit->getDamage());
@@ -72,6 +76,7 @@ class UnitTest extends TestCase
         $defendClass = UnitClassFactory::create($this->defendClassId);
 
         $attackUnit = new Unit(
+            $this->attackId,
             $this->attackName,
             $this->attackAvatar,
             $this->attackDamage,
@@ -82,6 +87,7 @@ class UnitTest extends TestCase
         );
 
         $defendUnit = new Unit(
+            $this->defendId,
             $this->defendName,
             $this->defendAvatar,
             $this->defendDamage,
@@ -117,6 +123,7 @@ class UnitTest extends TestCase
         $attackClass = UnitClassFactory::create($this->attackClassId);
 
         $unit = new Unit(
+            $this->attackId,
             $this->attackName,
             $this->attackAvatar,
             $this->attackDamage,

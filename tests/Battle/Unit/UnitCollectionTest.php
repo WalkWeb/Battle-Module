@@ -19,8 +19,31 @@ class UnitCollectionTest extends TestCase
     {
         $collection = new UnitCollection();
 
-        $collection->add(new Unit('User 1', 'avatar 1', 15, 1, 110, true, UnitClassFactory::create(1)));
-        $collection->add(new Unit('User 2', 'avatar 2', 12, 1, 95, false, UnitClassFactory::create(2)));
+        $collection->add(
+            new Unit(
+                '5aa0d764-e92d-4137-beed-f7f590b08165',
+                'User 1',
+                'avatar 1',
+                15,
+                1,
+                110,
+                true,
+                UnitClassFactory::create(1)
+            )
+        );
+
+        $collection->add(
+            new Unit(
+                '648a3bc6-13e3-4a24-8fbf-10c196251cc2',
+                'User 2',
+                'avatar 2',
+                12,
+                1,
+                95,
+                false,
+                UnitClassFactory::create(2)
+            )
+        );
 
         self::assertCount(2, $collection);
 

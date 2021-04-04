@@ -53,6 +53,7 @@ class UnitFactoryTest extends TestCase
             [
                 // attack_speed float
                 [
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
@@ -63,6 +64,7 @@ class UnitFactoryTest extends TestCase
                 ],
                 // attack_speed int - такой вариант также доступен
                 [
+                    'id'           => '5aa0d764-e92d-4137-beed-f7f590b08165',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
@@ -83,7 +85,49 @@ class UnitFactoryTest extends TestCase
         return [
             [
                 [
+                    // отсутствует id
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_ID,
+            ],
+            [
+                [
+                    // id некорректного типа
+                    'id'           => 123123,
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_ID,
+            ],
+            [
+                [
+                    // id пустая строка
+                    'id'           => '',
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_ID,
+            ],
+            [
+                [
                     // отсутствует name
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -96,6 +140,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // некорректный name
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 123,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
@@ -109,6 +154,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // отсутствует avatar
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -121,6 +167,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // некорректный avatar
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => ['ava' => '/images/avas/monsters/003.png'],
                     'damage'       => 15,
@@ -134,6 +181,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // отсутствует damage
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'attack_speed' => 1.2,
@@ -146,6 +194,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // некорректный damage
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15.3,
@@ -159,6 +208,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // отсутствует attack_speed
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
@@ -171,6 +221,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // некорректный attack_speed
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
@@ -184,6 +235,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // отсутствует life
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
@@ -196,6 +248,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // некорректный life
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
@@ -209,6 +262,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // отсутствует melee
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
@@ -221,6 +275,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // некорректный melee
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
@@ -234,6 +289,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // отсутствует class
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
@@ -246,6 +302,7 @@ class UnitFactoryTest extends TestCase
             [
                 [
                     // некорректный class
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,

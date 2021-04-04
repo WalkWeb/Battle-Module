@@ -28,10 +28,14 @@ class UnitStatisticCollection implements Iterator, Countable
         return current($this->elements);
     }
 
+    // todo existUnitById
+
     public function existUnitByName(string $name): bool
     {
         return array_key_exists($name, $this->elements);
     }
+
+    // todo getUnitById
 
     /**
      * @param string $name

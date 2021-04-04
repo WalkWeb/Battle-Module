@@ -44,6 +44,7 @@ class BattleTest extends TestCase
     {
         $data = [
             [
+                'id'           => 'a2763c19-7ec5-48f3-9242-2ea6c6d80c56',
                 'name'         => 'Warrior',
                 'avatar'       => '/images/avas/humans/human001.jpg',
                 'damage'       => 7,
@@ -54,6 +55,7 @@ class BattleTest extends TestCase
                 'command'      => 'left',
             ],
             [
+                'id'           => '9dce83f3-2720-43c1-bf2b-0fb7dcacae53',
                 'name'         => 'Skeleton',
                 'avatar'       => '/images/avas/monsters/005.png',
                 'damage'       => 5,

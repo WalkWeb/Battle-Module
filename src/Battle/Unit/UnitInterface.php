@@ -23,6 +23,13 @@ interface UnitInterface
     public const MAX_CONS = 1000;
 
     /**
+     * UUID or random string
+     *
+     * @return string
+     */
+    public function getId(): string;
+
+    /**
      * Имя юнита
      *
      * @return string

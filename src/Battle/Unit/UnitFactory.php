@@ -32,6 +32,10 @@ class UnitFactory
      */
     public static function create(array $data): UnitInterface
     {
+        if (!array_key_exists('id', $data) || !is_string($data['id']) || $data['id'] === '') {
+            throw new UnitException(UnitException::INCORRECT_ID);
+        }
+
         if (!array_key_exists('name', $data) || !is_string($data['name'])) {
             throw new UnitException(UnitException::INCORRECT_NAME);
         }
@@ -61,6 +65,7 @@ class UnitFactory
         }
 
         return new Unit(
+            $data['id'],
             $data['name'],
             $data['avatar'],
             $data['damage'],

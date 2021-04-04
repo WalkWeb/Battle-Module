@@ -6,6 +6,8 @@ namespace Battle\Statistic\UnitStatistic;
 
 class UnitStatistic implements UnitStatisticInterface
 {
+    // todo id unit
+
     /**
      * @var string - Имя юнита
      */

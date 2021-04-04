@@ -94,6 +94,7 @@ class CommandFactoryTest extends TestCase
             [
                 [
                     [
+                        'id'           => '63ad76c6-6a11-44ef-997b-fea1778bebe5',
                         'name'         => 'Skeleton',
                         'avatar'       => 'url avatar 1',
                         'damage'       => 15,
@@ -103,6 +104,7 @@ class CommandFactoryTest extends TestCase
                         'class'        => 1,
                     ],
                     [
+                        'id'           => 'fb8be211-0782-4c60-8865-68b177ffbe0c',
                         'name'         => 'Ghost',
                         'avatar'       => 'url avatar 2',
                         'damage'       => 11,
@@ -126,6 +128,7 @@ class CommandFactoryTest extends TestCase
                 // отсутствует name
                 [
                     [
+                        'id'           => 'f83b1152-b186-4a17-a3dd-88ac75e3cd23',
                         'avatar'       => 'url avatar 1',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
