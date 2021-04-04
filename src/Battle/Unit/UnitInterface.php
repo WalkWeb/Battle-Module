@@ -8,7 +8,6 @@ use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
-use Battle\Effect\Effect;
 use Battle\Effect\EffectCollection;
 
 /**
@@ -90,15 +89,6 @@ interface UnitInterface
     public function isMelee(): bool;
 
     /**
-     * Возвращает урон юнита
-     *
-     * TODO Переделать на DamageInterface - который в свою очередь будет содержать все параметры удара
-     *
-     * @return int
-     */
-    public function getDamage(): int;
-
-    /**
      * Возвращает скорость атаки юнита
      *
      * @return float
@@ -120,24 +110,6 @@ interface UnitInterface
     public function getTotalLife(): int;
 
     /**
-     * TODO На удаление, действие у юнита получается только через getAction()
-     *
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return ActionCollection
-     */
-    public function getDamageAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
-
-    /**
-     * TODO На удаление, действие у юнита получается только через getAction()
-     *
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return ActionCollection
-     */
-    public function getHealAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
-
-    /**
      * Возвращает количество концентрации юнита
      *
      * @return int
@@ -150,15 +122,6 @@ interface UnitInterface
      * @return UnitClassInterface
      */
     public function getClass(): UnitClassInterface;
-
-    /**
-     * Добавляет эффект юниту
-     *
-     * TODO Метод должен быть приватным, добавление эффекта напрямую запрещено, только через applyAction()
-     *
-     * @param Effect $effect
-     */
-    public function addEffect(Effect $effect): void;
 
     /**
      * Возвращает эффекты на юните

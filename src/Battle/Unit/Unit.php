@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Battle\Unit;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Chat\Message;
 use Battle\Command\CommandInterface;
-use Battle\Effect\Effect;
 use Exception;
 
 class Unit extends AbstractUnit
@@ -38,14 +36,12 @@ class Unit extends AbstractUnit
     }
 
     /**
-     * TODO Заменить видимость с public на private
-     *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
      * @throws Exception
      */
-    public function getDamageAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
+    private function getDamageAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         $attacks = $this->calculateAttackSpeed();
         $array = [];
@@ -55,53 +51,6 @@ class Unit extends AbstractUnit
         }
 
         return new ActionCollection($array);
-    }
-
-    /**
-     * TODO Метод на удаление
-     *
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return ActionCollection
-     * @throws ActionException
-     */
-    public function getHealAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
-    {
-        return new ActionCollection([new HealAction($this, $enemyCommand, $alliesCommand)]);
-    }
-
-    public function newRound(): void
-    {
-        $this->action = false;
-        $this->concentration += self::NEW_ROUND_ADD_CONS;
-    }
-
-    /**
-     * TODO Переделать public в private, эффекты должны добавляться только через applyAction()
-     *
-     * @param Effect $effect
-     */
-    public function addEffect(Effect $effect): void
-    {
-        $this->effects->add($effect);
-    }
-
-    /**
-     * Считает фактическое количество атак. Если скорость атаки 1.2, то с 80% вероятностью это будет 1 атака, а с 20%
-     * вероятностью - 2 атаки
-     *
-     * @return int
-     * @throws Exception
-     */
-    private function calculateAttackSpeed(): int
-    {
-        $result = (int)floor($this->attackSpeed);
-        $residue = $this->attackSpeed - $result;
-        if (($residue > 0) && ($residue * 100 > random_int(0, 100))) {
-            $result++;
-        }
-
-        return $result;
     }
 
     // ---------------------------------------------- HANDLE ACTION ----------------------------------------------------

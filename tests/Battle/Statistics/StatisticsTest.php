@@ -60,7 +60,7 @@ class StatisticsTest extends TestCase
         $enemyCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$attackUnit]);
 
-        $actionCollection = $attackUnit->getDamageAction($enemyCommand, $alliesCommand);
+        $actionCollection = $attackUnit->getAction($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection->getActions() as $action) {
             $action->handle();
@@ -70,7 +70,7 @@ class StatisticsTest extends TestCase
 
         // Делаем 10 ударов
         for ($i = 0; $i < 10; $i++) {
-            $actionCollection = $attackUnit->getDamageAction($enemyCommand, $alliesCommand);
+            $actionCollection = $attackUnit->getAction($enemyCommand, $alliesCommand);
 
             foreach ($actionCollection->getActions() as $action) {
 

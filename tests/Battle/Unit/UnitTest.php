@@ -8,9 +8,6 @@ use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandFactory;
-use Battle\Effect\Change\ChangeException;
-use Battle\Effect\EffectException;
-use Battle\Effect\EffectFactory;
 use Battle\Unit\Unit;
 use Battle\Action\DamageAction;
 use Battle\Unit\UnitInterface;
@@ -137,33 +134,35 @@ class UnitTest extends TestCase
         self::assertEquals(Unit::NEW_ROUND_ADD_CONS, $unit->getConcentration());
     }
 
-    /**
-     * @throws ClassFactoryException
-     * @throws ChangeException
-     * @throws EffectException
-     */
-    public function testAddEffect(): void
-    {
-        $attackClass = UnitClassFactory::create($this->attackClassId);
+    // todo Реализация добавления эффекта будет переделана
 
-        $unit = new Unit(
-            $this->attackName,
-            $this->attackAvatar,
-            $this->attackDamage,
-            $this->attackAttackSpeed,
-            $this->attackLife,
-            $this->attackMelee,
-            $attackClass
-        );
-
-        $effect = EffectFactory::create(1, $unit);
-
-        $unit->addEffect($effect);
-
-        $effects = $unit->getEffects();
-
-        foreach ($effects as $effectItem) {
-            self::assertEquals($effect, $effectItem);
-        }
-    }
+//    /**
+//     * @throws ClassFactoryException
+//     * @throws ChangeException
+//     * @throws EffectException
+//     */
+//    public function testAddEffect(): void
+//    {
+//        $attackClass = UnitClassFactory::create($this->attackClassId);
+//
+//        $unit = new Unit(
+//            $this->attackName,
+//            $this->attackAvatar,
+//            $this->attackDamage,
+//            $this->attackAttackSpeed,
+//            $this->attackLife,
+//            $this->attackMelee,
+//            $attackClass
+//        );
+//
+//        $effect = EffectFactory::create(1, $unit);
+//
+//        $unit->addEffect($effect);
+//
+//        $effects = $unit->getEffects();
+//
+//        foreach ($effects as $effectItem) {
+//            self::assertEquals($effect, $effectItem);
+//        }
+//    }
 }

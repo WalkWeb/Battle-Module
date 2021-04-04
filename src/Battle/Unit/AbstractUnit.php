@@ -6,6 +6,7 @@ namespace Battle\Unit;
 
 use Battle\Classes\UnitClassInterface;
 use Battle\Effect\EffectCollection;
+use Exception;
 
 abstract class AbstractUnit implements UnitInterface
 {
@@ -147,5 +148,29 @@ abstract class AbstractUnit implements UnitInterface
     public function getEffects(): EffectCollection
     {
         return $this->effects;
+    }
+
+    public function newRound(): void
+    {
+        $this->action = false;
+        $this->concentration += self::NEW_ROUND_ADD_CONS;
+    }
+
+    /**
+     * Считает фактическое количество атак. Если скорость атаки 1.2, то с 80% вероятностью это будет 1 атака, а с 20%
+     * вероятностью - 2 атаки
+     *
+     * @return int
+     * @throws Exception
+     */
+    protected function calculateAttackSpeed(): int
+    {
+        $result = (int)floor($this->attackSpeed);
+        $residue = $this->attackSpeed - $result;
+        if (($residue > 0) && ($residue * 100 > random_int(0, 100))) {
+            $result++;
+        }
+
+        return $result;
     }
 }

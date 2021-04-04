@@ -82,7 +82,7 @@ class DamageActionTest extends TestCase
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $alliesCommand = CommandFactory::create([$attackerUnit]);
 
-        $actionCollection = $attackerUnit->getDamageAction($enemyCommand, $alliesCommand);
+        $actionCollection = $attackerUnit->getAction($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection->getActions() as $action) {
             $action->handle();
