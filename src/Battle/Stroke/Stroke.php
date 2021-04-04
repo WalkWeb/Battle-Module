@@ -74,11 +74,6 @@ class Stroke implements StrokeInterface
      */
     public function handle(): void
     {
-        if ($this->debug) {
-            $view = $this->viewFactory->create();
-            $this->chat->add($view->renderCommandView($this->leftCommand, $this->rightCommand));
-        }
-
         //--------------------------------------------------------------------------------------------------------------
 
         $enemyCommand = $this->actionCommand === 1 ? $this->rightCommand : $this->leftCommand;
@@ -101,9 +96,7 @@ class Stroke implements StrokeInterface
 
         $this->actionUnit->madeAction();
 
-        if ($this->debug) {
-            $view = $this->viewFactory->create();
-            $this->chat->add($view->renderCommandView($this->leftCommand, $this->rightCommand));
-        }
+        $view = $this->viewFactory->create();
+        $this->chat->add($view->renderCommandView($this->leftCommand, $this->rightCommand));
     }
 }

@@ -6,6 +6,8 @@ use Battle\View\ViewException;
 if (!isset($result) || !($result instanceof ResultInterface)) {
     throw new ViewException(ViewException::MISSING_RESULT);
 }
+
+// TODO Разделить html на шапку и остальное
 ?>
 
 <html lang="ru">
@@ -22,10 +24,13 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
 
 <?= '<h1>' . $result->getWinnerText() . '</h1>' ?>
 
-<?= '<p>Количество раундов: ' . $result->getStatistic()->getRoundNumber() . '</p>' ?>
-<?= '<p>Количество ходов: ' . $result->getStatistic()->getStrokeNumber() . '</p>' ?>
+<br />
+<hr>
 
+<h2>Statistics:</h2>
 
+<?= '<p>Total rounds: ' . $result->getStatistic()->getRoundNumber() . '</p>' ?>
+<?= '<p>Total stroke: ' . $result->getStatistic()->getStrokeNumber() . '</p>' ?>
 
 <?php foreach ($result->getStatistic()->getUnitsStatistics() as $unit): ?>
 
@@ -38,5 +43,5 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
 
 <?php endforeach; ?>
 
-<p>На обработку боя ушло: <?= $result->getStatistic()->getRuntime() ?> ms</p>
-<p>Расход памяти: <?= $result->getStatistic()->getMemoryCostClipped() ?></p>
+<p>Runtime: <?= $result->getStatistic()->getRuntime() ?> ms</p>
+<p>Memory cost: <?= $result->getStatistic()->getMemoryCostClipped() ?></p>

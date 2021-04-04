@@ -87,6 +87,8 @@ class Command implements CommandInterface
     {
         // TODO Ошибка: выбираются мертвые юниты
 
+        // TODO Также выбирается не самый битый юнит, а случайный из битых
+
         $unitForHeal = [];
 
         foreach ($this->units as $unit) {

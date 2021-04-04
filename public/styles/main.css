@@ -16,7 +16,7 @@ hr {
     height: 1px;
 }
 
-p, h1 {
+p, h1, h2 {
     font-family: Verdana, sans-serif;
     text-align: center;
     color: #999;

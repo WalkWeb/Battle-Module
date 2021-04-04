@@ -14,6 +14,33 @@ use Exception;
 class BattleFactory
 {
     /**
+     * Create Battle object and dependencies
+     *
+     * Example data:
+     *
+     * $data = [
+     *     [
+     *         'name'         => 'Warrior',
+     *         'avatar'       => '/images/avas/humans/human001.jpg',
+     *         'damage'       => 15,
+     *         'attack_speed' => 1.0,
+     *         'life'         => 110,
+     *         'melee'        => true,
+     *         'class'        => 1,
+     *         'command'      => 'left',
+     *     ],
+     *     [
+     *         'name'         => 'Skeleton',
+     *         'avatar'       => '/images/avas/monsters/005.png',
+     *         'damage'       => 25,
+     *         'attack_speed' => 1,
+     *         'life'         => 165,
+     *         'melee'        => true,
+     *         'class'        => 1,
+     *         'command'      => 'right',
+     *     ],
+     * ];
+     *
      * @param array $data
      * @param Statistic|null $statistics
      * @param Chat|null $chat
@@ -41,6 +68,8 @@ class BattleFactory
     }
 
     /**
+     * Create (left or right) command based on $data
+     *
      * @param array $data
      * @param string $command
      * @return CommandInterface
