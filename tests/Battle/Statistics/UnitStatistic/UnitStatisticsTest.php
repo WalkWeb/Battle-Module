@@ -16,6 +16,9 @@ class UnitStatisticsTest extends TestCase
 
         $unitStatistics = new UnitStatistic($id, $name);
 
+        self::assertEquals($id, $unitStatistics->getId());
+        self::assertEquals($name, $unitStatistics->getName());
+
         $unitStatistics->addCausedDamage(15);
         $unitStatistics->addCausedDamage(15);
         $unitStatistics->addCausedDamage(15);

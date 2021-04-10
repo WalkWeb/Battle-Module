@@ -65,7 +65,7 @@ class StatisticsTest extends TestCase
         foreach ($actionCollection->getActions() as $action) {
             $action->handle();
             $statistics->addUnitAction($action);
-            self::assertEquals(20, $statistics->getUnitsStatistics()->getUnitByName($attackUnit->getName())->getCausedDamage());
+            self::assertEquals(20, $statistics->getUnitsStatistics()->get($attackUnit->getId())->getCausedDamage());
         }
 
         // Делаем 10 ударов
@@ -83,7 +83,7 @@ class StatisticsTest extends TestCase
             }
         }
 
-        self::assertEquals(150, $statistics->getUnitsStatistics()->getUnitByName($attackUnit->getName())->getCausedDamage());
+        self::assertEquals(150, $statistics->getUnitsStatistics()->get($attackUnit->getId())->getCausedDamage());
     }
 
     /**

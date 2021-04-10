@@ -160,7 +160,7 @@ class Statistic implements StatisticInterface
      */
     private function getUnitStatistics(string $name): UnitStatisticInterface
     {
-        return $this->unitsStatistics->getUnitByName($name);
+        return $this->unitsStatistics->get($name);
     }
 
     /**
@@ -171,7 +171,7 @@ class Statistic implements StatisticInterface
      */
     private function countingCausedDamage(ActionInterface $action): void
     {
-        if (!$this->unitsStatistics->existUnitByName($action->getActionUnit()->getName())) {
+        if (!$this->unitsStatistics->exist($action->getActionUnit()->getId())) {
             $unit = new UnitStatistic($action->getActionUnit()->getId(), $action->getActionUnit()->getName());
             $unit->addCausedDamage($action->getFactualPower());
 
@@ -182,7 +182,7 @@ class Statistic implements StatisticInterface
 
             $this->unitsStatistics->add($unit);
         } else {
-            $unit = $this->getUnitStatistics($action->getActionUnit()->getName());
+            $unit = $this->getUnitStatistics($action->getActionUnit()->getId());
 
             $defendUnit = $action->getTargetUnit();
             if (!$defendUnit->isAlive()) {
@@ -201,12 +201,12 @@ class Statistic implements StatisticInterface
      */
     private function countingTakenDamage(ActionInterface $action): void
     {
-        if (!$this->unitsStatistics->existUnitByName($action->getTargetUnit()->getName())) {
+        if (!$this->unitsStatistics->exist($action->getTargetUnit()->getId())) {
             $unit = new UnitStatistic($action->getTargetUnit()->getId(), $action->getTargetUnit()->getName());
             $unit->addTakenDamage($action->getFactualPower());
             $this->unitsStatistics->add($unit);
         } else {
-            $unit = $this->getUnitStatistics($action->getTargetUnit()->getName());
+            $unit = $this->getUnitStatistics($action->getTargetUnit()->getId());
             $unit->addTakenDamage($action->getFactualPower());
         }
     }
@@ -219,12 +219,12 @@ class Statistic implements StatisticInterface
      */
     private function countingHeal(ActionInterface $action): void
     {
-        if (!$this->unitsStatistics->existUnitByName($action->getActionUnit()->getName())) {
+        if (!$this->unitsStatistics->exist($action->getActionUnit()->getId())) {
             $unit = new UnitStatistic($action->getActionUnit()->getId(), $action->getActionUnit()->getName());
             $unit->addHeal($action->getFactualPower());
             $this->unitsStatistics->add($unit);
         } else {
-            $unit = $this->getUnitStatistics($action->getActionUnit()->getName());
+            $unit = $this->getUnitStatistics($action->getActionUnit()->getId());
             $unit->addHeal($action->getFactualPower());
         }
     }

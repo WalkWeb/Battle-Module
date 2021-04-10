@@ -20,7 +20,7 @@ class UnitStatisticCollection implements Iterator, Countable
 
     public function add(UnitStatisticInterface $unitStatistic): void
     {
-        $this->elements[$unitStatistic->getName()] = $unitStatistic;
+        $this->elements[$unitStatistic->getId()] = $unitStatistic;
     }
 
     public function current(): UnitStatisticInterface
@@ -28,26 +28,22 @@ class UnitStatisticCollection implements Iterator, Countable
         return current($this->elements);
     }
 
-    // todo existUnitById
-
-    public function existUnitByName(string $name): bool
+    public function exist(string $id): bool
     {
-        return array_key_exists($name, $this->elements);
+        return array_key_exists($id, $this->elements);
     }
 
-    // todo getUnitById
-
     /**
-     * @param string $name
+     * @param string $id
      * @return UnitStatisticInterface
      * @throws StatisticException
      */
-    public function getUnitByName(string $name): UnitStatisticInterface
+    public function get(string $id): UnitStatisticInterface
     {
-        if (!$this->existUnitByName($name)) {
-            throw new StatisticException(StatisticException::NO_UNIT . ': ' . $name);
+        if (!$this->exist($id)) {
+            throw new StatisticException(StatisticException::NO_UNIT . ': ' . $id);
         }
 
-        return $this->elements[$name];
+        return $this->elements[$id];
     }
 }
