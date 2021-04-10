@@ -10,6 +10,7 @@ use Battle\Classes\UnitClassInterface;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -18,8 +19,9 @@ class WarriorTest extends TestCase
 {
     /**
      * @throws ClassFactoryException
-     * @throws UnitFactoryException
      * @throws CommandException
+     * @throws UnitFactoryException
+     * @throws UnitException
      */
     public function testCreate(): void
     {

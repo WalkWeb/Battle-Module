@@ -3,7 +3,6 @@
 namespace Battle\Statistic;
 
 use Battle\Action\ActionInterface;
-use Battle\Statistic\UnitStatistic\UnitStatistic;
 use Battle\Statistic\UnitStatistic\UnitStatisticCollection;
 
 interface StatisticInterface

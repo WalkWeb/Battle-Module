@@ -30,6 +30,7 @@ class Result implements ResultInterface
      * @param CommandInterface $rightCommand
      * @param int $winner
      * @param Chat $chat
+     * @param Statistic $statistic
      * @throws ResultException
      */
     public function __construct(

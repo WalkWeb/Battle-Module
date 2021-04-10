@@ -7,6 +7,7 @@ namespace Tests\Battle\Result;
 use Battle\Chat\Chat;
 use Battle\Classes\ClassFactoryException;
 use Battle\Statistic\Statistic;
+use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Battle\Result\Result;
 use Tests\Battle\Factory\CommandFactory;
@@ -21,6 +22,7 @@ class ResultTest extends TestCase
      * @throws CommandException
      * @throws ResultException
      * @throws UnitFactoryException
+     * @throws UnitException
      */
     public function testCreateResultSuccess(): void
     {
@@ -41,6 +43,8 @@ class ResultTest extends TestCase
     /**
      * @throws ClassFactoryException
      * @throws CommandException
+     * @throws ResultException
+     * @throws UnitException
      * @throws UnitFactoryException
      */
     public function testCreateResultFail(): void

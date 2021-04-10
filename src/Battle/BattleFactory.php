@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Battle;
 
 use Battle\Chat\Chat;
+use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Round\RoundFactory;
 use Battle\Statistic\Statistic;
+use Battle\Unit\UnitException;
 use Exception;
 
 class BattleFactory
@@ -74,7 +76,8 @@ class BattleFactory
      * @param string $command
      * @return CommandInterface
      * @throws BattleException
-     * @throws Command\CommandException
+     * @throws CommandException
+     * @throws UnitException
      */
     public static function createCommand(array $data, string $command): CommandInterface
     {

@@ -7,6 +7,7 @@ namespace Tests\Battle\View;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\UnitException;
 use Battle\View\ViewFactory;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
@@ -21,6 +22,7 @@ class ViewTest extends TestCase
      * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
+     * @throws UnitException
      */
     public function testViewRenderMelee(): void
     {
@@ -102,8 +104,9 @@ EOT;
      * Тест генерации вида юнитов дальнего боя
      *
      * @throws ClassFactoryException
-     * @throws UnitFactoryException
      * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
      */
     public function testViewRenderRange(): void
     {

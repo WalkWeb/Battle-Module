@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Battle\Classes;
 
 use Battle\Action\ActionCollection;
+use Battle\Action\ActionException;
 use Battle\Action\GreatHealAction;
 use Battle\Command\CommandInterface;
-use Battle\Exception\ActionCollectionException;
 use Battle\Unit\UnitInterface;
 
 class Priest extends AbstractUnitClass
@@ -24,7 +24,7 @@ class Priest extends AbstractUnitClass
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
-     * @throws ActionCollectionException
+     * @throws ActionException
      */
     public function getAbility(
         UnitInterface $actionUnit,

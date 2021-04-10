@@ -21,6 +21,7 @@ class CommandFactoryTest extends TestCase
      * @param array $data
      * @throws ClassFactoryException
      * @throws CommandException
+     * @throws UnitException
      */
     public function testCommandFactoryCreateFromDataSuccess(array $data): void
     {
@@ -50,6 +51,7 @@ class CommandFactoryTest extends TestCase
      * @param array $data
      * @param string $error
      * @throws CommandException
+     * @throws UnitException
      */
     public function testCommandFactoryCreateFromDataFail(array $data, string $error): void
     {
@@ -61,6 +63,7 @@ class CommandFactoryTest extends TestCase
     /**
      * @throws ClassFactoryException
      * @throws CommandException
+     * @throws UnitException
      * @throws UnitFactoryException
      */
     public function testCommandFactoryCreateFromUsersSuccess(): void
@@ -76,6 +79,7 @@ class CommandFactoryTest extends TestCase
 
     /**
      * @throws CommandException
+     * @throws UnitException
      */
     public function testCommandFactoryCreateFromUsersFail(): void
     {

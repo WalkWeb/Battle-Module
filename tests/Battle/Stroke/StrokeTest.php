@@ -12,6 +12,7 @@ use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Statistic\Statistic;
 use Battle\Statistic\StatisticException;
+use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke\Stroke;
 use Battle\Unit\UnitInterface;
@@ -73,6 +74,7 @@ class StrokeTest extends TestCase
 
     /**
      * @throws CommandException
+     * @throws UnitException
      */
     public function testCreate(): void
     {
@@ -87,6 +89,7 @@ class StrokeTest extends TestCase
     /**
      * @throws CommandException
      * @throws StatisticException
+     * @throws UnitException
      */
     public function testAction(): void
     {

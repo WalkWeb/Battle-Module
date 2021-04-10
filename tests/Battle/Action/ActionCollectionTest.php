@@ -10,6 +10,7 @@ use Battle\Classes\ClassFactoryException;
 use Battle\Action\ActionException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -18,9 +19,10 @@ class ActionCollectionTest extends TestCase
 {
     /**
      * @throws ActionException
+     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
-     * @throws ClassFactoryException
+     * @throws UnitException
      */
     public function testCreateActionCollectionSuccess(): void
     {

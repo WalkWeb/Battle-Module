@@ -8,6 +8,7 @@ use Battle\Action\HealAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -20,6 +21,7 @@ class HealActionTest extends TestCase
      * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
+     * @throws UnitException
      */
     public function testCreateHealAction(): void
     {

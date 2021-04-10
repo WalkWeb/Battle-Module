@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Command;
 
 use Battle\Unit\UnitCollection;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -17,6 +18,7 @@ class CommandFactory
      * @param array $data
      * @return CommandInterface
      * @throws CommandException
+     * @throws UnitException
      */
     public static function create(array $data): CommandInterface
     {

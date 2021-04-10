@@ -9,14 +9,16 @@ use Battle\Command\Command;
 use Battle\Command\CommandInterface;
 use Battle\Command\CommandException;
 use Battle\Unit\UnitCollection;
+use Battle\Unit\UnitException;
 
 class CommandFactory
 {
     /**
      * @return CommandInterface
+     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
-     * @throws ClassFactoryException
+     * @throws UnitException
      */
     public static function createLeftCommand(): CommandInterface
     {
@@ -27,9 +29,10 @@ class CommandFactory
 
     /**
      * @return CommandInterface
-     * @throws CommandException
-     * @throws UnitFactoryException
      * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
      */
     public static function createRightCommand(): CommandInterface
     {

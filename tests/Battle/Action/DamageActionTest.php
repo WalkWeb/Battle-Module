@@ -9,6 +9,7 @@ use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -18,9 +19,10 @@ class DamageActionTest extends TestCase
     private const MESSAGE = '<b>unit_1</b> [100/100] normal attack <b>unit_2</b> [130/150] on 20 damage';
 
     /**
+     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
-     * @throws ClassFactoryException
+     * @throws UnitException
      */
     public function testCreate(): void
     {
@@ -33,9 +35,10 @@ class DamageActionTest extends TestCase
     }
 
     /**
+     * @throws ActionException
      * @throws ClassFactoryException
      * @throws CommandException
-     * @throws ActionException
+     * @throws UnitException
      * @throws UnitFactoryException
      */
     public function testApplyAction(): void
@@ -51,9 +54,10 @@ class DamageActionTest extends TestCase
     }
 
     /**
+     * @throws ActionException
      * @throws ClassFactoryException
      * @throws CommandException
-     * @throws ActionException
+     * @throws UnitException
      * @throws UnitFactoryException
      */
     public function testActionUnit(): void
@@ -73,6 +77,7 @@ class DamageActionTest extends TestCase
     /**
      * @throws ClassFactoryException
      * @throws CommandException
+     * @throws UnitException
      * @throws UnitFactoryException
      */
     public function testFactualDamage(): void

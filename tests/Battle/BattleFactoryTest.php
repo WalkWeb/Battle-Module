@@ -9,6 +9,7 @@ use Battle\BattleInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\BattleException;
+use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
@@ -43,6 +44,7 @@ class BattleFactoryTest extends TestCase
      * @param string $command
      * @throws BattleException
      * @throws CommandException
+     * @throws UnitException
      */
     public function testBattleFactoryCreateCommandSuccess(array $data, array $expectedData, string $command): void
     {

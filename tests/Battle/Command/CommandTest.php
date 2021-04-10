@@ -13,6 +13,7 @@ use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitCollection;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
@@ -26,6 +27,7 @@ class CommandTest extends TestCase
      * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
+     * @throws UnitException
      */
     public function testCreate(): void
     {
@@ -40,6 +42,7 @@ class CommandTest extends TestCase
      * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
+     * @throws UnitException
      */
     public function testCommandUnits(): void
     {
@@ -60,6 +63,7 @@ class CommandTest extends TestCase
      * @throws CommandException
      * @throws UnitFactoryException
      * @throws ClassFactoryException
+     * @throws UnitException
      */
     public function testMeleeAndRangeUnits(): void
     {
@@ -77,6 +81,7 @@ class CommandTest extends TestCase
      * @throws CommandException
      * @throws UnitFactoryException
      * @throws ClassFactoryException
+     * @throws UnitException
      */
     public function testNoMeleeUnits(): void
     {
@@ -94,6 +99,7 @@ class CommandTest extends TestCase
      * @throws CommandException
      * @throws UnitFactoryException
      * @throws ClassFactoryException
+     * @throws UnitException
      */
     public function testNoAliveMeleeUnits(): void
     {
@@ -118,6 +124,7 @@ class CommandTest extends TestCase
      * Проверяем неуспешное создание команды - передан некорректный объект
      *
      * @throws CommandException
+     * @throws UnitException
      */
     public function testIncorrectUnit(): void
     {
@@ -132,6 +139,7 @@ class CommandTest extends TestCase
      * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
+     * @throws UnitException
      */
     public function testGetUserFromAttack(): void
     {
@@ -152,6 +160,7 @@ class CommandTest extends TestCase
      * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
+     * @throws UnitException
      */
     public function testNoUnitFromAttack(): void
     {
@@ -168,6 +177,7 @@ class CommandTest extends TestCase
      * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
+     * @throws UnitException
      */
     public function testAllUnitAction(): void
     {
@@ -197,6 +207,7 @@ class CommandTest extends TestCase
      * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
+     * @throws UnitException
      */
     public function testGetUnitForActionOne(): void
     {
@@ -212,6 +223,7 @@ class CommandTest extends TestCase
      * @throws ClassFactoryException
      * @throws CommandException
      * @throws ActionException
+     * @throws UnitException
      */
     public function testGetUnitForActionNothing(): void
     {

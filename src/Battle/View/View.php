@@ -24,6 +24,8 @@ class View implements ViewInterface
     public function __construct(string $templateDir)
     {
         $this->templateDir = $templateDir;
+
+        // todo battle/result.template.php | battle/row.template.php | battle/unit/unit.template.php
     }
 
     public function renderResult(ResultInterface $result): string
