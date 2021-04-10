@@ -6,7 +6,10 @@ namespace Battle\Statistic\UnitStatistic;
 
 class UnitStatistic implements UnitStatisticInterface
 {
-    // todo id unit
+    /**
+     * @var string - ID юнита
+     */
+    private $id;
 
     /**
      * @var string - Имя юнита
@@ -34,11 +37,29 @@ class UnitStatistic implements UnitStatisticInterface
     private $killing = 0;
 
     /**
+     * @param string $id
      * @param string $name
      */
-    public function __construct(string $name)
+    public function __construct(string $id, string $name)
     {
+        $this->id = $id;
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     /**
@@ -68,14 +89,6 @@ class UnitStatistic implements UnitStatisticInterface
     public function addKillingUnit(): void
     {
         $this->killing++;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 
     /**

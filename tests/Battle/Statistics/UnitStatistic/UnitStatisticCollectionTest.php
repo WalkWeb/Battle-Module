@@ -14,8 +14,8 @@ class UnitStatisticCollectionTest extends TestCase
     {
         $collection = new UnitStatisticCollection();
 
-        $collection->add(new UnitStatistic('name_1'));
-        $collection->add(new UnitStatistic('name_2'));
+        $collection->add(new UnitStatistic('id_1', 'name_1'));
+        $collection->add(new UnitStatistic('id_2', 'name_2'));
 
         self::assertTrue($collection->existUnitByName('name_1'));
         self::assertFalse($collection->existUnitByName('name_3'));

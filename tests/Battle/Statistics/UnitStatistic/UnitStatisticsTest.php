@@ -11,8 +11,10 @@ class UnitStatisticsTest extends TestCase
 {
     public function testUnitStatistics(): void
     {
+        $id = 'b2d2e0ba-f85c-4c16-91ba-6a003e153e09';
         $name = 'Unit_stats';
-        $unitStatistics = new UnitStatistic($name);
+
+        $unitStatistics = new UnitStatistic($id, $name);
 
         $unitStatistics->addCausedDamage(15);
         $unitStatistics->addCausedDamage(15);

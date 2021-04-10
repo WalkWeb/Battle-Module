@@ -5,6 +5,20 @@ namespace Battle\Statistic\UnitStatistic;
 interface UnitStatisticInterface
 {
     /**
+     * Возвращает ID юнита
+     *
+     * @return string
+     */
+    public function getId(): string;
+
+    /**
+     * Возвращает имя юнита
+     *
+     * @return string
+     */
+    public function getName(): string;
+
+    /**
      * Добавляет нанесенный юнитом урон
      *
      * @param int $damage
@@ -29,13 +43,6 @@ interface UnitStatisticInterface
      * Увеличивает количество убитых юнитом противников на 1
      */
     public function addKillingUnit(): void;
-
-    /**
-     * Возвращает имя юнита
-     *
-     * @return string
-     */
-    public function getName(): string;
 
     /**
      * Возвращает суммарный нанесенный урон юнита
