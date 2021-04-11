@@ -19,20 +19,39 @@ class View implements ViewInterface
     private $templateDir;
 
     /**
-     * @param string $templateDir
+     * @var string
      */
-    public function __construct(string $templateDir)
+    private $resultTemplate;
+
+    /**
+     * @var string
+     */
+    private $rowTemplate;
+
+    /**
+     * @var string
+     */
+    private $unitTemplate;
+
+    /**
+     * @param string $templateDir
+     * @param string $resultTemplate
+     * @param string $rowTemplate
+     * @param string $unitTemplate
+     */
+    public function __construct(string $templateDir, string $resultTemplate, string $rowTemplate, string $unitTemplate)
     {
         $this->templateDir = $templateDir;
-
-        // todo battle/result.template.php | battle/row.template.php | battle/unit/unit.template.php
+        $this->resultTemplate = $resultTemplate;
+        $this->rowTemplate = $rowTemplate;
+        $this->unitTemplate = $unitTemplate;
     }
 
     public function renderResult(ResultInterface $result): string
     {
         ob_start();
 
-        require $this->templateDir . 'battle/result.template.php';
+        require $this->templateDir . $this->resultTemplate;
 
         return ob_get_clean();
     }
@@ -69,7 +88,7 @@ class View implements ViewInterface
 
         ob_start();
 
-        require $this->templateDir . 'battle/row.template.php';
+        require $this->templateDir . $this->rowTemplate;
 
         return ob_get_clean();
     }
@@ -83,7 +102,7 @@ class View implements ViewInterface
     {
         ob_start();
 
-        require $this->templateDir . 'battle/unit/unit.template.php';
+        require $this->templateDir . $this->unitTemplate;
 
         return ob_get_clean();
     }
