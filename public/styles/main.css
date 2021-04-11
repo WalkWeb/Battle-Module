@@ -31,10 +31,6 @@ table {
     width: 100%;
 }
 
-td {
-    border: 1px solid #777;
-}
-
 div.row {
     width: 90%;
     margin: 0 auto;
@@ -106,3 +102,257 @@ div.life_text {
     height: 50px;
     background-size: contain;
 }
+
+/* Unit box styles */
+
+.unit_main_box {
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+
+.unit_main_box p {
+    text-align: left; !important;
+}
+
+.unit_box1 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.unit_box2 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    left: 0;
+    background: url('/images/battle/unit.png');
+}
+
+.unit_box2_na {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    left: 0;
+    background: url('/images/battle/unit_na.png');
+}
+
+.unit_box1_right {
+    float: right;
+    width: 164px;
+    height: 117px;
+}
+
+.unit_box1_left {
+    margin-right: 164px;
+    width: 116px;
+    height: 117px;
+}
+
+.unit_box1_left2 {
+    padding: 10px;
+}
+
+.unit_ava {
+    width: 97px;
+    height: 97px;
+    border-radius: 100%;
+}
+
+.unit_box1_right2 {
+    padding-left: 4px;
+}
+
+.unit_box1_right3 {
+    width: 152px;
+    height: 117px;
+}
+
+.unit_box1_right4 {
+    position: absolute;
+    top: 58px;
+}
+
+.unit_hp {
+    width: 152px;
+    height: 14px;
+    background: #fff;
+}
+
+.unit_cons {
+    width: 152px;
+    height: 4px;
+    background: #444;
+    margin-top: 3px;
+}
+
+.unit_cons_bar2 {
+    height: 4px;
+    background: #999;
+    border-radius: 3px;
+}
+
+.unit_rage {
+    width: 152px;
+    height: 4px;
+    background: #572506;
+    margin-top: 3px;
+}
+
+.unit_rage_bar2 {
+    height: 4px;
+    background: #cd7038;
+    border-radius: 3px;
+}
+
+.unit_box2_right {
+    position: relative;
+    top: 0;
+    left: 115px;
+    width: 164px;
+    height: 117px;
+}
+
+.unit_box2_right2 {
+    padding-top: 30px;
+    padding-left: 4px;
+}
+
+.unit_box2_right3 {
+    width: 100%;
+    height: 20px;
+}
+
+.unit_box2_right3 p {
+    font-family: arial, sans-serif;
+    font-size: 17px;
+    color: #c1c1c1;
+}
+
+.unit_box2_left {
+    position: absolute;
+    top: 0;
+    margin-right: 164px;
+    width: 116px;
+    height: 117px;
+}
+
+.unit_hp_text {
+    margin-top: -14px;
+    width: 152px;
+    height: 14px;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    text-align: center;
+    color: #c1c1c1;
+}
+
+.unit_hp_text_add {
+    margin-top: -14px;
+    width: 152px;
+    height: 14px;
+    padding-left: 110px;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    color: #c1c1c1;
+}
+
+.unit_hp_bar {
+    width: 152px;
+    height: 14px;
+    background: #4e0c0a;
+}
+
+.unit_hp_bar_mana {
+    width: 152px;
+    height: 14px;
+    background: #0c0a4e;
+}
+
+.unit_hp_bar2 {
+    height: 14px;
+    background: #d72407;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.unit_hp_bar2_mana {
+    height: 14px;
+    background: #0724d7;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.unit_icon {
+    padding-top: 84px;
+    padding-left: 9px;
+    padding-right: 8px;
+}
+
+.unit_icon_left {
+    float: left;
+    width: 26px;
+    height: 26px;
+    color: #a1a1a1;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 1px;
+    margin-left: -1px;
+    line-height: normal;
+}
+
+.unit_icon_right {
+    float: right;
+    width: 26px;
+    height: 26px;
+    margin-right: -3px;
+    margin-top: 1px;
+}
+
+.unit_ava_blank {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+
+/* цвет людей */
+.unitcolor1 {
+    color: #1e72e3;
+}
+
+/* цвет эльфов */
+.unitcolor2 {
+    color: #2f8528;
+}
+
+/* цвет орков */
+.unitcolor3 {
+    color: #ae882d;
+}
+
+/* цвет гномов */
+.unitcolor4 {
+    color: #408cb3;
+}
+
+/* цвет ангелов */
+.unitcolor5 {
+    color: #2f9b5a;
+}
+
+/* цвет демонов */
+.unitcolor6 {
+    color: #ba4829;
+}
+
+/* цвет нежити */
+.unitcolor7 {
+    color: #953b39;
+}
+
+/* Unit box styles end */
