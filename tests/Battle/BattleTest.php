@@ -74,4 +74,41 @@ class BattleTest extends TestCase
 
         $battle->handle();
     }
+
+    /**
+     * Тест на ситуацию, когда передан массив юнитов с повторяющимися ID в разных командах
+     *
+     * @throws Exception
+     */
+    public function testBattleDoubleUnitId(): void
+    {
+        $data = [
+            [
+                'id'           => 'a2763c19-7ec5-48f3-9242-2ea6c6d80c56',
+                'name'         => 'Warrior',
+                'avatar'       => '/images/avas/humans/human001.jpg',
+                'damage'       => 7,
+                'attack_speed' => 1.0,
+                'life'         => 1500,
+                'melee'        => true,
+                'class'        => 1,
+                'command'      => 'left',
+            ],
+            [
+                'id'           => 'a2763c19-7ec5-48f3-9242-2ea6c6d80c56',
+                'name'         => 'Skeleton',
+                'avatar'       => '/images/avas/monsters/005.png',
+                'damage'       => 5,
+                'attack_speed' => 1.5,
+                'life'         => 1650,
+                'melee'        => true,
+                'class'        => 1,
+                'command'      => 'right',
+            ],
+        ];
+
+        $this->expectException(BattleException::class);
+        $this->expectExceptionMessage(BattleException::DOUBLE_UNIT_ID);
+        BattleFactory::create($data);
+    }
 }

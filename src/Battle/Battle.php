@@ -58,6 +58,7 @@ class Battle implements BattleInterface
         ?RoundFactory $roundFactory = null
     )
     {
+        $this->checkDoubleUnitId($leftCommand, $rightCommand);
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;
         $this->statistics = $statistics;
@@ -103,5 +104,33 @@ class Battle implements BattleInterface
         }
 
         throw new BattleException(BattleException::UNEXPECTED_ENDING_BATTLE);
+    }
+
+    /**
+     * @param CommandInterface $leftCommand
+     * @param CommandInterface $rightCommand
+     * @throws BattleException
+     */
+    private function checkDoubleUnitId(CommandInterface $leftCommand, CommandInterface $rightCommand): void
+    {
+        $ids = [];
+
+        foreach ($leftCommand->getUnits() as $unit) {
+
+            if (in_array($unit->getId(), $ids, true)) {
+                throw new BattleException(BattleException::DOUBLE_UNIT_ID);
+            }
+
+            $ids[] = $unit->getId();
+        }
+
+        foreach ($rightCommand->getUnits() as $unit) {
+
+            if (in_array($unit->getId(), $ids, true)) {
+                throw new BattleException(BattleException::DOUBLE_UNIT_ID);
+            }
+
+            $ids[] = $unit->getId();
+        }
     }
 }
