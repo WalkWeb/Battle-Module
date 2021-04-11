@@ -7,22 +7,13 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
     throw new ViewException(ViewException::MISSING_RESULT);
 }
 
-// TODO Разделить html на шапку и остальное
+foreach ($result->getChat()->getMessages() as $view) {
+    echo $view;
+}
+
+echo '<h1>' . $result->getWinnerText() . '</h1>';
+
 ?>
-
-<html lang="ru">
-<head>
-    <title>Battle Module</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="/styles/main.css">
-</head>
-<body>
-
-<?php foreach ($result->getChat()->getMessages() as $view): ?>
-    <?= $view ?>
-<?php endforeach; ?>
-
-<?= '<h1>' . $result->getWinnerText() . '</h1>' ?>
 
 <br />
 <hr>

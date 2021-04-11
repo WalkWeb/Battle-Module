@@ -55,6 +55,8 @@ $data = [
 try {
 
     $view = (new ViewFactory())->create();
+    echo $view->renderHead();
+
     $battle = BattleFactory::create($data);
     $result = $battle->handle();
     echo $view->renderResult($result);

@@ -11,6 +11,14 @@ use Battle\Unit\UnitInterface;
 interface ViewInterface
 {
     /**
+     * Генерирует html-код для отображения <head> страницы. Этот код нужен для демонстрации, но для генерации кода
+     * внутри существующего проекта он будет лишний
+     *
+     * @return string
+     */
+    public function renderHead(): string;
+
+    /**
      * Генерирует html-код для отображения результата боя
      *
      * @param ResultInterface $result

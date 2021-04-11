@@ -21,6 +21,11 @@ class View implements ViewInterface
     /**
      * @var string
      */
+    private $headTemplate;
+
+    /**
+     * @var string
+     */
     private $resultTemplate;
 
     /**
@@ -35,18 +40,46 @@ class View implements ViewInterface
 
     /**
      * @param string $templateDir
+     * @param string $headTemplate
      * @param string $resultTemplate
      * @param string $rowTemplate
      * @param string $unitTemplate
      */
-    public function __construct(string $templateDir, string $resultTemplate, string $rowTemplate, string $unitTemplate)
+    public function __construct(
+        string $templateDir,
+        string $headTemplate,
+        string $resultTemplate,
+        string $rowTemplate,
+        string $unitTemplate)
     {
         $this->templateDir = $templateDir;
+        $this->headTemplate = $headTemplate;
         $this->resultTemplate = $resultTemplate;
         $this->rowTemplate = $rowTemplate;
         $this->unitTemplate = $unitTemplate;
     }
 
+    /**
+     * Генерирует html-код для отображения <head> страницы. Этот код нужен для демонстрации, но для генерации кода
+     * внутри существующего проекта он будет лишний
+     *
+     * @return string
+     */
+    public function renderHead(): string
+    {
+        ob_start();
+
+        require $this->templateDir . $this->headTemplate;
+
+        return ob_get_clean();
+    }
+
+    /**
+     * Генерирует html-код для отображения результата боя
+     *
+     * @param ResultInterface $result
+     * @return string
+     */
     public function renderResult(ResultInterface $result): string
     {
         ob_start();
@@ -94,6 +127,8 @@ class View implements ViewInterface
     }
 
     /**
+     * Генерирует html-код для отображения юнита
+     *
      * @uses getWidth, getBgClass
      * @param UnitInterface $unit
      * @return string
