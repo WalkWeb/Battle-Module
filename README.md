@@ -5,6 +5,10 @@ public/index.php</p>
 <p>Запуск тестов:<br />
 php vendor/bin/phpunit</p>
 
+## Как выглядит бой
+
+![alt text](public/images/example.png)
+
 ## Планы
 
 - Добавить уровень юнитов
