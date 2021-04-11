@@ -37,59 +37,129 @@ class ViewTest extends TestCase
     <table>
         <tr>
             <td class="w25"></td>
-            <td class="w25"><div class="unit">
-    <table>
-        <tr>
-            <td rowspan="2" class="avatar_box" style="background-image: url(/images/avas/humans/human001.jpg"></td>
-            <td>Name</td>
-            <td>Damage</td>
-            <td>Life</td>
-            <td>Cons</td>
-            <td>Action?</td>
-            <td>Alive?</td>
-        </tr>
-        <tr>
-            <td>unit_1</td>
-            <td>20</td>
-            <td class="life_bar">
-                <div class="life_bar">
-                    <div class="life" style="width: 100%;"></div>
+            <td class="w25"><div align="center">
+    <div class="unit_main_box" id="usr_40">
+        <div class="unit_box1">
+            <div class="unit_box1_right">
+                <div class="unit_box1_right2">
+                    <div class="unit_box1_right3">
+                        <div class="unit_box1_right4">
+                            <div class="unit_hp">
+                                <div id="hp_bar_bg_40" class="unit_hp_bar">
+                                    <div id="hp_bar_40" class="unit_hp_bar2" style="width: 100%;"></div>
+                                </div>
+                                <div class="unit_hp_text">
+                                    <span class="hp">100</span> / <span class="thp">100</span>
+                                </div>
+                                <div class="unit_hp_text_add">
+                                    <span class="recdam"></span>
+                                </div>
+                            </div>
+                            <div class="unit_cons">
+                                <div class="unit_cons_bar2" style="width: 100%;"></div>
+                            </div>
+                            <div class="unit_rage">
+                                <div class="unit_rage_bar2" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="life_text">
-                    100/100                </div>
-            </td>
-            <td>0/1000</td>
-            <td class="c4">no</td>
-            <td>yes</td>
-        </tr>
-    </table>
+            </div>
+            <div class="unit_box1_left">
+                <div class="unit_box1_left2">
+                    <div class="unit_ava" style="background: url(/images/avas/humans/human001.jpg) no-repeat center; background-size: cover;">
+                        <div id="ava40" class="unit_ava_blank"></div>
+                        <div id="avas40" class="unit_ava_blank"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="unit_box2">
+            <div class="unit_box2_right">
+                <div class="unit_box2_right2">
+                    <div class="unit_box2_right3">
+                        <p><span class="unitcolor5">unit_1</span></p>
+                    </div>
+                </div>
+                <div class="unit_effect_contant">
+                    <p id="unit_effects_40"></p>
+                </div>
+            </div>
+            <div class="unit_box2_left">
+                <div class="unit_icon">
+                    <div class="unit_icon_left">
+                        1
+                    </div>
+                    <div class="unit_icon_right">
+                        <img src="/images/icons/class-icon-paladin.png" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div></td>
-            <td class="w25"><div class="unit">
-    <table>
-        <tr>
-            <td rowspan="2" class="avatar_box" style="background-image: url(/images/avas/humans/human002.jpg"></td>
-            <td>Name</td>
-            <td>Damage</td>
-            <td>Life</td>
-            <td>Cons</td>
-            <td>Action?</td>
-            <td>Alive?</td>
-        </tr>
-        <tr>
-            <td>unit_2</td>
-            <td>30</td>
-            <td class="life_bar">
-                <div class="life_bar">
-                    <div class="life" style="width: 100%;"></div>
+            <td class="w25"><div align="center">
+    <div class="unit_main_box" id="usr_40">
+        <div class="unit_box1">
+            <div class="unit_box1_right">
+                <div class="unit_box1_right2">
+                    <div class="unit_box1_right3">
+                        <div class="unit_box1_right4">
+                            <div class="unit_hp">
+                                <div id="hp_bar_bg_40" class="unit_hp_bar">
+                                    <div id="hp_bar_40" class="unit_hp_bar2" style="width: 100%;"></div>
+                                </div>
+                                <div class="unit_hp_text">
+                                    <span class="hp">150</span> / <span class="thp">150</span>
+                                </div>
+                                <div class="unit_hp_text_add">
+                                    <span class="recdam"></span>
+                                </div>
+                            </div>
+                            <div class="unit_cons">
+                                <div class="unit_cons_bar2" style="width: 100%;"></div>
+                            </div>
+                            <div class="unit_rage">
+                                <div class="unit_rage_bar2" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="life_text">
-                    150/150                </div>
-            </td>
-            <td>0/1000</td>
-            <td class="c4">no</td>
-            <td>yes</td>
-        </tr>
-    </table>
+            </div>
+            <div class="unit_box1_left">
+                <div class="unit_box1_left2">
+                    <div class="unit_ava" style="background: url(/images/avas/humans/human002.jpg) no-repeat center; background-size: cover;">
+                        <div id="ava40" class="unit_ava_blank"></div>
+                        <div id="avas40" class="unit_ava_blank"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="unit_box2">
+            <div class="unit_box2_right">
+                <div class="unit_box2_right2">
+                    <div class="unit_box2_right3">
+                        <p><span class="unitcolor5">unit_2</span></p>
+                    </div>
+                </div>
+                <div class="unit_effect_contant">
+                    <p id="unit_effects_40"></p>
+                </div>
+            </div>
+            <div class="unit_box2_left">
+                <div class="unit_icon">
+                    <div class="unit_icon_left">
+                        1
+                    </div>
+                    <div class="unit_icon_right">
+                        <img src="/images/icons/class-icon-paladin.png" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div></td>
             <td class="w25"></td>
         </tr>
@@ -123,61 +193,131 @@ EOT;
 <div class="row">
     <table>
         <tr>
-            <td class="w25"><div class="unit">
-    <table>
-        <tr>
-            <td rowspan="2" class="avatar_box" style="background-image: url(/images/avas/monsters/003.png"></td>
-            <td>Name</td>
-            <td>Damage</td>
-            <td>Life</td>
-            <td>Cons</td>
-            <td>Action?</td>
-            <td>Alive?</td>
-        </tr>
-        <tr>
-            <td>unit_5</td>
-            <td>15</td>
-            <td class="life_bar">
-                <div class="life_bar">
-                    <div class="life" style="width: 100%;"></div>
+            <td class="w25"><div align="center">
+    <div class="unit_main_box" id="usr_40">
+        <div class="unit_box1">
+            <div class="unit_box1_right">
+                <div class="unit_box1_right2">
+                    <div class="unit_box1_right3">
+                        <div class="unit_box1_right4">
+                            <div class="unit_hp">
+                                <div id="hp_bar_bg_40" class="unit_hp_bar">
+                                    <div id="hp_bar_40" class="unit_hp_bar2" style="width: 100%;"></div>
+                                </div>
+                                <div class="unit_hp_text">
+                                    <span class="hp">80</span> / <span class="thp">80</span>
+                                </div>
+                                <div class="unit_hp_text_add">
+                                    <span class="recdam"></span>
+                                </div>
+                            </div>
+                            <div class="unit_cons">
+                                <div class="unit_cons_bar2" style="width: 100%;"></div>
+                            </div>
+                            <div class="unit_rage">
+                                <div class="unit_rage_bar2" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="life_text">
-                    80/80                </div>
-            </td>
-            <td>0/1000</td>
-            <td class="c4">no</td>
-            <td>yes</td>
-        </tr>
-    </table>
+            </div>
+            <div class="unit_box1_left">
+                <div class="unit_box1_left2">
+                    <div class="unit_ava" style="background: url(/images/avas/monsters/003.png) no-repeat center; background-size: cover;">
+                        <div id="ava40" class="unit_ava_blank"></div>
+                        <div id="avas40" class="unit_ava_blank"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="unit_box2">
+            <div class="unit_box2_right">
+                <div class="unit_box2_right2">
+                    <div class="unit_box2_right3">
+                        <p><span class="unitcolor5">unit_5</span></p>
+                    </div>
+                </div>
+                <div class="unit_effect_contant">
+                    <p id="unit_effects_40"></p>
+                </div>
+            </div>
+            <div class="unit_box2_left">
+                <div class="unit_icon">
+                    <div class="unit_icon_left">
+                        1
+                    </div>
+                    <div class="unit_icon_right">
+                        <img src="/images/icons/class-icon-paladin.png" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div></td>
             <td class="w25"></td>
             <td class="w25"></td>
-            <td class="w25"><div class="unit">
-    <table>
-        <tr>
-            <td rowspan="2" class="avatar_box" style="background-image: url(/images/avas/monsters/003.png"></td>
-            <td>Name</td>
-            <td>Damage</td>
-            <td>Life</td>
-            <td>Cons</td>
-            <td>Action?</td>
-            <td>Alive?</td>
-        </tr>
-        <tr>
-            <td>unit_6</td>
-            <td>12</td>
-            <td class="life_bar">
-                <div class="life_bar">
-                    <div class="life" style="width: 100%;"></div>
+            <td class="w25"><div align="center">
+    <div class="unit_main_box" id="usr_40">
+        <div class="unit_box1">
+            <div class="unit_box1_right">
+                <div class="unit_box1_right2">
+                    <div class="unit_box1_right3">
+                        <div class="unit_box1_right4">
+                            <div class="unit_hp">
+                                <div id="hp_bar_bg_40" class="unit_hp_bar">
+                                    <div id="hp_bar_40" class="unit_hp_bar2" style="width: 100%;"></div>
+                                </div>
+                                <div class="unit_hp_text">
+                                    <span class="hp">50</span> / <span class="thp">50</span>
+                                </div>
+                                <div class="unit_hp_text_add">
+                                    <span class="recdam"></span>
+                                </div>
+                            </div>
+                            <div class="unit_cons">
+                                <div class="unit_cons_bar2" style="width: 100%;"></div>
+                            </div>
+                            <div class="unit_rage">
+                                <div class="unit_rage_bar2" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="life_text">
-                    50/50                </div>
-            </td>
-            <td>0/1000</td>
-            <td class="c4">no</td>
-            <td>yes</td>
-        </tr>
-    </table>
+            </div>
+            <div class="unit_box1_left">
+                <div class="unit_box1_left2">
+                    <div class="unit_ava" style="background: url(/images/avas/monsters/003.png) no-repeat center; background-size: cover;">
+                        <div id="ava40" class="unit_ava_blank"></div>
+                        <div id="avas40" class="unit_ava_blank"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="unit_box2">
+            <div class="unit_box2_right">
+                <div class="unit_box2_right2">
+                    <div class="unit_box2_right3">
+                        <p><span class="unitcolor5">unit_6</span></p>
+                    </div>
+                </div>
+                <div class="unit_effect_contant">
+                    <p id="unit_effects_40"></p>
+                </div>
+            </div>
+            <div class="unit_box2_left">
+                <div class="unit_icon">
+                    <div class="unit_icon_left">
+                        1
+                    </div>
+                    <div class="unit_icon_right">
+                        <img src="/images/icons/class-icon-paladin.png" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div></td>
         </tr>
     </table>
