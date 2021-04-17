@@ -15,7 +15,8 @@ class UnitException extends Exception
     public const INCORRECT_DAMAGE        = 'Incorrect damage, it required and type  int';
     public const INCORRECT_ATTACK_SPEED  = 'Incorrect attack speed, it required and type float or int';
     public const INCORRECT_LIFE          = 'Incorrect life, it required and type  int';
-    public const INCORRECT_TOTAL_LIFE    = 'Incorrect total life, it required and type  int';
+    public const INCORRECT_TOTAL_LIFE    = 'Incorrect total life, it required and type int';
+    public const LIFE_MORE_TOTAL_LIFE    = 'Life more total life';
     public const INCORRECT_MELEE         = 'Incorrect melee, it required and type  bool';
     public const INCORRECT_CLASS         = 'Incorrect class, it required and type  int';
     public const DOUBLE_UNIT_ID          = 'Double unit ID: collection have unit with specified id';

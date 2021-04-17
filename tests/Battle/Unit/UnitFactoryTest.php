@@ -384,6 +384,21 @@ class UnitFactoryTest extends TestCase
                 ],
                 'error' => UnitException::INCORRECT_CLASS,
             ],
+            [
+                [
+                    // life большие total life
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 90,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::LIFE_MORE_TOTAL_LIFE,
+            ],
         ];
     }
 }

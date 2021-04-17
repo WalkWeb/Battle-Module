@@ -67,7 +67,9 @@ class UnitFactory
             throw new UnitException(UnitException::INCORRECT_TOTAL_LIFE);
         }
 
-        // todo Проверка на то, что количество здоровья не больше максимального
+        if ($data['life'] > $data['total_life']) {
+            throw new UnitException(UnitException::LIFE_MORE_TOTAL_LIFE);
+        }
 
         if (!array_key_exists('melee', $data) || !is_bool($data['melee'])) {
             throw new UnitException(UnitException::INCORRECT_MELEE);
