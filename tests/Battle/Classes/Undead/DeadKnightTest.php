@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Classes;
+namespace Tests\Battle\Classes\Undead;
 
 use Battle\Action\HeavyStrikeAction;
 use Battle\Classes\ClassFactoryException;
@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 
-class WarriorTest extends TestCase
+class DeadKnightTest extends TestCase
 {
     /**
      * @throws ClassFactoryException
@@ -22,17 +22,17 @@ class WarriorTest extends TestCase
      * @throws UnitFactoryException
      * @throws UnitException
      */
-    public function testCreate(): void
+    public function testCreateDeadKnightClass(): void
     {
-        $actionUnit = UnitFactory::createByTemplate(1);
+        $actionUnit = UnitFactory::createByTemplate(8);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $actionCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $warrior = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::WARRIOR, $warrior->getId());
-        self::assertEquals(UnitClassInterface::WARRIOR_SMALL_ICON, $warrior->getSmallIcon());
+        self::assertEquals(UnitClassInterface::DEAD_KNIGHT, $warrior->getId());
+        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_SMALL_ICON, $warrior->getSmallIcon());
 
         $actionCollection = $warrior->getAbility($actionUnit, $enemyCommand, $actionCommand);
 

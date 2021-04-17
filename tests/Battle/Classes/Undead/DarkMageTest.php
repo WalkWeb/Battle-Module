@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Classes;
+namespace Tests\Battle\Classes\Undead;
 
 use Battle\Action\GreatHealAction;
 use Battle\Classes\ClassFactoryException;
@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 
-class PriestTest extends TestCase
+class DarkMageTest extends TestCase
 {
     /**
      * @throws ClassFactoryException
@@ -22,17 +22,17 @@ class PriestTest extends TestCase
      * @throws UnitFactoryException
      * @throws UnitException
      */
-    public function testCreate(): void
+    public function testCreateDarkMageClass(): void
     {
-        $actionUnit = UnitFactory::createByTemplate(5);
+        $actionUnit = UnitFactory::createByTemplate(7);
         $enemyUnit = UnitFactory::createByTemplate(1);
         $actionCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $priest = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::PRIEST, $priest->getId());
-        self::assertEquals(UnitClassInterface::PRIEST_SMALL_ICON, $priest->getSmallIcon());
+        self::assertEquals(UnitClassInterface::DARK_MAGE, $priest->getId());
+        self::assertEquals(UnitClassInterface::DARK_MAGE_SMALL_ICON, $priest->getSmallIcon());
 
         $actionCollection = $priest->getAbility($actionUnit, $enemyCommand, $actionCommand);
 

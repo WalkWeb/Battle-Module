@@ -36,7 +36,7 @@ $data = [
         'attack_speed' => 1,
         'life'         => 65,
         'melee'        => true,
-        'class'        => 1,
+        'class'        => 3,
         'command'      => 'right',
     ],
     [
@@ -47,7 +47,7 @@ $data = [
         'attack_speed' => 1.0,
         'life'         => 62,
         'melee'        => false,
-        'class'        => 2,
+        'class'        => 4,
         'command'      => 'right',
     ],
 ];

@@ -6,12 +6,16 @@ namespace Battle\Classes;
 
 use Battle\Classes\Human\Priest;
 use Battle\Classes\Human\Warrior;
+use Battle\Classes\Undead\DarkMage;
+use Battle\Classes\Undead\DeadKnight;
 
 class UnitClassFactory
 {
     private static $map = [
         1 => Warrior::class,
         2 => Priest::class,
+        3 => DeadKnight::class,
+        4 => DarkMage::class,
     ];
 
     /**
@@ -26,7 +30,7 @@ class UnitClassFactory
     public static function create(int $classId): UnitClassInterface
     {
         if (!array_key_exists($classId, self::$map)) {
-            throw new ClassFactoryException(ClassFactoryException::UNDEFINED_CLASS_ID);
+            throw new ClassFactoryException(ClassFactoryException::UNDEFINED_CLASS_ID . ': ' . $classId);
         }
 
         $className = self::$map[$classId];

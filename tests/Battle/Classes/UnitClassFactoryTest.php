@@ -7,6 +7,8 @@ namespace Tests\Battle\Classes;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\Human\Priest;
 use Battle\Classes\Human\Warrior;
+use Battle\Classes\Undead\DarkMage;
+use Battle\Classes\Undead\DeadKnight;
 use Battle\Classes\UnitClassFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -30,9 +32,9 @@ class UnitClassFactoryTest extends TestCase
      */
     public function testUnitClassFactoryCreateFail(): void
     {
-        $classId = 3;
+        $classId = 55;
         $this->expectException(ClassFactoryException::class);
-        $this->expectExceptionMessage(ClassFactoryException::UNDEFINED_CLASS_ID);
+        $this->expectExceptionMessage(ClassFactoryException::UNDEFINED_CLASS_ID . ': ' . $classId);
         UnitClassFactory::create($classId);
     }
 
@@ -49,6 +51,14 @@ class UnitClassFactoryTest extends TestCase
             [
                 2,
                 Priest::class,
+            ],
+            [
+                3,
+                DeadKnight::class,
+            ],
+            [
+                4,
+                DarkMage::class,
             ],
         ];
     }
