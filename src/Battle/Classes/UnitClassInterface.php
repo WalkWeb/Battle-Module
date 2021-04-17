@@ -35,4 +35,6 @@ interface UnitClassInterface
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand
     ): ActionCollection;
+
+    // todo url к мини-иконке класса в размере 21x21
 }
