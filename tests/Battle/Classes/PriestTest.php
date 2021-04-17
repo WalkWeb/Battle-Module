@@ -7,7 +7,6 @@ namespace Tests\Battle\Classes;
 use Battle\Action\GreatHealAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
-use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
@@ -33,6 +32,7 @@ class PriestTest extends TestCase
         $priest = $actionUnit->getClass();
 
         self::assertEquals(UnitClassInterface::PRIEST, $priest->getId());
+        self::assertEquals(UnitClassInterface::PRIEST_SMALL_ICON, $priest->getSmallIcon());
 
         $actionCollection = $priest->getAbility($actionUnit, $enemyCommand, $actionCommand);
 

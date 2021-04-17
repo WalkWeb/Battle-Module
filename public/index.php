@@ -42,7 +42,7 @@ $data = [
     [
         'id'           => '54656319-f841-4ba5-8c71-e67c5afdd3e9',
         'name'         => 'Necromancer',
-        'avatar'       => '/images/avas/monsters/006.png',
+        'avatar'       => '/images/avas/monsters/001.png',
         'damage'       => 10,
         'attack_speed' => 1.0,
         'life'         => 62,

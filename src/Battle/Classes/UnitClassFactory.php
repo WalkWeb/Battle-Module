@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Battle\Classes;
 
+use Battle\Classes\Human\Priest;
+use Battle\Classes\Human\Warrior;
+
 class UnitClassFactory
 {
     private static $map = [

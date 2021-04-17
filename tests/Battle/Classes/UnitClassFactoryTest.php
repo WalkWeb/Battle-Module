@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Battle\Classes;
 
 use Battle\Classes\ClassFactoryException;
-use Battle\Classes\Priest;
+use Battle\Classes\Human\Priest;
+use Battle\Classes\Human\Warrior;
 use Battle\Classes\UnitClassFactory;
-use Battle\Classes\Warrior;
 use PHPUnit\Framework\TestCase;
 
 class UnitClassFactoryTest extends TestCase

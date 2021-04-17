@@ -7,7 +7,6 @@ namespace Tests\Battle\Classes;
 use Battle\Action\HeavyStrikeAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
-use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
@@ -33,6 +32,7 @@ class WarriorTest extends TestCase
         $warrior = $actionUnit->getClass();
 
         self::assertEquals(UnitClassInterface::WARRIOR, $warrior->getId());
+        self::assertEquals(UnitClassInterface::WARRIOR_SMALL_ICON, $warrior->getSmallIcon());
 
         $actionCollection = $warrior->getAbility($actionUnit, $enemyCommand, $actionCommand);
 

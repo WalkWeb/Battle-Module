@@ -2,17 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Battle\Classes;
+namespace Battle\Classes\Human;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
-use Battle\Action\GreatHealAction;
+use Battle\Action\HeavyStrikeAction;
+use Battle\Classes\AbstractUnitClass;
+use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
-class Priest extends AbstractUnitClass
+class Warrior extends AbstractUnitClass
 {
-    private $id = UnitClassInterface::PRIEST;
+    private $id = UnitClassInterface::WARRIOR;
+    private $smallIcon = UnitClassInterface::WARRIOR_SMALL_ICON;
 
     public function getId(): int
     {
@@ -32,6 +35,14 @@ class Priest extends AbstractUnitClass
         CommandInterface $alliesCommand
     ): ActionCollection
     {
-        return new ActionCollection([new GreatHealAction($actionUnit, $alliesCommand, $alliesCommand)]);
+        return new ActionCollection([new HeavyStrikeAction($actionUnit, $enemyCommand, $alliesCommand)]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSmallIcon(): string
+    {
+        return $this->smallIcon;
     }
 }

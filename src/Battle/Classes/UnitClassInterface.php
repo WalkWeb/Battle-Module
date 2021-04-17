@@ -13,6 +13,9 @@ interface UnitClassInterface
     public const WARRIOR = 1;
     public const PRIEST  = 2;
 
+    public const WARRIOR_SMALL_ICON = '/images/icons/small/warrior.png';
+    public const PRIEST_SMALL_ICON  = '/images/icons/small/priest.png';
+
     /**
      * Возвращает ID класса
      *
@@ -36,5 +39,10 @@ interface UnitClassInterface
         CommandInterface $alliesCommand
     ): ActionCollection;
 
-    // todo url к мини-иконке класса в размере 21x21
+    /**
+     * Url к мини-иконке класса в размере 21x21, для отображения в бою
+     *
+     * @return string
+     */
+    public function getSmallIcon(): string;
 }

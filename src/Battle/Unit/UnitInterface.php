@@ -20,7 +20,7 @@ use Battle\Effect\EffectCollection;
 interface UnitInterface
 {
     public const NEW_ROUND_ADD_CONS = 500;
-    public const MAX_CONS = 1000;
+    public const MAX_CONS           = 1000;
 
     /**
      * UUID or random string

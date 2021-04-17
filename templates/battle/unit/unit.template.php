@@ -8,7 +8,6 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
 }
 
 // todo добавить отображение уровня
-// todo добавить отображение иконки класса
 // todo добавить отображение длины полоски концентрации
 // todo добавить отображение длины полоски ярости
 
@@ -67,7 +66,7 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                         1
                     </div>
                     <div class="unit_icon_right">
-                        <img src="/images/icons/class-icon-paladin.png" alt="">
+                        <img src="<?= $unit->getClass()->getSmallIcon() ?>" alt="">
                     </div>
                 </div>
 

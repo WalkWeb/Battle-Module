@@ -6,5 +6,5 @@ namespace Battle\Classes;
 
 abstract class AbstractUnitClass implements UnitClassInterface
 {
-
+    // todo getSmallIcon()
 }
