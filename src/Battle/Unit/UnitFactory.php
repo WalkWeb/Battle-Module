@@ -34,6 +34,11 @@ class UnitFactory
      */
     public static function create(array $data): UnitInterface
     {
+        // todo проверка на отрицательный урон
+        // todo проверка на отрицательное здоровье
+        // todo проверка на слишком большое количество урона или здоровья
+        // todo проверка на слишком длинное имя
+
         if (!array_key_exists('id', $data) || !is_string($data['id']) || $data['id'] === '') {
             throw new UnitException(UnitException::INCORRECT_ID);
         }
@@ -74,7 +79,7 @@ class UnitFactory
 
         return new Unit(
             $data['id'],
-            $data['name'],
+            htmlspecialchars($data['name']),
             $data['avatar'],
             $data['damage'],
             $data['attack_speed'],

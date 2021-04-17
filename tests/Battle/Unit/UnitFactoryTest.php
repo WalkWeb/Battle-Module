@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
+use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassFactory;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
@@ -45,6 +46,29 @@ class UnitFactoryTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectErrorMessage($error);
         UnitFactory::create($data);
+    }
+
+    /**
+     * @throws UnitException
+     * @throws ClassFactoryException
+     */
+    public function testUnitFactoryHtmlspecialchars(): void
+    {
+        $data = [
+            'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+            'name'         => '<b>Skeleton</b>',
+            'avatar'       => '/images/avas/monsters/003.png',
+            'damage'       => 15,
+            'attack_speed' => 1.2,
+            'life'         => 80,
+            'total_life'   => 80,
+            'melee'        => true,
+            'class'        => 1,
+        ];
+
+        $unit = UnitFactory::create($data);
+
+        self::assertEquals(htmlspecialchars($data['name']), $unit->getName());
     }
 
     public function successDataProvider(): array
