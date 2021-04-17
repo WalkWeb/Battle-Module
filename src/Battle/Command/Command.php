@@ -85,8 +85,6 @@ class Command implements CommandInterface
 
     public function getUnitForHeal(): ?UnitInterface
     {
-        // TODO Ошибка: выбираются мертвые юниты
-
         // TODO Также выбирается не самый битый юнит, а случайный из битых
 
         // TODO Также, если нет целей для лечения - нужно использовать обычную атаку, не потратив при этом концентрацию
@@ -95,7 +93,8 @@ class Command implements CommandInterface
         $unitForHeal = [];
 
         foreach ($this->units as $unit) {
-            if ($unit->getLife() < $unit->getTotalLife()) {
+            $life = $unit->getLife();
+            if ($life > 0 && $life < $unit->getTotalLife()) {
                 $unitForHeal[] = $unit;
             }
         }
