@@ -29,6 +29,7 @@ class UnitCollectionTest extends TestCase
                 15,
                 1,
                 110,
+                110,
                 true,
                 UnitClassFactory::create(1)
             )
@@ -41,6 +42,7 @@ class UnitCollectionTest extends TestCase
                 'avatar 2',
                 12,
                 1,
+                95,
                 95,
                 false,
                 UnitClassFactory::create(2)
@@ -73,6 +75,7 @@ class UnitCollectionTest extends TestCase
                 15,
                 1,
                 110,
+                110,
                 true,
                 UnitClassFactory::create(1)
             )
@@ -99,6 +102,7 @@ class UnitCollectionTest extends TestCase
                 15,
                 1,
                 110,
+                110,
                 true,
                 UnitClassFactory::create(1)
             )
@@ -114,6 +118,7 @@ class UnitCollectionTest extends TestCase
                 'avatar 2',
                 12,
                 1,
+                95,
                 95,
                 false,
                 UnitClassFactory::create(2)

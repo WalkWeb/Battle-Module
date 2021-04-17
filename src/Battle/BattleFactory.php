@@ -22,21 +22,25 @@ class BattleFactory
      *
      * $data = [
      *     [
+     *         'id'           => '3bc9b8be-8cbd-44b4-a935-cd435d905d1b',
      *         'name'         => 'Warrior',
      *         'avatar'       => '/images/avas/humans/human001.jpg',
      *         'damage'       => 15,
      *         'attack_speed' => 1.0,
      *         'life'         => 110,
+     *         'total_life'   => 110,
      *         'melee'        => true,
      *         'class'        => 1,
      *         'command'      => 'left',
      *     ],
      *     [
+     *         'id'           => '3bc9b8be-8cbd-44b4-a935-cd435d905d2b',
      *         'name'         => 'Skeleton',
      *         'avatar'       => '/images/avas/monsters/005.png',
      *         'damage'       => 25,
      *         'attack_speed' => 1,
      *         'life'         => 165,
+     *         'total_life'   => 165,
      *         'melee'        => true,
      *         'class'        => 1,
      *         'command'      => 'right',

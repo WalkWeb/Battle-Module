@@ -48,6 +48,7 @@ class UnitTest extends TestCase
             $this->attackDamage,
             $this->attackAttackSpeed,
             $this->attackLife,
+            $this->attackLife,
             $this->attackMelee,
             $attackClass
         );
@@ -82,6 +83,7 @@ class UnitTest extends TestCase
             $this->attackDamage,
             $this->attackAttackSpeed,
             $this->attackLife,
+            $this->attackLife,
             $this->attackMelee,
             $attackClass
         );
@@ -92,6 +94,7 @@ class UnitTest extends TestCase
             $this->defendAvatar,
             $this->defendDamage,
             $this->defendAttackSpeed,
+            $this->defendLife,
             $this->defendLife,
             $this->defendMelee,
             $defendClass
@@ -128,6 +131,7 @@ class UnitTest extends TestCase
             $this->attackAvatar,
             $this->attackDamage,
             $this->attackAttackSpeed,
+            $this->attackLife,
             $this->attackLife,
             $this->attackMelee,
             $attackClass

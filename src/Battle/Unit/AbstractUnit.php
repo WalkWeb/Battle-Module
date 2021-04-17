@@ -77,6 +77,7 @@ abstract class AbstractUnit implements UnitInterface
         int $damage,
         float $attackSpeed,
         int $life,
+        int $totalLife,
         bool $melee,
         UnitClassInterface $class
     )
@@ -86,7 +87,8 @@ abstract class AbstractUnit implements UnitInterface
         $this->avatar = $avatar;
         $this->damage = $damage;
         $this->attackSpeed = $attackSpeed;
-        $this->life = $this->totalLife = $life;
+        $this->life = $life;
+        $this->totalLife = $totalLife;
         $this->melee = $melee;
         $this->class = $class;
         $this->effects = new EffectCollection();

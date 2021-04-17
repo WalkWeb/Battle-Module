@@ -16,11 +16,13 @@ class UnitFactory
      * Ожидаемые параметры в формате:
      *
      * [
+     *     'id'           => 'a2763c19-7ec5-48f3-9242-2ea6c6d80c56',
      *     'name'         => 'Skeleton',
      *     'avatar'       => '/images/avas/monsters/003.png',
      *     'damage'       => 15,
      *     'attack_speed' => 1.2,
      *     'life'         => 80,
+     *     'total_life'   => 80,
      *     'melee'        => true,
      *     'class'        => 1,
      * ]
@@ -56,6 +58,12 @@ class UnitFactory
             throw new UnitException(UnitException::INCORRECT_LIFE);
         }
 
+        if (!array_key_exists('total_life', $data) || !is_int($data['total_life'])) {
+            throw new UnitException(UnitException::INCORRECT_TOTAL_LIFE);
+        }
+
+        // todo Проверка на то, что количество здоровья не больше максимального
+
         if (!array_key_exists('melee', $data) || !is_bool($data['melee'])) {
             throw new UnitException(UnitException::INCORRECT_MELEE);
         }
@@ -71,6 +79,7 @@ class UnitFactory
             $data['damage'],
             $data['attack_speed'],
             $data['life'],
+            $data['total_life'],
             $data['melee'],
             UnitClassFactory::create($data['class'])
         );

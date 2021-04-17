@@ -227,9 +227,41 @@ class CommandTest extends TestCase
      */
     public function testGetUnitForActionNothing(): void
     {
-        $unit1 = new Unit('19b871cd-f9e0-408c-aea0-2d903fd23806', 'User 1', 'ava 1', 15, 1, 110, true, UnitClassFactory::create(1));
-        $unit2 = new Unit('ac96be6b-4bb4-4636-8742-14001a7e2333', 'User 2', 'ava 2',12, 1, 95, false, UnitClassFactory::create(2));
-        $unit3 = new Unit('baab87e7-4670-4ac3-a4cf-1fe0111935e8', 'User 3', 'ava 3',120, 1, 300, true, UnitClassFactory::create(1));
+        $unit1 = new Unit(
+            '19b871cd-f9e0-408c-aea0-2d903fd23806',
+            'User 1',
+            'ava 1',
+            15,
+            1,
+            110,
+            110,
+            true,
+            UnitClassFactory::create(1)
+        );
+
+        $unit2 = new Unit(
+            'ac96be6b-4bb4-4636-8742-14001a7e2333',
+            'User 2',
+            'ava 2',
+            12,
+            1,
+            95,
+            95,
+            false,
+            UnitClassFactory::create(2)
+        );
+
+        $unit3 = new Unit(
+            'baab87e7-4670-4ac3-a4cf-1fe0111935e8',
+            'User 3',
+            'ava 3',
+            120,
+            1,
+            300,
+            300,
+            true,
+            UnitClassFactory::create(1)
+        );
 
         $alliesCommand = CommandFactory::create([$unit1, $unit2]);
         $enemyCommand = CommandFactory::create([$unit3]);

@@ -56,6 +56,7 @@ class StrokeTest extends TestCase
             $this->attackerDamage,
             $this->attackerAttackSpeed,
             $this->attackerLife,
+            $this->attackerLife,
             $this->attackerMelee,
             UnitClassFactory::create($this->attackerClass)
         );
@@ -66,6 +67,7 @@ class StrokeTest extends TestCase
             $this->defendAvatar,
             $this->defendDamage,
             $this->defendAttackSpeed,
+            $this->defendLife,
             $this->defendLife,
             $this->defendMelee,
             UnitClassFactory::create($this->defendClass)
