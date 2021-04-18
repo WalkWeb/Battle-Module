@@ -34,10 +34,12 @@ class UnitFactory
      */
     public static function create(array $data): UnitInterface
     {
-        // todo проверка на отрицательное здоровье
+        // todo проверка на слишком короткое или длинное имя
+        // todo проверка на слишком маленькое или большое максимальное здоровье
         // todo проверка на слишком большое количество урона или здоровья
         // todo проверка на слишком длинное имя
         // todo проверка на корректную скорость атаки
+        // todo рефакторинг - количество кода можно сократить
 
         if (!array_key_exists('id', $data) || !is_string($data['id']) || $data['id'] === '') {
             throw new UnitException(UnitException::INCORRECT_ID);
@@ -67,6 +69,12 @@ class UnitFactory
 
         if (!array_key_exists('life', $data) || !is_int($data['life'])) {
             throw new UnitException(UnitException::INCORRECT_LIFE);
+        }
+
+        if ($data['life'] < UnitInterface::MIN_LIFE || $data['life'] > UnitInterface::MAX_LIFE) {
+            throw new UnitException(
+                UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE
+            );
         }
 
         if (!array_key_exists('total_life', $data) || !is_int($data['total_life'])) {

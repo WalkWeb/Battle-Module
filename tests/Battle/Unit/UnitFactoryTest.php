@@ -322,11 +322,41 @@ class UnitFactoryTest extends TestCase
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'life'         => 80.0,
-                    'total_life'   => 80.0,
+                    'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
                 ],
                 'error' => UnitException::INCORRECT_LIFE,
+            ],
+            [
+                [
+                    // life < UnitInterface::MIN_LIFE
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => UnitInterface::MIN_LIFE - 1,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE,
+            ],
+            [
+                [
+                    // life > UnitInterface::MAX_LIFE
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => UnitInterface::MAX_LIFE + 1,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE,
             ],
             [
                 [

@@ -16,6 +16,7 @@ class UnitException extends Exception
     public const INCORRECT_DAMAGE_VALUE  = 'Incorrect damage, should be min-max value: ';
     public const INCORRECT_ATTACK_SPEED  = 'Incorrect attack speed, it required and type float or int';
     public const INCORRECT_LIFE          = 'Incorrect life, it required and type  int';
+    public const INCORRECT_LIFE_VALUE    = 'Incorrect life, should be min-max value: ';
     public const INCORRECT_TOTAL_LIFE    = 'Incorrect total life, it required and type int';
     public const LIFE_MORE_TOTAL_LIFE    = 'Life more total life';
     public const INCORRECT_MELEE         = 'Incorrect melee, it required and type  bool';
