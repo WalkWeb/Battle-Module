@@ -22,6 +22,9 @@ interface UnitInterface
     public const NEW_ROUND_ADD_CONS = 500;
     public const MAX_CONS           = 1000;
 
+    public const MIN_DAMAGE         = 0;
+    public const MAX_DAMAGE         = 100000;
+
     /**
      * UUID or random string
      *

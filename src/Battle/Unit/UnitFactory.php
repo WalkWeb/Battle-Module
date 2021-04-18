@@ -34,10 +34,10 @@ class UnitFactory
      */
     public static function create(array $data): UnitInterface
     {
-        // todo проверка на отрицательный урон
         // todo проверка на отрицательное здоровье
         // todo проверка на слишком большое количество урона или здоровья
         // todo проверка на слишком длинное имя
+        // todo проверка на корректную скорость атаки
 
         if (!array_key_exists('id', $data) || !is_string($data['id']) || $data['id'] === '') {
             throw new UnitException(UnitException::INCORRECT_ID);
@@ -53,6 +53,12 @@ class UnitFactory
 
         if (!array_key_exists('damage', $data) || !is_int($data['damage'])) {
             throw new UnitException(UnitException::INCORRECT_DAMAGE);
+        }
+
+        if ($data['damage'] < UnitInterface::MIN_DAMAGE || $data['damage'] > UnitInterface::MAX_DAMAGE) {
+            throw new UnitException(
+                UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE
+            );
         }
 
         if (!array_key_exists('attack_speed', $data) || (!is_float($data['attack_speed']) && !is_int($data['attack_speed']))) {

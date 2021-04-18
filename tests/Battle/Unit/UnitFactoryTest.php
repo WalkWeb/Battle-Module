@@ -8,6 +8,7 @@ use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassFactory;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
+use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
@@ -239,6 +240,36 @@ class UnitFactoryTest extends TestCase
                     'class'        => 1,
                 ],
                 'error' => UnitException::INCORRECT_DAMAGE,
+            ],
+            [
+                [
+                    // damage < UnitInterface::MIN_DAMAGE
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => UnitInterface::MIN_DAMAGE - 1,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
+            ],
+            [
+                [
+                    // damage > UnitInterface::MAX_DAMAGE
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => UnitInterface::MAX_DAMAGE + 1,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
             ],
             [
                 [
