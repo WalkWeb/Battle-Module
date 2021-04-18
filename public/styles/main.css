@@ -223,8 +223,9 @@ div.life_text {
 }
 
 .unit_box2_right3 {
-    width: 100%;
+    width: 95%;
     height: 20px;
+    overflow: hidden;
 }
 
 .unit_box2_right3 p {

@@ -34,9 +34,6 @@ class UnitFactory
      */
     public static function create(array $data): UnitInterface
     {
-        // todo проверка на слишком короткое или длинное имя
-        // todo проверка на слишком большое количество урона или здоровья
-        // todo проверка на слишком длинное имя
         // todo проверка на корректную скорость атаки
         // todo рефакторинг - количество кода можно сократить
 
@@ -46,6 +43,14 @@ class UnitFactory
 
         if (!array_key_exists('name', $data) || !is_string($data['name'])) {
             throw new UnitException(UnitException::INCORRECT_NAME);
+        }
+
+        $nameLength = mb_strlen($data['name']);
+
+        if ($nameLength < UnitInterface::MIN_NAME_LENGTH || $nameLength > UnitInterface::MAX_NAME_LENGTH) {
+            throw new UnitException(
+                UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH
+            );
         }
 
         if (!array_key_exists('avatar', $data) || !is_string($data['avatar'])) {

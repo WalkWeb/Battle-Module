@@ -31,6 +31,10 @@ interface UnitInterface
     public const MIN_TOTAL_LIFE     = 1;
     public const MAX_TOTAL_LIFE     = 100000;
 
+    // Помимо ограничения на символы, слишком длинное имя обрезается в css
+    public const MIN_NAME_LENGTH    = 1;
+    public const MAX_NAME_LENGTH    = 20;
+
     /**
      * UUID or random string
      *
