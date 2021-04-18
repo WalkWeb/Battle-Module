@@ -389,6 +389,36 @@ class UnitFactoryTest extends TestCase
             ],
             [
                 [
+                    // total life < UnitInterface::MIN_TOTAL_LIFE
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 0,
+                    'total_life'   => UnitInterface::MIN_TOTAL_LIFE - 1,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE,
+            ],
+            [
+                [
+                    // total life > UnitInterface::MAX_TOTAL_LIFE
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 0,
+                    'total_life'   => UnitInterface::MAX_TOTAL_LIFE + 1,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE,
+            ],
+            [
+                [
                     // отсутствует melee
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
