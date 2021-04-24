@@ -332,6 +332,36 @@ class UnitFactoryTest extends TestCase
             ],
             [
                 [
+                    // attack_speed < UnitInterface::MIN_ATTACK_SPEED
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => UnitInterface::MIN_ATTACK_SPEED - 0.1,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
+            ],
+            [
+                [
+                    // attack_speed > UnitInterface::MAX_ATTACK_SPEED
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' =>  UnitInterface::MAX_ATTACK_SPEED + 0.1,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
+            ],
+            [
+                [
                     // отсутствует life
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',

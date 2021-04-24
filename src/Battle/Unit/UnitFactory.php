@@ -34,7 +34,6 @@ class UnitFactory
      */
     public static function create(array $data): UnitInterface
     {
-        // todo проверка на корректную скорость атаки
         // todo рефакторинг - количество кода можно сократить
 
         if (!array_key_exists('id', $data) || !is_string($data['id']) || $data['id'] === '') {
@@ -69,6 +68,12 @@ class UnitFactory
 
         if (!array_key_exists('attack_speed', $data) || (!is_float($data['attack_speed']) && !is_int($data['attack_speed']))) {
             throw new UnitException(UnitException::INCORRECT_ATTACK_SPEED);
+        }
+
+        if ($data['attack_speed'] < UnitInterface::MIN_ATTACK_SPEED || $data['attack_speed'] > UnitInterface::MAX_ATTACK_SPEED) {
+            throw new UnitException(
+                UnitException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED
+            );
         }
 
         if (!array_key_exists('life', $data) || !is_int($data['life'])) {
