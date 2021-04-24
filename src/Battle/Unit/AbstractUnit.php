@@ -167,11 +167,7 @@ abstract class AbstractUnit implements UnitInterface
     public function newRound(): void
     {
         $this->action = false;
-        $this->concentration += self::NEW_ROUND_ADD_CONS;
-
-        if ($this->concentration > self::MAX_CONS) {
-            $this->concentration = self::MAX_CONS;
-        }
+        $this->addConcentration(self::ADD_CON_NEW_ROUND);
     }
 
     /**
@@ -190,5 +186,17 @@ abstract class AbstractUnit implements UnitInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @param int $concentration
+     */
+    protected function addConcentration(int $concentration): void
+    {
+        $this->concentration += $concentration;
+
+        if ($this->concentration > self::MAX_CONS) {
+            $this->concentration = self::MAX_CONS;
+        }
     }
 }

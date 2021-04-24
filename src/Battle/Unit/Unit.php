@@ -32,6 +32,10 @@ class Unit extends AbstractUnit
             return $this->class->getAbility($this, $enemyCommand, $alliesCommand);
         }
 
+        // Пока концентрация применяется сразу, при попытке сделать атаку, можно переделать так, чтобы добавлялась
+        // только при попадании по цели
+        $this->addConcentration(self::ADD_CON_ACTION_UNIT);
+
         return $this->getDamageAction($enemyCommand, $alliesCommand);
     }
 
@@ -70,6 +74,8 @@ class Unit extends AbstractUnit
         if (!method_exists($this, $method)) {
             throw new UnitException(UnitException::UNDEFINED_ACTION_METHOD);
         }
+
+        $this->addConcentration(self::ADD_CON_RECEIVING_UNIT);
 
         return $this->$method($action);
     }

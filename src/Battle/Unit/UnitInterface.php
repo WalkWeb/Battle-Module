@@ -19,8 +19,10 @@ use Battle\Effect\EffectCollection;
  */
 interface UnitInterface
 {
-    public const NEW_ROUND_ADD_CONS = 500;
-    public const MAX_CONS           = 1000;
+    public const ADD_CON_NEW_ROUND      = 200;
+    public const ADD_CON_ACTION_UNIT    = 180;
+    public const ADD_CON_RECEIVING_UNIT = 100;
+    public const MAX_CONS               = 1000;
 
     public const MIN_DAMAGE         = 0;
     public const MAX_DAMAGE         = 100000;

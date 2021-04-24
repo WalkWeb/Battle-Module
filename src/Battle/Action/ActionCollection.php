@@ -6,6 +6,8 @@ namespace Battle\Action;
 
 class ActionCollection
 {
+    // todo CollectionTrait
+
     /**
      * @var ActionInterface[]
      */

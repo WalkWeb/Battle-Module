@@ -32,9 +32,9 @@ class HealActionTest extends TestCase
         $alliesCommand = CommandFactory::create([$unit, $alliesUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $alliesUnit->newRound();
-        $alliesUnit->newRound();
-        $alliesUnit->newRound();
+        for ($i = 0; $i < 10; $i++) {
+            $alliesUnit->newRound();
+        }
 
         $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
@@ -44,5 +44,7 @@ class HealActionTest extends TestCase
         }
 
         self::assertEquals(self::NO_TARGET, $message);
+
+        self::assertEquals(0, $alliesUnit->getConcentration());
     }
 }

@@ -7,12 +7,18 @@ namespace Tests\Battle\Unit;
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
+use Battle\Command\Command;
+use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Unit;
 use Battle\Action\DamageAction;
+use Battle\Unit\UnitCollection;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
+use Tests\Battle\Factory\UnitFactory;
+use Tests\Battle\Factory\UnitFactoryException;
 
 class UnitTest extends TestCase
 {
@@ -142,7 +148,56 @@ class UnitTest extends TestCase
         self::assertEquals(0, $unit->getConcentration());
         $unit->newRound();
         self::assertFalse($unit->isAction());
-        self::assertEquals(Unit::NEW_ROUND_ADD_CONS, $unit->getConcentration());
+        self::assertEquals(Unit::ADD_CON_NEW_ROUND, $unit->getConcentration());
+    }
+
+    /**
+     * Проверяем корректное добавление концентрации юниту, при начале нового раунда
+     *
+     * @throws ClassFactoryException
+     * @throws UnitFactoryException
+     */
+    public function testUnitNewRoundAddConcentration(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        self::assertEquals(0 , $unit->getConcentration());
+
+        $unit->newRound();
+
+        self::assertEquals(UnitInterface::ADD_CON_NEW_ROUND, $unit->getConcentration());
+    }
+
+    /**
+     * Тест на получение концентрации при совершении действия, и получения действия от другого юнита
+     *
+     * @throws ClassFactoryException
+     * @throws UnitFactoryException
+     * @throws CommandException
+     * @throws UnitException
+     */
+    public function testUnitAddConcentration(): void
+    {
+        $leftUnit = UnitFactory::createByTemplate(1);
+        $leftCollection = new UnitCollection();
+        $leftCollection->add($leftUnit);
+        $leftCommand = new Command($leftCollection);
+
+        $rightUnit =  UnitFactory::createByTemplate(2);
+        $rightCollection = new UnitCollection();
+        $rightCollection->add($rightUnit);
+        $rightCommand = new Command($rightCollection);
+
+        self::assertEquals(0, $leftUnit->getConcentration());
+        self::assertEquals(0, $rightUnit->getConcentration());
+
+        $actionCollection = $leftUnit->getAction($rightCommand, $leftCommand);
+
+        self::assertEquals(UnitInterface::ADD_CON_ACTION_UNIT, $leftUnit->getConcentration());
+
+        $actionCollection->getActions()[0]->handle();
+
+        self::assertEquals(UnitInterface::ADD_CON_RECEIVING_UNIT, $rightUnit->getConcentration());
     }
 
     // todo Реализация добавления эффекта будет переделана
