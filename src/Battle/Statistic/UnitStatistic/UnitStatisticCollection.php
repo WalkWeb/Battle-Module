@@ -18,16 +18,31 @@ class UnitStatisticCollection implements Iterator, Countable
      */
     private $elements = [];
 
+    /**
+     * @param UnitStatisticInterface $unitStatistic
+     * @throws StatisticException
+     */
     public function add(UnitStatisticInterface $unitStatistic): void
     {
+        if ($this->exist($unitStatistic->getId())) {
+            throw new StatisticException(StatisticException::DOUBLE_ID);
+        }
+
         $this->elements[$unitStatistic->getId()] = $unitStatistic;
     }
 
+    /**
+     * @return UnitStatisticInterface
+     */
     public function current(): UnitStatisticInterface
     {
         return current($this->elements);
     }
 
+    /**
+     * @param string $id
+     * @return bool
+     */
     public function exist(string $id): bool
     {
         return array_key_exists($id, $this->elements);
