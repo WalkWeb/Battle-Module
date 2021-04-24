@@ -31,6 +31,13 @@ interface CommandInterface
     public function getMeleeUnitForAttacks(): ?UnitInterface;
 
     /**
+     * Возвращает самого раненого живого юнита в команде, если все живы или мертвы - возвращает null
+     *
+     * @return UnitInterface|null
+     */
+    public function getUnitForHeal(): ?UnitInterface;
+
+    /**
      * Возвращает юнита готового совершать действие в этом раунде
      *
      * @return UnitInterface|null

@@ -38,6 +38,7 @@ class ResultTest extends TestCase
         self::assertEquals(Result::RIGHT_COMMAND_WIN, $result->getWinnerText());
         self::assertEquals(1, $result->getStatistic()->getRoundNumber());
         self::assertEquals(1, $result->getStatistic()->getStrokeNumber());
+        self::assertCount(0, $result->getChat()->getMessages());
     }
 
     /**

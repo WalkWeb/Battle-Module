@@ -83,19 +83,26 @@ class Command implements CommandInterface
         return $meleeAliveUnits[array_rand($meleeAliveUnits)];
     }
 
+    /**
+     * Возвращает самого раненого живого юнита в команде, если все живы или мертвы - возвращает null
+     *
+     * @return UnitInterface|null
+     */
     public function getUnitForHeal(): ?UnitInterface
     {
-        // TODO Также выбирается не самый битый юнит, а случайный из битых
-
         // TODO Также, если нет целей для лечения - нужно использовать обычную атаку, не потратив при этом концентрацию
         // TODO чтобы можно было использовать лечение на следующем ходу
+
+        // TODO Т.е. нужно добавить опцию, была ли использована способность, и только если была - обнулять концентрацию
 
         $unitForHeal = [];
 
         foreach ($this->units as $unit) {
             $life = $unit->getLife();
-            if ($life > 0 && $life < $unit->getTotalLife()) {
-                $unitForHeal[] = $unit;
+            $totalLife = $unit->getTotalLife();
+            if ($life > 0 && $life < $totalLife) {
+                $percentLife = (int)(($life / $totalLife) * 100);
+                $unitForHeal[$percentLife] = $unit;
             }
         }
 
@@ -103,7 +110,9 @@ class Command implements CommandInterface
             return null;
         }
 
-        return $unitForHeal[array_rand($unitForHeal)];
+        ksort($unitForHeal);
+
+        return $unitForHeal[array_key_first($unitForHeal)];
     }
 
     /**
