@@ -4,8 +4,12 @@ namespace Battle\Statistic\UnitStatistic;
 
 interface UnitStatisticInterface
 {
+    // todo getUnit(): UnitInterface
+
     /**
      * Возвращает ID юнита
+     *
+     * todo На удаление
      *
      * @return string
      */
@@ -13,6 +17,8 @@ interface UnitStatisticInterface
 
     /**
      * Возвращает имя юнита
+     *
+     * todo На удаление
      *
      * @return string
      */

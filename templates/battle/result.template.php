@@ -20,19 +20,28 @@ echo '<h1>' . $result->getWinnerText() . '</h1>';
 
 <h2>Statistics:</h2>
 
-<?= '<p>Total rounds: ' . $result->getStatistic()->getRoundNumber() . '</p>' ?>
-<?= '<p>Total stroke: ' . $result->getStatistic()->getStrokeNumber() . '</p>' ?>
+<div class="statistics_box">
+    <table class="statistics">
+        <tr class="header">
+            <td><p><span class="stat_unit">Unit</span></p></td>
+            <td><p><span class="stat_damage">Caused Damage</span></p></td>
+            <td><p><span class="stat_taken">Taken Damage</span></p></td>
+            <td><p><span class="stat_heal">Heal</span></p></td>
+            <td><p><span class="stat_kill">Killing</span></p></td>
+        </tr>
+        <?php foreach ($result->getStatistic()->getUnitsStatistics() as $unit): ?>
+        <tr>
+            <td><p><span class="stat_unit"><?= $unit->getName() ?></span></p></td>
+            <td><p><span class="stat_damage"><?= $unit->getCausedDamage() ?></span></p></td>
+            <td><p><span class="stat_taken"><?= $unit->getTakenDamage() ?></span></p></td>
+            <td><p><span class="stat_heal"><?= $unit->getHeal() ?></span></p></td>
+            <td><p><span class="stat_kill"><?= $unit->getKilling() ?></span></p></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
 
-<?php foreach ($result->getStatistic()->getUnitsStatistics() as $unit): ?>
-
-    <?= '<p><b>' . $unit->getName() . '</b>' .
-        '<br />Caused Damage: ' . $unit->getCausedDamage() .
-        '<br />Taken Damage: ' . $unit->getTakenDamage() .
-        '<br />Heal: ' . $unit->getHeal() .
-        '<br />Killing: ' . $unit->getKilling() . '</p>'
-    ?>
-
-<?php endforeach; ?>
-
+<p>Total rounds: <?= $result->getStatistic()->getRoundNumber() ?></p>
+<p>Total stroke: <?= $result->getStatistic()->getStrokeNumber() ?></p>
 <p>Runtime: <?= $result->getStatistic()->getRuntime() ?> ms</p>
 <p>Memory cost: <?= $result->getStatistic()->getMemoryCostClipped() ?></p>

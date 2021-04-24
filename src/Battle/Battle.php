@@ -26,7 +26,7 @@ class Battle implements BattleInterface
     private $actionCommand;
 
     /** @var int */
-    private $maxRound = 50;
+    private $maxRound = 100;
 
     /** @var bool */
     private $debug;

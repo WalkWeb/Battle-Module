@@ -357,3 +357,47 @@ div.life_text {
 }
 
 /* Unit box styles end */
+
+/* Table statistics styles */
+
+div.statistics_box {
+    margin: 30px auto;
+    width: 50%;
+}
+
+table.statistics {
+    border: 1px solid #444;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.statistics td {
+    border: 1px solid #444;
+}
+
+table.statistics .header td {
+    background: #222;
+    font-weight: 700;
+}
+
+span.stat_unit {
+    color: #a9825d;
+}
+
+span.stat_damage {
+    color: #a71d2a;
+}
+
+span.stat_taken {
+    color: #0c8460;
+}
+
+span.stat_heal {
+    color: #1c7430;
+}
+
+span.stat_kill {
+    color: #d39e00;
+}
+
+/* Table statistics styles end */
