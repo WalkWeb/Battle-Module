@@ -168,6 +168,10 @@ abstract class AbstractUnit implements UnitInterface
     {
         $this->action = false;
         $this->concentration += self::NEW_ROUND_ADD_CONS;
+
+        if ($this->concentration > self::MAX_CONS) {
+            $this->concentration = self::MAX_CONS;
+        }
     }
 
     /**

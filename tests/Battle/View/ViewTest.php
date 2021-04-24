@@ -38,7 +38,7 @@ class ViewTest extends TestCase
         <tr>
             <td class="w25"></td>
             <td class="w25"><div align="center">
-    <div class="unit_main_box" id="usr_40">
+    <div class="unit_main_box" id="usr_f7e84eab-e4f6-469f-b0e3-f5f965f9fbce">
         <div class="unit_box1">
             <div class="unit_box1_right">
                 <div class="unit_box1_right2">
@@ -56,7 +56,7 @@ class ViewTest extends TestCase
                                 </div>
                             </div>
                             <div class="unit_cons">
-                                <div class="unit_cons_bar2" style="width: 100%;"></div>
+                                <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
                                 <div class="unit_rage_bar2" style="width: 100%;"></div>
@@ -100,7 +100,7 @@ class ViewTest extends TestCase
     </div>
 </div></td>
             <td class="w25"><div align="center">
-    <div class="unit_main_box" id="usr_40">
+    <div class="unit_main_box" id="usr_1aab367d-37e8-4544-9915-cb3d7779308b">
         <div class="unit_box1">
             <div class="unit_box1_right">
                 <div class="unit_box1_right2">
@@ -118,7 +118,7 @@ class ViewTest extends TestCase
                                 </div>
                             </div>
                             <div class="unit_cons">
-                                <div class="unit_cons_bar2" style="width: 100%;"></div>
+                                <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
                                 <div class="unit_rage_bar2" style="width: 100%;"></div>
@@ -194,7 +194,7 @@ EOT;
     <table>
         <tr>
             <td class="w25"><div align="center">
-    <div class="unit_main_box" id="usr_40">
+    <div class="unit_main_box" id="usr_46d969c1-463b-42b1-a2e0-2c64a8c34ae1">
         <div class="unit_box1">
             <div class="unit_box1_right">
                 <div class="unit_box1_right2">
@@ -212,7 +212,7 @@ EOT;
                                 </div>
                             </div>
                             <div class="unit_cons">
-                                <div class="unit_cons_bar2" style="width: 100%;"></div>
+                                <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
                                 <div class="unit_rage_bar2" style="width: 100%;"></div>
@@ -258,7 +258,7 @@ EOT;
             <td class="w25"></td>
             <td class="w25"></td>
             <td class="w25"><div align="center">
-    <div class="unit_main_box" id="usr_40">
+    <div class="unit_main_box" id="usr_1e813812-9a21-4e18-b494-8d552bac0cf4">
         <div class="unit_box1">
             <div class="unit_box1_right">
                 <div class="unit_box1_right2">
@@ -276,7 +276,7 @@ EOT;
                                 </div>
                             </div>
                             <div class="unit_cons">
-                                <div class="unit_cons_bar2" style="width: 100%;"></div>
+                                <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
                                 <div class="unit_rage_bar2" style="width: 100%;"></div>
