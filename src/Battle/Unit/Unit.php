@@ -8,6 +8,7 @@ use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
+use Battle\Action\Summon\SummonAction;
 use Battle\Chat\Message;
 use Battle\Command\CommandInterface;
 use Exception;
@@ -62,7 +63,7 @@ class Unit extends AbstractUnit
     /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
      *
-     * @uses applyDamageAction, applyHealAction
+     * @uses applyDamageAction, applyHealAction, applySummonAction
      * @param ActionInterface $action
      * @return string - Сообщение о произошедшем действии
      * @throws Exception
@@ -114,5 +115,18 @@ class Unit extends AbstractUnit
         $action->setFactualPower($this->life - $primordialLife);
 
         return Message::heal($action);
+    }
+
+    /**
+     * Добавление юнита в команду происходит в самом SummonAction, от пользователя нужно только сообщение о действии
+     *
+     * В тоже время, в будущем могут быть добавлены параметры, влияющие на силу саммонов
+     *
+     * @param SummonAction $action
+     * @return string
+     */
+    private function applySummonAction(SummonAction $action): string
+    {
+        return Message::summon($action);
     }
 }

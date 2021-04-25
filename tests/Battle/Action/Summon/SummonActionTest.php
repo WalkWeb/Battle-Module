@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Action;
+namespace Tests\Battle\Action\Summon;
 
-use Battle\Action\Heal\HealAction;
+use Battle\Action\Summon\SummonAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -13,23 +13,20 @@ use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 
-class HealActionTest extends TestCase
+class SummonActionTest extends TestCase
 {
-    private const NO_TARGET = '<b>unit_5</b> [80/80] wanted to use heal, but no one';
-
     /**
      * @throws ClassFactoryException
      * @throws CommandException
-     * @throws UnitFactoryException
      * @throws UnitException
+     * @throws UnitFactoryException
      */
-    public function testCreateHealAction(): void
+    public function testCreateSummonAction(): void
     {
         $message = '';
-        $unit = UnitFactory::createByTemplate(1);
-        $alliesUnit = UnitFactory::createByTemplate(5);
+        $alliesUnit = UnitFactory::createByTemplate(7);
         $enemyUnit = UnitFactory::createByTemplate(3);
-        $alliesCommand = CommandFactory::create([$unit, $alliesUnit]);
+        $alliesCommand = CommandFactory::create([$alliesUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         for ($i = 0; $i < 10; $i++) {
@@ -39,12 +36,11 @@ class HealActionTest extends TestCase
         $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection->getActions() as $action) {
-            self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
+            self::assertContainsOnlyInstancesOf(SummonAction::class, [$action]);
             $message = $action->handle();
         }
 
-        self::assertEquals(self::NO_TARGET, $message);
-
-        self::assertEquals(0, $alliesUnit->getConcentration());
+        self::assertEquals('<b>unit_7</b> [80/80] summon Imp', $message);
+        self::assertCount(2, $alliesCommand->getUnits());
     }
 }

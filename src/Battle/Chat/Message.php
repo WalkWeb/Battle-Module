@@ -6,6 +6,7 @@ namespace Battle\Chat;
 
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
+use Battle\Action\Summon\SummonAction;
 
 class Message
 {
@@ -31,6 +32,14 @@ class Message
             $action->getTargetUnit()->getLife() . '/' .
             $action->getTargetUnit()->getTotalLife() . '] on ' .
             $action->getFactualPower() . ' life';
+    }
+
+    public static function summon(SummonAction $action): string
+    {
+        return '<b>' .
+            $action->getActionUnit()->getName() . '</b> [' .
+            $action->getActionUnit()->getLife() . '/' .
+            $action->getActionUnit()->getTotalLife() . '] ' . $action->getNameAction();
     }
 
     public static function hoTargetForHeal(HealAction $action): string

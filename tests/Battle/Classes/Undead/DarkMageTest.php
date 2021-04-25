@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Classes\Undead;
 
-use Battle\Action\Heal\HealAction;
+use Battle\Action\Summon\SummonAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
@@ -29,16 +29,19 @@ class DarkMageTest extends TestCase
         $actionCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $priest = $actionUnit->getClass();
+        $darkMage = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::DARK_MAGE, $priest->getId());
-        self::assertEquals(UnitClassInterface::DARK_MAGE_SMALL_ICON, $priest->getSmallIcon());
+        self::assertEquals(UnitClassInterface::DARK_MAGE, $darkMage->getId());
+        self::assertEquals(UnitClassInterface::DARK_MAGE_SMALL_ICON, $darkMage->getSmallIcon());
 
-        $actionCollection = $priest->getAbility($actionUnit, $enemyCommand, $actionCommand);
+        $actionCollection = $darkMage->getAbility($actionUnit, $enemyCommand, $actionCommand);
 
         foreach ($actionCollection->getActions() as $action) {
-            self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
-            self::assertEquals((int)($actionUnit->getDamage() * 1.2), $action->getPower());
+            self::assertContainsOnlyInstancesOf(SummonAction::class, [$action]);
+            $action->handle();
         }
+
+        // Размер команды увеличился на 1 юнита
+        self::assertCount(2, $actionCommand->getUnits());
     }
 }

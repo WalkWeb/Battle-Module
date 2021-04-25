@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Action;
+namespace Tests\Battle\Action\Damage;
 
 use Battle\Action\Damage\DamageAction;
 use Battle\Classes\ClassFactoryException;
