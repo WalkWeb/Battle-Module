@@ -11,17 +11,15 @@ foreach ($result->getChat()->getMessages() as $view) {
     echo $view;
 }
 
-echo '<h1>' . $result->getWinnerText() . '</h1>';
-
 ?>
 
-<br />
-<hr>
-
-<h2>Statistics:</h2>
+<h1><?= $result->getWinnerText() ?></h1>
 
 <div class="statistics_box">
     <table class="statistics">
+        <tr class="header">
+            <td colspan="5"><p>Statistics</p></td>
+        </tr>
         <tr class="header">
             <td><p><span class="stat_unit">Unit</span></p></td>
             <td><p><span class="stat_damage">Caused Damage</span></p></td>
@@ -38,10 +36,21 @@ echo '<h1>' . $result->getWinnerText() . '</h1>';
             <td><p><span class="stat_kill"><?= $unit->getKilling() ?></span></p></td>
         </tr>
         <?php endforeach; ?>
+        <tr>
+            <td><p class="right">Total rounds:</p></td>
+            <td colspan="4"><p class="left"><?= $result->getStatistic()->getRoundNumber() ?></p></td>
+        </tr>
+        <tr>
+            <td><p class="right">Total stroke:</p></td>
+            <td colspan="4"><p class="left"><?= $result->getStatistic()->getStrokeNumber() ?></p></td>
+        </tr>
+        <tr>
+            <td><p class="right">Runtime:</p></td>
+            <td colspan="4"><p class="left"><?= $result->getStatistic()->getRuntime() ?> ms</p></td>
+        </tr>
+        <tr>
+            <td><p class="right">Memory cost:</p></td>
+            <td colspan="4"><p class="left"><?= $result->getStatistic()->getMemoryCostClipped() ?></p></td>
+        </tr>
     </table>
 </div>
-
-<p>Total rounds: <?= $result->getStatistic()->getRoundNumber() ?></p>
-<p>Total stroke: <?= $result->getStatistic()->getStrokeNumber() ?></p>
-<p>Runtime: <?= $result->getStatistic()->getRuntime() ?> ms</p>
-<p>Memory cost: <?= $result->getStatistic()->getMemoryCostClipped() ?></p>

@@ -400,4 +400,12 @@ span.stat_kill {
     color: #d39e00;
 }
 
+p.right {
+    text-align: right;
+}
+
+p.left {
+    text-align: left;
+}
+
 /* Table statistics styles end */
