@@ -11,7 +11,7 @@ use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Unit;
-use Battle\Action\DamageAction;
+use Battle\Action\Damage\DamageAction;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;

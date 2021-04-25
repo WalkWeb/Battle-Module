@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Action;
+namespace Battle\Action\Damage;
 
 class HeavyStrikeAction extends DamageAction
 {

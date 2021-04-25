@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Classes\Human;
 
-use Battle\Action\HeavyStrikeAction;
+use Battle\Action\Damage\HeavyStrikeAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandException;

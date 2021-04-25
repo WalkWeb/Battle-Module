@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Action;
+namespace Battle\Action\Heal;
 
 class GreatHealAction extends HealAction
 {

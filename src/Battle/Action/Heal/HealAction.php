@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Battle\Action;
+namespace Battle\Action\Heal;
 
+use Battle\Action\AbstractAction;
 use Battle\Chat\Message;
 
 class HealAction extends AbstractAction

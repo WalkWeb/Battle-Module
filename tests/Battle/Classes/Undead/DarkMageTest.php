@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Classes\Undead;
 
-use Battle\Action\GreatHealAction;
+use Battle\Action\Heal\HealAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
@@ -19,8 +19,8 @@ class DarkMageTest extends TestCase
     /**
      * @throws ClassFactoryException
      * @throws CommandException
-     * @throws UnitFactoryException
      * @throws UnitException
+     * @throws UnitFactoryException
      */
     public function testCreateDarkMageClass(): void
     {
@@ -37,8 +37,8 @@ class DarkMageTest extends TestCase
         $actionCollection = $priest->getAbility($actionUnit, $enemyCommand, $actionCommand);
 
         foreach ($actionCollection->getActions() as $action) {
-            self::assertContainsOnlyInstancesOf(GreatHealAction::class, [$action]);
-            self::assertEquals($actionUnit->getDamage() * 3, $action->getPower());
+            self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
+            self::assertEquals((int)($actionUnit->getDamage() * 1.2), $action->getPower());
         }
     }
 }

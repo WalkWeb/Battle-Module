@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Battle\Statistic;
 
 use Battle\Action\ActionInterface;
-use Battle\Action\DamageAction;
-use Battle\Action\HealAction;
+use Battle\Action\Damage\DamageAction;
+use Battle\Action\Heal\HealAction;
 use Battle\Statistic\UnitStatistic\UnitStatistic;
 use Battle\Statistic\UnitStatistic\UnitStatisticCollection;
 use Battle\Statistic\UnitStatistic\UnitStatisticInterface;

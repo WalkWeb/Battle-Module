@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
-use Battle\Action\DamageAction;
+use Battle\Action\Damage\DamageAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Action\ActionException;

@@ -6,7 +6,7 @@ namespace Battle\Classes\Human;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
-use Battle\Action\GreatHealAction;
+use Battle\Action\Heal\GreatHealAction;
 use Battle\Classes\AbstractUnitClass;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;

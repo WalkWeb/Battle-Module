@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Battle\Action;
+namespace Battle\Action\Damage;
 
+use Battle\Action\AbstractAction;
+use Battle\Action\ActionException;
 use Battle\Unit\UnitInterface;
 
 class DamageAction extends AbstractAction

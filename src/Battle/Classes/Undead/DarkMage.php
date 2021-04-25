@@ -6,7 +6,7 @@ namespace Battle\Classes\Undead;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
-use Battle\Action\GreatHealAction;
+use Battle\Action\Heal\HealAction;
 use Battle\Classes\AbstractUnitClass;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
@@ -35,7 +35,7 @@ class DarkMage extends AbstractUnitClass
         CommandInterface $alliesCommand
     ): ActionCollection
     {
-        return new ActionCollection([new GreatHealAction($actionUnit, $alliesCommand, $alliesCommand)]);
+        return new ActionCollection([new HealAction($actionUnit, $alliesCommand, $alliesCommand)]);
     }
 
     /**

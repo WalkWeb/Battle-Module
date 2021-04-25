@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Chat;
 
-use Battle\Action\DamageAction;
-use Battle\Action\HealAction;
+use Battle\Action\Damage\DamageAction;
+use Battle\Action\Heal\HealAction;
 
 class Message
 {

@@ -6,8 +6,8 @@ namespace Battle\Unit;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
-use Battle\Action\DamageAction;
-use Battle\Action\HealAction;
+use Battle\Action\Damage\DamageAction;
+use Battle\Action\Heal\HealAction;
 use Battle\Chat\Message;
 use Battle\Command\CommandInterface;
 use Exception;

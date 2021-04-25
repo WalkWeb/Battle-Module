@@ -6,7 +6,7 @@ namespace Battle\Classes\Undead;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
-use Battle\Action\HeavyStrikeAction;
+use Battle\Action\Damage\HeavyStrikeAction;
 use Battle\Classes\AbstractUnitClass;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;

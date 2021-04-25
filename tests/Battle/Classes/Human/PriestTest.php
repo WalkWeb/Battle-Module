@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Classes\Human;
 
-use Battle\Action\GreatHealAction;
+use Battle\Action\Heal\GreatHealAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
