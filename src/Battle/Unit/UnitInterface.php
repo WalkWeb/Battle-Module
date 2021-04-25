@@ -154,4 +154,11 @@ interface UnitInterface
      * @return EffectCollection
      */
     public function getEffects(): EffectCollection;
+
+    /**
+     * Урон юнита
+     *
+     * @return int
+     */
+    public function getDamage(): int;
 }

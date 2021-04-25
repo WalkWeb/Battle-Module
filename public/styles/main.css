@@ -400,6 +400,17 @@ span.stat_kill {
     color: #d39e00;
 }
 
+img.stat_ava {
+    width: 25px;
+    height: 25px;
+    background-size: cover;
+    border-radius: 100%;
+}
+
+img.stat_damage, img.stat_life, img.stat_ava {
+    vertical-align: middle;
+}
+
 p.right {
     text-align: right;
 }
