@@ -5,9 +5,54 @@ public/index.php</p>
 <p>Запуск тестов:<br />
 php vendor/bin/phpunit</p>
 
+## Пример
+
+```
+use Battle\BattleFactory;
+use Battle\View\ViewFactory;
+
+$data = [
+    [
+        'id'           => '81941b8a-f7ca-447e-8951-36777ae6e79e',
+        'name'         => 'Warrior',
+        'avatar'       => '/images/avas/humans/human001.jpg',
+        'damage'       => 25,
+        'attack_speed' => 1.0,
+        'life'         => 110,
+        'total_life'   => 110,
+        'melee'        => true,
+        'class'        => 1,
+        'command'      => 'left',
+    ],
+    [
+        'id'           => 'bf75c4a3-b866-4787-88c7-8db57daf3d64',
+        'name'         => 'Skeleton',
+        'avatar'       => '/images/avas/monsters/005.png',
+        'damage'       => 25,
+        'attack_speed' => 1,
+        'life'         => 65,
+        'total_life'   => 65,
+        'melee'        => true,
+        'class'        => 3,
+        'command'      => 'right',
+    ],
+];
+
+$view = (new ViewFactory())->create();
+echo $view->renderHead(); // example layout styles
+
+$battle = BattleFactory::create($data);
+$result = $battle->handle();
+echo $view->renderResult($result);
+```
+
 ## Как выглядит бой
 
-![alt text](public/images/example.png)
+![alt text](public/images/example_start.png)
+
+###...
+
+![alt text](public/images/example_end.png)
 
 ## Планы
 
@@ -20,7 +65,6 @@ php vendor/bin/phpunit</p>
 - Переделать отображение боя: стартовый вид юнитов, чат, детальный лог боя
 - Реализовать анимацию боя на JS и генерацию скрипта для анимации
 - Добавить мультиязычность
-- Еще раз обновить README.md - добавив обновленные картинки боя
 - Добавить больше разнообразных способностей
 - Реализовать механику эффектов
 - Расширить варианты классов, добавив новым классам новые варианты способностей
