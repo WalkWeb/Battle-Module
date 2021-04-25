@@ -50,4 +50,12 @@ class DamageAction extends AbstractAction
 
         return $this->enemyCommand->getMeleeUnitForAttacks();
     }
+
+    /**
+     * @return string
+     */
+    public function getNameAction(): string
+    {
+        return self::NAME;
+    }
 }

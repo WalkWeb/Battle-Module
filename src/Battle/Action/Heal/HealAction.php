@@ -41,4 +41,12 @@ class HealAction extends AbstractAction
     {
         $this->factualPower = $factualPower;
     }
+
+    /**
+     * @return string
+     */
+    public function getNameAction(): string
+    {
+        return self::NAME;
+    }
 }

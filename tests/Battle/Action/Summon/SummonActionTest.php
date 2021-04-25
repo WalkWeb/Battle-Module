@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action\Summon;
 
-use Battle\Action\Summon\SummonAction;
+use Battle\Action\Summon\SummonImpAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -36,7 +36,7 @@ class SummonActionTest extends TestCase
         $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection->getActions() as $action) {
-            self::assertContainsOnlyInstancesOf(SummonAction::class, [$action]);
+            self::assertContainsOnlyInstancesOf(SummonImpAction::class, [$action]);
             $message = $action->handle();
         }
 

@@ -5,24 +5,12 @@ declare(strict_types=1);
 namespace Battle\Action\Summon;
 
 use Battle\Action\AbstractAction;
-use Battle\Classes\UnitClassFactory;
-use Battle\Unit\Unit;
 use Battle\Unit\UnitInterface;
 use Exception;
 
-class SummonAction extends AbstractAction
+abstract class SummonAction extends AbstractAction
 {
-    protected const NAME          = 'summon Imp';
     protected const HANDLE_METHOD = 'applySummonAction';
-
-    //
-    private $name = 'Imp';
-    private $url = '/images/avas/monsters/004.png';
-    private $damage = 10;
-    private $attackSpeed = 1;
-    private $life = 30;
-    private $melee = true;
-    private $classId = 1;
 
     public function getHandleMethod(): string
     {
@@ -40,28 +28,18 @@ class SummonAction extends AbstractAction
         return $this->actionUnit->applyAction($this);
     }
 
+    /**
+     * @return UnitInterface
+     */
+    abstract public function getSummonUnit(): UnitInterface;
+
+    /**
+     * @param int $factualPower
+     * @return int|mixed
+     */
     public function setFactualPower(int $factualPower)
     {
         return 0;
-    }
-
-    /**
-     * @return UnitInterface
-     * @throws Exception
-     */
-    public function getSummonUnit(): UnitInterface
-    {
-        return new Unit(
-            $this->generateId(),
-            $this->name,
-            $this->url,
-            $this->damage,
-            $this->attackSpeed,
-            $this->life,
-            $this->life,
-            $this->melee,
-            UnitClassFactory::create($this->classId)
-        );
     }
 
     /**
@@ -71,7 +49,7 @@ class SummonAction extends AbstractAction
      * @return string
      * @throws Exception
      */
-    private function generateId(?int $length = 5): string
+    protected function generateId(?int $length = 5): string
     {
         $chars = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         $numChars = strlen($chars);

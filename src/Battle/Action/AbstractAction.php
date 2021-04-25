@@ -54,9 +54,4 @@ abstract class AbstractAction implements ActionInterface
     {
         return $this->factualPower;
     }
-
-    public function getNameAction(): string
-    {
-        return static::NAME;
-    }
 }
