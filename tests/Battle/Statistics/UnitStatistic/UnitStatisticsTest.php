@@ -4,20 +4,29 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Statistics\UnitStatistic;
 
+use Battle\Classes\ClassFactoryException;
 use Battle\Statistic\UnitStatistic\UnitStatistic;
 use PHPUnit\Framework\TestCase;
+use Tests\Battle\Factory\UnitFactory;
+use Tests\Battle\Factory\UnitFactoryException;
 
 class UnitStatisticsTest extends TestCase
 {
+    /**
+     * @throws ClassFactoryException
+     * @throws UnitFactoryException
+     */
     public function testUnitStatistics(): void
     {
-        $id = 'b2d2e0ba-f85c-4c16-91ba-6a003e153e09';
-        $name = 'Unit_stats';
+        $unit = UnitFactory::createByTemplate(1);
 
-        $unitStatistics = new UnitStatistic($id, $name);
+        $id = 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce';
+        $name = 'unit_1';
 
-        self::assertEquals($id, $unitStatistics->getId());
-        self::assertEquals($name, $unitStatistics->getName());
+        $unitStatistics = new UnitStatistic($unit);
+
+        self::assertEquals($id, $unitStatistics->getUnit()->getId());
+        self::assertEquals($name, $unitStatistics->getUnit()->getName());
 
         $unitStatistics->addCausedDamage(15);
         $unitStatistics->addCausedDamage(15);
@@ -37,6 +46,6 @@ class UnitStatisticsTest extends TestCase
         self::assertEquals(60, $unitStatistics->getTakenDamage());
         self::assertEquals(30, $unitStatistics->getHeal());
         self::assertEquals(1, $unitStatistics->getKilling());
-        self::assertEquals($name, $unitStatistics->getName());
+        self::assertEquals($name, $unitStatistics->getUnit()->getName());
     }
 }

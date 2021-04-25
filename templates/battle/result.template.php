@@ -29,7 +29,7 @@ foreach ($result->getChat()->getMessages() as $view) {
         </tr>
         <?php foreach ($result->getStatistic()->getUnitsStatistics() as $unit): ?>
         <tr>
-            <td><p><span class="stat_unit"><?= $unit->getName() ?></span></p></td>
+            <td><p><span class="stat_unit"><?= $unit->getUnit()->getName() ?></span></p></td>
             <td><p><span class="stat_damage"><?= $unit->getCausedDamage() ?></span></p></td>
             <td><p><span class="stat_taken"><?= $unit->getTakenDamage() ?></span></p></td>
             <td><p><span class="stat_heal"><?= $unit->getHeal() ?></span></p></td>

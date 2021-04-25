@@ -24,11 +24,11 @@ class UnitStatisticCollection implements Iterator, Countable
      */
     public function add(UnitStatisticInterface $unitStatistic): void
     {
-        if ($this->exist($unitStatistic->getId())) {
+        if ($this->exist($unitStatistic->getUnit()->getId())) {
             throw new StatisticException(StatisticException::DOUBLE_ID);
         }
 
-        $this->elements[$unitStatistic->getId()] = $unitStatistic;
+        $this->elements[$unitStatistic->getUnit()->getId()] = $unitStatistic;
     }
 
     /**

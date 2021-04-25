@@ -2,27 +2,16 @@
 
 namespace Battle\Statistic\UnitStatistic;
 
+use Battle\Unit\UnitInterface;
+
 interface UnitStatisticInterface
 {
-    // todo getUnit(): UnitInterface
-
     /**
-     * Возвращает ID юнита
+     * Возвращает юнита, по которому ведется статистика
      *
-     * todo На удаление
-     *
-     * @return string
+     * @return UnitInterface
      */
-    public function getId(): string;
-
-    /**
-     * Возвращает имя юнита
-     *
-     * todo На удаление
-     *
-     * @return string
-     */
-    public function getName(): string;
+    public function getUnit(): UnitInterface;
 
     /**
      * Добавляет нанесенный юнитом урон

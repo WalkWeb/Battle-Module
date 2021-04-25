@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Battle\Statistic\UnitStatistic;
 
+use Battle\Unit\UnitInterface;
+
 class UnitStatistic implements UnitStatisticInterface
 {
     /**
-     * @var string - ID юнита
+     * @var UnitInterface
      */
-    private $id;
-
-    /**
-     * @var string - Имя юнита
-     */
-    private $name;
+    private $unit;
 
     /**
      * @var int - Нанесенный юнитом урон
@@ -37,29 +34,19 @@ class UnitStatistic implements UnitStatisticInterface
     private $killing = 0;
 
     /**
-     * @param string $id
-     * @param string $name
+     * @param UnitInterface $unit
      */
-    public function __construct(string $id, string $name)
+    public function __construct(UnitInterface $unit)
     {
-        $this->id = $id;
-        $this->name = $name;
+        $this->unit = $unit;
     }
 
     /**
-     * @return string
+     * @return UnitInterface
      */
-    public function getId(): string
+    public function getUnit(): UnitInterface
     {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
+        return $this->unit;
     }
 
     /**
