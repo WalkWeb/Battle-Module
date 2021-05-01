@@ -27,7 +27,6 @@ class Warrior extends AbstractUnitClass
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
-     * @throws ActionException
      */
     public function getAbility(
         UnitInterface $actionUnit,
@@ -35,7 +34,9 @@ class Warrior extends AbstractUnitClass
         CommandInterface $alliesCommand
     ): ActionCollection
     {
-        return new ActionCollection([new HeavyStrikeAction($actionUnit, $enemyCommand, $alliesCommand)]);
+        $collection = new ActionCollection();
+        $collection->add(new HeavyStrikeAction($actionUnit, $enemyCommand, $alliesCommand));
+        return $collection;
     }
 
     /**

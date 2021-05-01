@@ -89,7 +89,7 @@ class DamageActionTest extends TestCase
 
         $actionCollection = $attackerUnit->getAction($enemyCommand, $alliesCommand);
 
-        foreach ($actionCollection->getActions() as $action) {
+        foreach ($actionCollection as $action) {
             $action->handle();
             self::assertEquals(30, $action->getPower());
             self::assertEquals(20, $action->getFactualPower());

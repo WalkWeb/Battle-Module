@@ -35,8 +35,9 @@ class DeadKnight extends AbstractUnitClass
         CommandInterface $alliesCommand
     ): ActionCollection
     {
-        // В будущем ассортимент способностей будет расширен
-        return new ActionCollection([new HeavyStrikeAction($actionUnit, $enemyCommand, $alliesCommand)]);
+        $collection = new ActionCollection();
+        $collection->add(new HeavyStrikeAction($actionUnit, $enemyCommand, $alliesCommand));
+        return $collection;
     }
 
     /**

@@ -36,7 +36,7 @@ class DeadKnightTest extends TestCase
 
         $actionCollection = $warrior->getAbility($actionUnit, $enemyCommand, $actionCommand);
 
-        foreach ($actionCollection->getActions() as $action) {
+        foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(HeavyStrikeAction::class, [$action]);
             self::assertEquals($actionUnit->getDamage() * 2.5, $action->getPower());
         }

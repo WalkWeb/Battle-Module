@@ -7,7 +7,6 @@ namespace Tests\Battle\Action;
 use Battle\Action\ActionCollection;
 use Battle\Action\Damage\DamageAction;
 use Battle\Classes\ClassFactoryException;
-use Battle\Action\ActionException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
@@ -18,7 +17,6 @@ use Tests\Battle\Factory\UnitFactoryException;
 class ActionCollectionTest extends TestCase
 {
     /**
-     * @throws ActionException
      * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitFactoryException
@@ -32,19 +30,11 @@ class ActionCollectionTest extends TestCase
         $alliesCommand = CommandFactory::create([$unit]);
         $action = new DamageAction($unit, $defendCommand, $alliesCommand);
 
-        $actionCollection = new ActionCollection([$action]);
+        $actionCollection = new ActionCollection();
+        $actionCollection->add($action);
 
-        foreach ($actionCollection->getActions() as $action) {
+        foreach ($actionCollection as $action) {
             self::assertInstanceOf(DamageAction::class, $action);
         }
-    }
-
-    /**
-     * @throws ActionException
-     */
-    public function testCreateActionCollectionFail(): void
-    {
-        $this->expectException(ActionException::class);
-        new ActionCollection(['action']);
     }
 }

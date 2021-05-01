@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Classes\Human;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\ActionException;
 use Battle\Action\Heal\GreatHealAction;
 use Battle\Classes\AbstractUnitClass;
 use Battle\Classes\UnitClassInterface;
@@ -27,7 +26,6 @@ class Priest extends AbstractUnitClass
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
-     * @throws ActionException
      */
     public function getAbility(
         UnitInterface $actionUnit,
@@ -35,7 +33,9 @@ class Priest extends AbstractUnitClass
         CommandInterface $alliesCommand
     ): ActionCollection
     {
-        return new ActionCollection([new GreatHealAction($actionUnit, $alliesCommand, $alliesCommand)]);
+        $collection = new ActionCollection();
+        $collection->add(new GreatHealAction($actionUnit, $alliesCommand, $alliesCommand));
+        return $collection;
     }
 
     /**

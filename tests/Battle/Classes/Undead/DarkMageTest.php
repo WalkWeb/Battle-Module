@@ -36,7 +36,7 @@ class DarkMageTest extends TestCase
 
         $actionCollection = $darkMage->getAbility($actionUnit, $enemyCommand, $actionCommand);
 
-        foreach ($actionCollection->getActions() as $action) {
+        foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(SummonAction::class, [$action]);
             $action->handle();
         }

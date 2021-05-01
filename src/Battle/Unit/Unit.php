@@ -48,14 +48,14 @@ class Unit extends AbstractUnit
      */
     private function getDamageAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
+        $collection = new ActionCollection();
         $attacks = $this->calculateAttackSpeed();
-        $array = [];
 
         for ($i = 0; $i < $attacks; $i++) {
-            $array[] = new DamageAction($this, $enemyCommand, $alliesCommand);
+            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand));
         }
 
-        return new ActionCollection($array);
+        return $collection;
     }
 
     // ---------------------------------------------- HANDLE ACTION ----------------------------------------------------

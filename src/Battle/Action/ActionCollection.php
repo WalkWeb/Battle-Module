@@ -4,34 +4,26 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
-class ActionCollection
+use Battle\Traits\CollectionTrait;
+use Countable;
+use Iterator;
+
+class ActionCollection implements Iterator, Countable
 {
-    // todo CollectionTrait
+    use CollectionTrait;
 
     /**
      * @var ActionInterface[]
      */
-    private $actions = [];
+    private $elements = [];
 
-    /**
-     * @param array $actions
-     * @throws ActionException
-     */
-    public function __construct(array $actions)
+    public function add(ActionInterface $action): void
     {
-        foreach ($actions as $action) {
-            if (!$action instanceof ActionInterface) {
-                throw new ActionException(ActionException::INCORRECT_ACTION);
-            }
-            $this->actions[] = $action;
-        }
+        $this->elements[] = $action;
     }
 
-    /**
-     * @return ActionInterface[]
-     */
-    public function getActions(): array
+    public function current(): ActionInterface
     {
-        return $this->actions;
+        return current($this->elements);
     }
 }

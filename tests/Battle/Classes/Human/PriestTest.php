@@ -36,7 +36,7 @@ class PriestTest extends TestCase
 
         $actionCollection = $priest->getAbility($actionUnit, $enemyCommand, $actionCommand);
 
-        foreach ($actionCollection->getActions() as $action) {
+        foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(GreatHealAction::class, [$action]);
             self::assertEquals($actionUnit->getDamage() * 3, $action->getPower());
         }

@@ -62,7 +62,7 @@ class StatisticsTest extends TestCase
 
         $actionCollection = $attackUnit->getAction($enemyCommand, $alliesCommand);
 
-        foreach ($actionCollection->getActions() as $action) {
+        foreach ($actionCollection as $action) {
             $action->handle();
             $statistics->addUnitAction($action);
             self::assertEquals(20, $statistics->getUnitsStatistics()->get($attackUnit->getId())->getCausedDamage());
@@ -72,7 +72,7 @@ class StatisticsTest extends TestCase
         for ($i = 0; $i < 10; $i++) {
             $actionCollection = $attackUnit->getAction($enemyCommand, $alliesCommand);
 
-            foreach ($actionCollection->getActions() as $action) {
+            foreach ($actionCollection as $action) {
 
                 if (!$enemyCommand->isAlive()) {
                     break;

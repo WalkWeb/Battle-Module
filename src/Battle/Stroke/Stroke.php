@@ -81,7 +81,7 @@ class Stroke implements StrokeInterface
 
         $actionCollection = $this->actionUnit->getAction($enemyCommand, $alliesCommand);
 
-        foreach ($actionCollection->getActions() as $action) {
+        foreach ($actionCollection as $action) {
 
             if (!$enemyCommand->isAlive()) {
                 break;

@@ -8,7 +8,6 @@ use Exception;
 
 class ActionException extends Exception
 {
-    public const INCORRECT_ACTION = 'INCORRECT_ACTION';
     public const NO_DEFINED       = 'No defined unit';
     public const NO_DEFINED_AGAIN = 'Не смотря на то, что команда сказала, что у неё есть живые юниты, метод getUnitForAttacks() не вернул ничего';
 }

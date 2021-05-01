@@ -82,7 +82,7 @@ class StrokeTest extends TestCase
      * @throws CommandException
      * @throws UnitException
      */
-    public function testCreate(): void
+    public function testCreateAction(): void
     {
         $leftCommand = CommandFactory::create([$this->attackUnit]);
         $rightCommand = CommandFactory::create([$this->defendUnit]);

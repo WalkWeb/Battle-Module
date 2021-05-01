@@ -202,7 +202,9 @@ class UnitTest extends TestCase
 
         self::assertEquals(UnitInterface::ADD_CON_ACTION_UNIT, $leftUnit->getConcentration());
 
-        $actionCollection->getActions()[0]->handle();
+        foreach ($actionCollection as $action) {
+            $action->handle();
+        }
 
         self::assertEquals(UnitInterface::ADD_CON_RECEIVING_UNIT, $rightUnit->getConcentration());
     }

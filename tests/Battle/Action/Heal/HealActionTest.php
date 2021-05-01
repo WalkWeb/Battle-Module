@@ -9,6 +9,7 @@ use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
+use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -36,9 +37,14 @@ class HealActionTest extends TestCase
             $alliesUnit->newRound();
         }
 
+        self::assertEquals(UnitInterface::MAX_CONS, $alliesUnit->getConcentration());
+
         $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
-        foreach ($actionCollection->getActions() as $action) {
+        self::assertEquals(0, $alliesUnit->getConcentration());
+        self::assertCount(1, $actionCollection);
+
+        foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
             $message = $action->handle();
         }

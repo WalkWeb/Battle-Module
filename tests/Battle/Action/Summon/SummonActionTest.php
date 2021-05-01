@@ -35,7 +35,7 @@ class SummonActionTest extends TestCase
 
         $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
-        foreach ($actionCollection->getActions() as $action) {
+        foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(SummonImpAction::class, [$action]);
             $message = $action->handle();
         }
