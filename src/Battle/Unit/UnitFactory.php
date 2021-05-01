@@ -35,35 +35,26 @@ class UnitFactory
      */
     public static function create(array $data): UnitInterface
     {
-        // todo рефакторинг - количество кода можно сократить
+        // todo минимальная-максимальная длина id
 
-        if (!array_key_exists('id', $data) || !is_string($data['id']) || $data['id'] === '') {
-            throw new UnitException(UnitException::INCORRECT_ID);
-        }
-
-        if (!array_key_exists('name', $data) || !is_string($data['name'])) {
-            throw new UnitException(UnitException::INCORRECT_NAME);
-        }
+        self::existAndString($data, 'id', UnitException::INCORRECT_ID);
+        self::existAndString($data, 'name', UnitException::INCORRECT_NAME);
+        self::existAndString($data, 'avatar', UnitException::INCORRECT_AVATAR);
+        self::existAndInt($data, 'damage', UnitException::INCORRECT_DAMAGE);
+        self::existAndInt($data, 'life', UnitException::INCORRECT_LIFE);
+        self::existAndInt($data, 'total_life', UnitException::INCORRECT_TOTAL_LIFE);
+        self::existAndInt($data, 'level', UnitException::INCORRECT_LEVEL);
+        self::existAndInt($data, 'class', UnitException::INCORRECT_CLASS);
+        self::intMinMax($data['damage'], UnitInterface::MIN_DAMAGE, UnitInterface::MAX_DAMAGE, UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE);
+        self::intMinMax($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
+        self::intMinMax($data['total_life'], UnitInterface::MIN_TOTAL_LIFE, UnitInterface::MAX_TOTAL_LIFE, UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE);
+        self::intMinMax($data['level'], UnitInterface::MIN_LEVEL, UnitInterface::MAX_LEVEL, UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL);
 
         $nameLength = mb_strlen($data['name']);
 
         if ($nameLength < UnitInterface::MIN_NAME_LENGTH || $nameLength > UnitInterface::MAX_NAME_LENGTH) {
             throw new UnitException(
                 UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH
-            );
-        }
-
-        if (!array_key_exists('avatar', $data) || !is_string($data['avatar'])) {
-            throw new UnitException(UnitException::INCORRECT_AVATAR);
-        }
-
-        if (!array_key_exists('damage', $data) || !is_int($data['damage'])) {
-            throw new UnitException(UnitException::INCORRECT_DAMAGE);
-        }
-
-        if ($data['damage'] < UnitInterface::MIN_DAMAGE || $data['damage'] > UnitInterface::MAX_DAMAGE) {
-            throw new UnitException(
-                UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE
             );
         }
 
@@ -77,46 +68,12 @@ class UnitFactory
             );
         }
 
-        if (!array_key_exists('life', $data) || !is_int($data['life'])) {
-            throw new UnitException(UnitException::INCORRECT_LIFE);
-        }
-
-        if ($data['life'] < UnitInterface::MIN_LIFE || $data['life'] > UnitInterface::MAX_LIFE) {
-            throw new UnitException(
-                UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE
-            );
-        }
-
-        if (!array_key_exists('total_life', $data) || !is_int($data['total_life'])) {
-            throw new UnitException(UnitException::INCORRECT_TOTAL_LIFE);
-        }
-
-        if ($data['total_life'] < UnitInterface::MIN_TOTAL_LIFE || $data['total_life'] > UnitInterface::MAX_TOTAL_LIFE) {
-            throw new UnitException(
-                UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE
-            );
-        }
-
         if ($data['life'] > $data['total_life']) {
             throw new UnitException(UnitException::LIFE_MORE_TOTAL_LIFE);
         }
 
-        if (!array_key_exists('level', $data) || !is_int($data['level'])) {
-            throw new UnitException(UnitException::INCORRECT_LEVEL);
-        }
-
-        if ($data['level'] < UnitInterface::MIN_LEVEL || $data['level'] > UnitInterface::MAX_LEVEL) {
-            throw new UnitException(
-                UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL
-            );
-        }
-
         if (!array_key_exists('melee', $data) || !is_bool($data['melee'])) {
             throw new UnitException(UnitException::INCORRECT_MELEE);
-        }
-
-        if (!array_key_exists('class', $data) || !is_int($data['class'])) {
-            throw new UnitException(UnitException::INCORRECT_CLASS);
         }
 
         return new Unit(
@@ -131,5 +88,45 @@ class UnitFactory
             $data['melee'],
             UnitClassFactory::create($data['class'])
         );
+    }
+
+    /**
+     * @param array $data
+     * @param string $filed
+     * @param string $error
+     * @throws UnitException
+     */
+    private static function existAndString(array $data, string $filed, string $error): void
+    {
+        if (!array_key_exists($filed, $data) || !is_string($data[$filed])) {
+            throw new UnitException($error);
+        }
+    }
+
+    /**
+     * @param array $data
+     * @param string $filed
+     * @param string $error
+     * @throws UnitException
+     */
+    private static function existAndInt(array $data, string $filed, string $error): void
+    {
+        if (!array_key_exists($filed, $data) || !is_int($data[$filed])) {
+            throw new UnitException($error);
+        }
+    }
+
+    /**
+     * @param int $value
+     * @param int $min
+     * @param int $max
+     * @param string $error
+     * @throws UnitException
+     */
+    private static function intMinMax(int $value, int $min, int $max, string $error): void
+    {
+        if ($value < $min || $value > $max) {
+            throw new UnitException($error);
+        }
     }
 }
