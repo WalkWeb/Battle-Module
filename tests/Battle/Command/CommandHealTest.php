@@ -59,6 +59,7 @@ class CommandHealTest extends TestCase
                     [
                         'id'           => '63ad76c6-6a11-44ef-997b-fea1778bebe5',
                         'name'         => 'Warrior',
+                        'level'        => 1,
                         'avatar'       => 'url avatar 1',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -71,6 +72,7 @@ class CommandHealTest extends TestCase
                     [
                         'id'           => 'fb8be211-0782-4c60-8865-68b177ffbe0c',
                         'name'         => 'Knight',
+                        'level'        => 1,
                         'avatar'       => 'url avatar 2',
                         'damage'       => 11,
                         'attack_speed' => 0.9,
@@ -82,6 +84,7 @@ class CommandHealTest extends TestCase
                     [
                         'id'           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
                         'name'         => 'Archer',
+                        'level'        => 1,
                         'avatar'       => 'url avatar 3',
                         'damage'       => 11,
                         'attack_speed' => 0.9,
@@ -94,6 +97,7 @@ class CommandHealTest extends TestCase
                     [
                         'id'           => 'fb8be211-0782-4c60-8865-68b177ffbe3c',
                         'name'         => 'Priest',
+                        'level'        => 1,
                         'avatar'       => 'url avatar 3',
                         'damage'       => 11,
                         'attack_speed' => 0.9,

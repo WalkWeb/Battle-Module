@@ -24,6 +24,7 @@ class UnitTest extends TestCase
 {
     private $attackId = '3bc9b8be-8cbd-44b4-a935-cd435d905d1b';
     private $attackName = 'attack_unit';
+    private $attackLevel = 1;
     private $attackAvatar = 'attack_unit_ava';
     private $attackDamage = 40;
     private $attackAttackSpeed = 1.00;
@@ -33,6 +34,7 @@ class UnitTest extends TestCase
 
     private $defendId = 'de03e3b9-21d1-439d-b336-8c7f000e5f59';
     private $defendName = 'defend_unit';
+    private $defendLevel = 2;
     private $defendAvatar = 'defend_unit_ava';
     private $defendDamage = 30;
     private $defendAttackSpeed = 1.00;
@@ -50,6 +52,7 @@ class UnitTest extends TestCase
         $unit = new Unit(
             $this->attackId,
             $this->attackName,
+            $this->attackLevel,
             $this->attackAvatar,
             $this->attackDamage,
             $this->attackAttackSpeed,
@@ -62,6 +65,7 @@ class UnitTest extends TestCase
         self::assertInstanceOf(UnitInterface::class, $unit);
         self::assertEquals($this->attackId, $unit->getId());
         self::assertEquals($this->attackName, $unit->getName());
+        self::assertEquals($this->attackLevel, $unit->getLevel());
         self::assertEquals($this->attackAvatar, $unit->getAvatar());
         self::assertEquals($this->attackDamage, $unit->getDamage());
         self::assertEquals($this->attackLife, $unit->getLife());
@@ -85,6 +89,7 @@ class UnitTest extends TestCase
         $attackUnit = new Unit(
             $this->attackId,
             $this->attackName,
+            $this->attackLevel,
             $this->attackAvatar,
             $this->attackDamage,
             $this->attackAttackSpeed,
@@ -97,6 +102,7 @@ class UnitTest extends TestCase
         $defendUnit = new Unit(
             $this->defendId,
             $this->defendName,
+            $this->defendLevel,
             $this->defendAvatar,
             $this->defendDamage,
             $this->defendAttackSpeed,
@@ -134,6 +140,7 @@ class UnitTest extends TestCase
         $unit = new Unit(
             $this->attackId,
             $this->attackName,
+            $this->attackLevel,
             $this->attackAvatar,
             $this->attackDamage,
             $this->attackAttackSpeed,

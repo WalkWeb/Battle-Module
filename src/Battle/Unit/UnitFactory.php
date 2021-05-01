@@ -18,6 +18,7 @@ class UnitFactory
      * [
      *     'id'           => 'a2763c19-7ec5-48f3-9242-2ea6c6d80c56',
      *     'name'         => 'Skeleton',
+     *     'level'        => 3,
      *     'avatar'       => '/images/avas/monsters/003.png',
      *     'damage'       => 15,
      *     'attack_speed' => 1.2,
@@ -100,6 +101,16 @@ class UnitFactory
             throw new UnitException(UnitException::LIFE_MORE_TOTAL_LIFE);
         }
 
+        if (!array_key_exists('level', $data) || !is_int($data['level'])) {
+            throw new UnitException(UnitException::INCORRECT_LEVEL);
+        }
+
+        if ($data['level'] < UnitInterface::MIN_LEVEL || $data['level'] > UnitInterface::MAX_LEVEL) {
+            throw new UnitException(
+                UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL
+            );
+        }
+
         if (!array_key_exists('melee', $data) || !is_bool($data['melee'])) {
             throw new UnitException(UnitException::INCORRECT_MELEE);
         }
@@ -111,6 +122,7 @@ class UnitFactory
         return new Unit(
             $data['id'],
             htmlspecialchars($data['name']),
+            $data['level'],
             $data['avatar'],
             $data['damage'],
             $data['attack_speed'],

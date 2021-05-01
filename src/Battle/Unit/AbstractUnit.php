@@ -21,6 +21,11 @@ abstract class AbstractUnit implements UnitInterface
     protected $name;
 
     /**
+     * @var int - Уровень юнита
+     */
+    protected $level;
+
+    /**
      * @var string - URL к картинке-аватару юнита
      */
     protected $avatar;
@@ -73,6 +78,7 @@ abstract class AbstractUnit implements UnitInterface
     public function __construct(
         string $id,
         string $name,
+        int $level,
         string $avatar,
         int $damage,
         float $attackSpeed,
@@ -84,6 +90,7 @@ abstract class AbstractUnit implements UnitInterface
     {
         $this->id = $id;
         $this->name = $name;
+        $this->level = $level;
         $this->avatar = $avatar;
         $this->damage = $damage;
         $this->attackSpeed = $attackSpeed;
@@ -102,6 +109,11 @@ abstract class AbstractUnit implements UnitInterface
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getLevel(): int
+    {
+        return $this->level;
     }
 
     public function isAction(): bool

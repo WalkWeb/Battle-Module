@@ -87,9 +87,7 @@ class ViewTest extends TestCase
             </div>
             <div class="unit_box2_left">
                 <div class="unit_icon">
-                    <div class="unit_icon_left">
-                        1
-                    </div>
+                    <div class="unit_icon_left">1</div>
                     <div class="unit_icon_right">
                         <img src="/images/icons/small/warrior.png" alt="">
                     </div>
@@ -149,9 +147,7 @@ class ViewTest extends TestCase
             </div>
             <div class="unit_box2_left">
                 <div class="unit_icon">
-                    <div class="unit_icon_left">
-                        1
-                    </div>
+                    <div class="unit_icon_left">1</div>
                     <div class="unit_icon_right">
                         <img src="/images/icons/small/warrior.png" alt="">
                     </div>
@@ -243,9 +239,7 @@ EOT;
             </div>
             <div class="unit_box2_left">
                 <div class="unit_icon">
-                    <div class="unit_icon_left">
-                        1
-                    </div>
+                    <div class="unit_icon_left">1</div>
                     <div class="unit_icon_right">
                         <img src="/images/icons/small/priest.png" alt="">
                     </div>
@@ -307,9 +301,7 @@ EOT;
             </div>
             <div class="unit_box2_left">
                 <div class="unit_icon">
-                    <div class="unit_icon_left">
-                        1
-                    </div>
+                    <div class="unit_icon_left">1</div>
                     <div class="unit_icon_right">
                         <img src="/images/icons/small/priest.png" alt="">
                     </div>

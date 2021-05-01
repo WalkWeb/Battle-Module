@@ -15,6 +15,7 @@ class UnitFactory
         1  => [
             'id'           => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',
             'name'         => 'unit_1',
+            'level'        => 1,
             'avatar'       => '/images/avas/humans/human001.jpg',
             'damage'       => 20,
             'attack_speed' => 1.00,
@@ -26,6 +27,7 @@ class UnitFactory
         2  => [
             'id'           => '1aab367d-37e8-4544-9915-cb3d7779308b',
             'name'         => 'unit_2',
+            'level'        => 1,
             'avatar'       => '/images/avas/humans/human002.jpg',
             'damage'       => 30,
             'attack_speed' => 1.00,
@@ -37,6 +39,7 @@ class UnitFactory
         3  => [
             'id'           => '72df87f5-b3a7-4574-9526-45a20aa77119',
             'name'         => 'unit_3',
+            'level'        => 1,
             'avatar'       => '/images/avas/humans/human003.jpg',
             'damage'       => 15,
             'attack_speed' => 1.00,
@@ -48,6 +51,7 @@ class UnitFactory
         4  => [
             'id'           => 'c310ce86-7bb2-44b0-b634-ea0d28fb1180',
             'name'         => 'unit_4',
+            'level'        => 1,
             'avatar'       => '/images/avas/humans/human004.jpg',
             'damage'       => 15,
             'attack_speed' => 1.00,
@@ -59,6 +63,7 @@ class UnitFactory
         5  => [
             'id'           => '46d969c1-463b-42b1-a2e0-2c64a8c34ae1',
             'name'         => 'unit_5',
+            'level'        => 1,
             'avatar'       => '/images/avas/monsters/003.png',
             'damage'       => 15,
             'attack_speed' => 1.00,
@@ -70,6 +75,7 @@ class UnitFactory
         6 => [
             'id'           => '1e813812-9a21-4e18-b494-8d552bac0cf4',
             'name'         => 'unit_6',
+            'level'        => 1,
             'avatar'       => '/images/avas/monsters/003.png',
             'damage'       => 12,
             'attack_speed' => 1.1,
@@ -81,6 +87,7 @@ class UnitFactory
         7  => [
             'id'           => '46d969c1-463b-42b1-a2e0-2c62a8c34ae3',
             'name'         => 'unit_7',
+            'level'        => 1,
             'avatar'       => '/images/avas/monsters/003.png',
             'damage'       => 15,
             'attack_speed' => 1.00,
@@ -92,6 +99,7 @@ class UnitFactory
         8  => [
             'id'           => 'f7e84eab-e4f6-463f-b0e3-f2f965f4fbce',
             'name'         => 'unit_8',
+            'level'        => 1,
             'avatar'       => '/images/avas/humans/human001.jpg',
             'damage'       => 20,
             'attack_speed' => 1.00,
@@ -103,6 +111,7 @@ class UnitFactory
         10 => [
             'id'           => '92e7b39c-dbfc-4493-b563-50314c524c0c',
             'name'         => 'dead_unit',
+            'level'        => 1,
             'avatar'       => '/images/avas/monsters/005.png',
             'damage'       => 35,
             'attack_speed' => 1.00,
@@ -128,6 +137,7 @@ class UnitFactory
         return new Unit(
             self::$units[$template]['id'],
             self::$units[$template]['name'],
+            self::$units[$template]['level'],
             self::$units[$template]['avatar'],
             self::$units[$template]['damage'],
             self::$units[$template]['attack_speed'],

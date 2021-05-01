@@ -12,6 +12,8 @@ class UnitException extends Exception
     public const INCORRECT_ID                 = 'Incorrect parameter id, it required and type string';
     public const INCORRECT_NAME               = 'Incorrect parameter name, it required and type string';
     public const INCORRECT_NAME_VALUE         = 'Incorrect name, should be min-max length: ';
+    public const INCORRECT_LEVEL              = 'Incorrect parameter level, it required and type int';
+    public const INCORRECT_LEVEL_VALUE        = 'Incorrect level, should be min-max value: ';
     public const INCORRECT_AVATAR             = 'Incorrect parameter avatar, it required and type string';
     public const INCORRECT_DAMAGE             = 'Incorrect damage, it required and type  int';
     public const INCORRECT_DAMAGE_VALUE       = 'Incorrect damage, should be min-max value: ';

@@ -77,6 +77,7 @@ class BattleFactoryTest extends TestCase
                     [
                         'id'           => 'f2f093cc-da4f-490b-aba0-9c0c89cc564d',
                         'name'         => 'Skeleton',
+                        'level'        => 1,
                         'avatar'       => '/images/avas/monsters/003.png',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -89,6 +90,7 @@ class BattleFactoryTest extends TestCase
                     [
                         'id'           => '3132614f-e8de-4cc1-a562-31cd29459c33',
                         'name'         => 'Skeleton',
+                        'level'        => 1,
                         'avatar'       => '/images/avas/monsters/003.png',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -116,6 +118,7 @@ class BattleFactoryTest extends TestCase
                     [
                         'id'           => '26137d24-426c-4727-ac62-32ae0f9030fb',
                         'name'         => 'Skeleton',
+                        'level'        => 1,
                         'avatar'       => '/images/avas/monsters/003.png',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -131,6 +134,7 @@ class BattleFactoryTest extends TestCase
                     [
                         'id'           => '26137d24-426c-4727-ac62-32ae0f9030fb',
                         'name'         => 'Skeleton',
+                        'level'        => 1,
                         'avatar'       => '/images/avas/monsters/003.png',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -150,6 +154,7 @@ class BattleFactoryTest extends TestCase
                     [
                         'id'           => '26137d24-426c-4727-ac62-32ae0f9030fb',
                         'name'         => 'Skeleton',
+                        'level'        => 1,
                         'avatar'       => '/images/avas/monsters/003.png',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -162,6 +167,7 @@ class BattleFactoryTest extends TestCase
                     [
                         'id'           => 'c11d1ac0-5c39-4bf8-bc5f-7d8fdadc7ec3',
                         'name'         => 'Warrior',
+                        'level'        => 1,
                         'avatar'       => '/images/avas/monsters/003.png',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -177,6 +183,7 @@ class BattleFactoryTest extends TestCase
                     [
                         'id'           => '26137d24-426c-4727-ac62-32ae0f9030fb',
                         'name'         => 'Skeleton',
+                        'level'        => 1,
                         'avatar'       => '/images/avas/monsters/003.png',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -196,6 +203,7 @@ class BattleFactoryTest extends TestCase
                     [
                         'id'           => 'c11d1ac0-5c39-4bf8-bc5f-7d8fdadc7ec3',
                         'name'         => 'Skeleton',
+                        'level'        => 1,
                         'avatar'       => '/images/avas/monsters/003.png',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -208,6 +216,7 @@ class BattleFactoryTest extends TestCase
                     [
                         'id'           => '99d77ca0-7a8f-47d0-bacc-e297331d89c8',
                         'name'         => 'Warrior',
+                        'level'        => 1,
                         'avatar'       => '/images/avas/monsters/003.png',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -223,6 +232,7 @@ class BattleFactoryTest extends TestCase
                     [
                         'id'           => '99d77ca0-7a8f-47d0-bacc-e297331d89c8',
                         'name'         => 'Warrior',
+                        'level'        => 1,
                         'avatar'       => '/images/avas/monsters/003.png',
                         'damage'       => 15,
                         'attack_speed' => 1.2,
@@ -255,6 +265,7 @@ class BattleFactoryTest extends TestCase
                     [
                         'id'           => '828595c4-66f5-4d1a-867b-9a33693ccee2',
                         'name'         => 'Skeleton',
+                        'level'        => 1,
                         'avatar'       => '/images/avas/monsters/003.png',
                         'damage'       => 15,
                         'attack_speed' => 1.2,

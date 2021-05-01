@@ -25,6 +25,7 @@ class UnitCollectionTest extends TestCase
             new Unit(
                 '5aa0d764-e92d-4137-beed-f7f590b08165',
                 'User 1',
+                1,
                 'avatar 1',
                 15,
                 1,
@@ -39,6 +40,7 @@ class UnitCollectionTest extends TestCase
             new Unit(
                 '648a3bc6-13e3-4a24-8fbf-10c196251cc2',
                 'User 2',
+                1,
                 'avatar 2',
                 12,
                 1,
@@ -71,6 +73,7 @@ class UnitCollectionTest extends TestCase
             new Unit(
                 $id,
                 'User 1',
+                1,
                 'avatar 1',
                 15,
                 1,
@@ -98,6 +101,7 @@ class UnitCollectionTest extends TestCase
             new Unit(
                 '5aa0d764-e92d-4137-beed-f7f590b08165',
                 'User 1',
+                1,
                 'avatar 1',
                 15,
                 1,
@@ -115,6 +119,7 @@ class UnitCollectionTest extends TestCase
             new Unit(
                 '5aa0d764-e92d-4137-beed-f7f590b08165',
                 'User 2',
+                1,
                 'avatar 2',
                 12,
                 1,

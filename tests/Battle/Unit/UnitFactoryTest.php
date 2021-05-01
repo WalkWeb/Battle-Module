@@ -27,6 +27,7 @@ class UnitFactoryTest extends TestCase
         $class = UnitClassFactory::create($data['class']);
 
         self::assertEquals($data['name'], $unit->getName());
+        self::assertEquals($data['level'], $unit->getLevel());
         self::assertEquals($data['avatar'], $unit->getAvatar());
         self::assertEquals($data['damage'], $unit->getDamage());
         self::assertEquals($data['attack_speed'], $unit->getAttackSpeed());
@@ -58,6 +59,7 @@ class UnitFactoryTest extends TestCase
         $data = [
             'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
             'name'         => '<b>Skeleton</b>',
+            'level'        => 1,
             'avatar'       => '/images/avas/monsters/003.png',
             'damage'       => 15,
             'attack_speed' => 1.2,
@@ -80,6 +82,7 @@ class UnitFactoryTest extends TestCase
                 [
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -92,6 +95,7 @@ class UnitFactoryTest extends TestCase
                 [
                     'id'           => '5aa0d764-e92d-4137-beed-f7f590b08165',
                     'name'         => 'Skeleton',
+                    'level'        => 5,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1,
@@ -114,6 +118,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // отсутствует id
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -129,6 +134,7 @@ class UnitFactoryTest extends TestCase
                     // id некорректного типа
                     'id'           => 123123,
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -144,6 +150,7 @@ class UnitFactoryTest extends TestCase
                     // id пустая строка
                     'id'           => '',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -158,6 +165,7 @@ class UnitFactoryTest extends TestCase
                 [
                     // отсутствует name
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -173,6 +181,7 @@ class UnitFactoryTest extends TestCase
                     // некорректный name
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 123,
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -188,6 +197,7 @@ class UnitFactoryTest extends TestCase
                     // name length < UnitInterface::MIN_NAME_LENGTH
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => '',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -203,6 +213,7 @@ class UnitFactoryTest extends TestCase
                     // name length > UnitInterface::MAX_NAME_LENGTH
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'lllllllllllllllllllll',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -218,6 +229,7 @@ class UnitFactoryTest extends TestCase
                     // отсутствует avatar
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'life'         => 80,
@@ -232,6 +244,7 @@ class UnitFactoryTest extends TestCase
                     // некорректный avatar
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => ['ava' => '/images/avas/monsters/003.png'],
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -247,6 +260,7 @@ class UnitFactoryTest extends TestCase
                     // отсутствует damage
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'attack_speed' => 1.2,
                     'life'         => 80,
@@ -261,6 +275,7 @@ class UnitFactoryTest extends TestCase
                     // некорректный damage
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15.3,
                     'attack_speed' => 1.2,
@@ -276,6 +291,7 @@ class UnitFactoryTest extends TestCase
                     // damage < UnitInterface::MIN_DAMAGE
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => UnitInterface::MIN_DAMAGE - 1,
                     'attack_speed' => 1.2,
@@ -291,6 +307,7 @@ class UnitFactoryTest extends TestCase
                     // damage > UnitInterface::MAX_DAMAGE
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => UnitInterface::MAX_DAMAGE + 1,
                     'attack_speed' => 1.2,
@@ -306,6 +323,7 @@ class UnitFactoryTest extends TestCase
                     // отсутствует attack_speed
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'life'         => 80,
@@ -320,6 +338,7 @@ class UnitFactoryTest extends TestCase
                     // некорректный attack_speed
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => '1',
@@ -335,6 +354,7 @@ class UnitFactoryTest extends TestCase
                     // attack_speed < UnitInterface::MIN_ATTACK_SPEED
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => UnitInterface::MIN_ATTACK_SPEED - 0.1,
@@ -350,6 +370,7 @@ class UnitFactoryTest extends TestCase
                     // attack_speed > UnitInterface::MAX_ATTACK_SPEED
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' =>  UnitInterface::MAX_ATTACK_SPEED + 0.1,
@@ -365,6 +386,7 @@ class UnitFactoryTest extends TestCase
                     // отсутствует life
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -378,6 +400,7 @@ class UnitFactoryTest extends TestCase
                     // некорректный life
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -393,6 +416,7 @@ class UnitFactoryTest extends TestCase
                     // life < UnitInterface::MIN_LIFE
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -408,6 +432,7 @@ class UnitFactoryTest extends TestCase
                     // life > UnitInterface::MAX_LIFE
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -423,6 +448,7 @@ class UnitFactoryTest extends TestCase
                     // отсутствует total life
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -437,6 +463,7 @@ class UnitFactoryTest extends TestCase
                     // некорректный total life
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -452,6 +479,7 @@ class UnitFactoryTest extends TestCase
                     // total life < UnitInterface::MIN_TOTAL_LIFE
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -467,6 +495,7 @@ class UnitFactoryTest extends TestCase
                     // total life > UnitInterface::MAX_TOTAL_LIFE
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -482,6 +511,7 @@ class UnitFactoryTest extends TestCase
                     // отсутствует melee
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -496,6 +526,7 @@ class UnitFactoryTest extends TestCase
                     // некорректный melee
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -511,6 +542,7 @@ class UnitFactoryTest extends TestCase
                     // отсутствует class
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -525,6 +557,7 @@ class UnitFactoryTest extends TestCase
                     // некорректный class
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -540,6 +573,7 @@ class UnitFactoryTest extends TestCase
                     // life большие total life
                     'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
                     'name'         => 'Skeleton',
+                    'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
@@ -549,6 +583,69 @@ class UnitFactoryTest extends TestCase
                     'class'        => 1,
                 ],
                 'error' => UnitException::LIFE_MORE_TOTAL_LIFE,
+            ],
+            [
+                [
+                    // level отсутствует
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_LEVEL,
+            ],
+            [
+                [
+                    // level некорректного типа
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'level'        => '3',
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_LEVEL,
+            ],
+            [
+                [
+                    // level < UnitInterface::MIN_LEVEL
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'level'        => UnitInterface::MIN_LEVEL - 1,
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL,
+            ],
+            [
+                [
+                    // level > UnitInterface::MAX_LEVEL
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'level'        => UnitInterface::MAX_LEVEL + 1,
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL,
             ],
         ];
     }

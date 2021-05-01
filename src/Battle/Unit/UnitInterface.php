@@ -36,6 +36,9 @@ interface UnitInterface
     public const MIN_TOTAL_LIFE     = 1;
     public const MAX_TOTAL_LIFE     = 100000;
 
+    public const MIN_LEVEL         = 1;
+    public const MAX_LEVEL         = 1000;
+
     // Помимо ограничения на символы, слишком длинное имя обрезается в css
     public const MIN_NAME_LENGTH    = 1;
     public const MAX_NAME_LENGTH    = 20;
@@ -53,6 +56,13 @@ interface UnitInterface
      * @return string
      */
     public function getName(): string;
+
+    /**
+     * Уровень юнита
+     *
+     * @return int
+     */
+    public function getLevel(): int;
 
     /**
      * URL к картинке-аватару юнита

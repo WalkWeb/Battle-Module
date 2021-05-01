@@ -9,6 +9,7 @@ $data = [
     [
         'id'           => '81941b8a-f7ca-447e-8951-36777ae6e79e',
         'name'         => 'Warrior',
+        'level'        => 3,
         'avatar'       => '/images/avas/humans/human001.jpg',
         'damage'       => 25,
         'attack_speed' => 1.0,
@@ -21,6 +22,7 @@ $data = [
     [
         'id'           => '9ec07b22-7176-434c-a5d8-05f6adee4486',
         'name'         => 'Priest',
+        'level'        => 2,
         'avatar'       => '/images/avas/humans/human004.jpg',
         'damage'       => 12,
         'attack_speed' => 1.0,
@@ -33,6 +35,7 @@ $data = [
     [
         'id'           => 'bf75c4a3-b866-4787-88c7-8db57daf3d64',
         'name'         => 'Skeleton',
+        'level'        => 2,
         'avatar'       => '/images/avas/monsters/005.png',
         'damage'       => 25,
         'attack_speed' => 1,
@@ -45,6 +48,7 @@ $data = [
     [
         'id'           => '54656319-f841-4ba5-8c71-e67c5afdd3e9',
         'name'         => 'Necromancer',
+        'level'        => 1,
         'avatar'       => '/images/avas/monsters/001.png',
         'damage'       => 10,
         'attack_speed' => 1.0,

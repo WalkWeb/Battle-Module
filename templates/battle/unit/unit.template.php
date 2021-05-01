@@ -61,9 +61,7 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
             </div>
             <div class="unit_box2_left">
                 <div class="unit_icon">
-                    <div class="unit_icon_left">
-                        1
-                    </div>
+                    <div class="unit_icon_left"><?= $unit->getLevel() ?></div>
                     <div class="unit_icon_right">
                         <img src="<?= $unit->getClass()->getSmallIcon() ?>" alt="">
                     </div>

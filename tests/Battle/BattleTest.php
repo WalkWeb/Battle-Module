@@ -46,6 +46,7 @@ class BattleTest extends TestCase
             [
                 'id'           => 'a2763c19-7ec5-48f3-9242-2ea6c6d80c56',
                 'name'         => 'Warrior',
+                'level'        => 1,
                 'avatar'       => '/images/avas/humans/human001.jpg',
                 'damage'       => 7,
                 'attack_speed' => 1.0,
@@ -58,6 +59,7 @@ class BattleTest extends TestCase
             [
                 'id'           => '9dce83f3-2720-43c1-bf2b-0fb7dcacae53',
                 'name'         => 'Skeleton',
+                'level'        => 1,
                 'avatar'       => '/images/avas/monsters/005.png',
                 'damage'       => 5,
                 'attack_speed' => 1.5,
@@ -88,6 +90,7 @@ class BattleTest extends TestCase
             [
                 'id'           => 'a2763c19-7ec5-48f3-9242-2ea6c6d80c56',
                 'name'         => 'Warrior',
+                'level'        => 1,
                 'avatar'       => '/images/avas/humans/human001.jpg',
                 'damage'       => 7,
                 'attack_speed' => 1.0,
@@ -100,6 +103,7 @@ class BattleTest extends TestCase
             [
                 'id'           => 'a2763c19-7ec5-48f3-9242-2ea6c6d80c56',
                 'name'         => 'Skeleton',
+                'level'        => 1,
                 'avatar'       => '/images/avas/monsters/005.png',
                 'damage'       => 5,
                 'attack_speed' => 1.5,

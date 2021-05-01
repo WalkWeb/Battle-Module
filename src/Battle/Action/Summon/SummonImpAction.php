@@ -14,6 +14,7 @@ class SummonImpAction extends SummonAction
     public const NAME = 'summon Imp';
 
     private $name = 'Imp';
+    private $level = 1;
     private $url = '/images/avas/monsters/004.png';
     private $damage = 10;
     private $attackSpeed = 1;
@@ -30,6 +31,7 @@ class SummonImpAction extends SummonAction
         return new Unit(
             $this->generateId(),
             $this->name,
+            $this->level,
             $this->url,
             $this->damage,
             $this->attackSpeed,

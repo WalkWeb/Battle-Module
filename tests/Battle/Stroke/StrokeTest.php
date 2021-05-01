@@ -22,6 +22,7 @@ class StrokeTest extends TestCase
 {
     private $attackerId     = 'e9734617-2894-4af4-85ff-67bb30de0500';
     private $attackerName   = 'first_unit';
+    private $attackerLevel  = 1;
     private $attackAvatar   = 'first_unit_ava';
     private $attackerDamage = 20;
     private $attackerAttackSpeed = 1.00;
@@ -31,6 +32,7 @@ class StrokeTest extends TestCase
 
     private $defendId     = 'a385c54d-ad29-4071-b362-898b88a6d0c8';
     private $defendName   = 'second_unit';
+    private $defendLevel  = 2;
     private $defendAvatar = 'second_unit_ava';
     private $defendDamage = 25;
     private $defendAttackSpeed = 1.00;
@@ -52,6 +54,7 @@ class StrokeTest extends TestCase
         $this->attackUnit = new Unit(
             $this->attackerId,
             $this->attackerName,
+            $this->attackerLevel,
             $this->attackAvatar,
             $this->attackerDamage,
             $this->attackerAttackSpeed,
@@ -64,6 +67,7 @@ class StrokeTest extends TestCase
         $this->defendUnit = new Unit(
             $this->defendId,
             $this->defendName,
+            $this->defendLevel,
             $this->defendAvatar,
             $this->defendDamage,
             $this->defendAttackSpeed,
