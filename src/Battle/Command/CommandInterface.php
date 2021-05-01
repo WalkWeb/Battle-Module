@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Command;
 
 use Battle\Unit\UnitCollection;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
 interface CommandInterface
@@ -54,20 +55,18 @@ interface CommandInterface
     /**
      * Возвращает коллекцию юнитов ближнего боя в команде
      *
-     * todo array => UnitCollection
-     *
-     * @return array
+     * @return UnitCollection
+     * @throws UnitException
      */
-    public function getMeleeUnits(): array;
+    public function getMeleeUnits(): UnitCollection;
 
     /**
      * Возвращает коллекцию юнитов дальнего боя в команде
      *
-     *  todo array => UnitCollection
-     *
-     * @return array
+     * @return UnitCollection
+     * @throws UnitException
      */
-    public function getRangeUnits(): array;
+    public function getRangeUnits(): UnitCollection;
 
     /**
      * Есть ли живые юниты ближнего боя в команде

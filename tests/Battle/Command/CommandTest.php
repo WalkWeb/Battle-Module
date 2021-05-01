@@ -71,8 +71,19 @@ class CommandTest extends TestCase
         $rangeUnit = UnitFactory::createByTemplate(5);
         $command = CommandFactory::create([$meleeUnit, $rangeUnit]);
 
-        self::assertEquals([$meleeUnit], $command->getMeleeUnits());
-        self::assertEquals([$rangeUnit], $command->getRangeUnits());
+        $resultMeleeUnits = $command->getMeleeUnits();
+        $resultRangeUnits = $command->getRangeUnits();
+
+        self::assertCount(1, $resultMeleeUnits);
+        self::assertCount(1, $resultRangeUnits);
+
+        foreach ($resultMeleeUnits as $resultMeleeUnit) {
+            self::assertEquals($meleeUnit, $resultMeleeUnit);
+        }
+
+        foreach ($resultRangeUnits as $resultRangeUnit) {
+            self::assertEquals($rangeUnit, $resultRangeUnit);
+        }
     }
 
     /**
@@ -89,8 +100,7 @@ class CommandTest extends TestCase
         $command = CommandFactory::create([$rangeUnit]);
 
         self::assertFalse($command->existMeleeUnits());
-        self::assertEquals([], $command->getMeleeUnits());
-        self::assertEquals([$rangeUnit], $command->getRangeUnits());
+        self::assertCount(0, $command->getMeleeUnits());
     }
 
     /**

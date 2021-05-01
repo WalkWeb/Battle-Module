@@ -6,6 +6,7 @@ namespace Battle\View;
 
 use Battle\Command\CommandInterface;
 use Battle\Result\ResultInterface;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
 /**
@@ -95,6 +96,7 @@ class View implements ViewInterface
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @return string
+     * @throws UnitException
      */
     public function renderCommandView(CommandInterface $leftCommand, CommandInterface $rightCommand): string
     {

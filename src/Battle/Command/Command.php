@@ -150,30 +150,30 @@ class Command implements CommandInterface
         return $this->units;
     }
 
-    public function getMeleeUnits(): array
+    public function getMeleeUnits(): UnitCollection
     {
-        $units = [];
+        $collection = new UnitCollection();
 
         foreach ($this->units as $unit) {
             if ($unit->isMelee()) {
-                $units[] = $unit;
+                $collection->add($unit);
             }
         }
 
-        return $units;
+        return $collection;
     }
 
-    public function getRangeUnits(): array
+    public function getRangeUnits(): UnitCollection
     {
-        $units = [];
+        $collection = new UnitCollection();
 
         foreach ($this->units as $unit) {
             if (!$unit->isMelee()) {
-                $units[] = $unit;
+                $collection->add($unit);
             }
         }
 
-        return $units;
+        return $collection;
     }
 
     public function existMeleeUnits(): bool
