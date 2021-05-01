@@ -21,10 +21,50 @@ class HealActionTest extends TestCase
     /**
      * @throws ClassFactoryException
      * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testHealAction(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $alliesUnit = UnitFactory::createByTemplate(5);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $alliesCommand = CommandFactory::create([$unit, $alliesUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Наносим урон
+        $damages = $enemyUnit->getAction($alliesCommand, $enemyCommand);
+
+        foreach ($damages as $damage) {
+            $damage->handle();
+        }
+
+        // Проверяем, что у одного из юнитов здоровье уменьшилось
+        self::assertTrue($unit->getLife() < $unit->getTotalLife() || $alliesUnit->getLife() < $alliesUnit->getTotalLife());
+
+        // Накапливаем концентрацию
+        for ($i = 0; $i < 10; $i++) {
+            $alliesUnit->newRound();
+        }
+
+        // Применяем лечение
+        $heals =  $alliesUnit->getAction($enemyCommand, $alliesCommand);
+
+        foreach ($heals as $heal) {
+            $heal->handle();
+        }
+
+        // Проверяем, что оба юнита стали здоровы
+        self::assertTrue($unit->getLife() === $unit->getTotalLife() && $alliesUnit->getLife() === $alliesUnit->getTotalLife());
+    }
+
+    /**
+     * @throws ClassFactoryException
+     * @throws CommandException
      * @throws UnitFactoryException
      * @throws UnitException
      */
-    public function testCreateHealAction(): void
+    public function testNoTargetHealAction(): void
     {
         $message = '';
         $unit = UnitFactory::createByTemplate(1);

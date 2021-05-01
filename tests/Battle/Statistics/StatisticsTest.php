@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Statistics;
 
+use Battle\Classes\ClassFactoryException;
+use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Statistic\Statistic;
+use Battle\Statistic\StatisticException;
+use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
+use Tests\Battle\Factory\UnitFactoryException;
 
 class StatisticsTest extends TestCase
 {
@@ -49,7 +54,11 @@ class StatisticsTest extends TestCase
     }
 
     /**
-     * @throws Exception
+     * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     * @throws StatisticException
      */
     public function testStatisticsUnitCausedDamage(): void
     {
@@ -84,6 +93,53 @@ class StatisticsTest extends TestCase
         }
 
         self::assertEquals(150, $statistics->getUnitsStatistics()->get($attackUnit->getId())->getCausedDamage());
+    }
+
+    /**
+     * @throws ClassFactoryException
+     * @throws UnitFactoryException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws StatisticException
+     */
+    public function testStatisticsUnitCausedHeal(): void
+    {
+        $statistics = new Statistic();
+
+        $dead = UnitFactory::createByTemplate(11);
+        $priest = UnitFactory::createByTemplate(5);
+        $enemy = UnitFactory::createByTemplate(1);
+
+        $alliesCommand = CommandFactory::create([$priest, $dead]);
+        $enemyCommand = CommandFactory::create([$enemy]);
+
+        // Применяем лечение
+        for ($i = 0; $i < 10; $i++) {
+            $priest->newRound();
+        }
+
+        $actionCollection = $priest->getAction($enemyCommand, $alliesCommand);
+
+        foreach ($actionCollection as $action) {
+            $action->handle();
+            $statistics->addUnitAction($action);
+        }
+
+        self::assertEquals($priest->getDamage() * 3, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
+
+        // И еще раз
+        for ($i = 0; $i < 10; $i++) {
+            $priest->newRound();
+        }
+
+        $actionCollection = $priest->getAction($enemyCommand, $alliesCommand);
+
+        foreach ($actionCollection as $action) {
+            $action->handle();
+            $statistics->addUnitAction($action);
+        }
+
+        self::assertEquals($priest->getDamage() * 6, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
     }
 
     /**

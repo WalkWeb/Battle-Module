@@ -7,7 +7,6 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
     throw new ViewException(ViewException::MISSING_UNIT);
 }
 
-// todo добавить отображение уровня
 // todo добавить отображение длины полоски ярости
 
 ?>

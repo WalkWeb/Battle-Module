@@ -120,6 +120,18 @@ class UnitFactory
             'melee'        => true,
             'class'        => 1,
         ],
+        11 => [
+            'id'           => '92e7b39c-dbfc-4493-b563-50314c524c3c',
+            'name'         => 'wounded_unit',
+            'level'        => 1,
+            'avatar'       => '/images/avas/monsters/005.png',
+            'damage'       => 35,
+            'attack_speed' => 1.00,
+            'life'         => 1,
+            'total_life'   => 100,
+            'melee'        => true,
+            'class'        => 1,
+        ],
     ];
 
     /**

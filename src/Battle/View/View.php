@@ -153,13 +153,4 @@ class View implements ViewInterface
     {
         return (int)($value / $max * 100);
     }
-
-    /**
-     * @param bool $value
-     * @return string
-     */
-    private function getBgClass(bool $value): string
-    {
-        return $value ? 'c6' : 'c4';
-    }
 }
