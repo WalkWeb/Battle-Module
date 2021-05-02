@@ -90,11 +90,6 @@ class Command implements CommandInterface
      */
     public function getUnitForHeal(): ?UnitInterface
     {
-        // TODO Также, если нет целей для лечения - нужно использовать обычную атаку, не потратив при этом концентрацию
-        // TODO чтобы можно было использовать лечение на следующем ходу
-
-        // TODO Т.е. нужно добавить опцию, была ли использована способность, и только если была - обнулять концентрацию
-
         $unitForHeal = [];
 
         foreach ($this->units as $unit) {

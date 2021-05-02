@@ -43,6 +43,16 @@ class Unit extends AbstractUnit
     /**
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
+     * @return ActionInterface
+     */
+    public function  getBaseAttack(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionInterface
+    {
+        return new DamageAction($this, $enemyCommand, $alliesCommand);
+    }
+
+    /**
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
      * @return ActionCollection
      * @throws Exception
      */

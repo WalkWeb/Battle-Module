@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action\Heal;
 
+use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
@@ -16,8 +17,6 @@ use Tests\Battle\Factory\UnitFactoryException;
 
 class HealActionTest extends TestCase
 {
-    private const NO_TARGET = '<b>unit_5</b> [80/80] wanted to use heal, but no one';
-
     /**
      * @throws ClassFactoryException
      * @throws CommandException
@@ -79,18 +78,45 @@ class HealActionTest extends TestCase
 
         self::assertEquals(UnitInterface::MAX_CONS, $alliesUnit->getConcentration());
 
+        // Лечить некого - получаем базовую атаку
         $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
-        self::assertEquals(0, $alliesUnit->getConcentration());
-        self::assertCount(1, $actionCollection);
-
+        // Проверяем, что получили лечение
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
             $message = $action->handle();
         }
 
-        self::assertEquals(self::NO_TARGET, $message);
+        // Но так как все живы - применится урон, проверяем
+        self::assertEquals('<b>unit_5</b> [80/80] normal attack <b>unit_3</b> [105/120] on 15 damage', $message);
+        self::assertTrue($enemyUnit->getLife() < $enemyUnit->getTotalLife());
 
+        // Проверяем, что концентрация осталась максимальной
+        self::assertEquals(UnitInterface::MAX_CONS, $alliesUnit->getConcentration());
+
+        // Наносим урон юниту из команды
+        $actionCollection = $enemyUnit->getAction($alliesCommand, $enemyCommand);
+
+        foreach ($actionCollection as $action) {
+            self::assertContainsOnlyInstancesOf(DamageAction::class, [$action]);
+            $action->handle();
+        }
+
+        // Получаем действие еще раз
+        $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
+
+        // Проверяем, что на этот раз получили лечение
+        foreach ($actionCollection as $action) {
+            self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
+            $message = $action->handle();
+        }
+
+        // Проверяем обнуленную концентрацию
         self::assertEquals(0, $alliesUnit->getConcentration());
+
+        // Проверяем восстановленное здоровье и сообщение
+        self::assertEquals('<b>unit_5</b> [80/80] heal to <b>unit_1</b> [100/100] on 15 life', $message);
+        self::assertEquals($unit->getLife(), $unit->getTotalLife());
+        self::assertEquals($alliesUnit->getLife(), $alliesUnit->getTotalLife());
     }
 }

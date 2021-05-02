@@ -211,4 +211,9 @@ abstract class AbstractUnit implements UnitInterface
             $this->concentration = self::MAX_CONS;
         }
     }
+
+    public function upMaxConcentration(): void
+    {
+        $this->concentration = self::MAX_CONS;
+    }
 }

@@ -42,7 +42,7 @@ class Message
             $action->getActionUnit()->getTotalLife() . '] ' . $action->getNameAction();
     }
 
-    public static function hoTargetForHeal(HealAction $action): string
+    public static function noTargetForHeal(HealAction $action): string
     {
         return '<b>' .
             $action->getActionUnit()->getName() . '</b> [' .

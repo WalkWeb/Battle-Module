@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Action\Heal;
 
 use Battle\Action\AbstractAction;
-use Battle\Chat\Message;
 
 class HealAction extends AbstractAction
 {
@@ -18,6 +17,8 @@ class HealAction extends AbstractAction
     }
 
     /**
+     * Если лечить некого - совершается обычная атака
+     *
      * @return string
      */
     public function handle(): string
@@ -25,7 +26,9 @@ class HealAction extends AbstractAction
         $this->targetUnit = $this->alliesCommand->getUnitForHeal();
 
         if (!$this->targetUnit) {
-            return Message::hoTargetForHeal($this);
+            $this->actionUnit->upMaxConcentration();
+            $action = $this->actionUnit->getBaseAttack($this->enemyCommand, $this->alliesCommand);
+            return $action->handle();
         }
 
         return $this->targetUnit->applyAction($this);
@@ -34,7 +37,7 @@ class HealAction extends AbstractAction
     public function getPower(): int
     {
         // Базовое лечение в 120% от силы удара юнита
-        return (int)round($this->getActionUnit()->getDamage() * 1.2);
+        return (int)($this->getActionUnit()->getDamage() * 1.2);
     }
 
     public function setFactualPower(int $factualPower): void
