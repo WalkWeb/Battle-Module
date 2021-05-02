@@ -43,6 +43,9 @@ interface UnitInterface
     public const MIN_NAME_LENGTH    = 1;
     public const MAX_NAME_LENGTH    = 20;
 
+    public const MIN_ID_LENGTH    = 1;
+    public const MAX_ID_LENGTH    = 36;
+
     /**
      * UUID or random string
      *

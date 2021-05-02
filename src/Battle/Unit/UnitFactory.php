@@ -35,8 +35,6 @@ class UnitFactory
      */
     public static function create(array $data): UnitInterface
     {
-        // todo минимальная-максимальная длина id
-
         self::existAndString($data, 'id', UnitException::INCORRECT_ID);
         self::existAndString($data, 'name', UnitException::INCORRECT_NAME);
         self::existAndString($data, 'avatar', UnitException::INCORRECT_AVATAR);
@@ -45,18 +43,12 @@ class UnitFactory
         self::existAndInt($data, 'total_life', UnitException::INCORRECT_TOTAL_LIFE);
         self::existAndInt($data, 'level', UnitException::INCORRECT_LEVEL);
         self::existAndInt($data, 'class', UnitException::INCORRECT_CLASS);
-        self::intMinMax($data['damage'], UnitInterface::MIN_DAMAGE, UnitInterface::MAX_DAMAGE, UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE);
-        self::intMinMax($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
-        self::intMinMax($data['total_life'], UnitInterface::MIN_TOTAL_LIFE, UnitInterface::MAX_TOTAL_LIFE, UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE);
-        self::intMinMax($data['level'], UnitInterface::MIN_LEVEL, UnitInterface::MAX_LEVEL, UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL);
-
-        $nameLength = mb_strlen($data['name']);
-
-        if ($nameLength < UnitInterface::MIN_NAME_LENGTH || $nameLength > UnitInterface::MAX_NAME_LENGTH) {
-            throw new UnitException(
-                UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH
-            );
-        }
+        self::intMinMaxValue($data['damage'], UnitInterface::MIN_DAMAGE, UnitInterface::MAX_DAMAGE, UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE);
+        self::intMinMaxValue($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
+        self::intMinMaxValue($data['total_life'], UnitInterface::MIN_TOTAL_LIFE, UnitInterface::MAX_TOTAL_LIFE, UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE);
+        self::intMinMaxValue($data['level'], UnitInterface::MIN_LEVEL, UnitInterface::MAX_LEVEL, UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL);
+        self::stringMinMaxLength($data['name'], UnitInterface::MIN_NAME_LENGTH, UnitInterface::MAX_NAME_LENGTH, UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH);
+        self::stringMinMaxLength($data['id'], UnitInterface::MIN_ID_LENGTH, UnitInterface::MAX_ID_LENGTH, UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH);
 
         if (!array_key_exists('attack_speed', $data) || (!is_float($data['attack_speed']) && !is_int($data['attack_speed']))) {
             throw new UnitException(UnitException::INCORRECT_ATTACK_SPEED);
@@ -123,9 +115,25 @@ class UnitFactory
      * @param string $error
      * @throws UnitException
      */
-    private static function intMinMax(int $value, int $min, int $max, string $error): void
+    private static function intMinMaxValue(int $value, int $min, int $max, string $error): void
     {
         if ($value < $min || $value > $max) {
+            throw new UnitException($error);
+        }
+    }
+
+    /**
+     * @param string $string
+     * @param int $minLength
+     * @param int $maxLength
+     * @param $error
+     * @throws UnitException
+     */
+    public static function stringMinMaxLength(string $string, int $minLength, int $maxLength, $error): void
+    {
+        $length = mb_strlen($string);
+
+        if ($length < $minLength || $length > $maxLength) {
             throw new UnitException($error);
         }
     }

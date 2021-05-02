@@ -145,23 +145,38 @@ class UnitFactoryTest extends TestCase
                 ],
                 'error' => UnitException::INCORRECT_ID,
             ],
-            // todo Временно допускаем такой вариант
-//            [
-//                [
-//                    // id пустая строка
-//                    'id'           => '',
-//                    'name'         => 'Skeleton',
-//                    'level'        => 3,
-//                    'avatar'       => '/images/avas/monsters/003.png',
-//                    'damage'       => 15,
-//                    'attack_speed' => 1.2,
-//                    'life'         => 80,
-//                    'total_life'   => 80,
-//                    'melee'        => true,
-//                    'class'        => 1,
-//                ],
-//                'error' => UnitException::INCORRECT_ID,
-//            ],
+            [
+                [
+                    // id меньше минимальной длины (0)
+                    'id'           => '',
+                    'name'         => 'Skeleton',
+                    'level'        => 3,
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH,
+            ],
+            [
+                [
+                    // id больше минимальной длины (4)
+                    'id'           => 'llllllllllllllllllllllllllllllllllllllll',
+                    'name'         => 'Skeleton',
+                    'level'        => 3,
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH,
+            ],
             [
                 [
                     // отсутствует name

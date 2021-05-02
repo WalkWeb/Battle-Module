@@ -10,6 +10,7 @@ class UnitException extends Exception
 {
     public const UNDEFINED_ACTION_METHOD      = 'Undefined action';
     public const INCORRECT_ID                 = 'Incorrect parameter id, it required and type string';
+    public const INCORRECT_ID_VALUE           = 'Incorrect id, should be min-max length: ';
     public const INCORRECT_NAME               = 'Incorrect parameter name, it required and type string';
     public const INCORRECT_NAME_VALUE         = 'Incorrect name, should be min-max length: ';
     public const INCORRECT_LEVEL              = 'Incorrect parameter level, it required and type int';
