@@ -66,6 +66,11 @@ abstract class AbstractUnit implements UnitInterface
     protected $concentration = 0;
 
     /**
+     * @var int - Ярость
+     */
+    protected $rage = 0;
+
+    /**
      * @var EffectCollection
      */
     protected $effects;
@@ -164,6 +169,11 @@ abstract class AbstractUnit implements UnitInterface
     public function getConcentration(): int
     {
         return $this->concentration;
+    }
+
+    public function getRage(): int
+    {
+        return $this->rage;
     }
 
     public function getClass(): UnitClassInterface

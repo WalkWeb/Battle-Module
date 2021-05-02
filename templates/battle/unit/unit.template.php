@@ -7,8 +7,6 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
     throw new ViewException(ViewException::MISSING_UNIT);
 }
 
-// todo добавить отображение длины полоски ярости
-
 ?>
 <div align="center">
     <div class="unit_main_box" id="usr_<?= $unit->getId() ?>">
@@ -32,7 +30,7 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                                 <div class="unit_cons_bar2" style="width: <?= $this->getWidth($unit->getConcentration(), UnitInterface::MAX_CONS) ?>%;"></div>
                             </div>
                             <div class="unit_rage">
-                                <div class="unit_rage_bar2" style="width: 100%;"></div>
+                                <div class="unit_rage_bar2" style="width: <?= $this->getWidth($unit->getRage(), UnitInterface::MAX_RAGE) ?>%;"></div>
                             </div>
                         </div>
                     </div>

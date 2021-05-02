@@ -59,7 +59,7 @@ class ViewTest extends TestCase
                                 <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
-                                <div class="unit_rage_bar2" style="width: 100%;"></div>
+                                <div class="unit_rage_bar2" style="width: 0%;"></div>
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@ class ViewTest extends TestCase
                                 <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
-                                <div class="unit_rage_bar2" style="width: 100%;"></div>
+                                <div class="unit_rage_bar2" style="width: 0%;"></div>
                             </div>
                         </div>
                     </div>
@@ -211,7 +211,7 @@ EOT;
                                 <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
-                                <div class="unit_rage_bar2" style="width: 100%;"></div>
+                                <div class="unit_rage_bar2" style="width: 0%;"></div>
                             </div>
                         </div>
                     </div>
@@ -273,7 +273,7 @@ EOT;
                                 <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
-                                <div class="unit_rage_bar2" style="width: 100%;"></div>
+                                <div class="unit_rage_bar2" style="width: 0%;"></div>
                             </div>
                         </div>
                     </div>

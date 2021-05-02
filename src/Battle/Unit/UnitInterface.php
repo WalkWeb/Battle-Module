@@ -19,10 +19,14 @@ use Battle\Effect\EffectCollection;
  */
 interface UnitInterface
 {
-    public const ADD_CON_NEW_ROUND      = 200;
-    public const ADD_CON_ACTION_UNIT    = 180;
-    public const ADD_CON_RECEIVING_UNIT = 100;
-    public const MAX_CONS               = 1000;
+    public const ADD_CON_NEW_ROUND       = 200;
+    public const ADD_CON_ACTION_UNIT     = 180;
+    public const ADD_CON_RECEIVING_UNIT  = 100;
+    public const ADD_RAGE_NEW_ROUND      = 50;
+    public const ADD_RAGE_ATTACK_UNIT    = 90;
+    public const ADD_RAGE_RECEIVING_UNIT = 70;
+    public const MAX_CONS                = 1000;
+    public const MAX_RAGE                = 1000;
 
     public const MIN_DAMAGE         = 0;
     public const MAX_DAMAGE         = 100000;
@@ -163,6 +167,13 @@ interface UnitInterface
      * @return int
      */
     public function getConcentration(): int;
+
+    /**
+     * Возвращает количество ярости юнита
+     *
+     * @return int
+     */
+    public function getRage(): int;
 
     /**
      * Возвращает класс юнита
