@@ -18,6 +18,9 @@ use Tests\Battle\Factory\UnitFactoryException;
 
 class HealActionTest extends TestCase
 {
+    private const MESSAGE           = '<b>unit_5</b> heal to <b>unit_1</b> on 15 life';
+    private const NO_TARGET_MESSAGE = '<b>unit_5</b> attack <b>unit_3</b> on 15 damage';
+
     /**
      * @throws ClassFactoryException
      * @throws CommandException
@@ -89,7 +92,7 @@ class HealActionTest extends TestCase
         }
 
         // Но так как все живы - применится урон, проверяем
-        self::assertEquals('<b>unit_5</b> [80/80] normal attack <b>unit_3</b> [105/120] on 15 damage', $message);
+        self::assertEquals(self::NO_TARGET_MESSAGE, $message);
         self::assertTrue($enemyUnit->getLife() < $enemyUnit->getTotalLife());
 
         // Проверяем, что концентрация осталась максимальной
@@ -116,7 +119,7 @@ class HealActionTest extends TestCase
         self::assertEquals(0, $alliesUnit->getConcentration());
 
         // Проверяем восстановленное здоровье и сообщение
-        self::assertEquals('<b>unit_5</b> [80/80] heal to <b>unit_1</b> [100/100] on 15 life', $message);
+        self::assertEquals(self::MESSAGE, $message);
         self::assertEquals($unit->getLife(), $unit->getTotalLife());
         self::assertEquals($alliesUnit->getLife(), $alliesUnit->getTotalLife());
     }

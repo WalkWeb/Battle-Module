@@ -13,32 +13,20 @@ class Message
     public static function damage(DamageAction $action): string
     {
         return '<b>' .
-            $action->getActionUnit()->getName() . '</b> [' .
-            $action->getActionUnit()->getLife() . '/' .
-            $action->getActionUnit()->getTotalLife() . '] ' . $action->getNameAction() . ' <b>' .
-            $action->getTargetUnit()->getName() . '</b> [' .
-            $action->getTargetUnit()->getLife() . '/' .
-            $action->getTargetUnit()->getTotalLife() . '] on ' .
-            $action->getFactualPower() . ' damage';
+            $action->getActionUnit()->getName() . '</b> ' . $action->getNameAction() . ' <b>' .
+            $action->getTargetUnit()->getName() . '</b> on ' . $action->getFactualPower() . ' damage';
     }
 
     public static function heal(HealAction $action): string
     {
         return '<b>' .
-            $action->getActionUnit()->getName() . '</b> [' .
-            $action->getActionUnit()->getLife() . '/' .
-            $action->getActionUnit()->getTotalLife() . '] ' . $action->getNameAction() . ' to <b>' .
-            $action->getTargetUnit()->getName() . '</b> [' .
-            $action->getTargetUnit()->getLife() . '/' .
-            $action->getTargetUnit()->getTotalLife() . '] on ' .
-            $action->getFactualPower() . ' life';
+            $action->getActionUnit()->getName() . '</b> ' . $action->getNameAction() . ' to <b>' .
+            $action->getTargetUnit()->getName() . '</b> on ' . $action->getFactualPower() . ' life';
     }
 
     public static function summon(SummonAction $action): string
     {
         return '<b>' .
-            $action->getActionUnit()->getName() . '</b> [' .
-            $action->getActionUnit()->getLife() . '/' .
-            $action->getActionUnit()->getTotalLife() . '] ' . $action->getNameAction();
+            $action->getActionUnit()->getName() . '</b> '  . $action->getNameAction();
     }
 }

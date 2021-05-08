@@ -10,7 +10,7 @@ use Battle\Unit\UnitInterface;
 
 class DamageAction extends AbstractAction
 {
-    protected const NAME          = 'normal attack';
+    protected const NAME          = 'attack';
     protected const HANDLE_METHOD = 'applyDamageAction';
 
     public function getHandleMethod(): string

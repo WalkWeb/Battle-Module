@@ -16,7 +16,7 @@ use Tests\Battle\Factory\UnitFactoryException;
 
 class DamageActionTest extends TestCase
 {
-    private const MESSAGE = '<b>unit_1</b> [100/100] normal attack <b>unit_2</b> [130/150] on 20 damage';
+    private const MESSAGE = '<b>unit_1</b> attack <b>unit_2</b> on 20 damage';
 
     /**
      * @throws ClassFactoryException

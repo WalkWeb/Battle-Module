@@ -15,6 +15,8 @@ use Tests\Battle\Factory\UnitFactoryException;
 
 class SummonActionTest extends TestCase
 {
+    private const MESSAGE = '<b>unit_7</b> summon Imp';
+
     /**
      * @throws ClassFactoryException
      * @throws CommandException
@@ -40,7 +42,7 @@ class SummonActionTest extends TestCase
             $message = $action->handle();
         }
 
-        self::assertEquals('<b>unit_7</b> [80/80] summon Imp', $message);
+        self::assertEquals(self::MESSAGE, $message);
         self::assertCount(2, $alliesCommand->getUnits());
     }
 
