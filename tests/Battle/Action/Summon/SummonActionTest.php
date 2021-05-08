@@ -43,4 +43,29 @@ class SummonActionTest extends TestCase
         self::assertEquals('<b>unit_7</b> [80/80] summon Imp', $message);
         self::assertCount(2, $alliesCommand->getUnits());
     }
+
+    /**
+     * Данный функционал не важен для SummonAction, но для полноценного покрытия кода тестами - делаем
+     *
+     * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testSummonActionSetFactualPower(): void
+    {
+        $actionUnit = UnitFactory::createByTemplate(7);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $alliesCommand = CommandFactory::create([$actionUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new SummonImpAction($actionUnit, $alliesCommand, $enemyCommand);
+
+        self::assertEquals(0, $action->getFactualPower());
+
+        $action->setFactualPower(100);
+
+        // В любом случае будет 0
+        self::assertEquals(0, $action->getFactualPower());
+    }
 }

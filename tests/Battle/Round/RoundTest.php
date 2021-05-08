@@ -12,6 +12,7 @@ use Battle\Round\RoundException;
 use Battle\Round\Round;
 use Battle\Statistic\Statistic;
 use Battle\Unit\UnitException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
 use Tests\Battle\Factory\UnitFactory;
@@ -28,7 +29,7 @@ class RoundTest extends TestCase
      * @throws UnitFactoryException
      * @throws UnitException
      */
-    public function testNextCommand(): void
+    public function testRoundNextCommand(): void
     {
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
@@ -51,7 +52,7 @@ class RoundTest extends TestCase
      * @throws UnitFactoryException
      * @throws UnitException
      */
-    public function testNextCommandNoAction(): void
+    public function testRoundNextCommandNoAction(): void
     {
         $leftUnit = UnitFactory::createByTemplate(1);
         $rightUnit = UnitFactory::createByTemplate(2);
@@ -67,5 +68,42 @@ class RoundTest extends TestCase
         $round = new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new Chat());
         self::assertEquals($round->handle(), $nextCommand);
         self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
+    }
+
+    /**
+     * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws RoundException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testRoundIncorrectActionCommand(): void
+    {
+        $leftUnit = UnitFactory::createByTemplate(1);
+        $rightUnit = UnitFactory::createByTemplate(2);
+        $leftUnit->madeAction();
+        $leftCommand = CommandFactory::create([$leftUnit]);
+        $rightCommand = CommandFactory::create([$rightUnit]);
+        $startCommand = 3;
+
+        $this->expectException(RoundException::class);
+        $this->expectExceptionMessage(RoundException::INCORRECT_START_COMMAND);
+        new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new Chat());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testRoundLimitStroke(): void
+    {
+        $leftCommand = TestCommandFactory::createVeryBigCommand();
+        $rightCommand = TestCommandFactory::createVeryBigCommand();
+
+        $round = new Round($leftCommand, $rightCommand, 1, new Statistic(), new Chat());
+
+        $this->expectException(RoundException::class);
+        $this->expectExceptionMessage(RoundException::UNEXPECTED_ENDING);
+
+        $round->handle();
     }
 }

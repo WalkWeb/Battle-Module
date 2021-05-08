@@ -10,6 +10,7 @@ use Battle\Classes\UnitClassInterface;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Effect\EffectCollection;
 use Battle\Unit\Unit;
 use Battle\Action\Damage\DamageAction;
 use Battle\Unit\UnitCollection;
@@ -17,6 +18,7 @@ use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
+use Tests\Battle\Factory\Mock\ActionMockFactory;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 
@@ -75,6 +77,7 @@ class UnitTest extends TestCase
         self::assertTrue($unit->isAlive());
         self::assertTrue($unit->isMelee());
         self::assertEquals($attackClass->getId(), $unit->getClass()->getId());
+        self::assertEquals(new EffectCollection(), $unit->getEffects());
     }
 
     /**
@@ -126,6 +129,21 @@ class UnitTest extends TestCase
 
         self::assertEquals(0, $defendUnit->getLife());
         self::assertFalse($defendUnit->isAlive());
+    }
+
+    /**
+     * @throws ClassFactoryException
+     * @throws UnitFactoryException
+     */
+    public function testUnitUnknownAction(): void
+    {
+        $factory = new ActionMockFactory();
+        $action = $factory->createDamageActionMock('unknownMethod');
+        $unit = UnitFactory::createByTemplate(1);
+
+        $this->expectException(UnitException::class);
+        $this->expectExceptionMessage(UnitException::UNDEFINED_ACTION_METHOD);
+        $unit->applyAction($action);
     }
 
     /**

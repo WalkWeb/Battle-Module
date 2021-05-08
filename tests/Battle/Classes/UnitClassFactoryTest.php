@@ -39,6 +39,19 @@ class UnitClassFactoryTest extends TestCase
     }
 
     /**
+     * Тест на некорректный класс юнита - когда класс не реализует интерфейс IncorrectUnitClassForTest
+     *
+     * @throws ClassFactoryException
+     */
+    public function testUnitClassFactoryIncorrectClass(): void
+    {
+        $classId = 100;
+        $this->expectException(ClassFactoryException::class);
+        $this->expectExceptionMessage(ClassFactoryException::INCORRECT_CLASS);
+        UnitClassFactory::create($classId);
+    }
+
+    /**
      * @return array
      */
     public function successDataProvider(): array

@@ -24,7 +24,7 @@ class DamageActionTest extends TestCase
      * @throws UnitFactoryException
      * @throws UnitException
      */
-    public function testCreate(): void
+    public function testCreateDamageAction(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
@@ -41,7 +41,7 @@ class DamageActionTest extends TestCase
      * @throws UnitException
      * @throws UnitFactoryException
      */
-    public function testApplyAction(): void
+    public function testApplyDamageAction(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
@@ -60,7 +60,7 @@ class DamageActionTest extends TestCase
      * @throws UnitException
      * @throws UnitFactoryException
      */
-    public function testActionUnit(): void
+    public function testDamageActionApplyUnit(): void
     {
         $actionUnit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
@@ -80,7 +80,7 @@ class DamageActionTest extends TestCase
      * @throws UnitException
      * @throws UnitFactoryException
      */
-    public function testFactualDamage(): void
+    public function testDamageActionFactualDamage(): void
     {
         $attackerUnit = UnitFactory::createByTemplate(2);
         $enemyUnit = UnitFactory::createByTemplate(4);
@@ -93,6 +93,30 @@ class DamageActionTest extends TestCase
             $action->handle();
             self::assertEquals(30, $action->getPower());
             self::assertEquals(20, $action->getFactualPower());
+        }
+    }
+
+    /**
+     * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testDamageActionNoDefined(): void
+    {
+        $attackerUnit = UnitFactory::createByTemplate(2);
+
+        // dead unit
+        $enemyUnit = UnitFactory::createByTemplate(10);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+        $alliesCommand = CommandFactory::create([$attackerUnit]);
+
+        $actionCollection = $attackerUnit->getAction($enemyCommand, $alliesCommand);
+
+        foreach ($actionCollection as $action) {
+            $this->expectException(ActionException::class);
+            $this->expectExceptionMessage(ActionException::NO_DEFINED);
+            $action->handle();
         }
     }
 }

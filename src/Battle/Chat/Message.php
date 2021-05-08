@@ -41,12 +41,4 @@ class Message
             $action->getActionUnit()->getLife() . '/' .
             $action->getActionUnit()->getTotalLife() . '] ' . $action->getNameAction();
     }
-
-    public static function noTargetForHeal(HealAction $action): string
-    {
-        return '<b>' .
-            $action->getActionUnit()->getName() . '</b> [' .
-            $action->getActionUnit()->getLife() . '/' .
-            $action->getActionUnit()->getTotalLife() . '] wanted to use heal, but no one';
-    }
 }

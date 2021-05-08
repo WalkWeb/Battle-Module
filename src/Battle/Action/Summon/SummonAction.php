@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Battle\Action\Summon;
 
 use Battle\Action\AbstractAction;
+use Battle\Traits\IdTrait;
 use Battle\Unit\UnitInterface;
 use Exception;
 
 abstract class SummonAction extends AbstractAction
 {
+    use IdTrait;
+
     protected const HANDLE_METHOD = 'applySummonAction';
 
     public function getHandleMethod(): string
@@ -40,23 +43,5 @@ abstract class SummonAction extends AbstractAction
     public function setFactualPower(int $factualPower)
     {
         return 0;
-    }
-
-    /**
-     * Генерация UUID не используется для лучшей производительности
-     *
-     * @param int|null $length
-     * @return string
-     * @throws Exception
-     */
-    protected function generateId(?int $length = 5): string
-    {
-        $chars = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        $numChars = strlen($chars);
-        $string = '';
-        for ($i = 0; $i < $length; $i++) {
-            $string .= $chars[random_int(1, $numChars) - 1];
-        }
-        return $string;
     }
 }

@@ -29,7 +29,7 @@ class Round implements RoundInterface
     private $actionCommand;
 
     /** @var int */
-    private $maxStroke = 50;
+    private $maxStroke = 20;
 
     /** @var Statistic */
     private $statistics;

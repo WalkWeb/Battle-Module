@@ -29,7 +29,7 @@ class SummonImpAction extends SummonAction
     public function getSummonUnit(): UnitInterface
     {
         return new Unit(
-            $this->generateId(),
+            self::generateId(),
             $this->name,
             $this->level,
             $this->url,

@@ -6,16 +6,18 @@ namespace Battle\Classes;
 
 use Battle\Classes\Human\Priest;
 use Battle\Classes\Human\Warrior;
+use Battle\Classes\Other\IncorrectUnitClassForTest;
 use Battle\Classes\Undead\DarkMage;
 use Battle\Classes\Undead\DeadKnight;
 
 class UnitClassFactory
 {
     private static $map = [
-        1 => Warrior::class,
-        2 => Priest::class,
-        3 => DeadKnight::class,
-        4 => DarkMage::class,
+        1   => Warrior::class,
+        2   => Priest::class,
+        3   => DeadKnight::class,
+        4   => DarkMage::class,
+        100 => IncorrectUnitClassForTest::class,
     ];
 
     /**

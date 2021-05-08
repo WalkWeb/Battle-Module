@@ -132,6 +132,18 @@ class UnitFactory
             'melee'        => true,
             'class'        => 1,
         ],
+        12  => [
+            'id'           => '1aab367d-37e8-4544-9915-cb3d7779332b',
+            'name'         => 'unit_12',
+            'level'        => 1,
+            'avatar'       => '/images/avas/humans/human002.jpg',
+            'damage'       => 3000,
+            'attack_speed' => 1.00,
+            'life'         => 150,
+            'total_life'   => 150,
+            'melee'        => true,
+            'class'        => 1,
+        ],
     ];
 
     /**

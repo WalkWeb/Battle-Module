@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Statistics;
 
+use Battle\Action\ActionException;
+use Battle\Action\Damage\DamageAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -160,6 +162,7 @@ class StatisticsTest extends TestCase
 
     /**
      * Тест на затраченную память
+     *
      * @throws Exception
      */
     public function testStatisticsMemoryCost(): void
@@ -171,5 +174,31 @@ class StatisticsTest extends TestCase
         // Расход памяти будет разным в зависимости от контекста выполнения теста
         self::assertIsInt($statistic->getMemoryCost());
         self::assertIsString($statistic->getMemoryCostClipped());
+    }
+
+    /**
+     * Тест на подсчет убийств
+     *
+     * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     * @throws ActionException
+     * @throws StatisticException
+     */
+    public function testStatisticsKills(): void
+    {
+        $statistics = new Statistic();
+        $unit = UnitFactory::createByTemplate(12);
+        $defendUnit = UnitFactory::createByTemplate(1);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
+        $action->handle();
+        $statistics->addUnitAction($action);
+
+        self::assertFalse($defendUnit->isAlive());
+        self::assertEquals(1, $statistics->getUnitsStatistics()->get($unit->getId())->getKilling());
     }
 }

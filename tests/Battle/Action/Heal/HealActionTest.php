@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Action\Heal;
 
 use Battle\Action\Damage\DamageAction;
+use Battle\Action\Heal\GreatHealAction;
 use Battle\Action\Heal\HealAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
@@ -118,5 +119,25 @@ class HealActionTest extends TestCase
         self::assertEquals('<b>unit_5</b> [80/80] heal to <b>unit_1</b> [100/100] on 15 life', $message);
         self::assertEquals($unit->getLife(), $unit->getTotalLife());
         self::assertEquals($alliesUnit->getLife(), $alliesUnit->getTotalLife());
+    }
+
+    /**
+     * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testGetPowerHealAction(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $healAction = new HealAction($unit, $enemyCommand, $command);
+        $greatHealAction = new GreatHealAction($unit, $enemyCommand, $command);
+
+        self::assertEquals((int)($unit->getDamage() * 1.2), $healAction->getPower());
+        self::assertEquals($unit->getDamage() * 3, $greatHealAction->getPower());
     }
 }
