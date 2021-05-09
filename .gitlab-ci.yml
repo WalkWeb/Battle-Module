@@ -1,0 +1,18 @@
+image: kibatic/symfony
+
+build:
+  stage: build
+  tags:
+    - gitlab-org
+  script:
+    - composer install
+  artifacts:
+    paths:
+      - vendor/
+
+test:
+  stage: test
+  tags:
+    - gitlab-org
+  script:
+    - php vendor/bin/phpunit
