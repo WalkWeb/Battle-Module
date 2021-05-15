@@ -6,7 +6,7 @@ namespace Battle\Round;
 
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
-use Battle\Result\Chat\FullLog;
+use Battle\Result\FullLog\FullLog;
 use Battle\Stroke\StrokeFactory;
 use Battle\Stroke\StrokeInterface;
 
@@ -35,7 +35,7 @@ class Round implements RoundInterface
     private $statistics;
 
     /** @var FullLog */
-    private $chat;
+    private $fullLog;
 
     /** @var bool */
     private $debug;
@@ -48,7 +48,7 @@ class Round implements RoundInterface
      * @param CommandInterface $rightCommand
      * @param int $actionCommand
      * @param Statistic $statistics
-     * @param FullLog $chat
+     * @param FullLog $fullLog
      * @param bool|null $debug
      * @param StrokeFactory|null $strokeFactory
      * @throws RoundException
@@ -58,7 +58,7 @@ class Round implements RoundInterface
         CommandInterface $rightCommand,
         int $actionCommand,
         Statistic $statistics,
-        FullLog $chat,
+        FullLog $fullLog,
         ?bool $debug = false,
         ?StrokeFactory $strokeFactory = null
     )
@@ -68,7 +68,7 @@ class Round implements RoundInterface
         $this->rightCommand = $rightCommand;
         $this->actionCommand = $actionCommand;
         $this->statistics = $statistics;
-        $this->chat = $chat;
+        $this->fullLog = $fullLog;
         $this->debug = $debug;
         $this->strokeFactory = $strokeFactory ?? new StrokeFactory();
     }
@@ -100,7 +100,7 @@ class Round implements RoundInterface
                     $this->leftCommand,
                     $this->rightCommand,
                     $this->statistics,
-                    $this->chat,
+                    $this->fullLog,
                     $this->debug
                 );
 
@@ -148,10 +148,10 @@ class Round implements RoundInterface
      */
     private function executeStroke(StrokeInterface $stroke): void
     {
-        $this->chat->add('<p>' . self::START_STROKE . ' #' . $this->statistics->getStrokeNumber() . '</p>');
+        $this->fullLog->add('<p>' . self::START_STROKE . ' #' . $this->statistics->getStrokeNumber() . '</p>');
         $stroke->handle();
-        $this->chat->add('<p>' . self::END_STROKE . ' #' . $this->statistics->getStrokeNumber() . '</p>');
-        $this->chat->add('<p>' . self::HR . '</p>');
+        $this->fullLog->add('<p>' . self::END_STROKE . ' #' . $this->statistics->getStrokeNumber() . '</p>');
+        $this->fullLog->add('<p>' . self::HR . '</p>');
     }
 
     /**
@@ -161,7 +161,7 @@ class Round implements RoundInterface
      */
     private function startRound(): void
     {
-        $this->chat->add('<p>' . self::START_ROUND . ' #' . $this->statistics->getRoundNumber() . '</p>');
+        $this->fullLog->add('<p>' . self::START_ROUND . ' #' . $this->statistics->getRoundNumber() . '</p>');
     }
 
     /**
@@ -175,7 +175,7 @@ class Round implements RoundInterface
      */
     private function endRound(): int
     {
-        $this->chat->add('<p>' . self::END_ROUND . '</p>');
+        $this->fullLog->add('<p>' . self::END_ROUND . '</p>');
         $this->leftCommand->newRound();
         $this->rightCommand->newRound();
         return $this->actionCommand;
@@ -192,7 +192,7 @@ class Round implements RoundInterface
      */
     private function endBattle(): int
     {
-        $this->chat->add('<p>' . self::END . '</p>');
+        $this->fullLog->add('<p>' . self::END . '</p>');
         return 0;
     }
 

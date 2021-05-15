@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result;
 
-use Battle\Result\Chat\FullLog;
+use Battle\Result\FullLog\FullLog;
 use Battle\Classes\ClassFactoryException;
 use Battle\Statistic\Statistic;
 use Battle\Unit\UnitException;
@@ -38,7 +38,7 @@ class ResultTest extends TestCase
         self::assertEquals(Result::RIGHT_COMMAND_WIN, $result->getWinnerText());
         self::assertEquals(1, $result->getStatistic()->getRoundNumber());
         self::assertEquals(1, $result->getStatistic()->getStrokeNumber());
-        self::assertCount(0, $result->getChat()->getLog());
+        self::assertCount(0, $result->getFullLog()->getLog());
     }
 
     /**

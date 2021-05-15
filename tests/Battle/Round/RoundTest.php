@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Round;
 
-use Battle\Result\Chat\FullLog;
+use Battle\Result\FullLog\FullLog;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Result\Chat;
+namespace Battle\Result\FullLog;
 
 class FullLog
 {

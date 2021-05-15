@@ -2,7 +2,7 @@
 
 namespace Battle\Result;
 
-use Battle\Result\Chat\FullLog;
+use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
 
@@ -44,7 +44,7 @@ interface ResultInterface
      *
      * @return FullLog
      */
-    public function getChat(): FullLog;
+    public function getFullLog(): FullLog;
 
     /**
      * Возвращает статистику по бою

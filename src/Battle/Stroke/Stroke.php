@@ -6,7 +6,7 @@ namespace Battle\Stroke;
 
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
-use Battle\Result\Chat\FullLog;
+use Battle\Result\FullLog\FullLog;
 use Battle\Statistic\StatisticException;
 use Battle\Unit\UnitInterface;
 use Battle\View\ViewFactory;
@@ -29,7 +29,7 @@ class Stroke implements StrokeInterface
     private $statistics;
 
     /** @var FullLog */
-    private $chat;
+    private $fullLog;
 
     /** @var bool */
     private $debug;
@@ -43,7 +43,7 @@ class Stroke implements StrokeInterface
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param Statistic $statistics
-     * @param FullLog $chat
+     * @param FullLog $fullLog
      * @param bool|null $debug
      * @param ViewFactory|null $viewFactory
      */
@@ -53,7 +53,7 @@ class Stroke implements StrokeInterface
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         Statistic $statistics,
-        FullLog $chat,
+        FullLog $fullLog,
         ?bool $debug = false,
         ?ViewFactory $viewFactory = null
     )
@@ -63,7 +63,7 @@ class Stroke implements StrokeInterface
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;
         $this->statistics = $statistics;
-        $this->chat = $chat;
+        $this->fullLog = $fullLog;
         $this->debug = $debug;
         $this->viewFactory = $viewFactory ?? new ViewFactory();
     }
@@ -89,7 +89,7 @@ class Stroke implements StrokeInterface
 
             $message = $action->handle();
             $this->statistics->addUnitAction($action);
-            $this->chat->add('<p>' . $message . '</p>');
+            $this->fullLog->add('<p>' . $message . '</p>');
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -97,6 +97,6 @@ class Stroke implements StrokeInterface
         $this->actionUnit->madeAction();
 
         $view = $this->viewFactory->create();
-        $this->chat->add($view->renderCommandView($this->leftCommand, $this->rightCommand));
+        $this->fullLog->add($view->renderCommandView($this->leftCommand, $this->rightCommand));
     }
 }
