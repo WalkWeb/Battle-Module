@@ -61,6 +61,10 @@ echo $view->renderResult($result);
 
 ![alt text](public/images/example_end.png)
 
+## GitLab CI/CD
+
+![alt text](public/images/gitlab-ci-cd.png)
+
 ## Планы
 
 - Реализовать создание способности через массив параметров
