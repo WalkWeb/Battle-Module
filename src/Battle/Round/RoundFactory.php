@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Round;
 
-use Battle\Chat\Chat;
+use Battle\Result\Chat\Chat;
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
 use Battle\Stroke\StrokeFactory;

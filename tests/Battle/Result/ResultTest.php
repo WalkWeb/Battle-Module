@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result;
 
-use Battle\Chat\Chat;
+use Battle\Result\Chat\Chat;
 use Battle\Classes\ClassFactoryException;
 use Battle\Statistic\Statistic;
 use Battle\Unit\UnitException;

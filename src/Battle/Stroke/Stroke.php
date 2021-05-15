@@ -6,7 +6,7 @@ namespace Battle\Stroke;
 
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
-use Battle\Chat\Chat;
+use Battle\Result\Chat\Chat;
 use Battle\Statistic\StatisticException;
 use Battle\Unit\UnitInterface;
 use Battle\View\ViewFactory;

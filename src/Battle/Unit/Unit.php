@@ -9,7 +9,7 @@ use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
 use Battle\Action\Summon\SummonAction;
-use Battle\Chat\Message;
+use Battle\Result\Chat\Message;
 use Battle\Command\CommandInterface;
 use Exception;
 

@@ -2,7 +2,7 @@
 
 namespace Battle\Result;
 
-use Battle\Chat\Chat;
+use Battle\Result\Chat\Chat;
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
 

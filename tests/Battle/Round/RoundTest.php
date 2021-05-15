@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Round;
 
-use Battle\Chat\Chat;
+use Battle\Result\Chat\Chat;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;

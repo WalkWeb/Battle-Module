@@ -6,7 +6,7 @@ namespace Tests\Battle;
 
 use Battle\BattleException;
 use Battle\BattleFactory;
-use Battle\Chat\Chat;
+use Battle\Result\Chat\Chat;
 use Battle\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
 use Battle\Battle;

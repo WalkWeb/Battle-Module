@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Chat;
+namespace Tests\Battle\Result\Chat;
 
 use PHPUnit\Framework\TestCase;
-use Battle\Chat\Chat;
+use Battle\Result\Chat\Chat;
 
 class ChatTest extends TestCase
 {

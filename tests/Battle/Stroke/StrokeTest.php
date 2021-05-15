@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Stroke;
 
-use Battle\Chat\Chat;
+use Battle\Result\Chat\Chat;
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;

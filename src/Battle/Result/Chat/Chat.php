@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Chat;
+namespace Battle\Result\Chat;
 
 // TODO По факту это никакой не чат, а хранилище html кода - переделать
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Battle;
 
-use Battle\Chat\Chat;
+use Battle\Result\Chat\Chat;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;

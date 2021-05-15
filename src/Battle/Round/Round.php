@@ -6,7 +6,7 @@ namespace Battle\Round;
 
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
-use Battle\Chat\Chat;
+use Battle\Result\Chat\Chat;
 use Battle\Stroke\StrokeFactory;
 use Battle\Stroke\StrokeInterface;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Chat;
+namespace Battle\Result\Chat;
 
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
