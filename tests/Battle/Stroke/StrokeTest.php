@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Stroke;
 
-use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\FullLog;
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
@@ -87,7 +87,7 @@ class StrokeTest extends TestCase
         $leftCommand = CommandFactory::create([$this->attackUnit]);
         $rightCommand = CommandFactory::create([$this->defendUnit]);
 
-        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new Statistic(), new Chat());
+        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog());
 
         self::assertInstanceOf(Stroke::class, $stroke);
     }
@@ -102,7 +102,7 @@ class StrokeTest extends TestCase
         $leftCommand = CommandFactory::create([$this->attackUnit]);
         $rightCommand = CommandFactory::create([$this->defendUnit]);
 
-        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new Statistic(), new Chat());
+        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog());
         $stroke->handle();
 
         self::assertEquals($this->defendLife - $this->attackUnit->getDamage(), $this->defendUnit->getLife());

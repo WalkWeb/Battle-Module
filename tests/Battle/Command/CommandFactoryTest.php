@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Command;
 
-use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\FullLog;
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
@@ -84,7 +84,7 @@ class CommandFactoryTest extends TestCase
      */
     public function testCommandFactoryCreateFromUsersFail(): void
     {
-        $unit = new Chat();
+        $unit = new FullLog();
         $this->expectException(CommandException::class);
         $this->expectErrorMessage(CommandException::INCORRECT_OBJECT_UNIT);
         CommandFactory::create([$unit]);

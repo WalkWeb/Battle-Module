@@ -7,7 +7,7 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
     throw new ViewException(ViewException::MISSING_RESULT);
 }
 
-foreach ($result->getChat()->getMessages() as $view) {
+foreach ($result->getChat()->getLog() as $view) {
     echo $view;
 }
 

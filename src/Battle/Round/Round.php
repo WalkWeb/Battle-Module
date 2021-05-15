@@ -6,7 +6,7 @@ namespace Battle\Round;
 
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
-use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\FullLog;
 use Battle\Stroke\StrokeFactory;
 use Battle\Stroke\StrokeInterface;
 
@@ -34,7 +34,7 @@ class Round implements RoundInterface
     /** @var Statistic */
     private $statistics;
 
-    /** @var Chat */
+    /** @var FullLog */
     private $chat;
 
     /** @var bool */
@@ -48,7 +48,7 @@ class Round implements RoundInterface
      * @param CommandInterface $rightCommand
      * @param int $actionCommand
      * @param Statistic $statistics
-     * @param Chat $chat
+     * @param FullLog $chat
      * @param bool|null $debug
      * @param StrokeFactory|null $strokeFactory
      * @throws RoundException
@@ -58,7 +58,7 @@ class Round implements RoundInterface
         CommandInterface $rightCommand,
         int $actionCommand,
         Statistic $statistics,
-        Chat $chat,
+        FullLog $chat,
         ?bool $debug = false,
         ?StrokeFactory $strokeFactory = null
     )

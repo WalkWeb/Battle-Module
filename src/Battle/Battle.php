@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Battle;
 
-use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Round\RoundException;
 use Battle\Round\RoundFactory;
@@ -34,7 +34,7 @@ class Battle implements BattleInterface
     /** @var Statistic */
     private $statistics;
 
-    /** @var Chat */
+    /** @var FullLog */
     private $chat;
 
     /** @var RoundFactory */
@@ -44,7 +44,7 @@ class Battle implements BattleInterface
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param Statistic $statistics
-     * @param Chat $chat
+     * @param FullLog $chat
      * @param bool|null $debug
      * @param RoundFactory|null $roundFactory
      * @throws Exception
@@ -53,7 +53,7 @@ class Battle implements BattleInterface
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         Statistic $statistics,
-        Chat $chat,
+        FullLog $chat,
         ?bool $debug = true,
         ?RoundFactory $roundFactory = null
     )

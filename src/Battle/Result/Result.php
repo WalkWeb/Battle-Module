@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Result;
 
-use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
 
@@ -19,7 +19,7 @@ class Result implements ResultInterface
     /** @var int - Победившая команда: 1 - левая команда, 2 - правая команда */
     private $winner;
 
-    /** @var Chat */
+    /** @var FullLog */
     private $chat;
 
     /** @var Statistic */
@@ -29,7 +29,7 @@ class Result implements ResultInterface
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param int $winner
-     * @param Chat $chat
+     * @param FullLog $chat
      * @param Statistic $statistic
      * @throws ResultException
      */
@@ -37,7 +37,7 @@ class Result implements ResultInterface
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         int $winner,
-        Chat $chat,
+        FullLog $chat,
         Statistic $statistic
     )
     {
@@ -72,7 +72,7 @@ class Result implements ResultInterface
         return $this->winner === 1 ? self::LEFT_COMMAND_WIN : self::RIGHT_COMMAND_WIN;
     }
 
-    public function getChat(): Chat
+    public function getChat(): FullLog
     {
         return $this->chat;
     }

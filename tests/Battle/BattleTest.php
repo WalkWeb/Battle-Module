@@ -6,7 +6,7 @@ namespace Tests\Battle;
 
 use Battle\BattleException;
 use Battle\BattleFactory;
-use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\FullLog;
 use Battle\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
 use Battle\Battle;
@@ -25,7 +25,7 @@ class BattleTest extends TestCase
         $leftCommand = CommandFactory::createLeftCommand();
         $rightCommand = CommandFactory::createRightCommand();
 
-        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new Chat());
+        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog());
         $result = $battle->handle();
 
         self::assertEquals(2, $result->getWinner());

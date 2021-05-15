@@ -6,7 +6,7 @@ namespace Battle\Stroke;
 
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
-use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\FullLog;
 use Battle\Statistic\StatisticException;
 use Battle\Unit\UnitInterface;
 use Battle\View\ViewFactory;
@@ -28,7 +28,7 @@ class Stroke implements StrokeInterface
     /** @var Statistic */
     private $statistics;
 
-    /** @var Chat */
+    /** @var FullLog */
     private $chat;
 
     /** @var bool */
@@ -43,7 +43,7 @@ class Stroke implements StrokeInterface
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param Statistic $statistics
-     * @param Chat $chat
+     * @param FullLog $chat
      * @param bool|null $debug
      * @param ViewFactory|null $viewFactory
      */
@@ -53,7 +53,7 @@ class Stroke implements StrokeInterface
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         Statistic $statistics,
-        Chat $chat,
+        FullLog $chat,
         ?bool $debug = false,
         ?ViewFactory $viewFactory = null
     )
