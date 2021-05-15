@@ -40,7 +40,7 @@ interface ResultInterface
     public function getWinnerText(): string;
 
     /**
-     * Возвращает чат по бою (сейчас это не чат а просто хранилище всего html-кода боя)
+     * Возвращает детальных лог боя
      *
      * @return FullLog
      */
