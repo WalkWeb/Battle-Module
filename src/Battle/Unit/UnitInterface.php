@@ -8,7 +8,6 @@ use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
-use Battle\Effect\EffectCollection;
 
 /**
  * Одна боевая единица.
@@ -181,13 +180,6 @@ interface UnitInterface
      * @return UnitClassInterface
      */
     public function getClass(): UnitClassInterface;
-
-    /**
-     * Возвращает эффекты на юните
-     *
-     * @return EffectCollection
-     */
-    public function getEffects(): EffectCollection;
 
     /**
      * Урон юнита

@@ -10,7 +10,6 @@ use Battle\Classes\UnitClassInterface;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Effect\EffectCollection;
 use Battle\Unit\Unit;
 use Battle\Action\Damage\DamageAction;
 use Battle\Unit\UnitCollection;
@@ -77,7 +76,6 @@ class UnitTest extends TestCase
         self::assertTrue($unit->isAlive());
         self::assertTrue($unit->isMelee());
         self::assertEquals($attackClass->getId(), $unit->getClass()->getId());
-        self::assertEquals(new EffectCollection(), $unit->getEffects());
     }
 
     /**
@@ -226,36 +224,4 @@ class UnitTest extends TestCase
 
         self::assertEquals(UnitInterface::ADD_CON_RECEIVING_UNIT, $rightUnit->getConcentration());
     }
-
-    // todo Реализация добавления эффекта будет переделана
-
-//    /**
-//     * @throws ClassFactoryException
-//     * @throws ChangeException
-//     * @throws EffectException
-//     */
-//    public function testAddEffect(): void
-//    {
-//        $attackClass = UnitClassFactory::create($this->attackClassId);
-//
-//        $unit = new Unit(
-//            $this->attackName,
-//            $this->attackAvatar,
-//            $this->attackDamage,
-//            $this->attackAttackSpeed,
-//            $this->attackLife,
-//            $this->attackMelee,
-//            $attackClass
-//        );
-//
-//        $effect = EffectFactory::create(1, $unit);
-//
-//        $unit->addEffect($effect);
-//
-//        $effects = $unit->getEffects();
-//
-//        foreach ($effects as $effectItem) {
-//            self::assertEquals($effect, $effectItem);
-//        }
-//    }
 }

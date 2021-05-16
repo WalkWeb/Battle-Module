@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Unit;
 
 use Battle\Classes\UnitClassInterface;
-use Battle\Effect\EffectCollection;
 use Exception;
 
 abstract class AbstractUnit implements UnitInterface
@@ -71,11 +70,6 @@ abstract class AbstractUnit implements UnitInterface
     protected $rage = 0;
 
     /**
-     * @var EffectCollection
-     */
-    protected $effects;
-
-    /**
      * @var UnitClassInterface
      */
     protected $class;
@@ -103,7 +97,6 @@ abstract class AbstractUnit implements UnitInterface
         $this->totalLife = $totalLife;
         $this->melee = $melee;
         $this->class = $class;
-        $this->effects = new EffectCollection();
     }
 
     public function getId(): string
@@ -179,11 +172,6 @@ abstract class AbstractUnit implements UnitInterface
     public function getClass(): UnitClassInterface
     {
         return $this->class;
-    }
-
-    public function getEffects(): EffectCollection
-    {
-        return $this->effects;
     }
 
     public function newRound(): void
