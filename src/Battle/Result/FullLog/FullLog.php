@@ -6,7 +6,9 @@ namespace Battle\Result\FullLog;
 
 class FullLog
 {
-    /** @var array */
+    /**
+     * @var string[]
+     */
     private $log = [];
 
     public function add(string $log): void
@@ -14,6 +16,9 @@ class FullLog
         $this->log[] = $log;
     }
 
+    /**
+     * @return string[]
+     */
     public function getLog(): array
     {
         return $this->log;

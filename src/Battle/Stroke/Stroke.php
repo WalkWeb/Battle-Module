@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Stroke;
 
 use Battle\Command\CommandInterface;
+use Battle\Result\Chat\Chat;
 use Battle\Statistic\Statistic;
 use Battle\Result\FullLog\FullLog;
 use Battle\Statistic\StatisticException;
@@ -31,6 +32,9 @@ class Stroke implements StrokeInterface
     /** @var FullLog */
     private $fullLog;
 
+    /** @var Chat */
+    private $chat;
+
     /** @var bool */
     private $debug;
 
@@ -44,6 +48,7 @@ class Stroke implements StrokeInterface
      * @param CommandInterface $rightCommand
      * @param Statistic $statistics
      * @param FullLog $fullLog
+     * @param Chat $chat
      * @param bool|null $debug
      * @param ViewFactory|null $viewFactory
      */
@@ -54,6 +59,7 @@ class Stroke implements StrokeInterface
         CommandInterface $rightCommand,
         Statistic $statistics,
         FullLog $fullLog,
+        Chat $chat,
         ?bool $debug = false,
         ?ViewFactory $viewFactory = null
     )
@@ -64,6 +70,7 @@ class Stroke implements StrokeInterface
         $this->rightCommand = $rightCommand;
         $this->statistics = $statistics;
         $this->fullLog = $fullLog;
+        $this->chat = $chat;
         $this->debug = $debug;
         $this->viewFactory = $viewFactory ?? new ViewFactory();
     }
@@ -90,6 +97,7 @@ class Stroke implements StrokeInterface
             $message = $action->handle();
             $this->statistics->addUnitAction($action);
             $this->fullLog->add('<p>' . $message . '</p>');
+            $this->chat->add($message);
         }
 
         //--------------------------------------------------------------------------------------------------------------

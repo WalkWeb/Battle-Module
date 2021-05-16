@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle;
 
+use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Round\RoundException;
@@ -37,6 +38,9 @@ class Battle implements BattleInterface
     /** @var FullLog */
     private $fullLog;
 
+    /** @var Chat */
+    private $chat;
+
     /** @var RoundFactory */
     private $roundFactory;
 
@@ -45,8 +49,10 @@ class Battle implements BattleInterface
      * @param CommandInterface $rightCommand
      * @param Statistic $statistics
      * @param FullLog $fullLog
+     * @param Chat $chat
      * @param bool|null $debug
      * @param RoundFactory|null $roundFactory
+     * @throws BattleException
      * @throws Exception
      */
     public function __construct(
@@ -54,6 +60,7 @@ class Battle implements BattleInterface
         CommandInterface $rightCommand,
         Statistic $statistics,
         FullLog $fullLog,
+        Chat $chat,
         ?bool $debug = true,
         ?RoundFactory $roundFactory = null
     )
@@ -63,6 +70,7 @@ class Battle implements BattleInterface
         $this->rightCommand = $rightCommand;
         $this->statistics = $statistics;
         $this->fullLog = $fullLog;
+        $this->chat = $chat;
         $this->actionCommand = random_int(1, 2);
         $this->debug = $debug;
         $this->roundFactory = $roundFactory ?? new RoundFactory();
@@ -87,6 +95,7 @@ class Battle implements BattleInterface
                 $this->actionCommand,
                 $this->statistics,
                 $this->fullLog,
+                $this->chat,
                 $this->debug
             );
 
@@ -96,7 +105,7 @@ class Battle implements BattleInterface
             // Проверяем живых в командах
             if (!$this->leftCommand->isAlive() || !$this->rightCommand->isAlive()) {
                 $winner = !$this->leftCommand->isAlive() ? 2 : 1;
-                return new Result($this->leftCommand, $this->rightCommand, $winner, $this->fullLog, $this->statistics);
+                return new Result($this->leftCommand, $this->rightCommand, $winner, $this->fullLog, $this->chat, $this->statistics);
             }
 
             $this->statistics->increasedRound();

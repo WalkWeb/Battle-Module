@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Stroke;
 
+use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
@@ -22,6 +23,7 @@ class StrokeFactory
      * @param CommandInterface $rightCommand
      * @param Statistic $statistics
      * @param FullLog $fullLog
+     * @param Chat $chat
      * @param bool|null $debug
      * @return StrokeInterface
      */
@@ -32,6 +34,7 @@ class StrokeFactory
         CommandInterface $rightCommand,
         Statistic $statistics,
         FullLog $fullLog,
+        Chat $chat,
         ?bool $debug = false
     ): StrokeInterface
     {
@@ -42,6 +45,7 @@ class StrokeFactory
             $rightCommand,
             $statistics,
             $fullLog,
+            $chat,
             $debug
         );
     }

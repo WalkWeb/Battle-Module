@@ -7,6 +7,7 @@ namespace Tests\Battle\View;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Result\Result;
 use Battle\Result\ResultException;
@@ -353,7 +354,7 @@ EOT;
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
 
-        $result = new Result($leftCommand, $rightCommand, 1, new FullLog(), new Statistic());
+        $result = new Result($leftCommand, $rightCommand, 1, new FullLog(), new Chat(), new Statistic());
         $view = (new ViewFactory)->create();
 
         // Из-за вывода статистики, и подсчета времени выполнения в статистике, мы никогда не сможем точно узнать

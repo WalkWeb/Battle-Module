@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Round;
 
+use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
@@ -21,6 +22,7 @@ class RoundFactory
      * @param int $actionCommand
      * @param Statistic $statistics
      * @param FullLog $fullLog
+     * @param Chat $chat
      * @param bool|null $debug
      * @param StrokeFactory|null $strokeFactory
      * @return RoundInterface
@@ -32,6 +34,7 @@ class RoundFactory
         int $actionCommand,
         Statistic $statistics,
         FullLog $fullLog,
+        Chat $chat,
         ?bool $debug = false,
         ?StrokeFactory $strokeFactory = null
     ): RoundInterface
@@ -42,6 +45,7 @@ class RoundFactory
             $actionCommand,
             $statistics,
             $fullLog,
+            $chat,
             $debug,
             $strokeFactory
         );

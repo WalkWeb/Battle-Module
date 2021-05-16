@@ -9,6 +9,7 @@ use Battle\BattleFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
+use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Statistic\Statistic;
 use Battle\Unit\UnitCollection;
@@ -31,7 +32,7 @@ class BattleTest extends TestCase
         $leftCommand = CommandFactory::createLeftCommand();
         $rightCommand = CommandFactory::createRightCommand();
 
-        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog());
+        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat());
         $result = $battle->handle();
 
         self::assertEquals(2, $result->getWinner());
@@ -142,7 +143,7 @@ class BattleTest extends TestCase
 
         $this->expectException(BattleException::class);
         $this->expectExceptionMessage(BattleException::DOUBLE_UNIT_ID);
-        new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog());
+        new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat());
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Stroke;
 
 use Battle\Command\Command;
+use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
@@ -83,33 +84,32 @@ class StrokeTest extends TestCase
     }
 
     /**
-     * @throws CommandException
-     * @throws UnitException
-     */
-    public function testCreateAction(): void
-    {
-        $leftCommand = CommandFactory::create([$this->attackUnit]);
-        $rightCommand = CommandFactory::create([$this->defendUnit]);
-
-        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog());
-
-        self::assertInstanceOf(Stroke::class, $stroke);
-    }
-
-    /**
+     * Тест на базовую обработку одного хода
+     *
      * @throws CommandException
      * @throws StatisticException
      * @throws UnitException
      */
-    public function testAction(): void
+    public function testStrokeHandle(): void
     {
         $leftCommand = CommandFactory::create([$this->attackUnit]);
         $rightCommand = CommandFactory::create([$this->defendUnit]);
+        $statistics = new Statistic();
+        $log = new FullLog();
+        $chat = new Chat();
 
-        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog());
+        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, $statistics, $log, $chat);
         $stroke->handle();
 
         self::assertEquals($this->defendLife - $this->attackUnit->getDamage(), $this->defendUnit->getLife());
+
+        self::assertTrue($this->attackUnit->isAction());
+        self::assertFalse($this->defendUnit->isAction());
+
+        $chatResultMessages = [
+            '<p class="none"><b>first_unit</b> attack <b>second_unit</b> on 20 damage</p>'
+        ];
+        self::assertEquals($chatResultMessages, $chat->getMessages());
     }
 
     /**
@@ -135,7 +135,7 @@ class StrokeTest extends TestCase
         $leftCommand = new Command($leftCollection);
         $rightCommand = new Command($rightCollection);
 
-        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog());
+        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat());
 
         // Для теста достаточно того, что выполнение хода завершилось без ошибок
         $stroke->handle();

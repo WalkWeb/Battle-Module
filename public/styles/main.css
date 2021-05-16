@@ -420,3 +420,14 @@ p.left {
 }
 
 /* Table statistics styles end */
+
+/* Стили для чата в бою */
+
+p.none {
+    display: none;
+}
+
+p.view {
+    display: block;
+    font-size: 110%;
+}

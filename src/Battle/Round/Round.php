@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Round;
 
 use Battle\Command\CommandInterface;
+use Battle\Result\Chat\Chat;
 use Battle\Statistic\Statistic;
 use Battle\Result\FullLog\FullLog;
 use Battle\Stroke\StrokeFactory;
@@ -37,6 +38,9 @@ class Round implements RoundInterface
     /** @var FullLog */
     private $fullLog;
 
+    /** @var Chat */
+    private $chat;
+
     /** @var bool */
     private $debug;
 
@@ -49,6 +53,7 @@ class Round implements RoundInterface
      * @param int $actionCommand
      * @param Statistic $statistics
      * @param FullLog $fullLog
+     * @param Chat $chat
      * @param bool|null $debug
      * @param StrokeFactory|null $strokeFactory
      * @throws RoundException
@@ -59,6 +64,7 @@ class Round implements RoundInterface
         int $actionCommand,
         Statistic $statistics,
         FullLog $fullLog,
+        Chat $chat,
         ?bool $debug = false,
         ?StrokeFactory $strokeFactory = null
     )
@@ -69,6 +75,7 @@ class Round implements RoundInterface
         $this->actionCommand = $actionCommand;
         $this->statistics = $statistics;
         $this->fullLog = $fullLog;
+        $this->chat = $chat;
         $this->debug = $debug;
         $this->strokeFactory = $strokeFactory ?? new StrokeFactory();
     }
@@ -101,6 +108,7 @@ class Round implements RoundInterface
                     $this->rightCommand,
                     $this->statistics,
                     $this->fullLog,
+                    $this->chat,
                     $this->debug
                 );
 

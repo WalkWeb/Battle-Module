@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle;
 
+use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -11,7 +12,6 @@ use Battle\Command\CommandInterface;
 use Battle\Round\RoundFactory;
 use Battle\Statistic\Statistic;
 use Battle\Unit\UnitException;
-use Exception;
 
 class BattleFactory
 {
@@ -50,15 +50,19 @@ class BattleFactory
      * @param array $data
      * @param Statistic|null $statistics
      * @param FullLog|null $fullLog
+     * @param Chat|null $chat
      * @param bool|null $debug
      * @param RoundFactory|null $roundFactory
      * @return BattleInterface
-     * @throws Exception
+     * @throws BattleException
+     * @throws CommandException
+     * @throws UnitException
      */
     public static function create(
         array $data,
         ?Statistic $statistics = null,
         ?FullLog $fullLog = null,
+        ?Chat $chat = null,
         ?bool $debug = true,
         ?RoundFactory $roundFactory = null
     ): BattleInterface
@@ -68,6 +72,7 @@ class BattleFactory
             self::createCommand($data, BattleInterface::RIGHT_COMMAND),
             $statistics ?? new Statistic(),
             $fullLog ?? new FullLog(),
+            $chat ?? new Chat(),
             $debug,
             $roundFactory
         );

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result;
 
+use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Classes\ClassFactoryException;
 use Battle\Statistic\Statistic;
@@ -29,7 +30,7 @@ class ResultTest extends TestCase
         $leftCommand = CommandFactory::createLeftCommand();
         $rightCommand = CommandFactory::createRightCommand();
 
-        $result = new Result($leftCommand, $rightCommand, $winner = 2, new FullLog(), new Statistic());
+        $result = new Result($leftCommand, $rightCommand, $winner = 2, new FullLog(), new Chat(), new Statistic());
 
         self::assertInstanceOf(Result::class, $result);
         self::assertEquals($leftCommand, $result->getLeftCommand());
@@ -39,6 +40,7 @@ class ResultTest extends TestCase
         self::assertEquals(1, $result->getStatistic()->getRoundNumber());
         self::assertEquals(1, $result->getStatistic()->getStrokeNumber());
         self::assertCount(0, $result->getFullLog()->getLog());
+        self::assertEquals(new Chat(), $result->getChat());
     }
 
     /**
@@ -54,6 +56,6 @@ class ResultTest extends TestCase
         $rightCommand = CommandFactory::createRightCommand();
 
         $this->expectException(ResultException::class);
-        new Result($leftCommand, $rightCommand, $winner = 3, new FullLog(), new Statistic());
+        new Result($leftCommand, $rightCommand, $winner = 3, new FullLog(), new Chat(), new Statistic());
     }
 }
