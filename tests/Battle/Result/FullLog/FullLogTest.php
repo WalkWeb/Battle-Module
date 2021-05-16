@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Result\Chat;
+namespace Tests\Battle\Result\FullLog;
 
 use PHPUnit\Framework\TestCase;
 use Battle\Result\FullLog\FullLog;
 
-class ChatTest extends TestCase
+class FullLogTest extends TestCase
 {
     public function testAdd(): void
     {
