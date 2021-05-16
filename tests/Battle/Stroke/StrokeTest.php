@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Stroke;
 
+use Battle\Command\Command;
 use Battle\Result\FullLog\FullLog;
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
@@ -12,11 +13,14 @@ use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Statistic\Statistic;
 use Battle\Statistic\StatisticException;
+use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke\Stroke;
 use Battle\Unit\UnitInterface;
 use Battle\Unit\Unit;
+use Tests\Battle\Factory\UnitFactory;
+use Tests\Battle\Factory\UnitFactoryException;
 
 class StrokeTest extends TestCase
 {
@@ -106,5 +110,37 @@ class StrokeTest extends TestCase
         $stroke->handle();
 
         self::assertEquals($this->defendLife - $this->attackUnit->getDamage(), $this->defendUnit->getLife());
+    }
+
+    /**
+     * Тест на остановку внутри Stroke, например, когда юнит хочет сделать два удара, но противник умирает после первого
+     *
+     * @throws ClassFactoryException
+     * @throws UnitFactoryException
+     * @throws UnitException
+     * @throws CommandException
+     * @throws StatisticException
+     */
+    public function testStrokeBreakAction(): void
+    {
+        $leftUnit = UnitFactory::createByTemplate(13);
+        $rightUnit = UnitFactory::createByTemplate(1);
+
+        $leftCollection = new UnitCollection();
+        $leftCollection->add($leftUnit);
+
+        $rightCollection = new UnitCollection();
+        $rightCollection->add($rightUnit);
+
+        $leftCommand = new Command($leftCollection);
+        $rightCommand = new Command($rightCollection);
+
+        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog());
+
+        // Для теста достаточно того, что выполнение хода завершилось без ошибок
+        $stroke->handle();
+
+        // Но, на всякий случай проверяем, что противник умер
+        self::assertEquals(0, $rightUnit->getLife());
     }
 }

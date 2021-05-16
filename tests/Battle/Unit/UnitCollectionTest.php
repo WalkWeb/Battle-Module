@@ -130,4 +130,31 @@ class UnitCollectionTest extends TestCase
             )
         );
     }
+
+    /**
+     * @throws ClassFactoryException
+     * @throws UnitException
+     */
+    public function testUnitCollectionKey(): void
+    {
+        $collection = new UnitCollection();
+        $id = '5aa0d764-e92d-4137-beed-f7f590b08165';
+
+        $collection->add(
+            new Unit(
+                $id,
+                'User 1',
+                1,
+                'avatar 1',
+                15,
+                1,
+                110,
+                110,
+                true,
+                UnitClassFactory::create(1)
+            )
+        );
+
+        self::assertEquals($id, $collection->key());
+    }
 }

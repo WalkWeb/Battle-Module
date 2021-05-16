@@ -7,6 +7,10 @@ namespace Tests\Battle\View;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Result\FullLog\FullLog;
+use Battle\Result\Result;
+use Battle\Result\ResultException;
+use Battle\Statistic\Statistic;
 use Battle\Unit\UnitException;
 use Battle\View\ViewFactory;
 use PHPUnit\Framework\TestCase;
@@ -335,5 +339,25 @@ EOT;
 EOT;
 
         self::assertEquals($expectHtml, $view->renderHead());
+    }
+
+    /**
+     * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     * @throws ResultException
+     */
+    public function testViewRenderResult(): void
+    {
+        $leftCommand = TestCommandFactory::createLeftCommand();
+        $rightCommand = TestCommandFactory::createRightCommand();
+
+        $result = new Result($leftCommand, $rightCommand, 1, new FullLog(), new Statistic());
+        $view = (new ViewFactory)->create();
+
+        // Из-за вывода статистики, и подсчета времени выполнения в статистике, мы никогда не сможем точно узнать
+        // какой код будет выведен. По этому просто проверяем, что рендер прошел без ошибок, и получили строку
+        self::assertIsString($view->renderResult($result));
     }
 }

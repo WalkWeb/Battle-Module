@@ -144,6 +144,18 @@ class UnitFactory
             'melee'        => true,
             'class'        => 1,
         ],
+        13  => [
+            'id'           => '1aab367d-37e8-4544-9915-cb3d7779332b',
+            'name'         => 'unit_13',
+            'level'        => 1,
+            'avatar'       => '/images/avas/humans/human002.jpg',
+            'damage'       => 3000,
+            'attack_speed' => 5, // Не просто большой урон, но и 5 атак за ход
+            'life'         => 150,
+            'total_life'   => 150,
+            'melee'        => true,
+            'class'        => 1,
+        ],
     ];
 
     /**
