@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Classes\Human;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\ActionException;
 use Battle\Action\Damage\HeavyStrikeAction;
 use Battle\Classes\AbstractUnitClass;
 use Battle\Classes\UnitClassInterface;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Classes\Undead;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\ActionException;
 use Battle\Action\Damage\HeavyStrikeAction;
 use Battle\Classes\AbstractUnitClass;
 use Battle\Classes\UnitClassInterface;
@@ -27,7 +26,6 @@ class DeadKnight extends AbstractUnitClass
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
-     * @throws ActionException
      */
     public function getAbility(
         UnitInterface $actionUnit,
