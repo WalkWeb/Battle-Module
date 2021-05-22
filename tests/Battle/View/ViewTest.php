@@ -12,6 +12,7 @@ use Battle\Result\FullLog\FullLog;
 use Battle\Result\Result;
 use Battle\Result\ResultException;
 use Battle\Statistic\Statistic;
+use Battle\Translation\Translation;
 use Battle\Unit\UnitException;
 use Battle\View\ViewFactory;
 use PHPUnit\Framework\TestCase;
@@ -354,7 +355,7 @@ EOT;
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
 
-        $result = new Result($leftCommand, $rightCommand, 1, new FullLog(), new Chat(), new Statistic());
+        $result = new Result($leftCommand, $rightCommand, 1, new FullLog(), new Chat(), new Statistic(), new Translation());
         $view = (new ViewFactory)->create();
 
         // Из-за вывода статистики, и подсчета времени выполнения в статистике, мы никогда не сможем точно узнать

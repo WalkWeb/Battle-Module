@@ -10,6 +10,8 @@ use Battle\Statistic\Statistic;
 use Battle\Result\FullLog\FullLog;
 use Battle\Stroke\StrokeFactory;
 use Battle\Stroke\StrokeInterface;
+use Battle\Translation\Translation;
+use Battle\Translation\TranslationException;
 
 class Round implements RoundInterface
 {
@@ -47,6 +49,9 @@ class Round implements RoundInterface
     /** @var StrokeFactory */
     private $strokeFactory;
 
+    /** @var Translation */
+    private $translation;
+
     /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
@@ -56,6 +61,7 @@ class Round implements RoundInterface
      * @param Chat $chat
      * @param bool|null $debug
      * @param StrokeFactory|null $strokeFactory
+     * @param Translation|null $translation
      * @throws RoundException
      */
     public function __construct(
@@ -66,7 +72,8 @@ class Round implements RoundInterface
         FullLog $fullLog,
         Chat $chat,
         ?bool $debug = false,
-        ?StrokeFactory $strokeFactory = null
+        ?StrokeFactory $strokeFactory = null,
+        ?Translation $translation = null
     )
     {
         $this->validateActionCommand($actionCommand);
@@ -78,6 +85,7 @@ class Round implements RoundInterface
         $this->chat = $chat;
         $this->debug = $debug;
         $this->strokeFactory = $strokeFactory ?? new StrokeFactory();
+        $this->translation = $translation ?? new Translation();
     }
 
     /**
@@ -88,6 +96,7 @@ class Round implements RoundInterface
      *
      * @return int
      * @throws RoundException
+     * @throws TranslationException
      */
     public function handle(): int
     {
@@ -153,12 +162,20 @@ class Round implements RoundInterface
      * 4. Добавляет разделительную линию (todo на удаление, объекты не должны выводить html)
      *
      * @param StrokeInterface $stroke
+     * @throws TranslationException
      */
     private function executeStroke(StrokeInterface $stroke): void
     {
-        $this->fullLog->add('<p>' . self::START_STROKE . ' #' . $this->statistics->getStrokeNumber() . '</p>');
+        $this->fullLog->add(
+            '<p>' . $this->translation->trans(self::START_STROKE) . ' #' . $this->statistics->getStrokeNumber() . '</p>'
+        );
+
         $stroke->handle();
-        $this->fullLog->add('<p>' . self::END_STROKE . ' #' . $this->statistics->getStrokeNumber() . '</p>');
+
+        $this->fullLog->add(
+            '<p>' .  $this->translation->trans(self::END_STROKE) . ' #' . $this->statistics->getStrokeNumber() . '</p>'
+        );
+
         $this->fullLog->add('<p>' . self::HR . '</p>');
     }
 
@@ -166,10 +183,14 @@ class Round implements RoundInterface
      * Стартует раунд:
      *
      * 1. В лог добавляет информацию о том, что раунд стартовал
+     *
+     * @throws TranslationException
      */
     private function startRound(): void
     {
-        $this->fullLog->add('<p>' . self::START_ROUND . ' #' . $this->statistics->getRoundNumber() . '</p>');
+        $this->fullLog->add(
+            '<p>' . $this->translation->trans(self::START_ROUND) . ' #' . $this->statistics->getRoundNumber() . '</p>'
+        );
     }
 
     /**
@@ -180,10 +201,11 @@ class Round implements RoundInterface
      * 3. Возвращается номер команды, которая будет делать следующий ход
      *
      * @return int
+     * @throws TranslationException
      */
     private function endRound(): int
     {
-        $this->fullLog->add('<p>' . self::END_ROUND . '</p>');
+        $this->fullLog->add('<p>' . $this->translation->trans(self::END_ROUND) . '</p>');
         $this->leftCommand->newRound();
         $this->rightCommand->newRound();
         return $this->actionCommand;

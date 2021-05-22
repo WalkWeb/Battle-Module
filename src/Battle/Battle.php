@@ -10,6 +10,7 @@ use Battle\Command\CommandInterface;
 use Battle\Round\RoundException;
 use Battle\Round\RoundFactory;
 use Battle\Statistic\Statistic;
+use Battle\Translation\Translation;
 use Exception;
 use Battle\Result\ResultException;
 use Battle\Result\Result;
@@ -44,6 +45,9 @@ class Battle implements BattleInterface
     /** @var RoundFactory */
     private $roundFactory;
 
+    /** @var Translation */
+    private $translation;
+
     /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
@@ -52,6 +56,7 @@ class Battle implements BattleInterface
      * @param Chat $chat
      * @param bool|null $debug
      * @param RoundFactory|null $roundFactory
+     * @param Translation|null $translation
      * @throws BattleException
      * @throws Exception
      */
@@ -62,7 +67,8 @@ class Battle implements BattleInterface
         FullLog $fullLog,
         Chat $chat,
         ?bool $debug = true,
-        ?RoundFactory $roundFactory = null
+        ?RoundFactory $roundFactory = null,
+        ?Translation $translation = null
     )
     {
         $this->checkDoubleUnitId($leftCommand, $rightCommand);
@@ -74,6 +80,7 @@ class Battle implements BattleInterface
         $this->actionCommand = random_int(1, 2);
         $this->debug = $debug;
         $this->roundFactory = $roundFactory ?? new RoundFactory();
+        $this->translation = $translation ?? new Translation();
     }
 
     /**
@@ -96,7 +103,8 @@ class Battle implements BattleInterface
                 $this->statistics,
                 $this->fullLog,
                 $this->chat,
-                $this->debug
+                $this->debug,
+                $this->translation
             );
 
             // Выполняем раунд, получая номер команды, которая будет ходить следующей
@@ -105,7 +113,15 @@ class Battle implements BattleInterface
             // Проверяем живых в командах
             if (!$this->leftCommand->isAlive() || !$this->rightCommand->isAlive()) {
                 $winner = !$this->leftCommand->isAlive() ? 2 : 1;
-                return new Result($this->leftCommand, $this->rightCommand, $winner, $this->fullLog, $this->chat, $this->statistics);
+                return new Result(
+                    $this->leftCommand,
+                    $this->rightCommand,
+                    $winner,
+                    $this->fullLog,
+                    $this->chat,
+                    $this->statistics,
+                    $this->translation
+                );
             }
 
             $this->statistics->increasedRound();

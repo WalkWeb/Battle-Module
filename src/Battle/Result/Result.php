@@ -8,6 +8,8 @@ use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
+use Battle\Translation\Translation;
+use Battle\Translation\TranslationInterface;
 
 class Result implements ResultInterface
 {
@@ -29,6 +31,9 @@ class Result implements ResultInterface
     /** @var Statistic */
     private $statistic;
 
+    /** @var Translation */
+    private $translation;
+
     /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
@@ -36,6 +41,7 @@ class Result implements ResultInterface
      * @param FullLog $fullLog
      * @param Chat $chat
      * @param Statistic $statistic
+     * @param Translation $translation
      * @throws ResultException
      */
     public function __construct(
@@ -44,7 +50,8 @@ class Result implements ResultInterface
         int $winner,
         FullLog $fullLog,
         Chat $chat,
-        Statistic $statistic
+        Statistic $statistic,
+        Translation $translation
     )
     {
         if ($winner !== 1 && $winner !== 2) {
@@ -57,6 +64,7 @@ class Result implements ResultInterface
         $this->fullLog = $fullLog;
         $this->chat = $chat;
         $this->statistic = $statistic;
+        $this->translation = $translation;
     }
 
     public function getLeftCommand(): CommandInterface
@@ -92,5 +100,10 @@ class Result implements ResultInterface
     public function getStatistic(): Statistic
     {
         return $this->statistic;
+    }
+
+    public function getTranslation(): TranslationInterface
+    {
+        return $this->translation;
     }
 }

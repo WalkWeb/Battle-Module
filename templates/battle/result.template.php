@@ -18,14 +18,14 @@ foreach ($result->getFullLog()->getLog() as $view) {
 <div class="statistics_box">
     <table class="statistics">
         <tr class="header">
-            <td colspan="5"><p>Statistics</p></td>
+            <td colspan="5"><p><?= $result->getTranslation()->trans('Statistics') ?></p></td>
         </tr>
         <tr class="header">
-            <td><p><span class="stat_unit">Unit</span></p></td>
-            <td><p><span class="stat_damage">Caused Damage</span></p></td>
-            <td><p><span class="stat_taken">Taken Damage</span></p></td>
-            <td><p><span class="stat_heal">Heal</span></p></td>
-            <td><p><span class="stat_kill">Killing</span></p></td>
+            <td><p><span class="stat_unit"><?= $result->getTranslation()->trans('Unit') ?></span></p></td>
+            <td><p><span class="stat_damage"><?= $result->getTranslation()->trans('Caused Damage') ?></span></p></td>
+            <td><p><span class="stat_taken"><?= $result->getTranslation()->trans('Taken Damage') ?></span></p></td>
+            <td><p><span class="stat_heal"><?= $result->getTranslation()->trans('Heal') ?></span></p></td>
+            <td><p><span class="stat_kill"><?= $result->getTranslation()->trans('Killing') ?></span></p></td>
         </tr>
         <?php foreach ($result->getStatistic()->getUnitsStatistics() as $unit): ?>
         <tr>
@@ -48,19 +48,19 @@ foreach ($result->getFullLog()->getLog() as $view) {
         </tr>
         <?php endforeach; ?>
         <tr>
-            <td><p class="right">Total rounds:</p></td>
+            <td><p class="right"><?= $result->getTranslation()->trans('Total rounds') ?>:</p></td>
             <td colspan="4"><p class="left"><?= $result->getStatistic()->getRoundNumber() ?></p></td>
         </tr>
         <tr>
-            <td><p class="right">Total stroke:</p></td>
+            <td><p class="right"><?= $result->getTranslation()->trans('Total stroke') ?>:</p></td>
             <td colspan="4"><p class="left"><?= $result->getStatistic()->getStrokeNumber() ?></p></td>
         </tr>
         <tr>
-            <td><p class="right">Runtime:</p></td>
+            <td><p class="right"><?= $result->getTranslation()->trans('Runtime') ?>:</p></td>
             <td colspan="4"><p class="left"><?= $result->getStatistic()->getRuntime() ?> ms</p></td>
         </tr>
         <tr>
-            <td><p class="right">Memory cost:</p></td>
+            <td><p class="right"><?= $result->getTranslation()->trans('Memory cost') ?>:</p></td>
             <td colspan="4"><p class="left"><?= $result->getStatistic()->getMemoryCostClipped() ?></p></td>
         </tr>
     </table>

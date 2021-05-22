@@ -11,6 +11,7 @@ use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Round\RoundFactory;
 use Battle\Statistic\Statistic;
+use Battle\Translation\Translation;
 use Battle\Unit\UnitException;
 
 class BattleFactory
@@ -53,6 +54,7 @@ class BattleFactory
      * @param Chat|null $chat
      * @param bool|null $debug
      * @param RoundFactory|null $roundFactory
+     * @param Translation|null $translation
      * @return BattleInterface
      * @throws BattleException
      * @throws CommandException
@@ -64,7 +66,8 @@ class BattleFactory
         ?FullLog $fullLog = null,
         ?Chat $chat = null,
         ?bool $debug = true,
-        ?RoundFactory $roundFactory = null
+        ?RoundFactory $roundFactory = null,
+        ?Translation $translation = null
     ): BattleInterface
     {
         return new Battle(
@@ -74,7 +77,8 @@ class BattleFactory
             $fullLog ?? new FullLog(),
             $chat ?? new Chat(),
             $debug,
-            $roundFactory
+            $roundFactory,
+            $translation
         );
     }
 

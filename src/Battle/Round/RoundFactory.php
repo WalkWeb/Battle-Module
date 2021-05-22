@@ -9,6 +9,7 @@ use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Statistic\Statistic;
 use Battle\Stroke\StrokeFactory;
+use Battle\Translation\Translation;
 
 class RoundFactory
 {
@@ -25,6 +26,7 @@ class RoundFactory
      * @param Chat $chat
      * @param bool|null $debug
      * @param StrokeFactory|null $strokeFactory
+     * @param Translation|null $translation
      * @return RoundInterface
      * @throws RoundException
      */
@@ -36,6 +38,7 @@ class RoundFactory
         FullLog $fullLog,
         Chat $chat,
         ?bool $debug = false,
+        ?Translation $translation = null,
         ?StrokeFactory $strokeFactory = null
     ): RoundInterface
     {
@@ -47,7 +50,8 @@ class RoundFactory
             $fullLog,
             $chat,
             $debug,
-            $strokeFactory
+            $strokeFactory,
+            $translation
         );
     }
 }
