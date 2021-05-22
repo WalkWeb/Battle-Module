@@ -1,0 +1,27 @@
+<?php
+
+return [
+    // Battle
+    'Battle end'                     => 'Battle end',
+    'Start new round'                => 'Start new round',
+    'All command actions. New round' => 'All command actions. New round',
+    'Start Stroke'                   => 'Start Stroke',
+    'End Stroke'                     => 'End Stroke',
+    // Action
+    'attack'                         => 'attack',
+    'Heavy Strike'                   => 'Heavy Strike',
+    'heal'                           => 'heal',
+    'Great Heal'                     => 'Great Heal',
+    'summon Imp'                     => 'summon Imp',
+    // Statistics
+    'Statistics'                     => 'Statistics',
+    'Unit'                           => 'Unit',
+    'Caused Damage'                  => 'Caused Damage',
+    'Taken Damage'                   => 'Taken Damage',
+    'Heal'                           => 'Heal',
+    'Killing'                        => 'Killing',
+    'Total rounds'                   => 'Total rounds',
+    'Total stroke'                   => 'Total stroke',
+    'Runtime'                        => 'Runtime',
+    'Memory cost'                    => 'Memory cost',
+];
