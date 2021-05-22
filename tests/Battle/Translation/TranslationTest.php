@@ -11,6 +11,8 @@ use PHPUnit\Framework\TestCase;
 class TranslationTest extends TestCase
 {
     /**
+     * Тест на стандартный успешный перевод сообщения
+     *
      * @throws TranslationException
      */
     public function testTranslationTransSuccess(): void
@@ -25,6 +27,8 @@ class TranslationTest extends TestCase
     }
 
     /**
+     * Тест ситуации, когда указанного сообщения нет в справочнике по переводу, и вернулось это же сообщение
+     *
      * @throws TranslationException
      */
     public function testTranslationTransUndefinedMessage(): void
@@ -39,6 +43,8 @@ class TranslationTest extends TestCase
     }
 
     /**
+     * Тест ситуации, когда указан неизвестный язык, и возвращен вариант языка по умолчанию
+     *
      * @throws TranslationException
      */
     public function testTranslationTransUndefinedLanguage(): void
@@ -53,6 +59,9 @@ class TranslationTest extends TestCase
     }
 
     /**
+     * Тест ситуации, когда справочник переводов составлен некорректно, и вместо строки получен какой-то другой тип
+     * сообщения
+     *
      * @throws TranslationException
      */
     public function testTranslationTransInvalidMessage(): void
@@ -70,17 +79,22 @@ class TranslationTest extends TestCase
         $translation->trans('hello');
     }
 
+    /**
+     * Тест определения языка на основании данных из $_SERVER['HTTP_ACCEPT_LANGUAGE']
+     */
     public function testTranslationTransHttpAcceptLanguage(): void
     {
-        $language = 'xx';
+        $language = 'xxXX';
         $_SERVER['HTTP_ACCEPT_LANGUAGE'] = $language;
 
         $translation = new Translation();
 
-        self::assertEquals($language, $translation->getLanguage());
+        self::assertEquals('xx', $translation->getLanguage());
     }
 
     /**
+     * Тест исключительной ситуации, когда передан язык по умолчанию, но справочник по переводу отсутствует
+     *
      * @throws TranslationException
      */
     public function testTranslationNoDefaultLanguage(): void

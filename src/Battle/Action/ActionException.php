@@ -9,5 +9,5 @@ use Exception;
 class ActionException extends Exception
 {
     public const NO_DEFINED       = 'No defined unit';
-    public const NO_DEFINED_AGAIN = 'Не смотря на то, что команда сказала, что у неё есть живые юниты, метод getUnitForAttacks() не вернул ничего';
+    public const NO_DEFINED_AGAIN = 'Despite the fact that command said that it has live units, getUnitForAttacks() return null';
 }
