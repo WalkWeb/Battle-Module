@@ -100,4 +100,12 @@ class RaceFactory
             $data['icon'],
         );
     }
+
+    /**
+     * @return array[]
+     */
+    public static function getData(): array
+    {
+        return self::$data;
+    }
 }
