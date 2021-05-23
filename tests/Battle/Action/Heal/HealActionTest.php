@@ -10,6 +10,7 @@ use Battle\Action\Heal\HealAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Result\Chat\Message;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;
@@ -132,13 +133,14 @@ class HealActionTest extends TestCase
      */
     public function testGetPowerHealAction(): void
     {
+        $message = new Message();
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(3);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $healAction = new HealAction($unit, $enemyCommand, $command);
-        $greatHealAction = new GreatHealAction($unit, $enemyCommand, $command);
+        $healAction = new HealAction($unit, $enemyCommand, $command, $message);
+        $greatHealAction = new GreatHealAction($unit, $enemyCommand, $command, $message);
 
         self::assertEquals((int)($unit->getDamage() * 1.2), $healAction->getPower());
         self::assertEquals($unit->getDamage() * 3, $greatHealAction->getPower());

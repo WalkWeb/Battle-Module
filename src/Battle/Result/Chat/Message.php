@@ -23,7 +23,6 @@ class Message
     public function __construct(?Translation $translation = null)
     {
         $this->translation = $translation ?? new Translation();
-
     }
 
     /**

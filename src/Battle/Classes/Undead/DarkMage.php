@@ -34,7 +34,7 @@ class DarkMage extends AbstractUnitClass
     ): ActionCollection
     {
         $collection = new ActionCollection();
-        $collection->add(new SummonImpAction($actionUnit, $alliesCommand, $alliesCommand));
+        $collection->add(new SummonImpAction($actionUnit, $alliesCommand, $alliesCommand, $this->message));
         return $collection;
     }
 

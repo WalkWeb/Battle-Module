@@ -34,7 +34,7 @@ class Priest extends AbstractUnitClass
     ): ActionCollection
     {
         $collection = new ActionCollection();
-        $collection->add(new GreatHealAction($actionUnit, $enemyCommand, $alliesCommand));
+        $collection->add(new GreatHealAction($actionUnit, $enemyCommand, $alliesCommand, $this->message));
         return $collection;
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Action\Summon;
 
 use Battle\Classes\UnitClassFactory;
-use Battle\Result\Chat\Message;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -29,9 +28,6 @@ class SummonImpAction extends SummonAction
      */
     public function getSummonUnit(): UnitInterface
     {
-        // todo вынести в зависимость
-        $message = new Message();
-
         return new Unit(
             self::generateId(),
             $this->name,
@@ -42,8 +38,8 @@ class SummonImpAction extends SummonAction
             $this->life,
             $this->life,
             $this->melee,
-            UnitClassFactory::create($this->classId),
-            $message
+            UnitClassFactory::create($this->classId, $this->message),
+            $this->message
         );
     }
 

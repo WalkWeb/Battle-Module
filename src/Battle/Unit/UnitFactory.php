@@ -82,7 +82,7 @@ class UnitFactory
             $data['life'],
             $data['total_life'],
             $data['melee'],
-            UnitClassFactory::create($data['class']),
+            UnitClassFactory::create($data['class'], $message),
             $message
         );
     }

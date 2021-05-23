@@ -47,7 +47,7 @@ class Unit extends AbstractUnit
      */
     public function  getBaseAttack(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionInterface
     {
-        return new DamageAction($this, $enemyCommand, $alliesCommand);
+        return new DamageAction($this, $enemyCommand, $alliesCommand, $this->message);
     }
 
     /**
@@ -62,7 +62,7 @@ class Unit extends AbstractUnit
         $attacks = $this->calculateAttackSpeed();
 
         for ($i = 0; $i < $attacks; $i++) {
-            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand));
+            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand, $this->message));
         }
 
         return $collection;

@@ -289,7 +289,7 @@ class CommandTest extends TestCase
         self::assertInstanceOf(UnitInterface::class, $alliesCommand->getUnitForAction());
 
         // убиваем первого юнита ($alliesCommand и $enemyCommand переставлены местами - это правильно, ходит вражеская команда)
-        $action = new DamageAction($unit3, $alliesCommand, $enemyCommand);
+        $action = new DamageAction($unit3, $alliesCommand, $enemyCommand, $message);
         $action->handle();
 
         // указываем, что второй юнит походил

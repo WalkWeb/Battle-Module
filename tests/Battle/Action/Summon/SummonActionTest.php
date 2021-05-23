@@ -8,6 +8,7 @@ use Battle\Action\Summon\SummonImpAction;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Result\Chat\Message;
 use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
@@ -61,7 +62,7 @@ class SummonActionTest extends TestCase
         $alliesCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new SummonImpAction($actionUnit, $alliesCommand, $enemyCommand);
+        $action = new SummonImpAction($actionUnit, $alliesCommand, $enemyCommand, new Message());
 
         self::assertEquals(0, $action->getFactualPower());
 

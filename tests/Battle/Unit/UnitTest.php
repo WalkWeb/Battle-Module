@@ -121,13 +121,13 @@ class UnitTest extends TestCase
         $enemyCommand = CommandFactory::create([$defendUnit], $message);
         $alliesCommand = CommandFactory::create([$attackUnit], $message);
 
-        $action = new DamageAction($attackUnit, $enemyCommand, $alliesCommand);
+        $action = new DamageAction($attackUnit, $enemyCommand, $alliesCommand, $message);
 
         $action->handle();
 
         self::assertEquals($this->defendLife - $attackUnit->getDamage(), $defendUnit->getLife());
 
-        $action2 = new DamageAction($attackUnit, $enemyCommand, $alliesCommand);
+        $action2 = new DamageAction($attackUnit, $enemyCommand, $alliesCommand, $message);
         $action2->handle();
 
         self::assertEquals(0, $defendUnit->getLife());

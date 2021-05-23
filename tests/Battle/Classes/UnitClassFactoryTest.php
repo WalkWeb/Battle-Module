@@ -10,6 +10,7 @@ use Battle\Classes\Human\Warrior;
 use Battle\Classes\Undead\DarkMage;
 use Battle\Classes\Undead\DeadKnight;
 use Battle\Classes\UnitClassFactory;
+use Battle\Result\Chat\Message;
 use PHPUnit\Framework\TestCase;
 
 class UnitClassFactoryTest extends TestCase
@@ -22,8 +23,9 @@ class UnitClassFactoryTest extends TestCase
      */
     public function testUnitClassFactoryCreateSuccess(int $classId, string $expectClassName): void
     {
+        $message = new Message();
         $class = UnitClassFactory::create($classId);
-        $expectClass = new $expectClassName;
+        $expectClass = new $expectClassName($message);
         self::assertEquals($expectClass, $class);
     }
 

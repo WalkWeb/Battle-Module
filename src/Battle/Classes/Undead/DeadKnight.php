@@ -34,7 +34,7 @@ class DeadKnight extends AbstractUnitClass
     ): ActionCollection
     {
         $collection = new ActionCollection();
-        $collection->add(new HeavyStrikeAction($actionUnit, $enemyCommand, $alliesCommand));
+        $collection->add(new HeavyStrikeAction($actionUnit, $enemyCommand, $alliesCommand, $this->message));
         return $collection;
     }
 
