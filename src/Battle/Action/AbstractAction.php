@@ -21,6 +21,8 @@ abstract class AbstractAction implements ActionInterface
     /** @var CommandInterface */
     protected $enemyCommand;
 
+    // todo Message
+
     /** @var int */
     protected $factualPower = 0;
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle;
 
 use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\Message;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -55,6 +56,7 @@ class BattleFactory
      * @param bool|null $debug
      * @param RoundFactory|null $roundFactory
      * @param Translation|null $translation
+     * @param Message|null $message
      * @return BattleInterface
      * @throws BattleException
      * @throws CommandException
@@ -67,12 +69,16 @@ class BattleFactory
         ?Chat $chat = null,
         ?bool $debug = true,
         ?RoundFactory $roundFactory = null,
-        ?Translation $translation = null
+        ?Translation $translation = null,
+        ?Message $message = null
     ): BattleInterface
     {
+        $translation = $translation ?? new Translation();
+        $message = $message ?? new Message($translation);
+
         return new Battle(
-            self::createCommand($data, BattleInterface::LEFT_COMMAND),
-            self::createCommand($data, BattleInterface::RIGHT_COMMAND),
+            self::createCommand($data, BattleInterface::LEFT_COMMAND, $message),
+            self::createCommand($data, BattleInterface::RIGHT_COMMAND, $message),
             $statistics ?? new Statistic(),
             $fullLog ?? new FullLog(),
             $chat ?? new Chat(),
@@ -87,13 +93,15 @@ class BattleFactory
      *
      * @param array $data
      * @param string $command
+     * @param Message|null $message
      * @return CommandInterface
      * @throws BattleException
      * @throws CommandException
      * @throws UnitException
      */
-    public static function createCommand(array $data, string $command): CommandInterface
+    public static function createCommand(array $data, string $command, ?Message $message = null): CommandInterface
     {
+        $message = $message ?? new Message();
         $commandData = [];
 
         foreach ($data as $datum) {
@@ -111,6 +119,6 @@ class BattleFactory
             }
         }
 
-        return CommandFactory::create($commandData);
+        return CommandFactory::create($commandData, $message);
     }
 }

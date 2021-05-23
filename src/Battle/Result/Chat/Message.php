@@ -7,26 +7,65 @@ namespace Battle\Result\Chat;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
 use Battle\Action\Summon\SummonAction;
+use Battle\Translation\Translation;
+use Battle\Translation\TranslationException;
 
 class Message
 {
-    public static function damage(DamageAction $action): string
+    /**
+     * @var Translation
+     */
+    private $translation;
+
+    /**
+     * @param Translation|null $translation
+     */
+    public function __construct(?Translation $translation = null)
     {
-        return '<b>' .
-            $action->getActionUnit()->getName() . '</b> ' . $action->getNameAction() . ' <b>' .
-            $action->getTargetUnit()->getName() . '</b> on ' . $action->getFactualPower() . ' damage';
+        $this->translation = $translation ?? new Translation();
+
     }
 
-    public static function heal(HealAction $action): string
+    /**
+     * @param DamageAction $action
+     * @return string
+     * @throws TranslationException
+     */
+    public function damage(DamageAction $action): string
     {
         return '<b>' .
-            $action->getActionUnit()->getName() . '</b> ' . $action->getNameAction() . ' to <b>' .
-            $action->getTargetUnit()->getName() . '</b> on ' . $action->getFactualPower() . ' life';
+            $action->getActionUnit()->getName() . '</b> ' .
+            $this->translation->trans( $action->getNameAction()) . ' <b>' .
+            $action->getTargetUnit()->getName() .
+            '</b> ' . $this->translation->trans('on') . ' ' .
+            $action->getFactualPower() . ' ' . $this->translation->trans('damage');
     }
 
-    public static function summon(SummonAction $action): string
+    /**
+     * @param HealAction $action
+     * @return string
+     * @throws TranslationException
+     */
+    public function heal(HealAction $action): string
     {
         return '<b>' .
-            $action->getActionUnit()->getName() . '</b> '  . $action->getNameAction();
+            $action->getActionUnit()->getName() . '</b> ' .
+            $this->translation->trans($action->getNameAction()) .
+            ' ' . $this->translation->trans('to') . ' <b>' .
+            $action->getTargetUnit()->getName() .
+            '</b> ' . $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' .
+            $this->translation->trans('life');
+    }
+
+    /**
+     * @param SummonAction $action
+     * @return string
+     * @throws TranslationException
+     */
+    public function summon(SummonAction $action): string
+    {
+        return '<b>' .
+            $action->getActionUnit()->getName() .
+            '</b> '  . $this->translation->trans($action->getNameAction());
     }
 }

@@ -10,6 +10,7 @@ use Battle\Classes\UnitClassInterface;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Result\Chat\Message;
 use Battle\Unit\Unit;
 use Battle\Action\Damage\DamageAction;
 use Battle\Unit\UnitCollection;
@@ -60,7 +61,8 @@ class UnitTest extends TestCase
             $this->attackLife,
             $this->attackLife,
             $this->attackMelee,
-            $attackClass
+            $attackClass,
+            new Message()
         );
 
         self::assertInstanceOf(UnitInterface::class, $unit);
@@ -83,6 +85,7 @@ class UnitTest extends TestCase
      */
     public function testApplyDamage(): void
     {
+        $message = new Message();
 
         $attackClass = UnitClassFactory::create($this->attackClassId);
         $defendClass = UnitClassFactory::create($this->defendClassId);
@@ -97,7 +100,8 @@ class UnitTest extends TestCase
             $this->attackLife,
             $this->attackLife,
             $this->attackMelee,
-            $attackClass
+            $attackClass,
+            $message
         );
 
         $defendUnit = new Unit(
@@ -110,11 +114,12 @@ class UnitTest extends TestCase
             $this->defendLife,
             $this->defendLife,
             $this->defendMelee,
-            $defendClass
+            $defendClass,
+            $message
         );
 
-        $enemyCommand = CommandFactory::create([$defendUnit]);
-        $alliesCommand = CommandFactory::create([$attackUnit]);
+        $enemyCommand = CommandFactory::create([$defendUnit], $message);
+        $alliesCommand = CommandFactory::create([$attackUnit], $message);
 
         $action = new DamageAction($attackUnit, $enemyCommand, $alliesCommand);
 
@@ -163,7 +168,8 @@ class UnitTest extends TestCase
             $this->attackLife,
             $this->attackLife,
             $this->attackMelee,
-            $attackClass
+            $attackClass,
+            new Message()
         );
 
         $unit->madeAction();

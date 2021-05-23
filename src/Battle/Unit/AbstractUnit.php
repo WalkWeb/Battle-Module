@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit;
 
 use Battle\Classes\UnitClassInterface;
+use Battle\Result\Chat\Message;
 use Exception;
 
 abstract class AbstractUnit implements UnitInterface
@@ -74,6 +75,11 @@ abstract class AbstractUnit implements UnitInterface
      */
     protected $class;
 
+    /**
+     * @var Message
+     */
+    protected $message;
+
     public function __construct(
         string $id,
         string $name,
@@ -84,7 +90,8 @@ abstract class AbstractUnit implements UnitInterface
         int $life,
         int $totalLife,
         bool $melee,
-        UnitClassInterface $class
+        UnitClassInterface $class,
+        Message $message
     )
     {
         $this->id = $id;
@@ -97,6 +104,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->totalLife = $totalLife;
         $this->melee = $melee;
         $this->class = $class;
+        $this->message = $message;
     }
 
     public function getId(): string

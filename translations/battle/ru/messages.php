@@ -13,6 +13,10 @@ return [
     'heal'                           => 'вылечил',
     'Great Heal'                     => 'Сильное Лечение',
     'summon Imp'                     => 'призвал Беса',
+    'on'                             => 'на',
+    'damage'                         => 'урона',
+    'to'                             => '',
+    'life'                           => 'здоровья',
     // Statistics
     'Statistics'                     => 'Статистика',
     'Unit'                           => 'Кто',

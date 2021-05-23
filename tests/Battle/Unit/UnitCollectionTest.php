@@ -6,6 +6,7 @@ namespace Tests\Battle\Unit;
 
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
+use Battle\Result\Chat\Message;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
@@ -19,6 +20,7 @@ class UnitCollectionTest extends TestCase
      */
     public function testCreateUnitCollectionSuccess(): void
     {
+        $message = new Message();
         $collection = new UnitCollection();
 
         $collection->add(
@@ -32,7 +34,8 @@ class UnitCollectionTest extends TestCase
                 110,
                 110,
                 true,
-                UnitClassFactory::create(1)
+                UnitClassFactory::create(1),
+                $message
             )
         );
 
@@ -47,7 +50,8 @@ class UnitCollectionTest extends TestCase
                 95,
                 95,
                 false,
-                UnitClassFactory::create(2)
+                UnitClassFactory::create(2),
+                $message
             )
         );
 
@@ -80,7 +84,8 @@ class UnitCollectionTest extends TestCase
                 110,
                 110,
                 true,
-                UnitClassFactory::create(1)
+                UnitClassFactory::create(1),
+                new Message()
             )
         );
 
@@ -94,6 +99,7 @@ class UnitCollectionTest extends TestCase
      */
     public function testUnitCollectionAddDoubleIdUnit(): void
     {
+        $message = new Message();
         $collection = new UnitCollection();
 
         // success
@@ -108,7 +114,8 @@ class UnitCollectionTest extends TestCase
                 110,
                 110,
                 true,
-                UnitClassFactory::create(1)
+                UnitClassFactory::create(1),
+                $message
             )
         );
 
@@ -126,7 +133,8 @@ class UnitCollectionTest extends TestCase
                 95,
                 95,
                 false,
-                UnitClassFactory::create(2)
+                UnitClassFactory::create(2),
+                $message
             )
         );
     }
@@ -151,7 +159,8 @@ class UnitCollectionTest extends TestCase
                 110,
                 110,
                 true,
-                UnitClassFactory::create(1)
+                UnitClassFactory::create(1),
+                new Message()
             )
         );
 

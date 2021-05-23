@@ -6,6 +6,7 @@ namespace Tests\Battle\Stroke;
 
 use Battle\Command\Command;
 use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\Message;
 use Battle\Result\FullLog\FullLog;
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
@@ -56,6 +57,8 @@ class StrokeTest extends TestCase
      */
     public function setUp(): void
     {
+        $message = new Message();
+
         $this->attackUnit = new Unit(
             $this->attackerId,
             $this->attackerName,
@@ -66,7 +69,8 @@ class StrokeTest extends TestCase
             $this->attackerLife,
             $this->attackerLife,
             $this->attackerMelee,
-            UnitClassFactory::create($this->attackerClass)
+            UnitClassFactory::create($this->attackerClass),
+            $message
         );
 
         $this->defendUnit = new Unit(
@@ -79,7 +83,8 @@ class StrokeTest extends TestCase
             $this->defendLife,
             $this->defendLife,
             $this->defendMelee,
-            UnitClassFactory::create($this->defendClass)
+            UnitClassFactory::create($this->defendClass),
+            $message
         );
     }
 

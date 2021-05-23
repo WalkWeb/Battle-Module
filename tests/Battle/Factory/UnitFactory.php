@@ -6,6 +6,7 @@ namespace Tests\Battle\Factory;
 
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
+use Battle\Result\Chat\Message;
 use Battle\Unit\UnitInterface;
 use Battle\Unit\Unit;
 
@@ -180,7 +181,8 @@ class UnitFactory
             self::$units[$template]['life'],
             self::$units[$template]['total_life'],
             self::$units[$template]['melee'],
-            UnitClassFactory::create(self::$units[$template]['class'])
+            UnitClassFactory::create(self::$units[$template]['class']),
+            new Message()
         );
     }
 

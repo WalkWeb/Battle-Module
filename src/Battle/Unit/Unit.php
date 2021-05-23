@@ -9,8 +9,8 @@ use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
 use Battle\Action\Summon\SummonAction;
-use Battle\Result\Chat\Message;
 use Battle\Command\CommandInterface;
+use Battle\Translation\TranslationException;
 use Exception;
 
 class Unit extends AbstractUnit
@@ -94,6 +94,7 @@ class Unit extends AbstractUnit
     /**
      * @param DamageAction $action
      * @return string
+     * @throws TranslationException
      */
     private function applyDamageAction(DamageAction $action): string
     {
@@ -106,12 +107,13 @@ class Unit extends AbstractUnit
 
         $action->setFactualPower($primordialLife - $this->life);
 
-        return Message::damage($action);
+        return $this->message->damage($action);
     }
 
     /**
      * @param HealAction $action
      * @return string
+     * @throws TranslationException
      */
     private function applyHealAction(HealAction $action): string
     {
@@ -124,7 +126,7 @@ class Unit extends AbstractUnit
 
         $action->setFactualPower($this->life - $primordialLife);
 
-        return Message::heal($action);
+        return $this->message->heal($action);
     }
 
     /**
@@ -134,9 +136,10 @@ class Unit extends AbstractUnit
      *
      * @param SummonAction $action
      * @return string
+     * @throws TranslationException
      */
     private function applySummonAction(SummonAction $action): string
     {
-        return Message::summon($action);
+        return $this->message->summon($action);
     }
 }

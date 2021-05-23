@@ -6,6 +6,7 @@ namespace Battle\Unit;
 
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
+use Battle\Result\Chat\Message;
 
 class UnitFactory
 {
@@ -29,12 +30,15 @@ class UnitFactory
      * ]
      *
      * @param array $data
+     * @param Message|null $message
      * @return UnitInterface
-     * @throws UnitException
      * @throws ClassFactoryException
+     * @throws UnitException
      */
-    public static function create(array $data): UnitInterface
+    public static function create(array $data, ?Message $message = null): UnitInterface
     {
+        $message = $message ?? new Message();
+
         self::existAndString($data, 'id', UnitException::INCORRECT_ID);
         self::existAndString($data, 'name', UnitException::INCORRECT_NAME);
         self::existAndString($data, 'avatar', UnitException::INCORRECT_AVATAR);
@@ -78,7 +82,8 @@ class UnitFactory
             $data['life'],
             $data['total_life'],
             $data['melee'],
-            UnitClassFactory::create($data['class'])
+            UnitClassFactory::create($data['class']),
+            $message
         );
     }
 

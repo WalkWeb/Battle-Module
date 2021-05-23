@@ -12,6 +12,7 @@ use Battle\Command\CommandFactory;
 use Battle\Round\RoundException;
 use Battle\Round\Round;
 use Battle\Statistic\Statistic;
+use Battle\Translation\TranslationException;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -29,6 +30,7 @@ class RoundTest extends TestCase
      * @throws RoundException
      * @throws UnitFactoryException
      * @throws UnitException
+     * @throws TranslationException
      */
     public function testRoundNextCommand(): void
     {
@@ -52,6 +54,7 @@ class RoundTest extends TestCase
      * @throws RoundException
      * @throws UnitFactoryException
      * @throws UnitException
+     * @throws TranslationException
      */
     public function testRoundNextCommandNoAction(): void
     {

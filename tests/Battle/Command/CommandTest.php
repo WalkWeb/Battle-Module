@@ -11,6 +11,7 @@ use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
+use Battle\Result\Chat\Message;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
@@ -237,6 +238,8 @@ class CommandTest extends TestCase
      */
     public function testGetUnitForActionNothing(): void
     {
+        $message = new Message();
+
         $unit1 = new Unit(
             '19b871cd-f9e0-408c-aea0-2d903fd23806',
             'User 1',
@@ -247,7 +250,8 @@ class CommandTest extends TestCase
             110,
             110,
             true,
-            UnitClassFactory::create(1)
+            UnitClassFactory::create(1),
+            $message
         );
 
         $unit2 = new Unit(
@@ -260,7 +264,8 @@ class CommandTest extends TestCase
             95,
             95,
             false,
-            UnitClassFactory::create(2)
+            UnitClassFactory::create(2),
+            $message
         );
 
         $unit3 = new Unit(
@@ -273,7 +278,8 @@ class CommandTest extends TestCase
             300,
             300,
             true,
-            UnitClassFactory::create(1)
+            UnitClassFactory::create(1),
+            $message
         );
 
         $alliesCommand = CommandFactory::create([$unit1, $unit2]);

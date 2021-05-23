@@ -13,6 +13,10 @@ return [
     'heal'                           => 'heal',
     'Great Heal'                     => 'Great Heal',
     'summon Imp'                     => 'summon Imp',
+    'on'                             => 'on',
+    'damage'                         => 'damage',
+    'to'                             => 'to',
+    'life'                           => 'life',
     // Statistics
     'Statistics'                     => 'Statistics',
     'Unit'                           => 'Unit',
