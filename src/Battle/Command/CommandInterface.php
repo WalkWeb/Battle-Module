@@ -18,6 +18,16 @@ interface CommandInterface
     public function isAlive(): bool;
 
     /**
+     * Готова ли команда ходить
+     *
+     * Если в команде есть юниты, которые живые и еще не ходили в этом раунде - вернет true
+     * Если все живые походили - вернет false
+     *
+     * @return bool
+     */
+    public function isAction(): bool;
+
+    /**
      * Возвращает случайного живого юнита для атаки, если есть
      *
      * @return UnitInterface|null

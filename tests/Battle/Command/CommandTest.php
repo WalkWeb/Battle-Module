@@ -118,6 +118,10 @@ class CommandTest extends TestCase
         $rangeUnit = UnitFactory::createByTemplate(5);
         $command = CommandFactory::create([$meleeUnit, $rangeUnit]);
         self::assertFalse($command->existMeleeUnits());
+        self::assertNull($command->getMeleeUnitForAttacks());
+
+        // Проверяем, что возвращается именно юнит дальнего боя
+        self::assertEquals($rangeUnit->getId(), $command->getUnitForAttacks()->getId());
     }
 
     /**
@@ -145,7 +149,7 @@ class CommandTest extends TestCase
     }
 
     /**
-     * Проверяем корректное возвращение юнита получения удара
+     * Проверяем корректное возвращение юнита для получения удара
      *
      * @throws ClassFactoryException
      * @throws CommandException

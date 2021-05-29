@@ -6,12 +6,14 @@ namespace Tests\Battle\Action\Damage;
 
 use Battle\Action\Damage\DamageAction;
 use Battle\Classes\ClassFactoryException;
+use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
+use Tests\Battle\Factory\Mock\CommandMockFactory;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 
@@ -103,7 +105,7 @@ class DamageActionTest extends TestCase
      * @throws UnitException
      * @throws UnitFactoryException
      */
-    public function testDamageActionNoDefined(): void
+    public function testDamageActionDeadCommand(): void
     {
         $attackerUnit = UnitFactory::createByTemplate(2);
 
@@ -117,6 +119,30 @@ class DamageActionTest extends TestCase
         foreach ($actionCollection as $action) {
             $this->expectException(ActionException::class);
             $this->expectExceptionMessage(ActionException::NO_DEFINED);
+            $action->handle();
+        }
+    }
+
+    /**
+     * Тест на исключительную ситуацию со сломанным объектом команды, который на запрос isAlive() вернет true, т.е.
+     * команда жива, но на запрос getDefinedUnit(), т.е. на запрос юнита для атаки вернет null (т.е. живых нет)
+     *
+     * @throws ClassFactoryException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testDamageActionNoTarget(): void
+    {
+        $attackerUnit = UnitFactory::createByTemplate(2);
+        $alliesCommand = CommandFactory::create([$attackerUnit]);
+        $enemyCommand = (new CommandMockFactory())->createAliveAndNoDefinedUnit();
+
+        $actionCollection = $attackerUnit->getAction($enemyCommand, $alliesCommand);
+
+        foreach ($actionCollection as $action) {
+            $this->expectException(ActionException::class);
+            $this->expectExceptionMessage(ActionException::NO_DEFINED_AGAIN);
             $action->handle();
         }
     }
