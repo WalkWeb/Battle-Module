@@ -14,31 +14,65 @@ use Battle\View\ViewFactory;
 
 class Stroke implements StrokeInterface
 {
-    /** @var int - Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand */
+    /**
+     * Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand
+     *
+     * @var int
+     */
     private $actionCommand;
 
-    /** @var UnitInterface - Юнит совершающий действие (атаку) */
+    /**
+     * Юнит совершающий действие
+     *
+     * @var UnitInterface
+     */
     private $actionUnit;
 
-    /** @var CommandInterface */
+    /**
+     * Левая команда
+     *
+     * @var CommandInterface
+     */
     private $leftCommand;
 
-    /** @var CommandInterface */
+    /**
+     * Правая команда
+     *
+     * @var CommandInterface
+     */
     private $rightCommand;
 
-    /** @var Statistic */
+    /**
+     * Статистика по юнитам в бою
+     *
+     * @var Statistic
+     */
     private $statistics;
 
-    /** @var FullLog */
+    /**
+     * Полный лог боя
+     *
+     * @var FullLog
+     */
     private $fullLog;
 
-    /** @var Chat */
+    /**
+     * Чат боя
+     *
+     * @var Chat
+     */
     private $chat;
 
-    /** @var bool */
+    /**
+     * TODO На удаление? Или на расширение механики вывода результата?
+     *
+     * @var bool
+     */
     private $debug;
 
-    /** @var ViewFactory */
+    /**
+     * @var ViewFactory
+     */
     private $viewFactory;
 
     /**

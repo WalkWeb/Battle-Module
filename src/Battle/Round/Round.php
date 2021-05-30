@@ -22,34 +22,70 @@ class Round implements RoundInterface
     private const END_STROKE   = 'End Stroke';
     private const HR           = '<hr>';
 
-    /** @var CommandInterface */
+    /**
+     * Левая команда
+     *
+     * @var CommandInterface
+     */
     private $leftCommand;
 
-    /** @var CommandInterface */
+    /**
+     * Правая команда
+     *
+     * @var CommandInterface
+     */
     private $rightCommand;
 
-    /** @var int - Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand */
+    /**
+     * Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand
+     *
+     * @var int
+     */
     private $actionCommand;
 
-    /** @var int */
+    /**
+     * Максимальное количество ходов в рамках одного раунда
+     *
+     * @var int
+     */
     private $maxStroke = 20;
 
-    /** @var Statistic */
+    /**
+     * Статистика по юнитам в бою
+     *
+     * @var Statistic
+     */
     private $statistics;
 
-    /** @var FullLog */
+    /**
+     * Полный лог боя
+     *
+     * @var FullLog
+     */
     private $fullLog;
 
-    /** @var Chat */
+    /**
+     * Чат
+     *
+     * @var Chat
+     */
     private $chat;
 
-    /** @var bool */
+    /**
+     * TODO На удаление? Или на расширение механики вывода результата?
+     *
+     * @var bool
+     */
     private $debug;
 
-    /** @var StrokeFactory */
+    /**
+     * @var StrokeFactory
+     */
     private $strokeFactory;
 
-    /** @var Translation */
+    /**
+     * @var Translation
+     */
     private $translation;
 
     /**
@@ -176,7 +212,7 @@ class Round implements RoundInterface
             '<p>' .  $this->translation->trans(self::END_STROKE) . ' #' . $this->statistics->getStrokeNumber() . '</p>'
         );
 
-        $this->fullLog->add('<p>' . self::HR . '</p>');
+        $this->fullLog->add(self::HR);
     }
 
     /**
