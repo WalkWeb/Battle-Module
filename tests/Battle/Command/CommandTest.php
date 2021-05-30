@@ -17,6 +17,7 @@ use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;
+use Tests\Battle\Factory\Mock\UnitMockFactory;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 
@@ -300,5 +301,23 @@ class CommandTest extends TestCase
         $unit2->madeAction();
 
         self::assertNull($alliesCommand->getUnitForAction());
+    }
+
+    /**
+     * Тест на необычную ситуацию, когда юниты в команде вначале сообщают, что есть готовые ходить, а при попытке
+     * вернуть такого юнита - его нет
+     *
+     * @throws CommandException
+     * @throws UnitException
+     */
+    public function testCommandGetUnitForActionBroken(): void
+    {
+        $factory = new UnitMockFactory();
+        $unit = $factory->create();
+        $command = CommandFactory::create([$unit]);
+
+        $this->expectException(CommandException::class);
+        $this->expectExceptionMessage(CommandException::UNEXPECTED_EVENT_NO_ACTION_UNIT);
+        $command->getUnitForAction();
     }
 }
