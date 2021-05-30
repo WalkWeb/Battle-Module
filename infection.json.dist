@@ -1,0 +1,19 @@
+{
+    "source": {
+        "directories": [
+            "src\/Battle"
+        ]
+    },
+    "mutators": {
+        "@default": true
+    },
+    "logs": {
+        "text": "infection.log",
+        "summary": "summary.log",
+        "perMutator": "per-mutator.md",
+        "github": true,
+        "badge": {
+            "branch": "master"
+        }
+    }
+}

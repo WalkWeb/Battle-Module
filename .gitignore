@@ -4,3 +4,8 @@ vendor/
 
 # result code coverage (php vendor/bin/phpunit --coverage-html html)
 html/
+
+# result mutations test (usage: https://infection.github.io/guide/usage.html)
+infection.log
+per-mutator.md
+summary.log
