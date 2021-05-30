@@ -50,6 +50,6 @@ class HealAction extends AbstractAction
      */
     public function getNameAction(): string
     {
-        return self::NAME;
+        return static::NAME;
     }
 }

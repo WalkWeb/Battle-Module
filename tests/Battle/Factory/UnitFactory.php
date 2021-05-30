@@ -161,11 +161,12 @@ class UnitFactory
 
     /**
      * @param int $template
+     * @param Message|null $message
      * @return UnitInterface
-     * @throws UnitFactoryException
      * @throws ClassFactoryException
+     * @throws UnitFactoryException
      */
-    public static function createByTemplate(int $template): UnitInterface
+    public static function createByTemplate(int $template, ?Message $message = null): UnitInterface
     {
         if (empty(self::$units[$template])) {
             throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
@@ -182,7 +183,7 @@ class UnitFactory
             self::$units[$template]['total_life'],
             self::$units[$template]['melee'],
             UnitClassFactory::create(self::$units[$template]['class']),
-            new Message()
+            $message ?? new Message()
         );
     }
 

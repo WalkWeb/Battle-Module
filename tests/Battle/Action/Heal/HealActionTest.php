@@ -19,7 +19,7 @@ use Tests\Battle\Factory\UnitFactoryException;
 
 class HealActionTest extends TestCase
 {
-    private const MESSAGE           = '<b>unit_5</b> heal to <b>unit_1</b> on 15 life';
+    private const MESSAGE           = '<b>unit_5</b> use Great Heal and heal <b>unit_1</b> on 15 life';
     private const NO_TARGET_MESSAGE = '<b>unit_5</b> attack <b>unit_3</b> on 15 damage';
 
     /**

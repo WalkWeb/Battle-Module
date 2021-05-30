@@ -9,14 +9,14 @@ return [
     'End Stroke'                     => 'End Stroke',
     // Action
     'attack'                         => 'attack',
-    'Heavy Strike'                   => 'Heavy Strike',
     'heal'                           => 'heal',
-    'Great Heal'                     => 'Great Heal',
-    'summon Imp'                     => 'summon Imp',
     'on'                             => 'on',
     'damage'                         => 'damage',
-    'to'                             => 'to',
     'life'                           => 'life',
+    // Ability
+    'use Heavy Strike at'            => 'use Heavy Strike at',
+    'use Great Heal and heal'        => 'use Great Heal and heal',
+    'summon Imp'                     => 'summon Imp',
     // Statistics
     'Statistics'                     => 'Statistics',
     'Unit'                           => 'Unit',

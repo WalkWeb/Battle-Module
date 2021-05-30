@@ -6,7 +6,7 @@ namespace Battle\Action\Heal;
 
 class GreatHealAction extends HealAction
 {
-    protected const NAME = 'Great Heal';
+    protected const NAME = 'use Great Heal and heal';
 
     public function getPower(): int
     {

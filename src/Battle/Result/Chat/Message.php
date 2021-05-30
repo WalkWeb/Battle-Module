@@ -49,8 +49,7 @@ class Message
     {
         return '<b>' .
             $action->getActionUnit()->getName() . '</b> ' .
-            $this->translation->trans($action->getNameAction()) .
-            ' ' . $this->translation->trans('to') . ' <b>' .
+            $this->translation->trans($action->getNameAction()) . ' <b>' .
             $action->getTargetUnit()->getName() .
             '</b> ' . $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' .
             $this->translation->trans('life');

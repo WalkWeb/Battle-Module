@@ -6,7 +6,6 @@ namespace Tests\Battle\Action\Damage;
 
 use Battle\Action\Damage\DamageAction;
 use Battle\Classes\ClassFactoryException;
-use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;

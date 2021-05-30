@@ -9,14 +9,14 @@ return [
     'End Stroke'                     => 'Ход закончен',
     // Action
     'attack'                         => 'атаковал',
-    'Heavy Strike'                   => 'Тяжелый Удар',
     'heal'                           => 'вылечил',
-    'Great Heal'                     => 'Сильное Лечение',
-    'summon Imp'                     => 'призвал Беса',
     'on'                             => 'на',
     'damage'                         => 'урона',
-    'to'                             => '',
     'life'                           => 'здоровья',
+    // Ability
+    'use Heavy Strike at'            => 'использовал Тяжелый Удар по',
+    'use Great Heal and heal'        => 'использовал Сильное Лечение и вылечил',
+    'summon Imp'                     => 'призвал Беса',
     // Statistics
     'Statistics'                     => 'Статистика',
     'Unit'                           => 'Кто',
