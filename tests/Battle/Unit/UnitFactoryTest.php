@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
+use Battle\BattleException;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassFactory;
 use Battle\Unit\UnitException;
@@ -38,6 +39,8 @@ class UnitFactoryTest extends TestCase
     }
 
     /**
+     * Тесты на различные варианты невалидных данных для создания юнита
+     *
      * @dataProvider failDataProvider
      * @param array $data
      * @param string $error
@@ -51,8 +54,9 @@ class UnitFactoryTest extends TestCase
     }
 
     /**
-     * @throws UnitException
      * @throws ClassFactoryException
+     * @throws UnitException
+     * @throws BattleException
      */
     public function testUnitFactoryHtmlspecialchars(): void
     {
@@ -74,6 +78,9 @@ class UnitFactoryTest extends TestCase
         self::assertEquals(htmlspecialchars($data['name']), $unit->getName());
     }
 
+    /**
+     * @return array
+     */
     public function successDataProvider(): array
     {
         return [
