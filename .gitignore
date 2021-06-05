@@ -6,6 +6,7 @@ vendor/
 html/
 
 # result mutations test (usage: https://infection.github.io/guide/usage.html)
+# export PATH=~/.composer/vendor/bin:$PATH && infection
 infection.log
 per-mutator.md
 summary.log

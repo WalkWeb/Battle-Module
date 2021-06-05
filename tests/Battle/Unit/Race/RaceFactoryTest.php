@@ -38,7 +38,7 @@ class RaceFactoryTest extends TestCase
     {
         $this->expectException(RaceException::class);
         $this->expectExceptionMessage(RaceException::UNDEFINED_RACE_ID);
-        RaceFactory::create(10);
+        RaceFactory::create(888);
     }
 
     /**

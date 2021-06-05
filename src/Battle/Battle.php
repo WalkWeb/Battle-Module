@@ -132,6 +132,22 @@ class Battle implements BattleInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isDebug(): bool
+    {
+        return $this->debug;
+    }
+
+    /**
+     * @return Translation
+     */
+    public function getTranslation(): Translation
+    {
+        return $this->translation;
+    }
+
+    /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @throws BattleException

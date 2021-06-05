@@ -40,8 +40,5 @@ abstract class SummonAction extends AbstractAction
      * @param int $factualPower
      * @return int|mixed
      */
-    public function setFactualPower(int $factualPower)
-    {
-        return 0;
-    }
+    public function setFactualPower(int $factualPower): void {}
 }

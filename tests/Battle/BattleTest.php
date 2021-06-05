@@ -12,6 +12,7 @@ use Battle\Command\CommandException;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Statistic\Statistic;
+use Battle\Translation\Translation;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
@@ -39,6 +40,7 @@ class BattleTest extends TestCase
         self::assertInstanceOf(Battle::class, $battle);
         self::assertTrue($result->getStatistic()->getRoundNumber() > 2);
         self::assertTrue($result->getStatistic()->getStrokeNumber() > 4);
+        self::assertTrue($battle->isDebug());
     }
 
     /**
@@ -144,6 +146,36 @@ class BattleTest extends TestCase
         $this->expectException(BattleException::class);
         $this->expectExceptionMessage(BattleException::DOUBLE_UNIT_ID);
         new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testBattleSetFalseDebug(): void
+    {
+        $leftCommand = CommandFactory::createLeftCommand();
+        $rightCommand = CommandFactory::createRightCommand();
+        $debug = false;
+
+        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat(), $debug);
+
+        self::assertFalse($battle->isDebug());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testBattleSetTranslation(): void
+    {
+        $leftCommand = CommandFactory::createLeftCommand();
+        $rightCommand = CommandFactory::createRightCommand();
+
+        $language = 'ru';
+        $translator = new Translation($language);
+
+        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat(), null, null, $translator);
+
+        self::assertEquals($translator, $battle->getTranslation());
     }
 
     /**

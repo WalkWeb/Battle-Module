@@ -3,6 +3,7 @@
 namespace Battle;
 
 use Battle\Result\ResultInterface;
+use Battle\Translation\Translation;
 
 interface BattleInterface
 {
@@ -16,4 +17,18 @@ interface BattleInterface
      * @return ResultInterface
      */
     public function handle(): ResultInterface;
+
+    /**
+     * Возвращает текущий режим работы боя - в debug режиме или нет
+     *
+     * @return bool
+     */
+    public function isDebug(): bool;
+
+    /**
+     * Возвращает установленный Translation в модуле боя
+     *
+     * @return Translation
+     */
+    public function getTranslation(): Translation;
 }

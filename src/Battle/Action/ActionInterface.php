@@ -48,7 +48,7 @@ interface ActionInterface
      *
      * @return mixed
      */
-    public function getPower();
+    public function getPower(): int;
 
     /**
      * Задает фактическую силу действия
@@ -60,7 +60,7 @@ interface ActionInterface
      * @param int $factualPower
      * @return mixed
      */
-    public function setFactualPower(int $factualPower);
+    public function setFactualPower(int $factualPower): void;
 
     /**
      * Возвращает фактическую силу действия

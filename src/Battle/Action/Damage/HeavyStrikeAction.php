@@ -11,6 +11,6 @@ class HeavyStrikeAction extends DamageAction
     public function getPower(): int
     {
         // Удар в 250% от силы удара юнита
-        return (int)round($this->getActionUnit()->getDamage() * 2.5);
+        return (int)($this->getActionUnit()->getDamage() * 2.5);
     }
 }
