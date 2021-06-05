@@ -177,6 +177,8 @@ interface UnitInterface
     /**
      * Возвращает класс юнита
      *
+     * TODO Добавить возможность отсутствия класса
+     *
      * @return UnitClassInterface
      */
     public function getClass(): UnitClassInterface;
@@ -193,4 +195,6 @@ interface UnitInterface
      * попробовал использовать способность в следующем ходу
      */
     public function upMaxConcentration(): void;
+
+    // TODO Добавить расу
 }

@@ -61,14 +61,28 @@ class RaceFactory
             'name'        => 'Animals',
             'single_name' => 'Animal',
             'color'       => '#000000',
-            'icon'        => '',
+            'icon'        => '/images/icons/small/base-animal.png',
         ],
         8 => [
             'id'          => 8,
             'name'        => 'Undead',
             'single_name' => 'Undead',
             'color'       => '#000000',
-            'icon'        => '',
+            'icon'        => '/images/icons/small/base-undead.png',
+        ],
+        9 => [
+            'id'          => 9,
+            'name'        => 'Inferno',
+            'single_name' => 'Inferno',
+            'color'       => '#000000',
+            'icon'        => '/images/icons/small/base-inferno.png',
+        ],
+        10 => [
+            'id'          => 10,
+            'name'        => 'Golem',
+            'single_name' => 'Golems',
+            'color'       => '#000000',
+            'icon'        => '/images/icons/small/base-golem.png',
         ],
     ];
 
