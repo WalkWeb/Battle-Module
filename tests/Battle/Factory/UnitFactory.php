@@ -188,12 +188,16 @@ class UnitFactory
     }
 
     /**
-     * @return Unit
-     * @throws ClassFactoryException
+     * @param int $template
+     * @return array
      * @throws UnitFactoryException
      */
-    public static function createDeadUnit(): UnitInterface
+    public static function getData(int $template): array
     {
-        return self::createByTemplate(10);
+        if (empty(self::$units[$template])) {
+            throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
+        }
+
+        return self::$units[$template];
     }
 }

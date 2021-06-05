@@ -180,7 +180,7 @@ class CommandTest extends TestCase
      */
     public function testNoUnitFromAttack(): void
     {
-        $unit = UnitFactory::createDeadUnit();
+        $unit = UnitFactory::createByTemplate(10);
         $command = CommandFactory::create([$unit]);
         self::assertEquals(null, $command->getUnitForAction());
         self::assertEquals(null, $command->getUnitForAttacks());
