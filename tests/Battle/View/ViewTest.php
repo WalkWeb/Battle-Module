@@ -4,31 +4,24 @@ declare(strict_types=1);
 
 namespace Tests\Battle\View;
 
-use Battle\Classes\ClassFactoryException;
-use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Result\Result;
-use Battle\Result\ResultException;
 use Battle\Statistic\Statistic;
 use Battle\Translation\Translation;
-use Battle\Unit\UnitException;
 use Battle\View\ViewFactory;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class ViewTest extends TestCase
 {
     /**
      * Тест генерации вида юнитов ближнего боя
      *
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitFactoryException
-     * @throws UnitException
+     * @throws Exception
      */
     public function testViewRenderMelee(): void
     {
@@ -175,10 +168,7 @@ EOT;
     /**
      * Тест генерации вида юнитов дальнего боя
      *
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testViewRenderRange(): void
     {
@@ -344,11 +334,7 @@ EOT;
     }
 
     /**
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
-     * @throws ResultException
+     * @throws Exception
      */
     public function testViewRenderResult(): void
     {

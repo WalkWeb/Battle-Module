@@ -5,26 +5,20 @@ declare(strict_types=1);
 namespace Tests\Battle\Action\Damage;
 
 use Battle\Action\Damage\DamageAction;
-use Battle\Classes\ClassFactoryException;
-use Battle\Command\CommandException;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
-use Battle\Unit\UnitException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\Mock\CommandMockFactory;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class DamageActionTest extends TestCase
 {
     private const MESSAGE = '<b>unit_1</b> attack <b>unit_2</b> on 20 damage';
 
     /**
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitFactoryException
-     * @throws UnitException
+     * @throws Exception
      */
     public function testCreateDamageAction(): void
     {
@@ -37,11 +31,7 @@ class DamageActionTest extends TestCase
     }
 
     /**
-     * @throws ActionException
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testApplyDamageAction(): void
     {
@@ -56,11 +46,7 @@ class DamageActionTest extends TestCase
     }
 
     /**
-     * @throws ActionException
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testDamageActionApplyUnit(): void
     {
@@ -77,10 +63,7 @@ class DamageActionTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testDamageActionFactualDamage(): void
     {
@@ -99,10 +82,7 @@ class DamageActionTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testDamageActionDeadCommand(): void
     {
@@ -126,10 +106,7 @@ class DamageActionTest extends TestCase
      * Тест на исключительную ситуацию со сломанным объектом команды, который на запрос isAlive() вернет true, т.е.
      * команда жива, но на запрос getDefinedUnit(), т.е. на запрос юнита для атаки вернет null (т.е. живых нет)
      *
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testDamageActionNoTarget(): void
     {

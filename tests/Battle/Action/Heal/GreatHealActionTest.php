@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action\Heal;
 
-use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Translation\Translation;
 use Battle\Unit\UnitException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class GreatHealActionTest extends TestCase
 {
@@ -20,10 +19,9 @@ class GreatHealActionTest extends TestCase
     private const GREAT_HEAL_MESSAGE_RU = '<b>unit_5</b> использовал Сильное Лечение и вылечил <b>wounded_unit</b> на 45 здоровья';
 
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testGreatHealActionMessageEn(): void
     {
@@ -46,10 +44,9 @@ class GreatHealActionTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testGreatHealActionMessageRu(): void
     {

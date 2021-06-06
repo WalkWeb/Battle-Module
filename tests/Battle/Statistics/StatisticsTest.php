@@ -4,19 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Statistics;
 
-use Battle\Action\ActionException;
 use Battle\Action\Damage\DamageAction;
-use Battle\Classes\ClassFactoryException;
-use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Statistic\Statistic;
-use Battle\Statistic\StatisticException;
-use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class StatisticsTest extends TestCase
 {
@@ -57,11 +51,7 @@ class StatisticsTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
-     * @throws StatisticException
+     * @throws Exception
      */
     public function testStatisticsUnitCausedDamage(): void
     {
@@ -99,11 +89,7 @@ class StatisticsTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
-     * @throws UnitFactoryException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws StatisticException
+     * @throws Exception
      */
     public function testStatisticsUnitCausedHeal(): void
     {
@@ -180,12 +166,7 @@ class StatisticsTest extends TestCase
     /**
      * Тест на подсчет убийств
      *
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
-     * @throws ActionException
-     * @throws StatisticException
+     * @throws Exception
      */
     public function testStatisticsKills(): void
     {

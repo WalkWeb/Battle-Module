@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Statistics\UnitStatistic;
 
-use Battle\Classes\ClassFactoryException;
 use Battle\Statistic\StatisticException;
 use Battle\Statistic\UnitStatistic\UnitStatistic;
 use Battle\Statistic\UnitStatistic\UnitStatisticCollection;
 use Battle\Statistic\UnitStatistic\UnitStatisticInterface;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class UnitStatisticCollectionTest extends TestCase
 {
     /**
-     * @throws StatisticException
-     * @throws ClassFactoryException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testStatisticsExistUnit(): void
     {
@@ -37,9 +34,7 @@ class UnitStatisticCollectionTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
-     * @throws StatisticException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testStatisticsDoubleId(): void
     {

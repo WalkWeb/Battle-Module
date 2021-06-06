@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action\Damage;
 
-use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Translation\Translation;
 use Battle\Unit\UnitException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class HeavyStrikeActionTest extends TestCase
 {
@@ -20,10 +19,9 @@ class HeavyStrikeActionTest extends TestCase
     private const HEAVY_STRIKE_MESSAGE_RU = '<b>unit_1</b> использовал Тяжелый Удар по <b>unit_2</b> на 50 урона';
 
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testHeavyStrikeActionMessageEn(): void
     {
@@ -45,10 +43,9 @@ class HeavyStrikeActionTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testHeavyStrikeActionMessageRu(): void
     {

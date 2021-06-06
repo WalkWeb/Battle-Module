@@ -10,9 +10,9 @@ use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class CommandFactoryTest extends TestCase
 {
@@ -62,10 +62,9 @@ class CommandFactoryTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testCommandFactoryCreateFromUsersSuccess(): void
     {

@@ -6,7 +6,6 @@ namespace Tests\Battle;
 
 use Battle\BattleException;
 use Battle\BattleFactory;
-use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Result\Chat\Chat;
@@ -14,7 +13,6 @@ use Battle\Result\FullLog\FullLog;
 use Battle\Statistic\Statistic;
 use Battle\Translation\Translation;
 use Battle\Unit\UnitCollection;
-use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Battle\Battle;
 use Tests\Battle\Factory\CommandFactory;
@@ -136,10 +134,8 @@ class BattleTest extends TestCase
     /**
      * Тест на ситуацию, когда передана некорректная коллекция юнитов - с одинаковыми ID
      *
-     * @throws Factory\UnitFactoryException
-     * @throws ClassFactoryException
+     * @throws BattleException
      * @throws CommandException
-     * @throws UnitException
      * @throws Exception
      */
     public function testBattleAgainDoubleUnitId(): void

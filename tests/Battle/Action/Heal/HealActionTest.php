@@ -7,15 +7,14 @@ namespace Tests\Battle\Action\Heal;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\GreatHealAction;
 use Battle\Action\Heal\HealAction;
-use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class HealActionTest extends TestCase
 {
@@ -23,10 +22,9 @@ class HealActionTest extends TestCase
     private const NO_TARGET_MESSAGE = '<b>unit_5</b> attack <b>unit_3</b> on 15 damage';
 
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testHealAction(): void
     {
@@ -63,10 +61,9 @@ class HealActionTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
-     * @throws UnitFactoryException
      * @throws UnitException
+     * @throws Exception
      */
     public function testNoTargetHealAction(): void
     {
@@ -126,10 +123,9 @@ class HealActionTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testGetPowerHealAction(): void
     {

@@ -6,25 +6,19 @@ namespace Tests\Battle\Result;
 
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
-use Battle\Classes\ClassFactoryException;
 use Battle\Statistic\Statistic;
 use Battle\Translation\Translation;
-use Battle\Unit\UnitException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Battle\Result\Result;
 use Tests\Battle\Factory\CommandFactory;
 use Battle\Result\ResultException;
-use Battle\Command\CommandException;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class ResultTest extends TestCase
 {
     /**
-     * @throws ClassFactoryException
-     * @throws CommandException
      * @throws ResultException
-     * @throws UnitFactoryException
-     * @throws UnitException
+     * @throws Exception
      */
     public function testCreateResultSuccess(): void
     {
@@ -46,11 +40,8 @@ class ResultTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
-     * @throws CommandException
      * @throws ResultException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testCreateResultFail(): void
     {

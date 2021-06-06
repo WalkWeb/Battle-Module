@@ -6,7 +6,6 @@ namespace Tests\Battle\Round;
 
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
-use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Round\RoundException;
@@ -18,19 +17,15 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class RoundTest extends TestCase
 {
     /**
      * Проверяем корректную смену действующий команды
      *
-     * @throws ClassFactoryException
-     * @throws CommandException
      * @throws RoundException
-     * @throws UnitFactoryException
-     * @throws UnitException
      * @throws TranslationException
+     * @throws Exception
      */
     public function testRoundNextCommand(): void
     {

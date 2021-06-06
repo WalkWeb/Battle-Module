@@ -10,6 +10,7 @@ use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Unit\UnitException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -19,10 +20,9 @@ class SummonActionTest extends TestCase
     private const MESSAGE = '<b>unit_7</b> summon Imp';
 
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testCreateSummonAction(): void
     {
@@ -50,10 +50,9 @@ class SummonActionTest extends TestCase
     /**
      * Данный функционал не важен для SummonAction, но для полноценного покрытия кода тестами - делаем
      *
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testSummonActionSetFactualPower(): void
     {

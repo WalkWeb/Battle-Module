@@ -5,22 +5,20 @@ declare(strict_types=1);
 namespace Tests\Battle\Classes\Undead;
 
 use Battle\Action\Summon\SummonAction;
-use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class DarkMageTest extends TestCase
 {
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testCreateDarkMageClass(): void
     {

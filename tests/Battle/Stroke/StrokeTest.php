@@ -6,27 +6,19 @@ namespace Tests\Battle\Stroke;
 
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
-use Battle\Classes\ClassFactoryException;
-use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Statistic\Statistic;
-use Battle\Statistic\StatisticException;
-use Battle\Unit\UnitException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke\Stroke;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class StrokeTest extends TestCase
 {
     /**
      * Тест на базовую обработку одного хода
      *
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws StatisticException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testStrokeHandle(): void
     {
@@ -56,11 +48,7 @@ class StrokeTest extends TestCase
     /**
      * Тест на остановку внутри Stroke, например, когда юнит хочет сделать два удара, но противник умирает после первого
      *
-     * @throws ClassFactoryException
-     * @throws UnitFactoryException
-     * @throws UnitException
-     * @throws CommandException
-     * @throws StatisticException
+     * @throws Exception
      */
     public function testStrokeBreakAction(): void
     {

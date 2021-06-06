@@ -6,17 +6,16 @@ namespace Tests\Battle\Unit;
 
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Battle\Classes\ClassFactoryException;
 use Tests\Battle\Factory\UnitFactoryException;
 
 class UnitCollectionTest extends TestCase
 {
     /**
-     * @throws ClassFactoryException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testCreateUnitCollectionSuccess(): void
     {
@@ -34,9 +33,9 @@ class UnitCollectionTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
      * @throws UnitException
      * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testUnitCollectionExistUnit(): void
     {
@@ -51,9 +50,8 @@ class UnitCollectionTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testUnitCollectionAddDoubleIdUnit(): void
     {
@@ -69,9 +67,9 @@ class UnitCollectionTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
      * @throws UnitException
      * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testUnitCollectionKey(): void
     {
