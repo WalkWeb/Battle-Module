@@ -8,6 +8,7 @@ use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Race\RaceInterface;
 
 /**
  * Одна боевая единица.
@@ -184,6 +185,13 @@ interface UnitInterface
     public function getClass(): UnitClassInterface;
 
     /**
+     * Возвращает расу юнита
+     *
+     * @return RaceInterface
+     */
+    public function getRace(): RaceInterface;
+
+    /**
      * Урон юнита
      *
      * @return int
@@ -195,6 +203,4 @@ interface UnitInterface
      * попробовал использовать способность в следующем ходу
      */
     public function upMaxConcentration(): void;
-
-    // TODO Добавить расу
 }

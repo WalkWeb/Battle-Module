@@ -6,6 +6,7 @@ namespace Battle\Unit;
 
 use Battle\Classes\UnitClassInterface;
 use Battle\Result\Chat\Message;
+use Battle\Unit\Race\RaceInterface;
 use Exception;
 
 abstract class AbstractUnit implements UnitInterface
@@ -76,6 +77,11 @@ abstract class AbstractUnit implements UnitInterface
     protected $class;
 
     /**
+     * @var RaceInterface
+     */
+    protected $race;
+
+    /**
      * @var Message
      */
     protected $message;
@@ -91,6 +97,7 @@ abstract class AbstractUnit implements UnitInterface
         int $totalLife,
         bool $melee,
         UnitClassInterface $class,
+        RaceInterface $race,
         Message $message
     )
     {
@@ -104,6 +111,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->totalLife = $totalLife;
         $this->melee = $melee;
         $this->class = $class;
+        $this->race = $race;
         $this->message = $message;
     }
 
@@ -180,6 +188,11 @@ abstract class AbstractUnit implements UnitInterface
     public function getClass(): UnitClassInterface
     {
         return $this->class;
+    }
+
+    public function getRace(): RaceInterface
+    {
+        return $this->race;
     }
 
     public function newRound(): void

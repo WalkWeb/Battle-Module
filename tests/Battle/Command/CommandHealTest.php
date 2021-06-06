@@ -4,23 +4,21 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Command;
 
-use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class CommandHealTest extends TestCase
 {
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
-     * @throws UnitFactoryException
      * @throws UnitException
+     * @throws Exception
      */
     public function testGetUnitForHealNull(): void
     {
@@ -67,6 +65,7 @@ class CommandHealTest extends TestCase
                         'total_life'   => 80,
                         'melee'        => true,
                         'class'        => 1,
+                        'race'         => 1,
                     ],
                     // Самый битый юнит - именно он должен выбираться для лечения
                     [
@@ -80,6 +79,7 @@ class CommandHealTest extends TestCase
                         'total_life'   => 115,
                         'melee'        => false,
                         'class'        => 1,
+                        'race'         => 1,
                     ],
                     [
                         'id'           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
@@ -92,6 +92,7 @@ class CommandHealTest extends TestCase
                         'total_life'   => 75,
                         'melee'        => false,
                         'class'        => 2,
+                        'race'         => 1,
                     ],
                     // Мертвый юнит - он выбираться не должен
                     [
@@ -105,6 +106,7 @@ class CommandHealTest extends TestCase
                         'total_life'   => 60,
                         'melee'        => false,
                         'class'        => 2,
+                        'race'         => 1,
                     ],
                 ],
                 'fb8be211-0782-4c60-8865-68b177ffbe0c',

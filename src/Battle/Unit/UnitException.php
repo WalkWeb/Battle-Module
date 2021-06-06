@@ -27,5 +27,6 @@ class UnitException extends Exception
     public const LIFE_MORE_TOTAL_LIFE         = 'Life more total life';
     public const INCORRECT_MELEE              = 'Incorrect melee, it required and type bool';
     public const INCORRECT_CLASS              = 'Incorrect class, it required and type int';
+    public const INCORRECT_RACE               = 'Incorrect race, it required and type int';
     public const DOUBLE_UNIT_ID               = 'Double unit ID: collection have unit with specified id';
 }

@@ -16,15 +16,14 @@ use Battle\Command\CommandFactory;
 use Battle\Command\CommandException;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Action\Damage\DamageAction;
-use Battle\Classes\ClassFactoryException;
 use Tests\Battle\Factory\UnitFactoryException;
 use Tests\Battle\Factory\Mock\ActionMockFactory;
 
 class UnitTest extends TestCase
 {
     /**
-     * @throws ClassFactoryException
      * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testUniCreate(): void
     {
@@ -44,6 +43,7 @@ class UnitTest extends TestCase
         self::assertTrue($unit->isAlive());
         self::assertTrue($unit->isMelee());
         self::assertEquals($data['class'], $unit->getClass()->getId());
+        self::assertEquals($data['race'], $unit->getRace()->getId());
     }
 
     /**
@@ -76,8 +76,7 @@ class UnitTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testUnitUnknownAction(): void
     {
@@ -93,8 +92,7 @@ class UnitTest extends TestCase
     /**
      * Проверяем корректное обновление параметра action у юнита, при начале нового раунда, и добавление концентрации
      *
-     * @throws ClassFactoryException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testUnitAddedConcentration(): void
     {
@@ -112,8 +110,7 @@ class UnitTest extends TestCase
     /**
      * Проверяем корректное добавление концентрации юниту, при начале нового раунда
      *
-     * @throws ClassFactoryException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testUnitNewRoundAddConcentration(): void
     {
@@ -129,10 +126,9 @@ class UnitTest extends TestCase
     /**
      * Тест на получение концентрации при совершении действия, и получения действия от другого юнита
      *
-     * @throws ClassFactoryException
-     * @throws UnitFactoryException
      * @throws CommandException
      * @throws UnitException
+     * @throws Exception
      */
     public function testUnitAddConcentration(): void
     {

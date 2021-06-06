@@ -109,6 +109,7 @@ class CommandFactoryTest extends TestCase
                         'total_life'   => 80,
                         'melee'        => true,
                         'class'        => 1,
+                        'race'         => 8,
                     ],
                     [
                         'id'           => 'fb8be211-0782-4c60-8865-68b177ffbe0c',
@@ -121,6 +122,7 @@ class CommandFactoryTest extends TestCase
                         'total_life'   => 75,
                         'melee'        => false,
                         'class'        => 2,
+                        'race'         => 8,
                     ],
                 ],
             ],
@@ -146,6 +148,7 @@ class CommandFactoryTest extends TestCase
                         'total_life'   => 80,
                         'melee'        => true,
                         'class'        => 1,
+                        'race'         => 1,
                     ],
                 ],
                 UnitException::INCORRECT_NAME . ' (1 element)',

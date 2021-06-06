@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
-use Battle\BattleException;
 use Battle\Classes\UnitClassFactory;
-use Battle\Classes\ClassFactoryException;
 use Battle\Result\Chat\Message;
 use Battle\Traits\Validation;
+use Battle\Unit\Race\RaceFactory;
+use Exception;
 
 class UnitFactory
 {
@@ -31,14 +31,13 @@ class UnitFactory
      *     'total_life'   => 80,
      *     'melee'        => true,
      *     'class'        => 1,
+     *     'race'         => 1,
      * ]
      *
      * @param array $data
      * @param Message|null $message
      * @return UnitInterface
-     * @throws ClassFactoryException
-     * @throws BattleException
-     * @throws UnitException
+     * @throws Exception
      */
     public static function create(array $data, ?Message $message = null): UnitInterface
     {
@@ -52,6 +51,7 @@ class UnitFactory
         self::existAndInt($data, 'total_life', UnitException::INCORRECT_TOTAL_LIFE);
         self::existAndInt($data, 'level', UnitException::INCORRECT_LEVEL);
         self::existAndInt($data, 'class', UnitException::INCORRECT_CLASS);
+        self::existAndInt($data, 'race', UnitException::INCORRECT_RACE);
         self::intMinMaxValue($data['damage'], UnitInterface::MIN_DAMAGE, UnitInterface::MAX_DAMAGE, UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE);
         self::intMinMaxValue($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
         self::intMinMaxValue($data['total_life'], UnitInterface::MIN_TOTAL_LIFE, UnitInterface::MAX_TOTAL_LIFE, UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE);
@@ -88,8 +88,8 @@ class UnitFactory
             $data['total_life'],
             $data['melee'],
             UnitClassFactory::create($data['class'], $message),
+            RaceFactory::create($data['race']),
             $message
         );
     }
-
 }

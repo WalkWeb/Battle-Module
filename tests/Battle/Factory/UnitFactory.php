@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Tests\Battle\Factory;
 
 use Battle\Classes\UnitClassFactory;
-use Battle\Classes\ClassFactoryException;
 use Battle\Result\Chat\Message;
+use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\UnitInterface;
 use Battle\Unit\Unit;
+use Exception;
 
 class UnitFactory
 {
@@ -24,6 +25,7 @@ class UnitFactory
             'total_life'   => 100,
             'melee'        => true,
             'class'        => 1,
+            'race'         => 1,
         ],
         2  => [
             'id'           => '1aab367d-37e8-4544-9915-cb3d7779308b',
@@ -36,6 +38,7 @@ class UnitFactory
             'total_life'   => 150,
             'melee'        => true,
             'class'        => 1,
+            'race'         => 1,
         ],
         3  => [
             'id'           => '72df87f5-b3a7-4574-9526-45a20aa77119',
@@ -48,6 +51,7 @@ class UnitFactory
             'total_life'   => 120,
             'melee'        => true,
             'class'        => 1,
+            'race'         => 1,
         ],
         4  => [
             'id'           => 'c310ce86-7bb2-44b0-b634-ea0d28fb1180',
@@ -60,6 +64,7 @@ class UnitFactory
             'total_life'   => 20,
             'melee'        => true,
             'class'        => 1,
+            'race'         => 1,
         ],
         5  => [
             'id'           => '46d969c1-463b-42b1-a2e0-2c64a8c34ae1',
@@ -72,6 +77,7 @@ class UnitFactory
             'total_life'   => 80,
             'melee'        => false,
             'class'        => 2,
+            'race'         => 1,
         ],
         6 => [
             'id'           => '1e813812-9a21-4e18-b494-8d552bac0cf4',
@@ -84,6 +90,7 @@ class UnitFactory
             'total_life'   => 50,
             'melee'        => false,
             'class'        => 2,
+            'race'         => 1,
         ],
         7  => [
             'id'           => '46d969c1-463b-42b1-a2e0-2c62a8c34ae3',
@@ -96,6 +103,7 @@ class UnitFactory
             'total_life'   => 80,
             'melee'        => false,
             'class'        => 4,
+            'race'         => 1,
         ],
         8  => [
             'id'           => 'f7e84eab-e4f6-463f-b0e3-f2f965f4fbce',
@@ -108,6 +116,7 @@ class UnitFactory
             'total_life'   => 100,
             'melee'        => true,
             'class'        => 3,
+            'race'         => 1,
         ],
         10 => [
             'id'           => '92e7b39c-dbfc-4493-b563-50314c524c0c',
@@ -120,6 +129,7 @@ class UnitFactory
             'total_life'   => 100,
             'melee'        => true,
             'class'        => 1,
+            'race'         => 1,
         ],
         11 => [
             'id'           => '92e7b39c-dbfc-4493-b563-50314c524c3c',
@@ -132,6 +142,7 @@ class UnitFactory
             'total_life'   => 100,
             'melee'        => true,
             'class'        => 1,
+            'race'         => 1,
         ],
         12  => [
             'id'           => '1aab367d-37e8-4544-9915-cb3d7779332b',
@@ -144,6 +155,7 @@ class UnitFactory
             'total_life'   => 150,
             'melee'        => true,
             'class'        => 1,
+            'race'         => 1,
         ],
         13  => [
             'id'           => '1aab367d-37e8-4544-9915-cb3d7779332b',
@@ -156,6 +168,7 @@ class UnitFactory
             'total_life'   => 150,
             'melee'        => true,
             'class'        => 1,
+            'race'         => 1,
         ],
     ];
 
@@ -163,8 +176,7 @@ class UnitFactory
      * @param int $template
      * @param Message|null $message
      * @return UnitInterface
-     * @throws ClassFactoryException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public static function createByTemplate(int $template, ?Message $message = null): UnitInterface
     {
@@ -183,6 +195,7 @@ class UnitFactory
             self::$units[$template]['total_life'],
             self::$units[$template]['melee'],
             UnitClassFactory::create(self::$units[$template]['class']),
+            RaceFactory::create(self::$units[$template]['race']),
             $message ?? new Message()
         );
     }

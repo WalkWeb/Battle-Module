@@ -63,6 +63,7 @@ class BattleTest extends TestCase
                 'total_life'   => 1500,
                 'melee'        => true,
                 'class'        => 1,
+                'race'         => 1,
                 'command'      => 'left',
             ],
             [
@@ -76,6 +77,7 @@ class BattleTest extends TestCase
                 'total_life'   => 1650,
                 'melee'        => true,
                 'class'        => 1,
+                'race'         => 8,
                 'command'      => 'right',
             ],
         ];
@@ -107,6 +109,7 @@ class BattleTest extends TestCase
                 'total_life'   => 1500,
                 'melee'        => true,
                 'class'        => 1,
+                'race'         => 1,
                 'command'      => 'left',
             ],
             [
@@ -120,6 +123,7 @@ class BattleTest extends TestCase
                 'total_life'   => 1650,
                 'melee'        => true,
                 'class'        => 1,
+                'race'         => 8,
                 'command'      => 'right',
             ],
         ];
@@ -182,8 +186,7 @@ class BattleTest extends TestCase
      * Эмулируем коллекцию, которая будет возвращать одного и того же юнита на каждый вызов метода current()
      *
      * @return UnitCollection
-     * @throws ClassFactoryException
-     * @throws Factory\UnitFactoryException
+     * @throws Exception
      */
     private function getUnitCollectionMock(): UnitCollection
     {

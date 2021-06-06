@@ -49,12 +49,11 @@ class RoundTest extends TestCase
     /**
      * Проверяем корректную смену действующий когда в действующей команде нет юнитов, способных совершить действие
      *
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws RoundException
-     * @throws UnitFactoryException
-     * @throws UnitException
      * @throws TranslationException
+     * @throws UnitException
+     * @throws Exception
      */
     public function testRoundNextCommandNoAction(): void
     {
@@ -75,11 +74,10 @@ class RoundTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws RoundException
      * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testRoundIncorrectActionCommand(): void
     {

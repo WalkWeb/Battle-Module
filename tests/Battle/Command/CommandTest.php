@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Command;
 
 use Battle\Action\Damage\DamageAction;
+use Battle\BattleException;
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
@@ -12,24 +13,25 @@ use Battle\Command\CommandException;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
+use Battle\Unit\Race\RaceException;
+use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\Mock\UnitMockFactory;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class CommandTest extends TestCase
 {
     /**
      * Проверяем успешное создание команды
      *
-     * @throws ClassFactoryException
      * @throws CommandException
-     * @throws UnitFactoryException
      * @throws UnitException
+     * @throws Exception
      */
     public function testCreate(): void
     {
@@ -41,10 +43,9 @@ class CommandTest extends TestCase
     /**
      * Проверяем соответствие переданных юнитов и тех, что возвращает команда
      *
-     * @throws ClassFactoryException
      * @throws CommandException
-     * @throws UnitFactoryException
      * @throws UnitException
+     * @throws Exception
      */
     public function testCommandUnits(): void
     {
@@ -63,9 +64,8 @@ class CommandTest extends TestCase
      * Проверяем корректный возврат юнитов ближнего и дальнего боя
      *
      * @throws CommandException
-     * @throws UnitFactoryException
-     * @throws ClassFactoryException
      * @throws UnitException
+     * @throws Exception
      */
     public function testMeleeAndRangeUnits(): void
     {
@@ -92,9 +92,8 @@ class CommandTest extends TestCase
      * Проверяем корректное отсутствие бойцов ближнего боя
      *
      * @throws CommandException
-     * @throws UnitFactoryException
-     * @throws ClassFactoryException
      * @throws UnitException
+     * @throws Exception
      */
     public function testNoMeleeUnits(): void
     {
@@ -109,9 +108,8 @@ class CommandTest extends TestCase
      * Проверяем корректное отсутствие живых бойцов ближнего боя
      *
      * @throws CommandException
-     * @throws UnitFactoryException
-     * @throws ClassFactoryException
      * @throws UnitException
+     * @throws Exception
      */
     public function testNoAliveMeleeUnits(): void
     {
@@ -152,10 +150,9 @@ class CommandTest extends TestCase
     /**
      * Проверяем корректное возвращение юнита для получения удара
      *
-     * @throws ClassFactoryException
      * @throws CommandException
-     * @throws UnitFactoryException
      * @throws UnitException
+     * @throws Exception
      */
     public function testGetUserFromAttack(): void
     {
@@ -173,10 +170,9 @@ class CommandTest extends TestCase
     /**
      * Проверяем корректное отсутствие юнитов для атаки и отсутствие живых юнитов в команде
      *
-     * @throws ClassFactoryException
      * @throws CommandException
-     * @throws UnitFactoryException
      * @throws UnitException
+     * @throws Exception
      */
     public function testNoUnitFromAttack(): void
     {
@@ -190,10 +186,9 @@ class CommandTest extends TestCase
     /**
      * Проверяем, что все юниты походили и на начало нового раунда - все юниты опять могут ходить
      *
-     * @throws ClassFactoryException
      * @throws CommandException
-     * @throws UnitFactoryException
      * @throws UnitException
+     * @throws Exception
      */
     public function testAllUnitAction(): void
     {
@@ -220,10 +215,9 @@ class CommandTest extends TestCase
     /**
      * Проверяем корректное возвращение юнита для совершения хода
      *
-     * @throws ClassFactoryException
      * @throws CommandException
-     * @throws UnitFactoryException
      * @throws UnitException
+     * @throws Exception
      */
     public function testGetUnitForActionOne(): void
     {
@@ -236,10 +230,14 @@ class CommandTest extends TestCase
     /**
      * Проверяем корректное отсутствие юнитов для хода, когда один может ходить но мертвый, другой - живой но уже ходил
      *
+     * TODO Подумать над рефакторингом теста
+     *
+     * @throws ActionException
      * @throws ClassFactoryException
      * @throws CommandException
-     * @throws ActionException
      * @throws UnitException
+     * @throws BattleException
+     * @throws RaceException
      */
     public function testGetUnitForActionNothing(): void
     {
@@ -256,6 +254,7 @@ class CommandTest extends TestCase
             110,
             true,
             UnitClassFactory::create(1),
+            RaceFactory::create(1),
             $message
         );
 
@@ -270,6 +269,7 @@ class CommandTest extends TestCase
             95,
             false,
             UnitClassFactory::create(2),
+            RaceFactory::create(1),
             $message
         );
 
@@ -284,6 +284,7 @@ class CommandTest extends TestCase
             300,
             true,
             UnitClassFactory::create(1),
+            RaceFactory::create(1),
             $message
         );
 

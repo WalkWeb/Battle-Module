@@ -17,6 +17,7 @@ $data = [
         'total_life'   => 110,
         'melee'        => true,
         'class'        => 1,
+        'race'         => 1,
         'command'      => 'left',
     ],
     [
@@ -30,6 +31,7 @@ $data = [
         'total_life'   => 95,
         'melee'        => false,
         'class'        => 2,
+        'race'         => 1,
         'command'      => 'left',
     ],
     [
@@ -43,6 +45,7 @@ $data = [
         'total_life'   => 65,
         'melee'        => true,
         'class'        => 3,
+        'race'         => 8,
         'command'      => 'right',
     ],
     [
@@ -56,6 +59,7 @@ $data = [
         'total_life'   => 62,
         'melee'        => false,
         'class'        => 4,
+        'race'         => 8,
         'command'      => 'right',
     ],
 ];

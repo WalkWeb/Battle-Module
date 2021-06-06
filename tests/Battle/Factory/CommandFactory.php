@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Factory;
 
-use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Command\CommandInterface;
-use Battle\Command\CommandException;
 use Battle\Traits\IdTrait;
 use Battle\Unit\UnitCollection;
-use Battle\Unit\UnitException;
 use Exception;
 use Battle\Unit\UnitFactory as BaseUnitFactory;
 
@@ -20,10 +17,7 @@ class CommandFactory
 
     /**
      * @return CommandInterface
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitFactoryException
-     * @throws UnitException
+     * @throws Exception
      */
     public static function createLeftCommand(): CommandInterface
     {
@@ -33,11 +27,7 @@ class CommandFactory
     }
 
     /**
-     * @return CommandInterface
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public static function createRightCommand(): CommandInterface
     {
@@ -64,6 +54,7 @@ class CommandFactory
             'total_life'   => 100,
             'melee'        => true,
             'class'        => 1,
+            'race'         => 1,
         ];
 
         $i = 0;

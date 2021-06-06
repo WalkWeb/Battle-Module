@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
-use Battle\BattleException;
-use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassFactory;
+use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
 use Battle\Unit\UnitInterface;
@@ -26,6 +25,7 @@ class UnitFactoryTest extends TestCase
     {
         $unit = UnitFactory::create($data);
         $class = UnitClassFactory::create($data['class']);
+        $race = RaceFactory::create($data['race']);
 
         self::assertEquals($data['name'], $unit->getName());
         self::assertEquals($data['level'], $unit->getLevel());
@@ -36,6 +36,7 @@ class UnitFactoryTest extends TestCase
         self::assertEquals($data['life'], $unit->getLife());
         self::assertEquals($data['melee'], $unit->isMelee());
         self::assertEquals($class, $unit->getClass());
+        self::assertEquals($race, $unit->getRace());
     }
 
     /**
@@ -54,9 +55,7 @@ class UnitFactoryTest extends TestCase
     }
 
     /**
-     * @throws ClassFactoryException
-     * @throws UnitException
-     * @throws BattleException
+     * @throws Exception
      */
     public function testUnitFactoryHtmlspecialchars(): void
     {
@@ -71,6 +70,7 @@ class UnitFactoryTest extends TestCase
             'total_life'   => 80,
             'melee'        => true,
             'class'        => 1,
+            'race'         => 8,
         ];
 
         $unit = UnitFactory::create($data);
@@ -97,6 +97,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 // attack_speed int - такой вариант также доступен
                 [
@@ -110,6 +111,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 8,
                 ],
             ],
         ];
@@ -133,6 +135,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_ID,
             ],
@@ -149,6 +152,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_ID,
             ],
@@ -165,6 +169,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH,
             ],
@@ -181,6 +186,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH,
             ],
@@ -196,6 +202,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_NAME,
             ],
@@ -212,6 +219,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_NAME,
             ],
@@ -228,6 +236,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH,
             ],
@@ -244,6 +253,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH,
             ],
@@ -259,6 +269,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_AVATAR,
             ],
@@ -275,6 +286,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_AVATAR,
             ],
@@ -290,6 +302,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_DAMAGE,
             ],
@@ -306,6 +319,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_DAMAGE,
             ],
@@ -322,6 +336,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
             ],
@@ -338,6 +353,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
             ],
@@ -353,6 +369,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_ATTACK_SPEED,
             ],
@@ -369,6 +386,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_ATTACK_SPEED,
             ],
@@ -385,6 +403,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
             ],
@@ -401,6 +420,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
             ],
@@ -415,6 +435,7 @@ class UnitFactoryTest extends TestCase
                     'attack_speed' => 1.2,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_LIFE,
             ],
@@ -431,6 +452,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_LIFE,
             ],
@@ -447,6 +469,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE,
             ],
@@ -463,6 +486,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE,
             ],
@@ -478,6 +502,7 @@ class UnitFactoryTest extends TestCase
                     'life'         => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_TOTAL_LIFE,
             ],
@@ -494,6 +519,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80.0,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_TOTAL_LIFE,
             ],
@@ -510,6 +536,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => UnitInterface::MIN_TOTAL_LIFE - 1,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE,
             ],
@@ -526,6 +553,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => UnitInterface::MAX_TOTAL_LIFE + 1,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE,
             ],
@@ -541,6 +569,7 @@ class UnitFactoryTest extends TestCase
                     'life'         => 80,
                     'total_life'   => 80,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_MELEE,
             ],
@@ -557,6 +586,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => 1,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_MELEE,
             ],
@@ -572,6 +602,7 @@ class UnitFactoryTest extends TestCase
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_CLASS,
             ],
@@ -588,6 +619,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 'warrior',
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_CLASS,
             ],
@@ -604,6 +636,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::LIFE_MORE_TOTAL_LIFE,
             ],
@@ -619,6 +652,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_LEVEL,
             ],
@@ -635,6 +669,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_LEVEL,
             ],
@@ -651,6 +686,7 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL,
             ],
@@ -667,8 +703,42 @@ class UnitFactoryTest extends TestCase
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
+                    'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL,
+            ],
+            [
+                [
+                    // отсутствует race
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'level'        => 3,
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                ],
+                'error' => UnitException::INCORRECT_RACE,
+            ],
+            [
+                [
+                    // race некорректного типа
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'level'        => 3,
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => 1,
+                    'race'         => 'human',
+                ],
+                'error' => UnitException::INCORRECT_RACE,
             ],
         ];
     }
