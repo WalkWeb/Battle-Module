@@ -4,116 +4,52 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Stroke;
 
-use Battle\Command\Command;
 use Battle\Result\Chat\Chat;
-use Battle\Result\Chat\Message;
 use Battle\Result\FullLog\FullLog;
-use Battle\Classes\UnitClassFactory;
 use Battle\Classes\ClassFactoryException;
-use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Statistic\Statistic;
 use Battle\Statistic\StatisticException;
-use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke\Stroke;
-use Battle\Unit\UnitInterface;
-use Battle\Unit\Unit;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 
 class StrokeTest extends TestCase
 {
-    private $attackerId     = 'e9734617-2894-4af4-85ff-67bb30de0500';
-    private $attackerName   = 'first_unit';
-    private $attackerLevel  = 1;
-    private $attackAvatar   = 'first_unit_ava';
-    private $attackerDamage = 20;
-    private $attackerAttackSpeed = 1.00;
-    private $attackerLife   = 100;
-    private $attackerMelee  = true;
-    private $attackerClass  = UnitClassInterface::WARRIOR;
-
-    private $defendId     = 'a385c54d-ad29-4071-b362-898b88a6d0c8';
-    private $defendName   = 'second_unit';
-    private $defendLevel  = 2;
-    private $defendAvatar = 'second_unit_ava';
-    private $defendDamage = 25;
-    private $defendAttackSpeed = 1.00;
-    private $defendLife   = 70;
-    private $defendMelee  = true;
-    private $defendClass  = UnitClassInterface::PRIEST;
-
-    /** @var UnitInterface */
-    private $attackUnit;
-
-    /** @var UnitInterface */
-    private $defendUnit;
-
-    /**
-     * @throws ClassFactoryException
-     */
-    public function setUp(): void
-    {
-        $message = new Message();
-
-        $this->attackUnit = new Unit(
-            $this->attackerId,
-            $this->attackerName,
-            $this->attackerLevel,
-            $this->attackAvatar,
-            $this->attackerDamage,
-            $this->attackerAttackSpeed,
-            $this->attackerLife,
-            $this->attackerLife,
-            $this->attackerMelee,
-            UnitClassFactory::create($this->attackerClass),
-            $message
-        );
-
-        $this->defendUnit = new Unit(
-            $this->defendId,
-            $this->defendName,
-            $this->defendLevel,
-            $this->defendAvatar,
-            $this->defendDamage,
-            $this->defendAttackSpeed,
-            $this->defendLife,
-            $this->defendLife,
-            $this->defendMelee,
-            UnitClassFactory::create($this->defendClass),
-            $message
-        );
-    }
-
     /**
      * Тест на базовую обработку одного хода
      *
+     * @throws ClassFactoryException
      * @throws CommandException
      * @throws StatisticException
      * @throws UnitException
+     * @throws UnitFactoryException
      */
     public function testStrokeHandle(): void
     {
-        $leftCommand = CommandFactory::create([$this->attackUnit]);
-        $rightCommand = CommandFactory::create([$this->defendUnit]);
-        $statistics = new Statistic();
-        $log = new FullLog();
+        $leftUnit = UnitFactory::createByTemplate(1);
+        $rightUnit = UnitFactory::createByTemplate(2);
+
+        $leftCommand = CommandFactory::create([$leftUnit]);
+        $rightCommand = CommandFactory::create([$rightUnit]);
+
         $chat = new Chat();
 
-        $stroke = new Stroke(1, $this->attackUnit, $leftCommand, $rightCommand, $statistics, $log, $chat);
+        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), $chat);
         $stroke->handle();
 
-        self::assertEquals($this->defendLife - $this->attackUnit->getDamage(), $this->defendUnit->getLife());
+        self::assertEquals($rightUnit->getTotalLife() - $leftUnit->getDamage(), $rightUnit->getLife());
 
-        self::assertTrue($this->attackUnit->isAction());
-        self::assertFalse($this->defendUnit->isAction());
+        self::assertTrue($leftUnit->isAction());
+        self::assertFalse($rightUnit->isAction());
 
         $chatResultMessages = [
-            '<p class="none"><b>first_unit</b> attack <b>second_unit</b> on 20 damage</p>'
+            '<p class="none"><b>unit_1</b> attack <b>unit_2</b> on 20 damage</p>'
         ];
+
         self::assertEquals($chatResultMessages, $chat->getMessages());
     }
 
@@ -131,14 +67,8 @@ class StrokeTest extends TestCase
         $leftUnit = UnitFactory::createByTemplate(13);
         $rightUnit = UnitFactory::createByTemplate(1);
 
-        $leftCollection = new UnitCollection();
-        $leftCollection->add($leftUnit);
-
-        $rightCollection = new UnitCollection();
-        $rightCollection->add($rightUnit);
-
-        $leftCommand = new Command($leftCollection);
-        $rightCommand = new Command($rightCollection);
+        $leftCommand = CommandFactory::create([$leftUnit]);
+        $rightCommand = CommandFactory::create([$rightUnit]);
 
         $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat());
 
