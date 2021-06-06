@@ -26,12 +26,14 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                                     <span class="recdam"></span>
                                 </div>
                             </div>
+                            <?php if ($unit->getClass()): ?>
                             <div class="unit_cons">
                                 <div class="unit_cons_bar2" style="width: <?= $this->getWidth($unit->getConcentration(), UnitInterface::MAX_CONS) ?>%;"></div>
                             </div>
                             <div class="unit_rage">
                                 <div class="unit_rage_bar2" style="width: <?= $this->getWidth($unit->getRage(), UnitInterface::MAX_RAGE) ?>%;"></div>
                             </div>
+                            <?php endif ?>
                         </div>
                     </div>
                 </div>
@@ -45,7 +47,7 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                 </div>
             </div>
         </div>
-        <div class="unit_box2">
+        <div class="<?= $unit->getClass() ? 'unit_box2' : 'unit_box2_na' ?>">
             <div class="unit_box2_right">
                 <div class="unit_box2_right2">
                     <div class="unit_box2_right3">

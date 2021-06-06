@@ -54,13 +54,13 @@ class ViewTest extends TestCase
                                     <span class="recdam"></span>
                                 </div>
                             </div>
-                            <div class="unit_cons">
+                                                        <div class="unit_cons">
                                 <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
                                 <div class="unit_rage_bar2" style="width: 0%;"></div>
                             </div>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
             </div>
@@ -114,13 +114,13 @@ class ViewTest extends TestCase
                                     <span class="recdam"></span>
                                 </div>
                             </div>
-                            <div class="unit_cons">
+                                                        <div class="unit_cons">
                                 <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
                                 <div class="unit_rage_bar2" style="width: 0%;"></div>
                             </div>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
             </div>
@@ -203,13 +203,13 @@ EOT;
                                     <span class="recdam"></span>
                                 </div>
                             </div>
-                            <div class="unit_cons">
+                                                        <div class="unit_cons">
                                 <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
                                 <div class="unit_rage_bar2" style="width: 0%;"></div>
                             </div>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
             </div>
@@ -265,13 +265,13 @@ EOT;
                                     <span class="recdam"></span>
                                 </div>
                             </div>
-                            <div class="unit_cons">
+                                                        <div class="unit_cons">
                                 <div class="unit_cons_bar2" style="width: 0%;"></div>
                             </div>
                             <div class="unit_rage">
                                 <div class="unit_rage_bar2" style="width: 0%;"></div>
                             </div>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
             </div>
