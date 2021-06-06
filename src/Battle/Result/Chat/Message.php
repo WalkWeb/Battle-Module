@@ -6,6 +6,7 @@ namespace Battle\Result\Chat;
 
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
+use Battle\Action\Other\WaitAction;
 use Battle\Action\Summon\SummonAction;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationException;
@@ -62,8 +63,16 @@ class Message
      */
     public function summon(SummonAction $action): string
     {
-        return '<b>' .
-            $action->getActionUnit()->getName() .
-            '</b> '  . $this->translation->trans($action->getNameAction());
+        return '<b>' . $action->getActionUnit()->getName() . '</b> ' . $this->translation->trans($action->getNameAction());
+    }
+
+    /**
+     * @param WaitAction $action
+     * @return string
+     * @throws TranslationException
+     */
+    public function wait(WaitAction $action): string
+    {
+        return '<b>' . $action->getActionUnit()->getName() . '</b> ' . $this->translation->trans($action->getNameAction());
     }
 }

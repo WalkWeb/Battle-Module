@@ -111,6 +111,7 @@ class Stroke implements StrokeInterface
 
     /**
      * Совершает ход одного юнита в бою
+     *
      * @throws StatisticException
      */
     public function handle(): void

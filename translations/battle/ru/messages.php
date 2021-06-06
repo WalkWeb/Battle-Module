@@ -13,6 +13,7 @@ return [
     'on'                             => 'на',
     'damage'                         => 'урона',
     'life'                           => 'здоровья',
+    'preparing to attack'            => 'готовится к атаке',
     // Ability
     'use Heavy Strike at'            => 'использовал Тяжелый Удар по',
     'use Great Heal and heal'        => 'использовал Сильное Лечение и вылечил',

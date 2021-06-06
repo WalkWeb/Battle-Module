@@ -13,6 +13,7 @@ return [
     'on'                             => 'on',
     'damage'                         => 'damage',
     'life'                           => 'life',
+    'preparing to attack'            => 'preparing to attack',
     // Ability
     'use Heavy Strike at'            => 'use Heavy Strike at',
     'use Great Heal and heal'        => 'use Great Heal and heal',

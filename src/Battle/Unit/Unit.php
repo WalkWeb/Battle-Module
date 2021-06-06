@@ -8,6 +8,7 @@ use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
+use Battle\Action\Other\WaitAction;
 use Battle\Action\Summon\SummonAction;
 use Battle\Command\CommandInterface;
 use Battle\Translation\TranslationException;
@@ -65,6 +66,10 @@ class Unit extends AbstractUnit
             $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand, $this->message));
         }
 
+        if (count($collection) === 0) {
+            $collection->add(new WaitAction($this, $enemyCommand, $alliesCommand, $this->message));
+        }
+
         return $collection;
     }
 
@@ -73,7 +78,7 @@ class Unit extends AbstractUnit
     /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
      *
-     * @uses applyDamageAction, applyHealAction, applySummonAction
+     * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction
      * @param ActionInterface $action
      * @return string - Сообщение о произошедшем действии
      * @throws Exception
@@ -141,5 +146,15 @@ class Unit extends AbstractUnit
     private function applySummonAction(SummonAction $action): string
     {
         return $this->message->summon($action);
+    }
+
+    /**
+     * @param WaitAction $action
+     * @return string
+     * @throws TranslationException
+     */
+    private function applyWaitAction(WaitAction $action): string
+    {
+        return $this->message->wait($action);
     }
 }

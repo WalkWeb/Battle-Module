@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Action\Summon;
 
 use Battle\Action\Summon\SummonImpAction;
-use Battle\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
@@ -13,7 +12,6 @@ use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class SummonActionTest extends TestCase
 {
@@ -40,7 +38,7 @@ class SummonActionTest extends TestCase
 
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(SummonImpAction::class, [$action]);
-            $message = $action->handle();
+            $message .= $action->handle();
         }
 
         self::assertEquals(self::MESSAGE, $message);

@@ -31,7 +31,7 @@ interface UnitInterface
     public const MIN_DAMAGE         = 0;
     public const MAX_DAMAGE         = 100000;
 
-    public const MIN_ATTACK_SPEED   = 0.1;
+    public const MIN_ATTACK_SPEED   = 0.0;
     public const MAX_ATTACK_SPEED   = 10;
 
     public const MIN_LIFE           = 0;

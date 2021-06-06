@@ -170,6 +170,19 @@ class UnitFactory
             'class'        => 1,
             'race'         => 1,
         ],
+        14  => [
+            'id'           => '1aab367d-37e8-4544-9915-cb3d7779323b',
+            'name'         => 'unit_14',
+            'level'        => 1,
+            'avatar'       => '/images/avas/humans/human002.jpg',
+            'damage'       => 32,
+            'attack_speed' => 0, // нулевая скорость атаки
+            'life'         => 150,
+            'total_life'   => 150,
+            'melee'        => true,
+            'class'        => 1,
+            'race'         => 1,
+        ],
     ];
 
     /**
