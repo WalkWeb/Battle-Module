@@ -72,7 +72,7 @@ abstract class AbstractUnit implements UnitInterface
     protected $rage = 0;
 
     /**
-     * @var UnitClassInterface
+     * @var UnitClassInterface|null
      */
     protected $class;
 
@@ -96,9 +96,9 @@ abstract class AbstractUnit implements UnitInterface
         int $life,
         int $totalLife,
         bool $melee,
-        UnitClassInterface $class,
         RaceInterface $race,
-        Message $message
+        Message $message,
+        ?UnitClassInterface $class = null
     )
     {
         $this->id = $id;
@@ -110,9 +110,9 @@ abstract class AbstractUnit implements UnitInterface
         $this->life = $life;
         $this->totalLife = $totalLife;
         $this->melee = $melee;
-        $this->class = $class;
         $this->race = $race;
         $this->message = $message;
+        $this->class = $class;
     }
 
     public function getId(): string
@@ -185,7 +185,7 @@ abstract class AbstractUnit implements UnitInterface
         return $this->rage;
     }
 
-    public function getClass(): UnitClassInterface
+    public function getClass(): ?UnitClassInterface
     {
         return $this->class;
     }
@@ -193,6 +193,11 @@ abstract class AbstractUnit implements UnitInterface
     public function getRace(): RaceInterface
     {
         return $this->race;
+    }
+
+    public function getIcon(): string
+    {
+        return $this->class ? $this->class->getSmallIcon() : $this->race->getIcon();
     }
 
     public function newRound(): void

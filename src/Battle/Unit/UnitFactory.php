@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
+use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassFactory;
+use Battle\Classes\UnitClassInterface;
 use Battle\Result\Chat\Message;
 use Battle\Traits\Validation;
 use Battle\Unit\Race\RaceFactory;
@@ -50,7 +52,6 @@ class UnitFactory
         self::existAndInt($data, 'life', UnitException::INCORRECT_LIFE);
         self::existAndInt($data, 'total_life', UnitException::INCORRECT_TOTAL_LIFE);
         self::existAndInt($data, 'level', UnitException::INCORRECT_LEVEL);
-        self::existAndInt($data, 'class', UnitException::INCORRECT_CLASS);
         self::existAndInt($data, 'race', UnitException::INCORRECT_RACE);
         self::intMinMaxValue($data['damage'], UnitInterface::MIN_DAMAGE, UnitInterface::MAX_DAMAGE, UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE);
         self::intMinMaxValue($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
@@ -87,9 +88,33 @@ class UnitFactory
             $data['life'],
             $data['total_life'],
             $data['melee'],
-            UnitClassFactory::create($data['class'], $message),
             RaceFactory::create($data['race']),
-            $message
+            $message,
+            self::getClass($data, $message)
         );
+    }
+
+    /**
+     * @param array $data
+     * @param Message $message
+     * @return UnitClassInterface|null
+     * @throws UnitException
+     * @throws ClassFactoryException
+     */
+    private static function getClass(array $data, Message $message): ?UnitClassInterface
+    {
+        if (!array_key_exists('class', $data)) {
+            return null;
+        }
+
+        if (is_null($data['class'])) {
+            return null;
+        }
+
+        if (!is_int($data['class'])) {
+            throw new UnitException(UnitException::INCORRECT_CLASS);
+        }
+
+        return UnitClassFactory::create($data['class'], $message);
     }
 }

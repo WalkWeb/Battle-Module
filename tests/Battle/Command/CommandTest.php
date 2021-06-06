@@ -6,8 +6,6 @@ namespace Tests\Battle\Command;
 
 use Battle\Action\Damage\DamageAction;
 use Battle\BattleException;
-use Battle\Classes\UnitClassFactory;
-use Battle\Classes\ClassFactoryException;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Action\ActionException;
@@ -233,7 +231,6 @@ class CommandTest extends TestCase
      * TODO Подумать над рефакторингом теста
      *
      * @throws ActionException
-     * @throws ClassFactoryException
      * @throws CommandException
      * @throws UnitException
      * @throws BattleException
@@ -253,7 +250,6 @@ class CommandTest extends TestCase
             110,
             110,
             true,
-            UnitClassFactory::create(1),
             RaceFactory::create(1),
             $message
         );
@@ -268,7 +264,6 @@ class CommandTest extends TestCase
             95,
             95,
             false,
-            UnitClassFactory::create(2),
             RaceFactory::create(1),
             $message
         );
@@ -283,7 +278,6 @@ class CommandTest extends TestCase
             300,
             300,
             true,
-            UnitClassFactory::create(1),
             RaceFactory::create(1),
             $message
         );

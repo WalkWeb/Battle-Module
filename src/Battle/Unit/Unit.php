@@ -28,7 +28,7 @@ class Unit extends AbstractUnit
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
-        if ($this->concentration >= self::MAX_CONS) {
+        if ($this->class && $this->concentration >= self::MAX_CONS) {
             $this->concentration = 0;
             return $this->class->getAbility($this, $enemyCommand, $alliesCommand);
         }

@@ -44,7 +44,7 @@ $data = [
         'life'         => 65,
         'total_life'   => 65,
         'melee'        => true,
-        'class'        => 3,
+        'class'        => null,
         'race'         => 8,
         'command'      => 'right',
     ],

@@ -24,7 +24,7 @@ class UnitFactoryTest extends TestCase
     public function testUnitFactorySuccess(array $data): void
     {
         $unit = UnitFactory::create($data);
-        $class = UnitClassFactory::create($data['class']);
+        $class = array_key_exists('class', $data) && is_int($data['class']) ? UnitClassFactory::create($data['class']) : null;
         $race = RaceFactory::create($data['race']);
 
         self::assertEquals($data['name'], $unit->getName());
@@ -99,6 +99,8 @@ class UnitFactoryTest extends TestCase
                     'class'        => 1,
                     'race'         => 1,
                 ],
+            ],
+            [
                 // attack_speed int - такой вариант также доступен
                 [
                     'id'           => '5aa0d764-e92d-4137-beed-f7f590b08165',
@@ -112,6 +114,37 @@ class UnitFactoryTest extends TestCase
                     'melee'        => true,
                     'class'        => 1,
                     'race'         => 8,
+                ],
+            ],
+            [
+                // отсутствует класс
+                [
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'level'        => 3,
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'race'         => 1,
+                ],
+            ],
+            [
+                // класс = null
+                [
+                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'         => 'Skeleton',
+                    'level'        => 3,
+                    'avatar'       => '/images/avas/monsters/003.png',
+                    'damage'       => 15,
+                    'attack_speed' => 1.2,
+                    'life'         => 80,
+                    'total_life'   => 80,
+                    'melee'        => true,
+                    'class'        => null,
+                    'race'         => 1,
                 ],
             ],
         ];
@@ -589,22 +622,6 @@ class UnitFactoryTest extends TestCase
                     'race'         => 1,
                 ],
                 'error' => UnitException::INCORRECT_MELEE,
-            ],
-            [
-                [
-                    // отсутствует class
-                    'id'           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'         => 'Skeleton',
-                    'level'        => 3,
-                    'avatar'       => '/images/avas/monsters/003.png',
-                    'damage'       => 15,
-                    'attack_speed' => 1.2,
-                    'life'         => 80,
-                    'total_life'   => 80,
-                    'melee'        => true,
-                    'race'         => 1,
-                ],
-                'error' => UnitException::INCORRECT_CLASS,
             ],
             [
                 [

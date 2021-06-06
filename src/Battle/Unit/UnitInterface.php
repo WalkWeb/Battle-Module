@@ -176,13 +176,11 @@ interface UnitInterface
     public function getRage(): int;
 
     /**
-     * Возвращает класс юнита
+     * Возвращает класс юнита, или null, если класса нет
      *
-     * TODO Добавить возможность отсутствия класса
-     *
-     * @return UnitClassInterface
+     * @return UnitClassInterface|null
      */
-    public function getClass(): UnitClassInterface;
+    public function getClass(): ?UnitClassInterface;
 
     /**
      * Возвращает расу юнита
@@ -203,4 +201,13 @@ interface UnitInterface
      * попробовал использовать способность в следующем ходу
      */
     public function upMaxConcentration(): void;
+
+    /**
+     * Возвращает путь к иконке юнита
+     *
+     * Если есть класс - берется иконка класса, если её нет - берется иконка расы
+     *
+     * @return string
+     */
+    public function getIcon(): string;
 }

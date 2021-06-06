@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Action\Summon;
 
-use Battle\Classes\UnitClassFactory;
 use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitInterface;
@@ -21,7 +20,6 @@ class SummonImpAction extends SummonAction
     private $attackSpeed = 1;
     private $life = 30;
     private $melee = true;
-    private $classId = 1;
     private $raceId = 9;
 
     /**
@@ -40,7 +38,6 @@ class SummonImpAction extends SummonAction
             $this->life,
             $this->life,
             $this->melee,
-            UnitClassFactory::create($this->classId, $this->message),
             RaceFactory::create($this->raceId),
             $this->message
         );

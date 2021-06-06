@@ -194,9 +194,9 @@ class UnitFactory
             self::$units[$template]['life'],
             self::$units[$template]['total_life'],
             self::$units[$template]['melee'],
-            UnitClassFactory::create(self::$units[$template]['class']),
             RaceFactory::create(self::$units[$template]['race']),
-            $message ?? new Message()
+            $message ?? new Message(),
+            UnitClassFactory::create(self::$units[$template]['class'])
         );
     }
 
