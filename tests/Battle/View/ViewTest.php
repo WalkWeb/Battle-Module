@@ -77,7 +77,7 @@ class ViewTest extends TestCase
             <div class="unit_box2_right">
                 <div class="unit_box2_right2">
                     <div class="unit_box2_right3">
-                        <p><span class="unitcolor5">unit_1</span></p>
+                        <p><span style="color: #1e72e3">unit_1</span></p>
                     </div>
                 </div>
                 <div class="unit_effect_contant">
@@ -137,7 +137,7 @@ class ViewTest extends TestCase
             <div class="unit_box2_right">
                 <div class="unit_box2_right2">
                     <div class="unit_box2_right3">
-                        <p><span class="unitcolor5">unit_2</span></p>
+                        <p><span style="color: #1e72e3">unit_2</span></p>
                     </div>
                 </div>
                 <div class="unit_effect_contant">
@@ -226,7 +226,7 @@ EOT;
             <div class="unit_box2_right">
                 <div class="unit_box2_right2">
                     <div class="unit_box2_right3">
-                        <p><span class="unitcolor5">unit_5</span></p>
+                        <p><span style="color: #1e72e3">unit_5</span></p>
                     </div>
                 </div>
                 <div class="unit_effect_contant">
@@ -288,7 +288,7 @@ EOT;
             <div class="unit_box2_right">
                 <div class="unit_box2_right2">
                     <div class="unit_box2_right3">
-                        <p><span class="unitcolor5">unit_6</span></p>
+                        <p><span style="color: #1e72e3">unit_6</span></p>
                     </div>
                 </div>
                 <div class="unit_effect_contant">

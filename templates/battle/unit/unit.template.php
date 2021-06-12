@@ -51,7 +51,7 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
             <div class="unit_box2_right">
                 <div class="unit_box2_right2">
                     <div class="unit_box2_right3">
-                        <p><span class="unitcolor5"><?= $unit->getName() ?></span></p>
+                        <p><span style="color: <?= $unit->getRace()->getColor() ?>"><?= $unit->getName() ?></span></p>
                     </div>
                 </div>
                 <div class="unit_effect_contant">
