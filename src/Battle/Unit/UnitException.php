@@ -29,4 +29,5 @@ class UnitException extends Exception
     public const INCORRECT_CLASS              = 'Incorrect class, it empty, null or type int';
     public const INCORRECT_RACE               = 'Incorrect race, it required and type int';
     public const DOUBLE_UNIT_ID               = 'Double unit ID: collection have unit with specified id';
+    public const INCORRECT_COMMAND            = 'Incorrect unit command. It required int 1 or 2';
 }

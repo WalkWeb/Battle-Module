@@ -32,6 +32,7 @@ class UnitFactory
      *     'life'         => 80,
      *     'total_life'   => 80,
      *     'melee'        => true,
+     *     'command'      => 1,
      *     'class'        => 1,
      *     'race'         => 1,
      * ]
@@ -53,6 +54,7 @@ class UnitFactory
         self::existAndInt($data, 'total_life', UnitException::INCORRECT_TOTAL_LIFE);
         self::existAndInt($data, 'level', UnitException::INCORRECT_LEVEL);
         self::existAndInt($data, 'race', UnitException::INCORRECT_RACE);
+        self::existAndInt($data, 'command', UnitException::INCORRECT_COMMAND);
         self::intMinMaxValue($data['damage'], UnitInterface::MIN_DAMAGE, UnitInterface::MAX_DAMAGE, UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE);
         self::intMinMaxValue($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
         self::intMinMaxValue($data['total_life'], UnitInterface::MIN_TOTAL_LIFE, UnitInterface::MAX_TOTAL_LIFE, UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE);
@@ -88,6 +90,7 @@ class UnitFactory
             $data['life'],
             $data['total_life'],
             $data['melee'],
+            $data['command'],
             RaceFactory::create($data['race']),
             $message,
             self::getClass($data, $message)

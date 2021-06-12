@@ -66,6 +66,7 @@ class CommandHealTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 1,
+                        'command'      => 1,
                     ],
                     // Самый битый юнит - именно он должен выбираться для лечения
                     [
@@ -80,6 +81,7 @@ class CommandHealTest extends TestCase
                         'melee'        => false,
                         'class'        => 1,
                         'race'         => 1,
+                        'command'      => 1,
                     ],
                     [
                         'id'           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
@@ -93,6 +95,7 @@ class CommandHealTest extends TestCase
                         'melee'        => false,
                         'class'        => 2,
                         'race'         => 1,
+                        'command'      => 1,
                     ],
                     // Мертвый юнит - он выбираться не должен
                     [
@@ -107,6 +110,7 @@ class CommandHealTest extends TestCase
                         'melee'        => false,
                         'class'        => 2,
                         'race'         => 1,
+                        'command'      => 1,
                     ],
                 ],
                 'fb8be211-0782-4c60-8865-68b177ffbe0c',

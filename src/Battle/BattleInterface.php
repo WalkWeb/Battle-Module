@@ -8,8 +8,8 @@ use Battle\Translation\Translation;
 interface BattleInterface
 {
     public const COMMAND_PARAMETER = 'command';
-    public const LEFT_COMMAND      = 'left';
-    public const RIGHT_COMMAND     = 'right';
+    public const LEFT_COMMAND      = 1;
+    public const RIGHT_COMMAND     = 2;
 
     /**
      * Обрабатывает бой, возвращая результат выполнения

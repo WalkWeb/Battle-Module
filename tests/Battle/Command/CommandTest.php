@@ -250,6 +250,7 @@ class CommandTest extends TestCase
             110,
             110,
             true,
+            1,
             RaceFactory::create(1),
             $message
         );
@@ -264,6 +265,7 @@ class CommandTest extends TestCase
             95,
             95,
             false,
+            1,
             RaceFactory::create(1),
             $message
         );
@@ -278,6 +280,7 @@ class CommandTest extends TestCase
             300,
             300,
             true,
+            1,
             RaceFactory::create(1),
             $message
         );

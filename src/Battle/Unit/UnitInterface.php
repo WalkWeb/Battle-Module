@@ -210,4 +210,13 @@ interface UnitInterface
      * @return string
      */
     public function getIcon(): string;
+
+    /**
+     * Возвращает номер команды: 1 - левая команда, 2 - правая команда
+     *
+     * Этот параметр необходим, для корректного отображения анимации в бою
+     *
+     * @return int
+     */
+    public function getCommand(): int;
 }

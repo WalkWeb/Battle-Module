@@ -109,6 +109,7 @@ class CommandFactoryTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 8,
+                        'command'      => 1,
                     ],
                     [
                         'id'           => 'fb8be211-0782-4c60-8865-68b177ffbe0c',
@@ -122,6 +123,7 @@ class CommandFactoryTest extends TestCase
                         'melee'        => false,
                         'class'        => 2,
                         'race'         => 8,
+                        'command'      => 1,
                     ],
                 ],
             ],

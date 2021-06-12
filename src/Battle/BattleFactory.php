@@ -32,8 +32,9 @@ class BattleFactory
      *         'life'         => 110,
      *         'total_life'   => 110,
      *         'melee'        => true,
+     *         'command'      => 1,
      *         'class'        => 1,
-     *         'command'      => 'left',
+     *         'race'         => 1,
      *     ],
      *     [
      *         'id'           => '3bc9b8be-8cbd-44b4-a935-cd435d905d2b',
@@ -44,8 +45,9 @@ class BattleFactory
      *         'life'         => 165,
      *         'total_life'   => 165,
      *         'melee'        => true,
+     *         'command'      => 2,
      *         'class'        => 1,
-     *         'command'      => 'right',
+     *         'race'         => 8,
      *     ],
      * ];
      *
@@ -92,14 +94,14 @@ class BattleFactory
      * Create (left or right) command based on $data
      *
      * @param array $data
-     * @param string $command
+     * @param $command
      * @param Message|null $message
      * @return CommandInterface
      * @throws BattleException
      * @throws CommandException
      * @throws UnitException
      */
-    public static function createCommand(array $data, string $command, ?Message $message = null): CommandInterface
+    public static function createCommand(array $data, $command, ?Message $message = null): CommandInterface
     {
         $message = $message ?? new Message();
         $commandData = [];

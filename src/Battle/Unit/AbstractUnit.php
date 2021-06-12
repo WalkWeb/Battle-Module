@@ -62,6 +62,11 @@ abstract class AbstractUnit implements UnitInterface
     protected $melee;
 
     /**
+     * @var int - Номер команды: 1 - левая команда, 2 - правая команда
+     */
+    protected $command;
+
+    /**
      * @var int - Концентрация
      */
     protected $concentration = 0;
@@ -86,6 +91,22 @@ abstract class AbstractUnit implements UnitInterface
      */
     protected $message;
 
+    /**
+     * @param string $id
+     * @param string $name
+     * @param int $level
+     * @param string $avatar
+     * @param int $damage
+     * @param float $attackSpeed
+     * @param int $life
+     * @param int $totalLife
+     * @param bool $melee
+     * @param int $command
+     * @param RaceInterface $race
+     * @param Message $message
+     * @param UnitClassInterface|null $class
+     * @throws UnitException
+     */
     public function __construct(
         string $id,
         string $name,
@@ -96,11 +117,13 @@ abstract class AbstractUnit implements UnitInterface
         int $life,
         int $totalLife,
         bool $melee,
+        int $command,
         RaceInterface $race,
         Message $message,
         ?UnitClassInterface $class = null
     )
     {
+        $this->validateCommand($command);
         $this->id = $id;
         $this->name = $name;
         $this->level = $level;
@@ -110,6 +133,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->life = $life;
         $this->totalLife = $totalLife;
         $this->melee = $melee;
+        $this->command = $command;
         $this->race = $race;
         $this->message = $message;
         $this->class = $class;
@@ -180,6 +204,11 @@ abstract class AbstractUnit implements UnitInterface
         return $this->concentration;
     }
 
+    public function getCommand(): int
+    {
+        return $this->command;
+    }
+
     public function getRage(): int
     {
         return $this->rage;
@@ -239,5 +268,19 @@ abstract class AbstractUnit implements UnitInterface
     public function upMaxConcentration(): void
     {
         $this->concentration = self::MAX_CONS;
+    }
+
+
+    /**
+     * Проверяет корректность номера активной команды - может иметь значение только 1 или 2
+     *
+     * @param int $command
+     * @throws UnitException
+     */
+    private function validateCommand(int $command): void
+    {
+        if ($command !== 1 && $command !== 2) {
+            throw new UnitException(UnitException::INCORRECT_COMMAND);
+        }
     }
 }

@@ -41,12 +41,12 @@ class BattleFactoryTest extends TestCase
      * @dataProvider successLeftCommandDataProvider
      * @param array $data
      * @param array $expectedData
-     * @param string $command
+     * @param int $command
      * @throws BattleException
      * @throws CommandException
      * @throws UnitException
      */
-    public function testBattleFactoryCreateCommandSuccess(array $data, array $expectedData, string $command): void
+    public function testBattleFactoryCreateCommandSuccess(array $data, array $expectedData, int $command): void
     {
         $command = BattleFactory::createCommand($data, $command);
         $expectCommand = CommandFactory::create($expectedData);
@@ -86,7 +86,7 @@ class BattleFactoryTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 1,
-                        'command'      => 'left',
+                        'command'      => 1,
                     ],
                     [
                         'id'           => '3132614f-e8de-4cc1-a562-31cd29459c33',
@@ -100,7 +100,7 @@ class BattleFactoryTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 8,
-                        'command'      => 'right',
+                        'command'      => 2,
                     ],
                 ],
             ],
@@ -129,7 +129,7 @@ class BattleFactoryTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 8,
-                        'command'      => 'left',
+                        'command'      => 1,
                     ],
                 ],
                 // Какая команда должна получиться
@@ -146,7 +146,7 @@ class BattleFactoryTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 8,
-                        'command'      => 'left',
+                        'command'      => 1,
                     ],
                 ],
                 BattleInterface::LEFT_COMMAND,
@@ -167,7 +167,7 @@ class BattleFactoryTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 8,
-                        'command'      => 'left',
+                        'command'      => 1,
                     ],
                     [
                         'id'           => 'c11d1ac0-5c39-4bf8-bc5f-7d8fdadc7ec3',
@@ -181,7 +181,7 @@ class BattleFactoryTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 1,
-                        'command'      => 'right',
+                        'command'      => 2,
                     ],
                 ],
                 // Какая команда должна получиться
@@ -198,7 +198,7 @@ class BattleFactoryTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 8,
-                        'command'      => 'left',
+                        'command'      => 1,
                     ],
                 ],
                 BattleInterface::LEFT_COMMAND,
@@ -219,7 +219,7 @@ class BattleFactoryTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 8,
-                        'command'      => 'left',
+                        'command'      => 1,
                     ],
                     [
                         'id'           => '99d77ca0-7a8f-47d0-bacc-e297331d89c8',
@@ -233,7 +233,7 @@ class BattleFactoryTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 1,
-                        'command'      => 'right',
+                        'command'      => 2,
                     ],
                 ],
                 // Какая команда должна получиться
@@ -250,7 +250,7 @@ class BattleFactoryTest extends TestCase
                         'melee'        => true,
                         'class'        => 1,
                         'race'         => 1,
-                        'command'      => 'right',
+                        'command'      => 2,
                     ],
                 ],
                 BattleInterface::RIGHT_COMMAND,

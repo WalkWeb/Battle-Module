@@ -55,6 +55,7 @@ class CommandFactory
             'melee'        => true,
             'class'        => 1,
             'race'         => 1,
+            'command'      => 1,
         ];
 
         $i = 0;

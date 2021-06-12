@@ -62,7 +62,7 @@ class BattleTest extends TestCase
                 'melee'        => true,
                 'class'        => 1,
                 'race'         => 1,
-                'command'      => 'left',
+                'command'      => 1,
             ],
             [
                 'id'           => '9dce83f3-2720-43c1-bf2b-0fb7dcacae53',
@@ -76,7 +76,7 @@ class BattleTest extends TestCase
                 'melee'        => true,
                 'class'        => 1,
                 'race'         => 8,
-                'command'      => 'right',
+                'command'      => 2,
             ],
         ];
 
@@ -108,7 +108,7 @@ class BattleTest extends TestCase
                 'melee'        => true,
                 'class'        => 1,
                 'race'         => 1,
-                'command'      => 'left',
+                'command'      => 1,
             ],
             [
                 'id'           => 'a2763c19-7ec5-48f3-9242-2ea6c6d80c56',
@@ -122,7 +122,7 @@ class BattleTest extends TestCase
                 'melee'        => true,
                 'class'        => 1,
                 'race'         => 8,
-                'command'      => 'right',
+                'command'      => 2,
             ],
         ];
 

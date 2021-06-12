@@ -18,7 +18,7 @@ $data = [
         'melee'        => true,
         'class'        => 1,
         'race'         => 1,
-        'command'      => 'left',
+        'command'      => 1,
     ],
     [
         'id'           => '9ec07b22-7176-434c-a5d8-05f6adee4486',
@@ -32,7 +32,7 @@ $data = [
         'melee'        => false,
         'class'        => 2,
         'race'         => 1,
-        'command'      => 'left',
+        'command'      => 1,
     ],
     [
         'id'           => 'bf75c4a3-b866-4787-88c7-8db57daf3d64',
@@ -46,7 +46,7 @@ $data = [
         'melee'        => true,
         'class'        => null,
         'race'         => 8,
-        'command'      => 'right',
+        'command'      => 2,
     ],
     [
         'id'           => '54656319-f841-4ba5-8c71-e67c5afdd3e9',
@@ -60,7 +60,7 @@ $data = [
         'melee'        => false,
         'class'        => 4,
         'race'         => 8,
-        'command'      => 'right',
+        'command'      => 2,
     ],
 ];
 

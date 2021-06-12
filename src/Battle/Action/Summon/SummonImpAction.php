@@ -38,6 +38,7 @@ class SummonImpAction extends SummonAction
             $this->life,
             $this->life,
             $this->melee,
+            $this->actionUnit->getCommand(),
             RaceFactory::create($this->raceId),
             $this->message
         );
