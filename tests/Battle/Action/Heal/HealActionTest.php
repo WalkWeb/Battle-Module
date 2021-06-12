@@ -26,7 +26,7 @@ class HealActionTest extends TestCase
      * @throws UnitException
      * @throws Exception
      */
-    public function testHealAction(): void
+    public function testHealActionRealistic(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $alliesUnit = UnitFactory::createByTemplate(5);
@@ -58,6 +58,35 @@ class HealActionTest extends TestCase
 
         // Проверяем, что оба юнита стали здоровы
         self::assertTrue($unit->getLife() === $unit->getTotalLife() && $alliesUnit->getLife() === $alliesUnit->getTotalLife());
+    }
+
+    /**
+     * Более простой вариант теста, без нанесения урона
+     *
+     * @throws Exception
+     */
+    public function testHealActionSimple(): void
+    {
+        $actionUnit = UnitFactory::createByTemplate(5);
+        $woundedUnit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $actionCommand = CommandFactory::create([$actionUnit, $woundedUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Накапливаем концентрацию
+        for ($i = 0; $i < 10; $i++) {
+            $actionCommand->newRound();
+        }
+
+        // Применяем лечение
+        $actions = $actionUnit->getAction($enemyCommand, $actionCommand);
+
+        foreach ($actions as $action) {
+            $action->handle();
+        }
+
+        // Проверяем лечение
+        self::assertEquals(1 + $actionUnit->getDamage() * 3, $woundedUnit->getLife());
     }
 
     /**
