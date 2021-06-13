@@ -8,6 +8,7 @@ use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Result\Scenario\Scenario;
 use Battle\Round\RoundException;
 use Battle\Round\Round;
 use Battle\Statistic\Statistic;
@@ -36,7 +37,7 @@ class RoundTest extends TestCase
         // Юниты делают по одному ходу, соответственно следующий, после раунда, ход будет 3
         $nextNumberStroke = 3;
 
-        $round = new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new FullLog(), new Chat());
+        $round = new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new FullLog(), new Chat(), new Scenario());
         self::assertEquals($round->handle(), $nextCommand);
         self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }
@@ -63,7 +64,7 @@ class RoundTest extends TestCase
         // В этом раунде походит только юнит из правой команды, соответственно счетчик увеличится только на 1
         $nextNumberStroke = 2;
 
-        $round = new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new FullLog(), new Chat());
+        $round = new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new FullLog(), new Chat(), new Scenario());
         self::assertEquals($round->handle(), $nextCommand);
         self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }
@@ -85,7 +86,7 @@ class RoundTest extends TestCase
 
         $this->expectException(RoundException::class);
         $this->expectExceptionMessage(RoundException::INCORRECT_START_COMMAND);
-        new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new FullLog(), new Chat());
+        new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new FullLog(), new Chat(), new Scenario());
     }
 
     /**
@@ -96,7 +97,7 @@ class RoundTest extends TestCase
         $leftCommand = TestCommandFactory::createVeryBigCommand();
         $rightCommand = TestCommandFactory::createVeryBigCommand();
 
-        $round = new Round($leftCommand, $rightCommand, 1, new Statistic(), new FullLog(), new Chat());
+        $round = new Round($leftCommand, $rightCommand, 1, new Statistic(), new FullLog(), new Chat(), new Scenario());
 
         $this->expectException(RoundException::class);
         $this->expectExceptionMessage(RoundException::UNEXPECTED_ENDING);

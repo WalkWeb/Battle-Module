@@ -7,6 +7,7 @@ namespace Tests\Battle\Stroke;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandFactory;
+use Battle\Result\Scenario\Scenario;
 use Battle\Statistic\Statistic;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -30,7 +31,7 @@ class StrokeTest extends TestCase
 
         $chat = new Chat();
 
-        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), $chat);
+        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), $chat, new Scenario());
         $stroke->handle();
 
         self::assertEquals($rightUnit->getTotalLife() - $leftUnit->getDamage(), $rightUnit->getLife());
@@ -58,7 +59,7 @@ class StrokeTest extends TestCase
         $leftCommand = CommandFactory::create([$leftUnit]);
         $rightCommand = CommandFactory::create([$rightUnit]);
 
-        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat());
+        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat(), new Scenario());
 
         // Для теста достаточно того, что выполнение хода завершилось без ошибок
         $stroke->handle();

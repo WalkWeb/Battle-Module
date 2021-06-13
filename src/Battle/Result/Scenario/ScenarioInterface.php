@@ -16,37 +16,23 @@ use Battle\Action\ActionInterface;
 interface ScenarioInterface
 {
     /**
-     * Добавляет анимацию атаки
+     * Добавляет анимацию действия
      *
      * @param ActionInterface $action
      */
-    public function addDamage(ActionInterface $action): void;
+    public function addAction(ActionInterface $action): void;
 
     /**
-     * Добавляет анимацию лечения
-     *
-     * @param ActionInterface $action
-     */
-    public function addHeal(ActionInterface $action): void;
-
-    /**
-     * Добавляет анимацию пропуска хода
-     *
-     * @param ActionInterface $action
-     */
-    public function addWait(ActionInterface $action): void;
-
-    /**
-     * Возвращает сформированный js-сценарий анимации боя
+     * Возвращает js-сценарий анимации боя
      *
      * @return string
      */
-    public function getScenario(): string;
+    public function getJson(): string;
 
     /**
      * Возвращает сценарий в виде массива
      *
      * @return array
      */
-    public function getScenarioArray(): array;
+    public function getArray(): array;
 }

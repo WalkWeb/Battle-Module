@@ -7,32 +7,52 @@ namespace Battle\Result;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
+use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Statistic\Statistic;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationInterface;
 
 class Result implements ResultInterface
 {
-    /** @var CommandInterface */
+    /**
+     * @var CommandInterface
+     */
     private $leftCommand;
 
-    /** @var CommandInterface */
+    /**
+     * @var CommandInterface
+     */
     private $rightCommand;
 
-    /** @var int - Победившая команда: 1 - левая команда, 2 - правая команда */
+    /**
+     * @var int - Победившая команда: 1 - левая команда, 2 - правая команда
+     */
     private $winner;
 
-    /** @var FullLog */
+    /**
+     * @var FullLog
+     */
     private $fullLog;
 
-    /** @var Chat */
+    /**
+     * @var Chat
+     */
     private $chat;
 
-    /** @var Statistic */
+    /**
+     * @var Statistic
+     */
     private $statistic;
 
-    /** @var Translation */
+    /**
+     * @var Translation
+     */
     private $translation;
+
+    /**
+     * @var ScenarioInterface
+     */
+    private $scenario;
 
     /**
      * @param CommandInterface $leftCommand
@@ -42,6 +62,7 @@ class Result implements ResultInterface
      * @param Chat $chat
      * @param Statistic $statistic
      * @param Translation $translation
+     * @param ScenarioInterface $scenario
      * @throws ResultException
      */
     public function __construct(
@@ -50,6 +71,7 @@ class Result implements ResultInterface
         int $winner,
         FullLog $fullLog,
         Chat $chat,
+        ScenarioInterface $scenario,
         Statistic $statistic,
         Translation $translation
     )
@@ -65,6 +87,7 @@ class Result implements ResultInterface
         $this->chat = $chat;
         $this->statistic = $statistic;
         $this->translation = $translation;
+        $this->scenario = $scenario;
     }
 
     public function getLeftCommand(): CommandInterface
@@ -105,5 +128,10 @@ class Result implements ResultInterface
     public function getTranslation(): TranslationInterface
     {
         return $this->translation;
+    }
+
+    public function getScenario(): ScenarioInterface
+    {
+        return $this->scenario;
     }
 }

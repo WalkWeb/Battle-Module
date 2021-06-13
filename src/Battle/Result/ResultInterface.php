@@ -5,6 +5,7 @@ namespace Battle\Result;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
+use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Statistic\Statistic;
 use Battle\Translation\TranslationInterface;
 
@@ -68,4 +69,11 @@ interface ResultInterface
      * @return TranslationInterface
      */
     public function getTranslation(): TranslationInterface;
+
+    /**
+     * Возвращает js-скрипт для анимации боя. По сути выводит результат
+     *
+     * @return ScenarioInterface
+     */
+    public function getScenario(): ScenarioInterface;
 }

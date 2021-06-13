@@ -7,6 +7,7 @@ namespace Battle\Round;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
+use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Statistic\Statistic;
 use Battle\Stroke\StrokeFactory;
 use Battle\Translation\Translation;
@@ -24,9 +25,10 @@ class RoundFactory
      * @param Statistic $statistics
      * @param FullLog $fullLog
      * @param Chat $chat
+     * @param ScenarioInterface $scenario
      * @param bool|null $debug
-     * @param StrokeFactory|null $strokeFactory
      * @param Translation|null $translation
+     * @param StrokeFactory|null $strokeFactory
      * @return RoundInterface
      * @throws RoundException
      */
@@ -37,6 +39,7 @@ class RoundFactory
         Statistic $statistics,
         FullLog $fullLog,
         Chat $chat,
+        ScenarioInterface $scenario,
         ?bool $debug = false,
         ?Translation $translation = null,
         ?StrokeFactory $strokeFactory = null
@@ -49,6 +52,7 @@ class RoundFactory
             $statistics,
             $fullLog,
             $chat,
+            $scenario,
             $debug,
             $strokeFactory,
             $translation

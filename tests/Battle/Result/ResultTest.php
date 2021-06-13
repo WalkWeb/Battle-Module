@@ -6,6 +6,7 @@ namespace Tests\Battle\Result;
 
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
+use Battle\Result\Scenario\Scenario;
 use Battle\Statistic\Statistic;
 use Battle\Translation\Translation;
 use Exception;
@@ -24,8 +25,11 @@ class ResultTest extends TestCase
     {
         $leftCommand = CommandFactory::createLeftCommand();
         $rightCommand = CommandFactory::createRightCommand();
+        $chat = new Chat();
+        $translation = new Translation();
+        $scenario = new Scenario();
 
-        $result = new Result($leftCommand, $rightCommand, $winner = 2, new FullLog(), new Chat(), new Statistic(), new Translation());
+        $result = new Result($leftCommand, $rightCommand, $winner = 2, new FullLog(), $chat, $scenario, new Statistic(), $translation);
 
         self::assertInstanceOf(Result::class, $result);
         self::assertEquals($leftCommand, $result->getLeftCommand());
@@ -35,8 +39,9 @@ class ResultTest extends TestCase
         self::assertEquals(1, $result->getStatistic()->getRoundNumber());
         self::assertEquals(1, $result->getStatistic()->getStrokeNumber());
         self::assertCount(0, $result->getFullLog()->getLog());
-        self::assertEquals(new Chat(), $result->getChat());
-        self::assertEquals(new Translation(), $result->getTranslation());
+        self::assertEquals($chat, $result->getChat());
+        self::assertEquals($translation, $result->getTranslation());
+        self::assertEquals($scenario, $result->getScenario());
     }
 
     /**
@@ -49,6 +54,6 @@ class ResultTest extends TestCase
         $rightCommand = CommandFactory::createRightCommand();
 
         $this->expectException(ResultException::class);
-        new Result($leftCommand, $rightCommand, $winner = 3, new FullLog(), new Chat(), new Statistic(), new Translation());
+        new Result($leftCommand, $rightCommand, $winner = 3, new FullLog(), new Chat(), new Scenario(), new Statistic(), new Translation());
     }
 }

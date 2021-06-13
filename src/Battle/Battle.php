@@ -7,14 +7,17 @@ namespace Battle;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
+use Battle\Result\Scenario\Scenario;
+use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Round\RoundException;
 use Battle\Round\RoundFactory;
 use Battle\Statistic\Statistic;
 use Battle\Translation\Translation;
-use Exception;
+use Battle\Translation\TranslationInterface;
 use Battle\Result\ResultException;
 use Battle\Result\Result;
 use Battle\Result\ResultInterface;
+use Exception;
 
 class Battle implements BattleInterface
 {
@@ -48,6 +51,9 @@ class Battle implements BattleInterface
     /** @var Translation */
     private $translation;
 
+    /** @var ScenarioInterface */
+    private $scenario;
+
     /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
@@ -56,7 +62,8 @@ class Battle implements BattleInterface
      * @param Chat $chat
      * @param bool|null $debug
      * @param RoundFactory|null $roundFactory
-     * @param Translation|null $translation
+     * @param TranslationInterface|null $translation
+     * @param ScenarioInterface|null $scenario
      * @throws BattleException
      * @throws Exception
      */
@@ -68,7 +75,8 @@ class Battle implements BattleInterface
         Chat $chat,
         ?bool $debug = true,
         ?RoundFactory $roundFactory = null,
-        ?Translation $translation = null
+        ?TranslationInterface $translation = null,
+        ?ScenarioInterface $scenario = null
     )
     {
         $this->checkDoubleUnitId($leftCommand, $rightCommand);
@@ -81,6 +89,7 @@ class Battle implements BattleInterface
         $this->debug = $debug;
         $this->roundFactory = $roundFactory ?? new RoundFactory();
         $this->translation = $translation ?? new Translation();
+        $this->scenario = $scenario ?? new Scenario();
     }
 
     /**
@@ -103,6 +112,7 @@ class Battle implements BattleInterface
                 $this->statistics,
                 $this->fullLog,
                 $this->chat,
+                $this->scenario,
                 $this->debug,
                 $this->translation
             );
@@ -119,6 +129,7 @@ class Battle implements BattleInterface
                     $winner,
                     $this->fullLog,
                     $this->chat,
+                    $this->scenario,
                     $this->statistics,
                     $this->translation
                 );

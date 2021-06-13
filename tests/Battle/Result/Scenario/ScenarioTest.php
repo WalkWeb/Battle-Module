@@ -40,7 +40,7 @@ class ScenarioTest extends TestCase
         $action->handle();
 
         $scenario = new Scenario();
-        $scenario->addDamage($action);
+        $scenario->addAction($action);
 
         $expectedData = [
             'step'    => 1,
@@ -69,7 +69,7 @@ class ScenarioTest extends TestCase
             ],
         ];
 
-        self::assertEquals($expectedData, $scenario->getScenarioArray()[0]);
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
     }
 
     /**
@@ -100,7 +100,7 @@ class ScenarioTest extends TestCase
 
         foreach ($actions as $action) {
             $action->handle();
-            $scenario->addHeal($action);
+            $scenario->addAction($action);
         }
 
         // Проверяем лечение
@@ -127,7 +127,7 @@ class ScenarioTest extends TestCase
             ],
         ];
 
-        self::assertEquals($expectedData, $scenario->getScenarioArray()[0]);
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
     }
 
     /**
@@ -147,7 +147,7 @@ class ScenarioTest extends TestCase
 
         $scenario = new Scenario();
 
-        $scenario->addWait($action);
+        $scenario->addAction($action);
 
         $expectedData = [
             'step'    => 1,
@@ -155,7 +155,7 @@ class ScenarioTest extends TestCase
             'effects' => [],
         ];
 
-        self::assertEquals($expectedData, $scenario->getScenarioArray()[0]);
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
     }
 
     /**
@@ -164,6 +164,6 @@ class ScenarioTest extends TestCase
     public function testScenarioGetJson(): void
     {
         $scenario = new Scenario();
-        self::assertEquals('[]', $scenario->getScenario());
+        self::assertEquals('[]', $scenario->getJson());
     }
 }

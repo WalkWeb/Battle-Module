@@ -6,6 +6,7 @@ namespace Battle\Stroke;
 
 use Battle\Command\CommandInterface;
 use Battle\Result\Chat\Chat;
+use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Statistic\Statistic;
 use Battle\Result\FullLog\FullLog;
 use Battle\Statistic\StatisticException;
@@ -64,6 +65,11 @@ class Stroke implements StrokeInterface
     private $chat;
 
     /**
+     * @var ScenarioInterface
+     */
+    private $scenario;
+
+    /**
      * TODO На удаление? Или на расширение механики вывода результата?
      *
      * @var bool
@@ -83,6 +89,7 @@ class Stroke implements StrokeInterface
      * @param Statistic $statistics
      * @param FullLog $fullLog
      * @param Chat $chat
+     * @param ScenarioInterface $scenario
      * @param bool|null $debug
      * @param ViewFactory|null $viewFactory
      */
@@ -94,6 +101,7 @@ class Stroke implements StrokeInterface
         Statistic $statistics,
         FullLog $fullLog,
         Chat $chat,
+        ScenarioInterface $scenario,
         ?bool $debug = false,
         ?ViewFactory $viewFactory = null
     )
@@ -105,6 +113,7 @@ class Stroke implements StrokeInterface
         $this->statistics = $statistics;
         $this->fullLog = $fullLog;
         $this->chat = $chat;
+        $this->scenario = $scenario;
         $this->debug = $debug;
         $this->viewFactory = $viewFactory ?? new ViewFactory();
     }
@@ -131,6 +140,7 @@ class Stroke implements StrokeInterface
 
             $message = $action->handle();
             $this->statistics->addUnitAction($action);
+            $this->scenario->addAction($action);
             $this->fullLog->add('<p>' . $message . '</p>');
             $this->chat->add($message);
         }

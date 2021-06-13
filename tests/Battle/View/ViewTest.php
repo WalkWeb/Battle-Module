@@ -8,6 +8,7 @@ use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Result\Result;
+use Battle\Result\Scenario\Scenario;
 use Battle\Statistic\Statistic;
 use Battle\Translation\Translation;
 use Battle\View\ViewFactory;
@@ -341,7 +342,7 @@ EOT;
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
 
-        $result = new Result($leftCommand, $rightCommand, 1, new FullLog(), new Chat(), new Statistic(), new Translation());
+        $result = new Result($leftCommand, $rightCommand, 1, new FullLog(), new Chat(), new Scenario(), new Statistic(), new Translation());
         $view = (new ViewFactory)->create();
 
         // Из-за вывода статистики, и подсчета времени выполнения в статистике, мы никогда не сможем точно узнать

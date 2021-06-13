@@ -6,6 +6,7 @@ namespace Battle\Round;
 
 use Battle\Command\CommandInterface;
 use Battle\Result\Chat\Chat;
+use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Statistic\Statistic;
 use Battle\Result\FullLog\FullLog;
 use Battle\Stroke\StrokeFactory;
@@ -72,6 +73,11 @@ class Round implements RoundInterface
     private $chat;
 
     /**
+     * @var ScenarioInterface
+     */
+    private $scenario;
+
+    /**
      * TODO На удаление? Или на расширение механики вывода результата?
      *
      * @var bool
@@ -95,6 +101,7 @@ class Round implements RoundInterface
      * @param Statistic $statistics
      * @param FullLog $fullLog
      * @param Chat $chat
+     * @param ScenarioInterface $scenario
      * @param bool|null $debug
      * @param StrokeFactory|null $strokeFactory
      * @param Translation|null $translation
@@ -107,6 +114,7 @@ class Round implements RoundInterface
         Statistic $statistics,
         FullLog $fullLog,
         Chat $chat,
+        ScenarioInterface $scenario,
         ?bool $debug = false,
         ?StrokeFactory $strokeFactory = null,
         ?Translation $translation = null
@@ -119,6 +127,7 @@ class Round implements RoundInterface
         $this->statistics = $statistics;
         $this->fullLog = $fullLog;
         $this->chat = $chat;
+        $this->scenario = $scenario;
         $this->debug = $debug;
         $this->strokeFactory = $strokeFactory ?? new StrokeFactory();
         $this->translation = $translation ?? new Translation();
@@ -154,6 +163,7 @@ class Round implements RoundInterface
                     $this->statistics,
                     $this->fullLog,
                     $this->chat,
+                    $this->scenario,
                     $this->debug
                 );
 

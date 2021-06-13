@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Battle\Result\Scenario;
 
 use Battle\Action\ActionInterface;
+use Battle\Action\Damage\DamageAction;
+use Battle\Action\Heal\HealAction;
+use Battle\Action\Other\WaitAction;
 use Battle\Unit\UnitInterface;
 use JsonException;
 
@@ -15,7 +18,22 @@ class Scenario implements ScenarioInterface
      */
     private $scenario = [];
 
-    public function addDamage(ActionInterface $action): void
+    public function addAction(ActionInterface $action): void
+    {
+        switch ($action) {
+            case $action instanceof DamageAction:
+                $this->addDamage($action);
+                break;
+            case $action instanceof HealAction:
+                $this->addHeal($action);
+                break;
+            case $action instanceof WaitAction:
+                $this->addWait();
+                break;
+        }
+    }
+    
+    private function addDamage(DamageAction $action): void
     {
         $this->scenario[] = [
             'step'    => 1, // todo round
@@ -45,7 +63,7 @@ class Scenario implements ScenarioInterface
         ];
     }
 
-    public function addHeal(ActionInterface $action): void
+    private function addHeal(HealAction $action): void
     {
         $this->scenario[] = [
             'step'    => 1, // todo round
@@ -69,7 +87,7 @@ class Scenario implements ScenarioInterface
         ];
     }
 
-    public function addWait(ActionInterface $action): void
+    private function addWait(): void
     {
         $this->scenario[] = [
             'step'    => 1, // todo round
@@ -82,15 +100,15 @@ class Scenario implements ScenarioInterface
      * @return string
      * @throws JsonException
      */
-    public function getScenario(): string
+    public function getJson(): string
     {
-        return json_encode($this->scenario, JSON_THROW_ON_ERROR);
+        return json_encode($this->scenario, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
     }
 
     /**
      * @return array
      */
-    public function getScenarioArray(): array
+    public function getArray(): array
     {
         return $this->scenario;
     }
