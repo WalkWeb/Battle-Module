@@ -32,32 +32,36 @@ class Scenario implements ScenarioInterface
                 break;
         }
     }
-    
+
     private function addDamage(DamageAction $action): void
     {
         $this->scenario[] = [
             'step'    => 1, // todo round
             'attack'  => 1, // todo stroke
             'effects' => [
-                'user_id'        => $action->getActionUnit()->getId(),
-                'class'          => $this->getAttackClass($action->getActionUnit()),
-                'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
-                'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
-                'unit_effects'   => $this->getUnitEffects(),
-                'targets'        => [
-                    'user_id'           => $action->getTargetUnit()->getId(),
-                    'class'             => 'd_red',
-                    'hp'                => $action->getTargetUnit()->getLife(),
-                    'thp'               => $action->getTargetUnit()->getTotalLife(),
-                    'hp_bar_class'      => 'unit_hp_bar',
-                    'hp_bar_class2'     => 'unit_hp_bar2',
-                    'recdam'            => '-' . $action->getFactualPower(),
-                    'unit_hp_bar_width' => $this->getLifeBarWidth($action->getTargetUnit()),
-                    'unit_cons_bar2'    => $this->getConcentrationBarWidth($action->getTargetUnit()),
-                    'unit_rage_bar2'    => $this->getRageBarWidth($action->getTargetUnit()),
-                    'ava'               => 'unit_ava_red',
-                    'avas'              => $this->getAvaClassTarget($action->getTargetUnit()),
-                    'unit_effects'      => $this->getUnitEffects(),
+                [
+                    'user_id'        => $action->getActionUnit()->getId(),
+                    'class'          => $this->getAttackClass($action->getActionUnit()),
+                    'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
+                    'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
+                    'unit_effects'   => $this->getUnitEffects(),
+                    'targets'        => [
+                        [
+                            'user_id'           => $action->getTargetUnit()->getId(),
+                            'class'             => 'd_red',
+                            'hp'                => $action->getTargetUnit()->getLife(),
+                            'thp'               => $action->getTargetUnit()->getTotalLife(),
+                            'hp_bar_class'      => 'unit_hp_bar',
+                            'hp_bar_class2'     => 'unit_hp_bar2',
+                            'recdam'            => '-' . $action->getFactualPower(),
+                            'unit_hp_bar_width' => $this->getLifeBarWidth($action->getTargetUnit()),
+                            'unit_cons_bar2'    => $this->getConcentrationBarWidth($action->getTargetUnit()),
+                            'unit_rage_bar2'    => $this->getRageBarWidth($action->getTargetUnit()),
+                            'ava'               => 'unit_ava_red',
+                            'avas'              => $this->getAvaClassTarget($action->getTargetUnit()),
+                            'unit_effects'      => $this->getUnitEffects(),
+                        ],
+                    ],
                 ],
             ],
         ];
@@ -69,19 +73,23 @@ class Scenario implements ScenarioInterface
             'step'    => 1, // todo round
             'attack'  => 1, // todo stroke
             'effects' => [
-                'user_id'        => $action->getActionUnit()->getId(),
-                'class'          => 'd_buff',
-                'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
-                'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
-                'targets'        => [
-                    'user_id'           => $action->getTargetUnit()->getId(),
-                    'ava'               => 'unit_ava_green',
-                    'recdam'            => '+' . $action->getFactualPower(),
-                    'hp'                => $action->getTargetUnit()->getLife(),
-                    'thp'               => $action->getTargetUnit()->getTotalLife(),
-                    'hp_bar_class'      => 'unit_hp_bar',
-                    'hp_bar_class2'     => 'unit_hp_bar2',
-                    'unit_hp_bar_width' => $this->getLifeBarWidth($action->getTargetUnit()),
+                [
+                    'user_id'        => $action->getActionUnit()->getId(),
+                    'class'          => 'd_buff',
+                    'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
+                    'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
+                    'targets'        => [
+                        [
+                            'user_id'           => $action->getTargetUnit()->getId(),
+                            'ava'               => 'unit_ava_green',
+                            'recdam'            => '+' . $action->getFactualPower(),
+                            'hp'                => $action->getTargetUnit()->getLife(),
+                            'thp'               => $action->getTargetUnit()->getTotalLife(),
+                            'hp_bar_class'      => 'unit_hp_bar',
+                            'hp_bar_class2'     => 'unit_hp_bar2',
+                            'unit_hp_bar_width' => $this->getLifeBarWidth($action->getTargetUnit()),
+                        ],
+                    ],
                 ],
             ],
         ];

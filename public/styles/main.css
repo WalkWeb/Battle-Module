@@ -6,7 +6,8 @@
 body {
     font-family: Verdana, sans-serif;
     background: #151515;
-    color: #999;
+    /*color: #999;*/
+    color: #796252;
 }
 
 hr {
@@ -16,14 +17,12 @@ hr {
     height: 1px;
 }
 
-p, h1, h2 {
-    font-family: Verdana, sans-serif;
+.ptitle {
+    font-family: Times New Roman, sans-serif;
+    font-size: 25px;
+    color: #b9b982;
+    padding: 40px 20px 20px 20px;
     text-align: center;
-    color: #999;
-}
-
-p {
-    padding: 4px;
 }
 
 table {
@@ -109,10 +108,6 @@ div.life_text {
     width: 280px;
     height: 117px;
     text-align: left;
-}
-
-.unit_main_box p {
-    text-align: left; !important;
 }
 
 .unit_box1 {
@@ -232,6 +227,7 @@ div.life_text {
     font-family: arial, sans-serif;
     font-size: 17px;
     color: #c1c1c1;
+    text-align: left;
 }
 
 .unit_box2_left {
@@ -320,44 +316,6 @@ div.life_text {
     border-radius: 100%;
 }
 
-
-/* цвет людей */
-.unitcolor1 {
-    color: #1e72e3;
-}
-
-/* цвет эльфов */
-.unitcolor2 {
-    color: #2f8528;
-}
-
-/* цвет орков */
-.unitcolor3 {
-    color: #ae882d;
-}
-
-/* цвет гномов */
-.unitcolor4 {
-    color: #408cb3;
-}
-
-/* цвет ангелов */
-.unitcolor5 {
-    color: #2f9b5a;
-}
-
-/* цвет демонов */
-.unitcolor6 {
-    color: #ba4829;
-}
-
-/* цвет нежити */
-.unitcolor7 {
-    color: #953b39;
-}
-
-/* Unit box styles end */
-
 /* Table statistics styles */
 
 div.statistics_box {
@@ -419,9 +377,30 @@ p.left {
     text-align: left;
 }
 
-/* Table statistics styles end */
+/* Chat */
 
-/* Стили для чата в бою */
+.com_container {
+    width: 96%;
+    height: 175px;
+    position: relative;
+    overflow: hidden;
+    margin: 60px auto 60px auto;
+    border: 1px solid #333;
+    border-radius: 2px;
+}
+
+.com_container p {
+    padding: 0 10px 5px 10px;
+}
+
+.com_container .com_content {
+    width: 100%;
+    max-height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+}
 
 p.none {
     display: none;
@@ -430,4 +409,301 @@ p.none {
 p.view {
     display: block;
     font-size: 110%;
+}
+
+/* Animated box */
+
+.d_red {
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+.d_green {
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+.d_grey {
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+
+.d_attack {
+    animation: attack 500ms infinite linear;
+    animation-direction: alternate;
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+
+.d_attack_s2 {
+    animation: attack_s2 500ms infinite linear;
+    animation-direction: alternate;
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+
+.d_buff {
+    position: relative;
+    animation: buff 500ms infinite linear;
+    animation-direction: alternate;
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+
+.d_debuff {
+    animation: animation_debuff 500ms infinite linear;
+    animation-direction: alternate;
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+
+.d_debuff_s2 {
+    animation: animation_debuff_s2 500ms infinite linear;
+    animation-direction: alternate;
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+
+.unit_ava_red {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    animation: ava_red 500ms infinite linear;
+    animation-direction: normal;
+}
+
+.unit_ava_effect_damage {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    animation: ava_ed 500ms infinite linear;
+    animation-direction: normal;
+}
+
+.unit_ava_green {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    animation: ava_green 500ms infinite linear;
+    animation-direction: normal;
+}
+
+.unit_ava_orange {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    animation: ava_orange 500ms infinite linear;
+    animation-direction: normal;
+}
+
+.d_evasion {
+    position: relative;
+    animation: evasion 500ms infinite linear;
+    animation-direction: alternate;
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+
+.d_evasion_s2 {
+    position: relative;
+    animation: evasion_s2 500ms infinite linear;
+    animation-direction: alternate;
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+
+.d_block {
+    position: relative;
+    animation: block 1000ms infinite linear;
+    width: 280px;
+    height: 117px;
+    text-align: left;
+}
+
+/* Animation */
+
+@keyframes attack {
+    0% {margin-left: 0;}
+    40% {margin-left: -10px;}
+    100% {margin-left: 30px;}
+}
+
+@keyframes attack_s2 {
+    0% {margin-right: 0;}
+    40% {margin-right: -10px;}
+    100% {margin-right: 30px;}
+}
+
+@keyframes buff {
+    0% {top: 0;}
+    40% {top: 5px;}
+    100% {top: -10px;}
+}
+
+@keyframes animation_debuff {
+    0% {margin-left: 0;}
+    100% {margin-left: 20px;}
+}
+
+@keyframes animation_debuff_s2 {
+    0% {margin-left: 0;}
+    100% {margin-left: -20px;}
+}
+
+@keyframes ava_red {
+    0% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        -moz-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+    }
+    10% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        -moz-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+    }
+    20% {
+        -webkit-box-shadow: inset 0 0 50px 10px rgba(230,18,29,1);
+        -moz-box-shadow: inset 0 0 50px 10px rgba(230,18,29,1);
+        box-shadow: inset 0 0 50px 10px rgba(230,18,29,1);
+    }
+    30% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        -moz-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+    }
+    100% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        -moz-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+    }
+}
+
+@keyframes ava_green {
+    0% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(18,130,29,1);
+        -moz-box-shadow: inset 0 0 0 0 rgba(18,130,29,1);
+        box-shadow: inset 0 0 0 0 rgba(18,130,29,1);
+    }
+    50% {
+        -webkit-box-shadow: inset 0 0 50px 10px rgba(18,130,29,1);
+        -moz-box-shadow: inset 0 0 50px 10px rgba(18,130,29,1);
+        box-shadow: inset 0 0 50px 10px rgba(18,130,29,1);
+    }
+    100% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(18,130,29,1);
+        -moz-box-shadow: inset 0 0 0 0 rgba(18,130,29,1);
+        box-shadow: inset 0 0 0 0 rgba(18,130,29,1);
+    }
+}
+
+@keyframes ava_orange {
+    0% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(219, 96, 47, 1);;
+        -moz-box-shadow: inset 0 0 0 0 rgba(219, 96, 47, 1);
+        box-shadow: inset 0 0 0 0 rgba(219, 96, 47,1);
+    }
+    10% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(219, 96, 47,1);
+        -moz-box-shadow: inset 0 0 0 0 rgba(219, 96, 47,1);
+        box-shadow: inset 0 0 0 0 rgba(219, 96, 47,1);
+    }
+    20% {
+        -webkit-box-shadow: inset 0 0 50px 10px rgba(219, 96, 47,1);
+        -moz-box-shadow: inset 0 0 50px 10px rgba(219, 96, 47,1);
+        box-shadow: inset 0 0 50px 10px rgba(219, 96, 47,1);
+    }
+    30% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(219, 96, 47,1);
+        -moz-box-shadow: inset 0 0 0 0 rgba(219, 96, 47,1);
+        box-shadow: inset 0 0 0 0 rgba(219, 96, 47,1);
+    }
+    100% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(219, 96, 47,1);
+        -moz-box-shadow: inset 0 0 0 0 rgba(219, 96, 47,1);
+        box-shadow: inset 0 0 0 0 rgba(219, 96, 47,1);
+    }
+}
+
+@keyframes ava_ed {
+    0% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        -moz-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+    }
+    50% {
+        -webkit-box-shadow: inset 0 0 50px 10px rgba(230,18,29,1);
+        -moz-box-shadow: inset 0 0 50px 10px rgba(230,18,29,1);
+        box-shadow: inset 0 0 50px 10px rgba(230,18,29,1);
+    }
+    100% {
+        -webkit-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        -moz-box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+        box-shadow: inset 0 0 0 0 rgba(230,18,29,1);
+    }
+}
+
+@keyframes evasion {
+    0% {left: 0; top: 0;}
+    70% {left: 0; top: 0;}
+    100% {left: 20px; top: 20px;}
+}
+
+@keyframes evasion_s2 {
+    0% {left: 0; top: 0;}
+    70% {left: 0; top: 0;}
+    100% {left: -20px; top: 20px;}
+}
+
+@keyframes block {
+    0% {top: 0;}
+    50% {top: 0;}
+    55% {top: 6px;}
+    65% {top: -6px;}
+    70%  {top: 0;}
+    100%  {top: 0;}
+}
+
+/* Кнопка для отображения полного лога боя */
+
+.spoiler_button {
+    padding: 25px 0;
+    margin: 0 auto;
+    width: 250px;
+    border-radius: 1px;
+    text-align: center;
+    font-family: arial, sans-serif;
+    font-size: 15px;
+    color: #9c6c47;
+    text-decoration: underline;
+}
+
+.spoiler_button:hover {
+    color: #ac8c47;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.spoiler_cont {
+    display: none;
+}
+
+.full_log p {
+    color: #999;
+    padding: 4px;
+    text-align: center;
+}
+
+.full_log h1 {
+    color: #999;
+    font-size: 25px;
+    padding: 40px 20px 20px 20px;
+    text-align: center;
 }

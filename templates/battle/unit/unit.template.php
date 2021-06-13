@@ -16,8 +16,8 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                     <div class="unit_box1_right3">
                         <div class="unit_box1_right4">
                             <div class="unit_hp">
-                                <div id="hp_bar_bg_40" class="unit_hp_bar">
-                                    <div id="hp_bar_40" class="unit_hp_bar2" style="width: <?= $this->getWidth($unit->getLife(), $unit->getTotalLife()) ?>%;"></div>
+                                <div id="hp_bar_bg_<?= $unit->getId() ?>" class="unit_hp_bar">
+                                    <div id="hp_bar_<?= $unit->getId() ?>" class="unit_hp_bar2" style="width: <?= $this->getWidth($unit->getLife(), $unit->getTotalLife()) ?>%;"></div>
                                 </div>
                                 <div class="unit_hp_text">
                                     <span class="hp"><?= $unit->getLife() ?></span> / <span class="thp"><?= $unit->getTotalLife() ?></span>
@@ -33,6 +33,14 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                             <div class="unit_rage">
                                 <div class="unit_rage_bar2" style="width: <?= $this->getWidth($unit->getRage(), UnitInterface::MAX_RAGE) ?>%;"></div>
                             </div>
+                            <?php else: ?>
+                            <!-- TODO Доработать js-скрипт таким образом, чтобы эти элементы не были обязательными -->
+                                <div class="unit_cons" style="display: none;">
+                                    <div class="unit_cons_bar2" style="width: 0;"></div>
+                                </div>
+                                <div class="unit_rage" style="display: none;">
+                                    <div class="unit_rage_bar2" style="width: 0;"></div>
+                                </div>
                             <?php endif ?>
                         </div>
                     </div>
@@ -41,8 +49,8 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
             <div class="unit_box1_left">
                 <div class="unit_box1_left2">
                     <div class="unit_ava" style="background: url(<?= $unit->getAvatar() ?>) no-repeat center; background-size: cover;">
-                        <div id="ava40" class="unit_ava_blank"></div>
-                        <div id="avas40" class="unit_ava_blank"></div>
+                        <div id="ava_<?= $unit->getId() ?>" class="unit_ava_blank"></div>
+                        <div id="avas_<?= $unit->getId() ?>" class="unit_ava_blank"></div>
                     </div>
                 </div>
             </div>
@@ -55,7 +63,7 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                     </div>
                 </div>
                 <div class="unit_effect_contant">
-                    <p id="unit_effects_40"></p>
+                    <p id="unit_effects_<?= $unit->getId() ?>"></p>
                 </div>
             </div>
             <div class="unit_box2_left">
