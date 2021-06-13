@@ -15,18 +15,32 @@ interface ResultInterface
     public const RIGHT_COMMAND_WIN = 'Right command win';
 
     /**
-     * Возвращает левую команду
+     * Возвращает левую команду с характеристиками на начало боя
      *
      * @return CommandInterface
      */
-    public function getLeftCommand(): CommandInterface;
+    public function getStartLeftCommand(): CommandInterface;
 
     /**
-     * Возвращает правую команду
+     * Возвращает правую команду с характеристиками на начало боя
      *
      * @return CommandInterface
      */
-    public function getRightCommand(): CommandInterface;
+    public function getStartRightCommand(): CommandInterface;
+
+    /**
+     * Возвращает левую команду с характеристиками на конец боя
+     *
+     * @return CommandInterface
+     */
+    public function getEndLeftCommand(): CommandInterface;
+
+    /**
+     * Возвращает правую команду с характеристиками на конец боя
+     *
+     * @return CommandInterface
+     */
+    public function getEndRightCommand(): CommandInterface;
 
     /**
      * Возвращает номер победившей команды: 1 - левая команда, 2 - правая команда

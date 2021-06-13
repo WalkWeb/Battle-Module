@@ -29,11 +29,13 @@ class ResultTest extends TestCase
         $translation = new Translation();
         $scenario = new Scenario();
 
-        $result = new Result($leftCommand, $rightCommand, $winner = 2, new FullLog(), $chat, $scenario, new Statistic(), $translation);
+        $result = new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 2, new FullLog(), $chat, $scenario, new Statistic(), $translation);
 
         self::assertInstanceOf(Result::class, $result);
-        self::assertEquals($leftCommand, $result->getLeftCommand());
-        self::assertEquals($rightCommand, $result->getRightCommand());
+        self::assertEquals($leftCommand, $result->getStartLeftCommand());
+        self::assertEquals($rightCommand, $result->getStartRightCommand());
+        self::assertEquals($leftCommand, $result->getEndLeftCommand());
+        self::assertEquals($rightCommand, $result->getEndRightCommand());
         self::assertEquals($winner, $result->getWinner());
         self::assertEquals(Result::RIGHT_COMMAND_WIN, $result->getWinnerText());
         self::assertEquals(1, $result->getStatistic()->getRoundNumber());
@@ -54,6 +56,6 @@ class ResultTest extends TestCase
         $rightCommand = CommandFactory::createRightCommand();
 
         $this->expectException(ResultException::class);
-        new Result($leftCommand, $rightCommand, $winner = 3, new FullLog(), new Chat(), new Scenario(), new Statistic(), new Translation());
+        new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 3, new FullLog(), new Chat(), new Scenario(), new Statistic(), new Translation());
     }
 }

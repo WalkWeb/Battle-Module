@@ -342,7 +342,7 @@ EOT;
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
 
-        $result = new Result($leftCommand, $rightCommand, 1, new FullLog(), new Chat(), new Scenario(), new Statistic(), new Translation());
+        $result = new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, 1, new FullLog(), new Chat(), new Scenario(), new Statistic(), new Translation());
         $view = (new ViewFactory)->create();
 
         // Из-за вывода статистики, и подсчета времени выполнения в статистике, мы никогда не сможем точно узнать

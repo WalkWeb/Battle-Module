@@ -17,12 +17,22 @@ class Result implements ResultInterface
     /**
      * @var CommandInterface
      */
-    private $leftCommand;
+    private $startLeftCommand;
 
     /**
      * @var CommandInterface
      */
-    private $rightCommand;
+    private $startRightCommand;
+
+    /**
+     * @var CommandInterface
+     */
+    private $endLeftCommand;
+
+    /**
+     * @var CommandInterface
+     */
+    private $endRightCommand;
 
     /**
      * @var int - Победившая команда: 1 - левая команда, 2 - правая команда
@@ -55,19 +65,23 @@ class Result implements ResultInterface
     private $scenario;
 
     /**
-     * @param CommandInterface $leftCommand
-     * @param CommandInterface $rightCommand
+     * @param CommandInterface $startLeftCommand
+     * @param CommandInterface $startRightCommand
+     * @param CommandInterface $endLeftCommand
+     * @param CommandInterface $endRightCommand
      * @param int $winner
      * @param FullLog $fullLog
      * @param Chat $chat
+     * @param ScenarioInterface $scenario
      * @param Statistic $statistic
      * @param Translation $translation
-     * @param ScenarioInterface $scenario
      * @throws ResultException
      */
     public function __construct(
-        CommandInterface $leftCommand,
-        CommandInterface $rightCommand,
+        CommandInterface $startLeftCommand,
+        CommandInterface $startRightCommand,
+        CommandInterface $endLeftCommand,
+        CommandInterface $endRightCommand,
         int $winner,
         FullLog $fullLog,
         Chat $chat,
@@ -81,8 +95,10 @@ class Result implements ResultInterface
         }
 
         $this->winner = $winner;
-        $this->leftCommand = $leftCommand;
-        $this->rightCommand = $rightCommand;
+        $this->startLeftCommand = $startLeftCommand;
+        $this->startRightCommand = $startRightCommand;
+        $this->endLeftCommand = $endLeftCommand;
+        $this->endRightCommand = $endRightCommand;
         $this->fullLog = $fullLog;
         $this->chat = $chat;
         $this->statistic = $statistic;
@@ -90,14 +106,24 @@ class Result implements ResultInterface
         $this->scenario = $scenario;
     }
 
-    public function getLeftCommand(): CommandInterface
+    public function getStartLeftCommand(): CommandInterface
     {
-        return $this->leftCommand;
+        return $this->startLeftCommand;
     }
 
-    public function getRightCommand(): CommandInterface
+    public function getStartRightCommand(): CommandInterface
     {
-        return $this->rightCommand;
+        return $this->startRightCommand;
+    }
+
+    public function getEndLeftCommand(): CommandInterface
+    {
+        return $this->endLeftCommand;
+    }
+
+    public function getEndRightCommand(): CommandInterface
+    {
+        return $this->endRightCommand;
     }
 
     public function getWinner(): int

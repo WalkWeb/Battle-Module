@@ -104,6 +104,9 @@ class Battle implements BattleInterface
     {
         $i = 0;
 
+        $startLeftCommand = clone $this->leftCommand;
+        $startRightCommand = clone $this->rightCommand;
+
         while ($i < $this->maxRound) {
             $round = $this->roundFactory->create(
                 $this->leftCommand,
@@ -124,6 +127,8 @@ class Battle implements BattleInterface
             if (!$this->leftCommand->isAlive() || !$this->rightCommand->isAlive()) {
                 $winner = !$this->leftCommand->isAlive() ? 2 : 1;
                 return new Result(
+                    $startLeftCommand,
+                    $startRightCommand,
                     $this->leftCommand,
                     $this->rightCommand,
                     $winner,
