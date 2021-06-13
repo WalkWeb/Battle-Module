@@ -92,4 +92,12 @@ interface CommandInterface
      * А также будут сделаны другие действия, соответствующие началу нового раунда
      */
     public function newRound(): void;
+
+    /**
+     * Клонирование команды должно также клонировать всех юнитов в команде
+     *
+     * @throws UnitException
+     * @return mixed
+     */
+    public function __clone();
 }

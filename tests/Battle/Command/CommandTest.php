@@ -5,12 +5,19 @@ declare(strict_types=1);
 namespace Tests\Battle\Command;
 
 use Battle\Action\Damage\DamageAction;
+use Battle\Battle;
 use Battle\BattleException;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
+use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
+use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\Message;
+use Battle\Result\FullLog\FullLog;
+use Battle\Result\ResultException;
+use Battle\Round\RoundException;
+use Battle\Statistic\Statistic;
 use Battle\Unit\Race\RaceException;
 use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\Unit;
@@ -317,5 +324,29 @@ class CommandTest extends TestCase
         $this->expectException(CommandException::class);
         $this->expectExceptionMessage(CommandException::UNEXPECTED_EVENT_NO_ACTION_UNIT);
         $command->getUnitForAction();
+    }
+
+    /**
+     * @throws BattleException
+     * @throws ResultException
+     * @throws RoundException
+     * @throws Exception
+     */
+    public function testCommandClone(): void
+    {
+        $leftCommand = TestCommandFactory::createLeftCommand();
+        $rightCommand = TestCommandFactory::createRightCommand();
+
+        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat());
+        $result = $battle->handle();
+
+        // Проверяем клонирование команд
+        foreach ($result->getStartLeftCommand()->getUnits() as $unit) {
+            self::assertEquals($unit->getLife(), $unit->getTotalLife());
+        }
+
+        foreach ($result->getStartRightCommand()->getUnits() as $unit) {
+            self::assertEquals($unit->getLife(), $unit->getTotalLife());
+        }
     }
 }

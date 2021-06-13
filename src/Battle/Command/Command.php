@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Command;
 
 use Battle\Unit\UnitCollection;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
 class Command implements CommandInterface
@@ -187,5 +188,20 @@ class Command implements CommandInterface
         foreach ($this->units as $unit) {
             $unit->newRound();
         }
+    }
+
+    /**
+     * @return mixed|void
+     * @throws UnitException
+     */
+    public function __clone()
+    {
+        $collection = new UnitCollection();
+
+        foreach ($this->getUnits() as $unit) {
+            $collection->add(clone $unit);
+        }
+
+        $this->units = $collection;
     }
 }
