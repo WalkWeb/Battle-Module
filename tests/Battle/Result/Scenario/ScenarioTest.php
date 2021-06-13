@@ -11,6 +11,7 @@ use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Result\Scenario\Scenario;
+use Battle\Statistic\Statistic;
 use Battle\Unit\UnitException;
 use Exception;
 use JsonException;
@@ -31,6 +32,7 @@ class ScenarioTest extends TestCase
      */
     public function testScenarioAddDamage(): void
     {
+        $statistic = new Statistic();
         $attackUnit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
         $attackCommand = CommandFactory::create([$attackUnit]);
@@ -40,11 +42,11 @@ class ScenarioTest extends TestCase
         $action->handle();
 
         $scenario = new Scenario();
-        $scenario->addAction($action);
+        $scenario->addAction($action, $statistic);
 
         $expectedData = [
-            'step'    => 1,
-            'attack'  => 1,
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
             'effects' => [
                 [
                     'user_id'        => $attackUnit->getId(),
@@ -87,6 +89,7 @@ class ScenarioTest extends TestCase
      */
     public function testScenarioAddHeal(): void
     {
+        $statistic = new Statistic();
         $scenario = new Scenario();
         $actionUnit = UnitFactory::createByTemplate(5);
         $woundedUnit = UnitFactory::createByTemplate(11);
@@ -104,15 +107,15 @@ class ScenarioTest extends TestCase
 
         foreach ($actions as $action) {
             $action->handle();
-            $scenario->addAction($action);
+            $scenario->addAction($action, $statistic);
         }
 
         // Проверяем лечение
         self::assertEquals(1 + $actionUnit->getDamage() * 3, $woundedUnit->getLife());
 
         $expectedData = [
-            'step'    => 1,
-            'attack'  => 1,
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
             'effects' => [
                 [
                     'user_id'        => $actionUnit->getId(),
@@ -145,6 +148,7 @@ class ScenarioTest extends TestCase
      */
     public function testScenarioAddWait(): void
     {
+        $statistic = new Statistic();
         $actionUnit = UnitFactory::createByTemplate(14);
         $enemyUnit = UnitFactory::createByTemplate(3);
 
@@ -155,11 +159,11 @@ class ScenarioTest extends TestCase
 
         $scenario = new Scenario();
 
-        $scenario->addAction($action);
+        $scenario->addAction($action, $statistic);
 
         $expectedData = [
-            'step'    => 1,
-            'attack'  => 1,
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
             'effects' => [],
         ];
 

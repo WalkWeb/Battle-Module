@@ -8,6 +8,7 @@ use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
 use Battle\Action\Other\WaitAction;
+use Battle\Statistic\StatisticInterface;
 use Battle\Unit\UnitInterface;
 use JsonException;
 
@@ -18,26 +19,26 @@ class Scenario implements ScenarioInterface
      */
     private $scenario = [];
 
-    public function addAction(ActionInterface $action): void
+    public function addAction(ActionInterface $action, StatisticInterface $statistic): void
     {
         switch ($action) {
             case $action instanceof DamageAction:
-                $this->addDamage($action);
+                $this->addDamage($action, $statistic);
                 break;
             case $action instanceof HealAction:
-                $this->addHeal($action);
+                $this->addHeal($action, $statistic);
                 break;
             case $action instanceof WaitAction:
-                $this->addWait();
+                $this->addWait($statistic);
                 break;
         }
     }
 
-    private function addDamage(DamageAction $action): void
+    private function addDamage(DamageAction $action, StatisticInterface $statistic): void
     {
         $this->scenario[] = [
-            'step'    => 1, // todo round
-            'attack'  => 1, // todo stroke
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
             'effects' => [
                 [
                     'user_id'        => $action->getActionUnit()->getId(),
@@ -67,11 +68,11 @@ class Scenario implements ScenarioInterface
         ];
     }
 
-    private function addHeal(HealAction $action): void
+    private function addHeal(HealAction $action, StatisticInterface $statistic): void
     {
         $this->scenario[] = [
-            'step'    => 1, // todo round
-            'attack'  => 1, // todo stroke
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
             'effects' => [
                 [
                     'user_id'        => $action->getActionUnit()->getId(),
@@ -95,11 +96,11 @@ class Scenario implements ScenarioInterface
         ];
     }
 
-    private function addWait(): void
+    private function addWait(StatisticInterface $statistic): void
     {
         $this->scenario[] = [
-            'step'    => 1, // todo round
-            'attack'  => 1, // todo stroke
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
             'effects' => [],
         ];
     }

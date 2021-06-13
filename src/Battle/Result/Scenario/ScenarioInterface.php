@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Result\Scenario;
 
 use Battle\Action\ActionInterface;
+use Battle\Statistic\StatisticInterface;
 
 /**
  * Для анимации боя на фронте используется js-сценарий.
@@ -19,8 +20,9 @@ interface ScenarioInterface
      * Добавляет анимацию действия
      *
      * @param ActionInterface $action
+     * @param StatisticInterface $statistic
      */
-    public function addAction(ActionInterface $action): void;
+    public function addAction(ActionInterface $action, StatisticInterface $statistic): void;
 
     /**
      * Возвращает js-сценарий анимации боя
