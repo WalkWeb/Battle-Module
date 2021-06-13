@@ -15,8 +15,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class HeavyStrikeActionTest extends TestCase
 {
-    private const HEAVY_STRIKE_MESSAGE_EN = '<b>unit_1</b> use Heavy Strike at <b>unit_2</b> on 50 damage';
-    private const HEAVY_STRIKE_MESSAGE_RU = '<b>unit_1</b> использовал Тяжелый Удар по <b>unit_2</b> на 50 урона';
+    private const HEAVY_STRIKE_MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use Heavy Strike at <span style="color: #1e72e3">unit_2</span> on 50 damage';
+    private const HEAVY_STRIKE_MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал Тяжелый Удар по <span style="color: #1e72e3">unit_2</span> на 50 урона';
 
     /**
      * @throws CommandException

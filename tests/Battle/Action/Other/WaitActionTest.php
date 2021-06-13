@@ -14,7 +14,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class WaitActionTest extends TestCase
 {
-    private const MESSAGE = '<b>unit_14</b> preparing to attack';
+    private const MESSAGE = '<span style="color: #1e72e3">unit_14</span> preparing to attack';
 
     /**
      * @throws CommandException

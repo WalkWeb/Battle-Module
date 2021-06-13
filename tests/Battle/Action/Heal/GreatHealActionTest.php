@@ -15,8 +15,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class GreatHealActionTest extends TestCase
 {
-    private const GREAT_HEAL_MESSAGE_EN = '<b>unit_5</b> use Great Heal and heal <b>wounded_unit</b> on 45 life';
-    private const GREAT_HEAL_MESSAGE_RU = '<b>unit_5</b> использовал Сильное Лечение и вылечил <b>wounded_unit</b> на 45 здоровья';
+    private const GREAT_HEAL_MESSAGE_EN = '<span style="color: #1e72e3">unit_5</span> use Great Heal and heal <span style="color: #1e72e3">wounded_unit</span> on 45 life';
+    private const GREAT_HEAL_MESSAGE_RU = '<span style="color: #1e72e3">unit_5</span> использовал Сильное Лечение и вылечил <span style="color: #1e72e3">wounded_unit</span> на 45 здоровья';
 
     /**
      * @throws CommandException

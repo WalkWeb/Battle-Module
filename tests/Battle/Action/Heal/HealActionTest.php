@@ -18,8 +18,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class HealActionTest extends TestCase
 {
-    private const MESSAGE           = '<b>unit_5</b> use Great Heal and heal <b>unit_1</b> on 15 life';
-    private const NO_TARGET_MESSAGE = '<b>unit_5</b> attack <b>unit_3</b> on 15 damage';
+    private const MESSAGE           = '<span style="color: #1e72e3">unit_5</span> use Great Heal and heal <span style="color: #1e72e3">unit_1</span> on 15 life';
+    private const NO_TARGET_MESSAGE = '<span style="color: #1e72e3">unit_5</span> attack <span style="color: #1e72e3">unit_3</span> on 15 damage';
 
     /**
      * @throws CommandException

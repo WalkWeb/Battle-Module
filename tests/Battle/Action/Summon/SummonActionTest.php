@@ -15,7 +15,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class SummonActionTest extends TestCase
 {
-    private const MESSAGE = '<b>unit_7</b> summon Imp';
+    private const MESSAGE = '<span style="color: #1e72e3">unit_7</span> summon Imp';
 
     /**
      * @throws CommandException

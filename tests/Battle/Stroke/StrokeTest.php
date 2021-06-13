@@ -16,6 +16,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class StrokeTest extends TestCase
 {
+    private const MESSAGE = '<p class="none"><span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage</p>';
+
     /**
      * Тест на базовую обработку одного хода
      *
@@ -40,7 +42,7 @@ class StrokeTest extends TestCase
         self::assertFalse($rightUnit->isAction());
 
         $chatResultMessages = [
-            '<p class="none"><b>unit_1</b> attack <b>unit_2</b> on 20 damage</p>'
+            self::MESSAGE,
         ];
 
         self::assertEquals($chatResultMessages, $chat->getMessages());

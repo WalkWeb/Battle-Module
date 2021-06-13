@@ -15,7 +15,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class DamageActionTest extends TestCase
 {
-    private const MESSAGE = '<b>unit_1</b> attack <b>unit_2</b> on 20 damage';
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
 
     /**
      * @throws Exception

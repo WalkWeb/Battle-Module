@@ -33,11 +33,12 @@ class Message
      */
     public function damage(DamageAction $action): string
     {
-        return '<b>' .
-            $action->getActionUnit()->getName() . '</b> ' .
-            $this->translation->trans( $action->getNameAction()) . ' <b>' .
+        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+            $action->getActionUnit()->getName() . '</span> ' .
+            $this->translation->trans( $action->getNameAction()) .
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() .
-            '</b> ' . $this->translation->trans('on') . ' ' .
+            '</span> ' . $this->translation->trans('on') . ' ' .
             $action->getFactualPower() . ' ' . $this->translation->trans('damage');
     }
 
@@ -48,11 +49,12 @@ class Message
      */
     public function heal(HealAction $action): string
     {
-        return '<b>' .
-            $action->getActionUnit()->getName() . '</b> ' .
-            $this->translation->trans($action->getNameAction()) . ' <b>' .
+        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+            $action->getActionUnit()->getName() . '</span> ' .
+            $this->translation->trans($action->getNameAction()) .
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() .
-            '</b> ' . $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' .
+            '</span> ' . $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' .
             $this->translation->trans('life');
     }
 
@@ -63,7 +65,8 @@ class Message
      */
     public function summon(SummonAction $action): string
     {
-        return '<b>' . $action->getActionUnit()->getName() . '</b> ' . $this->translation->trans($action->getNameAction());
+        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
     }
 
     /**
@@ -73,6 +76,7 @@ class Message
      */
     public function wait(WaitAction $action): string
     {
-        return '<b>' . $action->getActionUnit()->getName() . '</b> ' . $this->translation->trans($action->getNameAction());
+        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
     }
 }
