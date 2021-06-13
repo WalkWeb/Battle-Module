@@ -8,6 +8,8 @@ use Battle\Unit\UnitInterface;
 
 interface ActionInterface
 {
+    public const NO_HANDLE_MESSAGE = '';
+
     /**
      * Название метода в классе Unit, который будет обрабатывать данное событие
      *
@@ -40,6 +42,7 @@ interface ActionInterface
      * Возвращает юнита к которому применяется действие
      *
      * @return UnitInterface
+     * @throws ActionException
      */
     public function getTargetUnit(): UnitInterface;
 
@@ -68,4 +71,15 @@ interface ActionInterface
      * @return int
      */
     public function getFactualPower(): int;
+
+    /**
+     * Было ли действие успешно выполнено
+     *
+     * Данный метод необходим для таких ситуаций, когда, например, юнит хочет выполнить лечение, но целей для лечения
+     * нет - в этом случае, на основании isSuccessHandle() === false, берется базовая атака у юнита, и выполняется она,
+     * вместо лечения
+     *
+     * @return bool
+     */
+    public function isSuccessHandle(): bool;
 }

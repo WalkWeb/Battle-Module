@@ -425,7 +425,7 @@ p.none {
 
 p.view {
     display: block;
-    font-size: 110%;
+    font-size: 90%;
 }
 
 #comment::-webkit-scrollbar-track {

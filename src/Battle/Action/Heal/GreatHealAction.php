@@ -11,6 +11,6 @@ class GreatHealAction extends HealAction
     public function getPower(): int
     {
         // Лечение в 300% от силы удара юнита
-        return (int)($this->getActionUnit()->getDamage() * 3);
+        return $this->getActionUnit()->getDamage() * 3;
     }
 }

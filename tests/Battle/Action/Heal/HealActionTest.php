@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action\Heal;
 
+use Battle\Action\ActionException;
+use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\GreatHealAction;
 use Battle\Action\Heal\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
+use Battle\Result\Scenario\Scenario;
+use Battle\Statistic\Statistic;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -96,6 +100,8 @@ class HealActionTest extends TestCase
      */
     public function testNoTargetHealAction(): void
     {
+        $scenario = new Scenario();
+        $statistic = new Statistic();
         $message = '';
         $unit = UnitFactory::createByTemplate(1);
         $alliesUnit = UnitFactory::createByTemplate(5);
@@ -109,13 +115,24 @@ class HealActionTest extends TestCase
 
         self::assertEquals(UnitInterface::MAX_CONS, $alliesUnit->getConcentration());
 
-        // Лечить некого - получаем базовую атаку
+        // Получаем лечение, но лечить некого
         $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
         // Проверяем, что получили лечение
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
             $message = $action->handle();
+
+            // Проверяем, что лечение не применилось
+            self::assertFalse($action->isSuccessHandle());
+            self::assertEquals(ActionInterface::NO_HANDLE_MESSAGE, $message);
+
+            // В этом случае Stroke возьмет базовую атаку у юнита, и выполнит её
+            $action = $alliesUnit->getBaseAttack($enemyCommand, $alliesCommand);
+            $message = $action->handle();
+
+            // Проверяем, что $action успешно обрабатывается сценарием
+            $scenario->addAction($action, $statistic);
         }
 
         // Но так как все живы - применится урон, проверяем
@@ -131,6 +148,7 @@ class HealActionTest extends TestCase
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(DamageAction::class, [$action]);
             $action->handle();
+            $scenario->addAction($action, $statistic);
         }
 
         // Получаем действие еще раз
@@ -140,6 +158,7 @@ class HealActionTest extends TestCase
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
             $message = $action->handle();
+            $scenario->addAction($action, $statistic);
         }
 
         // Проверяем обнуленную концентрацию
@@ -169,5 +188,36 @@ class HealActionTest extends TestCase
 
         self::assertEquals((int)($unit->getDamage() * 1.2), $healAction->getPower());
         self::assertEquals($unit->getDamage() * 3, $greatHealAction->getPower());
+    }
+
+    /**
+     * Тест похож на testNoTargetHealAction(), но здесь проверяем полученное исключение
+     *
+     * @throws ActionException
+     * @throws CommandException
+     * @throws UnitException
+     */
+    public function testHealActionNoTargetException(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $alliesUnit = UnitFactory::createByTemplate(5);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $alliesCommand = CommandFactory::create([$unit, $alliesUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        for ($i = 0; $i < 10; $i++) {
+            $alliesUnit->newRound();
+        }
+
+        $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
+
+        foreach ($actionCollection as $action) {
+            self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
+            $action->handle();
+
+            $this->expectException(ActionException::class);
+            $this->expectExceptionMessage(ActionException::NO_TARGET_UNIT);
+            $action->getTargetUnit();
+        }
     }
 }

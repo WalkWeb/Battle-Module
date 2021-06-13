@@ -27,8 +27,8 @@ class HealAction extends AbstractAction
 
         if (!$this->targetUnit) {
             $this->actionUnit->upMaxConcentration();
-            $action = $this->actionUnit->getBaseAttack($this->enemyCommand, $this->alliesCommand);
-            return $action->handle();
+            // $action->successHandle = false
+            return self::NO_HANDLE_MESSAGE;
         }
 
         return $this->targetUnit->applyAction($this);

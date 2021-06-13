@@ -10,23 +10,42 @@ use Battle\Unit\UnitInterface;
 
 abstract class AbstractAction implements ActionInterface
 {
-    /** @var UnitInterface */
+    /**
+     * @var UnitInterface
+     */
     protected $actionUnit;
 
-    /** @var UnitInterface */
+    /**
+     * @var UnitInterface
+     */
     protected $targetUnit;
 
-    /** @var CommandInterface */
+    /**
+     * @var CommandInterface
+     */
     protected $alliesCommand;
 
-    /** @var CommandInterface */
+    /**
+     * @var CommandInterface
+     */
     protected $enemyCommand;
 
-    /** @var Message */
+    /**
+     * @var Message
+     */
     protected $message;
 
-    /** @var int */
+    /**
+     * @var int
+     */
     protected $factualPower = 0;
+
+    /**
+     * Был ли успешно применен Action
+     *
+     * @var bool
+     */
+    protected $successHandle = false;
 
     public function __construct(
         UnitInterface $actionUnit,
@@ -46,8 +65,16 @@ abstract class AbstractAction implements ActionInterface
         return $this->actionUnit;
     }
 
+    /**
+     * @return UnitInterface
+     * @throws ActionException
+     */
     public function getTargetUnit(): UnitInterface
     {
+        if ($this->targetUnit === null) {
+            throw new ActionException(ActionException::NO_TARGET_UNIT);
+        }
+
         return $this->targetUnit;
     }
 
@@ -59,5 +86,10 @@ abstract class AbstractAction implements ActionInterface
     public function getFactualPower(): int
     {
         return $this->factualPower;
+    }
+
+    public function isSuccessHandle(): bool
+    {
+        return $this->successHandle;
     }
 }

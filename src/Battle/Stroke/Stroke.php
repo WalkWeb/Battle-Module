@@ -10,6 +10,7 @@ use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Statistic\Statistic;
 use Battle\Result\FullLog\FullLog;
 use Battle\Statistic\StatisticException;
+use Battle\Statistic\StatisticInterface;
 use Battle\Unit\UnitInterface;
 use Battle\View\ViewFactory;
 
@@ -86,7 +87,7 @@ class Stroke implements StrokeInterface
      * @param UnitInterface $actionUnit
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
-     * @param Statistic $statistics
+     * @param StatisticInterface $statistics
      * @param FullLog $fullLog
      * @param Chat $chat
      * @param ScenarioInterface $scenario
@@ -98,7 +99,7 @@ class Stroke implements StrokeInterface
         UnitInterface $actionUnit,
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
-        Statistic $statistics,
+        StatisticInterface $statistics,
         FullLog $fullLog,
         Chat $chat,
         ScenarioInterface $scenario,
@@ -139,6 +140,12 @@ class Stroke implements StrokeInterface
             }
 
             $message = $action->handle();
+
+            if (!$action->isSuccessHandle()) {
+                $action = $this->actionUnit->getBaseAttack($enemyCommand, $alliesCommand);
+                $message = $action->handle();
+            }
+
             $this->statistics->addUnitAction($action);
             $this->scenario->addAction($action, $this->statistics);
             $this->fullLog->add('<p>' . $message . '</p>');

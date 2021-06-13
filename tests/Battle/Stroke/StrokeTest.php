@@ -69,4 +69,29 @@ class StrokeTest extends TestCase
         // Но, на всякий случай проверяем, что противник умер
         self::assertEquals(0, $rightUnit->getLife());
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testStrokeActionNoHandle(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $alliesUnit = UnitFactory::createByTemplate(5);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $alliesCommand = CommandFactory::create([$unit, $alliesUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Накапливаем концентрацию
+        for ($i = 0; $i < 10; $i++) {
+            $alliesUnit->newRound();
+        }
+
+        $stroke = new Stroke(1, $alliesUnit, $alliesCommand, $enemyCommand, new Statistic(), new FullLog(), new Chat(), new Scenario());
+
+        $stroke->handle();
+
+        // Не смотря на то, что должно было примениться лечение - будет использована атака, т.к. лечить некого
+        // Проверяем уменьшившееся здоровье
+        self::assertEquals($enemyUnit->getTotalLife() - $alliesUnit->getDamage(), $enemyUnit->getLife());
+    }
 }
