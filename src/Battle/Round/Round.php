@@ -178,11 +178,14 @@ class Round implements RoundInterface
 
                 // Проверяем, остались ли юниты, которые не ходили
                 if (!$this->leftCommand->isAction() && !$this->rightCommand->isAction()) {
+                    // Чтобы новый раунд начала следующая команда - также меняем действующую команду
+                    $this->changeActionCommand();
                     return $this->endRound();
                 }
             }
 
-            $this->actionCommand = $this->actionCommand === 1 ? $this->actionCommand = 2 : 1;
+            // Независимо от того, были ли юнит для хода или нет - меняем следующую действующую команду
+            $this->changeActionCommand();
             $i++;
         }
 
@@ -283,5 +286,10 @@ class Round implements RoundInterface
         if ($actionCommand !== 1 && $actionCommand !== 2) {
             throw new RoundException(RoundException::INCORRECT_START_COMMAND);
         }
+    }
+
+    private function changeActionCommand(): void
+    {
+        $this->actionCommand = $this->actionCommand === 1 ? $this->actionCommand = 2 : 1;
     }
 }

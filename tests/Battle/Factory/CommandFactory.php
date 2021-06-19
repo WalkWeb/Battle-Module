@@ -16,23 +16,26 @@ class CommandFactory
     use IdTrait;
 
     /**
+     * @param int $unitTemplate
      * @return CommandInterface
      * @throws Exception
      */
-    public static function createLeftCommand(): CommandInterface
+    public static function createLeftCommand(int $unitTemplate = 1): CommandInterface
     {
         $unitCollection = new UnitCollection();
-        $unitCollection->add(UnitFactory::createByTemplate(1));
+        $unitCollection->add(UnitFactory::createByTemplate($unitTemplate));
         return new Command($unitCollection);
     }
 
     /**
+     * @param int $unitTemplate
+     * @return CommandInterface
      * @throws Exception
      */
-    public static function createRightCommand(): CommandInterface
+    public static function createRightCommand(int $unitTemplate = 2): CommandInterface
     {
         $unitCollection = new UnitCollection();
-        $unitCollection->add(UnitFactory::createByTemplate(2));
+        $unitCollection->add(UnitFactory::createByTemplate($unitTemplate));
         return new Command($unitCollection);
     }
 

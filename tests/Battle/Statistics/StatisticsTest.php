@@ -85,7 +85,9 @@ class StatisticsTest extends TestCase
             }
         }
 
-        self::assertEquals(150, $statistics->getUnitsStatistics()->get($attackUnit->getId())->getCausedDamage());
+        $defendUnitData = UnitFactory::getData(2);
+
+        self::assertEquals($defendUnitData['total_life'], $statistics->getUnitsStatistics()->get($attackUnit->getId())->getCausedDamage());
     }
 
     /**

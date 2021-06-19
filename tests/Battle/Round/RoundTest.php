@@ -33,12 +33,13 @@ class RoundTest extends TestCase
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
         $startCommand = 1;
-        $nextCommand = 2;
+        // Юниты делают по ходу, и на следующий раунд атаковать будет таже команда
+        $nextCommand = 1;
         // Юниты делают по одному ходу, соответственно следующий, после раунда, ход будет 3
         $nextNumberStroke = 3;
 
         $round = new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new FullLog(), new Chat(), new Scenario());
-        self::assertEquals($round->handle(), $nextCommand);
+        self::assertEquals($nextCommand, $round->handle());
         self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }
 
@@ -60,12 +61,13 @@ class RoundTest extends TestCase
         $rightCommand = CommandFactory::create([$rightUnit]);
 
         $startCommand = 1;
-        $nextCommand = 2;
+        // Походит правая команда, и следующей будет ходить опять левая команда
+        $nextCommand = 1;
         // В этом раунде походит только юнит из правой команды, соответственно счетчик увеличится только на 1
         $nextNumberStroke = 2;
 
         $round = new Round($leftCommand, $rightCommand, $startCommand, new Statistic(), new FullLog(), new Chat(), new Scenario());
-        self::assertEquals($round->handle(), $nextCommand);
+        self::assertEquals($nextCommand, $round->handle());
         self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }
 

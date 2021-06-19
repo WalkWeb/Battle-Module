@@ -63,7 +63,7 @@ class ScenarioTest extends TestCase
                             'hp_bar_class'      => 'unit_hp_bar',
                             'hp_bar_class2'     => 'unit_hp_bar2',
                             'recdam'            => '-20',
-                            'unit_hp_bar_width' => 86,
+                            'unit_hp_bar_width' => 92,
                             'unit_cons_bar2'    => 10,
                             'unit_rage_bar2'    => 0,
                             'ava'               => 'unit_ava_red',

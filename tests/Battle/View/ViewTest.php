@@ -109,7 +109,7 @@ class ViewTest extends TestCase
                                     <div id="hp_bar_1aab367d-37e8-4544-9915-cb3d7779308b" class="unit_hp_bar2" style="width: 100%;"></div>
                                 </div>
                                 <div class="unit_hp_text">
-                                    <span class="hp">150</span> / <span class="thp">150</span>
+                                    <span class="hp">250</span> / <span class="thp">250</span>
                                 </div>
                                 <div class="unit_hp_text_add">
                                     <span class="recdam"></span>
