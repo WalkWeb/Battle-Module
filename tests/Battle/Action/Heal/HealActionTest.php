@@ -158,13 +158,17 @@ class HealActionTest extends TestCase
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
             $message = $action->handle();
+
+            // Проверяем, что лечение успешно применилось
+            self::assertTrue($action->isSuccessHandle());
+
             $scenario->addAction($action, $statistic);
         }
 
         // Проверяем обнуленную концентрацию
         self::assertEquals(0, $alliesUnit->getConcentration());
 
-        // Проверяем восстановленное здоровье и сообщение
+        // Проверяем восстановленное здоровье у обоих юнитов и сообщение
         self::assertEquals(self::MESSAGE, $message);
         self::assertEquals($unit->getLife(), $unit->getTotalLife());
         self::assertEquals($alliesUnit->getLife(), $alliesUnit->getTotalLife());

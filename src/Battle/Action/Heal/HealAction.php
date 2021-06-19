@@ -31,6 +31,8 @@ class HealAction extends AbstractAction
             return self::NO_HANDLE_MESSAGE;
         }
 
+        $this->successHandle = true;
+
         return $this->targetUnit->applyAction($this);
     }
 
