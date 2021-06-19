@@ -1,5 +1,5 @@
 
-var applayBattleChanges = {
+let applyBattleChanges = {
 
     "applyUsrEffect": function (effect) {
 
@@ -190,27 +190,27 @@ function startScenario(is_console_timers) {
             if (current_effect) {
                 switch (phase) {
                     case 0:
-                        applayBattleChanges.setCounters(scenario[step][attack]["step"], scenario[step][attack]["attack"]);
-                        applayBattleChanges.openNextComment();
-                        applayBattleChanges.applyEffect(current_effect);
+                        applyBattleChanges.setCounters(scenario[step][attack]["step"], scenario[step][attack]["attack"]);
+                        applyBattleChanges.openNextComment();
+                        applyBattleChanges.applyEffect(current_effect);
                         break;
                     case 1:
-                        applayBattleChanges.applyValues(current_effect);
+                        applyBattleChanges.applyValues(current_effect);
                         break;
                     case 2:
-                        applayBattleChanges.revertEffect(current_effect);
+                        applyBattleChanges.revertEffect(current_effect);
                         break;
                     case 3:
-                        applayBattleChanges.revertValues(current_effect);
+                        applyBattleChanges.revertValues(current_effect);
                         break;
                 }
             } else if (phase === 0) {
-                applayBattleChanges.setCounters(scenario[step][attack]["step"], scenario[step][attack]["attack"]);
-                applayBattleChanges.openNextComment();
+                applyBattleChanges.setCounters(scenario[step][attack]["step"], scenario[step][attack]["attack"]);
+                applyBattleChanges.openNextComment();
             }
         } else {
             let current_effect = scenario[step][attack];
-            applayBattleChanges.applyValues(current_effect);
+            applyBattleChanges.applyValues(current_effect);
         }
         let timer = getNext();
         if (step !== -1) {
@@ -240,8 +240,7 @@ function goScenario() {
     );
 }
 
-let timersInfo;
-timersInfo = {
+let timersInfo = {
     "start": 500,
     "step": [500, 500],
     "waiting": 100,
