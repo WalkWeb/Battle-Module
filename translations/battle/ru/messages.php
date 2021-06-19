@@ -7,6 +7,8 @@ return [
     'All command actions. New round' => 'Все команды походили, новый раунд',
     'Start Stroke'                   => 'Новый ход',
     'End Stroke'                     => 'Ход закончен',
+    'Round'                          => 'Раунд',
+    'Stroke'                         => 'Ход',
     // Action
     'attack'                         => 'атаковал',
     'heal'                           => 'вылечил',

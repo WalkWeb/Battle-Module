@@ -9,7 +9,10 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
 
 ?>
 
-<p class="ptitle">Раунд №<span id="num_step">1</span>, ход №<span id="num_attack">1</span></p>
+<p class="ptitle">
+    <?= $result->getTranslation()->trans('Round') ?> #<span id="num_step">1</span>,
+    <?= $result->getTranslation()->trans('Stroke') ?> #<span id="num_attack">1</span>
+</p>
 
 <?= $this->renderCommandView($result->getStartLeftCommand(), $result->getStartRightCommand()) ?>
 

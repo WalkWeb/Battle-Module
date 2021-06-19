@@ -47,13 +47,13 @@ $result = $battle->handle();
 echo $view->renderResult($result);
 ```
 
-## Как выглядит бой (2 на 2)
+## Как выглядит бой (2 на 3)
 
-![alt text](public/images/example_start.png)
+![alt text](public/images/battle.png)
 
-### ...
+### Итоговая статистика
 
-![alt text](public/images/example_end.png)
+![alt text](public/images/statistics.png)
 
 
 Вы можете запустить и посмотреть бой открыв страницу:
@@ -91,6 +91,7 @@ echo $view->renderResult($result);
 
 ## Планы
 
+- [Ошибка] Класс Priest не использует лечение
 - Обновить README
 - Добавить отдельные кнопки на полный лог и на статистику. Текстовые ссылки переделать в кнопки
 - Добавить анимацию призыва

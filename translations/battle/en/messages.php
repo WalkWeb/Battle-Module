@@ -7,6 +7,8 @@ return [
     'All command actions. New round' => 'All command actions. New round',
     'Start Stroke'                   => 'Start Stroke',
     'End Stroke'                     => 'End Stroke',
+    'Round'                          => 'Round',
+    'Stroke'                         => 'Stroke',
     // Action
     'attack'                         => 'attack',
     'heal'                           => 'heal',
