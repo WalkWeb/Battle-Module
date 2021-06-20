@@ -19,8 +19,8 @@ class ChatTest extends TestCase
         $chat->add($message2);
 
         $expectedResult = [
-            '<p class="' . Chat::HIDDEN_CLASS . '">' . $message1 . '</p>',
-            '<p class="' . Chat::HIDDEN_CLASS . '">' . $message2 . '</p>',
+            $message1,
+            $message2,
         ];
 
         $i = 0;

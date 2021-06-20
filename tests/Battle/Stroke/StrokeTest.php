@@ -16,7 +16,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class StrokeTest extends TestCase
 {
-    private const MESSAGE = '<p class="none"><span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage</p>';
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
 
     /**
      * Тест на базовую обработку одного хода

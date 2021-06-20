@@ -19,7 +19,7 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
 <div class="com_container">
     <div class="com_content" id="comment">
         <?php foreach ($result->getChat()->getMessages() as $message): ?>
-            <?= $message ?>
+            <?= '<p class="none">' . $message . '</p>' ?>
         <?php endforeach; ?>
     </div>
 </div>
