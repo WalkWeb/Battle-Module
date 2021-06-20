@@ -9,6 +9,10 @@ return [
     'End Stroke'                     => 'End Stroke',
     'Round'                          => 'Round',
     'Stroke'                         => 'Stroke',
+    'Show Battle Log'                => 'Show Battle Log',
+    'Show Battle Statistic'          => 'Show Battle Statistic',
+    'Hidden Battle Log'              => 'Hidden Battle Log',
+    'Hidden Battle Statistic'        => 'Hidden Battle Statistic',
     // Action
     'attack'                         => 'attack',
     'heal'                           => 'heal',

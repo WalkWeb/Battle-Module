@@ -247,12 +247,37 @@ let timersInfo = {
     "phases": [500, 500, 300, 200]
 };
 
-function HideShowAnswer(elem) {
-    if ($(elem).next().css("display") === "none") {
-        $(elem).next().slideDown();
-        $(elem).text("Скрыть подробности боя");
+let battle_log_view = 0;
+let battle_statistic_view = 0;
+
+function showBattleLog(button_content) {
+
+    let battle_log_button = document.getElementById('battle_log_button');
+    let battle_log = document.getElementById('battle_log');
+
+    if (battle_log_view === 0) {
+        battle_log.style.display = 'block';
+        battle_log_button.innerHTML = button_content[1];
+        battle_log_view = 1;
     } else {
-        $(elem).next().slideUp();
-        $(elem).text("Показать подробности боя");
+        battle_log.style.display = 'none';
+        battle_log_button.innerHTML = button_content[0];
+        battle_log_view = 0;
+    }
+}
+
+function showBattleStatistic(button_content) {
+
+    let battle_statistic_button = document.getElementById('battle_statistic_button');
+    let battle_statistic = document.getElementById('battle_statistic');
+
+    if (battle_statistic_view === 0) {
+        battle_statistic.style.display = 'block';
+        battle_statistic_button.innerHTML = button_content[1];
+        battle_statistic_view = 1;
+    } else {
+        battle_statistic.style.display = 'none';
+        battle_statistic_button.innerHTML = button_content[0];
+        battle_statistic_view = 0;
     }
 }

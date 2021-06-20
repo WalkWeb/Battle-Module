@@ -32,18 +32,24 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
     });
 </script>
 
-<div class="spoiler_button" onclick="HideShowAnswer(this)">Показать подробности боя</div>
-
-<div class="spoiler_cont">
-    <div class="full_log">
-
-        <?php foreach ($result->getFullLog()->getLog() as $row): ?>
-            <?= $row ?>
-        <?php endforeach; ?>
-
-        <h1><?= $result->getWinnerText() ?></h1>
+<div class="button_box">
+    <div class="button_row">
+        <div class="battle_button" onclick="showBattleLog([
+            '<?= $result->getTranslation()->trans('Show Battle Log') ?>',
+            '<?= $result->getTranslation()->trans('Hidden Battle Log') ?>'])" id="battle_log_button">
+            <?= $result->getTranslation()->trans('Show Battle Log') ?>
+        </div>
     </div>
+    <div class="button_row">
+        <div class="battle_button" onclick="showBattleStatistic([
+            '<?= $result->getTranslation()->trans('Show Battle Statistic') ?>',
+            '<?= $result->getTranslation()->trans('Hidden Battle Statistic') ?>'])" id="battle_statistic_button">
+            <?= $result->getTranslation()->trans('Show Battle Statistic') ?>
+        </div>
+    </div>
+</div>
 
+<div class="spoiler_cont" id="battle_statistic">
     <div class="statistics_box">
         <table class="statistics">
             <tr class="header">
@@ -91,5 +97,16 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
                 <td colspan="4"><p class="left"><?= $result->getStatistic()->getMemoryCostClipped() ?></p></td>
             </tr>
         </table>
+    </div>
+</div>
+
+<div class="spoiler_cont" id="battle_log">
+    <div class="full_log">
+
+        <?php foreach ($result->getFullLog()->getLog() as $row): ?>
+            <?= $row ?>
+        <?php endforeach; ?>
+
+        <h1><?= $result->getWinnerText() ?></h1>
     </div>
 </div>

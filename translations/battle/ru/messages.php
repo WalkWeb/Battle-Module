@@ -9,6 +9,10 @@ return [
     'End Stroke'                     => 'Ход закончен',
     'Round'                          => 'Раунд',
     'Stroke'                         => 'Ход',
+    'Show Battle Log'                => 'Показать детализацию боя',
+    'Show Battle Statistic'          => 'Показать статистику боя',
+    'Hidden Battle Log'              => 'Скрыть детализацию боя',
+    'Hidden Battle Statistic'        => 'Скрыть статистику боя',
     // Action
     'attack'                         => 'атаковал',
     'heal'                           => 'вылечил',

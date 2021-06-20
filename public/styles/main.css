@@ -1,3 +1,5 @@
+/* TODO Переименовать в battle.css */
+
 * {
     margin: 0;
     padding: 0;
@@ -739,4 +741,33 @@ p.view {
     font-size: 25px;
     padding: 40px 20px 20px 20px;
     text-align: center;
+}
+
+/* Стили для блоков и кнопок показать логи и статистику */
+
+.battle_button {
+    text-decoration: none;
+    border: 1px solid #1a120d;
+    padding: 4px 10px;
+    background: url('/images/battle/submit_row.jpg') repeat-x scroll center top #1a120d;
+    color: #d2a456;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 0 #6c4930 inset, 0 2px 3px rgba(0, 0, 0, 0.2);
+    font: 100% Verdana, sans-serif;
+}
+
+.battle_button:hover {
+    cursor: pointer;
+    color: #f2d456;
+}
+
+.button_box {
+    display: flex;
+}
+
+.button_row {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
