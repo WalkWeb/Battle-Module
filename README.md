@@ -61,6 +61,10 @@ echo $view->renderResult($result);
 `public/index.php`
 
 
+## 100% покрытие кода unit-тестами
+
+![alt text](public/images/test_code_coverage.png)
+
 ## GitLab CI
 
 ![alt text](public/images/gitlab-ci-cd.png)
@@ -91,7 +95,6 @@ echo $view->renderResult($result);
 
 ## Планы
 
-- Обновить README
 - Добавить анимацию призыва
 - Реализовать создание способности через массив параметров
 - Подумать над реализацией ручного режима боя

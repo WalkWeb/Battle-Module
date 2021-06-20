@@ -3,7 +3,6 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Battle\BattleFactory;
-use Battle\Translation\Translation;
 use Battle\View\ViewFactory;
 
 $data = [
