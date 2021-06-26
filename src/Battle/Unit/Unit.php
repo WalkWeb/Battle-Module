@@ -37,6 +37,7 @@ class Unit extends AbstractUnit
         // Пока концентрация применяется сразу, при попытке сделать атаку, можно переделать так, чтобы добавлялась
         // только при попадании по цели
         $this->addConcentration(self::ADD_CON_ACTION_UNIT);
+        $this->addRage(self::ADD_RAGE_ACTION_UNIT);
 
         return $this->getDamageAction($enemyCommand, $alliesCommand);
     }
@@ -92,6 +93,7 @@ class Unit extends AbstractUnit
         }
 
         $this->addConcentration(self::ADD_CON_RECEIVING_UNIT);
+        $this->addRage(self::ADD_RAGE_RECEIVING_UNIT);
 
         return $this->$method($action);
     }

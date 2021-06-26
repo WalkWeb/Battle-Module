@@ -65,7 +65,7 @@ class ScenarioTest extends TestCase
                             'recdam'            => '-20',
                             'unit_hp_bar_width' => 92,
                             'unit_cons_bar2'    => 10,
-                            'unit_rage_bar2'    => 0,
+                            'unit_rage_bar2'    => 7,
                             'ava'               => 'unit_ava_red',
                             'avas'              => 'unit_ava_blank',
                             'unit_effects'      => '',
@@ -121,7 +121,7 @@ class ScenarioTest extends TestCase
                     'user_id'        => $actionUnit->getId(),
                     'class'          => 'd_buff',
                     'unit_cons_bar2' => 0,
-                    'unit_rage_bar2' => 0,
+                    'unit_rage_bar2' => 50,
                     'targets'        => [
                         [
                             'user_id'           => $woundedUnit->getId(),

@@ -233,6 +233,17 @@ abstract class AbstractUnit implements UnitInterface
     {
         $this->action = false;
         $this->addConcentration(self::ADD_CON_NEW_ROUND);
+        $this->addRage(self::ADD_RAGE_NEW_ROUND);
+    }
+
+    public function upMaxConcentration(): void
+    {
+        $this->concentration = self::MAX_CONS;
+    }
+
+    public function upMaxRage(): void
+    {
+        $this->rage = self::MAX_RAGE;
     }
 
     /**
@@ -265,11 +276,17 @@ abstract class AbstractUnit implements UnitInterface
         }
     }
 
-    public function upMaxConcentration(): void
+    /**
+     * @param int $rage
+     */
+    protected function addRage(int $rage): void
     {
-        $this->concentration = self::MAX_CONS;
-    }
+        $this->rage += $rage;
 
+        if ($this->rage > self::MAX_RAGE) {
+            $this->rage = self::MAX_RAGE;
+        }
+    }
 
     /**
      * Проверяет корректность номера активной команды - может иметь значение только 1 или 2

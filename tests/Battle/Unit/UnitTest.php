@@ -90,47 +90,44 @@ class UnitTest extends TestCase
     }
 
     /**
-     * Проверяем корректное обновление параметра action у юнита, при начале нового раунда, и добавление концентрации
+     * Проверяем корректное обновление параметра action у юнита, при начале нового раунда
      *
      * @throws Exception
      */
-    public function testUnitAddedConcentration(): void
-    {
-        $template = 1;
-        $unit = UnitFactory::createByTemplate($template);
-
-        $unit->madeAction();
-        self::assertTrue($unit->isAction());
-        self::assertEquals(0, $unit->getConcentration());
-        $unit->newRound();
-        self::assertFalse($unit->isAction());
-        self::assertEquals(Unit::ADD_CON_NEW_ROUND, $unit->getConcentration());
-    }
-
-    /**
-     * Проверяем корректное добавление концентрации юниту, при начале нового раунда
-     *
-     * @throws Exception
-     */
-    public function testUnitNewRoundAddConcentration(): void
+    public function testUnitChangeAction(): void
     {
         $unit = UnitFactory::createByTemplate(1);
 
-        self::assertEquals(0 , $unit->getConcentration());
-
+        $unit->madeAction();
+        self::assertTrue($unit->isAction());
         $unit->newRound();
-
-        self::assertEquals(UnitInterface::ADD_CON_NEW_ROUND, $unit->getConcentration());
+        self::assertFalse($unit->isAction());
     }
 
     /**
-     * Тест на получение концентрации при совершении действия, и получения действия от другого юнита
+     * Проверяем корректное добавление концентрации и ярости юниту, при начале нового раунда
+     *
+     * @throws Exception
+     */
+    public function testUnitNewRoundAddConcentrationAndRage(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        self::assertEquals(0, $unit->getConcentration());
+        self::assertEquals(0, $unit->getRage());
+        $unit->newRound();
+        self::assertEquals(Unit::ADD_CON_NEW_ROUND, $unit->getConcentration());
+        self::assertEquals(Unit::ADD_RAGE_NEW_ROUND, $unit->getRage());
+    }
+
+    /**
+     * Тест на получение концентрации и ярости при совершении действия, и получения действия от другого юнита
      *
      * @throws CommandException
      * @throws UnitException
      * @throws Exception
      */
-    public function testUnitAddConcentration(): void
+    public function testUnitAddConcentrationAndRage(): void
     {
         $leftUnit = UnitFactory::createByTemplate(1);
         $leftCollection = new UnitCollection();
@@ -144,15 +141,40 @@ class UnitTest extends TestCase
 
         self::assertEquals(0, $leftUnit->getConcentration());
         self::assertEquals(0, $rightUnit->getConcentration());
+        self::assertEquals(0, $leftUnit->getRage());
+        self::assertEquals(0, $rightUnit->getRage());
 
         $actionCollection = $leftUnit->getAction($rightCommand, $leftCommand);
 
         self::assertEquals(UnitInterface::ADD_CON_ACTION_UNIT, $leftUnit->getConcentration());
+        self::assertEquals(UnitInterface::ADD_RAGE_ACTION_UNIT, $leftUnit->getRage());
 
         foreach ($actionCollection as $action) {
             $action->handle();
         }
 
         self::assertEquals(UnitInterface::ADD_CON_RECEIVING_UNIT, $rightUnit->getConcentration());
+        self::assertEquals(UnitInterface::ADD_RAGE_RECEIVING_UNIT, $rightUnit->getRage());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testUnitUpMaxConcentration(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        self::assertEquals(0, $unit->getConcentration());
+        $unit->upMaxConcentration();
+        self::assertEquals(Unit::MAX_CONS, $unit->getConcentration());
+    }
+
+    public function testUnitUmMaxRage(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        self::assertEquals(0, $unit->getRage());
+        $unit->upMaxRage();
+        self::assertEquals(Unit::MAX_RAGE, $unit->getRage());
     }
 }
