@@ -9,10 +9,10 @@ use Battle\Result\Chat\Chat;
 use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Statistic\Statistic;
 use Battle\Result\FullLog\FullLog;
-use Battle\Statistic\StatisticException;
 use Battle\Statistic\StatisticInterface;
 use Battle\Unit\UnitInterface;
 use Battle\View\ViewFactory;
+use Exception;
 
 class Stroke implements StrokeInterface
 {
@@ -122,10 +122,13 @@ class Stroke implements StrokeInterface
     /**
      * Совершает ход одного юнита в бою
      *
-     * @throws StatisticException
+     * @throws Exception
      */
     public function handle(): void
     {
+        $view = $this->viewFactory->create();
+        $this->fullLog->add($view->getUnitsStats($this->leftCommand, $this->rightCommand));
+
         //--------------------------------------------------------------------------------------------------------------
 
         $enemyCommand = $this->actionCommand === 1 ? $this->rightCommand : $this->leftCommand;
@@ -156,7 +159,7 @@ class Stroke implements StrokeInterface
 
         $this->actionUnit->madeAction();
 
-        $view = $this->viewFactory->create();
         $this->fullLog->add($view->renderCommandView($this->leftCommand, $this->rightCommand));
+        $this->fullLog->add($view->getUnitsStats($this->leftCommand, $this->rightCommand));
     }
 }

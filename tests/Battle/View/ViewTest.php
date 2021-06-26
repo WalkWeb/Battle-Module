@@ -336,6 +336,73 @@ EOT;
     }
 
     /**
+     * Тест на генерацию html-кода для отображения таблицы характеристик юнитов
+     *
+     * @throws Exception
+     */
+    public function testViewGetUnitsStats(): void
+    {
+        $factory = new ViewFactory();
+        $view = $factory->create();
+
+        $leftCommand = TestCommandFactory::createLeftCommand();
+        $rightCommand = TestCommandFactory::createLeftCommand();
+
+        $expectHtml = <<<EOT
+<div class="units_stats_box">
+    <table class="units_stats">
+        <tr class="header">
+            <td><p>Command</p></td>
+            <td><p>Name</p></td>
+            <td><p>Race</p></td>
+            <td><p>Life</p></td>
+            <td><p>Damage</p></td>
+            <td><p>Concentration</p></td>
+            <td><p>Rage</p></td>
+            <td><p>Melee?</p></td>
+            <td><p>Action?</p></td>
+            <td><p>Alive?</p></td>
+        </tr>
+                    <tr>
+                <td><p>1</p></td>
+                <td>
+                    <p>
+                        <img src="/images/avas/humans/human001.jpg" class="stat_ava" alt="" />
+                        unit_1                    </p>
+                </td>
+                <td><p>People</p></td>
+                <td><p>100/100</p></td>
+                <td><p>20</p></td>
+                <td><p>0/1000</p></td>
+                <td><p>0/1000</p></td>
+                <td><p>Yes</p></td>
+                <td><p>No</p></td>
+                <td><p>Yes</p></td>
+            </tr>
+                            <tr>
+                <td><p>1</p></td>
+                <td>
+                    <p>
+                        <img src="/images/avas/humans/human001.jpg" class="stat_ava" alt="" />
+                        unit_1                    </p>
+                </td>
+                <td><p>People</p></td>
+                <td><p>100/100</p></td>
+                <td><p>20</p></td>
+                <td><p>0/1000</p></td>
+                <td><p>0/1000</p></td>
+                <td><p>Yes</p></td>
+                <td><p>No</p></td>
+                <td><p>Yes</p></td>
+            </tr>
+            </table>
+</div>
+EOT;
+
+        self::assertEquals($expectHtml, $view->getUnitsStats($leftCommand, $rightCommand));
+    }
+
+    /**
      * @throws Exception
      */
     public function testViewRenderResult(): void

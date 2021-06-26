@@ -769,3 +769,27 @@ p.view {
     flex-direction: row;
     justify-content: center;
 }
+
+/* Table units stats */
+
+div.units_stats_box {
+    margin: 30px auto;
+    width: 80%;
+}
+
+table.units_stats {
+    border: 1px solid #444;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.units_stats td {
+    border: 1px solid #444;
+    text-align: center;
+}
+
+table.units_stats .header td {
+    background: #222;
+    font-weight: 700;
+    text-align: center;
+}

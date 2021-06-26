@@ -31,6 +31,8 @@ interface UnitClassInterface
      */
     public function getId(): int;
 
+    // todo getName
+
     /**
      * Возвращает способность данного класса для использования её в бою
      *

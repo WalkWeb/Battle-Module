@@ -40,24 +40,33 @@ class View implements ViewInterface
     private $unitTemplate;
 
     /**
+     * @var string
+     */
+    private $unitsStatsTemplate;
+
+    /**
      * @param string $templateDir
      * @param string $headTemplate
      * @param string $resultTemplate
      * @param string $rowTemplate
      * @param string $unitTemplate
+     * @param string $unitsStatsTemplate
      */
     public function __construct(
         string $templateDir,
         string $headTemplate,
         string $resultTemplate,
         string $rowTemplate,
-        string $unitTemplate)
+        string $unitTemplate,
+        string $unitsStatsTemplate
+    )
     {
         $this->templateDir = $templateDir;
         $this->headTemplate = $headTemplate;
         $this->resultTemplate = $resultTemplate;
         $this->rowTemplate = $rowTemplate;
         $this->unitTemplate = $unitTemplate;
+        $this->unitsStatsTemplate = $unitsStatsTemplate;
     }
 
     /**
@@ -140,6 +149,22 @@ class View implements ViewInterface
         ob_start();
 
         require $this->templateDir . $this->unitTemplate;
+
+        return ob_get_clean();
+    }
+
+    /**
+     * Генерирует html-код для отображения таблицы характеристик юнитов
+     *
+     * @param CommandInterface $leftCommand
+     * @param CommandInterface $rightCommand
+     * @return string
+     */
+    public function getUnitsStats(CommandInterface $leftCommand, CommandInterface $rightCommand): string
+    {
+        ob_start();
+
+        require $this->templateDir . $this->unitsStatsTemplate;
 
         return ob_get_clean();
     }

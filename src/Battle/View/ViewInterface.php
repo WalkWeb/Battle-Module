@@ -42,4 +42,13 @@ interface ViewInterface
      * @return string
      */
     public function getUnitView(UnitInterface $unit): string;
+
+    /**
+     * Генерирует html-код для отображения таблицы характеристик юнитов
+     *
+     * @param CommandInterface $leftCommand
+     * @param CommandInterface $rightCommand
+     * @return string
+     */
+    public function getUnitsStats(CommandInterface $leftCommand, CommandInterface $rightCommand): string;
 }
