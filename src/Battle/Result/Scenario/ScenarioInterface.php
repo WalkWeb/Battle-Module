@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Result\Scenario;
 
+use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Statistic\StatisticInterface;
 
@@ -21,6 +22,7 @@ interface ScenarioInterface
      *
      * @param ActionInterface $action
      * @param StatisticInterface $statistic
+     * @throws ActionException
      */
     public function addAction(ActionInterface $action, StatisticInterface $statistic): void;
 

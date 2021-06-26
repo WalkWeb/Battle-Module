@@ -44,7 +44,7 @@ let applyBattleChanges = {
         }
     },
 
-    "applyUsrValues": function (user) {
+    "applyTargetEffect": function (user) {
         let unit = document.getElementById("usr_" + user.user_id);
 
         if (user.thp !== undefined) {
@@ -92,9 +92,9 @@ let applyBattleChanges = {
     },
 
     "applyValues": function (effect) {
-        this.applyUsrValues(effect);
+        this.applyTargetEffect(effect);
         for (let i = 0; i < effect.targets.length; i++) {
-            this.applyUsrValues(effect.targets[i]);
+            this.applyTargetEffect(effect.targets[i]);
         }
     },
 

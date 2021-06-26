@@ -3,6 +3,7 @@
 namespace Battle\Round;
 
 use Battle\Statistic\Statistic;
+use Exception;
 
 interface RoundInterface
 {
@@ -16,7 +17,7 @@ interface RoundInterface
      * лимиту раундов
      *
      * @return int
-     * @throws RoundException
+     * @throws Exception
      */
     public function handle(): int;
 

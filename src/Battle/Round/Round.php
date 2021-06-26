@@ -13,6 +13,7 @@ use Battle\Stroke\StrokeFactory;
 use Battle\Stroke\StrokeInterface;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationException;
+use Exception;
 
 class Round implements RoundInterface
 {
@@ -140,8 +141,7 @@ class Round implements RoundInterface
      * живы - сбрасываются параметры $action у юнитов и начинается новый раунд.
      *
      * @return int
-     * @throws RoundException
-     * @throws TranslationException
+     * @throws Exception
      */
     public function handle(): int
     {
@@ -211,7 +211,7 @@ class Round implements RoundInterface
      * 4. Добавляет разделительную линию (todo на удаление, объекты не должны выводить html)
      *
      * @param StrokeInterface $stroke
-     * @throws TranslationException
+     * @throws Exception
      */
     private function executeStroke(StrokeInterface $stroke): void
     {

@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Round;
 
+use Exception;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
-use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Scenario\Scenario;
 use Battle\Round\RoundException;
 use Battle\Round\Round;
 use Battle\Statistic\Statistic;
-use Battle\Translation\TranslationException;
-use Battle\Unit\UnitException;
-use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
 use Tests\Battle\Factory\UnitFactory;
@@ -24,8 +21,6 @@ class RoundTest extends TestCase
     /**
      * Проверяем корректную смену действующий команды
      *
-     * @throws RoundException
-     * @throws TranslationException
      * @throws Exception
      */
     public function testRoundNextCommand(): void
@@ -46,10 +41,6 @@ class RoundTest extends TestCase
     /**
      * Проверяем корректную смену действующий когда в действующей команде нет юнитов, способных совершить действие
      *
-     * @throws CommandException
-     * @throws RoundException
-     * @throws TranslationException
-     * @throws UnitException
      * @throws Exception
      */
     public function testRoundNextCommandNoAction(): void
@@ -72,9 +63,6 @@ class RoundTest extends TestCase
     }
 
     /**
-     * @throws CommandException
-     * @throws RoundException
-     * @throws UnitException
      * @throws Exception
      */
     public function testRoundIncorrectActionCommand(): void

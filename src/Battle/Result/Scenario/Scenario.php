@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Result\Scenario;
 
+use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
@@ -19,6 +20,11 @@ class Scenario implements ScenarioInterface
      */
     private $scenario = [];
 
+    /**
+     * @param ActionInterface $action
+     * @param StatisticInterface $statistic
+     * @throws ActionException
+     */
     public function addAction(ActionInterface $action, StatisticInterface $statistic): void
     {
         switch ($action) {
@@ -34,6 +40,11 @@ class Scenario implements ScenarioInterface
         }
     }
 
+    /**
+     * @param DamageAction $action
+     * @param StatisticInterface $statistic
+     * @throws ActionException
+     */
     private function addDamage(DamageAction $action, StatisticInterface $statistic): void
     {
         $this->scenario[] = [
@@ -68,6 +79,11 @@ class Scenario implements ScenarioInterface
         ];
     }
 
+    /**
+     * @param HealAction $action
+     * @param StatisticInterface $statistic
+     * @throws ActionException
+     */
     private function addHeal(HealAction $action, StatisticInterface $statistic): void
     {
         $this->scenario[] = [

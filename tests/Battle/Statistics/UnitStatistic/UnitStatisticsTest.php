@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Statistics\UnitStatistic;
 
-use Battle\Classes\ClassFactoryException;
-use Battle\Statistic\UnitStatistic\UnitStatistic;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
+use Battle\Statistic\UnitStatistic\UnitStatistic;
 
 class UnitStatisticsTest extends TestCase
 {
     /**
-     * @throws ClassFactoryException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testUnitStatistics(): void
     {

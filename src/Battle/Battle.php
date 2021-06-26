@@ -9,12 +9,10 @@ use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Scenario\ScenarioInterface;
-use Battle\Round\RoundException;
 use Battle\Round\RoundFactory;
 use Battle\Statistic\Statistic;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationInterface;
-use Battle\Result\ResultException;
 use Battle\Result\Result;
 use Battle\Result\ResultInterface;
 use Exception;
@@ -96,9 +94,7 @@ class Battle implements BattleInterface
      * Обрабатывает бой, возвращая результат выполнения
      *
      * @return ResultInterface
-     * @throws BattleException
-     * @throws ResultException
-     * @throws RoundException
+     * @throws Exception
      */
     public function handle(): ResultInterface
     {
