@@ -29,7 +29,8 @@ class DeadKnightTest extends TestCase
 
         $warrior = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::DEAD_KNIGHT, $warrior->getId());
+        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_ID, $warrior->getId());
+        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_NAME, $warrior->getName());
         self::assertEquals(UnitClassInterface::DEAD_KNIGHT_SMALL_ICON, $warrior->getSmallIcon());
 
         $actionCollection = $warrior->getAbility($actionUnit, $enemyCommand, $actionCommand);

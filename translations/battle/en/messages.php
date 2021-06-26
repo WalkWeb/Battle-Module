@@ -51,4 +51,9 @@ return [
     'Animals'                        => 'Animals',
     'Animal'                         => 'Animal',
     'Undead'                         => 'Undead',
+    // Classes
+    'Warrior'                        => 'Warrior',
+    'Priest'                         => 'Priest',
+    'Dead Knight'                    => 'Dead Knight',
+    'Dark Mage'                      => 'Dark Mage',
 ];

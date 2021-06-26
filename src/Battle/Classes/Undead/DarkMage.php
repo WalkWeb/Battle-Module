@@ -7,20 +7,11 @@ namespace Battle\Classes\Undead;
 use Battle\Action\ActionCollection;
 use Battle\Action\Summon\SummonImpAction;
 use Battle\Classes\AbstractUnitClass;
-use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
 class DarkMage extends AbstractUnitClass
 {
-    private $id = UnitClassInterface::DARK_MAGE;
-    private $smallIcon = UnitClassInterface::DARK_MAGE_SMALL_ICON;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
     /**
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
@@ -39,10 +30,26 @@ class DarkMage extends AbstractUnitClass
     }
 
     /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return self::DARK_MAGE_ID;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::DARK_MAGE_NAME;
+    }
+
+    /**
      * @return string
      */
     public function getSmallIcon(): string
     {
-        return $this->smallIcon;
+        return self::DARK_MAGE_SMALL_ICON;
     }
 }

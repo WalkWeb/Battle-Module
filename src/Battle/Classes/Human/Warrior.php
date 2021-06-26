@@ -7,20 +7,11 @@ namespace Battle\Classes\Human;
 use Battle\Action\ActionCollection;
 use Battle\Action\Damage\HeavyStrikeAction;
 use Battle\Classes\AbstractUnitClass;
-use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
 class Warrior extends AbstractUnitClass
 {
-    private $id = UnitClassInterface::WARRIOR;
-    private $smallIcon = UnitClassInterface::WARRIOR_SMALL_ICON;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
     /**
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
@@ -39,10 +30,26 @@ class Warrior extends AbstractUnitClass
     }
 
     /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return self::WARRIOR_ID;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::WARRIOR_NAME;
+    }
+
+    /**
      * @return string
      */
     public function getSmallIcon(): string
     {
-        return $this->smallIcon;
+        return self::WARRIOR_SMALL_ICON;
     }
 }

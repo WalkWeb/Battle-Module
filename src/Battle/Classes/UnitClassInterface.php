@@ -10,17 +10,21 @@ use Battle\Unit\UnitInterface;
 
 interface UnitClassInterface
 {
-    // Humans
-    public const WARRIOR = 1;
-    public const PRIEST  = 2;
+    // ===== ID =====
+    public const WARRIOR_ID     = 1;
+    public const PRIEST_ID      = 2;
+    public const DEAD_KNIGHT_ID = 3;
+    public const DARK_MAGE_ID   = 4;
 
-    public const WARRIOR_SMALL_ICON = '/images/icons/small/warrior.png';
-    public const PRIEST_SMALL_ICON  = '/images/icons/small/priest.png';
+    // ===== Names =====
+    public const WARRIOR_NAME     = 'Warrior';
+    public const PRIEST_NAME      = 'Priest';
+    public const DEAD_KNIGHT_NAME = 'Dead Knight';
+    public const DARK_MAGE_NAME   = 'Dark Mage';
 
-    // Undead
-    public const DEAD_KNIGHT = 3;
-    public const DARK_MAGE = 4;
-
+    // ===== Icons =====
+    public const WARRIOR_SMALL_ICON     = '/images/icons/small/warrior.png';
+    public const PRIEST_SMALL_ICON      = '/images/icons/small/priest.png';
     public const DEAD_KNIGHT_SMALL_ICON = '/images/icons/small/dead-knight.png';
     public const DARK_MAGE_SMALL_ICON   = '/images/icons/small/dark-mage.png';
 
@@ -31,7 +35,12 @@ interface UnitClassInterface
      */
     public function getId(): int;
 
-    // todo getName
+    /**
+     * Возвращает имя класса
+     *
+     * @return string
+     */
+    public function getName(): string;
 
     /**
      * Возвращает способность данного класса для использования её в бою

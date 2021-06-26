@@ -29,7 +29,8 @@ class PriestTest extends TestCase
 
         $priest = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::PRIEST, $priest->getId());
+        self::assertEquals(UnitClassInterface::PRIEST_ID, $priest->getId());
+        self::assertEquals(UnitClassInterface::PRIEST_NAME, $priest->getName());
         self::assertEquals(UnitClassInterface::PRIEST_SMALL_ICON, $priest->getSmallIcon());
 
         $actionCollection = $priest->getAbility($actionUnit, $enemyCommand, $actionCommand);

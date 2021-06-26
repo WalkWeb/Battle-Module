@@ -7,20 +7,11 @@ namespace Battle\Classes\Undead;
 use Battle\Action\ActionCollection;
 use Battle\Action\Damage\HeavyStrikeAction;
 use Battle\Classes\AbstractUnitClass;
-use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
 class DeadKnight extends AbstractUnitClass
 {
-    private $id = UnitClassInterface::DEAD_KNIGHT;
-    private $smallIcon = UnitClassInterface::DEAD_KNIGHT_SMALL_ICON;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
     /**
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
@@ -39,10 +30,26 @@ class DeadKnight extends AbstractUnitClass
     }
 
     /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return self::DEAD_KNIGHT_ID;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::DEAD_KNIGHT_NAME;
+    }
+
+    /**
      * @return string
      */
     public function getSmallIcon(): string
     {
-        return $this->smallIcon;
+        return self::DEAD_KNIGHT_SMALL_ICON;
     }
 }

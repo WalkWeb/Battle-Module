@@ -29,7 +29,8 @@ class WarriorTest extends TestCase
 
         $warrior = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::WARRIOR, $warrior->getId());
+        self::assertEquals(UnitClassInterface::WARRIOR_ID, $warrior->getId());
+        self::assertEquals(UnitClassInterface::WARRIOR_NAME, $warrior->getName());
         self::assertEquals(UnitClassInterface::WARRIOR_SMALL_ICON, $warrior->getSmallIcon());
 
         $actionCollection = $warrior->getAbility($actionUnit, $enemyCommand, $actionCommand);

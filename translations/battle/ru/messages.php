@@ -51,4 +51,9 @@ return [
     'Animals'                        => 'Животные',
     'Animal'                         => 'Животное',
     'Undead'                         => 'Нежить',
+    // Classes
+    'Warrior'                        => 'Воин',
+    'Priest'                         => 'Священник',
+    'Dead Knight'                    => 'Мертвый Рыцарь',
+    'Dark Mage'                      => 'Маг тьмы',
 ];

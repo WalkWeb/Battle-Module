@@ -7,20 +7,11 @@ namespace Battle\Classes\Human;
 use Battle\Action\ActionCollection;
 use Battle\Action\Heal\GreatHealAction;
 use Battle\Classes\AbstractUnitClass;
-use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
 class Priest extends AbstractUnitClass
 {
-    private $id = UnitClassInterface::PRIEST;
-    private $smallIcon = UnitClassInterface::PRIEST_SMALL_ICON;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
     /**
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
@@ -39,10 +30,26 @@ class Priest extends AbstractUnitClass
     }
 
     /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return self::PRIEST_ID;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::PRIEST_NAME;
+    }
+
+    /**
      * @return string
      */
     public function getSmallIcon(): string
     {
-        return $this->smallIcon;
+        return self::PRIEST_SMALL_ICON;
     }
 }

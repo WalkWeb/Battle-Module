@@ -29,7 +29,8 @@ class DarkMageTest extends TestCase
 
         $darkMage = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::DARK_MAGE, $darkMage->getId());
+        self::assertEquals(UnitClassInterface::DARK_MAGE_ID, $darkMage->getId());
+        self::assertEquals(UnitClassInterface::DARK_MAGE_NAME, $darkMage->getName());
         self::assertEquals(UnitClassInterface::DARK_MAGE_SMALL_ICON, $darkMage->getSmallIcon());
 
         $actionCollection = $darkMage->getAbility($actionUnit, $enemyCommand, $actionCommand);
