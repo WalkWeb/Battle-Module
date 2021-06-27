@@ -11,7 +11,7 @@ use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Round\RoundFactory;
-use Battle\Statistic\Statistic;
+use Battle\Result\Statistic\Statistic;
 use Battle\Translation\Translation;
 use Battle\Unit\UnitException;
 

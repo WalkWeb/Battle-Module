@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Battle\Statistic;
+namespace Battle\Result\Statistic;
 
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
-use Battle\Statistic\UnitStatistic\UnitStatistic;
-use Battle\Statistic\UnitStatistic\UnitStatisticCollection;
-use Battle\Statistic\UnitStatistic\UnitStatisticInterface;
+use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
+use Battle\Result\Statistic\UnitStatistic\UnitStatisticCollection;
+use Battle\Result\Statistic\UnitStatistic\UnitStatisticInterface;
 
 /**
  * @package Battle\Statistic

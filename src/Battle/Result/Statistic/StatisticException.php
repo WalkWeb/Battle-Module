@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Statistic;
+namespace Battle\Result\Statistic;
 
 use Exception;
 

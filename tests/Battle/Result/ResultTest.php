@@ -7,7 +7,7 @@ namespace Tests\Battle\Result;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Result\Scenario\Scenario;
-use Battle\Statistic\Statistic;
+use Battle\Result\Statistic\Statistic;
 use Battle\Translation\Translation;
 use Exception;
 use PHPUnit\Framework\TestCase;

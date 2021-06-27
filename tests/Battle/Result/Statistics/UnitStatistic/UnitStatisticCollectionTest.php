@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Statistics\UnitStatistic;
+namespace Tests\Battle\Result\Statistics\UnitStatistic;
 
-use Battle\Statistic\StatisticException;
-use Battle\Statistic\UnitStatistic\UnitStatistic;
-use Battle\Statistic\UnitStatistic\UnitStatisticCollection;
-use Battle\Statistic\UnitStatistic\UnitStatisticInterface;
+use Battle\Result\Statistic\StatisticException;
+use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
+use Battle\Result\Statistic\UnitStatistic\UnitStatisticCollection;
+use Battle\Result\Statistic\UnitStatistic\UnitStatisticInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;

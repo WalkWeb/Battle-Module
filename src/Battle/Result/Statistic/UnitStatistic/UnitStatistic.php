@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Statistic\UnitStatistic;
+namespace Battle\Result\Statistic\UnitStatistic;
 
 use Battle\Unit\UnitInterface;
 

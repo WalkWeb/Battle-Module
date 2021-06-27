@@ -12,7 +12,7 @@ use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\Message;
 use Battle\Result\FullLog\FullLog;
-use Battle\Statistic\Statistic;
+use Battle\Result\Statistic\Statistic;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;

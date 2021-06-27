@@ -6,7 +6,7 @@ namespace Battle\Result\Scenario;
 
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
-use Battle\Statistic\StatisticInterface;
+use Battle\Result\Statistic\StatisticInterface;
 
 /**
  * Для анимации боя на фронте используется js-сценарий.

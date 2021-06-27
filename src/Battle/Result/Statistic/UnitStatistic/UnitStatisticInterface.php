@@ -1,6 +1,6 @@
 <?php
 
-namespace Battle\Statistic\UnitStatistic;
+namespace Battle\Result\Statistic\UnitStatistic;
 
 use Battle\Unit\UnitInterface;
 

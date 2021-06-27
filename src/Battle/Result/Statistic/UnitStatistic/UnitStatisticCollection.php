@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Battle\Statistic\UnitStatistic;
+namespace Battle\Result\Statistic\UnitStatistic;
 
-use Battle\Statistic\StatisticException;
+use Battle\Result\Statistic\StatisticException;
 use Battle\Traits\CollectionTrait;
 use Countable;
 use Iterator;

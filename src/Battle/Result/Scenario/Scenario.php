@@ -9,7 +9,7 @@ use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
 use Battle\Action\Other\WaitAction;
-use Battle\Statistic\StatisticInterface;
+use Battle\Result\Statistic\StatisticInterface;
 use Battle\Unit\UnitInterface;
 use JsonException;
 

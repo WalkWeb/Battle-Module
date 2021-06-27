@@ -8,7 +8,7 @@ use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Result\Scenario\ScenarioInterface;
-use Battle\Statistic\Statistic;
+use Battle\Result\Statistic\Statistic;
 use Battle\Stroke\StrokeFactory;
 use Battle\Translation\Translation;
 

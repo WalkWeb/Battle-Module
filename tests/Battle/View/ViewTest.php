@@ -9,7 +9,7 @@ use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Result\Result;
 use Battle\Result\Scenario\Scenario;
-use Battle\Statistic\Statistic;
+use Battle\Result\Statistic\Statistic;
 use Battle\Translation\Translation;
 use Battle\View\ViewFactory;
 use Exception;

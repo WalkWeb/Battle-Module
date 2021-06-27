@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Statistics\UnitStatistic;
+namespace Tests\Battle\Result\Statistics\UnitStatistic;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Battle\Statistic\UnitStatistic\UnitStatistic;
+use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
 
 class UnitStatisticsTest extends TestCase
 {

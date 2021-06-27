@@ -10,7 +10,7 @@ use Battle\Command\CommandInterface;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Round\RoundFactory;
-use Battle\Statistic\Statistic;
+use Battle\Result\Statistic\Statistic;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationInterface;
 use Battle\Result\Result;

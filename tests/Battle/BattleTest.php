@@ -10,7 +10,7 @@ use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
-use Battle\Statistic\Statistic;
+use Battle\Result\Statistic\Statistic;
 use Battle\Translation\Translation;
 use Battle\Unit\UnitCollection;
 use PHPUnit\Framework\TestCase;

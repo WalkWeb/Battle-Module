@@ -2,7 +2,7 @@
 
 namespace Battle\Round;
 
-use Battle\Statistic\Statistic;
+use Battle\Result\Statistic\Statistic;
 use Exception;
 
 interface RoundInterface

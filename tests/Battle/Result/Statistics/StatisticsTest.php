@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Statistics;
+namespace Tests\Battle\Result\Statistics;
 
 use Battle\Action\Damage\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
-use Battle\Statistic\Statistic;
+use Battle\Result\Statistic\Statistic;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;

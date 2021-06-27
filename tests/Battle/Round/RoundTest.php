@@ -11,7 +11,7 @@ use Battle\Command\CommandFactory;
 use Battle\Result\Scenario\Scenario;
 use Battle\Round\RoundException;
 use Battle\Round\Round;
-use Battle\Statistic\Statistic;
+use Battle\Result\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
 use Tests\Battle\Factory\UnitFactory;

@@ -13,7 +13,7 @@ use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Result\Scenario\Scenario;
-use Battle\Statistic\Statistic;
+use Battle\Result\Statistic\Statistic;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Exception;
