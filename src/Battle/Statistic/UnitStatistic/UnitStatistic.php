@@ -19,6 +19,11 @@ class UnitStatistic implements UnitStatisticInterface
     private $causedDamage = 0;
 
     /**
+     * @var int - Количество ударов юнита
+     */
+    private $hits = 0;
+
+    /**
      * @var int - Полученный юнитом урон
      */
     private $takenDamage = 0;
@@ -58,6 +63,14 @@ class UnitStatistic implements UnitStatisticInterface
     }
 
     /**
+     *
+     */
+    public function addHit(): void
+    {
+        $this->hits++;
+    }
+
+    /**
      * @param int $damage
      */
     public function addTakenDamage(int $damage): void
@@ -84,6 +97,14 @@ class UnitStatistic implements UnitStatisticInterface
     public function getCausedDamage(): int
     {
         return $this->causedDamage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHits(): int
+    {
+        return $this->hits;
     }
 
     /**

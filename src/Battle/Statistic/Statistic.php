@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Statistic;
 
+use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
@@ -96,6 +97,7 @@ class Statistic implements StatisticInterface
      * Добавляет действие юнита для расчета суммарного полученного и нанесенного урона
      *
      * @param ActionInterface $action
+     * @throws ActionException
      * @throws StatisticException
      */
     public function addUnitAction(ActionInterface $action): void
@@ -168,12 +170,14 @@ class Statistic implements StatisticInterface
      *
      * @param ActionInterface $action
      * @throws StatisticException
+     * @throws ActionException
      */
     private function countingCausedDamage(ActionInterface $action): void
     {
         if (!$this->unitsStatistics->exist($action->getActionUnit()->getId())) {
             $unit = new UnitStatistic($action->getActionUnit());
             $unit->addCausedDamage($action->getFactualPower());
+            $unit->addHit();
 
             $defendUnit = $action->getTargetUnit();
             if (!$defendUnit->isAlive()) {
@@ -190,6 +194,7 @@ class Statistic implements StatisticInterface
             }
 
             $unit->addCausedDamage($action->getFactualPower());
+            $unit->addHit();
         }
     }
 
@@ -197,6 +202,7 @@ class Statistic implements StatisticInterface
      * Суммирует полученный урон юнитом
      *
      * @param ActionInterface $action
+     * @throws ActionException
      * @throws StatisticException
      */
     private function countingTakenDamage(ActionInterface $action): void

@@ -21,6 +21,11 @@ interface UnitStatisticInterface
     public function addCausedDamage(int $damage): void;
 
     /**
+     * Добавляет один нанесенный удар
+     */
+    public function addHit(): void;
+
+    /**
      * Добавляет полученный юнитом урон
      *
      * @param int $damage
@@ -45,6 +50,13 @@ interface UnitStatisticInterface
      * @return int
      */
     public function getCausedDamage(): int;
+
+    /**
+     * Возвращает суммарное количество ударов юнита
+     *
+     * @return int
+     */
+    public function getHits(): int;
 
     /**
      * Возвращает суммарный полученный урон юнитом

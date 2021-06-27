@@ -53,10 +53,11 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
     <div class="statistics_box">
         <table class="statistics">
             <tr class="header">
-                <td colspan="5"><p><?= $result->getTranslation()->trans('Statistics') ?></p></td>
+                <td colspan="6"><p><?= $result->getTranslation()->trans('Statistics') ?></p></td>
             </tr>
             <tr class="header">
                 <td><p><span class="stat_unit"><?= $result->getTranslation()->trans('Unit') ?></span></p></td>
+                <td><p><span class="stat_damage"><?= $result->getTranslation()->trans('Hits') ?></span></p></td>
                 <td><p><span class="stat_damage"><?= $result->getTranslation()->trans('Caused Damage') ?></span></p></td>
                 <td><p><span class="stat_taken"><?= $result->getTranslation()->trans('Taken Damage') ?></span></p></td>
                 <td><p><span class="stat_heal"><?= $result->getTranslation()->trans('Heal') ?></span></p></td>
@@ -74,6 +75,7 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
                             <?= $unit->getUnit()->getTotalLife() ?>
                         </p>
                     </td>
+                    <td><p><span class="stat_damage"><?= $unit->getHits() ?></span></p></td>
                     <td><p><span class="stat_damage"><?= $unit->getCausedDamage() ?></span></p></td>
                     <td><p><span class="stat_taken"><?= $unit->getTakenDamage() ?></span></p></td>
                     <td><p><span class="stat_heal"><?= $unit->getHeal() ?></span></p></td>
@@ -82,19 +84,19 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
             <?php endforeach; ?>
             <tr>
                 <td><p class="right"><?= $result->getTranslation()->trans('Total rounds') ?>:</p></td>
-                <td colspan="4"><p class="left"><?= $result->getStatistic()->getRoundNumber() ?></p></td>
+                <td colspan="5"><p class="left"><?= $result->getStatistic()->getRoundNumber() ?></p></td>
             </tr>
             <tr>
                 <td><p class="right"><?= $result->getTranslation()->trans('Total stroke') ?>:</p></td>
-                <td colspan="4"><p class="left"><?= $result->getStatistic()->getStrokeNumber() ?></p></td>
+                <td colspan="5"><p class="left"><?= $result->getStatistic()->getStrokeNumber() ?></p></td>
             </tr>
             <tr>
                 <td><p class="right"><?= $result->getTranslation()->trans('Runtime') ?>:</p></td>
-                <td colspan="4"><p class="left"><?= $result->getStatistic()->getRuntime() ?> ms</p></td>
+                <td colspan="5"><p class="left"><?= $result->getStatistic()->getRuntime() ?> ms</p></td>
             </tr>
             <tr>
                 <td><p class="right"><?= $result->getTranslation()->trans('Memory cost') ?>:</p></td>
-                <td colspan="4"><p class="left"><?= $result->getStatistic()->getMemoryCostClipped() ?></p></td>
+                <td colspan="5"><p class="left"><?= $result->getStatistic()->getMemoryCostClipped() ?></p></td>
             </tr>
         </table>
     </div>

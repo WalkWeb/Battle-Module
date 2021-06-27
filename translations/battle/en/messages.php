@@ -27,6 +27,7 @@ return [
     // Statistics
     'Statistics'                     => 'Statistics',
     'Unit'                           => 'Unit',
+    'Hits'                           => 'Hits',
     'Caused Damage'                  => 'Caused Damage',
     'Taken Damage'                   => 'Taken Damage',
     'Heal'                           => 'Heal',

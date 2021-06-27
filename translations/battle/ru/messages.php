@@ -27,6 +27,7 @@ return [
     // Statistics
     'Statistics'                     => 'Статистика',
     'Unit'                           => 'Кто',
+    'Hits'                           => 'Ударов',
     'Caused Damage'                  => 'Нанес урона',
     'Taken Damage'                   => 'Получил урона',
     'Heal'                           => 'Вылечил',
