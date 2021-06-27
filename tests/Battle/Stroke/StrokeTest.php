@@ -9,6 +9,7 @@ use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandFactory;
 use Battle\Result\Scenario\Scenario;
 use Battle\Statistic\Statistic;
+use Battle\Translation\Translation;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke\Stroke;
@@ -33,7 +34,7 @@ class StrokeTest extends TestCase
 
         $chat = new Chat();
 
-        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), $chat, new Scenario());
+        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), $chat, new Scenario(), new Translation());
         $stroke->handle();
 
         self::assertEquals($rightUnit->getTotalLife() - $leftUnit->getDamage(), $rightUnit->getLife());
@@ -61,7 +62,7 @@ class StrokeTest extends TestCase
         $leftCommand = CommandFactory::create([$leftUnit]);
         $rightCommand = CommandFactory::create([$rightUnit]);
 
-        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat(), new Scenario());
+        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat(), new Scenario(), new Translation());
 
         // Для теста достаточно того, что выполнение хода завершилось без ошибок
         $stroke->handle();
@@ -86,7 +87,7 @@ class StrokeTest extends TestCase
             $alliesUnit->newRound();
         }
 
-        $stroke = new Stroke(1, $alliesUnit, $alliesCommand, $enemyCommand, new Statistic(), new FullLog(), new Chat(), new Scenario());
+        $stroke = new Stroke(1, $alliesUnit, $alliesCommand, $enemyCommand, new Statistic(), new FullLog(), new Chat(), new Scenario(), new Translation());
 
         $stroke->handle();
 

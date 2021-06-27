@@ -2,6 +2,7 @@
 
 use Battle\Command\CommandInterface;
 use Battle\View\ViewException;
+use Battle\View\ViewInterface;
 
 if (empty($leftCommand) || !($leftCommand instanceof CommandInterface)) {
     throw new ViewException(ViewException::MISSING_COMMAND);
@@ -11,20 +12,24 @@ if (empty($rightCommand) || !($rightCommand instanceof CommandInterface)) {
     throw new ViewException(ViewException::MISSING_COMMAND);
 }
 
+if (empty($this) || !($this instanceof ViewInterface)) {
+    throw new ViewException(ViewException::MISSING_VIEW);
+}
+
 ?>
 <div class="units_stats_box">
     <table class="units_stats">
         <tr class="header">
-            <td><p>Command</p></td>
-            <td><p>Name</p></td>
-            <td><p>Race</p></td>
-            <td><p>Life</p></td>
-            <td><p>Damage</p></td>
-            <td><p>Concentration</p></td>
-            <td><p>Rage</p></td>
-            <td><p>Melee?</p></td>
-            <td><p>Action?</p></td>
-            <td><p>Alive?</p></td>
+            <td><p><?= $this->getTranslation()->trans('Command') ?></p></td>
+            <td><p><?= $this->getTranslation()->trans('Name') ?></p></td>
+            <td><p><?= $this->getTranslation()->trans('Race') ?></p></td>
+            <td><p><?= $this->getTranslation()->trans('Life') ?></p></td>
+            <td><p><?= $this->getTranslation()->trans('Damage') ?></p></td>
+            <td><p><?= $this->getTranslation()->trans('Concentration') ?></p></td>
+            <td><p><?= $this->getTranslation()->trans('Rage') ?></p></td>
+            <td><p><?= $this->getTranslation()->trans('Melee') ?>?</p></td>
+            <td><p><?= $this->getTranslation()->trans('Action') ?>?</p></td>
+            <td><p><?= $this->getTranslation()->trans('Alive') ?>?</p></td>
         </tr>
         <?php foreach ($leftCommand->getUnits() as $unit): ?>
             <tr>
@@ -40,9 +45,9 @@ if (empty($rightCommand) || !($rightCommand instanceof CommandInterface)) {
                 <td><p><?= $unit->getDamage() ?></p></td>
                 <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONS ?></p></td>
                 <td><p><?= $unit->getRage() ?>/<?= $unit::MAX_RAGE ?></p></td>
-                <td><p><?= ($unit->isMelee() ? 'Yes' : 'No') ?></p></td>
-                <td><p><?= ($unit->isAction() ? 'Yes' : 'No') ?></p></td>
-                <td><p><?= ($unit->isAlive() ? 'Yes' : 'No') ?></p></td>
+                <td><p><?= ($unit->isMelee() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
+                <td><p><?= ($unit->isAction() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
+                <td><p><?= ($unit->isAlive() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
             </tr>
         <?php endforeach; ?>
         <?php foreach ($rightCommand->getUnits() as $unit): ?>
@@ -59,9 +64,9 @@ if (empty($rightCommand) || !($rightCommand instanceof CommandInterface)) {
                 <td><p><?= $unit->getDamage() ?></p></td>
                 <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONS ?></p></td>
                 <td><p><?= $unit->getRage() ?>/<?= $unit::MAX_RAGE ?></p></td>
-                <td><p><?= ($unit->isMelee() ? 'Yes' : 'No') ?></p></td>
-                <td><p><?= ($unit->isAction() ? 'Yes' : 'No') ?></p></td>
-                <td><p><?= ($unit->isAlive() ? 'Yes' : 'No') ?></p></td>
+                <td><p><?= ($unit->isMelee() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
+                <td><p><?= ($unit->isAction() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
+                <td><p><?= ($unit->isAlive() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
             </tr>
         <?php endforeach; ?>
     </table>

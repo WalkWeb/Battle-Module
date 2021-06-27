@@ -9,6 +9,7 @@ use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Statistic\Statistic;
+use Battle\Translation\Translation;
 use Battle\Unit\UnitInterface;
 
 class StrokeFactory
@@ -26,6 +27,7 @@ class StrokeFactory
      * @param FullLog $fullLog
      * @param Chat $chat
      * @param ScenarioInterface $scenario
+     * @param Translation $translation
      * @param bool|null $debug
      * @return StrokeInterface
      */
@@ -38,6 +40,7 @@ class StrokeFactory
         FullLog $fullLog,
         Chat $chat,
         ScenarioInterface $scenario,
+        Translation $translation,
         ?bool $debug = false
     ): StrokeInterface
     {
@@ -50,6 +53,7 @@ class StrokeFactory
             $fullLog,
             $chat,
             $scenario,
+            $translation,
             $debug
         );
     }

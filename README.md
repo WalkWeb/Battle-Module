@@ -38,12 +38,11 @@ $data = [
         'command'      => 2,
     ],
 ];
-
-$view = (new ViewFactory())->create();
-echo $view->renderHead(); // example layout styles
-
 $battle = BattleFactory::create($data);
 $result = $battle->handle();
+
+$view = (new ViewFactory())->create($battle->getTranslation());
+echo $view->renderHead(); // example layout styles
 echo $view->renderResult($result);
 ```
 
@@ -95,7 +94,8 @@ echo $view->renderResult($result);
 
 ## Планы
 
-- Добавить translations в статистику по юнитам
+- Убрать исключение в Translation::trans()
+- Добавить контейнер, т.к. зависимостей в классах становится все больше, и тащить их все через конструкторы уже неудобно
 - Добавить подсчет атак в статистике
 - Добавить конвертацию характеристик юнита в array и json
 - Добавить анимацию призыва

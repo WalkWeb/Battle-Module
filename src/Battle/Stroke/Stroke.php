@@ -10,6 +10,7 @@ use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Statistic\Statistic;
 use Battle\Result\FullLog\FullLog;
 use Battle\Statistic\StatisticInterface;
+use Battle\Translation\Translation;
 use Battle\Unit\UnitInterface;
 use Battle\View\ViewFactory;
 use Exception;
@@ -83,6 +84,11 @@ class Stroke implements StrokeInterface
     private $viewFactory;
 
     /**
+     * @var Translation
+     */
+    private $translation;
+
+    /**
      * @param int $actionCommand
      * @param UnitInterface $actionUnit
      * @param CommandInterface $leftCommand
@@ -91,6 +97,7 @@ class Stroke implements StrokeInterface
      * @param FullLog $fullLog
      * @param Chat $chat
      * @param ScenarioInterface $scenario
+     * @param Translation $translation
      * @param bool|null $debug
      * @param ViewFactory|null $viewFactory
      */
@@ -103,6 +110,7 @@ class Stroke implements StrokeInterface
         FullLog $fullLog,
         Chat $chat,
         ScenarioInterface $scenario,
+        Translation $translation,
         ?bool $debug = false,
         ?ViewFactory $viewFactory = null
     )
@@ -115,6 +123,7 @@ class Stroke implements StrokeInterface
         $this->fullLog = $fullLog;
         $this->chat = $chat;
         $this->scenario = $scenario;
+        $this->translation = $translation;
         $this->debug = $debug;
         $this->viewFactory = $viewFactory ?? new ViewFactory();
     }
@@ -126,7 +135,7 @@ class Stroke implements StrokeInterface
      */
     public function handle(): void
     {
-        $view = $this->viewFactory->create();
+        $view = $this->viewFactory->create($this->translation);
         $this->fullLog->add($view->getUnitsStats($this->leftCommand, $this->rightCommand));
 
         //--------------------------------------------------------------------------------------------------------------

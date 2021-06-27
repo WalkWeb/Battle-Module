@@ -6,6 +6,7 @@ namespace Battle\View;
 
 use Battle\Command\CommandInterface;
 use Battle\Result\ResultInterface;
+use Battle\Translation\Translation;
 use Battle\Unit\UnitInterface;
 
 interface ViewInterface
@@ -51,4 +52,11 @@ interface ViewInterface
      * @return string
      */
     public function getUnitsStats(CommandInterface $leftCommand, CommandInterface $rightCommand): string;
+
+    /**
+     * Возвращает объект отвечающий за мультиязычность
+     *
+     * @return Translation
+     */
+    public function getTranslation(): Translation;
 }

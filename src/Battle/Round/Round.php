@@ -164,6 +164,7 @@ class Round implements RoundInterface
                     $this->fullLog,
                     $this->chat,
                     $this->scenario,
+                    $this->translation,
                     $this->debug
                 );
 

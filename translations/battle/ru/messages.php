@@ -56,4 +56,17 @@ return [
     'Priest'                         => 'Священник',
     'Dead Knight'                    => 'Мертвый Рыцарь',
     'Dark Mage'                      => 'Маг тьмы',
+    // Full Log Units stats table
+    'Command'                        => 'Команда',
+    'Name'                           => 'Имя',
+    'Race'                           => 'Раса',
+    'Life'                           => 'Здоровье',
+    'Damage'                         => 'Урон',
+    'Concentration'                  => 'Концентрация',
+    'Rage'                           => 'Ярость',
+    'Melee'                          => 'Ближний бой',
+    'Action'                         => 'Ходил',
+    'Alive'                          => 'Живой',
+    'Yes'                            => 'Да',
+    'No'                             => 'Нет',
 ];

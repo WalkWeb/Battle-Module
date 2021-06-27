@@ -6,6 +6,7 @@ namespace Battle\View;
 
 use Battle\Command\CommandInterface;
 use Battle\Result\ResultInterface;
+use Battle\Translation\Translation;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
@@ -18,6 +19,11 @@ class View implements ViewInterface
      * @var string
      */
     private $templateDir;
+
+    /**
+     * @var Translation
+     */
+    private $translation;
 
     /**
      * @var string
@@ -45,6 +51,7 @@ class View implements ViewInterface
     private $unitsStatsTemplate;
 
     /**
+     * @param Translation $translation
      * @param string $templateDir
      * @param string $headTemplate
      * @param string $resultTemplate
@@ -53,6 +60,7 @@ class View implements ViewInterface
      * @param string $unitsStatsTemplate
      */
     public function __construct(
+        Translation $translation,
         string $templateDir,
         string $headTemplate,
         string $resultTemplate,
@@ -61,6 +69,7 @@ class View implements ViewInterface
         string $unitsStatsTemplate
     )
     {
+        $this->translation = $translation;
         $this->templateDir = $templateDir;
         $this->headTemplate = $headTemplate;
         $this->resultTemplate = $resultTemplate;
@@ -167,6 +176,14 @@ class View implements ViewInterface
         require $this->templateDir . $this->unitsStatsTemplate;
 
         return ob_get_clean();
+    }
+
+    /**
+     * @return Translation
+     */
+    public function getTranslation(): Translation
+    {
+        return $this->translation;
     }
 
     /**

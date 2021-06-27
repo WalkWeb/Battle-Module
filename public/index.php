@@ -79,12 +79,11 @@ $data = [
 ];
 
 try {
-
-    $view = (new ViewFactory())->create();
-    echo $view->renderHead(); // example layout styles
-
     $battle = BattleFactory::create($data);
     $result = $battle->handle();
+
+    $view = (new ViewFactory())->create($battle->getTranslation());
+    echo $view->renderHead(); // example layout styles
     echo $view->renderResult($result);
 
 } catch (Exception $e) {

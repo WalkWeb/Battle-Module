@@ -59,6 +59,7 @@ class Translation implements TranslationInterface
             return $message;
         }
 
+        // TODO Не возвращать ли в этом случае тот же $message? Чтобы избавиться от исключения во вьюхах
         if (!is_string($this->messages[$message])) {
             throw new TranslationException(TranslationException::MESSAGE_SHOULD_BE_STRING);
         }

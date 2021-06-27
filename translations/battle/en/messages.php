@@ -56,4 +56,17 @@ return [
     'Priest'                         => 'Priest',
     'Dead Knight'                    => 'Dead Knight',
     'Dark Mage'                      => 'Dark Mage',
+    // Full Log Units stats table
+    'Command'                        => 'Command',
+    'Name'                           => 'Name',
+    'Race'                           => 'Race',
+    'Life'                           => 'Life',
+    'Damage'                         => 'Damage',
+    'Concentration'                  => 'Concentration',
+    'Rage'                           => 'Rage',
+    'Melee'                          => 'Melee',
+    'Action'                         => 'Action',
+    'Alive'                          => 'Alive',
+    'Yes'                            => 'Yes',
+    'No'                             => 'No',
 ];
