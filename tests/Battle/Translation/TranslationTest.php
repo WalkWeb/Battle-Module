@@ -73,10 +73,7 @@ class TranslationTest extends TestCase
 
         $translation = new Translation($language, $messages);
 
-        $this->expectException(TranslationException::class);
-        $this->expectExceptionMessage(TranslationException::MESSAGE_SHOULD_BE_STRING);
-
-        $translation->trans('hello');
+        self::assertEquals('hello', $translation->trans('hello'));
     }
 
     /**

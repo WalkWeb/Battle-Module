@@ -51,7 +51,6 @@ class Translation implements TranslationInterface
     /**
      * @param string $message
      * @return string
-     * @throws TranslationException
      */
     public function trans(string $message): string
     {
@@ -59,9 +58,9 @@ class Translation implements TranslationInterface
             return $message;
         }
 
-        // TODO Не возвращать ли в этом случае тот же $message? Чтобы избавиться от исключения во вьюхах
+        // Просто возвращаем тот же $message, чтобы не бросать исключения во вьюхах
         if (!is_string($this->messages[$message])) {
-            throw new TranslationException(TranslationException::MESSAGE_SHOULD_BE_STRING);
+            return $message;
         }
 
         return $this->messages[$message];
