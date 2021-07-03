@@ -10,6 +10,8 @@ use Battle\Translation\Translation;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
+// TODO Проверка на наличие файлов шаблонов
+
 /**
  * @package Battle\View
  */
@@ -48,6 +50,11 @@ class View implements ViewInterface
     /**
      * @var string
      */
+    private $unitFullLogTemplate;
+
+    /**
+     * @var string
+     */
     private $unitsStatsTemplate;
 
     /**
@@ -57,6 +64,7 @@ class View implements ViewInterface
      * @param string $resultTemplate
      * @param string $rowTemplate
      * @param string $unitTemplate
+     * @param string $unitFullLogTemplate
      * @param string $unitsStatsTemplate
      */
     public function __construct(
@@ -66,6 +74,7 @@ class View implements ViewInterface
         string $resultTemplate,
         string $rowTemplate,
         string $unitTemplate,
+        string $unitFullLogTemplate,
         string $unitsStatsTemplate
     )
     {
@@ -74,7 +83,9 @@ class View implements ViewInterface
         $this->headTemplate = $headTemplate;
         $this->resultTemplate = $resultTemplate;
         $this->rowTemplate = $rowTemplate;
+        $this->unitFullLogTemplate = $unitFullLogTemplate;
         $this->unitTemplate = $unitTemplate;
+
         $this->unitsStatsTemplate = $unitsStatsTemplate;
     }
 
@@ -113,10 +124,11 @@ class View implements ViewInterface
      *
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
+     * @param bool $fullLog
      * @return string
      * @throws UnitException
      */
-    public function renderCommandView(CommandInterface $leftCommand, CommandInterface $rightCommand): string
+    public function renderCommandView(CommandInterface $leftCommand, CommandInterface $rightCommand, bool $fullLog = false): string
     {
         $leftMeleeUnits = '';
         $leftRangeUnits = '';
@@ -124,19 +136,19 @@ class View implements ViewInterface
         $rightRangeUnits = '';
 
         foreach ($leftCommand->getMeleeUnits() as $unit) {
-            $leftMeleeUnits .= $this->getUnitView($unit);
+            $leftMeleeUnits .= $fullLog ? $this->getStatUnitView($unit) : $this->getUnitView($unit);
         }
 
         foreach ($leftCommand->getRangeUnits() as $unit) {
-            $leftRangeUnits .= $this->getUnitView($unit);
+            $leftRangeUnits .= $fullLog ? $this->getStatUnitView($unit) : $this->getUnitView($unit);
         }
 
         foreach ($rightCommand->getMeleeUnits() as $unit) {
-            $rightMeleeUnits .= $this->getUnitView($unit);
+            $rightMeleeUnits .= $fullLog ? $this->getStatUnitView($unit) : $this->getUnitView($unit);
         }
 
         foreach ($rightCommand->getRangeUnits() as $unit) {
-            $rightRangeUnits .= $this->getUnitView($unit);
+            $rightRangeUnits .= $fullLog ? $this->getStatUnitView($unit) : $this->getUnitView($unit);
         }
 
         ob_start();
@@ -158,6 +170,20 @@ class View implements ViewInterface
         ob_start();
 
         require $this->templateDir . $this->unitTemplate;
+
+        return ob_get_clean();
+    }
+
+    /**
+     * @uses getWidth, getBgClass
+     * @param UnitInterface $unit
+     * @return string
+     */
+    public function getStatUnitView(UnitInterface $unit): string
+    {
+        ob_start();
+
+        require $this->templateDir . $this->unitFullLogTemplate;
 
         return ob_get_clean();
     }

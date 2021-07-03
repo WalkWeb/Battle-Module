@@ -20,6 +20,7 @@ class ViewFactory
      * @param string|null $resultTemplate
      * @param string|null $rowTemplate
      * @param string|null $unitTemplate
+     * @param string $unitFullLogTemplate
      * @param string|null $unitsStatsTemplate
      * @return ViewInterface
      */
@@ -30,6 +31,7 @@ class ViewFactory
         string $resultTemplate = 'battle/result.template.php',
         string $rowTemplate = 'battle/row.template.php',
         string $unitTemplate = 'battle/unit/unit.template.php',
+        string $unitFullLogTemplate = 'battle/unit/unit_full_log.template.php',
         string $unitsStatsTemplate = 'battle/unit/units_stats.template.php'
 
     ): ViewInterface
@@ -41,6 +43,7 @@ class ViewFactory
             $resultTemplate,
             $rowTemplate,
             $unitTemplate,
+            $unitFullLogTemplate,
             $unitsStatsTemplate
         );
     }

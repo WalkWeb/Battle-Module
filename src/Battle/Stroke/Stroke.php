@@ -117,7 +117,7 @@ class Stroke implements StrokeInterface
 
         $this->actionUnit->madeAction();
 
-        $this->container->getFullLog()->add($view->renderCommandView($this->leftCommand, $this->rightCommand));
+        $this->container->getFullLog()->add($view->renderCommandView($this->leftCommand, $this->rightCommand, true));
         $this->container->getFullLog()->add($view->getUnitsStats($this->leftCommand, $this->rightCommand));
     }
 }

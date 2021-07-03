@@ -32,9 +32,10 @@ interface ViewInterface
      *
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
+     * @param bool $fullLog
      * @return string
      */
-    public function renderCommandView(CommandInterface $leftCommand, CommandInterface $rightCommand): string;
+    public function renderCommandView(CommandInterface $leftCommand, CommandInterface $rightCommand, bool $fullLog = false): string;
 
     /**
      * Генерирует html-код для отображения юнита
