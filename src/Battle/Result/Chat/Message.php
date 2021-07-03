@@ -11,6 +11,8 @@ use Battle\Action\Summon\SummonAction;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationException;
 
+// todo add interface
+
 class Message
 {
     /**

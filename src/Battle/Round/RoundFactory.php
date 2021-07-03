@@ -4,13 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Round;
 
-use Battle\Result\Chat\Chat;
-use Battle\Result\FullLog\FullLog;
+use Battle\Container\ContainerInterface;
 use Battle\Command\CommandInterface;
-use Battle\Result\Scenario\ScenarioInterface;
-use Battle\Result\Statistic\Statistic;
-use Battle\Stroke\StrokeFactory;
-use Battle\Translation\Translation;
 
 class RoundFactory
 {
@@ -22,13 +17,8 @@ class RoundFactory
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param int $actionCommand
-     * @param Statistic $statistics
-     * @param FullLog $fullLog
-     * @param Chat $chat
-     * @param ScenarioInterface $scenario
+     * @param ContainerInterface $container
      * @param bool|null $debug
-     * @param Translation|null $translation
-     * @param StrokeFactory|null $strokeFactory
      * @return RoundInterface
      * @throws RoundException
      */
@@ -36,26 +26,16 @@ class RoundFactory
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         int $actionCommand,
-        Statistic $statistics,
-        FullLog $fullLog,
-        Chat $chat,
-        ScenarioInterface $scenario,
-        ?bool $debug = false,
-        ?Translation $translation = null,
-        ?StrokeFactory $strokeFactory = null
+        ContainerInterface $container,
+        ?bool $debug = false
     ): RoundInterface
     {
         return new Round(
             $leftCommand,
             $rightCommand,
             $actionCommand,
-            $statistics,
-            $fullLog,
-            $chat,
-            $scenario,
-            $debug,
-            $strokeFactory,
-            $translation
+            $container,
+            $debug
         );
     }
 }

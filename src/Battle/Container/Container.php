@@ -6,6 +6,7 @@ namespace Battle\Container;
 
 use Battle\BattleFactory;
 use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\Message;
 use Battle\Result\FullLog\FullLog;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Scenario\ScenarioInterface;
@@ -15,6 +16,7 @@ use Battle\Round\RoundFactory;
 use Battle\Stroke\StrokeFactory;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationInterface;
+use Battle\View\ViewFactory;
 
 class Container implements ContainerInterface
 {
@@ -32,12 +34,16 @@ class Container implements ContainerInterface
         'Scenario'                  => Scenario::class,
         FullLog::class              => FullLog::class,
         'FullLog'                   => FullLog::class,
+        Message::class              => Message::class,
+        'Message'                   => Message::class,
         BattleFactory::class        => BattleFactory::class,
         'BattleFactory'             => BattleFactory::class,
         RoundFactory::class         => RoundFactory::class,
         'RoundFactory'              => RoundFactory::class,
         StrokeFactory::class        => StrokeFactory::class,
         'StrokeFactory'             => StrokeFactory::class,
+        ViewFactory::class          => ViewFactory::class,
+        'ViewFactory'               => ViewFactory::class,
     ];
 
     private $storage = [];
@@ -72,6 +78,116 @@ class Container implements ContainerInterface
             // быть добавлен. Если будет добавлен метод set(), то данную механику нужно будет переделывать
             return false;
         }
+    }
+
+    /**
+     * @return StatisticInterface
+     * @throws ContainerException
+     */
+    public function getStatistic(): StatisticInterface
+    {
+        /** @var StatisticInterface $service */
+        $service = $this->get(StatisticInterface::class);
+        return $service;
+    }
+
+    /**
+     * @return Chat
+     * @throws ContainerException
+     */
+    public function getChat(): Chat
+    {
+        /** @var Chat $service */
+        $service = $this->get(Chat::class);
+        return $service;
+    }
+
+    /**
+     * @return TranslationInterface
+     * @throws ContainerException
+     */
+    public function getTranslation(): TranslationInterface
+    {
+        /** @var TranslationInterface $service */
+        $service = $this->get(TranslationInterface::class);
+        return $service;
+    }
+
+    /**
+     * @return ScenarioInterface
+     * @throws ContainerException
+     */
+    public function getScenario(): ScenarioInterface
+    {
+        /** @var ScenarioInterface $service */
+        $service = $this->get(ScenarioInterface::class);
+        return $service;
+    }
+
+    /**
+     * @return FullLog
+     * @throws ContainerException
+     */
+    public function getFullLog(): FullLog
+    {
+        /** @var FullLog $service */
+        $service = $this->get(FullLog::class);
+        return $service;
+    }
+
+    /**
+     * @return Message
+     * @throws ContainerException
+     */
+    public function getMessage(): Message
+    {
+        /** @var Message $service */
+        $service = $this->get(Message::class);
+        return $service;
+    }
+
+    /**
+     * @return BattleFactory
+     * @throws ContainerException
+     */
+    public function getBattleFactory(): BattleFactory
+    {
+        /** @var BattleFactory $service */
+        $service = $this->get(BattleFactory::class);
+        return $service;
+    }
+
+    /**
+     * @return ViewFactory
+     * @throws ContainerException
+     */
+    public function getViewFactory(): ViewFactory
+    {
+        /** @var ViewFactory $service */
+        $service = $this->get(ViewFactory::class);
+        return $service;
+    }
+
+    /**
+     * @return RoundFactory
+     * @throws ContainerException
+     */
+    public function getRoundFactory(): RoundFactory
+    {
+        /** @var RoundFactory $service */
+        $service = $this->get(RoundFactory::class);
+        return $service;
+    }
+
+    /**
+     * @return StrokeFactory
+     * @throws ContainerException
+     */
+    public function getStrokeFactory(): StrokeFactory
+    {
+        /** @var StrokeFactory $service */
+        $service = $this->get(StrokeFactory::class);
+        return $service;
     }
 
     /**

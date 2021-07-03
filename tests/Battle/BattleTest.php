@@ -4,19 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Battle;
 
+use Exception;
 use Battle\BattleException;
 use Battle\BattleFactory;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
-use Battle\Result\Chat\Chat;
-use Battle\Result\FullLog\FullLog;
-use Battle\Result\Statistic\Statistic;
-use Battle\Translation\Translation;
+use Battle\Container\Container;
 use Battle\Unit\UnitCollection;
 use PHPUnit\Framework\TestCase;
 use Battle\Battle;
 use Tests\Battle\Factory\CommandFactory;
-use Exception;
 use Tests\Battle\Factory\UnitFactory;
 
 class BattleTest extends TestCase
@@ -31,7 +28,8 @@ class BattleTest extends TestCase
         $leftCommand = CommandFactory::createLeftCommand();
         $rightCommand = CommandFactory::createRightCommand();
 
-        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat());
+        $container = new Container();
+        $battle = new Battle($leftCommand, $rightCommand, $container);
         $result = $battle->handle();
 
         self::assertEquals(2, $result->getWinner());
@@ -39,6 +37,7 @@ class BattleTest extends TestCase
         self::assertTrue($result->getStatistic()->getRoundNumber() > 2);
         self::assertTrue($result->getStatistic()->getStrokeNumber() > 4);
         self::assertTrue($battle->isDebug());
+        self::assertEquals($container->getTranslation(), $battle->getTranslation());
     }
 
     /**
@@ -134,7 +133,6 @@ class BattleTest extends TestCase
     /**
      * Тест на ситуацию, когда передана некорректная коллекция юнитов - с одинаковыми ID
      *
-     * @throws BattleException
      * @throws CommandException
      * @throws Exception
      */
@@ -145,7 +143,7 @@ class BattleTest extends TestCase
 
         $this->expectException(BattleException::class);
         $this->expectExceptionMessage(BattleException::DOUBLE_UNIT_ID);
-        new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat());
+        new Battle($leftCommand, $rightCommand, new Container());
     }
 
     /**
@@ -157,26 +155,28 @@ class BattleTest extends TestCase
         $rightCommand = CommandFactory::createRightCommand();
         $debug = false;
 
-        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat(), $debug);
+        $battle = new Battle($leftCommand, $rightCommand, new Container(), $debug);
 
         self::assertFalse($battle->isDebug());
     }
 
-    /**
-     * @throws Exception
-     */
-    public function testBattleSetTranslation(): void
-    {
-        $leftCommand = CommandFactory::createLeftCommand();
-        $rightCommand = CommandFactory::createRightCommand();
+    // todo container->set() mechanic
 
-        $language = 'ru';
-        $translator = new Translation($language);
-
-        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat(), null, null, $translator);
-
-        self::assertEquals($translator, $battle->getTranslation());
-    }
+//    /**
+//     * @throws Exception
+//     */
+//    public function testBattleSetTranslation(): void
+//    {
+//        $leftCommand = CommandFactory::createLeftCommand();
+//        $rightCommand = CommandFactory::createRightCommand();
+//
+//        $language = 'ru';
+//        $translator = new Translation($language);
+//
+//        $battle = new Battle($leftCommand, $rightCommand, new Container());
+//
+//        self::assertEquals($translator, $battle->getTranslation());
+//    }
 
     /**
      * Эмулируем коллекцию, которая будет возвращать одного и того же юнита на каждый вызов метода current()

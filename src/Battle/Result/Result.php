@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Battle\Result;
 
+use Battle\Container\ContainerException;
+use Battle\Container\ContainerInterface;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Result\Scenario\ScenarioInterface;
-use Battle\Result\Statistic\Statistic;
-use Battle\Translation\Translation;
+use Battle\Result\Statistic\StatisticInterface;
 use Battle\Translation\TranslationInterface;
 
 class Result implements ResultInterface
@@ -40,29 +41,9 @@ class Result implements ResultInterface
     private $winner;
 
     /**
-     * @var FullLog
+     * @var ContainerInterface
      */
-    private $fullLog;
-
-    /**
-     * @var Chat
-     */
-    private $chat;
-
-    /**
-     * @var Statistic
-     */
-    private $statistic;
-
-    /**
-     * @var Translation
-     */
-    private $translation;
-
-    /**
-     * @var ScenarioInterface
-     */
-    private $scenario;
+    private $container;
 
     /**
      * @param CommandInterface $startLeftCommand
@@ -70,11 +51,7 @@ class Result implements ResultInterface
      * @param CommandInterface $endLeftCommand
      * @param CommandInterface $endRightCommand
      * @param int $winner
-     * @param FullLog $fullLog
-     * @param Chat $chat
-     * @param ScenarioInterface $scenario
-     * @param Statistic $statistic
-     * @param Translation $translation
+     * @param ContainerInterface $container
      * @throws ResultException
      */
     public function __construct(
@@ -83,11 +60,7 @@ class Result implements ResultInterface
         CommandInterface $endLeftCommand,
         CommandInterface $endRightCommand,
         int $winner,
-        FullLog $fullLog,
-        Chat $chat,
-        ScenarioInterface $scenario,
-        Statistic $statistic,
-        Translation $translation
+        ContainerInterface $container
     )
     {
         if ($winner !== 1 && $winner !== 2) {
@@ -99,11 +72,7 @@ class Result implements ResultInterface
         $this->startRightCommand = $startRightCommand;
         $this->endLeftCommand = $endLeftCommand;
         $this->endRightCommand = $endRightCommand;
-        $this->fullLog = $fullLog;
-        $this->chat = $chat;
-        $this->statistic = $statistic;
-        $this->translation = $translation;
-        $this->scenario = $scenario;
+        $this->container = $container;
     }
 
     public function getStartLeftCommand(): CommandInterface
@@ -136,28 +105,48 @@ class Result implements ResultInterface
         return $this->winner === 1 ? self::LEFT_COMMAND_WIN : self::RIGHT_COMMAND_WIN;
     }
 
+    /**
+     * @return FullLog
+     * @throws ContainerException
+     */
     public function getFullLog(): FullLog
     {
-        return $this->fullLog;
+        return $this->container->getFullLog();
     }
 
+    /**
+     * @return Chat
+     * @throws ContainerException
+     */
     public function getChat(): Chat
     {
-        return $this->chat;
+        return $this->container->getChat();
     }
 
-    public function getStatistic(): Statistic
+    /**
+     * @return StatisticInterface
+     * @throws ContainerException
+     */
+    public function getStatistic(): StatisticInterface
     {
-        return $this->statistic;
+        return $this->container->getStatistic();
     }
 
+    /**
+     * @return TranslationInterface
+     * @throws ContainerException
+     */
     public function getTranslation(): TranslationInterface
     {
-        return $this->translation;
+        return $this->container->getTranslation();
     }
 
+    /**
+     * @return ScenarioInterface
+     * @throws ContainerException
+     */
     public function getScenario(): ScenarioInterface
     {
-        return $this->scenario;
+        return $this->container->getScenario();
     }
 }

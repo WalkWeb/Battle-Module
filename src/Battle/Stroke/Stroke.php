@@ -5,14 +5,8 @@ declare(strict_types=1);
 namespace Battle\Stroke;
 
 use Battle\Command\CommandInterface;
-use Battle\Result\Chat\Chat;
-use Battle\Result\Scenario\ScenarioInterface;
-use Battle\Result\Statistic\Statistic;
-use Battle\Result\FullLog\FullLog;
-use Battle\Result\Statistic\StatisticInterface;
-use Battle\Translation\Translation;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitInterface;
-use Battle\View\ViewFactory;
 use Exception;
 
 class Stroke implements StrokeInterface
@@ -46,30 +40,9 @@ class Stroke implements StrokeInterface
     private $rightCommand;
 
     /**
-     * Статистика по юнитам в бою
-     *
-     * @var Statistic
+     * @var ContainerInterface
      */
-    private $statistics;
-
-    /**
-     * Полный лог боя
-     *
-     * @var FullLog
-     */
-    private $fullLog;
-
-    /**
-     * Чат боя
-     *
-     * @var Chat
-     */
-    private $chat;
-
-    /**
-     * @var ScenarioInterface
-     */
-    private $scenario;
+    private $container;
 
     /**
      * TODO На удаление? Или на расширение механики вывода результата?
@@ -79,53 +52,29 @@ class Stroke implements StrokeInterface
     private $debug;
 
     /**
-     * @var ViewFactory
-     */
-    private $viewFactory;
-
-    /**
-     * @var Translation
-     */
-    private $translation;
-
-    /**
      * @param int $actionCommand
      * @param UnitInterface $actionUnit
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
-     * @param StatisticInterface $statistics
-     * @param FullLog $fullLog
-     * @param Chat $chat
-     * @param ScenarioInterface $scenario
-     * @param Translation $translation
+     * @param ContainerInterface $container
      * @param bool|null $debug
-     * @param ViewFactory|null $viewFactory
      */
     public function __construct(
         int $actionCommand,
         UnitInterface $actionUnit,
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
-        StatisticInterface $statistics,
-        FullLog $fullLog,
-        Chat $chat,
-        ScenarioInterface $scenario,
-        Translation $translation,
-        ?bool $debug = false,
-        ?ViewFactory $viewFactory = null
+        ContainerInterface $container,
+        ?bool $debug = false
     )
     {
         $this->actionCommand = $actionCommand;
         $this->actionUnit = $actionUnit;
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;
-        $this->statistics = $statistics;
-        $this->fullLog = $fullLog;
-        $this->chat = $chat;
-        $this->scenario = $scenario;
-        $this->translation = $translation;
+        $this->container = $container;
         $this->debug = $debug;
-        $this->viewFactory = $viewFactory ?? new ViewFactory();
+
     }
 
     /**
@@ -135,8 +84,8 @@ class Stroke implements StrokeInterface
      */
     public function handle(): void
     {
-        $view = $this->viewFactory->create($this->translation);
-        $this->fullLog->add($view->getUnitsStats($this->leftCommand, $this->rightCommand));
+        $view = $this->container->getViewFactory()->create($this->container->getTranslation());
+        $this->container->getFullLog()->add($view->getUnitsStats($this->leftCommand, $this->rightCommand));
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -158,17 +107,17 @@ class Stroke implements StrokeInterface
                 $message = $action->handle();
             }
 
-            $this->statistics->addUnitAction($action);
-            $this->scenario->addAction($action, $this->statistics);
-            $this->fullLog->add('<p>' . $message . '</p>');
-            $this->chat->add($message);
+            $this->container->getStatistic()->addUnitAction($action);
+            $this->container->getScenario()->addAction($action, $this->container->getStatistic());
+            $this->container->getFullLog()->add('<p>' . $message . '</p>');
+            $this->container->getChat()->add($message);
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
         $this->actionUnit->madeAction();
 
-        $this->fullLog->add($view->renderCommandView($this->leftCommand, $this->rightCommand));
-        $this->fullLog->add($view->getUnitsStats($this->leftCommand, $this->rightCommand));
+        $this->container->getFullLog()->add($view->renderCommandView($this->leftCommand, $this->rightCommand));
+        $this->container->getFullLog()->add($view->getUnitsStats($this->leftCommand, $this->rightCommand));
     }
 }

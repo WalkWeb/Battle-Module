@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\View;
 
 use Battle\Command\CommandFactory;
+use Battle\Container\Container;
 use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Result\Result;
@@ -410,7 +411,7 @@ EOT;
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
 
-        $result = new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, 1, new FullLog(), new Chat(), new Scenario(), new Statistic(), new Translation());
+        $result = new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, 1, new Container());
         $view = (new ViewFactory)->create();
 
         // Из-за вывода статистики, и подсчета времени выполнения в статистике, мы никогда не сможем точно узнать

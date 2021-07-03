@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Command;
 
+use Battle\Container\Container;
 use Exception;
 use Battle\Battle;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\Message;
-use Battle\Result\FullLog\FullLog;
-use Battle\Result\Statistic\Statistic;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;
@@ -257,7 +255,7 @@ class CommandTest extends TestCase
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
 
-        $battle = new Battle($leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat());
+        $battle = new Battle($leftCommand, $rightCommand, new Container());
         $result = $battle->handle();
 
         // Проверяем клонирование команд

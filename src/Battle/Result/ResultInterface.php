@@ -6,7 +6,7 @@ use Battle\Result\Chat\Chat;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Result\Scenario\ScenarioInterface;
-use Battle\Result\Statistic\Statistic;
+use Battle\Result\Statistic\StatisticInterface;
 use Battle\Translation\TranslationInterface;
 
 interface ResultInterface
@@ -73,9 +73,9 @@ interface ResultInterface
     /**
      * Возвращает статистику по бою
      *
-     * @return Statistic
+     * @return StatisticInterface
      */
-    public function getStatistic(): Statistic;
+    public function getStatistic(): StatisticInterface;
 
     /**
      * Возвращает объект отвечающий за мультиязычность

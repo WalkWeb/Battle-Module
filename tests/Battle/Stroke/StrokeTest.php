@@ -4,13 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Stroke;
 
-use Battle\Result\Chat\Chat;
-use Battle\Result\FullLog\FullLog;
-use Battle\Command\CommandFactory;
-use Battle\Result\Scenario\Scenario;
-use Battle\Result\Statistic\Statistic;
-use Battle\Translation\Translation;
 use Exception;
+use Battle\Container\Container;
+use Battle\Command\CommandFactory;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke\Stroke;
 use Tests\Battle\Factory\UnitFactory;
@@ -32,9 +28,9 @@ class StrokeTest extends TestCase
         $leftCommand = CommandFactory::create([$leftUnit]);
         $rightCommand = CommandFactory::create([$rightUnit]);
 
-        $chat = new Chat();
+        $container = new Container();
 
-        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), $chat, new Scenario(), new Translation());
+        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, $container);
         $stroke->handle();
 
         self::assertEquals($rightUnit->getTotalLife() - $leftUnit->getDamage(), $rightUnit->getLife());
@@ -46,7 +42,7 @@ class StrokeTest extends TestCase
             self::MESSAGE,
         ];
 
-        self::assertEquals($chatResultMessages, $chat->getMessages());
+        self::assertEquals($chatResultMessages, $container->getChat()->getMessages());
     }
 
     /**
@@ -62,7 +58,7 @@ class StrokeTest extends TestCase
         $leftCommand = CommandFactory::create([$leftUnit]);
         $rightCommand = CommandFactory::create([$rightUnit]);
 
-        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Statistic(), new FullLog(), new Chat(), new Scenario(), new Translation());
+        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Container());
 
         // Для теста достаточно того, что выполнение хода завершилось без ошибок
         $stroke->handle();
@@ -87,7 +83,7 @@ class StrokeTest extends TestCase
             $alliesUnit->newRound();
         }
 
-        $stroke = new Stroke(1, $alliesUnit, $alliesCommand, $enemyCommand, new Statistic(), new FullLog(), new Chat(), new Scenario(), new Translation());
+        $stroke = new Stroke(1, $alliesUnit, $alliesCommand, $enemyCommand, new Container());
 
         $stroke->handle();
 

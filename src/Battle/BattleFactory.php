@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Battle;
 
-use Battle\Result\Chat\Chat;
+use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Result\Chat\Message;
-use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Round\RoundFactory;
-use Battle\Result\Statistic\Statistic;
-use Battle\Translation\Translation;
 use Battle\Unit\UnitException;
+use Exception;
 
 class BattleFactory
 {
@@ -52,41 +50,24 @@ class BattleFactory
      * ];
      *
      * @param array $data
-     * @param Statistic|null $statistics
-     * @param FullLog|null $fullLog
-     * @param Chat|null $chat
+     * @param ContainerInterface|null $container
      * @param bool|null $debug
-     * @param RoundFactory|null $roundFactory
-     * @param Translation|null $translation
-     * @param Message|null $message
      * @return BattleInterface
-     * @throws BattleException
-     * @throws CommandException
-     * @throws UnitException
+     * @throws Exception
      */
     public static function create(
         array $data,
-        ?Statistic $statistics = null,
-        ?FullLog $fullLog = null,
-        ?Chat $chat = null,
-        ?bool $debug = true,
-        ?RoundFactory $roundFactory = null,
-        ?Translation $translation = null,
-        ?Message $message = null
+        ?ContainerInterface $container = null,
+        ?bool $debug = true
     ): BattleInterface
     {
-        $translation = $translation ?? new Translation();
-        $message = $message ?? new Message($translation);
+        $container = $container ?? new Container();
 
         return new Battle(
-            self::createCommand($data, BattleInterface::LEFT_COMMAND, $message),
-            self::createCommand($data, BattleInterface::RIGHT_COMMAND, $message),
-            $statistics ?? new Statistic(),
-            $fullLog ?? new FullLog(),
-            $chat ?? new Chat(),
-            $debug,
-            $roundFactory,
-            $translation
+            self::createCommand($data, BattleInterface::LEFT_COMMAND, $container->getMessage()),
+            self::createCommand($data, BattleInterface::RIGHT_COMMAND, $container->getMessage()),
+            $container,
+            $debug
         );
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\View;
 
 use Battle\Translation\Translation;
+use Battle\Translation\TranslationInterface;
 
 class ViewFactory
 {
@@ -13,7 +14,7 @@ class ViewFactory
      *
      * Фабрика простая, и создана для того, чтобы в Stroke отвязаться от конкретной реализации
      *
-     * @param Translation|null $translation
+     * @param TranslationInterface|null $translation
      * @param string|null $templateDir
      * @param string|null $headTemplate
      * @param string|null $resultTemplate
@@ -23,7 +24,7 @@ class ViewFactory
      * @return ViewInterface
      */
     public function create(
-        ?Translation $translation = null,
+        ?TranslationInterface $translation = null,
         string $templateDir = __DIR__ . '/../../../templates/',
         string $headTemplate = 'battle/head.template.php',
         string $resultTemplate = 'battle/result.template.php',

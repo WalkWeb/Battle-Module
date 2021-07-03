@@ -3,7 +3,7 @@
 namespace Battle;
 
 use Battle\Result\ResultInterface;
-use Battle\Translation\Translation;
+use Battle\Translation\TranslationInterface;
 
 interface BattleInterface
 {
@@ -28,7 +28,7 @@ interface BattleInterface
     /**
      * Возвращает установленный Translation в модуле боя
      *
-     * @return Translation
+     * @return TranslationInterface
      */
-    public function getTranslation(): Translation;
+    public function getTranslation(): TranslationInterface;
 }

@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Battle;
 
-use Battle\Result\Chat\Chat;
-use Battle\Result\FullLog\FullLog;
+use Battle\Container\ContainerException;
 use Battle\Command\CommandInterface;
-use Battle\Result\Scenario\Scenario;
-use Battle\Result\Scenario\ScenarioInterface;
-use Battle\Round\RoundFactory;
-use Battle\Result\Statistic\Statistic;
+use Battle\Container\ContainerInterface;
 use Battle\Translation\Translation;
-use Battle\Translation\TranslationInterface;
 use Battle\Result\Result;
 use Battle\Result\ResultInterface;
+use Battle\Translation\TranslationInterface;
 use Exception;
 
 class Battle implements BattleInterface
@@ -34,60 +30,29 @@ class Battle implements BattleInterface
     /** @var bool */
     private $debug;
 
-    /** @var Statistic */
-    private $statistics;
-
-    /** @var FullLog */
-    private $fullLog;
-
-    /** @var Chat */
-    private $chat;
-
-    /** @var RoundFactory */
-    private $roundFactory;
-
-    /** @var Translation */
-    private $translation;
-
-    /** @var ScenarioInterface */
-    private $scenario;
+    /** @var ContainerInterface */
+    private $container;
 
     /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
-     * @param Statistic $statistics
-     * @param FullLog $fullLog
-     * @param Chat $chat
+     * @param ContainerInterface $container
      * @param bool|null $debug
-     * @param RoundFactory|null $roundFactory
-     * @param TranslationInterface|null $translation
-     * @param ScenarioInterface|null $scenario
-     * @throws BattleException
      * @throws Exception
      */
     public function __construct(
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
-        Statistic $statistics,
-        FullLog $fullLog,
-        Chat $chat,
-        ?bool $debug = true,
-        ?RoundFactory $roundFactory = null,
-        ?TranslationInterface $translation = null,
-        ?ScenarioInterface $scenario = null
+        ContainerInterface $container,
+        ?bool $debug = true
     )
     {
         $this->checkDoubleUnitId($leftCommand, $rightCommand);
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;
-        $this->statistics = $statistics;
-        $this->fullLog = $fullLog;
-        $this->chat = $chat;
         $this->actionCommand = random_int(1, 2);
+        $this->container = $container;
         $this->debug = $debug;
-        $this->roundFactory = $roundFactory ?? new RoundFactory();
-        $this->translation = $translation ?? new Translation();
-        $this->scenario = $scenario ?? new Scenario();
     }
 
     /**
@@ -103,17 +68,16 @@ class Battle implements BattleInterface
         $startLeftCommand = clone $this->leftCommand;
         $startRightCommand = clone $this->rightCommand;
 
+        $roundFactory = $this->container->getRoundFactory();
+        $statistics = $this->container->getStatistic();
+
         while ($i < $this->maxRound) {
-            $round = $this->roundFactory->create(
+            $round = $roundFactory->create(
                 $this->leftCommand,
                 $this->rightCommand,
                 $this->actionCommand,
-                $this->statistics,
-                $this->fullLog,
-                $this->chat,
-                $this->scenario,
+                $this->container,
                 $this->debug,
-                $this->translation
             );
 
             // Выполняем раунд, получая номер команды, которая будет ходить следующей
@@ -128,15 +92,11 @@ class Battle implements BattleInterface
                     $this->leftCommand,
                     $this->rightCommand,
                     $winner,
-                    $this->fullLog,
-                    $this->chat,
-                    $this->scenario,
-                    $this->statistics,
-                    $this->translation
+                    $this->container
                 );
             }
 
-            $this->statistics->increasedRound();
+            $statistics->increasedRound();
             $i++;
         }
 
@@ -152,11 +112,14 @@ class Battle implements BattleInterface
     }
 
     /**
+     * TODO На удаление
+     *
      * @return Translation
+     * @throws ContainerException
      */
-    public function getTranslation(): Translation
+    public function getTranslation(): TranslationInterface
     {
-        return $this->translation;
+        return $this->container->getTranslation();
     }
 
     /**

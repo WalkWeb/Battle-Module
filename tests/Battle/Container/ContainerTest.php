@@ -17,6 +17,7 @@ use Battle\Round\RoundFactory;
 use Battle\Stroke\StrokeFactory;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationInterface;
+use Battle\View\ViewFactory;
 use PHPUnit\Framework\TestCase;
 
 class ContainerTest extends TestCase
@@ -138,6 +139,9 @@ class ContainerTest extends TestCase
 
         $battleFactory = $container->get('BattleFactory');
         self::assertInstanceOf(BattleFactory::class, $battleFactory);
+
+        $battleFactory = $container->getBattleFactory();
+        self::assertInstanceOf(BattleFactory::class, $battleFactory);
     }
 
     /**
@@ -166,6 +170,20 @@ class ContainerTest extends TestCase
 
         $strokeFactory = $container->get('StrokeFactory');
         self::assertInstanceOf(StrokeFactory::class, $strokeFactory);
+    }
+
+    /**
+     * @throws ContainerException
+     */
+    public function testContainerGetViewFactory(): void
+    {
+        $container = new Container();
+
+        $viewFactory = $container->get(ViewFactory::class);
+        self::assertInstanceOf(ViewFactory::class, $viewFactory);
+
+        $viewFactory = $container->get('ViewFactory');
+        self::assertInstanceOf(ViewFactory::class, $viewFactory);
     }
 
     /**

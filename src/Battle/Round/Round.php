@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace Battle\Round;
 
 use Battle\Command\CommandInterface;
-use Battle\Result\Chat\Chat;
-use Battle\Result\Scenario\ScenarioInterface;
+use Battle\Container\Container;
+use Battle\Container\ContainerException;
+use Battle\Container\ContainerInterface;
 use Battle\Result\Statistic\Statistic;
-use Battle\Result\FullLog\FullLog;
-use Battle\Stroke\StrokeFactory;
+use Battle\Result\Statistic\StatisticInterface;
 use Battle\Stroke\StrokeInterface;
-use Battle\Translation\Translation;
-use Battle\Translation\TranslationException;
 use Exception;
 
 class Round implements RoundInterface
@@ -53,32 +51,6 @@ class Round implements RoundInterface
     private $maxStroke = 20;
 
     /**
-     * Статистика по юнитам в бою
-     *
-     * @var Statistic
-     */
-    private $statistics;
-
-    /**
-     * Полный лог боя
-     *
-     * @var FullLog
-     */
-    private $fullLog;
-
-    /**
-     * Чат
-     *
-     * @var Chat
-     */
-    private $chat;
-
-    /**
-     * @var ScenarioInterface
-     */
-    private $scenario;
-
-    /**
      * TODO На удаление? Или на расширение механики вывода результата?
      *
      * @var bool
@@ -86,52 +58,32 @@ class Round implements RoundInterface
     private $debug;
 
     /**
-     * @var StrokeFactory
+     * @var Container
      */
-    private $strokeFactory;
-
-    /**
-     * @var Translation
-     */
-    private $translation;
+    private $container;
 
     /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param int $actionCommand
-     * @param Statistic $statistics
-     * @param FullLog $fullLog
-     * @param Chat $chat
-     * @param ScenarioInterface $scenario
+     * @param ContainerInterface $container
      * @param bool|null $debug
-     * @param StrokeFactory|null $strokeFactory
-     * @param Translation|null $translation
      * @throws RoundException
      */
     public function __construct(
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         int $actionCommand,
-        Statistic $statistics,
-        FullLog $fullLog,
-        Chat $chat,
-        ScenarioInterface $scenario,
-        ?bool $debug = false,
-        ?StrokeFactory $strokeFactory = null,
-        ?Translation $translation = null
+        ContainerInterface $container,
+        ?bool $debug = false
     )
     {
         $this->validateActionCommand($actionCommand);
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;
         $this->actionCommand = $actionCommand;
-        $this->statistics = $statistics;
-        $this->fullLog = $fullLog;
-        $this->chat = $chat;
-        $this->scenario = $scenario;
+        $this->container = $container;
         $this->debug = $debug;
-        $this->strokeFactory = $strokeFactory ?? new StrokeFactory();
-        $this->translation = $translation ?? new Translation();
     }
 
     /**
@@ -155,16 +107,12 @@ class Round implements RoundInterface
             if ($actionUnit) {
 
                 // Выполняем один ход - т.е. действие одного юнита
-                $stroke = $this->strokeFactory->create(
+                $stroke = $this->container->getStrokeFactory()->create(
                     $this->actionCommand,
                     $actionUnit,
                     $this->leftCommand,
                     $this->rightCommand,
-                    $this->statistics,
-                    $this->fullLog,
-                    $this->chat,
-                    $this->scenario,
-                    $this->translation,
+                    $this->container,
                     $this->debug
                 );
 
@@ -175,7 +123,7 @@ class Round implements RoundInterface
                     return $this->endBattle();
                 }
 
-                $this->statistics->increasedStroke();
+                $this->container->getStatistic()->increasedStroke();
 
                 // Проверяем, остались ли юниты, которые не ходили
                 if (!$this->leftCommand->isAction() && !$this->rightCommand->isAction()) {
@@ -197,10 +145,11 @@ class Round implements RoundInterface
      * Возвращает статистику дополненную информацией по текущему раунду
      *
      * @return Statistic
+     * @throws ContainerException
      */
-    public function getStatistics(): Statistic
+    public function getStatistics(): StatisticInterface
     {
-        return $this->statistics;
+        return $this->container->getStatistic();
     }
 
     /**
@@ -216,17 +165,17 @@ class Round implements RoundInterface
      */
     private function executeStroke(StrokeInterface $stroke): void
     {
-        $this->fullLog->add(
-            '<p>' . $this->translation->trans(self::START_STROKE) . ' #' . $this->statistics->getStrokeNumber() . '</p>'
+        $this->container->getFullLog()->add(
+            '<p>' . $this->container->getTranslation()->trans(self::START_STROKE) . ' #' . $this->container->getStatistic()->getStrokeNumber() . '</p>'
         );
 
         $stroke->handle();
 
-        $this->fullLog->add(
-            '<p>' .  $this->translation->trans(self::END_STROKE) . ' #' . $this->statistics->getStrokeNumber() . '</p>'
+        $this->container->getFullLog()->add(
+            '<p>' .  $this->container->getTranslation()->trans(self::END_STROKE) . ' #' . $this->container->getStatistic()->getStrokeNumber() . '</p>'
         );
 
-        $this->fullLog->add(self::HR);
+        $this->container->getFullLog()->add(self::HR);
     }
 
     /**
@@ -234,12 +183,12 @@ class Round implements RoundInterface
      *
      * 1. В лог добавляет информацию о том, что раунд стартовал
      *
-     * @throws TranslationException
+     * @throws ContainerException
      */
     private function startRound(): void
     {
-        $this->fullLog->add(
-            '<p>' . $this->translation->trans(self::START_ROUND) . ' #' . $this->statistics->getRoundNumber() . '</p>'
+        $this->container->getFullLog()->add(
+            '<p>' . $this->container->getTranslation()->trans(self::START_ROUND) . ' #' . $this->container->getStatistic()->getRoundNumber() . '</p>'
         );
     }
 
@@ -251,11 +200,11 @@ class Round implements RoundInterface
      * 3. Возвращается номер команды, которая будет делать следующий ход
      *
      * @return int
-     * @throws TranslationException
+     * @throws ContainerException
      */
     private function endRound(): int
     {
-        $this->fullLog->add('<p>' . $this->translation->trans(self::END_ROUND) . '</p>');
+        $this->container->getFullLog()->add('<p>' . $this->container->getTranslation()->trans(self::END_ROUND) . '</p>');
         $this->leftCommand->newRound();
         $this->rightCommand->newRound();
         return $this->actionCommand;
@@ -269,10 +218,11 @@ class Round implements RoundInterface
      *    что отдавать, и отдаем просто 0
      *
      * @return int
+     * @throws ContainerException
      */
     private function endBattle(): int
     {
-        $this->fullLog->add('<p>' . self::END . '</p>');
+        $this->container->getFullLog()->add('<p>' . self::END . '</p>');
         return 0;
     }
 

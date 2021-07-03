@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result;
 
-use Battle\Result\Chat\Chat;
-use Battle\Result\FullLog\FullLog;
-use Battle\Result\Scenario\Scenario;
-use Battle\Result\Statistic\Statistic;
-use Battle\Translation\Translation;
 use Exception;
+use Battle\Container\Container;
+use Battle\Result\Chat\Chat;
+use Battle\Result\Scenario\Scenario;
+use Battle\Translation\Translation;
 use PHPUnit\Framework\TestCase;
 use Battle\Result\Result;
 use Tests\Battle\Factory\CommandFactory;
@@ -29,7 +28,7 @@ class ResultTest extends TestCase
         $translation = new Translation();
         $scenario = new Scenario();
 
-        $result = new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 2, new FullLog(), $chat, $scenario, new Statistic(), $translation);
+        $result = new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 2, new Container());
 
         self::assertInstanceOf(Result::class, $result);
         self::assertEquals($leftCommand, $result->getStartLeftCommand());
@@ -56,6 +55,6 @@ class ResultTest extends TestCase
         $rightCommand = CommandFactory::createRightCommand();
 
         $this->expectException(ResultException::class);
-        new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 3, new FullLog(), new Chat(), new Scenario(), new Statistic(), new Translation());
+        new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 3, new Container());
     }
 }

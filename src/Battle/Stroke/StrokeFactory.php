@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Stroke;
 
-use Battle\Result\Chat\Chat;
-use Battle\Result\FullLog\FullLog;
+use Battle\Container\ContainerInterface;
 use Battle\Command\CommandInterface;
-use Battle\Result\Scenario\ScenarioInterface;
-use Battle\Result\Statistic\Statistic;
-use Battle\Translation\Translation;
 use Battle\Unit\UnitInterface;
 
 class StrokeFactory
@@ -23,11 +19,7 @@ class StrokeFactory
      * @param UnitInterface $actionUnit
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
-     * @param Statistic $statistics
-     * @param FullLog $fullLog
-     * @param Chat $chat
-     * @param ScenarioInterface $scenario
-     * @param Translation $translation
+     * @param ContainerInterface $container
      * @param bool|null $debug
      * @return StrokeInterface
      */
@@ -36,11 +28,7 @@ class StrokeFactory
         UnitInterface $actionUnit,
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
-        Statistic $statistics,
-        FullLog $fullLog,
-        Chat $chat,
-        ScenarioInterface $scenario,
-        Translation $translation,
+        ContainerInterface $container,
         ?bool $debug = false
     ): StrokeInterface
     {
@@ -49,11 +37,7 @@ class StrokeFactory
             $actionUnit,
             $leftCommand,
             $rightCommand,
-            $statistics,
-            $fullLog,
-            $chat,
-            $scenario,
-            $translation,
+            $container,
             $debug
         );
     }
