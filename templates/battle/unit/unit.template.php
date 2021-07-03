@@ -48,7 +48,7 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
             </div>
             <div class="unit_box1_left">
                 <div class="unit_box1_left2">
-                    <div class="unit_ava" style="background: url(<?= $unit->getAvatar() ?>) no-repeat center; background-size: cover;">
+                    <div class="unit_ava" style="background-image: url(<?= $unit->getAvatar() ?>);">
                         <div id="ava_<?= $unit->getId() ?>" class="unit_ava_blank"></div>
                         <div id="avas_<?= $unit->getId() ?>" class="unit_ava_blank"></div>
                     </div>

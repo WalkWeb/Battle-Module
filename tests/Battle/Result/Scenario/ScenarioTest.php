@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Scenario;
 
-use Battle\Action\ActionException;
+use Battle\Action\Summon\SummonImpAction;
+use Battle\Action\Summon\SummonSkeletonMage;
+use Exception;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Other\WaitAction;
-use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Statistic\Statistic;
-use Battle\Unit\UnitException;
-use Exception;
-use JsonException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 
@@ -25,9 +23,6 @@ class ScenarioTest extends TestCase
      *
      * И дополняется созданием и проверкой сценария
      *
-     * @throws ActionException
-     * @throws CommandException
-     * @throws UnitException
      * @throws Exception
      */
     public function testScenarioAddDamage(): void
@@ -56,6 +51,7 @@ class ScenarioTest extends TestCase
                     'unit_effects'   => '',
                     'targets'        => [
                         [
+                            'type'              => 'change',
                             'user_id'           => $defendUnit->getId(),
                             'class'             => 'd_red',
                             'hp'                => $defendUnit->getTotalLife() - $attackUnit->getDamage(),
@@ -83,8 +79,6 @@ class ScenarioTest extends TestCase
      *
      * И дополняется созданием и проверкой сценария
      *
-     * @throws CommandException
-     * @throws UnitException
      * @throws Exception
      */
     public function testScenarioAddHeal(): void
@@ -124,6 +118,7 @@ class ScenarioTest extends TestCase
                     'unit_rage_bar2' => 50,
                     'targets'        => [
                         [
+                            'type'              => 'change',
                             'user_id'           => $woundedUnit->getId(),
                             'ava'               => 'unit_ava_green',
                             'recdam'            => '+' . $actionUnit->getDamage() * 3,
@@ -142,8 +137,61 @@ class ScenarioTest extends TestCase
     }
 
     /**
-     * @throws CommandException
-     * @throws UnitException
+     * @throws Exception
+     */
+    public function testScenarioAddSummon(): void
+    {
+        $statistic = new Statistic();
+
+        $actionUnit = UnitFactory::createByTemplate(7);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+
+        $actionCommand = CommandFactory::create([$actionUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new SummonImpAction($actionUnit, $enemyCommand, $actionCommand, new Message());
+
+        $scenario = new Scenario();
+
+        $scenario->addAction($action, $statistic);
+
+        $expectedData = [
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'        => $action->getActionUnit()->getId(),
+                    'class'          => 'd_buff',
+                    'unit_cons_bar2' => 0,
+                    'unit_rage_bar2' => 0,
+                    'targets'        => [
+                        [
+                            'type'            => 'summon',
+                            'summon_row'      => 'left_command_melee',
+                            'id'              => $action->getSummonUnit()->getId(),
+                            'hp_bar_class'    => 'unit_hp_bar',
+                            'hp_bar_class2'   => 'unit_hp_bar2',
+                            'hp_bar_width'    => 100,
+                            'unit_box2_class' => 'unit_box2',
+                            'hp'              => 30,
+                            'thp'             => 30,
+                            'cons_bar_width'  => 0,
+                            'rage_bar_width'  => 0,
+                            'avatar'          => '/images/avas/monsters/004.png',
+                            'name'            => 'Imp',
+                            'name_color'      => '#ba4829',
+                            'icon'            => '/images/icons/small/base-inferno.png',
+                            'level'           => 1,
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
+    }
+
+    /**
      * @throws Exception
      */
     public function testScenarioAddWait(): void
@@ -171,11 +219,57 @@ class ScenarioTest extends TestCase
     }
 
     /**
-     * @throws JsonException
+     * @throws Exception
      */
     public function testScenarioGetJson(): void
     {
         $scenario = new Scenario();
         self::assertEquals('[]', $scenario->getJson());
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testScenarioGetSummonRowLeftCommand(): void
+    {
+        $actionUnit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+
+        $actionCommand = CommandFactory::create([$actionUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $scenario = new Scenario();
+
+        $action = new SummonImpAction($actionUnit, $enemyCommand, $actionCommand, new Message());
+
+        self::assertEquals('left_command_melee', $scenario->getSummonRow($action));
+
+        $action = new SummonSkeletonMage($actionUnit, $enemyCommand, $actionCommand, new Message());
+
+        self::assertEquals('left_command_range', $scenario->getSummonRow($action));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testScenarioGetSummonRowRightCommand(): void
+    {
+        $actionUnit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+
+        $actionCommand = CommandFactory::create([$actionUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new SummonImpAction($actionUnit, $enemyCommand, $actionCommand, new Message());
+
+        $scenario = new Scenario();
+
+        self::assertEquals('right_command_melee', $scenario->getSummonRow($action));
+
+        $action = new SummonSkeletonMage($actionUnit, $enemyCommand, $actionCommand, new Message());
+
+        self::assertEquals('right_command_range', $scenario->getSummonRow($action));
+    }
+
+
 }

@@ -37,8 +37,8 @@ class ViewTest extends TestCase
 <div class="row">
     <table>
         <tr>
-            <td class="w25"></td>
-            <td class="w25"><div align="center">
+            <td class="w25" id="left_command_range"></td>
+            <td class="w25" id="left_command_melee"><div align="center">
     <div class="unit_main_box" id="usr_f7e84eab-e4f6-469f-b0e3-f5f965f9fbce">
         <div class="unit_box1">
             <div class="unit_box1_right">
@@ -68,7 +68,7 @@ class ViewTest extends TestCase
             </div>
             <div class="unit_box1_left">
                 <div class="unit_box1_left2">
-                    <div class="unit_ava" style="background: url(/images/avas/humans/human001.jpg) no-repeat center; background-size: cover;">
+                    <div class="unit_ava" style="background-image: url(/images/avas/humans/human001.jpg);">
                         <div id="ava_f7e84eab-e4f6-469f-b0e3-f5f965f9fbce" class="unit_ava_blank"></div>
                         <div id="avas_f7e84eab-e4f6-469f-b0e3-f5f965f9fbce" class="unit_ava_blank"></div>
                     </div>
@@ -98,7 +98,7 @@ class ViewTest extends TestCase
         </div>
     </div>
 </div></td>
-            <td class="w25"><div align="center">
+            <td class="w25" id="right_command_melee"><div align="center">
     <div class="unit_main_box" id="usr_1aab367d-37e8-4544-9915-cb3d7779308b">
         <div class="unit_box1">
             <div class="unit_box1_right">
@@ -128,7 +128,7 @@ class ViewTest extends TestCase
             </div>
             <div class="unit_box1_left">
                 <div class="unit_box1_left2">
-                    <div class="unit_ava" style="background: url(/images/avas/humans/human002.jpg) no-repeat center; background-size: cover;">
+                    <div class="unit_ava" style="background-image: url(/images/avas/humans/human002.jpg);">
                         <div id="ava_1aab367d-37e8-4544-9915-cb3d7779308b" class="unit_ava_blank"></div>
                         <div id="avas_1aab367d-37e8-4544-9915-cb3d7779308b" class="unit_ava_blank"></div>
                     </div>
@@ -158,7 +158,7 @@ class ViewTest extends TestCase
         </div>
     </div>
 </div></td>
-            <td class="w25"></td>
+            <td class="w25" id="right_command_range"></td>
         </tr>
     </table>
 </div>
@@ -187,7 +187,7 @@ EOT;
 <div class="row">
     <table>
         <tr>
-            <td class="w25"><div align="center">
+            <td class="w25" id="left_command_range"><div align="center">
     <div class="unit_main_box" id="usr_46d969c1-463b-42b1-a2e0-2c64a8c34ae1">
         <div class="unit_box1">
             <div class="unit_box1_right">
@@ -217,7 +217,7 @@ EOT;
             </div>
             <div class="unit_box1_left">
                 <div class="unit_box1_left2">
-                    <div class="unit_ava" style="background: url(/images/avas/monsters/003.png) no-repeat center; background-size: cover;">
+                    <div class="unit_ava" style="background-image: url(/images/avas/monsters/003.png);">
                         <div id="ava_46d969c1-463b-42b1-a2e0-2c64a8c34ae1" class="unit_ava_blank"></div>
                         <div id="avas_46d969c1-463b-42b1-a2e0-2c64a8c34ae1" class="unit_ava_blank"></div>
                     </div>
@@ -247,9 +247,9 @@ EOT;
         </div>
     </div>
 </div></td>
-            <td class="w25"></td>
-            <td class="w25"></td>
-            <td class="w25"><div align="center">
+            <td class="w25" id="left_command_melee"></td>
+            <td class="w25" id="right_command_melee"></td>
+            <td class="w25" id="right_command_range"><div align="center">
     <div class="unit_main_box" id="usr_1e813812-9a21-4e18-b494-8d552bac0cf4">
         <div class="unit_box1">
             <div class="unit_box1_right">
@@ -279,7 +279,7 @@ EOT;
             </div>
             <div class="unit_box1_left">
                 <div class="unit_box1_left2">
-                    <div class="unit_ava" style="background: url(/images/avas/monsters/003.png) no-repeat center; background-size: cover;">
+                    <div class="unit_ava" style="background-image: url(/images/avas/monsters/003.png);">
                         <div id="ava_1e813812-9a21-4e18-b494-8d552bac0cf4" class="unit_ava_blank"></div>
                         <div id="avas_1e813812-9a21-4e18-b494-8d552bac0cf4" class="unit_ava_blank"></div>
                     </div>

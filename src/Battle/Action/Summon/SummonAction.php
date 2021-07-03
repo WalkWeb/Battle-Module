@@ -15,6 +15,11 @@ abstract class SummonAction extends AbstractAction
 
     protected const HANDLE_METHOD = 'applySummonAction';
 
+    /**
+     * @var UnitInterface
+     */
+    protected $summonUnit;
+
     public function getHandleMethod(): string
     {
         return self::HANDLE_METHOD;

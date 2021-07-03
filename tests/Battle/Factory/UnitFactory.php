@@ -164,7 +164,7 @@ class UnitFactory
             'life'         => 150,
             'total_life'   => 150,
             'melee'        => true,
-            'command'      => 1,
+            'command'      => 2,
             'class'        => 1,
             'race'         => 1,
         ],

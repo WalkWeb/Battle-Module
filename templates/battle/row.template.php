@@ -10,10 +10,10 @@ if (!isset($leftRangeUnits, $leftMeleeUnits, $rightMeleeUnits, $rightRangeUnits)
 <div class="row">
     <table>
         <tr>
-            <td class="w25"><?= $leftRangeUnits ?></td>
-            <td class="w25"><?= $leftMeleeUnits ?></td>
-            <td class="w25"><?= $rightMeleeUnits ?></td>
-            <td class="w25"><?= $rightRangeUnits ?></td>
+            <td class="w25" id="left_command_range"><?= $leftRangeUnits ?></td>
+            <td class="w25" id="left_command_melee"><?= $leftMeleeUnits ?></td>
+            <td class="w25" id="right_command_melee"><?= $rightMeleeUnits ?></td>
+            <td class="w25" id="right_command_range"><?= $rightRangeUnits ?></td>
         </tr>
     </table>
 </div>

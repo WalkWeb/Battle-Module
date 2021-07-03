@@ -9,18 +9,18 @@ use Battle\Unit\Unit;
 use Battle\Unit\UnitInterface;
 use Exception;
 
-class SummonImpAction extends SummonAction
+class SummonSkeletonMage extends SummonAction
 {
-    public const NAME = 'summon Imp';
+    public const NAME = 'summon Skeleton Mage';
 
-    private $name = 'Imp';
-    private $level = 1;
-    private $url = '/images/avas/monsters/004.png';
-    private $damage = 10;
-    private $attackSpeed = 1;
-    private $life = 30;
-    private $melee = true;
-    private $raceId = 9;
+    private $name = 'Skeleton Mage';
+    private $level = 2;
+    private $url = '/images/avas/monsters/008.png';
+    private $damage = 13;
+    private $attackSpeed = 1.2;
+    private $life = 42;
+    private $melee = false;
+    private $raceId = 8;
 
     /**
      * @return UnitInterface
@@ -48,9 +48,6 @@ class SummonImpAction extends SummonAction
         return $this->summonUnit;
     }
 
-    /**
-     * @return string
-     */
     public function getNameAction(): string
     {
         return self::NAME;
