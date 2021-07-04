@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Classes\Undead;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\Summon\SummonImpAction;
+use Battle\Action\Summon\SummonSkeletonAction;
 use Battle\Classes\AbstractUnitClass;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
@@ -25,7 +25,7 @@ class DarkMage extends AbstractUnitClass
     ): ActionCollection
     {
         $collection = new ActionCollection();
-        $collection->add(new SummonImpAction($actionUnit, $alliesCommand, $alliesCommand, $this->message));
+        $collection->add(new SummonSkeletonAction($actionUnit, $alliesCommand, $alliesCommand, $this->message));
         return $collection;
     }
 

@@ -24,6 +24,8 @@ return [
     'use Heavy Strike at'            => 'use Heavy Strike at',
     'use Great Heal and heal'        => 'use Great Heal and heal',
     'summon Imp'                     => 'summon Imp',
+    'summon Skeleton'                => 'summon Skeleton',
+    'summon Skeleton Mage'           => 'summon Skeleton Mage',
     // Statistics
     'Statistics'                     => 'Statistics',
     'Unit'                           => 'Unit',

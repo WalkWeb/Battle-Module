@@ -24,6 +24,8 @@ return [
     'use Heavy Strike at'            => 'использовал Тяжелый Удар по',
     'use Great Heal and heal'        => 'использовал Сильное Лечение и вылечил',
     'summon Imp'                     => 'призвал Беса',
+    'summon Skeleton'                => 'призвал Скелета',
+    'summon Skeleton Mage'           => 'призвал Скелета-мага',
     // Statistics
     'Statistics'                     => 'Статистика',
     'Unit'                           => 'Кто',
