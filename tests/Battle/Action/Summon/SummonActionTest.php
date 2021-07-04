@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Action\Summon;
 
 use Battle\Action\Summon\SummonImpAction;
+use Battle\Action\Summon\SummonSkeletonAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
@@ -15,7 +16,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class SummonActionTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_7</span> summon Imp';
+    private const MESSAGE = '<span style="color: #1e72e3">unit_7</span> summon Skeleton';
 
     /**
      * @throws CommandException
@@ -37,7 +38,7 @@ class SummonActionTest extends TestCase
         $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
-            self::assertContainsOnlyInstancesOf(SummonImpAction::class, [$action]);
+            self::assertContainsOnlyInstancesOf(SummonSkeletonAction::class, [$action]);
             $message .= $action->handle();
         }
 

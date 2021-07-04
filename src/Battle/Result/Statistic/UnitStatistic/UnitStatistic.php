@@ -39,6 +39,11 @@ class UnitStatistic implements UnitStatisticInterface
     private $killing = 0;
 
     /**
+     * @var int - Призвал существ
+     */
+    private $summons = 0;
+
+    /**
      * @param UnitInterface $unit
      */
     public function __construct(UnitInterface $unit)
@@ -91,6 +96,11 @@ class UnitStatistic implements UnitStatisticInterface
         $this->killing++;
     }
 
+    public function addSummon(): void
+    {
+        $this->summons++;
+    }
+
     /**
      * @return int
      */
@@ -129,5 +139,13 @@ class UnitStatistic implements UnitStatisticInterface
     public function getKilling(): int
     {
         return $this->killing;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSummons(): int
+    {
+        return $this->summons;
     }
 }

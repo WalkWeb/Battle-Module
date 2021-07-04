@@ -32,7 +32,7 @@ interface StatisticInterface
     public function getStrokeNumber(): int;
 
     /**
-     * Добавляет действие юнита для расчета суммарного полученного и нанесенного урона
+     * Добавляет действие юнита для подсчета статистики атак, полученного и нанесенного урона, и прочего
      *
      * @param ActionInterface $action
      */

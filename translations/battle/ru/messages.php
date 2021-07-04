@@ -34,6 +34,7 @@ return [
     'Taken Damage'                   => 'Получил урона',
     'Heal'                           => 'Вылечил',
     'Killing'                        => 'Убил',
+    'Summons'                        => 'Призвал',
     'Total rounds'                   => 'Всего раундов',
     'Total stroke'                   => 'Всего ходов',
     'Runtime'                        => 'Время выполнения',

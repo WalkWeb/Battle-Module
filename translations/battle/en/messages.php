@@ -1,5 +1,7 @@
 <?php
 
+// Example translations for other language
+
 return [
     // Battle
     'Battle end'                     => 'Battle end',
@@ -34,6 +36,7 @@ return [
     'Taken Damage'                   => 'Taken Damage',
     'Heal'                           => 'Heal',
     'Killing'                        => 'Killing',
+    'Summons'                        => 'Summons',
     'Total rounds'                   => 'Total rounds',
     'Total stroke'                   => 'Total stroke',
     'Runtime'                        => 'Runtime',

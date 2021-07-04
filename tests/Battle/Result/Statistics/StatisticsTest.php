@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Result\Statistics;
 
 use Battle\Action\Damage\DamageAction;
+use Battle\Action\Summon\SummonSkeletonAction;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Result\Statistic\Statistic;
@@ -131,6 +132,52 @@ class StatisticsTest extends TestCase
         }
 
         self::assertEquals($priest->getDamage() * 6, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testStatisticsUnitCountingSummons(): void
+    {
+        $statistics = new Statistic();
+
+        $darkMage = UnitFactory::createByTemplate(7);
+        $enemy = UnitFactory::createByTemplate(1);
+
+        $command = CommandFactory::create([$darkMage]);
+        $enemyCommand = CommandFactory::create([$enemy]);
+
+        // Max concentration
+        for ($i = 0; $i < 10; $i++) {
+            $darkMage->newRound();
+        }
+
+        $actions = $darkMage->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertInstanceOf(SummonSkeletonAction::class, $action);
+            $action->handle();
+            $statistics->addUnitAction($action);
+        }
+
+        self::assertEquals(1, $statistics->getUnitsStatistics()->get($darkMage->getId())->getSummons());
+        self::assertCount(2, $command->getUnits());
+
+        // Again
+        for ($i = 0; $i < 10; $i++) {
+            $darkMage->newRound();
+        }
+
+        $actions = $darkMage->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertInstanceOf(SummonSkeletonAction::class, $action);
+            $action->handle();
+            $statistics->addUnitAction($action);
+        }
+
+        self::assertEquals(2, $statistics->getUnitsStatistics()->get($darkMage->getId())->getSummons());
+        self::assertCount(3, $command->getUnits());
     }
 
     /**

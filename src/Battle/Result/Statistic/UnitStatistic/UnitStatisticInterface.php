@@ -45,6 +45,11 @@ interface UnitStatisticInterface
     public function addKillingUnit(): void;
 
     /**
+     * Увеличивает количество призванных существ юнитом на 1
+     */
+    public function addSummon(): void;
+
+    /**
      * Возвращает суммарный нанесенный урон юнита
      *
      * @return int
@@ -78,4 +83,11 @@ interface UnitStatisticInterface
      * @return int
      */
     public function getKilling(): int;
+
+    /**
+     * Возвращает количество призванных существ юнитом
+     *
+     * @return int
+     */
+    public function getSummons(): int;
 }

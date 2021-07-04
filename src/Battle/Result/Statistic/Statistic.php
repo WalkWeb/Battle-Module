@@ -8,6 +8,7 @@ use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
+use Battle\Action\Summon\SummonAction;
 use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
 use Battle\Result\Statistic\UnitStatistic\UnitStatisticCollection;
 use Battle\Result\Statistic\UnitStatistic\UnitStatisticInterface;
@@ -102,12 +103,17 @@ class Statistic implements StatisticInterface
      */
     public function addUnitAction(ActionInterface $action): void
     {
-        if ($action instanceof DamageAction) {
-            $this->countingCausedDamage($action);
-            $this->countingTakenDamage($action);
-        }
-        if ($action instanceof HealAction) {
-            $this->countingHeal($action);
+        switch ($action) {
+            case $action instanceof DamageAction:
+                $this->countingCausedDamage($action);
+                $this->countingTakenDamage($action);
+                break;
+            case $action instanceof HealAction:
+                $this->countingHeal($action);
+                break;
+            case $action instanceof SummonAction:
+                $this->countingSummons($action);
+                break;
         }
     }
 
@@ -232,6 +238,22 @@ class Statistic implements StatisticInterface
         } else {
             $unit = $this->getUnitStatistics($action->getActionUnit()->getId());
             $unit->addHeal($action->getFactualPower());
+        }
+    }
+
+    /**
+     * @param ActionInterface $action
+     * @throws StatisticException
+     */
+    private function countingSummons(ActionInterface $action): void
+    {
+        if (!$this->unitsStatistics->exist($action->getActionUnit()->getId())) {
+            $unit = new UnitStatistic($action->getActionUnit());
+            $unit->addSummon();
+            $this->unitsStatistics->add($unit);
+        } else {
+            $unit = $this->getUnitStatistics($action->getActionUnit()->getId());
+            $unit->addSummon();
         }
     }
 
