@@ -6,7 +6,7 @@ namespace Battle\Result;
 
 use Battle\Container\ContainerException;
 use Battle\Container\ContainerInterface;
-use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\ChatInterface;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
 use Battle\Result\Scenario\ScenarioInterface;
@@ -115,10 +115,10 @@ class Result implements ResultInterface
     }
 
     /**
-     * @return Chat
+     * @return ChatInterface
      * @throws ContainerException
      */
-    public function getChat(): Chat
+    public function getChat(): ChatInterface
     {
         return $this->container->getChat();
     }

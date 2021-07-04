@@ -8,6 +8,7 @@ use Battle\BattleFactory;
 use Battle\Container\Container;
 use Battle\Container\ContainerException;
 use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\ChatInterface;
 use Battle\Result\FullLog\FullLog;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Scenario\ScenarioInterface;
@@ -71,6 +72,9 @@ class ContainerTest extends TestCase
     public function testContainerGetChat(): void
     {
         $container = new Container();
+
+        $chat = $container->get(ChatInterface::class);
+        self::assertInstanceOf(Chat::class, $chat);
 
         $chat = $container->get(Chat::class);
         self::assertInstanceOf(Chat::class, $chat);

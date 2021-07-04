@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Container;
 
 use Battle\BattleFactory;
-use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\ChatInterface;
 use Battle\Result\Chat\Message;
 use Battle\Result\FullLog\FullLog;
 use Battle\Result\Scenario\ScenarioInterface;
@@ -36,10 +36,10 @@ interface ContainerInterface
     public function getStatistic(): StatisticInterface;
 
     /**
-     * @return Chat
+     * @return ChatInterface
      * @throws ContainerException
      */
-    public function getChat(): Chat;
+    public function getChat(): ChatInterface;
 
     /**
      * @return TranslationInterface

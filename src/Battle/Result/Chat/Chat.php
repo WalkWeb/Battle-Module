@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Result\Chat;
 
-// todo added interface
-
-class Chat
+class Chat implements ChatInterface
 {
     /**
      * @var string[]

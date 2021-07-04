@@ -6,6 +6,7 @@ namespace Battle\Container;
 
 use Battle\BattleFactory;
 use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\ChatInterface;
 use Battle\Result\Chat\Message;
 use Battle\Result\FullLog\FullLog;
 use Battle\Result\Scenario\Scenario;
@@ -24,6 +25,7 @@ class Container implements ContainerInterface
         StatisticInterface::class   => Statistic::class,
         Statistic::class            => Statistic::class,
         'Statistic'                 => Statistic::class,
+        ChatInterface::class        => Chat::class,
         Chat::class                 => Chat::class,
         'Chat'                      => Chat::class,
         TranslationInterface::class => Translation::class,
@@ -92,12 +94,12 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @return Chat
+     * @return ChatInterface
      * @throws ContainerException
      */
-    public function getChat(): Chat
+    public function getChat(): ChatInterface
     {
-        /** @var Chat $service */
+        /** @var ChatInterface $service */
         $service = $this->get(Chat::class);
         return $service;
     }
