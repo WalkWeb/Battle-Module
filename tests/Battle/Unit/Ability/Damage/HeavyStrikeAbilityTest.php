@@ -1,0 +1,57 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Battle\Unit\Ability\Damage;
+
+use Battle\Action\Damage\DamageAction;
+use Battle\Command\CommandFactory;
+use Battle\Unit\Ability\AbilityCollection;
+use Exception;
+use Battle\Container\Container;
+use PHPUnit\Framework\TestCase;
+use Tests\Battle\Factory\UnitFactory;
+use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
+
+class HeavyStrikeAbilityTest extends TestCase
+{
+    /**
+     * @throws Exception
+     */
+    public function testHeavyStrikeAbility(): void
+    {
+        $name = 'Heavy Strike Ability';
+        $icon = '/images/icons/ability/335.png';
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new HeavyStrikeAbility($name, $icon, $unit, new Container());
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+
+        $unit->upMaxConcentration();
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertInstanceOf(DamageAction::class, $action);
+            self::assertEquals($unit->getDamage(), $action->getPower());
+        }
+    }
+}
