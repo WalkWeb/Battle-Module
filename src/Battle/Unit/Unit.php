@@ -43,38 +43,17 @@ class Unit extends AbstractUnit
     }
 
     /**
+     * Возвращает базовую атаку юнита. Используется в тех случаях, когда использовать способность невозможно. Например,
+     * потому что способность лечения, а лечить некого
+     *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionInterface
      */
-    public function  getBaseAttack(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionInterface
+    public function getBaseAttack(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionInterface
     {
         return new DamageAction($this, $enemyCommand, $alliesCommand, $this->message);
     }
-
-    /**
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return ActionCollection
-     * @throws Exception
-     */
-    private function getDamageAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
-    {
-        $collection = new ActionCollection();
-        $attacks = $this->calculateAttackSpeed();
-
-        for ($i = 0; $i < $attacks; $i++) {
-            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand, $this->message));
-        }
-
-        if (count($collection) === 0) {
-            $collection->add(new WaitAction($this, $enemyCommand, $alliesCommand, $this->message));
-        }
-
-        return $collection;
-    }
-
-    // ---------------------------------------------- HANDLE ACTION ----------------------------------------------------
 
     /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
@@ -99,6 +78,8 @@ class Unit extends AbstractUnit
     }
 
     /**
+     * Обрабатывает action на получение урона
+     *
      * @param DamageAction $action
      * @return string
      * @throws TranslationException
@@ -118,6 +99,8 @@ class Unit extends AbstractUnit
     }
 
     /**
+     * Обрабатывает action на лечение
+     *
      * @param HealAction $action
      * @return string
      * @throws TranslationException
@@ -137,6 +120,8 @@ class Unit extends AbstractUnit
     }
 
     /**
+     * Обрабатывает action на призыв нового юнита
+     *
      * Добавление юнита в команду происходит в самом SummonAction, от пользователя нужно только сообщение о действии
      *
      * В тоже время, в будущем могут быть добавлены параметры, влияющие на силу саммонов
@@ -151,6 +136,8 @@ class Unit extends AbstractUnit
     }
 
     /**
+     * Обрабатывает action на пропуск хода
+     *
      * @param WaitAction $action
      * @return string
      * @throws TranslationException
@@ -158,5 +145,27 @@ class Unit extends AbstractUnit
     private function applyWaitAction(WaitAction $action): string
     {
         return $this->message->wait($action);
+    }
+
+    /**
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return ActionCollection
+     * @throws Exception
+     */
+    private function getDamageAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
+    {
+        $collection = new ActionCollection();
+        $attacks = $this->calculateAttackSpeed();
+
+        for ($i = 0; $i < $attacks; $i++) {
+            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand, $this->message));
+        }
+
+        if (count($collection) === 0) {
+            $collection->add(new WaitAction($this, $enemyCommand, $alliesCommand, $this->message));
+        }
+
+        return $collection;
     }
 }
