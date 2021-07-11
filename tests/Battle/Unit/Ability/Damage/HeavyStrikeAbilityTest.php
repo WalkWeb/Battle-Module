@@ -51,7 +51,7 @@ class HeavyStrikeAbilityTest extends TestCase
 
         foreach ($actions as $action) {
             self::assertInstanceOf(DamageAction::class, $action);
-            self::assertEquals($unit->getDamage(), $action->getPower());
+            self::assertEquals((int)($unit->getDamage() * 2.5), $action->getPower());
         }
     }
 }

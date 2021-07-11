@@ -14,6 +14,8 @@ use Battle\Unit\UnitInterface;
 class HeavyStrikeAbility extends AbstractAbility
 {
     /**
+     * Heavy Strike наносит 250% урона от базового урона юнита
+     *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
@@ -23,8 +25,13 @@ class HeavyStrikeAbility extends AbstractAbility
     {
         $collection = new ActionCollection();
 
-        // TODO Переделать механику DamageAction таким образом, чтобы можно было устанавливать любую силу удара
-        $collection->add(new DamageAction($this->unit, $enemyCommand, $alliesCommand, $this->container->getMessage()));
+        $collection->add(new DamageAction(
+            $this->unit,
+            $enemyCommand,
+            $alliesCommand,
+            $this->container->getMessage(),
+            (int)($this->unit->getDamage() * 2.5)
+        ));
 
         return $collection;
     }
