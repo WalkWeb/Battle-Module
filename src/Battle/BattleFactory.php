@@ -6,7 +6,6 @@ namespace Battle;
 
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
-use Battle\Result\Chat\Message;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
@@ -64,8 +63,8 @@ class BattleFactory
         $container = $container ?? new Container();
 
         return new Battle(
-            self::createCommand($data, BattleInterface::LEFT_COMMAND, $container->getMessage()),
-            self::createCommand($data, BattleInterface::RIGHT_COMMAND, $container->getMessage()),
+            self::createCommand($data, BattleInterface::LEFT_COMMAND, $container),
+            self::createCommand($data, BattleInterface::RIGHT_COMMAND, $container),
             $container,
             $debug
         );
@@ -76,15 +75,15 @@ class BattleFactory
      *
      * @param array $data
      * @param $command
-     * @param Message|null $message
+     * @param ContainerInterface|null $container
      * @return CommandInterface
      * @throws BattleException
      * @throws CommandException
      * @throws UnitException
      */
-    public static function createCommand(array $data, $command, ?Message $message = null): CommandInterface
+    public static function createCommand(array $data, $command, ?ContainerInterface $container = null): CommandInterface
     {
-        $message = $message ?? new Message();
+        $container = $container ?? new Container();
         $commandData = [];
 
         foreach ($data as $datum) {
@@ -102,6 +101,6 @@ class BattleFactory
             }
         }
 
-        return CommandFactory::create($commandData, $message);
+        return CommandFactory::create($commandData, $container);
     }
 }

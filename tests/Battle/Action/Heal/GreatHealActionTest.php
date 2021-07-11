@@ -6,8 +6,7 @@ namespace Tests\Battle\Action\Heal;
 
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message;
-use Battle\Translation\Translation;
+use Battle\Container\Container;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -50,10 +49,13 @@ class GreatHealActionTest extends TestCase
      */
     public function testGreatHealActionMessageRu(): void
     {
-        $message = new Message(new Translation('ru'));
-        $unit = UnitFactory::createByTemplate(5, $message);
-        $woundedUnit = UnitFactory::createByTemplate(11, $message);
-        $enemyUnit = UnitFactory::createByTemplate(2, $message);
+        // TODO Временное решение. Позже контейнеру будет добавлен метод set(), и можно будет передать Translator с нужным языком
+        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'ru';
+
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(5, $container);
+        $woundedUnit = UnitFactory::createByTemplate(11, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $alliesCommand = CommandFactory::create([$unit, $woundedUnit]);
 
@@ -67,5 +69,7 @@ class GreatHealActionTest extends TestCase
         foreach ($actionCollection as $action) {
             self::assertEquals(self::GREAT_HEAL_MESSAGE_RU, $action->handle());
         }
+
+        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en';
     }
 }

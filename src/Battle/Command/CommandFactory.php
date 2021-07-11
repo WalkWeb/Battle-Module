@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Command;
 
-use Battle\Result\Chat\Message;
+use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
@@ -17,14 +18,14 @@ class CommandFactory
      * Создает команду на основании массива юнитов или данных по юнитам
      *
      * @param array $data
-     * @param Message|null $message
+     * @param ContainerInterface|null $container
      * @return CommandInterface
      * @throws CommandException
      * @throws UnitException
      */
-    public static function create(array $data, ?Message $message = null): CommandInterface
+    public static function create(array $data, ?ContainerInterface $container = null): CommandInterface
     {
-        $message = $message ?? new Message();
+        $container = $container ?? new Container();
         $units = new UnitCollection();
         $i = 1;
 
@@ -44,7 +45,7 @@ class CommandFactory
             }
 
             try {
-                $units->add(UnitFactory::create($datum, $message));
+                $units->add(UnitFactory::create($datum, $container));
             } catch (Exception $e) {
                 throw new CommandException($e->getMessage() . ' (' . $i . ' element)');
             }

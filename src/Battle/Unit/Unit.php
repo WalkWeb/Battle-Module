@@ -12,6 +12,7 @@ use Battle\Action\Heal\HealAction;
 use Battle\Action\Other\WaitAction;
 use Battle\Action\Summon\SummonAction;
 use Battle\Command\CommandInterface;
+use Battle\Container\ContainerException;
 use Battle\Translation\TranslationException;
 use Exception;
 
@@ -50,10 +51,11 @@ class Unit extends AbstractUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionInterface
+     * @throws ContainerException
      */
     public function getBaseAttack(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionInterface
     {
-        return new DamageAction($this, $enemyCommand, $alliesCommand, $this->message, $this->damage);
+        return new DamageAction($this, $enemyCommand, $alliesCommand, $this->container->getMessage(), $this->damage);
     }
 
     /**
@@ -85,6 +87,7 @@ class Unit extends AbstractUnit
      * @return string
      * @throws TranslationException
      * @throws ActionException
+     * @throws ContainerException
      */
     private function applyDamageAction(DamageAction $action): string
     {
@@ -97,7 +100,7 @@ class Unit extends AbstractUnit
 
         $action->setFactualPower($primordialLife - $this->life);
 
-        return $this->message->damage($action);
+        return $this->container->getMessage()->damage($action);
     }
 
     /**
@@ -107,6 +110,7 @@ class Unit extends AbstractUnit
      * @return string
      * @throws TranslationException
      * @throws ActionException
+     * @throws ContainerException
      */
     private function applyHealAction(HealAction $action): string
     {
@@ -119,7 +123,7 @@ class Unit extends AbstractUnit
 
         $action->setFactualPower($this->life - $primordialLife);
 
-        return $this->message->heal($action);
+        return $this->container->getMessage()->heal($action);
     }
 
     /**
@@ -132,10 +136,11 @@ class Unit extends AbstractUnit
      * @param SummonAction $action
      * @return string
      * @throws TranslationException
+     * @throws ContainerException
      */
     private function applySummonAction(SummonAction $action): string
     {
-        return $this->message->summon($action);
+        return $this->container->getMessage()->summon($action);
     }
 
     /**
@@ -144,10 +149,11 @@ class Unit extends AbstractUnit
      * @param WaitAction $action
      * @return string
      * @throws TranslationException
+     * @throws ContainerException
      */
     private function applyWaitAction(WaitAction $action): string
     {
-        return $this->message->wait($action);
+        return $this->container->getMessage()->wait($action);
     }
 
     /**
@@ -162,11 +168,11 @@ class Unit extends AbstractUnit
         $attacks = $this->calculateAttackSpeed();
 
         for ($i = 0; $i < $attacks; $i++) {
-            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand, $this->message, $this->damage));
+            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand, $this->container->getMessage(), $this->damage));
         }
 
         if (count($collection) === 0) {
-            $collection->add(new WaitAction($this, $enemyCommand, $alliesCommand, $this->message));
+            $collection->add(new WaitAction($this, $enemyCommand, $alliesCommand, $this->container->getMessage()));
         }
 
         return $collection;

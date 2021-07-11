@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Tests\Battle\Factory;
 
 use Battle\Classes\UnitClassFactory;
-use Battle\Result\Chat\Message;
+use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\UnitInterface;
 use Battle\Unit\Unit;
@@ -200,11 +201,12 @@ class UnitFactory
 
     /**
      * @param int $template
-     * @param Message|null $message
+     * @param ContainerInterface|null $container
      * @return UnitInterface
+     * @throws UnitFactoryException
      * @throws Exception
      */
-    public static function createByTemplate(int $template, ?Message $message = null): UnitInterface
+    public static function createByTemplate(int $template, ?ContainerInterface $container = null): UnitInterface
     {
         if (empty(self::$units[$template])) {
             throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
@@ -222,7 +224,7 @@ class UnitFactory
             self::$units[$template]['melee'],
             self::$units[$template]['command'],
             RaceFactory::create(self::$units[$template]['race']),
-            $message ?? new Message(),
+            $container ?? new Container(),
             UnitClassFactory::create(self::$units[$template]['class'])
         );
     }

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
+use Battle\Container\Container;
 use Exception;
 use Battle\Unit\Unit;
 use Battle\Command\Command;
-use Battle\Result\Chat\Message;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
@@ -51,16 +51,16 @@ class UnitTest extends TestCase
      */
     public function testUnitApplyDamage(): void
     {
-        $message = new Message();
+        $container = new Container();
         $attackUnitTemplate = 2;
         $defendUnitTemplate = 6;
-        $attackUnit = UnitFactory::createByTemplate($attackUnitTemplate, $message);
-        $defendUnit = UnitFactory::createByTemplate($defendUnitTemplate, $message);
+        $attackUnit = UnitFactory::createByTemplate($attackUnitTemplate, $container);
+        $defendUnit = UnitFactory::createByTemplate($defendUnitTemplate, $container);
 
-        $enemyCommand = CommandFactory::create([$defendUnit], $message);
-        $alliesCommand = CommandFactory::create([$attackUnit], $message);
+        $enemyCommand = CommandFactory::create([$defendUnit], $container);
+        $alliesCommand = CommandFactory::create([$attackUnit], $container);
 
-        $action = new DamageAction($attackUnit, $enemyCommand, $alliesCommand, $message);
+        $action = new DamageAction($attackUnit, $enemyCommand, $alliesCommand, $container->getMessage());
 
         $action->handle();
 
@@ -68,7 +68,7 @@ class UnitTest extends TestCase
 
         self::assertEquals($defendLife - $attackUnit->getDamage(), $defendUnit->getLife());
 
-        $action2 = new DamageAction($attackUnit, $enemyCommand, $alliesCommand, $message);
+        $action2 = new DamageAction($attackUnit, $enemyCommand, $alliesCommand, $container->getMessage());
         $action2->handle();
 
         self::assertEquals(0, $defendUnit->getLife());
@@ -169,6 +169,9 @@ class UnitTest extends TestCase
         self::assertEquals(Unit::MAX_CONS, $unit->getConcentration());
     }
 
+    /**
+     * @throws Exception
+     */
     public function testUnitUmMaxRage(): void
     {
         $unit = UnitFactory::createByTemplate(1);

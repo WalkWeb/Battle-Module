@@ -7,6 +7,8 @@ namespace Battle\Unit;
 use Battle\Classes\ClassFactoryException;
 use Battle\Classes\UnitClassFactory;
 use Battle\Classes\UnitClassInterface;
+use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Result\Chat\Message;
 use Battle\Traits\Validation;
 use Battle\Unit\Race\RaceFactory;
@@ -38,13 +40,13 @@ class UnitFactory
      * ]
      *
      * @param array $data
-     * @param Message|null $message
+     * @param ContainerInterface|null $container
      * @return UnitInterface
      * @throws Exception
      */
-    public static function create(array $data, ?Message $message = null): UnitInterface
+    public static function create(array $data, ?ContainerInterface $container = null): UnitInterface
     {
-        $message = $message ?? new Message();
+        $container = $container ?? new Container();
 
         self::existAndString($data, 'id', UnitException::INCORRECT_ID);
         self::existAndString($data, 'name', UnitException::INCORRECT_NAME);
@@ -92,8 +94,8 @@ class UnitFactory
             $data['melee'],
             $data['command'],
             RaceFactory::create($data['race']),
-            $message,
-            self::getClass($data, $message)
+            $container,
+            self::getClass($data, $container->getMessage())
         );
     }
 

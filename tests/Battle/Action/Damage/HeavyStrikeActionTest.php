@@ -6,8 +6,7 @@ namespace Tests\Battle\Action\Damage;
 
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message;
-use Battle\Translation\Translation;
+use Battle\Container\Container;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -49,9 +48,12 @@ class HeavyStrikeActionTest extends TestCase
      */
     public function testHeavyStrikeActionMessageRu(): void
     {
-        $message = new Message(new Translation('ru'));
-        $unit = UnitFactory::createByTemplate(1, $message);
-        $enemyUnit = UnitFactory::createByTemplate(2, $message);
+        // TODO Временное решение. Позже контейнеру будет добавлен метод set(), и можно будет передать Translator с нужным языком
+        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'ru';
+
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
 
@@ -65,5 +67,7 @@ class HeavyStrikeActionTest extends TestCase
         foreach ($actionCollection as $action) {
             self::assertEquals(self::HEAVY_STRIKE_MESSAGE_RU, $action->handle());
         }
+
+        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en';
     }
 }

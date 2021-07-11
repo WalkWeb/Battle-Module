@@ -41,7 +41,7 @@ class SummonSkeletonMage extends SummonAction
                 $this->melee,
                 $this->actionUnit->getCommand(),
                 RaceFactory::create($this->raceId),
-                $this->message
+                $this->actionUnit->getContainer()
             );
         }
 

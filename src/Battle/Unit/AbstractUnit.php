@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit;
 
 use Battle\Classes\UnitClassInterface;
-use Battle\Result\Chat\Message;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Race\RaceInterface;
 use Exception;
 
@@ -87,9 +87,9 @@ abstract class AbstractUnit implements UnitInterface
     protected $race;
 
     /**
-     * @var Message
+     * @var ContainerInterface
      */
-    protected $message;
+    protected $container;
 
     /**
      * @param string $id
@@ -103,7 +103,7 @@ abstract class AbstractUnit implements UnitInterface
      * @param bool $melee
      * @param int $command
      * @param RaceInterface $race
-     * @param Message $message
+     * @param ContainerInterface $container
      * @param UnitClassInterface|null $class
      * @throws UnitException
      */
@@ -119,7 +119,7 @@ abstract class AbstractUnit implements UnitInterface
         bool $melee,
         int $command,
         RaceInterface $race,
-        Message $message,
+        ContainerInterface $container,
         ?UnitClassInterface $class = null
     )
     {
@@ -135,7 +135,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->melee = $melee;
         $this->command = $command;
         $this->race = $race;
-        $this->message = $message;
+        $this->container = $container;
         $this->class = $class;
     }
 
@@ -227,6 +227,11 @@ abstract class AbstractUnit implements UnitInterface
     public function getIcon(): string
     {
         return $this->class ? $this->class->getSmallIcon() : $this->race->getIcon();
+    }
+
+    public function getContainer(): ContainerInterface
+    {
+        return $this->container;
     }
 
     public function newRound(): void
