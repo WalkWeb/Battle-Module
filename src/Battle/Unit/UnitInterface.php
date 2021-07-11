@@ -9,6 +9,7 @@ use Battle\Action\ActionInterface;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
+use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Race\RaceInterface;
 
 /**
@@ -230,4 +231,9 @@ interface UnitInterface
      * @return ContainerInterface
      */
     public function getContainer(): ContainerInterface;
+
+    /**
+     * @return AbilityCollection
+     */
+    public function getAbilities(): AbilityCollection;
 }

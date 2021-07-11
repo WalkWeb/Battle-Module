@@ -8,6 +8,9 @@ use Battle\Action\ActionCollection;
 use Battle\Action\Summon\SummonSkeletonAction;
 use Battle\Classes\AbstractUnitClass;
 use Battle\Command\CommandInterface;
+use Battle\Container\ContainerInterface;
+use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\Summon\SummonSkeletonAbility;
 use Battle\Unit\UnitInterface;
 
 class DarkMage extends AbstractUnitClass
@@ -51,5 +54,24 @@ class DarkMage extends AbstractUnitClass
     public function getSmallIcon(): string
     {
         return self::DARK_MAGE_SMALL_ICON;
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param ContainerInterface $container
+     * @return AbilityCollection
+     */
+    public function getAbilities(UnitInterface $unit, ContainerInterface $container): AbilityCollection
+    {
+        $collection = new AbilityCollection();
+
+        $collection->add(new SummonSkeletonAbility(
+            'Summon Skeleton',
+            '/images/icons/ability/338.png',
+            $unit,
+            $container
+        ));
+
+        return $collection;
     }
 }

@@ -6,6 +6,8 @@ namespace Battle\Classes;
 
 use Battle\Action\ActionCollection;
 use Battle\Command\CommandInterface;
+use Battle\Container\ContainerInterface;
+use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\UnitInterface;
 
 interface UnitClassInterface
@@ -47,6 +49,8 @@ interface UnitClassInterface
      *
      * Так как способность может состоять сразу из нескольких действий - возвращается ActionCollection
      *
+     * TODO На удаление
+     *
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -64,4 +68,15 @@ interface UnitClassInterface
      * @return string
      */
     public function getSmallIcon(): string;
+
+    /**
+     * Возвращает коллекцию способностей данного класса
+     *
+     * TODO ContainerInterface не удаление - его теперь можно получить из юнита
+     *
+     * @param UnitInterface $unit
+     * @param ContainerInterface $container
+     * @return AbilityCollection
+     */
+    public function getAbilities(UnitInterface $unit, ContainerInterface $container): AbilityCollection;
 }

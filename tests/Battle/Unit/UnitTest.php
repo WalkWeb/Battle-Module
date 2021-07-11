@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit;
 
 use Battle\Container\Container;
+use Battle\Unit\Ability\AbilityCollection;
 use Exception;
 use Battle\Unit\Unit;
 use Battle\Command\Command;
@@ -44,6 +45,7 @@ class UnitTest extends TestCase
         self::assertTrue($unit->isMelee());
         self::assertEquals($data['class'], $unit->getClass()->getId());
         self::assertEquals($data['race'], $unit->getRace()->getId());
+        self::assertEquals($unit->getClass()->getAbilities($unit, $unit->getContainer()), $unit->getAbilities());
     }
 
     /**

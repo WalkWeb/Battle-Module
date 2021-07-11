@@ -6,6 +6,7 @@ namespace Battle\Unit;
 
 use Battle\Classes\UnitClassInterface;
 use Battle\Container\ContainerInterface;
+use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Race\RaceInterface;
 use Exception;
 
@@ -92,6 +93,11 @@ abstract class AbstractUnit implements UnitInterface
     protected $container;
 
     /**
+     * @var AbilityCollection
+     */
+    protected $abilities;
+
+    /**
      * @param string $id
      * @param string $name
      * @param int $level
@@ -137,6 +143,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->race = $race;
         $this->container = $container;
         $this->class = $class;
+        $this->abilities = $class ? $class->getAbilities($this, $container) : new AbilityCollection();
     }
 
     public function getId(): string
@@ -232,6 +239,11 @@ abstract class AbstractUnit implements UnitInterface
     public function getContainer(): ContainerInterface
     {
         return $this->container;
+    }
+
+    public function getAbilities(): AbilityCollection
+    {
+        return $this->abilities;
     }
 
     public function newRound(): void
