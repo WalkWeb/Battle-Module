@@ -6,12 +6,31 @@ namespace Battle\Action\Damage;
 
 use Battle\Action\AbstractAction;
 use Battle\Action\ActionException;
+use Battle\Command\CommandInterface;
+use Battle\Result\Chat\Message;
 use Battle\Unit\UnitInterface;
 
 class DamageAction extends AbstractAction
 {
     protected const NAME          = 'attack';
     protected const HANDLE_METHOD = 'applyDamageAction';
+
+    /**
+     * @var int
+     */
+    protected $damage;
+
+    public function __construct(
+        UnitInterface $actionUnit,
+        CommandInterface $enemyCommand,
+        CommandInterface $alliesCommand,
+        Message $message,
+        ?int $damage = null
+    )
+    {
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $message);
+        $this->damage = $damage ?? $actionUnit->getDamage();
+    }
 
     public function getHandleMethod(): string
     {
@@ -39,6 +58,11 @@ class DamageAction extends AbstractAction
         return $this->targetUnit->applyAction($this);
     }
 
+    public function getPower(): int
+    {
+        return $this->damage;
+    }
+
     public function setFactualPower(int $factualPower): void
     {
         $this->factualPower = $factualPower;
@@ -53,9 +77,6 @@ class DamageAction extends AbstractAction
         return $this->enemyCommand->getMeleeUnitForAttacks();
     }
 
-    /**
-     * @return string
-     */
     public function getNameAction(): string
     {
         return static::NAME;

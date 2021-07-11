@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit;
 
 use Battle\Action\ActionCollection;
+use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
@@ -52,7 +53,7 @@ class Unit extends AbstractUnit
      */
     public function getBaseAttack(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionInterface
     {
-        return new DamageAction($this, $enemyCommand, $alliesCommand, $this->message);
+        return new DamageAction($this, $enemyCommand, $alliesCommand, $this->message, $this->damage);
     }
 
     /**
@@ -83,6 +84,7 @@ class Unit extends AbstractUnit
      * @param DamageAction $action
      * @return string
      * @throws TranslationException
+     * @throws ActionException
      */
     private function applyDamageAction(DamageAction $action): string
     {
@@ -104,6 +106,7 @@ class Unit extends AbstractUnit
      * @param HealAction $action
      * @return string
      * @throws TranslationException
+     * @throws ActionException
      */
     private function applyHealAction(HealAction $action): string
     {
@@ -159,7 +162,7 @@ class Unit extends AbstractUnit
         $attacks = $this->calculateAttackSpeed();
 
         for ($i = 0; $i < $attacks; $i++) {
-            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand, $this->message));
+            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand, $this->message, $this->damage));
         }
 
         if (count($collection) === 0) {

@@ -27,7 +27,7 @@ class DamageActionTest extends TestCase
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
         $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
-        self::assertInstanceOf(DamageAction::class, $action);
+        self::assertEquals($unit->getDamage(), $action->getPower());
     }
 
     /**
@@ -50,15 +50,15 @@ class DamageActionTest extends TestCase
      */
     public function testDamageActionApplyUnit(): void
     {
-        $actionUnit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
-        $alliesCommand = CommandFactory::create([$actionUnit]);
-        $action = new DamageAction($actionUnit, $defendCommand, $alliesCommand, new Message());
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
         $action->handle();
 
         self::assertEquals(20, $action->getPower());
-        self::assertEquals($actionUnit->getName(), $action->getActionUnit()->getName());
+        self::assertEquals($unit->getName(), $action->getActionUnit()->getName());
         self::assertEquals($defendUnit->getName(), $action->getTargetUnit()->getName());
     }
 

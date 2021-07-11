@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action\Summon;
 
+use Battle\Action\ActionException;
 use Battle\Action\Summon\SummonImpAction;
 use Battle\Action\Summon\SummonSkeletonAction;
 use Battle\Command\CommandException;
@@ -68,5 +69,22 @@ class SummonActionTest extends TestCase
 
         // В любом случае будет 0
         self::assertEquals(0, $action->getFactualPower());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testSummonActionNoPower(): void
+    {
+        $actionUnit = UnitFactory::createByTemplate(7);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $alliesCommand = CommandFactory::create([$actionUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new SummonImpAction($actionUnit, $alliesCommand, $enemyCommand, new Message());
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getPower');
+        $action->getPower();
     }
 }

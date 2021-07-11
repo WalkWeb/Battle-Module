@@ -78,9 +78,13 @@ abstract class AbstractAction implements ActionInterface
         return $this->targetUnit;
     }
 
+    /**
+     * @return int
+     * @throws ActionException
+     */
     public function getPower(): int
     {
-        return $this->actionUnit->getDamage();
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }
 
     public function getFactualPower(): int
