@@ -53,4 +53,9 @@ interface AbilityInterface
      * @return UnitInterface
      */
     public function getUnit(): UnitInterface;
+
+    /**
+     * Указывает способности, что она была успешно применена (и должна перейти в статус ready = false)
+     */
+    public function setApply(): void;
 }

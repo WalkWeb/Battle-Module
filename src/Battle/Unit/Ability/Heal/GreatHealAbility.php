@@ -30,7 +30,8 @@ class GreatHealAbility extends AbstractAbility
             $enemyCommand,
             $alliesCommand,
             $this->container->getMessage(),
-            $this->unit->getDamage() * 3
+            $this->unit->getDamage() * 3,
+            'use Great Heal and heal'
         ));
 
         return $collection;

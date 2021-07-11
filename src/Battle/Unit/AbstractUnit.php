@@ -7,6 +7,7 @@ namespace Battle\Unit;
 use Battle\Classes\UnitClassInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Race\RaceInterface;
 use Exception;
 
@@ -143,7 +144,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->race = $race;
         $this->container = $container;
         $this->class = $class;
-        $this->abilities = $class ? $class->getAbilities($this, $container) : new AbilityCollection();
+        $this->abilities = $class ? $class->getAbilities($this) : new AbilityCollection();
     }
 
     public function getId(): string
@@ -255,7 +256,7 @@ abstract class AbstractUnit implements UnitInterface
 
     public function upMaxConcentration(): void
     {
-        $this->concentration = self::MAX_CONS;
+        $this->addConcentration(self::MAX_CONS);
     }
 
     public function upMaxRage(): void
@@ -291,6 +292,8 @@ abstract class AbstractUnit implements UnitInterface
         if ($this->concentration > self::MAX_CONS) {
             $this->concentration = self::MAX_CONS;
         }
+
+        $this->abilities->update($this);
     }
 
     /**
@@ -303,6 +306,22 @@ abstract class AbstractUnit implements UnitInterface
         if ($this->rage > self::MAX_RAGE) {
             $this->rage = self::MAX_RAGE;
         }
+    }
+
+    /**
+     * Проверяет способность, готовой к использованию
+     *
+     * @return AbilityInterface|null
+     */
+    protected function getAbility(): ?AbilityInterface
+    {
+        foreach ($this->abilities as $ability) {
+            if ($ability->isReady()) {
+                return $ability;
+            }
+        }
+
+        return null;
     }
 
     /**

@@ -31,9 +31,12 @@ class Unit extends AbstractUnit
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
-        if ($this->class && $this->concentration >= self::MAX_CONS) {
+        if ($ability = $this->getAbility()) {
+
+            // TODO Временно: в будущем сама способность будет обнулять концентрацию, если это необходимо
             $this->concentration = 0;
-            return $this->class->getAbility($this, $enemyCommand, $alliesCommand);
+            $ability->setApply();
+            return $ability->getAction($enemyCommand, $alliesCommand);
         }
 
         // Пока концентрация применяется сразу, при попытке сделать атаку, можно переделать так, чтобы добавлялась

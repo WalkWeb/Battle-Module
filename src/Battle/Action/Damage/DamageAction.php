@@ -20,16 +20,23 @@ class DamageAction extends AbstractAction
      */
     protected $damage;
 
+    /**
+     * @var string
+     */
+    protected $name;
+
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         Message $message,
-        ?int $damage = null
+        ?int $damage = null,
+        ?string $name = null
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $message);
         $this->damage = $damage ?? $actionUnit->getDamage();
+        $this->name = $name ?? self::NAME;
     }
 
     public function getHandleMethod(): string
@@ -79,6 +86,6 @@ class DamageAction extends AbstractAction
 
     public function getNameAction(): string
     {
-        return static::NAME;
+        return $this->name;
     }
 }

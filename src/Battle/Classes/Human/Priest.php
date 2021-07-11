@@ -67,7 +67,7 @@ class Priest extends AbstractUnitClass
             'Great Heal',
             '/images/icons/ability/338.png',
             $unit,
-            $unit->getContainer()
+            $unit->getContainer(),
         ));
 
         return $collection;

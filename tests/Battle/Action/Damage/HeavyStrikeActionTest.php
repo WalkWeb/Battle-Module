@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action\Damage;
 
+use Battle\Action\Damage\DamageAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Container\Container;
@@ -65,6 +66,8 @@ class HeavyStrikeActionTest extends TestCase
         $actionCollection = $unit->getAction($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
+            self::assertInstanceOf(DamageAction::class, $action);
+            self::assertEquals((int)($unit->getDamage() * 2.5), $action->getPower());
             self::assertEquals(self::HEAVY_STRIKE_MESSAGE_RU, $action->handle());
         }
 

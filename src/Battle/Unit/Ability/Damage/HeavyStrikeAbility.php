@@ -30,7 +30,8 @@ class HeavyStrikeAbility extends AbstractAbility
             $enemyCommand,
             $alliesCommand,
             $this->container->getMessage(),
-            (int)($this->unit->getDamage() * 2.5)
+            (int)($this->unit->getDamage() * 2.5),
+            'use Heavy Strike at'
         ));
 
         return $collection;

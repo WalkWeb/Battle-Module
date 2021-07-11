@@ -72,6 +72,11 @@ abstract class AbstractAbility implements AbilityInterface
         return $this->unit;
     }
 
+    public function setApply(): void
+    {
+        $this->ready = false;
+    }
+
     abstract public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
 
     abstract public function update(UnitInterface $unit): void;

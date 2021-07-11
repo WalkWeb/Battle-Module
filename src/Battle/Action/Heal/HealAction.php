@@ -19,16 +19,23 @@ class HealAction extends AbstractAction
      */
     protected $power;
 
+    /**
+     * @var string
+     */
+    protected $name;
+
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         Message $message,
-        ?int $power = null
+        ?int $power = null,
+        ?string $name = null
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $message);
         $this->power = $power ?? (int)($actionUnit->getDamage() * 1.2);
+        $this->name = $name ?? self::NAME;
     }
 
     public function getHandleMethod(): string
@@ -71,6 +78,6 @@ class HealAction extends AbstractAction
      */
     public function getNameAction(): string
     {
-        return static::NAME;
+        return $this->name;
     }
 }
