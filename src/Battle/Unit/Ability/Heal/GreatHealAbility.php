@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Battle\Unit\Ability\Damage;
+namespace Battle\Unit\Ability\Heal;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\Damage\DamageAction;
+use Battle\Action\Heal\HealAction;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerException;
 use Battle\Unit\Ability\AbstractAbility;
 use Battle\Unit\UnitInterface;
 
-class HeavyStrikeAbility extends AbstractAbility
+class GreatHealAbility extends AbstractAbility
 {
     /**
-     * Heavy Strike наносит 250% урона от базового урона юнита
+     * Great Heal лечение в 300% от силы удара юнита
      *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -25,12 +25,12 @@ class HeavyStrikeAbility extends AbstractAbility
     {
         $collection = new ActionCollection();
 
-        $collection->add(new DamageAction(
+        $collection->add(new HealAction(
             $this->unit,
             $enemyCommand,
             $alliesCommand,
             $this->container->getMessage(),
-            (int)($this->unit->getDamage() * 2.5)
+            $this->unit->getDamage() * 3
         ));
 
         return $collection;

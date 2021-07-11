@@ -5,11 +5,31 @@ declare(strict_types=1);
 namespace Battle\Action\Heal;
 
 use Battle\Action\AbstractAction;
+use Battle\Command\CommandInterface;
+use Battle\Result\Chat\Message;
+use Battle\Unit\UnitInterface;
 
 class HealAction extends AbstractAction
 {
     protected const NAME          = 'heal';
     protected const HANDLE_METHOD = 'applyHealAction';
+
+    /**
+     * @var int
+     */
+    protected $power;
+
+    public function __construct(
+        UnitInterface $actionUnit,
+        CommandInterface $enemyCommand,
+        CommandInterface $alliesCommand,
+        Message $message,
+        ?int $power = null
+    )
+    {
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $message);
+        $this->power = $power ?? (int)($actionUnit->getDamage() * 1.2);
+    }
 
     public function getHandleMethod(): string
     {
@@ -38,8 +58,7 @@ class HealAction extends AbstractAction
 
     public function getPower(): int
     {
-        // Базовое лечение в 120% от силы удара юнита
-        return (int)($this->getActionUnit()->getDamage() * 1.2);
+        return $this->power;
     }
 
     public function setFactualPower(int $factualPower): void
