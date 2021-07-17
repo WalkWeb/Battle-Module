@@ -197,6 +197,36 @@ class UnitFactory
             'class'        => 1,
             'race'         => 1,
         ],
+        // Юнит для подсчета дополнительных атак, с.м. тест testUnitCalculateAttackSpeed
+        15 => [
+            'id'           => '1aab367d-37e8-4544-9915-cb3d77793237',
+            'name'         => 'unit_15',
+            'level'        => 1,
+            'avatar'       => '/images/avas/humans/human002.jpg',
+            'damage'       => 32,
+            'attack_speed' => 1.9999,
+            'life'         => 150,
+            'total_life'   => 150,
+            'melee'        => true,
+            'command'      => 1,
+            'class'        => 1,
+            'race'         => 1,
+        ],
+        // Юнит для подсчета дополнительных атак, с.м. тест testUnitCalculateAttackSpeed
+        16 => [
+            'id'           => '1aab367d-37e8-4544-9915-cb3d77793239',
+            'name'         => 'unit_16',
+            'level'        => 1,
+            'avatar'       => '/images/avas/humans/human002.jpg',
+            'damage'       => 32,
+            'attack_speed' => 1.0001,
+            'life'         => 150,
+            'total_life'   => 150,
+            'melee'        => true,
+            'command'      => 1,
+            'class'        => 1,
+            'race'         => 1,
+        ],
     ];
 
     /**

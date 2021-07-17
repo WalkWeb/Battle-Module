@@ -210,6 +210,18 @@ interface UnitInterface
     public function upMaxRage(): void;
 
     /**
+     * Сообщает юниту, что была использована его способность завязанная на концентрацию
+     *
+     * Юнит, в свою очередь обнуляет свою концентрацию
+     */
+    public function useConcentrationAbility(): void;
+
+    /**
+     * Аналогично
+     */
+    public function useRageAbility(): void;
+
+    /**
      * Возвращает путь к иконке юнита
      *
      * Если есть класс - берется иконка класса, если её нет - берется иконка расы

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit;
 
 use Battle\Container\Container;
-use Battle\Unit\Ability\AbilityCollection;
 use Exception;
 use Battle\Unit\Unit;
 use Battle\Command\Command;
@@ -19,6 +18,7 @@ use Tests\Battle\Factory\UnitFactory;
 use Battle\Action\Damage\DamageAction;
 use Tests\Battle\Factory\UnitFactoryException;
 use Tests\Battle\Factory\Mock\ActionMockFactory;
+use Tests\Battle\Factory\CommandFactory as CommandFactoryTest;
 
 class UnitTest extends TestCase
 {
@@ -45,7 +45,7 @@ class UnitTest extends TestCase
         self::assertTrue($unit->isMelee());
         self::assertEquals($data['class'], $unit->getClass()->getId());
         self::assertEquals($data['race'], $unit->getRace()->getId());
-        self::assertEquals($unit->getClass()->getAbilities($unit, $unit->getContainer()), $unit->getAbilities());
+        self::assertEquals($unit->getClass()->getAbilities($unit), $unit->getAbilities());
     }
 
     /**
@@ -131,32 +131,32 @@ class UnitTest extends TestCase
      */
     public function testUnitAddConcentrationAndRage(): void
     {
-        $leftUnit = UnitFactory::createByTemplate(1);
-        $leftCollection = new UnitCollection();
-        $leftCollection->add($leftUnit);
-        $leftCommand = new Command($leftCollection);
+        $unit = UnitFactory::createByTemplate(1);
+        $collection = new UnitCollection();
+        $collection->add($unit);
+        $command = new Command($collection);
 
-        $rightUnit =  UnitFactory::createByTemplate(2);
-        $rightCollection = new UnitCollection();
-        $rightCollection->add($rightUnit);
-        $rightCommand = new Command($rightCollection);
+        $enemyUnit =  UnitFactory::createByTemplate(2);
+        $enemyCollection = new UnitCollection();
+        $enemyCollection->add($enemyUnit);
+        $enemyCommand = new Command($enemyCollection);
 
-        self::assertEquals(0, $leftUnit->getConcentration());
-        self::assertEquals(0, $rightUnit->getConcentration());
-        self::assertEquals(0, $leftUnit->getRage());
-        self::assertEquals(0, $rightUnit->getRage());
+        self::assertEquals(0, $unit->getConcentration());
+        self::assertEquals(0, $enemyUnit->getConcentration());
+        self::assertEquals(0, $unit->getRage());
+        self::assertEquals(0, $enemyUnit->getRage());
 
-        $actionCollection = $leftUnit->getAction($rightCommand, $leftCommand);
+        $actionCollection = $unit->getAction($enemyCommand, $command);
 
-        self::assertEquals(UnitInterface::ADD_CON_ACTION_UNIT, $leftUnit->getConcentration());
-        self::assertEquals(UnitInterface::ADD_RAGE_ACTION_UNIT, $leftUnit->getRage());
+        self::assertEquals(UnitInterface::ADD_CON_ACTION_UNIT, $unit->getConcentration());
+        self::assertEquals(UnitInterface::ADD_RAGE_ACTION_UNIT, $unit->getRage());
 
         foreach ($actionCollection as $action) {
             $action->handle();
         }
 
-        self::assertEquals(UnitInterface::ADD_CON_RECEIVING_UNIT, $rightUnit->getConcentration());
-        self::assertEquals(UnitInterface::ADD_RAGE_RECEIVING_UNIT, $rightUnit->getRage());
+        self::assertEquals(UnitInterface::ADD_CON_RECEIVING_UNIT, $enemyUnit->getConcentration());
+        self::assertEquals(UnitInterface::ADD_RAGE_RECEIVING_UNIT, $enemyUnit->getRage());
     }
 
     /**
@@ -174,12 +174,83 @@ class UnitTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testUnitUmMaxRage(): void
+    public function testUnitUpMaxRage(): void
     {
         $unit = UnitFactory::createByTemplate(1);
 
         self::assertEquals(0, $unit->getRage());
         $unit->upMaxRage();
         self::assertEquals(Unit::MAX_RAGE, $unit->getRage());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testUnitUseConcentrationAbility(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        $unit->upMaxConcentration();
+        self::assertEquals(Unit::MAX_CONS, $unit->getConcentration());
+
+        $unit->useConcentrationAbility();
+        self::assertEquals(0, $unit->getConcentration());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testUnitUseRageAbility(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        $unit->upMaxRage();
+        self::assertEquals(Unit::MAX_RAGE, $unit->getRage());
+
+        $unit->useRageAbility();
+        self::assertEquals(0, $unit->getRage());
+    }
+
+    /**
+     * Проверяем корректный подсчет нескольких атак за ход
+     *
+     * Юнит имеет скорость атаки = 1.9999, специально, чтобы точно была одна атака, плюс, 99.99% шанс на добавление
+     * второй атаки, которая, с 99.99% вероятностью будет добавлена. Недостаток теста - что в 1 вызове из 100 он будет
+     * падать
+     *
+     * Просто указать скорость атаки 2 нельзя - будет просто 2 атаки, и не будет проверен именно шанс добавления
+     * дополнительной атаки
+     *
+     * И затем делается аналогичный тест, только со скоростью атаки 1.0001, чтобы протестировать обратную ситуацию
+     *
+     * @throws Exception
+     */
+    public function testUnitCalculateAttackSpeed(): void
+    {
+        $unit = UnitFactory::createByTemplate(15);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactoryTest::createRightCommand();
+
+        $actions = $unit->getAction($enemyCommand, $command);
+
+        self::assertCount(2, $actions);
+
+        foreach ($actions as $action) {
+            self::assertInstanceOf(DamageAction::class, $action);
+        }
+
+        // В этом же тесте проверяем другую ситуацию, скорость атаки 1.0001 - т.е. расчет дополнительной атаки будет
+        // Но он будет всегда неуспешным
+
+        $unit = UnitFactory::createByTemplate(16);
+        $command = CommandFactory::create([$unit]);
+
+        $actions = $unit->getAction($enemyCommand, $command);
+
+        self::assertCount(1, $actions);
+
+        foreach ($actions as $action) {
+            self::assertInstanceOf(DamageAction::class, $action);
+        }
     }
 }
