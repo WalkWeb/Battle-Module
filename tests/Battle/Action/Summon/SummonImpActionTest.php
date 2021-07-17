@@ -26,6 +26,8 @@ class SummonImpActionTest extends TestCase
 
         $action = new SummonImpAction($actionUnit, $enemyCommand, $actionCommand, new Message());
 
+        self::assertTrue($action->canByUsed());
+
         self::assertEquals(SummonImpAction::NAME, $action->getNameAction());
 
         $unit = $action->getSummonUnit();

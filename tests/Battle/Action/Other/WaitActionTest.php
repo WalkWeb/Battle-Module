@@ -34,6 +34,7 @@ class WaitActionTest extends TestCase
 
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(WaitAction::class, [$action]);
+            self::assertTrue($action->canByUsed());
             $message .= $action->handle();
         }
 

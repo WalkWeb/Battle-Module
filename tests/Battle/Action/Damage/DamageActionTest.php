@@ -28,6 +28,7 @@ class DamageActionTest extends TestCase
         $alliesCommand = CommandFactory::create([$unit]);
         $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
         self::assertEquals($unit->getDamage(), $action->getPower());
+        self::assertTrue($action->canByUsed());
     }
 
     /**

@@ -48,6 +48,7 @@ class HealActionTest extends TestCase
         // Проверяем, что у одного из юнитов здоровье уменьшилось
         self::assertTrue($unit->getLife() < $unit->getTotalLife() || $alliesUnit->getLife() < $alliesUnit->getTotalLife());
 
+
         // Накапливаем концентрацию
         for ($i = 0; $i < 10; $i++) {
             $alliesUnit->newRound();
@@ -57,6 +58,8 @@ class HealActionTest extends TestCase
         $heals =  $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
         foreach ($heals as $heal) {
+            // Проверяем, что лечение может быть использовано:
+            self::assertTrue($heal->canByUsed());
             $heal->handle();
         }
 
@@ -121,6 +124,10 @@ class HealActionTest extends TestCase
         // Проверяем, что получили лечение
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
+
+            // Проверяем, что событие не может быть применено
+            self::assertFalse($action->canByUsed());
+
             $message = $action->handle();
 
             // Проверяем, что лечение не применилось

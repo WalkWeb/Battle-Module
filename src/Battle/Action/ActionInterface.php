@@ -18,6 +18,13 @@ interface ActionInterface
     public function getHandleMethod(): string;
 
     /**
+     * Может ли событие быть использовано - проверяет наличие цели для применения
+     *
+     * @return bool
+     */
+    public function canByUsed(): bool;
+
+    /**
      * Применение события
      *
      * @return string

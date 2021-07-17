@@ -93,4 +93,12 @@ class HealAction extends AbstractAction
     {
         return $this->name;
     }
+
+    /**
+     * @return bool
+     */
+    public function canByUsed(): bool
+    {
+        return (bool)$this->alliesCommand->getUnitForHeal();
+    }
 }
