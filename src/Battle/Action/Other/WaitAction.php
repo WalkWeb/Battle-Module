@@ -18,7 +18,6 @@ class WaitAction extends AbstractAction
 
     public function handle(): string
     {
-        $this->successHandle = true;
         return $this->actionUnit->applyAction($this);
     }
 

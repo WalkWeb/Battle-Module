@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action\Heal;
 
 use Battle\Action\AbstractAction;
+use Battle\Action\ActionException;
 use Battle\Command\CommandInterface;
 use Battle\Result\Chat\Message;
 use Battle\Unit\UnitInterface;
@@ -47,31 +48,16 @@ class HealAction extends AbstractAction
      * Если лечить некого - совершается обычная атака
      *
      * @return string
+     * @throws ActionException
      */
     public function handle(): string
     {
         $this->targetUnit = $this->alliesCommand->getUnitForHeal();
 
+        // Такой ситуации быть не должно, потому возможность применения события должна проверяться до её применения
         if (!$this->targetUnit) {
-
-            // TODO Здесь прямая завязка на концентрацию - необходимо от этого уйти
-
-            // TODO Плюс, если это способность - она (способность) не узнает, была ли она успешно применена
-            // TODO Точнее, в текущей ситуации узнает - через обновление концентрации способность снова
-            // TODO перейдет в статус активной. А если способность была одноразовой? Или завязана на другую
-            // TODO характеристику?
-
-            // TODO Размышляя над хорошей реализацией, прихожу к выводу, что нужно делать принципиально новый
-            // TODO функционал - проверку, может ли способность примениться. И использовать, только если способность
-            // TODO может примениться. В этом случае не придется откатывать активность способности и характеристики
-            // TODO юнита
-
-            $this->actionUnit->upMaxConcentration();
-            // $action->successHandle = false
-            return self::NO_HANDLE_MESSAGE;
+            throw new ActionException(ActionException::NO_TARGET_FOR_HEAL);
         }
-
-        $this->successHandle = true;
 
         return $this->targetUnit->applyAction($this);
     }

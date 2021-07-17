@@ -40,13 +40,6 @@ abstract class AbstractAction implements ActionInterface
      */
     protected $factualPower = 0;
 
-    /**
-     * Был ли успешно применен Action
-     *
-     * @var bool
-     */
-    protected $successHandle = false;
-
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,

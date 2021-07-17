@@ -60,8 +60,6 @@ class DamageAction extends AbstractAction
             throw new ActionException(ActionException::NO_DEFINED_AGAIN);
         }
 
-        $this->successHandle = true;
-
         return $this->targetUnit->applyAction($this);
     }
 

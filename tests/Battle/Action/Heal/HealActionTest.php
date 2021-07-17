@@ -111,11 +111,9 @@ class HealActionTest extends TestCase
     /**
      * Тест похож на testNoTargetHealAction(), но здесь проверяем полученное исключение
      *
-     * @throws ActionException
-     * @throws CommandException
-     * @throws UnitException
+     * @throws Exception
      */
-    public function testHealActionNoTargetException(): void
+    public function testHealActionNoTargetForHealException(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $alliesUnit = UnitFactory::createByTemplate(5);
@@ -131,11 +129,30 @@ class HealActionTest extends TestCase
 
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
-            $action->handle();
 
             $this->expectException(ActionException::class);
-            $this->expectExceptionMessage(ActionException::NO_TARGET_UNIT);
-            $action->getTargetUnit();
+            $this->expectExceptionMessage(ActionException::NO_TARGET_FOR_HEAL);
+            $action->handle();
         }
+    }
+
+    /**
+     * В этом тесте мы просто получаем исключение по прямому вызову getTargetUnit(), который используется после
+     * применения способности
+     *
+     * @throws Exception
+     */
+    public function testHealActionNoTargetException(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new HealAction($unit, $enemyCommand, $command, new Message());
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage(ActionException::NO_TARGET_UNIT);
+        $action->getTargetUnit();
     }
 }

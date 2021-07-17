@@ -33,7 +33,6 @@ abstract class SummonAction extends AbstractAction
     {
         $unit = $this->getSummonUnit();
         $this->alliesCommand->getUnits()->add($unit);
-        $this->successHandle = true;
         return $this->actionUnit->applyAction($this);
     }
 
