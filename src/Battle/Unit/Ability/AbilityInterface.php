@@ -55,7 +55,13 @@ interface AbilityInterface
     public function getUnit(): UnitInterface;
 
     /**
-     * Указывает способности, что она была успешно применена (и должна перейти в статус ready = false)
+     * Указывает способности, что она была успешно применена и должна сделать соответствующие действия для себя:
+     *
+     * 1. Перейти в статус ready = false
+     * 2. При необходимости изменить характеристику юнита, если способность была связана с заполненностью концентрации
+     *    или ярости
+     *
+     * @param UnitInterface $unit
      */
-    public function setApply(): void;
+    public function usage(UnitInterface $unit): void;
 }

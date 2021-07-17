@@ -48,4 +48,15 @@ class GreatHealAbility extends AbstractAbility
             $this->ready = true;
         }
     }
+
+    /**
+     * Способность отмечает свое использование - переходит в неактивный статус и обнуляет концентрацию у юнита
+     *
+     * @param UnitInterface $unit
+     */
+    public function usage(UnitInterface $unit): void
+    {
+        $this->ready = false;
+        $unit->useConcentrationAbility();
+    }
 }

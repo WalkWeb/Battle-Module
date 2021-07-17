@@ -32,10 +32,7 @@ class Unit extends AbstractUnit
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         if ($ability = $this->getAbility()) {
-
-            // TODO Временно: в будущем сама способность будет обнулять концентрацию, если это необходимо
-            $this->concentration = 0;
-            $ability->setApply();
+            $ability->usage($this);
             return $ability->getAction($enemyCommand, $alliesCommand);
         }
 

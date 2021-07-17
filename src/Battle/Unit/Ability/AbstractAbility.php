@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Ability;
 
-use Battle\Action\ActionCollection;
-use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitInterface;
 
@@ -71,13 +69,4 @@ abstract class AbstractAbility implements AbilityInterface
     {
         return $this->unit;
     }
-
-    public function setApply(): void
-    {
-        $this->ready = false;
-    }
-
-    abstract public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
-
-    abstract public function update(UnitInterface $unit): void;
 }
