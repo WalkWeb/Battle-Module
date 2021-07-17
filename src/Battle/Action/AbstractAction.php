@@ -92,11 +92,6 @@ abstract class AbstractAction implements ActionInterface
         return $this->factualPower;
     }
 
-    public function isSuccessHandle(): bool
-    {
-        return $this->successHandle;
-    }
-
     /**
      * Сейчас всего 4 типа событий, и 3 из них могут примениться по-умолчанию, это:
      *

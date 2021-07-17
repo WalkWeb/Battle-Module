@@ -50,20 +50,6 @@ class Unit extends AbstractUnit
     }
 
     /**
-     * Возвращает базовую атаку юнита. Используется в тех случаях, когда использовать способность невозможно. Например,
-     * потому что способность лечения, а лечить некого
-     *
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return ActionInterface
-     * @throws ContainerException
-     */
-    public function getBaseAttack(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionInterface
-    {
-        return new DamageAction($this, $enemyCommand, $alliesCommand, $this->container->getMessage(), $this->damage);
-    }
-
-    /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
      *
      * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction

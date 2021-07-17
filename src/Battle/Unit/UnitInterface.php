@@ -92,16 +92,6 @@ interface UnitInterface
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
 
     /**
-     * Иногда способность не может быть использована (например, лечение, когда все в команде живые), чтобы просто
-     * не пропускать ход - мы запрашиваем у юнита базовую атаку и применяем её
-     *
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return ActionInterface
-     */
-    public function getBaseAttack(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionInterface;
-
-    /**
      * Универсальный метод, через который мы применяем действие к юниту. Какое бы это действие не было - удар, лечение,
      * применение эффекта или что-то другое
      *
