@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Stroke;
 
+use Battle\Stroke\StrokeException;
 use Exception;
 use Battle\Container\Container;
 use Battle\Command\CommandFactory;
@@ -85,10 +86,16 @@ class StrokeTest extends TestCase
 
         $stroke = new Stroke(1, $alliesUnit, $alliesCommand, $enemyCommand, new Container());
 
+        // Событие должно проверяться перед использованием, на возможность использования
+        // Если этого сделано не было, и нет цели для использования - просто кидаем исключение
+
+        $this->expectException(StrokeException::class);
+        $this->expectExceptionMessage(StrokeException::CANT_BE_USED_ACTION);
         $stroke->handle();
 
+        // TODO Неочевидная логика, которой больше не будет
         // Не смотря на то, что должно было примениться лечение - будет использована атака, т.к. лечить некого
         // Проверяем уменьшившееся здоровье
-        self::assertEquals($enemyUnit->getTotalLife() - $alliesUnit->getDamage(), $enemyUnit->getLife());
+        //self::assertEquals($enemyUnit->getTotalLife() - $alliesUnit->getDamage(), $enemyUnit->getLife());
     }
 }

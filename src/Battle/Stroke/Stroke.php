@@ -100,12 +100,11 @@ class Stroke implements StrokeInterface
                 break;
             }
 
-            $message = $action->handle();
-
-            if (!$action->isSuccessHandle()) {
-                $action = $this->actionUnit->getBaseAttack($enemyCommand, $alliesCommand);
-                $message = $action->handle();
+            if (!$action->canByUsed()) {
+                throw new StrokeException(StrokeException::CANT_BE_USED_ACTION);
             }
+
+            $message = $action->handle();
 
             $this->container->getStatistic()->addUnitAction($action);
             $this->container->getScenario()->addAction($action, $this->container->getStatistic());

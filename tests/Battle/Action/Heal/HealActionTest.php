@@ -97,6 +97,8 @@ class HealActionTest extends TestCase
     }
 
     /**
+     * TODO Этот сложный тест потерял свою актуальность - на удаление, вместе с методом isSuccessHandle() в Action
+     *
      * @throws CommandException
      * @throws UnitException
      * @throws Exception

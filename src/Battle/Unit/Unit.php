@@ -31,7 +31,10 @@ class Unit extends AbstractUnit
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
-        if ($ability = $this->getAbility()) {
+        // Способность применяется если:
+        // 1. Есть способность доступная для использования
+        // 2. Способность может быть использована (например, есть цель для лечения)
+        if (($ability = $this->getAbility()) && $ability->canByUsed($enemyCommand, $alliesCommand)) {
             $ability->usage($this);
             return $ability->getAction($enemyCommand, $alliesCommand);
         }
@@ -41,6 +44,8 @@ class Unit extends AbstractUnit
         $this->addConcentration(self::ADD_CON_ACTION_UNIT);
         $this->addRage(self::ADD_RAGE_ACTION_UNIT);
 
+        // Базовую атака не проверяется на canByUsed(), потому что такой ситуации быть не должно - если противников нет
+        // Бой должен закончиться. Плюс, это избавляет от дополнительных проверок на каждую атаку
         return $this->getDamageAction($enemyCommand, $alliesCommand);
     }
 
