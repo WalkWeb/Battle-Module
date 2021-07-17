@@ -14,6 +14,11 @@ use Battle\Unit\UnitInterface;
 class GreatHealAbility extends AbstractAbility
 {
     /**
+     * @var ActionCollection
+     */
+    private $actionCollection;
+
+    /**
      * Great Heal лечение в 300% от силы удара юнита
      *
      * @param CommandInterface $enemyCommand
@@ -23,18 +28,20 @@ class GreatHealAbility extends AbstractAbility
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
-        $collection = new ActionCollection();
+        if ($this->actionCollection === null) {
+            $this->actionCollection = new ActionCollection();
 
-        $collection->add(new HealAction(
-            $this->unit,
-            $enemyCommand,
-            $alliesCommand,
-            $this->container->getMessage(),
-            $this->unit->getDamage() * 3,
-            'use Great Heal and heal'
-        ));
+            $this->actionCollection->add(new HealAction(
+                $this->unit,
+                $enemyCommand,
+                $alliesCommand,
+                $this->container->getMessage(),
+                $this->unit->getDamage() * 3,
+                'use Great Heal and heal'
+            ));
+        }
 
-        return $collection;
+        return $this->actionCollection;
     }
 
     /**
@@ -58,5 +65,18 @@ class GreatHealAbility extends AbstractAbility
     {
         $this->ready = false;
         $unit->useConcentrationAbility();
+    }
+
+    /**
+     * Проверяет, есть ли цель для лечения
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return bool
+     */
+    public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
+    {
+        // TODO Временно
+        return true;
     }
 }

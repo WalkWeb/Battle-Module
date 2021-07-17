@@ -27,12 +27,13 @@ class HeavyStrikeAbilityTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = new HeavyStrikeAbility($name, $icon, $unit, new Container());
+        $ability = new HeavyStrikeAbility($name, $icon, $unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
         $unit->upMaxConcentration();
 

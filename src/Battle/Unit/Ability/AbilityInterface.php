@@ -32,6 +32,16 @@ interface AbilityInterface
     public function isReady(): bool;
 
     /**
+     * Может ли способность быть применена. Например, способность лечения может быть готова для использования, но нет
+     * цели для лечения - в этом случае способность применять пока не нужно
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return bool
+     */
+    public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool;
+    
+    /**
      * Возвращает коллекцию действия данной способности
      *
      * @param CommandInterface $enemyCommand

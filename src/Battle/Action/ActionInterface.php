@@ -79,6 +79,9 @@ interface ActionInterface
      * нет - в этом случае, на основании isSuccessHandle() === false, берется базовая атака у юнита, и выполняется она,
      * вместо лечения
      *
+     * TODO На удаление, после добавления механики проверки возможности использования до фактического использования
+     * TODO события
+     *
      * @return bool
      */
     public function isSuccessHandle(): bool;

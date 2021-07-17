@@ -35,19 +35,16 @@ abstract class AbstractAbility implements AbilityInterface
     protected $container;
 
     /**
-     * TODO ContainerInterface на удаление - его можно получить из юнита
-     *
      * @param string $name
      * @param string $icon
      * @param UnitInterface $unit
-     * @param ContainerInterface $container
      */
-    public function __construct(string $name, string $icon, UnitInterface $unit, ContainerInterface $container)
+    public function __construct(string $name, string $icon, UnitInterface $unit)
     {
         $this->name = $name;
         $this->icon = $icon;
         $this->unit = $unit;
-        $this->container = $container;
+        $this->container = $unit->getContainer();
     }
 
     public function getName(): string

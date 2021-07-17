@@ -59,4 +59,17 @@ class HeavyStrikeAbility extends AbstractAbility
         $this->ready = false;
         $unit->useConcentrationAbility();
     }
+
+    /**
+     * Атакующие способности всегда готовы к использованию - потому что, если живых противников не остается - бой
+     * заканчивается
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return bool
+     */
+    public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
+    {
+        return true;
+    }
 }

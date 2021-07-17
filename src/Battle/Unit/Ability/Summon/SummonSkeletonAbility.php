@@ -57,4 +57,16 @@ class SummonSkeletonAbility extends AbstractAbility
         $this->ready = false;
         $unit->useConcentrationAbility();
     }
+
+    /**
+     * Призыв всего готов к использованию - ограничение на мест в группе нет
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return bool
+     */
+    public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
+    {
+        return true;
+    }
 }
