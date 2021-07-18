@@ -6,7 +6,6 @@ namespace Tests\Battle\Action\Heal;
 
 use Battle\Action\ActionException;
 use Battle\Action\Damage\DamageAction;
-use Battle\Action\Heal\GreatHealAction;
 use Battle\Action\Heal\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -102,10 +101,8 @@ class HealActionTest extends TestCase
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $healAction = new HealAction($unit, $enemyCommand, $command, $message);
-        $greatHealAction = new GreatHealAction($unit, $enemyCommand, $command, $message);
 
         self::assertEquals((int)($unit->getDamage() * 1.2), $healAction->getPower());
-        self::assertEquals($unit->getDamage() * 3, $greatHealAction->getPower());
     }
 
     /**

@@ -105,7 +105,5 @@ class StrokeTest extends TestCase
         $this->expectException(StrokeException::class);
         $this->expectExceptionMessage(StrokeException::CANT_BE_USED_ACTION);
         $stroke->handle();
-
-        self::assertEquals(1, 1);
     }
 }
