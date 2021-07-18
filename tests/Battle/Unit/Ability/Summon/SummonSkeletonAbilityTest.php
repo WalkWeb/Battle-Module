@@ -7,7 +7,6 @@ namespace Tests\Battle\Unit\Ability\Summon;
 use Battle\Action\Summon\SummonSkeletonAction;
 use Battle\Unit\Ability\Summon\SummonSkeletonAbility;
 use Exception;
-use Battle\Container\Container;
 use PHPUnit\Framework\TestCase;
 use Battle\Command\CommandFactory;
 use Tests\Battle\Factory\UnitFactory;
@@ -35,7 +34,10 @@ class SummonSkeletonAbilityTest extends TestCase
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        $unit->upMaxConcentration();
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
 
         $collection = new AbilityCollection();
         $collection->add($ability);

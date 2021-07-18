@@ -8,8 +8,6 @@ use Battle\Unit\UnitInterface;
 
 interface ActionInterface
 {
-    public const NO_HANDLE_MESSAGE = '';
-
     /**
      * Название метода в классе Unit, который будет обрабатывать данное событие
      *

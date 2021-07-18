@@ -254,16 +254,6 @@ abstract class AbstractUnit implements UnitInterface
         $this->addRage(self::ADD_RAGE_NEW_ROUND);
     }
 
-    public function upMaxConcentration(): void
-    {
-        $this->addConcentration(self::MAX_CONS);
-    }
-
-    public function upMaxRage(): void
-    {
-        $this->addRage(self::MAX_RAGE);
-    }
-
     public function useConcentrationAbility(): void
     {
         $this->concentration = 0;

@@ -167,7 +167,12 @@ class UnitTest extends TestCase
         $unit = UnitFactory::createByTemplate(1);
 
         self::assertEquals(0, $unit->getConcentration());
-        $unit->upMaxConcentration();
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
         self::assertEquals(Unit::MAX_CONS, $unit->getConcentration());
     }
 
@@ -179,7 +184,12 @@ class UnitTest extends TestCase
         $unit = UnitFactory::createByTemplate(1);
 
         self::assertEquals(0, $unit->getRage());
-        $unit->upMaxRage();
+
+        // Up rage
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
         self::assertEquals(Unit::MAX_RAGE, $unit->getRage());
     }
 
@@ -190,7 +200,11 @@ class UnitTest extends TestCase
     {
         $unit = UnitFactory::createByTemplate(1);
 
-        $unit->upMaxConcentration();
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
         self::assertEquals(Unit::MAX_CONS, $unit->getConcentration());
 
         $unit->useConcentrationAbility();
@@ -204,7 +218,11 @@ class UnitTest extends TestCase
     {
         $unit = UnitFactory::createByTemplate(1);
 
-        $unit->upMaxRage();
+        // Up rage
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
         self::assertEquals(Unit::MAX_RAGE, $unit->getRage());
 
         $unit->useRageAbility();

@@ -6,7 +6,6 @@ namespace Tests\Battle\Unit\Ability\Heal;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Battle\Container\Container;
 use Battle\Action\Heal\HealAction;
 use Battle\Command\CommandFactory;
 use Tests\Battle\Factory\UnitFactory;
@@ -35,7 +34,10 @@ class GreatHealAbilityTest extends TestCase
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        $unit->upMaxConcentration();
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
 
         $collection = new AbilityCollection();
         $collection->add($ability);

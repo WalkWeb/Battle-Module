@@ -8,7 +8,6 @@ use Battle\Action\Damage\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityCollection;
 use Exception;
-use Battle\Container\Container;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
@@ -35,7 +34,10 @@ class HeavyStrikeAbilityTest extends TestCase
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        $unit->upMaxConcentration();
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
 
         $collection = new AbilityCollection();
         $collection->add($ability);

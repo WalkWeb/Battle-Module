@@ -30,24 +30,24 @@ interface UnitInterface
     public const MAX_CONS                = 1000;
     public const MAX_RAGE                = 1000;
 
-    public const MIN_DAMAGE         = 0;
-    public const MAX_DAMAGE         = 100000;
+    public const MIN_DAMAGE       = 0;
+    public const MAX_DAMAGE       = 100000;
 
-    public const MIN_ATTACK_SPEED   = 0.0;
-    public const MAX_ATTACK_SPEED   = 10;
+    public const MIN_ATTACK_SPEED = 0.0;
+    public const MAX_ATTACK_SPEED = 10;
 
-    public const MIN_LIFE           = 0;
-    public const MAX_LIFE           = 100000;
+    public const MIN_LIFE         = 0;
+    public const MAX_LIFE         = 100000;
 
-    public const MIN_TOTAL_LIFE     = 1;
-    public const MAX_TOTAL_LIFE     = 100000;
+    public const MIN_TOTAL_LIFE   = 1;
+    public const MAX_TOTAL_LIFE   = 100000;
 
-    public const MIN_LEVEL         = 1;
-    public const MAX_LEVEL         = 1000;
+    public const MIN_LEVEL        = 1;
+    public const MAX_LEVEL        = 1000;
 
-    // Помимо ограничения на символы, слишком длинное имя обрезается в css
-    public const MIN_NAME_LENGTH    = 1;
-    public const MAX_NAME_LENGTH    = 20;
+    // Помимо ограничения на символы, слишком длинное имя обрезается в css, на случай WWWWW-имен
+    public const MIN_NAME_LENGTH  = 1;
+    public const MAX_NAME_LENGTH  = 20;
 
     public const MIN_ID_LENGTH    = 1;
     public const MAX_ID_LENGTH    = 36;
@@ -188,20 +188,6 @@ interface UnitInterface
      */
     public function getDamage(): int;
 
-    // TODO 2 метода ниже перестанут нужны, если добавить проверку на возможность использования способности перед
-    // TODO её использованием
-
-    /**
-     * Если способность не была применена - нужно сообщить юзеру, чтобы он вновь получил максимальную концентрацию и
-     * попробовал использовать способность в следующем ходу
-     */
-    public function upMaxConcentration(): void;
-
-    /**
-     * Аналогично
-     */
-    public function upMaxRage(): void;
-
     /**
      * Сообщает юниту, что была использована его способность завязанная на концентрацию
      *
@@ -210,7 +196,7 @@ interface UnitInterface
     public function useConcentrationAbility(): void;
 
     /**
-     * Аналогично
+     * Аналогично, только с яростью
      */
     public function useRageAbility(): void;
 
