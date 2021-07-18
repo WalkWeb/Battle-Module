@@ -73,10 +73,16 @@ class GreatHealAbility extends AbstractAbility
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return bool
+     * @throws ContainerException
      */
     public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
     {
-        // TODO Временно
+        foreach ($this->getAction($enemyCommand, $alliesCommand) as $action) {
+            if (!$action->canByUsed()) {
+                return false;
+            }
+        }
+
         return true;
     }
 }

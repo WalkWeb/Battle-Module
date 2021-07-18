@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Action\Heal;
 
 use Battle\Action\ActionException;
+use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\GreatHealAction;
 use Battle\Action\Heal\HealAction;
 use Battle\Command\CommandException;
@@ -39,7 +40,6 @@ class HealActionTest extends TestCase
 
         // Проверяем, что у одного из юнитов здоровье уменьшилось
         self::assertTrue($unit->getLife() < $unit->getTotalLife() || $alliesUnit->getLife() < $alliesUnit->getTotalLife());
-
 
         // Накапливаем концентрацию
         for ($i = 0; $i < 10; $i++) {
@@ -109,11 +109,9 @@ class HealActionTest extends TestCase
     }
 
     /**
-     * Тест похож на testNoTargetHealAction(), но здесь проверяем полученное исключение
-     *
      * @throws Exception
      */
-    public function testHealActionNoTargetForHealException(): void
+    public function testHealActionNoTargetForHeal(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $alliesUnit = UnitFactory::createByTemplate(5);
@@ -125,15 +123,15 @@ class HealActionTest extends TestCase
             $alliesUnit->newRound();
         }
 
+        // Лечить некого - по этому будет получен удар
         $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
-            self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
-
-            $this->expectException(ActionException::class);
-            $this->expectExceptionMessage(ActionException::NO_TARGET_FOR_HEAL);
+            self::assertContainsOnlyInstancesOf(DamageAction::class, [$action]);
             $action->handle();
         }
+
+        self::assertEquals($enemyUnit->getTotalLife() - $alliesUnit->getDamage(), $enemyUnit->getLife());
     }
 
     /**
@@ -154,5 +152,24 @@ class HealActionTest extends TestCase
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_TARGET_UNIT);
         $action->getTargetUnit();
+    }
+
+    /**
+     * В этом тесте эмулируем исключение ActionException::NO_TARGET_FOR_HEAL при вызове Action::handle()
+     *
+     * @throws Exception
+     */
+    public function testHealActionHandleNoTarget(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new HealAction($unit, $enemyCommand, $command, new Message());
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage(ActionException::NO_TARGET_FOR_HEAL);
+        $action->handle();
     }
 }

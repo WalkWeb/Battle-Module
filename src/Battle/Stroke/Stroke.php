@@ -101,7 +101,11 @@ class Stroke implements StrokeInterface
             }
 
             if (!$action->canByUsed()) {
-                throw new StrokeException(StrokeException::CANT_BE_USED_ACTION);
+                throw new StrokeException(
+                    StrokeException::CANT_BE_USED_ACTION .
+                    '. Action unit: ' . $this->actionUnit->getName() .
+                    '. Action: ' . $action->getNameAction()
+                );
             }
 
             $message = $action->handle();

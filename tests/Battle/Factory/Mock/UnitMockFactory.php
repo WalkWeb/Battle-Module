@@ -13,6 +13,9 @@ class UnitMockFactory extends TestCase
     /**
      * Единственное применение этому моку - в тесте CommandTest::testCommandGetUnitForActionBroken()
      *
+     * Тест на необычную ситуацию, когда юниты в команде вначале сообщают, что есть готовые ходить, а при попытке
+     * вернуть такого юнита - его нет
+     *
      * @return UnitInterface
      */
     public function create(): UnitInterface

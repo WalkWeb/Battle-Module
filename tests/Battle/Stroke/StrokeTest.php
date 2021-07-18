@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Tests\Battle\Stroke;
 
 use Battle\Stroke\StrokeException;
+use Battle\Unit\Race\RaceFactory;
 use Exception;
 use Battle\Container\Container;
 use Battle\Command\CommandFactory;
 use PHPUnit\Framework\TestCase;
 use Battle\Stroke\Stroke;
+use Tests\Battle\Factory\Mock\BrokenPriestUnit;
 use Tests\Battle\Factory\UnitFactory;
 
 class StrokeTest extends TestCase
@@ -69,33 +71,41 @@ class StrokeTest extends TestCase
     }
 
     /**
+     * Сложный тест на эмуляцию ситуации, когда Stroke не может выполнить полученный Action
+     *
+     * Сложный тем, что юнит проверяет событие на возможность использование. Значит, делаем мок юнита, который вернет
+     * именно лечение, хотя и лечить некого
+     *
      * @throws Exception
      */
-    public function testStrokeActionNoHandle(): void
+    public function testStrokeCantBeUsedActionException(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
-        $alliesUnit = UnitFactory::createByTemplate(5);
         $enemyUnit = UnitFactory::createByTemplate(3);
-        $alliesCommand = CommandFactory::create([$unit, $alliesUnit]);
+
+        $brokenPriest = new BrokenPriestUnit(
+            'id',
+            'Broken Priest',
+            1,
+            'avatar',
+            20,
+            1,
+            100,
+            100,
+            false,
+            1,
+            RaceFactory::create(1),
+            $enemyUnit->getContainer()
+        );
+
+        $alliesCommand = CommandFactory::create([$brokenPriest]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        // Накапливаем концентрацию
-        for ($i = 0; $i < 10; $i++) {
-            $alliesUnit->newRound();
-        }
-
-        $stroke = new Stroke(1, $alliesUnit, $alliesCommand, $enemyCommand, new Container());
-
-        // Событие должно проверяться перед использованием, на возможность использования
-        // Если этого сделано не было, и нет цели для использования - просто кидаем исключение
+        $stroke = new Stroke(1, $brokenPriest, $alliesCommand, $enemyCommand, new Container());
 
         $this->expectException(StrokeException::class);
         $this->expectExceptionMessage(StrokeException::CANT_BE_USED_ACTION);
         $stroke->handle();
 
-        // TODO Неочевидная логика, которой больше не будет
-        // Не смотря на то, что должно было примениться лечение - будет использована атака, т.к. лечить некого
-        // Проверяем уменьшившееся здоровье
-        //self::assertEquals($enemyUnit->getTotalLife() - $alliesUnit->getDamage(), $enemyUnit->getLife());
+        self::assertEquals(1, 1);
     }
 }
