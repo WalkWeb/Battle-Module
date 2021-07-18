@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Classes\Human;
 
-use Battle\Action\Heal\GreatHealAction;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\Ability\Heal\GreatHealAbility;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -33,11 +33,16 @@ class PriestTest extends TestCase
         self::assertEquals(UnitClassInterface::PRIEST_NAME, $priest->getName());
         self::assertEquals(UnitClassInterface::PRIEST_SMALL_ICON, $priest->getSmallIcon());
 
-        $actionCollection = $priest->getAbility($actionUnit, $enemyCommand, $actionCommand);
+        $abilities = $priest->getAbilities($actionUnit);
 
-        foreach ($actionCollection as $action) {
-            self::assertContainsOnlyInstancesOf(GreatHealAction::class, [$action]);
-            self::assertEquals($actionUnit->getDamage() * 3, $action->getPower());
+        foreach ($abilities as $ability) {
+            self::assertContainsOnlyInstancesOf(GreatHealAbility::class, [$ability]);
+
+            $actions = $ability->getAction($enemyCommand, $actionCommand);
+
+            foreach ($actions as $action) {
+                self::assertEquals($actionUnit->getDamage() * 3, $action->getPower());
+            }
         }
     }
 }

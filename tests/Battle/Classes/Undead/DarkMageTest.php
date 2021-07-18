@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Classes\Undead;
 
-use Battle\Action\Summon\SummonAction;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\Ability\Summon\SummonSkeletonAbility;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -33,11 +33,16 @@ class DarkMageTest extends TestCase
         self::assertEquals(UnitClassInterface::DARK_MAGE_NAME, $darkMage->getName());
         self::assertEquals(UnitClassInterface::DARK_MAGE_SMALL_ICON, $darkMage->getSmallIcon());
 
-        $actionCollection = $darkMage->getAbility($actionUnit, $enemyCommand, $actionCommand);
+        $abilities = $darkMage->getAbilities($actionUnit);
 
-        foreach ($actionCollection as $action) {
-            self::assertContainsOnlyInstancesOf(SummonAction::class, [$action]);
-            $action->handle();
+        foreach ($abilities as $ability) {
+            self::assertContainsOnlyInstancesOf(SummonSkeletonAbility::class, [$ability]);
+
+            $actions = $ability->getAction($enemyCommand, $actionCommand);
+
+            foreach ($actions as $action) {
+                $action->handle();
+            }
         }
 
         // Размер команды увеличился на 1 юнита

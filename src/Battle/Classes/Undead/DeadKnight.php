@@ -4,33 +4,13 @@ declare(strict_types=1);
 
 namespace Battle\Classes\Undead;
 
-use Battle\Action\ActionCollection;
-use Battle\Action\Damage\HeavyStrikeAction;
 use Battle\Classes\AbstractUnitClass;
-use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
 use Battle\Unit\UnitInterface;
 
 class DeadKnight extends AbstractUnitClass
 {
-    /**
-     * @param UnitInterface $actionUnit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return ActionCollection
-     */
-    public function getAbility(
-        UnitInterface $actionUnit,
-        CommandInterface $enemyCommand,
-        CommandInterface $alliesCommand
-    ): ActionCollection
-    {
-        $collection = new ActionCollection();
-        $collection->add(new HeavyStrikeAction($actionUnit, $enemyCommand, $alliesCommand, $this->message));
-        return $collection;
-    }
-
     /**
      * @return int
      */
@@ -66,8 +46,7 @@ class DeadKnight extends AbstractUnitClass
         $collection->add(new HeavyStrikeAbility(
             'Heavy Strike',
             '/images/icons/ability/335.png',
-            $unit,
-            $unit->getContainer()
+            $unit
         ));
 
         return $collection;

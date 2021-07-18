@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Classes\Undead;
 
-use Battle\Action\Damage\HeavyStrikeAction;
 use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -27,17 +27,22 @@ class DeadKnightTest extends TestCase
         $actionCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $warrior = $actionUnit->getClass();
+        $deadKnight = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_ID, $warrior->getId());
-        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_NAME, $warrior->getName());
-        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_SMALL_ICON, $warrior->getSmallIcon());
+        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_ID, $deadKnight->getId());
+        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_NAME, $deadKnight->getName());
+        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_SMALL_ICON, $deadKnight->getSmallIcon());
 
-        $actionCollection = $warrior->getAbility($actionUnit, $enemyCommand, $actionCommand);
+        $abilities = $deadKnight->getAbilities($actionUnit);
 
-        foreach ($actionCollection as $action) {
-            self::assertContainsOnlyInstancesOf(HeavyStrikeAction::class, [$action]);
-            self::assertEquals($actionUnit->getDamage() * 2.5, $action->getPower());
+        foreach ($abilities as $ability) {
+            self::assertContainsOnlyInstancesOf(HeavyStrikeAbility::class, [$ability]);
+
+            $actions = $ability->getAction($enemyCommand, $actionCommand);
+
+            foreach ($actions as $action) {
+                self::assertEquals((int)($actionUnit->getDamage() * 2.5), $action->getPower());
+            }
         }
     }
 }

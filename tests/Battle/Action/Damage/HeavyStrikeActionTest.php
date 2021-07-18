@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Tests\Battle\Action\Damage;
 
 use Battle\Action\Damage\DamageAction;
+use Battle\Action\Damage\HeavyStrikeAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Container\Container;
+use Battle\Result\Chat\Message;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -72,5 +74,20 @@ class HeavyStrikeActionTest extends TestCase
         }
 
         $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en';
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testHeavyStrikeActionPower(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new HeavyStrikeAction($unit, $enemyCommand, $command, new Message());
+
+        self::assertEquals((int)($unit->getDamage() * 2.5), $action->getPower());
     }
 }

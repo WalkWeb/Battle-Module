@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Classes;
 
-use Battle\Action\ActionCollection;
-use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\UnitInterface;
 
@@ -42,24 +40,6 @@ interface UnitClassInterface
      * @return string
      */
     public function getName(): string;
-
-    /**
-     * Возвращает способность данного класса для использования её в бою
-     *
-     * Так как способность может состоять сразу из нескольких действий - возвращается ActionCollection
-     *
-     * TODO На удаление
-     *
-     * @param UnitInterface $actionUnit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return ActionCollection
-     */
-    public function getAbility(
-        UnitInterface $actionUnit,
-        CommandInterface $enemyCommand,
-        CommandInterface $alliesCommand
-    ): ActionCollection;
 
     /**
      * Url к мини-иконке класса в размере 21x21, для отображения в бою

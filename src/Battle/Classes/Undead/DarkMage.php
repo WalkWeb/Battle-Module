@@ -4,33 +4,13 @@ declare(strict_types=1);
 
 namespace Battle\Classes\Undead;
 
-use Battle\Action\ActionCollection;
-use Battle\Action\Summon\SummonSkeletonAction;
 use Battle\Classes\AbstractUnitClass;
-use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Summon\SummonSkeletonAbility;
 use Battle\Unit\UnitInterface;
 
 class DarkMage extends AbstractUnitClass
 {
-    /**
-     * @param UnitInterface $actionUnit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return ActionCollection
-     */
-    public function getAbility(
-        UnitInterface $actionUnit,
-        CommandInterface $enemyCommand,
-        CommandInterface $alliesCommand
-    ): ActionCollection
-    {
-        $collection = new ActionCollection();
-        $collection->add(new SummonSkeletonAction($actionUnit, $alliesCommand, $alliesCommand, $this->message));
-        return $collection;
-    }
-
     /**
      * @return int
      */
@@ -66,8 +46,7 @@ class DarkMage extends AbstractUnitClass
         $collection->add(new SummonSkeletonAbility(
             'Summon Skeleton',
             '/images/icons/ability/338.png',
-            $unit,
-            $unit->getContainer()
+            $unit
         ));
 
         return $collection;
