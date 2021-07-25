@@ -6,12 +6,7 @@ namespace Tests\Battle\View;
 
 use Battle\Command\CommandFactory;
 use Battle\Container\Container;
-use Battle\Result\Chat\Chat;
-use Battle\Result\FullLog\FullLog;
 use Battle\Result\Result;
-use Battle\Result\Scenario\Scenario;
-use Battle\Result\Statistic\Statistic;
-use Battle\Translation\Translation;
 use Battle\View\ViewFactory;
 use Exception;
 use PHPUnit\Framework\TestCase;

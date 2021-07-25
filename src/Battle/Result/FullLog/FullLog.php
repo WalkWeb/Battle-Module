@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Result\FullLog;
 
-// todo Добавить интерфейс
-
-class FullLog
+class FullLog implements FullLogInterface
 {
     /**
      * @var string[]

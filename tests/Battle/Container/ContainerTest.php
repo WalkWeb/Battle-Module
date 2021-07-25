@@ -10,6 +10,7 @@ use Battle\Container\ContainerException;
 use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\ChatInterface;
 use Battle\Result\FullLog\FullLog;
+use Battle\Result\FullLog\FullLogInterface;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Result\Statistic\Statistic;
@@ -123,6 +124,9 @@ class ContainerTest extends TestCase
     public function testContainerGetFullLog(): void
     {
         $container = new Container();
+
+        $fullLog = $container->get(FullLogInterface::class);
+        self::assertInstanceOf(FullLog::class, $fullLog);
 
         $fullLog = $container->get(FullLog::class);
         self::assertInstanceOf(FullLog::class, $fullLog);

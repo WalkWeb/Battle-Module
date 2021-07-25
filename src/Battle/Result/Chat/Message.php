@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Battle\Result\Chat;
 
+use Battle\Action\ActionException;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Heal\HealAction;
 use Battle\Action\Other\WaitAction;
 use Battle\Action\Summon\SummonAction;
 use Battle\Translation\Translation;
-use Battle\Translation\TranslationException;
 
 // todo add interface
 
@@ -31,7 +31,7 @@ class Message
     /**
      * @param DamageAction $action
      * @return string
-     * @throws TranslationException
+     * @throws ActionException
      */
     public function damage(DamageAction $action): string
     {
@@ -47,7 +47,7 @@ class Message
     /**
      * @param HealAction $action
      * @return string
-     * @throws TranslationException
+     * @throws ActionException
      */
     public function heal(HealAction $action): string
     {
@@ -63,7 +63,6 @@ class Message
     /**
      * @param SummonAction $action
      * @return string
-     * @throws TranslationException
      */
     public function summon(SummonAction $action): string
     {
@@ -74,7 +73,6 @@ class Message
     /**
      * @param WaitAction $action
      * @return string
-     * @throws TranslationException
      */
     public function wait(WaitAction $action): string
     {

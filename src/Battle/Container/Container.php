@@ -9,6 +9,7 @@ use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\ChatInterface;
 use Battle\Result\Chat\Message;
 use Battle\Result\FullLog\FullLog;
+use Battle\Result\FullLog\FullLogInterface;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Result\Statistic\Statistic;
@@ -34,6 +35,7 @@ class Container implements ContainerInterface
         ScenarioInterface::class    => Scenario::class,
         Scenario::class             => Scenario::class,
         'Scenario'                  => Scenario::class,
+        FullLogInterface::class     => FullLog::class,
         FullLog::class              => FullLog::class,
         'FullLog'                   => FullLog::class,
         Message::class              => Message::class,
@@ -127,13 +129,13 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @return FullLog
+     * @return FullLogInterface
      * @throws ContainerException
      */
-    public function getFullLog(): FullLog
+    public function getFullLog(): FullLogInterface
     {
-        /** @var FullLog $service */
-        $service = $this->get(FullLog::class);
+        /** @var FullLogInterface $service */
+        $service = $this->get(FullLogInterface::class);
         return $service;
     }
 
