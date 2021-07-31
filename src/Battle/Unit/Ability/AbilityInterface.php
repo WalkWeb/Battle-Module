@@ -70,8 +70,6 @@ interface AbilityInterface
      * 1. Перейти в статус ready = false
      * 2. При необходимости изменить характеристику юнита, если способность была связана с заполненностью концентрации
      *    или ярости
-     *
-     * @param UnitInterface $unit
      */
-    public function usage(UnitInterface $unit): void;
+    public function usage(): void;
 }

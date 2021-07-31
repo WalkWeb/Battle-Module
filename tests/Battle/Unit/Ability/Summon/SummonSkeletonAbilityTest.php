@@ -56,7 +56,7 @@ class SummonSkeletonAbilityTest extends TestCase
             self::assertInstanceOf(SummonSkeletonAction::class, $action);
         }
 
-        $ability->usage($unit);
+        $ability->usage();
 
         self::assertFalse($ability->isReady());
 

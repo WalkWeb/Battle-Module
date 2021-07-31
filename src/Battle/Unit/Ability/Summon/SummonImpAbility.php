@@ -49,14 +49,10 @@ class SummonImpAbility extends AbstractAbility
 
     /**
      * Способность отмечает свое использование - переходит в неактивный статус и обнуляет концентрацию у юнита
-     *
-     * TODO зачем здесь юнит, если способность знает о юните, который её использует?
-     *
-     * @param UnitInterface $unit
      */
-    public function usage(UnitInterface $unit): void
+    public function usage(): void
     {
         $this->ready = false;
-        $unit->useConcentrationAbility();
+        $this->unit->useConcentrationAbility();
     }
 }

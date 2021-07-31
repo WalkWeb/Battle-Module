@@ -56,7 +56,7 @@ class SummonImpAbilityTest extends TestCase
             self::assertInstanceOf(SummonImpAction::class, $action);
         }
 
-        $ability->usage($unit);
+        $ability->usage();
 
         self::assertFalse($ability->isReady());
 

@@ -51,25 +51,10 @@ class HeavyStrikeAbility extends AbstractAbility
 
     /**
      * Способность отмечает свое использование - переходит в неактивный статус и обнуляет концентрацию у юнита
-     *
-     * @param UnitInterface $unit
      */
-    public function usage(UnitInterface $unit): void
+    public function usage(): void
     {
         $this->ready = false;
-        $unit->useConcentrationAbility();
-    }
-
-    /**
-     * Атакующие способности всегда готовы к использованию - потому что, если живых противников не остается - бой
-     * заканчивается
-     *
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return bool
-     */
-    public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
-    {
-        return true;
+        $this->unit->useConcentrationAbility();
     }
 }

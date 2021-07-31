@@ -35,7 +35,7 @@ class Unit extends AbstractUnit
         // 1. Есть способность доступная для использования
         // 2. Способность может быть использована (например, есть цель для лечения)
         if (($ability = $this->getAbility()) && $ability->canByUsed($enemyCommand, $alliesCommand)) {
-            $ability->usage($this);
+            $ability->usage();
             return $ability->getAction($enemyCommand, $alliesCommand);
         }
 
