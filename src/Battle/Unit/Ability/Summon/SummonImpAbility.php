@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Battle\Unit\Ability\Summon;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\Summon\SummonSkeletonAction;
+use Battle\Action\Summon\SummonImpAction;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerException;
 use Battle\Unit\Ability\AbstractAbility;
 use Battle\Unit\UnitInterface;
 
-class SummonSkeletonAbility extends AbstractAbility
+class SummonImpAbility extends AbstractAbility
 {
     /**
-     * Призывает скелета
+     * Призывает беса
      *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -25,7 +25,7 @@ class SummonSkeletonAbility extends AbstractAbility
     {
         $collection = new ActionCollection();
 
-        $collection->add(new SummonSkeletonAction(
+        $collection->add(new SummonImpAction(
             $this->unit,
             $enemyCommand,
             $alliesCommand,
@@ -49,6 +49,8 @@ class SummonSkeletonAbility extends AbstractAbility
 
     /**
      * Способность отмечает свое использование - переходит в неактивный статус и обнуляет концентрацию у юнита
+     *
+     * TODO зачем здесь юнит, если способность знает о юните, который её использует?
      *
      * @param UnitInterface $unit
      */

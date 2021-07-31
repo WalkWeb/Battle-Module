@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Summon;
 
-use Battle\Action\Summon\SummonSkeletonAction;
-use Battle\Unit\Ability\Summon\SummonSkeletonAbility;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Battle\Command\CommandFactory;
 use Tests\Battle\Factory\UnitFactory;
+use Battle\Action\Summon\SummonImpAction;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\Summon\SummonImpAbility;
 
-class SummonSkeletonAbilityTest extends TestCase
+class SummonImpAbilityTest extends TestCase
 {
     /**
      * @throws Exception
      */
     public function testSummonSkeletonAbility(): void
     {
-        $name = 'Summon Skeleton Ability';
-        $icon = '/images/icons/ability/338.png';
+        $name = 'Summon Imp Ability';
+        $icon = '/images/icons/ability/000.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = new SummonSkeletonAbility($name, $icon, $unit);
+        $ability = new SummonImpAbility($name, $icon, $unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -53,7 +53,7 @@ class SummonSkeletonAbilityTest extends TestCase
         $actions = $ability->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
-            self::assertInstanceOf(SummonSkeletonAction::class, $action);
+            self::assertInstanceOf(SummonImpAction::class, $action);
         }
 
         $ability->usage($unit);

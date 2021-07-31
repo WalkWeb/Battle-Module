@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Ability;
 
+use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitInterface;
+
+// TODO name должен задаваться через дочерние конкретные реализации, от указания через конструктор надо уйти
+// TODO icon должен задаваться через дочерние конкретные реализации, от указания через конструктор надо уйти
 
 abstract class AbstractAbility implements AbilityInterface
 {
@@ -65,5 +69,17 @@ abstract class AbstractAbility implements AbilityInterface
     public function getUnit(): UnitInterface
     {
         return $this->unit;
+    }
+
+    /**
+     * Призыв новых существ всегда доступен - ограничений мест в команде нет
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return bool
+     */
+    public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
+    {
+        return true;
     }
 }
