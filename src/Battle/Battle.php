@@ -60,8 +60,6 @@ class Battle implements BattleInterface
     /**
      * Обрабатывает бой, возвращая результат выполнения
      *
-     * TODO Подумать над рефакторингом определения победителя. Текущий код не нравится, но идей лучшего варианта нет
-     *
      * @return ResultInterface
      * @throws Exception
      */
@@ -89,18 +87,20 @@ class Battle implements BattleInterface
 
             // Проверяем живых в командах
             if (!$this->leftCommand->isAlive() || !$this->rightCommand->isAlive()) {
-                // TODO Здесь можно просто делать break, и определять победителя в одном месте
-                $winner = $this->leftCommand->isAlive() ? 1 : 2;
-                return $this->getResult($startLeftCommand, $startRightCommand, $winner);
+                break;
             }
 
             $statistics->increasedRound();
             $i++;
         }
 
-        $this->container->getFullLog()->add('<p>' . self::LIMIT_ROUND_MESSAGE . '</p>');
-        $winner = $this->leftCommand->getTotalLife() > $this->rightCommand->getTotalLife() ? 1 : 2;
-        return $this->getResult($startLeftCommand, $startRightCommand, $winner);
+        if ($i === $this->maxRound) {
+            $this->container->getFullLog()->add(
+                '<p>' . $this->container->getTranslation()->trans(self::LIMIT_ROUND_MESSAGE) . '</p>'
+            );
+        }
+
+        return $this->getResult($startLeftCommand, $startRightCommand, $this->getWinner());
     }
 
     /**
@@ -169,5 +169,22 @@ class Battle implements BattleInterface
             $winner,
             $this->container
         );
+    }
+
+    /**
+     * Определяет победителя
+     *
+     * Если одна из команд погибла - выбирается выжившая, если же обе команды живы (бой закончился по лимиту раундов) то
+     * выбирается та команда, у которой осталось больше всего здоровья
+     *
+     * @return int
+     */
+    private function getWinner(): int
+    {
+        if (!$this->leftCommand->isAlive() || !$this->rightCommand->isAlive()) {
+            return $this->leftCommand->isAlive() ? 1 : 2;
+        }
+
+        return $this->leftCommand->getTotalLife() > $this->rightCommand->getTotalLife() ? 1 : 2;
     }
 }
