@@ -42,7 +42,7 @@ class BattleTest extends TestCase
 
     /**
      * Тест на бой в котором сражающиеся очень толстые но с очень небольшим уроном - и бой заканчивается по лимиту
-     * раундов
+     * раундов. Победителем выбирается тот, у кого осталось больше здоровья
      *
      * @throws Exception
      */
@@ -56,8 +56,8 @@ class BattleTest extends TestCase
                 'avatar'       => '/images/avas/humans/human001.jpg',
                 'damage'       => 7,
                 'attack_speed' => 1,
-                'life'         => 2500,
-                'total_life'   => 2500,
+                'life'         => 25000,
+                'total_life'   => 25000,
                 'melee'        => true,
                 'class'        => 1,
                 'race'         => 1,
@@ -81,10 +81,18 @@ class BattleTest extends TestCase
 
         $battle = BattleFactory::create($data);
 
-        $this->expectException(BattleException::class);
-        $this->expectExceptionMessage(BattleException::UNEXPECTED_ENDING_BATTLE);
+        $result = $battle->handle();
 
-        $battle->handle();
+        // Проверяем победителя
+        self::assertEquals(1, $result->getWinner());
+
+        // Проверяем, что бой закончился по лимиту (есть соответствующее сообщение в логах)
+        $fullLog = '';
+        foreach ($result->getFullLog()->getLog() as $log) {
+            $fullLog .= $log;
+        }
+
+        self::assertIsInt(strripos($fullLog, Battle::LIMIT_ROUND_MESSAGE));
     }
 
     /**

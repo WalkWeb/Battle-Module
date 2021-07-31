@@ -15,6 +15,8 @@ use Exception;
 
 class Battle implements BattleInterface
 {
+    public const LIMIT_ROUND_MESSAGE = 'Limit round. Winner by max life';
+
     /** @var CommandInterface */
     private $leftCommand;
 
@@ -58,6 +60,8 @@ class Battle implements BattleInterface
     /**
      * Обрабатывает бой, возвращая результат выполнения
      *
+     * TODO Подумать над рефакторингом определения победителя. Текущий код не нравится, но идей лучшего варианта нет
+     *
      * @return ResultInterface
      * @throws Exception
      */
@@ -85,22 +89,18 @@ class Battle implements BattleInterface
 
             // Проверяем живых в командах
             if (!$this->leftCommand->isAlive() || !$this->rightCommand->isAlive()) {
-                $winner = !$this->leftCommand->isAlive() ? 2 : 1;
-                return new Result(
-                    $startLeftCommand,
-                    $startRightCommand,
-                    $this->leftCommand,
-                    $this->rightCommand,
-                    $winner,
-                    $this->container
-                );
+                // TODO Здесь можно просто делать break, и определять победителя в одном месте
+                $winner = $this->leftCommand->isAlive() ? 1 : 2;
+                return $this->getResult($startLeftCommand, $startRightCommand, $winner);
             }
 
             $statistics->increasedRound();
             $i++;
         }
 
-        throw new BattleException(BattleException::UNEXPECTED_ENDING_BATTLE);
+        $this->container->getFullLog()->add('<p>' . self::LIMIT_ROUND_MESSAGE . '</p>');
+        $winner = $this->leftCommand->getTotalLife() > $this->rightCommand->getTotalLife() ? 1 : 2;
+        return $this->getResult($startLeftCommand, $startRightCommand, $winner);
     }
 
     /**
@@ -148,5 +148,26 @@ class Battle implements BattleInterface
 
             $ids[] = $unit->getId();
         }
+    }
+
+    /**
+     * Создает и возвращает объект результата боя
+     *
+     * @param CommandInterface $startLeftCommand
+     * @param CommandInterface $startRightCommand
+     * @param int $winner
+     * @return ResultInterface
+     * @throws Exception
+     */
+    private function getResult(CommandInterface $startLeftCommand, CommandInterface $startRightCommand, int $winner): ResultInterface
+    {
+        return new Result(
+            $startLeftCommand,
+            $startRightCommand,
+            $this->leftCommand,
+            $this->rightCommand,
+            $winner,
+            $this->container
+        );
     }
 }
