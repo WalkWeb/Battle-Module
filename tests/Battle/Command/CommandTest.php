@@ -267,4 +267,26 @@ class CommandTest extends TestCase
             self::assertEquals($unit->getLife(), $unit->getTotalLife());
         }
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testCommandTotalLife(): void
+    {
+        $warrior = UnitFactory::createByTemplate(1);
+        $priest = UnitFactory::createByTemplate(5);
+
+        $command = CommandFactory::create([$warrior, $priest]);
+
+        self::assertEquals($warrior->getTotalLife() + $priest->getTotalLife(), $command->getTotalLife());
+
+        // Нанесем урон и проверим общее здоровье еще раз
+        $zombie = UnitFactory::createByTemplate(1);
+        $enemyCommand = CommandFactory::create([$zombie]);
+
+        $damage = new DamageAction($zombie, $command, $enemyCommand, new Message());
+        $damage->handle();
+
+        self::assertEquals($warrior->getTotalLife() + $priest->getTotalLife() - $zombie->getDamage(), $command->getTotalLife());
+    }
 }

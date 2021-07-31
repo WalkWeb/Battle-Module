@@ -190,6 +190,17 @@ class Command implements CommandInterface
         }
     }
 
+    public function getTotalLife(): int
+    {
+        $totalLife = 0;
+
+        foreach ($this->units as $unit) {
+            $totalLife += $unit->getLife();
+        }
+
+        return $totalLife;
+    }
+
     /**
      * @return mixed|void
      * @throws UnitException

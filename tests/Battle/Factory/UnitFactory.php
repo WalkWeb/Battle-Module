@@ -227,6 +227,20 @@ class UnitFactory
             'class'        => 1,
             'race'         => 1,
         ],
+        17  => [
+            'id'           => '57b11b16-c1fc-463a-a2a0-9dff8a7e2d5c',
+            'name'         => 'Zombie',
+            'level'        => 2,
+            'avatar'       => '/images/avas/monsters/006.png',
+            'damage'       => 23,
+            'attack_speed' => 0.7,
+            'life'         => 62,
+            'total_life'   => 62,
+            'melee'        => true,
+            'class'        => null,
+            'race'         => 8,
+            'command'      => 2,
+        ],
     ];
 
     /**
