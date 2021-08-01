@@ -19,13 +19,6 @@ interface BattleInterface
     public function handle(): ResultInterface;
 
     /**
-     * Возвращает текущий режим работы боя - в debug режиме или нет
-     *
-     * @return bool
-     */
-    public function isDebug(): bool;
-
-    /**
      * Возвращает установленный Translation в модуле боя
      *
      * @return TranslationInterface

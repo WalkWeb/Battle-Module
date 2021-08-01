@@ -18,7 +18,6 @@ class RoundFactory
      * @param CommandInterface $rightCommand
      * @param int $actionCommand
      * @param ContainerInterface $container
-     * @param bool|null $debug
      * @return RoundInterface
      * @throws RoundException
      */
@@ -26,16 +25,14 @@ class RoundFactory
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         int $actionCommand,
-        ContainerInterface $container,
-        ?bool $debug = false
+        ContainerInterface $container
     ): RoundInterface
     {
         return new Round(
             $leftCommand,
             $rightCommand,
             $actionCommand,
-            $container,
-            $debug
+            $container
         );
     }
 }

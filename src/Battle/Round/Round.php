@@ -51,13 +51,6 @@ class Round implements RoundInterface
     private $maxStroke = 20;
 
     /**
-     * TODO На удаление? Или на расширение механики вывода результата?
-     *
-     * @var bool
-     */
-    private $debug;
-
-    /**
      * @var Container
      */
     private $container;
@@ -67,15 +60,13 @@ class Round implements RoundInterface
      * @param CommandInterface $rightCommand
      * @param int $actionCommand
      * @param ContainerInterface $container
-     * @param bool|null $debug
      * @throws RoundException
      */
     public function __construct(
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         int $actionCommand,
-        ContainerInterface $container,
-        ?bool $debug = false
+        ContainerInterface $container
     )
     {
         $this->validateActionCommand($actionCommand);
@@ -83,7 +74,6 @@ class Round implements RoundInterface
         $this->rightCommand = $rightCommand;
         $this->actionCommand = $actionCommand;
         $this->container = $container;
-        $this->debug = $debug;
     }
 
     /**
@@ -112,8 +102,7 @@ class Round implements RoundInterface
                     $actionUnit,
                     $this->leftCommand,
                     $this->rightCommand,
-                    $this->container,
-                    $this->debug
+                    $this->container
                 );
 
                 $this->executeStroke($stroke);

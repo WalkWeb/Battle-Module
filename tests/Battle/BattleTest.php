@@ -36,7 +36,6 @@ class BattleTest extends TestCase
         self::assertInstanceOf(Battle::class, $battle);
         self::assertTrue($result->getStatistic()->getRoundNumber() > 2);
         self::assertTrue($result->getStatistic()->getStrokeNumber() > 4);
-        self::assertTrue($battle->isDebug());
         self::assertEquals($container->getTranslation(), $battle->getTranslation());
     }
 
@@ -152,20 +151,6 @@ class BattleTest extends TestCase
         $this->expectException(BattleException::class);
         $this->expectExceptionMessage(BattleException::DOUBLE_UNIT_ID);
         new Battle($leftCommand, $rightCommand, new Container());
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function testBattleSetFalseDebug(): void
-    {
-        $leftCommand = CommandFactory::createLeftCommand();
-        $rightCommand = CommandFactory::createRightCommand();
-        $debug = false;
-
-        $battle = new Battle($leftCommand, $rightCommand, new Container(), $debug);
-
-        self::assertFalse($battle->isDebug());
     }
 
     // todo container->set() mechanic

@@ -45,27 +45,18 @@ class Stroke implements StrokeInterface
     private $container;
 
     /**
-     * TODO На удаление? Или на расширение механики вывода результата?
-     *
-     * @var bool
-     */
-    private $debug;
-
-    /**
      * @param int $actionCommand
      * @param UnitInterface $actionUnit
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param ContainerInterface $container
-     * @param bool|null $debug
      */
     public function __construct(
         int $actionCommand,
         UnitInterface $actionUnit,
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
-        ContainerInterface $container,
-        ?bool $debug = false
+        ContainerInterface $container
     )
     {
         $this->actionCommand = $actionCommand;
@@ -73,7 +64,6 @@ class Stroke implements StrokeInterface
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;
         $this->container = $container;
-        $this->debug = $debug;
 
     }
 

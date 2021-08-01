@@ -50,14 +50,12 @@ class BattleFactory
      *
      * @param array $data
      * @param ContainerInterface|null $container
-     * @param bool|null $debug
      * @return BattleInterface
      * @throws Exception
      */
     public static function create(
         array $data,
-        ?ContainerInterface $container = null,
-        ?bool $debug = true
+        ?ContainerInterface $container = null
     ): BattleInterface
     {
         $container = $container ?? new Container();
@@ -65,8 +63,7 @@ class BattleFactory
         return new Battle(
             self::createCommand($data, BattleInterface::LEFT_COMMAND, $container),
             self::createCommand($data, BattleInterface::RIGHT_COMMAND, $container),
-            $container,
-            $debug
+            $container
         );
     }
 

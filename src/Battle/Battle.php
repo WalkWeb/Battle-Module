@@ -29,9 +29,6 @@ class Battle implements BattleInterface
     /** @var int */
     private $maxRound = 100;
 
-    /** @var bool */
-    private $debug;
-
     /** @var ContainerInterface */
     private $container;
 
@@ -39,14 +36,12 @@ class Battle implements BattleInterface
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param ContainerInterface $container
-     * @param bool|null $debug
      * @throws Exception
      */
     public function __construct(
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
-        ContainerInterface $container,
-        ?bool $debug = true
+        ContainerInterface $container
     )
     {
         $this->checkDoubleUnitId($leftCommand, $rightCommand);
@@ -54,7 +49,6 @@ class Battle implements BattleInterface
         $this->rightCommand = $rightCommand;
         $this->actionCommand = random_int(1, 2);
         $this->container = $container;
-        $this->debug = $debug;
     }
 
     /**
@@ -78,8 +72,7 @@ class Battle implements BattleInterface
                 $this->leftCommand,
                 $this->rightCommand,
                 $this->actionCommand,
-                $this->container,
-                $this->debug,
+                $this->container
             );
 
             // Выполняем раунд, получая номер команды, которая будет ходить следующей
@@ -101,14 +94,6 @@ class Battle implements BattleInterface
         }
 
         return $this->getResult($startLeftCommand, $startRightCommand, $this->getWinner());
-    }
-
-    /**
-     * @return bool
-     */
-    public function isDebug(): bool
-    {
-        return $this->debug;
     }
 
     /**

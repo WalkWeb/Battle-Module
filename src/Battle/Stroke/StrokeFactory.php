@@ -20,7 +20,6 @@ class StrokeFactory
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param ContainerInterface $container
-     * @param bool|null $debug
      * @return StrokeInterface
      */
     public function create(
@@ -28,8 +27,7 @@ class StrokeFactory
         UnitInterface $actionUnit,
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
-        ContainerInterface $container,
-        ?bool $debug = false
+        ContainerInterface $container
     ): StrokeInterface
     {
         return new Stroke(
@@ -37,8 +35,7 @@ class StrokeFactory
             $actionUnit,
             $leftCommand,
             $rightCommand,
-            $container,
-            $debug
+            $container
         );
     }
 }
