@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Summon;
 
-use Battle\Action\Summon\SummonSkeletonAction;
+use Battle\Action\Summon\SummonAction;
 use Battle\Unit\Ability\Summon\SummonSkeletonAbility;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -53,7 +53,7 @@ class SummonSkeletonAbilityTest extends TestCase
         $actions = $ability->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
-            self::assertInstanceOf(SummonSkeletonAction::class, $action);
+            self::assertInstanceOf(SummonAction::class, $action);
         }
 
         $ability->usage();

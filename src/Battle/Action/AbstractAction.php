@@ -104,4 +104,13 @@ abstract class AbstractAction implements ActionInterface
     {
         return true;
     }
+
+    /**
+     * @return UnitInterface
+     * @throws ActionException
+     */
+    public function getSummonUnit(): UnitInterface
+    {
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
+    }
 }

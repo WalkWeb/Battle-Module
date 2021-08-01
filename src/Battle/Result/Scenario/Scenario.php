@@ -188,7 +188,6 @@ class Scenario implements ScenarioInterface
     /**
      * @param SummonAction $action
      * @return string
-     * @throws ScenarioException
      */
     public function getSummonRow(SummonAction $action): string
     {

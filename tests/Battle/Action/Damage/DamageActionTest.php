@@ -123,4 +123,22 @@ class DamageActionTest extends TestCase
             $action->handle();
         }
     }
+
+    /**
+     * Тест на ситуацию, когда не SummonAction вызывают метод getSummonUnit()
+     *
+     * @throws Exception
+     */
+    public function testActionNoGetSummonUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getSummonUnit');
+        $action->getSummonUnit();
+    }
 }

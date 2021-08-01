@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Result\Statistics;
 
 use Battle\Action\Damage\DamageAction;
-use Battle\Action\Summon\SummonSkeletonAction;
+use Battle\Action\Summon\SummonAction;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Result\Statistic\Statistic;
@@ -155,7 +155,7 @@ class StatisticsTest extends TestCase
         $actions = $darkMage->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
-            self::assertInstanceOf(SummonSkeletonAction::class, $action);
+            self::assertInstanceOf(SummonAction::class, $action);
             $action->handle();
             $statistics->addUnitAction($action);
         }
@@ -171,7 +171,7 @@ class StatisticsTest extends TestCase
         $actions = $darkMage->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
-            self::assertInstanceOf(SummonSkeletonAction::class, $action);
+            self::assertInstanceOf(SummonAction::class, $action);
             $action->handle();
             $statistics->addUnitAction($action);
         }

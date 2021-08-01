@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Scenario;
 
-use Battle\Action\Summon\SummonImpAction;
-use Battle\Action\Summon\SummonSkeletonMage;
+use Battle\Action\Summon\SummonAction;
+use Battle\Command\CommandInterface;
+use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Action\Damage\DamageAction;
 use Battle\Action\Other\WaitAction;
@@ -149,7 +150,7 @@ class ScenarioTest extends TestCase
         $actionCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new SummonImpAction($actionUnit, $enemyCommand, $actionCommand, new Message());
+        $action = $this->getSummonImpAction($actionUnit, $enemyCommand, $actionCommand);
 
         $scenario = new Scenario();
 
@@ -240,11 +241,11 @@ class ScenarioTest extends TestCase
 
         $scenario = new Scenario();
 
-        $action = new SummonImpAction($actionUnit, $enemyCommand, $actionCommand, new Message());
+        $action = $this->getSummonImpAction($actionUnit, $enemyCommand, $actionCommand);
 
         self::assertEquals('left_command_melee', $scenario->getSummonRow($action));
 
-        $action = new SummonSkeletonMage($actionUnit, $enemyCommand, $actionCommand, new Message());
+        $action = $this->getSummonSkeletonMageAction($actionUnit, $enemyCommand, $actionCommand);
 
         self::assertEquals('left_command_range', $scenario->getSummonRow($action));
     }
@@ -260,16 +261,64 @@ class ScenarioTest extends TestCase
         $actionCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new SummonImpAction($actionUnit, $enemyCommand, $actionCommand, new Message());
+        $action = $this->getSummonImpAction($actionUnit, $enemyCommand, $actionCommand);
 
         $scenario = new Scenario();
 
         self::assertEquals('right_command_melee', $scenario->getSummonRow($action));
 
-        $action = new SummonSkeletonMage($actionUnit, $enemyCommand, $actionCommand, new Message());
+        $action = $this->getSummonSkeletonMageAction($actionUnit, $enemyCommand, $actionCommand);
 
         self::assertEquals('right_command_range', $scenario->getSummonRow($action));
     }
 
+    /**
+     * Создает Action, который призовет Imp
+     *
+     * @param UnitInterface $actionUnit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $actionCommand
+     * @return SummonAction
+     * @throws Exception
+     */
+    private function getSummonImpAction(
+        UnitInterface $actionUnit,
+        CommandInterface $enemyCommand,
+        CommandInterface $actionCommand
+    ): SummonAction
+    {
+        return new SummonAction(
+            $actionUnit,
+            $enemyCommand,
+            $actionCommand,
+            new Message(),
+            'Summon Imp',
+            UnitFactory::createByTemplate(18)
+        );
+    }
 
+    /**
+     * Создает Action, который призовет Skeleton Mage
+     *
+     * @param UnitInterface $actionUnit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $actionCommand
+     * @return SummonAction
+     * @throws Exception
+     */
+    private function getSummonSkeletonMageAction(
+        UnitInterface $actionUnit,
+        CommandInterface $enemyCommand,
+        CommandInterface $actionCommand
+    ): SummonAction
+    {
+        return new SummonAction(
+            $actionUnit,
+            $enemyCommand,
+            $actionCommand,
+            new Message(),
+            'Summon Skeleton Mage',
+            UnitFactory::createByTemplate(19)
+        );
+    }
 }

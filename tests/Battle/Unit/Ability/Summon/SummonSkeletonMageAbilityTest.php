@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Summon;
 
-use Battle\Action\Summon\SummonSkeletonMage;
+use Battle\Action\Summon\SummonAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Summon\SummonSkeletonMageAbility;
@@ -53,7 +53,7 @@ class SummonSkeletonMageAbilityTest extends TestCase
         $actions = $ability->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
-            self::assertInstanceOf(SummonSkeletonMage::class, $action);
+            self::assertInstanceOf(SummonAction::class, $action);
         }
 
         $ability->usage();

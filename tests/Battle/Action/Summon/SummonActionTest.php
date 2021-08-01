@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Action\Summon;
 
 use Battle\Action\ActionException;
-use Battle\Action\Summon\SummonImpAction;
-use Battle\Action\Summon\SummonSkeletonAction;
+use Battle\Action\Summon\SummonAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
@@ -39,7 +38,7 @@ class SummonActionTest extends TestCase
         $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
-            self::assertContainsOnlyInstancesOf(SummonSkeletonAction::class, [$action]);
+            self::assertContainsOnlyInstancesOf(SummonAction::class, [$action]);
             $message .= $action->handle();
         }
 
@@ -56,12 +55,15 @@ class SummonActionTest extends TestCase
      */
     public function testSummonActionSetFactualPower(): void
     {
+        $name = 'Summon Zombie';
+        $summon = UnitFactory::createByTemplate(17);
+
         $actionUnit = UnitFactory::createByTemplate(7);
         $enemyUnit = UnitFactory::createByTemplate(3);
         $alliesCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new SummonImpAction($actionUnit, $alliesCommand, $enemyCommand, new Message());
+        $action = new SummonAction($actionUnit, $alliesCommand, $enemyCommand, new Message(), $name, $summon);
 
         self::assertEquals(0, $action->getFactualPower());
 
@@ -76,12 +78,15 @@ class SummonActionTest extends TestCase
      */
     public function testSummonActionNoPower(): void
     {
+        $name = 'Summon Zombie';
+        $summon = UnitFactory::createByTemplate(17);
+
         $actionUnit = UnitFactory::createByTemplate(7);
         $enemyUnit = UnitFactory::createByTemplate(3);
         $alliesCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new SummonImpAction($actionUnit, $alliesCommand, $enemyCommand, new Message());
+        $action = new SummonAction($actionUnit, $alliesCommand, $enemyCommand, new Message(), $name, $summon);
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getPower');

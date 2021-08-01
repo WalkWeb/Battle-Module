@@ -5,20 +5,38 @@ declare(strict_types=1);
 namespace Battle\Action\Summon;
 
 use Battle\Action\AbstractAction;
-use Battle\Traits\IdTrait;
+use Battle\Command\CommandInterface;
+use Battle\Result\Chat\Message;
 use Battle\Unit\UnitInterface;
 use Exception;
 
-abstract class SummonAction extends AbstractAction
+class SummonAction extends AbstractAction
 {
-    use IdTrait;
+    private const HANDLE_METHOD = 'applySummonAction';
 
-    protected const HANDLE_METHOD = 'applySummonAction';
+    /**
+     * @var string
+     */
+    private $name;
 
     /**
      * @var UnitInterface
      */
-    protected $summonUnit;
+    private $summon;
+
+    public function __construct(
+        UnitInterface $actionUnit,
+        CommandInterface $enemyCommand,
+        CommandInterface $alliesCommand,
+        Message $message,
+        string $name,
+        UnitInterface $summon
+    )
+    {
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $message);
+        $this->name = $name;
+        $this->summon = $summon;
+    }
 
     public function getHandleMethod(): string
     {
@@ -31,19 +49,29 @@ abstract class SummonAction extends AbstractAction
      */
     public function handle(): string
     {
-        $unit = $this->getSummonUnit();
-        $this->alliesCommand->getUnits()->add($unit);
+        $this->alliesCommand->getUnits()->add($this->summon);
         return $this->actionUnit->applyAction($this);
     }
-
-    /**
-     * @return UnitInterface
-     */
-    abstract public function getSummonUnit(): UnitInterface;
 
     /**
      * @param int $factualPower
      * @return int|mixed
      */
     public function setFactualPower(int $factualPower): void {}
+
+    /**
+     * @return string
+     */
+    public function getNameAction(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return UnitInterface
+     */
+    public function getSummonUnit(): UnitInterface
+    {
+        return $this->summon;
+    }
 }

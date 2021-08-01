@@ -241,6 +241,51 @@ class UnitFactory
             'race'         => 8,
             'command'      => 2,
         ],
+        // Аналог юнита из SummonImpAbility
+        18  => [
+            'id'           => '57b11b16-c1fc-463a-a2a0-9dff8a7e2333',
+            'name'         => 'Imp',
+            'level'        => 1,
+            'avatar'       => '/images/avas/monsters/004.png',
+            'damage'       => 10,
+            'attack_speed' => 1,
+            'life'         => 30,
+            'total_life'   => 30,
+            'melee'        => true,
+            'class'        => null,
+            'race'         => 9,
+            'command'      => 2,
+        ],
+        // Аналог юнита из SummonSkeletonMageAbility
+        19  => [
+            'id'           => '57b11b16-c1fc-463a-a2a0-9dff8a7e2326',
+            'name'         => 'Skeleton Mage',
+            'level'        => 2,
+            'avatar'       => '/images/avas/monsters/008.png',
+            'damage'       => 13,
+            'attack_speed' => 1.2,
+            'life'         => 42,
+            'total_life'   => 42,
+            'melee'        => false,
+            'class'        => null,
+            'race'         => 8,
+            'command'      => 2,
+        ],
+        // Аналог юнита из SummonSkeletonAbility
+        20  => [
+            'id'           => '57b11b16-c1fc-463a-a2a0-9dff8a7e2541',
+            'name'         => 'Skeleton',
+            'level'        => 1,
+            'avatar'       => '/images/avas/monsters/003.png',
+            'damage'       => 16,
+            'attack_speed' => 1,
+            'life'         => 38,
+            'total_life'   => 38,
+            'melee'        => true,
+            'class'        => null,
+            'race'         => 8,
+            'command'      => 2,
+        ],
     ];
 
     /**
@@ -256,6 +301,8 @@ class UnitFactory
             throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
         }
 
+        $class = isset(self::$units[$template]['class']) ? UnitClassFactory::create(self::$units[$template]['class']) : null;
+
         return new Unit(
             self::$units[$template]['id'],
             self::$units[$template]['name'],
@@ -269,7 +316,7 @@ class UnitFactory
             self::$units[$template]['command'],
             RaceFactory::create(self::$units[$template]['race']),
             $container ?? new Container(),
-            UnitClassFactory::create(self::$units[$template]['class'])
+            $class
         );
     }
 

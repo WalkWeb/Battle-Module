@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Summon;
 
+use Battle\Action\Summon\SummonAction;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Battle\Command\CommandFactory;
 use Tests\Battle\Factory\UnitFactory;
-use Battle\Action\Summon\SummonImpAction;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Summon\SummonImpAbility;
 
@@ -53,7 +53,7 @@ class SummonImpAbilityTest extends TestCase
         $actions = $ability->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
-            self::assertInstanceOf(SummonImpAction::class, $action);
+            self::assertInstanceOf(SummonAction::class, $action);
         }
 
         $ability->usage();

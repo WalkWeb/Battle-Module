@@ -76,4 +76,13 @@ interface ActionInterface
      * @return int
      */
     public function getFactualPower(): int;
+
+    /**
+     * Возвращает юнита, который будет призван
+     *
+     * Актуально для SummonAction, при вызове этого метода у других Action будет брошено исключение
+     *
+     * @return UnitInterface
+     */
+    public function getSummonUnit(): UnitInterface;
 }
