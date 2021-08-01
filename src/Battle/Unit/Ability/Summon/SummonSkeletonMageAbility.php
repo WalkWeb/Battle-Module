@@ -1,0 +1,58 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Battle\Unit\Ability\Summon;
+
+use Battle\Action\ActionCollection;
+use Battle\Action\Summon\SummonSkeletonMage;
+use Battle\Command\CommandInterface;
+use Battle\Container\ContainerException;
+use Battle\Unit\Ability\AbstractAbility;
+use Battle\Unit\UnitInterface;
+
+class SummonSkeletonMageAbility extends AbstractAbility
+{
+    /**
+     * Призывает скелета-мага
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return ActionCollection
+     * @throws ContainerException
+     */
+    public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
+    {
+        $collection = new ActionCollection();
+
+        $collection->add(new SummonSkeletonMage(
+            $this->unit,
+            $enemyCommand,
+            $alliesCommand,
+            $this->container->getMessage()
+        ));
+
+        return $collection;
+    }
+
+    /**
+     * Способность активируется при полной концентрации юнита
+     *
+     * @param UnitInterface $unit
+     */
+    public function update(UnitInterface $unit): void
+    {
+        if (!$this->ready && $unit->getConcentration() === UnitInterface::MAX_CONS) {
+            $this->ready = true;
+        }
+    }
+
+    /**
+     * Способность отмечает свое использование - переходит в неактивный статус и обнуляет концентрацию у юнита
+     */
+    public function usage(): void
+    {
+        $this->ready = false;
+        $this->unit->useConcentrationAbility();
+    }
+}

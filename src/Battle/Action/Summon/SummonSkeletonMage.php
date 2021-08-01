@@ -9,6 +9,8 @@ use Battle\Unit\Unit;
 use Battle\Unit\UnitInterface;
 use Exception;
 
+// TODO Rename to SummonSkeletonMageAbility
+
 class SummonSkeletonMage extends SummonAction
 {
     public const NAME = 'summon Skeleton Mage';
