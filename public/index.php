@@ -82,7 +82,7 @@ try {
     $battle = BattleFactory::create($data);
     $result = $battle->handle();
 
-    $view = (new ViewFactory())->create($battle->getTranslation());
+    $view = (new ViewFactory())->create($battle->getContainer()->getTranslation());
     echo $view->renderHead(); // example layout styles
     echo $view->renderResult($result);
 

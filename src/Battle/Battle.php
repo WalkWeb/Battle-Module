@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Battle;
 
-use Battle\Container\ContainerException;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
-use Battle\Translation\Translation;
 use Battle\Result\Result;
 use Battle\Result\ResultInterface;
-use Battle\Translation\TranslationInterface;
 use Exception;
 
 class Battle implements BattleInterface
@@ -97,14 +94,11 @@ class Battle implements BattleInterface
     }
 
     /**
-     * TODO На удаление
-     *
-     * @return Translation
-     * @throws ContainerException
+     * @return ContainerInterface
      */
-    public function getTranslation(): TranslationInterface
+    public function getContainer(): ContainerInterface
     {
-        return $this->container->getTranslation();
+        return $this->container;
     }
 
     /**

@@ -2,8 +2,8 @@
 
 namespace Battle;
 
+use Battle\Container\ContainerInterface;
 use Battle\Result\ResultInterface;
-use Battle\Translation\TranslationInterface;
 
 interface BattleInterface
 {
@@ -19,9 +19,9 @@ interface BattleInterface
     public function handle(): ResultInterface;
 
     /**
-     * Возвращает установленный Translation в модуле боя
+     * Возвращает контейнер
      *
-     * @return TranslationInterface
+     * @return ContainerInterface
      */
-    public function getTranslation(): TranslationInterface;
+    public function getContainer(): ContainerInterface;
 }
