@@ -17,16 +17,16 @@ class SummonImpAbilityTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testSummonSkeletonAbility(): void
+    public function testSummonImpAbility(): void
     {
-        $name = 'Summon Imp Ability';
+        $name = 'Summon Imp';
         $icon = '/images/icons/ability/000.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = new SummonImpAbility($name, $icon, $unit);
+        $ability = new SummonImpAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());

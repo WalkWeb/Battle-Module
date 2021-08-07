@@ -21,14 +21,14 @@ class GreatHealAbilityTest extends TestCase
      */
     public function testGreatHealAbilityCreate(): void
     {
-        $name = 'Great Heal Ability';
+        $name = 'Great Heal';
         $icon = '/images/icons/ability/196.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = new GreatHealAbility($name, $icon, $unit);
+        $ability = new GreatHealAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -75,15 +75,13 @@ class GreatHealAbilityTest extends TestCase
      */
     public function testGreatHealAbilityCantBeUsed(): void
     {
-        $name = 'Great Heal Ability';
-        $icon = '/images/icons/ability/196.png';
         $unit = UnitFactory::createByTemplate(4);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         // Создаем напрямую, и проверяем, что способность не может быть применена
-        $ability = new GreatHealAbility($name, $icon, $unit);
+        $ability = new GreatHealAbility($unit);
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
         // Up concentration

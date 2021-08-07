@@ -42,13 +42,7 @@ class Warrior extends AbstractUnitClass
     public function getAbilities(UnitInterface $unit): AbilityCollection
     {
         $collection = new AbilityCollection();
-
-        $collection->add(new HeavyStrikeAbility(
-            'Heavy Strike',
-            '/images/icons/ability/335.png',
-            $unit
-        ));
-
+        $collection->add(new HeavyStrikeAbility($unit));
         return $collection;
     }
 }

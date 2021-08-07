@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Damage;
 
+use Exception;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityCollection;
-use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
@@ -19,14 +19,14 @@ class HeavyStrikeAbilityTest extends TestCase
      */
     public function testHeavyStrikeAbility(): void
     {
-        $name = 'Heavy Strike Ability';
+        $name = 'Heavy Strike';
         $icon = '/images/icons/ability/335.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = new HeavyStrikeAbility($name, $icon, $unit);
+        $ability = new HeavyStrikeAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());

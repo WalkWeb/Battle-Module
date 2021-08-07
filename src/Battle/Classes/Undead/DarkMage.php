@@ -42,13 +42,7 @@ class DarkMage extends AbstractUnitClass
     public function getAbilities(UnitInterface $unit): AbilityCollection
     {
         $collection = new AbilityCollection();
-
-        $collection->add(new SummonSkeletonAbility(
-            'Summon Skeleton',
-            '/images/icons/ability/338.png',
-            $unit
-        ));
-
+        $collection->add(new SummonSkeletonAbility($unit));
         return $collection;
     }
 }

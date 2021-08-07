@@ -18,7 +18,9 @@ class SummonSkeletonAbility extends AbstractAbility
 {
     use IdTrait;
 
-    public const ACTION_NAME          = 'summon Skeleton';
+    private const NAME                = 'Summon Skeleton';
+    private const ICON                = '/images/icons/ability/338.png';
+    private const USE_MESSAGE         = 'summon Skeleton';
 
     private const SUMMON_NAME         = 'Skeleton';
     private const SUMMON_LEVEL        = 1;
@@ -46,7 +48,7 @@ class SummonSkeletonAbility extends AbstractAbility
             $enemyCommand,
             $alliesCommand,
             $this->container->getMessage(),
-            self::ACTION_NAME,
+            self::USE_MESSAGE,
             new Unit(
                 self::generateId(),
                 self::SUMMON_NAME,
@@ -85,5 +87,21 @@ class SummonSkeletonAbility extends AbstractAbility
     {
         $this->ready = false;
         $this->unit->useConcentrationAbility();
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::NAME;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon(): string
+    {
+        return self::ICON;
     }
 }

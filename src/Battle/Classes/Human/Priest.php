@@ -42,13 +42,7 @@ class Priest extends AbstractUnitClass
     public function getAbilities(UnitInterface $unit): AbilityCollection
     {
         $collection = new AbilityCollection();
-
-        $collection->add(new GreatHealAbility(
-            'Great Heal',
-            '/images/icons/ability/338.png',
-            $unit
-        ));
-
+        $collection->add(new GreatHealAbility($unit));
         return $collection;
     }
 }

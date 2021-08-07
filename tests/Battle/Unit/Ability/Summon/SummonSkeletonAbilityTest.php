@@ -19,14 +19,14 @@ class SummonSkeletonAbilityTest extends TestCase
      */
     public function testSummonSkeletonAbility(): void
     {
-        $name = 'Summon Skeleton Ability';
+        $name = 'Summon Skeleton';
         $icon = '/images/icons/ability/338.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = new SummonSkeletonAbility($name, $icon, $unit);
+        $ability = new SummonSkeletonAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());

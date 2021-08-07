@@ -8,21 +8,8 @@ use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitInterface;
 
-// TODO name должен задаваться через дочерние конкретные реализации, от указания через конструктор надо уйти
-// TODO icon должен задаваться через дочерние конкретные реализации, от указания через конструктор надо уйти
-
 abstract class AbstractAbility implements AbilityInterface
 {
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $icon;
-
     /**
      * @var bool
      */
@@ -39,33 +26,25 @@ abstract class AbstractAbility implements AbilityInterface
     protected $container;
 
     /**
-     * @param string $name
-     * @param string $icon
      * @param UnitInterface $unit
      */
-    public function __construct(string $name, string $icon, UnitInterface $unit)
+    public function __construct(UnitInterface $unit)
     {
-        $this->name = $name;
-        $this->icon = $icon;
         $this->unit = $unit;
         $this->container = $unit->getContainer();
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getIcon(): string
-    {
-        return $this->icon;
-    }
-
+    /**
+     * @return bool
+     */
     public function isReady(): bool
     {
         return $this->ready;
     }
 
+    /**
+     * @return UnitInterface
+     */
     public function getUnit(): UnitInterface
     {
         return $this->unit;

@@ -13,6 +13,10 @@ use Battle\Unit\UnitInterface;
 
 class HeavyStrikeAbility extends AbstractAbility
 {
+    private const NAME        = 'Heavy Strike';
+    private const ICON        = '/images/icons/ability/335.png';
+    private const USE_MESSAGE = 'use Heavy Strike at';
+
     /**
      * Heavy Strike наносит 250% урона от базового урона юнита
      *
@@ -31,7 +35,7 @@ class HeavyStrikeAbility extends AbstractAbility
             $alliesCommand,
             $this->container->getMessage(),
             (int)($this->unit->getDamage() * 2.5),
-            'use Heavy Strike at'
+            self::USE_MESSAGE
         ));
 
         return $collection;
@@ -56,5 +60,21 @@ class HeavyStrikeAbility extends AbstractAbility
     {
         $this->ready = false;
         $this->unit->useConcentrationAbility();
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::NAME;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon(): string
+    {
+        return self::ICON;
     }
 }
