@@ -24,6 +24,16 @@ interface ContainerInterface
     public function get(string $id): object;
 
     /**
+     * Добавляет сервис
+     *
+     * Можно добавить только сервис из списка доступных (с.м. Container->map)
+     *
+     * @param string $id
+     * @param object $object
+     */
+    public function set(string $id, object $object): void;
+
+    /**
      * @param string $id
      * @return bool
      */

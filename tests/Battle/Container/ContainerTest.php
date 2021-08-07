@@ -20,9 +20,12 @@ use Battle\Result\Statistic\StatisticInterface;
 use Battle\Round\RoundFactory;
 use Battle\Stroke\StrokeFactory;
 use Battle\Translation\Translation;
+use Battle\Translation\TranslationException;
 use Battle\Translation\TranslationInterface;
+use Battle\Unit\Unit;
 use Battle\View\ViewFactory;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class ContainerTest extends TestCase
 {
@@ -223,5 +226,43 @@ class ContainerTest extends TestCase
         $this->expectException(ContainerException::class);
         $this->expectExceptionMessage(ContainerException::UNKNOWN_SERVICE);
         $container->get('UnknownService');
+    }
+
+    /**
+     * @throws ContainerException
+     * @throws TranslationException
+     */
+    public function testContainerSetSuccess(): void
+    {
+        $language = 'ru';
+        $translator = new Translation($language);
+
+        $container = new Container();
+        $container->set(Translation::class, $translator);
+        self::assertEquals($translator, $container->getTranslation());
+
+        $container = new Container();
+        $container->set('Translation', $translator);
+        self::assertEquals($translator, $container->getTranslation());
+
+        $container = new Container();
+        $container->set(TranslationInterface::class, $translator);
+        self::assertEquals($translator, $container->getTranslation());
+    }
+
+    /**
+     * @throws ContainerException
+     */
+    public function testContainerSetFail(): void
+    {
+        // Создаем какой-то объект
+        $invalidService = new StdClass();
+        $container = new Container();
+
+        $this->expectException(ContainerException::class);
+        $this->expectExceptionMessage(ContainerException::UNKNOWN_SERVICE);
+
+        // Пытаемся добавить его, под именем класса, который отсутствует в Container->map - получаем исключение
+        $container->set(Unit::class, $invalidService);
     }
 }

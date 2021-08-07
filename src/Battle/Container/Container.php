@@ -72,6 +72,17 @@ class Container implements ContainerInterface
 
     /**
      * @param string $id
+     * @param object $object
+     * @throws ContainerException
+     */
+    public function set(string $id, object $object): void
+    {
+        $id = $this->normalizeIdService($id);
+        $this->storage[$id] = $object;
+    }
+
+    /**
+     * @param string $id
      * @return bool
      */
     public function exist(string $id): bool

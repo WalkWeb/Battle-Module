@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle;
 
+use Battle\Translation\Translation;
 use Exception;
 use Battle\BattleException;
 use Battle\BattleFactory;
@@ -153,23 +154,23 @@ class BattleTest extends TestCase
         new Battle($leftCommand, $rightCommand, new Container());
     }
 
-    // todo container->set() mechanic
+    /**
+     * @throws Exception
+     */
+    public function testBattleSetTranslation(): void
+    {
+        $leftCommand = CommandFactory::createLeftCommand();
+        $rightCommand = CommandFactory::createRightCommand();
 
-//    /**
-//     * @throws Exception
-//     */
-//    public function testBattleSetTranslation(): void
-//    {
-//        $leftCommand = CommandFactory::createLeftCommand();
-//        $rightCommand = CommandFactory::createRightCommand();
-//
-//        $language = 'ru';
-//        $translator = new Translation($language);
-//
-//        $battle = new Battle($leftCommand, $rightCommand, new Container());
-//
-//        self::assertEquals($translator, $battle->getTranslation());
-//    }
+        $language = 'ru';
+        $translator = new Translation($language);
+        $container = new Container();
+        $container->set(Translation::class, $translator);
+
+        $battle = new Battle($leftCommand, $rightCommand, $container);
+
+        self::assertEquals($translator, $battle->getContainer()->getTranslation());
+    }
 
     /**
      * Эмулируем коллекцию, которая будет возвращать одного и того же юнита на каждый вызов метода current()
