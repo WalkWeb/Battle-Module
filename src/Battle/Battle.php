@@ -85,8 +85,8 @@ class Battle implements BattleInterface
         }
 
         if ($i === $this->maxRound) {
-            $this->container->getFullLog()->add(
-                '<p>' . $this->container->getTranslation()->trans(self::LIMIT_ROUND_MESSAGE) . '</p>'
+            $this->container->getFullLog()->addText(
+                $this->container->getTranslation()->trans(self::LIMIT_ROUND_MESSAGE)
             );
         }
 

@@ -20,7 +20,6 @@ class Round implements RoundInterface
     private const END_ROUND    = 'All command actions. New round';
     private const START_STROKE = 'Start Stroke';
     private const END_STROKE   = 'End Stroke';
-    private const HR           = '<hr>';
 
     /**
      * Левая команда
@@ -149,24 +148,22 @@ class Round implements RoundInterface
      * 3. Добавляет информацию в лог о завершении хода
      * 4. Добавляет разделительную линию
      *
-     * TODO Подумать как убрать html теги <p> и <hr>
-     *
      * @param StrokeInterface $stroke
      * @throws Exception
      */
     private function executeStroke(StrokeInterface $stroke): void
     {
-        $this->container->getFullLog()->add(
-            '<p>' . $this->container->getTranslation()->trans(self::START_STROKE) . ' #' . $this->container->getStatistic()->getStrokeNumber() . '</p>'
+        $this->container->getFullLog()->addText(
+            $this->container->getTranslation()->trans(self::START_STROKE) . ' #' . $this->container->getStatistic()->getStrokeNumber()
         );
 
         $stroke->handle();
 
-        $this->container->getFullLog()->add(
-            '<p>' .  $this->container->getTranslation()->trans(self::END_STROKE) . ' #' . $this->container->getStatistic()->getStrokeNumber() . '</p>'
+        $this->container->getFullLog()->addText(
+            $this->container->getTranslation()->trans(self::END_STROKE) . ' #' . $this->container->getStatistic()->getStrokeNumber()
         );
 
-        $this->container->getFullLog()->add(self::HR);
+        $this->container->getFullLog()->addLine();
     }
 
     /**
@@ -178,8 +175,8 @@ class Round implements RoundInterface
      */
     private function startRound(): void
     {
-        $this->container->getFullLog()->add(
-            '<p>' . $this->container->getTranslation()->trans(self::START_ROUND) . ' #' . $this->container->getStatistic()->getRoundNumber() . '</p>'
+        $this->container->getFullLog()->addText(
+            $this->container->getTranslation()->trans(self::START_ROUND) . ' #' . $this->container->getStatistic()->getRoundNumber()
         );
     }
 
@@ -195,7 +192,7 @@ class Round implements RoundInterface
      */
     private function endRound(): int
     {
-        $this->container->getFullLog()->add('<p>' . $this->container->getTranslation()->trans(self::END_ROUND) . '</p>');
+        $this->container->getFullLog()->addText($this->container->getTranslation()->trans(self::END_ROUND));
         $this->leftCommand->newRound();
         $this->rightCommand->newRound();
         return $this->actionCommand;
@@ -213,7 +210,7 @@ class Round implements RoundInterface
      */
     private function endBattle(): int
     {
-        $this->container->getFullLog()->add('<p>' . self::END . '</p>');
+        $this->container->getFullLog()->addText(self::END);
         return 0;
     }
 

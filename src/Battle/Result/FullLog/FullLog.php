@@ -6,6 +6,8 @@ namespace Battle\Result\FullLog;
 
 class FullLog implements FullLogInterface
 {
+    private const LINE = '<hr>';
+
     /**
      * @var string[]
      */
@@ -14,6 +16,16 @@ class FullLog implements FullLogInterface
     public function add(string $log): void
     {
         $this->log[] = $log;
+    }
+
+    public function addText(string $text): void
+    {
+        $this->log[] = '<p>' . $text . '</p>';
+    }
+
+    public function addLine(): void
+    {
+        $this->log[] = self::LINE;
     }
 
     /**

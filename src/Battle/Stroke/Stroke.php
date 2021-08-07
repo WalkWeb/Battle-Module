@@ -102,7 +102,7 @@ class Stroke implements StrokeInterface
 
             $this->container->getStatistic()->addUnitAction($action);
             $this->container->getScenario()->addAction($action, $this->container->getStatistic());
-            $this->container->getFullLog()->add('<p>' . $message . '</p>');
+            $this->container->getFullLog()->addText($message);
             $this->container->getChat()->add($message);
         }
 
