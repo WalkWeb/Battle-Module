@@ -7,13 +7,12 @@ namespace Battle\Unit;
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
-use Battle\Action\Damage\DamageAction;
-use Battle\Action\Heal\HealAction;
-use Battle\Action\Other\WaitAction;
-use Battle\Action\Summon\SummonAction;
+use Battle\Action\DamageAction;
+use Battle\Action\HealAction;
+use Battle\Action\WaitAction;
+use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerException;
-use Battle\Translation\TranslationException;
 use Exception;
 
 class Unit extends AbstractUnit
@@ -76,7 +75,6 @@ class Unit extends AbstractUnit
      *
      * @param DamageAction $action
      * @return string
-     * @throws TranslationException
      * @throws ActionException
      * @throws ContainerException
      */
@@ -99,7 +97,6 @@ class Unit extends AbstractUnit
      *
      * @param HealAction $action
      * @return string
-     * @throws TranslationException
      * @throws ActionException
      * @throws ContainerException
      */
@@ -126,7 +123,6 @@ class Unit extends AbstractUnit
      *
      * @param SummonAction $action
      * @return string
-     * @throws TranslationException
      * @throws ContainerException
      */
     private function applySummonAction(SummonAction $action): string
@@ -139,7 +135,6 @@ class Unit extends AbstractUnit
      *
      * @param WaitAction $action
      * @return string
-     * @throws TranslationException
      * @throws ContainerException
      */
     private function applyWaitAction(WaitAction $action): string

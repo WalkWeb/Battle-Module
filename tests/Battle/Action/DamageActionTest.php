@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Action\Damage;
+namespace Tests\Battle\Action;
 
-use Battle\Action\Damage\DamageAction;
+use Battle\Action\DamageAction;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
@@ -125,7 +125,7 @@ class DamageActionTest extends TestCase
     }
 
     /**
-     * Тест на ситуацию, когда не SummonAction вызывают метод getSummonUnit()
+     * Тест на ситуацию, когда у не-SummonAction вызывают метод getSummonUnit()
      *
      * @throws Exception
      */

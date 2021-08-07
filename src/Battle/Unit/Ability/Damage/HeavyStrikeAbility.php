@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit\Ability\Damage;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\Damage\DamageAction;
+use Battle\Action\DamageAction;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerException;
 use Battle\Unit\Ability\AbstractAbility;

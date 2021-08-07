@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Action\Summon;
+namespace Tests\Battle\Action;
 
 use Battle\Action\ActionException;
-use Battle\Action\Summon\SummonAction;
+use Battle\Action\SummonAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;

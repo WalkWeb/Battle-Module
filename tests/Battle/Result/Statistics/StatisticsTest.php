@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Statistics;
 
-use Battle\Action\Damage\DamageAction;
-use Battle\Action\Summon\SummonAction;
+use Battle\Action\DamageAction;
+use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Result\Statistic\Statistic;

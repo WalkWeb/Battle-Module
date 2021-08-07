@@ -6,11 +6,11 @@ namespace Battle\Result\Scenario;
 
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
-use Battle\Action\Damage\DamageAction;
-use Battle\Action\Heal\HealAction;
-use Battle\Action\Other\WaitAction;
+use Battle\Action\DamageAction;
+use Battle\Action\HealAction;
+use Battle\Action\WaitAction;
+use Battle\Action\SummonAction;
 use Battle\Result\Statistic\StatisticInterface;
-use Battle\Action\Summon\SummonAction;
 use Battle\Unit\UnitInterface;
 use JsonException;
 

@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Action\Other;
-
-use Battle\Action\AbstractAction;
+namespace Battle\Action;
 
 class WaitAction extends AbstractAction
 {

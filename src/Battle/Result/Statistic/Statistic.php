@@ -6,9 +6,9 @@ namespace Battle\Result\Statistic;
 
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
-use Battle\Action\Damage\DamageAction;
-use Battle\Action\Heal\HealAction;
-use Battle\Action\Summon\SummonAction;
+use Battle\Action\DamageAction;
+use Battle\Action\HealAction;
+use Battle\Action\SummonAction;
 use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
 use Battle\Result\Statistic\UnitStatistic\UnitStatisticCollection;
 use Battle\Result\Statistic\UnitStatistic\UnitStatisticInterface;

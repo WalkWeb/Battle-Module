@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Action\Heal;
+namespace Tests\Battle\Action;
 
 use Battle\Action\ActionException;
-use Battle\Action\Damage\DamageAction;
-use Battle\Action\Heal\HealAction;
+use Battle\Action\DamageAction;
+use Battle\Action\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Summon;
 
-use Battle\Action\Summon\SummonAction;
-use Battle\Unit\Ability\Summon\SummonSkeletonAbility;
 use Exception;
+use Battle\Action\SummonAction;
+use Battle\Unit\Ability\Summon\SummonSkeletonAbility;
 use PHPUnit\Framework\TestCase;
 use Battle\Command\CommandFactory;
 use Tests\Battle\Factory\UnitFactory;

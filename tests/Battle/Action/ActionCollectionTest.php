@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Action;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\Damage\DamageAction;
+use Battle\Action\DamageAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;

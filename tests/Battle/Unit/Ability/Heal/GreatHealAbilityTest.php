@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Heal;
 
-use Battle\Action\Damage\DamageAction;
-use Battle\Result\Chat\Message;
 use Exception;
+use Battle\Action\DamageAction;
+use Battle\Result\Chat\Message;
 use PHPUnit\Framework\TestCase;
-use Battle\Action\Heal\HealAction;
+use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Unit\Ability\AbilityCollection;

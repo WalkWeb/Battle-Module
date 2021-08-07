@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Action\Other;
+namespace Tests\Battle\Action;
 
-use Battle\Action\Other\WaitAction;
+use Battle\Action\WaitAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Scenario;
 
-use Battle\Action\Summon\SummonAction;
+use Exception;
+use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
-use Exception;
-use Battle\Action\Damage\DamageAction;
-use Battle\Action\Other\WaitAction;
+use Battle\Action\DamageAction;
+use Battle\Action\WaitAction;
 use Battle\Command\CommandFactory;
 use Battle\Result\Chat\Message;
 use Battle\Result\Scenario\Scenario;

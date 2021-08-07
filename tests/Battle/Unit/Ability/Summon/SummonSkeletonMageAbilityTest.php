@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Summon;
 
-use Battle\Action\Summon\SummonAction;
+use Exception;
+use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Summon\SummonSkeletonMageAbility;
-use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 

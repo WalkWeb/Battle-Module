@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Factory\Mock;
 
 use Battle\Action\ActionInterface;
-use Battle\Action\Damage\DamageAction;
+use Battle\Action\DamageAction;
 use PHPUnit\Framework\TestCase;
 
 class ActionMockFactory extends TestCase

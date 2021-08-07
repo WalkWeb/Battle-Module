@@ -14,7 +14,7 @@ use Battle\Result\Chat\Message;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;
-use Battle\Action\Damage\DamageAction;
+use Battle\Action\DamageAction;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\Mock\UnitMockFactory;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;

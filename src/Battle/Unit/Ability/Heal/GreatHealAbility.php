@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit\Ability\Heal;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\Heal\HealAction;
+use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerException;
 use Battle\Unit\Ability\AbstractAbility;

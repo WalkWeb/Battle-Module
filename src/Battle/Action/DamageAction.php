@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Battle\Action\Damage;
+namespace Battle\Action;
 
-use Battle\Action\AbstractAction;
-use Battle\Action\ActionException;
 use Battle\Command\CommandInterface;
 use Battle\Result\Chat\Message;
 use Battle\Unit\UnitInterface;

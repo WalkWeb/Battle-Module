@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit\Ability\Summon;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\Summon\SummonAction;
+use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
 use Battle\Traits\IdTrait;
 use Battle\Unit\Ability\AbstractAbility;

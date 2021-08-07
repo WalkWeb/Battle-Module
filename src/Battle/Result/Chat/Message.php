@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Battle\Result\Chat;
 
 use Battle\Action\ActionException;
-use Battle\Action\Damage\DamageAction;
-use Battle\Action\Heal\HealAction;
-use Battle\Action\Other\WaitAction;
-use Battle\Action\Summon\SummonAction;
+use Battle\Action\DamageAction;
+use Battle\Action\HealAction;
+use Battle\Action\WaitAction;
+use Battle\Action\SummonAction;
 use Battle\Translation\Translation;
 
 // todo add interface
