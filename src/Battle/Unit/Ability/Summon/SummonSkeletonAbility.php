@@ -4,17 +4,10 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Ability\Summon;
 
-use Battle\Action\ActionCollection;
-use Battle\Action\SummonAction;
-use Battle\Command\CommandInterface;
 use Battle\Traits\IdTrait;
-use Battle\Unit\Ability\AbstractAbility;
-use Battle\Unit\Race\RaceFactory;
-use Battle\Unit\Unit;
 use Battle\Unit\UnitInterface;
-use Exception;
 
-class SummonSkeletonAbility extends AbstractAbility
+class SummonSkeletonAbility extends AbstractSummonAbility
 {
     use IdTrait;
 
@@ -31,41 +24,19 @@ class SummonSkeletonAbility extends AbstractAbility
     private const SUMMON_MELEE        = true;
     private const SUMMON_RACE_ID      = 8;
 
-    /**
-     * Призывает скелета
-     *
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return ActionCollection
-     * @throws Exception
-     */
-    public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
+    public function __construct(UnitInterface $unit)
     {
-        $collection = new ActionCollection();
-
-        $collection->add(new SummonAction(
-            $this->unit,
-            $enemyCommand,
-            $alliesCommand,
-            $this->container->getMessage(),
-            self::USE_MESSAGE,
-            new Unit(
-                self::generateId(),
-                self::SUMMON_NAME,
-                self::SUMMON_LEVEL,
-                self::SUMMON_AVATAR,
-                self::SUMMON_DAMAGE,
-                self::SUMMON_ATTACK_SPEED,
-                self::SUMMON_LIFE,
-                self::SUMMON_LIFE,
-                self::SUMMON_MELEE,
-                $this->unit->getCommand(),
-                RaceFactory::create(self::SUMMON_RACE_ID),
-                $this->unit->getContainer()
-            )
-        ));
-
-        return $collection;
+        parent::__construct(
+            $unit,
+            self::SUMMON_NAME,
+            self::SUMMON_LEVEL,
+            self::SUMMON_AVATAR,
+            self::SUMMON_DAMAGE,
+            self::SUMMON_ATTACK_SPEED,
+            self::SUMMON_LIFE,
+            self::SUMMON_MELEE,
+            self::SUMMON_RACE_ID
+        );
     }
 
     /**
@@ -89,19 +60,18 @@ class SummonSkeletonAbility extends AbstractAbility
         $this->unit->useConcentrationAbility();
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
-    /**
-     * @return string
-     */
     public function getIcon(): string
     {
         return self::ICON;
+    }
+
+    public function getUseMessage(): string
+    {
+        return self::USE_MESSAGE;
     }
 }
