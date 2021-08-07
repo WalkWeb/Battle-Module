@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 use Battle\Unit\UnitInterface;
 
 abstract class AbstractAction implements ActionInterface

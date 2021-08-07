@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Result\Chat;
+namespace Battle\Result\Chat\Message;
 
 use Battle\Action\ActionException;
 use Battle\Action\DamageAction;

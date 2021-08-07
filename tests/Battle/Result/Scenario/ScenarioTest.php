@@ -11,7 +11,7 @@ use Battle\Unit\UnitInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;

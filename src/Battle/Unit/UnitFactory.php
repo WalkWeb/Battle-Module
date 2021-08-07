@@ -9,7 +9,7 @@ use Battle\Classes\UnitClassFactory;
 use Battle\Classes\UnitClassInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 use Battle\Traits\Validation;
 use Battle\Unit\Race\RaceFactory;
 use Exception;

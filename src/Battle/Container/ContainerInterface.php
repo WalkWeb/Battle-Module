@@ -6,7 +6,7 @@ namespace Battle\Container;
 
 use Battle\BattleFactory;
 use Battle\Result\Chat\ChatInterface;
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 use Battle\Result\FullLog\FullLogInterface;
 use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Result\Statistic\StatisticInterface;

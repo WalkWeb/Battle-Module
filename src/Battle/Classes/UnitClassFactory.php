@@ -9,7 +9,7 @@ use Battle\Classes\Human\Warrior;
 use Battle\Classes\Other\IncorrectUnitClassForTest;
 use Battle\Classes\Undead\DarkMage;
 use Battle\Classes\Undead\DeadKnight;
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 
 class UnitClassFactory
 {

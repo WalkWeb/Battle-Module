@@ -8,7 +8,7 @@ use Battle\Action\ActionException;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;

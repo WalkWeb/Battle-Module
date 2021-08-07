@@ -6,7 +6,7 @@ namespace Tests\Battle\Unit\Ability\Heal;
 
 use Exception;
 use Battle\Action\DamageAction;
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 use PHPUnit\Framework\TestCase;
 use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;

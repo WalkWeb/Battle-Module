@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Command;
 
-use Battle\Container\Container;
 use Exception;
 use Battle\Battle;
+use Battle\Container\Container;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;

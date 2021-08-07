@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Statistics;
 
+use Exception;
 use Battle\Action\DamageAction;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 use Battle\Result\Statistic\Statistic;
-use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Classes;
 
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 
 abstract class AbstractUnitClass implements UnitClassInterface
 {

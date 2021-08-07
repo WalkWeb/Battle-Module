@@ -10,7 +10,7 @@ use Battle\Classes\Human\Warrior;
 use Battle\Classes\Undead\DarkMage;
 use Battle\Classes\Undead\DeadKnight;
 use Battle\Classes\UnitClassFactory;
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 use PHPUnit\Framework\TestCase;
 
 class UnitClassFactoryTest extends TestCase

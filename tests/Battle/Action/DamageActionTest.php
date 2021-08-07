@@ -7,7 +7,7 @@ namespace Tests\Battle\Action;
 use Battle\Action\DamageAction;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message;
+use Battle\Result\Chat\Message\Message;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\Mock\CommandMockFactory;
