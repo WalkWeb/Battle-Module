@@ -7,6 +7,9 @@ namespace Tests\Battle\View;
 use Battle\Command\CommandFactory;
 use Battle\Container\Container;
 use Battle\Result\Result;
+use Battle\Translation\Translation;
+use Battle\View\View;
+use Battle\View\ViewException;
 use Battle\View\ViewFactory;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -412,5 +415,28 @@ EOT;
         // Из-за вывода статистики, и подсчета времени выполнения в статистике, мы никогда не сможем точно узнать
         // какой код будет выведен. По этому просто проверяем, что рендер прошел без ошибок, и получили строку
         self::assertIsString($view->renderResult($result));
+    }
+
+    /**
+     * Тест на проверку ситуации, когда указанного файла шаблона не существует
+     *
+     * @throws Exception
+     */
+    public function testViewMissingTemplate(): void
+    {
+        $view = new View(
+            new Translation(),
+            __DIR__ . '/../../../templates/',
+            'battle/missed_file.php',
+            'battle/result.template.php',
+            'battle/row.template.php',
+            'battle/unit/unit.template.php',
+            'battle/unit/unit_full_log.template.php',
+            'battle/unit/units_stats.template.php'
+        );
+
+        $this->expectException(ViewException::class);
+        $this->expectExceptionMessage(ViewException::MISSING_TEMPLATE . ': Head Template');
+        $view->renderHead();
     }
 }

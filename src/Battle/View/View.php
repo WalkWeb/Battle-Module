@@ -10,8 +10,6 @@ use Battle\Translation\Translation;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
-// TODO Проверка на наличие файлов шаблонов
-
 /**
  * @package Battle\View
  */
@@ -94,12 +92,17 @@ class View implements ViewInterface
      * внутри существующего проекта он будет лишний
      *
      * @return string
+     * @throws ViewException
      */
     public function renderHead(): string
     {
+        $filePath = $this->templateDir . $this->headTemplate;
+
+        $this->checkExistTemplate($filePath, 'Head Template');
+
         ob_start();
 
-        require $this->templateDir . $this->headTemplate;
+        require $filePath;
 
         return ob_get_clean();
     }
@@ -109,12 +112,17 @@ class View implements ViewInterface
      *
      * @param ResultInterface $result
      * @return string
+     * @throws ViewException
      */
     public function renderResult(ResultInterface $result): string
     {
+        $filePath = $this->templateDir . $this->resultTemplate;
+
+        $this->checkExistTemplate($filePath, 'Result Template');
+
         ob_start();
 
-        require $this->templateDir . $this->resultTemplate;
+        require $filePath;
 
         return ob_get_clean();
     }
@@ -127,9 +135,14 @@ class View implements ViewInterface
      * @param bool $fullLog
      * @return string
      * @throws UnitException
+     * @throws ViewException
      */
     public function renderCommandView(CommandInterface $leftCommand, CommandInterface $rightCommand, bool $fullLog = false): string
     {
+        $filePath = $this->templateDir . $this->rowTemplate;
+
+        $this->checkExistTemplate($filePath, 'Row Template');
+
         $leftMeleeUnits = '';
         $leftRangeUnits = '';
         $rightMeleeUnits = '';
@@ -153,7 +166,7 @@ class View implements ViewInterface
 
         ob_start();
 
-        require $this->templateDir . $this->rowTemplate;
+        require $filePath;
 
         return ob_get_clean();
     }
@@ -161,29 +174,39 @@ class View implements ViewInterface
     /**
      * Генерирует html-код для отображения юнита
      *
-     * @uses getWidth, getBgClass
      * @param UnitInterface $unit
      * @return string
+     * @throws ViewException
+     * @uses getWidth, getBgClass
      */
     public function getUnitView(UnitInterface $unit): string
     {
+        $filePath = $this->templateDir . $this->unitTemplate;
+
+        $this->checkExistTemplate($filePath, 'Unit Template');
+
         ob_start();
 
-        require $this->templateDir . $this->unitTemplate;
+        require $filePath;
 
         return ob_get_clean();
     }
 
     /**
-     * @uses getWidth, getBgClass
      * @param UnitInterface $unit
      * @return string
+     * @throws ViewException
+     * @uses getWidth, getBgClass
      */
     public function getStatUnitView(UnitInterface $unit): string
     {
+        $filePath = $this->templateDir . $this->unitFullLogTemplate;
+
+        $this->checkExistTemplate($filePath, 'Unit Full Log Template');
+
         ob_start();
 
-        require $this->templateDir . $this->unitFullLogTemplate;
+        require $filePath;
 
         return ob_get_clean();
     }
@@ -194,12 +217,17 @@ class View implements ViewInterface
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @return string
+     * @throws ViewException
      */
     public function getUnitsStats(CommandInterface $leftCommand, CommandInterface $rightCommand): string
     {
+        $filePath = $this->templateDir . $this->unitsStatsTemplate;
+
+        $this->checkExistTemplate($filePath, 'Units Stats Template');
+
         ob_start();
 
-        require $this->templateDir . $this->unitsStatsTemplate;
+        require $filePath;
 
         return ob_get_clean();
     }
@@ -220,5 +248,19 @@ class View implements ViewInterface
     private function getWidth(int $value, int $max): int
     {
         return (int)($value / $max * 100);
+    }
+
+    /**
+     * Проверяет существование указанного файла
+     *
+     * @param string $filePath
+     * @param string $nameFile
+     * @throws ViewException
+     */
+    private function checkExistTemplate(string $filePath, string $nameFile): void
+    {
+        if (!file_exists($filePath)) {
+            throw new ViewException(ViewException::MISSING_TEMPLATE . ': ' . $nameFile);
+        }
     }
 }
