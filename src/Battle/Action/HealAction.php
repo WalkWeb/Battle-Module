@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
-use Battle\Result\Chat\Message\Message;
+use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Unit\UnitInterface;
 
 class HealAction extends AbstractAction
@@ -27,7 +27,7 @@ class HealAction extends AbstractAction
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
-        Message $message,
+        MessageInterface $message,
         ?int $power = null,
         ?string $name = null
     )

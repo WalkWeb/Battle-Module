@@ -6,7 +6,7 @@ namespace Battle\Container;
 
 use Battle\BattleFactory;
 use Battle\Result\Chat\ChatInterface;
-use Battle\Result\Chat\Message\Message;
+use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Result\FullLog\FullLogInterface;
 use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Result\Statistic\StatisticInterface;
@@ -60,10 +60,10 @@ interface ContainerInterface
     public function getFullLog(): FullLogInterface;
 
     /**
-     * @return Message
+     * @return MessageInterface
      * @throws ContainerException
      */
-    public function getMessage(): Message;
+    public function getMessage(): MessageInterface;
 
     /**
      * @return BattleFactory

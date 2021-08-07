@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
-use Battle\Result\Chat\Message\Message;
+use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Unit\UnitInterface;
 
 abstract class AbstractAction implements ActionInterface
@@ -31,7 +31,7 @@ abstract class AbstractAction implements ActionInterface
     protected $enemyCommand;
 
     /**
-     * @var Message
+     * @var MessageInterface
      */
     protected $message;
 
@@ -44,7 +44,7 @@ abstract class AbstractAction implements ActionInterface
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
-        Message $message
+        MessageInterface $message
     )
     {
         $this->actionUnit = $actionUnit;

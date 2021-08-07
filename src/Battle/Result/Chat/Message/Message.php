@@ -11,9 +11,7 @@ use Battle\Action\WaitAction;
 use Battle\Action\SummonAction;
 use Battle\Translation\Translation;
 
-// todo add interface
-
-class Message
+class Message implements MessageInterface
 {
     /**
      * @var Translation

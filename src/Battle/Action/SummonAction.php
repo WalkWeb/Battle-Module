@@ -6,7 +6,7 @@ namespace Battle\Action;
 
 use Exception;
 use Battle\Command\CommandInterface;
-use Battle\Result\Chat\Message\Message;
+use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Unit\UnitInterface;
 
 class SummonAction extends AbstractAction
@@ -27,7 +27,7 @@ class SummonAction extends AbstractAction
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
-        Message $message,
+        MessageInterface $message,
         string $name,
         UnitInterface $summon
     )

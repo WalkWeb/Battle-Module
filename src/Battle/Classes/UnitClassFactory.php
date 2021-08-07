@@ -10,6 +10,7 @@ use Battle\Classes\Other\IncorrectUnitClassForTest;
 use Battle\Classes\Undead\DarkMage;
 use Battle\Classes\Undead\DeadKnight;
 use Battle\Result\Chat\Message\Message;
+use Battle\Result\Chat\Message\MessageInterface;
 
 class UnitClassFactory
 {
@@ -27,11 +28,11 @@ class UnitClassFactory
      * От класса зависят способности, которые юнит будет применять в бою
      *
      * @param int $classId
-     * @param Message|null $message
+     * @param MessageInterface|null $message
      * @return UnitClassInterface
      * @throws ClassFactoryException
      */
-    public static function create(int $classId, ?Message $message = null): UnitClassInterface
+    public static function create(int $classId, ?MessageInterface $message = null): UnitClassInterface
     {
         $message = $message ?? new Message();
 

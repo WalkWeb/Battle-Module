@@ -9,7 +9,7 @@ use Battle\Classes\UnitClassFactory;
 use Battle\Classes\UnitClassInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
-use Battle\Result\Chat\Message\Message;
+use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Traits\Validation;
 use Battle\Unit\Race\RaceFactory;
 use Exception;
@@ -101,12 +101,12 @@ class UnitFactory
 
     /**
      * @param array $data
-     * @param Message $message
+     * @param MessageInterface $message
      * @return UnitClassInterface|null
      * @throws UnitException
      * @throws ClassFactoryException
      */
-    private static function getClass(array $data, Message $message): ?UnitClassInterface
+    private static function getClass(array $data, MessageInterface $message): ?UnitClassInterface
     {
         if (!array_key_exists('class', $data)) {
             return null;
