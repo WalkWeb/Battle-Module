@@ -6,8 +6,8 @@ namespace Battle\Action;
 
 class WaitAction extends AbstractAction
 {
-    protected const NAME          = 'preparing to attack';
-    protected const HANDLE_METHOD = 'applyWaitAction';
+    private const NAME          = 'preparing to attack';
+    private const HANDLE_METHOD = 'applyWaitAction';
 
     public function getHandleMethod(): string
     {

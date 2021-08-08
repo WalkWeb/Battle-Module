@@ -9,11 +9,9 @@ use Battle\Unit\UnitInterface;
 
 class BuffAction extends AbstractAction
 {
-    // TODO От конкретных Action больше нет наследования - можно protected заменить на private
-
     // TODO Подумать над реализацией revert-сообщения для чата
 
-    protected const HANDLE_METHOD = 'applyBuffAction';
+    private const HANDLE_METHOD = 'applyBuffAction';
 
     /**
      * @var string

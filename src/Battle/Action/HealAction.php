@@ -9,8 +9,8 @@ use Battle\Unit\UnitInterface;
 
 class HealAction extends AbstractAction
 {
-    protected const NAME          = 'heal';
-    protected const HANDLE_METHOD = 'applyHealAction';
+    private const NAME          = 'heal';
+    private const HANDLE_METHOD = 'applyHealAction';
 
     /**
      * @var int

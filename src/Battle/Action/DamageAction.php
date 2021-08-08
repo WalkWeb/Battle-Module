@@ -9,8 +9,8 @@ use Battle\Unit\UnitInterface;
 
 class DamageAction extends AbstractAction
 {
-    protected const NAME          = 'attack';
-    protected const HANDLE_METHOD = 'applyDamageAction';
+    private const NAME          = 'attack';
+    private const HANDLE_METHOD = 'applyDamageAction';
 
     /**
      * @var int
