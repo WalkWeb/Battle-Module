@@ -84,5 +84,21 @@ class BuffAction extends AbstractAction
         return $this->revertValue;
     }
 
+    public function getRevertAction(): ActionInterface
+    {
+        $rollbackAction = new BuffAction(
+            $this->actionUnit,
+            $this->enemyCommand,
+            $this->alliesCommand,
+            $this->name,
+            $this->modifyMethod . self::ROLLBACK_METHOD_SUFFIX,
+            $this->power
+        );
+
+        $rollbackAction->setRevertValue($this->getRevertValue());
+
+        return $rollbackAction;
+    }
+
     public function setFactualPower(int $factualPower): void {}
 }

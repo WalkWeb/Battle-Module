@@ -56,12 +56,7 @@ class BuffActionTest extends TestCase
         self::assertEquals($newLife, $unit->getLife());
 
         // Откат изменения
-        // TODO В будущем нужно будет сделать так, чтобы BuffAction сам создавал Action для отката своих изменений
-
-        $rollbackAction = new BuffAction($unit, $enemyCommand, $command, $name, $modifyMethod . 'Revert', $power);
-        $rollbackAction->setRevertValue($action->getRevertValue());
-
-        $rollbackAction->handle();
+        $action->getRevertAction()->handle();
 
         self::assertEquals($oldLife, $unit->getTotalLife());
         self::assertEquals($oldLife, $unit->getLife());

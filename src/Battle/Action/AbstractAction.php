@@ -132,4 +132,13 @@ abstract class AbstractAction implements ActionInterface
     {
         throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }
+
+    /**
+     * @return ActionInterface
+     * @throws ActionException
+     */
+    public function getRevertAction(): ActionInterface
+    {
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
+    }
 }

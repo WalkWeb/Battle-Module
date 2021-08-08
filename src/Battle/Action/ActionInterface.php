@@ -8,6 +8,8 @@ use Battle\Unit\UnitInterface;
 
 interface ActionInterface
 {
+    public const ROLLBACK_METHOD_SUFFIX = 'Revert';
+
     /**
      * Название метода в классе Unit, который будет обрабатывать данное событие
      *
@@ -35,6 +37,8 @@ interface ActionInterface
      * @return string
      */
     public function getNameAction(): string;
+
+    // todo Add getRevertNameAction()
 
     /**
      * Возвращает юнита совершающего действие
@@ -110,4 +114,13 @@ interface ActionInterface
      * @return int
      */
     public function getRevertValue(): int;
+
+    /**
+     * BuffAction создает BuffAction для отката своих изменений характеристик юнита
+     *
+     *  Используется только в BuffAction, при вызове у других Action будет брошено исключение
+     *
+     * @return ActionInterface
+     */
+    public function getRevertAction(): ActionInterface;
 }

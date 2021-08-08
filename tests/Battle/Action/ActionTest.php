@@ -84,4 +84,22 @@ class ActionTest extends TestCase
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getRevertValue');
         $action->getRevertValue();
     }
+
+    /**
+     * Тест на ситуацию, когда у не-BuffAction вызывают метод getRevertAction()
+     *
+     * @throws Exception
+     */
+    public function testActionNoGetRevertAction(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getRevertAction');
+        $action->getRevertAction();
+    }
 }
