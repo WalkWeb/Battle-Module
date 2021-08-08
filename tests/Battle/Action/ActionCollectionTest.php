@@ -9,7 +9,6 @@ use Battle\Action\ActionCollection;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message\Message;
 use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
@@ -27,7 +26,7 @@ class ActionCollectionTest extends TestCase
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
 
         $actionCollection = new ActionCollection();
         $actionCollection->add($action);

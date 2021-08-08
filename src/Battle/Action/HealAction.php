@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
-use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Unit\UnitInterface;
 
 class HealAction extends AbstractAction
@@ -27,12 +26,11 @@ class HealAction extends AbstractAction
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
-        MessageInterface $message,
         ?int $power = null,
         ?string $name = null
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $message);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand);
         $this->power = $power ?? (int)($actionUnit->getDamage() * 1.2);
         $this->name = $name ?? self::NAME;
     }

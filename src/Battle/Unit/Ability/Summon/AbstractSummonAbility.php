@@ -96,7 +96,6 @@ abstract class AbstractSummonAbility extends AbstractAbility
             $this->unit,
             $enemyCommand,
             $alliesCommand,
-            $this->container->getMessage(),
             $this->getUseMessage(),
             new Unit(
                 self::generateId(),

@@ -7,7 +7,6 @@ namespace Battle\Unit\Ability\Damage;
 use Battle\Action\ActionCollection;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandInterface;
-use Battle\Container\ContainerException;
 use Battle\Unit\Ability\AbstractAbility;
 use Battle\Unit\UnitInterface;
 
@@ -23,7 +22,6 @@ class HeavyStrikeAbility extends AbstractAbility
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
-     * @throws ContainerException
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
@@ -33,7 +31,6 @@ class HeavyStrikeAbility extends AbstractAbility
             $this->unit,
             $enemyCommand,
             $alliesCommand,
-            $this->container->getMessage(),
             (int)($this->unit->getDamage() * 2.5),
             self::USE_MESSAGE
         ));

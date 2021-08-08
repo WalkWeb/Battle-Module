@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
-use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Unit\UnitInterface;
 
 class BuffAction extends AbstractAction
@@ -40,13 +39,12 @@ class BuffAction extends AbstractAction
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
-        MessageInterface $message,
         string $name,
         string $modifyMethod,
         int $power
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $message);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand);
         $this->name = $name;
         $this->modifyMethod = $modifyMethod;
         $this->power = $power;

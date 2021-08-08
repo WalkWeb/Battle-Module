@@ -10,7 +10,6 @@ use Battle\Container\Container;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message\Message;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 use PHPUnit\Framework\TestCase;
@@ -221,7 +220,7 @@ class CommandTest extends TestCase
         self::assertInstanceOf(UnitInterface::class, $alliesCommand->getUnitForAction());
 
         // убиваем первого юнита ($alliesCommand и $enemyCommand переставлены местами - это правильно, ходит вражеская команда)
-        $action = new DamageAction($enemyUnit, $alliesCommand, $enemyCommand, new Message());
+        $action = new DamageAction($enemyUnit, $alliesCommand, $enemyCommand);
         $action->handle();
 
         // указываем, что второй юнит походил
@@ -284,7 +283,7 @@ class CommandTest extends TestCase
         $zombie = UnitFactory::createByTemplate(1);
         $enemyCommand = CommandFactory::create([$zombie]);
 
-        $damage = new DamageAction($zombie, $command, $enemyCommand, new Message());
+        $damage = new DamageAction($zombie, $command, $enemyCommand);
         $damage->handle();
 
         self::assertEquals($warrior->getTotalLife() + $priest->getTotalLife() - $zombie->getDamage(), $command->getTotalLife());

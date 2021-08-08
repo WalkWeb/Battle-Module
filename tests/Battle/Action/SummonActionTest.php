@@ -8,7 +8,6 @@ use Battle\Action\ActionException;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message\Message;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -63,7 +62,7 @@ class SummonActionTest extends TestCase
         $alliesCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new SummonAction($actionUnit, $alliesCommand, $enemyCommand, new Message(), $name, $summon);
+        $action = new SummonAction($actionUnit, $alliesCommand, $enemyCommand, $name, $summon);
 
         self::assertEquals(0, $action->getFactualPower());
 
@@ -86,7 +85,7 @@ class SummonActionTest extends TestCase
         $alliesCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new SummonAction($actionUnit, $alliesCommand, $enemyCommand, new Message(), $name, $summon);
+        $action = new SummonAction($actionUnit, $alliesCommand, $enemyCommand, $name, $summon);
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getPower');

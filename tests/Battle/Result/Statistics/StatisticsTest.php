@@ -8,7 +8,6 @@ use Exception;
 use Battle\Action\DamageAction;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message\Message;
 use Battle\Result\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
@@ -225,7 +224,7 @@ class StatisticsTest extends TestCase
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
 
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
         $action->handle();
         $statistics->addUnitAction($action);
 

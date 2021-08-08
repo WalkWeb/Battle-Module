@@ -221,11 +221,11 @@ class Unit extends AbstractUnit
         $attacks = $this->calculateAttackSpeed();
 
         for ($i = 0; $i < $attacks; $i++) {
-            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand, $this->container->getMessage(), $this->damage));
+            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand, $this->damage));
         }
 
         if (count($collection) === 0) {
-            $collection->add(new WaitAction($this, $enemyCommand, $alliesCommand, $this->container->getMessage()));
+            $collection->add(new WaitAction($this, $enemyCommand, $alliesCommand));
         }
 
         return $collection;

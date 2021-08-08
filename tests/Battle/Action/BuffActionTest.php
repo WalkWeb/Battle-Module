@@ -43,7 +43,7 @@ class BuffActionTest extends TestCase
 
         $oldLife = $unit->getTotalLife();
 
-        $action = new BuffAction($unit, $enemyCommand, $command, new Message(), $name, $modifyMethod, $power);
+        $action = new BuffAction($unit, $enemyCommand, $command, $name, $modifyMethod, $power);
 
         $multiplier = $action->getPower() / 100;
         $newLife = (int)($unit->getTotalLife() * $multiplier);
@@ -58,7 +58,7 @@ class BuffActionTest extends TestCase
         // Откат изменения
         // TODO В будущем нужно будет сделать так, чтобы BuffAction сам создавал Action для отката своих изменений
 
-        $rollbackAction = new BuffAction($unit, $enemyCommand, $command, new Message(), $name, $modifyMethod . 'Revert', $power);
+        $rollbackAction = new BuffAction($unit, $enemyCommand, $command, $name, $modifyMethod . 'Revert', $power);
         $rollbackAction->setRevertValue($action->getRevertValue());
 
         $rollbackAction->handle();
@@ -85,7 +85,7 @@ class BuffActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction($unit, $enemyCommand, $command, new Message(), $name, $modifyMethod, $power);
+        $action = new BuffAction($unit, $enemyCommand, $command, $name, $modifyMethod, $power);
 
         $this->expectException(UnitException::class);
         $this->expectErrorMessage(UnitException::NO_REDUCED_LIFE_MULTIPLIER);
@@ -110,7 +110,7 @@ class BuffActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction($unit, $enemyCommand, $command, new Message(), $name, $modifyMethod, $power);
+        $action = new BuffAction($unit, $enemyCommand, $command, $name, $modifyMethod, $power);
 
         $this->expectException(UnitException::class);
         $this->expectErrorMessage(UnitException::UNDEFINED_MODIFY_METHOD . ': ' . $modifyMethod);
@@ -141,7 +141,7 @@ class BuffActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction($unit, $enemyCommand, $command, new Message(), $name, $modifyMethod, $power);
+        $action = new BuffAction($unit, $enemyCommand, $command, $name, $modifyMethod, $power);
 
         $message = $action->handle();
 

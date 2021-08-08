@@ -9,7 +9,6 @@ use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message\Message;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -94,13 +93,12 @@ class HealActionTest extends TestCase
      */
     public function testGetPowerHealAction(): void
     {
-        $message = new Message();
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(3);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $healAction = new HealAction($unit, $enemyCommand, $command, $message);
+        $healAction = new HealAction($unit, $enemyCommand, $command);
 
         self::assertEquals((int)($unit->getDamage() * 1.2), $healAction->getPower());
     }
@@ -144,7 +142,7 @@ class HealActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new HealAction($unit, $enemyCommand, $command, new Message());
+        $action = new HealAction($unit, $enemyCommand, $command);
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_TARGET_UNIT);
@@ -163,7 +161,7 @@ class HealActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new HealAction($unit, $enemyCommand, $command, new Message());
+        $action = new HealAction($unit, $enemyCommand, $command);
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_TARGET_FOR_HEAL);

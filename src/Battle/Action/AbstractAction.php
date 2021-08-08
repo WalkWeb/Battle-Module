@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
-use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Unit\UnitInterface;
 
 abstract class AbstractAction implements ActionInterface
@@ -31,13 +30,6 @@ abstract class AbstractAction implements ActionInterface
     protected $enemyCommand;
 
     /**
-     * TODO Где используется?
-     *
-     * @var MessageInterface
-     */
-    protected $message;
-
-    /**
      * @var int
      */
     protected $factualPower = 0;
@@ -45,14 +37,12 @@ abstract class AbstractAction implements ActionInterface
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
-        CommandInterface $alliesCommand,
-        MessageInterface $message
+        CommandInterface $alliesCommand
     )
     {
         $this->actionUnit = $actionUnit;
         $this->enemyCommand = $enemyCommand;
         $this->alliesCommand = $alliesCommand;
-        $this->message = $message;
     }
 
     public function getActionUnit(): UnitInterface

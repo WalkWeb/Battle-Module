@@ -7,7 +7,6 @@ namespace Battle\Unit\Ability\Heal;
 use Battle\Action\ActionCollection;
 use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
-use Battle\Container\ContainerException;
 use Battle\Unit\Ability\AbstractAbility;
 use Battle\Unit\UnitInterface;
 
@@ -28,7 +27,6 @@ class GreatHealAbility extends AbstractAbility
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
-     * @throws ContainerException
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
@@ -39,7 +37,6 @@ class GreatHealAbility extends AbstractAbility
                 $this->unit,
                 $enemyCommand,
                 $alliesCommand,
-                $this->container->getMessage(),
                 $this->unit->getDamage() * 3,
                 self::USE_MESSAGE
             ));
@@ -75,7 +72,6 @@ class GreatHealAbility extends AbstractAbility
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return bool
-     * @throws ContainerException
      */
     public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
     {

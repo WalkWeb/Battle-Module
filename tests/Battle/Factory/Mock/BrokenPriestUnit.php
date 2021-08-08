@@ -7,7 +7,6 @@ namespace Tests\Battle\Factory\Mock;
 use Battle\Action\ActionCollection;
 use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
-use Battle\Container\ContainerException;
 use Battle\Unit\Unit;
 
 class BrokenPriestUnit extends Unit
@@ -18,12 +17,11 @@ class BrokenPriestUnit extends Unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
-     * @throws ContainerException
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         $collection = new ActionCollection();
-        $collection->add(new HealAction($this, $enemyCommand, $alliesCommand, $this->getContainer()->getMessage()));
+        $collection->add(new HealAction($this, $enemyCommand, $alliesCommand));
         return $collection;
     }
 }

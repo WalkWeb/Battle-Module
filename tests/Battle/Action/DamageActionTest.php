@@ -7,7 +7,6 @@ namespace Tests\Battle\Action;
 use Battle\Action\DamageAction;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message\Message;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\Mock\CommandMockFactory;
@@ -26,7 +25,7 @@ class DamageActionTest extends TestCase
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
         self::assertEquals($unit->getDamage(), $action->getPower());
         self::assertTrue($action->canByUsed());
     }
@@ -40,7 +39,7 @@ class DamageActionTest extends TestCase
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
         $message = $action->handle();
         self::assertEquals($unit->getDamage(), $action->getPower());
         self::assertEquals(self::MESSAGE, $message);
@@ -55,7 +54,7 @@ class DamageActionTest extends TestCase
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
         $action->handle();
 
         self::assertEquals(20, $action->getPower());

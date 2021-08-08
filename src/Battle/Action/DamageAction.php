@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
-use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Unit\UnitInterface;
 
 class DamageAction extends AbstractAction
@@ -27,12 +26,11 @@ class DamageAction extends AbstractAction
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
-        MessageInterface $message,
         ?int $damage = null,
         ?string $name = null
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $message);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand);
         $this->damage = $damage ?? $actionUnit->getDamage();
         $this->name = $name ?? self::NAME;
     }

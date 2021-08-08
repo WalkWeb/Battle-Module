@@ -6,7 +6,6 @@ namespace Tests\Battle\Unit\Ability\Heal;
 
 use Exception;
 use Battle\Action\DamageAction;
-use Battle\Result\Chat\Message\Message;
 use PHPUnit\Framework\TestCase;
 use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
@@ -38,7 +37,7 @@ class GreatHealAbilityTest extends TestCase
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
         // Наносим урон юниту, чтобы способность перешла в "возможную для использования"
-        $damage = new DamageAction($enemyUnit, $command, $enemyCommand, new Message());
+        $damage = new DamageAction($enemyUnit, $command, $enemyCommand);
         $damage->handle();
 
         // После чего, способность может быть использована

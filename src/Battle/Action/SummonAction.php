@@ -6,7 +6,6 @@ namespace Battle\Action;
 
 use Exception;
 use Battle\Command\CommandInterface;
-use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Unit\UnitInterface;
 
 class SummonAction extends AbstractAction
@@ -27,12 +26,11 @@ class SummonAction extends AbstractAction
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
-        MessageInterface $message,
         string $name,
         UnitInterface $summon
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $message);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand);
         $this->name = $name;
         $this->summon = $summon;
     }

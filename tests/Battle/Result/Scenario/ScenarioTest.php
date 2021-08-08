@@ -11,7 +11,6 @@ use Battle\Unit\UnitInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandFactory;
-use Battle\Result\Chat\Message\Message;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
@@ -33,7 +32,7 @@ class ScenarioTest extends TestCase
         $defendUnit = UnitFactory::createByTemplate(2);
         $attackCommand = CommandFactory::create([$attackUnit]);
         $defendCommand = CommandFactory::create([$defendUnit]);
-        $action = new DamageAction($attackUnit, $defendCommand, $attackCommand, new Message());
+        $action = new DamageAction($attackUnit, $defendCommand, $attackCommand);
 
         $action->handle();
 
@@ -204,7 +203,7 @@ class ScenarioTest extends TestCase
         $actionCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new WaitAction($actionUnit, $enemyCommand, $actionCommand, new Message());
+        $action = new WaitAction($actionUnit, $enemyCommand, $actionCommand);
 
         $scenario = new Scenario();
 
@@ -291,7 +290,6 @@ class ScenarioTest extends TestCase
             $actionUnit,
             $enemyCommand,
             $actionCommand,
-            new Message(),
             'Summon Imp',
             UnitFactory::createByTemplate(18)
         );
@@ -316,7 +314,6 @@ class ScenarioTest extends TestCase
             $actionUnit,
             $enemyCommand,
             $actionCommand,
-            new Message(),
             'Summon Skeleton Mage',
             UnitFactory::createByTemplate(19)
         );
