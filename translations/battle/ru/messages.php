@@ -27,6 +27,7 @@ return [
     'summon Imp'                      => 'призвал Беса',
     'summon Skeleton'                 => 'призвал Скелета',
     'summon Skeleton Mage'            => 'призвал Скелета-мага',
+    'use Reserve Forces'              => 'использовал Резервные Силы',
     // Statistics
     'Statistics'                      => 'Статистика',
     'Unit'                            => 'Кто',

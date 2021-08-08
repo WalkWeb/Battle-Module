@@ -7,6 +7,7 @@ namespace Battle\Unit;
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Action\WaitAction;
@@ -51,7 +52,7 @@ class Unit extends AbstractUnit
     /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
      *
-     * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction
+     * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction, applyBuffAction
      * @param ActionInterface $action
      * @return string - Сообщение о произошедшем действии
      * @throws Exception
@@ -140,6 +141,72 @@ class Unit extends AbstractUnit
     private function applyWaitAction(WaitAction $action): string
     {
         return $this->container->getMessage()->wait($action);
+    }
+
+    /**
+     * Обрабатывает action на изменение характеристик юнита
+     *
+     * @uses multiplierMaxLife, multiplierMaxLifeRevert
+     * @param BuffAction $action
+     * @return string
+     * @throws ActionException
+     * @throws UnitException
+     */
+    private function applyBuffAction(BuffAction $action): string
+    {
+        if (!method_exists($this, $modifyMethod = $action->getModifyMethod())) {
+            throw new UnitException(UnitException::UNDEFINED_MODIFY_METHOD . ': ' . $modifyMethod);
+        }
+
+        return $this->$modifyMethod($action);
+    }
+
+    /**
+     * Увеличивает здоровье юнита (можно сделать и уменьшение, но пока делаем только увеличение)
+     *
+     * @param BuffAction $action
+     * @return string
+     * @throws UnitException
+     * @throws ActionException
+     * @throws ContainerException
+     */
+    private function multiplierMaxLife(BuffAction $action): string
+    {
+        if ($action->getPower() <= 100) {
+            throw new UnitException(UnitException::NO_REDUCED_LIFE_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldLife = $this->totalLife;
+        $newHpMax = (int)($this->totalLife * $multiplier);
+
+        $bonus = $newHpMax - $oldLife;
+
+        $this->life += $bonus;
+        $this->totalLife += $bonus;
+
+        $action->setRevertValue($bonus);
+
+        return $this->container->getMessage()->buff($action);
+    }
+
+    /**
+     * Откатывает изменения по здоровью
+     *
+     * @param BuffAction $action
+     * @return string
+     * @throws ActionException
+     */
+    private function multiplierMaxLifeRevert(BuffAction $action): string
+    {
+        $this->totalLife -= $action->getRevertValue();
+
+        if ($this->life > $this->totalLife) {
+            $this->life = $this->totalLife;
+        }
+
+        return '';
     }
 
     /**

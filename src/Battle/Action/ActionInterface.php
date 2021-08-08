@@ -85,4 +85,29 @@ interface ActionInterface
      * @return UnitInterface
      */
     public function getSummonUnit(): UnitInterface;
+
+    /**
+     * Возвращает название метода, который будет обрабатывать изменение указанной характеристики
+     *
+     * Используется только в BuffAction, при вызове у других Action будет брошено исключение
+     *
+     * @return string
+     */
+    public function getModifyMethod(): string;
+
+    /**
+     * Значение, на которое характеристика была изменена. Используется для отката изменения
+     *
+     * Используется только в BuffAction, при вызове у других Action будет брошено исключение
+     *
+     * @param int $revertValue
+     */
+    public function setRevertValue(int $revertValue): void;
+
+    /**
+     * Используется только в BuffAction, при вызове у других Action будет брошено исключение
+     *
+     * @return int
+     */
+    public function getRevertValue(): int;
 }

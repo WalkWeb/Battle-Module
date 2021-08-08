@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Result\Chat\Message;
 
 use Battle\Action\ActionException;
+use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Action\WaitAction;
@@ -73,6 +74,16 @@ class Message implements MessageInterface
      * @return string
      */
     public function wait(WaitAction $action): string
+    {
+        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
+    }
+
+    /**
+     * @param BuffAction $action
+     * @return string
+     */
+    public function buff(BuffAction $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());

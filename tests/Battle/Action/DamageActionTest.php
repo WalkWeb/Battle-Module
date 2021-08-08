@@ -124,6 +124,8 @@ class DamageActionTest extends TestCase
         }
     }
 
+    // TODO Возможно тесты ниже стоит вынести в отдельный класс, т.к. к тестированию DamageAction они не относятся
+
     /**
      * Тест на ситуацию, когда у не-SummonAction вызывают метод getSummonUnit()
      *
@@ -140,5 +142,59 @@ class DamageActionTest extends TestCase
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getSummonUnit');
         $action->getSummonUnit();
+    }
+
+    /**
+     * Тест на ситуацию, когда у не-BuffAction вызывают метод getModifyMethod()
+     *
+     * @throws Exception
+     */
+    public function testActionNoGetModifyMethod(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getModifyMethod');
+        $action->getModifyMethod();
+    }
+
+    /**
+     * Тест на ситуацию, когда у не-BuffAction вызывают метод setRevertValue()
+     *
+     * @throws Exception
+     */
+    public function testActionNoSetRevertValue(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::setRevertValue');
+        $action->setRevertValue(10);
+    }
+
+    /**
+     * Тест на ситуацию, когда у не-BuffAction вызывают метод getRevertValue()
+     *
+     * @throws Exception
+     */
+    public function testActionNoGetRevertValue(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, new Message());
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getRevertValue');
+        $action->getRevertValue();
     }
 }

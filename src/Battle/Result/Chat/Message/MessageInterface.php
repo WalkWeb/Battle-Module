@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Result\Chat\Message;
 
+use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Action\SummonAction;
@@ -42,4 +43,12 @@ interface MessageInterface
      * @return string
      */
     public function wait(WaitAction $action): string;
+
+    /**
+     * Формирует и возвращает сообщение для чата о применении бафа
+     *
+     * @param BuffAction $action
+     * @return string
+     */
+    public function buff(BuffAction $action): string;
 }
