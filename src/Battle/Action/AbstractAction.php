@@ -31,6 +31,8 @@ abstract class AbstractAction implements ActionInterface
     protected $enemyCommand;
 
     /**
+     * TODO Где используется?
+     *
      * @var MessageInterface
      */
     protected $message;

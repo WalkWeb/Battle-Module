@@ -8,7 +8,10 @@ use Battle\Action\ActionException;
 use Battle\Action\BuffAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Container\Container;
+use Battle\Container\ContainerException;
 use Battle\Result\Chat\Message\Message;
+use Battle\Translation\Translation;
 use Battle\Unit\UnitException;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
@@ -16,7 +19,8 @@ use Tests\Battle\Factory\UnitFactoryException;
 
 class BuffActionTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces';
+    private const MESSAGE    = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces';
+    private const RU_MESSAGE = '<span style="color: #1e72e3">unit_1</span> использовал Резервные Силы';
 
     /**
      * Тест на баф, который увеличит здоровье юнита на 30%, а потом откат изменения
@@ -113,5 +117,34 @@ class BuffActionTest extends TestCase
         $action->handle();
     }
 
-    // todo Тест на русский вариант сообщения об использовании способности
+    /**
+     * Тест на русский вариант сообщения об использовании способности
+     *
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     * @throws ContainerException
+     */
+    public function testBuffActionRuMessage(): void
+    {
+        $name = 'use Reserve Forces';
+        $modifyMethod = 'multiplierMaxLife';
+        $power = 130;
+
+        $translator = new Translation('ru');
+        $message = new Message($translator);
+        $container = new Container();
+        $container->set(Message::class, $message);
+
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction($unit, $enemyCommand, $command, new Message(), $name, $modifyMethod, $power);
+
+        $message = $action->handle();
+
+        self::assertEquals(self::RU_MESSAGE, $message);
+    }
 }
