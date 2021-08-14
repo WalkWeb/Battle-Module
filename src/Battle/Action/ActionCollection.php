@@ -26,4 +26,11 @@ class ActionCollection implements Iterator, Countable
     {
         return current($this->elements);
     }
+
+    public function addCollection(ActionCollection $collection): void
+    {
+        foreach ($collection as $action) {
+            $this->elements[] = $action;
+        }
+    }
 }
