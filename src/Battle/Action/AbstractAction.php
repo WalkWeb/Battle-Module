@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitInterface;
 
 abstract class AbstractAction implements ActionInterface
@@ -138,6 +139,15 @@ abstract class AbstractAction implements ActionInterface
      * @throws ActionException
      */
     public function getRevertAction(): ActionInterface
+    {
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
+    }
+
+    /**
+     * @return EffectCollection
+     * @throws ActionException
+     */
+    public function getEffects(): EffectCollection
     {
         throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }

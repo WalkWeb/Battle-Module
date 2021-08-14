@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
+use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitInterface;
 
 interface ActionInterface
@@ -96,6 +97,7 @@ interface ActionInterface
      * Используется только в BuffAction, при вызове у других Action будет брошено исключение
      *
      * @return string
+     * @throws ActionException
      */
     public function getModifyMethod(): string;
 
@@ -105,6 +107,7 @@ interface ActionInterface
      * Используется только в BuffAction, при вызове у других Action будет брошено исключение
      *
      * @param int $revertValue
+     * @throws ActionException
      */
     public function setRevertValue(int $revertValue): void;
 
@@ -112,15 +115,27 @@ interface ActionInterface
      * Используется только в BuffAction, при вызове у других Action будет брошено исключение
      *
      * @return int
+     * @throws ActionException
      */
     public function getRevertValue(): int;
 
     /**
      * BuffAction создает BuffAction для отката своих изменений характеристик юнита
      *
-     *  Используется только в BuffAction, при вызове у других Action будет брошено исключение
+     * Используется только в BuffAction, при вызове у других Action будет брошено исключение
      *
      * @return ActionInterface
+     * @throws ActionException
      */
     public function getRevertAction(): ActionInterface;
+
+    /**
+     * Возвращает коллекцию применяемых к юниту эффектов
+     *
+     * Только для EffectAction, при вызове у других Action будет брошено исключение
+     *
+     * @return EffectCollection
+     * @throws ActionException
+     */
+    public function getEffects(): EffectCollection;
 }

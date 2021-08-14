@@ -6,6 +6,7 @@ namespace Battle\Result\Chat\Message;
 
 use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
+use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
@@ -51,4 +52,12 @@ interface MessageInterface
      * @return string
      */
     public function buff(BuffAction $action): string;
+
+    /**
+     * Формирует и возвращает сообщение для чата о применении эффекта
+     *
+     * @param EffectAction $action
+     * @return string
+     */
+    public function applyEffect(EffectAction $action): string;
 }

@@ -7,6 +7,7 @@ namespace Battle\Result\Chat\Message;
 use Battle\Action\ActionException;
 use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
+use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Action\WaitAction;
 use Battle\Action\SummonAction;
@@ -87,5 +88,15 @@ class Message implements MessageInterface
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
+    }
+
+    /**
+     * @param EffectAction $action
+     * @return string
+     */
+    public function applyEffect(EffectAction $action): string
+    {
+        // TODO Доработка механики формирования сообщения + тест
+        return '';
     }
 }

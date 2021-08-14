@@ -8,6 +8,7 @@ use Battle\Classes\UnitClassInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Race\RaceInterface;
 use Exception;
 
@@ -99,6 +100,11 @@ abstract class AbstractUnit implements UnitInterface
     protected $abilities;
 
     /**
+     * @var EffectCollection
+     */
+    protected $effects;
+
+    /**
      * @param string $id
      * @param string $name
      * @param int $level
@@ -112,6 +118,7 @@ abstract class AbstractUnit implements UnitInterface
      * @param RaceInterface $race
      * @param ContainerInterface $container
      * @param UnitClassInterface|null $class
+     * @param EffectCollection|null $effects
      * @throws UnitException
      */
     public function __construct(
@@ -127,7 +134,8 @@ abstract class AbstractUnit implements UnitInterface
         int $command,
         RaceInterface $race,
         ContainerInterface $container,
-        ?UnitClassInterface $class = null
+        ?UnitClassInterface $class = null,
+        ?EffectCollection $effects = null
     )
     {
         $this->validateCommand($command);
@@ -145,6 +153,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->container = $container;
         $this->class = $class;
         $this->abilities = $class ? $class->getAbilities($this) : new AbilityCollection();
+        $this->effects = $effects ?? new EffectCollection();
     }
 
     public function getId(): string
@@ -262,6 +271,11 @@ abstract class AbstractUnit implements UnitInterface
     public function useRageAbility(): void
     {
         $this->rage = 0;
+    }
+
+    public function getEffects(): EffectCollection
+    {
+        return $this->effects;
     }
 
     /**

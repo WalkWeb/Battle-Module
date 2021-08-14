@@ -10,6 +10,7 @@ use Battle\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Race\RaceInterface;
 
 /**
@@ -224,7 +225,16 @@ interface UnitInterface
     public function getContainer(): ContainerInterface;
 
     /**
+     * Возвращает коллекцию способностей юнита
+     *
      * @return AbilityCollection
      */
     public function getAbilities(): AbilityCollection;
+
+    /**
+     * Возвращает текущую коллекцию эффектов на юните
+     *
+     * @return EffectCollection
+     */
+    public function getEffects(): EffectCollection;
 }

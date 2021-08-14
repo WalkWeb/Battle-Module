@@ -102,4 +102,22 @@ class ActionTest extends TestCase
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getRevertAction');
         $action->getRevertAction();
     }
+
+    /**
+     * Тест на ситуацию, когда у не-EffectAction вызывают метод getEffects()
+     *
+     * @throws Exception
+     */
+    public function testActionNoGetEffects(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getEffects');
+        $action->getEffects();
+    }
 }

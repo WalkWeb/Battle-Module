@@ -33,6 +33,16 @@ class EffectCollection implements Iterator, Countable
     }
 
     /**
+     * @param EffectCollection $effects
+     */
+    public function addCollection(EffectCollection $effects): void
+    {
+        foreach ($effects as $effect) {
+            $this->add($effect);
+        }
+    }
+
+    /**
      * @return EffectInterface
      */
     public function current(): EffectInterface

@@ -9,6 +9,7 @@ use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
+use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Action\WaitAction;
 use Battle\Action\SummonAction;
@@ -52,7 +53,7 @@ class Unit extends AbstractUnit
     /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
      *
-     * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction, applyBuffAction
+     * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction
      * @param ActionInterface $action
      * @return string - Сообщение о произошедшем действии
      * @throws Exception
@@ -141,6 +142,23 @@ class Unit extends AbstractUnit
     private function applyWaitAction(WaitAction $action): string
     {
         return $this->container->getMessage()->wait($action);
+    }
+
+    /**
+     * Применяет(ы) эффект к юниту
+     *
+     * @param EffectAction $action
+     * @return string
+     * @throws ContainerException
+     * @throws ActionException
+     */
+    private function applyEffectAction(EffectAction $action): string
+    {
+        // TODO Применение к юниту событий getOnApplyActions()
+
+        $this->effects->addCollection($action->getEffects());
+
+        return $this->container->getMessage()->applyEffect($action);
     }
 
     /**
