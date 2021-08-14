@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Scenario;
 
+use Battle\Action\ActionCollection;
+use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
+use Battle\Action\EffectAction;
+use Battle\Unit\Effect\Effect;
+use Battle\Unit\Effect\EffectCollection;
 use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
@@ -194,6 +200,50 @@ class ScenarioTest extends TestCase
     /**
      * @throws Exception
      */
+    public function testScenarioAddEffect(): void
+    {
+        $statistic = new Statistic();
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command);
+
+        $action->handle();
+
+        $scenario = new Scenario();
+        $scenario->addAction($action, $statistic);
+
+        $expectedData = [
+            [
+                'step'    => $statistic->getRoundNumber(),
+                'attack'  => $statistic->getStrokeNumber(),
+                'effects' => [
+                    [
+                        'user_id'        => $unit->getId(),
+                        'class'          => 'd_buff',
+                        'unit_cons_bar2' => 10,
+                        'unit_rage_bar2' => 7,
+                        'targets'        => [
+                            [
+                                'user_id'      => $action->getActionUnit()->getId(),
+                                'hp'           => $action->getActionUnit()->getLife(),
+                                'thp'          => $action->getActionUnit()->getTotalLife(),
+                                'unit_effects' => '<img src="icon.png" width="22" alt="" /> <span>8</span>',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $scenario->getArray());
+    }
+
+    /**
+     * @throws Exception
+     */
     public function testScenarioAddWait(): void
     {
         $statistic = new Statistic();
@@ -317,5 +367,35 @@ class ScenarioTest extends TestCase
             'Summon Skeleton Mage',
             UnitFactory::createByTemplate(19)
         );
+    }
+
+    /**
+     * Создает и возвращает EffectAction
+     *
+     * TODO Возможно в будущем нужно сделать фабрику для более быстрого и удобного создания эффектов в тестах
+     *
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @return ActionInterface
+     */
+    private function getReserveForcesAction(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command
+    ): ActionInterface
+    {
+        // Создаем коллекцию событий с одним событием - добавлением эффекта на увеличение здоровья
+        $onApplyActions = new ActionCollection();
+        $onApplyActions->add(
+            new BuffAction($unit, $enemyCommand, $command, 'use Reserve Forces', 'multiplierMaxLife', 130)
+        );
+
+        // Создаем коллекцию эффектов, которые будут применяться на юнита при добавлении ему эффекта
+        $effects = new EffectCollection();
+        $effects->add(new Effect('Effect#123', 'icon.png', 8, $onApplyActions, new ActionCollection(), new ActionCollection()));
+
+        // Создаем и возвращаем EffectAction
+        return new EffectAction($unit, $enemyCommand, $command, 'use Reserve Forces for self', $effects);
     }
 }

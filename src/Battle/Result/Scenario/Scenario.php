@@ -7,6 +7,7 @@ namespace Battle\Result\Scenario;
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
+use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Action\WaitAction;
 use Battle\Action\SummonAction;
@@ -38,6 +39,9 @@ class Scenario implements ScenarioInterface
             case $action instanceof SummonAction:
                 $this->addSummon($action, $statistic);
                 break;
+            case $action instanceof EffectAction:
+                $this->addEffect($action, $statistic);
+                break;
             case $action instanceof WaitAction:
                 $this->addWait($statistic);
                 break;
@@ -60,7 +64,7 @@ class Scenario implements ScenarioInterface
                     'class'          => $this->getAttackClass($action->getActionUnit()),
                     'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
                     'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
-                    'unit_effects'   => $this->getUnitEffects(),
+                    'unit_effects'   => $this->getUnitEffects($action->getActionUnit()),
                     'targets'        => [
                         [
                             'type'              => 'change',
@@ -76,7 +80,7 @@ class Scenario implements ScenarioInterface
                             'unit_rage_bar2'    => $this->getRageBarWidth($action->getTargetUnit()),
                             'ava'               => 'unit_ava_red',
                             'avas'              => $this->getAvaClassTarget($action->getTargetUnit()),
-                            'unit_effects'      => $this->getUnitEffects(),
+                            'unit_effects'      => $this->getUnitEffects($action->getTargetUnit()),
                         ],
                     ],
                 ],
@@ -159,6 +163,37 @@ class Scenario implements ScenarioInterface
         ];
     }
 
+    /**
+     * @param EffectAction $action
+     * @param StatisticInterface $statistic
+     */
+    private function addEffect(EffectAction $action, StatisticInterface $statistic): void
+    {
+        // TODO Пока реализован только положительный эффект на себя, в будущем нужно будет формировать разные сценарии
+        // TODO при разных типах эффектов и их целей
+
+        $this->scenario[] = [
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'        => $action->getActionUnit()->getId(),
+                    'class'          => 'd_buff',
+                    'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
+                    'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
+                    'targets'        => [
+                        [
+                            'user_id'      => $action->getActionUnit()->getId(), // todo Пока только на себя
+                            'hp'           => $action->getActionUnit()->getLife(),
+                            'thp'          => $action->getActionUnit()->getTotalLife(),
+                            'unit_effects' => $this->getUnitEffects($action->getActionUnit()),
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     private function addWait(StatisticInterface $statistic): void
     {
         $this->scenario[] = [
@@ -228,9 +263,16 @@ class Scenario implements ScenarioInterface
         return $unit->getLife() > 0 ? 'unit_ava_blank' : 'unit_ava_dead';
     }
 
-    private function getUnitEffects(): string
+    private function getUnitEffects(UnitInterface $unit): string
     {
-        // TODO Эффекты пока не реализованы
-        return '';
+        // TODO Формируем html сразу. Пока непонятно, стоит ли ради одной строчки дергать View
+
+        $html = '';
+
+        foreach ($unit->getEffects() as $effect) {
+            $html .= '<img src="' . $effect->getIcon() . '" width="22" alt="" /> <span>' . $effect->getDuration() . '</span>';
+        }
+
+        return $html;
     }
 }
