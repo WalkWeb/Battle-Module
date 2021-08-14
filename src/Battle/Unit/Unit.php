@@ -156,6 +156,8 @@ class Unit extends AbstractUnit
     {
         // TODO Применение к юниту событий getOnApplyActions()
 
+        // TODO Также, при применении эффектов получаем сообщения и добавляем его к сообщению о применении эффекта
+
         $this->effects->addCollection($action->getEffects());
 
         return $this->container->getMessage()->applyEffect($action);

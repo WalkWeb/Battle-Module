@@ -96,7 +96,10 @@ class Message implements MessageInterface
      */
     public function applyEffect(EffectAction $action): string
     {
-        // TODO Доработка механики формирования сообщения + тест
-        return '';
+        // TODO Пока эффект применяется только на себя, в будущем сообщение нужно формировать по разному, в зависимости
+        // TODO от того, применен эффект на себя или на кого-то другого
+
+        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
     }
 }
