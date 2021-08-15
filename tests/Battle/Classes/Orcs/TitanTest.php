@@ -56,7 +56,7 @@ class TitanTest extends TestCase
     {
         $name = 'Reserve Forces';
         $icon = '/images/icons/ability/156.png';
-        $useMessage = 'use Reserve Forces for self';
+        $useMessage = 'use Reserve Forces';
         $duration = 6;
         $modifyMethod = 'multiplierMaxLife';
         $modifyPower = 130;

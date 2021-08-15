@@ -400,6 +400,6 @@ class ScenarioTest extends TestCase
         $effects->add(new Effect('Effect#123', 'icon.png', 8, $onApplyActions, new ActionCollection(), new ActionCollection()));
 
         // Создаем и возвращаем EffectAction
-        return new EffectAction($unit, $enemyCommand, $command, 'use Reserve Forces for self', $effects);
+        return new EffectAction($unit, $enemyCommand, $command, 'use Reserve Forces', $effects);
     }
 }

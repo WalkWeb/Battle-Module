@@ -20,7 +20,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class ReserveForcesAbilityTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use Reserve Forces for self';
+    private const MESSAGE    = '<span style="color: #ae882d">Titan</span> use Reserve Forces';
 
     /**
      * Тест на создание способности ReserveForcesAbility
@@ -118,7 +118,7 @@ class ReserveForcesAbilityTest extends TestCase
     {
         $name = 'Reserve Forces';
         $icon = '/images/icons/ability/156.png';
-        $useMessage = 'use Reserve Forces for self';
+        $useMessage = 'use Reserve Forces';
         $duration = 6;
         $modifyMethod = 'multiplierMaxLife';
         $modifyPower = 130;

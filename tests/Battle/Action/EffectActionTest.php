@@ -22,7 +22,7 @@ use Tests\Battle\Factory\UnitFactoryException;
 
 class EffectActionTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces for self';
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces';
 
     /**
      * @throws CommandException
@@ -117,6 +117,6 @@ class EffectActionTest extends TestCase
         $effects->add(new Effect('Effect#123', 'icon.png', 8, $onApplyActions, new ActionCollection(), new ActionCollection()));
 
         // Создаем и возвращаем EffectAction
-        return new EffectAction($unit, $enemyCommand, $command, 'use Reserve Forces for self', $effects);
+        return new EffectAction($unit, $enemyCommand, $command, 'use Reserve Forces', $effects);
     }
 }
