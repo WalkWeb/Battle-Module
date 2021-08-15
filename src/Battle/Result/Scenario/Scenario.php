@@ -115,6 +115,7 @@ class Scenario implements ScenarioInterface
                             'hp_bar_class'      => 'unit_hp_bar',
                             'hp_bar_class2'     => 'unit_hp_bar2',
                             'unit_hp_bar_width' => $this->getLifeBarWidth($action->getTargetUnit()),
+                            'unit_effects'      => $this->getUnitEffects($action->getTargetUnit()),
                         ],
                     ],
                 ],
@@ -181,6 +182,7 @@ class Scenario implements ScenarioInterface
                     'class'          => 'd_buff',
                     'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
                     'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
+                    'unit_effects'      => $this->getUnitEffects($action->getActionUnit()),
                     'targets'        => [
                         [
                             'user_id'      => $action->getActionUnit()->getId(), // todo Пока только на себя

@@ -3,6 +3,7 @@
 namespace Battle\Unit\Effect;
 
 use Battle\Action\ActionCollection;
+use Battle\Action\ActionException;
 
 interface EffectInterface
 {
@@ -62,6 +63,7 @@ interface EffectInterface
      * Возвращает коллекцию событий, которые необходимо применить к юниту при удалении этого эффекта
      *
      * @return ActionCollection
+     * @throws ActionException
      */
     public function getOnDisableActions(): ActionCollection;
 }

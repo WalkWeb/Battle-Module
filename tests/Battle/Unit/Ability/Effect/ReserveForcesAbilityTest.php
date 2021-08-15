@@ -20,14 +20,18 @@ use Tests\Battle\Factory\UnitFactory;
 
 class ReserveForcesAbilityTest extends TestCase
 {
+    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use Reserve Forces for self';
+
     /**
+     * Тест на создание способности ReserveForcesAbility
+     *
      * @throws Exception
      */
-    public function testReserveForcesAbility(): void
+    public function testReserveForcesAbilityCreate(): void
     {
         $name = 'Reserve Forces';
         $icon = '/images/icons/ability/156.png';
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(21);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -64,8 +68,46 @@ class ReserveForcesAbilityTest extends TestCase
         $ability->usage();
 
         self::assertFalse($ability->isReady());
+    }
 
-        // TODO Дописать тест на применение пока нельзя - т.к. нет класса, который бы использовал данную способность
+    /**
+     * Тест на применение способности ReserveForcesAbility
+     *
+     * @throws Exception
+     */
+    public function testReserveForcesAbilityApply(): void
+    {
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $unitBaseLife = $unit->getTotalLife();
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $actions = $unit->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            $message = $action->handle();
+            self::assertEquals(self::MESSAGE, $message);
+        }
+
+        // Проверяем, что здоровье юнита выросло
+        self::assertEquals((int)($unitBaseLife * 1.3), $unit->getTotalLife());
+        self::assertEquals((int)($unitBaseLife * 1.3), $unit->getLife());
+
+        // Пропускаем ходы
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        // Проверяем, что здоровье вернулось к исходному
+        self::assertEquals($unitBaseLife, $unit->getTotalLife());
+        self::assertEquals($unitBaseLife, $unit->getLife());
     }
 
     private function getReserveForcesActions(
@@ -112,7 +154,7 @@ class ReserveForcesAbilityTest extends TestCase
             $unit,
             $enemyCommand,
             $alliesCommand,
-            $name,
+            $useMessage,
             $effects
         ));
 

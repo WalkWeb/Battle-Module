@@ -62,7 +62,7 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                         <p><span style="color: <?= $unit->getRace()->getColor() ?>"><?= $unit->getName() ?></span></p>
                     </div>
                 </div>
-                <div class="unit_effect_contant">
+                <div class="unit_effect_container">
                     <p id="unit_effects_<?= $unit->getId() ?>"></p>
                 </div>
             </div>
@@ -73,7 +73,6 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                         <img src="<?= $unit->getIcon() ?>" alt="">
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

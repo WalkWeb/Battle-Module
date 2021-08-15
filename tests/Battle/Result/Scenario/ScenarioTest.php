@@ -133,6 +133,7 @@ class ScenarioTest extends TestCase
                             'hp_bar_class'      => 'unit_hp_bar',
                             'hp_bar_class2'     => 'unit_hp_bar2',
                             'unit_hp_bar_width' => 46,
+                            'unit_effects'      => '',
                         ],
                     ],
                 ],
@@ -223,8 +224,9 @@ class ScenarioTest extends TestCase
                     [
                         'user_id'        => $unit->getId(),
                         'class'          => 'd_buff',
-                        'unit_cons_bar2' => 10,
-                        'unit_rage_bar2' => 7,
+                        'unit_cons_bar2' => 20,
+                        'unit_rage_bar2' => 14,
+                        'unit_effects'   => '<img src="icon.png" width="22" alt="" /> <span>8</span>',
                         'targets'        => [
                             [
                                 'user_id'      => $action->getActionUnit()->getId(),

@@ -154,11 +154,17 @@ class Unit extends AbstractUnit
      */
     private function applyEffectAction(EffectAction $action): string
     {
-        // TODO Применение к юниту событий getOnApplyActions()
-
-        // TODO Также, при применении эффектов получаем сообщения и добавляем его к сообщению о применении эффекта
-
         $this->effects->addCollection($action->getEffects());
+
+        $onApplyAction = new ActionCollection();
+
+        foreach ($action->getEffects() as $effect) {
+            $onApplyAction->addCollection($effect->getOnApplyActions());
+        }
+
+        foreach ($onApplyAction as $applyAction) {
+            $applyAction->handle();
+        }
 
         return $this->container->getMessage()->applyEffect($action);
     }

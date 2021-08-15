@@ -329,6 +329,23 @@ div.life_text {
     opacity: 0.5;
 }
 
+.unit_effect_container {
+    margin-top: 38px;
+    margin-left: 5px;
+}
+
+.unit_effect_container span {
+    font-size: 13px;
+    margin-left: -12px;
+    color: red;
+    text-shadow: 0 0 3px #000;
+}
+
+.unit_effect_container img {
+    border: 1px solid #2b1a04;
+    border-radius: 3px;
+}
+
 /* Table statistics styles */
 
 div.statistics_box {

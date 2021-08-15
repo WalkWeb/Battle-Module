@@ -92,7 +92,7 @@ class TitanTest extends TestCase
             $unit,
             $enemyCommand,
             $alliesCommand,
-            $name,
+            $useMessage,
             $effects
         ));
 

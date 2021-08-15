@@ -80,7 +80,7 @@ class ViewTest extends TestCase
                         <p><span style="color: #1e72e3">unit_1</span></p>
                     </div>
                 </div>
-                <div class="unit_effect_contant">
+                <div class="unit_effect_container">
                     <p id="unit_effects_f7e84eab-e4f6-469f-b0e3-f5f965f9fbce"></p>
                 </div>
             </div>
@@ -91,7 +91,6 @@ class ViewTest extends TestCase
                         <img src="/images/icons/small/warrior.png" alt="">
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -140,7 +139,7 @@ class ViewTest extends TestCase
                         <p><span style="color: #1e72e3">unit_2</span></p>
                     </div>
                 </div>
-                <div class="unit_effect_contant">
+                <div class="unit_effect_container">
                     <p id="unit_effects_1aab367d-37e8-4544-9915-cb3d7779308b"></p>
                 </div>
             </div>
@@ -151,7 +150,6 @@ class ViewTest extends TestCase
                         <img src="/images/icons/small/warrior.png" alt="">
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -229,7 +227,7 @@ EOT;
                         <p><span style="color: #1e72e3">unit_5</span></p>
                     </div>
                 </div>
-                <div class="unit_effect_contant">
+                <div class="unit_effect_container">
                     <p id="unit_effects_46d969c1-463b-42b1-a2e0-2c64a8c34ae1"></p>
                 </div>
             </div>
@@ -240,7 +238,6 @@ EOT;
                         <img src="/images/icons/small/priest.png" alt="">
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -291,7 +288,7 @@ EOT;
                         <p><span style="color: #1e72e3">unit_6</span></p>
                     </div>
                 </div>
-                <div class="unit_effect_contant">
+                <div class="unit_effect_container">
                     <p id="unit_effects_1e813812-9a21-4e18-b494-8d552bac0cf4"></p>
                 </div>
             </div>
@@ -302,7 +299,6 @@ EOT;
                         <img src="/images/icons/small/priest.png" alt="">
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

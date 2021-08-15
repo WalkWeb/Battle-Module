@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit\Effect;
 
 use Battle\Action\ActionCollection;
+use Battle\Action\ActionException;
 
 class Effect implements EffectInterface
 {
@@ -111,10 +112,18 @@ class Effect implements EffectInterface
 
     /**
      * @return ActionCollection
+     * @throws ActionException
      */
     public function getOnDisableActions(): ActionCollection
     {
-        return $this->onDisableActions;
+        $collection = $this->onDisableActions;
+
+        // Также, к коллекции событий необходимо добавить revertAction от событий, примененных сразу
+        foreach ($this->onApplyActions as $applyAction) {
+            $collection->add($applyAction->getRevertAction());
+        }
+
+        return $collection;
     }
 
     public function nextRound(): void

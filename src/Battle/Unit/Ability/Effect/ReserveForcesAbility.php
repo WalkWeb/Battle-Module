@@ -55,7 +55,7 @@ class ReserveForcesAbility extends AbstractAbility
             $this->unit,
             $enemyCommand,
             $alliesCommand,
-            self::NAME,
+            self::USE_MESSAGE,
             $effects
         ));
 

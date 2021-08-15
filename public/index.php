@@ -7,18 +7,18 @@ use Battle\View\ViewFactory;
 
 $data = [
     [
-        'id'           => '81941b8a-f7ca-447e-8951-36777ae6e79e',
-        'name'         => 'Warrior',
+        'id'           => '60f3c032-46a6-454d-ae3a-d066f150f6ef',
+        'name'         => 'Titan',
         'level'        => 3,
-        'avatar'       => '/images/avas/humans/human001.jpg',
+        'avatar'       => '/images/avas/orcs/orc001.jpg',
         'damage'       => 35,
-        'attack_speed' => 0.8,
+        'attack_speed' => 1.2,
         'life'         => 250,
         'total_life'   => 250,
         'melee'        => true,
-        'class'        => 1,
-        'race'         => 1,
         'command'      => 1,
+        'class'        => 5,
+        'race'         => 3,
     ],
     [
         'id'           => '9ec07b22-7176-434c-a5d8-05f6adee4486',
