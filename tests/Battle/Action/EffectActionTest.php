@@ -60,6 +60,8 @@ class EffectActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
+        $unitBaseLife = $unit->getTotalLife();
+
         $effectAction = $this->getReserveForcesAction($unit, $enemyCommand, $command);
 
         $message = $effectAction->handle();
@@ -68,7 +70,24 @@ class EffectActionTest extends TestCase
 
         self::assertEquals($effectAction->getEffects(), $unit->getEffects());
 
-        // todo Механика применения эффекта и проверка увеличения здоровья
+        // Проверяем увеличившееся здоровье
+        self::assertEquals((int)($unitBaseLife * 1.3), $unit->getTotalLife());
+        self::assertEquals((int)($unitBaseLife * 1.3), $unit->getLife());
+
+        // Применяем эффект еще раз, и проверяем, что здоровье еще раз не увеличилось
+        $effectAction->handle();
+
+        self::assertEquals((int)($unitBaseLife * 1.3), $unit->getTotalLife());
+        self::assertEquals((int)($unitBaseLife * 1.3), $unit->getLife());
+
+        // Пропускаем ходы и проверяем, что здоровье вернулось к исходному
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        self::assertEquals($unitBaseLife, $unit->getTotalLife());
+        self::assertEquals($unitBaseLife, $unit->getLife());
+        self::assertCount(0, $unit->getEffects());
     }
 
     /**

@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Effect;
 
 use Battle\Action\ActionCollection;
+use Battle\Action\ActionException;
 use Battle\Unit\Effect\Effect;
 use PHPUnit\Framework\TestCase;
 
 class EffectTest extends TestCase
 {
+    /**
+     * @throws ActionException
+     */
     public function testEffectCreate(): void
     {
         $name = 'Effect Name';

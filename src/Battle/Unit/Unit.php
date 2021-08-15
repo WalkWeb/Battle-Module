@@ -154,13 +154,7 @@ class Unit extends AbstractUnit
      */
     private function applyEffectAction(EffectAction $action): string
     {
-        $this->effects->addCollection($action->getEffects());
-
-        $onApplyAction = new ActionCollection();
-
-        foreach ($action->getEffects() as $effect) {
-            $onApplyAction->addCollection($effect->getOnApplyActions());
-        }
+        $onApplyAction = $this->effects->addCollection($action->getEffects());
 
         foreach ($onApplyAction as $applyAction) {
             $applyAction->handle();

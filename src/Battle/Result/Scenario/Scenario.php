@@ -180,9 +180,11 @@ class Scenario implements ScenarioInterface
                 [
                     'user_id'        => $action->getActionUnit()->getId(),
                     'class'          => 'd_buff',
+                    'hp'             => $action->getActionUnit()->getLife(),
+                    'thp'            => $action->getActionUnit()->getTotalLife(),
                     'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
                     'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
-                    'unit_effects'      => $this->getUnitEffects($action->getActionUnit()),
+                    'unit_effects'   => $this->getUnitEffects($action->getActionUnit()),
                     'targets'        => [
                         [
                             'user_id'      => $action->getActionUnit()->getId(), // todo Пока только на себя

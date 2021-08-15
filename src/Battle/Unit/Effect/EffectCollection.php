@@ -19,27 +19,36 @@ class EffectCollection implements Iterator, Countable
     private $elements = [];
 
     /**
-     * TODO При добавлении эффекта можно сразу возвращать коллекцию событий эффекта, при getOnApplyActions()
-     *
      * @param EffectInterface $effect
+     * @return ActionCollection
      */
-    public function add(EffectInterface $effect): void
+    public function add(EffectInterface $effect): ActionCollection
     {
+        $onApplyActionCollection = new ActionCollection();
+
         if ($this->exist($effect->getName())) {
             $this->elements[$effect->getName()]->resetDuration();
         } else {
             $this->elements[$effect->getName()] = $effect;
+            $onApplyActionCollection->addCollection($effect->getOnApplyActions());
         }
+
+        return $onApplyActionCollection;
     }
 
     /**
      * @param EffectCollection $effects
+     * @return ActionCollection
      */
-    public function addCollection(EffectCollection $effects): void
+    public function addCollection(EffectCollection $effects): ActionCollection
     {
+        $onApplyActionCollection = new ActionCollection();
+
         foreach ($effects as $effect) {
-            $this->add($effect);
+            $onApplyActionCollection->addCollection($this->add($effect));
         }
+
+        return $onApplyActionCollection;
     }
 
     /**

@@ -224,6 +224,8 @@ class ScenarioTest extends TestCase
                     [
                         'user_id'        => $unit->getId(),
                         'class'          => 'd_buff',
+                        'hp'             => 130,
+                        'thp'            => 130,
                         'unit_cons_bar2' => 20,
                         'unit_rage_bar2' => 14,
                         'unit_effects'   => '<img src="icon.png" width="22" alt="" /> <span>8</span>',
