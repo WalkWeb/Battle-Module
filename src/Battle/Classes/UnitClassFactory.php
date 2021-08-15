@@ -6,6 +6,7 @@ namespace Battle\Classes;
 
 use Battle\Classes\Human\Priest;
 use Battle\Classes\Human\Warrior;
+use Battle\Classes\Orcs\Titan;
 use Battle\Classes\Other\IncorrectUnitClassForTest;
 use Battle\Classes\Undead\DarkMage;
 use Battle\Classes\Undead\DeadKnight;
@@ -19,6 +20,7 @@ class UnitClassFactory
         2   => Priest::class,
         3   => DeadKnight::class,
         4   => DarkMage::class,
+        5   => Titan::class,
         100 => IncorrectUnitClassForTest::class,
     ];
 

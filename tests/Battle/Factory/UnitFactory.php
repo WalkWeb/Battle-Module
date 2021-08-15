@@ -286,6 +286,21 @@ class UnitFactory
             'race'         => 8,
             'command'      => 2,
         ],
+        // Орк с классом Титан
+        21  => [
+            'id'           => '60f3c032-46a6-454d-ae3a-d066f150f6ef',
+            'name'         => 'Titan',
+            'level'        => 3,
+            'avatar'       => '/images/avas/orcs/orc001.jpg',
+            'damage'       => 27,
+            'attack_speed' => 0.8,
+            'life'         => 120,
+            'total_life'   => 120,
+            'melee'        => true,
+            'command'      => 1,
+            'class'        => 5,
+            'race'         => 3,
+        ],
     ];
 
     /**

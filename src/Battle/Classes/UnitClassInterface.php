@@ -14,18 +14,21 @@ interface UnitClassInterface
     public const PRIEST_ID      = 2;
     public const DEAD_KNIGHT_ID = 3;
     public const DARK_MAGE_ID   = 4;
+    public const TITAN_ID       = 5;
 
     // ===== Names =====
     public const WARRIOR_NAME     = 'Warrior';
     public const PRIEST_NAME      = 'Priest';
     public const DEAD_KNIGHT_NAME = 'Dead Knight';
     public const DARK_MAGE_NAME   = 'Dark Mage';
+    public const TITAN_NAME       = 'Titan';
 
     // ===== Icons =====
     public const WARRIOR_SMALL_ICON     = '/images/icons/small/warrior.png';
     public const PRIEST_SMALL_ICON      = '/images/icons/small/priest.png';
     public const DEAD_KNIGHT_SMALL_ICON = '/images/icons/small/dead-knight.png';
     public const DARK_MAGE_SMALL_ICON   = '/images/icons/small/dark-mage.png';
+    public const TITAN_SMALL_ICON       = '/images/icons/small/titan.png';
 
     /**
      * Возвращает ID класса
