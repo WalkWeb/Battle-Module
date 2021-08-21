@@ -68,6 +68,7 @@ return [
     'Race'                            => 'Раса',
     'Life'                            => 'Здоровье',
     'Damage'                          => 'Урон',
+    'Attack Speed'                    => 'Скорость атаки',
     'Concentration'                   => 'Концентрация',
     'Rage'                            => 'Ярость',
     'Melee'                           => 'Ближний бой',

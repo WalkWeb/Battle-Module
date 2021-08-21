@@ -70,6 +70,7 @@ return [
     'Race'                            => 'Race',
     'Life'                            => 'Life',
     'Damage'                          => 'Damage',
+    'Attack Speed'                    => 'Attack Speed',
     'Concentration'                   => 'Concentration',
     'Rage'                            => 'Rage',
     'Melee'                           => 'Melee',

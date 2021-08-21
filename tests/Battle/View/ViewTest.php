@@ -352,6 +352,7 @@ EOT;
             <td><p>Race</p></td>
             <td><p>Life</p></td>
             <td><p>Damage</p></td>
+            <td><p>Attack Speed</p></td>
             <td><p>Concentration</p></td>
             <td><p>Rage</p></td>
             <td><p>Melee?</p></td>
@@ -368,6 +369,7 @@ EOT;
                 <td><p>People</p></td>
                 <td><p>100/100</p></td>
                 <td><p>20</p></td>
+                <td><p>1</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>Yes</p></td>
@@ -384,6 +386,7 @@ EOT;
                 <td><p>People</p></td>
                 <td><p>100/100</p></td>
                 <td><p>20</p></td>
+                <td><p>1</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>Yes</p></td>
