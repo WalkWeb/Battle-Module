@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Battle\Classes\Undead;
+namespace Battle\Unit\Classes\Undead;
 
-use Battle\Classes\AbstractUnitClass;
+use Battle\Unit\Classes\AbstractUnitClass;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Summon\SummonSkeletonAbility;
 use Battle\Unit\UnitInterface;

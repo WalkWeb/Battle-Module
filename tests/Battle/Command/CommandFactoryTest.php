@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Battle\Command;
 
 use Battle\Result\FullLog\FullLog;
-use Battle\Classes\UnitClassFactory;
-use Battle\Classes\ClassFactoryException;
+use Battle\Unit\Classes\UnitClassFactory;
+use Battle\Unit\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;

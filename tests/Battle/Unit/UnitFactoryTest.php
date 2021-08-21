@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
-use Battle\Classes\UnitClassFactory;
+use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;

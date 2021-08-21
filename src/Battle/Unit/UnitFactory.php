@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
-use Battle\Classes\ClassFactoryException;
-use Battle\Classes\UnitClassFactory;
-use Battle\Classes\UnitClassInterface;
+use Battle\Unit\Classes\ClassFactoryException;
+use Battle\Unit\Classes\UnitClassFactory;
+use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Result\Chat\Message\MessageInterface;

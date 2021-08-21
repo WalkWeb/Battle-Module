@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Classes;
+namespace Tests\Battle\Unit\Classes;
 
-use Battle\Classes\ClassFactoryException;
-use Battle\Classes\Human\Priest;
-use Battle\Classes\Human\Warrior;
-use Battle\Classes\Undead\DarkMage;
-use Battle\Classes\Undead\DeadKnight;
-use Battle\Classes\UnitClassFactory;
+use Battle\Unit\Classes\ClassFactoryException;
+use Battle\Unit\Classes\Human\Priest;
+use Battle\Unit\Classes\Human\Warrior;
+use Battle\Unit\Classes\Undead\DarkMage;
+use Battle\Unit\Classes\Undead\DeadKnight;
+use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Result\Chat\Message\Message;
 use PHPUnit\Framework\TestCase;
 

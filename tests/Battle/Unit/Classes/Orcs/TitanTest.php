@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Classes\Orcs;
+namespace Tests\Battle\Unit\Classes\Orcs;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\BuffAction;
@@ -15,7 +15,7 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use Battle\Command\CommandFactory;
 use Tests\Battle\Factory\UnitFactory;
-use Battle\Classes\UnitClassInterface;
+use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Unit\Ability\Effect\ReserveForcesAbility;
 
 class TitanTest extends TestCase

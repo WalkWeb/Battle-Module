@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Battle\Classes\Orcs;
+namespace Battle\Unit\Classes\Orcs;
 
-use Battle\Classes\AbstractUnitClass;
+use Battle\Unit\Classes\AbstractUnitClass;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\ReserveForcesAbility;
 use Battle\Unit\UnitInterface;

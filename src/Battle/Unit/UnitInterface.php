@@ -6,7 +6,7 @@ namespace Battle\Unit;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
-use Battle\Classes\UnitClassInterface;
+use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;

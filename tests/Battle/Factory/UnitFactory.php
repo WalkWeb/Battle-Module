@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Factory;
 
-use Battle\Classes\UnitClassFactory;
+use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Race\RaceFactory;

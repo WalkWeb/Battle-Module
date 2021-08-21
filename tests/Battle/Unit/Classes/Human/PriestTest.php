@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Classes\Human;
+namespace Tests\Battle\Unit\Classes\Human;
 
-use Battle\Classes\UnitClassInterface;
+use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Heal\GreatHealAbility;

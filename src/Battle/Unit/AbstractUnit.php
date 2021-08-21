@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
-use Battle\Classes\UnitClassInterface;
+use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;

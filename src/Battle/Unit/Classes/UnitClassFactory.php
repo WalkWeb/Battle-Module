@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Battle\Classes;
+namespace Battle\Unit\Classes;
 
-use Battle\Classes\Human\Priest;
-use Battle\Classes\Human\Warrior;
-use Battle\Classes\Orcs\Titan;
-use Battle\Classes\Other\IncorrectUnitClassForTest;
-use Battle\Classes\Undead\DarkMage;
-use Battle\Classes\Undead\DeadKnight;
+use Battle\Unit\Classes\Human\Priest;
+use Battle\Unit\Classes\Human\Warrior;
+use Battle\Unit\Classes\Orcs\Titan;
+use Battle\Unit\Classes\Other\IncorrectUnitClassForTest;
+use Battle\Unit\Classes\Undead\DarkMage;
+use Battle\Unit\Classes\Undead\DeadKnight;
 use Battle\Result\Chat\Message\Message;
 use Battle\Result\Chat\Message\MessageInterface;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Classes;
+namespace Battle\Unit\Classes;
 
 use Battle\Result\Chat\Message\MessageInterface;
 

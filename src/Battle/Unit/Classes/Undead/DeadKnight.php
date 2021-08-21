@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Battle\Classes\Human;
+namespace Battle\Unit\Classes\Undead;
 
-use Battle\Classes\AbstractUnitClass;
+use Battle\Unit\Classes\AbstractUnitClass;
 use Battle\Unit\Ability\AbilityCollection;
-use Battle\Unit\Ability\Heal\GreatHealAbility;
+use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
 use Battle\Unit\UnitInterface;
 
-class Priest extends AbstractUnitClass
+class DeadKnight extends AbstractUnitClass
 {
     /**
      * @return int
      */
     public function getId(): int
     {
-        return self::PRIEST_ID;
+        return self::DEAD_KNIGHT_ID;
     }
 
     /**
@@ -24,7 +24,7 @@ class Priest extends AbstractUnitClass
      */
     public function getName(): string
     {
-        return self::PRIEST_NAME;
+        return self::DEAD_KNIGHT_NAME;
     }
 
     /**
@@ -32,7 +32,7 @@ class Priest extends AbstractUnitClass
      */
     public function getSmallIcon(): string
     {
-        return self::PRIEST_SMALL_ICON;
+        return self::DEAD_KNIGHT_SMALL_ICON;
     }
 
     /**
@@ -42,7 +42,7 @@ class Priest extends AbstractUnitClass
     public function getAbilities(UnitInterface $unit): AbilityCollection
     {
         $collection = new AbilityCollection();
-        $collection->add(new GreatHealAbility($unit));
+        $collection->add(new HeavyStrikeAbility($unit));
         return $collection;
     }
 }

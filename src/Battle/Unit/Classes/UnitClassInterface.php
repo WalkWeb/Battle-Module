@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Classes;
+namespace Battle\Unit\Classes;
 
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\UnitInterface;

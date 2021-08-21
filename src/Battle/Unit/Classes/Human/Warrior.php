@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Battle\Classes\Human;
+namespace Battle\Unit\Classes\Human;
 
-use Battle\Classes\AbstractUnitClass;
+use Battle\Unit\Classes\AbstractUnitClass;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
 use Battle\Unit\UnitInterface;

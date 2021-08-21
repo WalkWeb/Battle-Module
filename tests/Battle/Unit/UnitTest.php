@@ -241,6 +241,8 @@ class UnitTest extends TestCase
      *
      * И затем делается аналогичный тест, только со скоростью атаки 1.0001, чтобы протестировать обратную ситуацию
      *
+     * TODO Тест падает чаще, чем один раз в 10000 запусков, нужно подумать, из-за чего
+     *
      * @throws Exception
      */
     public function testUnitCalculateAttackSpeed(): void

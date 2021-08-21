@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Classes\Undead;
+namespace Tests\Battle\Unit\Classes\Human;
 
-use Battle\Classes\UnitClassInterface;
+use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
@@ -13,27 +13,27 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 
-class DeadKnightTest extends TestCase
+class WarriorTest extends TestCase
 {
     /**
      * @throws CommandException
      * @throws UnitException
      * @throws Exception
      */
-    public function testCreateDeadKnightClass(): void
+    public function testCreateWarriorClass(): void
     {
-        $actionUnit = UnitFactory::createByTemplate(8);
+        $actionUnit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $actionCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $deadKnight = $actionUnit->getClass();
+        $warrior = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_ID, $deadKnight->getId());
-        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_NAME, $deadKnight->getName());
-        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_SMALL_ICON, $deadKnight->getSmallIcon());
+        self::assertEquals(UnitClassInterface::WARRIOR_ID, $warrior->getId());
+        self::assertEquals(UnitClassInterface::WARRIOR_NAME, $warrior->getName());
+        self::assertEquals(UnitClassInterface::WARRIOR_SMALL_ICON, $warrior->getSmallIcon());
 
-        $abilities = $deadKnight->getAbilities($actionUnit);
+        $abilities = $warrior->getAbilities($actionUnit);
 
         foreach ($abilities as $ability) {
             self::assertContainsOnlyInstancesOf(HeavyStrikeAbility::class, [$ability]);
