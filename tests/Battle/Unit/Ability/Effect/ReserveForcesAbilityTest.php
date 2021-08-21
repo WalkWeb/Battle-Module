@@ -20,7 +20,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class ReserveForcesAbilityTest extends TestCase
 {
-    private const MESSAGE    = '<span style="color: #ae882d">Titan</span> use Reserve Forces';
+    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use Reserve Forces';
 
     /**
      * Тест на создание способности ReserveForcesAbility
@@ -108,6 +108,39 @@ class ReserveForcesAbilityTest extends TestCase
         // Проверяем, что здоровье вернулось к исходному
         self::assertEquals($unitBaseLife, $unit->getTotalLife());
         self::assertEquals($unitBaseLife, $unit->getLife());
+    }
+
+    /**
+     * Тест на проверку перехода события из способного к применению, в невозможное к применение и обратно
+     *
+     * @throws Exception
+     */
+    public function testReserveForcesAbilityCanBeUsed(): void
+    {
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new ReserveForcesAbility($unit);
+
+        // Перед применением способности эффекта на юните еще нет - способность может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            $action->handle();
+        }
+
+        // После появления эффекта на юните - способность уже не может быть применена
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        // Пропускаем ходы
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        // Эффект исчез - способность опять может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
     }
 
     private function getReserveForcesActions(

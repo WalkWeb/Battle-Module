@@ -22,44 +22,14 @@ class ReserveForcesAbility extends AbstractAbility
     private const MODIFY_METHOD = 'multiplierMaxLife';
     private const MODIFY_POWER  = 130;
 
+    /**
+     * @var ActionCollection
+     */
+    private $actions;
+
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
-        $collection = new ActionCollection();
-
-        // Создаем коллекцию событий (с одним бафом), которая будет применена к персонажу, при применении эффекта
-        $onApplyActionCollection = new ActionCollection();
-
-        $onApplyActionCollection->add(new BuffAction(
-            $this->unit,
-            $enemyCommand,
-            $alliesCommand,
-            self::USE_MESSAGE,
-            self::MODIFY_METHOD,
-            self::MODIFY_POWER
-        ));
-
-        // Создаем коллекцию эффектов, с одним эффектом при применении - Reserve Forces
-        $effects = new EffectCollection();
-
-        $effects->add(new Effect(
-            self::NAME,
-            self::ICON,
-            self::DURATION,
-            $onApplyActionCollection,
-            new ActionCollection(),
-            new ActionCollection()
-        ));
-
-        // Создаем сам эффект
-        $collection->add(new EffectAction(
-            $this->unit,
-            $enemyCommand,
-            $alliesCommand,
-            self::USE_MESSAGE,
-            $effects
-        ));
-
-        return $collection;
+        return $this->createEffectActions($enemyCommand, $alliesCommand);
     }
 
     public function getName(): string
@@ -91,5 +61,59 @@ class ReserveForcesAbility extends AbstractAbility
     {
         $this->ready = false;
         $this->unit->useConcentrationAbility();
+    }
+
+    public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
+    {
+        foreach ($this->getAction($enemyCommand, $alliesCommand) as $action) {
+            if (!$action->canByUsed()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function createEffectActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
+    {
+        if ($this->actions === null) {
+            // Создаем коллекцию событий (с одним бафом), которая будет применена к персонажу, при применении эффекта
+            $onApplyActionCollection = new ActionCollection();
+
+            $onApplyActionCollection->add(new BuffAction(
+                $this->unit,
+                $enemyCommand,
+                $alliesCommand,
+                self::USE_MESSAGE,
+                self::MODIFY_METHOD,
+                self::MODIFY_POWER
+            ));
+
+            // Создаем коллекцию эффектов, с одним эффектом при применении - Reserve Forces
+            $effects = new EffectCollection();
+
+            // Создаем сам эффект
+            $effects->add(new Effect(
+                self::NAME,
+                self::ICON,
+                self::DURATION,
+                $onApplyActionCollection,
+                new ActionCollection(),
+                new ActionCollection()
+            ));
+
+            // Создаем коллекцию событий для применения к юниту
+            $this->actions = new ActionCollection();
+
+            $this->actions->add(new EffectAction(
+                $this->unit,
+                $enemyCommand,
+                $alliesCommand,
+                self::USE_MESSAGE,
+                $effects
+            ));
+        }
+
+        return $this->actions;
     }
 }

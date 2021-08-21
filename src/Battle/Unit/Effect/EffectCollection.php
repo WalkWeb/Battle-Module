@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit\Effect;
 
 use Battle\Action\ActionCollection;
+use Battle\Action\ActionException;
 use Battle\Traits\CollectionTrait;
 use Countable;
 use Iterator;
@@ -26,7 +27,7 @@ class EffectCollection implements Iterator, Countable
     {
         $onApplyActionCollection = new ActionCollection();
 
-        if ($this->exist($effect->getName())) {
+        if ($this->exist($effect)) {
             $this->elements[$effect->getName()]->resetDuration();
         } else {
             $this->elements[$effect->getName()] = $effect;
@@ -60,16 +61,17 @@ class EffectCollection implements Iterator, Countable
     }
 
     /**
-     * @param string $name
+     * @param EffectInterface $effect
      * @return bool
      */
-    public function exist(string $name): bool
+    public function exist(EffectInterface $effect): bool
     {
-        return array_key_exists($name, $this->elements);
+        return array_key_exists($effect->getName(), $this->elements);
     }
 
     /**
      * @return ActionCollection
+     * @throws ActionException
      */
     public function nextRound(): ActionCollection
     {

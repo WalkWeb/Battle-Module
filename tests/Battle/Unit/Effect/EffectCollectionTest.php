@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Effect;
 
 use Battle\Action\ActionCollection;
+use Battle\Action\ActionException;
 use Battle\Action\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -54,21 +55,34 @@ class EffectCollectionTest extends TestCase
     {
         $collection = new EffectCollection();
 
-        $collection->add(new Effect(
+        $effect1 = new Effect(
             'Effect#1',
             'icon',
             10,
             new ActionCollection(),
             new ActionCollection(),
             new ActionCollection()
-        ));
+        );
 
-        self::assertTrue($collection->exist('Effect#1'));
-        self::assertFalse($collection->exist('Effect#10'));
+        $effect2 = new Effect(
+            'Effect#2',
+            'icon',
+            10,
+            new ActionCollection(),
+            new ActionCollection(),
+            new ActionCollection()
+        );
+
+        $collection->add($effect1);
+
+        self::assertTrue($collection->exist($effect1));
+        self::assertFalse($collection->exist($effect2));
     }
 
     /**
      * Тест на ситуацию, когда добавленный аналогичный эффект обновляет длительность уже существующего
+     *
+     * @throws ActionException
      */
     public function testEffectCollectionAddDouble(): void
     {
@@ -109,6 +123,7 @@ class EffectCollectionTest extends TestCase
      *
      * @throws CommandException
      * @throws UnitException
+     * @throws ActionException
      * @throws UnitFactoryException
      */
     public function testEffectCollectionActionsOnNextRound(): void
@@ -142,6 +157,7 @@ class EffectCollectionTest extends TestCase
     }
 
     /**
+     * @throws ActionException
      * @throws CommandException
      * @throws UnitException
      * @throws UnitFactoryException

@@ -64,7 +64,13 @@ class EffectActionTest extends TestCase
 
         $effectAction = $this->getReserveForcesAction($unit, $enemyCommand, $command);
 
+        // Пока эффекта на юните нет - событие может примениться
+        self::assertTrue($effectAction->canByUsed());
+
         $message = $effectAction->handle();
+
+        // А вот когда эффект наложен - уже нет
+        self::assertFalse($effectAction->canByUsed());
 
         self::assertEquals(self::MESSAGE, $message);
 
@@ -88,6 +94,9 @@ class EffectActionTest extends TestCase
         self::assertEquals($unitBaseLife, $unit->getTotalLife());
         self::assertEquals($unitBaseLife, $unit->getLife());
         self::assertCount(0, $unit->getEffects());
+
+        // Проверяем, что эффект опять готов примениться
+        self::assertTrue($effectAction->canByUsed());
     }
 
     /**

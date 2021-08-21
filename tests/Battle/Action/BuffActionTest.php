@@ -48,6 +48,9 @@ class BuffActionTest extends TestCase
         $multiplier = $action->getPower() / 100;
         $newLife = (int)($unit->getTotalLife() * $multiplier);
 
+        // BuffAction всегда готов примениться (а EffectAction - только если аналогичный на юните не существует)
+        self::assertTrue($action->canByUsed());
+
         // Применяем баф
         $message = $action->handle();
 

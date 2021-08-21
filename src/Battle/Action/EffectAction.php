@@ -58,5 +58,19 @@ class EffectAction extends AbstractAction
         return $this->effects;
     }
 
+    public function canByUsed(): bool
+    {
+        // TODO Доработать метод, когда цель будет выбираться не только по себе
+
+        foreach ($this->effects as $effect) {
+            // Если хотя бы один из накладываемых эффектов еще есть на юните - событие считаем невозможным для применения
+            if ($this->actionUnit->getEffects()->exist($effect)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public function setFactualPower(int $factualPower): void {}
 }

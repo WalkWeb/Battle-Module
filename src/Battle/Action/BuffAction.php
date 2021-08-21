@@ -48,7 +48,6 @@ class BuffAction extends AbstractAction
         $this->power = $power;
     }
 
-
     public function handle(): string
     {
         return $this->actionUnit->applyAction($this);
