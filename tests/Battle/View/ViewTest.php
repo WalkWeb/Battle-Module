@@ -8,6 +8,7 @@ use Battle\Command\CommandFactory;
 use Battle\Container\Container;
 use Battle\Result\Result;
 use Battle\Translation\Translation;
+use Battle\Unit\Ability\Effect\ReserveForcesAbility;
 use Battle\View\View;
 use Battle\View\ViewException;
 use Battle\View\ViewFactory;
@@ -303,6 +304,160 @@ EOT;
         </div>
     </div>
 </div></td>
+        </tr>
+    </table>
+</div>
+EOT;
+
+        self::assertEquals($expectHtml, $html);
+    }
+
+    /**
+     * Тест шаблона unit_full_log.template.php
+     *
+     * Чтобы View покрылся тестом полноценно - один из юнитов обязательно должен иметь эффект
+     *
+     * @throws Exception
+     */
+    public function testViewRenderFullLogUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new ReserveForcesAbility($unit);
+
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            $action->handle();
+        }
+
+        $view = (new ViewFactory)->create();
+
+        $html = $view->renderCommandView($command, $enemyCommand, true);
+
+        $expectHtml = <<<EOT
+<div class="row">
+    <table>
+        <tr>
+            <td class="w25" id="left_command_range"></td>
+            <td class="w25" id="left_command_melee"><div align="center">
+    <div class="unit_main_box">
+        <div class="unit_box1">
+            <div class="unit_box1_right">
+                <div class="unit_box1_right2">
+                    <div class="unit_box1_right3">
+                        <div class="unit_box1_right4">
+                            <div class="unit_hp">
+                                <div class="unit_hp_bar">
+                                    <div class="unit_hp_bar2" style="width: 100%;"></div>
+                                </div>
+                                <div class="unit_hp_text">
+                                    <span class="hp">130</span> / <span class="thp">130</span>
+                                </div>
+                                <div class="unit_hp_text_add">
+                                    <span class="recdam"></span>
+                                </div>
+                            </div>
+                                                            <div class="unit_cons">
+                                    <div class="unit_cons_bar2" style="width: 20%;"></div>
+                                </div>
+                                <div class="unit_rage">
+                                    <div class="unit_rage_bar2" style="width: 14%;"></div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="unit_box1_left">
+                <div class="unit_box1_left2">
+                    <div class="unit_ava" style="background-image: url(/images/avas/orcs/orc001.jpg);">
+                        <div class="unit_ava_blank"></div>
+                        <div class="unit_ava_blank"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="unit_box2">
+            <div class="unit_box2_right">
+                <div class="unit_box2_right2">
+                    <div class="unit_box2_right3">
+                        <p><span style="color: #ae882d">Titan</span></p>
+                    </div>
+                </div>
+                <div class="unit_effect_container">
+                    <img src="/images/icons/ability/156.png" width="22" alt="" /> <span>6</span>                </div>
+            </div>
+            <div class="unit_box2_left">
+                <div class="unit_icon">
+                    <div class="unit_icon_left">3</div>
+                    <div class="unit_icon_right">
+                        <img src="/images/icons/small/titan.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div></td>
+            <td class="w25" id="right_command_melee"><div align="center">
+    <div class="unit_main_box">
+        <div class="unit_box1">
+            <div class="unit_box1_right">
+                <div class="unit_box1_right2">
+                    <div class="unit_box1_right3">
+                        <div class="unit_box1_right4">
+                            <div class="unit_hp">
+                                <div class="unit_hp_bar">
+                                    <div class="unit_hp_bar2" style="width: 100%;"></div>
+                                </div>
+                                <div class="unit_hp_text">
+                                    <span class="hp">250</span> / <span class="thp">250</span>
+                                </div>
+                                <div class="unit_hp_text_add">
+                                    <span class="recdam"></span>
+                                </div>
+                            </div>
+                                                            <div class="unit_cons">
+                                    <div class="unit_cons_bar2" style="width: 0%;"></div>
+                                </div>
+                                <div class="unit_rage">
+                                    <div class="unit_rage_bar2" style="width: 0%;"></div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="unit_box1_left">
+                <div class="unit_box1_left2">
+                    <div class="unit_ava" style="background-image: url(/images/avas/humans/human002.jpg);">
+                        <div class="unit_ava_blank"></div>
+                        <div class="unit_ava_blank"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="unit_box2">
+            <div class="unit_box2_right">
+                <div class="unit_box2_right2">
+                    <div class="unit_box2_right3">
+                        <p><span style="color: #1e72e3">unit_2</span></p>
+                    </div>
+                </div>
+                <div class="unit_effect_container">
+                                    </div>
+            </div>
+            <div class="unit_box2_left">
+                <div class="unit_icon">
+                    <div class="unit_icon_left">1</div>
+                    <div class="unit_icon_right">
+                        <img src="/images/icons/small/warrior.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div></td>
+            <td class="w25" id="right_command_range"></td>
         </tr>
     </table>
 </div>

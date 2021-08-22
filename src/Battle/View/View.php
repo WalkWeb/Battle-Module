@@ -263,4 +263,19 @@ class View implements ViewInterface
             throw new ViewException(ViewException::MISSING_TEMPLATE . ': ' . $nameFile);
         }
     }
+
+    /**
+     * @param UnitInterface $unit
+     * @return string
+     */
+    private function getEffects(UnitInterface $unit): string
+    {
+        $html = '';
+
+        foreach ($unit->getEffects() as $effect) {
+            $html .= '<img src="' . $effect->getIcon() . '" width="22" alt="" /> <span>' . $effect->getDuration() . '</span>';
+        }
+        
+        return $html;
+    }
 }

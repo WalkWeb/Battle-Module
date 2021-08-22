@@ -1,7 +1,10 @@
 <?php
 
 use Battle\Unit\UnitInterface;
+use Battle\View\View;
 use Battle\View\ViewException;
+
+/** @var View $this */
 
 if (empty($unit) || !($unit instanceof UnitInterface)) {
     throw new ViewException(ViewException::MISSING_UNIT);
@@ -9,7 +12,7 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
 
 // No id attributes
 
-// TODO Added effect
+// TODO Рендер этого шаблона не покрыт тестами
 
 ?>
 <div align="center">
@@ -37,14 +40,6 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                                 <div class="unit_rage">
                                     <div class="unit_rage_bar2" style="width: <?= $this->getWidth($unit->getRage(), UnitInterface::MAX_RAGE) ?>%;"></div>
                                 </div>
-                            <?php else: ?>
-                                <!-- TODO Доработать js-скрипт таким образом, чтобы эти элементы не были обязательными -->
-                                <div class="unit_cons" style="display: none;">
-                                    <div class="unit_cons_bar2" style="width: 0;"></div>
-                                </div>
-                                <div class="unit_rage" style="display: none;">
-                                    <div class="unit_rage_bar2" style="width: 0;"></div>
-                                </div>
                             <?php endif ?>
                         </div>
                     </div>
@@ -67,7 +62,7 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                     </div>
                 </div>
                 <div class="unit_effect_container">
-                    <p></p>
+                    <?= $this->getEffects($unit) ?>
                 </div>
             </div>
             <div class="unit_box2_left">
