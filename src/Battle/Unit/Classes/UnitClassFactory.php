@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes;
 
+use Battle\Unit\Classes\Dwarf\Alchemist;
 use Battle\Unit\Classes\Human\Priest;
 use Battle\Unit\Classes\Human\Warrior;
 use Battle\Unit\Classes\Orcs\Titan;
@@ -21,6 +22,7 @@ class UnitClassFactory
         3   => DeadKnight::class,
         4   => DarkMage::class,
         5   => Titan::class,
+        6   => Alchemist::class,
         100 => IncorrectUnitClassForTest::class,
     ];
 

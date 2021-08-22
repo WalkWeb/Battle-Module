@@ -301,6 +301,21 @@ class UnitFactory
             'class'        => 5,
             'race'         => 3,
         ],
+        // Гном с классом Алхимик
+        22  => [
+            'id'           => '2c58854d-e0ad-4d29-86e4-62bbb4b8d3b7',
+            'name'         => 'Alchemist',
+            'level'        => 3,
+            'avatar'       => '/images/avas/orcs/orc001.jpg',
+            'damage'       => 13,
+            'attack_speed' => 1.1,
+            'life'         => 75,
+            'total_life'   => 75,
+            'melee'        => false,
+            'command'      => 1,
+            'class'        => 6,
+            'race'         => 4,
+        ],
     ];
 
     /**

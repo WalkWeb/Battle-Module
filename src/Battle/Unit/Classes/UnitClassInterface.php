@@ -15,6 +15,7 @@ interface UnitClassInterface
     public const DEAD_KNIGHT_ID = 3;
     public const DARK_MAGE_ID   = 4;
     public const TITAN_ID       = 5;
+    public const ALCHEMIST_ID   = 6;
 
     // ===== Names =====
     public const WARRIOR_NAME     = 'Warrior';
@@ -22,6 +23,7 @@ interface UnitClassInterface
     public const DEAD_KNIGHT_NAME = 'Dead Knight';
     public const DARK_MAGE_NAME   = 'Dark Mage';
     public const TITAN_NAME       = 'Titan';
+    public const ALCHEMIST_NAME   = 'Alchemist';
 
     // ===== Icons =====
     public const WARRIOR_SMALL_ICON     = '/images/icons/small/warrior.png';
@@ -29,6 +31,7 @@ interface UnitClassInterface
     public const DEAD_KNIGHT_SMALL_ICON = '/images/icons/small/dead-knight.png';
     public const DARK_MAGE_SMALL_ICON   = '/images/icons/small/dark-mage.png';
     public const TITAN_SMALL_ICON       = '/images/icons/small/titan.png';
+    public const ALCHEMIST_SMALL_ICON   = '/images/icons/small/alchemist.png';
 
     /**
      * Возвращает ID класса

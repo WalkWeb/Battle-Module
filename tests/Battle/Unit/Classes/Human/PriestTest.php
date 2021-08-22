@@ -22,26 +22,26 @@ class PriestTest extends TestCase
      */
     public function testCreatePriestClass(): void
     {
-        $actionUnit = UnitFactory::createByTemplate(5);
+        $unit = UnitFactory::createByTemplate(5);
         $enemyUnit = UnitFactory::createByTemplate(1);
-        $actionCommand = CommandFactory::create([$actionUnit]);
+        $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $priest = $actionUnit->getClass();
+        $priest = $unit->getClass();
 
         self::assertEquals(UnitClassInterface::PRIEST_ID, $priest->getId());
         self::assertEquals(UnitClassInterface::PRIEST_NAME, $priest->getName());
         self::assertEquals(UnitClassInterface::PRIEST_SMALL_ICON, $priest->getSmallIcon());
 
-        $abilities = $priest->getAbilities($actionUnit);
+        $abilities = $priest->getAbilities($unit);
 
         foreach ($abilities as $ability) {
             self::assertContainsOnlyInstancesOf(GreatHealAbility::class, [$ability]);
 
-            $actions = $ability->getAction($enemyCommand, $actionCommand);
+            $actions = $ability->getAction($enemyCommand, $command);
 
             foreach ($actions as $action) {
-                self::assertEquals($actionUnit->getDamage() * 3, $action->getPower());
+                self::assertEquals($unit->getDamage() * 3, $action->getPower());
             }
         }
     }
