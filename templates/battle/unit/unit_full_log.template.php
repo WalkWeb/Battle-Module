@@ -12,8 +12,6 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
 
 // No id attributes
 
-// TODO Рендер этого шаблона не покрыт тестами
-
 ?>
 <div align="center">
     <div class="unit_main_box">

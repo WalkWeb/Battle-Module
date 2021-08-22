@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
+use Battle\Action\ActionException;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
@@ -256,16 +257,23 @@ abstract class AbstractUnit implements UnitInterface
         return $this->abilities;
     }
 
+    /**
+     * @throws ActionException
+     */
     public function newRound(): void
     {
         $this->action = false;
         $this->addConcentration(self::ADD_CON_NEW_ROUND);
         $this->addRage(self::ADD_RAGE_NEW_ROUND);
 
-        $onDisableActions = $this->effects->nextRound();
+        // События, которые должны примениться при новом раунде и при отмене эффекта
+        // TODO Эффекты getOnNextRoundActions() необходимо применять в Stroke->handle()
+        $effectActions = $this->effects->nextRound();
 
-        foreach ($onDisableActions as $action) {
-            $action->handle();
+        foreach ($effectActions as $action) {
+            if ($action->canByUsed()) {
+                $action->handle();
+            }
         }
     }
 

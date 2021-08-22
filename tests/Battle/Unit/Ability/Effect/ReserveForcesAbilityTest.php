@@ -143,6 +143,62 @@ class ReserveForcesAbilityTest extends TestCase
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
     }
 
+    /**
+     * Тест на выявление ошибки, при котором повторное применение эффекта к персонажу добавляло эффект с длительностью 0
+     *
+     * @throws Exception
+     */
+    public function testReserveForcesAbilityUpdatedDuration(): void
+    {
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $actions = $unit->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            $action->handle();
+        }
+
+        // Проверяем, что длительность = 6
+        foreach ($unit->getEffects() as $effect) {
+            self::assertEquals(6, $effect->getDuration());
+        }
+
+        // Пропускаем ходы
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        // Применяем способность еще раз
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $actions = $unit->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            $action->handle();
+        }
+
+        // Проверяем еще раз, что при повторном применении эффекта длительность = 6
+        foreach ($unit->getEffects() as $effect) {
+            self::assertEquals(6, $effect->getDuration());
+        }
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return ActionCollection
+     */
     private function getReserveForcesActions(
         UnitInterface $unit,
         CommandInterface $enemyCommand,

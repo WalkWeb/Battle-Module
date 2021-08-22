@@ -129,4 +129,54 @@ class HealingPotionAbilityTest extends TestCase
         // Эффект исчез - способность опять может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
     }
+
+    /**
+     * Тест на выявление ошибки, при котором повторное применение эффекта к персонажу добавляло эффект с длительностью 0
+     *
+     * @throws Exception
+     */
+    public function testHealingPotionAbilityUpdateDuration(): void
+    {
+        $unit = UnitFactory::createByTemplate(22);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $actions = $unit->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            $action->handle();
+        }
+
+        // Проверяем, что длительность = 4
+        foreach ($unit->getEffects() as $effect) {
+            self::assertEquals(4, $effect->getDuration());
+        }
+
+        // Пропускаем ходы
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        // Применяем способность еще раз
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $actions = $unit->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            $action->handle();
+        }
+
+        // Проверяем еще раз, что при повторном применении эффекта длительность = 4
+        foreach ($unit->getEffects() as $effect) {
+            self::assertEquals(4, $effect->getDuration());
+        }
+    }
 }
