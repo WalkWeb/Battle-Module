@@ -145,7 +145,7 @@ class Unit extends AbstractUnit
     }
 
     /**
-     * Применяет(ы) эффект к юниту
+     * Обрабатывает action на добавление эффекта юниту
      *
      * @param EffectAction $action
      * @return string
@@ -165,6 +165,9 @@ class Unit extends AbstractUnit
 
     /**
      * Обрабатывает action на изменение характеристик юнита
+     *
+     * При этом само событие указывает, в getModifyMethod(), какой метод должен обработать текущее изменение
+     * характеристик
      *
      * @uses multiplierMaxLife, multiplierMaxLifeRevert
      * @param BuffAction $action

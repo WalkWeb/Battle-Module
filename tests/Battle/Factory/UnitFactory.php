@@ -306,7 +306,7 @@ class UnitFactory
             'id'           => '2c58854d-e0ad-4d29-86e4-62bbb4b8d3b7',
             'name'         => 'Alchemist',
             'level'        => 3,
-            'avatar'       => '/images/avas/orcs/orc001.jpg',
+            'avatar'       => '/images/avas/dwarfs/dwarf004.jpg',
             'damage'       => 13,
             'attack_speed' => 1.1,
             'life'         => 75,
