@@ -1,7 +1,7 @@
 
 let applyBattleChanges = {
 
-    "applyUsrEffect": function (effect) {
+    "applyUnitEffect": function (effect) {
 
         let unit = document.getElementById("usr_" + effect.user_id);
         if (typeof effect.class !== "undefined") {
@@ -18,7 +18,7 @@ let applyBattleChanges = {
         }
     },
 
-    "revertUsrEffect": function (effect) {
+    "revertUnitEffect": function (effect) {
         if (effect.hasOwnProperty('user_id')) {
             let unit = document.getElementById("usr_" + effect.user_id);
 
@@ -34,16 +34,16 @@ let applyBattleChanges = {
     },
 
     "applyEffect": function (effect) {
-        this.applyUsrEffect(effect);
+        this.applyUnitEffect(effect);
         for (let i = 0; i < effect.targets.length; i++) {
-            this.applyUsrEffect(effect.targets[i]);
+            this.applyUnitEffect(effect.targets[i]);
         }
     },
 
     "revertEffect": function (effect) {
-        this.revertUsrEffect(effect);
+        this.revertUnitEffect(effect);
         for (let i = 0; i < effect.targets.length; i++) {
-            this.revertUsrEffect(effect.targets[i]);
+            this.revertUnitEffect(effect.targets[i]);
         }
     },
 
@@ -93,7 +93,7 @@ let applyBattleChanges = {
         content.appendChild(createUnit(unit));
     },
 
-    "revertUsrValues": function (user) {
+    "revertUnitValues": function (user) {
         if (user.hasOwnProperty('user_id')) {
             let unit = document.getElementById("usr_" + user.user_id);
             unit.getElementsByClassName("recdam")[0].innerHTML = "";
@@ -115,9 +115,9 @@ let applyBattleChanges = {
     },
 
     "revertValues": function (effect) {
-        this.revertUsrValues(effect);
+        this.revertUnitValues(effect);
         for (let i = 0; i < effect.targets.length; i++) {
-            this.revertUsrValues(effect.targets[i]);
+            this.revertUnitValues(effect.targets[i]);
         }
     },
 
@@ -298,187 +298,77 @@ function showBattleStatistic(button_content) {
     }
 }
 
-/**
- * TODO Refactoring?..
- *
- * @param unit
- * @returns {HTMLDivElement}
- */
+function createElement(type, parent, className, idName) {
+    let element = document.createElement(type);
+    if (className) {
+        element.setAttribute('class', className);
+    }
+    if (idName) {
+        element.setAttribute('id', idName);
+    }
+    parent.appendChild(element);
+    return element;
+}
+
 function createUnit(unit) {
 
     let create = document.createElement('div');
     create.setAttribute('align', 'center');
 
-    let unit_main_box = document.createElement('div');
-    unit_main_box.setAttribute('class', 'unit_main_box');
-    unit_main_box.setAttribute('id', 'usr_' + unit.id);
-    create.appendChild(unit_main_box);
+    let unit_main_box = createElement('div', create, 'unit_main_box', 'usr_' + unit.id);
 
-    // -----------------------------------------------
+    let unit_box1 = createElement('div', unit_main_box, 'unit_box1');
+    let unit_box2 = createElement('div', unit_main_box, unit.unit_box2_class);
 
-    let unit_box1 = document.createElement('div');
-    unit_box1.setAttribute('class', 'unit_box1');
-    unit_main_box.appendChild(unit_box1);
+    let unit_box1_right = createElement('div', unit_box1, 'unit_box1_right');
+    let unit_box1_left = createElement('div', unit_box1, 'unit_box1_left');
 
-    let unit_box2 = document.createElement('div');
-    unit_box2.setAttribute('class', unit.unit_box2_class);
-    unit_main_box.appendChild(unit_box2);
-
-    // -----------------------------------------------
-
-    let unit_box1_right = document.createElement('div');
-    unit_box1_right.setAttribute('class', 'unit_box1_right');
-    unit_box1.appendChild(unit_box1_right);
-
-    let unit_box1_left = document.createElement('div');
-    unit_box1_left.setAttribute('class', 'unit_box1_left');
-    unit_box1.appendChild(unit_box1_left);
-
-    // -----------------------------------------------
-
-    let unit_box1_right2 = document.createElement('div');
-    unit_box1_right2.setAttribute('class', 'unit_box1_right2');
-    unit_box1_right.appendChild(unit_box1_right2);
-
-    let unit_box1_right3 = document.createElement('div');
-    unit_box1_right3.setAttribute('class', 'unit_box1_right3');
-    unit_box1_right2.appendChild(unit_box1_right3);
-
-    let unit_box1_right4 = document.createElement('div');
-    unit_box1_right4.setAttribute('class', 'unit_box1_right4');
-    unit_box1_right3.appendChild(unit_box1_right4);
-
-    let unit_hp = document.createElement('div');
-    unit_hp.setAttribute('class', 'unit_hp');
-    unit_box1_right4.appendChild(unit_hp);
-
-    let hp_bar_bg_ = document.createElement('div');
-    hp_bar_bg_.setAttribute('class', unit.hp_bar_class);
-    hp_bar_bg_.setAttribute('id', 'hp_bar_bg_' + unit.id);
-    unit_hp.appendChild(hp_bar_bg_);
-
-    let hp_bar_ = document.createElement('div');
-    hp_bar_.setAttribute('class', unit.hp_bar_class2);
-    hp_bar_.setAttribute('id', 'hp_bar_' + unit.id);
+    let unit_box1_right2 = createElement('div', unit_box1_right, 'unit_box1_right2');
+    let unit_box1_right3 = createElement('div', unit_box1_right2, 'unit_box1_right3')
+    let unit_box1_right4 = createElement('div', unit_box1_right3, 'unit_box1_right4');
+    let unit_hp = createElement('div', unit_box1_right4, 'unit_hp');
+    let hp_bar_bg_ = createElement('div', unit_hp, unit.hp_bar_class, 'hp_bar_bg_' + unit.id);
+    let hp_bar_ = createElement('div', hp_bar_bg_, unit.hp_bar_class2, 'hp_bar_' + unit.id);
     hp_bar_.style.width = unit.hp_bar_width + '%';
-    hp_bar_bg_.appendChild(hp_bar_);
-
-    let unit_hp_text = document.createElement('div');
-    unit_hp_text.setAttribute('class', 'unit_hp_text')
-    unit_hp.appendChild(unit_hp_text);
-
-    let unit_hp_text_span_hp = document.createElement('span');
-    unit_hp_text_span_hp.setAttribute('class', 'hp');
+    let unit_hp_text = createElement('div', unit_hp, 'unit_hp_text');
+    let unit_hp_text_span_hp = createElement('span', unit_hp_text, 'hp');
     unit_hp_text_span_hp.innerHTML = unit.hp;
-    unit_hp_text.appendChild(unit_hp_text_span_hp);
-
-    let unit_hp_text_span_slash = document.createElement('span');
+    let unit_hp_text_span_slash = createElement('span', unit_hp_text);
     unit_hp_text_span_slash.innerHTML = ' / ';
-    unit_hp_text.appendChild(unit_hp_text_span_slash);
-
-    let unit_hp_text_span_thp = document.createElement('span');
-    unit_hp_text_span_thp.setAttribute('class', 'thp');
+    let unit_hp_text_span_thp = createElement('span', unit_hp_text, 'thp');
     unit_hp_text_span_thp.innerHTML = unit.thp;
-    unit_hp_text.appendChild(unit_hp_text_span_thp);
-
-    let unit_hp_text_add = document.createElement('div');
-    unit_hp_text_add.setAttribute('class', 'unit_hp_text_add');
-    unit_hp.appendChild(unit_hp_text_add);
-
-    let unit_hp_text_add_span = document.createElement('span');
-    unit_hp_text_add_span.setAttribute('class', 'recdam');
-    unit_hp_text_add.appendChild(unit_hp_text_add_span);
-
-    let unit_cons = document.createElement('div');
-    unit_cons.setAttribute('class', 'unit_cons');
-    unit_box1_right4.appendChild(unit_cons);
-
-    let unit_cons_bar2 = document.createElement('div');
-    unit_cons_bar2.setAttribute('class', 'unit_cons_bar2');
+    let unit_hp_text_add = createElement('div', unit_hp, 'unit_hp_text_add');
+    createElement('span', unit_hp_text_add, 'recdam');
+    let unit_cons = createElement('div', unit_box1_right4, 'unit_cons');
+    let unit_cons_bar2 = createElement('div', unit_cons, 'unit_cons_bar2');
     unit_cons_bar2.style.width = unit.cons_bar_width + '%';
-    unit_cons.appendChild(unit_cons_bar2);
-
-    let unit_rage = document.createElement('div');
-    unit_rage.setAttribute('class', 'unit_rage');
-    unit_box1_right4.appendChild(unit_rage);
-
-    let unit_rage_bar2 = document.createElement('div');
-    unit_rage_bar2.setAttribute('class', 'unit_rage_bar2');
+    let unit_rage = createElement('div', unit_box1_right4, 'unit_rage');
+    let unit_rage_bar2 = createElement('div', unit_rage,  'unit_rage_bar2');
     unit_rage_bar2.style.width = unit.rage_bar_width + '%';
-    unit_rage.appendChild(unit_rage_bar2);
 
-    // -----------------------------------------------
-
-    let unit_box1_left2 = document.createElement('div');
-    unit_box1_left2.setAttribute('class', 'unit_box1_left2');
-    unit_box1_left.appendChild(unit_box1_left2);
-
-    let unit_ava = document.createElement('div');
-    unit_ava.setAttribute('class', 'unit_ava');
+    let unit_box1_left2 = createElement('div', unit_box1_left, 'unit_box1_left2');
+    let unit_ava = createElement('div', unit_box1_left2, 'unit_ava');
     unit_ava.style.backgroundImage = 'url('+ unit.avatar + ')';
-    unit_box1_left2.appendChild(unit_ava);
+    createElement('div', unit_ava, 'unit_ava_blank', 'ava_' + unit.id);
+    createElement('div', unit_ava, 'unit_ava_blank', 'avas_' + unit.id);
 
-    let ava_ = document.createElement('div');
-    ava_.setAttribute('id', 'ava_' + unit.id);
-    ava_.setAttribute('class', 'unit_ava_blank');
-    unit_ava.appendChild(ava_);
-
-    let avas_ = document.createElement('div');
-    avas_.setAttribute('id', 'avas_' + unit.id);
-    avas_.setAttribute('class', 'unit_ava_blank');
-    unit_ava.appendChild(avas_);
-
-    // -----------------------------------------------
-
-    let unit_box2_right = document.createElement('div');
-    unit_box2_right.setAttribute('class', 'unit_box2_right');
-    unit_box2.appendChild(unit_box2_right);
-
-    let unit_box2_right2 = document.createElement('div');
-    unit_box2_right2.setAttribute('class', 'unit_box2_right2');
-    unit_box2_right.appendChild(unit_box2_right2);
-
-    let unit_box2_right3 = document.createElement('div');
-    unit_box2_right3.setAttribute('class', 'unit_box2_right3');
-    unit_box2_right2.appendChild(unit_box2_right3);
-
-    let unit_box2_right3_p = document.createElement('p');
-    unit_box2_right3.appendChild(unit_box2_right3_p);
-
-    let unit_box2_right3_span = document.createElement('span');
+    let unit_box2_right = createElement('div', unit_box2, 'unit_box2_right');
+    let unit_box2_right2 = createElement('div', unit_box2_right, 'unit_box2_right2');
+    let unit_box2_right3 = createElement('div', unit_box2_right2, 'unit_box2_right3');
+    let unit_box2_right3_p = createElement('p', unit_box2_right3);
+    let unit_box2_right3_span = createElement('span', unit_box2_right3_p);
     unit_box2_right3_span.style.color = unit.name_color;
     unit_box2_right3_span.innerHTML = unit.name;
-    unit_box2_right3_p.appendChild(unit_box2_right3_span);
-
-    let unit_box2_left = document.createElement('div');
-    unit_box2_left.setAttribute('class', 'unit_box2_left');
-    unit_box2.appendChild(unit_box2_left);
-
-    let unit_effect_content = document.createElement('div');
-    unit_effect_content.setAttribute('class', 'unit_effect_content');
-    unit_box2_right.appendChild(unit_effect_content);
-
-    let unit_effects_ = document.createElement('p');
-    unit_effects_.setAttribute('id', 'unit_effects_' + unit.id);
-    unit_effect_content.appendChild(unit_effects_);
-
-    let unit_icon = document.createElement('div');
-    unit_icon.setAttribute('class', 'unit_icon');
-    unit_box2_left.appendChild(unit_icon);
-
-    let unit_icon_left = document.createElement('div');
-    unit_icon_left.setAttribute('class', 'unit_icon_left');
+    let unit_box2_left = createElement('div', unit_box2, 'unit_box2_left');
+    let unit_effect_content = createElement('div', unit_box2_right, 'unit_effect_content');
+    createElement('p', unit_effect_content, null, 'unit_effects_' + unit.id);
+    let unit_icon = createElement('div', unit_box2_left, 'unit_icon');
+    let unit_icon_left = createElement('div', unit_icon, 'unit_icon_left');
     unit_icon_left.innerHTML = unit.level.toString();
-    unit_icon.appendChild(unit_icon_left)
-
-    let unit_icon_right = document.createElement('div');
-    unit_icon_right.setAttribute('class', 'unit_icon_right');
-    unit_icon.appendChild(unit_icon_right);
-
-    let unit_icon_right_img = document.createElement('img');
+    let unit_icon_right = createElement('div', unit_icon, 'unit_icon_right');
+    let unit_icon_right_img = createElement('img', unit_icon_right);
     unit_icon_right_img.setAttribute('src', unit.icon);
-    unit_icon_right_img.setAttribute('alt', '')
-    unit_icon_right.appendChild(unit_icon_right_img);
+    unit_icon_right_img.setAttribute('alt', '');
 
     return create;
 }
