@@ -69,6 +69,7 @@ class HealingPotionAbilityTest extends TestCase
         $ability = new HealingPotionAbility($unit);
 
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
             $action->handle();
         }
 
@@ -115,6 +116,9 @@ class HealingPotionAbilityTest extends TestCase
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            // TODO Из-за механики создания коллекции действий в Ability получается, что и вызывать canByUsed() нужно
+            // TODO каждый раз перед применением, хотя, казалось бы, при $ability->canByUsed() он уже был вызван
+            self::assertTrue($action->canByUsed());
             $action->handle();
         }
 
@@ -150,6 +154,7 @@ class HealingPotionAbilityTest extends TestCase
         $actions = $unit->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
             $action->handle();
         }
 
@@ -171,6 +176,7 @@ class HealingPotionAbilityTest extends TestCase
         $actions = $unit->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
             $action->handle();
         }
 

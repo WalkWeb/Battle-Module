@@ -170,12 +170,10 @@ class Scenario implements ScenarioInterface
     /**
      * @param EffectAction $action
      * @param StatisticInterface $statistic
+     * @throws ActionException
      */
     private function addEffect(EffectAction $action, StatisticInterface $statistic): void
     {
-        // TODO Пока реализован только положительный эффект на себя, в будущем нужно будет формировать разные сценарии
-        // TODO при разных типах эффектов и их целей
-
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
             'attack'  => $statistic->getStrokeNumber(),
@@ -190,10 +188,10 @@ class Scenario implements ScenarioInterface
                     'unit_effects'   => $this->getUnitEffects($action->getActionUnit()),
                     'targets'        => [
                         [
-                            'user_id'      => $action->getActionUnit()->getId(), // todo Пока только на себя
-                            'hp'           => $action->getActionUnit()->getLife(),
-                            'thp'          => $action->getActionUnit()->getTotalLife(),
-                            'unit_effects' => $this->getUnitEffects($action->getActionUnit()),
+                            'user_id'      => $action->getTargetUnit()->getId(),
+                            'hp'           => $action->getTargetUnit()->getLife(),
+                            'thp'          => $action->getTargetUnit()->getTotalLife(),
+                            'unit_effects' => $this->getUnitEffects($action->getTargetUnit()),
                         ],
                     ],
                 ],

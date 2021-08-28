@@ -211,6 +211,8 @@ class ScenarioTest extends TestCase
 
         $action = $this->getReserveForcesAction($unit, $enemyCommand, $command);
 
+        self::assertTrue($action->canByUsed());
+
         $action->handle();
 
         $scenario = new Scenario();

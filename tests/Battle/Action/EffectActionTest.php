@@ -22,7 +22,8 @@ use Tests\Battle\Factory\UnitFactoryException;
 
 class EffectActionTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces';
+    private const MESSAGE_SELF = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces';
+    private const MESSAGE_TO   = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces on <span style="color: #1e72e3">unit_2</span>';
 
     /**
      * @throws CommandException
@@ -62,7 +63,7 @@ class EffectActionTest extends TestCase
 
         $unitBaseLife = $unit->getTotalLife();
 
-        $effectAction = $this->getReserveForcesAction($unit, $enemyCommand, $command);
+        $effectAction = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
 
         // Пока эффекта на юните нет - событие может примениться
         self::assertTrue($effectAction->canByUsed());
@@ -72,7 +73,7 @@ class EffectActionTest extends TestCase
         // А вот когда эффект наложен - уже нет
         self::assertFalse($effectAction->canByUsed());
 
-        self::assertEquals(self::MESSAGE, $message);
+        self::assertEquals(self::MESSAGE_SELF, $message);
 
         self::assertEquals($effectAction->getEffects(), $unit->getEffects());
 
@@ -100,6 +101,48 @@ class EffectActionTest extends TestCase
     }
 
     /**
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testEffectActionNoTargetForEffect(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(10);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_RANDOM_ENEMY);
+
+        // При вызове canByUsed() происходит поиск цели
+        self::assertFalse($action->canByUsed());
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage(ActionException::NO_TARGET_FOR_EFFECT);
+        $action->handle();
+    }
+
+    /**
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testEffectActionMessageTo(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_RANDOM_ENEMY);
+
+        // При вызове canByUsed() происходит поиск цели
+        self::assertTrue($action->canByUsed());
+
+        self::assertEquals(self::MESSAGE_TO, $action->handle());
+    }
+
+    /**
      * Создает и возвращает EffectAction
      *
      * TODO Возможно в будущем нужно сделать фабрику для более быстрого и удобного создания эффектов в тестах
@@ -107,12 +150,14 @@ class EffectActionTest extends TestCase
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
+     * @param int $typeTarget
      * @return ActionInterface
      */
     private function getReserveForcesAction(
         UnitInterface $unit,
         CommandInterface $enemyCommand,
-        CommandInterface $command
+        CommandInterface $command,
+        int $typeTarget
     ): ActionInterface
     {
         // Создаем коллекцию событий с одним событием - добавлением эффекта на увеличение здоровья
@@ -138,7 +183,7 @@ class EffectActionTest extends TestCase
             $unit,
             $enemyCommand,
             $command,
-            EffectAction::TARGET_SELF,
+            $typeTarget,
             'use Reserve Forces',
             $effects
         );

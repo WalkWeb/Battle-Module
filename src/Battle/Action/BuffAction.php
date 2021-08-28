@@ -61,7 +61,7 @@ class BuffAction extends AbstractAction
             throw new ActionException(ActionException::NO_TARGET_FOR_BUFF);
         }
 
-        return $this->actionUnit->applyAction($this);
+        return $this->targetUnit->applyAction($this);
     }
 
     public function getPower(): int

@@ -329,6 +329,7 @@ EOT;
         $ability = new ReserveForcesAbility($unit);
 
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
             $action->handle();
         }
 

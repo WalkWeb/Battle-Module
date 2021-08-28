@@ -92,6 +92,7 @@ class ReserveForcesAbilityTest extends TestCase
         $actions = $unit->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
             $message = $action->handle();
             self::assertEquals(self::MESSAGE, $message);
         }
@@ -128,6 +129,7 @@ class ReserveForcesAbilityTest extends TestCase
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
             $action->handle();
         }
 
@@ -163,6 +165,7 @@ class ReserveForcesAbilityTest extends TestCase
         $actions = $unit->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
             $action->handle();
         }
 
@@ -184,6 +187,7 @@ class ReserveForcesAbilityTest extends TestCase
         $actions = $unit->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
             $action->handle();
         }
 

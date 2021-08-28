@@ -91,15 +91,23 @@ class Message implements MessageInterface
     }
 
     /**
+     * Сообщение строится по разному, в зависимости от того, на кого применяется эффект - на себя, или на другого юнита
+     *
      * @param EffectAction $action
      * @return string
+     * @throws ActionException
      */
     public function applyEffect(EffectAction $action): string
     {
-        // TODO Пока эффект применяется только на себя, в будущем сообщение нужно формировать по разному, в зависимости
-        // TODO от того, применен эффект на себя или на кого-то другого
+        if ($action->getActionUnit()->getId() === $action->getTargetUnit()->getId()) {
+            return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+                $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
+        }
 
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
+            $action->getActionUnit()->getName() . '</span> ' .
+            $this->translation->trans($action->getNameAction()) . ' ' . $this->translation->trans('on') .
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
+            $action->getTargetUnit()->getName() . '</span>';
     }
 }
