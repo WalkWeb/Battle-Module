@@ -108,12 +108,6 @@ class Command implements CommandInterface
 
         ksort($unitsForHeal);
 
-        foreach ($unitsForHeal as $key => $unitForHeal) {
-            echo '<p>[' . $unitForHeal->getName() . ']: '.$unitForHeal->getLife().'/'.$unitForHeal->getTotalLife().' ('.$key.'%)</p>';
-        }
-
-        var_dump($unitsForHeal[array_key_first($unitsForHeal)]->getName());
-
         return $unitsForHeal[array_key_first($unitsForHeal)];
     }
 
