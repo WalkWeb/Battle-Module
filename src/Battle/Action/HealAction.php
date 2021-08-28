@@ -49,9 +49,6 @@ class HealAction extends AbstractAction
      */
     public function handle(): string
     {
-        $this->targetUnit = $this->searchTargetUnit();
-
-        // Такой ситуации быть не должно, потому возможность применения события должна проверяться до её применения
         if (!$this->targetUnit) {
             throw new ActionException(ActionException::NO_TARGET_FOR_HEAL);
         }
@@ -75,13 +72,5 @@ class HealAction extends AbstractAction
     public function getNameAction(): string
     {
         return $this->name;
-    }
-
-    /**
-     * @return bool
-     */
-    public function canByUsed(): bool
-    {
-        return (bool)$this->alliesCommand->getUnitForHeal();
     }
 }

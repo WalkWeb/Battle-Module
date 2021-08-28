@@ -42,6 +42,13 @@ abstract class AbstractAction implements ActionInterface
      */
     protected $factualPower = 0;
 
+    /**
+     * @param UnitInterface $actionUnit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @param int $typeTarget
+     * @throws ActionException
+     */
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
@@ -53,6 +60,7 @@ abstract class AbstractAction implements ActionInterface
         $this->enemyCommand = $enemyCommand;
         $this->alliesCommand = $alliesCommand;
         $this->typeTarget = $typeTarget;
+        $this->targetUnit = $this->searchTargetUnit();
     }
 
     public function getActionUnit(): UnitInterface
@@ -107,15 +115,11 @@ abstract class AbstractAction implements ActionInterface
      *
      * Соответственно внутри HealAction и EffectAction данный метод переназначается
      *
-     * TODO При добавлении эффектов и баффов механика работы событий усложнилась, и текущий дефолтный return true
-     * TODO может вызвать ошибки. Пока оставляем, но при любых непонятных ошибках с Action нужно будет отказаться от
-     * TODO такого варианта по умолчанию - пусть каждый Action делает фактическую проверку своего применения
-     *
      * @return bool
      */
     public function canByUsed(): bool
     {
-        return true;
+        return $this->targetUnit !== null;
     }
 
     /**

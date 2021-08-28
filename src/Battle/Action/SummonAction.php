@@ -55,8 +55,12 @@ class SummonAction extends AbstractAction
      */
     public function handle(): string
     {
+        if (!$this->targetUnit) {
+            throw new ActionException(ActionException::NO_TARGET_FOR_SUMMON);
+        }
+
         $this->alliesCommand->getUnits()->add($this->summon);
-        return $this->actionUnit->applyAction($this);
+        return $this->targetUnit->applyAction($this);
     }
 
     /**

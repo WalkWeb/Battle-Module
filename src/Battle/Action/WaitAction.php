@@ -18,6 +18,7 @@ class WaitAction extends AbstractAction
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
+     * @throws ActionException
      */
     public function __construct(
         UnitInterface $actionUnit,

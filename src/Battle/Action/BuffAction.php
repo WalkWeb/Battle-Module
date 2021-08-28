@@ -55,8 +55,6 @@ class BuffAction extends AbstractAction
      */
     public function handle(): string
     {
-        $this->targetUnit = $this->searchTargetUnit();
-
         if (!$this->targetUnit) {
             throw new ActionException(ActionException::NO_TARGET_FOR_BUFF);
         }

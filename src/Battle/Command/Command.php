@@ -91,24 +91,30 @@ class Command implements CommandInterface
      */
     public function getUnitForHeal(): ?UnitInterface
     {
-        $unitForHeal = [];
+        $unitsForHeal = [];
 
         foreach ($this->units as $unit) {
             $life = $unit->getLife();
             $totalLife = $unit->getTotalLife();
             if ($life > 0 && $life < $totalLife) {
                 $percentLife = (int)(($life / $totalLife) * 100);
-                $unitForHeal[$percentLife] = $unit;
+                $unitsForHeal[$percentLife] = $unit;
             }
         }
 
-        if (count($unitForHeal) === 0) {
+        if (count($unitsForHeal) === 0) {
             return null;
         }
 
-        ksort($unitForHeal);
+        ksort($unitsForHeal);
 
-        return $unitForHeal[array_key_first($unitForHeal)];
+        foreach ($unitsForHeal as $key => $unitForHeal) {
+            echo '<p>[' . $unitForHeal->getName() . ']: '.$unitForHeal->getLife().'/'.$unitForHeal->getTotalLife().' ('.$key.'%)</p>';
+        }
+
+        var_dump($unitsForHeal[array_key_first($unitsForHeal)]->getName());
+
+        return $unitsForHeal[array_key_first($unitsForHeal)];
     }
 
     /**

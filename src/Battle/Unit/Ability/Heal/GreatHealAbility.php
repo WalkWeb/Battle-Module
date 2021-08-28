@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit\Ability\Heal;
 
 use Battle\Action\ActionCollection;
+use Battle\Action\ActionException;
 use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\AbstractAbility;
@@ -27,6 +28,7 @@ class GreatHealAbility extends AbstractAbility
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
+     * @throws ActionException
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
@@ -73,6 +75,7 @@ class GreatHealAbility extends AbstractAbility
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return bool
+     * @throws ActionException
      */
     public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
     {

@@ -55,7 +55,7 @@ class CommandHealTest extends TestCase
             [
                 [
                     [
-                        'id'           => '63ad76c6-6a11-44ef-997b-fea1778bebe5',
+                        'id'           => 'd8eee3b4-8c0e-438d-b3ea-71af9190b6c3',
                         'name'         => 'Warrior',
                         'level'        => 1,
                         'avatar'       => 'url avatar 1',
@@ -70,7 +70,7 @@ class CommandHealTest extends TestCase
                     ],
                     // Самый битый юнит - именно он должен выбираться для лечения
                     [
-                        'id'           => 'fb8be211-0782-4c60-8865-68b177ffbe0c',
+                        'id'           => '974968e3-5599-4a72-bf85-3199fc8ff0ae',
                         'name'         => 'Knight',
                         'level'        => 1,
                         'avatar'       => 'url avatar 2',
@@ -84,7 +84,7 @@ class CommandHealTest extends TestCase
                         'command'      => 1,
                     ],
                     [
-                        'id'           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
+                        'id'           => '3c018373-efb5-4f21-91b9-918d5852f288',
                         'name'         => 'Archer',
                         'level'        => 1,
                         'avatar'       => 'url avatar 3',
@@ -99,7 +99,7 @@ class CommandHealTest extends TestCase
                     ],
                     // Мертвый юнит - он выбираться не должен
                     [
-                        'id'           => 'fb8be211-0782-4c60-8865-68b177ffbe3c',
+                        'id'           => '0470ea73-3cc0-434d-9f1d-441cdb9f9e26',
                         'name'         => 'Priest',
                         'level'        => 1,
                         'avatar'       => 'url avatar 3',
@@ -113,7 +113,7 @@ class CommandHealTest extends TestCase
                         'command'      => 1,
                     ],
                 ],
-                'fb8be211-0782-4c60-8865-68b177ffbe0c',
+                '974968e3-5599-4a72-bf85-3199fc8ff0ae',
             ],
         ];
     }

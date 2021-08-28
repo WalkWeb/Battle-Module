@@ -44,6 +44,8 @@ interface CommandInterface
     /**
      * Возвращает самого раненого живого юнита в команде, если все живы или мертвы - возвращает null
      *
+     * Важно: самый раненый считается по % оставшегося здоровья, а не по фактическому количеству оставшегося здоровья
+     *
      * @return UnitInterface|null
      */
     public function getUnitForHeal(): ?UnitInterface;

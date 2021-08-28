@@ -41,12 +41,17 @@ class EffectAction extends AbstractAction
         return self::HANDLE_METHOD;
     }
 
+    /**
+     * @return string
+     * @throws ActionException
+     */
     public function handle(): string
     {
-        // TODO Сейчас эффект применяется только на себе, в будущем нужно добавить параметр, на кого должен применяться
-        // TODO эффект
+        if (!$this->targetUnit) {
+            throw new ActionException(ActionException::NO_TARGET_FOR_EFFECT);
+        }
 
-        return $this->actionUnit->applyAction($this);
+        return $this->targetUnit->applyAction($this);
     }
 
     public function getNameAction(): string
@@ -61,11 +66,13 @@ class EffectAction extends AbstractAction
 
     public function canByUsed(): bool
     {
-        // TODO Доработать метод, когда цель будет выбираться не только по себе
+        if (!$this->targetUnit) {
+            return false;
+        }
 
         foreach ($this->effects as $effect) {
             // Если хотя бы один из накладываемых эффектов еще есть на юните - событие считаем невозможным для применения
-            if ($this->actionUnit->getEffects()->exist($effect)) {
+            if ($this->targetUnit->getEffects()->exist($effect)) {
                 return false;
             }
         }

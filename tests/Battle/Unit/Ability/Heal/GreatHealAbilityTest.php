@@ -27,20 +27,16 @@ class GreatHealAbilityTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
+        // Наносим урон юниту, чтобы способность перешла в "возможную для использования"
+        $damage = new DamageAction($enemyUnit, $command, $enemyCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $damage->handle();
+
         $ability = new GreatHealAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
-
-        self::assertFalse($ability->canByUsed($enemyCommand, $command));
-
-        // Наносим урон юниту, чтобы способность перешла в "возможную для использования"
-        $damage = new DamageAction($enemyUnit, $command, $enemyCommand, DamageAction::TARGET_RANDOM_ENEMY);
-        $damage->handle();
-
-        // После чего, способность может быть использована
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
         // Up concentration
