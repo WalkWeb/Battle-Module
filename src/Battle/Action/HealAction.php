@@ -26,11 +26,12 @@ class HealAction extends AbstractAction
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
+        int $typeTarget,
         ?int $power = null,
         ?string $name = null
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->power = $power ?? (int)($actionUnit->getDamage() * 1.2);
         $this->name = $name ?? self::NAME;
     }
@@ -48,7 +49,7 @@ class HealAction extends AbstractAction
      */
     public function handle(): string
     {
-        $this->targetUnit = $this->alliesCommand->getUnitForHeal();
+        $this->targetUnit = $this->searchTargetUnit();
 
         // Такой ситуации быть не должно, потому возможность применения события должна проверяться до её применения
         if (!$this->targetUnit) {

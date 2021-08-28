@@ -70,6 +70,7 @@ class TitanTest extends TestCase
             $unit,
             $enemyCommand,
             $alliesCommand,
+            BuffAction::TARGET_SELF,
             $useMessage,
             $modifyMethod,
             $modifyPower
@@ -92,6 +93,7 @@ class TitanTest extends TestCase
             $unit,
             $enemyCommand,
             $alliesCommand,
+            BuffAction::TARGET_SELF,
             $useMessage,
             $effects
         ));

@@ -98,7 +98,7 @@ class HealActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $healAction = new HealAction($unit, $enemyCommand, $command);
+        $healAction = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
 
         self::assertEquals((int)($unit->getDamage() * 1.2), $healAction->getPower());
     }
@@ -142,7 +142,7 @@ class HealActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new HealAction($unit, $enemyCommand, $command);
+        $action = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_TARGET_UNIT);
@@ -161,7 +161,7 @@ class HealActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new HealAction($unit, $enemyCommand, $command);
+        $action = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_TARGET_FOR_HEAL);

@@ -9,6 +9,13 @@ use Battle\Unit\UnitInterface;
 
 interface ActionInterface
 {
+    // Применяет событие на себя
+    public const TARGET_SELF           = 1;
+    // Применяет событие на случайного врага
+    public const TARGET_RANDOM_ENEMY   = 2;
+    // Применяет событие на самого раненого союзника
+    public const TARGET_WOUNDED_ALLIES = 3;
+
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 
     /**
@@ -47,6 +54,13 @@ interface ActionInterface
      * @return UnitInterface
      */
     public function getActionUnit(): UnitInterface;
+
+    /**
+     * Возвращает тип выбора цели для применения события
+     *
+     * @return int
+     */
+    public function getTypeTarget(): int;
 
     /**
      * Возвращает юнита к которому применяется действие

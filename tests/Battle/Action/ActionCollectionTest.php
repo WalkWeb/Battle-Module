@@ -23,7 +23,7 @@ class ActionCollectionTest extends TestCase
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
 
         $actionCollection = new ActionCollection();
         $actionCollection->add($action);
@@ -43,8 +43,8 @@ class ActionCollectionTest extends TestCase
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
 
-        $damageAction = new DamageAction($unit, $defendCommand, $alliesCommand);
-        $healAction = new HealAction($unit, $defendCommand, $alliesCommand);
+        $damageAction = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $healAction = new HealAction($unit, $defendCommand, $alliesCommand, HealAction::TARGET_WOUNDED_ALLIES);
 
         $actionCollection = new ActionCollection();
         $actionCollection->add($damageAction);

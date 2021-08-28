@@ -37,19 +37,30 @@ class BuffAction extends AbstractAction
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
+        int $typeTarget,
         string $name,
         string $modifyMethod,
         int $power
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->name = $name;
         $this->modifyMethod = $modifyMethod;
         $this->power = $power;
     }
 
+    /**
+     * @return string
+     * @throws ActionException
+     */
     public function handle(): string
     {
+        $this->targetUnit = $this->searchTargetUnit();
+
+        if (!$this->targetUnit) {
+            throw new ActionException(ActionException::NO_TARGET_FOR_BUFF);
+        }
+
         return $this->actionUnit->applyAction($this);
     }
 
@@ -89,6 +100,7 @@ class BuffAction extends AbstractAction
             $this->actionUnit,
             $this->enemyCommand,
             $this->alliesCommand,
+            $this->typeTarget,
             $this->name,
             $this->modifyMethod . self::ROLLBACK_METHOD_SUFFIX,
             $this->power

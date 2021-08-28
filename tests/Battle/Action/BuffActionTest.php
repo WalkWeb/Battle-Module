@@ -43,7 +43,7 @@ class BuffActionTest extends TestCase
 
         $oldLife = $unit->getTotalLife();
 
-        $action = new BuffAction($unit, $enemyCommand, $command, $name, $modifyMethod, $power);
+        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
         $multiplier = $action->getPower() / 100;
         $newLife = (int)($unit->getTotalLife() * $multiplier);
@@ -71,6 +71,7 @@ class BuffActionTest extends TestCase
      * @throws CommandException
      * @throws UnitException
      * @throws UnitFactoryException
+     * @throws ActionException
      */
     public function testBuffActionReducedLife(): void
     {
@@ -83,7 +84,7 @@ class BuffActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction($unit, $enemyCommand, $command, $name, $modifyMethod, $power);
+        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
         $this->expectException(UnitException::class);
         $this->expectErrorMessage(UnitException::NO_REDUCED_LIFE_MULTIPLIER);
@@ -96,6 +97,7 @@ class BuffActionTest extends TestCase
      * @throws CommandException
      * @throws UnitException
      * @throws UnitFactoryException
+     * @throws ActionException
      */
     public function testBuffActionUndefinedModifyMethod(): void
     {
@@ -108,7 +110,7 @@ class BuffActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction($unit, $enemyCommand, $command, $name, $modifyMethod, $power);
+        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
         $this->expectException(UnitException::class);
         $this->expectErrorMessage(UnitException::UNDEFINED_MODIFY_METHOD . ': ' . $modifyMethod);
@@ -122,6 +124,7 @@ class BuffActionTest extends TestCase
      * @throws UnitException
      * @throws UnitFactoryException
      * @throws ContainerException
+     * @throws ActionException
      */
     public function testBuffActionRuMessage(): void
     {
@@ -139,10 +142,37 @@ class BuffActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction($unit, $enemyCommand, $command, $name, $modifyMethod, $power);
+        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
         $message = $action->handle();
 
         self::assertEquals(self::RU_MESSAGE, $message);
+    }
+
+    /**
+     * @throws ActionException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testBuffActionNoTargetForBuff(): void
+    {
+        $name = 'use Reserve Forces';
+        $modifyMethod = 'multiplierMaxLife';
+        $power = 130;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(10);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Цель бафа - случайный противник, но противник мертв
+        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_RANDOM_ENEMY, $name, $modifyMethod, $power);
+
+        // Применяем баф и получаем исключение - нет цели для применения бафа
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage(ActionException::NO_TARGET_FOR_BUFF);
+        $action->handle();
     }
 }

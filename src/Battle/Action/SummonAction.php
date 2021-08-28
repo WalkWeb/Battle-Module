@@ -22,6 +22,15 @@ class SummonAction extends AbstractAction
      */
     private $summon;
 
+    /**
+     * В отличие от прочих событий, SummonAction всегда применяется к себе и не требует $typeTarget в конструктор
+     *
+     * @param UnitInterface $actionUnit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @param string $name
+     * @param UnitInterface $summon
+     */
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
@@ -30,7 +39,7 @@ class SummonAction extends AbstractAction
         UnitInterface $summon
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF);
         $this->name = $name;
         $this->summon = $summon;
     }

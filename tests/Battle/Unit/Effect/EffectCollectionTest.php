@@ -136,7 +136,7 @@ class EffectCollectionTest extends TestCase
         $collection = new EffectCollection();
 
         $actions = new ActionCollection();
-        $actions->add(new HealAction($unit, $enemyCommand, $command));
+        $actions->add(new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES));
 
         $collection->add(new Effect(
             'Effect#1',
@@ -172,7 +172,7 @@ class EffectCollectionTest extends TestCase
         $collection = new EffectCollection();
 
         $actions = new ActionCollection();
-        $actions->add(new HealAction($unit, $enemyCommand, $command));
+        $actions->add(new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES));
 
         $collection->add(new Effect(
             'Effect#1',

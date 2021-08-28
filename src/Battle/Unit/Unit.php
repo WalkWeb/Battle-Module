@@ -244,7 +244,12 @@ class Unit extends AbstractUnit
         $attacks = $this->calculateAttackSpeed();
 
         for ($i = 0; $i < $attacks; $i++) {
-            $collection->add(new DamageAction($this, $enemyCommand, $alliesCommand, $this->damage));
+            $collection->add(new DamageAction(
+                $this,
+                $enemyCommand,
+                $alliesCommand,
+                DamageAction::TARGET_RANDOM_ENEMY
+            ));
         }
 
         if (count($collection) === 0) {

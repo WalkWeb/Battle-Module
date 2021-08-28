@@ -26,11 +26,12 @@ class EffectAction extends AbstractAction
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
+        int $typeTarget,
         string $name,
         EffectCollection $effects
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->name = $name;
         $this->effects = $effects;
     }

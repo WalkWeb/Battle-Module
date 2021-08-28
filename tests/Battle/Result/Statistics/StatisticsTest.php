@@ -224,7 +224,7 @@ class StatisticsTest extends TestCase
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
 
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
         $action->handle();
         $statistics->addUnitAction($action);
 

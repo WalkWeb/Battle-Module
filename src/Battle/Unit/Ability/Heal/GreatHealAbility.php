@@ -37,6 +37,7 @@ class GreatHealAbility extends AbstractAbility
                 $this->unit,
                 $enemyCommand,
                 $alliesCommand,
+                HealAction::TARGET_WOUNDED_ALLIES,
                 $this->unit->getDamage() * 3,
                 self::USE_MESSAGE
             ));

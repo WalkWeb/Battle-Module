@@ -38,7 +38,7 @@ class ScenarioTest extends TestCase
         $defendUnit = UnitFactory::createByTemplate(2);
         $attackCommand = CommandFactory::create([$attackUnit]);
         $defendCommand = CommandFactory::create([$defendUnit]);
-        $action = new DamageAction($attackUnit, $defendCommand, $attackCommand);
+        $action = new DamageAction($attackUnit, $defendCommand, $attackCommand, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
 
@@ -228,13 +228,13 @@ class ScenarioTest extends TestCase
                         'thp'            => 130,
                         'unit_cons_bar2' => 20,
                         'unit_rage_bar2' => 14,
-                        'unit_effects'   => '<img src="icon.png" width="22" alt="" /> <span>8</span>',
+                        'unit_effects'   => '<img src="images/icons/ability/156.png" width="22" alt="" /> <span>8</span>',
                         'targets'        => [
                             [
                                 'user_id'      => $action->getActionUnit()->getId(),
                                 'hp'           => $action->getActionUnit()->getLife(),
                                 'thp'          => $action->getActionUnit()->getTotalLife(),
-                                'unit_effects' => '<img src="icon.png" width="22" alt="" /> <span>8</span>',
+                                'unit_effects' => '<img src="images/icons/ability/156.png" width="22" alt="" /> <span>8</span>',
                             ],
                         ],
                     ],
@@ -392,14 +392,14 @@ class ScenarioTest extends TestCase
         // Создаем коллекцию событий с одним событием - добавлением эффекта на увеличение здоровья
         $onApplyActions = new ActionCollection();
         $onApplyActions->add(
-            new BuffAction($unit, $enemyCommand, $command, 'use Reserve Forces', 'multiplierMaxLife', 130)
+            new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, 'use Reserve Forces', 'multiplierMaxLife', 130)
         );
 
         // Создаем коллекцию эффектов, которые будут применяться на юнита при добавлении ему эффекта
         $effects = new EffectCollection();
-        $effects->add(new Effect('Effect#123', 'icon.png', 8, $onApplyActions, new ActionCollection(), new ActionCollection()));
+        $effects->add(new Effect('Effect#123', 'images/icons/ability/156.png', 8, $onApplyActions, new ActionCollection(), new ActionCollection()));
 
         // Создаем и возвращаем EffectAction
-        return new EffectAction($unit, $enemyCommand, $command, 'use Reserve Forces', $effects);
+        return new EffectAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, 'use Reserve Forces', $effects);
     }
 }

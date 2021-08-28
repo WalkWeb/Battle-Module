@@ -37,7 +37,7 @@ class GreatHealAbilityTest extends TestCase
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
         // Наносим урон юниту, чтобы способность перешла в "возможную для использования"
-        $damage = new DamageAction($enemyUnit, $command, $enemyCommand);
+        $damage = new DamageAction($enemyUnit, $command, $enemyCommand, DamageAction::TARGET_RANDOM_ENEMY);
         $damage->handle();
 
         // После чего, способность может быть использована

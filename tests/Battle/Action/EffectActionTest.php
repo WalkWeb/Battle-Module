@@ -40,7 +40,7 @@ class EffectActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new EffectAction($unit, $enemyCommand, $command, $name, $effects);
+        $action = new EffectAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF, $name, $effects);
 
         self::assertEquals('applyEffectAction', $action->getHandleMethod());
         self::assertEquals($effects, $action->getEffects());
@@ -118,7 +118,15 @@ class EffectActionTest extends TestCase
         // Создаем коллекцию событий с одним событием - добавлением эффекта на увеличение здоровья
         $onApplyActions = new ActionCollection();
         $onApplyActions->add(
-            new BuffAction($unit, $enemyCommand, $command, 'use Reserve Forces', 'multiplierMaxLife', 130)
+            new BuffAction(
+                $unit,
+                $enemyCommand,
+                $command,
+                EffectAction::TARGET_SELF,
+                'use Reserve Forces',
+                'multiplierMaxLife',
+                130
+            )
         );
 
         // Создаем коллекцию эффектов, которые будут применяться на юнита при добавлении ему эффекта
@@ -126,6 +134,13 @@ class EffectActionTest extends TestCase
         $effects->add(new Effect('Effect#123', 'icon.png', 8, $onApplyActions, new ActionCollection(), new ActionCollection()));
 
         // Создаем и возвращаем EffectAction
-        return new EffectAction($unit, $enemyCommand, $command, 'use Reserve Forces', $effects);
+        return new EffectAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            EffectAction::TARGET_SELF,
+            'use Reserve Forces',
+            $effects
+        );
     }
 }

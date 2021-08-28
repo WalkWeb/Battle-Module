@@ -4,10 +4,29 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
+use Battle\Command\CommandInterface;
+use Battle\Unit\UnitInterface;
+
 class WaitAction extends AbstractAction
 {
     private const NAME          = 'preparing to attack';
     private const HANDLE_METHOD = 'applyWaitAction';
+
+    /**
+     * В отличие от прочих событий, WaitAction всегда применяется к себе и не требует $typeTarget в конструктор
+     *
+     * @param UnitInterface $actionUnit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     */
+    public function __construct(
+        UnitInterface $actionUnit,
+        CommandInterface $enemyCommand,
+        CommandInterface $alliesCommand
+    )
+    {
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF);
+    }
 
     public function getHandleMethod(): string
     {

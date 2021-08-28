@@ -26,11 +26,12 @@ class DamageAction extends AbstractAction
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
+        int $typeTarget,
         ?int $damage = null,
         ?string $name = null
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->damage = $damage ?? $actionUnit->getDamage();
         $this->name = $name ?? self::NAME;
     }
@@ -50,7 +51,7 @@ class DamageAction extends AbstractAction
             throw new ActionException(ActionException::NO_DEFINED);
         }
 
-        $this->targetUnit = $this->getDefinedUnit();
+        $this->targetUnit = $this->searchTargetUnit();
 
         if (!$this->targetUnit) {
             throw new ActionException(ActionException::NO_DEFINED_AGAIN);
@@ -67,15 +68,6 @@ class DamageAction extends AbstractAction
     public function setFactualPower(int $factualPower): void
     {
         $this->factualPower = $factualPower;
-    }
-
-    private function getDefinedUnit(): ?UnitInterface
-    {
-        if ((!$this->actionUnit->isMelee()) || ($this->actionUnit->isMelee() && !$this->enemyCommand->existMeleeUnits())) {
-            return $this->enemyCommand->getUnitForAttacks();
-        }
-
-        return $this->enemyCommand->getMeleeUnitForAttacks();
     }
 
     public function getNameAction(): string

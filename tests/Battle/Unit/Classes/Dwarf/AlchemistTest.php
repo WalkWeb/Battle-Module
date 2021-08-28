@@ -69,6 +69,7 @@ class AlchemistTest extends TestCase
             $unit,
             $enemyCommand,
             $command,
+            HealAction::TARGET_SELF,
             15
         ));
 

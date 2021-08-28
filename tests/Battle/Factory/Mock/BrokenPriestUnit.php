@@ -21,7 +21,7 @@ class BrokenPriestUnit extends Unit
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         $collection = new ActionCollection();
-        $collection->add(new HealAction($this, $enemyCommand, $alliesCommand));
+        $collection->add(new HealAction($this, $enemyCommand, $alliesCommand, HealAction::TARGET_WOUNDED_ALLIES));
         return $collection;
     }
 }

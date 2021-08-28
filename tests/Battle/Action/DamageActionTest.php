@@ -25,7 +25,7 @@ class DamageActionTest extends TestCase
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
         self::assertEquals($unit->getDamage(), $action->getPower());
         self::assertTrue($action->canByUsed());
     }
@@ -39,7 +39,7 @@ class DamageActionTest extends TestCase
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
         $message = $action->handle();
         self::assertEquals($unit->getDamage(), $action->getPower());
         self::assertEquals(self::MESSAGE, $message);
@@ -54,7 +54,7 @@ class DamageActionTest extends TestCase
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
         $action->handle();
 
         self::assertEquals(20, $action->getPower());
@@ -121,5 +121,26 @@ class DamageActionTest extends TestCase
             $this->expectExceptionMessage(ActionException::NO_DEFINED_AGAIN);
             $action->handle();
         }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testDamageActionUnknownTypeTarget(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+
+        $typeTarget = 10;
+
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, $typeTarget);
+
+        self::assertEquals($typeTarget, $action->getTypeTarget());
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage(ActionException::UNKNOWN_TYPE_TARGET . ': ' . $typeTarget);
+        $action->handle();
     }
 }

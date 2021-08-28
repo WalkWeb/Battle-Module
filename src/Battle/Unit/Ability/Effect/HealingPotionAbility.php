@@ -112,6 +112,7 @@ class HealingPotionAbility extends AbstractAbility
                 $this->unit,
                 $enemyCommand,
                 $alliesCommand,
+                HealAction::TARGET_SELF,
                 self::POWER
             ));
 
@@ -135,6 +136,7 @@ class HealingPotionAbility extends AbstractAbility
                 $this->unit,
                 $enemyCommand,
                 $alliesCommand,
+                EffectAction::TARGET_SELF,
                 self::USE_MESSAGE,
                 $effects
             ));

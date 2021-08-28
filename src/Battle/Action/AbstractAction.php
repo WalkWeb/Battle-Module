@@ -31,6 +31,13 @@ abstract class AbstractAction implements ActionInterface
     protected $enemyCommand;
 
     /**
+     * Тип выбора цели для применения события, например: на себя, на врага, на самого раненого союзника и т.д.
+     *
+     * @var int
+     */
+    protected $typeTarget;
+
+    /**
      * @var int
      */
     protected $factualPower = 0;
@@ -38,17 +45,24 @@ abstract class AbstractAction implements ActionInterface
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
-        CommandInterface $alliesCommand
+        CommandInterface $alliesCommand,
+        int $typeTarget
     )
     {
         $this->actionUnit = $actionUnit;
         $this->enemyCommand = $enemyCommand;
         $this->alliesCommand = $alliesCommand;
+        $this->typeTarget = $typeTarget;
     }
 
     public function getActionUnit(): UnitInterface
     {
         return $this->actionUnit;
+    }
+
+    public function getTypeTarget(): int
+    {
+        return $this->typeTarget;
     }
 
     /**
@@ -79,17 +93,23 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
-     * Сейчас всего 4 типа событий, и 3 из них могут примениться по-умолчанию, это:
+     * Сейчас всего 6 типа событий, и 4 из них могут примениться по-умолчанию, это:
      *
      * 1. Урон (если все противники умерли - бой заканчивается)
      * 2. Пропуск хода
      * 3. Призыв
+     * 4. Баф
      *
-     * И только для одного события, нужно делать проверку наличия цели, это:
+     * И только для двух событий, нужно делать проверку на возможность применения:
      *
-     * 4. Лечение
+     * 5. Лечение
+     * 6. Эффект (если юнит уже имеет аналогичный эффект - накладывать его еще раз не нужно)
      *
-     * Соответственно внутри самого HealAction данный метод переназначается
+     * Соответственно внутри HealAction и EffectAction данный метод переназначается
+     *
+     * TODO При добавлении эффектов и баффов механика работы событий усложнилась, и текущий дефолтный return true
+     * TODO может вызвать ошибки. Пока оставляем, но при любых непонятных ошибках с Action нужно будет отказаться от
+     * TODO такого варианта по умолчанию - пусть каждый Action делает фактическую проверку своего применения
      *
      * @return bool
      */
@@ -150,5 +170,37 @@ abstract class AbstractAction implements ActionInterface
     public function getEffects(): EffectCollection
     {
         throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
+    }
+
+    /**
+     * Ищет юнита для применения события.
+     *
+     * @return UnitInterface|null
+     * @throws ActionException
+     */
+    protected function searchTargetUnit(): ?UnitInterface
+    {
+        switch ($this->typeTarget) {
+            case self::TARGET_SELF:
+                return $this->actionUnit;
+            case self::TARGET_RANDOM_ENEMY:
+               return $this->getRandomEnemyUnit();
+            case self::TARGET_WOUNDED_ALLIES:
+                return $this->alliesCommand->getUnitForHeal();
+        }
+
+        throw new ActionException(ActionException::UNKNOWN_TYPE_TARGET . ': ' . $this->typeTarget);
+    }
+
+    /**
+     * @return UnitInterface|null
+     */
+    private function getRandomEnemyUnit(): ?UnitInterface
+    {
+        if ((!$this->actionUnit->isMelee()) || ($this->actionUnit->isMelee() && !$this->enemyCommand->existMeleeUnits())) {
+            return $this->enemyCommand->getUnitForAttacks();
+        }
+
+        return $this->enemyCommand->getMeleeUnitForAttacks();
     }
 }

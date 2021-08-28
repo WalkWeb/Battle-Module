@@ -221,6 +221,7 @@ class ReserveForcesAbilityTest extends TestCase
             $unit,
             $enemyCommand,
             $alliesCommand,
+            BuffAction::TARGET_SELF,
             $useMessage,
             $modifyMethod,
             $modifyPower
@@ -243,6 +244,7 @@ class ReserveForcesAbilityTest extends TestCase
             $unit,
             $enemyCommand,
             $alliesCommand,
+            EffectAction::TARGET_SELF,
             $useMessage,
             $effects
         ));

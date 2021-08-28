@@ -106,6 +106,7 @@ class ReserveForcesAbility extends AbstractAbility
                 $this->unit,
                 $enemyCommand,
                 $alliesCommand,
+                BuffAction::TARGET_SELF,
                 self::USE_MESSAGE,
                 self::MODIFY_METHOD,
                 self::MODIFY_POWER
@@ -131,6 +132,7 @@ class ReserveForcesAbility extends AbstractAbility
                 $this->unit,
                 $enemyCommand,
                 $alliesCommand,
+                EffectAction::TARGET_SELF,
                 self::USE_MESSAGE,
                 $effects
             ));

@@ -23,6 +23,9 @@ class Scenario implements ScenarioInterface
     private $scenario = [];
 
     /**
+     * TODO Метод, который будет формировать сценарий хранить в самом Action - это позволит, например, лечение от юнита
+     * TODO и лечение от эффекта анимировать разными вариантами
+     *
      * @param ActionInterface $action
      * @param StatisticInterface $statistic
      * @throws ActionException
