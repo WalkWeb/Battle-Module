@@ -23,7 +23,7 @@ class ActionFactory
     /**
      * Создает Action на основе массива параметров
      *
-     * TODO Пока реализовано только создание DamageAction
+     * TODO Пока реализовано только создание DamageAction и HealAction
      *
      * Пример данных:
      *
@@ -52,18 +52,24 @@ class ActionFactory
         $enemyCommand = self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA);
         $alliesCommand = self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA);
         $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
-        $damage = self::intOrNull($data, 'damage', ActionException::INVALID_DAMAGE_DATA);
-        $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
 
         $className = self::$map[$type];
 
-        return new $className(
-            $actionUnit,
-            $enemyCommand,
-            $alliesCommand,
-            $typeTarget,
-            $damage,
-            $name
-        );
+        if ($className === DamageAction::class || $className === HealAction::class) {
+
+            $power = self::intOrNull($data, 'power', ActionException::INVALID_POWER_DATA);
+            $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
+
+            return new $className(
+                $actionUnit,
+                $enemyCommand,
+                $alliesCommand,
+                $typeTarget,
+                $power,
+                $name
+            );
+        }
+
+        throw new ActionException(ActionException::NO_REALIZE);
     }
 }

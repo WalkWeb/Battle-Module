@@ -8,6 +8,7 @@ use Battle\Action\ActionException;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
+use Battle\Action\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
@@ -54,7 +55,7 @@ class ActionFactoryTest extends TestCase
             'enemy_command'  => $enemyCommand,
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-            'damage'         => $damage = 50,
+            'power'          => $damage = 50,
             'name'           => $name = 'action name 123',
         ];
 
@@ -68,19 +69,92 @@ class ActionFactoryTest extends TestCase
     }
 
     /**
-     * Тесты на различные варианты невалидных данных
+     * Тест на успешное создание HealAction на основе массива с данными
+     *
+     * @throws Exception
+     */
+    public function testActionFactoryCreateHealSuccess(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $actionFactory = new ActionFactory();
+
+        // Вариант данных без damage и name
+        $data = [
+            'type'           => ActionInterface::HEAL,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES,
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertInstanceOf(HealAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_WOUNDED_ALLIES, $action->getTypeTarget());
+        self::assertEquals((int)($unit->getDamage() * 1.2), $action->getPower());
+        self::assertEquals('heal', $action->getNameAction());
+
+        // Полный набор данных
+        $data = [
+            'type'           => ActionInterface::HEAL,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES,
+            'power'          => $power = 50,
+            'name'           => $name = 'action name 123',
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertInstanceOf(HealAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_WOUNDED_ALLIES, $action->getTypeTarget());
+        self::assertEquals($power, $action->getPower());
+        self::assertEquals($name, $action->getNameAction());
+    }
+
+    /**
+     * Тесты на различные варианты невалидных данных для (перебираются некорректные варианты для всех видов Action)
      *
      * @dataProvider failDataProvider
      * @param array $data
      * @param string $error
      * @throws Exception
      */
-    public function testActionFactoryCreateDamageFail(array $data, string $error): void
+    public function testActionFactoryCreateFail(array $data, string $error): void
     {
         $actionFactory = new ActionFactory();
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
+        $actionFactory->create($data);
+    }
+
+    /**
+     * Временный тест на создание Action, который пока не реализован
+     *
+     * @throws Exception
+     */
+    public function testActionFactoryNoRealize(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $actionFactory = new ActionFactory();
+
+        // Вариант данных без damage и name
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES,
+        ];
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage(ActionException::NO_REALIZE);
         $actionFactory->create($data);
     }
 
@@ -105,7 +179,7 @@ class ActionFactoryTest extends TestCase
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
+                    'power'          => 50,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_TYPE_DATA,
@@ -118,7 +192,7 @@ class ActionFactoryTest extends TestCase
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
+                    'power'          => 50,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_TYPE_DATA,
@@ -131,7 +205,7 @@ class ActionFactoryTest extends TestCase
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
+                    'power'          => 50,
                     'name'           => 'action name',
                 ],
                 ActionException::UNKNOWN_TYPE_ACTION,
@@ -143,7 +217,7 @@ class ActionFactoryTest extends TestCase
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
+                    'power'          => 50,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_ACTION_UNIT_DATA,
@@ -156,7 +230,7 @@ class ActionFactoryTest extends TestCase
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
+                    'power'          => 50,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_ACTION_UNIT_DATA,
@@ -168,7 +242,7 @@ class ActionFactoryTest extends TestCase
                     'action_unit'    => $actionUnit,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
+                    'power'          => 50,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
@@ -181,7 +255,7 @@ class ActionFactoryTest extends TestCase
                     'enemy_command'  => new UnitFactory(),
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
+                    'power'          => 50,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
@@ -189,12 +263,12 @@ class ActionFactoryTest extends TestCase
             [
                 // Отсутствует allies_command
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
-                    'name'           => 'action name',
+                    'type'          => ActionInterface::DAMAGE,
+                    'action_unit'   => $actionUnit,
+                    'enemy_command' => $enemyCommand,
+                    'type_target'   => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'power'         => 50,
+                    'name'          => 'action name',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
             ],
@@ -206,7 +280,7 @@ class ActionFactoryTest extends TestCase
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => new UnitFactory(),
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
+                    'power'          => 50,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
@@ -218,7 +292,7 @@ class ActionFactoryTest extends TestCase
                     'action_unit'    => $actionUnit,
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
-                    'damage'         => 50,
+                    'power'          => 50,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_TYPE_TARGET_DATA,
@@ -231,7 +305,7 @@ class ActionFactoryTest extends TestCase
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => true,
-                    'damage'         => 50,
+                    'power'          => 50,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_TYPE_TARGET_DATA,
@@ -244,10 +318,10 @@ class ActionFactoryTest extends TestCase
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => '50',
+                    'power'          => '50',
                     'name'           => 'action name',
                 ],
-                ActionException::INVALID_DAMAGE_DATA,
+                ActionException::INVALID_POWER_DATA,
             ],
             [
                 // name некорректного типа
@@ -257,7 +331,7 @@ class ActionFactoryTest extends TestCase
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
+                    'power'          => 50,
                     'name'           => ['action name'],
                 ],
                 ActionException::INVALID_NAME_DATA,
