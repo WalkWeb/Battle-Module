@@ -97,6 +97,24 @@ class ActionFactory
 
         }
 
+        if ($className === BuffAction::class) {
+
+            $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
+            $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
+            $modifyMethod = self::string($data, 'modify_method', ActionException::INVALID_MODIFY_METHOD_DATA);
+            $power = self::int($data, 'power', ActionException::INVALID_POWER_DATA);
+
+            return new $className(
+                $actionUnit,
+                $enemyCommand,
+                $alliesCommand,
+                $typeTarget,
+                $name,
+                $modifyMethod,
+                $power
+            );
+        }
+
         throw new ActionException(ActionException::NO_REALIZE);
     }
 }

@@ -7,6 +7,7 @@ namespace Tests\Battle\Action;
 use Battle\Action\ActionException;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Action\SummonAction;
@@ -130,7 +131,6 @@ class ActionFactoryTest extends TestCase
 
         $actionFactory = new ActionFactory();
 
-        // Вариант данных без damage и name
         $data = [
             'type'           => ActionInterface::WAIT,
             'action_unit'    => $unit,
@@ -170,7 +170,6 @@ class ActionFactoryTest extends TestCase
             'race'         => 9,
         ];
 
-        // Вариант данных без damage и name
         $data = [
             'type'           => ActionInterface::SUMMON,
             'action_unit'    => $unit,
@@ -197,6 +196,38 @@ class ActionFactoryTest extends TestCase
         self::assertEquals($summonData['melee'], $action->getSummonUnit()->isMelee());
         self::assertEquals($summonData['class'], $action->getSummonUnit()->getClass()->getId());
         self::assertEquals($summonData['race'], $action->getSummonUnit()->getRace()->getId());
+    }
+
+    /**
+     * Тест на успешное создание BuffAction на основе массива с данными
+     *
+     * @throws Exception
+     */
+    public function testActionFactoryCreateBuffSuccess(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $actionFactory = new ActionFactory();
+
+        $data = [
+            'type'           => ActionInterface::BUFF,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_SELF,
+            'name'           => $name = 'buff name test',
+            'modify_method'  => $modifyMethod = 'modifyMethod',
+            'power'          => $power = 150,
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertInstanceOf(BuffAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
+        self::assertEquals($power, $action->getPower());
+        self::assertEquals($name, $action->getNameAction());
+        self::assertEquals($modifyMethod, $action->getModifyMethod());
     }
 
     /**
@@ -369,7 +400,7 @@ class ActionFactoryTest extends TestCase
                 ActionException::INVALID_COMMAND_DATA,
             ],
             [
-                // Отсутствует type_target
+                // Отсутствует type_target [для DamageAction]
                 [
                     'type'           => ActionInterface::DAMAGE,
                     'action_unit'    => $actionUnit,
@@ -381,9 +412,34 @@ class ActionFactoryTest extends TestCase
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // type_target некорректного типа
+                // type_target некорректного типа [для DamageAction]
                 [
                     'type'           => ActionInterface::DAMAGE,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => true,
+                    'power'          => 50,
+                    'name'           => 'action name',
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            [
+                // Отсутствует type_target [для HealAction]
+                [
+                    'type'           => ActionInterface::HEAL,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'power'          => 50,
+                    'name'           => 'action name',
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            [
+                // type_target некорректного типа [для HealAction]
+                [
+                    'type'           => ActionInterface::HEAL,
                     'action_unit'    => $actionUnit,
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
@@ -488,6 +544,114 @@ class ActionFactoryTest extends TestCase
                     'summon'         => [],
                 ],
                 UnitException::INCORRECT_NAME,
+            ],
+            [
+                // Отсутствует type_target [для BuffAction]
+                [
+                    'type'           => ActionInterface::HEAL,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'name'           => 'buff test',
+                    'modify_method'  => 'modify method test',
+                    'power'          => 150,
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            [
+                // type_target некорректного типа [для BuffAction]
+                [
+                    'type'           => ActionInterface::HEAL,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => true,
+                    'name'           => 'buff test',
+                    'modify_method'  => 'modify method test',
+                    'power'          => 150,
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            [
+                // Отсутствует name [для BuffAction]
+                [
+                    'type'           => ActionInterface::BUFF,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'modify_method'  => 'modify method test',
+                    'power'          => 150,
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            [
+                // name некорректного типа [для BuffAction]
+                [
+                    'type'           => ActionInterface::BUFF,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 123,
+                    'modify_method'  => 'modify method test',
+                    'power'          => 150,
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            [
+                // Отсутствует modify_method [для BuffAction]
+                [
+                    'type'           => ActionInterface::BUFF,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'buff test',
+                    'power'          => 150,
+                ],
+                ActionException::INVALID_MODIFY_METHOD_DATA,
+            ],
+            [
+                // modify_method некорректного типа [для BuffAction]
+                [
+                    'type'           => ActionInterface::BUFF,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'buff test',
+                    'modify_method'  => ['modify method test'],
+                    'power'          => 150,
+                ],
+                ActionException::INVALID_MODIFY_METHOD_DATA,
+            ],
+            [
+                // Отсутствует power [для BuffAction]
+                [
+                    'type'           => ActionInterface::BUFF,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'buff test',
+                    'modify_method'  => 'modify method test',
+                ],
+                ActionException::INVALID_POWER_DATA,
+            ],
+            [
+                // power некорректного типа [для BuffAction]
+                [
+                    'type'           => ActionInterface::BUFF,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'buff test',
+                    'modify_method'  => 'modify method test',
+                    'power'          => '150',
+                ],
+                ActionException::INVALID_POWER_DATA,
             ],
         ];
     }
