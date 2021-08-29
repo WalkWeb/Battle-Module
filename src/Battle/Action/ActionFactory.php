@@ -51,12 +51,12 @@ class ActionFactory
         $actionUnit = self::unit($data, 'action_unit', ActionException::INVALID_ACTION_UNIT_DATA);
         $enemyCommand = self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA);
         $alliesCommand = self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA);
-        $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
 
         $className = self::$map[$type];
 
         if ($className === DamageAction::class || $className === HealAction::class) {
 
+            $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
             $power = self::intOrNull($data, 'power', ActionException::INVALID_POWER_DATA);
             $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
 
@@ -67,6 +67,14 @@ class ActionFactory
                 $typeTarget,
                 $power,
                 $name
+            );
+        }
+
+        if ($className === WaitAction::class) {
+            return new $className(
+                $actionUnit,
+                $enemyCommand,
+                $alliesCommand
             );
         }
 

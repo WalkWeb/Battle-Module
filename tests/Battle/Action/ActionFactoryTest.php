@@ -9,6 +9,7 @@ use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
+use Battle\Action\WaitAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
@@ -114,6 +115,33 @@ class ActionFactoryTest extends TestCase
         self::assertEquals(ActionInterface::TARGET_WOUNDED_ALLIES, $action->getTypeTarget());
         self::assertEquals($power, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
+    }
+
+    /**
+     * Тест на успешное создание WaitAction на основе массива с данными
+     *
+     * @throws Exception
+     */
+    public function testActionFactoryCreateWaitSuccess(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $actionFactory = new ActionFactory();
+
+        // Вариант данных без damage и name
+        $data = [
+            'type'           => ActionInterface::WAIT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertInstanceOf(WaitAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
+        self::assertEquals('preparing to attack', $action->getNameAction());
     }
 
     /**
