@@ -9,6 +9,13 @@ use Battle\Unit\UnitInterface;
 
 interface ActionInterface
 {
+    public const DAMAGE = 1;
+    public const HEAL   = 2;
+    public const WAIT   = 3;
+    public const SUMMON = 4;
+    public const BUFF   = 5;
+    public const EFFECT = 6;
+
     // Применяет событие на себя
     public const TARGET_SELF           = 1;
     // Применяет событие на случайного врага
@@ -45,8 +52,6 @@ interface ActionInterface
      * @return string
      */
     public function getNameAction(): string;
-
-    // todo Add getRevertNameAction()
 
     /**
      * Возвращает юнита совершающего действие
@@ -152,4 +157,8 @@ interface ActionInterface
      * @throws ActionException
      */
     public function getEffects(): EffectCollection;
+
+    // todo Add getRevertNameAction()
+    // todo Add getAlliesCommand
+    // todo Add getEnemyCommand
 }

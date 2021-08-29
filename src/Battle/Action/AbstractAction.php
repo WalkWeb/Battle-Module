@@ -53,6 +53,8 @@ abstract class AbstractAction implements ActionInterface
         $this->enemyCommand = $enemyCommand;
         $this->alliesCommand = $alliesCommand;
         $this->typeTarget = $typeTarget;
+
+        // TODO Возможно имеет смысл сразу проверять $typeTarget на существование, чтобы созданный объект был валидным
     }
 
     public function getActionUnit(): UnitInterface
