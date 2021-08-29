@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
-use Battle\BattleException;
+use Battle\Traits\IdTrait;
 use Battle\Traits\Validation;
+use Battle\Unit\UnitFactory;
+use Exception;
 
 class ActionFactory
 {
     use Validation;
+    use IdTrait;
 
     private static $map = [
         ActionInterface::DAMAGE => DamageAction::class,
@@ -23,7 +26,7 @@ class ActionFactory
     /**
      * Создает Action на основе массива параметров
      *
-     * TODO Пока реализовано только создание DamageAction и HealAction
+     * TODO Пока реализовано только создание DamageAction, HealAction, WaitAction и SummonAction
      *
      * Пример данных:
      *
@@ -37,8 +40,7 @@ class ActionFactory
      *
      * @param array $data
      * @return ActionInterface
-     * @throws BattleException
-     * @throws ActionException
+     * @throws Exception
      */
     public function create(array $data): ActionInterface
     {
@@ -76,6 +78,23 @@ class ActionFactory
                 $enemyCommand,
                 $alliesCommand
             );
+        }
+
+        if ($className === SummonAction::class) {
+
+            $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
+            $summonData = self::array($data, 'summon', ActionException::INVALID_SUMMON_DATA);
+            $summonData['id'] = self::generateId();
+            $summonData['command'] = $actionUnit->getCommand();
+
+            return new $className(
+                $actionUnit,
+                $enemyCommand,
+                $alliesCommand,
+                $name,
+                UnitFactory::create($summonData, $actionUnit->getContainer())
+            );
+
         }
 
         throw new ActionException(ActionException::NO_REALIZE);

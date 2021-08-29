@@ -8,6 +8,8 @@ use Battle\BattleException;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
+// TODO Rename to ValidationTrait
+
 trait Validation
 {
     /**
@@ -88,6 +90,38 @@ trait Validation
     protected static function int(array $data, string $filed, string $error): int
     {
         if (!array_key_exists($filed, $data) || !is_int($data[$filed])) {
+            throw new BattleException($error);
+        }
+
+        return $data[$filed];
+    }
+
+    /**
+     * @param array $data
+     * @param string $filed
+     * @param string $error
+     * @return string
+     * @throws BattleException
+     */
+    protected static function string(array $data, string $filed, string $error): string
+    {
+        if (!array_key_exists($filed, $data) || !is_string($data[$filed])) {
+            throw new BattleException($error);
+        }
+
+        return $data[$filed];
+    }
+
+    /**
+     * @param array $data
+     * @param string $filed
+     * @param string $error
+     * @return array
+     * @throws BattleException
+     */
+    protected static function array(array $data, string $filed, string $error): array
+    {
+        if (!array_key_exists($filed, $data) || !is_array($data[$filed])) {
             throw new BattleException($error);
         }
 

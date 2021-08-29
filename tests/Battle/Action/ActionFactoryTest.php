@@ -9,6 +9,7 @@ use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
+use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -16,8 +17,9 @@ use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\BaseFactory;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Battle\Factory\UnitFactory as TestUnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
+use Battle\Unit\UnitFactory;
 
 class ActionFactoryTest extends TestCase
 {
@@ -145,6 +147,59 @@ class ActionFactoryTest extends TestCase
     }
 
     /**
+     * Тест на успешное создание SummonAction на основе массива с данными
+     *
+     * @throws Exception
+     */
+    public function testActionFactoryCreateSummonSuccess(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $actionFactory = new ActionFactory();
+
+        $summonData = [
+            'name'         => 'Imp',
+            'level'        => 1,
+            'avatar'       => '/images/avas/monsters/004.png',
+            'damage'       => 10,
+            'attack_speed' => 1,
+            'life'         => 30,
+            'total_life'   => 30,
+            'melee'        => true,
+            'class'        => 1,
+            'race'         => 9,
+        ];
+
+        // Вариант данных без damage и name
+        $data = [
+            'type'           => ActionInterface::SUMMON,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'name'           => 'Summon Imp',
+            'summon'         => $summonData,
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertInstanceOf(SummonAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
+        self::assertEquals('Summon Imp', $action->getNameAction());
+
+        self::assertEquals($summonData['name'], $action->getSummonUnit()->getName());
+        self::assertEquals($summonData['level'], $action->getSummonUnit()->getLevel());
+        self::assertEquals($summonData['avatar'], $action->getSummonUnit()->getAvatar());
+        self::assertEquals($summonData['damage'], $action->getSummonUnit()->getDamage());
+        self::assertEquals($summonData['attack_speed'], $action->getSummonUnit()->getAttackSpeed());
+        self::assertEquals($summonData['life'], $action->getSummonUnit()->getLife());
+        self::assertEquals($summonData['total_life'], $action->getSummonUnit()->getTotalLife());
+        self::assertEquals($summonData['melee'], $action->getSummonUnit()->isMelee());
+        self::assertEquals($summonData['class'], $action->getSummonUnit()->getClass()->getId());
+        self::assertEquals($summonData['race'], $action->getSummonUnit()->getRace()->getId());
+    }
+
+    /**
      * Тесты на различные варианты невалидных данных для (перебираются некорректные варианты для всех видов Action)
      *
      * @dataProvider failDataProvider
@@ -194,8 +249,8 @@ class ActionFactoryTest extends TestCase
      */
     public function failDataProvider(): array
     {
-        $actionUnit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $actionUnit = TestUnitFactory::createByTemplate(1);
+        $enemyUnit = TestUnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -352,7 +407,7 @@ class ActionFactoryTest extends TestCase
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // name некорректного типа
+                // name некорректного типа [для DamageAction]
                 [
                     'type'           => ActionInterface::DAMAGE,
                     'action_unit'    => $actionUnit,
@@ -363,6 +418,76 @@ class ActionFactoryTest extends TestCase
                     'name'           => ['action name'],
                 ],
                 ActionException::INVALID_NAME_DATA,
+            ],
+            [
+                // name некорректного типа [для HealAction]
+                [
+                    'type'           => ActionInterface::DAMAGE,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'power'          => 50,
+                    'name'           => 123,
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            [
+                // Отсутствует name [для SummonAction]
+                [
+                    'type'           => ActionInterface::SUMMON,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            [
+                // name некорректного типа [для SummonAction]
+                [
+                    'type'           => ActionInterface::SUMMON,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'name'           => [],
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            [
+                // Отсутствует summon [для SummonAction]
+                [
+                    'type'           => ActionInterface::SUMMON,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'name'           => 'summon test',
+                ],
+                ActionException::INVALID_SUMMON_DATA,
+            ],
+            [
+                // summon некорректного типа [для SummonAction]
+                [
+                    'type'           => ActionInterface::SUMMON,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'name'           => 'summon test',
+                    'summon'         => 'summon data',
+                ],
+                ActionException::INVALID_SUMMON_DATA,
+            ],
+            [
+                // summon не содержит нужных параметров [для SummonAction]. Для данного теста достаточно одной проверки,
+                // так как все варианты невалидных данных по юниту проверяются уже в UnitFactory
+                [
+                    'type'           => ActionInterface::SUMMON,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'name'           => 'summon test',
+                    'summon'         => [],
+                ],
+                UnitException::INCORRECT_NAME,
             ],
         ];
     }
