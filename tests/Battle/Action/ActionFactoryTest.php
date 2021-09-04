@@ -9,11 +9,13 @@ use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
+use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -231,6 +233,62 @@ class ActionFactoryTest extends TestCase
     }
 
     /**
+     * Тест на успешное создание EffectAction на основе массива с данными
+     *
+     * @throws Exception
+     */
+    public function testActionFactoryCreateEffectSuccess(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $actionFactory = new ActionFactory();
+        $effectFactory = new EffectFactory($actionFactory);
+
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_SELF,
+            'name'           => $name = 'Effect test',
+            'effects'        => [
+                [
+                    'name'                  => 'Effect test #1',
+                    'icon'                  => 'effect_icon_#1',
+                    'duration'              => 10,
+                    'on_apply_actions'      => [
+                        [
+                            'type'           => ActionInterface::BUFF,
+                            'action_unit'    => $unit,
+                            'enemy_command'  => $enemyCommand,
+                            'allies_command' => $command,
+                            'type_target'    => ActionInterface::TARGET_SELF,
+                            'name'           => 'use Reserve Forces',
+                            'modify_method'  => 'multiplierMaxLife',
+                            'power'          => 130,
+                        ],
+                    ],
+                    'on_next_round_actions' => [],
+                    'on_disable_actions'    => [],
+                ],
+            ],
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertInstanceOf(EffectAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
+        self::assertEquals($name, $action->getNameAction());
+
+        $i = 0;
+        foreach ($action->getEffects() as $effect) {
+            self::assertEquals($effectFactory->create($data['effects'][$i]), $effect);
+            $i++;
+        }
+    }
+
+    /**
      * Тесты на различные варианты невалидных данных для (перебираются некорректные варианты для всех видов Action)
      *
      * @dataProvider failDataProvider
@@ -244,31 +302,6 @@ class ActionFactoryTest extends TestCase
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        $actionFactory->create($data);
-    }
-
-    /**
-     * Временный тест на создание Action, который пока не реализован
-     *
-     * @throws Exception
-     */
-    public function testActionFactoryNoRealize(): void
-    {
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
-
-        $actionFactory = new ActionFactory();
-
-        // Вариант данных без damage и name
-        $data = [
-            'type'           => ActionInterface::EFFECT,
-            'action_unit'    => $unit,
-            'enemy_command'  => $enemyCommand,
-            'allies_command' => $command,
-            'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES,
-        ];
-
-        $this->expectException(ActionException::class);
-        $this->expectExceptionMessage(ActionException::NO_REALIZE);
         $actionFactory->create($data);
     }
 
@@ -652,6 +685,177 @@ class ActionFactoryTest extends TestCase
                     'power'          => '150',
                 ],
                 ActionException::INVALID_POWER_DATA,
+            ],
+            // EffectAction
+            // Отсутствует type_target
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'name'           => 'Effect test',
+                    'effects'        => [
+                        [
+                            'name'                  => 'Effect test #1',
+                            'icon'                  => 'effect_icon_#1',
+                            'duration'              => 10,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'action_unit'    => $actionUnit,
+                                    'enemy_command'  => $enemyCommand,
+                                    'allies_command' => $command,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'use Reserve Forces',
+                                    'modify_method'  => 'multiplierMaxLife',
+                                    'power'          => 130,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            // type_target некорректного типа
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => 'self',
+                    'name'           => 'Effect test',
+                    'effects'        => [
+                        [
+                            'name'                  => 'Effect test #1',
+                            'icon'                  => 'effect_icon_#1',
+                            'duration'              => 10,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'action_unit'    => $actionUnit,
+                                    'enemy_command'  => $enemyCommand,
+                                    'allies_command' => $command,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'use Reserve Forces',
+                                    'modify_method'  => 'multiplierMaxLife',
+                                    'power'          => 130,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            // Отсутствует name
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'effects'        => [
+                        [
+                            'name'                  => 'Effect test #1',
+                            'icon'                  => 'effect_icon_#1',
+                            'duration'              => 10,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'action_unit'    => $actionUnit,
+                                    'enemy_command'  => $enemyCommand,
+                                    'allies_command' => $command,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'use Reserve Forces',
+                                    'modify_method'  => 'multiplierMaxLife',
+                                    'power'          => 130,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            // name некорректного типа
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => true,
+                    'effects'        => [
+                        [
+                            'name'                  => 'Effect test #1',
+                            'icon'                  => 'effect_icon_#1',
+                            'duration'              => 10,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'action_unit'    => $actionUnit,
+                                    'enemy_command'  => $enemyCommand,
+                                    'allies_command' => $command,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'use Reserve Forces',
+                                    'modify_method'  => 'multiplierMaxLife',
+                                    'power'          => 130,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            // Отсутствует effects
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'Effect test',
+                ],
+                ActionException::INVALID_EFFECTS_DATA,
+            ],
+            // effects некорректного типа
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'Effect test',
+                    'effects'        => 'effects',
+                ],
+                ActionException::INVALID_EFFECTS_DATA,
+            ],
+            // effects вместо массива данных по эффекту содержит строку
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'Effect test',
+                    'effects' => [
+                        'buff effect',
+                    ],
+                ],
+                ActionException::INVALID_EFFECT_DATA,
             ],
         ];
     }

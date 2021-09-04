@@ -6,6 +6,8 @@ namespace Battle\Action;
 
 use Battle\Traits\IdTrait;
 use Battle\Traits\Validation;
+use Battle\Unit\Effect\EffectCollection;
+use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\UnitFactory;
 use Exception;
 
@@ -25,8 +27,6 @@ class ActionFactory
 
     /**
      * Создает Action на основе массива параметров
-     *
-     * TODO Создание EffectAction пока не реализовано
      *
      * Пример данных:
      *
@@ -73,7 +73,7 @@ class ActionFactory
         }
 
         if ($className === WaitAction::class) {
-            return new $className(
+            return new WaitAction(
                 $actionUnit,
                 $enemyCommand,
                 $alliesCommand
@@ -87,7 +87,7 @@ class ActionFactory
             $summonData['id'] = self::generateId();
             $summonData['command'] = $actionUnit->getCommand();
 
-            return new $className(
+            return new SummonAction(
                 $actionUnit,
                 $enemyCommand,
                 $alliesCommand,
@@ -104,7 +104,7 @@ class ActionFactory
             $modifyMethod = self::string($data, 'modify_method', ActionException::INVALID_MODIFY_METHOD_DATA);
             $power = self::int($data, 'power', ActionException::INVALID_POWER_DATA);
 
-            return new $className(
+            return new BuffAction(
                 $actionUnit,
                 $enemyCommand,
                 $alliesCommand,
@@ -115,6 +115,27 @@ class ActionFactory
             );
         }
 
-        throw new ActionException(ActionException::NO_REALIZE);
+        $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
+        $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
+        $effectsData = self::array($data, 'effects', ActionException::INVALID_EFFECTS_DATA);
+        $effects = new EffectCollection();
+        $effectFactory = new EffectFactory($this);
+
+        foreach ($effectsData as $effectData) {
+            if (!is_array($effectData)) {
+                throw new ActionException(ActionException::INVALID_EFFECT_DATA);
+            }
+
+            $effects->add($effectFactory->create($effectData));
+        }
+
+        return new EffectAction(
+            $actionUnit,
+            $enemyCommand,
+            $alliesCommand,
+            $typeTarget,
+            $name,
+            $effects
+        );
     }
 }

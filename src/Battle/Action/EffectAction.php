@@ -18,6 +18,8 @@ class EffectAction extends AbstractAction
     private $name;
 
     /**
+     * TODO Добавление коллекции эффектов одному EffectAction - избыточное решение. Переделать на один эффект
+     *
      * @var EffectCollection
      */
     private $effects;
