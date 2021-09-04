@@ -26,7 +26,7 @@ class ActionFactory
     /**
      * Создает Action на основе массива параметров
      *
-     * TODO Пока реализовано только создание DamageAction, HealAction, WaitAction и SummonAction
+     * TODO Создание EffectAction пока не реализовано
      *
      * Пример данных:
      *
