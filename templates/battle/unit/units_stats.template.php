@@ -41,7 +41,7 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                         <?= $unit->getName() ?>
                     </p>
                 </td>
-                <td><p><?= $unit->getRace()->getName() ?></p></td>
+                <td><p><?= $this->getTranslation()->trans($unit->getRace()->getSingleName()) ?></p></td>
                 <td><p><?= $unit->getLife() ?>/<?= $unit->getTotalLife() ?></p></td>
                 <td><p><?= $unit->getDamage() ?></p></td>
                 <td><p><?= $unit->getAttackSpeed() ?></p></td>
@@ -61,7 +61,7 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                         <?= $unit->getName() ?>
                     </p>
                 </td>
-                <td><p><?= $unit->getRace()->getName() ?></p></td>
+                <td><p><?= $this->getTranslation()->trans($unit->getRace()->getSingleName()) ?></p></td>
                 <td><p><?= $unit->getLife() ?>/<?= $unit->getTotalLife() ?></p></td>
                 <td><p><?= $unit->getDamage() ?></p></td>
                 <td><p><?= $unit->getAttackSpeed() ?></p></td>

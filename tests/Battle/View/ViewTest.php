@@ -522,7 +522,7 @@ EOT;
                         <img src="/images/avas/humans/human001.jpg" class="stat_ava" alt="" />
                         unit_1                    </p>
                 </td>
-                <td><p>People</p></td>
+                <td><p>Human</p></td>
                 <td><p>100/100</p></td>
                 <td><p>20</p></td>
                 <td><p>1</p></td>
@@ -539,7 +539,7 @@ EOT;
                         <img src="/images/avas/humans/human001.jpg" class="stat_ava" alt="" />
                         unit_1                    </p>
                 </td>
-                <td><p>People</p></td>
+                <td><p>Human</p></td>
                 <td><p>100/100</p></td>
                 <td><p>20</p></td>
                 <td><p>1</p></td>
