@@ -135,6 +135,7 @@ class Scenario implements ScenarioInterface
                     'unit_effects' => $this->getUnitEffects($action->getActionUnit()),
                     'targets'      => [
                         [
+                            'type'              => 'change',
                             'user_id'           => $action->getActionUnit()->getId(),
                             'ava'               => 'unit_ava_green',
                             'recdam'            => '+' . $action->getFactualPower(),

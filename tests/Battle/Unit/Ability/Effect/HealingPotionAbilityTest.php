@@ -7,6 +7,7 @@ namespace Tests\Battle\Unit\Ability\Effect;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
+use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
@@ -77,23 +78,23 @@ class HealingPotionAbilityTest extends TestCase
 
         self::assertEquals(1, $unit->getLife());
 
-        $unit->newRound();
+        $this->nextRound($unit);
 
         self::assertEquals(1 + 15, $unit->getLife());
 
-        $unit->newRound();
+        $this->nextRound($unit);
 
         self::assertEquals(1 + 30, $unit->getLife());
 
-        $unit->newRound();
+        $this->nextRound($unit);
 
         self::assertEquals(1 + 45, $unit->getLife());
 
-        $unit->newRound();
+        $this->nextRound($unit);
 
         self::assertEquals(1 + 60, $unit->getLife());
 
-        $unit->newRound();
+        $this->nextRound($unit);
 
         self::assertEquals(1 + 60, $unit->getLife());
 
@@ -184,5 +185,18 @@ class HealingPotionAbilityTest extends TestCase
         foreach ($unit->getEffects() as $effect) {
             self::assertEquals(4, $effect->getDuration());
         }
+    }
+
+    /**
+     * @param UnitInterface $unit
+     */
+    private function nextRound(UnitInterface $unit): void
+    {
+        foreach ($unit->getOnNewRoundActions() as $action) {
+            if ($action->canByUsed()) {
+                $action->handle();
+            }
+        }
+        $unit->newRound();
     }
 }

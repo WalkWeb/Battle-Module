@@ -153,14 +153,20 @@ class ScenarioTest extends TestCase
 
         $ability = new HealingPotionAbility($unit);
 
+        // Применение эффекта
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
-
             self::assertTrue($action->canByUsed());
             $action->handle();
             $container->getScenario()->addAction($action, $container->getStatistic());
         }
 
-        $unit->newRound();
+        // Применение эффекта от лечения
+        foreach ($unit->getOnNewRoundActions() as $action) {
+            if ($action->canByUsed()) {
+                $action->handle();
+                $container->getScenario()->addAction($action, $container->getStatistic());
+            }
+        }
 
         $expectedData = [
             'step'    => $container->getStatistic()->getRoundNumber(),
@@ -168,9 +174,10 @@ class ScenarioTest extends TestCase
             'effects' => [
                 [
                     'user_id'      => $unit->getId(),
-                    'unit_effects' => '<img src="/images/icons/ability/234.png" width="22" alt="" /> <span>3</span>',
+                    'unit_effects' => '<img src="/images/icons/ability/234.png" width="22" alt="" /> <span>4</span>',
                     'targets'      => [
                         [
+                            'type'              => 'change',
                             'user_id'           => $unit->getId(),
                             'ava'               => 'unit_ava_green',
                             'recdam'            => '+15',

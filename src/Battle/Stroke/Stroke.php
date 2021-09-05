@@ -82,9 +82,22 @@ class Stroke implements StrokeInterface
         $enemyCommand = $this->actionCommand === 1 ? $this->rightCommand : $this->leftCommand;
         $alliesCommand = $this->actionCommand === 1 ? $this->leftCommand : $this->rightCommand;
 
-        $actionCollection = $this->actionUnit->getAction($enemyCommand, $alliesCommand);
+        // --------------------------------------- Apply unit effects --------------------------------------------------
 
-        foreach ($actionCollection as $action) {
+        foreach ($this->actionUnit->getOnNewRoundActions() as $action) {
+            if ($action->canByUsed()) {
+                $message = $action->handle();
+
+                $this->container->getStatistic()->addUnitAction($action);
+                $this->container->getScenario()->addAction($action, $this->container->getStatistic());
+                $this->container->getFullLog()->addText($message);
+                $this->container->getChat()->add($message);
+            }
+        }
+
+        // -------------------------------------------- Action Unit ----------------------------------------------------
+
+        foreach ($this->actionUnit->getAction($enemyCommand, $alliesCommand) as $action) {
 
             if (!$enemyCommand->isAlive()) {
                 break;

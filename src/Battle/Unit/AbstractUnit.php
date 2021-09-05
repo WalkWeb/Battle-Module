@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
+use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Container\ContainerException;
 use Battle\Unit\Classes\UnitClassInterface;
@@ -258,6 +259,11 @@ abstract class AbstractUnit implements UnitInterface
         return $this->abilities;
     }
 
+    public function getOnNewRoundActions(): ActionCollection
+    {
+        return $this->effects->newRound();
+    }
+
     /**
      * @throws ActionException
      * @throws ContainerException
@@ -268,8 +274,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->addConcentration(self::ADD_CON_NEW_ROUND);
         $this->addRage(self::ADD_RAGE_NEW_ROUND);
 
-        // События, которые должны примениться при новом раунде и при отмене эффекта
-        // TODO Эффекты getOnNextRoundActions() необходимо применять в Stroke->handle()
+        // События, которые должны примениться при отмене эффекта
         $effectActions = $this->effects->nextRound();
 
         foreach ($effectActions as $action) {

@@ -70,6 +70,27 @@ class EffectCollection implements Iterator, Countable
     }
 
     /**
+     * Событие newRound происходит вначале хода юнита в текущем раунде, соответственно нужно применить все события
+     * getOnNextRoundActions(), которые имеются у эффектов юнита.
+     *
+     * @return ActionCollection
+     */
+    public function newRound(): ActionCollection
+    {
+        $collection = new ActionCollection();
+
+        foreach ($this->elements as $effect) {
+            $collection->addCollection($effect->getOnNextRoundActions());
+        }
+
+        return $collection;
+    }
+
+    /**
+     * Событие nextRound происходит тогда, когда все живые юниты во всех командах походили. Соответственно это окончание
+     * текущего раунда, и нужно увеличить длительность всех эффектов, а те эффекты, у которых длительность завершилась -
+     * удалить
+     *
      * @return ActionCollection
      * @throws ActionException
      */
@@ -78,9 +99,6 @@ class EffectCollection implements Iterator, Countable
         $collection = new ActionCollection();
 
         foreach ($this->elements as $effect) {
-
-            $collection->addCollection($effect->getOnNextRoundActions());
-
             $effect->nextRound();
 
             if ($effect->getDuration() < 1) {

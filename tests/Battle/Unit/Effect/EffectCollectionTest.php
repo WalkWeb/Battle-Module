@@ -149,7 +149,8 @@ class EffectCollectionTest extends TestCase
 
         // 5 раз получаем ActionCollection с HealAction внутри
         for ($i = 0; $i < 5; $i++) {
-            self::assertEquals($actions, $collection->nextRound());
+            self::assertEquals($actions, $collection->newRound());
+            $collection->nextRound();
         }
 
         // Затем коллекция эффектов становится пустой - эффект удалился

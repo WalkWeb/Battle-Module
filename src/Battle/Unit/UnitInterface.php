@@ -102,6 +102,16 @@ interface UnitInterface
     public function applyAction(ActionInterface $action): string;
 
     /**
+     * Возвращает коллекцию событий, которые необходимо применить перед ходом данного юнита в текущем раунде
+     *
+     * Например, юнит имеет эффект постепенного лечения (или урона) - значит, перед ходом этого юнита нужно применить к
+     * нему эффект лечения или урона.
+     *
+     * @return ActionCollection
+     */
+    public function getOnNewRoundActions(): ActionCollection;
+
+    /**
      * Совершал ли юнит действие в этом раунде
      *
      * @return bool
