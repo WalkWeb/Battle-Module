@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Scenario;
 
-use Battle\Action\ActionCollection;
+use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
-use Battle\Action\BuffAction;
-use Battle\Action\EffectAction;
-use Battle\Unit\Effect\Effect;
-use Battle\Unit\Effect\EffectCollection;
 use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
@@ -378,12 +374,11 @@ class ScenarioTest extends TestCase
     /**
      * Создает и возвращает EffectAction
      *
-     * TODO Возможно в будущем нужно сделать фабрику для более быстрого и удобного создания эффектов в тестах
-     *
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
      * @return ActionInterface
+     * @throws Exception
      */
     private function getReserveForcesAction(
         UnitInterface $unit,
@@ -391,17 +386,38 @@ class ScenarioTest extends TestCase
         CommandInterface $command
     ): ActionInterface
     {
-        // Создаем коллекцию событий с одним событием - добавлением эффекта на увеличение здоровья
-        $onApplyActions = new ActionCollection();
-        $onApplyActions->add(
-            new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, 'use Reserve Forces', 'multiplierMaxLife', 130)
-        );
+        $actionFactory = new ActionFactory();
 
-        // Создаем коллекцию эффектов, которые будут применяться на юнита при добавлении ему эффекта
-        $effects = new EffectCollection();
-        $effects->add(new Effect('Effect#123', 'images/icons/ability/156.png', 8, $onApplyActions, new ActionCollection(), new ActionCollection()));
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_SELF,
+            'name'           => 'use Reserve Forces',
+            'effects'        => [
+                [
+                    'name'                  => 'Effect#123',
+                    'icon'                  => 'images/icons/ability/156.png',
+                    'duration'              => 8,
+                    'on_apply_actions'      => [
+                        [
+                            'type'           => ActionInterface::BUFF,
+                            'action_unit'    => $unit,
+                            'enemy_command'  => $enemyCommand,
+                            'allies_command' => $command,
+                            'type_target'    => ActionInterface::TARGET_SELF,
+                            'name'           => 'use Reserve Forces',
+                            'modify_method'  => 'multiplierMaxLife',
+                            'power'          => 130,
+                        ],
+                    ],
+                    'on_next_round_actions' => [],
+                    'on_disable_actions'    => [],
+                ],
+            ],
+        ];
 
-        // Создаем и возвращаем EffectAction
-        return new EffectAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, 'use Reserve Forces', $effects);
+        return $actionFactory->create($data);
     }
 }

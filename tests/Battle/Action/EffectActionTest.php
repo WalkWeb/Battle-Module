@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
-use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
+use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
-use Battle\Action\BuffAction;
 use Battle\Action\EffectAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -49,10 +48,7 @@ class EffectActionTest extends TestCase
     }
 
     /**
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
-     * @throws ActionException
+     * @throws Exception
      */
     public function testEffectActionApply(): void
     {
@@ -101,9 +97,7 @@ class EffectActionTest extends TestCase
     }
 
     /**
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testEffectActionNoTargetForEffect(): void
     {
@@ -123,9 +117,7 @@ class EffectActionTest extends TestCase
     }
 
     /**
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testEffectActionMessageTo(): void
     {
@@ -145,13 +137,12 @@ class EffectActionTest extends TestCase
     /**
      * Создает и возвращает EffectAction
      *
-     * TODO Возможно в будущем нужно сделать фабрику для более быстрого и удобного создания эффектов в тестах
-     *
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
      * @param int $typeTarget
      * @return ActionInterface
+     * @throws Exception
      */
     private function getReserveForcesAction(
         UnitInterface $unit,
@@ -160,32 +151,38 @@ class EffectActionTest extends TestCase
         int $typeTarget
     ): ActionInterface
     {
-        // Создаем коллекцию событий с одним событием - добавлением эффекта на увеличение здоровья
-        $onApplyActions = new ActionCollection();
-        $onApplyActions->add(
-            new BuffAction(
-                $unit,
-                $enemyCommand,
-                $command,
-                EffectAction::TARGET_SELF,
-                'use Reserve Forces',
-                'multiplierMaxLife',
-                130
-            )
-        );
+        $actionFactory = new ActionFactory();
 
-        // Создаем коллекцию эффектов, которые будут применяться на юнита при добавлении ему эффекта
-        $effects = new EffectCollection();
-        $effects->add(new Effect('Effect#123', 'icon.png', 8, $onApplyActions, new ActionCollection(), new ActionCollection()));
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => $typeTarget,
+            'name'           => 'use Reserve Forces',
+            'effects'        => [
+                [
+                    'name'                  => 'Effect#123',
+                    'icon'                  => 'icon.png',
+                    'duration'              => 8,
+                    'on_apply_actions'      => [
+                        [
+                            'type'           => ActionInterface::BUFF,
+                            'action_unit'    => $unit,
+                            'enemy_command'  => $enemyCommand,
+                            'allies_command' => $command,
+                            'type_target'    => ActionInterface::TARGET_SELF,
+                            'name'           => 'use Reserve Forces',
+                            'modify_method'  => 'multiplierMaxLife',
+                            'power'          => 130,
+                        ],
+                    ],
+                    'on_next_round_actions' => [],
+                    'on_disable_actions'    => [],
+                ],
+            ],
+        ];
 
-        // Создаем и возвращаем EffectAction
-        return new EffectAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            $typeTarget,
-            'use Reserve Forces',
-            $effects
-        );
+        return $actionFactory->create($data);
     }
 }
