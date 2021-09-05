@@ -158,6 +158,16 @@ interface ActionInterface
      */
     public function getEffects(): EffectCollection;
 
+    /**
+     * Возвращает названия метода (в классе Scenario) для создания анимации данного Action
+     *
+     * Такая механика нужна для того, чтобы одни и те же Action, например HealAction по-разному анимировать, в
+     * зависимости от того, чем они были сделаны - юнитом или эффектом
+     *
+     * @return string
+     */
+    public function getAnimationMethod(): string;
+
     // todo Add getRevertNameAction()
     // todo Add getAlliesCommand
     // todo Add getEnemyCommand

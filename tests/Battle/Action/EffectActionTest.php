@@ -43,6 +43,7 @@ class EffectActionTest extends TestCase
         $action = new EffectAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF, $name, $effects);
 
         self::assertEquals('applyEffectAction', $action->getHandleMethod());
+        self::assertEquals('effect', $action->getAnimationMethod());
         self::assertEquals($effects, $action->getEffects());
         self::assertEquals($name, $action->getNameAction());
     }

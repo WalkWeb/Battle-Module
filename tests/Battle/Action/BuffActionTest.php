@@ -45,6 +45,8 @@ class BuffActionTest extends TestCase
 
         $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
+        self::assertEquals('skip', $action->getAnimationMethod());
+
         $multiplier = $action->getPower() / 100;
         $newLife = (int)($unit->getTotalLife() * $multiplier);
 

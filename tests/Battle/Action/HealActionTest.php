@@ -48,6 +48,7 @@ class HealActionTest extends TestCase
         $heals =  $alliesUnit->getAction($enemyCommand, $alliesCommand);
 
         foreach ($heals as $heal) {
+            self::assertEquals(HealAction::UNIT_ANIMATION_METHOD, $heal->getAnimationMethod());
             // Проверяем, что лечение может быть использовано:
             self::assertTrue($heal->canByUsed());
             $heal->handle();

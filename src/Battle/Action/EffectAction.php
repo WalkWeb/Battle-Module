@@ -10,12 +10,18 @@ use Battle\Unit\UnitInterface;
 
 class EffectAction extends AbstractAction
 {
-    private const HANDLE_METHOD = 'applyEffectAction';
+    private const HANDLE_METHOD            = 'applyEffectAction';
+    private const DEFAULT_ANIMATION_METHOD = 'effect';
 
     /**
      * @var string
      */
     private $name;
+
+    /**
+     * @var string
+     */
+    protected $animationMethod;
 
     /**
      * TODO Добавление коллекции эффектов одному EffectAction - избыточное решение. Переделать на один эффект
@@ -30,12 +36,14 @@ class EffectAction extends AbstractAction
         CommandInterface $alliesCommand,
         int $typeTarget,
         string $name,
-        EffectCollection $effects
+        EffectCollection $effects,
+        string $animationMethod = self::DEFAULT_ANIMATION_METHOD
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->name = $name;
         $this->effects = $effects;
+        $this->animationMethod = $animationMethod;
     }
 
     public function getHandleMethod(): string
@@ -95,6 +103,11 @@ class EffectAction extends AbstractAction
         }
 
         return true;
+    }
+
+    public function getAnimationMethod(): string
+    {
+        return $this->animationMethod;
     }
 
     public function setFactualPower(int $factualPower): void {}

@@ -9,10 +9,11 @@ use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
-use Battle\Action\WaitAction;
 use Battle\Action\SummonAction;
+use Battle\Action\WaitAction;
 use Battle\Result\Statistic\StatisticInterface;
 use Battle\Unit\UnitInterface;
+use Exception;
 use JsonException;
 
 class Scenario implements ScenarioInterface
@@ -23,32 +24,22 @@ class Scenario implements ScenarioInterface
     private $scenario = [];
 
     /**
-     * TODO Метод, который будет формировать сценарий хранить в самом Action - это позволит, например, лечение от юнита
-     * TODO и лечение от эффекта анимировать разными вариантами
+     * Добавляет в сценарий анимацию, соответствующую указанному Action
      *
+     * @uses damage, heal, summon, effect, wait, skip
      * @param ActionInterface $action
      * @param StatisticInterface $statistic
-     * @throws ActionException
+     * @throws Exception
      */
     public function addAction(ActionInterface $action, StatisticInterface $statistic): void
     {
-        switch ($action) {
-            case $action instanceof DamageAction:
-                $this->addDamage($action, $statistic);
-                break;
-            case $action instanceof HealAction:
-                $this->addHeal($action, $statistic);
-                break;
-            case $action instanceof SummonAction:
-                $this->addSummon($action, $statistic);
-                break;
-            case $action instanceof EffectAction:
-                $this->addEffect($action, $statistic);
-                break;
-            case $action instanceof WaitAction:
-                $this->addWait($statistic);
-                break;
+        $animationMethod = $action->getAnimationMethod();
+
+        if (!method_exists($this, $animationMethod)) {
+            throw new ScenarioException(ScenarioException::UNDEFINED_ANIMATION_METHOD);
         }
+
+        $this->$animationMethod($action, $statistic);
     }
 
     /**
@@ -56,7 +47,7 @@ class Scenario implements ScenarioInterface
      * @param StatisticInterface $statistic
      * @throws ActionException
      */
-    private function addDamage(DamageAction $action, StatisticInterface $statistic): void
+    private function damage(DamageAction $action, StatisticInterface $statistic): void
     {
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
@@ -96,7 +87,7 @@ class Scenario implements ScenarioInterface
      * @param StatisticInterface $statistic
      * @throws ActionException
      */
-    private function addHeal(HealAction $action, StatisticInterface $statistic): void
+    private function heal(HealAction $action, StatisticInterface $statistic): void
     {
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
@@ -130,7 +121,7 @@ class Scenario implements ScenarioInterface
      * @param SummonAction $action
      * @param StatisticInterface $statistic
      */
-    private function addSummon(SummonAction $action, StatisticInterface $statistic): void
+    private function summon(SummonAction $action, StatisticInterface $statistic): void
     {
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
@@ -172,7 +163,7 @@ class Scenario implements ScenarioInterface
      * @param StatisticInterface $statistic
      * @throws ActionException
      */
-    private function addEffect(EffectAction $action, StatisticInterface $statistic): void
+    private function effect(EffectAction $action, StatisticInterface $statistic): void
     {
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
@@ -199,14 +190,26 @@ class Scenario implements ScenarioInterface
         ];
     }
 
-    private function addWait(StatisticInterface $statistic): void
+    /**
+     * @param WaitAction $action
+     * @param StatisticInterface $statistic
+     * @return WaitAction только для того, чтобы IDE не ругался на то, что $action не используется в методе
+     */
+    private function wait(WaitAction $action, StatisticInterface $statistic): WaitAction
     {
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
             'attack'  => $statistic->getStrokeNumber(),
             'effects' => [],
         ];
+
+        return $action;
     }
+
+    /**
+     * При некоторых событиях не нужно добавлять никаких анимаций
+     */
+    private function skip(): void {}
 
     /**
      * @return string

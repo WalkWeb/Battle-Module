@@ -11,7 +11,8 @@ class BuffAction extends AbstractAction
 {
     // TODO Подумать над реализацией revert-сообщения для чата
 
-    private const HANDLE_METHOD = 'applyBuffAction';
+    private const HANDLE_METHOD            = 'applyBuffAction';
+    private const DEFAULT_ANIMATION_METHOD = 'skip';
 
     /**
      * @var string
@@ -109,6 +110,11 @@ class BuffAction extends AbstractAction
         $rollbackAction->setRevertValue($this->getRevertValue());
 
         return $rollbackAction;
+    }
+
+    public function getAnimationMethod(): string
+    {
+        return self::DEFAULT_ANIMATION_METHOD;
     }
 
     public function setFactualPower(int $factualPower): void {}

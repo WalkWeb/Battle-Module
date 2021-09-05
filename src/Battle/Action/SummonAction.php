@@ -10,7 +10,8 @@ use Battle\Unit\UnitInterface;
 
 class SummonAction extends AbstractAction
 {
-    private const HANDLE_METHOD = 'applySummonAction';
+    private const HANDLE_METHOD            = 'applySummonAction';
+    private const DEFAULT_ANIMATION_METHOD = 'summon';
 
     /**
      * @var string
@@ -79,5 +80,10 @@ class SummonAction extends AbstractAction
     public function getSummonUnit(): UnitInterface
     {
         return $this->summon;
+    }
+
+    public function getAnimationMethod(): string
+    {
+        return self::DEFAULT_ANIMATION_METHOD;
     }
 }

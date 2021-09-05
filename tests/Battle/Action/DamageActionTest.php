@@ -28,6 +28,7 @@ class DamageActionTest extends TestCase
         $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
         self::assertEquals($unit->getDamage(), $action->getPower());
         self::assertTrue($action->canByUsed());
+        self::assertEquals(DamageAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
     }
 
     /**

@@ -9,8 +9,10 @@ use Battle\Unit\UnitInterface;
 
 class DamageAction extends AbstractAction
 {
-    private const NAME          = 'attack';
-    private const HANDLE_METHOD = 'applyDamageAction';
+    private const HANDLE_METHOD          = 'applyDamageAction';
+    private const DEFAULT_NAME           = 'attack';
+    public const UNIT_ANIMATION_METHOD   = 'damage';
+    public const EFFECT_ANIMATION_METHOD = 'effectDamage';
 
     /**
      * @var int
@@ -22,18 +24,25 @@ class DamageAction extends AbstractAction
      */
     protected $name;
 
+    /**
+     * @var string
+     */
+    protected $animationMethod;
+
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         int $typeTarget,
         ?int $damage = null,
-        ?string $name = null
+        ?string $name = null,
+        string $animationMethod = self::UNIT_ANIMATION_METHOD
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->damage = $damage ?? $actionUnit->getDamage();
-        $this->name = $name ?? self::NAME;
+        $this->name = $name ?? self::DEFAULT_NAME;
+        $this->animationMethod = $animationMethod;
     }
 
     public function getHandleMethod(): string
@@ -73,5 +82,10 @@ class DamageAction extends AbstractAction
     public function getNameAction(): string
     {
         return $this->name;
+    }
+
+    public function getAnimationMethod(): string
+    {
+        return $this->animationMethod;
     }
 }

@@ -9,8 +9,10 @@ use Battle\Unit\UnitInterface;
 
 class HealAction extends AbstractAction
 {
-    private const NAME          = 'heal';
-    private const HANDLE_METHOD = 'applyHealAction';
+    private const NAME                   = 'heal';
+    private const HANDLE_METHOD          = 'applyHealAction';
+    public const UNIT_ANIMATION_METHOD   = 'heal';
+    public const EFFECT_ANIMATION_METHOD = 'effectHeal';
 
     /**
      * @var int
@@ -22,13 +24,19 @@ class HealAction extends AbstractAction
      */
     protected $name;
 
+    /**
+     * @var string
+     */
+    protected $animationMethod;
+
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         int $typeTarget,
         ?int $power = null,
-        ?string $name = null
+        ?string $name = null,
+        string $animationMethod = self::UNIT_ANIMATION_METHOD
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
@@ -36,6 +44,7 @@ class HealAction extends AbstractAction
         // TODO Убрать увеличения силы по-умолчанию
         $this->power = $power ?? (int)($actionUnit->getDamage() * 1.2);
         $this->name = $name ?? self::NAME;
+        $this->animationMethod = $animationMethod;
     }
 
     public function getHandleMethod(): string
@@ -85,5 +94,10 @@ class HealAction extends AbstractAction
     public function canByUsed(): bool
     {
         return (bool)$this->alliesCommand->getUnitForHeal();
+    }
+
+    public function getAnimationMethod(): string
+    {
+        return $this->animationMethod;
     }
 }

@@ -6,6 +6,7 @@ namespace Tests\Battle\Result\Scenario;
 
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
+use Battle\Result\Scenario\ScenarioException;
 use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
@@ -16,6 +17,7 @@ use Battle\Command\CommandFactory;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Statistic\Statistic;
 use PHPUnit\Framework\TestCase;
+use Tests\Battle\Factory\BaseFactory;
 use Tests\Battle\Factory\UnitFactory;
 
 class ScenarioTest extends TestCase
@@ -321,6 +323,31 @@ class ScenarioTest extends TestCase
         $action = $this->getSummonSkeletonMageAction($actionUnit, $enemyCommand, $actionCommand);
 
         self::assertEquals('right_command_range', $scenario->getSummonRow($action));
+    }
+
+    /**
+     * Тест на ситуацию, когда Action имеет неизвестный метод анимации в Scenario
+     *
+     * @throws Exception
+     */
+    public function testScenarioUndefinedAnimationName(): void
+    {
+        $scenario = new Scenario();
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_SELF,
+            null,
+            null,
+            'undefinedAnimationMethod'
+        );
+
+        $this->expectException(ScenarioException::class);
+        $this->expectExceptionMessage(ScenarioException::UNDEFINED_ANIMATION_METHOD);
+        $scenario->addAction($action, new Statistic());
     }
 
     /**

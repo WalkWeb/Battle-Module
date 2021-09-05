@@ -20,6 +20,8 @@ interface ScenarioInterface
     /**
      * Добавляет анимацию действия
      *
+     * TODO Rename to addAnimation()
+     *
      * @param ActionInterface $action
      * @param StatisticInterface $statistic
      * @throws ActionException
