@@ -7,12 +7,12 @@ namespace Battle\Unit\Effect;
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
-use Battle\Traits\Validation;
+use Battle\Traits\ValidationTrait;
 use Exception;
 
 class EffectFactory
 {
-    use Validation;
+    use ValidationTrait;
 
     /**
      * @var ActionFactory

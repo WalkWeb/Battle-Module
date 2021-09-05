@@ -8,9 +8,7 @@ use Battle\BattleException;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
-// TODO Rename to ValidationTrait
-
-trait Validation
+trait ValidationTrait
 {
     /**
      * @param array $data

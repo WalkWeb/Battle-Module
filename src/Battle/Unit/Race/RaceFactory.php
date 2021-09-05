@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Battle\Unit\Race;
 
 use Battle\BattleException;
-use Battle\Traits\Validation;
+use Battle\Traits\ValidationTrait;
 
 class RaceFactory
 {
-    use Validation;
+    use ValidationTrait;
 
     private static $data = [
         // played races

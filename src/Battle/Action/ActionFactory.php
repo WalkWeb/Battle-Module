@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Traits\IdTrait;
-use Battle\Traits\Validation;
+use Battle\Traits\ValidationTrait;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\UnitFactory;
@@ -13,7 +13,7 @@ use Exception;
 
 class ActionFactory
 {
-    use Validation;
+    use ValidationTrait;
     use IdTrait;
 
     private static $map = [

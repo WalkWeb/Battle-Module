@@ -10,13 +10,13 @@ use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Result\Chat\Message\MessageInterface;
-use Battle\Traits\Validation;
+use Battle\Traits\ValidationTrait;
 use Battle\Unit\Race\RaceFactory;
 use Exception;
 
 class UnitFactory
 {
-    use Validation;
+    use ValidationTrait;
 
     /**
      * Создает юнита на основе массива данных по юниту. Это может быть как json сконвертированный в массив, так и массив
