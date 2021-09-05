@@ -37,7 +37,7 @@ class ActionFactoryTest extends TestCase
 
         $actionFactory = new ActionFactory();
 
-        // Вариант данных без damage и name
+        // Вариант данных без damage, name и animation_method
         $data = [
             'type'           => ActionInterface::DAMAGE,
             'action_unit'    => $unit,
@@ -56,13 +56,14 @@ class ActionFactoryTest extends TestCase
 
         // Полный набор данных
         $data = [
-            'type'           => ActionInterface::DAMAGE,
-            'action_unit'    => $unit,
-            'enemy_command'  => $enemyCommand,
-            'allies_command' => $command,
-            'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-            'power'          => $damage = 50,
-            'name'           => $name = 'action name 123',
+            'type'             => ActionInterface::DAMAGE,
+            'action_unit'      => $unit,
+            'enemy_command'    => $enemyCommand,
+            'allies_command'   => $command,
+            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+            'power'            => $damage = 50,
+            'name'             => $name = 'action name 123',
+            'animation_method' => $animationMethod = 'effectDamage',
         ];
 
         $action = $actionFactory->create($data);
@@ -72,6 +73,7 @@ class ActionFactoryTest extends TestCase
         self::assertEquals(ActionInterface::TARGET_RANDOM_ENEMY, $action->getTypeTarget());
         self::assertEquals($damage, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
+        self::assertEquals($animationMethod, $action->getAnimationMethod());
     }
 
     /**
@@ -104,13 +106,14 @@ class ActionFactoryTest extends TestCase
 
         // Полный набор данных
         $data = [
-            'type'           => ActionInterface::HEAL,
-            'action_unit'    => $unit,
-            'enemy_command'  => $enemyCommand,
-            'allies_command' => $command,
-            'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES,
-            'power'          => $power = 50,
-            'name'           => $name = 'action name 123',
+            'type'             => ActionInterface::HEAL,
+            'action_unit'      => $unit,
+            'enemy_command'    => $enemyCommand,
+            'allies_command'   => $command,
+            'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+            'power'            => $power = 50,
+            'name'             => $name = 'action name 123',
+            'animation_method' => $animationMethod = 'effectHeal',
         ];
 
         $action = $actionFactory->create($data);
@@ -120,6 +123,7 @@ class ActionFactoryTest extends TestCase
         self::assertEquals(ActionInterface::TARGET_WOUNDED_ALLIES, $action->getTypeTarget());
         self::assertEquals($power, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
+        self::assertEquals($animationMethod, $action->getAnimationMethod());
     }
 
     /**
@@ -851,7 +855,7 @@ class ActionFactoryTest extends TestCase
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'Effect test',
-                    'effects' => [
+                    'effects'        => [
                         'buff effect',
                     ],
                 ],

@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Battle\Unit\Ability\Effect;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\EffectAction;
+use Battle\Action\ActionFactory;
+use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\AbstractAbility;
-use Battle\Unit\Effect\Effect;
-use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitInterface;
+use Exception;
 
 class HealingPotionAbility extends AbstractAbility
 {
@@ -26,16 +26,28 @@ class HealingPotionAbility extends AbstractAbility
      */
     private $actions;
 
+    /**
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return ActionCollection
+     * @throws Exception
+     */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         return $this->createEffectActions($enemyCommand, $alliesCommand, true);
     }
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         return self::NAME;
     }
 
+    /**
+     * @return string
+     */
     public function getIcon(): string
     {
         return self::ICON;
@@ -68,6 +80,7 @@ class HealingPotionAbility extends AbstractAbility
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return bool
+     * @throws Exception
      */
     public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
     {
@@ -97,6 +110,7 @@ class HealingPotionAbility extends AbstractAbility
      * @param CommandInterface $alliesCommand
      * @param bool $new
      * @return ActionCollection
+     * @throws Exception
      */
     private function createEffectActions(
         CommandInterface $enemyCommand,
@@ -104,46 +118,42 @@ class HealingPotionAbility extends AbstractAbility
         bool $new = false
     ): ActionCollection
     {
-        // TODO Переделать на массив параметров и ActionFactory
-
         if ($new || $this->actions === null) {
-            // Создаем коллекцию событий (с одним бафом), которая будет применена к персонажу, при применении эффекта
-            $onNextRoundActions = new ActionCollection();
 
-            $onNextRoundActions->add(new HealAction(
-                $this->unit,
-                $enemyCommand,
-                $alliesCommand,
-                HealAction::TARGET_SELF,
-                self::POWER,
-                null,
-                HealAction::EFFECT_ANIMATION_METHOD
-            ));
+            $actionFactory = new ActionFactory();
 
-            // Создаем коллекцию эффектов, с одним эффектом при применении - Reserve Forces
-            $effects = new EffectCollection();
+            $data = [
+                'type'           => ActionInterface::EFFECT,
+                'action_unit'    => $this->unit,
+                'enemy_command'  => $enemyCommand,
+                'allies_command' => $alliesCommand,
+                'type_target'    => ActionInterface::TARGET_SELF,
+                'name'           => self::USE_MESSAGE,
+                'effects'        => [
+                    [
+                        'name'                  => self::NAME,
+                        'icon'                  => self::ICON,
+                        'duration'              => self::DURATION,
+                        'on_apply_actions'      => [],
+                        'on_next_round_actions' => [
+                            [
+                                'type'            => ActionInterface::HEAL,
+                                'action_unit'     => $this->unit,
+                                'enemy_command'   => $enemyCommand,
+                                'allies_command'  => $alliesCommand,
+                                'type_target'     => ActionInterface::TARGET_SELF,
+                                'name'            => null,
+                                'power'           => self::POWER,
+                                'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                            ],
+                        ],
+                        'on_disable_actions'    => [],
+                    ],
+                ],
+            ];
 
-            // Создаем сам эффект
-            $effects->add(new Effect(
-                self::NAME,
-                self::ICON,
-                self::DURATION,
-                new ActionCollection(),
-                $onNextRoundActions,
-                new ActionCollection()
-            ));
-
-            // Создаем коллекцию событий для применения к юниту
             $this->actions = new ActionCollection();
-
-            $this->actions->add(new EffectAction(
-                $this->unit,
-                $enemyCommand,
-                $alliesCommand,
-                EffectAction::TARGET_SELF,
-                self::USE_MESSAGE,
-                $effects
-            ));
+            $this->actions->add($actionFactory->create($data));
         }
 
         return $this->actions;

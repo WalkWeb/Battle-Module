@@ -139,7 +139,7 @@ trait ValidationTrait
             return null;
         }
 
-        if (!is_int($data[$filed])) {
+        if (!is_int($data[$filed]) && !is_null($data[$filed])) {
             throw new BattleException($error);
         }
 
@@ -159,7 +159,7 @@ trait ValidationTrait
             return null;
         }
 
-        if (!is_string($data[$filed])) {
+        if (!is_string($data[$filed]) && !is_null($data[$filed])) {
             throw new BattleException($error);
         }
 

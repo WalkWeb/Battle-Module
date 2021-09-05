@@ -61,6 +61,7 @@ class ActionFactory
             $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
             $power = self::intOrNull($data, 'power', ActionException::INVALID_POWER_DATA);
             $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
+            $animationMethod = self::stringOrNull($data, 'animation_method', ActionException::INVALID_NAME_DATA);
 
             return new $className(
                 $actionUnit,
@@ -68,7 +69,8 @@ class ActionFactory
                 $alliesCommand,
                 $typeTarget,
                 $power,
-                $name
+                $name,
+                $animationMethod
             );
         }
 

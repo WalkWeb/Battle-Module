@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Battle\Unit\Ability\Effect;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\BuffAction;
-use Battle\Action\EffectAction;
+use Battle\Action\ActionFactory;
+use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\AbstractAbility;
-use Battle\Unit\Effect\Effect;
-use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitInterface;
+use Exception;
 
 class ReserveForcesAbility extends AbstractAbility
 {
@@ -27,16 +26,28 @@ class ReserveForcesAbility extends AbstractAbility
      */
     private $actions;
 
+    /**
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return ActionCollection
+     * @throws Exception
+     */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         return $this->createEffectActions($enemyCommand, $alliesCommand, true);
     }
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         return self::NAME;
     }
 
+    /**
+     * @return string
+     */
     public function getIcon(): string
     {
         return self::ICON;
@@ -63,6 +74,12 @@ class ReserveForcesAbility extends AbstractAbility
         $this->unit->useConcentrationAbility();
     }
 
+    /**
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return bool
+     * @throws Exception
+     */
     public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
     {
         foreach ($this->createEffectActions($enemyCommand, $alliesCommand) as $action) {
@@ -91,6 +108,7 @@ class ReserveForcesAbility extends AbstractAbility
      * @param CommandInterface $alliesCommand
      * @param bool $new
      * @return ActionCollection
+     * @throws Exception
      */
     private function createEffectActions(
         CommandInterface $enemyCommand,
@@ -98,46 +116,42 @@ class ReserveForcesAbility extends AbstractAbility
         bool $new = false
     ): ActionCollection
     {
-        // TODO Переделать на массив параметров и ActionFactory
-
         if ($new || $this->actions === null) {
-            // Создаем коллекцию событий (с одним бафом), которая будет применена к персонажу, при применении эффекта
-            $onApplyActionCollection = new ActionCollection();
 
-            $onApplyActionCollection->add(new BuffAction(
-                $this->unit,
-                $enemyCommand,
-                $alliesCommand,
-                BuffAction::TARGET_SELF,
-                self::USE_MESSAGE,
-                self::MODIFY_METHOD,
-                self::MODIFY_POWER
-            ));
+            $actionFactory = new ActionFactory();
 
-            // Создаем коллекцию эффектов, с одним эффектом при применении - Reserve Forces
-            $effects = new EffectCollection();
+            $data = [
+                'type'           => ActionInterface::EFFECT,
+                'action_unit'    => $this->unit,
+                'enemy_command'  => $enemyCommand,
+                'allies_command' => $alliesCommand,
+                'type_target'    => ActionInterface::TARGET_SELF,
+                'name'           => self::USE_MESSAGE,
+                'effects'        => [
+                    [
+                        'name'                  => self::NAME,
+                        'icon'                  => self::ICON,
+                        'duration'              => self::DURATION,
+                        'on_apply_actions'      => [
+                            [
+                                'type'           => ActionInterface::BUFF,
+                                'action_unit'    => $this->unit,
+                                'enemy_command'  => $enemyCommand,
+                                'allies_command' => $alliesCommand,
+                                'type_target'    => ActionInterface::TARGET_SELF,
+                                'name'           => self::USE_MESSAGE,
+                                'modify_method'  => self::MODIFY_METHOD,
+                                'power'          => self::MODIFY_POWER,
+                            ],
+                        ],
+                        'on_next_round_actions' => [],
+                        'on_disable_actions'    => [],
+                    ],
+                ],
+            ];
 
-            // Создаем сам эффект
-            $effects->add(new Effect(
-                self::NAME,
-                self::ICON,
-                self::DURATION,
-                $onApplyActionCollection,
-                new ActionCollection(),
-                new ActionCollection()
-            ));
-
-            // Создаем коллекцию событий для применения к юниту
             $this->actions = new ActionCollection();
-
-            $this->actions->add(new EffectAction(
-                $this->unit,
-                $enemyCommand,
-                $alliesCommand,
-                EffectAction::TARGET_SELF,
-                self::USE_MESSAGE,
-                $effects
-            ));
+            $this->actions->add($actionFactory->create($data));
         }
 
         return $this->actions;

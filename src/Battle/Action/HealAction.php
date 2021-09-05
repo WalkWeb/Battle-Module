@@ -36,7 +36,7 @@ class HealAction extends AbstractAction
         int $typeTarget,
         ?int $power = null,
         ?string $name = null,
-        string $animationMethod = self::UNIT_ANIMATION_METHOD
+        ?string $animationMethod = null
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
@@ -44,7 +44,7 @@ class HealAction extends AbstractAction
         // TODO Убрать увеличения силы по-умолчанию
         $this->power = $power ?? (int)($actionUnit->getDamage() * 1.2);
         $this->name = $name ?? self::NAME;
-        $this->animationMethod = $animationMethod;
+        $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
     }
 
     public function getHandleMethod(): string

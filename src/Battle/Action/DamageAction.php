@@ -36,13 +36,13 @@ class DamageAction extends AbstractAction
         int $typeTarget,
         ?int $damage = null,
         ?string $name = null,
-        string $animationMethod = self::UNIT_ANIMATION_METHOD
+        ?string $animationMethod = null
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->damage = $damage ?? $actionUnit->getDamage();
         $this->name = $name ?? self::DEFAULT_NAME;
-        $this->animationMethod = $animationMethod;
+        $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
     }
 
     public function getHandleMethod(): string
