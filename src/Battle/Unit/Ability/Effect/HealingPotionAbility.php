@@ -104,6 +104,8 @@ class HealingPotionAbility extends AbstractAbility
         bool $new = false
     ): ActionCollection
     {
+        // TODO Переделать на массив параметров и ActionFactory
+
         if ($new || $this->actions === null) {
             // Создаем коллекцию событий (с одним бафом), которая будет применена к персонажу, при применении эффекта
             $onNextRoundActions = new ActionCollection();
@@ -113,7 +115,9 @@ class HealingPotionAbility extends AbstractAbility
                 $enemyCommand,
                 $alliesCommand,
                 HealAction::TARGET_SELF,
-                self::POWER
+                self::POWER,
+                null,
+                HealAction::EFFECT_ANIMATION_METHOD
             ));
 
             // Создаем коллекцию эффектов, с одним эффектом при применении - Reserve Forces

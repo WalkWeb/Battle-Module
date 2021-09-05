@@ -6,6 +6,7 @@ namespace Tests\Battle\Factory;
 
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitException;
 
 class BaseFactory
@@ -20,16 +21,17 @@ class BaseFactory
      *
      * @param int $unitId
      * @param int $enemyUnitId
+     * @param ContainerInterface|null $container
      * @return array
-     * @throws UnitFactoryException
      * @throws CommandException
      * @throws UnitException
+     * @throws UnitFactoryException
      */
-    public static function create(int $unitId, int $enemyUnitId): array
+    public static function create(int $unitId, int $enemyUnitId, ?ContainerInterface $container = null): array
     {
-        $unit = UnitFactory::createByTemplate($unitId);
+        $unit = UnitFactory::createByTemplate($unitId, $container);
         $command = CommandFactory::create([$unit]);
-        $enemyUnit = UnitFactory::createByTemplate($enemyUnitId);
+        $enemyUnit = UnitFactory::createByTemplate($enemyUnitId, $container);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         return [$unit, $command, $enemyCommand, $enemyUnit];

@@ -26,10 +26,10 @@ class Scenario implements ScenarioInterface
     /**
      * Добавляет в сценарий анимацию, соответствующую указанному Action
      *
-     * @uses damage, heal, summon, effect, wait, skip
      * @param ActionInterface $action
      * @param StatisticInterface $statistic
      * @throws Exception
+     * @uses damage, heal, effectHeal, summon, effect, wait, skip
      */
     public function addAction(ActionInterface $action, StatisticInterface $statistic): void
     {
@@ -82,6 +82,8 @@ class Scenario implements ScenarioInterface
         ];
     }
 
+    // TODO Add effectDamage
+
     /**
      * @param HealAction $action
      * @param StatisticInterface $statistic
@@ -110,6 +112,35 @@ class Scenario implements ScenarioInterface
                             'hp_bar_class2'     => 'unit_hp_bar2',
                             'unit_hp_bar_width' => $this->getLifeBarWidth($action->getTargetUnit()),
                             'unit_effects'      => $this->getUnitEffects($action->getTargetUnit()),
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @param HealAction $action
+     * @param StatisticInterface $statistic
+     * @throws ActionException
+     */
+    public function effectHeal(HealAction $action, StatisticInterface $statistic): void
+    {
+        $this->scenario[] = [
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'      => $action->getActionUnit()->getId(),
+                    'unit_effects' => $this->getUnitEffects($action->getActionUnit()),
+                    'targets'      => [
+                        [
+                            'user_id'           => $action->getActionUnit()->getId(),
+                            'ava'               => 'unit_ava_green',
+                            'recdam'            => '+' . $action->getFactualPower(),
+                            'hp'                => $action->getTargetUnit()->getLife(),
+                            'thp'               => $action->getTargetUnit()->getTotalLife(),
+                            'unit_hp_bar_width' => $this->getLifeBarWidth($action->getTargetUnit()),
                         ],
                     ],
                 ],

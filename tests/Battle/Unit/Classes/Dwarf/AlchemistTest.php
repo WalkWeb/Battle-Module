@@ -70,7 +70,9 @@ class AlchemistTest extends TestCase
             $enemyCommand,
             $command,
             HealAction::TARGET_SELF,
-            15
+            15,
+            null,
+            HealAction::EFFECT_ANIMATION_METHOD
         ));
 
         // Создаем коллекцию эффектов, с одним эффектом при применении - Reserve Forces

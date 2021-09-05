@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit;
 
 use Battle\Action\ActionException;
+use Battle\Container\ContainerException;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
@@ -259,6 +260,7 @@ abstract class AbstractUnit implements UnitInterface
 
     /**
      * @throws ActionException
+     * @throws ContainerException
      */
     public function newRound(): void
     {
@@ -273,6 +275,7 @@ abstract class AbstractUnit implements UnitInterface
         foreach ($effectActions as $action) {
             if ($action->canByUsed()) {
                 $action->handle();
+                $this->container->getScenario()->addAction($action, $this->container->getStatistic());
             }
         }
     }

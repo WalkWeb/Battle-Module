@@ -6,7 +6,9 @@ namespace Tests\Battle\Result\Scenario;
 
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
+use Battle\Container\Container;
 use Battle\Result\Scenario\ScenarioException;
+use Battle\Unit\Ability\Effect\HealingPotionAbility;
 use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
@@ -139,6 +141,49 @@ class ScenarioTest extends TestCase
         ];
 
         self::assertEquals($expectedData, $scenario->getArray()[0]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testScenarioAddEffectHeal(): void
+    {
+        $container = new Container();
+        [$unit, $command, $enemyCommand] = BaseFactory::create(11, 2, $container);
+
+        $ability = new HealingPotionAbility($unit);
+
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            $container->getScenario()->addAction($action, $container->getStatistic());
+        }
+
+        $unit->newRound();
+
+        $expectedData = [
+            'step'    => $container->getStatistic()->getRoundNumber(),
+            'attack'  => $container->getStatistic()->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'      => $unit->getId(),
+                    'unit_effects' => '<img src="/images/icons/ability/234.png" width="22" alt="" /> <span>3</span>',
+                    'targets'      => [
+                        [
+                            'user_id'           => $unit->getId(),
+                            'ava'               => 'unit_ava_green',
+                            'recdam'            => '+15',
+                            'hp'                => 16,
+                            'thp'               => 100,
+                            'unit_hp_bar_width' => 16,
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $container->getScenario()->getArray()[1]);
     }
 
     /**

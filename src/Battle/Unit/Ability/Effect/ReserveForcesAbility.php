@@ -98,6 +98,8 @@ class ReserveForcesAbility extends AbstractAbility
         bool $new = false
     ): ActionCollection
     {
+        // TODO Переделать на массив параметров и ActionFactory
+
         if ($new || $this->actions === null) {
             // Создаем коллекцию событий (с одним бафом), которая будет применена к персонажу, при применении эффекта
             $onApplyActionCollection = new ActionCollection();
