@@ -6,6 +6,8 @@ namespace Battle\Unit\Effect;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
+use Battle\Action\BuffAction;
+use Battle\Unit\UnitInterface;
 
 class Effect implements EffectInterface
 {
@@ -118,9 +120,11 @@ class Effect implements EffectInterface
     {
         $collection = $this->onDisableActions;
 
-        // Также, к коллекции событий необходимо добавить revertAction от событий, примененных сразу
+        // Также, к коллекции событий необходимо добавить revertAction от бафов, примененных сразу
         foreach ($this->onApplyActions as $applyAction) {
-            $collection->add($applyAction->getRevertAction());
+            if ($applyAction instanceof BuffAction) {
+                $collection->add($applyAction->getRevertAction());
+            }
         }
 
         return $collection;
@@ -134,5 +138,20 @@ class Effect implements EffectInterface
     public function resetDuration(): void
     {
         $this->duration = $this->baseDuration;
+    }
+
+    public function changeActionUnit(UnitInterface $unit): void
+    {
+        foreach ($this->onApplyActions as $onApplyAction) {
+            $onApplyAction->changeActionUnit($unit);
+        }
+
+        foreach ($this->onNextRoundActions as $onNextRoundAction) {
+            $onNextRoundAction->changeActionUnit($unit);
+        }
+
+        foreach ($this->onDisableActions as $onDisableAction) {
+            $onDisableAction->changeActionUnit($unit);
+        }
     }
 }

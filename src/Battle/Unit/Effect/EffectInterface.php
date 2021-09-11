@@ -4,6 +4,7 @@ namespace Battle\Unit\Effect;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
+use Battle\Unit\UnitInterface;
 
 interface EffectInterface
 {
@@ -66,4 +67,16 @@ interface EffectInterface
      * @throws ActionException
      */
     public function getOnDisableActions(): ActionCollection;
+
+    /**
+     * При применении эффекта необходимо изменить $actionUnit во всех Action, так как теперь они будут вызываться от
+     * владельца эффекта.
+     *
+     * Сразу устанавливать в $actionUnit того, на кого эффект будет применен мы не можем, потому что в момент создания
+     * эффекта это еще неизвестно. Это событие вообще может не наступить, если эффект накладывается в конце действия
+     * другого эффекта, а юнит умер до того, как эффект закончился
+     *
+     * @param UnitInterface $unit
+     */
+    public function changeActionUnit(UnitInterface $unit): void;
 }
