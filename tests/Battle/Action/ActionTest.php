@@ -9,6 +9,7 @@ use Battle\Action\ActionException;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use PHPUnit\Framework\TestCase;
+use Tests\Battle\Factory\BaseFactory;
 use Tests\Battle\Factory\UnitFactory;
 
 class ActionTest extends TestCase
@@ -119,5 +120,23 @@ class ActionTest extends TestCase
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getEffects');
         $action->getEffects();
+    }
+
+    /**
+     * Тест на изменение $actionUnit в Action
+     *
+     * @throws Exception
+     */
+    public function testActionChangeActionUnit(): void
+    {
+        [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(1, 2);
+
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertEquals($unit, $action->getActionUnit());
+
+        $action->changeActionUnit($enemyUnit);
+
+        self::assertEquals($enemyUnit, $action->getActionUnit());
     }
 }

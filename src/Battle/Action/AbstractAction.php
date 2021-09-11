@@ -175,6 +175,14 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * @param UnitInterface $unit
+     */
+    public function changeActionUnit(UnitInterface $unit): void
+    {
+        $this->actionUnit = $unit;
+    }
+
+    /**
      * Ищет юнита для применения события.
      *
      * @return UnitInterface|null

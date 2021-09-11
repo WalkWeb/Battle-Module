@@ -168,6 +168,15 @@ interface ActionInterface
      */
     public function getAnimationMethod(): string;
 
+    /**
+     * При создании Action, его создатель считается $actionUnit, но, если Action является частью эффекта, то при
+     * наложении его на другого юнита, Action будет вызываться уже от его лица. Соответственно нужен метод для изменения
+     * $actionUnit в таких ситуациях.
+     *
+     * @param UnitInterface $unit
+     */
+    public function changeActionUnit(UnitInterface $unit): void;
+
     // todo Add getRevertNameAction()
     // todo Add getAlliesCommand
     // todo Add getEnemyCommand
