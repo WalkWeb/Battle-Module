@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Classes\Orcs;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\BuffAction;
-use Battle\Action\EffectAction;
+use Battle\Action\ActionFactory;
+use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
-use Battle\Unit\Effect\Effect;
-use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -48,57 +46,53 @@ class TitanTest extends TestCase
         }
     }
 
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return ActionCollection
+     * @throws Exception
+     */
     private function getReserveForcesActions(
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand
     ): ActionCollection
     {
-        // TODO Переделать создание на фабрику
-
-        $name = 'Reserve Forces';
-        $icon = '/images/icons/ability/156.png';
-        $useMessage = 'use Reserve Forces';
-        $duration = 6;
-        $modifyMethod = 'multiplierMaxLife';
-        $modifyPower = 130;
-
         $collection = new ActionCollection();
+        $factory = new ActionFactory();
 
-        // Создаем коллекцию событий (с одним бафом), которая будет применена к персонажу, при применении эффекта
-        $onApplyActionCollection = new ActionCollection();
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $alliesCommand,
+            'type_target'    => ActionInterface::TARGET_SELF,
+            'name'           => 'use Reserve Forces',
+            'effects'        => [
+                [
+                    'name'                  => 'Reserve Forces',
+                    'icon'                  => '/images/icons/ability/156.png',
+                    'duration'              => 6,
+                    'on_apply_actions'      => [
+                        [
+                            'type'           => ActionInterface::BUFF,
+                            'action_unit'    => $unit,
+                            'enemy_command'  => $enemyCommand,
+                            'allies_command' => $alliesCommand,
+                            'type_target'    => ActionInterface::TARGET_SELF,
+                            'name'           => 'use Reserve Forces',
+                            'modify_method'  => 'multiplierMaxLife',
+                            'power'          => 130,
+                        ],
+                    ],
+                    'on_next_round_actions' => [],
+                    'on_disable_actions'    => [],
+                ],
+            ],
+        ];
 
-        $onApplyActionCollection->add(new BuffAction(
-            $unit,
-            $enemyCommand,
-            $alliesCommand,
-            BuffAction::TARGET_SELF,
-            $useMessage,
-            $modifyMethod,
-            $modifyPower
-        ));
-
-        // Создаем коллекцию эффектов, с одним эффектом при применении - Reserve Forces
-        $effects = new EffectCollection($unit);
-
-        $effects->add(new Effect(
-            $name,
-            $icon,
-            $duration,
-            $onApplyActionCollection,
-            new ActionCollection(),
-            new ActionCollection()
-        ));
-
-        // Создаем сам эффект
-        $collection->add(new EffectAction(
-            $unit,
-            $enemyCommand,
-            $alliesCommand,
-            BuffAction::TARGET_SELF,
-            $useMessage,
-            $effects
-        ));
+        $collection->add($factory->create($data));
 
         return $collection;
     }
