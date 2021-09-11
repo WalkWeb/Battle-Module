@@ -65,7 +65,7 @@ class AlchemistTest extends TestCase
      */
     private function createEffects(UnitInterface $unit, CommandInterface $enemyCommand, CommandInterface $command): EffectCollection
     {
-        $effects = new EffectCollection();
+        $effects = new EffectCollection($unit);
         $effectFactory = new EffectFactory(new ActionFactory());
 
         $data = [

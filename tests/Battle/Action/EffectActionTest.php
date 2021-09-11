@@ -32,13 +32,13 @@ class EffectActionTest extends TestCase
      */
     public function testEffectActionCreate(): void
     {
-        $name = 'Effect#123';
-        $effects = new EffectCollection();
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $name = 'Effect#123';
+        $effects = new EffectCollection($unit);
 
         $action = new EffectAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF, $name, $effects);
 

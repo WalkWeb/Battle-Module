@@ -54,6 +54,8 @@ class TitanTest extends TestCase
         CommandInterface $alliesCommand
     ): ActionCollection
     {
+        // TODO Переделать создание на фабрику
+
         $name = 'Reserve Forces';
         $icon = '/images/icons/ability/156.png';
         $useMessage = 'use Reserve Forces';
@@ -77,7 +79,7 @@ class TitanTest extends TestCase
         ));
 
         // Создаем коллекцию эффектов, с одним эффектом при применении - Reserve Forces
-        $effects = new EffectCollection();
+        $effects = new EffectCollection($unit);
 
         $effects->add(new Effect(
             $name,

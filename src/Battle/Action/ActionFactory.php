@@ -120,7 +120,7 @@ class ActionFactory
         $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
         $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
         $effectsData = self::array($data, 'effects', ActionException::INVALID_EFFECTS_DATA);
-        $effects = new EffectCollection();
+        $effects = new EffectCollection($actionUnit);
         $effectFactory = new EffectFactory($this);
 
         foreach ($effectsData as $effectData) {

@@ -23,7 +23,7 @@ class HealingPotionAbilityTest extends TestCase
     {
         $name = 'Healing Potion';
         $icon = '/images/icons/ability/234.png';
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);

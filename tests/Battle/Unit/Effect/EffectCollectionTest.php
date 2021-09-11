@@ -18,9 +18,13 @@ use Tests\Battle\Factory\UnitFactoryException;
 
 class EffectCollectionTest extends TestCase
 {
+    /**
+     * @throws UnitFactoryException
+     */
     public function testEffectCollectionCreate(): void
     {
-        $collection = new EffectCollection();
+        $unit = UnitFactory::createByTemplate(1);
+        $collection = new EffectCollection($unit);
 
         $collection->add(new Effect(
             'Effect#1',
@@ -51,9 +55,13 @@ class EffectCollectionTest extends TestCase
         }
     }
 
+    /**
+     * @throws UnitFactoryException
+     */
     public function testEffectCollectionExist(): void
     {
-        $collection = new EffectCollection();
+        $unit = UnitFactory::createByTemplate(1);
+        $collection = new EffectCollection($unit);
 
         $effect1 = new Effect(
             'Effect#1',
@@ -83,10 +91,12 @@ class EffectCollectionTest extends TestCase
      * Тест на ситуацию, когда добавленный аналогичный эффект обновляет длительность уже существующего
      *
      * @throws ActionException
+     * @throws UnitFactoryException
      */
     public function testEffectCollectionAddDouble(): void
     {
-        $collection = new EffectCollection();
+        $unit = UnitFactory::createByTemplate(1);
+        $collection = new EffectCollection($unit);
 
         $duration = 10;
 
@@ -133,7 +143,7 @@ class EffectCollectionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $collection = new EffectCollection();
+        $collection = new EffectCollection($unit);
 
         $actions = new ActionCollection();
         $actions->add(new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES));
@@ -170,7 +180,7 @@ class EffectCollectionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $collection = new EffectCollection();
+        $collection = new EffectCollection($unit);
 
         $actions = new ActionCollection();
         $actions->add(new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES));

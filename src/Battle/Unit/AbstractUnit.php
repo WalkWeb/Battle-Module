@@ -156,7 +156,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->container = $container;
         $this->class = $class;
         $this->abilities = $class ? $class->getAbilities($this) : new AbilityCollection();
-        $this->effects = $effects ?? new EffectCollection();
+        $this->effects = $effects ?? new EffectCollection($this);
     }
 
     public function getId(): string

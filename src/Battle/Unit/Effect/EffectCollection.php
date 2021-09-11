@@ -7,6 +7,7 @@ namespace Battle\Unit\Effect;
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Traits\CollectionTrait;
+use Battle\Unit\UnitInterface;
 use Countable;
 use Iterator;
 
@@ -20,11 +21,26 @@ class EffectCollection implements Iterator, Countable
     private $elements = [];
 
     /**
+     * Юнит, к которому относится данная коллекция эффектов
+     *
+     * @var UnitInterface
+     */
+    private $parentUnit;
+
+    public function __construct(UnitInterface $parentUnit)
+    {
+        $this->parentUnit = $parentUnit;
+    }
+
+    /**
      * @param EffectInterface $effect
      * @return ActionCollection
      */
     public function add(EffectInterface $effect): ActionCollection
     {
+        // Теперь эффект (а точнее его Actions) будет срабатывать от лица юнита, на который он наложен
+        $effect->changeActionUnit($this->parentUnit);
+
         $onApplyActionCollection = new ActionCollection();
 
         if ($this->exist($effect)) {
