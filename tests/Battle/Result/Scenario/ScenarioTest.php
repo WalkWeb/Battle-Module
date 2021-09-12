@@ -303,7 +303,7 @@ class ScenarioTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testScenarioAddEffect(): void
+    public function testScenarioAddEffectBuff(): void
     {
         $statistic = new Statistic();
         $unit = UnitFactory::createByTemplate(1);
@@ -335,6 +335,7 @@ class ScenarioTest extends TestCase
                         'unit_effects'   => '<img src="images/icons/ability/156.png" width="22" alt="" /> <span>8</span>',
                         'targets'        => [
                             [
+                                'type'         => 'change',
                                 'user_id'      => $action->getActionUnit()->getId(),
                                 'hp'           => $action->getActionUnit()->getLife(),
                                 'thp'          => $action->getActionUnit()->getTotalLife(),

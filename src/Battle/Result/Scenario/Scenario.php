@@ -232,7 +232,7 @@ class Scenario implements ScenarioInterface
             'effects' => [
                 [
                     'user_id'        => $action->getActionUnit()->getId(),
-                    'class'          => 'd_buff',
+                    'class'          => 'd_buff', // TODO 1) Эффекта на аватаре не происходит, 2) Необходимо разделять эффекты на положительные и отрицательные
                     'hp'             => $action->getActionUnit()->getLife(),
                     'thp'            => $action->getActionUnit()->getTotalLife(),
                     'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
@@ -240,6 +240,7 @@ class Scenario implements ScenarioInterface
                     'unit_effects'   => $this->getUnitEffects($action->getActionUnit()),
                     'targets'        => [
                         [
+                            'type'         => 'change',
                             'user_id'      => $action->getTargetUnit()->getId(),
                             'hp'           => $action->getTargetUnit()->getLife(),
                             'thp'          => $action->getTargetUnit()->getTotalLife(),
