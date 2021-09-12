@@ -316,6 +316,21 @@ class UnitFactory
             'class'        => 6,
             'race'         => 4,
         ],
+        // Демон с классом Суккуб
+        23  => [
+            'id'           => '942be229-2272-45d5-94ec-4c20be94a344',
+            'name'         => 'Succubus',
+            'level'        => 2,
+            'avatar'       => '/images/avas/demons/demon010.jpg',
+            'damage'       => 11,
+            'attack_speed' => 1.2,
+            'life'         => 69,
+            'total_life'   => 69,
+            'melee'        => false,
+            'command'      => 1,
+            'class'        => 7,
+            'race'         => 6,
+        ],
     ];
 
     /**

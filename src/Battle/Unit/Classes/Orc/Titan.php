@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Unit\Classes\Orcs;
+namespace Battle\Unit\Classes\Orc;
 
 use Battle\Unit\Classes\AbstractUnitClass;
 use Battle\Unit\Ability\AbilityCollection;

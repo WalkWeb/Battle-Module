@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Unit\Classes\Orcs;
+namespace Tests\Battle\Unit\Classes\Orc;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionFactory;

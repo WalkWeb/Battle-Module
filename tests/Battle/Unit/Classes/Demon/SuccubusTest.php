@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Unit\Classes\Dwarf;
+namespace Tests\Battle\Unit\Classes\Demon;
 
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
-use Battle\Action\HealAction;
+use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Unit\Ability\Effect\HealingPotionAbility;
+use Battle\Unit\Ability\Effect\PoisonAbility;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Effect\EffectFactory;
@@ -18,28 +18,30 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
 
-class AlchemistTest extends TestCase
+class SuccubusTest extends TestCase
 {
     /**
+     * Тест на создание класса Succubus
+     *
      * @throws Exception
      */
-    public function testAlchemistCreate(): void
+    public function testSuccubusCreate(): void
     {
-        $unit = UnitFactory::createByTemplate(22);
+        $unit = UnitFactory::createByTemplate(23);
         $enemyUnit = UnitFactory::createByTemplate(1);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $alchemist = $unit->getClass();
+        $succubus = $unit->getClass();
 
-        self::assertEquals(UnitClassInterface::ALCHEMIST_ID, $alchemist->getId());
-        self::assertEquals(UnitClassInterface::ALCHEMIST_NAME, $alchemist->getName());
-        self::assertEquals(UnitClassInterface::ALCHEMIST_SMALL_ICON, $alchemist->getSmallIcon());
+        self::assertEquals(UnitClassInterface::SUCCUBUS_ID, $succubus->getId());
+        self::assertEquals(UnitClassInterface::SUCCUBUS_NAME, $succubus->getName());
+        self::assertEquals(UnitClassInterface::SUCCUBUS_SMALL_ICON, $succubus->getSmallIcon());
 
-        $abilities = $alchemist->getAbilities($unit);
+        $abilities = $succubus->getAbilities($unit);
 
         foreach ($abilities as $ability) {
-            self::assertContainsOnlyInstancesOf(HealingPotionAbility::class, [$ability]);
+            self::assertContainsOnlyInstancesOf(PoisonAbility::class, [$ability]);
 
             $actions = $ability->getAction($enemyCommand, $command);
 
@@ -54,31 +56,35 @@ class AlchemistTest extends TestCase
 
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
+     * @param CommandInterface $enemyCommand
      * @return EffectCollection
      * @throws Exception
      */
-    private function createEffects(UnitInterface $unit, CommandInterface $enemyCommand, CommandInterface $command): EffectCollection
+    private function createEffects(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command
+    ): EffectCollection
     {
         $effects = new EffectCollection($unit);
         $effectFactory = new EffectFactory(new ActionFactory());
 
         $data = [
-            'name'                  => 'Healing Potion',
-            'icon'                  =>'/images/icons/ability/234.png',
-            'duration'              => 4,
+            'name'                  => 'Poison',
+            'icon'                  =>'/images/icons/ability/202.png',
+            'duration'              => 5,
             'on_apply_actions'      => [],
             'on_next_round_actions' => [
                 [
-                    'type'            => ActionInterface::HEAL,
+                    'type'            => ActionInterface::DAMAGE,
                     'action_unit'     => $unit,
                     'enemy_command'   => $enemyCommand,
                     'allies_command'  => $command,
                     'type_target'     => ActionInterface::TARGET_SELF,
                     'name'            => null,
-                    'power'           => 15,
-                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                    'power'           => 8,
+                    'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                 ],
             ],
             'on_disable_actions'    => [],
