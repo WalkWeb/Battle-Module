@@ -82,7 +82,36 @@ class Scenario implements ScenarioInterface
         ];
     }
 
-    // TODO Add effectDamage
+    /**
+     * @param DamageAction $action
+     * @param StatisticInterface $statistic
+     * @throws ActionException
+     */
+    public function effectDamage(DamageAction $action, StatisticInterface $statistic): void
+    {
+        $this->scenario[] = [
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'      => $action->getActionUnit()->getId(),
+                    'unit_effects' => $this->getUnitEffects($action->getActionUnit()),
+                    'targets'      => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => $action->getTargetUnit()->getId(),
+                            'ava'               => 'unit_ava_effect_damage',
+                            'recdam'            => '-' . $action->getFactualPower(),
+                            'hp'                => $action->getTargetUnit()->getLife(),
+                            'thp'               => $action->getTargetUnit()->getTotalLife(),
+                            'unit_hp_bar_width' => $this->getLifeBarWidth($action->getTargetUnit()),
+                            'avas'              => $this->getAvaClassTarget($action->getTargetUnit()),
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
 
     /**
      * @param HealAction $action

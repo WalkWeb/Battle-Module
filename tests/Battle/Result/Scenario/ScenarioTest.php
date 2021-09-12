@@ -9,6 +9,7 @@ use Battle\Action\ActionInterface;
 use Battle\Container\Container;
 use Battle\Result\Scenario\ScenarioException;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
+use Battle\Unit\Ability\Effect\PoisonAbility;
 use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
@@ -78,6 +79,57 @@ class ScenarioTest extends TestCase
         ];
 
         self::assertEquals($expectedData, $scenario->getArray()[0]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testScenarioAddEffectDamage(): void
+    {
+        $container = new Container();
+        [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(23, 2, $container);
+
+        $ability = new PoisonAbility($unit);
+
+        // Применение эффекта
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            $container->getScenario()->addAction($action, $container->getStatistic());
+        }
+
+        // Применение эффекта от урона
+        foreach ($enemyUnit->getOnNewRoundActions() as $action) {
+            if ($action->canByUsed()) {
+                $action->handle();
+                $container->getScenario()->addAction($action, $container->getStatistic());
+            }
+        }
+
+        $expectedData = [
+            'step'    => $container->getStatistic()->getRoundNumber(),
+            'attack'  => $container->getStatistic()->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'      => $enemyUnit->getId(),
+                    'unit_effects' => '<img src="/images/icons/ability/202.png" width="22" alt="" /> <span>5</span>',
+                    'targets'      => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => $enemyUnit->getId(),
+                            'ava'               => 'unit_ava_effect_damage',
+                            'recdam'            => '-8',
+                            'hp'                => 242,
+                            'thp'               => 250,
+                            'unit_hp_bar_width' => 96,
+                            'avas'              => 'unit_ava_blank',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $container->getScenario()->getArray()[1]);
     }
 
     /**
