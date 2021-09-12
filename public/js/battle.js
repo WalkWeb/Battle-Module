@@ -360,7 +360,7 @@ function createUnit(unit) {
     unit_box2_right3_span.style.color = unit.name_color;
     unit_box2_right3_span.innerHTML = unit.name;
     let unit_box2_left = createElement('div', unit_box2, 'unit_box2_left');
-    let unit_effect_content = createElement('div', unit_box2_right, 'unit_effect_content');
+    let unit_effect_content = createElement('div', unit_box2_right, 'unit_effect_container');
     createElement('p', unit_effect_content, null, 'unit_effects_' + unit.id);
     let unit_icon = createElement('div', unit_box2_left, 'unit_icon');
     let unit_icon_left = createElement('div', unit_icon, 'unit_icon_left');

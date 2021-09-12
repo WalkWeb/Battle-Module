@@ -87,6 +87,8 @@ class Unit extends AbstractUnit
         $this->life -= $action->getPower();
         if ($this->life < 0) {
             $this->life = 0;
+
+            // TODO Обнуляем эффекты при смерти
         }
 
         $action->setFactualPower($primordialLife - $this->life);
