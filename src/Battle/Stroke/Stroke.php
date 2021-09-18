@@ -95,6 +95,8 @@ class Stroke implements StrokeInterface
             }
         }
 
+        // TODO После применения эффектов необходимо проверить, жив ли юнит
+
         // -------------------------------------------- Action Unit ----------------------------------------------------
 
         foreach ($this->actionUnit->getAction($enemyCommand, $alliesCommand) as $action) {
