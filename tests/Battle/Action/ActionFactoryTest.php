@@ -101,7 +101,7 @@ class ActionFactoryTest extends TestCase
         self::assertInstanceOf(HealAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_WOUNDED_ALLIES, $action->getTypeTarget());
-        self::assertEquals((int)($unit->getDamage() * 1.2), $action->getPower());
+        self::assertEquals($unit->getDamage(), $action->getPower());
         self::assertEquals('heal', $action->getNameAction());
 
         // Полный набор данных

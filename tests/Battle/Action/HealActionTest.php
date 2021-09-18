@@ -101,7 +101,7 @@ class HealActionTest extends TestCase
 
         $healAction = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
 
-        self::assertEquals((int)($unit->getDamage() * 1.2), $healAction->getPower());
+        self::assertEquals($unit->getDamage(), $healAction->getPower());
     }
 
     /**

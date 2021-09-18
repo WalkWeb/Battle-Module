@@ -41,8 +41,7 @@ class HealAction extends AbstractAction
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
 
-        // TODO Убрать увеличения силы по-умолчанию
-        $this->power = $power ?? (int)($actionUnit->getDamage() * 1.2);
+        $this->power = $power ?? $actionUnit->getDamage();
         $this->name = $name ?? self::NAME;
         $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
     }
