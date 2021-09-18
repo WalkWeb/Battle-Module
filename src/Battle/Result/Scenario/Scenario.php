@@ -31,7 +31,7 @@ class Scenario implements ScenarioInterface
      * @throws Exception
      * @uses damage, heal, effectHeal, summon, effect, wait, skip
      */
-    public function addAction(ActionInterface $action, StatisticInterface $statistic): void
+    public function addAnimation(ActionInterface $action, StatisticInterface $statistic): void
     {
         $animationMethod = $action->getAnimationMethod();
 
@@ -335,7 +335,7 @@ class Scenario implements ScenarioInterface
 
     private function getUnitEffects(UnitInterface $unit): string
     {
-        // TODO Формируем html сразу. Пока непонятно, стоит ли ради одной строчки дергать View
+        // TODO Передавать массив параметров, а html формировать на стороне js
 
         $html = '';
 

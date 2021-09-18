@@ -20,13 +20,11 @@ interface ScenarioInterface
     /**
      * Добавляет анимацию действия
      *
-     * TODO Rename to addAnimation()
-     *
      * @param ActionInterface $action
      * @param StatisticInterface $statistic
      * @throws ActionException
      */
-    public function addAction(ActionInterface $action, StatisticInterface $statistic): void;
+    public function addAnimation(ActionInterface $action, StatisticInterface $statistic): void;
 
     /**
      * Возвращает js-сценарий анимации боя

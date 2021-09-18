@@ -280,7 +280,7 @@ abstract class AbstractUnit implements UnitInterface
         foreach ($effectActions as $action) {
             if ($action->canByUsed()) {
                 $action->handle();
-                $this->container->getScenario()->addAction($action, $this->container->getStatistic());
+                $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
             }
         }
     }

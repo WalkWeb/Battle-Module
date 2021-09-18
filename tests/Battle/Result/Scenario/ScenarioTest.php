@@ -44,7 +44,7 @@ class ScenarioTest extends TestCase
         $action->handle();
 
         $scenario = new Scenario();
-        $scenario->addAction($action, $statistic);
+        $scenario->addAnimation($action, $statistic);
 
         $expectedData = [
             'step'    => $statistic->getRoundNumber(),
@@ -95,14 +95,14 @@ class ScenarioTest extends TestCase
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
-            $container->getScenario()->addAction($action, $container->getStatistic());
+            $container->getScenario()->addAnimation($action, $container->getStatistic());
         }
 
         // Применение эффекта от урона
         foreach ($enemyUnit->getOnNewRoundActions() as $action) {
             if ($action->canByUsed()) {
                 $action->handle();
-                $container->getScenario()->addAction($action, $container->getStatistic());
+                $container->getScenario()->addAnimation($action, $container->getStatistic());
             }
         }
 
@@ -159,7 +159,7 @@ class ScenarioTest extends TestCase
 
         foreach ($actions as $action) {
             $action->handle();
-            $scenario->addAction($action, $statistic);
+            $scenario->addAnimation($action, $statistic);
         }
 
         // Проверяем лечение
@@ -209,14 +209,14 @@ class ScenarioTest extends TestCase
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
-            $container->getScenario()->addAction($action, $container->getStatistic());
+            $container->getScenario()->addAnimation($action, $container->getStatistic());
         }
 
         // Применение эффекта от лечения
         foreach ($unit->getOnNewRoundActions() as $action) {
             if ($action->canByUsed()) {
                 $action->handle();
-                $container->getScenario()->addAction($action, $container->getStatistic());
+                $container->getScenario()->addAnimation($action, $container->getStatistic());
             }
         }
 
@@ -262,7 +262,7 @@ class ScenarioTest extends TestCase
 
         $scenario = new Scenario();
 
-        $scenario->addAction($action, $statistic);
+        $scenario->addAnimation($action, $statistic);
 
         $expectedData = [
             'step'    => $statistic->getRoundNumber(),
@@ -318,7 +318,7 @@ class ScenarioTest extends TestCase
         $action->handle();
 
         $scenario = new Scenario();
-        $scenario->addAction($action, $statistic);
+        $scenario->addAnimation($action, $statistic);
 
         $expectedData = [
             [
@@ -366,7 +366,7 @@ class ScenarioTest extends TestCase
 
         $scenario = new Scenario();
 
-        $scenario->addAction($action, $statistic);
+        $scenario->addAnimation($action, $statistic);
 
         $expectedData = [
             'step'    => $statistic->getRoundNumber(),
@@ -452,7 +452,7 @@ class ScenarioTest extends TestCase
 
         $this->expectException(ScenarioException::class);
         $this->expectExceptionMessage(ScenarioException::UNDEFINED_ANIMATION_METHOD);
-        $scenario->addAction($action, new Statistic());
+        $scenario->addAnimation($action, new Statistic());
     }
 
     /**

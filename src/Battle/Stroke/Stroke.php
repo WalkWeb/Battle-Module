@@ -89,7 +89,7 @@ class Stroke implements StrokeInterface
                 $message = $action->handle();
 
                 $this->container->getStatistic()->addUnitAction($action);
-                $this->container->getScenario()->addAction($action, $this->container->getStatistic());
+                $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
                 $this->container->getFullLog()->addText($message);
                 $this->container->getChat()->add($message);
             }
@@ -116,7 +116,7 @@ class Stroke implements StrokeInterface
             $message = $action->handle();
 
             $this->container->getStatistic()->addUnitAction($action);
-            $this->container->getScenario()->addAction($action, $this->container->getStatistic());
+            $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
             $this->container->getFullLog()->addText($message);
             $this->container->getChat()->add($message);
         }
