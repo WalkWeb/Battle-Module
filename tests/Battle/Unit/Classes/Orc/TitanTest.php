@@ -13,7 +13,6 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use Battle\Command\CommandFactory;
 use Tests\Battle\Factory\UnitFactory;
-use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Unit\Ability\Effect\ReserveForcesAbility;
 
 class TitanTest extends TestCase
@@ -30,9 +29,9 @@ class TitanTest extends TestCase
 
         $class = $unit->getClass();
 
-        self::assertEquals(UnitClassInterface::TITAN_ID, $class->getId());
-        self::assertEquals(UnitClassInterface::TITAN_NAME, $class->getName());
-        self::assertEquals(UnitClassInterface::TITAN_SMALL_ICON, $class->getSmallIcon());
+        self::assertEquals(5, $class->getId());
+        self::assertEquals('Titan', $class->getName());
+        self::assertEquals('/images/icons/small/titan.png', $class->getSmallIcon());
 
         $abilities = $class->getAbilities($unit);
 

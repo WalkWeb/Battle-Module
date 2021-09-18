@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\Undead;
 
-use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Summon\SummonSkeletonAbility;
@@ -29,9 +28,9 @@ class DarkMageTest extends TestCase
 
         $darkMage = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::DARK_MAGE_ID, $darkMage->getId());
-        self::assertEquals(UnitClassInterface::DARK_MAGE_NAME, $darkMage->getName());
-        self::assertEquals(UnitClassInterface::DARK_MAGE_SMALL_ICON, $darkMage->getSmallIcon());
+        self::assertEquals(4, $darkMage->getId());
+        self::assertEquals('Dark Mage', $darkMage->getName());
+        self::assertEquals('/images/icons/small/dark-mage.png', $darkMage->getSmallIcon());
 
         $abilities = $darkMage->getAbilities($actionUnit);
 

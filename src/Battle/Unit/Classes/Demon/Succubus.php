@@ -11,34 +11,25 @@ use Battle\Unit\UnitInterface;
 
 class Succubus extends AbstractUnitClass
 {
-    /**
-     * @return int
-     */
+    private const ID         = 7;
+    private const NAME       = 'Succubus';
+    private const SMALL_ICON = '/images/icons/small/dark-mage.png';
+
     public function getId(): int
     {
-        return self::SUCCUBUS_ID;
+        return self::ID;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
-        return self::SUCCUBUS_NAME;
+        return self::NAME;
     }
 
-    /**
-     * @return string
-     */
     public function getSmallIcon(): string
     {
-        return self::SUCCUBUS_SMALL_ICON;
+        return self::SMALL_ICON;
     }
 
-    /**
-     * @param UnitInterface $unit
-     * @return AbilityCollection
-     */
     public function getAbilities(UnitInterface $unit): AbilityCollection
     {
         $collection = new AbilityCollection();

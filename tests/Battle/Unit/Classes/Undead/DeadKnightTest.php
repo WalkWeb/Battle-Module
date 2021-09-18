@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\Undead;
 
-use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
@@ -29,9 +28,9 @@ class DeadKnightTest extends TestCase
 
         $deadKnight = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_ID, $deadKnight->getId());
-        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_NAME, $deadKnight->getName());
-        self::assertEquals(UnitClassInterface::DEAD_KNIGHT_SMALL_ICON, $deadKnight->getSmallIcon());
+        self::assertEquals(3, $deadKnight->getId());
+        self::assertEquals('Dead Knight', $deadKnight->getName());
+        self::assertEquals('/images/icons/small/dead-knight.png', $deadKnight->getSmallIcon());
 
         $abilities = $deadKnight->getAbilities($actionUnit);
 

@@ -11,6 +11,10 @@ use Battle\Unit\UnitInterface;
 
 class Titan extends AbstractUnitClass
 {
+    private const ID         = 5;
+    private const NAME       = 'Titan';
+    private const SMALL_ICON = '/images/icons/small/titan.png';
+
     public function getAbilities(UnitInterface $unit): AbilityCollection
     {
         $collection = new AbilityCollection();
@@ -20,16 +24,16 @@ class Titan extends AbstractUnitClass
 
     public function getId(): int
     {
-        return self::TITAN_ID;
+        return self::ID;
     }
 
     public function getName(): string
     {
-        return self::TITAN_NAME;
+        return self::NAME;
     }
 
     public function getSmallIcon(): string
     {
-        return self::TITAN_SMALL_ICON;
+        return self::SMALL_ICON;
     }
 }

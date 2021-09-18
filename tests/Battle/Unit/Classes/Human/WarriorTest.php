@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\Human;
 
-use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
@@ -29,9 +28,9 @@ class WarriorTest extends TestCase
 
         $warrior = $actionUnit->getClass();
 
-        self::assertEquals(UnitClassInterface::WARRIOR_ID, $warrior->getId());
-        self::assertEquals(UnitClassInterface::WARRIOR_NAME, $warrior->getName());
-        self::assertEquals(UnitClassInterface::WARRIOR_SMALL_ICON, $warrior->getSmallIcon());
+        self::assertEquals(1, $warrior->getId());
+        self::assertEquals('Warrior', $warrior->getName());
+        self::assertEquals('/images/icons/small/warrior.png', $warrior->getSmallIcon());
 
         $abilities = $warrior->getAbilities($actionUnit);
 

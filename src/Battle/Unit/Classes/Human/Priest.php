@@ -11,34 +11,25 @@ use Battle\Unit\UnitInterface;
 
 class Priest extends AbstractUnitClass
 {
-    /**
-     * @return int
-     */
+    private const ID         = 2;
+    private const NAME       = 'Priest';
+    private const SMALL_ICON = '/images/icons/small/priest.png';
+
     public function getId(): int
     {
-        return self::PRIEST_ID;
+        return self::ID;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
-        return self::PRIEST_NAME;
+        return self::NAME;
     }
 
-    /**
-     * @return string
-     */
     public function getSmallIcon(): string
     {
-        return self::PRIEST_SMALL_ICON;
+        return self::SMALL_ICON;
     }
 
-    /**
-     * @param UnitInterface $unit
-     * @return AbilityCollection
-     */
     public function getAbilities(UnitInterface $unit): AbilityCollection
     {
         $collection = new AbilityCollection();

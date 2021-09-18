@@ -11,34 +11,25 @@ use Battle\Unit\UnitInterface;
 
 class DeadKnight extends AbstractUnitClass
 {
-    /**
-     * @return int
-     */
+    private const ID         = 3;
+    private const NAME       = 'Dead Knight';
+    private const SMALL_ICON = '/images/icons/small/dead-knight.png';
+
     public function getId(): int
     {
-        return self::DEAD_KNIGHT_ID;
+        return self::ID;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
-        return self::DEAD_KNIGHT_NAME;
+        return self::NAME;
     }
 
-    /**
-     * @return string
-     */
     public function getSmallIcon(): string
     {
-        return self::DEAD_KNIGHT_SMALL_ICON;
+        return self::SMALL_ICON;
     }
 
-    /**
-     * @param UnitInterface $unit
-     * @return AbilityCollection
-     */
     public function getAbilities(UnitInterface $unit): AbilityCollection
     {
         $collection = new AbilityCollection();

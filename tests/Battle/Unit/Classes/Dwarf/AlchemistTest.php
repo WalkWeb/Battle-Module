@@ -10,7 +10,6 @@ use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
-use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\UnitInterface;
@@ -32,9 +31,9 @@ class AlchemistTest extends TestCase
 
         $alchemist = $unit->getClass();
 
-        self::assertEquals(UnitClassInterface::ALCHEMIST_ID, $alchemist->getId());
-        self::assertEquals(UnitClassInterface::ALCHEMIST_NAME, $alchemist->getName());
-        self::assertEquals(UnitClassInterface::ALCHEMIST_SMALL_ICON, $alchemist->getSmallIcon());
+        self::assertEquals(6, $alchemist->getId());
+        self::assertEquals('Alchemist', $alchemist->getName());
+        self::assertEquals('/images/icons/small/alchemist.png', $alchemist->getSmallIcon());
 
         $abilities = $alchemist->getAbilities($unit);
 

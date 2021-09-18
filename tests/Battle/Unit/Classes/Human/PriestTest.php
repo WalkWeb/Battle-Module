@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\Human;
 
-use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Heal\GreatHealAbility;
@@ -29,9 +28,9 @@ class PriestTest extends TestCase
 
         $priest = $unit->getClass();
 
-        self::assertEquals(UnitClassInterface::PRIEST_ID, $priest->getId());
-        self::assertEquals(UnitClassInterface::PRIEST_NAME, $priest->getName());
-        self::assertEquals(UnitClassInterface::PRIEST_SMALL_ICON, $priest->getSmallIcon());
+        self::assertEquals(2, $priest->getId());
+        self::assertEquals('Priest', $priest->getName());
+        self::assertEquals('/images/icons/small/priest.png', $priest->getSmallIcon());
 
         $abilities = $priest->getAbilities($unit);
 

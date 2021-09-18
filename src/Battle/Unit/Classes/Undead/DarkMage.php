@@ -11,34 +11,25 @@ use Battle\Unit\UnitInterface;
 
 class DarkMage extends AbstractUnitClass
 {
-    /**
-     * @return int
-     */
+    private const ID         = 4;
+    private const NAME       = 'Dark Mage';
+    private const SMALL_ICON = '/images/icons/small/dark-mage.png';
+
     public function getId(): int
     {
-        return self::DARK_MAGE_ID;
+        return self::ID;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
-        return self::DARK_MAGE_NAME;
+        return self::NAME;
     }
 
-    /**
-     * @return string
-     */
     public function getSmallIcon(): string
     {
-        return self::DARK_MAGE_SMALL_ICON;
+        return self::SMALL_ICON;
     }
 
-    /**
-     * @param UnitInterface $unit
-     * @return AbilityCollection
-     */
     public function getAbilities(UnitInterface $unit): AbilityCollection
     {
         $collection = new AbilityCollection();

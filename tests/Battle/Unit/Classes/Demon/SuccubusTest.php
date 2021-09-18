@@ -10,7 +10,6 @@ use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Effect\PoisonAbility;
-use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\UnitInterface;
@@ -34,9 +33,9 @@ class SuccubusTest extends TestCase
 
         $succubus = $unit->getClass();
 
-        self::assertEquals(UnitClassInterface::SUCCUBUS_ID, $succubus->getId());
-        self::assertEquals(UnitClassInterface::SUCCUBUS_NAME, $succubus->getName());
-        self::assertEquals(UnitClassInterface::SUCCUBUS_SMALL_ICON, $succubus->getSmallIcon());
+        self::assertEquals(7, $succubus->getId());
+        self::assertEquals('Succubus', $succubus->getName());
+        self::assertEquals('/images/icons/small/dark-mage.png', $succubus->getSmallIcon());
 
         $abilities = $succubus->getAbilities($unit);
 
