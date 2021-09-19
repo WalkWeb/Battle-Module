@@ -41,6 +41,10 @@ interface ActionInterface
      * canByUsed() должна быть обязательной перед каждым вызовом Action->handle(), соответственно допустимо, что Action
      * упадет из-за отсутствия цели для применения, если проверка на canByUsed() не была сделана.
      *
+     * TODO Доработать логику проверки - добавив проверку на то, что юнит живой. Необходимо для эффектов.
+     * TODO Перед этим написав тест, с двумя эффектами на юните - один убивает, другой лечит - должен отработать только
+     * TODO первый
+     *
      * @return bool
      */
     public function canByUsed(): bool;
@@ -182,6 +186,8 @@ interface ActionInterface
      */
     public function getAnimationMethod(): string;
 
+    // TODO getMessageMethod() - который будет возвращать метод для обработки данного Action в классе Message
+
     /**
      * При создании Action, его создатель считается $actionUnit, но, если Action является частью эффекта, то при
      * наложении его на другого юнита, Action будет вызываться уже от его лица. Соответственно нужен метод для изменения
@@ -190,8 +196,4 @@ interface ActionInterface
      * @param UnitInterface $unit
      */
     public function changeActionUnit(UnitInterface $unit): void;
-
-    // todo Add getRevertNameAction()
-    // todo Add getAlliesCommand
-    // todo Add getEnemyCommand
 }

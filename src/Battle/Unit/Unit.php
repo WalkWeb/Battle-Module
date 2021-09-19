@@ -159,8 +159,9 @@ class Unit extends AbstractUnit
         $onApplyAction = $this->effects->addCollection($action->getEffects());
 
         foreach ($onApplyAction as $applyAction) {
-            // TODO add if canBeUsed()
-            $applyAction->handle();
+            if ($applyAction->canByUsed()) {
+                $applyAction->handle();
+            }
         }
 
         return $this->container->getMessage()->applyEffect($action);

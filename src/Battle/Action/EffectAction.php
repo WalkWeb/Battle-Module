@@ -24,8 +24,6 @@ class EffectAction extends AbstractAction
     protected $animationMethod;
 
     /**
-     * TODO Добавление коллекции эффектов одному EffectAction - избыточное решение. Переделать на один эффект
-     *
      * @var EffectCollection
      */
     private $effects;

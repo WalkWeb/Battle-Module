@@ -64,7 +64,6 @@ class Stroke implements StrokeInterface
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;
         $this->container = $container;
-
     }
 
     /**
@@ -95,30 +94,30 @@ class Stroke implements StrokeInterface
             }
         }
 
-        // TODO После применения эффектов необходимо проверить, жив ли юнит
-
         // -------------------------------------------- Action Unit ----------------------------------------------------
 
-        foreach ($this->actionUnit->getAction($enemyCommand, $alliesCommand) as $action) {
+        if ($this->actionUnit->isAlive()) {
+            foreach ($this->actionUnit->getAction($enemyCommand, $alliesCommand) as $action) {
 
-            if (!$enemyCommand->isAlive()) {
-                break;
+                if (!$enemyCommand->isAlive()) {
+                    break;
+                }
+
+                if (!$action->canByUsed()) {
+                    throw new StrokeException(
+                        StrokeException::CANT_BE_USED_ACTION .
+                        '. Action unit: ' . $this->actionUnit->getName() .
+                        '. Action: ' . $action->getNameAction()
+                    );
+                }
+
+                $message = $action->handle();
+
+                $this->container->getStatistic()->addUnitAction($action);
+                $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
+                $this->container->getFullLog()->addText($message);
+                $this->container->getChat()->add($message);
             }
-
-            if (!$action->canByUsed()) {
-                throw new StrokeException(
-                    StrokeException::CANT_BE_USED_ACTION .
-                    '. Action unit: ' . $this->actionUnit->getName() .
-                    '. Action: ' . $action->getNameAction()
-                );
-            }
-
-            $message = $action->handle();
-
-            $this->container->getStatistic()->addUnitAction($action);
-            $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
-            $this->container->getFullLog()->addText($message);
-            $this->container->getChat()->add($message);
         }
 
         //--------------------------------------------------------------------------------------------------------------

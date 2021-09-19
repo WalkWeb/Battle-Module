@@ -30,6 +30,7 @@ return [
     'summon Skeleton'                 => 'summon Skeleton',
     'summon Skeleton Mage'            => 'summon Skeleton Mage',
     'use Reserve Forces'              => 'use Reserve Forces',
+    'use Poison'                      => 'use Poison',
     // Statistics
     'Statistics'                      => 'Statistics',
     'Unit'                            => 'Unit',

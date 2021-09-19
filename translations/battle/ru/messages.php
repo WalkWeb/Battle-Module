@@ -28,6 +28,7 @@ return [
     'summon Skeleton'                 => 'призвал Скелета',
     'summon Skeleton Mage'            => 'призвал Скелета-мага',
     'use Reserve Forces'              => 'использовал Резервные Силы',
+    'use Poison'                      => 'использовал Отравление',
     // Statistics
     'Statistics'                      => 'Статистика',
     'Unit'                            => 'Кто',

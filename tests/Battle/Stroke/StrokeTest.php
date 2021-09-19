@@ -6,6 +6,8 @@ namespace Tests\Battle\Stroke;
 
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
+use Battle\Action\DamageAction;
+use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
 use Battle\Stroke\StrokeException;
@@ -123,7 +125,7 @@ class StrokeTest extends TestCase
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $container = new Container();
 
-        $effectAction = $this->getEffectAction($unit, $command, $enemyCommand);
+        $effectAction = $this->getHealEffectAction($unit, $command, $enemyCommand);
 
         self::assertTrue($effectAction->canByUsed());
 
@@ -139,13 +141,67 @@ class StrokeTest extends TestCase
     }
 
     /**
+     * Тест на ситуацию, когда юнит, который должен ходить, умирает от эффекта, наложенного на него и по сути не ходит
+     *
+     * @throws Exception
+     */
+    public function testStrokeEffectDead(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit]);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+        $container = new Container();
+
+        $action = $this->getDamageEffectAction($unit, $command, $enemyCommand);
+
+        if ($action->canByUsed()) {
+            $unit->applyAction($action);
+        }
+
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+        $stroke->handle();
+
+        $scenario = $container->getScenario()->getArray();
+
+        // В сценарии должна быть только одна запись - о нанесении урона
+        self::assertCount(1, $scenario);
+
+        // Проверяем, что эта запись - именно об эффекте
+        $expectedData = [
+            'step'    => $container->getStatistic()->getRoundNumber(),
+            'attack'  => $container->getStatistic()->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'      => $unit->getId(),
+                    'unit_effects' => '<img src="icon.png" width="22" alt="" /> <span>8</span>',
+                    'targets'      => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => $unit->getId(),
+                            'ava'               => 'unit_ava_effect_damage',
+                            'recdam'            => '-100',
+                            'hp'                => 0,
+                            'thp'               => 100,
+                            'unit_hp_bar_width' => 0,
+                            'avas'              => 'unit_ava_dead',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $container->getScenario()->getArray()[0]);
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $command
      * @param CommandInterface $enemyCommand
      * @return ActionInterface
      * @throws Exception
      */
-    private function getEffectAction(UnitInterface $unit, CommandInterface $command, CommandInterface $enemyCommand): ActionInterface
+    private function getHealEffectAction(UnitInterface $unit, CommandInterface $command, CommandInterface $enemyCommand): ActionInterface
     {
         $actionFactory = new ActionFactory();
 
@@ -172,6 +228,54 @@ class StrokeTest extends TestCase
                             'name'             => 'Effect Heal',
                             'power'            => 15,
                             'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                        ],
+                    ],
+                    'on_disable_actions'    => [],
+                ],
+            ],
+        ];
+
+        return $actionFactory->create($data);
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $command
+     * @param CommandInterface $enemyCommand
+     * @return EffectAction
+     * @throws Exception
+     */
+    private function getDamageEffectAction(
+        UnitInterface $unit,
+        CommandInterface $command,
+        CommandInterface $enemyCommand
+    ): ActionInterface
+    {
+        $actionFactory = new ActionFactory();
+
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_SELF,
+            'name'           => 'Effect Damage',
+            'effects'        => [
+                [
+                    'name'                  => 'Effect Damage',
+                    'icon'                  => 'icon.png',
+                    'duration'              => 8,
+                    'on_apply_actions'      => [],
+                    'on_next_round_actions' => [
+                        [
+                            'type'             => ActionInterface::DAMAGE,
+                            'action_unit'      => $unit,
+                            'enemy_command'    => $enemyCommand,
+                            'allies_command'   => $command,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'name'             => 'Effect Damage',
+                            'power'            => 1000,
+                            'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                         ],
                     ],
                     'on_disable_actions'    => [],
