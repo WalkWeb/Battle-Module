@@ -12,6 +12,7 @@ class EffectAction extends AbstractAction
 {
     private const HANDLE_METHOD            = 'applyEffectAction';
     private const DEFAULT_ANIMATION_METHOD = 'effect';
+    private const DEFAULT_MESSAGE_METHOD   = 'applyEffect';
 
     /**
      * @var string
@@ -106,6 +107,11 @@ class EffectAction extends AbstractAction
     public function getAnimationMethod(): string
     {
         return $this->animationMethod;
+    }
+
+    public function getMessageMethod(): string
+    {
+        return self::DEFAULT_MESSAGE_METHOD;
     }
 
     public function setFactualPower(int $factualPower): void {}

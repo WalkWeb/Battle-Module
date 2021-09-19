@@ -35,6 +35,7 @@ class WaitActionTest extends TestCase
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(WaitAction::class, [$action]);
             self::assertEquals('wait', $action->getAnimationMethod());
+            self::assertEquals('wait', $action->getMessageMethod());
             self::assertTrue($action->canByUsed());
             $message .= $action->handle();
         }

@@ -39,6 +39,7 @@ class SummonActionTest extends TestCase
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(SummonAction::class, [$action]);
             self::assertEquals('summon', $action->getAnimationMethod());
+            self::assertEquals('summon', $action->getMessageMethod());
             $message .= $action->handle();
         }
 

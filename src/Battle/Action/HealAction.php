@@ -13,6 +13,7 @@ class HealAction extends AbstractAction
     private const HANDLE_METHOD          = 'applyHealAction';
     public const UNIT_ANIMATION_METHOD   = 'heal';
     public const EFFECT_ANIMATION_METHOD = 'effectHeal';
+    private const DEFAULT_MESSAGE_METHOD = 'heal';
 
     /**
      * @var int
@@ -98,5 +99,10 @@ class HealAction extends AbstractAction
     public function getAnimationMethod(): string
     {
         return $this->animationMethod;
+    }
+
+    public function getMessageMethod(): string
+    {
+        return self::DEFAULT_MESSAGE_METHOD;
     }
 }

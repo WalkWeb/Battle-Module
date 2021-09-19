@@ -186,7 +186,19 @@ interface ActionInterface
      */
     public function getAnimationMethod(): string;
 
-    // TODO getMessageMethod() - который будет возвращать метод для обработки данного Action в классе Message
+    /**
+     * Возвращает названия метода (в классе Message) для создания сообщения для чата данного Action
+     *
+     * Такая механика нужна для того, чтобы у одних и тех же Action создавать разные сообщения для чата, например когда
+     * DamageAction - это урон от юнита по другому юниту, то сообщение будет:
+     * "Titan атаковал Zombie на 32 урона"
+     *
+     * А если же DamageAction - это урон от эффекта по юниту, то сообщение будет:
+     * "Titan получил урон на 10 здоровья, от эффекта Отравление"
+     *
+     * @return string
+     */
+    public function getMessageMethod(): string;
 
     /**
      * При создании Action, его создатель считается $actionUnit, но, если Action является частью эффекта, то при

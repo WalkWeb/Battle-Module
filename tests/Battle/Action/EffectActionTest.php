@@ -44,6 +44,7 @@ class EffectActionTest extends TestCase
 
         self::assertEquals('applyEffectAction', $action->getHandleMethod());
         self::assertEquals('effect', $action->getAnimationMethod());
+        self::assertEquals('applyEffect', $action->getMessageMethod());
         self::assertEquals($effects, $action->getEffects());
         self::assertEquals($name, $action->getNameAction());
     }

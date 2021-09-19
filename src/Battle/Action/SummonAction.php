@@ -12,6 +12,7 @@ class SummonAction extends AbstractAction
 {
     private const HANDLE_METHOD            = 'applySummonAction';
     private const DEFAULT_ANIMATION_METHOD = 'summon';
+    private const DEFAULT_MESSAGE_METHOD   = 'summon';
 
     /**
      * @var string
@@ -85,5 +86,10 @@ class SummonAction extends AbstractAction
     public function getAnimationMethod(): string
     {
         return self::DEFAULT_ANIMATION_METHOD;
+    }
+
+    public function getMessageMethod(): string
+    {
+        return self::DEFAULT_MESSAGE_METHOD;
     }
 }

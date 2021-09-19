@@ -29,6 +29,7 @@ class DamageActionTest extends TestCase
         self::assertEquals($unit->getDamage(), $action->getPower());
         self::assertTrue($action->canByUsed());
         self::assertEquals(DamageAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
+        self::assertEquals('damage', $action->getMessageMethod());
     }
 
     /**

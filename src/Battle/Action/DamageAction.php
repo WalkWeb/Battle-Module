@@ -13,6 +13,7 @@ class DamageAction extends AbstractAction
     private const DEFAULT_NAME           = 'attack';
     public const UNIT_ANIMATION_METHOD   = 'damage';
     public const EFFECT_ANIMATION_METHOD = 'effectDamage';
+    private const DEFAULT_MESSAGE_METHOD = 'damage';
 
     /**
      * @var int
@@ -87,5 +88,10 @@ class DamageAction extends AbstractAction
     public function getAnimationMethod(): string
     {
         return $this->animationMethod;
+    }
+
+    public function getMessageMethod(): string
+    {
+        return self::DEFAULT_MESSAGE_METHOD;
     }
 }

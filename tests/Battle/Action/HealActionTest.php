@@ -49,6 +49,7 @@ class HealActionTest extends TestCase
 
         foreach ($heals as $heal) {
             self::assertEquals(HealAction::UNIT_ANIMATION_METHOD, $heal->getAnimationMethod());
+            self::assertEquals('heal', $heal->getMessageMethod());
             // Проверяем, что лечение может быть использовано:
             self::assertTrue($heal->canByUsed());
             $heal->handle();
