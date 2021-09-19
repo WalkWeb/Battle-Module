@@ -93,7 +93,7 @@ class Unit extends AbstractUnit
 
         $action->setFactualPower($primordialLife - $this->life);
 
-        return $this->container->getMessage()->damage($action);
+        return $this->container->getMessage()->createMessage($action);
     }
 
     /**
@@ -115,7 +115,7 @@ class Unit extends AbstractUnit
 
         $action->setFactualPower($this->life - $primordialLife);
 
-        return $this->container->getMessage()->heal($action);
+        return $this->container->getMessage()->createMessage($action);
     }
 
     /**
@@ -131,7 +131,7 @@ class Unit extends AbstractUnit
      */
     private function applySummonAction(SummonAction $action): string
     {
-        return $this->container->getMessage()->summon($action);
+        return $this->container->getMessage()->createMessage($action);
     }
 
     /**
@@ -143,7 +143,7 @@ class Unit extends AbstractUnit
      */
     private function applyWaitAction(WaitAction $action): string
     {
-        return $this->container->getMessage()->wait($action);
+        return $this->container->getMessage()->createMessage($action);
     }
 
     /**
@@ -164,7 +164,7 @@ class Unit extends AbstractUnit
             }
         }
 
-        return $this->container->getMessage()->applyEffect($action);
+        return $this->container->getMessage()->createMessage($action);
     }
 
     /**
@@ -215,7 +215,7 @@ class Unit extends AbstractUnit
 
         $action->setRevertValue($bonus);
 
-        return $this->container->getMessage()->buff($action);
+        return $this->container->getMessage()->createMessage($action);
     }
 
     /**

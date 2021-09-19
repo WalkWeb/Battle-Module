@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Result\Chat\Message;
 
 use Battle\Action\ActionException;
+use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
@@ -29,11 +30,28 @@ class Message implements MessageInterface
     }
 
     /**
+     * @param ActionInterface $action
+     * @return string
+     * @throws MessageException
+     * @uses damage, heal, summon, wait, buff, applyEffect
+     */
+    public function createMessage(ActionInterface $action): string
+    {
+        $createMethod = $action->getMessageMethod();
+
+        if (!method_exists($this, $createMethod)) {
+            throw new MessageException(MessageException::UNDEFINED_MESSAGE_METHOD);
+        }
+
+        return $this->$createMethod($action);
+    }
+
+    /**
      * @param DamageAction $action
      * @return string
      * @throws ActionException
      */
-    public function damage(DamageAction $action): string
+    private function damage(DamageAction $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' .
@@ -49,7 +67,7 @@ class Message implements MessageInterface
      * @return string
      * @throws ActionException
      */
-    public function heal(HealAction $action): string
+    private function heal(HealAction $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' .
@@ -64,7 +82,7 @@ class Message implements MessageInterface
      * @param SummonAction $action
      * @return string
      */
-    public function summon(SummonAction $action): string
+    private function summon(SummonAction $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
@@ -74,7 +92,7 @@ class Message implements MessageInterface
      * @param WaitAction $action
      * @return string
      */
-    public function wait(WaitAction $action): string
+    private function wait(WaitAction $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
@@ -84,7 +102,7 @@ class Message implements MessageInterface
      * @param BuffAction $action
      * @return string
      */
-    public function buff(BuffAction $action): string
+    private function buff(BuffAction $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
@@ -97,7 +115,7 @@ class Message implements MessageInterface
      * @return string
      * @throws ActionException
      */
-    public function applyEffect(EffectAction $action): string
+    private function applyEffect(EffectAction $action): string
     {
         if ($action->getActionUnit()->getId() === $action->getTargetUnit()->getId()) {
             return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
