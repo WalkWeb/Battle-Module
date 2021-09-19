@@ -23,6 +23,8 @@ return [
     'damage'                          => 'damage',
     'life'                            => 'life',
     'preparing to attack'             => 'preparing to attack',
+    'received damage'                 => 'received damage',
+    'life from effect'                => 'life from effect',
     // Ability
     'use Heavy Strike at'             => 'use Heavy Strike at',
     'use Great Heal and heal'         => 'use Great Heal and heal',
@@ -31,6 +33,7 @@ return [
     'summon Skeleton Mage'            => 'summon Skeleton Mage',
     'use Reserve Forces'              => 'use Reserve Forces',
     'use Poison'                      => 'use Poison',
+    'Poison'                          => 'Poison',
     // Statistics
     'Statistics'                      => 'Statistics',
     'Unit'                            => 'Unit',

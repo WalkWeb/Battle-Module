@@ -6,12 +6,6 @@ namespace Battle\Result\Chat\Message;
 
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
-use Battle\Action\BuffAction;
-use Battle\Action\DamageAction;
-use Battle\Action\EffectAction;
-use Battle\Action\HealAction;
-use Battle\Action\WaitAction;
-use Battle\Action\SummonAction;
 use Battle\Translation\Translation;
 
 class Message implements MessageInterface
@@ -33,7 +27,7 @@ class Message implements MessageInterface
      * @param ActionInterface $action
      * @return string
      * @throws MessageException
-     * @uses damage, heal, summon, wait, buff, applyEffect
+     * @uses damage, heal, summon, wait, buff, applyEffect, effectDamage
      */
     public function createMessage(ActionInterface $action): string
     {
@@ -47,11 +41,11 @@ class Message implements MessageInterface
     }
 
     /**
-     * @param DamageAction $action
+     * @param ActionInterface $action
      * @return string
      * @throws ActionException
      */
-    private function damage(DamageAction $action): string
+    private function damage(ActionInterface $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' .
@@ -63,11 +57,11 @@ class Message implements MessageInterface
     }
 
     /**
-     * @param HealAction $action
+     * @param ActionInterface $action
      * @return string
      * @throws ActionException
      */
-    private function heal(HealAction $action): string
+    private function heal(ActionInterface $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' .
@@ -79,30 +73,30 @@ class Message implements MessageInterface
     }
 
     /**
-     * @param SummonAction $action
+     * @param ActionInterface $action
      * @return string
      */
-    private function summon(SummonAction $action): string
+    private function summon(ActionInterface $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
     }
 
     /**
-     * @param WaitAction $action
+     * @param ActionInterface $action
      * @return string
      */
-    private function wait(WaitAction $action): string
+    private function wait(ActionInterface $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
     }
 
     /**
-     * @param BuffAction $action
+     * @param ActionInterface $action
      * @return string
      */
-    private function buff(BuffAction $action): string
+    private function buff(ActionInterface $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
@@ -111,11 +105,11 @@ class Message implements MessageInterface
     /**
      * Сообщение строится по разному, в зависимости от того, на кого применяется эффект - на себя, или на другого юнита
      *
-     * @param EffectAction $action
+     * @param ActionInterface $action
      * @return string
      * @throws ActionException
      */
-    private function applyEffect(EffectAction $action): string
+    private function applyEffect(ActionInterface $action): string
     {
         if ($action->getActionUnit()->getId() === $action->getTargetUnit()->getId()) {
             return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
@@ -127,5 +121,20 @@ class Message implements MessageInterface
             $this->translation->trans($action->getNameAction()) . ' ' . $this->translation->trans('on') .
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() . '</span>';
+    }
+
+    /**
+     * Формирует сообщение урона от эффекта в формате:
+     * "$name получил урон на $damage от эффекта $effectName"
+     *
+     * @param ActionInterface $action
+     * @return string
+     */
+    private function effectDamage(ActionInterface $action): string
+    {
+        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans('received damage') . ' ' .
+            $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' . $this->translation->trans('life from effect') . ' ' .
+            $this->translation->trans($action->getNameAction());
     }
 }

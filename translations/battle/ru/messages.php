@@ -21,6 +21,8 @@ return [
     'damage'                          => 'урона',
     'life'                            => 'здоровья',
     'preparing to attack'             => 'готовится к атаке',
+    'received damage'                 => 'получил урон',
+    'life from effect'                => 'здоровья от эффекта',
     // Ability
     'use Heavy Strike at'             => 'использовал Тяжелый Удар по',
     'use Great Heal and heal'         => 'использовал Сильное Лечение и вылечил',
@@ -29,6 +31,7 @@ return [
     'summon Skeleton Mage'            => 'призвал Скелета-мага',
     'use Reserve Forces'              => 'использовал Резервные Силы',
     'use Poison'                      => 'использовал Отравление',
+    'Poison'                          => 'Отравление',
     // Statistics
     'Statistics'                      => 'Статистика',
     'Unit'                            => 'Кто',

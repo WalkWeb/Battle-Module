@@ -62,6 +62,7 @@ class ActionFactory
             $power = self::intOrNull($data, 'power', ActionException::INVALID_POWER_DATA);
             $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
             $animationMethod = self::stringOrNull($data, 'animation_method', ActionException::INVALID_NAME_DATA);
+            $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_NAME_DATA);
 
             return new $className(
                 $actionUnit,
@@ -70,7 +71,8 @@ class ActionFactory
                 $typeTarget,
                 $power,
                 $name,
-                $animationMethod
+                $animationMethod,
+                $messageMethod
             );
         }
 

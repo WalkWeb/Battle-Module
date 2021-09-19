@@ -30,6 +30,11 @@ class HealAction extends AbstractAction
      */
     protected $animationMethod;
 
+    /**
+     * @var string
+     */
+    protected $messageMethod;
+
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
@@ -37,7 +42,8 @@ class HealAction extends AbstractAction
         int $typeTarget,
         ?int $power = null,
         ?string $name = null,
-        ?string $animationMethod = null
+        ?string $animationMethod = null,
+        ?string $messageMethod = null
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
@@ -45,6 +51,7 @@ class HealAction extends AbstractAction
         $this->power = $power ?? $actionUnit->getDamage();
         $this->name = $name ?? self::NAME;
         $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
+        $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
     }
 
     public function getHandleMethod(): string
@@ -103,6 +110,6 @@ class HealAction extends AbstractAction
 
     public function getMessageMethod(): string
     {
-        return self::DEFAULT_MESSAGE_METHOD;
+        return $this->messageMethod;
     }
 }

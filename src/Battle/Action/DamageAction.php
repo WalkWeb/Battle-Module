@@ -14,6 +14,7 @@ class DamageAction extends AbstractAction
     public const UNIT_ANIMATION_METHOD   = 'damage';
     public const EFFECT_ANIMATION_METHOD = 'effectDamage';
     private const DEFAULT_MESSAGE_METHOD = 'damage';
+    public const EFFECT_MESSAGE_METHOD   = 'effectDamage';
 
     /**
      * @var int
@@ -30,6 +31,9 @@ class DamageAction extends AbstractAction
      */
     protected $animationMethod;
 
+    /**
+     * @var string
+     */
     protected $messageMethod;
 
     public function __construct(

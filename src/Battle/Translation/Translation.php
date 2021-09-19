@@ -44,8 +44,8 @@ class Translation implements TranslationInterface
             $defaultLanguage = self::DEFAULT_LANGUAGE;
         }
 
-        $language = $language ?? $this->defineLanguage($defaultLanguage);
-        $this->messages = $messages ?? $this->getMessages($language, $defaultLanguage, $directory);
+        $this->language = $language ?? $this->defineLanguage($defaultLanguage);
+        $this->messages = $messages ?? $this->getMessages($this->language, $defaultLanguage, $directory);
     }
 
     /**
