@@ -129,26 +129,24 @@ class HealingPotionAbility extends AbstractAbility
                 'allies_command' => $alliesCommand,
                 'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES,
                 'name'           => self::USE_MESSAGE,
-                'effects'        => [
-                    [
-                        'name'                  => self::NAME,
-                        'icon'                  => self::ICON,
-                        'duration'              => self::DURATION,
-                        'on_apply_actions'      => [],
-                        'on_next_round_actions' => [
-                            [
-                                'type'            => ActionInterface::HEAL,
-                                'action_unit'     => $this->unit,
-                                'enemy_command'   => $enemyCommand,
-                                'allies_command'  => $alliesCommand,
-                                'type_target'     => ActionInterface::TARGET_SELF,
-                                'name'            => null,
-                                'power'           => self::POWER,
-                                'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
-                            ],
+                'effect'         => [
+                    'name'                  => self::NAME,
+                    'icon'                  => self::ICON,
+                    'duration'              => self::DURATION,
+                    'on_apply_actions'      => [],
+                    'on_next_round_actions' => [
+                        [
+                            'type'            => ActionInterface::HEAL,
+                            'action_unit'     => $this->unit,
+                            'enemy_command'   => $enemyCommand,
+                            'allies_command'  => $alliesCommand,
+                            'type_target'     => ActionInterface::TARGET_SELF,
+                            'name'            => null,
+                            'power'           => self::POWER,
+                            'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
                         ],
-                        'on_disable_actions'    => [],
                     ],
+                    'on_disable_actions'    => [],
                 ],
             ];
 

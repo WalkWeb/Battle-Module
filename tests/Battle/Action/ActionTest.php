@@ -118,8 +118,8 @@ class ActionTest extends TestCase
         $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
 
         $this->expectException(ActionException::class);
-        $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getEffects');
-        $action->getEffects();
+        $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getEffect');
+        $action->getEffect();
     }
 
     /**

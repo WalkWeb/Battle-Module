@@ -10,8 +10,8 @@ use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
-use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Effect\EffectFactory;
+use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -44,8 +44,8 @@ class AlchemistTest extends TestCase
 
             foreach ($actions as $action) {
                 self::assertEquals(
-                    $this->createEffects($unit, $enemyCommand, $command),
-                    $action->getEffects()
+                    $this->createEffect($unit, $enemyCommand, $command),
+                    $action->getEffect()
                 );
             }
         }
@@ -55,12 +55,11 @@ class AlchemistTest extends TestCase
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
-     * @return EffectCollection
+     * @return EffectInterface
      * @throws Exception
      */
-    private function createEffects(UnitInterface $unit, CommandInterface $enemyCommand, CommandInterface $command): EffectCollection
+    private function createEffect(UnitInterface $unit, CommandInterface $enemyCommand, CommandInterface $command): EffectInterface
     {
-        $effects = new EffectCollection($unit);
         $effectFactory = new EffectFactory(new ActionFactory());
 
         $data = [
@@ -83,8 +82,6 @@ class AlchemistTest extends TestCase
             'on_disable_actions'    => [],
         ];
 
-        $effects->add($effectFactory->create($data));
-
-        return $effects;
+        return $effectFactory->create($data);
     }
 }

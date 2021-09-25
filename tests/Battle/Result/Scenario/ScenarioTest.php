@@ -527,26 +527,24 @@ class ScenarioTest extends TestCase
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_SELF,
             'name'           => 'use Reserve Forces',
-            'effects'        => [
-                [
-                    'name'                  => 'Effect#123',
-                    'icon'                  => 'images/icons/ability/156.png',
-                    'duration'              => 8,
-                    'on_apply_actions'      => [
-                        [
-                            'type'           => ActionInterface::BUFF,
-                            'action_unit'    => $unit,
-                            'enemy_command'  => $enemyCommand,
-                            'allies_command' => $command,
-                            'type_target'    => ActionInterface::TARGET_SELF,
-                            'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
-                            'power'          => 130,
-                        ],
+            'effect'         => [
+                'name'                  => 'Effect#123',
+                'icon'                  => 'images/icons/ability/156.png',
+                'duration'              => 8,
+                'on_apply_actions'      => [
+                    [
+                        'type'           => ActionInterface::BUFF,
+                        'action_unit'    => $unit,
+                        'enemy_command'  => $enemyCommand,
+                        'allies_command' => $command,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'use Reserve Forces',
+                        'modify_method'  => 'multiplierMaxLife',
+                        'power'          => 130,
                     ],
-                    'on_next_round_actions' => [],
-                    'on_disable_actions'    => [],
                 ],
+                'on_next_round_actions' => [],
+                'on_disable_actions'    => [],
             ],
         ];
 

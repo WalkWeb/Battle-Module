@@ -489,16 +489,13 @@ class CommandTest extends TestCase
         CommandInterface $enemyCommand
     ): ActionInterface
     {
-        $effectCollection = new EffectCollection($unit);
-        $effectCollection->add($effect);
-
         return new EffectAction(
             $unit,
             $enemyCommand,
             $command,
             EffectAction::TARGET_SELF,
             'effect',
-            $effectCollection
+            $effect
         );
     }
 }

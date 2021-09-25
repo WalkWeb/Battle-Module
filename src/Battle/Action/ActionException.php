@@ -25,7 +25,6 @@ class ActionException extends Exception
     public const INVALID_ACTION_UNIT_DATA   = 'ActionFactory: Invalid unit data';
     public const INVALID_COMMAND_DATA       = 'ActionFactory: Invalid command data';
     public const INVALID_SUMMON_DATA        = 'ActionFactory: Invalid summon data: array expected';
-    public const INVALID_EFFECTS_DATA       = 'ActionFactory: Invalid effects data: array expected';
     public const INVALID_EFFECT_DATA        = 'ActionFactory: Invalid effect data: array expected';
     public const INVALID_MODIFY_METHOD_DATA = 'ActionFactory: Invalid modify_method data: string expected';
 }

@@ -6,7 +6,6 @@ namespace Battle\Action;
 
 use Battle\Traits\IdTrait;
 use Battle\Traits\ValidationTrait;
-use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\UnitFactory;
 use Exception;
@@ -121,17 +120,10 @@ class ActionFactory
 
         $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
         $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
-        $effectsData = self::array($data, 'effects', ActionException::INVALID_EFFECTS_DATA);
-        $effects = new EffectCollection($actionUnit);
+        $effectData = self::array($data, 'effect', ActionException::INVALID_EFFECT_DATA);
+
         $effectFactory = new EffectFactory($this);
-
-        foreach ($effectsData as $effectData) {
-            if (!is_array($effectData)) {
-                throw new ActionException(ActionException::INVALID_EFFECT_DATA);
-            }
-
-            $effects->add($effectFactory->create($effectData));
-        }
+        $effect = $effectFactory->create($effectData);
 
         return new EffectAction(
             $actionUnit,
@@ -139,7 +131,7 @@ class ActionFactory
             $alliesCommand,
             $typeTarget,
             $name,
-            $effects
+            $effect
         );
     }
 }

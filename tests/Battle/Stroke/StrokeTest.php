@@ -212,26 +212,24 @@ class StrokeTest extends TestCase
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_SELF,
             'name'           => 'Effect Heal',
-            'effects'        => [
-                [
-                    'name'                  => 'Effect Heal',
-                    'icon'                  => 'icon.png',
-                    'duration'              => 8,
-                    'on_apply_actions'      => [],
-                    'on_next_round_actions' => [
-                        [
-                            'type'             => ActionInterface::HEAL,
-                            'action_unit'      => $unit,
-                            'enemy_command'    => $enemyCommand,
-                            'allies_command'   => $command,
-                            'type_target'      => ActionInterface::TARGET_SELF,
-                            'name'             => 'Effect Heal',
-                            'power'            => 15,
-                            'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
-                        ],
+            'effect'         => [
+                'name'                  => 'Effect Heal',
+                'icon'                  => 'icon.png',
+                'duration'              => 8,
+                'on_apply_actions'      => [],
+                'on_next_round_actions' => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'action_unit'      => $unit,
+                        'enemy_command'    => $enemyCommand,
+                        'allies_command'   => $command,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'name'             => 'Effect Heal',
+                        'power'            => 15,
+                        'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
                     ],
-                    'on_disable_actions'    => [],
                 ],
+                'on_disable_actions'    => [],
             ],
         ];
 
@@ -260,26 +258,24 @@ class StrokeTest extends TestCase
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_SELF,
             'name'           => 'Effect Damage',
-            'effects'        => [
-                [
-                    'name'                  => 'Effect Damage',
-                    'icon'                  => 'icon.png',
-                    'duration'              => 8,
-                    'on_apply_actions'      => [],
-                    'on_next_round_actions' => [
-                        [
-                            'type'             => ActionInterface::DAMAGE,
-                            'action_unit'      => $unit,
-                            'enemy_command'    => $enemyCommand,
-                            'allies_command'   => $command,
-                            'type_target'      => ActionInterface::TARGET_SELF,
-                            'name'             => 'Effect Damage',
-                            'power'            => 1000,
-                            'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
-                        ],
+            'effect'         => [
+                'name'                  => 'Effect Damage',
+                'icon'                  => 'icon.png',
+                'duration'              => 8,
+                'on_apply_actions'      => [],
+                'on_next_round_actions' => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'action_unit'      => $unit,
+                        'enemy_command'    => $enemyCommand,
+                        'allies_command'   => $command,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'name'             => 'Effect Damage',
+                        'power'            => 1000,
+                        'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                     ],
-                    'on_disable_actions'    => [],
                 ],
+                'on_disable_actions'    => [],
             ],
         ];
 

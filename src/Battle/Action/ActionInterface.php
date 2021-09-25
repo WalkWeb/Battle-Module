@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Unit\Effect\EffectCollection;
+use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 
 interface ActionInterface
@@ -171,10 +172,10 @@ interface ActionInterface
      *
      * Только для EffectAction, при вызове у других Action будет брошено исключение
      *
-     * @return EffectCollection
+     * @return EffectInterface
      * @throws ActionException
      */
-    public function getEffects(): EffectCollection;
+    public function getEffect(): EffectInterface;
 
     /**
      * Возвращает названия метода (в классе Scenario) для создания анимации данного Action

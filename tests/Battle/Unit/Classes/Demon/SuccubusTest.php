@@ -10,8 +10,8 @@ use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Effect\PoisonAbility;
-use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Effect\EffectFactory;
+use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -46,8 +46,8 @@ class SuccubusTest extends TestCase
 
             foreach ($actions as $action) {
                 self::assertEquals(
-                    $this->createEffects($unit, $enemyCommand, $command),
-                    $action->getEffects()
+                    $this->createEffect($unit, $enemyCommand, $command),
+                    $action->getEffect()
                 );
             }
         }
@@ -55,18 +55,17 @@ class SuccubusTest extends TestCase
 
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $command
      * @param CommandInterface $enemyCommand
-     * @return EffectCollection
+     * @param CommandInterface $command
+     * @return EffectInterface
      * @throws Exception
      */
-    private function createEffects(
+    private function createEffect(
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $command
-    ): EffectCollection
+    ): EffectInterface
     {
-        $effects = new EffectCollection($unit);
         $effectFactory = new EffectFactory(new ActionFactory());
 
         $data = [
@@ -90,8 +89,6 @@ class SuccubusTest extends TestCase
             'on_disable_actions'    => [],
         ];
 
-        $effects->add($effectFactory->create($data));
-
-        return $effects;
+        return $effectFactory->create($data);
     }
 }

@@ -255,26 +255,24 @@ class ActionFactoryTest extends TestCase
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_SELF,
             'name'           => $name = 'Effect test',
-            'effects'        => [
-                [
-                    'name'                  => 'Effect test #1',
-                    'icon'                  => 'effect_icon_#1',
-                    'duration'              => 10,
-                    'on_apply_actions'      => [
-                        [
-                            'type'           => ActionInterface::BUFF,
-                            'action_unit'    => $unit,
-                            'enemy_command'  => $enemyCommand,
-                            'allies_command' => $command,
-                            'type_target'    => ActionInterface::TARGET_SELF,
-                            'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
-                            'power'          => 130,
-                        ],
+            'effect'         => [
+                'name'                  => 'Effect test #1',
+                'icon'                  => 'effect_icon_#1',
+                'duration'              => 10,
+                'on_apply_actions'      => [
+                    [
+                        'type'           => ActionInterface::BUFF,
+                        'action_unit'    => $unit,
+                        'enemy_command'  => $enemyCommand,
+                        'allies_command' => $command,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'use Reserve Forces',
+                        'modify_method'  => 'multiplierMaxLife',
+                        'power'          => 130,
                     ],
-                    'on_next_round_actions' => [],
-                    'on_disable_actions'    => [],
                 ],
+                'on_next_round_actions' => [],
+                'on_disable_actions'    => [],
             ],
         ];
 
@@ -284,12 +282,7 @@ class ActionFactoryTest extends TestCase
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
         self::assertEquals($name, $action->getNameAction());
-
-        $i = 0;
-        foreach ($action->getEffects() as $effect) {
-            self::assertEquals($effectFactory->create($data['effects'][$i]), $effect);
-            $i++;
-        }
+        self::assertEquals($effectFactory->create($data['effect']), $action->getEffect());
     }
 
     /**
@@ -821,7 +814,7 @@ class ActionFactoryTest extends TestCase
                 ],
                 ActionException::INVALID_NAME_DATA,
             ],
-            // Отсутствует effects
+            // Отсутствует effect
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -831,7 +824,7 @@ class ActionFactoryTest extends TestCase
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'Effect test',
                 ],
-                ActionException::INVALID_EFFECTS_DATA,
+                ActionException::INVALID_EFFECT_DATA,
             ],
             // effects некорректного типа
             [
@@ -842,9 +835,9 @@ class ActionFactoryTest extends TestCase
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'Effect test',
-                    'effects'        => 'effects',
+                    'effect'         => 'effects',
                 ],
-                ActionException::INVALID_EFFECTS_DATA,
+                ActionException::INVALID_EFFECT_DATA,
             ],
             // effects вместо массива данных по эффекту содержит строку
             [

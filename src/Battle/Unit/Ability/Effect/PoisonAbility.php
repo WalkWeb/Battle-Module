@@ -102,27 +102,25 @@ class PoisonAbility extends AbstractAbility
                 'allies_command' => $alliesCommand,
                 'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                 'name'           => self::USE_MESSAGE,
-                'effects'        => [
-                    [
-                        'name'                  => self::NAME,
-                        'icon'                  => self::ICON,
-                        'duration'              => self::DURATION,
-                        'on_apply_actions'      => [],
-                        'on_next_round_actions' => [
-                            [
-                                'type'             => ActionInterface::DAMAGE,
-                                'action_unit'      => $this->unit,
-                                'enemy_command'    => $enemyCommand,
-                                'allies_command'   => $alliesCommand,
-                                'type_target'      => ActionInterface::TARGET_SELF,
-                                'name'             => self::NAME,
-                                'power'            => self::POWER,
-                                'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
-                                'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
-                            ],
+                'effect'         => [
+                    'name'                  => self::NAME,
+                    'icon'                  => self::ICON,
+                    'duration'              => self::DURATION,
+                    'on_apply_actions'      => [],
+                    'on_next_round_actions' => [
+                        [
+                            'type'             => ActionInterface::DAMAGE,
+                            'action_unit'      => $this->unit,
+                            'enemy_command'    => $enemyCommand,
+                            'allies_command'   => $alliesCommand,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'name'             => self::NAME,
+                            'power'            => self::POWER,
+                            'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                            'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
                         ],
-                        'on_disable_actions'    => [],
                     ],
+                    'on_disable_actions'    => [],
                 ],
             ];
 

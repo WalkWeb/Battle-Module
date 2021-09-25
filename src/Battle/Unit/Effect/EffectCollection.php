@@ -54,21 +54,6 @@ class EffectCollection implements Iterator, Countable
     }
 
     /**
-     * @param EffectCollection $effects
-     * @return ActionCollection
-     */
-    public function addCollection(EffectCollection $effects): ActionCollection
-    {
-        $onApplyActionCollection = new ActionCollection();
-
-        foreach ($effects as $effect) {
-            $onApplyActionCollection->addCollection($this->add($effect));
-        }
-
-        return $onApplyActionCollection;
-    }
-
-    /**
      * @return EffectInterface
      */
     public function current(): EffectInterface

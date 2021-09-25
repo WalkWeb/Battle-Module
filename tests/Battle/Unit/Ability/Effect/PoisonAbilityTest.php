@@ -104,27 +104,25 @@ class PoisonAbilityTest extends TestCase
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
             'name'           => 'use Poison',
-            'effects'        => [
-                [
-                    'name'                  => 'Poison',
-                    'icon'                  => '/images/icons/ability/202.png',
-                    'duration'              => 5,
-                    'on_apply_actions'      => [],
-                    'on_next_round_actions' => [
-                        [
-                            'type'             => ActionInterface::DAMAGE,
-                            'action_unit'      => $unit,
-                            'enemy_command'    => $enemyCommand,
-                            'allies_command'   => $command,
-                            'type_target'      => ActionInterface::TARGET_SELF,
-                            'name'             => 'Poison',
-                            'power'            => 8,
-                            'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
-                            'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
-                        ],
+            'effect'         => [
+                'name'                  => 'Poison',
+                'icon'                  => '/images/icons/ability/202.png',
+                'duration'              => 5,
+                'on_apply_actions'      => [],
+                'on_next_round_actions' => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'action_unit'      => $unit,
+                        'enemy_command'    => $enemyCommand,
+                        'allies_command'   => $command,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'name'             => 'Poison',
+                        'power'            => 8,
+                        'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                        'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
                     ],
-                    'on_disable_actions'    => [],
                 ],
+                'on_disable_actions'    => [],
             ],
         ];
 

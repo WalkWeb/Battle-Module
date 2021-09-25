@@ -8,16 +8,15 @@ use Battle\Action\ActionException;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\EffectAction;
-use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Effect\EffectCollection;
-use Battle\Unit\UnitException;
+use Battle\Unit\Effect\EffectFactory;
+use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class EffectActionTest extends TestCase
 {
@@ -25,10 +24,7 @@ class EffectActionTest extends TestCase
     private const MESSAGE_TO   = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces on <span style="color: #1e72e3">unit_2</span>';
 
     /**
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
-     * @throws ActionException
+     * @throws Exception
      */
     public function testEffectActionCreate(): void
     {
@@ -37,15 +33,14 @@ class EffectActionTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $name = 'Effect#123';
-        $effects = new EffectCollection($unit);
-
-        $action = new EffectAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF, $name, $effects);
+        $name = 'use Reserve Forces';
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
+        $effect = $this->getReserveForcesEffect($unit, $enemyCommand, $command);
 
         self::assertEquals('applyEffectAction', $action->getHandleMethod());
         self::assertEquals('effect', $action->getAnimationMethod());
         self::assertEquals('applyEffect', $action->getMessageMethod());
-        self::assertEquals($effects, $action->getEffects());
+        self::assertEquals($effect, $action->getEffect());
         self::assertEquals($name, $action->getNameAction());
     }
 
@@ -73,7 +68,10 @@ class EffectActionTest extends TestCase
 
         self::assertEquals(self::MESSAGE_SELF, $message);
 
-        self::assertEquals($effectAction->getEffects(), $unit->getEffects());
+        $effects = new EffectCollection($unit);
+        $effects->add($effectAction->getEffect());
+
+        self::assertEquals($effects, $unit->getEffects());
 
         // Проверяем увеличившееся здоровье
         self::assertEquals((int)($unitBaseLife * 1.3), $unit->getTotalLife());
@@ -162,29 +160,65 @@ class EffectActionTest extends TestCase
             'allies_command' => $command,
             'type_target'    => $typeTarget,
             'name'           => 'use Reserve Forces',
-            'effects'        => [
-                [
-                    'name'                  => 'Effect#123',
-                    'icon'                  => 'icon.png',
-                    'duration'              => 8,
-                    'on_apply_actions'      => [
-                        [
-                            'type'           => ActionInterface::BUFF,
-                            'action_unit'    => $unit,
-                            'enemy_command'  => $enemyCommand,
-                            'allies_command' => $command,
-                            'type_target'    => ActionInterface::TARGET_SELF,
-                            'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
-                            'power'          => 130,
-                        ],
+            'effect'         => [
+                'name'                  => 'Effect#123',
+                'icon'                  => 'icon.png',
+                'duration'              => 8,
+                'on_apply_actions'      => [
+                    [
+                        'type'           => ActionInterface::BUFF,
+                        'action_unit'    => $unit,
+                        'enemy_command'  => $enemyCommand,
+                        'allies_command' => $command,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'use Reserve Forces',
+                        'modify_method'  => 'multiplierMaxLife',
+                        'power'          => 130,
                     ],
-                    'on_next_round_actions' => [],
-                    'on_disable_actions'    => [],
                 ],
+                'on_next_round_actions' => [],
+                'on_disable_actions'    => [],
             ],
         ];
 
         return $actionFactory->create($data);
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @return EffectInterface
+     * @throws Exception
+     */
+    public function getReserveForcesEffect(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command
+    ): EffectInterface
+    {
+        $effectFactory = new EffectFactory(new ActionFactory());
+
+        $data = [
+            'name'                  => 'Effect#123',
+            'icon'                  => 'icon.png',
+            'duration'              => 8,
+            'on_apply_actions'      => [
+                [
+                    'type'           => ActionInterface::BUFF,
+                    'action_unit'    => $unit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'use Reserve Forces',
+                    'modify_method'  => 'multiplierMaxLife',
+                    'power'          => 130,
+                ],
+            ],
+            'on_next_round_actions' => [],
+            'on_disable_actions'    => [],
+        ];
+
+        return $effectFactory->create($data);
     }
 }

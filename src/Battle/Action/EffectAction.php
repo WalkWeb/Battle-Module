@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
-use Battle\Unit\Effect\EffectCollection;
+use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 
 class EffectAction extends AbstractAction
@@ -25,9 +25,9 @@ class EffectAction extends AbstractAction
     protected $animationMethod;
 
     /**
-     * @var EffectCollection
+     * @var EffectInterface
      */
-    private $effects;
+    private $effect;
 
     public function __construct(
         UnitInterface $actionUnit,
@@ -35,13 +35,13 @@ class EffectAction extends AbstractAction
         CommandInterface $alliesCommand,
         int $typeTarget,
         string $name,
-        EffectCollection $effects,
+        EffectInterface $effect,
         string $animationMethod = self::DEFAULT_ANIMATION_METHOD
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->name = $name;
-        $this->effects = $effects;
+        $this->effect = $effect;
         $this->animationMethod = $animationMethod;
     }
 
@@ -74,15 +74,17 @@ class EffectAction extends AbstractAction
         return $this->name;
     }
 
-    public function getEffects(): EffectCollection
+    public function getEffect(): EffectInterface
     {
-        return $this->effects;
+        return $this->effect;
     }
 
     /**
      * TODO Сейчас бой периодически падает с ошибкой "Can't be used action. Action unit: Succubus. Action: use Poison"
      * TODO Из-за того, что выбранный случайно юнит вначале не имеет эффекта, а потом, при применении эффекта выбирается
      * TODO другой юнит, с эффектом, и эта же проверка уже возвращает false. Необходимо добавить новый поиск цели.
+     *
+     * Проверки специально сделаны двумя отдельными if, чтобы покрытие тестов проверяло покрытиями тестами два варианта
      *
      * @return bool
      * @throws ActionException
@@ -95,11 +97,8 @@ class EffectAction extends AbstractAction
             return false;
         }
 
-        foreach ($this->effects as $effect) {
-            // Если хотя бы один из накладываемых эффектов еще есть на юните - событие считаем невозможным для применения
-            if ($this->targetUnit->getEffects()->exist($effect)) {
-                return false;
-            }
+        if ($this->targetUnit->getEffects()->exist($this->effect)) {
+            return false;
         }
 
         return true;
