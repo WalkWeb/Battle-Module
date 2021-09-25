@@ -83,6 +83,38 @@ class PoisonAbilityTest extends TestCase
     }
 
     /**
+     * Тест на получение false в $ability->canByUsed(), когда все противники уже имеют такой эффект
+     *
+     * @throws Exception
+     */
+    public function testPoisonAbilityCantBeUsed(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new PoisonAbility($unit);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        // Применяем эффект
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Теперь эффект у противника есть, и больше способность примениться не может
+        // Так как все противники (один противник) уже имеют такой эффект
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $command
      * @param CommandInterface $enemyCommand
@@ -102,7 +134,7 @@ class PoisonAbilityTest extends TestCase
             'action_unit'    => $unit,
             'enemy_command'  => $enemyCommand,
             'allies_command' => $command,
-            'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
+            'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
             'name'           => 'use Poison',
             'effect'         => [
                 'name'                  => 'Poison',

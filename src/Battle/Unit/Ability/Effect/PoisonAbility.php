@@ -67,6 +67,25 @@ class PoisonAbility extends AbstractAbility
     }
 
     /**
+     * Может ли способность быть применена - если аналогичный эффект существует, то нет
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return bool
+     * @throws Exception
+     */
+    public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
+    {
+        foreach ($this->getAction($enemyCommand, $alliesCommand) as $action) {
+            if (!$action->canByUsed()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Создает коллекцию эффектов, которая будет применена к юниту
      *
      * При создании коллекции событий для применения способности с эффектом есть несколько особенностей:
@@ -100,7 +119,7 @@ class PoisonAbility extends AbstractAbility
                 'action_unit'    => $this->unit,
                 'enemy_command'  => $enemyCommand,
                 'allies_command' => $alliesCommand,
-                'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
+                'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
                 'name'           => self::USE_MESSAGE,
                 'effect'         => [
                     'name'                  => self::NAME,

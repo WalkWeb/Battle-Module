@@ -75,6 +75,8 @@ class ReserveForcesAbility extends AbstractAbility
     }
 
     /**
+     * Может ли способность быть применена - если аналогичный эффект существует, то нет
+     *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return bool

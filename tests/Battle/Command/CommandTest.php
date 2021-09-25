@@ -8,7 +8,6 @@ use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\EffectAction;
 use Battle\Command\CommandInterface;
-use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Exception;
@@ -348,6 +347,9 @@ class CommandTest extends TestCase
 
         // Проверяем, что новых целей для наложения эффекта нет
         self::assertNull($command->getUnitForEffect($effect));
+
+        // Проверяем, что Action больше не может примениться
+        self::assertFalse($action->canByUsed());
     }
 
     /**

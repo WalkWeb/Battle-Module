@@ -75,4 +75,17 @@ class HeavyStrikeAbility extends AbstractAbility
     {
         return self::ICON;
     }
+
+    /**
+     * Боевые способности считаем всегда доступными для применения - потому что если живых противников нет бой должен
+     * остановиться
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return bool
+     */
+    public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
+    {
+        return true;
+    }
 }

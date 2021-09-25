@@ -116,5 +116,17 @@ abstract class AbstractSummonAbility extends AbstractAbility
         return $collection;
     }
 
+    /**
+     * Призыв новых существ всегда доступен - ограничений мест в команде нет
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return bool
+     */
+    public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
+    {
+        return true;
+    }
+
     abstract public function getUseMessage(): string;
 }

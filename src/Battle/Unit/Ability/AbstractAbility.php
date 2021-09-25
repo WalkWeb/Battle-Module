@@ -49,16 +49,4 @@ abstract class AbstractAbility implements AbilityInterface
     {
         return $this->unit;
     }
-
-    /**
-     * Призыв новых существ всегда доступен - ограничений мест в команде нет
-     *
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return bool
-     */
-    public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
-    {
-        return true;
-    }
 }
