@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Command;
 
+use Battle\Action\ActionFactory;
+use Battle\Action\ActionInterface;
+use Battle\Action\EffectAction;
+use Battle\Command\CommandInterface;
+use Battle\Unit\Effect\EffectCollection;
+use Battle\Unit\Effect\EffectFactory;
+use Battle\Unit\Effect\EffectInterface;
 use Exception;
 use Battle\Battle;
 use Battle\Container\Container;
@@ -287,5 +294,211 @@ class CommandTest extends TestCase
         $damage->handle();
 
         self::assertEquals($warrior->getTotalLife() + $priest->getTotalLife() - $zombie->getDamage(), $command->getTotalLife());
+    }
+
+    // ---------------------------------- Тест на метод getUnitForEffect() ---------------------------------------------
+    // Проверены следующие ситуации:
+    // 1. Живых юнитов в команде нет         => получаем null
+    // 2. Юнит с эффектом + Мертвый юнит     => получаем null
+    // 3. Два живых юнита, оба с эффектом    => получаем null
+    // 4. Один живой юнит без эффекта        => получаем unit
+    // 5. Юнит без эффекта + Мертвый юнит    => получаем unit
+    // 6. Юнит с эффектом + Юнит без эффекта => получаем unit
+
+    /**
+     * 1. Тест на получение юнита для эффекта, когда живых юнитов в команде нет - получаем null
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForEffectNoAliveUnits(): void
+    {
+        $unit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        self::assertNull($command->getUnitForEffect($effect));
+    }
+
+    /**
+     * 2. Тест на получение юнита для эффекта, когда есть два юнита - один живой с эффектом, а другой мертвый - получаем
+     * null
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForEffectNoUnits(): void
+    {
+        $unit = UnitFactory::createByTemplate(2);
+        $otherUnit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit, $otherUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        $action = $this->createEffectAction($effect, $unit, $command, $enemyCommand);
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем, что юнит получил эффект
+        self::assertTrue($unit->getEffects()->exist($effect));
+
+        // Проверяем, что новых целей для наложения эффекта нет
+        self::assertNull($command->getUnitForEffect($effect));
+    }
+
+    /**
+     * 3. Тест на получение юнита для эффекта, когда есть два юнита - оба живых, и оба с эффектом - получаем null
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForEffectAllHaveEffect(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $otherUnit = UnitFactory::createByTemplate(2);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit, $otherUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        $action = $this->createEffectAction($effect, $unit, $command, $enemyCommand);
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        $action = $this->createEffectAction($effect, $otherUnit, $command, $enemyCommand);
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        self::assertNull($command->getUnitForEffect($effect));
+    }
+
+    /**
+     * 4. Тест на получение юнита для эффекта, когда есть только один юнит, он живой и не имеет указанного эффекта
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForEffectOneUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(2);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        self::assertEquals($unit, $command->getUnitForEffect($effect));
+    }
+
+    /**
+     * 5. Тест на получение юнита для эффекта, когда есть два юнита - один живой и без эффета, а другой мертвый
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForEffectOneAliveUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(10);
+        $otherUnit = UnitFactory::createByTemplate(3);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit, $otherUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        self::assertEquals($otherUnit, $command->getUnitForEffect($effect));
+    }
+
+    /**
+     * 6. Тест на получение юнита для эффекта, когда есть два юнита - юнит с эффектом и юнит без эффекта
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForEffectExistOne(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $otherUnit = UnitFactory::createByTemplate(2);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit, $otherUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        $action = $this->createEffectAction($effect, $unit, $command, $enemyCommand);
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        self::assertEquals($otherUnit, $command->getUnitForEffect($effect));
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $command
+     * @param CommandInterface $enemyCommand
+     * @return EffectInterface
+     * @throws Exception
+     */
+    private function createEffect(
+        UnitInterface $unit,
+        CommandInterface $command,
+        CommandInterface $enemyCommand
+    ): EffectInterface
+    {
+        $factory = new EffectFactory(new ActionFactory());
+
+        $data = [
+            'name'                  => 'Poison',
+            'icon'                  => 'icon.png',
+            'duration'              => 10,
+            'on_apply_actions'      => [],
+            'on_next_round_actions' => [
+                [
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $unit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'name'             => 'Poison',
+                    'power'            => 15,
+                    'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                    'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                ],
+            ],
+            'on_disable_actions'    => [],
+        ];
+
+        return $factory->create($data);
+    }
+
+    /**
+     * @param EffectInterface $effect
+     * @param UnitInterface $unit
+     * @param CommandInterface $command
+     * @param CommandInterface $enemyCommand
+     * @return ActionInterface
+     */
+    private function createEffectAction(
+        EffectInterface $effect,
+        UnitInterface $unit,
+        CommandInterface $command,
+        CommandInterface $enemyCommand
+    ): ActionInterface
+    {
+        $effectCollection = new EffectCollection($unit);
+        $effectCollection->add($effect);
+
+        return new EffectAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            EffectAction::TARGET_SELF,
+            'effect',
+            $effectCollection
+        );
     }
 }

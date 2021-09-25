@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Command;
 
+use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
@@ -54,6 +55,16 @@ interface CommandInterface
      * @return UnitInterface|null
      */
     public function getUnitForAction(): ?UnitInterface;
+
+    /**
+     * Возвращает случайного юнита не имеющего указанного эффекта
+     *
+     * Если живых юнитов нет, или все, что есть, имеют указанный эффект - возвращает null
+     *
+     * @param EffectInterface $effect
+     * @return UnitInterface|null
+     */
+    public function getUnitForEffect(EffectInterface $effect): ?UnitInterface;
 
     /**
      * Возвращает коллекцию юнитов данной команды

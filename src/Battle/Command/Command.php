@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Command;
 
+use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
@@ -136,6 +137,34 @@ class Command implements CommandInterface
         }
 
         return $actionUnits[array_rand($actionUnits)];
+    }
+
+    public function getUnitForEffect(EffectInterface $effect): ?UnitInterface
+    {
+        $aliveUnits = [];
+
+        foreach ($this->units as $unit) {
+            if ($unit->isAlive()) {
+                $aliveUnits[] = $unit;
+            }
+        }
+
+        // Если живых юнитов нет - возвращаем null
+        if (count($aliveUnits) === 0) {
+            return null;
+        }
+
+        // Чтобы эффект накладывался случайному юниту, а не первому - перемешиваем массив
+        shuffle($aliveUnits);
+
+        // Проходим по юнитам и проверяем, у кого указанного эффекта нет
+        foreach ($aliveUnits as $unit) {
+            if (!$unit->getEffects()->exist($effect)) {
+                return $unit;
+            }
+        }
+
+        return null;
     }
 
     /**
