@@ -7,6 +7,7 @@ namespace Tests\Battle\Action;
 use Battle\Action\ActionException;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
+use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
@@ -135,6 +136,64 @@ class EffectActionTest extends TestCase
     }
 
     /**
+     * Тест на применение эффекта на случайного противника не имеющего данного эффекта
+     *
+     * @throws Exception
+     */
+    public function testEffectActionTargetEffectEnemy(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $otherEnemyUnit = UnitFactory::createByTemplate(10);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit, $otherEnemyUnit]);
+
+        $action = $this->getPoisonActionToEnemyTarget($unit, $enemyCommand, $command, ActionInterface::TARGET_EFFECT_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        // Мертвый вражеский юнит не должен получить эффекта
+        self::assertEquals(new EffectCollection($otherEnemyUnit), $otherEnemyUnit->getEffects());
+
+        $effects = new EffectCollection($enemyUnit);
+        $effects->add($action->getEffect());
+
+        // А вот живой вражеский юнит должен теперь иметь эффект
+        self::assertEquals($effects, $enemyUnit->getEffects());
+    }
+
+    /**
+     * Тест аналогичен testEffectActionTargetEffectEnemy(), только на этот раз выбирается случайный союзный юнит
+     *
+     * @throws Exception
+     */
+    public function testEffectActionTargetEffectAllies(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $otherUnit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit, $otherUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->getPoisonActionToEnemyTarget($unit, $enemyCommand, $command, ActionInterface::TARGET_EFFECT_ALLIES);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        // Мертвый союзный юнит не должен получить эффекта
+        self::assertEquals(new EffectCollection($otherUnit), $otherUnit->getEffects());
+
+        $effects = new EffectCollection($unit);
+        $effects->add($action->getEffect());
+
+        // А вот живой союзный юнит должен теперь иметь эффект
+        self::assertEquals($effects, $unit->getEffects());
+    }
+
+    /**
      * Создает и возвращает EffectAction
      *
      * @param UnitInterface $unit
@@ -220,5 +279,54 @@ class EffectActionTest extends TestCase
         ];
 
         return $effectFactory->create($data);
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param int $typeTarget
+     * @return ActionInterface
+     * @throws Exception
+     */
+    public function getPoisonActionToEnemyTarget(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        int $typeTarget
+    ): ActionInterface
+    {
+        $actionFactory = new ActionFactory();
+
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => $typeTarget,
+            'name'           => 'use Poison',
+            'effect'         => [
+                'name'                  => 'Poison',
+                'icon'                  => '/images/icons/ability/202.png',
+                'duration'              => 5,
+                'on_apply_actions'      => [],
+                'on_next_round_actions' => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'action_unit'      => $unit,
+                        'enemy_command'    => $enemyCommand,
+                        'allies_command'   => $command,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'name'             => 'Poison',
+                        'power'            => 8,
+                        'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                        'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                    ],
+                ],
+                'on_disable_actions'    => [],
+            ],
+        ];
+
+        return $actionFactory->create($data);
     }
 }

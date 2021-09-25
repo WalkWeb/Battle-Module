@@ -185,10 +185,11 @@ abstract class AbstractAction implements ActionInterface
     /**
      * Ищет юнита для применения события.
      *
+     * @param ActionInterface $action
      * @return UnitInterface|null
      * @throws ActionException
      */
-    protected function searchTargetUnit(): ?UnitInterface
+    protected function searchTargetUnit(ActionInterface $action): ?UnitInterface
     {
         switch ($this->typeTarget) {
             case self::TARGET_SELF:
@@ -197,6 +198,10 @@ abstract class AbstractAction implements ActionInterface
                return $this->getRandomEnemyUnit();
             case self::TARGET_WOUNDED_ALLIES:
                 return $this->alliesCommand->getUnitForHeal();
+            case self::TARGET_EFFECT_ENEMY:
+                return $this->enemyCommand->getUnitForEffect($action->getEffect());
+            case self::TARGET_EFFECT_ALLIES:
+                return $this->alliesCommand->getUnitForEffect($action->getEffect());
         }
 
         throw new ActionException(ActionException::UNKNOWN_TYPE_TARGET . ': ' . $this->typeTarget);

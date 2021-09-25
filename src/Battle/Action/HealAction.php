@@ -67,7 +67,7 @@ class HealAction extends AbstractAction
      */
     public function handle(): string
     {
-        $this->targetUnit = $this->searchTargetUnit();
+        $this->targetUnit = $this->searchTargetUnit($this);
 
         // Такой ситуации быть не должно, потому возможность применения события должна проверяться до её применения
         if (!$this->targetUnit) {

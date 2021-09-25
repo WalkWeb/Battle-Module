@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
-use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 
@@ -23,6 +22,12 @@ interface ActionInterface
     public const TARGET_RANDOM_ENEMY   = 2;
     // Применяет событие на самого раненого союзника
     public const TARGET_WOUNDED_ALLIES = 3;
+    // Применяет событие (эффект) на случайного противника, не имеющего данного эффекта
+    public const TARGET_EFFECT_ENEMY   = 4;
+    // Применяет событие (эффект) на случайного дружеского юнита, не имеющего данного эффекта
+    public const TARGET_EFFECT_ALLIES  = 5;
+
+    // TODO Добавить еще один тип цели - раненый союзник, не имеющий эффекта
 
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 

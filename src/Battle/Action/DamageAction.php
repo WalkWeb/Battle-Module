@@ -69,7 +69,7 @@ class DamageAction extends AbstractAction
             throw new ActionException(ActionException::NO_DEFINED);
         }
 
-        $this->targetUnit = $this->searchTargetUnit();
+        $this->targetUnit = $this->searchTargetUnit($this);
 
         if (!$this->targetUnit) {
             throw new ActionException(ActionException::NO_DEFINED_AGAIN);

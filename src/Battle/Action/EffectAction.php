@@ -91,7 +91,7 @@ class EffectAction extends AbstractAction
      */
     public function canByUsed(): bool
     {
-        $this->targetUnit = $this->searchTargetUnit();
+        $this->targetUnit = $this->searchTargetUnit($this);
 
         if (!$this->targetUnit) {
             return false;
