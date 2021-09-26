@@ -96,6 +96,8 @@ class HealAction extends AbstractAction
     }
 
     /**
+     * TODO Необходима доработка. Например, для ситуаций, когда лечение это эффект, а юнит полностью здоров или умер
+     *
      * @return bool
      */
     public function canByUsed(): bool

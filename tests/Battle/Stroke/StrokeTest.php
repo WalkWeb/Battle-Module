@@ -195,13 +195,83 @@ class StrokeTest extends TestCase
     }
 
     /**
+     * Тест ситуации, когда юнит имеет два эффект, и первый эффект его убивает - второй эффект применяться не должен
+     *
+     * @throws Exception
+     */
+    public function testStrokeTwoEffectAndDeadAfterFirst(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $otherUnit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit, $otherUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+        $container = new Container();
+
+        $effectDamage = $this->getDamageEffectAction($unit, $command, $enemyCommand);
+
+        if ($effectDamage->canByUsed()) {
+            $unit->applyAction($effectDamage);
+        }
+
+        $effectHeal = $this->getHealEffectAction($unit, $command, $enemyCommand);
+
+        if ($effectHeal->canByUsed()) {
+            $unit->applyAction($effectHeal);
+        }
+
+        self::assertCount(2, $unit->getEffects());
+
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+        $stroke->handle();
+
+        $scenario = $container->getScenario()->getArray();
+
+        // На всякий случай проверяем, что эффект полечил не того, на кого наложен, а другого юнита
+        self::assertEquals(1, $otherUnit->getLife());
+
+        // Проверяем количество записей в сценарии - должна быть только одна запись о применении эффекта
+        self::assertCount(1, $scenario);
+
+        // Проверяем, что эта запись - именно об эффекте
+        $expectedData = [
+            'step'    => $container->getStatistic()->getRoundNumber(),
+            'attack'  => $container->getStatistic()->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'      => $unit->getId(),
+                    'unit_effects' => '<img src="icon.png" width="22" alt="" /> <span>8</span><img src="icon.png" width="22" alt="" /> <span>8</span>',
+                    'targets'      => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => $unit->getId(),
+                            'ava'               => 'unit_ava_effect_damage',
+                            'recdam'            => '-100',
+                            'hp'                => 0,
+                            'thp'               => 100,
+                            'unit_hp_bar_width' => 0,
+                            'avas'              => 'unit_ava_dead',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $container->getScenario()->getArray()[0]);
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $command
      * @param CommandInterface $enemyCommand
      * @return ActionInterface
      * @throws Exception
      */
-    private function getHealEffectAction(UnitInterface $unit, CommandInterface $command, CommandInterface $enemyCommand): ActionInterface
+    private function getHealEffectAction(
+        UnitInterface $unit,
+        CommandInterface $command,
+        CommandInterface $enemyCommand
+    ): ActionInterface
     {
         $actionFactory = new ActionFactory();
 

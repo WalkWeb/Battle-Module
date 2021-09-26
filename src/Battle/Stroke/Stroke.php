@@ -92,6 +92,11 @@ class Stroke implements StrokeInterface
                 $this->container->getFullLog()->addText($message);
                 $this->container->getChat()->add($message);
             }
+
+            // Если юнит умер после применении эффекта - дальнейшие эффекты применять не нужно
+            if (!$this->actionUnit->isAlive()) {
+                break;
+            }
         }
 
         // -------------------------------------------- Action Unit ----------------------------------------------------
