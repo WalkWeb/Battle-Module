@@ -23,12 +23,12 @@ use Tests\Battle\Factory\CommandFactory as CommandFactoryTest;
 class UnitTest extends TestCase
 {
     /**
+     * @dataProvider createDataProvider
+     * @param int $template
      * @throws UnitFactoryException
-     * @throws Exception
      */
-    public function testUniCreate(): void
+    public function testUniCreate(int $template): void
     {
-        $template = 1;
         $unit = UnitFactory::createByTemplate($template);
         $data = UnitFactory::getData($template);
 
@@ -37,15 +37,19 @@ class UnitTest extends TestCase
         self::assertEquals($data['level'], $unit->getLevel());
         self::assertEquals($data['avatar'], $unit->getAvatar());
         self::assertEquals($data['damage'], $unit->getDamage());
+        self::assertEquals(round($data['damage'] * $data['attack_speed'], 1), $unit->getDPS());
         self::assertEquals($data['life'], $unit->getLife());
         self::assertEquals($data['total_life'], $unit->getTotalLife());
         self::assertEquals($data['attack_speed'], $unit->getAttackSpeed());
         self::assertFalse($unit->isAction());
-        self::assertTrue($unit->isAlive());
-        self::assertTrue($unit->isMelee());
-        self::assertEquals($data['class'], $unit->getClass()->getId());
+        self::assertEquals($data['life'] > 0, $unit->isAlive());
+        self::assertEquals($data['melee'], $unit->isMelee());
         self::assertEquals($data['race'], $unit->getRace()->getId());
-        self::assertEquals($unit->getClass()->getAbilities($unit), $unit->getAbilities());
+
+        if ($data['class']) {
+            self::assertEquals($data['class'], $unit->getClass()->getId());
+            self::assertEquals($unit->getClass()->getAbilities($unit), $unit->getAbilities());
+        }
     }
 
     /**
@@ -136,7 +140,7 @@ class UnitTest extends TestCase
         $collection->add($unit);
         $command = new Command($collection);
 
-        $enemyUnit =  UnitFactory::createByTemplate(2);
+        $enemyUnit = UnitFactory::createByTemplate(2);
         $enemyCollection = new UnitCollection();
         $enemyCollection->add($enemyUnit);
         $enemyCommand = new Command($enemyCollection);
@@ -270,5 +274,12 @@ class UnitTest extends TestCase
         foreach ($actions as $action) {
             self::assertInstanceOf(DamageAction::class, $action);
         }
+    }
+
+    public function createDataProvider(): array
+    {
+        return [
+            [1], [2], [3], [4], [5], [6], [7], [8], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20]
+        ];
     }
 }

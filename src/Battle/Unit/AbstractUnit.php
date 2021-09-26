@@ -204,6 +204,11 @@ abstract class AbstractUnit implements UnitInterface
         return $this->damage;
     }
 
+    public function getDPS(): float
+    {
+        return round($this->damage * $this->attackSpeed, 1);
+    }
+
     public function getAttackSpeed(): float
     {
         return $this->attackSpeed;
