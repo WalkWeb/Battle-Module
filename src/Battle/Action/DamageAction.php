@@ -102,4 +102,17 @@ class DamageAction extends AbstractAction
     {
         return $this->messageMethod;
     }
+
+    /**
+     * Урон по умолчанию считается доступным для использования - потому что:
+     *
+     * 1. Если это атака юнита - а живых противников нет, то бой должен был остановиться (т.е. ошибка в Round)
+     * 2. Если это урон от эффекта - в Stroke делается проверка на то, живой ли юнит после применение урона
+     *
+     * @return bool
+     */
+    public function canByUsed(): bool
+    {
+        return true;
+    }
 }

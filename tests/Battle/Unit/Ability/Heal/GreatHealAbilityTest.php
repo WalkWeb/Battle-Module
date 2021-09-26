@@ -72,7 +72,7 @@ class GreatHealAbilityTest extends TestCase
      *
      * @throws Exception
      */
-    public function testGreatHealAbilityCantBeUsed(): void
+    public function testGreatHealAbilityCantByUsed(): void
     {
         $unit = UnitFactory::createByTemplate(4);
         $enemyUnit = UnitFactory::createByTemplate(2);

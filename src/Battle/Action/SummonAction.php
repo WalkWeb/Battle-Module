@@ -92,4 +92,14 @@ class SummonAction extends AbstractAction
     {
         return self::DEFAULT_MESSAGE_METHOD;
     }
+
+    /**
+     * Призыв существ считается всегда возможным - потому что лимита на количество юнитов в группе нет
+     *
+     * @return bool
+     */
+    public function canByUsed(): bool
+    {
+        return true;
+    }
 }

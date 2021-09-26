@@ -123,5 +123,16 @@ class BuffAction extends AbstractAction
         return self::DEFAULT_MESSAGE_METHOD;
     }
 
+    /**
+     * Бафф всегда может примениться, потому что проверка на возможность применения того или иного бафа происходит в
+     * EffectAction
+     *
+     * @return bool
+     */
+    public function canByUsed(): bool
+    {
+        return true;
+    }
+
     public function setFactualPower(int $factualPower): void {}
 }

@@ -83,7 +83,7 @@ class StrokeTest extends TestCase
      *
      * @throws Exception
      */
-    public function testStrokeCantBeUsedActionException(): void
+    public function testStrokeCantByUsedActionException(): void
     {
         $enemyUnit = UnitFactory::createByTemplate(3);
 

@@ -104,7 +104,7 @@ class HealingPotionAbilityTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testHealingPotionAbilityCanBeUsed(): void
+    public function testHealingPotionAbilityCanByUsed(): void
     {
         $unit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);

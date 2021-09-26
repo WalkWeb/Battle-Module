@@ -87,7 +87,7 @@ class PoisonAbilityTest extends TestCase
      *
      * @throws Exception
      */
-    public function testPoisonAbilityCantBeUsed(): void
+    public function testPoisonAbilityCantByUsed(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);

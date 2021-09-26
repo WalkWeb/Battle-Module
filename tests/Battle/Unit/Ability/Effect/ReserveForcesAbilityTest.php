@@ -114,7 +114,7 @@ class ReserveForcesAbilityTest extends TestCase
      *
      * @throws Exception
      */
-    public function testReserveForcesAbilityCanBeUsed(): void
+    public function testReserveForcesAbilityCanByUsed(): void
     {
         $unit = UnitFactory::createByTemplate(21);
         $enemyUnit = UnitFactory::createByTemplate(2);

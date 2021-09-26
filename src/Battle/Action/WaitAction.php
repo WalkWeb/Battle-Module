@@ -55,5 +55,15 @@ class WaitAction extends AbstractAction
         return self::DEFAULT_MESSAGE_METHOD;
     }
 
+    /**
+     * Пропуск хода всегда доступен для использования - никаких ограничений нет
+     *
+     * @return bool
+     */
+    public function canByUsed(): bool
+    {
+        return true;
+    }
+
     public function setFactualPower(int $factualPower): void {}
 }
