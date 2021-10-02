@@ -84,7 +84,7 @@ let applyBattleChanges = {
             unit.getElementsByClassName("unit_rage_bar2")[0].style.width = user.unit_rage_bar2 + "%";
         }
         if (user.unit_effects !== undefined) {
-            document.getElementById("unit_effects_" + user.user_id).innerHTML = user.unit_effects;
+            document.getElementById("unit_effects_" + user.user_id).innerHTML = createEffectsView(user.unit_effects);
         }
     },
 
@@ -371,4 +371,14 @@ function createUnit(unit) {
     unit_icon_right_img.setAttribute('alt', '');
 
     return create;
+}
+
+function createEffectsView(effects) {
+    let html = '';
+
+    effects.forEach(function(effect) {
+        html += '<img src="' + effect.icon + '" width="22" alt="" /> <span>' + effect.duration + '</span>';
+    });
+
+    return html;
 }

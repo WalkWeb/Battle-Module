@@ -55,7 +55,7 @@ class ScenarioTest extends TestCase
                     'class'          => 'd_attack',
                     'unit_cons_bar2' => 0,
                     'unit_rage_bar2' => 0,
-                    'unit_effects'   => '',
+                    'unit_effects'   => [],
                     'targets'        => [
                         [
                             'type'              => 'change',
@@ -71,7 +71,7 @@ class ScenarioTest extends TestCase
                             'unit_rage_bar2'    => 7,
                             'ava'               => 'unit_ava_red',
                             'avas'              => 'unit_ava_blank',
-                            'unit_effects'      => '',
+                            'unit_effects'      => [],
                         ],
                     ],
                 ],
@@ -112,7 +112,12 @@ class ScenarioTest extends TestCase
             'effects' => [
                 [
                     'user_id'      => $enemyUnit->getId(),
-                    'unit_effects' => '<img src="/images/icons/ability/202.png" width="22" alt="" /> <span>5</span>',
+                    'unit_effects' => [
+                        [
+                            'icon'     => '/images/icons/ability/202.png',
+                            'duration' => 5,
+                        ],
+                    ],
                     'targets'      => [
                         [
                             'type'              => 'change',
@@ -185,7 +190,7 @@ class ScenarioTest extends TestCase
                             'hp_bar_class'      => 'unit_hp_bar',
                             'hp_bar_class2'     => 'unit_hp_bar2',
                             'unit_hp_bar_width' => 46,
-                            'unit_effects'      => '',
+                            'unit_effects'      => [],
                         ],
                     ],
                 ],
@@ -226,7 +231,12 @@ class ScenarioTest extends TestCase
             'effects' => [
                 [
                     'user_id'      => $unit->getId(),
-                    'unit_effects' => '<img src="/images/icons/ability/234.png" width="22" alt="" /> <span>4</span>',
+                    'unit_effects' => [
+                        [
+                            'icon'     => '/images/icons/ability/234.png',
+                            'duration' => 4,
+                        ],
+                    ],
                     'targets'      => [
                         [
                             'type'              => 'change',
@@ -332,14 +342,24 @@ class ScenarioTest extends TestCase
                         'thp'            => 130,
                         'unit_cons_bar2' => 20,
                         'unit_rage_bar2' => 14,
-                        'unit_effects'   => '<img src="images/icons/ability/156.png" width="22" alt="" /> <span>8</span>',
+                        'unit_effects'   => [
+                            [
+                                'icon'     => 'images/icons/ability/156.png',
+                                'duration' => 8,
+                            ],
+                        ],
                         'targets'        => [
                             [
                                 'type'         => 'change',
                                 'user_id'      => $action->getActionUnit()->getId(),
                                 'hp'           => $action->getActionUnit()->getLife(),
                                 'thp'          => $action->getActionUnit()->getTotalLife(),
-                                'unit_effects' => '<img src="images/icons/ability/156.png" width="22" alt="" /> <span>8</span>',
+                                'unit_effects' => [
+                                    [
+                                        'icon'     => 'images/icons/ability/156.png',
+                                        'duration' => 8,
+                                    ],
+                                ],
                             ],
                         ],
                     ],

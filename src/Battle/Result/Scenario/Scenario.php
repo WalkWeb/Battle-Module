@@ -333,16 +333,17 @@ class Scenario implements ScenarioInterface
         return $unit->getLife() > 0 ? 'unit_ava_blank' : 'unit_ava_dead';
     }
 
-    private function getUnitEffects(UnitInterface $unit): string
+    private function getUnitEffects(UnitInterface $unit): array
     {
-        // TODO Передавать массив параметров, а html формировать на стороне js
-
-        $html = '';
+        $data = [];
 
         foreach ($unit->getEffects() as $effect) {
-            $html .= '<img src="' . $effect->getIcon() . '" width="22" alt="" /> <span>' . $effect->getDuration() . '</span>';
+            $data[] = [
+                'icon'     => $effect->getIcon(),
+                'duration' => $effect->getDuration(),
+            ];
         }
 
-        return $html;
+        return $data;
     }
 }
