@@ -50,6 +50,16 @@ interface CommandInterface
     public function getUnitForHeal(): ?UnitInterface;
 
     /**
+     * Возвращает самого раненого живого юнита в команде не имеющего указанного эффекта
+     *
+     * Если все живы или мертвы - возвращает null
+     *
+     * @param EffectInterface $effect
+     * @return UnitInterface|null
+     */
+    public function getUnitForEffectHeal(EffectInterface $effect): ?UnitInterface;
+
+    /**
      * Возвращает юнита готового совершать действие в этом раунде
      *
      * @return UnitInterface|null

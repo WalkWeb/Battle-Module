@@ -438,6 +438,116 @@ class CommandTest extends TestCase
         self::assertEquals($otherUnit, $command->getUnitForEffect($effect));
     }
 
+    // ---------------------------------- Тест на метод getUnitForEffectHeal() -----------------------------------------
+    // Проверены следующие ситуации:
+    // 1. Один живой юнит не имеющий эффекта => null
+    // 2. Один раненый юнит не имеющий эффекта => unit
+    // 3. Один раненый юнит с эффектом => null
+    // 4. Два раненых юнита, один с эффектом, другой без => unit
+    // 5. Два раненых юнита, выбирается самый раненый => unit
+
+    /**
+     * 1. Один живой юнит не имеющий эффекта. Возвращает null
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForEffectHealFullLife(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        self::assertNull($command->getUnitForEffectHeal($effect));
+    }
+
+    /**
+     * 2. Один раненый юнит не имеющий эффекта. Возвращается этот юнит
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForEffectHealWoundedUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        self::assertEquals($unit, $command->getUnitForEffectHeal($effect));
+    }
+
+    /**
+     * 3. Один раненый юнит с эффектом. Получаем null
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForEffectHealOneWoundedUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        $action = $this->createEffectAction($effect, $unit, $command, $enemyCommand);
+
+        // Применяем эффект
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        self::assertNull($command->getUnitForEffectHeal($effect));
+    }
+
+    /**
+     * 4. Два раненых юнита, один с эффектом, другой без. Выбирается юнит без эффекта
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForEffectHealWhoWoundedUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(11);
+        $otherUnit = UnitFactory::createByTemplate(9);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit, $otherUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        $action = $this->createEffectAction($effect, $unit, $command, $enemyCommand);
+
+        // Применяем эффект
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // getUnitForEffectHeal() возвращает второго юнита в команде, без эффекта
+        self::assertEquals($otherUnit, $command->getUnitForEffectHeal($effect));
+    }
+
+    /**
+     * 5. Два раненых юнита, выбирается самый раненый
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForEffectHealMostWounded(): void
+    {
+        // Life: 1/100
+        $unit = UnitFactory::createByTemplate(11);
+        // Life: 90/100
+        $otherUnit = UnitFactory::createByTemplate(9);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit, $otherUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        self::assertEquals($unit, $command->getUnitForEffectHeal($effect));
+    }
+
     /**
      * @param UnitInterface $unit
      * @param CommandInterface $command

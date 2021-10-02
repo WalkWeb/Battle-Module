@@ -92,24 +92,36 @@ class Command implements CommandInterface
      */
     public function getUnitForHeal(): ?UnitInterface
     {
-        $unitForHeal = [];
-
-        foreach ($this->units as $unit) {
-            $life = $unit->getLife();
-            $totalLife = $unit->getTotalLife();
-            if ($life > 0 && $life < $totalLife) {
-                $percentLife = (int)(($life / $totalLife) * 100);
-                $unitForHeal[$percentLife] = $unit;
-            }
-        }
+        $unitForHeal = $this->getWoundedUnits();
 
         if (count($unitForHeal) === 0) {
             return null;
         }
 
-        ksort($unitForHeal);
-
         return $unitForHeal[array_key_first($unitForHeal)];
+    }
+
+    /**
+     * Возвращает самого раненого живого юнита в команде не имеющего указанного эффекта
+     *
+     * @param EffectInterface $effect
+     * @return UnitInterface|null
+     */
+    public function getUnitForEffectHeal(EffectInterface $effect): ?UnitInterface
+    {
+        $unitForHeal = $this->getWoundedUnits();
+
+        if (count($unitForHeal) === 0) {
+            return null;
+        }
+
+        foreach ($unitForHeal as $unit) {
+            if (!$unit->getEffects()->exist($effect)) {
+                return $unit;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -243,5 +255,28 @@ class Command implements CommandInterface
         }
 
         $this->units = $collection;
+    }
+
+    /**
+     * Возвращает массив самых раненых (но живых) юнитов в команде, сортированных в порядке самых раненых
+     *
+     * @return UnitInterface[]
+     */
+    private function getWoundedUnits(): array
+    {
+        $unitForHeal = [];
+
+        foreach ($this->units as $unit) {
+            $life = $unit->getLife();
+            $totalLife = $unit->getTotalLife();
+            if ($life > 0 && $life < $totalLife) {
+                $percentLife = (int)(($life / $totalLife) * 100);
+                $unitForHeal[$percentLife] = $unit;
+            }
+        }
+
+        ksort($unitForHeal);
+
+        return $unitForHeal;
     }
 }

@@ -127,6 +127,22 @@ class UnitFactory
             'class'        => 3,
             'race'         => 1,
         ],
+        // Слегка раненый юнит
+        9 => [
+            'id'           => '5e5c15fb-fa29-4bf0-8a0d-f2be9f90ca9d',
+            'name'         => 'small_wounded_unit',
+            'level'        => 1,
+            'avatar'       => '/images/avas/monsters/005.png',
+            'damage'       => 35,
+            'attack_speed' => 1.00,
+            'life'         => 90,
+            'total_life'   => 100,
+            'melee'        => true,
+            'command'      => 1,
+            'class'        => 1,
+            'race'         => 1,
+        ],
+        // Мертвый юнит
         10 => [
             'id'           => '92e7b39c-dbfc-4493-b563-50314c524c0c',
             'name'         => 'dead_unit',
@@ -141,6 +157,7 @@ class UnitFactory
             'class'        => 1,
             'race'         => 1,
         ],
+        // Сильно раненый юнит
         11 => [
             'id'           => '92e7b39c-dbfc-4493-b563-50314c524c3c',
             'name'         => 'wounded_unit',
