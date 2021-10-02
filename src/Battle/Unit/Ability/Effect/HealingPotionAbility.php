@@ -127,7 +127,7 @@ class HealingPotionAbility extends AbstractAbility
                 'action_unit'    => $this->unit,
                 'enemy_command'  => $enemyCommand,
                 'allies_command' => $alliesCommand,
-                'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES,
+                'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
                 'name'           => self::USE_MESSAGE,
                 'effect'         => [
                     'name'                  => self::NAME,

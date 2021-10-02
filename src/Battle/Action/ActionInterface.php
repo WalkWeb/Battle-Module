@@ -17,17 +17,17 @@ interface ActionInterface
     public const EFFECT = 6;
 
     // Применяет событие на себя
-    public const TARGET_SELF           = 1;
+    public const TARGET_SELF                  = 1;
     // Применяет событие на случайного врага
-    public const TARGET_RANDOM_ENEMY   = 2;
+    public const TARGET_RANDOM_ENEMY          = 2;
     // Применяет событие на самого раненого союзника
-    public const TARGET_WOUNDED_ALLIES = 3;
+    public const TARGET_WOUNDED_ALLIES        = 3;
     // Применяет событие (эффект) на случайного противника, не имеющего данного эффекта
-    public const TARGET_EFFECT_ENEMY   = 4;
+    public const TARGET_EFFECT_ENEMY          = 4;
     // Применяет событие (эффект) на случайного дружеского юнита, не имеющего данного эффекта
-    public const TARGET_EFFECT_ALLIES  = 5;
-
-    // TODO Добавить еще один тип цели - раненый союзник, не имеющий эффекта
+    public const TARGET_EFFECT_ALLIES         = 5;
+    // Применяет эффект на самого раненого союзника не имеющего данного эффекта
+    public const TARGET_WOUNDED_ALLIES_EFFECT = 6;
 
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 

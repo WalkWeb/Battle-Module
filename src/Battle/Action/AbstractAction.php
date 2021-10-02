@@ -53,8 +53,6 @@ abstract class AbstractAction implements ActionInterface
         $this->enemyCommand = $enemyCommand;
         $this->alliesCommand = $alliesCommand;
         $this->typeTarget = $typeTarget;
-
-        // TODO Возможно имеет смысл сразу проверять $typeTarget на существование, чтобы созданный объект был валидным
     }
 
     public function getActionUnit(): UnitInterface
@@ -176,6 +174,8 @@ abstract class AbstractAction implements ActionInterface
                 return $this->enemyCommand->getUnitForEffect($action->getEffect());
             case self::TARGET_EFFECT_ALLIES:
                 return $this->alliesCommand->getUnitForEffect($action->getEffect());
+            case self::TARGET_WOUNDED_ALLIES_EFFECT:
+                return $this->alliesCommand->getUnitForEffectHeal($action->getEffect());
         }
 
         throw new ActionException(ActionException::UNKNOWN_TYPE_TARGET . ': ' . $this->typeTarget);
