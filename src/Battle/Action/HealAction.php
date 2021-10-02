@@ -96,12 +96,17 @@ class HealAction extends AbstractAction
     }
 
     /**
-     * TODO Необходима доработка. Например, для ситуаций, когда лечение это эффект, а юнит полностью здоров или умер
+     * Вариант применения эффект на противников не рассматривается - т.к. помогать противоположной команде не
+     * подразумевается
      *
      * @return bool
      */
     public function canByUsed(): bool
     {
+        if ($this->typeTarget === self::TARGET_SELF && $this->actionUnit->getLife() === $this->actionUnit->getTotalLife()) {
+            return false;
+        }
+
         return (bool)$this->alliesCommand->getUnitForHeal();
     }
 

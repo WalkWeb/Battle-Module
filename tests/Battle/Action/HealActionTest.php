@@ -5,11 +5,16 @@ declare(strict_types=1);
 namespace Tests\Battle\Action;
 
 use Battle\Action\ActionException;
+use Battle\Action\ActionFactory;
+use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Command\CommandInterface;
+use Battle\Container\Container;
 use Battle\Unit\UnitException;
+use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\UnitFactory;
@@ -168,5 +173,88 @@ class HealActionTest extends TestCase
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_TARGET_FOR_HEAL);
         $action->handle();
+    }
+
+    /**
+     * Тест на ситуацию, когда лечение - это эффект, а юнит, на котором оно находится - полностью здоров
+     *
+     * @throws Exception
+     */
+    public function testHealActionNoCanByUsedSelf(): void
+    {
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $otherUnit = UnitFactory::createByTemplate(11, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit, $otherUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effectAction = $this->getEffectAction($unit, $command, $enemyCommand);
+
+        // Применяем эффект на юнита
+        self::assertTrue($effectAction->canByUsed());
+        $effectAction->handle();
+
+        // Проверяем, что юнит получил эффект
+        self::assertCount(1, $unit->getEffects());
+
+        // Проверяем, что сам эффект не может примениться
+        $effects = $unit->getEffects();
+
+        // Проверяем, что эффект не может примениться, потому что на кого он наложен - здоров
+        foreach ($effects as $effect) {
+
+            $actions = $effect->getOnNextRoundActions();
+
+            foreach ($actions as $action) {
+                self::assertFalse($action->canByUsed());
+            }
+        }
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $command
+     * @param CommandInterface $enemyCommand
+     * @return ActionInterface
+     * @throws Exception
+     */
+    private function getEffectAction(
+        UnitInterface $unit,
+        CommandInterface $command,
+        CommandInterface $enemyCommand
+    ): ActionInterface
+    {
+        $actionFactory = new ActionFactory();
+
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_SELF,
+            'name'           => 'Heal Potion',
+            'effect'         => [
+                'name'                  => 'Heal Potion',
+                'icon'                  => 'icon.png',
+                'duration'              => 10,
+                'on_apply_actions'      => [],
+                'on_next_round_actions' => [
+                    [
+                        'type'            => ActionInterface::HEAL,
+                        'action_unit'     => $unit,
+                        'enemy_command'   => $enemyCommand,
+                        'allies_command'  => $command,
+                        'type_target'     => ActionInterface::TARGET_SELF,
+                        'name'            => null,
+                        'power'           => 100,
+                        'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                    ],
+                ],
+                'on_disable_actions'    => [],
+            ],
+        ];
+
+        return $actionFactory->create($data);
     }
 }
