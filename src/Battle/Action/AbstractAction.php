@@ -176,6 +176,8 @@ abstract class AbstractAction implements ActionInterface
                 return $this->alliesCommand->getUnitForEffect($action->getEffect());
             case self::TARGET_WOUNDED_ALLIES_EFFECT:
                 return $this->alliesCommand->getUnitForEffectHeal($action->getEffect());
+            case self::TARGET_DEAD_ALLIES:
+                return $this->alliesCommand->getUnitForResurrection();
         }
 
         throw new ActionException(ActionException::UNKNOWN_TYPE_TARGET . ': ' . $this->typeTarget);

@@ -11,6 +11,7 @@ use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
+use Battle\Action\ResurrectionAction;
 use Battle\Action\WaitAction;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
@@ -53,7 +54,7 @@ class Unit extends AbstractUnit
     /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
      *
-     * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction
+     * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction, applyResurrectionAction
      * @param ActionInterface $action
      * @return string - Сообщение о произошедшем действии
      * @throws Exception
@@ -167,6 +168,26 @@ class Unit extends AbstractUnit
         return $this->container->getMessage()->createMessage($action);
     }
 
+    /**
+     * Обрабатывает action на воскрешение. При этом power - количество здоровья (в % от максимального), которое будет
+     * восстановлено юниту при воскрешении
+     *
+     * @param ResurrectionAction $action
+     * @return string
+     * @throws ActionException
+     */
+    private function applyResurrectionAction(ResurrectionAction $action): string
+    {
+        $restoreLife = (int)($this->totalLife * ($action->getPower()/100));
+
+        $this->life += $restoreLife;
+
+        $action->setFactualPower($restoreLife);
+
+        // TODO Added message
+        return '';
+    }
+    
     /**
      * Обрабатывает action на изменение характеристик юнита
      *

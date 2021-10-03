@@ -96,7 +96,7 @@ echo $view->renderResult($result);
 
 ## Планы
 
-- Добавить Action-воскрешение
+- Добавить Action-способность завязанную на Rage
 - EffectAction добавить параметр buff: true/false указывающий на то, является ли это положительный или отрицательный 
 эффект
 - Добавить CancelBuffAction и CancelDebuffAction - отменяющие все положительные или все отрицательные эффекты

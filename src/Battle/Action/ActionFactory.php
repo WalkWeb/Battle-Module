@@ -118,6 +118,8 @@ class ActionFactory
             );
         }
 
+        // TODO Add ResurrectionAction
+
         $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
         $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
         $effectData = self::array($data, 'effect', ActionException::INVALID_EFFECT_DATA);
