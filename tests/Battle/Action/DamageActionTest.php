@@ -14,8 +14,6 @@ use Tests\Battle\Factory\UnitFactory;
 
 class DamageActionTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
-
     /**
      * @throws Exception
      */
@@ -42,9 +40,8 @@ class DamageActionTest extends TestCase
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
         $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
-        $message = $action->handle();
+        $action->handle();
         self::assertEquals($unit->getDamage(), $action->getPower());
-        self::assertEquals(self::MESSAGE, $message);
     }
 
     /**

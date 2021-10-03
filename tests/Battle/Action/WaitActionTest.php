@@ -14,8 +14,6 @@ use Tests\Battle\Factory\UnitFactory;
 
 class WaitActionTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_14</span> preparing to attack';
-
     /**
      * @throws CommandException
      * @throws UnitException
@@ -23,7 +21,6 @@ class WaitActionTest extends TestCase
      */
     public function testCreateWaitAction(): void
     {
-        $message = '';
         $alliesUnit = UnitFactory::createByTemplate(14);
         $enemyUnit = UnitFactory::createByTemplate(3);
 
@@ -37,9 +34,7 @@ class WaitActionTest extends TestCase
             self::assertEquals('wait', $action->getAnimationMethod());
             self::assertEquals('wait', $action->getMessageMethod());
             self::assertTrue($action->canByUsed());
-            $message .= $action->handle();
+            $action->handle();
         }
-
-        self::assertEquals(self::MESSAGE, $message);
     }
 }

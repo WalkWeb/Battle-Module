@@ -9,8 +9,6 @@ use Battle\Unit\UnitInterface;
 
 class BuffAction extends AbstractAction
 {
-    // TODO Подумать над реализацией revert-сообщения для чата
-
     private const HANDLE_METHOD            = 'applyBuffAction';
     private const DEFAULT_ANIMATION_METHOD = 'skip';
     private const DEFAULT_MESSAGE_METHOD   = 'buff';

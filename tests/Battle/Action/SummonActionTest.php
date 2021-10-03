@@ -15,8 +15,6 @@ use Tests\Battle\Factory\UnitFactory;
 
 class SummonActionTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_7</span> summon Skeleton';
-
     /**
      * @throws CommandException
      * @throws UnitException
@@ -24,7 +22,6 @@ class SummonActionTest extends TestCase
      */
     public function testCreateSummonAction(): void
     {
-        $message = '';
         $alliesUnit = UnitFactory::createByTemplate(7);
         $enemyUnit = UnitFactory::createByTemplate(3);
         $alliesCommand = CommandFactory::create([$alliesUnit]);
@@ -41,10 +38,9 @@ class SummonActionTest extends TestCase
             self::assertTrue($action->canByUsed());
             self::assertEquals('summon', $action->getAnimationMethod());
             self::assertEquals('summon', $action->getMessageMethod());
-            $message .= $action->handle();
+            $action->handle();
         }
 
-        self::assertEquals(self::MESSAGE, $message);
         self::assertCount(2, $alliesCommand->getUnits());
     }
 

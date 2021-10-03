@@ -21,9 +21,6 @@ use Tests\Battle\Factory\UnitFactory;
 
 class EffectActionTest extends TestCase
 {
-    private const MESSAGE_SELF = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces';
-    private const MESSAGE_TO   = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces on <span style="color: #1e72e3">unit_2</span>';
-
     /**
      * @throws Exception
      */
@@ -62,12 +59,10 @@ class EffectActionTest extends TestCase
         // Пока эффекта на юните нет - событие может примениться
         self::assertTrue($effectAction->canByUsed());
 
-        $message = $effectAction->handle();
+        $effectAction->handle();
 
         // А вот когда эффект наложен - уже нет
         self::assertFalse($effectAction->canByUsed());
-
-        self::assertEquals(self::MESSAGE_SELF, $message);
 
         $effects = new EffectCollection($unit);
         $effects->add($effectAction->getEffect());
@@ -131,8 +126,7 @@ class EffectActionTest extends TestCase
 
         // При вызове canByUsed() происходит поиск цели
         self::assertTrue($action->canByUsed());
-
-        self::assertEquals(self::MESSAGE_TO, $action->handle());
+        $action->handle();
     }
 
     /**
