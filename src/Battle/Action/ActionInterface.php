@@ -29,6 +29,8 @@ interface ActionInterface
     // Применяет эффект на самого раненого союзника не имеющего данного эффекта
     public const TARGET_WOUNDED_ALLIES_EFFECT = 6;
 
+    // TODO Применяет событие-воскрешение на случайного мертвого союзного юнита
+
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 
     /**

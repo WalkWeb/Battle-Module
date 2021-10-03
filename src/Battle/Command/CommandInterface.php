@@ -77,6 +77,15 @@ interface CommandInterface
     public function getUnitForEffect(EffectInterface $effect): ?UnitInterface;
 
     /**
+     * Возвращает случайного мертвого юнита в команде
+     *
+     * Если все живы - возвращает null
+     *
+     * @return UnitInterface|null
+     */
+    public function getUnitForResurrection():? UnitInterface;
+    
+    /**
      * Возвращает коллекцию юнитов данной команды
      *
      * @return UnitCollection

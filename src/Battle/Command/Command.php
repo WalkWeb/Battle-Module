@@ -125,6 +125,28 @@ class Command implements CommandInterface
     }
 
     /**
+     * Возвращает случайного мертвого юнита в команде, если он есть
+     *
+     * @return UnitInterface|null
+     */
+    public function getUnitForResurrection(): ?UnitInterface
+    {
+        $deadUnits = [];
+
+        foreach ($this->units as $unit) {
+            if (!$unit->isAlive()) {
+                $deadUnits[] = $unit;
+            }
+        }
+
+        if (count($deadUnits) === 0) {
+            return null;
+        }
+
+        return $deadUnits[array_rand($deadUnits)];
+    }
+
+    /**
      * Возвращает случайного юнита, готового совершить действие
      *
      * @return UnitInterface|null

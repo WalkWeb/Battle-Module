@@ -548,6 +548,40 @@ class CommandTest extends TestCase
         self::assertEquals($unit, $command->getUnitForEffectHeal($effect));
     }
 
+    // ------------------------------ Тест на метод getUnitForResurrection() -------------------------------------------
+    // Проверены следующие ситуации:
+    // 1. Один живой юнит => null
+    // 2. Живой + мертвый юнит => unit
+
+    /**
+     * 1. Один живой юнит в команде - получаем null
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForResurrectionNull(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        $command = CommandFactory::create([$unit]);
+
+        self::assertNull($command->getUnitForResurrection());
+    }
+
+    /**
+     * 2. Живой + мертвый юнит => получаем мертвого юнита
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitForResurrectionSuccess(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $deadUnit = UnitFactory::createByTemplate(10);
+
+        $command = CommandFactory::create([$unit, $deadUnit]);
+
+        self::assertEquals($deadUnit, $command->getUnitForResurrection());
+    }
+
     /**
      * @param UnitInterface $unit
      * @param CommandInterface $command
