@@ -8,6 +8,8 @@ use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Translation\Translation;
 
+// TODO Вынести функционал в Chat, потому что текущий Message не является объектом чата, это скорее объект-сервис
+
 class Message implements MessageInterface
 {
     /**
@@ -27,7 +29,7 @@ class Message implements MessageInterface
      * @param ActionInterface $action
      * @return string
      * @throws MessageException
-     * @uses damage, heal, summon, wait, buff, applyEffect, effectDamage
+     * @uses damage, heal, summon, wait, buff, applyEffect, effectDamage, effectHeal
      */
     public function createMessage(ActionInterface $action): string
     {
@@ -135,6 +137,21 @@ class Message implements MessageInterface
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans('received damage') . ' ' .
             $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' . $this->translation->trans('life from effect') . ' ' .
+            $this->translation->trans($action->getNameAction());
+    }
+
+    /**
+     * Формирует сообщение здоровья от эффекта в формате:
+     * "$name восстановил $power здоровья, от эффекта $effectName"
+     *
+     * @param ActionInterface $action
+     * @return string
+     */
+    private function effectHeal(ActionInterface $action): string
+    {
+        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans('restored') . ' ' .
+            $action->getFactualPower() . ' ' . $this->translation->trans('life from effect') . ' ' .
             $this->translation->trans($action->getNameAction());
     }
 }

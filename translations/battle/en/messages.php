@@ -25,6 +25,7 @@ return [
     'preparing to attack'             => 'preparing to attack',
     'received damage'                 => 'received damage',
     'life from effect'                => 'life from effect',
+    'restored'                        => 'restored',
     // Ability
     'use Heavy Strike at'             => 'use Heavy Strike at',
     'use Great Heal and heal'         => 'use Great Heal and heal',
@@ -34,6 +35,7 @@ return [
     'use Reserve Forces'              => 'use Reserve Forces',
     'use Poison'                      => 'use Poison',
     'Poison'                          => 'Poison',
+    'Healing Potion'                  => 'Healing Potion',
     // Statistics
     'Statistics'                      => 'Statistics',
     'Unit'                            => 'Unit',

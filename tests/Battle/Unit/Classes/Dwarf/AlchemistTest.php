@@ -64,19 +64,20 @@ class AlchemistTest extends TestCase
 
         $data = [
             'name'                  => 'Healing Potion',
-            'icon'                  =>'/images/icons/ability/234.png',
+            'icon'                  => '/images/icons/ability/234.png',
             'duration'              => 4,
             'on_apply_actions'      => [],
             'on_next_round_actions' => [
                 [
-                    'type'            => ActionInterface::HEAL,
-                    'action_unit'     => $unit,
-                    'enemy_command'   => $enemyCommand,
-                    'allies_command'  => $command,
-                    'type_target'     => ActionInterface::TARGET_SELF,
-                    'name'            => null,
-                    'power'           => 15,
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $unit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'name'             => 'Healing Potion',
+                    'power'            => 15,
                     'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
                 ],
             ],
             'on_disable_actions'    => [],

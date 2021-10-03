@@ -23,6 +23,7 @@ return [
     'preparing to attack'             => 'готовится к атаке',
     'received damage'                 => 'получил урон',
     'life from effect'                => 'здоровья от эффекта',
+    'restored'                        => 'восстановил',
     // Ability
     'use Heavy Strike at'             => 'использовал Тяжелый Удар по',
     'use Great Heal and heal'         => 'использовал Сильное Лечение и вылечил',
@@ -32,6 +33,7 @@ return [
     'use Reserve Forces'              => 'использовал Резервные Силы',
     'use Poison'                      => 'использовал Отравление',
     'Poison'                          => 'Отравление',
+    'Healing Potion'                  => 'Лечебное зелье',
     // Statistics
     'Statistics'                      => 'Статистика',
     'Unit'                            => 'Кто',
