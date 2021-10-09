@@ -11,6 +11,7 @@ use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
+use Battle\Action\ResurrectionAction;
 use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandException;
@@ -234,6 +235,36 @@ class ActionFactoryTest extends TestCase
         self::assertEquals($power, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($modifyMethod, $action->getModifyMethod());
+    }
+
+    /**
+     * Тест на успешное создание ResurrectionAction на основе массива с данными
+     *
+     * @throws Exception
+     */
+    public function testActionFactoryCreateResurrectionSuccess(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $actionFactory = new ActionFactory();
+
+        $data = [
+            'type'           => ActionInterface::RESURRECTION,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
+            'name'           => $name = 'resurrection name test',
+            'power'          => $power = 50,
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertInstanceOf(ResurrectionAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_DEAD_ALLIES, $action->getTypeTarget());
+        self::assertEquals($power, $action->getPower());
+        self::assertEquals($name, $action->getNameAction());
     }
 
     /**
@@ -853,6 +884,81 @@ class ActionFactoryTest extends TestCase
                     ],
                 ],
                 ActionException::INVALID_EFFECT_DATA,
+            ],
+            // ResurrectionAction - отсутствует type_target
+            [
+                [
+                    'type'           => ActionInterface::RESURRECTION,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'name'           => 'resurrection name test',
+                    'power'          => 50,
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            // ResurrectionAction - type_target некорректного типа
+            [
+                [
+                    'type'           => ActionInterface::RESURRECTION,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => 'self',
+                    'name'           => 'resurrection name test',
+                    'power'          => 50,
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            // ResurrectionAction - отсутствует power
+            [
+                [
+                    'type'           => ActionInterface::RESURRECTION,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
+                    'name'           => 'resurrection name test',
+                ],
+                ActionException::INVALID_POWER_DATA,
+            ],
+            // ResurrectionAction - power некорректного типа
+            [
+                [
+                    'type'           => ActionInterface::RESURRECTION,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
+                    'name'           => 'resurrection name test',
+                    'power'          => true,
+                ],
+                ActionException::INVALID_POWER_DATA,
+            ],
+            // ResurrectionAction - отсутствует name
+            [
+                [
+                    'type'           => ActionInterface::RESURRECTION,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
+                    'power'          => 50,
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            // ResurrectionAction - name некорректного типа
+            [
+                [
+                    'type'           => ActionInterface::RESURRECTION,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
+                    'name'           => 100,
+                    'power'          => 50,
+                ],
+                ActionException::INVALID_NAME_DATA,
             ],
         ];
     }

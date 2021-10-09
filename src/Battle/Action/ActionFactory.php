@@ -16,12 +16,14 @@ class ActionFactory
     use IdTrait;
 
     private static $map = [
-        ActionInterface::DAMAGE => DamageAction::class,
-        ActionInterface::HEAL   => HealAction::class,
-        ActionInterface::WAIT   => WaitAction::class,
-        ActionInterface::SUMMON => SummonAction::class,
-        ActionInterface::BUFF   => BuffAction::class,
-        ActionInterface::EFFECT => EffectAction::class,
+        ActionInterface::DAMAGE       => DamageAction::class,
+        ActionInterface::HEAL         => HealAction::class,
+        ActionInterface::WAIT         => WaitAction::class,
+        ActionInterface::SUMMON       => SummonAction::class,
+        ActionInterface::BUFF         => BuffAction::class,
+        ActionInterface::EFFECT       => EffectAction::class,
+        ActionInterface::RESURRECTION => ResurrectionAction::class,
+
     ];
 
     /**
@@ -118,7 +120,20 @@ class ActionFactory
             );
         }
 
-        // TODO Add ResurrectionAction
+        if ($className === ResurrectionAction::class) {
+            $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
+            $power = self::int($data, 'power', ActionException::INVALID_POWER_DATA);
+            $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
+
+            return new ResurrectionAction(
+                $actionUnit,
+                $enemyCommand,
+                $alliesCommand,
+                $typeTarget,
+                $power,
+                $name
+            );
+        }
 
         $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
         $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
