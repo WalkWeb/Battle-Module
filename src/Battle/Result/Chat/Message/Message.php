@@ -29,7 +29,7 @@ class Message implements MessageInterface
      * @param ActionInterface $action
      * @return string
      * @throws MessageException
-     * @uses damage, heal, summon, wait, buff, applyEffect, effectDamage, effectHeal
+     * @uses damage, heal, summon, wait, buff, resurrected, applyEffect, effectDamage, effectHeal
      */
     public function createMessage(ActionInterface $action): string
     {
@@ -102,6 +102,27 @@ class Message implements MessageInterface
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
+    }
+
+    /**
+     * Формирует сообщение для события ResurrectionAction в виде:
+     *
+     * "$name воскресил $targetName"
+     *
+     * Воскрешение подразумевается только одним юнитом другого. Воскрешение самого себя на данный момент не
+     * предусмотренно
+     *
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    private function resurrected(ActionInterface $action): string
+    {
+        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction()) .
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
+            $action->getTargetUnit()->getName() .
+            '</span>';
     }
 
     /**

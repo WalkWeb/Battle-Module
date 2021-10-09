@@ -31,7 +31,7 @@ class ResurrectionActionTest extends TestCase
         self::assertEquals($typeTarget, $action->getTypeTarget());
         self::assertEquals('applyResurrectionAction', $action->getHandleMethod());
         self::assertEquals(ResurrectionAction::EFFECT_ANIMATION_METHOD, $action->getAnimationMethod());
-        self::assertEquals('', $action->getMessageMethod());
+        self::assertEquals('resurrected', $action->getMessageMethod());
         self::assertTrue($action->canByUsed());
 
         $factualPower = 123;
@@ -60,10 +60,9 @@ class ResurrectionActionTest extends TestCase
         self::assertEquals(0, $unit->getLife());
 
         self::assertTrue($action->canByUsed());
-        $message = $action->handle();
+        $action->handle();
 
         self::assertTrue($unit->isAlive());
         self::assertEquals(50, $unit->getLife());
-        self::assertEquals('', $message);
     }
 }

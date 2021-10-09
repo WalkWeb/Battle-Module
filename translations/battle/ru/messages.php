@@ -24,6 +24,7 @@ return [
     'received damage'                 => 'получил урон',
     'life from effect'                => 'здоровья от эффекта',
     'restored'                        => 'восстановил',
+    'resurrected'                     => 'воскресил',
     // Ability
     'use Heavy Strike at'             => 'использовал Тяжелый Удар по',
     'use Great Heal and heal'         => 'использовал Сильное Лечение и вылечил',

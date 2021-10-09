@@ -14,6 +14,10 @@ class ResurrectionAction extends AbstractAction
     // Анимация аналогична лечению
     public const EFFECT_ANIMATION_METHOD = 'effectHeal';
 
+    private const DEFAULT_MESSAGE_METHOD = 'resurrected';
+
+    // TODO Можно подумать над добавлением name по умолчанию = 'resurrected'
+
     /**
      * @var string
      */
@@ -44,6 +48,8 @@ class ResurrectionAction extends AbstractAction
 
     /**
      * Логика подразумевает, что воскрешение возможно только юнитов из своей команды
+     *
+     * TODO Добавить проверку на то, что выбранный юнит мертв
      *
      * @return bool
      * @throws ActionException
@@ -86,7 +92,6 @@ class ResurrectionAction extends AbstractAction
 
     public function getMessageMethod(): string
     {
-        // TODO
-        return '';
+        return self::DEFAULT_MESSAGE_METHOD;
     }
 }

@@ -174,6 +174,7 @@ class Unit extends AbstractUnit
      *
      * @param ResurrectionAction $action
      * @return string
+     * @throws ContainerException
      * @throws ActionException
      */
     private function applyResurrectionAction(ResurrectionAction $action): string
@@ -184,8 +185,7 @@ class Unit extends AbstractUnit
 
         $action->setFactualPower($restoreLife);
 
-        // TODO Added message
-        return '';
+        return $this->container->getMessage()->createMessage($action);
     }
     
     /**

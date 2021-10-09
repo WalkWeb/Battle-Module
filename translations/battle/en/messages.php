@@ -26,6 +26,7 @@ return [
     'received damage'                 => 'received damage',
     'life from effect'                => 'life from effect',
     'restored'                        => 'restored',
+    'resurrected'                     => 'resurrected',
     // Ability
     'use Heavy Strike at'             => 'use Heavy Strike at',
     'use Great Heal and heal'         => 'use Great Heal and heal',

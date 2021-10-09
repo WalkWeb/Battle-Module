@@ -10,6 +10,7 @@ use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
+use Battle\Action\ResurrectionAction;
 use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandFactory;
@@ -45,6 +46,9 @@ class MessageTest extends TestCase
 
     private const BUFF_EN = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces';
     private const BUFF_RU = '<span style="color: #1e72e3">unit_1</span> использовал Резервные Силы';
+
+    private const RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> resurrection <span style="color: #1e72e3">unit_2</span>';
+    private const RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> воскресил <span style="color: #1e72e3">unit_2</span>';
 
     private const EFFECT_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect Healing Potion';
     private const EFFECT_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта Лечебное зелье';
@@ -315,6 +319,52 @@ class MessageTest extends TestCase
 
         self::assertTrue($action->canByUsed());
         self::assertEquals(self::BUFF_RU, $action->handle());
+    }
+
+    /**
+     * Тест на формирование сообщения о воскрешении, на английском
+     *
+     *  @throws Exception
+     */
+    public function testMessageResurrectionEn(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $action = new ResurrectionAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_RANDOM_ENEMY,
+            50,
+            'resurrection'
+        );
+
+        self::assertTrue($action->canByUsed());
+        self::assertEquals(self::RESURRECTION_EN, $action->handle());
+    }
+
+    /**
+     * Тест на формирование сообщения о воскрешении, на русском
+     *
+     *  @throws Exception
+     */
+    public function testMessageResurrectionRu(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
+
+        $action = new ResurrectionAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_RANDOM_ENEMY,
+            50,
+            'resurrected'
+        );
+
+        self::assertTrue($action->canByUsed());
+        self::assertEquals(self::RESURRECTION_RU, $action->handle());
     }
 
     /**
