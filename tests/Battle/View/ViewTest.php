@@ -95,7 +95,8 @@ class ViewTest extends TestCase
             </div>
         </div>
     </div>
-</div></td>
+</div>
+</td>
             <td class="w25" id="right_command_melee"><div align="center">
     <div class="unit_main_box" id="usr_1aab367d-37e8-4544-9915-cb3d7779308b">
         <div class="unit_box1">
@@ -154,7 +155,8 @@ class ViewTest extends TestCase
             </div>
         </div>
     </div>
-</div></td>
+</div>
+</td>
             <td class="w25" id="right_command_range"></td>
         </tr>
     </table>
@@ -242,7 +244,8 @@ EOT;
             </div>
         </div>
     </div>
-</div></td>
+</div>
+</td>
             <td class="w25" id="left_command_melee"></td>
             <td class="w25" id="right_command_melee"></td>
             <td class="w25" id="right_command_range"><div align="center">
@@ -303,7 +306,8 @@ EOT;
             </div>
         </div>
     </div>
-</div></td>
+</div>
+</td>
         </tr>
     </table>
 </div>

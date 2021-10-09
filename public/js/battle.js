@@ -71,8 +71,11 @@ let applyBattleChanges = {
         if (user.recdam !== undefined) {
             unit.getElementsByClassName("recdam")[0].innerHTML = user.recdam;
         }
-        if (user.unit_cons_bar2 !== undefined) {
+        if (unit.getElementsByClassName("unit_cons_bar2").length > 0 && user.unit_cons_bar2 !== undefined) {
             unit.getElementsByClassName("unit_cons_bar2")[0].style.width = user.unit_cons_bar2 + "%";
+        }
+        if (unit.getElementsByClassName("unit_rage_bar2").length > 0 && user.unit_rage_bar2 !== undefined) {
+            unit.getElementsByClassName("unit_rage_bar2")[0].style.width = user.unit_rage_bar2 + "%";
         }
         if (user.ava !== undefined) {
             document.getElementById("ava_" + user.user_id).className = user.ava;
@@ -80,9 +83,7 @@ let applyBattleChanges = {
         if (user.avas !== undefined) {
             document.getElementById("avas_" + user.user_id).className = user.avas;
         }
-        if (user.unit_rage_bar2 !== undefined) {
-            unit.getElementsByClassName("unit_rage_bar2")[0].style.width = user.unit_rage_bar2 + "%";
-        }
+
         if (user.unit_effects !== undefined) {
             document.getElementById("unit_effects_" + user.user_id).innerHTML = createEffectsView(user.unit_effects);
         }

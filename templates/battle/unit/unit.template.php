@@ -33,14 +33,6 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                             <div class="unit_rage">
                                 <div class="unit_rage_bar2" style="width: <?= $this->getWidth($unit->getRage(), UnitInterface::MAX_RAGE) ?>%;"></div>
                             </div>
-                            <?php else: ?>
-                            <!-- TODO Доработать js-скрипт таким образом, чтобы эти элементы не были обязательными -->
-                                <div class="unit_cons" style="display: none;">
-                                    <div class="unit_cons_bar2" style="width: 0;"></div>
-                                </div>
-                                <div class="unit_rage" style="display: none;">
-                                    <div class="unit_rage_bar2" style="width: 0;"></div>
-                                </div>
                             <?php endif ?>
                         </div>
                     </div>
