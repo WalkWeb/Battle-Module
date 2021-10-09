@@ -123,7 +123,7 @@ class ActionFactory
         if ($className === ResurrectionAction::class) {
             $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
             $power = self::int($data, 'power', ActionException::INVALID_POWER_DATA);
-            $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
+            $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
 
             return new ResurrectionAction(
                 $actionUnit,

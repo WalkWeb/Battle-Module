@@ -248,6 +248,7 @@ class ActionFactoryTest extends TestCase
 
         $actionFactory = new ActionFactory();
 
+        // Полный набор данных
         $data = [
             'type'           => ActionInterface::RESURRECTION,
             'action_unit'    => $unit,
@@ -265,6 +266,20 @@ class ActionFactoryTest extends TestCase
         self::assertEquals(ActionInterface::TARGET_DEAD_ALLIES, $action->getTypeTarget());
         self::assertEquals($power, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
+
+        // Вариант без name
+        $data = [
+            'type'           => ActionInterface::RESURRECTION,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
+            'power'          => $power = 50,
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertEquals('resurrected', $action->getNameAction());
     }
 
     /**
@@ -934,18 +949,6 @@ class ActionFactoryTest extends TestCase
                     'power'          => true,
                 ],
                 ActionException::INVALID_POWER_DATA,
-            ],
-            // ResurrectionAction - отсутствует name
-            [
-                [
-                    'type'           => ActionInterface::RESURRECTION,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
-                    'power'          => 50,
-                ],
-                ActionException::INVALID_NAME_DATA,
             ],
             // ResurrectionAction - name некорректного типа
             [

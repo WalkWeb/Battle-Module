@@ -11,12 +11,10 @@ class ResurrectionAction extends AbstractAction
 {
     private const HANDLE_METHOD          = 'applyResurrectionAction';
 
+    private const DEFAULT_NAME           = 'resurrected';
+    private const DEFAULT_MESSAGE_METHOD = 'resurrected';
     // Анимация аналогична лечению
     public const EFFECT_ANIMATION_METHOD = 'effectHeal';
-
-    private const DEFAULT_MESSAGE_METHOD = 'resurrected';
-
-    // TODO Можно подумать над добавлением name по умолчанию = 'resurrected'
 
     /**
      * @var string
@@ -38,11 +36,11 @@ class ResurrectionAction extends AbstractAction
         CommandInterface $alliesCommand,
         int $typeTarget,
         int $power,
-        string $name
+        ?string $name = null
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
-        $this->name = $name;
+        $this->name = $name ?? self::DEFAULT_NAME;
         $this->power = $power;
     }
 
