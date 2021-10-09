@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\ActionException;
 use Battle\Action\ResurrectionAction;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -64,5 +65,43 @@ class ResurrectionActionTest extends TestCase
 
         self::assertTrue($unit->isAlive());
         self::assertEquals(50, $unit->getLife());
+    }
+
+    /**
+     * Тест на различные варианты некорректной силы ResurrectionAction - меньше 1 или больше 100
+     *
+     * @dataProvider invalidPowerDataProvider
+     * @param int $power
+     * @throws ActionException
+     * @throws Exception
+     */
+    public function testResurrectionActionInvalidPower(int $power): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(10, 2);
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('ResurrectionAction: invalid power: min: 1, max: 100');
+        new ResurrectionAction($unit, $enemyCommand, $command, ResurrectionAction::TARGET_DEAD_ALLIES, $power);
+    }
+
+    /**
+     * @return array
+     */
+    public function invalidPowerDataProvider(): array
+    {
+        return [
+            [
+                -10
+            ],
+            [
+                0
+            ],
+            [
+                101
+            ],
+            [
+                1000
+            ],
+        ];
     }
 }

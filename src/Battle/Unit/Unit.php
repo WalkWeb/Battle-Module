@@ -181,6 +181,8 @@ class Unit extends AbstractUnit
     {
         $restoreLife = (int)($this->totalLife * ($action->getPower()/100));
 
+        // TODO Если здоровья у юнита очень мало и power небольшой - проверяем, что восстанавливается хотя бы 1 здоровья
+
         $this->life += $restoreLife;
 
         $action->setFactualPower($restoreLife);
