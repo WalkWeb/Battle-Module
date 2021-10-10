@@ -18,7 +18,7 @@ class GreatHealAbilityTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testGreatHealAbilityCreate(): void
+    public function testGreatHealAbilityCreateAndApply(): void
     {
         $name = 'Great Heal';
         $icon = '/images/icons/ability/196.png';
