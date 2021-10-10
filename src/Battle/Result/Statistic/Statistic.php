@@ -97,6 +97,9 @@ class Statistic implements StatisticInterface
     /**
      * Добавляет действие юнита для расчета суммарного полученного и нанесенного урона
      *
+     * TODO Добавить подсчет восстанавливаемого здоровья от воскрешения
+     * TODO Добавить подсчет воскрешений юнитом
+     *
      * @param ActionInterface $action
      * @throws ActionException
      * @throws StatisticException

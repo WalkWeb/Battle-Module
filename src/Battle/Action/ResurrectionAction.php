@@ -16,8 +16,7 @@ class ResurrectionAction extends AbstractAction
 
     private const DEFAULT_NAME           = 'resurrected';
     private const DEFAULT_MESSAGE_METHOD = 'resurrected';
-    // Анимация аналогична лечению
-    public const EFFECT_ANIMATION_METHOD = 'effectHeal';
+    private const ANIMATION_METHOD       = 'resurrected';
 
     /**
      * @var string
@@ -89,7 +88,7 @@ class ResurrectionAction extends AbstractAction
 
     public function getAnimationMethod(): string
     {
-        return self::EFFECT_ANIMATION_METHOD;
+        return self::ANIMATION_METHOD;
     }
 
     public function getPower(): int

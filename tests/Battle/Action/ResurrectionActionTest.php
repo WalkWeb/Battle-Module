@@ -34,7 +34,7 @@ class ResurrectionActionTest extends TestCase
         self::assertEquals($power, $action->getPower());
         self::assertEquals($typeTarget, $action->getTypeTarget());
         self::assertEquals('applyResurrectionAction', $action->getHandleMethod());
-        self::assertEquals(ResurrectionAction::EFFECT_ANIMATION_METHOD, $action->getAnimationMethod());
+        self::assertEquals('resurrected', $action->getAnimationMethod());
         self::assertEquals('resurrected', $action->getMessageMethod());
         self::assertTrue($action->canByUsed());
 

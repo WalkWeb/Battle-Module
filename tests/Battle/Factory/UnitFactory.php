@@ -363,6 +363,21 @@ class UnitFactory
             'class'        => 1,
             'race'         => 1,
         ],
+        // Человек с классом Priest
+        25 => [
+            'id'           => 'e09b2794-5075-4186-a1ed-31e40cd3fda2',
+            'name'         => 'Priest',
+            'level'        => 2,
+            'avatar'       => '/images/avas/humans/human004.jpg',
+            'damage'       => 13,
+            'attack_speed' => 1.20,
+            'life'         => 110,
+            'total_life'   => 110,
+            'melee'        => false,
+            'command'      => 1,
+            'class'        => 2,
+            'race'         => 1,
+        ],
     ];
 
     /**

@@ -10,6 +10,7 @@ use Battle\Container\Container;
 use Battle\Result\Scenario\ScenarioException;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
 use Battle\Unit\Ability\Effect\PoisonAbility;
+use Battle\Unit\Ability\Resurrection\BackToLifeAbility;
 use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
@@ -392,6 +393,60 @@ class ScenarioTest extends TestCase
             'step'    => $statistic->getRoundNumber(),
             'attack'  => $statistic->getStrokeNumber(),
             'effects' => [],
+        ];
+
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testScenarioAddResurrected(): void
+    {
+        $statistic = new Statistic();
+        $scenario = new Scenario();
+        $unit = UnitFactory::createByTemplate(1);
+        $deadUnit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+
+        $command = CommandFactory::create([$unit, $deadUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new BackToLifeAbility($unit);
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            $scenario->addAnimation($action, $statistic);
+        }
+
+        $expectedData = [
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'        => $unit->getId(),
+                    'class'          => 'd_buff',
+                    'unit_cons_bar2' => 0,
+                    'unit_rage_bar2' => 0,
+                    'targets'        => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => $deadUnit->getId(),
+                            'ava'               => 'unit_ava_green',
+                            'recdam'            => '+30',
+                            'hp'                => 30,
+                            'thp'               => 100,
+                            'hp_bar_class'      => 'unit_hp_bar',
+                            'hp_bar_class2'     => 'unit_hp_bar2',
+                            'unit_hp_bar_width' => 30,
+                            'unit_effects'      => [],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         self::assertEquals($expectedData, $scenario->getArray()[0]);

@@ -9,6 +9,7 @@ use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
+use Battle\Action\ResurrectionAction;
 use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
 use Battle\Result\Statistic\StatisticInterface;
@@ -29,7 +30,7 @@ class Scenario implements ScenarioInterface
      * @param ActionInterface $action
      * @param StatisticInterface $statistic
      * @throws Exception
-     * @uses damage, heal, effectHeal, summon, effect, wait, skip
+     * @uses damage, heal, effectHeal, summon, effect, wait, skip, resurrected
      */
     public function addAnimation(ActionInterface $action, StatisticInterface $statistic): void
     {
@@ -245,6 +246,44 @@ class Scenario implements ScenarioInterface
                             'hp'           => $action->getTargetUnit()->getLife(),
                             'thp'          => $action->getTargetUnit()->getTotalLife(),
                             'unit_effects' => $this->getUnitEffects($action->getTargetUnit()),
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Создает анимацию воскрешения. Пока она аналогична лечению, но в будущем скорее всего изменится - по этому
+     * делается сразу отдельным методом
+     *
+     * @param ResurrectionAction $action
+     * @param StatisticInterface $statistic
+     * @throws ActionException
+     */
+    private function resurrected(ResurrectionAction $action, StatisticInterface $statistic): void
+    {
+        $this->scenario[] = [
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'        => $action->getActionUnit()->getId(),
+                    'class'          => 'd_buff',
+                    'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
+                    'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
+                    'targets'        => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => $action->getTargetUnit()->getId(),
+                            'ava'               => 'unit_ava_green',
+                            'recdam'            => '+' . $action->getFactualPower(),
+                            'hp'                => $action->getTargetUnit()->getLife(),
+                            'thp'               => $action->getTargetUnit()->getTotalLife(),
+                            'hp_bar_class'      => 'unit_hp_bar',
+                            'hp_bar_class2'     => 'unit_hp_bar2',
+                            'unit_hp_bar_width' => $this->getLifeBarWidth($action->getTargetUnit()),
+                            'unit_effects'      => $this->getUnitEffects($action->getTargetUnit()),
                         ],
                     ],
                 ],
