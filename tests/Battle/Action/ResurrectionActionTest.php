@@ -7,9 +7,11 @@ namespace Tests\Battle\Action;
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\ResurrectionAction;
+use Battle\Command\CommandFactory;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Battle\Factory\BaseFactory;
+use Tests\Battle\Factory\UnitFactory;
 
 class ResurrectionActionTest extends TestCase
 {
@@ -66,6 +68,43 @@ class ResurrectionActionTest extends TestCase
 
         self::assertTrue($unit->isAlive());
         self::assertEquals(50, $unit->getLife());
+    }
+
+    /**
+     * Тест на проверку следующей ситуации:
+     *
+     * - Есть юнит с небольшим количеством максимального здоровья, например 10 здоровья
+     * - Есть ResurrectionAction с power = 1
+     *
+     * Необходимо проверить, что хотя бы 1 здоровье будет восстановлено - т.е. юнит перейдет в разряд живых
+     *
+     * Обычное же получение 1% от 10 здоровья даст 0 после округления
+     *
+     * @throws Exception
+     */
+    public function testResurrectionLowLife(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $deadUnit = UnitFactory::createByTemplate(24);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+
+        $command = CommandFactory::create([$unit, $deadUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $power = 1;
+        $typeTarget = ResurrectionAction::TARGET_DEAD_ALLIES;
+
+        $action = new ResurrectionAction($unit, $enemyCommand, $command, $typeTarget, $power);
+
+        // Вначале убеждаемся, что юнит мертв
+        self::assertEquals(0, $deadUnit->getLife());
+
+        // Применяем воскрешение
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем, что здоровье стало = 1
+        self::assertEquals(1, $deadUnit->getLife());
     }
 
     /**

@@ -348,6 +348,21 @@ class UnitFactory
             'class'        => 7,
             'race'         => 6,
         ],
+        // Мертвый юнит с небольшим количеством здоровья
+        24 => [
+            'id'           => 'ffd35911-4bec-494a-afe8-f6492d81847f',
+            'name'         => 'dead_unit_low_life',
+            'level'        => 1,
+            'avatar'       => '/images/avas/monsters/005.png',
+            'damage'       => 35,
+            'attack_speed' => 1.00,
+            'life'         => 0,
+            'total_life'   => 10,
+            'melee'        => true,
+            'command'      => 1,
+            'class'        => 1,
+            'race'         => 1,
+        ],
     ];
 
     /**
