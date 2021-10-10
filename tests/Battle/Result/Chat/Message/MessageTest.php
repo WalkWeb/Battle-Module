@@ -47,8 +47,8 @@ class MessageTest extends TestCase
     private const BUFF_EN = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces';
     private const BUFF_RU = '<span style="color: #1e72e3">unit_1</span> использовал Резервные Силы';
 
-    private const RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> resurrection <span style="color: #1e72e3">unit_2</span>';
-    private const RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> воскресил <span style="color: #1e72e3">unit_2</span>';
+    private const RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> resurrection <span style="color: #1e72e3">dead_unit</span>';
+    private const RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> воскресил <span style="color: #1e72e3">dead_unit</span>';
 
     private const EFFECT_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect Healing Potion';
     private const EFFECT_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта Лечебное зелье';
@@ -328,13 +328,18 @@ class MessageTest extends TestCase
      */
     public function testMessageResurrectionEn(): void
     {
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+        $unit = UnitFactory::createByTemplate(1);
+        $deadUnit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+
+        $command = CommandFactory::create([$unit, $deadUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new ResurrectionAction(
             $unit,
             $enemyCommand,
             $command,
-            BuffAction::TARGET_RANDOM_ENEMY,
+            BuffAction::TARGET_DEAD_ALLIES,
             50,
             'resurrection'
         );
@@ -352,13 +357,18 @@ class MessageTest extends TestCase
     {
         $container = $this->getContainerWithRuLanguage();
 
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $deadUnit = UnitFactory::createByTemplate(10, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+
+        $command = CommandFactory::create([$unit, $deadUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new ResurrectionAction(
             $unit,
             $enemyCommand,
             $command,
-            BuffAction::TARGET_RANDOM_ENEMY,
+            BuffAction::TARGET_DEAD_ALLIES,
             50,
             'resurrected'
         );

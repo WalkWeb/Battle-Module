@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Action;
 
 use Battle\Action\ActionException;
+use Battle\Action\ActionInterface;
 use Battle\Action\ResurrectionAction;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -85,6 +86,23 @@ class ResurrectionActionTest extends TestCase
     }
 
     /**
+     * Тест на различные варианты некорректного типа выбора цели для воскрешения. Доступен только TARGET_DEAD_ALLIES
+     *
+     * @dataProvider invalidTypeTargetDataProvider
+     * @param int $typeTarget
+     * @throws ActionException
+     * @throws Exception
+     */
+    public function testResurrectionActionInvalidTypeTarget(int $typeTarget): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(10, 2);
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage(ActionException::INVALID_RESURRECTED_TARGET);
+        new ResurrectionAction($unit, $enemyCommand, $command, $typeTarget, 50);
+    }
+
+    /**
      * @return array
      */
     public function invalidPowerDataProvider(): array
@@ -101,6 +119,33 @@ class ResurrectionActionTest extends TestCase
             ],
             [
                 1000
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function invalidTypeTargetDataProvider(): array
+    {
+        return [
+            [
+                ActionInterface::TARGET_SELF,
+            ],
+            [
+                ActionInterface::TARGET_RANDOM_ENEMY,
+            ],
+            [
+                ActionInterface::TARGET_WOUNDED_ALLIES,
+            ],
+            [
+                ActionInterface::TARGET_EFFECT_ENEMY,
+            ],
+            [
+                ActionInterface::TARGET_EFFECT_ALLIES,
+            ],
+            [
+                ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
             ],
         ];
     }

@@ -49,6 +49,7 @@ class ResurrectionAction extends AbstractAction
         ?string $name = null
     )
     {
+        $typeTarget = $this->validateTypeTarget($typeTarget);
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->name = $name ?? self::DEFAULT_NAME;
         $this->power = $this->validatePower($power);
@@ -56,8 +57,6 @@ class ResurrectionAction extends AbstractAction
 
     /**
      * Логика подразумевает, что воскрешение возможно только юнитов из своей команды
-     *
-     * TODO Добавить проверку на то, что выбранный юнит мертв
      *
      * @return bool
      * @throws ActionException
@@ -119,5 +118,22 @@ class ResurrectionAction extends AbstractAction
         }
 
         return $power;
+    }
+
+    /**
+     * Проверяет тип выбора цели. Текущая логика подразумевает воскрешение мертвых только из своей команды.
+     * Соответственно, любые другие типы выбора цели, кроме TARGET_DEAD_ALLIES будут некорректны
+     *
+     * @param int $typeTarget
+     * @return int
+     * @throws ActionException
+     */
+    private function validateTypeTarget(int $typeTarget): int
+    {
+        if ($typeTarget !== self::TARGET_DEAD_ALLIES) {
+            throw new ActionException(ActionException::INVALID_RESURRECTED_TARGET);
+        }
+
+        return $typeTarget;
     }
 }

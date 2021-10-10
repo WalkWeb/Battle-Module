@@ -28,4 +28,5 @@ class ActionException extends Exception
     public const INVALID_EFFECT_DATA        = 'ActionFactory: Invalid effect data: array expected';
     public const INVALID_MODIFY_METHOD_DATA = 'ActionFactory: Invalid modify_method data: string expected';
     public const INVALID_RESURRECTED_POWER  = 'ResurrectionAction: invalid power';
+    public const INVALID_RESURRECTED_TARGET = 'ResurrectionAction: invalid type target';
 }
