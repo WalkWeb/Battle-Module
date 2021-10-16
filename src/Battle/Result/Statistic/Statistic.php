@@ -8,6 +8,7 @@ use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
+use Battle\Action\ResurrectionAction;
 use Battle\Action\SummonAction;
 use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
 use Battle\Result\Statistic\UnitStatistic\UnitStatisticCollection;
@@ -97,7 +98,6 @@ class Statistic implements StatisticInterface
     /**
      * Добавляет действие юнита для расчета суммарного полученного и нанесенного урона
      *
-     * TODO Добавить подсчет восстанавливаемого здоровья от воскрешения
      * TODO Добавить подсчет воскрешений юнитом
      *
      * @param ActionInterface $action
@@ -111,6 +111,7 @@ class Statistic implements StatisticInterface
                 $this->countingCausedDamage($action);
                 $this->countingTakenDamage($action);
                 break;
+            case $action instanceof ResurrectionAction:
             case $action instanceof HealAction:
                 $this->countingHeal($action);
                 break;

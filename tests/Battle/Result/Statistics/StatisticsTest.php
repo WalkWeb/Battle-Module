@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Statistics;
 
+use Battle\Action\ResurrectionAction;
 use Exception;
 use Battle\Action\DamageAction;
 use Battle\Action\SummonAction;
@@ -97,11 +98,11 @@ class StatisticsTest extends TestCase
     {
         $statistics = new Statistic();
 
-        $dead = UnitFactory::createByTemplate(11);
+        $woundedUnit = UnitFactory::createByTemplate(11);
         $priest = UnitFactory::createByTemplate(5);
         $enemy = UnitFactory::createByTemplate(1);
 
-        $alliesCommand = CommandFactory::create([$priest, $dead]);
+        $alliesCommand = CommandFactory::create([$priest, $woundedUnit]);
         $enemyCommand = CommandFactory::create([$enemy]);
 
         // Применяем лечение
@@ -131,6 +132,38 @@ class StatisticsTest extends TestCase
         }
 
         self::assertEquals($priest->getDamage() * 6, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testStatisticsUnitCausedResurrected(): void
+    {
+        $statistics = new Statistic();
+
+        $unit = UnitFactory::createByTemplate(5);
+        $deadUnit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+
+        $command = CommandFactory::create([$unit, $deadUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new ResurrectionAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            ResurrectionAction::TARGET_DEAD_ALLIES,
+            50
+        );
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        $statistics->addUnitAction($action);
+
+        foreach ($statistics->getUnitsStatistics() as $unitStatistic) {
+            self::assertEquals(50, $unitStatistic->getHeal());
+        }
     }
 
     /**
