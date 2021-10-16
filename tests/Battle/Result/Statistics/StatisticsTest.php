@@ -163,6 +163,7 @@ class StatisticsTest extends TestCase
 
         foreach ($statistics->getUnitsStatistics() as $unitStatistic) {
             self::assertEquals(50, $unitStatistic->getHeal());
+            self::assertEquals(1, $unitStatistic->getResurrections());
         }
     }
 

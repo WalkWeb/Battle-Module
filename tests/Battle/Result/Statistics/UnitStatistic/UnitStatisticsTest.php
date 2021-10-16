@@ -32,6 +32,7 @@ class UnitStatisticsTest extends TestCase
         self::assertEquals(0, $unitStatistics->getHeal());
         self::assertEquals(0, $unitStatistics->getKilling());
         self::assertEquals(0, $unitStatistics->getSummons());
+        self::assertEquals(0, $unitStatistics->getResurrections());
 
         $unitStatistics->addHit();
         $unitStatistics->addHit();
@@ -54,12 +55,15 @@ class UnitStatisticsTest extends TestCase
         $unitStatistics->addSummon();
         $unitStatistics->addSummon();
 
+        $unitStatistics->addResurrection();
+
         self::assertEquals(3, $unitStatistics->getHits());
         self::assertEquals(45, $unitStatistics->getCausedDamage());
         self::assertEquals(60, $unitStatistics->getTakenDamage());
         self::assertEquals(30, $unitStatistics->getHeal());
         self::assertEquals(1, $unitStatistics->getKilling());
         self::assertEquals(2, $unitStatistics->getSummons());
+        self::assertEquals(1, $unitStatistics->getResurrections());
         self::assertEquals($name, $unitStatistics->getUnit()->getName());
     }
 }

@@ -50,6 +50,11 @@ interface UnitStatisticInterface
     public function addSummon(): void;
 
     /**
+     * Увеличивает количество воскрешенных союзников юнитом на 1
+     */
+    public function addResurrection(): void;
+
+    /**
      * Возвращает суммарный нанесенный урон юнита
      *
      * @return int
@@ -90,4 +95,9 @@ interface UnitStatisticInterface
      * @return int
      */
     public function getSummons(): int;
+
+    /**
+     * @return int
+     */
+    public function getResurrections(): int;
 }

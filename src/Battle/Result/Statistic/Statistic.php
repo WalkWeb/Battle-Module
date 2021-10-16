@@ -98,8 +98,6 @@ class Statistic implements StatisticInterface
     /**
      * Добавляет действие юнита для расчета суммарного полученного и нанесенного урона
      *
-     * TODO Добавить подсчет воскрешений юнитом
-     *
      * @param ActionInterface $action
      * @throws ActionException
      * @throws StatisticException
@@ -243,6 +241,10 @@ class Statistic implements StatisticInterface
             $unit = $this->getUnitStatistics($action->getActionUnit()->getId());
             $unit->addHeal($action->getFactualPower());
         }
+
+        if ($action instanceof ResurrectionAction) {
+            $this->countingResurrections($action);
+        }
     }
 
     /**
@@ -259,6 +261,20 @@ class Statistic implements StatisticInterface
             $unit = $this->getUnitStatistics($action->getActionUnit()->getId());
             $unit->addSummon();
         }
+    }
+
+    /**
+     * Воскрешение всегда восстанавливает хотя бы 1 здоровья, и вызывается после подсчета countingHeal()
+     *
+     * Соответственно UnitStatistic всегда будет создан, и ему достаточно добавить количество воскрешений
+     *
+     * @param ActionInterface $action
+     * @throws StatisticException
+     */
+    private function countingResurrections(ActionInterface $action): void
+    {
+        $unit = $this->getUnitStatistics($action->getActionUnit()->getId());
+        $unit->addResurrection();
     }
 
     /**

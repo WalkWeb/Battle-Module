@@ -44,6 +44,11 @@ class UnitStatistic implements UnitStatisticInterface
     private $summons = 0;
 
     /**
+     * @var int - Воскресил союзников
+     */
+    private $resurrection = 0;
+
+    /**
      * @param UnitInterface $unit
      */
     public function __construct(UnitInterface $unit)
@@ -67,9 +72,6 @@ class UnitStatistic implements UnitStatisticInterface
         $this->causedDamage += $damage;
     }
 
-    /**
-     *
-     */
     public function addHit(): void
     {
         $this->hits++;
@@ -101,9 +103,11 @@ class UnitStatistic implements UnitStatisticInterface
         $this->summons++;
     }
 
-    /**
-     * @return int
-     */
+    public function addResurrection(): void
+    {
+        $this->resurrection++;
+    }
+
     public function getCausedDamage(): int
     {
         return $this->causedDamage;
@@ -147,5 +151,13 @@ class UnitStatistic implements UnitStatisticInterface
     public function getSummons(): int
     {
         return $this->summons;
+    }
+
+    /**
+     * @return int
+     */
+    public function getResurrections(): int
+    {
+        return $this->resurrection;
     }
 }
