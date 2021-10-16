@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes\Human;
 
+use Battle\Unit\Ability\Resurrection\BackToLifeAbility;
 use Battle\Unit\Classes\AbstractUnitClass;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Heal\GreatHealAbility;
@@ -34,6 +35,7 @@ class Priest extends AbstractUnitClass
     {
         $collection = new AbilityCollection();
         $collection->add(new GreatHealAbility($unit));
+        $collection->add(new BackToLifeAbility($unit));
         return $collection;
     }
 }

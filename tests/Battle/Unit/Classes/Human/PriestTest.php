@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\Human;
 
+use Battle\Action\HealAction;
+use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Heal\GreatHealAbility;
+use Battle\Unit\Ability\Resurrection\BackToLifeAbility;
 use Battle\Unit\UnitException;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -34,13 +37,28 @@ class PriestTest extends TestCase
 
         $abilities = $priest->getAbilities($unit);
 
-        foreach ($abilities as $ability) {
-            self::assertContainsOnlyInstancesOf(GreatHealAbility::class, [$ability]);
+        self::assertCount(2, $abilities);
 
-            $actions = $ability->getAction($enemyCommand, $command);
+        foreach ($abilities as $i => $ability) {
+            if ($i === 0) {
+                self::assertContainsOnlyInstancesOf(GreatHealAbility::class, [$ability]);
 
-            foreach ($actions as $action) {
-                self::assertEquals($unit->getDamage() * 3, $action->getPower());
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
+                    self::assertEquals($unit->getDamage() * 3, $action->getPower());
+                }
+            }
+            if ($i === 1) {
+                self::assertContainsOnlyInstancesOf(BackToLifeAbility::class, [$ability]);
+
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertContainsOnlyInstancesOf(ResurrectionAction::class, [$action]);
+                    self::assertEquals(30, $action->getPower());
+                }
             }
         }
     }

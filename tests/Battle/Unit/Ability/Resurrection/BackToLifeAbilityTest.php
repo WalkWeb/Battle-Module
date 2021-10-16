@@ -52,7 +52,7 @@ class BackToLifeAbilityTest extends TestCase
 
         foreach ($actions as $action) {
             self::assertInstanceOf(ResurrectionAction::class, $action);
-            self::assertEquals('use back to life and resurrected', $action->getNameAction());
+            self::assertEquals('use Back to Life and resurrected', $action->getNameAction());
             self::assertEquals(30, $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();

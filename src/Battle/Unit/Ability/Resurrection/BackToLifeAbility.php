@@ -15,7 +15,7 @@ class BackToLifeAbility extends AbstractAbility
 {
     private const NAME        = 'Back to Life';
     private const ICON        = '/images/icons/ability/053.png';
-    private const USE_MESSAGE = 'use back to life and resurrected';
+    private const USE_MESSAGE = 'use Back to Life and resurrected';
 
     /**
      * @var ActionCollection
