@@ -45,6 +45,7 @@ return [
     'Heal'                             => 'Вылечил',
     'Killing'                          => 'Убил',
     'Summons'                          => 'Призвал',
+    'Resurrections'                    => 'Воскресил',
     'Total rounds'                     => 'Всего раундов',
     'Total stroke'                     => 'Всего ходов',
     'Runtime'                          => 'Время выполнения',

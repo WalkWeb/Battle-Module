@@ -47,6 +47,7 @@ return [
     'Heal'                             => 'Heal',
     'Killing'                          => 'Killing',
     'Summons'                          => 'Summons',
+    'Resurrections'                    => 'Resurrections',
     'Total rounds'                     => 'Total rounds',
     'Total stroke'                     => 'Total stroke',
     'Runtime'                          => 'Runtime',
