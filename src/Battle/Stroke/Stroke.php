@@ -69,9 +69,6 @@ class Stroke implements StrokeInterface
     /**
      * Совершает ход одного юнита в бою
      *
-     * TODO Метод разросся, а еще будет добавлена обработка событий при рефлекте урона, обработка событий при смерти -
-     * TODO пора выносить код в отдельные методы
-     *
      * @throws Exception
      */
     public function handle(): void
@@ -84,8 +81,27 @@ class Stroke implements StrokeInterface
         $enemyCommand = $this->actionCommand === 1 ? $this->rightCommand : $this->leftCommand;
         $alliesCommand = $this->actionCommand === 1 ? $this->leftCommand : $this->rightCommand;
 
-        // --------------------------------------- Apply unit effects --------------------------------------------------
+        $this->handleUnitEffects();
+        $this->handleUnitActions($enemyCommand, $alliesCommand);
 
+        // В будущем здесь также будут выполняться события при рефлекте урона и события при смерти юнита
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        $this->actionUnit->madeAction();
+
+        $this->container->getFullLog()->add($view->renderCommandView($this->leftCommand, $this->rightCommand, true));
+        $this->container->getFullLog()->add($view->getUnitsStats($this->leftCommand, $this->rightCommand));
+    }
+
+    /**
+     * Перед тем как юнит начинает ходить - нужно выполнить события эффектов на данном юните, которые срабатывают на
+     * каждом раунде
+     *
+     * @throws Exception
+     */
+    private function handleUnitEffects(): void
+    {
         foreach ($this->actionUnit->getOnNewRoundActions() as $action) {
             if ($action->canByUsed()) {
                 $message = $action->handle();
@@ -100,9 +116,17 @@ class Stroke implements StrokeInterface
                 break;
             }
         }
+    }
 
-        // -------------------------------------------- Action Unit ----------------------------------------------------
-
+    /**
+     * Выполняет действия юнита, который ходит
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @throws Exception
+     */
+    private function handleUnitActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): void
+    {
         if ($this->actionUnit->isAlive()) {
             foreach ($this->actionUnit->getAction($enemyCommand, $alliesCommand) as $action) {
 
@@ -125,12 +149,5 @@ class Stroke implements StrokeInterface
                 $this->container->getFullLog()->addText($message);
             }
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        $this->actionUnit->madeAction();
-
-        $this->container->getFullLog()->add($view->renderCommandView($this->leftCommand, $this->rightCommand, true));
-        $this->container->getFullLog()->add($view->getUnitsStats($this->leftCommand, $this->rightCommand));
     }
 }
