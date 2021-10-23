@@ -16,6 +16,7 @@ use Battle\Action\WaitAction;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerException;
+use Battle\Result\Chat\ChatException;
 use Exception;
 
 class Unit extends AbstractUnit
@@ -80,6 +81,7 @@ class Unit extends AbstractUnit
      * @return string
      * @throws ActionException
      * @throws ContainerException
+     * @throws ChatException
      */
     private function applyDamageAction(DamageAction $action): string
     {
@@ -94,7 +96,7 @@ class Unit extends AbstractUnit
 
         $action->setFactualPower($primordialLife - $this->life);
 
-        return $this->container->getMessage()->createMessage($action);
+        return $this->container->getChat()->addMessage($action);
     }
 
     /**
@@ -104,6 +106,7 @@ class Unit extends AbstractUnit
      * @return string
      * @throws ActionException
      * @throws ContainerException
+     * @throws ChatException
      */
     private function applyHealAction(HealAction $action): string
     {
@@ -116,7 +119,7 @@ class Unit extends AbstractUnit
 
         $action->setFactualPower($this->life - $primordialLife);
 
-        return $this->container->getMessage()->createMessage($action);
+        return $this->container->getChat()->addMessage($action);
     }
 
     /**
@@ -129,10 +132,11 @@ class Unit extends AbstractUnit
      * @param SummonAction $action
      * @return string
      * @throws ContainerException
+     * @throws ChatException
      */
     private function applySummonAction(SummonAction $action): string
     {
-        return $this->container->getMessage()->createMessage($action);
+        return $this->container->getChat()->addMessage($action);
     }
 
     /**
@@ -141,10 +145,11 @@ class Unit extends AbstractUnit
      * @param WaitAction $action
      * @return string
      * @throws ContainerException
+     * @throws ChatException
      */
     private function applyWaitAction(WaitAction $action): string
     {
-        return $this->container->getMessage()->createMessage($action);
+        return $this->container->getChat()->addMessage($action);
     }
 
     /**
@@ -154,6 +159,7 @@ class Unit extends AbstractUnit
      * @return string
      * @throws ContainerException
      * @throws ActionException
+     * @throws ChatException
      */
     private function applyEffectAction(EffectAction $action): string
     {
@@ -165,7 +171,7 @@ class Unit extends AbstractUnit
             }
         }
 
-        return $this->container->getMessage()->createMessage($action);
+        return $this->container->getChat()->addMessage($action);
     }
 
     /**
@@ -176,6 +182,7 @@ class Unit extends AbstractUnit
      * @return string
      * @throws ContainerException
      * @throws ActionException
+     * @throws ChatException
      */
     private function applyResurrectionAction(ResurrectionAction $action): string
     {
@@ -190,7 +197,7 @@ class Unit extends AbstractUnit
 
         $action->setFactualPower($restoreLife);
 
-        return $this->container->getMessage()->createMessage($action);
+        return $this->container->getChat()->addMessage($action);
     }
     
     /**
@@ -222,6 +229,7 @@ class Unit extends AbstractUnit
      * @throws UnitException
      * @throws ActionException
      * @throws ContainerException
+     * @throws ChatException
      */
     private function multiplierMaxLife(BuffAction $action): string
     {
@@ -241,7 +249,7 @@ class Unit extends AbstractUnit
 
         $action->setRevertValue($bonus);
 
-        return $this->container->getMessage()->createMessage($action);
+        return $this->container->getChat()->addMessage($action);
     }
 
     /**

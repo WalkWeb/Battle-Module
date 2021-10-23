@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes;
 
-use Battle\Result\Chat\Message\MessageInterface;
+use Battle\Result\Chat\ChatInterface;
 
 abstract class AbstractUnitClass implements UnitClassInterface
 {
     /**
-     * @var MessageInterface
+     * @var ChatInterface
      */
-    protected $message;
+    protected $chat;
 
-    public function __construct(MessageInterface $message)
+    public function __construct(ChatInterface $message)
     {
-        $this->message = $message;
+        $this->chat = $message;
     }
 }

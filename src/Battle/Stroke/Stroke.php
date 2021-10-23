@@ -69,6 +69,9 @@ class Stroke implements StrokeInterface
     /**
      * Совершает ход одного юнита в бою
      *
+     * TODO Метод разросся, а еще будет добавлена обработка событий при рефлекте урона, обработка событий при смерти -
+     * TODO пора выносить код в отдельные методы
+     *
      * @throws Exception
      */
     public function handle(): void
@@ -90,7 +93,6 @@ class Stroke implements StrokeInterface
                 $this->container->getStatistic()->addUnitAction($action);
                 $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
                 $this->container->getFullLog()->addText($message);
-                $this->container->getChat()->add($message);
             }
 
             // Если юнит умер после применении эффекта - дальнейшие эффекты применять не нужно
@@ -121,7 +123,6 @@ class Stroke implements StrokeInterface
                 $this->container->getStatistic()->addUnitAction($action);
                 $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
                 $this->container->getFullLog()->addText($message);
-                $this->container->getChat()->add($message);
             }
         }
 

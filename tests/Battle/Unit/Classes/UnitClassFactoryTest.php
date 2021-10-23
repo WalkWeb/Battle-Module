@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes;
 
+use Battle\Result\Chat\Chat;
 use Battle\Unit\Classes\ClassFactoryException;
 use Battle\Unit\Classes\Human\Priest;
 use Battle\Unit\Classes\Human\Warrior;
 use Battle\Unit\Classes\Undead\DarkMage;
 use Battle\Unit\Classes\Undead\DeadKnight;
 use Battle\Unit\Classes\UnitClassFactory;
-use Battle\Result\Chat\Message\Message;
 use PHPUnit\Framework\TestCase;
 
 class UnitClassFactoryTest extends TestCase
@@ -23,9 +23,9 @@ class UnitClassFactoryTest extends TestCase
      */
     public function testUnitClassFactoryCreateSuccess(int $classId, string $expectClassName): void
     {
-        $message = new Message();
+        $chat = new Chat();
         $class = UnitClassFactory::create($classId);
-        $expectClass = new $expectClassName($message);
+        $expectClass = new $expectClassName($chat);
         self::assertEquals($expectClass, $class);
     }
 

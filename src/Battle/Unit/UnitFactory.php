@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
+use Battle\Result\Chat\ChatInterface;
 use Battle\Unit\Classes\ClassFactoryException;
 use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
-use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Traits\ValidationTrait;
 use Battle\Unit\Race\RaceFactory;
 use Exception;
@@ -95,18 +95,18 @@ class UnitFactory
             $data['command'],
             RaceFactory::create($data['race']),
             $container,
-            self::getClass($data, $container->getMessage())
+            self::getClass($data, $container->getChat())
         );
     }
 
     /**
      * @param array $data
-     * @param MessageInterface $message
+     * @param ChatInterface $chat
      * @return UnitClassInterface|null
      * @throws UnitException
      * @throws ClassFactoryException
      */
-    private static function getClass(array $data, MessageInterface $message): ?UnitClassInterface
+    private static function getClass(array $data, ChatInterface $chat): ?UnitClassInterface
     {
         if (!array_key_exists('class', $data)) {
             return null;
@@ -120,6 +120,6 @@ class UnitFactory
             throw new UnitException(UnitException::INCORRECT_CLASS);
         }
 
-        return UnitClassFactory::create($data['class'], $message);
+        return UnitClassFactory::create($data['class'], $chat);
     }
 }

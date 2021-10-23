@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace Battle\Result\Chat;
 
+use Battle\Action\ActionInterface;
+
 interface ChatInterface
 {
     /**
-     * Добавляет сообщение в чат
+     * Формирует сообщение (строку) на основании переданного action, сохраняет его в чате и возвращает его, чтобы его
+     * можно было использовать где-то еще (например, сохранить в логе боя)
      *
-     * @param string $message
+     * @param ActionInterface $action
+     * @return string
+     * @throws ChatException
      */
-    public function add(string $message): void;
+    public function addMessage(ActionInterface $action): string;
 
     /**
-     * Возвращает массив сообщений
+     * Возвращает массив сообщений (массив строк)
      *
      * @return array
      */

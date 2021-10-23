@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes;
 
+use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\ChatInterface;
 use Battle\Unit\Classes\Demon\Succubus;
 use Battle\Unit\Classes\Dwarf\Alchemist;
 use Battle\Unit\Classes\Human\Priest;
@@ -12,8 +14,6 @@ use Battle\Unit\Classes\Orc\Titan;
 use Battle\Unit\Classes\Other\IncorrectUnitClassForTest;
 use Battle\Unit\Classes\Undead\DarkMage;
 use Battle\Unit\Classes\Undead\DeadKnight;
-use Battle\Result\Chat\Message\Message;
-use Battle\Result\Chat\Message\MessageInterface;
 
 class UnitClassFactory
 {
@@ -34,20 +34,20 @@ class UnitClassFactory
      * От класса зависят способности, которые юнит будет применять в бою
      *
      * @param int $classId
-     * @param MessageInterface|null $message
+     * @param ChatInterface|null $chat
      * @return UnitClassInterface
      * @throws ClassFactoryException
      */
-    public static function create(int $classId, ?MessageInterface $message = null): UnitClassInterface
+    public static function create(int $classId, ?ChatInterface $chat = null): UnitClassInterface
     {
-        $message = $message ?? new Message();
+        $chat = $chat ?? new Chat();
 
         if (!array_key_exists($classId, self::$map)) {
             throw new ClassFactoryException(ClassFactoryException::UNDEFINED_CLASS_ID . ': ' . $classId);
         }
 
         $className = self::$map[$classId];
-        $class = new $className($message);
+        $class = new $className($chat);
 
         if (!($class instanceof UnitClassInterface)) {
             throw new ClassFactoryException(ClassFactoryException::INCORRECT_CLASS);

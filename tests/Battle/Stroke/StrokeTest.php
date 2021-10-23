@@ -32,11 +32,11 @@ class StrokeTest extends TestCase
      */
     public function testStrokeHandle(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
-        $container = new Container();
 
         $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
         $stroke->handle();

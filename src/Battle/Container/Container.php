@@ -7,8 +7,6 @@ namespace Battle\Container;
 use Battle\BattleFactory;
 use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\ChatInterface;
-use Battle\Result\Chat\Message\Message;
-use Battle\Result\Chat\Message\MessageInterface;
 use Battle\Result\FullLog\FullLog;
 use Battle\Result\FullLog\FullLogInterface;
 use Battle\Result\Scenario\Scenario;
@@ -39,9 +37,6 @@ class Container implements ContainerInterface
         FullLogInterface::class     => FullLog::class,
         FullLog::class              => FullLog::class,
         'FullLog'                   => FullLog::class,
-        MessageInterface::class     => Message::class,
-        Message::class              => Message::class,
-        'Message'                   => Message::class,
         BattleFactory::class        => BattleFactory::class,
         'BattleFactory'             => BattleFactory::class,
         RoundFactory::class         => RoundFactory::class,
@@ -149,17 +144,6 @@ class Container implements ContainerInterface
     {
         /** @var FullLogInterface $service */
         $service = $this->get(FullLogInterface::class);
-        return $service;
-    }
-
-    /**
-     * @return MessageInterface
-     * @throws ContainerException
-     */
-    public function getMessage(): MessageInterface
-    {
-        /** @var MessageInterface $service */
-        $service = $this->get(Message::class);
         return $service;
     }
 
