@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
+use Battle\Action\ActionException;
 use Battle\Container\Container;
 use Exception;
 use Battle\Unit\Unit;
@@ -274,6 +275,54 @@ class UnitTest extends TestCase
         foreach ($actions as $action) {
             self::assertInstanceOf(DamageAction::class, $action);
         }
+    }
+
+    /**
+     * Тест на удаление эффектов при смерти юнита
+     *
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     * @throws ActionException
+     */
+    public function testUnitRemoveEffectsAtDie(): void
+    {
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        self::assertEquals(100, $unit->getTotalLife());
+        self::assertEquals(100, $unit->getLife());
+        self::assertCount(0, $unit->getEffects());
+
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $actions = $unit->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            // Применяем баф
+            $action->handle();
+        }
+
+        self::assertEquals(130, $unit->getTotalLife());
+        self::assertEquals(130, $unit->getLife());
+        self::assertCount(1, $unit->getEffects());
+
+        // Убиваем юнита
+        $damageAction = new DamageAction($enemyUnit, $command, $enemyCommand, DamageAction::TARGET_RANDOM_ENEMY, 500);
+
+        $damageAction->handle();
+
+        // Проверяем, что он умер
+        self::assertEquals(0, $unit->getLife());
+
+        // Проверяем, что здоровье вернулось к изначальному
+        self::assertEquals(100, $unit->getTotalLife());
+        self::assertCount(0, $unit->getEffects());
     }
 
     public function createDataProvider(): array

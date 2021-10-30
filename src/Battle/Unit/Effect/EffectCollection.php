@@ -110,4 +110,25 @@ class EffectCollection implements Iterator, Countable
 
         return $collection;
     }
+
+    /**
+     * Обрабатывает смерть юнита, к которому относится данная коллекция эффектов
+     *
+     * Получаем у всех эффектов события OnDisable и обнуляем коллекцию
+     *
+     * @return ActionCollection
+     * @throws ActionException
+     */
+    public function diedParentUnit(): ActionCollection
+    {
+        $collection = new ActionCollection();
+
+        foreach ($this->elements as $effect) {
+            $collection->addCollection($effect->getOnDisableActions());
+        }
+
+        $this->elements = [];
+
+        return $collection;
+    }
 }

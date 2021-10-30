@@ -88,10 +88,20 @@ class Unit extends AbstractUnit
         $primordialLife = $this->life;
 
         $this->life -= $action->getPower();
-        if ($this->life < 0) {
+
+        if ($this->life < 1) {
             $this->life = 0;
 
-            // TODO Обнуляем эффекты при смерти
+            // Обрабатываем события от эффектов при смерти
+            // TODO Когда будут добавлены сложные эффекты при смерти - нужно будет отдельно создавать сообщения в чат
+            // TODO и анимации. Но для текущих простых эффектов это не нужно - ничего особенно при смерти они не создают
+            $dieActions = $this->effects->diedParentUnit();
+
+            foreach ($dieActions as $dieAction) {
+                if ($dieAction->canByUsed()) {
+                    $dieAction->handle();
+                }
+            }
         }
 
         $action->setFactualPower($primordialLife - $this->life);

@@ -174,12 +174,7 @@ class StrokeTest extends TestCase
             'effects' => [
                 [
                     'user_id'      => $unit->getId(),
-                    'unit_effects' => [
-                        [
-                            'icon'     => 'icon.png',
-                            'duration' => 8,
-                        ],
-                    ],
+                    'unit_effects' => [],
                     'targets'      => [
                         [
                             'type'              => 'change',
@@ -245,16 +240,7 @@ class StrokeTest extends TestCase
             'effects' => [
                 [
                     'user_id'      => $unit->getId(),
-                    'unit_effects' => [
-                        [
-                            'icon' => 'icon.png',
-                            'duration' => 8,
-                        ],
-                        [
-                            'icon' => 'icon.png',
-                            'duration' => 8,
-                        ],
-                    ],
+                    'unit_effects' => [],
                     'targets'      => [
                         [
                             'type'              => 'change',
