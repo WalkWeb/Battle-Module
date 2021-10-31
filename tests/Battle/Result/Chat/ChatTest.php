@@ -59,6 +59,8 @@ class ChatTest extends TestCase
     private const APPLY_EFFECT_TO_EN = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces on <span style="color: #1e72e3">unit_2</span>';
     private const APPLY_EFFECT_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал Резервные Силы на <span style="color: #1e72e3">unit_2</span>';
 
+    private const SKIP_MESSAGE = '';
+
     /**
      * Тест на проверку того, что создаваемое сообщение также сохраняется в самом чате
      *
@@ -495,6 +497,33 @@ class ChatTest extends TestCase
 
         self::assertTrue($action->canByUsed());
         self::assertEquals(self::EFFECT_HEAL_RU, $action->handle());
+    }
+
+    /**
+     * Тест на пропуск формирования сообщения для чата - будет возвращена пустая строка, а в сам чат (массив сообщений)
+     * ничего не будет добавлено
+     *
+     * @throws Exception
+     */
+    public function testChatSkipMessage(): void
+    {
+        $container = new Container();
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
+
+        $action = new BuffAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'test name',
+            'multiplierMaxLife',
+            200,
+            BuffAction::SKIP_MESSAGE_METHOD
+        );
+
+        self::assertTrue($action->canByUsed());
+        self::assertEquals(self::SKIP_MESSAGE, $action->handle());
+        self::assertEquals([], $container->getChat()->getMessages());
     }
 
     /**

@@ -33,6 +33,11 @@ class BuffAction extends AbstractAction
      */
     private $revertValue;
 
+    /**
+     * @var string
+     */
+    private $messageMethod;
+
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
@@ -40,13 +45,15 @@ class BuffAction extends AbstractAction
         int $typeTarget,
         string $name,
         string $modifyMethod,
-        int $power
+        int $power,
+        string $messageMethod = self::DEFAULT_MESSAGE_METHOD
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->name = $name;
         $this->modifyMethod = $modifyMethod;
         $this->power = $power;
+        $this->messageMethod = $messageMethod;
     }
 
     /**
@@ -118,7 +125,7 @@ class BuffAction extends AbstractAction
 
     public function getMessageMethod(): string
     {
-        return self::DEFAULT_MESSAGE_METHOD;
+        return $this->messageMethod;
     }
 
     /**

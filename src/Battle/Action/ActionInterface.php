@@ -34,6 +34,9 @@ interface ActionInterface
 
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 
+    // Пропуск создания сообщения в чате
+    public const SKIP_MESSAGE_METHOD    = 'skip';
+
     /**
      * Название метода в классе Unit, который будет обрабатывать данное событие
      *

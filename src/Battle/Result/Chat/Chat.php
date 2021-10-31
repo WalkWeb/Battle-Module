@@ -32,7 +32,7 @@ class Chat implements ChatInterface
      * @param ActionInterface $action
      * @return string
      * @throws ChatException
-     * @uses damage, heal, summon, wait, buff, resurrected, applyEffect, effectDamage, effectHeal
+     * @uses damage, heal, summon, wait, buff, resurrected, applyEffect, effectDamage, effectHeal, skip
      */
     public function addMessage(ActionInterface $action): string
     {
@@ -44,7 +44,9 @@ class Chat implements ChatInterface
 
         $message = $this->$createMethod($action);
 
-        $this->messages[] = $message;
+        if ($message !== '') {
+            $this->messages[] = $message;
+        }
 
         return $message;
     }
@@ -189,5 +191,17 @@ class Chat implements ChatInterface
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans('restored') . ' ' .
             $action->getFactualPower() . ' ' . $this->translation->trans('life from effect') . ' ' .
             $this->translation->trans($action->getNameAction());
+    }
+
+    /**
+     * Пропускает генерацию сообщения
+     *
+     * TODO Подумать, что будет лучше - возвращать null, если сообщение не сгенерировано, или пустую строку
+     *
+     * @return string
+     */
+    private function skip(): string
+    {
+        return '';
     }
 }
