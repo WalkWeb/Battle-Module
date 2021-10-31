@@ -10,6 +10,7 @@ use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
+use Battle\Unit\Ability\Summon\SummonFireElementalAbility;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
@@ -37,16 +38,37 @@ class AlchemistTest extends TestCase
 
         $abilities = $alchemist->getAbilities($unit);
 
-        foreach ($abilities as $ability) {
-            self::assertContainsOnlyInstancesOf(HealingPotionAbility::class, [$ability]);
+        foreach ($abilities as $i => $ability) {
 
-            $actions = $ability->getAction($enemyCommand, $command);
+            if ($i === 0) {
+                self::assertContainsOnlyInstancesOf(HealingPotionAbility::class, [$ability]);
 
-            foreach ($actions as $action) {
-                self::assertEquals(
-                    $this->createEffect($unit, $enemyCommand, $command),
-                    $action->getEffect()
-                );
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertEquals(
+                        $this->createEffect($unit, $enemyCommand, $command),
+                        $action->getEffect()
+                    );
+                }
+            }
+            if ($i === 1) {
+                self::assertContainsOnlyInstancesOf(SummonFireElementalAbility::class, [$ability]);
+
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertEquals($this->getSummon()->getName(), $action->getSummonUnit()->getName());
+                    self::assertEquals($this->getSummon()->getLevel(), $action->getSummonUnit()->getLevel());
+                    self::assertEquals($this->getSummon()->getAvatar(), $action->getSummonUnit()->getAvatar());
+                    self::assertEquals($this->getSummon()->getDamage(), $action->getSummonUnit()->getDamage());
+                    self::assertEquals($this->getSummon()->getAttackSpeed(), $action->getSummonUnit()->getAttackSpeed());
+                    self::assertEquals($this->getSummon()->getLife(), $action->getSummonUnit()->getLife());
+                    self::assertEquals($this->getSummon()->getTotalLife(), $action->getSummonUnit()->getTotalLife());
+                    self::assertEquals($this->getSummon()->isMelee(), $action->getSummonUnit()->isMelee());
+                    self::assertEquals($this->getSummon()->getClass(), $action->getSummonUnit()->getClass());
+                    self::assertEquals($this->getSummon()->getRace(), $action->getSummonUnit()->getRace());
+                }
             }
         }
     }
@@ -84,5 +106,14 @@ class AlchemistTest extends TestCase
         ];
 
         return $effectFactory->create($data);
+    }
+
+    /**
+     * @return UnitInterface
+     * @throws Exception
+     */
+    private function getSummon(): UnitInterface
+    {
+        return UnitFactory::createByTemplate(26);
     }
 }

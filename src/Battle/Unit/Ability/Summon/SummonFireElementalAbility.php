@@ -10,7 +10,7 @@ class SummonFireElementalAbility extends AbstractSummonAbility
 {
     private const NAME                = 'Summon Fire Elemental';
     private const ICON                = '/images/icons/ability/198.png';
-    private const USE_MESSAGE         = 'summon Imp';
+    private const USE_MESSAGE         = 'summon Fire Elemental';
 
     private const SUMMON_NAME         = 'Fire Elemental';
     private const SUMMON_LEVEL        = 3;

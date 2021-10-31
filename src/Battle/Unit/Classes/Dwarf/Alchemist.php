@@ -6,6 +6,7 @@ namespace Battle\Unit\Classes\Dwarf;
 
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
+use Battle\Unit\Ability\Summon\SummonFireElementalAbility;
 use Battle\Unit\Classes\AbstractUnitClass;
 use Battle\Unit\UnitInterface;
 
@@ -34,6 +35,7 @@ class Alchemist extends AbstractUnitClass
     {
         $collection = new AbilityCollection();
         $collection->add(new HealingPotionAbility($unit));
+        $collection->add(new SummonFireElementalAbility($unit));
         return $collection;
     }
 }

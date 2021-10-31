@@ -81,7 +81,7 @@ class RaceFactory
             'id'          => 10,
             'name'        => 'Golem',
             'single_name' => 'Golems',
-            'color'       => '#000000',
+            'color'       => '#7585a6',
             'icon'        => '/images/icons/small/base-golem.png',
         ],
     ];
