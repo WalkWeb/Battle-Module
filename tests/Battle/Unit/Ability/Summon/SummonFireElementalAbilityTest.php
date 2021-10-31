@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Summon;
 
-use Exception;
 use Battle\Action\SummonAction;
-use PHPUnit\Framework\TestCase;
 use Battle\Command\CommandFactory;
-use Tests\Battle\Factory\UnitFactory;
 use Battle\Unit\Ability\AbilityCollection;
-use Battle\Unit\Ability\Summon\SummonImpAbility;
+use Battle\Unit\Ability\Summon\SummonFireElementalAbility;
+use Exception;
+use PHPUnit\Framework\TestCase;
+use Tests\Battle\Factory\UnitFactory;
 
-class SummonImpAbilityTest extends TestCase
+class SummonFireElementalAbilityTest extends TestCase
 {
     /**
      * @throws Exception
      */
-    public function testSummonImpAbility(): void
+    public function testSummonFireElementalAbility(): void
     {
-        $name = 'Summon Imp';
-        $icon = '/images/icons/ability/000.png';
+        $name = 'Summon Fire Elemental';
+        $icon = '/images/icons/ability/198.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = new SummonImpAbility($unit);
+        $ability = new SummonFireElementalAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -35,7 +35,7 @@ class SummonImpAbilityTest extends TestCase
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
         // Up concentration
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $unit->newRound();
         }
 
@@ -55,6 +55,6 @@ class SummonImpAbilityTest extends TestCase
 
         self::assertFalse($ability->isReady());
 
-        self::assertEquals(0, $unit->getConcentration());
+        self::assertEquals(0, $unit->getRage());
     }
 }
