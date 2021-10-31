@@ -230,7 +230,7 @@ div.life_text {
     font-family: arial, sans-serif;
     font-size: 17px;
     color: #c1c1c1;
-    text-align: left;
+    text-align: left !important;
 }
 
 .unit_box2_left {

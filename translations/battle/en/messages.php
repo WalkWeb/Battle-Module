@@ -33,6 +33,7 @@ return [
     'summon Imp'                       => 'summon Imp',
     'summon Skeleton'                  => 'summon Skeleton',
     'summon Skeleton Mage'             => 'summon Skeleton Mage',
+    'summon Fire Elemental'            => 'summon Fire Elemental',
     'use Reserve Forces'               => 'use Reserve Forces',
     'use Poison'                       => 'use Poison',
     'Poison'                           => 'Poison',

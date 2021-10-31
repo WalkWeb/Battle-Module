@@ -42,7 +42,7 @@ class Chat implements ChatInterface
             throw new ChatException(ChatException::UNDEFINED_MESSAGE_METHOD);
         }
 
-        $message =  $this->$createMethod($action);
+        $message = $this->$createMethod($action);
 
         $this->messages[] = $message;
 

@@ -31,6 +31,7 @@ return [
     'summon Imp'                       => 'призвал Беса',
     'summon Skeleton'                  => 'призвал Скелета',
     'summon Skeleton Mage'             => 'призвал Скелета-мага',
+    'summon Fire Elemental'            => 'призвал Элементаля огня',
     'use Reserve Forces'               => 'использовал Резервные Силы',
     'use Poison'                       => 'использовал Отравление',
     'Poison'                           => 'Отравление',
