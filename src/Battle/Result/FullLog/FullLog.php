@@ -20,10 +20,9 @@ class FullLog implements FullLogInterface
 
     public function addText(string $text): void
     {
-        // TODO Добавить проверку - если передана пустая строка (т.е. фактического сообщения для чата не сформировано)
-        // TODO то и в лог ничего не добавлять
-
-        $this->log[] = '<p>' . $text . '</p>';
+        if ($text !== '') {
+            $this->log[] = '<p>' . $text . '</p>';
+        }
     }
 
     public function addLine(): void

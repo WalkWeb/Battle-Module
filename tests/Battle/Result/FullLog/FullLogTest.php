@@ -25,6 +25,8 @@ class FullLogTest extends TestCase
         $messages = ['<p>text 1</p>', '<p>text 2</p>'];
         $fullLog->addText('text 1');
         $fullLog->addText('text 2');
+        // Пустое сообщение не будет добавлено
+        $fullLog->addText('');
         self::assertEquals($messages, $fullLog->getLog());
     }
 
