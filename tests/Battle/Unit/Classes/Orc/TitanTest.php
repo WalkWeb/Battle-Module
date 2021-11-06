@@ -79,6 +79,7 @@ class TitanTest extends TestCase
                     'name'           => 'use Reserve Forces',
                     'modify_method'  => 'multiplierMaxLife',
                     'power'          => 130,
+                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                 ],
             ],
             'on_next_round_actions' => [],

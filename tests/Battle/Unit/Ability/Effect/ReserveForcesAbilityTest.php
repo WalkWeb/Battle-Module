@@ -9,6 +9,7 @@ use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\ReserveForcesAbility;
 use Battle\Unit\UnitInterface;
@@ -75,8 +76,9 @@ class ReserveForcesAbilityTest extends TestCase
      */
     public function testReserveForcesAbilityApply(): void
     {
-        $unit = UnitFactory::createByTemplate(21);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(21, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -107,6 +109,15 @@ class ReserveForcesAbilityTest extends TestCase
         // Проверяем, что здоровье вернулось к исходному
         self::assertEquals($unitBaseLife, $unit->getTotalLife());
         self::assertEquals($unitBaseLife, $unit->getLife());
+
+        $chatMessages = $container->getChat()->getMessages();
+
+        // Проверяем, что сообщение об использовании способности было добавлено в чат один раз
+        self::assertCount(1, $chatMessages);
+
+        foreach ($chatMessages as $chatMessage) {
+            self::assertEquals('<span style="color: #ae882d">Titan</span> use Reserve Forces', $chatMessage);
+        }
     }
 
     /**
@@ -232,6 +243,7 @@ class ReserveForcesAbilityTest extends TestCase
                         'name'           => 'use Reserve Forces',
                         'modify_method'  => 'multiplierMaxLife',
                         'power'          => 130,
+                        'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                     ],
                 ],
                 'on_next_round_actions' => [],

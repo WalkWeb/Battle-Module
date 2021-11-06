@@ -143,6 +143,7 @@ class ReserveForcesAbility extends AbstractAbility
                             'name'           => self::USE_MESSAGE,
                             'modify_method'  => self::MODIFY_METHOD,
                             'power'          => self::MODIFY_POWER,
+                            'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                         ],
                     ],
                     'on_next_round_actions' => [],
