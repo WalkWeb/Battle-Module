@@ -46,14 +46,14 @@ class BuffAction extends AbstractAction
         string $name,
         string $modifyMethod,
         int $power,
-        string $messageMethod = self::DEFAULT_MESSAGE_METHOD
+        ?string $messageMethod = null
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->name = $name;
         $this->modifyMethod = $modifyMethod;
         $this->power = $power;
-        $this->messageMethod = $messageMethod;
+        $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
     }
 
     /**

@@ -216,6 +216,30 @@ class ActionFactoryTest extends TestCase
 
         $actionFactory = new ActionFactory();
 
+        // Полный набор данных
+        $data = [
+            'type'           => ActionInterface::BUFF,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_SELF,
+            'name'           => $name = 'buff name test',
+            'modify_method'  => $modifyMethod = 'modifyMethod',
+            'power'          => $power = 150,
+            'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertInstanceOf(BuffAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
+        self::assertEquals($power, $action->getPower());
+        self::assertEquals($name, $action->getNameAction());
+        self::assertEquals($modifyMethod, $action->getModifyMethod());
+        self::assertEquals(ActionInterface::SKIP_MESSAGE_METHOD, $action->getMessageMethod());
+
+        // Вариант без message_method
         $data = [
             'type'           => ActionInterface::BUFF,
             'action_unit'    => $unit,
@@ -235,6 +259,7 @@ class ActionFactoryTest extends TestCase
         self::assertEquals($power, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($modifyMethod, $action->getModifyMethod());
+        self::assertEquals('buff', $action->getMessageMethod());
     }
 
     /**
@@ -728,6 +753,21 @@ class ActionFactoryTest extends TestCase
                     'power'          => '150',
                 ],
                 ActionException::INVALID_POWER_DATA,
+            ],
+            [
+                // message_method некорректного типа [для BuffAction]
+                [
+                    'type'           => ActionInterface::BUFF,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'buff test',
+                    'modify_method'  => 'modify method test',
+                    'power'          => 150,
+                    'message_method' => 123,
+                ],
+                ActionException::INVALID_MESSAGE_METHOD,
             ],
             // EffectAction
             // Отсутствует type_target

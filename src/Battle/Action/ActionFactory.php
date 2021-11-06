@@ -108,6 +108,7 @@ class ActionFactory
             $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
             $modifyMethod = self::string($data, 'modify_method', ActionException::INVALID_MODIFY_METHOD_DATA);
             $power = self::int($data, 'power', ActionException::INVALID_POWER_DATA);
+            $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
 
             return new BuffAction(
                 $actionUnit,
@@ -116,7 +117,8 @@ class ActionFactory
                 $typeTarget,
                 $name,
                 $modifyMethod,
-                $power
+                $power,
+                $messageMethod
             );
         }
 
