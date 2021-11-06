@@ -340,12 +340,17 @@ function createUnit(unit) {
     unit_hp_text_span_thp.innerHTML = unit.thp;
     let unit_hp_text_add = createElement('div', unit_hp, 'unit_hp_text_add');
     createElement('span', unit_hp_text_add, 'recdam');
-    let unit_cons = createElement('div', unit_box1_right4, 'unit_cons');
-    let unit_cons_bar2 = createElement('div', unit_cons, 'unit_cons_bar2');
-    unit_cons_bar2.style.width = unit.cons_bar_width + '%';
-    let unit_rage = createElement('div', unit_box1_right4, 'unit_rage');
-    let unit_rage_bar2 = createElement('div', unit_rage,  'unit_rage_bar2');
-    unit_rage_bar2.style.width = unit.rage_bar_width + '%';
+
+    if (unit.exist_class) {
+        // Полоска концентрации
+        let unit_cons = createElement('div', unit_box1_right4, 'unit_cons');
+        let unit_cons_bar2 = createElement('div', unit_cons, 'unit_cons_bar2');
+        unit_cons_bar2.style.width = unit.cons_bar_width + '%';
+        // Полоска ярости
+        let unit_rage = createElement('div', unit_box1_right4, 'unit_rage');
+        let unit_rage_bar2 = createElement('div', unit_rage,  'unit_rage_bar2');
+        unit_rage_bar2.style.width = unit.rage_bar_width + '%';
+    }
 
     let unit_box1_left2 = createElement('div', unit_box1_left, 'unit_box1_left2');
     let unit_ava = createElement('div', unit_box1_left2, 'unit_ava');

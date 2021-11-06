@@ -38,8 +38,6 @@ interface AbilityInterface
      * Может ли способность быть применена. Например, способность лечения может быть готова для использования, но нет
      * цели для лечения - в этом случае способность применять пока не нужно
      *
-     * TODO Подумать над тем, чтобы в этом методе также перепроверять ready = true
-     *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return bool

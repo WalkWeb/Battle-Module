@@ -203,7 +203,7 @@ class Scenario implements ScenarioInterface
                             'hp_bar_class'    => 'unit_hp_bar',
                             'hp_bar_class2'   => 'unit_hp_bar2',
                             'hp_bar_width'    => $this->getLifeBarWidth($action->getSummonUnit()),
-                            'unit_box2_class' => 'unit_box2', // todo
+                            'unit_box2_class' => $this->getUnitBoxClass($action->getSummonUnit()),
                             'hp'              => $action->getSummonUnit()->getLife(),
                             'thp'             => $action->getSummonUnit()->getTotalLife(),
                             'cons_bar_width'  => $this->getConcentrationBarWidth($action->getSummonUnit()),
@@ -213,6 +213,7 @@ class Scenario implements ScenarioInterface
                             'name_color'      => $action->getSummonUnit()->getRace()->getColor(),
                             'icon'            => $action->getSummonUnit()->getIcon(),
                             'level'           => $action->getSummonUnit()->getLevel(),
+                            'exist_class'     => (bool)$action->getSummonUnit()->getClass(),
                         ],
                     ],
                 ],
@@ -384,5 +385,17 @@ class Scenario implements ScenarioInterface
         }
 
         return $data;
+    }
+
+    /**
+     * Определяет, какую иконку должен иметь юнит - с полосками ярости и концентрации, или без. Если класса нет - то эти
+     * полоски не нужны
+     *
+     * @param UnitInterface $unit
+     * @return string
+     */
+    private function getUnitBoxClass(UnitInterface $unit): string
+    {
+        return $unit->getClass() ? 'unit_box2' : 'unit_box2_na';
     }
 }
