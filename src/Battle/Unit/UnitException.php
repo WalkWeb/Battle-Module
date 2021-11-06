@@ -30,6 +30,7 @@ class UnitException extends Exception
     public const INCORRECT_RACE               = 'Incorrect race, it required and type int';
     public const DOUBLE_UNIT_ID               = 'Double unit ID: collection have unit with specified id';
     public const INCORRECT_COMMAND            = 'Incorrect unit command. It required int 1 or 2';
-    public const NO_REDUCED_LIFE_MULTIPLIER   = 'No reduced life multiplier';
+    public const NO_REDUCED_MAXIMUM_LIFE      = 'No reduced maximum life';
+    public const NO_REDUCED_ATTACK_SPEED      = 'No reduced attack speed';
     public const UNDEFINED_MODIFY_METHOD      = 'Undefined modify method';
 }

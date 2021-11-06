@@ -151,18 +151,18 @@ interface ActionInterface
      *
      * Используется только в BuffAction, при вызове у других Action будет брошено исключение
      *
-     * @param int $revertValue
+     * @param int|float $revertValue
      * @throws ActionException
      */
-    public function setRevertValue(int $revertValue): void;
+    public function setRevertValue($revertValue): void;
 
     /**
      * Используется только в BuffAction, при вызове у других Action будет брошено исключение
      *
-     * @return int
+     * @return int|float
      * @throws ActionException
      */
-    public function getRevertValue(): int;
+    public function getRevertValue();
 
     /**
      * BuffAction создает BuffAction для отката своих изменений характеристик юнита

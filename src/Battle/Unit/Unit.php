@@ -216,7 +216,7 @@ class Unit extends AbstractUnit
      * При этом само событие указывает, в getModifyMethod(), какой метод должен обработать текущее изменение
      * характеристик
      *
-     * @uses multiplierMaxLife, multiplierMaxLifeRevert
+     * @uses multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert
      * @param BuffAction $action
      * @return string
      * @throws ActionException
@@ -244,7 +244,7 @@ class Unit extends AbstractUnit
     private function multiplierMaxLife(BuffAction $action): string
     {
         if ($action->getPower() <= 100) {
-            throw new UnitException(UnitException::NO_REDUCED_LIFE_MULTIPLIER);
+            throw new UnitException(UnitException::NO_REDUCED_MAXIMUM_LIFE);
         }
 
         $multiplier = $action->getPower() / 100;
@@ -277,6 +277,49 @@ class Unit extends AbstractUnit
             $this->life = $this->totalLife;
         }
 
+        return '';
+    }
+
+    /**
+     * Увеличивает скорость атаки юнита
+     *
+     * @param BuffAction $action
+     * @return string
+     * @throws ActionException
+     * @throws ChatException
+     * @throws ContainerException
+     * @throws UnitException
+     */
+    private function multiplierAttackSpeed(BuffAction $action): string
+    {
+        if ($action->getPower() <= 100) {
+            throw new UnitException(UnitException::NO_REDUCED_ATTACK_SPEED);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldAttackSpeed = $this->attackSpeed;
+        $newAttackSpeed = $this->attackSpeed * $multiplier;
+
+        $bonus = $newAttackSpeed - $oldAttackSpeed;
+
+        $this->attackSpeed += $bonus;
+
+        $action->setRevertValue($bonus);
+
+        return $this->container->getChat()->addMessage($action);
+    }
+
+    /**
+     * Откатывает обратно увеличенную скорость атаки
+     *
+     * @param BuffAction $action
+     * @return string
+     * @throws ActionException
+     */
+    private function multiplierAttackSpeedRevert(BuffAction $action): string
+    {
+        $this->attackSpeed -= $action->getRevertValue();
         return '';
     }
 

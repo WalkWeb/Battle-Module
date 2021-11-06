@@ -91,12 +91,12 @@ class BuffAction extends AbstractAction
         return $this->modifyMethod;
     }
 
-    public function setRevertValue(int $revertValue): void
+    public function setRevertValue($revertValue): void
     {
         $this->revertValue = $revertValue;
     }
 
-    public function getRevertValue(): int
+    public function getRevertValue()
     {
         return $this->revertValue;
     }

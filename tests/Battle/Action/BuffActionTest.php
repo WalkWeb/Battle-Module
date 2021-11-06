@@ -23,7 +23,7 @@ class BuffActionTest extends TestCase
      * @throws UnitFactoryException
      * @throws ActionException
      */
-    public function testBuffActionSuccess(): void
+    public function testBuffActionMaximumLifeSuccess(): void
     {
         $name = 'use Reserve Forces';
         $modifyMethod = 'multiplierMaxLife';
@@ -41,10 +41,10 @@ class BuffActionTest extends TestCase
         self::assertEquals('skip', $action->getAnimationMethod());
         self::assertEquals('buff', $action->getMessageMethod());
 
-        $multiplier = $action->getPower() / 100;
+        $multiplier = $power / 100;
         $newLife = (int)($unit->getTotalLife() * $multiplier);
 
-        // BuffAction всегда готов примениться (а EffectAction - только если аналогичный на юните не существует)
+        // BuffAction всегда готов примениться (а EffectAction - только если аналогичный эффект на юните отсутствует)
         self::assertTrue($action->canByUsed());
 
         // Применяем баф
@@ -68,7 +68,7 @@ class BuffActionTest extends TestCase
      * @throws UnitFactoryException
      * @throws ActionException
      */
-    public function testBuffActionReducedLife(): void
+    public function testBuffActionMaximumLifeReduced(): void
     {
         $name = 'use Reserve Forces';
         $modifyMethod = 'multiplierMaxLife';
@@ -82,7 +82,76 @@ class BuffActionTest extends TestCase
         $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
         $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::NO_REDUCED_LIFE_MULTIPLIER);
+        $this->expectErrorMessage(UnitException::NO_REDUCED_MAXIMUM_LIFE);
+        $action->handle();
+    }
+
+    /**
+     * Тест на увеличение скорости атаки юнита
+     *
+     * @throws ActionException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testBuffActionAttackSpeedSuccess(): void
+    {
+        $name = 'use Battle Fury';
+        $modifyMethod = 'multiplierAttackSpeed';
+        $power = 125;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $oldAttackSpeed = $unit->getAttackSpeed();
+
+        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
+
+        self::assertEquals('skip', $action->getAnimationMethod());
+        self::assertEquals('buff', $action->getMessageMethod());
+
+        $multiplier = $power / 100;
+        $newAttackSpeed = $unit->getAttackSpeed() * $multiplier;
+
+        // BuffAction всегда готов примениться (а EffectAction - только если аналогичный эффект на юните отсутствует)
+        self::assertTrue($action->canByUsed());
+
+        // Применяем баф
+        $action->handle();
+
+        self::assertEquals($newAttackSpeed, $unit->getAttackSpeed());
+
+        // Откат изменения
+        $action->getRevertAction()->handle();
+
+        self::assertEquals($oldAttackSpeed, $unit->getAttackSpeed());
+    }
+
+    /**
+     * Тест на уменьшение скорости атаки - такая механика пока недоступна
+     *
+     * @throws ActionException
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testBuffActionAttackSpeedReduced(): void
+    {
+        $name = 'use Battle Fury';
+        $modifyMethod = 'multiplierAttackSpeed';
+        $power = 50;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
+
+        $this->expectException(UnitException::class);
+        $this->expectErrorMessage(UnitException::NO_REDUCED_ATTACK_SPEED);
         $action->handle();
     }
 
