@@ -9,6 +9,7 @@ use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\BattleFuryAbility;
 use Battle\Unit\UnitInterface;
@@ -18,6 +19,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class BattleFuryAbilityTest extends TestCase
 {
+    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use Battle Fury';
+
     /**
      * Тест на создание способности BattleFuryAbility
      *
@@ -65,6 +68,59 @@ class BattleFuryAbilityTest extends TestCase
         $ability->usage();
 
         self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на применение способности BattleFuryAbility
+     *
+     * @throws Exception
+     */
+    public function testBattleFuryAbilityApply(): void
+    {
+        $container = new Container();
+        $power = 1.4;
+        $unit = UnitFactory::createByTemplate(21, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $oldAttackSpeed = $unit->getAttackSpeed();
+
+        // Up concentration
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        // Обнуляем концентрацию, чтобы получить способность связанную с яростью
+        $unit->useConcentrationAbility();
+
+        $actions = $unit->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $message = $action->handle();
+            self::assertEquals(self::MESSAGE, $message);
+        }
+
+        // Проверяем, что скорость атаки юнита выросла
+        self::assertEquals($oldAttackSpeed * $power , $unit->getAttackSpeed());
+
+        // Пропускаем ходы
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        // Проверяем, что скорость атаки вернулась к исходному
+        self::assertEquals($oldAttackSpeed, $unit->getAttackSpeed());
+
+        $chatMessages = $container->getChat()->getMessages();
+
+        // Проверяем, что сообщение об использовании способности было добавлено в чат один раз
+        self::assertCount(1, $chatMessages);
+
+        foreach ($chatMessages as $chatMessage) {
+            self::assertEquals(self::MESSAGE, $chatMessage);
+        }
     }
 
     /**

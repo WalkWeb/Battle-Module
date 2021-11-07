@@ -33,6 +33,7 @@ return [
     'summon Skeleton Mage'             => 'призвал Скелета-мага',
     'summon Fire Elemental'            => 'призвал Элементаля огня',
     'use Reserve Forces'               => 'использовал Резервные Силы',
+    'use Battle Fury'                  => 'использовал Ярость битвы',
     'use Poison'                       => 'использовал Отравление',
     'Poison'                           => 'Отравление',
     'Healing Potion'                   => 'Лечебное зелье',

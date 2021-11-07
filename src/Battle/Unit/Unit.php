@@ -34,10 +34,8 @@ class Unit extends AbstractUnit
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
-        // Способность применяется если:
-        // 1. Есть способность доступная для использования
-        // 2. Способность может быть использована (например, есть цель для лечения)
-        if (($ability = $this->getAbility()) && $ability->canByUsed($enemyCommand, $alliesCommand)) {
+        // Если есть способность готовая к использованию - применяем её
+        if (($ability = $this->getAbility($enemyCommand, $alliesCommand))) {
             $ability->usage();
             return $ability->getAction($enemyCommand, $alliesCommand);
         }

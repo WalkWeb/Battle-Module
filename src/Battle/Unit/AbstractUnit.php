@@ -6,6 +6,7 @@ namespace Battle\Unit;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
+use Battle\Command\CommandInterface;
 use Battle\Container\ContainerException;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\ContainerInterface;
@@ -354,12 +355,18 @@ abstract class AbstractUnit implements UnitInterface
     /**
      * Проверяет способность, готовой к использованию
      *
+     * Способность применяется если:
+     * 1. Есть способность доступная для использования
+     * 2. Способность может быть использована (например, есть цель для лечения)
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
      * @return AbilityInterface|null
      */
-    protected function getAbility(): ?AbilityInterface
+    protected function getAbility(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ?AbilityInterface
     {
         foreach ($this->abilities as $ability) {
-            if ($ability->isReady()) {
+            if ($ability->isReady() && $ability->canByUsed($enemyCommand, $alliesCommand)) {
                 return $ability;
             }
         }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes\Orc;
 
+use Battle\Unit\Ability\Effect\BattleFuryAbility;
 use Battle\Unit\Classes\AbstractUnitClass;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\ReserveForcesAbility;
@@ -19,6 +20,7 @@ class Titan extends AbstractUnitClass
     {
         $collection = new AbilityCollection();
         $collection->add(new ReserveForcesAbility($unit));
+        $collection->add(new BattleFuryAbility($unit));
         return $collection;
     }
 
