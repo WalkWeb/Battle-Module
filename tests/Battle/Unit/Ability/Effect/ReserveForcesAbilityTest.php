@@ -116,7 +116,7 @@ class ReserveForcesAbilityTest extends TestCase
         self::assertCount(1, $chatMessages);
 
         foreach ($chatMessages as $chatMessage) {
-            self::assertEquals('<span style="color: #ae882d">Titan</span> use Reserve Forces', $chatMessage);
+            self::assertEquals(self::MESSAGE, $chatMessage);
         }
     }
 
