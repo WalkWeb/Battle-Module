@@ -293,11 +293,13 @@ abstract class AbstractUnit implements UnitInterface
     public function useConcentrationAbility(): void
     {
         $this->concentration = 0;
+        $this->abilities->update($this);
     }
 
     public function useRageAbility(): void
     {
         $this->rage = 0;
+        $this->abilities->update($this);
     }
 
     public function getEffects(): EffectCollection

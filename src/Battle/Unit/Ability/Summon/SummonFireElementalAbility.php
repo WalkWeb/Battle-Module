@@ -43,9 +43,7 @@ class SummonFireElementalAbility extends AbstractSummonAbility
      */
     public function update(UnitInterface $unit): void
     {
-        if (!$this->ready && $unit->getRage() === UnitInterface::MAX_RAGE) {
-            $this->ready = true;
-        }
+        $this->ready = $unit->getRage() === UnitInterface::MAX_RAGE;
     }
 
     /**

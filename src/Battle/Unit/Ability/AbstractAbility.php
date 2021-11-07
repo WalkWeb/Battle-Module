@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Ability;
 
-use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitInterface;
 

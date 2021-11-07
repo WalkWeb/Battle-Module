@@ -53,9 +53,7 @@ class GreatHealAbility extends AbstractAbility
      */
     public function update(UnitInterface $unit): void
     {
-        if (!$this->ready && $unit->getConcentration() === UnitInterface::MAX_CONS) {
-            $this->ready = true;
-        }
+        $this->ready = $unit->getConcentration() === UnitInterface::MAX_CONS;
     }
 
     /**
