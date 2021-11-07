@@ -62,4 +62,26 @@ class PriestTest extends TestCase
             }
         }
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testPriestReadyAbility(): void
+    {
+        $unit = UnitFactory::createByTemplate(5);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        for ($i = 0; $i < 30; $i++) {
+            $unit->newRound();
+        }
+
+        foreach ($unit->getAbilities() as $ability) {
+
+            // Лечение не может быть применено - лечить некого
+            self::assertTrue($ability->isReady());
+            self::assertFalse($ability->canByUsed($enemyCommand, $command));
+        }
+    }
 }

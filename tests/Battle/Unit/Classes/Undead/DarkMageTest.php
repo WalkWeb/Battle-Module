@@ -47,4 +47,24 @@ class DarkMageTest extends TestCase
         // Размер команды увеличился на 1 юнита
         self::assertCount(2, $actionCommand->getUnits());
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testDarkMageReadyAbility(): void
+    {
+        $unit = UnitFactory::createByTemplate(7);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        for ($i = 0; $i < 30; $i++) {
+            $unit->newRound();
+        }
+
+        foreach ($unit->getAbilities() as $ability) {
+            self::assertTrue($ability->isReady());
+            self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        }
+    }
 }

@@ -54,6 +54,26 @@ class SuccubusTest extends TestCase
     }
 
     /**
+     * @throws Exception
+     */
+    public function testSuccubusReadyAbility(): void
+    {
+        $unit = UnitFactory::createByTemplate(23);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        for ($i = 0; $i < 30; $i++) {
+            $unit->newRound();
+        }
+
+        foreach ($unit->getAbilities() as $ability) {
+            self::assertTrue($ability->isReady());
+            self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        }
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command

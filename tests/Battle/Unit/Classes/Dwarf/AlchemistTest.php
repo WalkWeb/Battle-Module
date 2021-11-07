@@ -74,6 +74,36 @@ class AlchemistTest extends TestCase
     }
 
     /**
+     * @throws Exception
+     */
+    public function testAlchemistReadyAbility(): void
+    {
+        $unit = UnitFactory::createByTemplate(22);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        for ($i = 0; $i < 30; $i++) {
+            $unit->newRound();
+        }
+
+        foreach ($unit->getAbilities() as $i => $ability) {
+
+            // Эффект на лечение - лечить некого
+            if ($i === 0) {
+                self::assertTrue($ability->isReady());
+                self::assertFalse($ability->canByUsed($enemyCommand, $command));
+            }
+
+            // Призыв
+            if ($i === 1) {
+                self::assertTrue($ability->isReady());
+                self::assertTrue($ability->canByUsed($enemyCommand, $command));
+            }
+        }
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
