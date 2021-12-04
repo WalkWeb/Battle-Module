@@ -113,6 +113,6 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
             <?= $row ?>
         <?php endforeach; ?>
 
-        <h1><?= $result->getWinnerText() ?></h1>
+        <h1><?= $result->getTranslation()->trans($result->getWinnerText()) ?></h1>
     </div>
 </div>

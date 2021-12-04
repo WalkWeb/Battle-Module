@@ -16,6 +16,8 @@ return [
     'Hidden Battle Log'                => 'Hidden Battle Log',
     'Hidden Battle Statistic'          => 'Hidden Battle Statistic',
     'Limit round. Winner by max life'  => 'Limit round. Winner by max life',
+    'Left command win'                 => 'Left command win',
+    'Right command win'                => 'Right command win',
     // Action
     'attack'                           => 'attack',
     'heal'                             => 'heal',
