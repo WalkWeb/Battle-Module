@@ -265,6 +265,9 @@ class View implements ViewInterface
     }
 
     /**
+     * Длительность эффекта отображается только в том случае, если она меньше 10. Это сделано для того, чтобы большая
+     * цифра длительности не выходила за рамки иконки эффекта
+     *
      * @param UnitInterface $unit
      * @return string
      */
@@ -273,7 +276,8 @@ class View implements ViewInterface
         $html = '';
 
         foreach ($unit->getEffects() as $effect) {
-            $html .= '<img src="' . $effect->getIcon() . '" width="22" alt="" /> <span>' . $effect->getDuration() . '</span>';
+            $duration = $effect->getDuration() < 10 ? (string)$effect->getDuration() : '';
+            $html .= '<img src="' . $effect->getIcon() . '" width="22" alt="" /> <span>' . $duration . '</span>';
         }
         
         return $html;

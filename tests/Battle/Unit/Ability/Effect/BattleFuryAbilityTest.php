@@ -106,7 +106,7 @@ class BattleFuryAbilityTest extends TestCase
         self::assertEquals($oldAttackSpeed * $power , $unit->getAttackSpeed());
 
         // Пропускаем ходы
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $unit->newRound();
         }
 
@@ -149,7 +149,7 @@ class BattleFuryAbilityTest extends TestCase
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
         // Пропускаем ходы
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $unit->newRound();
         }
 
@@ -183,7 +183,7 @@ class BattleFuryAbilityTest extends TestCase
             'effect'         => [
                 'name'                  => 'Battle Fury',
                 'icon'                  => '/images/icons/ability/102.png',
-                'duration'              => 5,
+                'duration'              => 15,
                 'on_apply_actions'      => [
                     [
                         'type'           => ActionInterface::BUFF,

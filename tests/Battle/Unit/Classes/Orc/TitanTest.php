@@ -144,7 +144,7 @@ class TitanTest extends TestCase
         $data = [
             'name'                  => 'Battle Fury',
             'icon'                  => '/images/icons/ability/102.png',
-            'duration'              => 5,
+            'duration'              => 15,
             'on_apply_actions'      => [
                 [
                     'type'           => ActionInterface::BUFF,

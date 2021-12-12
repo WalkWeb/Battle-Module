@@ -17,7 +17,7 @@ class BattleFuryAbility extends AbstractAbility
     private const NAME          = 'Battle Fury';
     private const ICON          = '/images/icons/ability/102.png';
     private const USE_MESSAGE   = 'use Battle Fury';
-    private const DURATION      = 5;
+    private const DURATION      = 15;
     private const MODIFY_METHOD = 'multiplierAttackSpeed';
     private const MODIFY_POWER  = 140;
 

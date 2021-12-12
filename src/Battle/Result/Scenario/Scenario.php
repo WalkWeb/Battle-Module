@@ -373,6 +373,13 @@ class Scenario implements ScenarioInterface
         return $unit->getLife() > 0 ? 'unit_ava_blank' : 'unit_ava_dead';
     }
 
+    /**
+     * Длительность эффекта отображается только в том случае, если она меньше 10. Это сделано для того, чтобы большая
+     * цифра длительности не выходила за рамки иконки эффекта
+     *
+     * @param UnitInterface $unit
+     * @return array
+     */
     private function getUnitEffects(UnitInterface $unit): array
     {
         $data = [];
@@ -380,7 +387,7 @@ class Scenario implements ScenarioInterface
         foreach ($unit->getEffects() as $effect) {
             $data[] = [
                 'icon'     => $effect->getIcon(),
-                'duration' => $effect->getDuration(),
+                'duration' => $effect->getDuration() < 10 ? (string)$effect->getDuration() : '',
             ];
         }
 
