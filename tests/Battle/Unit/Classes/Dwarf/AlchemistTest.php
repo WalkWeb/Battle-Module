@@ -130,6 +130,7 @@ class AlchemistTest extends TestCase
                     'power'            => 15,
                     'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
                     'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                    'icon'             => '/images/icons/ability/234.png',
                 ],
             ],
             'on_disable_actions'    => [],

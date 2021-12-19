@@ -14,6 +14,9 @@ use Tests\Battle\Factory\UnitFactory;
 
 class HealingPotionAbilityTest extends TestCase
 {
+    private const MESSAGE_APPLY = '<span style="color: #1e72e3">wounded_unit</span> <img src="/images/icons/ability/234.png" alt="" /> use Healing Potion';
+    private const MESSAGE_HEAL = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <img src="/images/icons/ability/234.png" alt="" /> Healing Potion';
+
     /**
      * Тест на создание способности HealingPotionAbility
      *
@@ -56,7 +59,7 @@ class HealingPotionAbilityTest extends TestCase
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY, $action->handle());
         }
 
         $effects = $unit->getEffects();
@@ -66,7 +69,7 @@ class HealingPotionAbilityTest extends TestCase
 
             foreach ($onNextRoundActions as $effectAction) {
                 self::assertTrue($effectAction->canByUsed());
-                $effectAction->handle();
+                self::assertEquals(self::MESSAGE_HEAL, $effectAction->handle());
             }
         }
 

@@ -193,9 +193,11 @@ class Chat implements ChatInterface
      */
     private function effectHeal(ActionInterface $action): string
     {
+        $icon = $action->getIcon() === '' ? '' : $this->createIconImage($action->getIcon());
+
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans('restored') . ' ' .
-            $action->getFactualPower() . ' ' . $this->translation->trans('life from effect') . ' ' .
+            $action->getFactualPower() . ' ' . $this->translation->trans('life from effect') . ' ' . $icon .
             $this->translation->trans($action->getNameAction());
     }
 

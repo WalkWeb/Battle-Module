@@ -91,7 +91,7 @@ class ActionFactoryTest extends TestCase
 
         $actionFactory = new ActionFactory();
 
-        // Вариант данных без damage и name
+        // Вариант с минимальным набором данных
         $data = [
             'type'           => ActionInterface::HEAL,
             'action_unit'    => $unit,
@@ -107,6 +107,7 @@ class ActionFactoryTest extends TestCase
         self::assertEquals(ActionInterface::TARGET_WOUNDED_ALLIES, $action->getTypeTarget());
         self::assertEquals($unit->getDamage(), $action->getPower());
         self::assertEquals('heal', $action->getNameAction());
+        self::assertEquals('', $action->getIcon());
 
         // Полный набор данных
         $data = [
@@ -118,6 +119,7 @@ class ActionFactoryTest extends TestCase
             'power'            => $power = 50,
             'name'             => $name = 'action name 123',
             'animation_method' => $animationMethod = 'effectHeal',
+            'icon'             => $icon = 'icon.png',
         ];
 
         $action = $actionFactory->create($data);
@@ -128,6 +130,7 @@ class ActionFactoryTest extends TestCase
         self::assertEquals($power, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($animationMethod, $action->getAnimationMethod());
+        self::assertEquals($icon, $action->getIcon());
     }
 
     /**

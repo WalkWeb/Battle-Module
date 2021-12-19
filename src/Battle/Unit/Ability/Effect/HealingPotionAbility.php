@@ -127,6 +127,7 @@ class HealingPotionAbility extends AbstractAbility
                 'allies_command' => $alliesCommand,
                 'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
                 'name'           => self::USE_MESSAGE,
+                'icon'           => self::ICON,
                 'effect'         => [
                     'name'                  => self::NAME,
                     'icon'                  => self::ICON,
@@ -143,6 +144,7 @@ class HealingPotionAbility extends AbstractAbility
                             'power'            => self::POWER,
                             'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
                             'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                            'icon'             => self::ICON,
                         ],
                     ],
                     'on_disable_actions'    => [],
