@@ -140,6 +140,7 @@ class ActionFactory
         $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
         $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
         $effectData = self::array($data, 'effect', ActionException::INVALID_EFFECT_DATA);
+        $icon = $data['icon'] ?? '';
 
         $effectFactory = new EffectFactory($this);
         $effect = $effectFactory->create($effectData);
@@ -150,6 +151,7 @@ class ActionFactory
             $alliesCommand,
             $typeTarget,
             $name,
+            $icon,
             $effect
         );
     }

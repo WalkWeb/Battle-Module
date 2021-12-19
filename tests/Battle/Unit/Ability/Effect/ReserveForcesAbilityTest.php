@@ -19,7 +19,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class ReserveForcesAbilityTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use Reserve Forces';
+    private const MESSAGE = '<span style="color: #ae882d">Titan</span> <img src="/images/icons/ability/156.png" alt="" /> use Reserve Forces';
 
     /**
      * Тест на создание способности ReserveForcesAbility
@@ -229,6 +229,7 @@ class ReserveForcesAbilityTest extends TestCase
             'allies_command' => $alliesCommand,
             'type_target'    => ActionInterface::TARGET_SELF,
             'name'           => 'use Reserve Forces',
+            'icon'           => '/images/icons/ability/156.png',
             'effect'         => [
                 'name'                  => 'Reserve Forces',
                 'icon'                  => '/images/icons/ability/156.png',

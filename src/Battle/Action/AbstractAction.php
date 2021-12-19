@@ -42,17 +42,24 @@ abstract class AbstractAction implements ActionInterface
      */
     protected $factualPower = 0;
 
+    /**
+     * @var string
+     */
+    protected $icon;
+
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
-        int $typeTarget
+        int $typeTarget,
+        string $icon = ''
     )
     {
         $this->actionUnit = $actionUnit;
         $this->enemyCommand = $enemyCommand;
         $this->alliesCommand = $alliesCommand;
         $this->typeTarget = $typeTarget;
+        $this->icon = $icon;
     }
 
     public function getActionUnit(): UnitInterface
@@ -63,6 +70,11 @@ abstract class AbstractAction implements ActionInterface
     public function getTypeTarget(): int
     {
         return $this->typeTarget;
+    }
+
+    public function getIcon(): string
+    {
+        return $this->icon;
     }
 
     /**

@@ -35,11 +35,12 @@ class EffectAction extends AbstractAction
         CommandInterface $alliesCommand,
         int $typeTarget,
         string $name,
+        string $icon,
         EffectInterface $effect,
         string $animationMethod = self::DEFAULT_ANIMATION_METHOD
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->name = $name;
         $this->effect = $effect;
         $this->animationMethod = $animationMethod;

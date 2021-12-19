@@ -439,6 +439,11 @@ p.left {
     overflow: auto;
 }
 
+.com_container .com_content img {
+    height: 18px;
+    vertical-align: middle;
+}
+
 p.none {
     display: none;
 }

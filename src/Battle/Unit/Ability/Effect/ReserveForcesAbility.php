@@ -127,6 +127,7 @@ class ReserveForcesAbility extends AbstractAbility
                 'allies_command' => $alliesCommand,
                 'type_target'    => ActionInterface::TARGET_SELF,
                 'name'           => self::USE_MESSAGE,
+                'icon'           => self::ICON,
                 'effect'         => [
                     'name'                  => self::NAME,
                     'icon'                  => self::ICON,

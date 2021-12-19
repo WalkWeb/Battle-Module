@@ -216,4 +216,14 @@ interface ActionInterface
      * @param UnitInterface $unit
      */
     public function changeActionUnit(UnitInterface $unit): void;
+
+    /**
+     * Иконка события. Если это простая базовая атака - будет возвращена пустая строка. Во всех остальных случаях
+     * используется способность, которая имеет свою иконку.
+     *
+     * Используется для отображения иконок способностей в чате
+     *
+     * @return string
+     */
+    public function getIcon(): string;
 }

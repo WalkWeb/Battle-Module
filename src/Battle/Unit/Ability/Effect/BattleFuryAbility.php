@@ -131,6 +131,7 @@ class BattleFuryAbility extends AbstractAbility
                             'name'           => self::USE_MESSAGE,
                             'modify_method'  => self::MODIFY_METHOD,
                             'power'          => self::MODIFY_POWER,
+                            'icon'           => self::ICON,
                             'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                         ],
                     ],

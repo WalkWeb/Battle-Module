@@ -152,13 +152,16 @@ class Chat implements ChatInterface
      */
     private function applyEffect(ActionInterface $action): string
     {
+        $icon = $action->getIcon() === '' ? '' : $this->createIconImage($action->getIcon());
+
         if ($action->getActionUnit()->getId() === $action->getTargetUnit()->getId()) {
             return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-                $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
+                $action->getActionUnit()->getName() . '</span> ' . $icon .
+                $this->translation->trans($action->getNameAction());
         }
 
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' .
+            $action->getActionUnit()->getName() . '</span> ' . $icon .
             $this->translation->trans($action->getNameAction()) . ' ' . $this->translation->trans('on') .
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() . '</span>';
@@ -204,5 +207,14 @@ class Chat implements ChatInterface
     private function skip(): string
     {
         return '';
+    }
+
+    /**
+     * @param string $icon
+     * @return string
+     */
+    private function createIconImage(string $icon): string
+    {
+        return '<img src="' . $icon . '" alt="" /> ';
     }
 }

@@ -641,6 +641,7 @@ class CommandTest extends TestCase
             $command,
             EffectAction::TARGET_SELF,
             'effect',
+            'icon.png',
             $effect
         );
     }

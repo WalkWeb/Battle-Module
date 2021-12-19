@@ -326,6 +326,7 @@ class ActionFactoryTest extends TestCase
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_SELF,
             'name'           => $name = 'Effect test',
+            'icon'           => $icon = 'icon.png',
             'effect'         => [
                 'name'                  => 'Effect test #1',
                 'icon'                  => 'effect_icon_#1',
@@ -353,6 +354,7 @@ class ActionFactoryTest extends TestCase
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
         self::assertEquals($name, $action->getNameAction());
+        self::assertEquals($icon, $action->getIcon());
         self::assertEquals($effectFactory->create($data['effect']), $action->getEffect());
     }
 
