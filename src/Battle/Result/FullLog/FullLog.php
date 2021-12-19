@@ -21,7 +21,7 @@ class FullLog implements FullLogInterface
     public function addText(string $text): void
     {
         if ($text !== '') {
-            $this->log[] = '<p>' . $text . '</p>';
+            $this->log[] = '<p class="chat_message">' . $text . '</p>';
         }
     }
 

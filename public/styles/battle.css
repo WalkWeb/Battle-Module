@@ -439,7 +439,7 @@ p.left {
     overflow: auto;
 }
 
-.com_container .com_content img {
+.com_container .com_content img, p.chat_message img {
     height: 18px;
     vertical-align: middle;
 }
