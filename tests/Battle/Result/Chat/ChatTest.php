@@ -558,9 +558,7 @@ class ChatTest extends TestCase
     private function getContainerWithRuLanguage(): ContainerInterface
     {
         $translation = new Translation('ru');
-        $chat = new Chat($translation);
         $container = new Container();
-        $container->set(Chat::class, $chat);
         $container->set(Translation::class, $translation);
         return $container;
     }

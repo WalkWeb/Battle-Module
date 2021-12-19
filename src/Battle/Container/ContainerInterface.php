@@ -33,10 +33,10 @@ interface ContainerInterface
     public function set(string $id, object $object): void;
 
     /**
-     * @param string $id
+     * @param string $class
      * @return bool
      */
-    public function exist(string $id): bool;
+    public function exist(string $class): bool;
 
     /**
      * @return StatisticInterface

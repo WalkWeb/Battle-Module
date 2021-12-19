@@ -7,11 +7,12 @@ namespace Battle\Result\Chat;
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Translation\Translation;
+use Battle\Translation\TranslationInterface;
 
 class Chat implements ChatInterface
 {
     /**
-     * @var Translation
+     * @var TranslationInterface
      */
     private $translation;
 
@@ -21,9 +22,9 @@ class Chat implements ChatInterface
     private $messages = [];
 
     /**
-     * @param Translation|null $translation
+     * @param TranslationInterface|null $translation
      */
-    public function __construct(?Translation $translation = null)
+    public function __construct(?TranslationInterface $translation = null)
     {
         $this->translation = $translation ?? new Translation();
     }

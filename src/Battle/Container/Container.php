@@ -56,13 +56,13 @@ class Container implements ContainerInterface
      */
     public function get(string $id): object
     {
-        $id = $this->normalizeIdService($id);
+        $class = $this->getNameService($id);
 
-        if ($this->exist($id)) {
-            return $this->storage[$id];
+        if ($this->exist($class)) {
+            return $this->storage[$class];
         }
 
-        return $this->create($id);
+        return $this->create($class);
     }
 
     /**
@@ -72,19 +72,19 @@ class Container implements ContainerInterface
      */
     public function set(string $id, object $object): void
     {
-        $id = $this->normalizeIdService($id);
+        $id = $this->getNameService($id);
         $this->storage[$id] = $object;
     }
 
     /**
-     * @param string $id
+     * @param string $class
      * @return bool
      */
-    public function exist(string $id): bool
+    public function exist(string $class): bool
     {
         try {
-            $id = $this->normalizeIdService($id);
-            return array_key_exists($id, $this->storage);
+            $class = $this->getNameService($class);
+            return array_key_exists($class, $this->storage);
         } catch (ContainerException $e) {
             // Контейнер может иметь только фиксированный набор сервисов. Если указан неизвестный - значит он не может
             // быть добавлен. Если будет добавлен метод set(), то данную механику нужно будет переделывать
@@ -192,18 +192,34 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @param string $id
+     * @param string $class
      * @return object
+     * @throws ContainerException
      */
-    private function create(string $id): object
+    private function create(string $class): object
     {
-        $class = $this->map[$id];
+        if ($class === Chat::class) {
+            $object = $this->createChat();
+            $this->storage[$this->map[$class]] = $object;
+            return $object;
+        }
 
         $object = new $class;
-
-        $this->storage[$this->map[$id]] = $object;
+        $this->storage[$this->map[$class]] = $object;
 
         return $object;
+    }
+
+    /**
+     * Логика создания чата отличается от других объектов - необходимо использовать Translation из контейнера, а не
+     * создавать новый
+     *
+     * @return ChatInterface
+     * @throws ContainerException
+     */
+    private function createChat(): ChatInterface
+    {
+        return new Chat($this->getTranslation());
     }
 
     /**
@@ -211,7 +227,7 @@ class Container implements ContainerInterface
      * @return string
      * @throws ContainerException
      */
-    private function normalizeIdService(string $id): string
+    private function getNameService(string $id): string
     {
         if (!array_key_exists($id, $this->map)) {
             throw new ContainerException(ContainerException::UNKNOWN_SERVICE);
