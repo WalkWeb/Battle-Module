@@ -19,7 +19,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class BattleFuryAbilityTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use Battle Fury';
+    private const MESSAGE = '<span style="color: #ae882d">Titan</span> <img src="/images/icons/ability/102.png" alt="" /> use Battle Fury';
 
     /**
      * Тест на создание способности BattleFuryAbility
@@ -180,6 +180,7 @@ class BattleFuryAbilityTest extends TestCase
             'allies_command' => $alliesCommand,
             'type_target'    => ActionInterface::TARGET_SELF,
             'name'           => 'use Battle Fury',
+            'icon'           => '/images/icons/ability/102.png',
             'effect'         => [
                 'name'                  => 'Battle Fury',
                 'icon'                  => '/images/icons/ability/102.png',
