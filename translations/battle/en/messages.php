@@ -42,6 +42,7 @@ return [
     'Poison'                           => 'Poison',
     'Healing Potion'                   => 'Healing Potion',
     'use Back to Life and resurrected' => 'use Back to Life and resurrected',
+    'use Healing Potion'               => 'use Healing Potion',
     // Statistics
     'Statistics'                       => 'Statistics',
     'Unit'                             => 'Unit',

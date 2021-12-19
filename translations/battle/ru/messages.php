@@ -40,6 +40,7 @@ return [
     'Poison'                           => 'Отравление',
     'Healing Potion'                   => 'Лечебное зелье',
     'use Back to Life and resurrected' => 'использовал Возвращение к жизни и воскресил',
+    'use Healing Potion'               => 'использовал Лечебное зелье',
     // Statistics
     'Statistics'                       => 'Статистика',
     'Unit'                             => 'Кто',
