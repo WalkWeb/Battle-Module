@@ -170,6 +170,26 @@ trait ValidationTrait
      * @param array $data
      * @param string $filed
      * @param string $error
+     * @return string
+     * @throws BattleException
+     */
+    protected static function stringOrMissing(array $data, string $filed, string $error): string
+    {
+        if (!array_key_exists($filed, $data)) {
+            return '';
+        }
+
+        if (!is_string($data[$filed])) {
+            throw new BattleException($error);
+        }
+
+        return $data[$filed];
+    }
+
+    /**
+     * @param array $data
+     * @param string $filed
+     * @param string $error
      * @return UnitInterface
      * @throws BattleException
      */

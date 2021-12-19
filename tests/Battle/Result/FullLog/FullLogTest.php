@@ -22,7 +22,7 @@ class FullLogTest extends TestCase
     public function testFullLogAddText(): void
     {
         $fullLog = new FullLog();
-        $messages = ['<p>text 1</p>', '<p>text 2</p>'];
+        $messages = ['<p class="chat_message">text 1</p>', '<p class="chat_message">text 2</p>'];
         $fullLog->addText('text 1');
         $fullLog->addText('text 2');
         // Пустое сообщение не будет добавлено

@@ -14,6 +14,8 @@ use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
 
 class HeavyStrikeAbilityTest extends TestCase
 {
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/335.png" alt="" /> use Heavy Strike at <span style="color: #1e72e3">unit_2</span> on 50 damage';
+
     /**
      * @throws Exception
      */
@@ -55,6 +57,8 @@ class HeavyStrikeAbilityTest extends TestCase
         foreach ($actions as $action) {
             self::assertInstanceOf(DamageAction::class, $action);
             self::assertEquals((int)($unit->getDamage() * 2.5), $action->getPower());
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE, $action->handle());
         }
     }
 }

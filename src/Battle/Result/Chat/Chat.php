@@ -67,8 +67,10 @@ class Chat implements ChatInterface
      */
     private function damage(ActionInterface $action): string
     {
+        $icon = $action->getIcon() === '' ? '' : $this->createIconImage($action->getIcon());
+
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' .
+            $action->getActionUnit()->getName() . '</span> ' . $icon .
             $this->translation->trans( $action->getNameAction()) .
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() .

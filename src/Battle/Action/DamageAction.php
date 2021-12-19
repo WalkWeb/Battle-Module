@@ -13,7 +13,7 @@ class DamageAction extends AbstractAction
     private const DEFAULT_NAME           = 'attack';
     public const UNIT_ANIMATION_METHOD   = 'damage';
     public const EFFECT_ANIMATION_METHOD = 'effectDamage';
-    private const DEFAULT_MESSAGE_METHOD = 'damage';
+    public const DEFAULT_MESSAGE_METHOD = 'damage';
     public const EFFECT_MESSAGE_METHOD   = 'effectDamage';
 
     /**
@@ -44,10 +44,11 @@ class DamageAction extends AbstractAction
         ?int $damage = null,
         ?string $name = null,
         ?string $animationMethod = null,
-        ?string $messageMethod = null
+        ?string $messageMethod = null,
+        string $icon = ''
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->damage = $damage ?? $actionUnit->getDamage();
         $this->name = $name ?? self::DEFAULT_NAME;
         $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;

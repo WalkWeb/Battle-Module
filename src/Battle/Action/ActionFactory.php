@@ -54,6 +54,7 @@ class ActionFactory
         $actionUnit = self::unit($data, 'action_unit', ActionException::INVALID_ACTION_UNIT_DATA);
         $enemyCommand = self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA);
         $alliesCommand = self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA);
+        $icon = self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON);
 
         $className = self::$map[$type];
 
@@ -73,7 +74,8 @@ class ActionFactory
                 $power,
                 $name,
                 $animationMethod,
-                $messageMethod
+                $messageMethod,
+                $icon
             );
         }
 
@@ -140,7 +142,6 @@ class ActionFactory
         $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
         $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
         $effectData = self::array($data, 'effect', ActionException::INVALID_EFFECT_DATA);
-        $icon = $data['icon'] ?? '';
 
         $effectFactory = new EffectFactory($this);
         $effect = $effectFactory->create($effectData);

@@ -38,7 +38,7 @@ class ActionFactoryTest extends TestCase
 
         $actionFactory = new ActionFactory();
 
-        // Вариант данных без damage, name и animation_method
+        // Вариант с минимальным набором данных
         $data = [
             'type'           => ActionInterface::DAMAGE,
             'action_unit'    => $unit,
@@ -54,6 +54,7 @@ class ActionFactoryTest extends TestCase
         self::assertEquals(ActionInterface::TARGET_RANDOM_ENEMY, $action->getTypeTarget());
         self::assertEquals($unit->getDamage(), $action->getPower());
         self::assertEquals('attack', $action->getNameAction());
+        self::assertEquals('', $action->getIcon());
 
         // Полный набор данных
         $data = [
@@ -65,6 +66,7 @@ class ActionFactoryTest extends TestCase
             'power'            => $damage = 50,
             'name'             => $name = 'action name 123',
             'animation_method' => $animationMethod = 'effectDamage',
+            'icon'             => $icon = 'icon.png',
         ];
 
         $action = $actionFactory->create($data);
@@ -75,6 +77,7 @@ class ActionFactoryTest extends TestCase
         self::assertEquals($damage, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($animationMethod, $action->getAnimationMethod());
+        self::assertEquals($icon, $action->getIcon());
     }
 
     /**
@@ -1004,6 +1007,52 @@ class ActionFactoryTest extends TestCase
                     'power'          => 50,
                 ],
                 ActionException::INVALID_NAME_DATA,
+            ],
+            // DamageAction - некорректный icon
+            [
+                [
+                    'type'           => ActionInterface::DAMAGE,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'icon'           => 123,
+                ],
+                ActionException::INVALID_ICON,
+            ],
+            // EffectAction - некорректный icon
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'Effect',
+                    'icon'           => true,
+                    'effects'        => [
+                        [
+                            'name'                  => 'Effect test #1',
+                            'icon'                  => 'effect_icon_#1',
+                            'duration'              => 10,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'action_unit'    => $actionUnit,
+                                    'enemy_command'  => $enemyCommand,
+                                    'allies_command' => $command,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'use Reserve Forces',
+                                    'modify_method'  => 'multiplierMaxLife',
+                                    'power'          => 130,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+                ActionException::INVALID_ICON,
             ],
         ];
     }
