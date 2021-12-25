@@ -67,10 +67,8 @@ class Chat implements ChatInterface
      */
     private function damage(ActionInterface $action): string
     {
-        $icon = $action->getIcon() === '' ? '' : $this->createIconImage($action->getIcon());
-
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $icon .
+            $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
             $this->translation->trans( $action->getNameAction()) .
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() .
@@ -86,7 +84,7 @@ class Chat implements ChatInterface
     private function heal(ActionInterface $action): string
     {
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' .
+            $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
             $this->translation->trans($action->getNameAction()) .
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() .
@@ -100,10 +98,9 @@ class Chat implements ChatInterface
      */
     private function summon(ActionInterface $action): string
     {
-        $icon = $action->getIcon() === '' ? '' : $this->createIconImage($action->getIcon());
-
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $icon . $this->translation->trans($action->getNameAction());
+            $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
+            $this->translation->trans($action->getNameAction());
     }
 
     /**
@@ -140,10 +137,9 @@ class Chat implements ChatInterface
      */
     private function resurrected(ActionInterface $action): string
     {
-        $icon = $action->getIcon() === '' ? '' : $this->createIconImage($action->getIcon());
-
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $icon . $this->translation->trans($action->getNameAction()) .
+            $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
+            $this->translation->trans($action->getNameAction()) .
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() .
             '</span>';
@@ -158,16 +154,14 @@ class Chat implements ChatInterface
      */
     private function applyEffect(ActionInterface $action): string
     {
-        $icon = $action->getIcon() === '' ? '' : $this->createIconImage($action->getIcon());
-
         if ($action->getActionUnit()->getId() === $action->getTargetUnit()->getId()) {
             return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-                $action->getActionUnit()->getName() . '</span> ' . $icon .
+                $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
                 $this->translation->trans($action->getNameAction());
         }
 
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $icon .
+            $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
             $this->translation->trans($action->getNameAction()) . ' ' . $this->translation->trans('on') .
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() . '</span>';
@@ -197,12 +191,10 @@ class Chat implements ChatInterface
      */
     private function effectHeal(ActionInterface $action): string
     {
-        $icon = $action->getIcon() === '' ? '' : $this->createIconImage($action->getIcon());
-
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans('restored') . ' ' .
-            $action->getFactualPower() . ' ' . $this->translation->trans('life from effect') . ' ' . $icon .
-            $this->translation->trans($action->getNameAction());
+            $action->getFactualPower() . ' ' . $this->translation->trans('life from effect') . ' ' .
+            $this->getIcon($action) . $this->translation->trans($action->getNameAction());
     }
 
     /**
@@ -216,11 +208,11 @@ class Chat implements ChatInterface
     }
 
     /**
-     * @param string $icon
+     * @param ActionInterface $action
      * @return string
      */
-    private function createIconImage(string $icon): string
+    private function getIcon(ActionInterface $action): string
     {
-        return '<img src="' . $icon . '" alt="" /> ';
+        return $action->getIcon() === '' ? '' : '<img src="' . $action->getIcon() . '" alt="" /> ';
     }
 }

@@ -13,7 +13,7 @@ class HealAction extends AbstractAction
     private const HANDLE_METHOD          = 'applyHealAction';
     public const UNIT_ANIMATION_METHOD   = 'heal';
     public const EFFECT_ANIMATION_METHOD = 'effectHeal';
-    private const DEFAULT_MESSAGE_METHOD = 'heal';
+    public const DEFAULT_MESSAGE_METHOD = 'heal';
     public const EFFECT_MESSAGE_METHOD   = 'effectHeal';
 
     /**

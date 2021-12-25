@@ -15,6 +15,8 @@ use Battle\Unit\Ability\Heal\GreatHealAbility;
 
 class GreatHealAbilityTest extends TestCase
 {
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/196.png" alt="" /> use Great Heal and heal <span style="color: #1e72e3">unit_1</span> on 30 life';
+
     /**
      * @throws Exception
      */
@@ -64,6 +66,8 @@ class GreatHealAbilityTest extends TestCase
         foreach ($actions as $action) {
             self::assertInstanceOf(HealAction::class, $action);
             self::assertEquals($unit->getDamage() * 3, $action->getPower());
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE, $action->handle());
         }
     }
 
