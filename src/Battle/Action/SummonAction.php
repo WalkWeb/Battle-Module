@@ -32,16 +32,18 @@ class SummonAction extends AbstractAction
      * @param CommandInterface $alliesCommand
      * @param string $name
      * @param UnitInterface $summon
+     * @param string $icon
      */
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         string $name,
-        UnitInterface $summon
+        UnitInterface $summon,
+        string $icon = ''
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF);
+        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF, $icon);
         $this->name = $name;
         $this->summon = $summon;
     }

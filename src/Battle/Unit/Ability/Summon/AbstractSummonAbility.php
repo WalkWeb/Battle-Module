@@ -58,6 +58,11 @@ abstract class AbstractSummonAbility extends AbstractAbility
      */
     private $summonRaceId;
 
+    /**
+     * @var string
+     */
+    private $icon;
+
     public function __construct(
         UnitInterface $unit,
         string $summonName,
@@ -67,7 +72,9 @@ abstract class AbstractSummonAbility extends AbstractAbility
         float $summonAttackSpeed,
         int $summonLife,
         bool $summonMelee,
-        int $summonRaceId)
+        int $summonRaceId,
+        string $icon = ''
+    )
     {
         parent::__construct($unit);
         $this->summonName = $summonName;
@@ -78,6 +85,7 @@ abstract class AbstractSummonAbility extends AbstractAbility
         $this->summonLife = $summonLife;
         $this->summonMelee = $summonMelee;
         $this->summonRaceId = $summonRaceId;
+        $this->icon = $icon;
     }
 
     /**
@@ -110,7 +118,8 @@ abstract class AbstractSummonAbility extends AbstractAbility
                 $this->unit->getCommand(),
                 RaceFactory::create($this->summonRaceId),
                 $this->unit->getContainer()
-            )
+            ),
+            $this->icon
         ));
 
         return $collection;

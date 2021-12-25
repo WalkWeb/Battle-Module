@@ -99,7 +99,8 @@ class ActionFactory
                 $enemyCommand,
                 $alliesCommand,
                 $name,
-                UnitFactory::create($summonData, $actionUnit->getContainer())
+                UnitFactory::create($summonData, $actionUnit->getContainer()),
+                $icon
             );
 
         }

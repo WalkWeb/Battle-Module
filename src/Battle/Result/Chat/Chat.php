@@ -100,8 +100,10 @@ class Chat implements ChatInterface
      */
     private function summon(ActionInterface $action): string
     {
+        $icon = $action->getIcon() === '' ? '' : $this->createIconImage($action->getIcon());
+
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
+            $action->getActionUnit()->getName() . '</span> ' . $icon . $this->translation->trans($action->getNameAction());
     }
 
     /**

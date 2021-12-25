@@ -14,6 +14,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class SummonFireElementalAbilityTest extends TestCase
 {
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/198.png" alt="" /> summon Fire Elemental';
+
     /**
      * @throws Exception
      */
@@ -49,6 +51,8 @@ class SummonFireElementalAbilityTest extends TestCase
 
         foreach ($actions as $action) {
             self::assertInstanceOf(SummonAction::class, $action);
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE, $action->handle());
         }
 
         $ability->usage();
