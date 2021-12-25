@@ -135,7 +135,8 @@ class ActionFactory
                 $alliesCommand,
                 $typeTarget,
                 $power,
-                $name
+                $name,
+                $icon
             );
         }
 

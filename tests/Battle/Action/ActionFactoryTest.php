@@ -288,6 +288,7 @@ class ActionFactoryTest extends TestCase
             'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
             'name'           => $name = 'resurrection name test',
             'power'          => $power = 50,
+            'icon'           => $icon = 'icon.png',
         ];
 
         $action = $actionFactory->create($data);
@@ -297,8 +298,9 @@ class ActionFactoryTest extends TestCase
         self::assertEquals(ActionInterface::TARGET_DEAD_ALLIES, $action->getTypeTarget());
         self::assertEquals($power, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
+        self::assertEquals($icon, $action->getIcon());
 
-        // Вариант без name
+        // Минимальный вариант данных
         $data = [
             'type'           => ActionInterface::RESURRECTION,
             'action_unit'    => $unit,
@@ -310,7 +312,12 @@ class ActionFactoryTest extends TestCase
 
         $action = $actionFactory->create($data);
 
+        self::assertInstanceOf(ResurrectionAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_DEAD_ALLIES, $action->getTypeTarget());
+        self::assertEquals($power, $action->getPower());
         self::assertEquals('resurrected', $action->getNameAction());
+        self::assertEquals('', $action->getIcon());
     }
 
     /**

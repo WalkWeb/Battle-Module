@@ -138,8 +138,10 @@ class Chat implements ChatInterface
      */
     private function resurrected(ActionInterface $action): string
     {
+        $icon = $action->getIcon() === '' ? '' : $this->createIconImage($action->getIcon());
+
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction()) .
+            $action->getActionUnit()->getName() . '</span> ' . $icon . $this->translation->trans($action->getNameAction()) .
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() .
             '</span>';
@@ -203,8 +205,6 @@ class Chat implements ChatInterface
 
     /**
      * Пропускает генерацию сообщения
-     *
-     * TODO Подумать, что будет лучше - возвращать null, если сообщение не сгенерировано, или пустую строку
      *
      * @return string
      */

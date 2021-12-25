@@ -41,7 +41,8 @@ class BackToLifeAbility extends AbstractAbility
                 $alliesCommand,
                 ResurrectionAction::TARGET_DEAD_ALLIES,
                 30,
-                self::USE_MESSAGE
+                self::USE_MESSAGE,
+                self::ICON
             ));
         }
 

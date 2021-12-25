@@ -13,6 +13,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class BackToLifeAbilityTest extends TestCase
 {
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/053.png" alt="" /> use Back to Life and resurrected <span style="color: #1e72e3">dead_unit</span>';
+
     /**
      * Создание и применение способности BackToLifeAbility
      *
@@ -55,7 +57,7 @@ class BackToLifeAbilityTest extends TestCase
             self::assertEquals('use Back to Life and resurrected', $action->getNameAction());
             self::assertEquals(30, $action->getPower());
             self::assertTrue($action->canByUsed());
-            $action->handle();
+            self::assertEquals(self::MESSAGE, $action->handle());
         }
 
         // После применения способности юнит восстановил 30% здоровья (30 здоровья от 100 максимальных)
