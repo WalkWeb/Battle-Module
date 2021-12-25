@@ -9,7 +9,7 @@ use Battle\Unit\UnitInterface;
 class SummonImpAbility extends AbstractSummonAbility
 {
     private const NAME                = 'Summon Imp';
-    private const ICON                = '/images/icons/ability/000.png';
+    private const ICON                = '/images/icons/ability/275.png';
     private const USE_MESSAGE         = 'summon Imp';
 
     private const SUMMON_NAME         = 'Imp';
@@ -32,7 +32,8 @@ class SummonImpAbility extends AbstractSummonAbility
             self::SUMMON_ATTACK_SPEED,
             self::SUMMON_LIFE,
             self::SUMMON_MELEE,
-            self::SUMMON_RACE_ID
+            self::SUMMON_RACE_ID,
+            self::ICON
         );
     }
 

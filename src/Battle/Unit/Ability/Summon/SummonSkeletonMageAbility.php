@@ -35,7 +35,8 @@ class SummonSkeletonMageAbility extends AbstractSummonAbility
             self::SUMMON_ATTACK_SPEED,
             self::SUMMON_LIFE,
             self::SUMMON_MELEE,
-            self::SUMMON_RACE_ID
+            self::SUMMON_RACE_ID,
+            self::ICON
         );
     }
 

@@ -19,6 +19,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class PoisonAbilityTest extends TestCase
 {
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/202.png" alt="" /> use Poison on <span style="color: #1e72e3">unit_2</span>';
+
     /**
      * Тест на создание способности PoisonAbility
      *
@@ -106,7 +108,7 @@ class PoisonAbilityTest extends TestCase
         // Применяем эффект
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
-            $action->handle();
+            self::assertEquals(self::MESSAGE, $action->handle());
         }
 
         // Теперь эффект у противника есть, и больше способность примениться не может
@@ -136,6 +138,7 @@ class PoisonAbilityTest extends TestCase
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
             'name'           => 'use Poison',
+            'icon'           => '/images/icons/ability/202.png',
             'effect'         => [
                 'name'                  => 'Poison',
                 'icon'                  => '/images/icons/ability/202.png',

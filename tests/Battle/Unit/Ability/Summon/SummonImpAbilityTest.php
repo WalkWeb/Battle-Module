@@ -14,13 +14,15 @@ use Battle\Unit\Ability\Summon\SummonImpAbility;
 
 class SummonImpAbilityTest extends TestCase
 {
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/275.png" alt="" /> summon Imp';
+
     /**
      * @throws Exception
      */
     public function testSummonImpAbility(): void
     {
         $name = 'Summon Imp';
-        $icon = '/images/icons/ability/000.png';
+        $icon = '/images/icons/ability/275.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -49,6 +51,8 @@ class SummonImpAbilityTest extends TestCase
 
         foreach ($actions as $action) {
             self::assertInstanceOf(SummonAction::class, $action);
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE, $action->handle());
         }
 
         $ability->usage();
