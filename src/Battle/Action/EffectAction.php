@@ -30,6 +30,11 @@ class EffectAction extends AbstractAction
     protected $messageMethod;
 
     /**
+     * @var string
+     */
+    protected $useMessage;
+
+    /**
      * @var EffectInterface
      */
     private $effect;
@@ -42,8 +47,9 @@ class EffectAction extends AbstractAction
         string $name,
         string $icon,
         EffectInterface $effect,
-        string $animationMethod = null,
-        string $messageMethod = null
+        ?string $animationMethod = null,
+        ?string $messageMethod = null,
+        ?string $useMessage = null
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
@@ -51,6 +57,7 @@ class EffectAction extends AbstractAction
         $this->effect = $effect;
         $this->animationMethod = $animationMethod ?? self::DEFAULT_ANIMATION_METHOD;
         $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
+        $this->useMessage = $useMessage ?? '';
     }
 
     public function getHandleMethod(): string
@@ -69,6 +76,11 @@ class EffectAction extends AbstractAction
         }
 
         return $this->targetUnit->applyAction($this);
+    }
+
+    public function getUseMessage(): string
+    {
+        return $this->useMessage;
     }
 
     public function getNameAction(): string

@@ -146,6 +146,7 @@ class ActionFactory
         $effectData = self::array($data, 'effect', ActionException::INVALID_EFFECT_DATA);
         $animationMethod = self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA);
         $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
+        $useMessage = self::stringOrNull($data, 'use_message', ActionException::INVALID_USE_MESSAGE_DATA);
 
         $effectFactory = new EffectFactory($this);
         $effect = $effectFactory->create($effectData);
@@ -159,7 +160,8 @@ class ActionFactory
             $icon,
             $effect,
             $animationMethod,
-            $messageMethod
+            $messageMethod,
+            $useMessage
         );
     }
 }

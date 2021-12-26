@@ -194,7 +194,7 @@ class EffectActionTest extends TestCase
      *
      * @throws Exception
      */
-    public function testEffectActionDefaultAnimationAndMessageMethod(): void
+    public function testEffectActionDefaultValue(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -216,6 +216,7 @@ class EffectActionTest extends TestCase
 
         self::assertEquals(EffectAction::DEFAULT_ANIMATION_METHOD, $effectAction->getAnimationMethod());
         self::assertEquals(EffectAction::DEFAULT_MESSAGE_METHOD, $effectAction->getMessageMethod());
+        self::assertEquals('', $effectAction->getUseMessage());
     }
 
     /**
@@ -223,7 +224,7 @@ class EffectActionTest extends TestCase
      *
      * @throws Exception
      */
-    public function testEffectActionCustomAnimationAndMessageMethod(): void
+    public function testEffectActionCustomValue(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -236,6 +237,7 @@ class EffectActionTest extends TestCase
 
         $animationMethod = 'custom_animate_method';
         $messageMethod = 'custom_message_method';
+        $useMessage = 'use_message';
 
         $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
 
@@ -253,11 +255,13 @@ class EffectActionTest extends TestCase
             $icon,
             $effect,
             $animationMethod,
-            $messageMethod
+            $messageMethod,
+            $useMessage
         );
 
         self::assertEquals($animationMethod, $effectAction->getAnimationMethod());
         self::assertEquals($messageMethod, $effectAction->getMessageMethod());
+        self::assertEquals($useMessage, $effectAction->getUseMessage());
     }
 
     /**
