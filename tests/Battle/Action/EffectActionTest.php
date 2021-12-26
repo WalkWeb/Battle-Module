@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
@@ -11,6 +12,7 @@ use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
@@ -185,6 +187,77 @@ class EffectActionTest extends TestCase
 
         // А вот живой союзный юнит должен теперь иметь эффект
         self::assertEquals($effects, $unit->getEffects());
+    }
+
+    /**
+     * Проверка дефолтных параметров $animationMethod и $messageMethod
+     *
+     * @throws Exception
+     */
+    public function testEffectActionDefaultAnimationAndMessageMethod(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $name = 'use Reserve Forces';
+        $icon = 'icon.png';
+        $duration = 10;
+
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
+
+        $actionCollection = new ActionCollection();
+        $actionCollection->add($action);
+
+        $effect = new Effect($name, $icon, $duration, new ActionCollection(), $actionCollection, new ActionCollection());
+
+        $effectAction = new EffectAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF, $name, $icon, $effect);
+
+        self::assertEquals(EffectAction::DEFAULT_ANIMATION_METHOD, $effectAction->getAnimationMethod());
+        self::assertEquals(EffectAction::DEFAULT_MESSAGE_METHOD, $effectAction->getMessageMethod());
+    }
+
+    /**
+     * Проверка пользовательских параметров $animationMethod и $messageMethod
+     *
+     * @throws Exception
+     */
+    public function testEffectActionCustomAnimationAndMessageMethod(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $name = 'use Reserve Forces';
+        $icon = 'icon.png';
+        $duration = 10;
+
+        $animationMethod = 'custom_animate_method';
+        $messageMethod = 'custom_message_method';
+
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
+
+        $actionCollection = new ActionCollection();
+        $actionCollection->add($action);
+
+        $effect = new Effect($name, $icon, $duration, new ActionCollection(), $actionCollection, new ActionCollection());
+
+        $effectAction = new EffectAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            EffectAction::TARGET_SELF,
+            $name,
+            $icon,
+            $effect,
+            $animationMethod,
+            $messageMethod
+        );
+
+        self::assertEquals($animationMethod, $effectAction->getAnimationMethod());
+        self::assertEquals($messageMethod, $effectAction->getMessageMethod());
     }
 
     /**

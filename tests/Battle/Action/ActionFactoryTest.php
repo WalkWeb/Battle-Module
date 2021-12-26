@@ -332,6 +332,7 @@ class ActionFactoryTest extends TestCase
         $actionFactory = new ActionFactory();
         $effectFactory = new EffectFactory($actionFactory);
 
+        // Минимальный набор данных
         $data = [
             'type'           => ActionInterface::EFFECT,
             'action_unit'    => $unit,
@@ -369,6 +370,51 @@ class ActionFactoryTest extends TestCase
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($icon, $action->getIcon());
         self::assertEquals($effectFactory->create($data['effect']), $action->getEffect());
+        self::assertEquals(EffectAction::DEFAULT_ANIMATION_METHOD, $action->getAnimationMethod());
+        self::assertEquals(EffectAction::DEFAULT_MESSAGE_METHOD, $action->getMessageMethod());
+
+        // Полный набор данных
+        $data = [
+            'type'             => ActionInterface::EFFECT,
+            'action_unit'      => $unit,
+            'enemy_command'    => $enemyCommand,
+            'allies_command'   => $command,
+            'type_target'      => ActionInterface::TARGET_SELF,
+            'name'             => $name = 'Effect test',
+            'icon'             => $icon = 'icon.png',
+            'effect'           => [
+                'name'                  => 'Effect test #1',
+                'icon'                  => 'effect_icon_#1',
+                'duration'              => 10,
+                'on_apply_actions'      => [
+                    [
+                        'type'           => ActionInterface::BUFF,
+                        'action_unit'    => $unit,
+                        'enemy_command'  => $enemyCommand,
+                        'allies_command' => $command,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'use Reserve Forces',
+                        'modify_method'  => 'multiplierMaxLife',
+                        'power'          => 130,
+                    ],
+                ],
+                'on_next_round_actions' => [],
+                'on_disable_actions'    => [],
+            ],
+            'animation_method' => $animationMethod = 'custom_animation_method',
+            'message_method'   => $messageMethod = 'custom_message_method',
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertInstanceOf(EffectAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
+        self::assertEquals($name, $action->getNameAction());
+        self::assertEquals($icon, $action->getIcon());
+        self::assertEquals($effectFactory->create($data['effect']), $action->getEffect());
+        self::assertEquals($animationMethod, $action->getAnimationMethod());
+        self::assertEquals($messageMethod, $action->getMessageMethod());
     }
 
     /**
@@ -1040,29 +1086,93 @@ class ActionFactoryTest extends TestCase
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'Effect',
                     'icon'           => true,
-                    'effects'        => [
-                        [
-                            'name'                  => 'Effect test #1',
-                            'icon'                  => 'effect_icon_#1',
-                            'duration'              => 10,
-                            'on_apply_actions'      => [
-                                [
-                                    'type'           => ActionInterface::BUFF,
-                                    'action_unit'    => $actionUnit,
-                                    'enemy_command'  => $enemyCommand,
-                                    'allies_command' => $command,
-                                    'type_target'    => ActionInterface::TARGET_SELF,
-                                    'name'           => 'use Reserve Forces',
-                                    'modify_method'  => 'multiplierMaxLife',
-                                    'power'          => 130,
-                                ],
+                    'effect'           => [
+                        'name'                  => 'Effect test #1',
+                        'icon'                  => 'effect_icon_#1',
+                        'duration'              => 10,
+                        'on_apply_actions'      => [
+                            [
+                                'type'           => ActionInterface::BUFF,
+                                'action_unit'    => $actionUnit,
+                                'enemy_command'  => $enemyCommand,
+                                'allies_command' => $command,
+                                'type_target'    => ActionInterface::TARGET_SELF,
+                                'name'           => 'use Reserve Forces',
+                                'modify_method'  => 'multiplierMaxLife',
+                                'power'          => 130,
                             ],
-                            'on_next_round_actions' => [],
-                            'on_disable_actions'    => [],
                         ],
+                        'on_next_round_actions' => [],
+                        'on_disable_actions'    => [],
                     ],
                 ],
                 ActionException::INVALID_ICON,
+            ],
+            // EffectAction - некорректный animation_method
+            [
+                [
+                    'type'             => ActionInterface::EFFECT,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'name'             => 'Effect',
+                    'icon'             => 'icon.png',
+                    'effect'           => [
+                        'name'                  => 'Effect test #1',
+                        'icon'                  => 'effect_icon_#1',
+                        'duration'              => 10,
+                        'on_apply_actions'      => [
+                            [
+                                'type'           => ActionInterface::BUFF,
+                                'action_unit'    => $actionUnit,
+                                'enemy_command'  => $enemyCommand,
+                                'allies_command' => $command,
+                                'type_target'    => ActionInterface::TARGET_SELF,
+                                'name'           => 'use Reserve Forces',
+                                'modify_method'  => 'multiplierMaxLife',
+                                'power'          => 130,
+                            ],
+                        ],
+                        'on_next_round_actions' => [],
+                        'on_disable_actions'    => [],
+                    ],
+                    'animation_method' => 123,
+                ],
+                ActionException::INVALID_ANIMATION_DATA,
+            ],
+            // EffectAction - некорректный message_method
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'Effect',
+                    'icon'           => 'icon.png',
+                    'effect'           => [
+                        'name'                  => 'Effect test #1',
+                        'icon'                  => 'effect_icon_#1',
+                        'duration'              => 10,
+                        'on_apply_actions'      => [
+                            [
+                                'type'           => ActionInterface::BUFF,
+                                'action_unit'    => $actionUnit,
+                                'enemy_command'  => $enemyCommand,
+                                'allies_command' => $command,
+                                'type_target'    => ActionInterface::TARGET_SELF,
+                                'name'           => 'use Reserve Forces',
+                                'modify_method'  => 'multiplierMaxLife',
+                                'power'          => 130,
+                            ],
+                        ],
+                        'on_next_round_actions' => [],
+                        'on_disable_actions'    => [],
+                    ],
+                    'message_method' => true,
+                ],
+                ActionException::INVALID_MESSAGE_METHOD,
             ],
         ];
     }

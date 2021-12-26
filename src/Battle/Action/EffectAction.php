@@ -11,8 +11,8 @@ use Battle\Unit\UnitInterface;
 class EffectAction extends AbstractAction
 {
     private const HANDLE_METHOD            = 'applyEffectAction';
-    private const DEFAULT_ANIMATION_METHOD = 'effect';
-    private const DEFAULT_MESSAGE_METHOD   = 'applyEffect';
+    public const DEFAULT_ANIMATION_METHOD = 'effect';
+    public const DEFAULT_MESSAGE_METHOD   = 'applyEffect';
 
     /**
      * @var string
@@ -23,6 +23,11 @@ class EffectAction extends AbstractAction
      * @var string
      */
     protected $animationMethod;
+
+    /**
+     * @var string
+     */
+    protected $messageMethod;
 
     /**
      * @var EffectInterface
@@ -37,13 +42,15 @@ class EffectAction extends AbstractAction
         string $name,
         string $icon,
         EffectInterface $effect,
-        string $animationMethod = self::DEFAULT_ANIMATION_METHOD
+        string $animationMethod = null,
+        string $messageMethod = null
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->name = $name;
         $this->effect = $effect;
-        $this->animationMethod = $animationMethod;
+        $this->animationMethod = $animationMethod ?? self::DEFAULT_ANIMATION_METHOD;
+        $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
     }
 
     public function getHandleMethod(): string
@@ -102,7 +109,7 @@ class EffectAction extends AbstractAction
 
     public function getMessageMethod(): string
     {
-        return self::DEFAULT_MESSAGE_METHOD;
+        return $this->messageMethod;
     }
 
     public function setFactualPower(int $factualPower): void {}

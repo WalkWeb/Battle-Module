@@ -63,8 +63,8 @@ class ActionFactory
             $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
             $power = self::intOrNull($data, 'power', ActionException::INVALID_POWER_DATA);
             $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
-            $animationMethod = self::stringOrNull($data, 'animation_method', ActionException::INVALID_NAME_DATA);
-            $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_NAME_DATA);
+            $animationMethod = self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA);
+            $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
 
             return new $className(
                 $actionUnit,
@@ -144,6 +144,8 @@ class ActionFactory
         $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
         $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
         $effectData = self::array($data, 'effect', ActionException::INVALID_EFFECT_DATA);
+        $animationMethod = self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA);
+        $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
 
         $effectFactory = new EffectFactory($this);
         $effect = $effectFactory->create($effectData);
@@ -155,7 +157,9 @@ class ActionFactory
             $typeTarget,
             $name,
             $icon,
-            $effect
+            $effect,
+            $animationMethod,
+            $messageMethod
         );
     }
 }
