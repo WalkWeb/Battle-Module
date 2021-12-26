@@ -44,8 +44,8 @@ class ChatTest extends TestCase
     private const EFFECT_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> received damage on 10 life from effect Poison';
     private const EFFECT_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> получил урон на 10 здоровья от эффекта Отравление';
 
-    private const BUFF_EN = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces';
-    private const BUFF_RU = '<span style="color: #1e72e3">unit_1</span> использовал Резервные Силы';
+    private const BUFF_EN = '<span style="color: #1e72e3">unit_1</span> Reserve Forces';
+    private const BUFF_RU = '<span style="color: #1e72e3">unit_1</span> Резервные Силы';
 
     private const RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> resurrection <span style="color: #1e72e3">dead_unit</span>';
     private const RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> воскресил <span style="color: #1e72e3">dead_unit</span>';
@@ -309,7 +309,7 @@ class ChatTest extends TestCase
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            'use Reserve Forces',
+            'Reserve Forces',
             'multiplierMaxLife',
             130
         );
@@ -334,7 +334,7 @@ class ChatTest extends TestCase
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            'use Reserve Forces',
+            'Reserve Forces',
             'multiplierMaxLife',
             130
         );
@@ -588,7 +588,9 @@ class ChatTest extends TestCase
             'enemy_command'  => $enemyCommand,
             'allies_command' => $command,
             'type_target'    => $typeTarget,
-            'name'           => 'use Reserve Forces',
+            'name'           => 'Reserve Forces',
+            'use_message'    => 'use',
+            'message_method' => 'applyEffectImproved',
             'effect'         => [
                 'name'                  => 'Effect#123',
                 'icon'                  => 'icon.png',

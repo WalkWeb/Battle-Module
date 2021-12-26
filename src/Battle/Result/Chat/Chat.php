@@ -33,7 +33,7 @@ class Chat implements ChatInterface
      * @param ActionInterface $action
      * @return string
      * @throws ChatException
-     * @uses damage, heal, summon, wait, buff, resurrected, applyEffect, effectDamage, effectHeal, skip
+     * @uses damage, heal, summon, wait, buff, resurrected, applyEffect, effectDamage, effectHeal, skip, applyEffectImproved
      */
     public function addMessage(ActionInterface $action): string
     {
@@ -148,6 +148,9 @@ class Chat implements ChatInterface
     /**
      * Сообщение строится по разному, в зависимости от того, на кого применяется эффект - на себя, или на другого юнита
      *
+     * TODO Устаревший метод формирования сообщения об эффекте. Когда все способности будут обновлены для формирования
+     * TODO сообщения по-новому типу - этот метод будет удален.
+     *
      * @param ActionInterface $action
      * @return string
      * @throws ActionException
@@ -162,6 +165,38 @@ class Chat implements ChatInterface
 
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
+            $this->translation->trans($action->getNameAction()) . ' ' . $this->translation->trans('on') .
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
+            $action->getTargetUnit()->getName() . '</span>';
+    }
+
+    /**
+     * Улучшенный метод для формирования сообщения о примененном эффекте. В нем название способности отделено от
+     * действия, что позволяет добавить иконку способности именно перед названием способности.
+     *
+     * Было так:
+     * Юнит <icon> использовал Способность
+     *
+     * Теперь так:
+     * Юнит использовал <icon> Способность
+     *
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    private function applyEffectImproved(ActionInterface $action): string
+    {
+        if ($action->getActionUnit()->getId() === $action->getTargetUnit()->getId()) {
+            return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+                $action->getActionUnit()->getName() . '</span> ' .
+                $this->translation->trans($action->getUseMessage()) . ' ' .
+                $this->getIcon($action) .
+                $this->translation->trans($action->getNameAction());
+        }
+
+        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+            $action->getActionUnit()->getName() . '</span> ' .
+            $this->translation->trans($action->getUseMessage()) . ' ' . $this->getIcon($action) .
             $this->translation->trans($action->getNameAction()) . ' ' . $this->translation->trans('on') .
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() . '</span>';

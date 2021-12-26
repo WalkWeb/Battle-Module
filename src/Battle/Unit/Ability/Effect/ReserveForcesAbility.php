@@ -14,12 +14,13 @@ use Exception;
 
 class ReserveForcesAbility extends AbstractAbility
 {
-    private const NAME          = 'Reserve Forces';
-    private const ICON          = '/images/icons/ability/156.png';
-    private const USE_MESSAGE   = 'use Reserve Forces';
-    private const DURATION      = 6;
-    private const MODIFY_METHOD = 'multiplierMaxLife';
-    private const MODIFY_POWER  = 130;
+    private const NAME           = 'Reserve Forces';
+    private const ICON           = '/images/icons/ability/156.png';
+    private const USE_MESSAGE    = 'use';
+    private const DURATION       = 6;
+    private const MODIFY_METHOD  = 'multiplierMaxLife';
+    private const MODIFY_POWER   = 130;
+    private const MESSAGE_METHOD = 'applyEffectImproved';
 
     /**
      * @var ActionCollection
@@ -126,8 +127,10 @@ class ReserveForcesAbility extends AbstractAbility
                 'enemy_command'  => $enemyCommand,
                 'allies_command' => $alliesCommand,
                 'type_target'    => ActionInterface::TARGET_SELF,
-                'name'           => self::USE_MESSAGE,
+                'name'           => self::NAME,
                 'icon'           => self::ICON,
+                'message_method' => self::MESSAGE_METHOD,
+                'use_message'    => self::USE_MESSAGE,
                 'effect'         => [
                     'name'                  => self::NAME,
                     'icon'                  => self::ICON,
@@ -139,7 +142,7 @@ class ReserveForcesAbility extends AbstractAbility
                             'enemy_command'  => $enemyCommand,
                             'allies_command' => $alliesCommand,
                             'type_target'    => ActionInterface::TARGET_SELF,
-                            'name'           => self::USE_MESSAGE,
+                            'name'           => self::NAME,
                             'modify_method'  => self::MODIFY_METHOD,
                             'power'          => self::MODIFY_POWER,
                             'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,

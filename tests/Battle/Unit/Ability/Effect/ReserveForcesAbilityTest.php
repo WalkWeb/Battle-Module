@@ -19,7 +19,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class ReserveForcesAbilityTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #ae882d">Titan</span> <img src="/images/icons/ability/156.png" alt="" /> use Reserve Forces';
+    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/156.png" alt="" /> Reserve Forces';
 
     /**
      * Тест на создание способности ReserveForcesAbility
@@ -228,7 +228,9 @@ class ReserveForcesAbilityTest extends TestCase
             'enemy_command'  => $enemyCommand,
             'allies_command' => $alliesCommand,
             'type_target'    => ActionInterface::TARGET_SELF,
-            'name'           => 'use Reserve Forces',
+            'name'           => 'Reserve Forces',
+            'use_message'    => 'use',
+            'message_method' => 'applyEffectImproved',
             'icon'           => '/images/icons/ability/156.png',
             'effect'         => [
                 'name'                  => 'Reserve Forces',
@@ -241,7 +243,7 @@ class ReserveForcesAbilityTest extends TestCase
                         'enemy_command'  => $enemyCommand,
                         'allies_command' => $alliesCommand,
                         'type_target'    => ActionInterface::TARGET_SELF,
-                        'name'           => 'use Reserve Forces',
+                        'name'           => 'Reserve Forces',
                         'modify_method'  => 'multiplierMaxLife',
                         'power'          => 130,
                         'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,

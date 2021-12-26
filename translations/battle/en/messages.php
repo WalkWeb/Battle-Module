@@ -29,6 +29,7 @@ return [
     'life from effect'                 => 'life from effect',
     'restored'                         => 'restored',
     'resurrected'                      => 'resurrected',
+    'use'                              => 'use',
     // Ability
     'use Heavy Strike at'              => 'use Heavy Strike at',
     'use Great Heal and heal'          => 'use Great Heal and heal',
@@ -36,7 +37,7 @@ return [
     'summon Skeleton'                  => 'summon Skeleton',
     'summon Skeleton Mage'             => 'summon Skeleton Mage',
     'summon Fire Elemental'            => 'summon Fire Elemental',
-    'use Reserve Forces'               => 'use Reserve Forces',
+    'Reserve Forces'                   => 'Reserve Forces',
     'use Battle Fury'                  => 'use Battle Fury',
     'use Poison'                       => 'use Poison',
     'Poison'                           => 'Poison',

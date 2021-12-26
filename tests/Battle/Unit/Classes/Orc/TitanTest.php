@@ -113,7 +113,7 @@ class TitanTest extends TestCase
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $alliesCommand,
                     'type_target'    => ActionInterface::TARGET_SELF,
-                    'name'           => 'use Reserve Forces',
+                    'name'           => 'Reserve Forces',
                     'modify_method'  => 'multiplierMaxLife',
                     'power'          => 130,
                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,

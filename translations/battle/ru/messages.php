@@ -27,6 +27,7 @@ return [
     'life from effect'                 => 'здоровья от эффекта',
     'restored'                         => 'восстановил',
     'resurrected'                      => 'воскресил',
+    'use'                              => 'использовал',
     // Ability
     'use Heavy Strike at'              => 'использовал Тяжелый Удар по',
     'use Great Heal and heal'          => 'использовал Сильное Лечение и вылечил',
@@ -34,7 +35,7 @@ return [
     'summon Skeleton'                  => 'призвал Скелета',
     'summon Skeleton Mage'             => 'призвал Скелета-мага',
     'summon Fire Elemental'            => 'призвал Элементаля огня',
-    'use Reserve Forces'               => 'использовал Резервные Силы',
+    'Reserve Forces'                   => 'Резервные Силы',
     'use Battle Fury'                  => 'использовал Ярость битвы',
     'use Poison'                       => 'использовал Отравление',
     'Poison'                           => 'Отравление',
