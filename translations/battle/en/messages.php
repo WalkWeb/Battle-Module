@@ -39,7 +39,6 @@ return [
     'summon Fire Elemental'            => 'summon Fire Elemental',
     'Reserve Forces'                   => 'Reserve Forces',
     'Battle Fury'                      => 'Battle Fury',
-    'use Poison'                       => 'use Poison',
     'Poison'                           => 'Poison',
     'Healing Potion'                   => 'Healing Potion',
     'use Back to Life and resurrected' => 'use Back to Life and resurrected',

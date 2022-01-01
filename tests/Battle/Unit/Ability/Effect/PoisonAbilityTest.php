@@ -19,7 +19,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class PoisonAbilityTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/202.png" alt="" /> use Poison on <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> Poison on <span style="color: #1e72e3">unit_2</span>';
 
     /**
      * Тест на создание способности PoisonAbility
@@ -137,8 +137,9 @@ class PoisonAbilityTest extends TestCase
             'enemy_command'  => $enemyCommand,
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
-            'name'           => 'use Poison',
+            'name'           => 'Poison',
             'icon'           => '/images/icons/ability/202.png',
+            'message_method'  => 'applyEffectImproved',
             'effect'         => [
                 'name'                  => 'Poison',
                 'icon'                  => '/images/icons/ability/202.png',

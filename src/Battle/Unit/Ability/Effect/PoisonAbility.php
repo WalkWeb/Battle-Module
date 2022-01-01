@@ -15,11 +15,11 @@ use Exception;
 
 class PoisonAbility extends AbstractAbility
 {
-    private const NAME        = 'Poison';
-    private const ICON        = '/images/icons/ability/202.png';
-    private const USE_MESSAGE = 'use Poison';
-    private const DURATION    = 5;
-    private const POWER       = 8;
+    private const NAME           = 'Poison';
+    private const ICON           = '/images/icons/ability/202.png';
+    private const MESSAGE_METHOD = 'applyEffectImproved';
+    private const DURATION       = 5;
+    private const POWER          = 8;
 
     /**
      * @var ActionCollection
@@ -118,8 +118,9 @@ class PoisonAbility extends AbstractAbility
                 'enemy_command'  => $enemyCommand,
                 'allies_command' => $alliesCommand,
                 'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
-                'name'           => self::USE_MESSAGE,
+                'name'           => self::NAME,
                 'icon'           => self::ICON,
+                'message_method' => self::MESSAGE_METHOD,
                 'effect'         => [
                     'name'                  => self::NAME,
                     'icon'                  => self::ICON,

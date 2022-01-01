@@ -37,7 +37,6 @@ return [
     'summon Fire Elemental'            => 'призвал Элементаля огня',
     'Reserve Forces'                   => 'Резервные Силы',
     'Battle Fury'                      => 'Ярость битвы',
-    'use Poison'                       => 'использовал Отравление',
     'Poison'                           => 'Отравление',
     'Healing Potion'                   => 'Лечебное зелье',
     'use Back to Life and resurrected' => 'использовал Возвращение к жизни и воскресил',
