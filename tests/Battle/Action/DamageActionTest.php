@@ -29,7 +29,6 @@ class DamageActionTest extends TestCase
         self::assertEquals(DamageAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
         self::assertEquals('damage', $action->getMessageMethod());
         self::assertEquals('attack', $action->getNameAction());
-        self::assertEquals('', $action->getUseMessage());
     }
 
     /**

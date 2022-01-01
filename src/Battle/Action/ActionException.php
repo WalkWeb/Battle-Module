@@ -27,7 +27,6 @@ class ActionException extends Exception
     public const INVALID_SUMMON_DATA        = 'ActionFactory: Invalid summon data: array expected';
     public const INVALID_EFFECT_DATA        = 'ActionFactory: Invalid effect data: array expected';
     public const INVALID_MODIFY_METHOD_DATA = 'ActionFactory: Invalid modify_method data: string expected';
-    public const INVALID_USE_MESSAGE_DATA   = 'ActionFactory: Invalid use_message data: string or null expected';
     public const INVALID_MESSAGE_METHOD     = 'ActionFactory: invalid message_method: string or null expected';
     public const INVALID_ICON               = 'ActionFactory: invalid icon: missing or string';
     public const INVALID_RESURRECTED_POWER  = 'ResurrectionAction: invalid power';

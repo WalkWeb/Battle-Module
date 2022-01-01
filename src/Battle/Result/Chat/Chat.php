@@ -189,14 +189,14 @@ class Chat implements ChatInterface
         if ($action->getActionUnit()->getId() === $action->getTargetUnit()->getId()) {
             return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
                 $action->getActionUnit()->getName() . '</span> ' .
-                $this->translation->trans($action->getUseMessage()) . ' ' .
+                $this->translation->trans('use') . ' ' .
                 $this->getIcon($action) .
                 $this->translation->trans($action->getNameAction());
         }
 
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' .
-            $this->translation->trans($action->getUseMessage()) . ' ' . $this->getIcon($action) .
+            $this->translation->trans('use') . ' ' . $this->getIcon($action) .
             $this->translation->trans($action->getNameAction()) . ' ' . $this->translation->trans('on') .
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() . '</span>';

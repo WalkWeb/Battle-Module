@@ -71,13 +71,6 @@ interface ActionInterface
     public function handle(): string;
 
     /**
-     * Сообщение об использовании способности, используется для создания сообщений в чате
-     *
-     * @return string
-     */
-    public function getUseMessage(): string;
-
-    /**
      * Название события, используется для создания сообщений в чате
      *
      * @return string

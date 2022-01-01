@@ -104,11 +104,6 @@ abstract class AbstractAction implements ActionInterface
         return $this->factualPower;
     }
 
-    public function getUseMessage(): string
-    {
-        return '';
-    }
-
     /**
      * @return UnitInterface
      * @throws ActionException
