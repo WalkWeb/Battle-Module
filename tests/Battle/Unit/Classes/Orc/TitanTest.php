@@ -152,7 +152,7 @@ class TitanTest extends TestCase
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $alliesCommand,
                     'type_target'    => ActionInterface::TARGET_SELF,
-                    'name'           => 'use Battle Fury',
+                    'name'           => 'Battle Fury',
                     'modify_method'  => 'multiplierAttackSpeed',
                     'power'          => 140,
                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,

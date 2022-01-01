@@ -16,10 +16,10 @@ class BattleFuryAbility extends AbstractAbility
 {
     private const NAME          = 'Battle Fury';
     private const ICON          = '/images/icons/ability/102.png';
-    private const USE_MESSAGE   = 'use Battle Fury';
     private const DURATION      = 15;
     private const MODIFY_METHOD = 'multiplierAttackSpeed';
     private const MODIFY_POWER  = 140;
+    private const MESSAGE_METHOD = 'applyEffectImproved';
 
     /**
      * @var ActionCollection
@@ -116,8 +116,9 @@ class BattleFuryAbility extends AbstractAbility
                 'enemy_command'  => $enemyCommand,
                 'allies_command' => $alliesCommand,
                 'type_target'    => ActionInterface::TARGET_SELF,
-                'name'           => self::USE_MESSAGE,
+                'name'           => self::NAME,
                 'icon'           => self::ICON,
+                'message_method' => self::MESSAGE_METHOD,
                 'effect'         => [
                     'name'                  => self::NAME,
                     'icon'                  => self::ICON,
@@ -129,7 +130,7 @@ class BattleFuryAbility extends AbstractAbility
                             'enemy_command'  => $enemyCommand,
                             'allies_command' => $alliesCommand,
                             'type_target'    => ActionInterface::TARGET_SELF,
-                            'name'           => self::USE_MESSAGE,
+                            'name'           => self::NAME,
                             'modify_method'  => self::MODIFY_METHOD,
                             'power'          => self::MODIFY_POWER,
                             'icon'           => self::ICON,

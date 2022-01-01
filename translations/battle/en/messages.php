@@ -38,7 +38,7 @@ return [
     'summon Skeleton Mage'             => 'summon Skeleton Mage',
     'summon Fire Elemental'            => 'summon Fire Elemental',
     'Reserve Forces'                   => 'Reserve Forces',
-    'use Battle Fury'                  => 'use Battle Fury',
+    'Battle Fury'                      => 'Battle Fury',
     'use Poison'                       => 'use Poison',
     'Poison'                           => 'Poison',
     'Healing Potion'                   => 'Healing Potion',

@@ -19,7 +19,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class BattleFuryAbilityTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #ae882d">Titan</span> <img src="/images/icons/ability/102.png" alt="" /> use Battle Fury';
+    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/102.png" alt="" /> Battle Fury';
 
     /**
      * Тест на создание способности BattleFuryAbility
@@ -179,8 +179,9 @@ class BattleFuryAbilityTest extends TestCase
             'enemy_command'  => $enemyCommand,
             'allies_command' => $alliesCommand,
             'type_target'    => ActionInterface::TARGET_SELF,
-            'name'           => 'use Battle Fury',
+            'name'           => 'Battle Fury',
             'icon'           => '/images/icons/ability/102.png',
+            'message_method' => 'applyEffectImproved',
             'effect'         => [
                 'name'                  => 'Battle Fury',
                 'icon'                  => '/images/icons/ability/102.png',
@@ -192,7 +193,7 @@ class BattleFuryAbilityTest extends TestCase
                         'enemy_command'  => $enemyCommand,
                         'allies_command' => $alliesCommand,
                         'type_target'    => ActionInterface::TARGET_SELF,
-                        'name'           => 'use Battle Fury',
+                        'name'           => 'Battle Fury',
                         'modify_method'  => 'multiplierAttackSpeed',
                         'power'          => 140,
                         'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,

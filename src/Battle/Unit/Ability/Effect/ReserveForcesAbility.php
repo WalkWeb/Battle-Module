@@ -16,7 +16,6 @@ class ReserveForcesAbility extends AbstractAbility
 {
     private const NAME           = 'Reserve Forces';
     private const ICON           = '/images/icons/ability/156.png';
-    private const USE_MESSAGE    = 'use';
     private const DURATION       = 6;
     private const MODIFY_METHOD  = 'multiplierMaxLife';
     private const MODIFY_POWER   = 130;
@@ -130,7 +129,6 @@ class ReserveForcesAbility extends AbstractAbility
                 'name'           => self::NAME,
                 'icon'           => self::ICON,
                 'message_method' => self::MESSAGE_METHOD,
-                'use_message'    => self::USE_MESSAGE,
                 'effect'         => [
                     'name'                  => self::NAME,
                     'icon'                  => self::ICON,
