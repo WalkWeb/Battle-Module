@@ -30,8 +30,8 @@ return [
     'restored'                         => 'restored',
     'resurrected'                      => 'resurrected',
     'use'                              => 'use',
+    'at'                               => 'at',
     // Ability
-    'use Heavy Strike at'              => 'use Heavy Strike at',
     'use Great Heal and heal'          => 'use Great Heal and heal',
     'summon Imp'                       => 'summon Imp',
     'summon Skeleton'                  => 'summon Skeleton',
@@ -40,6 +40,7 @@ return [
     'Reserve Forces'                   => 'Reserve Forces',
     'Battle Fury'                      => 'Battle Fury',
     'Poison'                           => 'Poison',
+    'Heavy Strike'                     => 'Heavy Strike',
     'Healing Potion'                   => 'Healing Potion',
     'use Back to Life and resurrected' => 'use Back to Life and resurrected',
     'use Healing Potion'               => 'use Healing Potion',

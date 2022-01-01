@@ -28,8 +28,8 @@ return [
     'restored'                         => 'восстановил',
     'resurrected'                      => 'воскресил',
     'use'                              => 'использовал',
+    'at'                               => 'по',
     // Ability
-    'use Heavy Strike at'              => 'использовал Тяжелый Удар по',
     'use Great Heal and heal'          => 'использовал Сильное Лечение и вылечил',
     'summon Imp'                       => 'призвал Беса',
     'summon Skeleton'                  => 'призвал Скелета',
@@ -38,6 +38,7 @@ return [
     'Reserve Forces'                   => 'Резервные Силы',
     'Battle Fury'                      => 'Ярость битвы',
     'Poison'                           => 'Отравление',
+    'Heavy Strike'                     => 'Тяжелый Удар',
     'Healing Potion'                   => 'Лечебное зелье',
     'use Back to Life and resurrected' => 'использовал Возвращение к жизни и воскресил',
     'use Healing Potion'               => 'использовал Лечебное зелье',

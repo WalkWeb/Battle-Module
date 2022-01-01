@@ -12,9 +12,9 @@ use Battle\Unit\UnitInterface;
 
 class HeavyStrikeAbility extends AbstractAbility
 {
-    private const NAME        = 'Heavy Strike';
-    private const ICON        = '/images/icons/ability/335.png';
-    private const USE_MESSAGE = 'use Heavy Strike at';
+    public const NAME           = 'Heavy Strike';
+    public const ICON           = '/images/icons/ability/335.png';
+    public const MESSAGE_METHOD = 'damageAbility';
 
     /**
      * Heavy Strike наносит 250% урона от базового урона юнита
@@ -33,9 +33,9 @@ class HeavyStrikeAbility extends AbstractAbility
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             (int)($this->unit->getDamage() * 2.5),
-            self::USE_MESSAGE,
+            self::NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::DEFAULT_MESSAGE_METHOD,
+            self::MESSAGE_METHOD,
             self::ICON,
         ));
 

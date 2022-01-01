@@ -21,6 +21,7 @@ use Battle\Container\ContainerInterface;
 use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\ChatException;
 use Battle\Translation\Translation;
+use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -31,6 +32,9 @@ class ChatTest extends TestCase
 {
     private const DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
     private const DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона';
+
+    private const DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> Heavy Strike at <span style="color: #1e72e3">unit_2</span> on 50 damage';
+    private const DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> Тяжелый Удар по <span style="color: #1e72e3">unit_2</span> на 50 урона';
 
     private const HEAL_EN = '<span style="color: #1e72e3">unit_1</span> heal <span style="color: #1e72e3">wounded_unit</span> on 20 life';
     private const HEAL_RU = '<span style="color: #1e72e3">unit_1</span> вылечил <span style="color: #1e72e3">wounded_unit</span> на 20 здоровья';
@@ -111,6 +115,58 @@ class ChatTest extends TestCase
 
         self::assertTrue($action->canByUsed());
         self::assertEquals(self::DAMAGE_RU, $action->handle());
+    }
+
+    /**
+     * Тест на формирование сообщения об уроне со способности, на английском
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageDamageAbilityEn(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            50,
+            HeavyStrikeAbility::NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            HeavyStrikeAbility::MESSAGE_METHOD,
+            HeavyStrikeAbility::ICON
+        );
+
+        self::assertTrue($action->canByUsed());
+        self::assertEquals(self::DAMAGE_ABILITY_EN, $action->handle());
+    }
+
+    /**
+     * Тест на формирование сообщения об уроне со способности, на русском
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageDamageAbilityRu(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            50,
+            HeavyStrikeAbility::NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            HeavyStrikeAbility::MESSAGE_METHOD,
+            HeavyStrikeAbility::ICON
+        );
+
+        self::assertTrue($action->canByUsed());
+        self::assertEquals(self::DAMAGE_ABILITY_RU, $action->handle());
     }
 
     /**

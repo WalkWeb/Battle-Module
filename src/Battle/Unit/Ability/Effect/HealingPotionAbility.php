@@ -15,11 +15,11 @@ use Exception;
 
 class HealingPotionAbility extends AbstractAbility
 {
-    private const NAME = 'Healing Potion';
-    private const ICON = '/images/icons/ability/234.png';
+    private const NAME        = 'Healing Potion';
+    private const ICON        = '/images/icons/ability/234.png';
     private const USE_MESSAGE = 'use Healing Potion';
-    private const DURATION = 4;
-    private const POWER = 15;
+    private const DURATION    = 4;
+    private const POWER       = 15;
 
     /**
      * @var ActionCollection

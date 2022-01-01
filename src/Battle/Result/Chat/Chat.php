@@ -33,7 +33,7 @@ class Chat implements ChatInterface
      * @param ActionInterface $action
      * @return string
      * @throws ChatException
-     * @uses damage, heal, summon, wait, buff, resurrected, applyEffect, effectDamage, effectHeal, skip, applyEffectImproved
+     * @uses damage, damageAbility, heal, summon, wait, buff, resurrected, applyEffect, effectDamage, effectHeal, skip, applyEffectImproved
      */
     public function addMessage(ActionInterface $action): string
     {
@@ -70,6 +70,27 @@ class Chat implements ChatInterface
         return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
             $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
             $this->translation->trans( $action->getNameAction()) .
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
+            $action->getTargetUnit()->getName() .
+            '</span> ' . $this->translation->trans('on') . ' ' .
+            $action->getFactualPower() . ' ' . $this->translation->trans('damage');
+    }
+
+    /**
+     * Отдельный метод для формирования урона от способностей. Сообщение выглядит так:
+     *
+     * Unit use <icon> Heavy Strike at Enemy on 50 damage
+     *
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    private function damageAbility(ActionInterface $action): string
+    {
+        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
+            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans('use') . ' ' .
+            $this->getIcon($action) . $this->translation->trans($action->getNameAction()) . ' ' .
+            $this->translation->trans('at') .
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() .
             '</span> ' . $this->translation->trans('on') . ' ' .
