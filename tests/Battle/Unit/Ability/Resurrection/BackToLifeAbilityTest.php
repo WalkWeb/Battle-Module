@@ -6,6 +6,10 @@ namespace Tests\Battle\Unit\Ability\Resurrection;
 
 use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandFactory;
+use Battle\Container\Container;
+use Battle\Container\ContainerException;
+use Battle\Container\ContainerInterface;
+use Battle\Translation\Translation;
 use Battle\Unit\Ability\Resurrection\BackToLifeAbility;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -13,7 +17,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class BackToLifeAbilityTest extends TestCase
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/053.png" alt="" /> use Back to Life and resurrected <span style="color: #1e72e3">dead_unit</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/053.png" alt="" /> Back to Life and resurrected <span style="color: #1e72e3">dead_unit</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/053.png" alt="" /> Возвращение к жизни и воскресил <span style="color: #1e72e3">dead_unit</span>';
 
     /**
      * Создание и применение способности BackToLifeAbility
@@ -54,10 +59,10 @@ class BackToLifeAbilityTest extends TestCase
 
         foreach ($actions as $action) {
             self::assertInstanceOf(ResurrectionAction::class, $action);
-            self::assertEquals('use Back to Life and resurrected', $action->getNameAction());
+            self::assertEquals('Back to Life', $action->getNameAction());
             self::assertEquals(30, $action->getPower());
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE, $action->handle());
+            self::assertEquals(self::MESSAGE_EN, $action->handle());
         }
 
         // После применения способности юнит восстановил 30% здоровья (30 здоровья от 100 максимальных)
@@ -87,5 +92,52 @@ class BackToLifeAbilityTest extends TestCase
         $ability = new BackToLifeAbility($unit);
 
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
+    }
+
+    /**
+     * Тест на формирование сообщение для чата на русском
+     *
+     * @throws Exception
+     */
+    public function testBackToLifeAbilityMessageRu(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $deadUnit = UnitFactory::createByTemplate(10, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+
+        $command = CommandFactory::create([$unit, $deadUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new BackToLifeAbility($unit);
+
+        // Увеличиваем ярость у юнита до максимальной
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $ability->update($unit);
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE_RU, $action->handle());
+        }
+    }
+
+    /**
+     * TODO Дублируется в нескольких тестах, можно вынести в TestCase
+     *
+     * @return ContainerInterface
+     * @throws ContainerException
+     */
+    private function getContainerWithRuLanguage(): ContainerInterface
+    {
+        $translation = new Translation('ru');
+        $container = new Container();
+        $container->set(Translation::class, $translation);
+        return $container;
     }
 }

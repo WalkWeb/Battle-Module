@@ -30,6 +30,7 @@ return [
     'use'                              => 'использовал',
     'at'                               => 'по',
     'and heal'                         => 'и вылечил',
+    'and resurrected'                  => 'и воскресил',
     // Ability
     'Great Heal'                       => 'Сильное Лечение',
     'summon Imp'                       => 'призвал Беса',
@@ -41,7 +42,7 @@ return [
     'Poison'                           => 'Отравление',
     'Heavy Strike'                     => 'Тяжелый Удар',
     'Healing Potion'                   => 'Лечебное зелье',
-    'use Back to Life and resurrected' => 'использовал Возвращение к жизни и воскресил',
+    'Back to Life'                     => 'Возвращение к жизни',
     'use Healing Potion'               => 'использовал Лечебное зелье',
     // Statistics
     'Statistics'                       => 'Статистика',

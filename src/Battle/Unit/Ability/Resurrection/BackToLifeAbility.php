@@ -13,9 +13,8 @@ use Battle\Unit\UnitInterface;
 
 class BackToLifeAbility extends AbstractAbility
 {
-    private const NAME        = 'Back to Life';
-    private const ICON        = '/images/icons/ability/053.png';
-    private const USE_MESSAGE = 'use Back to Life and resurrected';
+    private const NAME = 'Back to Life';
+    private const ICON = '/images/icons/ability/053.png';
 
     /**
      * @var ActionCollection
@@ -41,7 +40,7 @@ class BackToLifeAbility extends AbstractAbility
                 $alliesCommand,
                 ResurrectionAction::TARGET_DEAD_ALLIES,
                 30,
-                self::USE_MESSAGE,
+                self::NAME,
                 self::ICON
             ));
         }

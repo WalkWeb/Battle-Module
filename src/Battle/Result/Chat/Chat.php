@@ -177,9 +177,10 @@ class Chat implements ChatInterface
     }
 
     /**
-     * Формирует сообщение для события ResurrectionAction в виде:
+     * Воскрешение может быть использовано только со способностей. Формирует сообщение для события ResurrectionAction в
+     * виде:
      *
-     * "$name воскресил $targetName"
+     * "Unit use <icon> NameAction and resurrected Target"
      *
      * Воскрешение подразумевается только одним юнитом другого. Воскрешение самого себя на данный момент не
      * предусмотренно
@@ -190,12 +191,19 @@ class Chat implements ChatInterface
      */
     private function resurrected(ActionInterface $action): string
     {
-        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
-            $this->translation->trans($action->getNameAction()) .
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
-            $action->getTargetUnit()->getName() .
-            '</span>';
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // "use"
+            $this->translation->trans('use') . ' ' .
+            // ability icon
+            $this->getIcon($action) .
+            // ability name
+            $this->translation->trans($action->getNameAction()) . ' ' .
+            // "and resurrected"
+            $this->translation->trans('and resurrected') .
+            // Target
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span>';
     }
 
     /**

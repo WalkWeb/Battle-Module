@@ -32,6 +32,7 @@ return [
     'use'                              => 'use',
     'at'                               => 'at',
     'and heal'                         => 'and heal',
+    'and resurrected'                  => 'and resurrected',
     // Ability
     'Great Heal'                       => 'Great Heal',
     'summon Imp'                       => 'summon Imp',
@@ -43,7 +44,7 @@ return [
     'Poison'                           => 'Poison',
     'Heavy Strike'                     => 'Heavy Strike',
     'Healing Potion'                   => 'Healing Potion',
-    'use Back to Life and resurrected' => 'use Back to Life and resurrected',
+    'Back to Life'                     => 'Back to Life',
     'use Healing Potion'               => 'use Healing Potion',
     // Statistics
     'Statistics'                       => 'Statistics',

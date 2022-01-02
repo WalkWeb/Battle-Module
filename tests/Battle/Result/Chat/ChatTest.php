@@ -51,8 +51,10 @@ class ChatTest extends TestCase
     private const BUFF_EN = '<span style="color: #1e72e3">unit_1</span> Reserve Forces';
     private const BUFF_RU = '<span style="color: #1e72e3">unit_1</span> Резервные Силы';
 
-    private const RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> resurrection <span style="color: #1e72e3">dead_unit</span>';
-    private const RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> воскресил <span style="color: #1e72e3">dead_unit</span>';
+    // Сейчас сообщения выглядят некорректно, т.к. сообщение о воскрешении подразумевает, что воскрешение использовано со способности
+    // TODO Подумать над улучшением
+    private const RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> use resurrection and resurrected <span style="color: #1e72e3">dead_unit</span>';
+    private const RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> использовал воскресил и воскресил <span style="color: #1e72e3">dead_unit</span>';
 
     private const EFFECT_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect Healing Potion';
     private const EFFECT_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта Лечебное зелье';
