@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability\Effect;
 
 use Battle\Command\CommandFactory;
+use Battle\Container\Container;
+use Battle\Container\ContainerException;
+use Battle\Container\ContainerInterface;
+use Battle\Translation\Translation;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
 use Battle\Unit\UnitInterface;
@@ -14,15 +18,17 @@ use Tests\Battle\Factory\UnitFactory;
 
 class HealingPotionAbilityTest extends TestCase
 {
-    private const MESSAGE_APPLY = '<span style="color: #1e72e3">wounded_unit</span> <img src="/images/icons/ability/234.png" alt="" /> use Healing Potion';
-    private const MESSAGE_HEAL = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <img src="/images/icons/ability/234.png" alt="" /> Healing Potion';
+    private const MESSAGE_APPLY_SELF  = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/234.png" alt="" /> Healing Potion';
+    private const MESSAGE_APPLY_TO    = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/234.png" alt="" /> Healing Potion on <span style="color: #1e72e3">wounded_unit</span>';
+    private const MESSAGE_APPLY_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/234.png" alt="" /> Лечебное зелье на <span style="color: #1e72e3">wounded_unit</span>';
+    private const MESSAGE_HEAL        = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <img src="/images/icons/ability/234.png" alt="" /> Healing Potion';
 
     /**
      * Тест на создание способности HealingPotionAbility
      *
      * @throws Exception
      */
-    public function testHealingPotionAbilityCreate(): void
+    public function testHealingPotionAbilitySelfCreate(): void
     {
         $name = 'Healing Potion';
         $icon = '/images/icons/ability/234.png';
@@ -59,7 +65,7 @@ class HealingPotionAbilityTest extends TestCase
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_APPLY, $action->handle());
+            self::assertEquals(self::MESSAGE_APPLY_SELF, $action->handle());
         }
 
         $effects = $unit->getEffects();
@@ -207,6 +213,72 @@ class HealingPotionAbilityTest extends TestCase
     }
 
     /**
+     * Тест на проверку сформированного сообщения при применении способности на другого юнита, на английском
+     *
+     * @throws Exception
+     */
+    public function testHealingPotionAbilityToEn(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $woundedUnit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit, $woundedUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $ability = new HealingPotionAbility($unit);
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+        $collection->update($unit);
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE_APPLY_TO, $action->handle());
+        }
+    }
+
+    /**
+     * Тест на проверку сформированного сообщения при применении способности на другого юнита, на русском
+     *
+     * @throws Exception
+     */
+    public function testHealingPotionAbilityToRu(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $woundedUnit = UnitFactory::createByTemplate(11, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit, $woundedUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $ability = new HealingPotionAbility($unit);
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+        $collection->update($unit);
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE_APPLY_TO_RU, $action->handle());
+        }
+    }
+
+    /**
      * @param UnitInterface $unit
      */
     private function nextRound(UnitInterface $unit): void
@@ -217,5 +289,17 @@ class HealingPotionAbilityTest extends TestCase
             }
         }
         $unit->newRound();
+    }
+
+    /**
+     * @return ContainerInterface
+     * @throws ContainerException
+     */
+    private function getContainerWithRuLanguage(): ContainerInterface
+    {
+        $translation = new Translation('ru');
+        $container = new Container();
+        $container->set(Translation::class, $translation);
+        return $container;
     }
 }

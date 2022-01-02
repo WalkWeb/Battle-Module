@@ -15,11 +15,11 @@ use Exception;
 
 class HealingPotionAbility extends AbstractAbility
 {
-    private const NAME        = 'Healing Potion';
-    private const ICON        = '/images/icons/ability/234.png';
-    private const USE_MESSAGE = 'use Healing Potion';
-    private const DURATION    = 4;
-    private const POWER       = 15;
+    private const NAME           = 'Healing Potion';
+    private const ICON           = '/images/icons/ability/234.png';
+    private const DURATION       = 4;
+    private const POWER          = 15;
+    private const MESSAGE_METHOD = 'applyEffectImproved';
 
     /**
      * @var ActionCollection
@@ -126,8 +126,9 @@ class HealingPotionAbility extends AbstractAbility
                 'enemy_command'  => $enemyCommand,
                 'allies_command' => $alliesCommand,
                 'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
-                'name'           => self::USE_MESSAGE,
+                'name'           => self::NAME,
                 'icon'           => self::ICON,
+                'message_method' => self::MESSAGE_METHOD,
                 'effect'         => [
                     'name'                  => self::NAME,
                     'icon'                  => self::ICON,
