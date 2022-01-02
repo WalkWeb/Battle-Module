@@ -29,8 +29,9 @@ return [
     'resurrected'                      => 'воскресил',
     'use'                              => 'использовал',
     'at'                               => 'по',
+    'and heal'                         => 'и вылечил',
     // Ability
-    'use Great Heal and heal'          => 'использовал Сильное Лечение и вылечил',
+    'Great Heal'                       => 'Сильное Лечение',
     'summon Imp'                       => 'призвал Беса',
     'summon Skeleton'                  => 'призвал Скелета',
     'summon Skeleton Mage'             => 'призвал Скелета-мага',

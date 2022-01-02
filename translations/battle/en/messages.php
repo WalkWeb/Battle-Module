@@ -31,8 +31,9 @@ return [
     'resurrected'                      => 'resurrected',
     'use'                              => 'use',
     'at'                               => 'at',
+    'and heal'                         => 'and heal',
     // Ability
-    'use Great Heal and heal'          => 'use Great Heal and heal',
+    'Great Heal'                       => 'Great Heal',
     'summon Imp'                       => 'summon Imp',
     'summon Skeleton'                  => 'summon Skeleton',
     'summon Skeleton Mage'             => 'summon Skeleton Mage',

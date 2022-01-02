@@ -12,9 +12,8 @@ use Battle\Unit\UnitInterface;
 
 class GreatHealAbility extends AbstractAbility
 {
-    private const NAME        = 'Great Heal';
-    private const ICON        = '/images/icons/ability/196.png';
-    private const USE_MESSAGE = 'use Great Heal and heal';
+    private const NAME = 'Great Heal';
+    private const ICON = '/images/icons/ability/196.png';
 
     /**
      * @var ActionCollection
@@ -39,9 +38,9 @@ class GreatHealAbility extends AbstractAbility
                 $alliesCommand,
                 HealAction::TARGET_WOUNDED_ALLIES,
                 $this->unit->getDamage() * 3,
-                self::USE_MESSAGE,
+                self::NAME,
                 HealAction::UNIT_ANIMATION_METHOD,
-                HealAction::DEFAULT_MESSAGE_METHOD,
+                HealAction::ABILITY_MESSAGE_METHOD,
                 self::ICON
             ));
         }

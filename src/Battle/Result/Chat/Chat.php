@@ -9,6 +9,8 @@ use Battle\Action\ActionInterface;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationInterface;
 
+// TODO Рефакторинг методов по примеру healAbility()
+
 class Chat implements ChatInterface
 {
     /**
@@ -33,7 +35,7 @@ class Chat implements ChatInterface
      * @param ActionInterface $action
      * @return string
      * @throws ChatException
-     * @uses damage, damageAbility, heal, summon, wait, buff, resurrected, applyEffect, effectDamage, effectHeal, skip, applyEffectImproved
+     * @uses damage, damageAbility, heal, healAbility, summon, wait, buff, resurrected, applyEffect, effectDamage, effectHeal, skip, applyEffectImproved
      */
     public function addMessage(ActionInterface $action): string
     {
@@ -110,6 +112,36 @@ class Chat implements ChatInterface
             ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
             $action->getTargetUnit()->getName() .
             '</span> ' . $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' .
+            $this->translation->trans('life');
+    }
+
+    /**
+     * Использование лечение со способности. В отличие от обычного лечения добавляется иконка способности
+     *
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    public function healAbility(ActionInterface $action): string
+    {
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // "use"
+            $this->translation->trans('use') . ' ' .
+            // ability icon
+            $this->getIcon($action) .
+            // ability name
+            $this->translation->trans($action->getNameAction()) . ' ' .
+            // "and heal"
+            $this->translation->trans('and heal') .
+            // Target
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span> ' .
+            // "on"
+            $this->translation->trans('on') . ' ' .
+            // Power
+            $action->getFactualPower() . ' ' .
+            // "life"
             $this->translation->trans('life');
     }
 
