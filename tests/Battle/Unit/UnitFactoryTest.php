@@ -10,9 +10,9 @@ use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 
-class UnitFactoryTest extends TestCase
+class UnitFactoryTest extends AbstractUnitTest
 {
     /**
      * Тест на успешное создание юнита через UnitFactory

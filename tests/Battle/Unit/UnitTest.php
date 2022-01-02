@@ -12,16 +12,16 @@ use Battle\Command\Command;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
-use PHPUnit\Framework\TestCase;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandException;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Action\DamageAction;
 use Tests\Battle\Factory\UnitFactoryException;
 use Tests\Battle\Factory\Mock\ActionMockFactory;
 use Tests\Battle\Factory\CommandFactory as CommandFactoryTest;
 
-class UnitTest extends TestCase
+class UnitTest extends AbstractUnitTest
 {
     /**
      * @dataProvider createDataProvider

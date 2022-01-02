@@ -9,11 +9,11 @@ use Battle\Round\Round;
 use Battle\Round\RoundException;
 use Battle\Container\Container;
 use Battle\Command\CommandFactory;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
 use Tests\Battle\Factory\UnitFactory;
 
-class RoundTest extends TestCase
+class RoundTest extends AbstractUnitTest
 {
     /**
      * Проверяем корректную смену действующий команды

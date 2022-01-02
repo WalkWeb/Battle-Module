@@ -9,10 +9,10 @@ use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Summon\SummonFireElementalAbility;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class SummonFireElementalAbilityTest extends TestCase
+class SummonFireElementalAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/198.png" alt="" /> summon Fire Elemental';
 

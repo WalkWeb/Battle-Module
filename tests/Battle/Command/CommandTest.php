@@ -18,13 +18,13 @@ use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
-use PHPUnit\Framework\TestCase;
 use Battle\Action\DamageAction;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\Mock\UnitMockFactory;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
 
-class CommandTest extends TestCase
+class CommandTest extends AbstractUnitTest
 {
     /**
      * Проверяем успешное создание команды

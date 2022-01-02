@@ -13,11 +13,11 @@ use Battle\View\View;
 use Battle\View\ViewException;
 use Battle\View\ViewFactory;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
 use Tests\Battle\Factory\UnitFactory;
 
-class ViewTest extends TestCase
+class ViewTest extends AbstractUnitTest
 {
     /**
      * Тест генерации вида юнитов ближнего боя

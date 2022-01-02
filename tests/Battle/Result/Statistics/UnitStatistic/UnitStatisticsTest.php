@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Tests\Battle\Result\Statistics\UnitStatistic;
 
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
 
-class UnitStatisticsTest extends TestCase
+class UnitStatisticsTest extends AbstractUnitTest
 {
     /**
      * @throws Exception

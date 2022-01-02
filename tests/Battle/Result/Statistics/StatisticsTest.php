@@ -10,10 +10,10 @@ use Battle\Action\DamageAction;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
 use Battle\Result\Statistic\Statistic;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class StatisticsTest extends TestCase
+class StatisticsTest extends AbstractUnitTest
 {
     public function testStatisticsRoundNumber(): void
     {

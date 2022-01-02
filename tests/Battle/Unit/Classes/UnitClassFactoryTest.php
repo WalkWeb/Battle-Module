@@ -11,9 +11,9 @@ use Battle\Unit\Classes\Human\Warrior;
 use Battle\Unit\Classes\Undead\DarkMage;
 use Battle\Unit\Classes\Undead\DeadKnight;
 use Battle\Unit\Classes\UnitClassFactory;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 
-class UnitClassFactoryTest extends TestCase
+class UnitClassFactoryTest extends AbstractUnitTest
 {
     /**
      * @dataProvider successDataProvider

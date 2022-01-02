@@ -9,11 +9,11 @@ use Battle\Action\ActionInterface;
 use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandFactory;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\BaseFactory;
 use Tests\Battle\Factory\UnitFactory;
 
-class ResurrectionActionTest extends TestCase
+class ResurrectionActionTest extends AbstractUnitTest
 {
     /**
      * Тест на создание ResurrectionAction

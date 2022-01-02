@@ -14,10 +14,10 @@ use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\ReserveForcesAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class ReserveForcesAbilityTest extends TestCase
+class ReserveForcesAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/156.png" alt="" /> Reserve Forces';
 

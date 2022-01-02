@@ -9,12 +9,12 @@ use Battle\Container\Container;
 use Battle\Result\Chat\Chat;
 use Battle\Result\Scenario\Scenario;
 use Battle\Translation\Translation;
-use PHPUnit\Framework\TestCase;
 use Battle\Result\Result;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\CommandFactory;
 use Battle\Result\ResultException;
 
-class ResultTest extends TestCase
+class ResultTest extends AbstractUnitTest
 {
     /**
      * @throws ResultException

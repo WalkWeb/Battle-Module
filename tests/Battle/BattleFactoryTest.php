@@ -11,9 +11,9 @@ use Battle\Command\CommandFactory;
 use Battle\BattleException;
 use Battle\Unit\UnitException;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 
-class BattleFactoryTest extends TestCase
+class BattleFactoryTest extends AbstractUnitTest
 {
     /**
      * @dataProvider successDataProvider

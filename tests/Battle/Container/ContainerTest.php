@@ -22,10 +22,10 @@ use Battle\Translation\TranslationException;
 use Battle\Translation\TranslationInterface;
 use Battle\Unit\Unit;
 use Battle\View\ViewFactory;
-use PHPUnit\Framework\TestCase;
 use stdClass;
+use Tests\AbstractUnitTest;
 
-class ContainerTest extends TestCase
+class ContainerTest extends AbstractUnitTest
 {
     /**
      * @throws ContainerException

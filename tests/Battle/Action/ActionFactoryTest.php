@@ -19,13 +19,13 @@ use Battle\Command\CommandFactory;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\UnitException;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\BaseFactory;
 use Tests\Battle\Factory\UnitFactory as TestUnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 use Battle\Unit\UnitFactory;
 
-class ActionFactoryTest extends TestCase
+class ActionFactoryTest extends AbstractUnitTest
 {
     /**
      * Тест на успешное создание DamageAction на основе массива с данными

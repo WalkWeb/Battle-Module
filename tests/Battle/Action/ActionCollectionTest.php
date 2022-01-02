@@ -9,10 +9,10 @@ use Exception;
 use Battle\Action\ActionCollection;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class ActionCollectionTest extends TestCase
+class ActionCollectionTest extends AbstractUnitTest
 {
     /**
      * @throws Exception

@@ -9,10 +9,10 @@ use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Summon\SummonSkeletonMageAbility;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class SummonSkeletonMageAbilityTest extends TestCase
+class SummonSkeletonMageAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/503.png" alt="" /> summon Skeleton Mage';
 

@@ -16,19 +16,16 @@ use Battle\Action\WaitAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
-use Battle\Container\ContainerException;
-use Battle\Container\ContainerInterface;
 use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\ChatException;
-use Battle\Translation\Translation;
 use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\BaseFactory;
 use Tests\Battle\Factory\UnitFactory;
 
-class ChatTest extends TestCase
+class ChatTest extends AbstractUnitTest
 {
     private const DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
     private const DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона';
@@ -607,18 +604,6 @@ class ChatTest extends TestCase
         $this->expectException(ChatException::class);
         $this->expectExceptionMessage(ChatException::UNDEFINED_MESSAGE_METHOD);
         $chat->addMessage($action);
-    }
-
-    /**
-     * @return ContainerInterface
-     * @throws ContainerException
-     */
-    private function getContainerWithRuLanguage(): ContainerInterface
-    {
-        $translation = new Translation('ru');
-        $container = new Container();
-        $container->set(Translation::class, $translation);
-        return $container;
     }
 
     /**

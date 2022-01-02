@@ -14,10 +14,10 @@ use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\PoisonAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class PoisonAbilityTest extends TestCase
+class PoisonAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> Poison on <span style="color: #1e72e3">unit_2</span>';
 

@@ -16,12 +16,12 @@ use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Container\Container;
 use Battle\Command\CommandFactory;
-use PHPUnit\Framework\TestCase;
 use Battle\Stroke\Stroke;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\Mock\BrokenPriestUnit;
 use Tests\Battle\Factory\UnitFactory;
 
-class StrokeTest extends TestCase
+class StrokeTest extends AbstractUnitTest
 {
     private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
 

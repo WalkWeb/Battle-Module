@@ -7,11 +7,11 @@ namespace Tests\Battle\Unit;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 
-class UnitCollectionTest extends TestCase
+class UnitCollectionTest extends AbstractUnitTest
 {
     /**
      * @throws UnitException

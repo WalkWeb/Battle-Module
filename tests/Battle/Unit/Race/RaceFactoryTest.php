@@ -7,9 +7,9 @@ namespace Tests\Battle\Unit\Race;
 use Battle\BattleException;
 use Battle\Unit\Race\RaceException;
 use Battle\Unit\Race\RaceFactory;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 
-class RaceFactoryTest extends TestCase
+class RaceFactoryTest extends AbstractUnitTest
 {
     /**
      * @dataProvider successDataProvider

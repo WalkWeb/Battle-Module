@@ -8,11 +8,11 @@ use Battle\Action\DamageAction;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\Mock\CommandMockFactory;
 use Tests\Battle\Factory\UnitFactory;
 
-class DamageActionTest extends TestCase
+class DamageActionTest extends AbstractUnitTest
 {
     /**
      * @throws Exception

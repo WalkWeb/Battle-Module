@@ -5,18 +5,14 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability\Effect;
 
 use Battle\Command\CommandFactory;
-use Battle\Container\Container;
-use Battle\Container\ContainerException;
-use Battle\Container\ContainerInterface;
-use Battle\Translation\Translation;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class HealingPotionAbilityTest extends TestCase
+class HealingPotionAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_APPLY_SELF  = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/234.png" alt="" /> Healing Potion';
     private const MESSAGE_APPLY_TO    = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/234.png" alt="" /> Healing Potion on <span style="color: #1e72e3">wounded_unit</span>';
@@ -289,17 +285,5 @@ class HealingPotionAbilityTest extends TestCase
             }
         }
         $unit->newRound();
-    }
-
-    /**
-     * @return ContainerInterface
-     * @throws ContainerException
-     */
-    private function getContainerWithRuLanguage(): ContainerInterface
-    {
-        $translation = new Translation('ru');
-        $container = new Container();
-        $container->set(Translation::class, $translation);
-        return $container;
     }
 }

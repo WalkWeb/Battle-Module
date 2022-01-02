@@ -15,10 +15,10 @@ use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class AlchemistTest extends TestCase
+class AlchemistTest extends AbstractUnitTest
 {
     /**
      * @throws Exception

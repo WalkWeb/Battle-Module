@@ -13,11 +13,11 @@ use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use PHPUnit\Framework\TestCase;
 use Battle\Command\CommandFactory;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class TitanTest extends TestCase
+class TitanTest extends AbstractUnitTest
 {
     /**
      * @throws Exception

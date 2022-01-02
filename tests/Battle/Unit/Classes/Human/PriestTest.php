@@ -12,10 +12,10 @@ use Battle\Unit\Ability\Heal\GreatHealAbility;
 use Battle\Unit\Ability\Resurrection\BackToLifeAbility;
 use Battle\Unit\UnitException;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class PriestTest extends TestCase
+class PriestTest extends AbstractUnitTest
 {
     /**
      * @throws CommandException

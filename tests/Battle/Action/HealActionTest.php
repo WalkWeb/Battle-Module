@@ -16,10 +16,10 @@ use Battle\Container\Container;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class HealActionTest extends TestCase
+class HealActionTest extends AbstractUnitTest
 {
     /**
      * @throws CommandException

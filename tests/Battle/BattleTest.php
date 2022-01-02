@@ -12,12 +12,12 @@ use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Container\Container;
 use Battle\Unit\UnitCollection;
-use PHPUnit\Framework\TestCase;
 use Battle\Battle;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\CommandFactory;
 use Tests\Battle\Factory\UnitFactory;
 
-class BattleTest extends TestCase
+class BattleTest extends AbstractUnitTest
 {
     /**
      * Тест на успешную обработку боя

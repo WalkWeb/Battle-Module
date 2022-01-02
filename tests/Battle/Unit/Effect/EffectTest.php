@@ -14,10 +14,10 @@ use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\BaseFactory;
 
-class EffectTest extends TestCase
+class EffectTest extends AbstractUnitTest
 {
     /**
      * @throws ActionException

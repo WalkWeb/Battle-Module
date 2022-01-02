@@ -6,16 +6,12 @@ namespace Tests\Battle\Unit\Ability\Resurrection;
 
 use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandFactory;
-use Battle\Container\Container;
-use Battle\Container\ContainerException;
-use Battle\Container\ContainerInterface;
-use Battle\Translation\Translation;
 use Battle\Unit\Ability\Resurrection\BackToLifeAbility;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class BackToLifeAbilityTest extends TestCase
+class BackToLifeAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/053.png" alt="" /> Back to Life and resurrected <span style="color: #1e72e3">dead_unit</span>';
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/053.png" alt="" /> Возвращение к жизни и воскресил <span style="color: #1e72e3">dead_unit</span>';
@@ -125,19 +121,5 @@ class BackToLifeAbilityTest extends TestCase
             self::assertTrue($action->canByUsed());
             self::assertEquals(self::MESSAGE_RU, $action->handle());
         }
-    }
-
-    /**
-     * TODO Дублируется в нескольких тестах, можно вынести в TestCase
-     *
-     * @return ContainerInterface
-     * @throws ContainerException
-     */
-    private function getContainerWithRuLanguage(): ContainerInterface
-    {
-        $translation = new Translation('ru');
-        $container = new Container();
-        $container->set(Translation::class, $translation);
-        return $container;
     }
 }

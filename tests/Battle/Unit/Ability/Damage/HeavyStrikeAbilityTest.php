@@ -8,11 +8,11 @@ use Exception;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityCollection;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
 
-class HeavyStrikeAbilityTest extends TestCase
+class HeavyStrikeAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> Heavy Strike at <span style="color: #1e72e3">unit_2</span> on 50 damage';
 

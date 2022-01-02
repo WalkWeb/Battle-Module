@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\FullLog;
 
-use PHPUnit\Framework\TestCase;
 use Battle\Result\FullLog\FullLog;
+use Tests\AbstractUnitTest;
 
-class FullLogTest extends TestCase
+class FullLogTest extends AbstractUnitTest
 {
     public function testFullLogAddDefault(): void
     {

@@ -10,10 +10,10 @@ use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class SummonActionTest extends TestCase
+class SummonActionTest extends AbstractUnitTest
 {
     /**
      * @throws CommandException

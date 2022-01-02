@@ -9,10 +9,10 @@ use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
 use Battle\Result\Statistic\UnitStatistic\UnitStatisticCollection;
 use Battle\Result\Statistic\UnitStatistic\UnitStatisticInterface;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class UnitStatisticCollectionTest extends TestCase
+class UnitStatisticCollectionTest extends AbstractUnitTest
 {
     /**
      * @throws Exception

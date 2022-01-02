@@ -12,11 +12,11 @@ use Battle\Command\CommandFactory;
 use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitException;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
 
-class EffectCollectionTest extends TestCase
+class EffectCollectionTest extends AbstractUnitTest
 {
     /**
      * @throws UnitFactoryException

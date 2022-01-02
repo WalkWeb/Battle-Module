@@ -14,10 +14,10 @@ use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\BattleFuryAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class BattleFuryAbilityTest extends TestCase
+class BattleFuryAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/102.png" alt="" /> Battle Fury';
 

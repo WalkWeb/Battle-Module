@@ -9,10 +9,10 @@ use Battle\Action\ActionInterface;
 use Battle\Unit\Effect\EffectException;
 use Battle\Unit\Effect\EffectFactory;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\BaseFactory;
 
-class EffectFactoryTest extends TestCase
+class EffectFactoryTest extends AbstractUnitTest
 {
     /**
      * Тест на успешный вариант создания эффекта из массива параметров

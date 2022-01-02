@@ -10,10 +10,12 @@ use Battle\Command\CommandFactory;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class CommandHealTest extends TestCase
+// TODO Вынести данные тесты в CommandTest
+
+class CommandHealTest extends AbstractUnitTest
 {
     /**
      * @throws CommandException

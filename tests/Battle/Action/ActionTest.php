@@ -8,11 +8,11 @@ use Exception;
 use Battle\Action\ActionException;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\BaseFactory;
 use Tests\Battle\Factory\UnitFactory;
 
-class ActionTest extends TestCase
+class ActionTest extends AbstractUnitTest
 {
     /**
      * Тест на ситуацию, когда у не-SummonAction вызывают метод getSummonUnit()

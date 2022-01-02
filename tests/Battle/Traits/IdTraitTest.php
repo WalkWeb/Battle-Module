@@ -6,9 +6,9 @@ namespace Tests\Battle\Traits;
 
 use Battle\Traits\IdTrait;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 
-class IdTraitTest extends TestCase
+class IdTraitTest extends AbstractUnitTest
 {
     use IdTrait;
 

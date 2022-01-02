@@ -20,11 +20,11 @@ use Battle\Action\WaitAction;
 use Battle\Command\CommandFactory;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Statistic\Statistic;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\BaseFactory;
 use Tests\Battle\Factory\UnitFactory;
 
-class ScenarioTest extends TestCase
+class ScenarioTest extends AbstractUnitTest
 {
     /**
      * За основу берется DamageActionTest::testApplyDamageAction()

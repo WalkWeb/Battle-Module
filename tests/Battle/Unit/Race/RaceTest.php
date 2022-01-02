@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Race;
 
 use Battle\Unit\Race\Race;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 
-class RaceTest extends TestCase
+class RaceTest extends AbstractUnitTest
 {
     public function testRaceCreate(): void
     {

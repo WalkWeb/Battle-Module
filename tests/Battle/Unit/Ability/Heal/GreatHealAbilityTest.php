@@ -10,14 +10,14 @@ use Battle\Container\ContainerInterface;
 use Battle\Translation\Translation;
 use Exception;
 use Battle\Action\DamageAction;
-use PHPUnit\Framework\TestCase;
 use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Heal\GreatHealAbility;
 
-class GreatHealAbilityTest extends TestCase
+class GreatHealAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/196.png" alt="" /> Great Heal and heal <span style="color: #1e72e3">unit_1</span> on 30 life';
     private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/196.png" alt="" /> Сильное Лечение и вылечил <span style="color: #1e72e3">wounded_unit</span> на 99 здоровья';
@@ -141,17 +141,5 @@ class GreatHealAbilityTest extends TestCase
             self::assertTrue($action->canByUsed());
             self::assertEquals(self::MESSAGE_RU, $action->handle());
         }
-    }
-
-    /**
-     * @return ContainerInterface
-     * @throws ContainerException
-     */
-    private function getContainerWithRuLanguage(): ContainerInterface
-    {
-        $translation = new Translation('ru');
-        $container = new Container();
-        $container->set(Translation::class, $translation);
-        return $container;
     }
 }

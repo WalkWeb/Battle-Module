@@ -9,10 +9,10 @@ use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Summon\SummonSkeletonAbility;
 use Battle\Unit\UnitException;
 use Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
-class DarkMageTest extends TestCase
+class DarkMageTest extends AbstractUnitTest
 {
     /**
      * @throws CommandException

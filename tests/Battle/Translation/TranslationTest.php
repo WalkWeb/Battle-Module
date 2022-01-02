@@ -6,9 +6,9 @@ namespace Tests\Battle\Translation;
 
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationException;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractUnitTest;
 
-class TranslationTest extends TestCase
+class TranslationTest extends AbstractUnitTest
 {
     /**
      * Тест на стандартный успешный перевод сообщения

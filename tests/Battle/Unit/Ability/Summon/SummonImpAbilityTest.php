@@ -6,13 +6,13 @@ namespace Tests\Battle\Unit\Ability\Summon;
 
 use Exception;
 use Battle\Action\SummonAction;
-use PHPUnit\Framework\TestCase;
 use Battle\Command\CommandFactory;
+use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Summon\SummonImpAbility;
 
-class SummonImpAbilityTest extends TestCase
+class SummonImpAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/275.png" alt="" /> summon Imp';
 
