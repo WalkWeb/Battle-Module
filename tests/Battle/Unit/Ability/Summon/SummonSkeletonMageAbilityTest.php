@@ -14,8 +14,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class SummonSkeletonMageAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/503.png" alt="" /> Skeleton Mage';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/503.png" alt="" /> Скелета-мага';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/503.png" alt="" /> <span class="ability">Skeleton Mage</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/503.png" alt="" /> <span class="ability">Скелета-мага</span>';
 
     /**
      * @throws Exception

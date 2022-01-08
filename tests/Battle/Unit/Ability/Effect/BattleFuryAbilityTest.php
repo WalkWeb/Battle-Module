@@ -19,7 +19,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class BattleFuryAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/102.png" alt="" /> Battle Fury';
+    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/102.png" alt="" /> <span class="ability">Battle Fury</span>';
 
     /**
      * Тест на создание способности BattleFuryAbility

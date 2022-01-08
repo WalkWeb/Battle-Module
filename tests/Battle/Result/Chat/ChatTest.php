@@ -30,36 +30,39 @@ class ChatTest extends AbstractUnitTest
     private const DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
     private const DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона';
 
-    private const DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> Heavy Strike at <span style="color: #1e72e3">unit_2</span> on 50 damage';
-    private const DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> Тяжелый Удар по <span style="color: #1e72e3">unit_2</span> на 50 урона';
+    private const DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> at <span style="color: #1e72e3">unit_2</span> on 50 damage';
+    private const DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> по <span style="color: #1e72e3">unit_2</span> на 50 урона';
 
     private const HEAL_EN = '<span style="color: #1e72e3">unit_1</span> heal <span style="color: #1e72e3">wounded_unit</span> on 20 life';
     private const HEAL_RU = '<span style="color: #1e72e3">unit_1</span> вылечил <span style="color: #1e72e3">wounded_unit</span> на 20 здоровья';
 
-    private const SUMMON_EN = '<span style="color: #1e72e3">unit_1</span> summon Imp';
-    private const SUMMON_RU = '<span style="color: #1e72e3">unit_1</span> призвал Беса';
+    // TODO Почему нет иконки?
+    private const SUMMON_EN = '<span style="color: #1e72e3">unit_1</span> summon <span class="ability">Imp</span>';
+    private const SUMMON_RU = '<span style="color: #1e72e3">unit_1</span> призвал <span class="ability">Беса</span>';
 
     private const WAIT_EN = '<span style="color: #1e72e3">unit_1</span> preparing to attack';
     private const WAIT_RU = '<span style="color: #1e72e3">unit_1</span> готовится к атаке';
 
-    private const EFFECT_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> received damage on 10 life from effect Poison';
-    private const EFFECT_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> получил урон на 10 здоровья от эффекта Отравление';
+    private const EFFECT_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> received damage on 10 life from effect <span class="ability">Poison</span>';
+    private const EFFECT_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> получил урон на 10 здоровья от эффекта <span class="ability">Отравление</span>';
 
+    // TODO В текущих способностях сообщение от BuffAction не формируется, оно формируется через EffectAction
+    // TODO По этому текущие сообщения выглядят кривовато
     private const BUFF_EN = '<span style="color: #1e72e3">unit_1</span> Reserve Forces';
     private const BUFF_RU = '<span style="color: #1e72e3">unit_1</span> Резервные Силы';
 
     // Сейчас сообщения выглядят некорректно, т.к. сообщение о воскрешении подразумевает, что воскрешение использовано со способности
-    private const RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> use ExampleActionName and resurrected <span style="color: #1e72e3">dead_unit</span>';
-    private const RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> использовал ExampleActionName и воскресил <span style="color: #1e72e3">dead_unit</span>';
+    private const RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> use <span class="ability">ExampleActionName</span> and resurrected <span style="color: #1e72e3">dead_unit</span>';
+    private const RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> использовал <span class="ability">ExampleActionName</span> и воскресил <span style="color: #1e72e3">dead_unit</span>';
 
-    private const EFFECT_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect Healing Potion';
-    private const EFFECT_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта Лечебное зелье';
+    private const EFFECT_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <span class="ability">Healing Potion</span>';
+    private const EFFECT_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта <span class="ability">Лечебное зелье</span>';
 
-    private const APPLY_EFFECT_SELF_EN = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces';
-    private const APPLY_EFFECT_SELF_RU = '<span style="color: #1e72e3">unit_1</span> использовал Резервные Силы';
+    private const APPLY_EFFECT_SELF_EN = '<span style="color: #1e72e3">unit_1</span> use <span class="ability">Reserve Forces</span>';
+    private const APPLY_EFFECT_SELF_RU = '<span style="color: #1e72e3">unit_1</span> использовал <span class="ability">Резервные Силы</span>';
 
-    private const APPLY_EFFECT_TO_EN = '<span style="color: #1e72e3">unit_1</span> use Reserve Forces on <span style="color: #1e72e3">unit_2</span>';
-    private const APPLY_EFFECT_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал Резервные Силы на <span style="color: #1e72e3">unit_2</span>';
+    private const APPLY_EFFECT_TO_EN = '<span style="color: #1e72e3">unit_1</span> use <span class="ability">Reserve Forces</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const APPLY_EFFECT_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <span class="ability">Резервные Силы</span> на <span style="color: #1e72e3">unit_2</span>';
 
     private const SKIP_MESSAGE = '';
 

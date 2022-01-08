@@ -818,3 +818,7 @@ table.units_stats .header td {
     font-weight: 700;
     text-align: center;
 }
+
+span.ability {
+    color: #9e6821;
+}

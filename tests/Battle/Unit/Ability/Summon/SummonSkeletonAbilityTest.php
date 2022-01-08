@@ -14,8 +14,8 @@ use Battle\Unit\Ability\AbilityCollection;
 
 class SummonSkeletonAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/338.png" alt="" /> Skeleton';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/338.png" alt="" /> Скелета';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/338.png" alt="" /> <span class="ability">Skeleton</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/338.png" alt="" /> <span class="ability">Скелета</span>';
 
     /**
      * @throws Exception

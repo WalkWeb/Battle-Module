@@ -19,7 +19,9 @@ use Tests\Battle\Factory\UnitFactory;
 
 class ReserveForcesAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/156.png" alt="" /> Reserve Forces';
+    // TODO Сообщение на русском
+
+    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Reserve Forces</span>';
 
     /**
      * Тест на создание способности ReserveForcesAbility

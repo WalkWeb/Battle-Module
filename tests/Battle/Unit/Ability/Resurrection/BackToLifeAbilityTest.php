@@ -13,8 +13,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class BackToLifeAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/053.png" alt="" /> Back to Life and resurrected <span style="color: #1e72e3">dead_unit</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/053.png" alt="" /> Возвращение к жизни и воскресил <span style="color: #1e72e3">dead_unit</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">Back to Life</span> and resurrected <span style="color: #1e72e3">dead_unit</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">Возвращение к жизни</span> и воскресил <span style="color: #1e72e3">dead_unit</span>';
 
     /**
      * Создание и применение способности BackToLifeAbility

@@ -101,7 +101,7 @@ class Chat implements ChatInterface
             // ability icon
             $this->getIcon($action) .
             // ability name
-            $this->translation->trans($action->getNameAction()) . ' ' .
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
             // "at"
             $this->translation->trans('at') .
             // Target
@@ -151,7 +151,7 @@ class Chat implements ChatInterface
             // ability icon
             $this->getIcon($action) .
             // ability name
-            $this->translation->trans($action->getNameAction()) . ' ' .
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
             // "and heal"
             $this->translation->trans('and heal') .
             // Target
@@ -180,7 +180,7 @@ class Chat implements ChatInterface
             // ability icon
             $this->getIcon($action) .
             // ability name
-            $this->translation->trans($action->getNameAction());
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>';
     }
 
     /**
@@ -197,6 +197,8 @@ class Chat implements ChatInterface
     }
 
     /**
+     * В текущих способностях сам баф не формирует сообщение - его формирует эффект, от которого применяется баф.
+     *
      * @param ActionInterface $action
      * @return string
      */
@@ -232,7 +234,7 @@ class Chat implements ChatInterface
             // ability icon
             $this->getIcon($action) .
             // ability name
-            $this->translation->trans($action->getNameAction()) . ' ' .
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
             // "and resurrected"
             $this->translation->trans('and resurrected') .
             // Target
@@ -257,7 +259,7 @@ class Chat implements ChatInterface
                 // ability icon
                 $this->getIcon($action) .
                 // ability name
-                $this->translation->trans($action->getNameAction());
+                '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>';
         }
 
         return
@@ -268,7 +270,7 @@ class Chat implements ChatInterface
             // ability icon
             $this->getIcon($action) .
             // ability name
-            $this->translation->trans($action->getNameAction()) . ' ' .
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
             // "on"
             $this->translation->trans('on') .
             // Target
@@ -296,7 +298,7 @@ class Chat implements ChatInterface
             // ability icon
             $this->getIcon($action) .
             // ability name
-            $this->translation->trans($action->getNameAction());
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>';
     }
 
     /**
@@ -318,7 +320,7 @@ class Chat implements ChatInterface
             // ability icon
             $this->getIcon($action) .
             // ability name
-            $this->translation->trans($action->getNameAction());
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>';
     }
 
     /**
