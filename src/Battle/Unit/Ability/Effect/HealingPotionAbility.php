@@ -19,7 +19,7 @@ class HealingPotionAbility extends AbstractAbility
     private const ICON           = '/images/icons/ability/234.png';
     private const DURATION       = 4;
     private const POWER          = 15;
-    private const MESSAGE_METHOD = 'applyEffectImproved';
+    private const MESSAGE_METHOD = 'applyEffect';
 
     /**
      * @var ActionCollection

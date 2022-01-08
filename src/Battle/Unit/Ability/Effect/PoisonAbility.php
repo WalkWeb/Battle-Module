@@ -17,7 +17,7 @@ class PoisonAbility extends AbstractAbility
 {
     private const NAME           = 'Poison';
     private const ICON           = '/images/icons/ability/202.png';
-    private const MESSAGE_METHOD = 'applyEffectImproved';
+    private const MESSAGE_METHOD = 'applyEffect';
     private const DURATION       = 5;
     private const POWER          = 8;
 

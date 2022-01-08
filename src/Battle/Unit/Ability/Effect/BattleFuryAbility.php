@@ -14,12 +14,12 @@ use Exception;
 
 class BattleFuryAbility extends AbstractAbility
 {
-    private const NAME          = 'Battle Fury';
-    private const ICON          = '/images/icons/ability/102.png';
-    private const DURATION      = 15;
-    private const MODIFY_METHOD = 'multiplierAttackSpeed';
-    private const MODIFY_POWER  = 140;
-    private const MESSAGE_METHOD = 'applyEffectImproved';
+    private const NAME           = 'Battle Fury';
+    private const ICON           = '/images/icons/ability/102.png';
+    private const DURATION       = 15;
+    private const MODIFY_METHOD  = 'multiplierAttackSpeed';
+    private const MODIFY_POWER   = 140;
+    private const MESSAGE_METHOD = 'applyEffect';
 
     /**
      * @var ActionCollection

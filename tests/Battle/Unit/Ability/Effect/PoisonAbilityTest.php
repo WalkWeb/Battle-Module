@@ -20,16 +20,16 @@ use Tests\Battle\Factory\UnitFactory;
 class PoisonAbilityTest extends AbstractUnitTest
 {
     // Сообщения применения на другого юнита
-    private const MESSAGE_APPLY_TO_EN   = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> Poison on <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_APPLY_TO_RU   = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/202.png" alt="" /> Отравление на <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_APPLY_TO_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> Poison on <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_APPLY_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/202.png" alt="" /> Отравление на <span style="color: #1e72e3">unit_2</span>';
 
     // Сообщения применения эффекта на себя
     private const MESSAGE_APPLY_SELF_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> Poison';
     private const MESSAGE_APPLY_SELF_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/202.png" alt="" /> Отравление';
 
     // Сообщения об уроне от эффекта
-    private const MESSAGE_DAMAGE_EN     = '<span style="color: #1e72e3">unit_2</span> received damage on 8 life from effect <img src="/images/icons/ability/202.png" alt="" /> Poison';
-    private const MESSAGE_DAMAGE_RU     = '<span style="color: #1e72e3">unit_2</span> получил урон на 8 здоровья от эффекта <img src="/images/icons/ability/202.png" alt="" /> Отравление';
+    private const MESSAGE_DAMAGE_EN = '<span style="color: #1e72e3">unit_2</span> received damage on 8 life from effect <img src="/images/icons/ability/202.png" alt="" /> Poison';
+    private const MESSAGE_DAMAGE_RU = '<span style="color: #1e72e3">unit_2</span> получил урон на 8 здоровья от эффекта <img src="/images/icons/ability/202.png" alt="" /> Отравление';
 
     /**
      * Тест на создание способности PoisonAbility
@@ -245,7 +245,7 @@ class PoisonAbilityTest extends AbstractUnitTest
             'type_target'    => $typeTarget,
             'name'           => 'Poison',
             'icon'           => '/images/icons/ability/202.png',
-            'message_method'  => 'applyEffectImproved',
+            'message_method' => 'applyEffect',
             'effect'         => [
                 'name'                  => 'Poison',
                 'icon'                  => '/images/icons/ability/202.png',

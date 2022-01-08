@@ -19,7 +19,7 @@ class ReserveForcesAbility extends AbstractAbility
     private const DURATION       = 6;
     private const MODIFY_METHOD  = 'multiplierMaxLife';
     private const MODIFY_POWER   = 130;
-    private const MESSAGE_METHOD = 'applyEffectImproved';
+    private const MESSAGE_METHOD = 'applyEffect';
 
     /**
      * @var ActionCollection

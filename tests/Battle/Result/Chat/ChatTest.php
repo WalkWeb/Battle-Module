@@ -633,7 +633,7 @@ class ChatTest extends AbstractUnitTest
             'type_target'    => $typeTarget,
             'name'           => 'Reserve Forces',
             'use_message'    => 'use',
-            'message_method' => 'applyEffectImproved',
+            'message_method' => 'applyEffect',
             'effect'         => [
                 'name'                  => 'Effect#123',
                 'icon'                  => 'icon.png',

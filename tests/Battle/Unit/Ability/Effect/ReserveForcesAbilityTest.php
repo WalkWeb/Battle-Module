@@ -230,7 +230,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
             'type_target'    => ActionInterface::TARGET_SELF,
             'name'           => 'Reserve Forces',
             'use_message'    => 'use',
-            'message_method' => 'applyEffectImproved',
+            'message_method' => 'applyEffect',
             'icon'           => '/images/icons/ability/156.png',
             'effect'         => [
                 'name'                  => 'Reserve Forces',

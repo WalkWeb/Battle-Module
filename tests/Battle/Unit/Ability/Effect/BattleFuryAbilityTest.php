@@ -181,7 +181,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
             'type_target'    => ActionInterface::TARGET_SELF,
             'name'           => 'Battle Fury',
             'icon'           => '/images/icons/ability/102.png',
-            'message_method' => 'applyEffectImproved',
+            'message_method' => 'applyEffect',
             'effect'         => [
                 'name'                  => 'Battle Fury',
                 'icon'                  => '/images/icons/ability/102.png',
