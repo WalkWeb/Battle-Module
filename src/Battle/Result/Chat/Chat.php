@@ -9,8 +9,6 @@ use Battle\Action\ActionInterface;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationInterface;
 
-// TODO Рефакторинг методов по примеру healAbility()
-
 class Chat implements ChatInterface
 {
     /**
@@ -69,12 +67,18 @@ class Chat implements ChatInterface
      */
     private function damage(ActionInterface $action): string
     {
-        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // ability icon, if any
+            $this->getIcon($action) .
+            // attack
             $this->translation->trans( $action->getNameAction()) .
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
-            $action->getTargetUnit()->getName() .
-            '</span> ' . $this->translation->trans('on') . ' ' .
+            // Target
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span> ' .
+            // "on"
+            $this->translation->trans('on') . ' ' .
+            // # damage
             $action->getFactualPower() . ' ' . $this->translation->trans('damage');
     }
 
@@ -89,13 +93,22 @@ class Chat implements ChatInterface
      */
     private function damageAbility(ActionInterface $action): string
     {
-        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans('use') . ' ' .
-            $this->getIcon($action) . $this->translation->trans($action->getNameAction()) . ' ' .
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // "use"
+            $this->translation->trans('use') . ' ' .
+            // ability icon
+            $this->getIcon($action) .
+            // ability name
+            $this->translation->trans($action->getNameAction()) . ' ' .
+            // "at"
             $this->translation->trans('at') .
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
-            $action->getTargetUnit()->getName() .
-            '</span> ' . $this->translation->trans('on') . ' ' .
+            // Target
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span> ' .
+            // "on"
+            $this->translation->trans('on') . ' ' .
+            // # damage
             $action->getFactualPower() . ' ' . $this->translation->trans('damage');
     }
 
@@ -106,13 +119,19 @@ class Chat implements ChatInterface
      */
     private function heal(ActionInterface $action): string
     {
-        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // ability icon, if any
+            $this->getIcon($action) .
+            // heal
             $this->translation->trans($action->getNameAction()) .
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
-            $action->getTargetUnit()->getName() .
-            '</span> ' . $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' .
-            $this->translation->trans('life');
+            // Target
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span> ' .
+            // "on"
+            $this->translation->trans('on') . ' ' .
+            // # life
+            $action->getFactualPower() . ' ' . $this->translation->trans('life');
     }
 
     /**
@@ -170,8 +189,11 @@ class Chat implements ChatInterface
      */
     private function wait(ActionInterface $action): string
     {
-        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // preparing to attack
+            $this->translation->trans($action->getNameAction());
     }
 
     /**
@@ -180,8 +202,11 @@ class Chat implements ChatInterface
      */
     private function buff(ActionInterface $action): string
     {
-        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans($action->getNameAction());
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // use message
+            $this->translation->trans($action->getNameAction());
     }
 
     /**
@@ -227,16 +252,26 @@ class Chat implements ChatInterface
     private function applyEffect(ActionInterface $action): string
     {
         if ($action->getActionUnit()->getId() === $action->getTargetUnit()->getId()) {
-            return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-                $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
+            return
+                // Unit
+                '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+                // ability icon
+                $this->getIcon($action) .
+                // use message
                 $this->translation->trans($action->getNameAction());
         }
 
-        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
-            $this->translation->trans($action->getNameAction()) . ' ' . $this->translation->trans('on') .
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
-            $action->getTargetUnit()->getName() . '</span>';
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // ability icon
+            $this->getIcon($action) .
+            // ability name
+            $this->translation->trans($action->getNameAction()) . ' ' .
+            // "on"
+            $this->translation->trans('on') .
+            // Target
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span>';
     }
 
     /**
@@ -256,33 +291,53 @@ class Chat implements ChatInterface
     private function applyEffectImproved(ActionInterface $action): string
     {
         if ($action->getActionUnit()->getId() === $action->getTargetUnit()->getId()) {
-            return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-                $action->getActionUnit()->getName() . '</span> ' .
+            return
+                // Unit
+                '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+                // "use"
                 $this->translation->trans('use') . ' ' .
+                // ability icon
                 $this->getIcon($action) .
+                // ability name
                 $this->translation->trans($action->getNameAction());
         }
 
-        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' .
-            $this->translation->trans('use') . ' ' . $this->getIcon($action) .
-            $this->translation->trans($action->getNameAction()) . ' ' . $this->translation->trans('on') .
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' .
-            $action->getTargetUnit()->getName() . '</span>';
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // "use"
+            $this->translation->trans('use') . ' ' .
+            // ability icon
+            $this->getIcon($action) .
+            // ability name
+            $this->translation->trans($action->getNameAction()) . ' ' .
+            // "on"
+            $this->translation->trans('on') .
+            // Target
+            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span>';
     }
 
     /**
      * Формирует сообщение урона от эффекта в формате:
      * "$name получил урон на $damage от эффекта $effectName"
      *
+     * TODO Добавить ability icon
+     *
      * @param ActionInterface $action
      * @return string
      */
     private function effectDamage(ActionInterface $action): string
     {
-        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans('received damage') . ' ' .
-            $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' . $this->translation->trans('life from effect') . ' ' .
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // "received damage"
+            $this->translation->trans('received damage') . ' ' .
+            // "on" #
+            $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' .
+            // "life from effect"
+            $this->translation->trans('life from effect') . ' ' .
+            // ability name
             $this->translation->trans($action->getNameAction());
     }
 
@@ -295,10 +350,17 @@ class Chat implements ChatInterface
      */
     private function effectHeal(ActionInterface $action): string
     {
-        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->translation->trans('restored') . ' ' .
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // "restored"
+            $this->translation->trans('restored') . ' ' .
+            // # "life from effect"
             $action->getFactualPower() . ' ' . $this->translation->trans('life from effect') . ' ' .
-            $this->getIcon($action) . $this->translation->trans($action->getNameAction());
+            // ability icon
+            $this->getIcon($action) .
+            // ability name
+            $this->translation->trans($action->getNameAction());
     }
 
     /**
