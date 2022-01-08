@@ -19,16 +19,15 @@ use Tests\Battle\Factory\UnitFactory;
 
 class ReserveForcesAbilityTest extends AbstractUnitTest
 {
-    // TODO Сообщение на русском
-
-    private const MESSAGE = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Reserve Forces</span>';
+    private const MESSAGE_EN = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Reserve Forces</span>';
+    private const MESSAGE_RU = '<span style="color: #ae882d">Titan</span> использовал <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Резервные Силы</span>';
 
     /**
      * Тест на создание способности ReserveForcesAbility
      *
      * @throws Exception
      */
-    public function testReserveForcesAbilityCreate(): void
+    public function testReserveForcesAbilityUse(): void
     {
         $name = 'Reserve Forces';
         $icon = '/images/icons/ability/156.png';
@@ -96,7 +95,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
             $message = $action->handle();
-            self::assertEquals(self::MESSAGE, $message);
+            self::assertEquals(self::MESSAGE_EN, $message);
         }
 
         // Проверяем, что здоровье юнита выросло
@@ -118,7 +117,34 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         self::assertCount(1, $chatMessages);
 
         foreach ($chatMessages as $chatMessage) {
-            self::assertEquals(self::MESSAGE, $chatMessage);
+            self::assertEquals(self::MESSAGE_EN, $chatMessage);
+        }
+    }
+
+    /**
+     * Тест на формирование сообщения на русском
+     *
+     * @throws Exception
+     */
+    public function testReserveForcesAbilityRuMessage(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(21, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $actions = $unit->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE_RU, $action->handle());
         }
     }
 

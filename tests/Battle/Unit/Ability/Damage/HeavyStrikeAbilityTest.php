@@ -14,14 +14,13 @@ use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
 
 class HeavyStrikeAbilityTest extends AbstractUnitTest
 {
-    // TODO Сообщение на русском
-
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> at <span style="color: #1e72e3">unit_2</span> on 50 damage';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> at <span style="color: #1e72e3">unit_2</span> on 50 damage';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> по <span style="color: #1e72e3">unit_2</span> на 50 урона';
 
     /**
      * @throws Exception
      */
-    public function testHeavyStrikeAbility(): void
+    public function testHeavyStrikeAbilityUse(): void
     {
         $name = 'Heavy Strike';
         $icon = '/images/icons/ability/335.png';
@@ -60,7 +59,40 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
             self::assertInstanceOf(DamageAction::class, $action);
             self::assertEquals((int)($unit->getDamage() * 2.5), $action->getPower());
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE, $action->handle());
+            self::assertEquals(self::MESSAGE_EN, $action->handle());
+        }
+    }
+
+    /**
+     * Тест на формирование сообщения на русском
+     *
+     * @throws Exception
+     */
+    public function testHeavyStrikeAbilityRuMessage(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new HeavyStrikeAbility($unit);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+        $collection->update($unit);
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE_RU, $action->handle());
         }
     }
 }
