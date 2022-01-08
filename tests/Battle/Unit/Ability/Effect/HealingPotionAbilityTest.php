@@ -14,19 +14,24 @@ use Tests\Battle\Factory\UnitFactory;
 
 class HealingPotionAbilityTest extends AbstractUnitTest
 {
-    // TODO Добавить русские варианты сообщений для всех вариантов
+    // Сообщения применение эффекта на себя
+    private const MESSAGE_APPLY_SELF_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/234.png" alt="" /> Healing Potion';
+    private const MESSAGE_APPLY_SELF_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/234.png" alt="" /> Лечебное зелье';
 
-    private const MESSAGE_APPLY_SELF  = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/234.png" alt="" /> Healing Potion';
-    private const MESSAGE_APPLY_TO    = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/234.png" alt="" /> Healing Potion on <span style="color: #1e72e3">wounded_unit</span>';
-    private const MESSAGE_APPLY_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/234.png" alt="" /> Лечебное зелье на <span style="color: #1e72e3">wounded_unit</span>';
-    private const MESSAGE_HEAL        = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <img src="/images/icons/ability/234.png" alt="" /> Healing Potion';
+    // Сообщения применения эффекта на другого юнита
+    private const MESSAGE_APPLY_TO_EN   = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/234.png" alt="" /> Healing Potion on <span style="color: #1e72e3">wounded_unit</span>';
+    private const MESSAGE_APPLY_TO_RU   = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/234.png" alt="" /> Лечебное зелье на <span style="color: #1e72e3">wounded_unit</span>';
+
+    // Сообщения о лечении от эффекта
+    private const MESSAGE_HEAL_EN       = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <img src="/images/icons/ability/234.png" alt="" /> Healing Potion';
+    private const MESSAGE_HEAL_RU       = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта <img src="/images/icons/ability/234.png" alt="" /> Лечебное зелье';
 
     /**
      * Тест на создание способности HealingPotionAbility
      *
      * @throws Exception
      */
-    public function testHealingPotionAbilitySelfCreate(): void
+    public function testHealingPotionAbilitySelfCreateEn(): void
     {
         $name = 'Healing Potion';
         $icon = '/images/icons/ability/234.png';
@@ -63,17 +68,81 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_APPLY_SELF, $action->handle());
+            self::assertEquals(self::MESSAGE_APPLY_SELF_EN, $action->handle());
         }
 
         $effects = $unit->getEffects();
+
+        self::assertCount(1, $effects);
 
         foreach ($effects as $effect) {
             $onNextRoundActions = $effect->getOnNextRoundActions();
 
             foreach ($onNextRoundActions as $effectAction) {
                 self::assertTrue($effectAction->canByUsed());
-                self::assertEquals(self::MESSAGE_HEAL, $effectAction->handle());
+                self::assertEquals(self::MESSAGE_HEAL_EN, $effectAction->handle());
+            }
+        }
+
+        $ability->usage();
+
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на формировании сообщении о применении и использовании эффекта на себя, на русском
+     *
+     * @throws Exception
+     */
+    public function testHealingPotionAbilitySelfCreateRuMessage(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(11, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new HealingPotionAbility($unit);
+
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE_APPLY_SELF_RU, $action->handle());
+        }
+
+
+        $effects = $unit->getEffects();
+
+        self::assertCount(1, $effects);
+
+        foreach ($effects as $effect) {
+            $onNextRoundActions = $effect->getOnNextRoundActions();
+
+            foreach ($onNextRoundActions as $effectAction) {
+                self::assertTrue($effectAction->canByUsed());
+                self::assertEquals(self::MESSAGE_HEAL_RU, $effectAction->handle());
             }
         }
 
@@ -238,7 +307,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_APPLY_TO, $action->handle());
+            self::assertEquals(self::MESSAGE_APPLY_TO_EN, $action->handle());
         }
     }
 
