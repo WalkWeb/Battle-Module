@@ -104,7 +104,7 @@ abstract class AbstractSummonAbility extends AbstractAbility
             $this->unit,
             $enemyCommand,
             $alliesCommand,
-            $this->getUseMessage(),
+            $this->getName(),
             new Unit(
                 self::generateId(),
                 $this->summonName,
@@ -136,6 +136,4 @@ abstract class AbstractSummonAbility extends AbstractAbility
     {
         return true;
     }
-
-    abstract public function getUseMessage(): string;
 }

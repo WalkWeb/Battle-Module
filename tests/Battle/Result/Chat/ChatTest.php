@@ -222,7 +222,7 @@ class ChatTest extends AbstractUnitTest
             $unit,
             $enemyCommand,
             $command,
-            'summon Imp',
+            'Imp',
             $summon
         );
 
@@ -246,7 +246,7 @@ class ChatTest extends AbstractUnitTest
             $unit,
             $enemyCommand,
             $command,
-            'summon Imp',
+            'Imp',
             $summon
         );
 

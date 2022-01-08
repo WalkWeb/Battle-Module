@@ -14,14 +14,15 @@ use Tests\Battle\Factory\UnitFactory;
 
 class SummonSkeletonMageAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/503.png" alt="" /> summon Skeleton Mage';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/503.png" alt="" /> Skeleton Mage';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/503.png" alt="" /> Скелета-мага';
 
     /**
      * @throws Exception
      */
-    public function testSummonSkeletonMageAbility(): void
+    public function testSummonSkeletonMageAbilityUse(): void
     {
-        $name = 'Summon Skeleton Mage';
+        $name = 'Skeleton Mage';
         $icon = '/images/icons/ability/503.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -57,7 +58,7 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
         foreach ($actions as $action) {
             self::assertInstanceOf(SummonAction::class, $action);
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE, $action->handle());
+            self::assertEquals(self::MESSAGE_EN, $action->handle());
         }
 
         $ability->usage();
@@ -65,5 +66,37 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->isReady());
 
         self::assertEquals(0, $unit->getConcentration());
+    }
+
+    /**
+     * Тест на формирование сообщения на русском
+     *
+     * @throws Exception
+     */
+    public function testSummonSkeletonMageAbilityRuMessage(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new SummonSkeletonMageAbility($unit);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+        $collection->update($unit);
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertEquals(self::MESSAGE_RU, $action->handle());
+        }
     }
 }

@@ -8,9 +8,8 @@ use Battle\Unit\UnitInterface;
 
 class SummonImpAbility extends AbstractSummonAbility
 {
-    private const NAME                = 'Summon Imp';
+    private const NAME                = 'Imp';
     private const ICON                = '/images/icons/ability/275.png';
-    private const USE_MESSAGE         = 'summon Imp';
 
     private const SUMMON_NAME         = 'Imp';
     private const SUMMON_LEVEL        = 1;
@@ -64,10 +63,5 @@ class SummonImpAbility extends AbstractSummonAbility
     public function getIcon(): string
     {
         return self::ICON;
-    }
-
-    public function getUseMessage(): string
-    {
-        return self::USE_MESSAGE;
     }
 }

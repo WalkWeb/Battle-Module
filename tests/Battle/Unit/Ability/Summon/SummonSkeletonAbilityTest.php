@@ -14,14 +14,15 @@ use Battle\Unit\Ability\AbilityCollection;
 
 class SummonSkeletonAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/338.png" alt="" /> summon Skeleton';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/338.png" alt="" /> Skeleton';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/338.png" alt="" /> Скелета';
 
     /**
      * @throws Exception
      */
-    public function testSummonSkeletonAbility(): void
+    public function testSummonSkeletonAbilityUse(): void
     {
-        $name = 'Summon Skeleton';
+        $name = 'Skeleton';
         $icon = '/images/icons/ability/338.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -57,7 +58,7 @@ class SummonSkeletonAbilityTest extends AbstractUnitTest
         foreach ($actions as $action) {
             self::assertInstanceOf(SummonAction::class, $action);
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE, $action->handle());
+            self::assertEquals(self::MESSAGE_EN, $action->handle());
         }
 
         $ability->usage();
@@ -65,5 +66,37 @@ class SummonSkeletonAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->isReady());
 
         self::assertEquals(0, $unit->getConcentration());
+    }
+
+    /**
+     * Тест на формирование сообщения на русском
+     *
+     * @throws Exception
+     */
+    public function testSummonSkeletonAbilityRuMessage(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new SummonSkeletonAbility($unit);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+        $collection->update($unit);
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertEquals(self::MESSAGE_RU, $action->handle());
+        }
     }
 }

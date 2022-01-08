@@ -8,9 +8,8 @@ use Battle\Unit\UnitInterface;
 
 class SummonFireElementalAbility extends AbstractSummonAbility
 {
-    private const NAME                = 'Summon Fire Elemental';
+    private const NAME                = 'Fire Elemental';
     private const ICON                = '/images/icons/ability/198.png';
-    private const USE_MESSAGE         = 'summon Fire Elemental';
 
     private const SUMMON_NAME         = 'Fire Elemental';
     private const SUMMON_LEVEL        = 3;
@@ -64,10 +63,5 @@ class SummonFireElementalAbility extends AbstractSummonAbility
     public function getIcon(): string
     {
         return self::ICON;
-    }
-
-    public function getUseMessage(): string
-    {
-        return self::USE_MESSAGE;
     }
 }

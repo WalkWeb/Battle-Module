@@ -146,13 +146,21 @@ class Chat implements ChatInterface
     }
 
     /**
+     * Призыв существ сейчас используется только со способностей
+     *
      * @param ActionInterface $action
      * @return string
      */
     private function summon(ActionInterface $action): string
     {
-        return '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' .
-            $action->getActionUnit()->getName() . '</span> ' . $this->getIcon($action) .
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // summon
+            $this->translation->trans('summon') . ' ' .
+            // ability icon
+            $this->getIcon($action) .
+            // ability name
             $this->translation->trans($action->getNameAction());
     }
 

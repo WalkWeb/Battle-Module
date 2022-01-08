@@ -14,14 +14,15 @@ use Tests\Battle\Factory\UnitFactory;
 
 class SummonFireElementalAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/198.png" alt="" /> summon Fire Elemental';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/198.png" alt="" /> Fire Elemental';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/198.png" alt="" /> Элементаля огня';
 
     /**
      * @throws Exception
      */
-    public function testSummonFireElementalAbility(): void
+    public function testSummonFireElementalAbilityUse(): void
     {
-        $name = 'Summon Fire Elemental';
+        $name = 'Fire Elemental';
         $icon = '/images/icons/ability/198.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -52,7 +53,7 @@ class SummonFireElementalAbilityTest extends AbstractUnitTest
         foreach ($actions as $action) {
             self::assertInstanceOf(SummonAction::class, $action);
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE, $action->handle());
+            self::assertEquals(self::MESSAGE_EN, $action->handle());
         }
 
         $ability->usage();
@@ -60,5 +61,37 @@ class SummonFireElementalAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->isReady());
 
         self::assertEquals(0, $unit->getRage());
+    }
+
+    /**
+     * Тест на формирование сообщения на русском
+     *
+     * @throws Exception
+     */
+    public function testSummonFireElementalAbilityRuMessage(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new SummonFireElementalAbility($unit);
+
+        // Up concentration
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+        $collection->update($unit);
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertEquals(self::MESSAGE_RU, $action->handle());
+        }
     }
 }

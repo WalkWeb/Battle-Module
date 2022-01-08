@@ -11,9 +11,8 @@ class SummonSkeletonMageAbility extends AbstractSummonAbility
 {
     use IdTrait;
 
-    private const NAME                = 'Summon Skeleton Mage';
+    private const NAME                = 'Skeleton Mage';
     private const ICON                = '/images/icons/ability/503.png';
-    private const USE_MESSAGE         = 'summon Skeleton Mage';
 
     private const SUMMON_NAME         = 'Skeleton Mage';
     private const SUMMON_LEVEL        = 2;
@@ -67,10 +66,5 @@ class SummonSkeletonMageAbility extends AbstractSummonAbility
     public function getIcon(): string
     {
         return self::ICON;
-    }
-
-    public function getUseMessage(): string
-    {
-        return self::USE_MESSAGE;
     }
 }

@@ -14,14 +14,15 @@ use Battle\Unit\Ability\Summon\SummonImpAbility;
 
 class SummonImpAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> <img src="/images/icons/ability/275.png" alt="" /> summon Imp';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/275.png" alt="" /> Imp';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/275.png" alt="" /> Беса';
 
     /**
      * @throws Exception
      */
-    public function testSummonImpAbility(): void
+    public function testSummonImpAbilityUse(): void
     {
-        $name = 'Summon Imp';
+        $name = 'Imp';
         $icon = '/images/icons/ability/275.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -52,7 +53,7 @@ class SummonImpAbilityTest extends AbstractUnitTest
         foreach ($actions as $action) {
             self::assertInstanceOf(SummonAction::class, $action);
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE, $action->handle());
+            self::assertEquals(self::MESSAGE_EN, $action->handle());
         }
 
         $ability->usage();
@@ -60,5 +61,37 @@ class SummonImpAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->isReady());
 
         self::assertEquals(0, $unit->getConcentration());
+    }
+
+    /**
+     * Тест на формирование сообщения на русском
+     *
+     * @throws Exception
+     */
+    public function testSummonImpAbilityRuMessage(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new SummonImpAbility($unit);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+        $collection->update($unit);
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertEquals(self::MESSAGE_RU, $action->handle());
+        }
     }
 }
