@@ -20,14 +20,16 @@ use Tests\Battle\Factory\UnitFactory;
 class PoisonAbilityTest extends AbstractUnitTest
 {
     // Сообщения применения на другого юнита
-    private const MESSAGE_APPLY_TO_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> Poison on <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_APPLY_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/202.png" alt="" /> Отравление на <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_APPLY_TO_EN   = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> Poison on <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_APPLY_TO_RU   = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/202.png" alt="" /> Отравление на <span style="color: #1e72e3">unit_2</span>';
+
+    // Сообщения применения эффекта на себя
+    private const MESSAGE_APPLY_SELF_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> Poison';
+    private const MESSAGE_APPLY_SELF_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/202.png" alt="" /> Отравление';
 
     // Сообщения об уроне от эффекта
-    private const MESSAGE_DAMAGE_EN = '<span style="color: #1e72e3">unit_2</span> received damage on 8 life from effect <img src="/images/icons/ability/202.png" alt="" /> Poison';
-    private const MESSAGE_DAMAGE_RU = '<span style="color: #1e72e3">unit_2</span> получил урон на 8 здоровья от эффекта <img src="/images/icons/ability/202.png" alt="" /> Отравление';
-
-    // TODO Сообщения применения эффекта на себя
+    private const MESSAGE_DAMAGE_EN     = '<span style="color: #1e72e3">unit_2</span> received damage on 8 life from effect <img src="/images/icons/ability/202.png" alt="" /> Poison';
+    private const MESSAGE_DAMAGE_RU     = '<span style="color: #1e72e3">unit_2</span> получил урон на 8 здоровья от эффекта <img src="/images/icons/ability/202.png" alt="" /> Отравление';
 
     /**
      * Тест на создание способности PoisonAbility
@@ -87,7 +89,7 @@ class PoisonAbilityTest extends AbstractUnitTest
         $ability = new PoisonAbility($unit);
 
         self::assertEquals(
-            $this->createActions($unit, $command, $enemyCommand),
+            $this->createActions($unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
             $ability->getAction($enemyCommand, $command)
         );
     }
@@ -179,16 +181,58 @@ class PoisonAbilityTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на формирование сообщения о применении эффекта на себя, на английском
+     *
+     * @throws Exception
+     */
+    public function testPoisonAbilityApplySelfEnMessage(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Применяем эффект
+        foreach ($this->createActions($unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ALLIES) as $action) {
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE_APPLY_SELF_EN, $action->handle());
+        }
+    }
+
+    /**
+     * Тест на формирование сообщения о применении эффекта на себя, на русском
+     *
+     * @throws Exception
+     */
+    public function testPoisonAbilityApplySelfRuMessage(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Применяем эффект
+        foreach ($this->createActions($unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ALLIES) as $action) {
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE_APPLY_SELF_RU, $action->handle());
+        }
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $command
      * @param CommandInterface $enemyCommand
+     * @param int $typeTarget
      * @return ActionCollection
      * @throws Exception
      */
     private function createActions(
         UnitInterface $unit,
         CommandInterface $command,
-        CommandInterface $enemyCommand
+        CommandInterface $enemyCommand,
+        int $typeTarget
     ): ActionCollection
     {
         $actionFactory = new ActionFactory();
@@ -198,7 +242,7 @@ class PoisonAbilityTest extends AbstractUnitTest
             'action_unit'    => $unit,
             'enemy_command'  => $enemyCommand,
             'allies_command' => $command,
-            'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
+            'type_target'    => $typeTarget,
             'name'           => 'Poison',
             'icon'           => '/images/icons/ability/202.png',
             'message_method'  => 'applyEffectImproved',
