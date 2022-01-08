@@ -14,6 +14,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class HealingPotionAbilityTest extends AbstractUnitTest
 {
+    // TODO Добавить русские варианты сообщений для всех вариантов
+
     private const MESSAGE_APPLY_SELF  = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/234.png" alt="" /> Healing Potion';
     private const MESSAGE_APPLY_TO    = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/234.png" alt="" /> Healing Potion on <span style="color: #1e72e3">wounded_unit</span>';
     private const MESSAGE_APPLY_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/234.png" alt="" /> Лечебное зелье на <span style="color: #1e72e3">wounded_unit</span>';

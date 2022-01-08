@@ -321,8 +321,6 @@ class Chat implements ChatInterface
      * Формирует сообщение урона от эффекта в формате:
      * "$name получил урон на $damage от эффекта $effectName"
      *
-     * TODO Добавить ability icon
-     *
      * @param ActionInterface $action
      * @return string
      */
@@ -337,6 +335,8 @@ class Chat implements ChatInterface
             $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' .
             // "life from effect"
             $this->translation->trans('life from effect') . ' ' .
+            // ability icon
+            $this->getIcon($action) .
             // ability name
             $this->translation->trans($action->getNameAction());
     }

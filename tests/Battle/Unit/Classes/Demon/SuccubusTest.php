@@ -104,6 +104,7 @@ class SuccubusTest extends AbstractUnitTest
                     'power'            => 8,
                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                     'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                    'icon'             => '/images/icons/ability/202.png',
                 ],
             ],
             'on_disable_actions'    => [],

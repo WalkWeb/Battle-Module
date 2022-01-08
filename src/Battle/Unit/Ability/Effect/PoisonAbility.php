@@ -137,6 +137,7 @@ class PoisonAbility extends AbstractAbility
                             'power'            => self::POWER,
                             'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                             'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                            'icon'             => self::ICON,
                         ],
                     ],
                     'on_disable_actions'    => [],

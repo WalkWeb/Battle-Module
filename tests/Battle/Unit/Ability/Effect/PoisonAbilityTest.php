@@ -19,7 +19,15 @@ use Tests\Battle\Factory\UnitFactory;
 
 class PoisonAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> Poison on <span style="color: #1e72e3">unit_2</span>';
+    // Сообщения применения на другого юнита
+    private const MESSAGE_APPLY_TO_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> Poison on <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_APPLY_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/202.png" alt="" /> Отравление на <span style="color: #1e72e3">unit_2</span>';
+
+    // Сообщения об уроне от эффекта
+    private const MESSAGE_DAMAGE_EN = '<span style="color: #1e72e3">unit_2</span> received damage on 8 life from effect <img src="/images/icons/ability/202.png" alt="" /> Poison';
+    private const MESSAGE_DAMAGE_RU = '<span style="color: #1e72e3">unit_2</span> получил урон на 8 здоровья от эффекта <img src="/images/icons/ability/202.png" alt="" /> Отравление';
+
+    // TODO Сообщения применения эффекта на себя
 
     /**
      * Тест на создание способности PoisonAbility
@@ -108,12 +116,66 @@ class PoisonAbilityTest extends AbstractUnitTest
         // Применяем эффект
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE, $action->handle());
+            self::assertEquals(self::MESSAGE_APPLY_TO_EN, $action->handle());
         }
 
         // Теперь эффект у противника есть, и больше способность примениться не может
         // Так как все противники (один противник) уже имеют такой эффект
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        $effects = $enemyUnit->getEffects();
+
+        self::assertCount(1, $effects);
+
+        foreach ($effects as $effect) {
+            $actions = $effect->getOnNextRoundActions();
+            self::assertCount(1, $actions);
+            foreach ($actions as $action) {
+                self::assertTrue($action->canByUsed());
+                self::assertEquals(self::MESSAGE_DAMAGE_EN, $action->handle());
+            }
+        }
+    }
+
+    /**
+     * Тест на формирование сообщения на русском
+     *
+     * @throws Exception
+     */
+    public function testPoisonAbilityRuMessage(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new PoisonAbility($unit);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        // Применяем эффект
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(self::MESSAGE_APPLY_TO_RU, $action->handle());
+        }
+
+        $effects = $enemyUnit->getEffects();
+
+        self::assertCount(1, $effects);
+
+        foreach ($effects as $effect) {
+            $actions = $effect->getOnNextRoundActions();
+            self::assertCount(1, $actions);
+            foreach ($actions as $action) {
+                self::assertTrue($action->canByUsed());
+                self::assertEquals(self::MESSAGE_DAMAGE_RU, $action->handle());
+            }
+        }
     }
 
     /**
@@ -156,6 +218,7 @@ class PoisonAbilityTest extends AbstractUnitTest
                         'power'            => 8,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                         'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                        'icon'             => '/images/icons/ability/202.png',
                     ],
                 ],
                 'on_disable_actions'    => [],
