@@ -28,10 +28,10 @@ class HealActionTest extends AbstractUnitTest
      */
     public function testHealActionRealistic(): void
     {
+        $priest = UnitFactory::createByTemplate(5);
         $unit = UnitFactory::createByTemplate(1);
-        $alliesUnit = UnitFactory::createByTemplate(5);
         $enemyUnit = UnitFactory::createByTemplate(3);
-        $alliesCommand = CommandFactory::create([$unit, $alliesUnit]);
+        $alliesCommand = CommandFactory::create([$unit, $priest]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         // Наносим урон
@@ -42,26 +42,30 @@ class HealActionTest extends AbstractUnitTest
         }
 
         // Проверяем, что у одного из юнитов здоровье уменьшилось
-        self::assertTrue($unit->getLife() < $unit->getTotalLife() || $alliesUnit->getLife() < $alliesUnit->getTotalLife());
+        self::assertTrue($unit->getLife() < $unit->getTotalLife() || $priest->getLife() < $priest->getTotalLife());
 
         // Накапливаем концентрацию
         for ($i = 0; $i < 10; $i++) {
-            $alliesUnit->newRound();
+            $priest->newRound();
         }
 
         // Применяем лечение (получаем Action от способности GreatHealAbility)
-        $heals =  $alliesUnit->getAction($enemyCommand, $alliesCommand);
+        $actions =  $priest->getAction($enemyCommand, $alliesCommand);
 
-        foreach ($heals as $heal) {
-            self::assertEquals(HealAction::UNIT_ANIMATION_METHOD, $heal->getAnimationMethod());
-            self::assertEquals('healAbility', $heal->getMessageMethod());
+        foreach ($actions as $action) {
+            self::assertEquals(HealAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
+            self::assertEquals('healAbility', $action->getMessageMethod());
             // Проверяем, что лечение может быть использовано:
-            self::assertTrue($heal->canByUsed());
-            $heal->handle();
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+
+            // Проверяем factualPower
+            self::assertEquals($priest->getDamage(), $action->getFactualPower());
+            self::assertEquals($priest->getDamage(), $action->getFactualPowerByUnit($unit->getId()));
         }
 
         // Проверяем, что оба юнита стали здоровы
-        self::assertTrue($unit->getLife() === $unit->getTotalLife() && $alliesUnit->getLife() === $alliesUnit->getTotalLife());
+        self::assertTrue($unit->getLife() === $unit->getTotalLife() && $priest->getLife() === $priest->getTotalLife());
     }
 
     /**
@@ -91,6 +95,43 @@ class HealActionTest extends AbstractUnitTest
 
         // Проверяем лечение
         self::assertEquals(1 + $actionUnit->getDamage() * 3, $woundedUnit->getLife());
+    }
+
+    /**
+     * Тест на ситуацию, когда у HealAction запрашивается фактическое лечение по юниту, по которому лечения не было
+     *
+     * @throws Exception
+     */
+    public function testHealActionNoPowerByUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(5);
+        $woundedUnit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $actionCommand = CommandFactory::create([$unit, $woundedUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Накапливаем концентрацию
+        for ($i = 0; $i < 10; $i++) {
+            $actionCommand->newRound();
+        }
+
+        // Применяем лечение
+        $actions = $unit->getAction($enemyCommand, $actionCommand);
+
+        foreach ($actions as $action) {
+            $action->handle();
+        }
+
+        // Общий factualPower получаем нормально
+        self::assertEquals($unit->getDamage() * 3, $action->getFactualPower());
+
+        // factualPower, по юниту, по которому урон наносился - тоже
+        self::assertEquals($unit->getDamage() * 3, $action->getFactualPowerByUnit($woundedUnit->getId()));
+
+        // А вот factualPower по юниту, по которому урон не наносился - отсутствует
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage(ActionException::NO_POWER_BY_UNIT);
+        $action->getFactualPowerByUnit($unit->getId());
     }
 
     /**

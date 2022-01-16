@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\WaitAction;
 use Exception;
 use Battle\Action\ActionException;
 use Battle\Action\DamageAction;
@@ -120,6 +121,24 @@ class ActionTest extends AbstractUnitTest
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getEffect');
         $action->getEffect();
+    }
+
+    /**
+     * Тест на ситуацию, когда у не лечения/удара/воскрешения вызывают метод getFactualPowerByUnit()
+     *
+     * @throws Exception
+     */
+    public function testActionNoGetFactualPowerByUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new WaitAction($unit, $defendCommand, $alliesCommand);
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getFactualPowerByUnit');
+        $action->getFactualPowerByUnit($unit->getId());
     }
 
     /**

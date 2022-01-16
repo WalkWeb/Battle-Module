@@ -64,12 +64,6 @@ class SummonAction extends AbstractAction
     }
 
     /**
-     * @param int $factualPower
-     * @return int|mixed
-     */
-    public function setFactualPower(int $factualPower): void {}
-
-    /**
      * @return string
      */
     public function getNameAction(): string
@@ -104,4 +98,12 @@ class SummonAction extends AbstractAction
     {
         return true;
     }
+
+    /**
+     * У призыва нет силы действия - соответственно метод ничего не делает
+     *
+     * @param string $unitId
+     * @param int $factualPower
+     */
+    public function addFactualPower(string $unitId, int $factualPower): void {}
 }

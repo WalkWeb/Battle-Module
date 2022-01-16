@@ -40,9 +40,10 @@ class ResurrectionActionTest extends AbstractUnitTest
 
         $factualPower = 123;
 
-        $action->setFactualPower($factualPower);
+        $action->addFactualPower($unit->getId(), $factualPower);
 
         self::assertEquals($factualPower, $action->getFactualPower());
+        self::assertEquals($factualPower, $action->getFactualPowerByUnit($unit->getId()));
     }
 
     /**
@@ -68,6 +69,37 @@ class ResurrectionActionTest extends AbstractUnitTest
 
         self::assertTrue($unit->isAlive());
         self::assertEquals(50, $unit->getLife());
+    }
+
+    /**
+     * Тест на ситуацию, когда у ResurrectionAction запрашивается фактическое лечение по юниту, по которому воскрешения
+     * (и соответственно лечения) не было
+     *
+     * @throws Exception
+     */
+    public function testResurrectionActionNoPowerByUnit(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(10, 2);
+
+        $name = 'Resurrection';
+        $power = 50;
+        $typeTarget = ResurrectionAction::TARGET_DEAD_ALLIES;
+
+        $action = new ResurrectionAction($unit, $enemyCommand, $command, $typeTarget, $power, $name);
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Общий factualPower получаем нормально
+        self::assertEquals($power, $action->getFactualPower());
+
+        // factualPower, по юниту, по которому урон наносился - тоже
+        self::assertEquals($power, $action->getFactualPowerByUnit($unit->getId()));
+
+        // А вот factualPower по юниту, по которому урон не наносился - отсутствует
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage(ActionException::NO_POWER_BY_UNIT);
+        $action->getFactualPowerByUnit('id');
     }
 
     /**

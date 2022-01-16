@@ -112,19 +112,17 @@ interface ActionInterface
     public function getPower(): int;
 
     /**
-     * Задает фактическую силу действия
+     * Задает фактическую силу действия, суммарно по всем юнитам
      *
      * Например, у юнита осталось 5 здоровья и он получает 50 удара. В этом случае фактический удар будет на 5 здоровья
      *
      * Этот параметр необходим, например, для корректного расчета вампиризма
      *
-     * TODO В связи с изменением механики Action, и возможностью применять их сразу на нескольких целей - переделать в
-     * TODO addFactualPower, соответственно будет отображаться суммарный урон/лечение по всем целям
-     *
+     * @param string $unitId
      * @param int $factualPower
      * @return mixed
      */
-    public function setFactualPower(int $factualPower): void;
+    public function addFactualPower(string $unitId, int $factualPower): void;
 
     /**
      * Возвращает фактическую силу действия
@@ -132,6 +130,15 @@ interface ActionInterface
      * @return int
      */
     public function getFactualPower(): int;
+
+    /**
+     * Возвращает силу действия по конкретному юниту
+     *
+     * @param string $unitId
+     * @return int
+     * @throws ActionException
+     */
+    public function getFactualPowerByUnit(string $unitId): int;
 
     /**
      * Возвращает юнита, который будет призван

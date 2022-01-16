@@ -66,6 +66,8 @@ class ResurrectionAction extends AbstractAction
      */
     public function canByUsed(): bool
     {
+        // TODO Action может применяться от мертвого юнита, это не выглядит нормальным
+
         $this->targetUnits = $this->searchTargetUnits($this);
         return count($this->targetUnits) > 0;
     }
@@ -92,9 +94,30 @@ class ResurrectionAction extends AbstractAction
         return $this->name;
     }
 
-    public function setFactualPower(int $factualPower): void
+    /**
+     * Воскрешение восстанавливает часть здоровья, по этому силу лечения считать нужно
+     *
+     * @param string $unitId
+     * @param int $factualPower
+     */
+    public function addFactualPower(string $unitId, int $factualPower): void
     {
         $this->factualPower = $factualPower;
+        $this->factualPowerByUnit[$unitId] = $factualPower;
+    }
+
+    /**
+     * @param string $unitId
+     * @return int
+     * @throws ActionException
+     */
+    public function getFactualPowerByUnit(string $unitId): int
+    {
+        if (!array_key_exists($unitId, $this->factualPowerByUnit)) {
+            throw new ActionException(ActionException::NO_POWER_BY_UNIT . ': ' . $unitId);
+        }
+
+        return $this->factualPowerByUnit[$unitId];
     }
 
     public function getAnimationMethod(): string

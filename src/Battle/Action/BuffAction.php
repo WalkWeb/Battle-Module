@@ -148,5 +148,11 @@ class BuffAction extends AbstractAction
         return true;
     }
 
-    public function setFactualPower(int $factualPower): void {}
+    /**
+     * У баффов нет силы действия - соответственно метод ничего не делает
+     *
+     * @param string $unitId
+     * @param int $factualPower
+     */
+    public function addFactualPower(string $unitId, int $factualPower): void {}
 }

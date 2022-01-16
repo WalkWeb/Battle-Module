@@ -93,9 +93,24 @@ class DamageAction extends AbstractAction
         return $this->damage;
     }
 
-    public function setFactualPower(int $factualPower): void
+    public function addFactualPower(string $unitId, int $factualPower): void
     {
-        $this->factualPower = $factualPower;
+        $this->factualPower += $factualPower;
+        $this->factualPowerByUnit[$unitId] = $factualPower;
+    }
+
+    /**
+     * @param string $unitId
+     * @return int
+     * @throws ActionException
+     */
+    public function getFactualPowerByUnit(string $unitId): int
+    {
+        if (!array_key_exists($unitId, $this->factualPowerByUnit)) {
+            throw new ActionException(ActionException::NO_POWER_BY_UNIT . ': ' . $unitId);
+        }
+
+        return $this->factualPowerByUnit[$unitId];
     }
 
     public function getNameAction(): string

@@ -40,9 +40,23 @@ abstract class AbstractAction implements ActionInterface
     protected $typeTarget;
 
     /**
+     * Фактическая сила действия события. Актуально для урона и лечения - где подсчитывается суммарный урон или лечение
+     *
      * @var int
      */
     protected $factualPower = 0;
+
+    /**
+     * Фактическая сила действия отдельно по каждому юниту, в формате:
+     *
+     * [
+     *   '354e4360-69f1-407e-bee3-de9cecceee55' => 10,
+     *   'de8995de-35f1-450e-a56b-929ac08dc929' => 30,
+     * ]
+     *
+     * @var array
+     */
+    protected $factualPowerByUnit = [];
 
     /**
      * @var string
@@ -105,6 +119,16 @@ abstract class AbstractAction implements ActionInterface
     public function getFactualPower(): int
     {
         return $this->factualPower;
+    }
+
+    /**
+     * @param string $unitId
+     * @return int
+     * @throws ActionException
+     */
+    public function getFactualPowerByUnit(string $unitId): int
+    {
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }
 
     /**

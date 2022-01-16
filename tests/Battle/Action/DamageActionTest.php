@@ -58,6 +58,8 @@ class DamageActionTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(20, $action->getPower());
+        self::assertEquals(20, $action->getFactualPower());
+        self::assertEquals(20, $action->getFactualPowerByUnit($defendUnit->getId()));
         self::assertEquals($unit->getName(), $action->getActionUnit()->getName());
         self::assertEquals($defendUnit->getName(), $action->getTargetUnits()[0]->getName());
     }
@@ -142,5 +144,31 @@ class DamageActionTest extends AbstractUnitTest
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::UNKNOWN_TYPE_TARGET . ': ' . $typeTarget);
         $action->handle();
+    }
+
+    /**
+     * Тест на ситуацию, когда у DamageAction запрашивается фактический урон по юниту, по которому урон не наносился
+     *
+     * @throws Exception
+     */
+    public function testDamageActionNoPowerByUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $action->handle();
+
+        // Общий factualPower получаем нормально
+        self::assertEquals($unit->getDamage(), $action->getFactualPower());
+
+        // factualPower, по юниту, по которому урон наносился - тоже
+        self::assertEquals($unit->getDamage(), $action->getFactualPowerByUnit($defendUnit->getId()));
+
+        // А вот factualPower по юниту, по которому урон не наносился - отсутствует
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage(ActionException::NO_POWER_BY_UNIT);
+        $action->getFactualPowerByUnit($unit->getId());
     }
 }

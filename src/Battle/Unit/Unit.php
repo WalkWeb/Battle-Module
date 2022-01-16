@@ -102,7 +102,7 @@ class Unit extends AbstractUnit
             }
         }
 
-        $action->setFactualPower($primordialLife - $this->life);
+        $action->addFactualPower($this->id, $primordialLife - $this->life);
 
         return $this->container->getChat()->addMessage($action);
     }
@@ -125,7 +125,7 @@ class Unit extends AbstractUnit
             $this->life = $this->totalLife;
         }
 
-        $action->setFactualPower($this->life - $primordialLife);
+        $action->addFactualPower($this->id, $this->life - $primordialLife);
 
         return $this->container->getChat()->addMessage($action);
     }
@@ -203,7 +203,7 @@ class Unit extends AbstractUnit
 
         $this->life += $restoreLife;
 
-        $action->setFactualPower($restoreLife);
+        $action->addFactualPower($this->id, $restoreLife);
 
         return $this->container->getChat()->addMessage($action);
     }

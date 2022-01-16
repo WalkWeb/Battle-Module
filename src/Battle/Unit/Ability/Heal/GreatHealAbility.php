@@ -16,11 +16,6 @@ class GreatHealAbility extends AbstractAbility
     private const ICON = '/images/icons/ability/196.png';
 
     /**
-     * @var ActionCollection
-     */
-    private $actionCollection;
-
-    /**
      * Great Heal лечение в 300% от силы удара юнита
      *
      * @param CommandInterface $enemyCommand
@@ -29,23 +24,21 @@ class GreatHealAbility extends AbstractAbility
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
-        if ($this->actionCollection === null) {
-            $this->actionCollection = new ActionCollection();
+        $collection = new ActionCollection();
 
-            $this->actionCollection->add(new HealAction(
-                $this->unit,
-                $enemyCommand,
-                $alliesCommand,
-                HealAction::TARGET_WOUNDED_ALLIES,
-                $this->unit->getDamage() * 3,
-                self::NAME,
-                HealAction::UNIT_ANIMATION_METHOD,
-                HealAction::ABILITY_MESSAGE_METHOD,
-                self::ICON
-            ));
-        }
+        $collection->add(new HealAction(
+            $this->unit,
+            $enemyCommand,
+            $alliesCommand,
+            HealAction::TARGET_WOUNDED_ALLIES,
+            $this->unit->getDamage() * 3,
+            self::NAME,
+            HealAction::UNIT_ANIMATION_METHOD,
+            HealAction::ABILITY_MESSAGE_METHOD,
+            self::ICON
+        ));
 
-        return $this->actionCollection;
+        return $collection;
     }
 
     /**
