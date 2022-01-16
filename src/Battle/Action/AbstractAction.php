@@ -238,6 +238,8 @@ abstract class AbstractAction implements ActionInterface
                     $units->add($unit);
                 }
                 return $units;
+            case self::TARGET_ALL_ALIVE_ENEMY:
+                return $this->enemyCommand->getAllAliveUnits();
         }
 
         throw new ActionException(ActionException::UNKNOWN_TYPE_TARGET . ': ' . $this->typeTarget);

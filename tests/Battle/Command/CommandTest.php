@@ -24,6 +24,7 @@ use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\Mock\UnitMockFactory;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
+use Tests\Battle\Factory\UnitFactoryException;
 
 class CommandTest extends AbstractUnitTest
 {
@@ -612,6 +613,24 @@ class CommandTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $deadUnit]);
 
         self::assertEquals($deadUnit, $command->getUnitForResurrection());
+    }
+
+    /**
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testCommandGetAllAliveUnits(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $deadUnit = UnitFactory::createByTemplate(10);
+
+        $command = CommandFactory::create([$unit, $deadUnit]);
+
+        $expected = new UnitCollection();
+        $expected->add($unit);
+
+        self::assertEquals($expected, $command->getAllAliveUnits());
     }
 
     /**

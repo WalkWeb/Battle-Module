@@ -84,6 +84,13 @@ interface CommandInterface
      * @return UnitInterface|null
      */
     public function getUnitForResurrection():? UnitInterface;
+
+    /**
+     * Возвращает всех живых юнитов в команде
+     *
+     * @return UnitCollection
+     */
+    public function getAllAliveUnits(): UnitCollection;
     
     /**
      * Возвращает коллекцию юнитов данной команды

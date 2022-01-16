@@ -147,6 +147,25 @@ class Command implements CommandInterface
     }
 
     /**
+     * Возвращает всех живых юнитов в команде
+     *
+     * @return UnitCollection
+     * @throws UnitException
+     */
+    public function getAllAliveUnits(): UnitCollection
+    {
+        $units = new UnitCollection();
+
+        foreach ($this->units as $unit) {
+            if ($unit->isAlive()) {
+                $units->add($unit);
+            }
+        }
+
+        return $units;
+    }
+
+    /**
      * Возвращает случайного юнита, готового совершить действие
      *
      * @return UnitInterface|null

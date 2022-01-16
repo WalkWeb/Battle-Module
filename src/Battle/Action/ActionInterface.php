@@ -32,6 +32,8 @@ interface ActionInterface
     public const TARGET_WOUNDED_ALLIES_EFFECT = 6;
     // Применяет событие-воскрешение на случайного мертвого союзного юнита
     public const TARGET_DEAD_ALLIES           = 7;
+    // Применяет событие на всех живых противников (для массовой атаки по всем врагам)
+    public const TARGET_ALL_ALIVE_ENEMY       = 8;
 
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 

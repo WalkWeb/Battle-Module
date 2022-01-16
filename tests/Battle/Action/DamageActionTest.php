@@ -171,4 +171,27 @@ class DamageActionTest extends AbstractUnitTest
         $this->expectExceptionMessage(ActionException::NO_POWER_BY_UNIT);
         $action->getFactualPowerByUnit($unit->getId());
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testDamageActionTargetAllAliveEnemy(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
+
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ALIVE_ENEMY);
+
+        $action->handle();
+
+        // Проверяем, что урон нанесен по обоим юнитам
+        self::assertEquals($firstEnemyUnit->getTotalLife() - $unit->getDamage(), $firstEnemyUnit->getLife());
+        self::assertEquals($secondaryEnemyUnit->getTotalLife() - $unit->getDamage(), $secondaryEnemyUnit->getLife());
+
+        // TODO Когда будет доработано создание сообщения по множеству целей - нужно будет доработать тест
+    }
 }
