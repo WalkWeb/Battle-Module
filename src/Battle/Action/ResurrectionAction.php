@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
 class ResurrectionAction extends AbstractAction
@@ -61,16 +62,24 @@ class ResurrectionAction extends AbstractAction
      *
      * @return bool
      * @throws ActionException
+     * @throws UnitException
      */
     public function canByUsed(): bool
     {
-        $this->targetUnit = $this->searchTargetUnit($this);
-        return (bool)$this->targetUnit;
+        $this->targetUnits = $this->searchTargetUnits($this);
+        return count($this->targetUnits) > 0;
     }
 
     public function handle(): string
     {
-        return $this->targetUnit->applyAction($this);
+        // TODO Переделать формирование сообщения так, чтобы обрабатывались ситуации со множеством целей
+        $message = '';
+
+        foreach ($this->targetUnits as $targetUnit) {
+            $message .= $targetUnit->applyAction($this);
+        }
+
+        return $message;
     }
 
     public function getHandleMethod(): string

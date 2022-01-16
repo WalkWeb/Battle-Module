@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
 class HealAction extends AbstractAction
@@ -67,17 +68,25 @@ class HealAction extends AbstractAction
      *
      * @return string
      * @throws ActionException
+     * @throws UnitException
      */
     public function handle(): string
     {
-        $this->targetUnit = $this->searchTargetUnit($this);
+        $this->targetUnits = $this->searchTargetUnits($this);
 
         // Такой ситуации быть не должно, потому возможность применения события должна проверяться до её применения
-        if (!$this->targetUnit) {
+        if (count($this->targetUnits) === 0) {
             throw new ActionException(ActionException::NO_TARGET_FOR_HEAL);
         }
 
-        return $this->targetUnit->applyAction($this);
+        // TODO Переделать формирование сообщения так, чтобы обрабатывались ситуации со множеством целей
+        $message = '';
+
+        foreach ($this->targetUnits as $targetUnit) {
+            $message .= $targetUnit->applyAction($this);
+        }
+
+        return $message;
     }
 
     public function getPower(): int

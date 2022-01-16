@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Unit\Effect\EffectInterface;
+use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 
 interface ActionInterface
@@ -66,6 +67,8 @@ interface ActionInterface
      *     $action->handle();
      * }
      *
+     * TODO В конкретных реализациях много дублирующегося кода - можно улучшить
+     *
      * @return string
      */
     public function handle(): string;
@@ -94,10 +97,10 @@ interface ActionInterface
     /**
      * Возвращает юнита к которому применяется действие
      *
-     * @return UnitInterface
+     * @return UnitCollection
      * @throws ActionException
      */
-    public function getTargetUnit(): UnitInterface;
+    public function getTargetUnits(): UnitCollection;
 
     /**
      * Возвращает силу действия (например, силу удара или силу лечения)
@@ -114,6 +117,9 @@ interface ActionInterface
      * Например, у юнита осталось 5 здоровья и он получает 50 удара. В этом случае фактический удар будет на 5 здоровья
      *
      * Этот параметр необходим, например, для корректного расчета вампиризма
+     *
+     * TODO В связи с изменением механики Action, и возможностью применять их сразу на нескольких целей - переделать в
+     * TODO addFactualPower, соответственно будет отображаться суммарный урон/лечение по всем целям
      *
      * @param int $factualPower
      * @return mixed

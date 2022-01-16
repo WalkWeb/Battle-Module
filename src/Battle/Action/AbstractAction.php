@@ -6,6 +6,8 @@ namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
 use Battle\Unit\Effect\EffectInterface;
+use Battle\Unit\UnitCollection;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
 abstract class AbstractAction implements ActionInterface
@@ -16,9 +18,9 @@ abstract class AbstractAction implements ActionInterface
     protected $actionUnit;
 
     /**
-     * @var UnitInterface
+     * @var UnitCollection
      */
-    protected $targetUnit;
+    protected $targetUnits;
 
     /**
      * @var CommandInterface
@@ -78,16 +80,17 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
-     * @return UnitInterface
+     * @return UnitCollection
      * @throws ActionException
      */
-    public function getTargetUnit(): UnitInterface
+    public function getTargetUnits(): UnitCollection
     {
-        if ($this->targetUnit === null) {
+        // TODO Нужно разобраться, почему в тесте testHealActionNoTargetException() в $this->targetUnits появляется NULL
+        if ($this->targetUnits === null || count($this->targetUnits) === 0) {
             throw new ActionException(ActionException::NO_TARGET_UNIT);
         }
 
-        return $this->targetUnit;
+        return $this->targetUnits;
     }
 
     /**
@@ -169,26 +172,48 @@ abstract class AbstractAction implements ActionInterface
      * Ищет юнита для применения события.
      *
      * @param ActionInterface $action
-     * @return UnitInterface|null
+     * @return UnitCollection
      * @throws ActionException
+     * @throws UnitException
      */
-    protected function searchTargetUnit(ActionInterface $action): ?UnitInterface
+    protected function searchTargetUnits(ActionInterface $action): UnitCollection
     {
+        $units = new UnitCollection();
+
         switch ($this->typeTarget) {
             case self::TARGET_SELF:
-                return $this->actionUnit;
+                $units->add($this->actionUnit);
+                return $units;
             case self::TARGET_RANDOM_ENEMY:
-               return $this->getRandomEnemyUnit();
+                if ($unit = $this->getRandomEnemyUnit()) {
+                    $units->add($unit);
+                }
+                return $units;
             case self::TARGET_WOUNDED_ALLIES:
-                return $this->alliesCommand->getUnitForHeal();
+                if ($unit = $this->alliesCommand->getUnitForHeal()) {
+                    $units->add($unit);
+                }
+                return $units;
             case self::TARGET_EFFECT_ENEMY:
-                return $this->enemyCommand->getUnitForEffect($action->getEffect());
+                if ($unit = $this->enemyCommand->getUnitForEffect($action->getEffect())) {
+                    $units->add($unit);
+                }
+                return $units;
             case self::TARGET_EFFECT_ALLIES:
-                return $this->alliesCommand->getUnitForEffect($action->getEffect());
+                if ($unit = $this->alliesCommand->getUnitForEffect($action->getEffect())) {
+                    $units->add($unit);
+                }
+                return $units;
             case self::TARGET_WOUNDED_ALLIES_EFFECT:
-                return $this->alliesCommand->getUnitForEffectHeal($action->getEffect());
+                if ($unit = $this->alliesCommand->getUnitForEffectHeal($action->getEffect())) {
+                    $units->add($unit);
+                }
+                return $units;
             case self::TARGET_DEAD_ALLIES:
-                return $this->alliesCommand->getUnitForResurrection();
+                if ($unit = $this->alliesCommand->getUnitForResurrection()) {
+                    $units->add($unit);
+                }
+                return $units;
         }
 
         throw new ActionException(ActionException::UNKNOWN_TYPE_TARGET . ': ' . $this->typeTarget);

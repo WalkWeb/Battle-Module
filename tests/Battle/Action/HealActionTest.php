@@ -153,7 +153,7 @@ class HealActionTest extends AbstractUnitTest
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_TARGET_UNIT);
-        $action->getTargetUnit();
+        $action->getTargetUnits();
     }
 
     /**

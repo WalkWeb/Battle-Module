@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
 class DamageAction extends AbstractAction
@@ -13,7 +14,7 @@ class DamageAction extends AbstractAction
     private const DEFAULT_NAME           = 'attack';
     public const UNIT_ANIMATION_METHOD   = 'damage';
     public const EFFECT_ANIMATION_METHOD = 'effectDamage';
-    public const DEFAULT_MESSAGE_METHOD = 'damage';
+    public const DEFAULT_MESSAGE_METHOD  = 'damage';
     public const EFFECT_MESSAGE_METHOD   = 'effectDamage';
 
     /**
@@ -63,6 +64,7 @@ class DamageAction extends AbstractAction
     /**
      * @return string
      * @throws ActionException
+     * @throws UnitException
      */
     public function handle(): string
     {
@@ -70,13 +72,20 @@ class DamageAction extends AbstractAction
             throw new ActionException(ActionException::NO_DEFINED);
         }
 
-        $this->targetUnit = $this->searchTargetUnit($this);
+        $this->targetUnits = $this->searchTargetUnits($this);
 
-        if (!$this->targetUnit) {
+        if (count($this->targetUnits) === 0) {
             throw new ActionException(ActionException::NO_DEFINED_AGAIN);
         }
 
-        return $this->targetUnit->applyAction($this);
+        // TODO Переделать формирование сообщения так, чтобы обрабатывались ситуации со множеством целей
+        $message = '';
+
+        foreach ($this->targetUnits as $targetUnit) {
+            $message .= $targetUnit->applyAction($this);
+        }
+
+        return $message;
     }
 
     public function getPower(): int

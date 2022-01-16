@@ -67,6 +67,11 @@ class Chat implements ChatInterface
      */
     private function damage(ActionInterface $action): string
     {
+        // TODO На данный момент механика применения Action ко множеству целей в процессе добавления
+        // TODO Задача поделена на несколько этапов, и обновление формирования сообщений будет сделано отдельно
+        // TODO Для того, чтобы все работало как раньше - выбираем первую цель (пока нет событий с несколькими целями)
+        $targetUnit = $action->getTargetUnits()[0];
+
         return
             // Unit
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
@@ -75,7 +80,7 @@ class Chat implements ChatInterface
             // attack
             $this->translation->trans( $action->getNameAction()) .
             // Target
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span> ' .
+            ' <span style="color: ' . $targetUnit->getRace()->getColor() . '">' . $targetUnit->getName() . '</span> ' .
             // "on"
             $this->translation->trans('on') . ' ' .
             // # damage
@@ -93,6 +98,9 @@ class Chat implements ChatInterface
      */
     private function damageAbility(ActionInterface $action): string
     {
+        // Временно, с.м. комментарий выше
+        $targetUnit = $action->getTargetUnits()[0];
+
         return
             // Unit
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
@@ -105,7 +113,7 @@ class Chat implements ChatInterface
             // "at"
             $this->translation->trans('at') .
             // Target
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span> ' .
+            ' <span style="color: ' . $targetUnit->getRace()->getColor() . '">' . $targetUnit->getName() . '</span> ' .
             // "on"
             $this->translation->trans('on') . ' ' .
             // # damage
@@ -119,6 +127,9 @@ class Chat implements ChatInterface
      */
     private function heal(ActionInterface $action): string
     {
+        // Временно, с.м. комментарий выше
+        $targetUnit = $action->getTargetUnits()[0];
+
         return
             // Unit
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
@@ -127,7 +138,7 @@ class Chat implements ChatInterface
             // heal
             $this->translation->trans($action->getNameAction()) .
             // Target
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span> ' .
+            ' <span style="color: ' . $targetUnit->getRace()->getColor() . '">' . $targetUnit->getName() . '</span> ' .
             // "on"
             $this->translation->trans('on') . ' ' .
             // # life
@@ -143,6 +154,9 @@ class Chat implements ChatInterface
      */
     public function healAbility(ActionInterface $action): string
     {
+        // Временно, с.м. комментарий выше
+        $targetUnit = $action->getTargetUnits()[0];
+
         return
             // Unit
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
@@ -155,7 +169,7 @@ class Chat implements ChatInterface
             // "and heal"
             $this->translation->trans('and heal') .
             // Target
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span> ' .
+            ' <span style="color: ' . $targetUnit->getRace()->getColor() . '">' . $targetUnit->getName() . '</span> ' .
             // "on"
             $this->translation->trans('on') . ' ' .
             // Power
@@ -226,6 +240,9 @@ class Chat implements ChatInterface
      */
     private function resurrected(ActionInterface $action): string
     {
+        // Временно, с.м. комментарий выше
+        $targetUnit = $action->getTargetUnits()[0];
+
         return
             // Unit
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
@@ -238,7 +255,7 @@ class Chat implements ChatInterface
             // "and resurrected"
             $this->translation->trans('and resurrected') .
             // Target
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span>';
+            ' <span style="color: ' . $targetUnit->getRace()->getColor() . '">' . $targetUnit->getName() . '</span>';
     }
 
     /**
@@ -250,7 +267,10 @@ class Chat implements ChatInterface
      */
     private function applyEffect(ActionInterface $action): string
     {
-        if ($action->getActionUnit()->getId() === $action->getTargetUnit()->getId()) {
+        // Временно, с.м. комментарий выше
+        $targetUnit = $action->getTargetUnits()[0];
+
+        if ($action->getActionUnit()->getId() === $targetUnit->getId()) {
             return
                 // Unit
                 '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
@@ -274,7 +294,7 @@ class Chat implements ChatInterface
             // "on"
             $this->translation->trans('on') .
             // Target
-            ' <span style="color: ' . $action->getTargetUnit()->getRace()->getColor() . '">' . $action->getTargetUnit()->getName() . '</span>';
+            ' <span style="color: ' . $targetUnit->getRace()->getColor() . '">' . $targetUnit->getName() . '</span>';
     }
 
     /**

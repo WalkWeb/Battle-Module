@@ -59,7 +59,7 @@ class DamageActionTest extends AbstractUnitTest
 
         self::assertEquals(20, $action->getPower());
         self::assertEquals($unit->getName(), $action->getActionUnit()->getName());
-        self::assertEquals($defendUnit->getName(), $action->getTargetUnit()->getName());
+        self::assertEquals($defendUnit->getName(), $action->getTargetUnits()[0]->getName());
     }
 
     /**

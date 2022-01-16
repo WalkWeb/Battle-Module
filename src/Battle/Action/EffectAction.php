@@ -6,6 +6,7 @@ namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
 use Battle\Unit\Effect\EffectInterface;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
 class EffectAction extends AbstractAction
@@ -64,11 +65,18 @@ class EffectAction extends AbstractAction
      */
     public function handle(): string
     {
-        if (!$this->targetUnit) {
+        if (count($this->targetUnits) === 0) {
             throw new ActionException(ActionException::NO_TARGET_FOR_EFFECT);
         }
 
-        return $this->targetUnit->applyAction($this);
+        // TODO Переделать формирование сообщения так, чтобы обрабатывались ситуации со множеством целей
+        $message = '';
+
+        foreach ($this->targetUnits as $targetUnit) {
+            $message .= $targetUnit->applyAction($this);
+        }
+
+        return $message;
     }
 
     public function getNameAction(): string
@@ -86,20 +94,27 @@ class EffectAction extends AbstractAction
      *
      * @return bool
      * @throws ActionException
+     * @throws UnitException
      */
     public function canByUsed(): bool
     {
-        $this->targetUnit = $this->searchTargetUnit($this);
+        $this->targetUnits = $this->searchTargetUnits($this);
 
-        if (!$this->targetUnit) {
+        if (count($this->targetUnits) === 0) {
             return false;
         }
 
-        if ($this->targetUnit->getEffects()->exist($this->effect)) {
-            return false;
+        // Action может быть использован если есть хотя бы одна цель для использования
+        // Как происходит проверка - проходим по всем юнитам, если эффект есть - добавляем в массив 0
+        // Если эффекта нет - добавляем 1
+        // И в финале проверяем сумму значений на больше 0 - если больше - значит есть цели для эффекта
+        $effectSum = [];
+
+        foreach ($this->targetUnits as $targetUnit) {
+            $effectSum[] = $targetUnit->getEffects()->exist($this->effect) ? 0 : 1;
         }
 
-        return true;
+        return array_sum($effectSum) > 0;
     }
 
     public function getAnimationMethod(): string
