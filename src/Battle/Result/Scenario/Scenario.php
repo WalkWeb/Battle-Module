@@ -50,10 +50,26 @@ class Scenario implements ScenarioInterface
      */
     private function damage(DamageAction $action, StatisticInterface $statistic): void
     {
-        // TODO На данный момент механика применения Action ко множеству целей в процессе добавления
-        // TODO Задача поделена на несколько этапов, и обновление формирования сценария будет сделано отдельно
-        // TODO Для того, чтобы все работало как раньше - выбираем первую цель (пока нет событий с несколькими целями)
-        $targetUnit = $action->getTargetUnits()[0];
+        $targetEffects = [];
+
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            $targetEffects[] = [
+                'type'              => 'change',
+                'user_id'           => $targetUnit->getId(),
+                'class'             => 'd_red',
+                'hp'                => $targetUnit->getLife(),
+                'thp'               => $targetUnit->getTotalLife(),
+                'hp_bar_class'      => 'unit_hp_bar',
+                'hp_bar_class2'     => 'unit_hp_bar2',
+                'recdam'            => '-' . $action->getFactualPower(),
+                'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
+                'unit_cons_bar2'    => $this->getConcentrationBarWidth($targetUnit),
+                'unit_rage_bar2'    => $this->getRageBarWidth($targetUnit),
+                'ava'               => 'unit_ava_red',
+                'avas'              => $this->getAvaClassTarget($targetUnit),
+                'unit_effects'      => $this->getUnitEffects($targetUnit),
+            ];
+        }
 
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
@@ -65,24 +81,7 @@ class Scenario implements ScenarioInterface
                     'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
                     'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
                     'unit_effects'   => $this->getUnitEffects($action->getActionUnit()),
-                    'targets'        => [
-                        [
-                            'type'              => 'change',
-                            'user_id'           => $targetUnit->getId(),
-                            'class'             => 'd_red',
-                            'hp'                => $targetUnit->getLife(),
-                            'thp'               => $targetUnit->getTotalLife(),
-                            'hp_bar_class'      => 'unit_hp_bar',
-                            'hp_bar_class2'     => 'unit_hp_bar2',
-                            'recdam'            => '-' . $action->getFactualPower(),
-                            'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
-                            'unit_cons_bar2'    => $this->getConcentrationBarWidth($targetUnit),
-                            'unit_rage_bar2'    => $this->getRageBarWidth($targetUnit),
-                            'ava'               => 'unit_ava_red',
-                            'avas'              => $this->getAvaClassTarget($targetUnit),
-                            'unit_effects'      => $this->getUnitEffects($targetUnit),
-                        ],
-                    ],
+                    'targets'        => $targetEffects,
                 ],
             ],
         ];
@@ -95,8 +94,20 @@ class Scenario implements ScenarioInterface
      */
     public function effectDamage(DamageAction $action, StatisticInterface $statistic): void
     {
-        // Временно, с.м. комментарий выше
-        $targetUnit = $action->getTargetUnits()[0];
+        $targetEffects = [];
+
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            $targetEffects[] = [
+                'type'              => 'change',
+                'user_id'           => $targetUnit->getId(),
+                'ava'               => 'unit_ava_effect_damage',
+                'recdam'            => '-' . $action->getFactualPower(),
+                'hp'                => $targetUnit->getLife(),
+                'thp'               => $targetUnit->getTotalLife(),
+                'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
+                'avas'              => $this->getAvaClassTarget($targetUnit),
+            ];
+        }
 
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
@@ -105,18 +116,7 @@ class Scenario implements ScenarioInterface
                 [
                     'user_id'      => $action->getActionUnit()->getId(),
                     'unit_effects' => $this->getUnitEffects($action->getActionUnit()),
-                    'targets'      => [
-                        [
-                            'type'              => 'change',
-                            'user_id'           => $targetUnit->getId(),
-                            'ava'               => 'unit_ava_effect_damage',
-                            'recdam'            => '-' . $action->getFactualPower(),
-                            'hp'                => $targetUnit->getLife(),
-                            'thp'               => $targetUnit->getTotalLife(),
-                            'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
-                            'avas'              => $this->getAvaClassTarget($targetUnit),
-                        ],
-                    ],
+                    'targets'      => $targetEffects,
                 ],
             ],
         ];
@@ -129,8 +129,22 @@ class Scenario implements ScenarioInterface
      */
     private function heal(HealAction $action, StatisticInterface $statistic): void
     {
-        // Временно, с.м. комментарий выше
-        $targetUnit = $action->getTargetUnits()[0];
+        $targetEffects = [];
+
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            $targetEffects[] = [
+                'type'              => 'change',
+                'user_id'           => $targetUnit->getId(),
+                'ava'               => 'unit_ava_green',
+                'recdam'            => '+' . $action->getFactualPower(),
+                'hp'                => $targetUnit->getLife(),
+                'thp'               => $targetUnit->getTotalLife(),
+                'hp_bar_class'      => 'unit_hp_bar',
+                'hp_bar_class2'     => 'unit_hp_bar2',
+                'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
+                'unit_effects'      => $this->getUnitEffects($targetUnit),
+            ];
+        }
 
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
@@ -141,20 +155,7 @@ class Scenario implements ScenarioInterface
                     'class'          => 'd_buff',
                     'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
                     'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
-                    'targets'        => [
-                        [
-                            'type'              => 'change',
-                            'user_id'           => $targetUnit->getId(),
-                            'ava'               => 'unit_ava_green',
-                            'recdam'            => '+' . $action->getFactualPower(),
-                            'hp'                => $targetUnit->getLife(),
-                            'thp'               => $targetUnit->getTotalLife(),
-                            'hp_bar_class'      => 'unit_hp_bar',
-                            'hp_bar_class2'     => 'unit_hp_bar2',
-                            'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
-                            'unit_effects'      => $this->getUnitEffects($targetUnit),
-                        ],
-                    ],
+                    'targets'        => $targetEffects,
                 ],
             ],
         ];
@@ -167,8 +168,19 @@ class Scenario implements ScenarioInterface
      */
     public function effectHeal(HealAction $action, StatisticInterface $statistic): void
     {
-        // Временно, с.м. комментарий выше
-        $targetUnit = $action->getTargetUnits()[0];
+        $targetEffects = [];
+
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            $targetEffects[] = [
+                'type'              => 'change',
+                'user_id'           => $action->getActionUnit()->getId(),
+                'ava'               => 'unit_ava_green',
+                'recdam'            => '+' . $action->getFactualPower(),
+                'hp'                => $targetUnit->getLife(),
+                'thp'               => $targetUnit->getTotalLife(),
+                'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
+            ];
+        }
 
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
@@ -177,17 +189,7 @@ class Scenario implements ScenarioInterface
                 [
                     'user_id'      => $action->getActionUnit()->getId(),
                     'unit_effects' => $this->getUnitEffects($action->getActionUnit()),
-                    'targets'      => [
-                        [
-                            'type'              => 'change',
-                            'user_id'           => $action->getActionUnit()->getId(),
-                            'ava'               => 'unit_ava_green',
-                            'recdam'            => '+' . $action->getFactualPower(),
-                            'hp'                => $targetUnit->getLife(),
-                            'thp'               => $targetUnit->getTotalLife(),
-                            'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
-                        ],
-                    ],
+                    'targets'      => $targetEffects,
                 ],
             ],
         ];
@@ -281,8 +283,22 @@ class Scenario implements ScenarioInterface
      */
     private function resurrected(ResurrectionAction $action, StatisticInterface $statistic): void
     {
-        // Временно, с.м. комментарий выше
-        $targetUnit = $action->getTargetUnits()[0];
+        $targetEffects = [];
+
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            $targetEffects[] = [
+                'type'              => 'change',
+                'user_id'           => $targetUnit->getId(),
+                'ava'               => 'unit_ava_green',
+                'recdam'            => '+' . $action->getFactualPower(),
+                'hp'                => $targetUnit->getLife(),
+                'thp'               => $targetUnit->getTotalLife(),
+                'hp_bar_class'      => 'unit_hp_bar',
+                'hp_bar_class2'     => 'unit_hp_bar2',
+                'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
+                'unit_effects'      => $this->getUnitEffects($targetUnit),
+            ];
+        }
 
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
@@ -293,20 +309,7 @@ class Scenario implements ScenarioInterface
                     'class'          => 'd_buff',
                     'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
                     'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
-                    'targets'        => [
-                        [
-                            'type'              => 'change',
-                            'user_id'           => $targetUnit->getId(),
-                            'ava'               => 'unit_ava_green',
-                            'recdam'            => '+' . $action->getFactualPower(),
-                            'hp'                => $targetUnit->getLife(),
-                            'thp'               => $targetUnit->getTotalLife(),
-                            'hp_bar_class'      => 'unit_hp_bar',
-                            'hp_bar_class2'     => 'unit_hp_bar2',
-                            'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
-                            'unit_effects'      => $this->getUnitEffects($targetUnit),
-                        ],
-                    ],
+                    'targets'        => $targetEffects,
                 ],
             ],
         ];

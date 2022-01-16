@@ -531,6 +531,9 @@ class ScenarioTest extends AbstractUnitTest
         $scenario->addAnimation($action, new Statistic());
     }
 
+    // TODO Когда будут добавлены Action с выбором несколько целей - нужно будет добавить тесты на формирование
+    // TODO сценария по нескольким целям
+
     /**
      * Создает Action, который призовет Imp
      *
