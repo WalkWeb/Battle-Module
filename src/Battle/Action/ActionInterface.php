@@ -127,6 +127,14 @@ interface ActionInterface
     public function addFactualPower(string $unitId, int $factualPower): void;
 
     /**
+     * Сбрасывает factualPower у Action
+     *
+     * Необходим для эффектов, чтобы на каждом раунде отображалась сила эффекта именно в этом раунде, а не суммарная за
+     * все раунды
+     */
+    public function clearFactualPower(): void;
+
+    /**
      * Возвращает фактическую силу действия
      *
      * @return int

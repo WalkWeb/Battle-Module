@@ -81,6 +81,7 @@ class EffectCollection implements Iterator, Countable
         $collection = new ActionCollection();
 
         foreach ($this->elements as $effect) {
+            $effect->newRound();
             $collection->addCollection($effect->getOnNextRoundActions());
         }
 

@@ -130,6 +130,13 @@ class Effect implements EffectInterface
         return $collection;
     }
 
+    public function newRound(): void
+    {
+        foreach ($this->onNextRoundActions as $action) {
+            $action->clearFactualPower();
+        }
+    }
+    
     public function nextRound(): void
     {
         $this->duration--;

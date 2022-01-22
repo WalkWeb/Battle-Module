@@ -161,6 +161,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
+        $power = 15;
         $ability = new HealingPotionAbility($unit);
 
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
@@ -172,25 +173,23 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         self::assertEquals(1, $unit->getLife());
 
-        $this->nextRound($unit);
+        foreach ($unit->getEffects() as $effect) {
+            foreach ($effect->getOnNextRoundActions() as $effectAction) {
+                self::assertEquals(0, $effectAction->getFactualPower());
+            }
+        }
 
-        self::assertEquals(1 + 15, $unit->getLife());
+        for ($i = 1; $i < 5; $i++) {
+            $this->nextRound($unit);
 
-        $this->nextRound($unit);
-
-        self::assertEquals(1 + 30, $unit->getLife());
-
-        $this->nextRound($unit);
-
-        self::assertEquals(1 + 45, $unit->getLife());
-
-        $this->nextRound($unit);
-
-        self::assertEquals(1 + 60, $unit->getLife());
-
-        $this->nextRound($unit);
-
-        self::assertEquals(1 + 60, $unit->getLife());
+            // Проверяем FactualPower после применения - он не должен меняться
+            self::assertEquals(1 + $power * $i, $unit->getLife());
+            foreach ($unit->getEffects() as $effect) {
+                foreach ($effect->getOnNextRoundActions() as $effectAction) {
+                    self::assertEquals($power, $effectAction->getFactualPower());
+                }
+            }
+        }
 
         self::assertCount(0, $unit->getEffects());
     }

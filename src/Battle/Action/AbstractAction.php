@@ -116,6 +116,11 @@ abstract class AbstractAction implements ActionInterface
         throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }
 
+    public function clearFactualPower(): void
+    {
+        $this->factualPower = 0;
+    }
+
     public function getFactualPower(): int
     {
         return $this->factualPower;
