@@ -61,39 +61,6 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
-        }
-    }
-
-    /**
-     * Тест на формирование сообщения на русском
-     *
-     * @throws Exception
-     */
-    public function testHeavyStrikeAbilityRuMessage(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = new HeavyStrikeAbility($unit);
-
-        // Up concentration
-        for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
-        }
-
-        $collection = new AbilityCollection();
-        $collection->add($ability);
-        $collection->update($unit);
-
-        $actions = $ability->getAction($enemyCommand, $command);
-
-        foreach ($actions as $action) {
-            self::assertTrue($action->canByUsed());
-            $action->handle();
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
     }

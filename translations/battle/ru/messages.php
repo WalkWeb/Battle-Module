@@ -41,7 +41,7 @@ return [
     'Heavy Strike'                     => 'Тяжелый Удар',
     'Healing Potion'                   => 'Лечебное зелье',
     'Back to Life'                     => 'Возвращение к жизни',
-    'use Healing Potion'               => 'использовал Лечебное зелье',
+    'Hellfire'                         => 'Адское пламя',
     // Summon Ability
     'Imp'                              => 'Беса', // в сформированном сообщении будет "призвал Беса"
     'Skeleton'                         => 'Скелета',

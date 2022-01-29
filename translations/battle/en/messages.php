@@ -47,7 +47,7 @@ return [
     'Heavy Strike'                     => 'Heavy Strike',
     'Healing Potion'                   => 'Healing Potion',
     'Back to Life'                     => 'Back to Life',
-    'use Healing Potion'               => 'use Healing Potion',
+    'Hellfire'                         => 'Hellfire',
     // Statistics
     'Statistics'                       => 'Statistics',
     'Unit'                             => 'Unit',
