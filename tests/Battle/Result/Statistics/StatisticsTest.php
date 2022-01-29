@@ -92,6 +92,38 @@ class StatisticsTest extends AbstractUnitTest
     }
 
     /**
+     * Подсчет полученного урона от Action с несколькими целями
+     *
+     * @throws Exception
+     */
+    public function testStatisticsUnitCausedMultipleDamage(): void
+    {
+        $statistics = new Statistic();
+
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+        $thirdEnemyUnit = UnitFactory::createByTemplate(4);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
+
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ALIVE_ENEMY);
+
+        $action->handle();
+
+        $statistics->addUnitAction($action);
+
+        // Проверяем, что атакующий юнит нанес тройной урон (урон * 3 цели)
+        self::assertEquals($unit->getDamage() * 3, $statistics->getUnitsStatistics()->get($unit->getId())->getCausedDamage());
+
+        // Проверяем, что всем врагам добавлен полученный урон
+        self::assertEquals($unit->getDamage(), $statistics->getUnitsStatistics()->get($firstEnemyUnit->getId())->getTakenDamage());
+        self::assertEquals($unit->getDamage(), $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getTakenDamage());
+        self::assertEquals($unit->getDamage(), $statistics->getUnitsStatistics()->get($thirdEnemyUnit->getId())->getTakenDamage());
+    }
+
+    /**
      * @throws Exception
      */
     public function testStatisticsUnitCausedHeal(): void
@@ -264,5 +296,32 @@ class StatisticsTest extends AbstractUnitTest
 
         self::assertFalse($defendUnit->isAlive());
         self::assertEquals(1, $statistics->getUnitsStatistics()->get($unit->getId())->getKilling());
+    }
+
+    /**
+     * Подсчет полученного урона от Action с несколькими целями
+     *
+     * @throws Exception
+     */
+    public function testStatisticsMultipleKills(): void
+    {
+        $statistics = new Statistic();
+
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+        $thirdEnemyUnit = UnitFactory::createByTemplate(4);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
+
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ALIVE_ENEMY, 1000);
+
+        $action->handle();
+
+        $statistics->addUnitAction($action);
+
+        // Проверяем, что атакующий убил 3 юнита
+        self::assertEquals(3, $statistics->getUnitsStatistics()->get($unit->getId())->getKilling());
     }
 }

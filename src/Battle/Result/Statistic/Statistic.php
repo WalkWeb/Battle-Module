@@ -182,26 +182,25 @@ class Statistic implements StatisticInterface
      */
     private function countingCausedDamage(ActionInterface $action): void
     {
-        // TODO На данный момент механика применения Action ко множеству целей в процессе добавления
-        // TODO Задача поделена на несколько этапов, и обновление формирования статистики будет сделано отдельно
-        // TODO Для того, чтобы все работало как раньше - выбираем первую цель (пока нет событий с несколькими целями)
-        $defendUnit = $action->getTargetUnits()[0];
-
         if (!$this->unitsStatistics->exist($action->getActionUnit()->getId())) {
             $unit = new UnitStatistic($action->getActionUnit());
             $unit->addCausedDamage($action->getFactualPower());
             $unit->addHit();
 
-            if (!$defendUnit->isAlive()) {
-                $unit->addKillingUnit();
+            foreach ($action->getTargetUnits() as $targetUnit) {
+                if (!$targetUnit->isAlive()) {
+                    $unit->addKillingUnit();
+                }
             }
 
             $this->unitsStatistics->add($unit);
         } else {
             $unit = $this->getUnitStatistics($action->getActionUnit()->getId());
 
-            if (!$defendUnit->isAlive()) {
-                $unit->addKillingUnit();
+            foreach ($action->getTargetUnits() as $targetUnit) {
+                if (!$targetUnit->isAlive()) {
+                    $unit->addKillingUnit();
+                }
             }
 
             $unit->addCausedDamage($action->getFactualPower());
@@ -218,16 +217,15 @@ class Statistic implements StatisticInterface
      */
     private function countingTakenDamage(ActionInterface $action): void
     {
-        // С.м. комментарий выше
-        $defendUnit = $action->getTargetUnits()[0];
-
-        if (!$this->unitsStatistics->exist($defendUnit->getId())) {
-            $unit = new UnitStatistic($defendUnit);
-            $unit->addTakenDamage($action->getFactualPower());
-            $this->unitsStatistics->add($unit);
-        } else {
-            $unit = $this->getUnitStatistics($defendUnit->getId());
-            $unit->addTakenDamage($action->getFactualPower());
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            if (!$this->unitsStatistics->exist($targetUnit->getId())) {
+                $unit = new UnitStatistic($targetUnit);
+                $unit->addTakenDamage($action->getFactualPowerByUnit($targetUnit->getId()));
+                $this->unitsStatistics->add($unit);
+            } else {
+                $unit = $this->getUnitStatistics($targetUnit->getId());
+                $unit->addTakenDamage($action->getFactualPowerByUnit($targetUnit->getId()));
+            }
         }
     }
 
