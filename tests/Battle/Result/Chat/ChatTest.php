@@ -44,9 +44,8 @@ class ChatTest extends AbstractUnitTest
     private const HEAL_EN = '<span style="color: #1e72e3">unit_1</span> heal <span style="color: #1e72e3">wounded_unit</span> on 20 life';
     private const HEAL_RU = '<span style="color: #1e72e3">unit_1</span> вылечил <span style="color: #1e72e3">wounded_unit</span> на 20 здоровья';
 
-    // TODO Почему нет иконки?
-    private const SUMMON_EN = '<span style="color: #1e72e3">unit_1</span> summon <span class="ability">Imp</span>';
-    private const SUMMON_RU = '<span style="color: #1e72e3">unit_1</span> призвал <span class="ability">Беса</span>';
+    private const SUMMON_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Imp</span>';
+    private const SUMMON_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Беса</span>';
 
     private const WAIT_EN = '<span style="color: #1e72e3">unit_1</span> preparing to attack';
     private const WAIT_RU = '<span style="color: #1e72e3">unit_1</span> готовится к атаке';
@@ -81,9 +80,7 @@ class ChatTest extends AbstractUnitTest
      */
     public function testChatAddedMessage(): void
     {
-        $container = $this->getContainerWithRuLanguage();
-
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
         $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
@@ -95,11 +92,11 @@ class ChatTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на формирование сообщения об уроне, на английском
+     * Тест на формирование сообщения об уроне
      *
      * @throws Exception
      */
-    public function testChatAddMessageDamageEn(): void
+    public function testChatAddMessageDamage(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
@@ -110,34 +107,15 @@ class ChatTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(self::DAMAGE_EN, $this->getChat()->addMessage($action));
-    }
-
-    /**
-     * Тест на формирование сообщения об уроне, на русском
-     *
-     * @throws Exception
-     */
-    public function testChatAddMessageDamageRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
-
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
-
-        self::assertTrue($action->canByUsed());
-
-        $action->handle();
-
         self::assertEquals(self::DAMAGE_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
-     * Тест на формирование сообщения об уроне со способности, на английском
+     * Тест на формирование сообщения об уроне со способности
      *
      * @throws Exception
      */
-    public function testChatAddMessageDamageAbilityEn(): void
+    public function testChatAddMessageDamageAbility(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
@@ -158,44 +136,15 @@ class ChatTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(self::DAMAGE_ABILITY_EN, $this->getChat()->addMessage($action));
-    }
-
-    /**
-     * Тест на формирование сообщения об уроне со способности, на русском
-     *
-     * @throws Exception
-     */
-    public function testChatAddMessageDamageAbilityRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
-
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            50,
-            HeavyStrikeAbility::NAME,
-            DamageAction::UNIT_ANIMATION_METHOD,
-            HeavyStrikeAbility::MESSAGE_METHOD,
-            HeavyStrikeAbility::ICON
-        );
-
-        self::assertTrue($action->canByUsed());
-
-        $action->handle();
-
         self::assertEquals(self::DAMAGE_ABILITY_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
-     * Тест на формирование сообщения о лечении, на английском
+     * Тест на формирование сообщения о лечении
      *
      * @throws Exception
      */
-    public function testChatAddMessageHealEn(): void
+    public function testChatAddMessageHeal(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $otherUnit = UnitFactory::createByTemplate(11);
@@ -210,48 +159,27 @@ class ChatTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(self::HEAL_EN, $this->getChat()->addMessage($action));
-    }
-
-    /**
-     * Тест на формирование сообщения о лечении, на английском
-     *
-     * @throws Exception
-     */
-    public function testChatAddMessageHealRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $otherUnit = UnitFactory::createByTemplate(11, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
-        $command = CommandFactory::create([$unit, $otherUnit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
-
-        self::assertTrue($action->canByUsed());
-
-        $action->handle();
-
         self::assertEquals(self::HEAL_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
-     * Тест на формирование сообщения о призыве, на английском
+     * Тест на формирование сообщения о призыве
      *
      * @throws Exception
      */
-    public function testChatAddMessageSummonEn(): void
+    public function testChatAddMessageSummon(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
         $summon = UnitFactory::createByTemplate(18);
+        $icon = '/images/icons/ability/275.png';
 
         $action = new SummonAction(
             $unit,
             $enemyCommand,
             $command,
             'Imp',
-            $summon
+            $summon,
+            $icon
         );
 
         self::assertTrue($action->canByUsed());
@@ -259,41 +187,15 @@ class ChatTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(self::SUMMON_EN, $this->getChat()->addMessage($action));
-    }
-
-    /**
-     * Тест на формирование сообщения о призыве, на русском
-     *
-     * @throws Exception
-     */
-    public function testChatAddMessageSummonRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
-        $summon = UnitFactory::createByTemplate(18);
-
-        $action = new SummonAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            'Imp',
-            $summon
-        );
-
-        self::assertTrue($action->canByUsed());
-
-        $action->handle();
-
         self::assertEquals(self::SUMMON_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
-     * Тест на формирование сообщения о пропуске хода, на английском
+     * Тест на формирование сообщения о пропуске хода
      *
      * @throws Exception
      */
-    public function testChatAddMessageWaitEn(): void
+    public function testChatAddMessageWait(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
@@ -304,34 +206,15 @@ class ChatTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(self::WAIT_EN, $this->getChat()->addMessage($action));
-    }
-
-    /**
-     * Тест на формирование сообщения о пропуске хода, на русском
-     *
-     * @throws Exception
-     */
-    public function testChatAddMessageWaitRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
-
-        $action = new WaitAction($unit, $enemyCommand, $command);
-
-        self::assertTrue($action->canByUsed());
-
-        $action->handle();
-
         self::assertEquals(self::WAIT_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
-     * Тест на формирование сообщения о применении эффекта на себя, на английском
+     * Тест на формирование сообщения о применении эффекта на себя
      *
      * @throws Exception
      */
-    public function testChatAddMessageApplyEffectToSelfEn(): void
+    public function testChatAddMessageApplyEffectToSelf(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
@@ -342,34 +225,15 @@ class ChatTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(self::APPLY_EFFECT_SELF_EN, $this->getChat()->addMessage($action));
-    }
-
-    /**
-     * Тест на формирование сообщения о применении эффекта на себя, на русском
-     *
-     * @throws Exception
-     */
-    public function testChatAddMessageApplyEffectToSelfRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
-
-        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
-
-        self::assertTrue($action->canByUsed());
-
-        $action->handle();
-
         self::assertEquals(self::APPLY_EFFECT_SELF_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
-     * Тест на формирование сообщения о применении эффекта на другого юнита, на английском
+     * Тест на формирование сообщения о применении эффекта на другого юнита
      *
      * @throws Exception
      */
-    public function testChatAddMessageApplyEffectToOtherEn(): void
+    public function testChatAddMessageApplyEffectToOther(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
@@ -380,34 +244,15 @@ class ChatTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(self::APPLY_EFFECT_TO_EN, $this->getChat()->addMessage($action));
-    }
-
-    /**
-     * Тест на формирование сообщения о применении эффекта на другого юнита, на русском
-     *
-     * @throws Exception
-     */
-    public function testChatAddMessageApplyEffectToOtherRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
-
-        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_RANDOM_ENEMY);
-
-        self::assertTrue($action->canByUsed());
-
-        $action->handle();
-
         self::assertEquals(self::APPLY_EFFECT_TO_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
-     * Тест на формирование сообщения об усилении, на английском
+     * Тест на формирование сообщения об усилении
      *
      * @throws Exception
      */
-    public function testChatAddMessageBuffEn(): void
+    public function testChatAddMessageBuff(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
@@ -426,42 +271,15 @@ class ChatTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(self::BUFF_EN, $this->getChat()->addMessage($action));
-    }
-
-    /**
-     * Тест на формирование сообщения об усилении, на русском
-     *
-     * @throws Exception
-     */
-    public function testChatAddMessageBuffRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
-
-        $action = new BuffAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'Reserve Forces',
-            'multiplierMaxLife',
-            130
-        );
-
-        self::assertTrue($action->canByUsed());
-
-        $action->handle();
-
         self::assertEquals(self::BUFF_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
-     * Тест на формирование сообщения о воскрешении, на английском
+     * Тест на формирование сообщения о воскрешении
      *
      *  @throws Exception
      */
-    public function testChatAddMessageResurrectionEn(): void
+    public function testChatAddMessageResurrection(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $deadUnit = UnitFactory::createByTemplate(10);
@@ -484,46 +302,15 @@ class ChatTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(self::RESURRECTION_EN, $this->getChat()->addMessage($action));
-    }
-
-    /**
-     * Тест на формирование сообщения о воскрешении, на русском
-     *
-     *  @throws Exception
-     */
-    public function testChatAddMessageResurrectionRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $deadUnit = UnitFactory::createByTemplate(10, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
-
-        $command = CommandFactory::create([$unit, $deadUnit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new ResurrectionAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_DEAD_ALLIES,
-            50,
-            'ExampleActionName'
-        );
-
-        self::assertTrue($action->canByUsed());
-
-        $action->handle();
-
         self::assertEquals(self::RESURRECTION_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
-     * Тест на формирование сообщения об уроне от эффекта, на английском
+     * Тест на формирование сообщения об уроне от эффекта
      *
      * @throws Exception
      */
-    public function testChatAddMessageEffectDamageEn(): void
+    public function testChatAddMessageEffectDamage(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
@@ -543,43 +330,15 @@ class ChatTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(self::EFFECT_DAMAGE_EN, $this->getChat()->addMessage($action));
-    }
-
-    /**
-     * Тест на формирование сообщения об уроне от эффекта, на русском
-     *
-     * @throws Exception
-     */
-    public function testChatAddMessageEffectDamageRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
-
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            10,
-            'Poison',
-            null,
-            DamageAction::EFFECT_MESSAGE_METHOD
-        );
-
-        self::assertTrue($action->canByUsed());
-
-        $action->handle();
-
         self::assertEquals(self::EFFECT_DAMAGE_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
-     * Тест на формирование сообщения о лечении от эффекта, на английском
+     * Тест на формирование сообщения о лечении от эффекта
      *
      * @throws Exception
      */
-    public function testChatAddMessageEffectHealEn(): void
+    public function testChatAddMessageEffectHeal(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(11, 2);
 
@@ -599,34 +358,6 @@ class ChatTest extends AbstractUnitTest
         $action->handle();
 
         self::assertEquals(self::EFFECT_HEAL_EN, $this->getChat()->addMessage($action));
-    }
-
-    /**
-     * Тест на формирование сообщения о лечении от эффекта, на русском
-     *
-     * @throws Exception
-     */
-    public function testChatAddMessageEffectHealRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        [$unit, $command, $enemyCommand] = BaseFactory::create(11, 2, $container);
-
-        $action = new HealAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            HealAction::TARGET_SELF,
-            15,
-            'Healing Potion',
-            HealAction::EFFECT_ANIMATION_METHOD,
-            HealAction::EFFECT_MESSAGE_METHOD
-        );
-
-        self::assertTrue($action->canByUsed());
-
-        $action->handle();
-
         self::assertEquals(self::EFFECT_HEAL_RU, $this->getChatRu()->addMessage($action));
     }
 
