@@ -34,6 +34,7 @@ return [
     'and heal'                         => 'and heal',
     'and resurrected'                  => 'and resurrected',
     'summon'                           => 'summon',
+    'and'                              => 'and',
     // Ability
     'Great Heal'                       => 'Great Heal',
     'Imp'                              => 'Imp',

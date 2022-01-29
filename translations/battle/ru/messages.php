@@ -32,6 +32,7 @@ return [
     'and heal'                         => 'и вылечил',
     'and resurrected'                  => 'и воскресил',
     'summon'                           => 'призвал',
+    'and'                              => 'и',
     // Ability
     'Great Heal'                       => 'Сильное Лечение',
     'Reserve Forces'                   => 'Резервные Силы',

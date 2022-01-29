@@ -32,6 +32,12 @@ class ChatTest extends AbstractUnitTest
     private const DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
     private const DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона';
 
+    private const DAMAGE_TWO_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> and <span style="color: #1e72e3">unit_3</span> on 40 damage';
+    private const DAMAGE_TWO_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> и <span style="color: #1e72e3">unit_3</span> на 40 урона';
+
+    private const DAMAGE_THREE_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> and <span style="color: #1e72e3">unit_4</span> on 60 damage';
+    private const DAMAGE_THREE_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> и <span style="color: #1e72e3">unit_4</span> на 60 урона';
+
     private const DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> at <span style="color: #1e72e3">unit_2</span> on 50 damage';
     private const DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> по <span style="color: #1e72e3">unit_2</span> на 50 урона';
 
@@ -676,6 +682,55 @@ class ChatTest extends AbstractUnitTest
         $this->expectException(ChatException::class);
         $this->expectExceptionMessage(ChatException::UNDEFINED_MESSAGE_METHOD);
         $chat->addMessage($action);
+    }
+
+    /**
+     * Тест на формирование сообщения удара по двум целям одновременно
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageTwoTarget(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
+
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ALIVE_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::DAMAGE_TWO_TARGET_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::DAMAGE_TWO_TARGET_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения удара по трем целям одновременно
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageThreeTarget(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+        $thirdEnemyUnit = UnitFactory::createByTemplate(4);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
+
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ALIVE_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::DAMAGE_THREE_TARGET_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::DAMAGE_THREE_TARGET_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
