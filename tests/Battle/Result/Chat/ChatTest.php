@@ -27,6 +27,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class ChatTest extends AbstractUnitTest
 {
+    private const MESSAGE   = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
+
     private const DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
     private const DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона';
 
@@ -79,11 +81,11 @@ class ChatTest extends AbstractUnitTest
 
         $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
-        $message = $action->handle();
+        self::assertTrue($action->canByUsed());
 
-        $chat = $container->getChat();
+        $action->handle();
 
-        self::assertEquals([$message], $chat->getMessages());
+        self::assertEquals(self::MESSAGE, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -98,7 +100,10 @@ class ChatTest extends AbstractUnitTest
         $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::DAMAGE_EN, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::DAMAGE_EN, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -115,7 +120,10 @@ class ChatTest extends AbstractUnitTest
         $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::DAMAGE_RU, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::DAMAGE_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -140,7 +148,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::DAMAGE_ABILITY_EN, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::DAMAGE_ABILITY_EN, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -167,7 +178,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::DAMAGE_ABILITY_RU, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::DAMAGE_ABILITY_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -186,7 +200,10 @@ class ChatTest extends AbstractUnitTest
         $action = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::HEAL_EN, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::HEAL_EN, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -207,7 +224,10 @@ class ChatTest extends AbstractUnitTest
         $action = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::HEAL_RU, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::HEAL_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -229,7 +249,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::SUMMON_EN, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::SUMMON_EN, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -253,7 +276,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::SUMMON_RU, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::SUMMON_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -268,7 +294,10 @@ class ChatTest extends AbstractUnitTest
         $action = new WaitAction($unit, $enemyCommand, $command);
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::WAIT_EN, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::WAIT_EN, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -285,7 +314,10 @@ class ChatTest extends AbstractUnitTest
         $action = new WaitAction($unit, $enemyCommand, $command);
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::WAIT_RU, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::WAIT_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -297,10 +329,13 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
-        $effectAction = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
 
-        self::assertTrue($effectAction->canByUsed());
-        self::assertEquals(self::APPLY_EFFECT_SELF_EN, $effectAction->handle());
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::APPLY_EFFECT_SELF_EN, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -314,10 +349,13 @@ class ChatTest extends AbstractUnitTest
 
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
 
-        $effectAction = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
 
-        self::assertTrue($effectAction->canByUsed());
-        self::assertEquals(self::APPLY_EFFECT_SELF_RU, $effectAction->handle());
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::APPLY_EFFECT_SELF_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -329,10 +367,13 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
-        $effectAction = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_RANDOM_ENEMY);
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_RANDOM_ENEMY);
 
-        self::assertTrue($effectAction->canByUsed());
-        self::assertEquals(self::APPLY_EFFECT_TO_EN, $effectAction->handle());
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::APPLY_EFFECT_TO_EN, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -346,10 +387,13 @@ class ChatTest extends AbstractUnitTest
 
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
 
-        $effectAction = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_RANDOM_ENEMY);
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_RANDOM_ENEMY);
 
-        self::assertTrue($effectAction->canByUsed());
-        self::assertEquals(self::APPLY_EFFECT_TO_RU, $effectAction->handle());
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::APPLY_EFFECT_TO_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -372,7 +416,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::BUFF_EN, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::BUFF_EN, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -397,7 +444,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::BUFF_RU, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::BUFF_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -424,7 +474,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::RESURRECTION_EN, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::RESURRECTION_EN, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -453,7 +506,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::RESURRECTION_RU, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::RESURRECTION_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -477,7 +533,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::EFFECT_DAMAGE_EN, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::EFFECT_DAMAGE_EN, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -503,7 +562,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::EFFECT_DAMAGE_RU, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::EFFECT_DAMAGE_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -527,7 +589,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::EFFECT_HEAL_EN, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::EFFECT_HEAL_EN, $this->getChat()->addMessage($action));
     }
 
     /**
@@ -553,7 +618,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::EFFECT_HEAL_RU, $action->handle());
+
+        $action->handle();
+
+        self::assertEquals(self::EFFECT_HEAL_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -579,8 +647,10 @@ class ChatTest extends AbstractUnitTest
         );
 
         self::assertTrue($action->canByUsed());
-        self::assertEquals(self::SKIP_MESSAGE, $action->handle());
-        self::assertEquals([], $container->getChat()->getMessages());
+
+        $action->handle();
+
+        self::assertEquals(self::SKIP_MESSAGE, $this->getChat()->addMessage($action));
     }
 
     /**

@@ -60,23 +60,17 @@ class EffectAction extends AbstractAction
     }
 
     /**
-     * @return string
      * @throws ActionException
      */
-    public function handle(): string
+    public function handle(): void
     {
         if (count($this->targetUnits) === 0) {
             throw new ActionException(ActionException::NO_TARGET_FOR_EFFECT);
         }
 
-        // TODO Переделать формирование сообщения так, чтобы обрабатывались ситуации со множеством целей
-        $message = '';
-
         foreach ($this->targetUnits as $targetUnit) {
-            $message .= $targetUnit->applyAction($this);
+            $targetUnit->applyAction($this);
         }
-
-        return $message;
     }
 
     public function getNameAction(): string

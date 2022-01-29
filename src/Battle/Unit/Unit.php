@@ -15,8 +15,6 @@ use Battle\Action\ResurrectionAction;
 use Battle\Action\WaitAction;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
-use Battle\Container\ContainerException;
-use Battle\Result\Chat\ChatException;
 use Exception;
 
 class Unit extends AbstractUnit
@@ -55,10 +53,9 @@ class Unit extends AbstractUnit
      *
      * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction, applyResurrectionAction
      * @param ActionInterface $action
-     * @return string - Сообщение о произошедшем действии
      * @throws Exception
      */
-    public function applyAction(ActionInterface $action): string
+    public function applyAction(ActionInterface $action): void
     {
         $method = $action->getHandleMethod();
 
@@ -69,19 +66,16 @@ class Unit extends AbstractUnit
         $this->addConcentration(self::ADD_CON_RECEIVING_UNIT);
         $this->addRage(self::ADD_RAGE_RECEIVING_UNIT);
 
-        return $this->$method($action);
+        $this->$method($action);
     }
 
     /**
      * Обрабатывает action на получение урона
      *
      * @param DamageAction $action
-     * @return string
      * @throws ActionException
-     * @throws ContainerException
-     * @throws ChatException
      */
-    private function applyDamageAction(DamageAction $action): string
+    private function applyDamageAction(DamageAction $action): void
     {
         $primordialLife = $this->life;
 
@@ -103,20 +97,15 @@ class Unit extends AbstractUnit
         }
 
         $action->addFactualPower($this->id, $primordialLife - $this->life);
-
-        return $this->container->getChat()->addMessage($action);
     }
 
     /**
      * Обрабатывает action на лечение
      *
      * @param HealAction $action
-     * @return string
      * @throws ActionException
-     * @throws ContainerException
-     * @throws ChatException
      */
-    private function applyHealAction(HealAction $action): string
+    private function applyHealAction(HealAction $action): void
     {
         $primordialLife = $this->life;
 
@@ -126,50 +115,31 @@ class Unit extends AbstractUnit
         }
 
         $action->addFactualPower($this->id, $this->life - $primordialLife);
-
-        return $this->container->getChat()->addMessage($action);
     }
 
     /**
      * Обрабатывает action на призыв нового юнита
      *
-     * Добавление юнита в команду происходит в самом SummonAction, от пользователя нужно только сообщение о действии
-     *
-     * В тоже время, в будущем могут быть добавлены параметры, влияющие на силу саммонов
+     * Призыв суммона в команду происходит в самом SummonAction, от юнита ничего не нужно
      *
      * @param SummonAction $action
-     * @return string
-     * @throws ContainerException
-     * @throws ChatException
      */
-    private function applySummonAction(SummonAction $action): string
-    {
-        return $this->container->getChat()->addMessage($action);
-    }
+    private function applySummonAction(SummonAction $action): void {}
 
     /**
      * Обрабатывает action на пропуск хода
      *
      * @param WaitAction $action
-     * @return string
-     * @throws ContainerException
-     * @throws ChatException
      */
-    private function applyWaitAction(WaitAction $action): string
-    {
-        return $this->container->getChat()->addMessage($action);
-    }
+    private function applyWaitAction(WaitAction $action): void {}
 
     /**
      * Обрабатывает action на добавление эффекта юниту
      *
      * @param EffectAction $action
-     * @return string
-     * @throws ContainerException
      * @throws ActionException
-     * @throws ChatException
      */
-    private function applyEffectAction(EffectAction $action): string
+    private function applyEffectAction(EffectAction $action): void
     {
         $onApplyAction = $this->effects->add($action->getEffect());
 
@@ -178,8 +148,6 @@ class Unit extends AbstractUnit
                 $applyAction->handle();
             }
         }
-
-        return $this->container->getChat()->addMessage($action);
     }
 
     /**
@@ -187,12 +155,9 @@ class Unit extends AbstractUnit
      * восстановлено юниту при воскрешении
      *
      * @param ResurrectionAction $action
-     * @return string
-     * @throws ContainerException
      * @throws ActionException
-     * @throws ChatException
      */
-    private function applyResurrectionAction(ResurrectionAction $action): string
+    private function applyResurrectionAction(ResurrectionAction $action): void
     {
         $restoreLife = (int)($this->totalLife * ($action->getPower()/100));
 
@@ -204,8 +169,6 @@ class Unit extends AbstractUnit
         $this->life += $restoreLife;
 
         $action->addFactualPower($this->id, $restoreLife);
-
-        return $this->container->getChat()->addMessage($action);
     }
     
     /**
@@ -216,30 +179,26 @@ class Unit extends AbstractUnit
      *
      * @uses multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert
      * @param BuffAction $action
-     * @return string
      * @throws ActionException
      * @throws UnitException
      */
-    private function applyBuffAction(BuffAction $action): string
+    private function applyBuffAction(BuffAction $action): void
     {
         if (!method_exists($this, $modifyMethod = $action->getModifyMethod())) {
             throw new UnitException(UnitException::UNDEFINED_MODIFY_METHOD . ': ' . $modifyMethod);
         }
 
-        return $this->$modifyMethod($action);
+        $this->$modifyMethod($action);
     }
 
     /**
      * Увеличивает здоровье юнита (можно сделать и уменьшение, но пока делаем только увеличение)
      *
      * @param BuffAction $action
-     * @return string
      * @throws UnitException
      * @throws ActionException
-     * @throws ContainerException
-     * @throws ChatException
      */
-    private function multiplierMaxLife(BuffAction $action): string
+    private function multiplierMaxLife(BuffAction $action): void
     {
         if ($action->getPower() <= 100) {
             throw new UnitException(UnitException::NO_REDUCED_MAXIMUM_LIFE);
@@ -256,39 +215,31 @@ class Unit extends AbstractUnit
         $this->totalLife += $bonus;
 
         $action->setRevertValue($bonus);
-
-        return $this->container->getChat()->addMessage($action);
     }
 
     /**
      * Откатывает изменения по здоровью
      *
      * @param BuffAction $action
-     * @return string
      * @throws ActionException
      */
-    private function multiplierMaxLifeRevert(BuffAction $action): string
+    private function multiplierMaxLifeRevert(BuffAction $action): void
     {
         $this->totalLife -= $action->getRevertValue();
 
         if ($this->life > $this->totalLife) {
             $this->life = $this->totalLife;
         }
-
-        return '';
     }
 
     /**
      * Увеличивает скорость атаки юнита
      *
      * @param BuffAction $action
-     * @return string
      * @throws ActionException
-     * @throws ChatException
-     * @throws ContainerException
      * @throws UnitException
      */
-    private function multiplierAttackSpeed(BuffAction $action): string
+    private function multiplierAttackSpeed(BuffAction $action): void
     {
         if ($action->getPower() <= 100) {
             throw new UnitException(UnitException::NO_REDUCED_ATTACK_SPEED);
@@ -304,21 +255,17 @@ class Unit extends AbstractUnit
         $this->attackSpeed += $bonus;
 
         $action->setRevertValue($bonus);
-
-        return $this->container->getChat()->addMessage($action);
     }
 
     /**
      * Откатывает обратно увеличенную скорость атаки
      *
      * @param BuffAction $action
-     * @return string
      * @throws ActionException
      */
-    private function multiplierAttackSpeedRevert(BuffAction $action): string
+    private function multiplierAttackSpeedRevert(BuffAction $action): void
     {
         $this->attackSpeed -= $action->getRevertValue();
-        return '';
     }
 
     /**

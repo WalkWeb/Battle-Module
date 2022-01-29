@@ -19,6 +19,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class BattleFuryAbilityTest extends AbstractUnitTest
 {
+    // TODO Добавить проверку сообщения на русском
     private const MESSAGE = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/102.png" alt="" /> <span class="ability">Battle Fury</span>';
 
     /**
@@ -98,8 +99,8 @@ class BattleFuryAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            $message = $action->handle();
-            self::assertEquals(self::MESSAGE, $message);
+            $action->handle();
+            self::assertEquals(self::MESSAGE, $this->getChat()->addMessage($action));
         }
 
         // Проверяем, что скорость атаки юнита выросла
@@ -112,15 +113,6 @@ class BattleFuryAbilityTest extends AbstractUnitTest
 
         // Проверяем, что скорость атаки вернулась к исходному
         self::assertEquals($oldAttackSpeed, $unit->getAttackSpeed());
-
-        $chatMessages = $container->getChat()->getMessages();
-
-        // Проверяем, что сообщение об использовании способности было добавлено в чат один раз
-        self::assertCount(1, $chatMessages);
-
-        foreach ($chatMessages as $chatMessage) {
-            self::assertEquals(self::MESSAGE, $chatMessage);
-        }
     }
 
     /**

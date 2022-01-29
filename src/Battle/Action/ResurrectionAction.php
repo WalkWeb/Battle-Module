@@ -72,16 +72,11 @@ class ResurrectionAction extends AbstractAction
         return count($this->targetUnits) > 0;
     }
 
-    public function handle(): string
+    public function handle(): void
     {
-        // TODO Переделать формирование сообщения так, чтобы обрабатывались ситуации со множеством целей
-        $message = '';
-
         foreach ($this->targetUnits as $targetUnit) {
-            $message .= $targetUnit->applyAction($this);
+            $targetUnit->applyAction($this);
         }
-
-        return $message;
     }
 
     public function getHandleMethod(): string

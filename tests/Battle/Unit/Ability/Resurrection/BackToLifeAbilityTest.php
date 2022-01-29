@@ -58,7 +58,8 @@ class BackToLifeAbilityTest extends AbstractUnitTest
             self::assertEquals('Back to Life', $action->getNameAction());
             self::assertEquals(30, $action->getPower());
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_EN, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
         }
 
         // После применения способности юнит восстановил 30% здоровья (30 здоровья от 100 максимальных)
@@ -119,7 +120,8 @@ class BackToLifeAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_RU, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
     }
 }

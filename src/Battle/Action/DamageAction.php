@@ -62,11 +62,10 @@ class DamageAction extends AbstractAction
     }
 
     /**
-     * @return string
      * @throws ActionException
      * @throws UnitException
      */
-    public function handle(): string
+    public function handle(): void
     {
         if (!$this->enemyCommand->isAlive()) {
             throw new ActionException(ActionException::NO_DEFINED);
@@ -78,14 +77,9 @@ class DamageAction extends AbstractAction
             throw new ActionException(ActionException::NO_DEFINED_AGAIN);
         }
 
-        // TODO Переделать формирование сообщения так, чтобы обрабатывались ситуации со множеством целей
-        $message = '';
-
         foreach ($this->targetUnits as $targetUnit) {
-            $message .= $targetUnit->applyAction($this);
+            $targetUnit->applyAction($this);
         }
-
-        return $message;
     }
 
     public function getPower(): int

@@ -94,8 +94,8 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            $message = $action->handle();
-            self::assertEquals(self::MESSAGE_EN, $message);
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
         }
 
         // Проверяем, что здоровье юнита выросло
@@ -110,15 +110,6 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         // Проверяем, что здоровье вернулось к исходному
         self::assertEquals($unitBaseLife, $unit->getTotalLife());
         self::assertEquals($unitBaseLife, $unit->getLife());
-
-        $chatMessages = $container->getChat()->getMessages();
-
-        // Проверяем, что сообщение об использовании способности было добавлено в чат один раз
-        self::assertCount(1, $chatMessages);
-
-        foreach ($chatMessages as $chatMessage) {
-            self::assertEquals(self::MESSAGE_EN, $chatMessage);
-        }
     }
 
     /**
@@ -144,7 +135,8 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_RU, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
     }
 

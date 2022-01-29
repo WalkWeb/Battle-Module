@@ -68,7 +68,8 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_APPLY_SELF_EN, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_SELF_EN, $this->getChat()->addMessage($action));
         }
 
         $effects = $unit->getEffects();
@@ -80,7 +81,8 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
             foreach ($onNextRoundActions as $effectAction) {
                 self::assertTrue($effectAction->canByUsed());
-                self::assertEquals(self::MESSAGE_HEAL_EN, $effectAction->handle());
+                $effectAction->handle();
+                self::assertEquals(self::MESSAGE_HEAL_EN, $this->getChat()->addMessage($effectAction));
             }
         }
 
@@ -129,7 +131,8 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_APPLY_SELF_RU, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_SELF_RU, $this->getChatRu()->addMessage($action));
         }
 
 
@@ -142,7 +145,8 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
             foreach ($onNextRoundActions as $effectAction) {
                 self::assertTrue($effectAction->canByUsed());
-                self::assertEquals(self::MESSAGE_HEAL_RU, $effectAction->handle());
+                $effectAction->handle();
+                self::assertEquals(self::MESSAGE_HEAL_RU, $this->getChatRu()->addMessage($effectAction));
             }
         }
 
@@ -306,7 +310,8 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_APPLY_TO_EN, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_TO_EN, $this->getChat()->addMessage($action));
         }
     }
 
@@ -340,7 +345,8 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_APPLY_TO_RU, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_TO_RU, $this->getChatRu()->addMessage($action));
         }
     }
 

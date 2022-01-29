@@ -59,7 +59,8 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
             self::assertInstanceOf(DamageAction::class, $action);
             self::assertEquals((int)($unit->getDamage() * 2.5), $action->getPower());
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_EN, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
         }
     }
 
@@ -92,7 +93,8 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_RU, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
     }
 }

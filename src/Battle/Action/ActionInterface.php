@@ -70,10 +70,8 @@ interface ActionInterface
      * }
      *
      * TODO В конкретных реализациях много дублирующегося кода - можно улучшить
-     *
-     * @return string
      */
-    public function handle(): string;
+    public function handle(): void;
 
     /**
      * Название события, используется для создания сообщений в чате

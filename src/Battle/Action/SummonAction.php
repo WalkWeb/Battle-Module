@@ -54,13 +54,12 @@ class SummonAction extends AbstractAction
     }
 
     /**
-     * @return string
      * @throws Exception
      */
-    public function handle(): string
+    public function handle(): void
     {
         $this->alliesCommand->getUnits()->add($this->summon);
-        return $this->actionUnit->applyAction($this);
+        $this->actionUnit->applyAction($this);
     }
 
     /**

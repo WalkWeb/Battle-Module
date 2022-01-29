@@ -58,11 +58,10 @@ class BuffAction extends AbstractAction
     }
 
     /**
-     * @return string
      * @throws ActionException
      * @throws UnitException
      */
-    public function handle(): string
+    public function handle(): void
     {
         $this->targetUnits = $this->searchTargetUnits($this);
 
@@ -70,14 +69,9 @@ class BuffAction extends AbstractAction
             throw new ActionException(ActionException::NO_TARGET_FOR_BUFF);
         }
 
-        // TODO Переделать формирование сообщения так, чтобы обрабатывались ситуации со множеством целей
-        $message = '';
-
         foreach ($this->targetUnits as $targetUnit) {
-            $message .= $targetUnit->applyAction($this);
+            $targetUnit->applyAction($this);
         }
-
-        return $message;
     }
 
     public function getPower(): int

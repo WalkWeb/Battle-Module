@@ -104,8 +104,10 @@ class Stroke implements StrokeInterface
     {
         foreach ($this->actionUnit->getOnNewRoundActions() as $action) {
             if ($action->canByUsed()) {
-                $message = $action->handle();
 
+                $action->handle();
+
+                $message = $this->container->getChat()->addMessage($action);
                 $this->container->getStatistic()->addUnitAction($action);
                 $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
                 $this->container->getFullLog()->addText($message);
@@ -142,7 +144,9 @@ class Stroke implements StrokeInterface
                     );
                 }
 
-                $message = $action->handle();
+                $action->handle();
+
+                $message = $this->container->getChat()->addMessage($action);
 
                 $this->container->getStatistic()->addUnitAction($action);
                 $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());

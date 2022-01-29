@@ -58,7 +58,8 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
         foreach ($actions as $action) {
             self::assertInstanceOf(SummonAction::class, $action);
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_EN, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
         }
 
         $ability->usage();
@@ -96,7 +97,8 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
         $actions = $ability->getAction($enemyCommand, $command);
 
         foreach ($actions as $action) {
-            self::assertEquals(self::MESSAGE_RU, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
     }
 }

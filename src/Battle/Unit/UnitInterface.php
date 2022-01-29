@@ -97,9 +97,8 @@ interface UnitInterface
      * применение эффекта или что-то другое
      *
      * @param ActionInterface $action
-     * @return string
      */
-    public function applyAction(ActionInterface $action): string;
+    public function applyAction(ActionInterface $action): void;
 
     /**
      * Возвращает коллекцию событий, которые необходимо применить перед ходом данного юнита в текущем раунде

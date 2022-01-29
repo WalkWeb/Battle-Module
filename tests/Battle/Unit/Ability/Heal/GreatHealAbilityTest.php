@@ -68,7 +68,8 @@ class GreatHealAbilityTest extends AbstractUnitTest
             self::assertInstanceOf(HealAction::class, $action);
             self::assertEquals($unit->getDamage() * 3, $action->getPower());
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_EN, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
         }
     }
 
@@ -135,7 +136,8 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
-            self::assertEquals(self::MESSAGE_RU, $action->handle());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
     }
 }

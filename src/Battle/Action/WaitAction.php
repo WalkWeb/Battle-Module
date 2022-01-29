@@ -35,9 +35,9 @@ class WaitAction extends AbstractAction
         return self::HANDLE_METHOD;
     }
 
-    public function handle(): string
+    public function handle(): void
     {
-        return $this->actionUnit->applyAction($this);
+        $this->actionUnit->applyAction($this);
     }
 
     public function getNameAction(): string

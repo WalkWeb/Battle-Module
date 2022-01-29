@@ -7,6 +7,8 @@ namespace Tests;
 use Battle\Container\Container;
 use Battle\Container\ContainerException;
 use Battle\Container\ContainerInterface;
+use Battle\Result\Chat\Chat;
+use Battle\Result\Chat\ChatInterface;
 use Battle\Translation\Translation;
 use PHPUnit\Framework\TestCase;
 
@@ -22,5 +24,15 @@ abstract class AbstractUnitTest extends TestCase
         $container = new Container();
         $container->set(Translation::class, $translation);
         return $container;
+    }
+
+    protected function getChat(): ChatInterface
+    {
+        return new Chat();
+    }
+
+    protected function getChatRu(): ChatInterface
+    {
+        return new Chat(new Translation('ru'));
     }
 }
