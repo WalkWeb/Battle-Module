@@ -429,7 +429,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
 
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ALIVE_ENEMY);
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -454,7 +454,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
 
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ALIVE_ENEMY);
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 

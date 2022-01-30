@@ -184,7 +184,7 @@ class DamageActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
 
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ALIVE_ENEMY);
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         $action->handle();
 

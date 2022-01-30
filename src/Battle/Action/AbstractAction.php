@@ -244,7 +244,7 @@ abstract class AbstractAction implements ActionInterface
                     $units->add($unit);
                 }
                 return $units;
-            case self::TARGET_ALL_ALIVE_ENEMY:
+            case self::TARGET_ALL_ENEMY:
                 return $this->enemyCommand->getAllAliveUnits();
         }
 

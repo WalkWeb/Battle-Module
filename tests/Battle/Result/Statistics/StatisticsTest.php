@@ -108,7 +108,7 @@ class StatisticsTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
 
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ALIVE_ENEMY);
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         $action->handle();
 
@@ -315,7 +315,7 @@ class StatisticsTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
 
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ALIVE_ENEMY, 1000);
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY, 1000);
 
         $action->handle();
 
