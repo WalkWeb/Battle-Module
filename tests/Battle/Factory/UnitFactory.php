@@ -15,6 +15,7 @@ use Exception;
 class UnitFactory
 {
     private static $units = [
+        // Warrior
         1  => [
             'id'           => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',
             'name'         => 'unit_1',
@@ -71,6 +72,7 @@ class UnitFactory
             'class'        => 1,
             'race'         => 1,
         ],
+        // Priest
         5  => [
             'id'           => '46d969c1-463b-42b1-a2e0-2c64a8c34ae1',
             'name'         => 'unit_5',
