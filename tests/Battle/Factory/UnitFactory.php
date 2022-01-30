@@ -393,6 +393,21 @@ class UnitFactory
             'class'        => null,
             'race'         => 10,
         ],
+        // Босс Warden
+        27 => [
+            'id'           => 'e53b7edd-a4b5-49c4-81a2-050a1b7ecbea',
+            'name'         => 'Warden',
+            'level'        => 5,
+            'avatar'       => '/images/avas/bosses/011.png',
+            'damage'       => 40,
+            'attack_speed' => 1,
+            'life'         => 300,
+            'total_life'   => 300,
+            'melee'        => true,
+            'command'      => 2,
+            'class'        => 50,
+            'race'         => 9,
+        ],
     ];
 
     /**

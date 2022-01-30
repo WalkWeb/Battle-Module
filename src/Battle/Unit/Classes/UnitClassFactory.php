@@ -6,6 +6,7 @@ namespace Battle\Unit\Classes;
 
 use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\ChatInterface;
+use Battle\Unit\Classes\Bosses\Warden;
 use Battle\Unit\Classes\Demon\Succubus;
 use Battle\Unit\Classes\Dwarf\Alchemist;
 use Battle\Unit\Classes\Human\Priest;
@@ -25,6 +26,10 @@ class UnitClassFactory
         5   => Titan::class,
         6   => Alchemist::class,
         7   => Succubus::class,
+
+        // bosses
+        50  => Warden::class,
+
         100 => IncorrectUnitClassForTest::class,
     ];
 
