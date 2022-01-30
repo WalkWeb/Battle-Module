@@ -85,6 +85,96 @@ class ScenarioTest extends AbstractUnitTest
     /**
      * @throws Exception
      */
+    public function testScenarioAddMultipleDamage(): void
+    {
+        $statistic = new Statistic();
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+        $thirdEnemyUnit = UnitFactory::createByTemplate(4);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
+
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ALIVE_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        $scenario = new Scenario();
+        $scenario->addAnimation($action, $statistic);
+
+        $expectedData = [
+            'step'    => 1,
+            'attack'  => 1,
+            'effects' => [
+                [
+                    'user_id'        => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',
+                    'class'          => 'd_attack',
+                    'unit_cons_bar2' => 0,
+                    'unit_rage_bar2' => 0,
+                    'unit_effects'   => [],
+                    'targets'        => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => '1aab367d-37e8-4544-9915-cb3d7779308b',
+                            'class'             => 'd_red',
+                            'hp'                => 230,
+                            'thp'               => 250,
+                            'hp_bar_class'      => 'unit_hp_bar',
+                            'hp_bar_class2'     => 'unit_hp_bar2',
+                            'recdam'            => '-20',
+                            'unit_hp_bar_width' => 92,
+                            'unit_cons_bar2'    => 10,
+                            'unit_rage_bar2'    => 7,
+                            'ava'               => 'unit_ava_red',
+                            'avas'              => 'unit_ava_blank',
+                            'unit_effects'      => [],
+                        ],
+                        [
+                            'type'              => 'change',
+                            'user_id'           => '72df87f5-b3a7-4574-9526-45a20aa77119',
+                            'class'             => 'd_red',
+                            'hp'                => 100,
+                            'thp'               => 120,
+                            'hp_bar_class'      => 'unit_hp_bar',
+                            'hp_bar_class2'     => 'unit_hp_bar2',
+                            'recdam'            => '-20',
+                            'unit_hp_bar_width' => 83,
+                            'unit_cons_bar2'    => 10,
+                            'unit_rage_bar2'    => 7,
+                            'ava'               => 'unit_ava_red',
+                            'avas'              => 'unit_ava_blank',
+                            'unit_effects'      => [],
+                        ],
+                        [
+                            'type'              => 'change',
+                            'user_id'           => 'c310ce86-7bb2-44b0-b634-ea0d28fb1180',
+                            'class'             => 'd_red',
+                            'hp'                => 0,
+                            'thp'               => 20,
+                            'hp_bar_class'      => 'unit_hp_bar',
+                            'hp_bar_class2'     => 'unit_hp_bar2',
+                            'recdam'            => '-20',
+                            'unit_hp_bar_width' => 0,
+                            'unit_cons_bar2'    => 10,
+                            'unit_rage_bar2'    => 7,
+                            'ava'               => 'unit_ava_red',
+                            'avas'              => 'unit_ava_dead',
+                            'unit_effects'      => [],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
+    }
+
+    /**
+     * @throws Exception
+     */
     public function testScenarioAddEffectDamage(): void
     {
         $container = new Container();

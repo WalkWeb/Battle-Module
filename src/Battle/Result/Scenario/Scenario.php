@@ -61,7 +61,7 @@ class Scenario implements ScenarioInterface
                 'thp'               => $targetUnit->getTotalLife(),
                 'hp_bar_class'      => 'unit_hp_bar',
                 'hp_bar_class2'     => 'unit_hp_bar2',
-                'recdam'            => '-' . $action->getFactualPower(),
+                'recdam'            => '-' . $action->getFactualPowerByUnit($targetUnit->getId()),
                 'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
                 'unit_cons_bar2'    => $this->getConcentrationBarWidth($targetUnit),
                 'unit_rage_bar2'    => $this->getRageBarWidth($targetUnit),
@@ -101,7 +101,7 @@ class Scenario implements ScenarioInterface
                 'type'              => 'change',
                 'user_id'           => $targetUnit->getId(),
                 'ava'               => 'unit_ava_effect_damage',
-                'recdam'            => '-' . $action->getFactualPower(),
+                'recdam'            => '-' . $action->getFactualPowerByUnit($targetUnit->getId()),
                 'hp'                => $targetUnit->getLife(),
                 'thp'               => $targetUnit->getTotalLife(),
                 'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
@@ -136,7 +136,7 @@ class Scenario implements ScenarioInterface
                 'type'              => 'change',
                 'user_id'           => $targetUnit->getId(),
                 'ava'               => 'unit_ava_green',
-                'recdam'            => '+' . $action->getFactualPower(),
+                'recdam'            => '+' . $action->getFactualPowerByUnit($targetUnit->getId()),
                 'hp'                => $targetUnit->getLife(),
                 'thp'               => $targetUnit->getTotalLife(),
                 'hp_bar_class'      => 'unit_hp_bar',
@@ -175,7 +175,7 @@ class Scenario implements ScenarioInterface
                 'type'              => 'change',
                 'user_id'           => $action->getActionUnit()->getId(),
                 'ava'               => 'unit_ava_green',
-                'recdam'            => '+' . $action->getFactualPower(),
+                'recdam'            => '+' . $action->getFactualPowerByUnit($targetUnit->getId()),
                 'hp'                => $targetUnit->getLife(),
                 'thp'               => $targetUnit->getTotalLife(),
                 'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
@@ -244,7 +244,7 @@ class Scenario implements ScenarioInterface
      */
     private function effect(EffectAction $action, StatisticInterface $statistic): void
     {
-        // Временно, с.м. комментарий выше
+        // TODO Реализация применения эффекта на несколько целей сразу пока не реализована
         $targetUnit = $action->getTargetUnits()[0];
 
         $this->scenario[] = [
