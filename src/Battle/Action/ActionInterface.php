@@ -34,6 +34,8 @@ interface ActionInterface
     public const TARGET_DEAD_ALLIES           = 7;
     // Применяет событие на всех живых противников (для массовой атаки по всем врагам)
     public const TARGET_ALL_ENEMY             = 8;
+    // TODO Применяет событие на всех раненых (но живых) союзников (для массового лечения по своим)
+    // TODO TARGET_ALL_WOUNDED_ALLIES    = 9;
 
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 

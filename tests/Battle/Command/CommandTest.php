@@ -634,6 +634,25 @@ class CommandTest extends AbstractUnitTest
     }
 
     /**
+     * @throws CommandException
+     * @throws UnitException
+     * @throws UnitFactoryException
+     */
+    public function testCommandGetAllWoundedUnits(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $deadUnit = UnitFactory::createByTemplate(10);
+        $woundedUnit = UnitFactory::createByTemplate(11);
+
+        $command = CommandFactory::create([$unit, $deadUnit, $woundedUnit]);
+
+        $expected = new UnitCollection();
+        $expected->add($woundedUnit);
+
+        self::assertEquals($expected, $command->getAllWoundedUnits());
+    }
+
+    /**
      * @return array
      */
     public function unitDataProvider(): array

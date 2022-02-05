@@ -91,7 +91,14 @@ interface CommandInterface
      * @return UnitCollection
      */
     public function getAllAliveUnits(): UnitCollection;
-    
+
+    /**
+     * Возвращает всех раненых (но живых) юнитов в команде
+     *
+     * @return UnitCollection
+     */
+    public function getAllWoundedUnits(): UnitCollection;
+
     /**
      * Возвращает коллекцию юнитов данной команды
      *

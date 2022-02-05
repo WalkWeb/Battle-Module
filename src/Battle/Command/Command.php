@@ -166,6 +166,25 @@ class Command implements CommandInterface
     }
 
     /**
+     * Возвращает всех раненых юнитов в команде
+     *
+     * @return UnitCollection
+     * @throws UnitException
+     */
+    public function getAllWoundedUnits(): UnitCollection
+    {
+        $units = new UnitCollection();
+
+        foreach ($this->units as $unit) {
+            if ($unit->isAlive() && $unit->getLife() < $unit->getTotalLife()) {
+                $units->add($unit);
+            }
+        }
+
+        return $units;
+    }
+
+    /**
      * Возвращает случайного юнита, готового совершить действие
      *
      * @return UnitInterface|null
