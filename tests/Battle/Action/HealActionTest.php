@@ -254,6 +254,37 @@ class HealActionTest extends AbstractUnitTest
     }
 
     /**
+     * @throws Exception
+     */
+    public function testHealActionTargetAllWoundedAllies(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $slightlyWoundedUnit = UnitFactory::createByTemplate(9);
+        $badlyWoundedUnit = UnitFactory::createByTemplate(11);
+        $deadUnit =  UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+
+        $command = CommandFactory::create([$unit, $slightlyWoundedUnit, $badlyWoundedUnit, $deadUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $power = 50;
+        $oldLife = $badlyWoundedUnit->getLife();
+
+        $action = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_ALL_WOUNDED_ALLIES, $power);
+
+        $action->handle();
+
+        // Слегка раненый юнит становится полностью здоровым
+        self::assertEquals($slightlyWoundedUnit->getTotalLife(), $slightlyWoundedUnit->getLife());
+
+        // Сильно раненый юнит восстанавливает здоровье
+        self::assertEquals($oldLife + $power, $badlyWoundedUnit->getLife());
+
+        // Проверяем, что мертвый юнит остался мертвым
+        self::assertFalse($deadUnit->isAlive());
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $command
      * @param CommandInterface $enemyCommand
