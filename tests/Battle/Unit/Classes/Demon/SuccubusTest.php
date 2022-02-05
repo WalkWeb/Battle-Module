@@ -7,9 +7,11 @@ namespace Tests\Battle\Unit\Classes\Demon;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
+use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Effect\PoisonAbility;
+use Battle\Unit\Ability\Heal\GeneralHealAbility;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
@@ -39,16 +41,32 @@ class SuccubusTest extends AbstractUnitTest
 
         $abilities = $succubus->getAbilities($unit);
 
-        foreach ($abilities as $ability) {
-            self::assertContainsOnlyInstancesOf(PoisonAbility::class, [$ability]);
+        foreach ($abilities as $i => $ability) {
 
-            $actions = $ability->getAction($enemyCommand, $command);
+            if ($i === 0) {
+                self::assertContainsOnlyInstancesOf(PoisonAbility::class, [$ability]);
 
-            foreach ($actions as $action) {
-                self::assertEquals(
-                    $this->createEffect($unit, $enemyCommand, $command),
-                    $action->getEffect()
-                );
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertEquals(
+                        $this->createEffect($unit, $enemyCommand, $command),
+                        $action->getEffect()
+                    );
+                }
+            }
+
+            if ($i === 1) {
+                self::assertContainsOnlyInstancesOf(GeneralHealAbility::class, [$ability]);
+
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertEquals(
+                        $this->createHeal($unit, $enemyCommand, $command),
+                        $action
+                    );
+                }
             }
         }
     }
@@ -59,8 +77,9 @@ class SuccubusTest extends AbstractUnitTest
     public function testSuccubusReadyAbility(): void
     {
         $unit = UnitFactory::createByTemplate(23);
+        $woundedUnit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
+        $command = CommandFactory::create([$unit, $woundedUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         for ($i = 0; $i < 30; $i++) {
@@ -111,5 +130,24 @@ class SuccubusTest extends AbstractUnitTest
         ];
 
         return $effectFactory->create($data);
+    }
+
+    private function createHeal(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command
+    ): ActionInterface
+    {
+        return new HealAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_ALL_WOUNDED_ALLIES,
+            (int)($unit->getDamage() * 1.2),
+            'General Heal',
+            HealAction::UNIT_ANIMATION_METHOD,
+            HealAction::ABILITY_MESSAGE_METHOD,
+            '/images/icons/ability/452.png'
+        );
     }
 }
