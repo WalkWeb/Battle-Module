@@ -105,6 +105,8 @@ class GreatHealAbilityTest extends AbstractUnitTest
     /**
      * Тест на формирование сообщения о лечении на русском
      *
+     * TODO Проверку можно сделать в рамках testGreatHealAbilityCreateAndApply()
+     *
      * @throws Exception
      */
     public function testGreatHealAbilityMessageRu(): void

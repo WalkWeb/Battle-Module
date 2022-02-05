@@ -48,6 +48,7 @@ return [
     'Healing Potion'                   => 'Healing Potion',
     'Back to Life'                     => 'Back to Life',
     'Hellfire'                         => 'Hellfire',
+    'General Heal'                     => 'General Heal',
     // Statistics
     'Statistics'                       => 'Statistics',
     'Unit'                             => 'Unit',

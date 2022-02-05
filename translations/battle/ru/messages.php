@@ -34,6 +34,10 @@ return [
     'summon'                           => 'призвал',
     'and'                              => 'и',
     // Ability
+    'Imp'                              => 'Беса', // в сформированном сообщении будет "призвал Беса"
+    'Skeleton'                         => 'Скелета',
+    'Skeleton Mage'                    => 'Скелета-мага',
+    'Fire Elemental'                   => 'Элементаля огня',
     'Great Heal'                       => 'Сильное Лечение',
     'Reserve Forces'                   => 'Резервные Силы',
     'Battle Fury'                      => 'Ярость битвы',
@@ -42,11 +46,7 @@ return [
     'Healing Potion'                   => 'Лечебное зелье',
     'Back to Life'                     => 'Возвращение к жизни',
     'Hellfire'                         => 'Адское пламя',
-    // Summon Ability
-    'Imp'                              => 'Беса', // в сформированном сообщении будет "призвал Беса"
-    'Skeleton'                         => 'Скелета',
-    'Skeleton Mage'                    => 'Скелета-мага',
-    'Fire Elemental'                   => 'Элементаля огня',
+    'General Heal'                     => 'Общее исцеление',
     // Statistics
     'Statistics'                       => 'Статистика',
     'Unit'                             => 'Кто',
