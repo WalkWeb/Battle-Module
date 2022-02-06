@@ -246,6 +246,8 @@ abstract class AbstractAction implements ActionInterface
                 return $units;
             case self::TARGET_ALL_ENEMY:
                 return $this->enemyCommand->getAllAliveUnits();
+                // TODO Из-за особенностей логики в EffectAction этот вариант по сути не используется
+                // TODO Возможно имеет смысл и вовсе удалить
             case self::TARGET_ALL_WOUNDED_ALLIES:
                 return $this->alliesCommand->getAllWoundedUnits();
         }

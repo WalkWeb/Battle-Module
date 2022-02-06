@@ -49,6 +49,7 @@ return [
     'Back to Life'                     => 'Back to Life',
     'Hellfire'                         => 'Hellfire',
     'General Heal'                     => 'General Heal',
+    'Incineration'                     => 'Incineration',
     // Statistics
     'Statistics'                       => 'Statistics',
     'Unit'                             => 'Unit',

@@ -47,6 +47,7 @@ return [
     'Back to Life'                     => 'Возвращение к жизни',
     'Hellfire'                         => 'Адское пламя',
     'General Heal'                     => 'Общее исцеление',
+    'Incineration'                     => 'Испепеление',
     // Statistics
     'Statistics'                       => 'Статистика',
     'Unit'                             => 'Кто',

@@ -64,7 +64,7 @@ class EffectAction extends AbstractAction
      */
     public function handle(): void
     {
-        if (count($this->targetUnits) === 0) {
+        if ($this->targetUnits === null || count($this->targetUnits) === 0) {
             throw new ActionException(ActionException::NO_TARGET_FOR_EFFECT);
         }
 
@@ -84,7 +84,7 @@ class EffectAction extends AbstractAction
     }
 
     /**
-     * Проверки специально сделаны двумя отдельными if, чтобы покрытие тестов проверяло покрытиями тестами два варианта
+     * Логика будет разной для применения эффекта на всю вражескую команду, всю свою команду, и на одну цель
      *
      * @return bool
      * @throws ActionException
@@ -92,23 +92,34 @@ class EffectAction extends AbstractAction
      */
     public function canByUsed(): bool
     {
+        // Если эффект применяется на всю вражескую команду
+        if ($this->typeTarget === self::TARGET_ALL_ENEMY) {
+
+            // Цели для такого события - все живые противники
+            // Это необходимо для того, чтобы юниты с имеющимся эффектом все равно получили эффект и обновили его длительность
+            $this->targetUnits = $this->enemyCommand->getAllAliveUnits();
+
+            // Но проверка на необходимость применения события делается по наличию юнитов без эффекта (хотя бы одного)
+            $targets = $this->enemyCommand->getUnitsForEffect($this->effect);
+
+            // Т.е. проверяется использования способности по хотя бы одной цели без эффекта, а применяется уже событие
+            // по всем живым целям в команде
+
+            return count($targets) > 0;
+        }
+
+        // TODO Эффект на всю свою команду - пока нет такого эффекта, чтобы покрыть данный код тестами
+
+        // Если эффект применяется на одну цель
         $this->targetUnits = $this->searchTargetUnits($this);
 
-        if (count($this->targetUnits) === 0) {
-            return false;
-        }
-
-        // Action может быть использован если есть хотя бы одна цель для использования
-        // Как происходит проверка - проходим по всем юнитам, если эффект есть - добавляем в массив 0
-        // Если эффекта нет - добавляем 1
-        // И в финале проверяем сумму значений на больше 0 - если больше - значит есть цели для эффекта
-        $effectSum = [];
-
         foreach ($this->targetUnits as $targetUnit) {
-            $effectSum[] = $targetUnit->getEffects()->exist($this->effect) ? 0 : 1;
+            if ($targetUnit->isAlive() && !$targetUnit->getEffects()->exist($this->effect)) {
+                return true;
+            }
         }
 
-        return array_sum($effectSum) > 0;
+        return false;
     }
 
     public function getAnimationMethod(): string
