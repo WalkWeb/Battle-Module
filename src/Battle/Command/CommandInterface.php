@@ -77,6 +77,18 @@ interface CommandInterface
     public function getUnitForEffect(EffectInterface $effect): ?UnitInterface;
 
     /**
+     * Возвращает всех живых юнитов в команде не имеющих указанного эффекта
+     *
+     * Метод необходимо для применения эффекта на всю команду. Но важно учитывать, что этим методом проверяется, может
+     * ли способность быть использована (имеет ли смысл её использовать), а вот применяться она будет по всем живым
+     * юнитам в команде - чтобы у тех юнитов, у которых эффект уже есть - он обновил длительность
+     *
+     * @param EffectInterface $effect
+     * @return UnitCollection
+     */
+    public function getUnitsForEffect(EffectInterface $effect): UnitCollection;
+
+    /**
      * Возвращает случайного мертвого юнита в команде
      *
      * Если все живы - возвращает null

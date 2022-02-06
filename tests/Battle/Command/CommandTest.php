@@ -10,7 +10,6 @@ use Battle\Action\EffectAction;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
-use Battle\Unit\UnitException;
 use Exception;
 use Battle\Battle;
 use Battle\Container\Container;
@@ -24,7 +23,6 @@ use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\Mock\UnitMockFactory;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
-use Tests\Battle\Factory\UnitFactoryException;
 
 class CommandTest extends AbstractUnitTest
 {
@@ -551,8 +549,6 @@ class CommandTest extends AbstractUnitTest
     }
 
     /**
-     * @throws CommandException
-     * @throws UnitException
      * @throws Exception
      */
     public function testGetUnitForHealNull(): void
@@ -572,8 +568,7 @@ class CommandTest extends AbstractUnitTest
      * @dataProvider unitDataProvider
      * @param array $data
      * @param string $unitIdForHeal
-     * @throws CommandException
-     * @throws UnitException
+     * @throws Exception
      */
     public function testGetMostWoundedUnitForHeal(array $data, string $unitIdForHeal): void
     {
@@ -616,9 +611,7 @@ class CommandTest extends AbstractUnitTest
     }
 
     /**
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testCommandGetAllAliveUnits(): void
     {
@@ -634,9 +627,7 @@ class CommandTest extends AbstractUnitTest
     }
 
     /**
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testCommandGetAllWoundedUnits(): void
     {
@@ -650,6 +641,40 @@ class CommandTest extends AbstractUnitTest
         $expected->add($woundedUnit);
 
         self::assertEquals($expected, $command->getAllWoundedUnits());
+    }
+
+    /**
+     * Тест на получение всех живых юнитов не имеющих указанного эффекта
+     *
+     * @throws Exception
+     */
+    public function testCommandGetUnitsForEffect(): void
+    {
+        $unit = UnitFactory::createByTemplate(2);
+        $otherUnit = UnitFactory::createByTemplate(3);
+        $deadUnit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit, $otherUnit, $deadUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $effect = $this->createEffect($unit, $command, $enemyCommand);
+
+        $action = $this->createEffectAction($effect, $unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ALLIES);
+
+        // Вначале мы получаем двух юнитов не имеющих эффекта
+        self::assertCount(2, $command->getUnitsForEffect($effect));
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // А после применения - одного
+        self::assertCount(1, $command->getUnitsForEffect($effect));
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Применив еще раз - целей для эффекта не осталось
+        self::assertCount(0, $command->getUnitsForEffect($effect));
     }
 
     /**
@@ -768,20 +793,22 @@ class CommandTest extends AbstractUnitTest
      * @param UnitInterface $unit
      * @param CommandInterface $command
      * @param CommandInterface $enemyCommand
+     * @param int $typeTarget
      * @return ActionInterface
      */
     private function createEffectAction(
         EffectInterface $effect,
         UnitInterface $unit,
         CommandInterface $command,
-        CommandInterface $enemyCommand
+        CommandInterface $enemyCommand,
+        int $typeTarget = ActionInterface::TARGET_SELF
     ): ActionInterface
     {
         return new EffectAction(
             $unit,
             $enemyCommand,
             $command,
-            EffectAction::TARGET_SELF,
+            $typeTarget,
             'effect',
             'icon.png',
             $effect

@@ -240,8 +240,23 @@ class Command implements CommandInterface
     }
 
     /**
+     * @param EffectInterface $effect
      * @return UnitCollection
+     * @throws UnitException
      */
+    public function getUnitsForEffect(EffectInterface $effect): UnitCollection
+    {
+        $units = new UnitCollection();
+
+        foreach ($this->units as $unit) {
+            if ($unit->isAlive() && !$unit->getEffects()->exist($effect)) {
+                $units->add($unit);
+            }
+        }
+
+        return $units;
+    }
+
     public function getUnits(): UnitCollection
     {
         return $this->units;
