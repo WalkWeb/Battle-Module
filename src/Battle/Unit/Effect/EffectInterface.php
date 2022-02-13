@@ -87,6 +87,12 @@ interface EffectInterface
      * другого эффекта, а юнит умер до того, как эффект закончился
      *
      * @param UnitInterface $unit
+     * @return EffectInterface
      */
-    public function changeActionUnit(UnitInterface $unit): void;
+    public function changeActionUnit(UnitInterface $unit): EffectInterface;
+
+    /**
+     * @return mixed
+     */
+    public function __clone();
 }

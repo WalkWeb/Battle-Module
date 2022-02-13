@@ -8,6 +8,8 @@ use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
+use Battle\Action\DamageAction;
+use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectFactory;
@@ -16,6 +18,7 @@ use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\BaseFactory;
+use Tests\Battle\Factory\UnitFactory;
 
 class EffectTest extends AbstractUnitTest
 {
@@ -62,29 +65,64 @@ class EffectTest extends AbstractUnitTest
         $effect = $this->createEffect($unit, $command, $enemyCommand);
 
         foreach ($effect->getOnApplyActions() as $action) {
-            self::assertEquals($unit, $action->getActionUnit());
+            self::assertEquals($unit->getId(), $action->getActionUnit()->getId());
         }
 
         foreach ($effect->getOnNextRoundActions() as $action) {
-            self::assertEquals($unit, $action->getActionUnit());
+            self::assertEquals($unit->getId(), $action->getActionUnit()->getId());
         }
 
         foreach ($effect->getOnDisableActions() as $action) {
-            self::assertEquals($unit, $action->getActionUnit());
+            self::assertEquals($unit->getId(), $action->getActionUnit()->getId());
         }
 
-        $effect->changeActionUnit($enemyUnit);
+        $effect = $effect->changeActionUnit($enemyUnit);
 
         foreach ($effect->getOnApplyActions() as $action) {
-            self::assertEquals($enemyUnit, $action->getActionUnit());
+            self::assertEquals($enemyUnit->getId(), $action->getActionUnit()->getId());
         }
 
         foreach ($effect->getOnNextRoundActions() as $action) {
-            self::assertEquals($enemyUnit, $action->getActionUnit());
+            self::assertEquals($enemyUnit->getId(), $action->getActionUnit()->getId());
         }
 
         foreach ($effect->getOnDisableActions() as $action) {
-            self::assertEquals($enemyUnit, $action->getActionUnit());
+            self::assertEquals($enemyUnit->getId(), $action->getActionUnit()->getId());
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testEffectChangeMultipleActionUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit, $secondaryEnemyUnit]);
+
+        $action = $this->createIncinerationAction($unit, $enemyCommand, $command);
+
+        // До применения эффекта на противника Action которые будут применяться от эффекта имеют ActionUnit создателя
+        foreach ($action->getEffect()->getOnNextRoundActions() as $nextRoundAction) {
+            self::assertEquals($unit, $nextRoundAction->getActionUnit());
+        }
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // После применения эффекта все Action от эффектов привязаны к своим родительским юнитам
+        foreach ($enemyUnit->getEffects() as $effect) {
+            foreach ($effect->getOnNextRoundActions() as $nextRoundAction) {
+                self::assertEquals($enemyUnit->getId(), $nextRoundAction->getActionUnit()->getId());
+            }
+        }
+
+        foreach ($secondaryEnemyUnit->getEffects() as $effect) {
+            foreach ($effect->getOnNextRoundActions() as $nextRoundAction) {
+                self::assertEquals($secondaryEnemyUnit->getId(), $nextRoundAction->getActionUnit()->getId());
+            }
         }
     }
 
@@ -95,10 +133,12 @@ class EffectTest extends AbstractUnitTest
      * @return EffectInterface
      * @throws Exception
      */
-    private function createEffect(UnitInterface $unit, CommandInterface $command, CommandInterface $enemyCommand): EffectInterface
+    private function createEffect(
+        UnitInterface $unit,
+        CommandInterface $command,
+        CommandInterface $enemyCommand
+    ): EffectInterface
     {
-
-
         $factory = new EffectFactory(new ActionFactory());
 
         $data = [
@@ -135,5 +175,53 @@ class EffectTest extends AbstractUnitTest
         ];
 
         return $factory->create($data);
+    }
+
+    /**
+     * @param UnitInterface $actionUnit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @return ActionInterface
+     * @throws Exception
+     */
+    private function createIncinerationAction(
+        UnitInterface $actionUnit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command
+    ): ActionInterface
+    {
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $actionUnit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_ALL_ENEMY,
+            'name'           => 'Incineration',
+            'icon'           => '/images/icons/ability/232.png',
+            'message_method' => 'applyEffect',
+            'effect'         => [
+                'name'                  => 'Incineration',
+                'icon'                  => '/images/icons/ability/232.png',
+                'duration'              => 8,
+                'on_apply_actions'      => [],
+                'on_next_round_actions' => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'action_unit'      => $actionUnit,
+                        'enemy_command'    => $enemyCommand,
+                        'allies_command'   => $command,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'name'             => 'Incineration',
+                        'power'            => 6,
+                        'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                        'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                        'icon'             => '/images/icons/ability/232.png',
+                    ],
+                ],
+                'on_disable_actions'    => [],
+            ],
+        ];
+
+        return (new ActionFactory())->create($data);
     }
 }

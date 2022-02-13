@@ -80,7 +80,7 @@ class EffectAction extends AbstractAction
 
     public function getEffect(): EffectInterface
     {
-        return $this->effect;
+        return clone $this->effect;
     }
 
     /**

@@ -38,8 +38,7 @@ class EffectCollection implements Iterator, Countable
      */
     public function add(EffectInterface $effect): ActionCollection
     {
-        // Теперь эффект (а точнее его Actions) будет срабатывать от лица юнита, на который он наложен
-        $effect->changeActionUnit($this->parentUnit);
+        $effect = $effect->changeActionUnit($this->parentUnit);
 
         $onApplyActionCollection = new ActionCollection();
 

@@ -19,7 +19,10 @@ class ActionCollection implements Iterator, Countable
 
     public function add(ActionInterface $action): void
     {
-        $this->elements[] = $action;
+        // TODO Так работает тест testEffectChangeMultipleActionUnit, но падают другие
+        $this->elements[] = clone $action;
+        // TODO А так все тесты выполняются, но падает testEffectChangeMultipleActionUnit
+        //$this->elements[] = $action;
     }
 
     public function current(): ActionInterface
@@ -30,7 +33,7 @@ class ActionCollection implements Iterator, Countable
     public function addCollection(ActionCollection $collection): void
     {
         foreach ($collection as $action) {
-            $this->elements[] = $action;
+            $this->add($action);
         }
     }
 }

@@ -158,4 +158,27 @@ class ActionTest extends AbstractUnitTest
 
         self::assertEquals($enemyUnit, $action->getActionUnit());
     }
+
+    /**
+     * Тест проверяет, что у Action корректно работает clone и смена ActionUnit - юнит меняется только там, где и был
+     * изменен
+     *
+     * @throws Exception
+     */
+    public function testActionCloneChangeActionUnit(): void
+    {
+        [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(1, 2);
+
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $cloneAction = clone $action;
+
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals($unit, $cloneAction->getActionUnit());
+
+        $action->changeActionUnit($enemyUnit);
+
+        self::assertEquals($enemyUnit, $action->getActionUnit());
+        self::assertEquals($unit, $cloneAction->getActionUnit());
+    }
 }
