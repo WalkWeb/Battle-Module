@@ -53,8 +53,8 @@ class ChatTest extends AbstractUnitTest
     private const EFFECT_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> received damage on 10 life from effect <span class="ability">Poison</span>';
     private const EFFECT_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> получил урон на 10 здоровья от эффекта <span class="ability">Отравление</span>';
 
-    // TODO В текущих способностях сообщение от BuffAction не формируется, оно формируется через EffectAction
-    // TODO По этому текущие сообщения выглядят кривовато
+    // В текущих способностях сообщение от BuffAction не формируется, оно формируется через EffectAction
+    // По этому это сообщение выглядит кривовато, но это нормально
     private const BUFF_EN = '<span style="color: #1e72e3">unit_1</span> Reserve Forces';
     private const BUFF_RU = '<span style="color: #1e72e3">unit_1</span> Резервные Силы';
 

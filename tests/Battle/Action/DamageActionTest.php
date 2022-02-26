@@ -51,17 +51,21 @@ class DamageActionTest extends AbstractUnitTest
     public function testDamageActionApplyUnit(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $defendUnit = UnitFactory::createByTemplate(2);
-        $defendCommand = CommandFactory::create([$defendUnit]);
-        $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$enemyUnit]);
+        $enemyCommand = CommandFactory::create([$unit]);
+        $action = new DamageAction($unit, $command, $enemyCommand, DamageAction::TARGET_RANDOM_ENEMY);
         $action->handle();
 
         self::assertEquals(20, $action->getPower());
         self::assertEquals(20, $action->getFactualPower());
-        self::assertEquals(20, $action->getFactualPowerByUnit($defendUnit->getId()));
-        self::assertEquals($unit->getName(), $action->getActionUnit()->getName());
-        self::assertEquals($defendUnit->getName(), $action->getTargetUnits()[0]->getName());
+        self::assertEquals(20, $action->getFactualPowerByUnit($enemyUnit->getId()));
+        self::assertEquals($unit->getId(), $action->getActionUnit()->getId());
+        self::assertCount(1, $action->getTargetUnits());
+
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            self::assertEquals($enemyUnit->getId(), $targetUnit->getId());
+        }
     }
 
     /**
@@ -173,6 +177,8 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на нанесение урона сразу всей вражеской команде
+     *
      * @throws Exception
      */
     public function testDamageActionTargetAllAliveEnemy(): void
@@ -191,7 +197,5 @@ class DamageActionTest extends AbstractUnitTest
         // Проверяем, что урон нанесен по обоим юнитам
         self::assertEquals($firstEnemyUnit->getTotalLife() - $unit->getDamage(), $firstEnemyUnit->getLife());
         self::assertEquals($secondaryEnemyUnit->getTotalLife() - $unit->getDamage(), $secondaryEnemyUnit->getLife());
-
-        // TODO Когда будет доработано создание сообщения по множеству целей - нужно будет доработать тест
     }
 }

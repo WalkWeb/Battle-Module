@@ -250,11 +250,8 @@ class Chat implements ChatInterface
      */
     private function applyEffect(ActionInterface $action): string
     {
-        // TODO Необходимо доработать и уйти от временного костыля, когда к UnitCollection можно обращаться как к массиву
-        $targetUnit = $action->getTargetUnits()[0];
-
         // Если цель у эффекта одна, и эта цель сам юнит - сообщение нужно формировать по другому
-        if (count($action->getTargetUnits()) === 1 && $action->getActionUnit()->getId() === $targetUnit->getId()) {
+        if ($this->isApplySelf($action)) {
             return
                 // Unit
                 '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
@@ -384,5 +381,35 @@ class Chat implements ChatInterface
         unset($names[$count - 1]);
 
         return implode(', ', $names) . ' ' . $this->translation->trans('and') . ' ' . $last;
+    }
+
+    /**
+     * @param ActionInterface $action
+     * @return bool
+     * @throws ActionException
+     */
+    private function isApplySelf(ActionInterface $action): bool
+    {
+        if (count($action->getTargetUnits()) > 1) {
+            return false;
+        }
+
+        /*
+         * Можно написать проще:
+         *
+         * foreach ($action->getTargetUnits() as $targetUnit) {
+         *    return $targetUnit->getId() === $action->getActionUnit()->getId();
+         * }
+         *
+         * Но IDE ругается на такой foreach как на ошибку. По этому написан более сложный вариант.
+         */
+
+        $target = null;
+
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            $target =  $targetUnit;
+        }
+
+        return $target->getId() === $action->getActionUnit()->getId();
     }
 }

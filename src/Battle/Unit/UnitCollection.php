@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
-use ArrayAccess;
-use Battle\Traits\ArrayAccessTrait;
 use Battle\Traits\CollectionTrait;
 use Countable;
 use Iterator;
 
-class UnitCollection implements Iterator, Countable, ArrayAccess
+class UnitCollection implements Iterator, Countable
 {
     use CollectionTrait;
-    use ArrayAccessTrait;
 
     /**
      * @var UnitInterface[]
