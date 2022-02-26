@@ -529,7 +529,74 @@ class ScenarioTest extends AbstractUnitTest
         self::assertEquals($expectedData, $scenario->getArray());
     }
 
-    // TODO testScenarioAddMultipleEffect
+    /**
+     * Тест на формирование сценария при применении эффекта сразу всей команде
+     *
+     * @throws Exception
+     */
+    public function testScenarioAddMultipleEffect(): void
+    {
+        $statistic = new Statistic();
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $otherEnemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit, $otherEnemyUnit]);
+
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, ActionInterface::TARGET_ALL_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        $scenario = new Scenario();
+        $scenario->addAnimation($action, $statistic);
+
+        $expectedData = [
+            'step'    => 1,
+            'attack'  => 1,
+            'effects' =>
+                [
+                    [
+                        'user_id'        => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',
+                        'class'          => 'd_buff',
+                        'hp'             => 100,
+                        'thp'            => 100,
+                        'unit_cons_bar2' => 0,
+                        'unit_rage_bar2' => 0,
+                        'unit_effects'   => [],
+                        'targets'        => [
+                            [
+                                'type'         => 'change',
+                                'user_id'      => '1aab367d-37e8-4544-9915-cb3d7779308b',
+                                'hp'           => 325,
+                                'thp'          => 325,
+                                'unit_effects' => [
+                                    [
+                                        'icon'     => 'images/icons/ability/156.png',
+                                        'duration' => '8',
+                                    ],
+                                ],
+                            ],
+                            [
+                                'type'         => 'change',
+                                'user_id'      => '72df87f5-b3a7-4574-9526-45a20aa77119',
+                                'hp'           => 156,
+                                'thp'          => 156,
+                                'unit_effects' => [
+                                    [
+                                        'icon'     => 'images/icons/ability/156.png',
+                                        'duration' => '8',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+        ];
+
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
+    }
 
     /**
      * @throws Exception
@@ -744,6 +811,7 @@ class ScenarioTest extends AbstractUnitTest
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
+     * @param int $target
      * @return ActionInterface
      * @throws Exception
      */
@@ -773,7 +841,7 @@ class ScenarioTest extends AbstractUnitTest
                         'action_unit'    => $unit,
                         'enemy_command'  => $enemyCommand,
                         'allies_command' => $command,
-                        'type_target'    => $target,
+                        'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'use Reserve Forces',
                         'modify_method'  => 'multiplierMaxLife',
                         'power'          => 130,

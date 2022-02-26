@@ -244,8 +244,17 @@ class Scenario implements ScenarioInterface
      */
     private function effect(EffectAction $action, StatisticInterface $statistic): void
     {
-        // TODO Реализация применения эффекта на несколько целей сразу пока не реализована
-        $targetUnit = $action->getTargetUnits()[0];
+        $targetEffects = [];
+
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            $targetEffects[] = [
+                'type'         => 'change',
+                'user_id'      => $targetUnit->getId(),
+                'hp'           => $targetUnit->getLife(),
+                'thp'          => $targetUnit->getTotalLife(),
+                'unit_effects' => $this->getUnitEffects($targetUnit),
+            ];
+        }
 
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
@@ -259,15 +268,7 @@ class Scenario implements ScenarioInterface
                     'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
                     'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
                     'unit_effects'   => $this->getUnitEffects($action->getActionUnit()),
-                    'targets'        => [
-                        [
-                            'type'         => 'change',
-                            'user_id'      => $targetUnit->getId(),
-                            'hp'           => $targetUnit->getLife(),
-                            'thp'          => $targetUnit->getTotalLife(),
-                            'unit_effects' => $this->getUnitEffects($targetUnit),
-                        ],
-                    ],
+                    'targets'        => $targetEffects,
                 ],
             ],
         ];
