@@ -16,7 +16,7 @@ use Battle\Unit\Ability\Heal\GreatHealAbility;
 class GreatHealAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and heal <span style="color: #1e72e3">unit_1</span> on 30 life';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">wounded_unit</span> на 99 здоровья';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">unit_1</span> на 30 здоровья';
 
     /**
      * @throws Exception
@@ -70,6 +70,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
     }
 
@@ -99,47 +100,6 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         foreach ($abilities as $ability) {
             self::assertInstanceOf(DamageAction::class, $ability);
-        }
-    }
-
-    /**
-     * Тест на формирование сообщения о лечении на русском
-     *
-     * TODO Проверку можно сделать в рамках testGreatHealAbilityCreateAndApply()
-     *
-     * @throws Exception
-     */
-    public function testGreatHealAbilityMessageRu(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        $unit = UnitFactory::createByTemplate(11, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = new GreatHealAbility($unit);
-
-        // Up concentration
-        for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
-        }
-
-        $collection = new AbilityCollection();
-        $collection->add($ability);
-
-        foreach ($collection as $item) {
-            self::assertEquals($ability, $item);
-        }
-
-        $collection->update($unit);
-
-        $actions = $ability->getAction($enemyCommand, $command);
-
-        foreach ($actions as $action) {
-            self::assertTrue($action->canByUsed());
-            $action->handle();
-            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
     }
 }

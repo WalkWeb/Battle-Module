@@ -6,6 +6,7 @@ namespace Tests\Battle\Result\Scenario;
 
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
+use Battle\Action\HealAction;
 use Battle\Container\Container;
 use Battle\Result\Scenario\ScenarioException;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
@@ -292,6 +293,72 @@ class ScenarioTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на формирование сценария при применении лечения сразу по нескольким целям
+     *
+     * @throws Exception
+     */
+    public function testScenarioAddMultipleHeal(): void
+    {
+        $statistic = new Statistic();
+        $unit = UnitFactory::createByTemplate(9);
+        $woundedUnit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(4);
+
+        $command = CommandFactory::create([$unit, $woundedUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new HealAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_WOUNDED_ALLIES);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        $scenario = new Scenario();
+        $scenario->addAnimation($action, $statistic);
+
+        $expectedData = [
+            'step'    => 1,
+            'attack'  => 1,
+            'effects' => [
+                [
+                    'user_id'        => '5e5c15fb-fa29-4bf0-8a0d-f2be9f90ca9d',
+                    'class'          => 'd_buff',
+                    'unit_cons_bar2' => 10,
+                    'unit_rage_bar2' => 7,
+                    'targets'        => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => '5e5c15fb-fa29-4bf0-8a0d-f2be9f90ca9d',
+                            'ava'               => 'unit_ava_green',
+                            'recdam'            => '+10',
+                            'hp'                => 100,
+                            'thp'               => 100,
+                            'hp_bar_class'      => 'unit_hp_bar',
+                            'hp_bar_class2'     => 'unit_hp_bar2',
+                            'unit_hp_bar_width' => 100,
+                            'unit_effects'      => [],
+                        ],
+                        [
+                            'type'              => 'change',
+                            'user_id'           => '92e7b39c-dbfc-4493-b563-50314c524c3c',
+                            'ava'               => 'unit_ava_green',
+                            'recdam'            => '+35',
+                            'hp'                => 36,
+                            'thp'               => 100,
+                            'hp_bar_class'      => 'unit_hp_bar',
+                            'hp_bar_class2'     => 'unit_hp_bar2',
+                            'unit_hp_bar_width' => 36,
+                            'unit_effects'      => [],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
+    }
+
+    /**
      * @throws Exception
      */
     public function testScenarioAddEffectHeal(): void
@@ -405,7 +472,7 @@ class ScenarioTest extends AbstractUnitTest
     /**
      * @throws Exception
      */
-    public function testScenarioAddEffectBuff(): void
+    public function testScenarioAddEffect(): void
     {
         $statistic = new Statistic();
         $unit = UnitFactory::createByTemplate(1);
@@ -413,7 +480,7 @@ class ScenarioTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command);
+        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, ActionInterface::TARGET_SELF);
 
         self::assertTrue($action->canByUsed());
 
@@ -461,6 +528,8 @@ class ScenarioTest extends AbstractUnitTest
 
         self::assertEquals($expectedData, $scenario->getArray());
     }
+
+    // TODO testScenarioAddMultipleEffect
 
     /**
      * @throws Exception
@@ -621,9 +690,6 @@ class ScenarioTest extends AbstractUnitTest
         $scenario->addAnimation($action, new Statistic());
     }
 
-    // TODO Когда будут добавлены Action с выбором несколько целей - нужно будет добавить тесты на формирование
-    // TODO сценария по нескольким целям
-
     /**
      * Создает Action, который призовет Imp
      *
@@ -684,7 +750,8 @@ class ScenarioTest extends AbstractUnitTest
     private function getReserveForcesAction(
         UnitInterface $unit,
         CommandInterface $enemyCommand,
-        CommandInterface $command
+        CommandInterface $command,
+        int $target
     ): ActionInterface
     {
         $actionFactory = new ActionFactory();
@@ -694,7 +761,7 @@ class ScenarioTest extends AbstractUnitTest
             'action_unit'    => $unit,
             'enemy_command'  => $enemyCommand,
             'allies_command' => $command,
-            'type_target'    => ActionInterface::TARGET_SELF,
+            'type_target'    => $target,
             'name'           => 'use Reserve Forces',
             'effect'         => [
                 'name'                  => 'Effect#123',
@@ -706,7 +773,7 @@ class ScenarioTest extends AbstractUnitTest
                         'action_unit'    => $unit,
                         'enemy_command'  => $enemyCommand,
                         'allies_command' => $command,
-                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'type_target'    => $target,
                         'name'           => 'use Reserve Forces',
                         'modify_method'  => 'multiplierMaxLife',
                         'power'          => 130,

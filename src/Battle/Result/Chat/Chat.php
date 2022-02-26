@@ -250,7 +250,7 @@ class Chat implements ChatInterface
      */
     private function applyEffect(ActionInterface $action): string
     {
-        // Временно, с.м. комментарий выше
+        // TODO Необходимо доработать и уйти от временного костыля, когда к UnitCollection можно обращаться как к массиву
         $targetUnit = $action->getTargetUnits()[0];
 
         // Если цель у эффекта одна, и эта цель сам юнит - сообщение нужно формировать по другому
