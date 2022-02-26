@@ -22,15 +22,15 @@ class RoundTest extends AbstractUnitTest
      */
     public function testRoundNextCommand(): void
     {
-        $leftCommand = TestCommandFactory::createLeftCommand();
-        $rightCommand = TestCommandFactory::createRightCommand();
+        $command = TestCommandFactory::createLeftCommand();
+        $enemyCommand = TestCommandFactory::createRightCommand();
         $startCommand = 1;
-        // Юниты делают по ходу, и на следующий раунд атаковать будет таже команда
+        // Юниты делают по ходу, и на следующий раунд атаковать будет та же команда
         $nextCommand = 1;
         // Юниты делают по одному ходу, соответственно следующий, после раунда, ход будет 3
         $nextNumberStroke = 3;
 
-        $round = new Round($leftCommand, $rightCommand, $startCommand, new Container());
+        $round = new Round($command, $enemyCommand, $startCommand, new Container());
         self::assertEquals($nextCommand, $round->handle());
         self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }
@@ -42,11 +42,11 @@ class RoundTest extends AbstractUnitTest
      */
     public function testRoundNextCommandNoAction(): void
     {
-        $leftUnit = UnitFactory::createByTemplate(1);
-        $rightUnit = UnitFactory::createByTemplate(2);
-        $leftUnit->madeAction();
-        $leftCommand = CommandFactory::create([$leftUnit]);
-        $rightCommand = CommandFactory::create([$rightUnit]);
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $unit->madeAction();
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $startCommand = 1;
         // Походит правая команда, и следующей будет ходить опять левая команда
@@ -54,7 +54,7 @@ class RoundTest extends AbstractUnitTest
         // В этом раунде походит только юнит из правой команды, соответственно счетчик увеличится только на 1
         $nextNumberStroke = 2;
 
-        $round = new Round($leftCommand, $rightCommand, $startCommand, new Container());
+        $round = new Round($command, $enemyCommand, $startCommand, new Container());
         self::assertEquals($nextCommand, $round->handle());
         self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }
@@ -64,16 +64,16 @@ class RoundTest extends AbstractUnitTest
      */
     public function testRoundIncorrectActionCommand(): void
     {
-        $leftUnit = UnitFactory::createByTemplate(1);
-        $rightUnit = UnitFactory::createByTemplate(2);
-        $leftUnit->madeAction();
-        $leftCommand = CommandFactory::create([$leftUnit]);
-        $rightCommand = CommandFactory::create([$rightUnit]);
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $unit->madeAction();
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
         $startCommand = 3;
 
         $this->expectException(RoundException::class);
         $this->expectExceptionMessage(RoundException::INCORRECT_START_COMMAND);
-        new Round($leftCommand, $rightCommand, $startCommand, new Container());
+        new Round($command, $enemyCommand, $startCommand, new Container());
     }
 
     /**
@@ -81,10 +81,10 @@ class RoundTest extends AbstractUnitTest
      */
     public function testRoundLimitStroke(): void
     {
-        $leftCommand = TestCommandFactory::createVeryBigCommand();
-        $rightCommand = TestCommandFactory::createVeryBigCommand();
+        $command = TestCommandFactory::createVeryBigCommand();
+        $enemyCommand = TestCommandFactory::createVeryBigCommand();
 
-        $round = new Round($leftCommand, $rightCommand, 1, new Container());
+        $round = new Round($command, $enemyCommand, 1, new Container());
 
         $this->expectException(RoundException::class);
         $this->expectExceptionMessage(RoundException::UNEXPECTED_ENDING);

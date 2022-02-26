@@ -26,11 +26,11 @@ class BattleTest extends AbstractUnitTest
      */
     public function testHandleBattleSuccess(): void
     {
-        $leftCommand = CommandFactory::createLeftCommand();
-        $rightCommand = CommandFactory::createRightCommand();
+        $command = CommandFactory::createLeftCommand();
+        $enemyCommand = CommandFactory::createRightCommand();
 
         $container = new Container();
-        $battle = new Battle($leftCommand, $rightCommand, $container);
+        $battle = new Battle($command, $enemyCommand, $container);
         $result = $battle->handle();
 
         self::assertEquals(2, $result->getWinner());
@@ -146,12 +146,12 @@ class BattleTest extends AbstractUnitTest
      */
     public function testBattleAgainDoubleUnitId(): void
     {
-        $leftCommand = new Command($this->getUnitCollectionMock());
-        $rightCommand = CommandFactory::createLeftCommand();
+        $command = new Command($this->getUnitCollectionMock());
+        $enemyCommand = CommandFactory::createLeftCommand();
 
         $this->expectException(BattleException::class);
         $this->expectExceptionMessage(BattleException::DOUBLE_UNIT_ID);
-        new Battle($leftCommand, $rightCommand, new Container());
+        new Battle($command, $enemyCommand, new Container());
     }
 
     /**
@@ -159,15 +159,14 @@ class BattleTest extends AbstractUnitTest
      */
     public function testBattleSetTranslation(): void
     {
-        $leftCommand = CommandFactory::createLeftCommand();
-        $rightCommand = CommandFactory::createRightCommand();
+        $command = CommandFactory::createLeftCommand();
+        $enemyCommand = CommandFactory::createRightCommand();
 
-        $language = 'ru';
-        $translator = new Translation($language);
+        $translator = new Translation('ru');
         $container = new Container();
         $container->set(Translation::class, $translator);
 
-        $battle = new Battle($leftCommand, $rightCommand, $container);
+        $battle = new Battle($command, $enemyCommand, $container);
 
         self::assertEquals($translator, $battle->getContainer()->getTranslation());
     }

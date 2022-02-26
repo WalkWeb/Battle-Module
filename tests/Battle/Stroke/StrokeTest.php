@@ -60,19 +60,19 @@ class StrokeTest extends AbstractUnitTest
      */
     public function testStrokeBreakAction(): void
     {
-        $leftUnit = UnitFactory::createByTemplate(13);
-        $rightUnit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(13);
+        $enemyUnit = UnitFactory::createByTemplate(1);
 
-        $leftCommand = CommandFactory::create([$leftUnit]);
-        $rightCommand = CommandFactory::create([$rightUnit]);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $stroke = new Stroke(1, $leftUnit, $leftCommand, $rightCommand, new Container());
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, new Container());
 
         // Для теста достаточно того, что выполнение хода завершилось без ошибок
         $stroke->handle();
 
         // Но, на всякий случай проверяем, что противник умер
-        self::assertEquals(0, $rightUnit->getLife());
+        self::assertEquals(0, $enemyUnit->getLife());
     }
 
     /**
@@ -148,8 +148,8 @@ class StrokeTest extends AbstractUnitTest
     public function testStrokeEffectDead(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $command = CommandFactory::create([$unit]);
         $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $container = new Container();
 
