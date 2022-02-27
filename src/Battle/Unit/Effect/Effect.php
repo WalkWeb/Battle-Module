@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Battle\Unit\Effect;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\ActionException;
+use Battle\Action\ActionFactory;
+use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Unit\UnitInterface;
+use Exception;
 
 class Effect implements EffectInterface
 {
@@ -32,27 +34,42 @@ class Effect implements EffectInterface
     private $duration;
 
     /**
-     * @var ActionCollection
+     * Массив данных по Actions, на основе которого будет создаваться ActionCollection для применения к юниту при
+     * применении эффекта
+     *
+     * @var array
      */
     private $onApplyActions;
 
     /**
-     * @var ActionCollection
+     * Массив данных по Actions, на основе которого будет создаваться ActionCollection для применения к юниту при
+     * начале нового раунда (при ходе юнита в новом раунде)
+     *
+     * @var array
      */
     private $onNextRoundActions;
 
     /**
-     * @var ActionCollection
+     * Массив данных по Actions, на основе которого будет создаваться ActionCollection для применения к юниту при
+     * истечении эффекта
+     *
+     * @var array
      */
     private $onDisableActions;
+
+    /**
+     * @var ActionFactory
+     */
+    private $actionFactory;
 
     public function __construct(
         string $name,
         string $icon,
         int $duration,
-        ActionCollection $onApplyActions,
-        ActionCollection $onNextRoundActions,
-        ActionCollection $onDisableActions
+        array $onApplyActions,
+        array $onNextRoundActions,
+        array $onDisableActions,
+        ActionFactory $actionFactory = null
     )
     {
         $this->name = $name;
@@ -62,6 +79,7 @@ class Effect implements EffectInterface
         $this->onApplyActions = $onApplyActions;
         $this->onNextRoundActions = $onNextRoundActions;
         $this->onDisableActions = $onDisableActions;
+        $this->actionFactory = $actionFactory ?? new ActionFactory();
     }
 
     /**
@@ -98,27 +116,29 @@ class Effect implements EffectInterface
 
     /**
      * @return ActionCollection
+     * @throws Exception
      */
     public function getOnApplyActions(): ActionCollection
     {
-        return $this->onApplyActions;
+        return $this->createActionCollection($this->onApplyActions);
     }
 
     /**
      * @return ActionCollection
+     * @throws Exception
      */
     public function getOnNextRoundActions(): ActionCollection
     {
-        return $this->onNextRoundActions;
+        return $this->createActionCollection($this->onNextRoundActions);
     }
 
     /**
      * @return ActionCollection
-     * @throws ActionException
+     * @throws Exception
      */
     public function getOnDisableActions(): ActionCollection
     {
-        $collection = $this->onDisableActions;
+        $collection = $this->createActionCollection($this->onDisableActions);
 
         // Также, к коллекции событий необходимо добавить revertAction от бафов, примененных сразу
         foreach ($this->onApplyActions as $applyAction) {
@@ -160,5 +180,35 @@ class Effect implements EffectInterface
         foreach ($this->onDisableActions as $onDisableAction) {
             $onDisableAction->changeActionUnit($unit);
         }
+    }
+
+    /**
+     * @param array $data
+     * @return ActionCollection
+     * @throws Exception
+     */
+    private function createActionCollection(array $data): ActionCollection
+    {
+        $collection = new ActionCollection();
+
+        foreach ($data as $datum) {
+            $collection->add($this->createAction($datum));
+        }
+
+        return $collection;
+    }
+
+    /**
+     * @param $data
+     * @return ActionInterface
+     * @throws Exception
+     */
+    private function createAction($data): ActionInterface
+    {
+        if (!is_array($data)) {
+            throw new EffectException(EffectException::INVALID_ACTION_DATA);
+        }
+
+        return $this->actionFactory->create($data);
     }
 }

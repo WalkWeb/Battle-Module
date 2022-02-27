@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
-use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
@@ -205,14 +204,19 @@ class EffectActionTest extends AbstractUnitTest
         $icon = 'icon.png';
         $duration = 10;
 
-        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
+        $actionsData = $this->getReserveForcesActionData($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
 
-        $actionCollection = new ActionCollection();
-        $actionCollection->add($action);
+        $effect = new Effect($name, $icon, $duration, [], $actionsData, []);
 
-        $effect = new Effect($name, $icon, $duration, new ActionCollection(), $actionCollection, new ActionCollection());
-
-        $effectAction = new EffectAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF, $name, $icon, $effect);
+        $effectAction = new EffectAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            EffectAction::TARGET_SELF,
+            $name,
+            $icon,
+            $effect
+        );
 
         self::assertEquals(EffectAction::DEFAULT_ANIMATION_METHOD, $effectAction->getAnimationMethod());
         self::assertEquals(EffectAction::DEFAULT_MESSAGE_METHOD, $effectAction->getMessageMethod());
@@ -237,12 +241,9 @@ class EffectActionTest extends AbstractUnitTest
         $animationMethod = 'custom_animate_method';
         $messageMethod = 'custom_message_method';
 
-        $action = $this->getReserveForcesAction($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
+        $actionsData = $this->getReserveForcesActionData($unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
 
-        $actionCollection = new ActionCollection();
-        $actionCollection->add($action);
-
-        $effect = new Effect($name, $icon, $duration, new ActionCollection(), $actionCollection, new ActionCollection());
+        $effect = new Effect($name, $icon, $duration, [], $actionsData, []);
 
         $effectAction = new EffectAction(
             $unit,
@@ -308,6 +309,53 @@ class EffectActionTest extends AbstractUnitTest
         ];
 
         return $actionFactory->create($data);
+    }
+
+    /**
+     * Возвращает массив данных, по аналогу с getReserveForcesAction
+     *
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param int $typeTarget
+     * @return array[]
+     */
+    private function getReserveForcesActionData(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        int $typeTarget
+    ): array
+    {
+        return [
+            [
+                'type'           => ActionInterface::EFFECT,
+                'action_unit'    => $unit,
+                'enemy_command'  => $enemyCommand,
+                'allies_command' => $command,
+                'type_target'    => $typeTarget,
+                'name'           => 'use Reserve Forces',
+                'effect'         => [
+                    'name'                  => 'Effect#123',
+                    'icon'                  => 'icon.png',
+                    'duration'              => 8,
+                    'on_apply_actions'      => [
+                        [
+                            'type'           => ActionInterface::BUFF,
+                            'action_unit'    => $unit,
+                            'enemy_command'  => $enemyCommand,
+                            'allies_command' => $command,
+                            'type_target'    => ActionInterface::TARGET_SELF,
+                            'name'           => 'use Reserve Forces',
+                            'modify_method'  => 'multiplierMaxLife',
+                            'power'          => 130,
+                        ],
+                    ],
+                    'on_next_round_actions' => [],
+                    'on_disable_actions'    => [],
+                ],
+            ]
+        ];
     }
 
     /**

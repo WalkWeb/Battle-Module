@@ -6,12 +6,15 @@ namespace Tests\Battle\Unit\Effect;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
+use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Command\CommandInterface;
 use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitException;
+use Battle\Unit\UnitInterface;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -30,18 +33,18 @@ class EffectCollectionTest extends AbstractUnitTest
             'Effect#1',
             'icon',
             10,
-            new ActionCollection(),
-            new ActionCollection(),
-            new ActionCollection()
+            [],
+            [],
+            []
         ));
 
         $collection->add(new Effect(
             'Effect#2',
             'icon',
             10,
-            new ActionCollection(),
-            new ActionCollection(),
-            new ActionCollection()
+            [],
+            [],
+            []
         ));
 
         self::assertCount(2, $collection);
@@ -67,18 +70,18 @@ class EffectCollectionTest extends AbstractUnitTest
             'Effect#1',
             'icon',
             10,
-            new ActionCollection(),
-            new ActionCollection(),
-            new ActionCollection()
+            [],
+            [],
+            []
         );
 
         $effect2 = new Effect(
             'Effect#2',
             'icon',
             10,
-            new ActionCollection(),
-            new ActionCollection(),
-            new ActionCollection()
+            [],
+            [],
+            []
         );
 
         $collection->add($effect1);
@@ -104,9 +107,9 @@ class EffectCollectionTest extends AbstractUnitTest
             'Effect#1',
             'icon',
             $duration,
-            new ActionCollection(),
-            new ActionCollection(),
-            new ActionCollection()
+            [],
+            [],
+            []
         );
 
         $collection->add($effect);
@@ -152,9 +155,9 @@ class EffectCollectionTest extends AbstractUnitTest
             'Effect#1',
             'icon',
             5,
-            new ActionCollection(),
+            [],
             $actions,
-            new ActionCollection()
+            []
         ));
 
         // 5 раз получаем ActionCollection с HealAction внутри
@@ -189,8 +192,8 @@ class EffectCollectionTest extends AbstractUnitTest
             'Effect#1',
             'icon',
             5,
-            new ActionCollection(),
-            new ActionCollection(),
+            [],
+            [],
             $actions
         ));
 
@@ -204,5 +207,50 @@ class EffectCollectionTest extends AbstractUnitTest
 
         // Затем коллекция эффектов становится пустой - эффект удалился
         self::assertCount(0, $collection);
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param int $typeTarget
+     * @return array[]
+     */
+    private function getHealActionData(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        int $typeTarget
+    ): array
+    {
+        return [
+            [
+                'type'           => ActionInterface::EFFECT,
+                'action_unit'    => $unit,
+                'enemy_command'  => $enemyCommand,
+                'allies_command' => $command,
+                'type_target'    => $typeTarget,
+                'name'           => 'use Reserve Forces',
+                'effect'         => [
+                    'name'                  => 'Effect#123',
+                    'icon'                  => 'icon.png',
+                    'duration'              => 8,
+                    'on_apply_actions'      => [
+                        [
+                            'type'           => ActionInterface::BUFF,
+                            'action_unit'    => $unit,
+                            'enemy_command'  => $enemyCommand,
+                            'allies_command' => $command,
+                            'type_target'    => ActionInterface::TARGET_SELF,
+                            'name'           => 'use Reserve Forces',
+                            'modify_method'  => 'multiplierMaxLife',
+                            'power'          => 130,
+                        ],
+                    ],
+                    'on_next_round_actions' => [],
+                    'on_disable_actions'    => [],
+                ],
+            ]
+        ];
     }
 }

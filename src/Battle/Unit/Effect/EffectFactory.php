@@ -45,17 +45,19 @@ class EffectFactory
             throw new EffectException(EffectException::ZERO_ACTION);
         }
 
-        $onApplyActionCollection = $this->createActionCollection($onApplyActionsData);
-        $onNextRoundActions = $this->createActionCollection($onNextRoundActionsData);
-        $onDisableActions = $this->createActionCollection($onDisableActionsData);
+        // Цель создания коллекций - сразу проверить, что в данных нет ошибки
+        // В сам эффект будут переданы массивы данных
+        $this->createActionCollection($onApplyActionsData);
+        $this->createActionCollection($onNextRoundActionsData);
+        $this->createActionCollection($onDisableActionsData);
 
         return new Effect(
             $name,
             $icon,
             $duration,
-            $onApplyActionCollection,
-            $onNextRoundActions,
-            $onDisableActions
+            $onApplyActionsData,
+            $onNextRoundActionsData,
+            $onDisableActionsData
         );
     }
 
