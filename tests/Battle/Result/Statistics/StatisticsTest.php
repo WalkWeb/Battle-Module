@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Statistics;
 
+use Battle\Action\ActionFactory;
+use Battle\Action\ActionInterface;
+use Battle\Action\HealAction;
 use Battle\Action\ResurrectionAction;
+use Battle\Command\CommandInterface;
+use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Action\DamageAction;
 use Battle\Action\SummonAction;
@@ -124,6 +129,47 @@ class StatisticsTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на подсчет полученного урона от EffectAction, а именно то, что нанесенный урон засчитывается юниту который
+     * создал эффект, а не тому, на ком эффект находится
+     *
+     * @throws Exception
+     */
+    public function testStatisticsUnitCausedEffectDamage(): void
+    {
+        $statistics = new Statistic();
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createEffectDamageAction($unit, $command, $enemyCommand);
+
+        // Проверяем, что вначале эффекта на юните нет
+        self::assertCount(0, $enemyUnit->getEffects());
+        // И его здоровье полное
+        self::assertEquals($enemyUnit->getTotalLife(), $enemyUnit->getLife());
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем, что эффект появился
+        self::assertCount(1, $enemyUnit->getEffects());
+
+        // Наносим урон юниту от эффекта и считаем статистику от эффекта
+        foreach ($enemyUnit->getOnNewRoundActions() as $effectAction) {
+            $effectAction->handle();
+            $statistics->addUnitAction($effectAction);
+        }
+
+        // Проверяем, что урон получен
+        self::assertEquals($enemyUnit->getTotalLife() - 8, $enemyUnit->getLife());
+
+        // Проверяем, что урон засчитался юниту, который создал эффект
+        self::assertEquals(8, $statistics->getUnitsStatistics()->get($unit->getId())->getCausedDamage());
+    }
+
+    /**
      * @throws Exception
      */
     public function testStatisticsUnitCausedHeal(): void
@@ -164,6 +210,47 @@ class StatisticsTest extends AbstractUnitTest
         }
 
         self::assertEquals($priest->getDamage() * 6, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
+    }
+
+    /**
+     * Тест на подсчет лечения от EffectAction, а именно то, что лечение засчитывается юниту который создал эффект, а не
+     * тому, на ком эффект находится
+     *
+     * @throws Exception
+     */
+    public function testStatisticsUnitCausedEffectHeal(): void
+    {
+        $statistics = new Statistic();
+
+        $unit = UnitFactory::createByTemplate(1);
+        $woundedUnit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit, $woundedUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createEffectHealAction($unit, $command, $enemyCommand);
+
+        // Проверяем, что вначале эффекта на юните нет
+        self::assertCount(0, $woundedUnit->getEffects());
+        self::assertEquals(1, $woundedUnit->getLife());
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем, что эффект появился
+        self::assertCount(1, $woundedUnit->getEffects());
+
+        // Лечим юнита от эффекта и считаем статистику от эффекта
+        foreach ($woundedUnit->getOnNewRoundActions() as $effectAction) {
+            $effectAction->handle();
+            $statistics->addUnitAction($effectAction);
+        }
+
+        // Проверяем, что лечение произошло
+        self::assertEquals(16, $woundedUnit->getLife());
+
+        // Проверяем, что лечение засчиталось юниту, который создал эффект
+        self::assertEquals(15, $statistics->getUnitsStatistics()->get($unit->getId())->getHeal());
     }
 
     /**
@@ -323,5 +410,106 @@ class StatisticsTest extends AbstractUnitTest
 
         // Проверяем, что атакующий убил 3 юнита
         self::assertEquals(3, $statistics->getUnitsStatistics()->get($unit->getId())->getKilling());
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $command
+     * @param CommandInterface $enemyCommand
+     * @return ActionInterface
+     * @throws Exception
+     */
+    private function createEffectDamageAction(
+        UnitInterface $unit,
+        CommandInterface $command,
+        CommandInterface $enemyCommand
+    ): ActionInterface
+    {
+        $actionFactory = new ActionFactory();
+
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
+            'name'           => 'Poison',
+            'icon'           => '/images/icons/ability/202.png',
+            'message_method' => 'applyEffect',
+            'effect'         => [
+                'name'                  => 'Poison',
+                'icon'                  => '/images/icons/ability/202.png',
+                'duration'              => 5,
+                'on_apply_actions'      => [],
+                'on_next_round_actions' => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'action_unit'      => $unit,
+                        'enemy_command'    => $enemyCommand,
+                        'allies_command'   => $command,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'name'             => 'Poison',
+                        'power'            => 8,
+                        'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                        'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                        'icon'             => '/images/icons/ability/202.png',
+                    ],
+                ],
+                'on_disable_actions'    => [],
+            ],
+        ];
+
+        return $actionFactory->create($data);
+    }
+
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $command
+     * @param CommandInterface $enemyCommand
+     * @return ActionInterface
+     * @throws Exception
+     */
+    private function createEffectHealAction(
+        UnitInterface $unit,
+        CommandInterface $command,
+        CommandInterface $enemyCommand
+    ): ActionInterface
+    {
+        $actionFactory = new ActionFactory();
+
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+            'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES,
+            'name'           => 'Healing Potion',
+            'icon'           => '/images/icons/ability/234.png',
+            'message_method' => 'applyEffect',
+            'effect'         => [
+                'name'                  => 'Healing Potion',
+                'icon'                  => '/images/icons/ability/234.png',
+                'duration'              => 4,
+                'on_apply_actions'      => [],
+                'on_next_round_actions' => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'action_unit'      => $unit,
+                        'enemy_command'    => $enemyCommand,
+                        'allies_command'   => $command,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'name'             => 'Healing Potion',
+                        'power'            => 15,
+                        'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                        'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                        'icon'             => '/images/icons/ability/234.png',
+                    ],
+                ],
+                'on_disable_actions'    => [],
+            ],
+        ];
+
+        return $actionFactory->create($data);
     }
 }
