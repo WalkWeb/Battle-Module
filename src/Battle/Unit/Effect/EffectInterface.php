@@ -87,6 +87,14 @@ interface EffectInterface
      * другого эффекта, а юнит умер до того, как эффект закончился
      *
      * @param UnitInterface $unit
+     * @return EffectInterface
      */
-    public function changeActionUnit(UnitInterface $unit): void;
+    public function changeActionUnit(UnitInterface $unit): EffectInterface;
+
+    /**
+     * При клонировании эффекта необходимо также клонировать onApplyActions, onNextRoundActions и onDisableActions
+     *
+     * @return mixed
+     */
+    public function __clone();
 }

@@ -147,18 +147,29 @@ class Effect implements EffectInterface
         $this->duration = $this->baseDuration;
     }
 
-    public function changeActionUnit(UnitInterface $unit): void
+    public function changeActionUnit(UnitInterface $unit): EffectInterface
     {
-        foreach ($this->onApplyActions as $onApplyAction) {
+        $effect = clone $this;
+
+        foreach ($effect->onApplyActions as $onApplyAction) {
             $onApplyAction->changeActionUnit($unit);
         }
 
-        foreach ($this->onNextRoundActions as $onNextRoundAction) {
+        foreach ($effect->onNextRoundActions as $onNextRoundAction) {
             $onNextRoundAction->changeActionUnit($unit);
         }
 
-        foreach ($this->onDisableActions as $onDisableAction) {
+        foreach ($effect->onDisableActions as $onDisableAction) {
             $onDisableAction->changeActionUnit($unit);
         }
+
+        return $effect;
+    }
+
+    public function __clone()
+    {
+        $this->onApplyActions = clone $this->onApplyActions;
+        $this->onNextRoundActions = clone $this->onNextRoundActions;
+        $this->onDisableActions = clone $this->onDisableActions;
     }
 }

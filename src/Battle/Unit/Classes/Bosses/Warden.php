@@ -6,6 +6,7 @@ namespace Battle\Unit\Classes\Bosses;
 
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Damage\HellfireAbility;
+use Battle\Unit\Ability\Effect\IncinerationAbility;
 use Battle\Unit\Classes\AbstractUnitClass;
 use Battle\Unit\UnitInterface;
 
@@ -34,6 +35,7 @@ class Warden extends AbstractUnitClass
     {
         $collection = new AbilityCollection();
         $collection->add(new HellfireAbility($unit));
+        $collection->add(new IncinerationAbility($unit));
         return $collection;
     }
 }
