@@ -198,9 +198,14 @@ interface ActionInterface
     public function getRevertAction(): ActionInterface;
 
     /**
-     * Возвращает коллекцию применяемых к юниту эффектов
+     * Возвращает эффект события
      *
      * Только для EffectAction, при вызове у других Action будет брошено исключение
+     *
+     * Так как один и тот же EffectAction может применяться к нескольким юнитам, чтобы каждый из них имел свой
+     * уникальный эффект - необходимо клонировать возвращаемый объект, т.е. делать:
+     *
+     * return clone $this->effect;
      *
      * @return EffectInterface
      * @throws ActionException

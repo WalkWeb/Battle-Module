@@ -92,6 +92,8 @@ interface EffectInterface
     public function changeActionUnit(UnitInterface $unit): EffectInterface;
 
     /**
+     * При клонировании эффекта необходимо также клонировать onApplyActions, onNextRoundActions и onDisableActions
+     *
      * @return mixed
      */
     public function __clone();

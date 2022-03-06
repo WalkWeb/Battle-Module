@@ -168,31 +168,8 @@ class Effect implements EffectInterface
 
     public function __clone()
     {
-        // --------
-        $collection = new ActionCollection();
-
-        foreach ($this->onApplyActions as $action) {
-            $collection->add($action);
-        }
-
-        $this->onApplyActions = $collection;
-
-        // --------
-        $collection = new ActionCollection();
-
-        foreach ($this->onNextRoundActions as $action) {
-            $collection->add($action);
-        }
-
-        $this->onNextRoundActions = $collection;
-
-        // --------
-        $collection = new ActionCollection();
-
-        foreach ($this->onDisableActions as $action) {
-            $collection->add($action);
-        }
-
-        $this->onDisableActions = $collection;
+        $this->onApplyActions = clone $this->onApplyActions;
+        $this->onNextRoundActions = clone $this->onNextRoundActions;
+        $this->onDisableActions = clone $this->onDisableActions;
     }
 }

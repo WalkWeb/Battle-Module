@@ -78,6 +78,12 @@ class EffectAction extends AbstractAction
         return $this->name;
     }
 
+    /**
+     * Так как один и тот же EffectAction может применяться к нескольким юнитам, чтобы каждый из них имел свой
+     * уникальный эффект - необходимо клонировать возвращаемый объект
+     *
+     * @return EffectInterface
+     */
     public function getEffect(): EffectInterface
     {
         return clone $this->effect;

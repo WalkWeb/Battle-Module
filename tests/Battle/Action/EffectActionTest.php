@@ -69,8 +69,6 @@ class EffectActionTest extends AbstractUnitTest
         $effects = new EffectCollection($unit);
         $effects->add($effectAction->getEffect());
 
-        self::assertEquals($effects, $unit->getEffects());
-
         // Проверяем увеличившееся здоровье
         self::assertEquals((int)($unitBaseLife * 1.3), $unit->getTotalLife());
         self::assertEquals((int)($unitBaseLife * 1.3), $unit->getLife());
