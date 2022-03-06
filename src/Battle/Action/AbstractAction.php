@@ -15,6 +15,11 @@ abstract class AbstractAction implements ActionInterface
     /**
      * @var UnitInterface
      */
+    protected $creatorUnit;
+
+    /**
+     * @var UnitInterface
+     */
     protected $actionUnit;
 
     /**
@@ -71,11 +76,19 @@ abstract class AbstractAction implements ActionInterface
         string $icon = ''
     )
     {
+        // По умолчанию creatorUnit равен actionUnit, и только у Action от эффектов actionUnit меняется когда эффект
+        // применяется к цели, а creatorUnit остается неизменным
+        $this->creatorUnit = $actionUnit;
         $this->actionUnit = $actionUnit;
         $this->enemyCommand = $enemyCommand;
         $this->alliesCommand = $alliesCommand;
         $this->typeTarget = $typeTarget;
         $this->icon = $icon;
+    }
+
+    public function getCreatorUnit(): UnitInterface
+    {
+        return $this->creatorUnit;
     }
 
     public function getActionUnit(): UnitInterface

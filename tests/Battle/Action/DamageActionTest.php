@@ -24,6 +24,9 @@ class DamageActionTest extends AbstractUnitTest
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
         $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals($unit, $action->getCreatorUnit());
         self::assertEquals($unit->getDamage(), $action->getPower());
         self::assertTrue($action->canByUsed());
         self::assertEquals(DamageAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());

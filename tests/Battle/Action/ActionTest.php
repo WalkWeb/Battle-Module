@@ -153,10 +153,14 @@ class ActionTest extends AbstractUnitTest
         $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals($unit, $action->getCreatorUnit());
 
         $action->changeActionUnit($enemyUnit);
 
         self::assertEquals($enemyUnit, $action->getActionUnit());
+
+        // При этом creatorUnit не изменился
+        self::assertEquals($unit, $action->getCreatorUnit());
     }
 
     /**

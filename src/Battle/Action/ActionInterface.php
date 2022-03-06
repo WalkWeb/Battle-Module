@@ -83,6 +83,18 @@ interface ActionInterface
     public function getNameAction(): string;
 
     /**
+     * Возвращает юнита создавшего данный Action
+     *
+     * Необходимо для корректного расчета статистики от эффектов. Например, чтобы лечение от эффекта засчитывалось не
+     * тому юниту, на которого эффект наложен, а тому, кто этот эффект создал.
+     *
+     * В Action которые не относятся к эффектам, CreatorUnit будет равен ActionUnit
+     *
+     * @return UnitInterface
+     */
+    public function getCreatorUnit(): UnitInterface;
+
+    /**
      * Возвращает юнита совершающего действие
      *
      * @return UnitInterface
