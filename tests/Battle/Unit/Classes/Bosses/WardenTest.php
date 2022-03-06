@@ -4,8 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\Bosses;
 
+use Battle\Action\ActionFactory;
+use Battle\Action\ActionInterface;
+use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
+use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Damage\HellfireAbility;
+use Battle\Unit\Ability\Effect\IncinerationAbility;
+use Battle\Unit\Effect\EffectFactory;
+use Battle\Unit\Effect\EffectInterface;
+use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
@@ -19,7 +27,7 @@ class WardenTest extends AbstractUnitTest
     {
         $unit = UnitFactory::createByTemplate(27);
         $enemyUnit = UnitFactory::createByTemplate(2);
-        $actionCommand = CommandFactory::create([$unit]);
+        $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $warden = $unit->getClass();
@@ -30,17 +38,32 @@ class WardenTest extends AbstractUnitTest
 
         $abilities = $warden->getAbilities($unit);
 
-        foreach ($abilities as $ability) {
-            self::assertContainsOnlyInstancesOf(HellfireAbility::class, [$ability]);
+        foreach ($abilities as $i => $ability) {
 
-            $actions = $ability->getAction($enemyCommand, $actionCommand);
+            if ($i === 0) {
+                self::assertContainsOnlyInstancesOf(HellfireAbility::class, [$ability]);
 
-            foreach ($actions as $action) {
-                self::assertEquals((int)($unit->getDamage() * 1.5), $action->getPower());
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertEquals((int)($unit->getDamage() * 1.5), $action->getPower());
+                }
+            }
+
+            if ($i === 1) {
+                self::assertContainsOnlyInstancesOf(IncinerationAbility::class, [$ability]);
+
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertEquals(
+                        $this->createEffect($unit, $enemyCommand, $command),
+                        $action->getEffect()
+                    );
+                }
             }
         }
     }
-
 
     /**
      * @throws Exception
@@ -60,5 +83,45 @@ class WardenTest extends AbstractUnitTest
             self::assertTrue($ability->isReady());
             self::assertTrue($ability->canByUsed($enemyCommand, $command));
         }
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @return EffectInterface
+     * @throws Exception
+     */
+    private function createEffect(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command
+    ): EffectInterface
+    {
+        $effectFactory = new EffectFactory(new ActionFactory());
+
+        $data = [
+            'name'                  => 'Incineration',
+            'icon'                  => '/images/icons/ability/232.png',
+            'duration'              => 8,
+            'on_apply_actions'      => [],
+            'on_next_round_actions' => [
+                [
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $unit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'name'             => 'Incineration',
+                    'power'            => 6,
+                    'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                    'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                    'icon'             => '/images/icons/ability/232.png',
+                ],
+            ],
+            'on_disable_actions'    => [],
+        ];
+
+        return $effectFactory->create($data);
     }
 }
