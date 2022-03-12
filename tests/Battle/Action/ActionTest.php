@@ -142,6 +142,24 @@ class ActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ситуацию, когда у не-DamageAction вызывается метод blocked()
+     *
+     * @throws Exception
+     */
+    public function testActionNoBlocked(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new WaitAction($unit, $defendCommand, $alliesCommand);
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::blocked');
+        $action->blocked();
+    }
+
+    /**
      * Тест на изменение $actionUnit в Action
      *
      * @throws Exception

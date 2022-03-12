@@ -201,4 +201,27 @@ class DamageActionTest extends AbstractUnitTest
         self::assertEquals($firstEnemyUnit->getTotalLife() - $unit->getDamage(), $firstEnemyUnit->getLife());
         self::assertEquals($secondaryEnemyUnit->getTotalLife() - $unit->getDamage(), $secondaryEnemyUnit->getLife());
     }
+
+    /**
+     * Тест на указывание, что событие (урон) было заблокировано
+     *
+     * @throws Exception
+     */
+    public function testDamageActionBlocked(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        // По-умолчанию isBlocked возвращает false
+        self::assertFalse($action->isBlocked());
+
+        // Указываем, что урон был заблокирован
+        $action->blocked();
+
+        // И получаем true
+        self::assertTrue($action->isBlocked());
+    }
 }

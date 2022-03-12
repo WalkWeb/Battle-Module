@@ -68,6 +68,13 @@ abstract class AbstractAction implements ActionInterface
      */
     protected $icon;
 
+    /**
+     * Было ли событие заблокировано
+     *
+     * @var bool
+     */
+    protected $blocked = false;
+
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
@@ -209,6 +216,22 @@ abstract class AbstractAction implements ActionInterface
     public function changeActionUnit(UnitInterface $unit): void
     {
         $this->actionUnit = $unit;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBlocked(): bool
+    {
+        return $this->blocked;
+    }
+
+    /**
+     * @throws ActionException
+     */
+    public function blocked(): void
+    {
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }
 
     /**

@@ -266,4 +266,20 @@ interface ActionInterface
      * @return string
      */
     public function getIcon(): string;
+
+    /**
+     * Было ли событие заблокировано
+     *
+     * По умолчанию возвращает всегда false, true может быть только в DamageAction, если противник заблокировал урон
+     *
+     * @return bool
+     */
+    public function isBlocked(): bool;
+
+    /**
+     * Указывает, что событие было заблокировано
+     *
+     * По умолчанию вызов метода возвращает Exception, успешно обработан данный метод будет только в DamageAction
+     */
+    public function blocked(): void;
 }

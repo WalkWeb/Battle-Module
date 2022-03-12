@@ -134,4 +134,9 @@ class DamageAction extends AbstractAction
     {
         return true;
     }
+
+    public function blocked(): void
+    {
+        $this->blocked = true;
+    }
 }
