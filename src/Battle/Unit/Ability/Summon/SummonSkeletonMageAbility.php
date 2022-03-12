@@ -19,6 +19,7 @@ class SummonSkeletonMageAbility extends AbstractSummonAbility
     private const SUMMON_AVATAR       = '/images/avas/monsters/008.png';
     private const SUMMON_DAMAGE       = 13;
     private const SUMMON_ATTACK_SPEED = 1.2;
+    private const SUMMON_BLOCK        = 0;
     private const SUMMON_LIFE         = 42;
     private const SUMMON_MELEE        = false;
     private const SUMMON_RACE_ID      = 8;
@@ -32,6 +33,7 @@ class SummonSkeletonMageAbility extends AbstractSummonAbility
             self::SUMMON_AVATAR,
             self::SUMMON_DAMAGE,
             self::SUMMON_ATTACK_SPEED,
+            self::SUMMON_BLOCK,
             self::SUMMON_LIFE,
             self::SUMMON_MELEE,
             self::SUMMON_RACE_ID,

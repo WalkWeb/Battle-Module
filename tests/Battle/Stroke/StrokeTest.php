@@ -94,6 +94,7 @@ class StrokeTest extends AbstractUnitTest
             'avatar',
             20,
             1,
+            0,
             100,
             100,
             false,

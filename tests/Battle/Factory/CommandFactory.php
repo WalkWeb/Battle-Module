@@ -53,6 +53,7 @@ class CommandFactory
             'avatar'       => '/images/avas/humans/human001.jpg',
             'damage'       => 20,
             'attack_speed' => 1.00,
+            'block'        => 0,
             'life'         => 100,
             'total_life'   => 100,
             'melee'        => true,

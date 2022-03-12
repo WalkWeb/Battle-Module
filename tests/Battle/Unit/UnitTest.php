@@ -42,6 +42,7 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['life'], $unit->getLife());
         self::assertEquals($data['total_life'], $unit->getTotalLife());
         self::assertEquals($data['attack_speed'], $unit->getAttackSpeed());
+        self::assertEquals($data['block'], $unit->getBlock());
         self::assertFalse($unit->isAction());
         self::assertEquals($data['life'] > 0, $unit->isAlive());
         self::assertEquals($data['melee'], $unit->isMelee());
@@ -328,7 +329,10 @@ class UnitTest extends AbstractUnitTest
     public function createDataProvider(): array
     {
         return [
-            [1], [2], [3], [4], [5], [6], [7], [8], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20]
+            [1], [2], [3], [4], [5], [6], [7], [8], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20],
+            [21], [22], [23], [24], [25], [26],
+            // TODO Error class id
+            //[27],
         ];
     }
 }

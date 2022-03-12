@@ -37,6 +37,9 @@ interface UnitInterface
     public const MIN_ATTACK_SPEED = 0.0;
     public const MAX_ATTACK_SPEED = 10;
 
+    public const MIN_BLOCK        = 0;
+    public const MAX_BLOCK        = 100;
+
     public const MIN_LIFE         = 0;
     public const MAX_LIFE         = 100000;
 
@@ -148,6 +151,13 @@ interface UnitInterface
      * @return float
      */
     public function getAttackSpeed(): float;
+
+    /**
+     * Возвращает шанс блока вражеских атак юнита
+     *
+     * @return int
+     */
+    public function getBlock(): int;
 
     /**
      * Возвращает текущее здоровье юнита

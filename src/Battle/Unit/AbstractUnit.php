@@ -49,6 +49,11 @@ abstract class AbstractUnit implements UnitInterface
     protected $attackSpeed;
 
     /**
+     * @var int - Шанс блока вражеских атак
+     */
+    protected $block;
+
+    /**
      * @var int - Текущее здоровье
      */
     protected $life;
@@ -115,6 +120,7 @@ abstract class AbstractUnit implements UnitInterface
      * @param string $avatar
      * @param int $damage
      * @param float $attackSpeed
+     * @param int $block
      * @param int $life
      * @param int $totalLife
      * @param bool $melee
@@ -132,6 +138,7 @@ abstract class AbstractUnit implements UnitInterface
         string $avatar,
         int $damage,
         float $attackSpeed,
+        int $block,
         int $life,
         int $totalLife,
         bool $melee,
@@ -149,6 +156,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->avatar = $avatar;
         $this->damage = $damage;
         $this->attackSpeed = $attackSpeed;
+        $this->block = $block;
         $this->life = $life;
         $this->totalLife = $totalLife;
         $this->melee = $melee;
@@ -213,6 +221,11 @@ abstract class AbstractUnit implements UnitInterface
     public function getAttackSpeed(): float
     {
         return $this->attackSpeed;
+    }
+
+    public function getBlock(): int
+    {
+        return $this->block;
     }
 
     public function getLife(): int
