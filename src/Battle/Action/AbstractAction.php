@@ -68,13 +68,6 @@ abstract class AbstractAction implements ActionInterface
      */
     protected $icon;
 
-    /**
-     * Было ли событие заблокировано
-     *
-     * @var bool
-     */
-    protected $blocked = false;
-
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
@@ -219,17 +212,22 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Фактическая проверка на блок актуальна только для DamageAction, для всех остальных событий просто возвращается
+     * false
+     *
+     * @param UnitInterface $unit
      * @return bool
      */
-    public function isBlocked(): bool
+    public function isBlocked(UnitInterface $unit): bool
     {
-        return $this->blocked;
+        return false;
     }
 
     /**
+     * @param UnitInterface $unit
      * @throws ActionException
      */
-    public function blocked(): void
+    public function blocked(UnitInterface $unit): void
     {
         throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }

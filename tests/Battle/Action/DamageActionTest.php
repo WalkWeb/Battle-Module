@@ -216,12 +216,12 @@ class DamageActionTest extends AbstractUnitTest
         $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
 
         // По-умолчанию isBlocked возвращает false
-        self::assertFalse($action->isBlocked());
+        self::assertFalse($action->isBlocked($defendUnit));
 
         // Указываем, что урон был заблокирован
-        $action->blocked();
+        $action->blocked($defendUnit);
 
         // И получаем true
-        self::assertTrue($action->isBlocked());
+        self::assertTrue($action->isBlocked($defendUnit));
     }
 }

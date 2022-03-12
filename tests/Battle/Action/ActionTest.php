@@ -156,7 +156,7 @@ class ActionTest extends AbstractUnitTest
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::blocked');
-        $action->blocked();
+        $action->blocked($defendUnit);
     }
 
     /**

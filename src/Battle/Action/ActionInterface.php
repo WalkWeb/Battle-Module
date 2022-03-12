@@ -268,18 +268,21 @@ interface ActionInterface
     public function getIcon(): string;
 
     /**
-     * Было ли событие заблокировано
+     * Было ли событие заблокировано указанным юнитом
      *
      * По умолчанию возвращает всегда false, true может быть только в DamageAction, если противник заблокировал урон
      *
+     * @param UnitInterface $unit
      * @return bool
      */
-    public function isBlocked(): bool;
+    public function isBlocked(UnitInterface $unit): bool;
 
     /**
-     * Указывает, что событие было заблокировано
+     * Указывает, что событие было заблокировано данным юнитом
      *
      * По умолчанию вызов метода возвращает Exception, успешно обработан данный метод будет только в DamageAction
+     *
+     * @param UnitInterface $unit
      */
-    public function blocked(): void;
+    public function blocked(UnitInterface $unit): void;
 }

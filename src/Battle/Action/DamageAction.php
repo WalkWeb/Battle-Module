@@ -37,6 +37,16 @@ class DamageAction extends AbstractAction
      */
     protected $messageMethod;
 
+    /**
+     * Было ли событие заблокировано
+     *
+     * Данные хранятся в виде массива:
+     * unit_id => true
+     *
+     * @var bool
+     */
+    protected $blockedByUnit = [];
+
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
@@ -135,8 +145,24 @@ class DamageAction extends AbstractAction
         return true;
     }
 
-    public function blocked(): void
+    /**
+     * @param UnitInterface $unit
+     * @return bool
+     */
+    public function isBlocked(UnitInterface $unit): bool
     {
-        $this->blocked = true;
+        if (!array_key_exists($unit->getId(), $this->blockedByUnit)) {
+            return false;
+        }
+
+        return (bool)$this->blockedByUnit[$unit->getId()];
+    }
+
+    /**
+     * @param UnitInterface $unit
+     */
+    public function blocked(UnitInterface $unit): void
+    {
+        $this->blockedByUnit[$unit->getId()] = true;
     }
 }

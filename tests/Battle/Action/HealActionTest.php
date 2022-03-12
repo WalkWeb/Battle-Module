@@ -285,6 +285,23 @@ class HealActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на вызов isBlocked() у не-DamageAction - всегда получаем false
+     *
+     * @throws Exception
+     */
+    public function testHealActionIsBlocked(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $healAction = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
+
+        self::assertFalse($healAction->isBlocked($enemyUnit));
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $command
      * @param CommandInterface $enemyCommand
