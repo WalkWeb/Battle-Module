@@ -32,8 +32,14 @@ class ChatTest extends AbstractUnitTest
     private const DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
     private const DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона';
 
+    private const BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
+    private const BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
+
     private const DAMAGE_TWO_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> and <span style="color: #1e72e3">unit_3</span> on 40 damage';
     private const DAMAGE_TWO_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> и <span style="color: #1e72e3">unit_3</span> на 40 урона';
+
+    private const DAMAGE_AND_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
+    private const DAMAGE_AND_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
     private const DAMAGE_THREE_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> and <span style="color: #1e72e3">unit_4</span> on 60 damage';
     private const DAMAGE_THREE_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> и <span style="color: #1e72e3">unit_4</span> на 60 урона';
@@ -108,6 +114,25 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::DAMAGE_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::DAMAGE_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения о блоке
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageBlockedDamage(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 28);
+
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::BLOCK_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::BLOCK_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -437,6 +462,30 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::DAMAGE_TWO_TARGET_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::DAMAGE_TWO_TARGET_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения, когда одна цель получила урон, а другая заблокировала
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageDamageAndBlock(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(28);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
+
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::DAMAGE_AND_BLOCK_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::DAMAGE_AND_BLOCK_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**

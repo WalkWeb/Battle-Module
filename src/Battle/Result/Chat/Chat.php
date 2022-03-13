@@ -67,19 +67,19 @@ class Chat implements ChatInterface
      */
     private function damage(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // ability icon, if any
-            $this->getIcon($action) .
-            // attack
-            $this->translation->trans( $action->getNameAction()) .
-            // Targets
-            ' ' . $this->getTargetsName($action) . ' ' .
-            // "on"
-            $this->translation->trans('on') . ' ' .
-            // # damage
-            $action->getFactualPower() . ' ' . $this->translation->trans('damage');
+        $damagedUnits = $this->getTargetsName($action);
+        $blockedUnits = $this->getTargetsBlockedName($action);
+
+        if ($damagedUnits && $blockedUnits) {
+            return
+                $this->getDamagedMessage($action) . '. ' . $this->getBlockedMessage($action);
+        }
+
+        if ($damagedUnits) {
+            return $this->getDamagedMessage($action);
+        }
+
+        return $this->getBlockedMessage($action);
     }
 
     /**
@@ -344,30 +344,60 @@ class Chat implements ChatInterface
     }
 
     /**
-     * Формирует строку на основании количества целей:
-     *
-     * 1 цель: unit
-     * 2 цели: unit and unit
-     * 3+ цели: unit, unit and unit
-     *
-     * На данный момент несколько целей могут быть только у удара или лечения
-     *
      * @param ActionInterface $action
      * @return string
      * @throws ActionException
      */
     private function getTargetsName(ActionInterface $action): string
     {
-        // TODO На всякий случай добавить проверку на то, что у Action нет цели
-
         $targets = clone $action->getTargetUnits();
         $names = [];
 
         foreach ($targets as $target) {
-            $names[] = '<span style="color: ' . $target->getRace()->getColor() . '">' . $target->getName() . '</span>';
+            if (!$action->isBlocked($target)) {
+                $names[] = '<span style="color: ' . $target->getRace()->getColor() . '">' . $target->getName() . '</span>';
+            }
         }
 
+        return $this->gluingNames($names);
+    }
+
+    /**
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    private function getTargetsBlockedName(ActionInterface $action): string
+    {
+        $targets = clone $action->getTargetUnits();
+        $names = [];
+
+        foreach ($targets as $target) {
+            if ($action->isBlocked($target)) {
+                $names[] = '<span style="color: ' . $target->getRace()->getColor() . '">' . $target->getName() . '</span>';
+            }
+        }
+
+        return $this->gluingNames($names);
+    }
+
+    /**
+     * Формирует строку на основании количества целей:
+     *
+     * 1 цель: unit
+     * 2 цели: unit and unit
+     * 3+ цели: unit, unit and unit
+     *
+     * @param array $names
+     * @return string
+     */
+    private function gluingNames(array $names): string
+    {
         $count = count($names);
+
+        if ($count === 0) {
+            return '';
+        }
 
         if ($count === 1) {
             return $names[0];
@@ -382,7 +412,7 @@ class Chat implements ChatInterface
 
         return implode(', ', $names) . ' ' . $this->translation->trans('and') . ' ' . $last;
     }
-
+    
     /**
      * @param ActionInterface $action
      * @return bool
@@ -411,5 +441,52 @@ class Chat implements ChatInterface
         }
 
         return $target->getId() === $action->getActionUnit()->getId();
+    }
+
+    /**
+     * Формирует сообщение о юнитах, которые получили урон
+     *
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    private function getDamagedMessage(ActionInterface $action): string
+    {
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // ability icon, if any
+            $this->getIcon($action) .
+            // attack
+            $this->translation->trans( $action->getNameAction()) .
+            // Targets
+            ' ' . $this->getTargetsName($action) . ' ' .
+            // "on"
+            $this->translation->trans('on') . ' ' .
+            // # damage
+            $action->getFactualPower() . ' ' . $this->translation->trans('damage');
+    }
+
+    /**
+     * Формирует сообщение о тех юнитах, которые заблокировали атаку. Сообщение формируется так, чтобы оно корректно
+     * отображалось как само по себе (когда цель у DamageAction одна и она заблокировала урон), так и вместе с
+     * сообщением о получении урона другими юнитами (когда целей у DamageAction несколько, и кто-то урон получил, а
+     * кто-то заблокировал)
+     *
+     * @param $action
+     * @return string
+     * @throws ActionException
+     */
+    private function getBlockedMessage(ActionInterface $action): string
+    {
+        return
+            // unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // "tried to strike, but"
+            $this->translation->trans('tried to strike, but') . ' ' .
+            // targets
+            $this->getTargetsBlockedName($action) . ' ' .
+            // "blocked it!"
+            $this->translation->trans('blocked it') . '!';
     }
 }
