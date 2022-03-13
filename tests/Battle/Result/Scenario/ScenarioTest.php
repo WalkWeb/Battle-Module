@@ -84,6 +84,49 @@ class ScenarioTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на формирование массива параметров для анимации блока атаки
+     *
+     * @throws Exception
+     */
+    public function testScenarioAddBlockedDamage(): void
+    {
+        $statistic = new Statistic();
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(28);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->handle();
+
+        $scenario = new Scenario();
+        $scenario->addAnimation($action, $statistic);
+
+        $expectedData = [
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'        => $unit->getId(),
+                    'class'          => 'd_attack',
+                    'unit_cons_bar2' => 0,
+                    'unit_rage_bar2' => 0,
+                    'unit_effects'   => [],
+                    'targets'        => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => $enemyUnit->getId(),
+                            'class'             => 'd_block',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
+    }
+
+    /**
      * @throws Exception
      */
     public function testScenarioAddMultipleDamage(): void

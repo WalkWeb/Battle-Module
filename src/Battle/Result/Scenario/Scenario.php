@@ -53,22 +53,11 @@ class Scenario implements ScenarioInterface
         $targetEffects = [];
 
         foreach ($action->getTargetUnits() as $targetUnit) {
-            $targetEffects[] = [
-                'type'              => 'change',
-                'user_id'           => $targetUnit->getId(),
-                'class'             => 'd_red',
-                'hp'                => $targetUnit->getLife(),
-                'thp'               => $targetUnit->getTotalLife(),
-                'hp_bar_class'      => 'unit_hp_bar',
-                'hp_bar_class2'     => 'unit_hp_bar2',
-                'recdam'            => '-' . $action->getFactualPowerByUnit($targetUnit->getId()),
-                'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
-                'unit_cons_bar2'    => $this->getConcentrationBarWidth($targetUnit),
-                'unit_rage_bar2'    => $this->getRageBarWidth($targetUnit),
-                'ava'               => 'unit_ava_red',
-                'avas'              => $this->getAvaClassTarget($targetUnit),
-                'unit_effects'      => $this->getUnitEffects($targetUnit),
-            ];
+            if ($action->isBlocked($targetUnit)) {
+                $targetEffects[] = $this->createBlockedDamageTargetEffect($targetUnit);
+            } else {
+                $targetEffects[] = $this->createDamageTargetEffect($action, $targetUnit);
+            }
         }
 
         $this->scenario[] = [
@@ -98,6 +87,7 @@ class Scenario implements ScenarioInterface
 
         foreach ($action->getTargetUnits() as $targetUnit) {
             $targetEffects[] = [
+                // TODO Привести массив параметров в соответствие с createDamageTargetEffect()
                 'type'              => 'change',
                 'user_id'           => $targetUnit->getId(),
                 'ava'               => 'unit_ava_effect_damage',
@@ -335,7 +325,9 @@ class Scenario implements ScenarioInterface
     /**
      * При некоторых событиях не нужно добавлять никаких анимаций
      */
-    private function skip(): void {}
+    private function skip(): void
+    {
+    }
 
     /**
      * @return string
@@ -428,5 +420,48 @@ class Scenario implements ScenarioInterface
     private function getUnitBoxClass(UnitInterface $unit): string
     {
         return $unit->getClass() ? 'unit_box2' : 'unit_box2_na';
+    }
+
+    /**
+     * Создает массив параметров для анимации получения удара у цели
+     *
+     * @param ActionInterface $action
+     * @param UnitInterface $targetUnit
+     * @return array
+     * @throws ActionException
+     */
+    private function createDamageTargetEffect(ActionInterface $action, UnitInterface $targetUnit): array
+    {
+        return [
+            'type'              => 'change',
+            'user_id'           => $targetUnit->getId(),
+            'class'             => 'd_red',
+            'hp'                => $targetUnit->getLife(),
+            'thp'               => $targetUnit->getTotalLife(),
+            'hp_bar_class'      => 'unit_hp_bar',
+            'hp_bar_class2'     => 'unit_hp_bar2',
+            'recdam'            => '-' . $action->getFactualPowerByUnit($targetUnit->getId()),
+            'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
+            'unit_cons_bar2'    => $this->getConcentrationBarWidth($targetUnit),
+            'unit_rage_bar2'    => $this->getRageBarWidth($targetUnit),
+            'ava'               => 'unit_ava_red',
+            'avas'              => $this->getAvaClassTarget($targetUnit),
+            'unit_effects'      => $this->getUnitEffects($targetUnit),
+        ];
+    }
+
+    /**
+     * Создает массив параметров для анимации блока удара у цели
+     *
+     * @param UnitInterface $targetUnit
+     * @return array
+     */
+    private function createBlockedDamageTargetEffect(UnitInterface $targetUnit): array
+    {
+        return [
+            'type'    => 'change',
+            'user_id' => $targetUnit->getId(),
+            'class'   => 'd_block',
+        ];
     }
 }
