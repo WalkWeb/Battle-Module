@@ -104,6 +104,8 @@ class DamageAction extends AbstractAction
     }
 
     /**
+     * TODO Лучше переделать на UnitInterface $unit, и потом уже внутри брать id
+     *
      * @param string $unitId
      * @return int
      * @throws ActionException

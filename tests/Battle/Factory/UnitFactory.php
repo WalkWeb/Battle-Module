@@ -437,6 +437,22 @@ class UnitFactory
             'class'        => 50,
             'race'         => 9,
         ],
+        // Юнит со 100% шансом блока
+        28  => [
+            'id'           => '818b6a3f-a994-412e-9210-88dbd6962d9d',
+            'name'         => '100_block',
+            'level'        => 1,
+            'avatar'       => '/images/avas/humans/human001.jpg',
+            'damage'       => 20,
+            'attack_speed' => 1,
+            'block'        => 100,
+            'life'         => 100,
+            'total_life'   => 100,
+            'melee'        => true,
+            'command'      => 1,
+            'class'        => 1,
+            'race'         => 1,
+        ],
     ];
 
     /**

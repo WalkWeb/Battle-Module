@@ -203,11 +203,11 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на указывание, что событие (урон) было заблокировано
+     * Тест на ручное указывание, что событие (урон) было заблокировано
      *
      * @throws Exception
      */
-    public function testDamageActionBlocked(): void
+    public function testDamageActionManualBlocked(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
@@ -223,5 +223,23 @@ class DamageActionTest extends AbstractUnitTest
 
         // И получаем true
         self::assertTrue($action->isBlocked($defendUnit));
+    }
+
+    /**
+     * Тест на блокирование урона
+     *
+     * @throws Exception
+     */
+    public function testDamageActionBlocked(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(28);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+        $action->handle();
+
+        self::assertTrue($action->isBlocked($enemyUnit));
+        self::assertEquals(0, $action->getFactualPowerByUnit($enemyUnit->getId()));
     }
 }

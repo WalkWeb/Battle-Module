@@ -72,13 +72,23 @@ class Unit extends AbstractUnit
     /**
      * Обрабатывает action на получение урона
      *
+     * Позже, когда будет добавлен магический блок, игнорирование бока, уклонение, критические удары - все эти
+     * механики будут вынесены в отдельный класс Calculator
+     *
      * @param DamageAction $action
-     * @throws ActionException
+     * @throws Exception
      */
     private function applyDamageAction(DamageAction $action): void
     {
-        $primordialLife = $this->life;
+        // Проверка блока
+        if ($this->block && $this->block > random_int(1, 100)) {
+            $action->addFactualPower($this->id, 0);
+            $action->blocked($this);
+            return;
+        }
 
+        // Применение урона
+        $primordialLife = $this->life;
         $this->life -= $action->getPower();
 
         if ($this->life < 1) {
