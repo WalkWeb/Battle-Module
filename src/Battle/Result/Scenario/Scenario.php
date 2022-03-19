@@ -86,17 +86,7 @@ class Scenario implements ScenarioInterface
         $targetEffects = [];
 
         foreach ($action->getTargetUnits() as $targetUnit) {
-            $targetEffects[] = [
-                // TODO Привести массив параметров в соответствие с createDamageTargetEffect()
-                'type'              => 'change',
-                'user_id'           => $targetUnit->getId(),
-                'ava'               => 'unit_ava_effect_damage',
-                'recdam'            => '-' . $action->getFactualPowerByUnit($targetUnit),
-                'hp'                => $targetUnit->getLife(),
-                'thp'               => $targetUnit->getTotalLife(),
-                'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
-                'avas'              => $this->getAvaClassTarget($targetUnit),
-            ];
+            $targetEffects[] = $this->createDamageTargetEffect($action, $targetUnit, true);
         }
 
         $this->scenario[] = [
@@ -427,15 +417,15 @@ class Scenario implements ScenarioInterface
      *
      * @param ActionInterface $action
      * @param UnitInterface $targetUnit
+     * @param bool $effect - является ли данный урон уроном от эффекта
      * @return array
      * @throws ActionException
      */
-    private function createDamageTargetEffect(ActionInterface $action, UnitInterface $targetUnit): array
+    private function createDamageTargetEffect(ActionInterface $action, UnitInterface $targetUnit, bool $effect = false): array
     {
         return [
             'type'              => 'change',
             'user_id'           => $targetUnit->getId(),
-            'class'             => 'd_red',
             'hp'                => $targetUnit->getLife(),
             'thp'               => $targetUnit->getTotalLife(),
             'hp_bar_class'      => 'unit_hp_bar',
@@ -444,7 +434,7 @@ class Scenario implements ScenarioInterface
             'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
             'unit_cons_bar2'    => $this->getConcentrationBarWidth($targetUnit),
             'unit_rage_bar2'    => $this->getRageBarWidth($targetUnit),
-            'ava'               => 'unit_ava_red',
+            'ava'               => $effect ? 'unit_ava_effect_damage' : 'unit_ava_red',
             'avas'              => $this->getAvaClassTarget($targetUnit),
             'unit_effects'      => $this->getUnitEffects($targetUnit),
         ];

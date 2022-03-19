@@ -471,22 +471,6 @@ p.view {
 
 /* Animated box */
 
-.d_red {
-    width: 280px;
-    height: 117px;
-    text-align: left;
-}
-.d_green {
-    width: 280px;
-    height: 117px;
-    text-align: left;
-}
-.d_grey {
-    width: 280px;
-    height: 117px;
-    text-align: left;
-}
-
 .d_attack {
     animation: attack 500ms infinite linear;
     animation-direction: alternate;

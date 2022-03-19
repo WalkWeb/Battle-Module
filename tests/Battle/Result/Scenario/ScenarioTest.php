@@ -62,7 +62,6 @@ class ScenarioTest extends AbstractUnitTest
                         [
                             'type'              => 'change',
                             'user_id'           => $defendUnit->getId(),
-                            'class'             => 'd_red',
                             'hp'                => $defendUnit->getTotalLife() - $attackUnit->getDamage(),
                             'thp'               => $defendUnit->getTotalLife(),
                             'hp_bar_class'      => 'unit_hp_bar',
@@ -114,9 +113,9 @@ class ScenarioTest extends AbstractUnitTest
                     'unit_effects'   => [],
                     'targets'        => [
                         [
-                            'type'              => 'change',
-                            'user_id'           => $enemyUnit->getId(),
-                            'class'             => 'd_block',
+                            'type'    => 'change',
+                            'user_id' => $enemyUnit->getId(),
+                            'class'   => 'd_block',
                         ],
                     ],
                 ],
@@ -163,7 +162,6 @@ class ScenarioTest extends AbstractUnitTest
                         [
                             'type'              => 'change',
                             'user_id'           => '1aab367d-37e8-4544-9915-cb3d7779308b',
-                            'class'             => 'd_red',
                             'hp'                => 230,
                             'thp'               => 250,
                             'hp_bar_class'      => 'unit_hp_bar',
@@ -179,7 +177,6 @@ class ScenarioTest extends AbstractUnitTest
                         [
                             'type'              => 'change',
                             'user_id'           => '72df87f5-b3a7-4574-9526-45a20aa77119',
-                            'class'             => 'd_red',
                             'hp'                => 100,
                             'thp'               => 120,
                             'hp_bar_class'      => 'unit_hp_bar',
@@ -195,7 +192,6 @@ class ScenarioTest extends AbstractUnitTest
                         [
                             'type'              => 'change',
                             'user_id'           => 'c310ce86-7bb2-44b0-b634-ea0d28fb1180',
-                            'class'             => 'd_red',
                             'hp'                => 0,
                             'thp'               => 20,
                             'hp_bar_class'      => 'unit_hp_bar',
@@ -263,6 +259,16 @@ class ScenarioTest extends AbstractUnitTest
                             'thp'               => 250,
                             'unit_hp_bar_width' => 96,
                             'avas'              => 'unit_ava_blank',
+                            'hp_bar_class'      => 'unit_hp_bar',
+                            'hp_bar_class2'     => 'unit_hp_bar2',
+                            'unit_cons_bar2'    => 20,
+                            'unit_rage_bar2'    => 14,
+                            'unit_effects'      => [
+                                [
+                                    'icon'     => '/images/icons/ability/202.png',
+                                    'duration' => '5',
+                                ],
+                            ],
                         ],
                     ],
                 ],
