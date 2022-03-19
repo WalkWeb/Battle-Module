@@ -156,11 +156,11 @@ interface ActionInterface
     /**
      * Возвращает силу действия по конкретному юниту
      *
-     * @param string $unitId
+     * @param UnitInterface $unit
      * @return int
      * @throws ActionException
      */
-    public function getFactualPowerByUnit(string $unitId): int;
+    public function getFactualPowerByUnit(UnitInterface $unit): int;
 
     /**
      * Возвращает юнита, который будет призван

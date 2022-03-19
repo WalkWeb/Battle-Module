@@ -62,7 +62,7 @@ class DamageActionTest extends AbstractUnitTest
 
         self::assertEquals(20, $action->getPower());
         self::assertEquals(20, $action->getFactualPower());
-        self::assertEquals(20, $action->getFactualPowerByUnit($enemyUnit->getId()));
+        self::assertEquals(20, $action->getFactualPowerByUnit($enemyUnit));
         self::assertEquals($unit->getId(), $action->getActionUnit()->getId());
         self::assertCount(1, $action->getTargetUnits());
 
@@ -171,12 +171,12 @@ class DamageActionTest extends AbstractUnitTest
         self::assertEquals($unit->getDamage(), $action->getFactualPower());
 
         // factualPower, по юниту, по которому урон наносился - тоже
-        self::assertEquals($unit->getDamage(), $action->getFactualPowerByUnit($defendUnit->getId()));
+        self::assertEquals($unit->getDamage(), $action->getFactualPowerByUnit($defendUnit));
 
         // А вот factualPower по юниту, по которому урон не наносился - отсутствует
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_POWER_BY_UNIT);
-        $action->getFactualPowerByUnit($unit->getId());
+        $action->getFactualPowerByUnit($unit);
     }
 
     /**
@@ -240,6 +240,6 @@ class DamageActionTest extends AbstractUnitTest
         $action->handle();
 
         self::assertTrue($action->isBlocked($enemyUnit));
-        self::assertEquals(0, $action->getFactualPowerByUnit($enemyUnit->getId()));
+        self::assertEquals(0, $action->getFactualPowerByUnit($enemyUnit));
     }
 }

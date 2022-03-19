@@ -141,11 +141,11 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
-     * @param string $unitId
+     * @param UnitInterface $unit
      * @return int
      * @throws ActionException
      */
-    public function getFactualPowerByUnit(string $unitId): int
+    public function getFactualPowerByUnit(UnitInterface $unit): int
     {
         throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }

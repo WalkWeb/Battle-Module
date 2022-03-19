@@ -102,17 +102,17 @@ class ResurrectionAction extends AbstractAction
     }
 
     /**
-     * @param string $unitId
+     * @param UnitInterface $unit
      * @return int
      * @throws ActionException
      */
-    public function getFactualPowerByUnit(string $unitId): int
+    public function getFactualPowerByUnit(UnitInterface $unit): int
     {
-        if (!array_key_exists($unitId, $this->factualPowerByUnit)) {
-            throw new ActionException(ActionException::NO_POWER_BY_UNIT . ': ' . $unitId);
+        if (!array_key_exists($unit->getId(), $this->factualPowerByUnit)) {
+            throw new ActionException(ActionException::NO_POWER_BY_UNIT . ': ' . $unit->getId());
         }
 
-        return $this->factualPowerByUnit[$unitId];
+        return $this->factualPowerByUnit[$unit->getId()];
     }
 
     public function getAnimationMethod(): string

@@ -138,7 +138,7 @@ class ActionTest extends AbstractUnitTest
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getFactualPowerByUnit');
-        $action->getFactualPowerByUnit($unit->getId());
+        $action->getFactualPowerByUnit($unit);
     }
 
     /**

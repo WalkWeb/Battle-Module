@@ -43,7 +43,7 @@ class ResurrectionActionTest extends AbstractUnitTest
         $action->addFactualPower($unit->getId(), $factualPower);
 
         self::assertEquals($factualPower, $action->getFactualPower());
-        self::assertEquals($factualPower, $action->getFactualPowerByUnit($unit->getId()));
+        self::assertEquals($factualPower, $action->getFactualPowerByUnit($unit));
     }
 
     /**
@@ -79,7 +79,7 @@ class ResurrectionActionTest extends AbstractUnitTest
      */
     public function testResurrectionActionNoPowerByUnit(): void
     {
-        [$unit, $command, $enemyCommand] = BaseFactory::create(10, 2);
+        [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(10, 2);
 
         $name = 'Resurrection';
         $power = 50;
@@ -94,12 +94,12 @@ class ResurrectionActionTest extends AbstractUnitTest
         self::assertEquals($power, $action->getFactualPower());
 
         // factualPower, по юниту, по которому урон наносился - тоже
-        self::assertEquals($power, $action->getFactualPowerByUnit($unit->getId()));
+        self::assertEquals($power, $action->getFactualPowerByUnit($unit));
 
         // А вот factualPower по юниту, по которому урон не наносился - отсутствует
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_POWER_BY_UNIT);
-        $action->getFactualPowerByUnit('id');
+        $action->getFactualPowerByUnit($enemyUnit);
     }
 
     /**

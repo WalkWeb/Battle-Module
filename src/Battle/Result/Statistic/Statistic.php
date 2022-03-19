@@ -220,11 +220,11 @@ class Statistic implements StatisticInterface
         foreach ($action->getTargetUnits() as $targetUnit) {
             if (!$this->unitsStatistics->exist($targetUnit->getId())) {
                 $unit = new UnitStatistic($targetUnit);
-                $unit->addTakenDamage($action->getFactualPowerByUnit($targetUnit->getId()));
+                $unit->addTakenDamage($action->getFactualPowerByUnit($targetUnit));
                 $this->unitsStatistics->add($unit);
             } else {
                 $unit = $this->getUnitStatistics($targetUnit->getId());
-                $unit->addTakenDamage($action->getFactualPowerByUnit($targetUnit->getId()));
+                $unit->addTakenDamage($action->getFactualPowerByUnit($targetUnit));
             }
         }
     }
