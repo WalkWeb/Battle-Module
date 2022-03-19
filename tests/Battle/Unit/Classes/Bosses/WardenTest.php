@@ -32,7 +32,7 @@ class WardenTest extends AbstractUnitTest
 
         $warden = $unit->getClass();
 
-        self::assertEquals(9, $warden->getId());
+        self::assertEquals(50, $warden->getId());
         self::assertEquals('Warden', $warden->getName());
         self::assertEquals('/images/icons/small/base-inferno.png', $warden->getSmallIcon());
 

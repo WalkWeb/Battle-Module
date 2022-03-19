@@ -12,7 +12,7 @@ use Battle\Unit\UnitInterface;
 
 class Warden extends AbstractUnitClass
 {
-    private const ID         = 9;
+    private const ID         = 50;
     private const NAME       = 'Warden';
     private const SMALL_ICON = '/images/icons/small/base-inferno.png';
 
