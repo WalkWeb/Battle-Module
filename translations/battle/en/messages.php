@@ -37,6 +37,7 @@ return [
     'and'                              => 'and',
     'tried to strike, but'             => 'tried to strike, but',
     'blocked it'                       => 'blocked it',
+    'but'                              => 'but',
     // Ability
     'Great Heal'                       => 'Great Heal',
     'Imp'                              => 'Imp',

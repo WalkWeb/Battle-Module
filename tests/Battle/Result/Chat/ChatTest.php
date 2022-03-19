@@ -47,6 +47,12 @@ class ChatTest extends AbstractUnitTest
     private const DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> at <span style="color: #1e72e3">unit_2</span> on 50 damage';
     private const DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> по <span style="color: #1e72e3">unit_2</span> на 50 урона';
 
+    private const DAMAGE_ABILITY_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it!';
+    private const DAMAGE_ABILITY_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его!';
+
+    private const ABILITY_DAMAGE_AND_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> at <span style="color: #1e72e3">unit_2</span> on 50 damage. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it!';
+    private const ABILITY_DAMAGE_AND_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> по <span style="color: #1e72e3">unit_2</span> на 50 урона. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его!';
+
     private const HEAL_EN = '<span style="color: #1e72e3">unit_1</span> heal <span style="color: #1e72e3">wounded_unit</span> on 20 life';
     private const HEAL_RU = '<span style="color: #1e72e3">unit_1</span> вылечил <span style="color: #1e72e3">wounded_unit</span> на 20 здоровья';
 
@@ -162,6 +168,35 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::DAMAGE_ABILITY_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::DAMAGE_ABILITY_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения о блоке способности
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageBlockedDamageAbility(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 28);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            50,
+            HeavyStrikeAbility::NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            HeavyStrikeAbility::MESSAGE_METHOD,
+            HeavyStrikeAbility::ICON
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::DAMAGE_ABILITY_BLOCK_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::DAMAGE_ABILITY_BLOCK_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -486,6 +521,40 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::DAMAGE_AND_BLOCK_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::DAMAGE_AND_BLOCK_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения, когда одна цель получила урон, а другая заблокировала от способности
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageAbilityDamageAndBlock(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(28);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            50,
+            HeavyStrikeAbility::NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            HeavyStrikeAbility::MESSAGE_METHOD,
+            HeavyStrikeAbility::ICON
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::ABILITY_DAMAGE_AND_BLOCK_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::ABILITY_DAMAGE_AND_BLOCK_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**

@@ -61,6 +61,14 @@ class Chat implements ChatInterface
     }
 
     /**
+     * Формирует сообщение о нанесении урона.
+     *
+     * Сообщение может быть в трех вариантах:
+     * 1. Нанесение урона
+     * 2. Урон заблокирован
+     * 3. Нанесение урона + урон заблокирован, если было атаковано сразу несколько целей, и там были и те, кто получил
+     *    урон и те, кто его заблокировал
+     *
      * @param ActionInterface $action
      * @return string
      * @throws ActionException
@@ -83,7 +91,7 @@ class Chat implements ChatInterface
     }
 
     /**
-     * Отдельный метод для формирования урона от способностей. Сообщение выглядит так:
+     * Отдельный метод для формирования урона от способностей. В базовом варианте сообщение выглядит так:
      *
      * Unit use <icon> Heavy Strike at Enemy on 50 damage
      *
@@ -93,23 +101,19 @@ class Chat implements ChatInterface
      */
     private function damageAbility(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // "use"
-            $this->translation->trans('use') . ' ' .
-            // ability icon
-            $this->getIcon($action) .
-            // ability name
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
-            // "at"
-            $this->translation->trans('at') .
-            // Targets
-            ' ' . $this->getTargetsName($action) . ' ' .
-            // "on"
-            $this->translation->trans('on') . ' ' .
-            // # damage
-            $action->getFactualPower() . ' ' . $this->translation->trans('damage');
+        $damagedUnits = $this->getTargetsName($action);
+        $blockedUnits = $this->getTargetsBlockedName($action);
+
+        if ($damagedUnits && $blockedUnits) {
+            return
+                $this->getDamagedAbilityMessage($action) . '. ' . $this->getBlockedAbilityMessage($action);
+        }
+
+        if ($damagedUnits) {
+            return $this->getDamagedAbilityMessage($action);
+        }
+
+        return $this->getBlockedAbilityMessage($action);
     }
 
     /**
@@ -468,10 +472,7 @@ class Chat implements ChatInterface
     }
 
     /**
-     * Формирует сообщение о тех юнитах, которые заблокировали атаку. Сообщение формируется так, чтобы оно корректно
-     * отображалось как само по себе (когда цель у DamageAction одна и она заблокировала урон), так и вместе с
-     * сообщением о получении урона другими юнитами (когда целей у DamageAction несколько, и кто-то урон получил, а
-     * кто-то заблокировал)
+     * Формирует сообщение о юнитах которые заблокировали атаку.
      *
      * @param $action
      * @return string
@@ -484,6 +485,60 @@ class Chat implements ChatInterface
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
             // "tried to strike, but"
             $this->translation->trans('tried to strike, but') . ' ' .
+            // targets
+            $this->getTargetsBlockedName($action) . ' ' .
+            // "blocked it!"
+            $this->translation->trans('blocked it') . '!';
+    }
+
+    /**
+     * Формирует сообщение о юнитах, которые получили урон от способности
+     *
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    private function getDamagedAbilityMessage(ActionInterface $action): string
+    {
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // "use"
+            $this->translation->trans('use') . ' ' .
+            // ability icon
+            $this->getIcon($action) .
+            // ability name
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
+            // "at"
+            $this->translation->trans('at') .
+            // targets
+            ' ' . $this->getTargetsName($action) . ' ' .
+            // "on"
+            $this->translation->trans('on') . ' ' .
+            // # damage
+            $action->getFactualPower() . ' ' . $this->translation->trans('damage');
+    }
+
+    /**
+     * Формирует сообщение о юнитах которые заблокировали урон от способности
+     *
+     * @param $action
+     * @return string
+     * @throws ActionException
+     */
+    private function getBlockedAbilityMessage(ActionInterface $action): string
+    {
+        return
+            // unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // "use"
+            $this->translation->trans('use') . ' ' .
+            // ability icon
+            $this->getIcon($action) .
+            // ability name
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
+            // "but"
+            $this->translation->trans('but') . ' ' .
             // targets
             $this->getTargetsBlockedName($action) . ' ' .
             // "blocked it!"
