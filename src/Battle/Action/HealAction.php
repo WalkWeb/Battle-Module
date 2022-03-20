@@ -43,7 +43,7 @@ class HealAction extends AbstractAction
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         int $typeTarget,
-        ?int $power = null,
+        int $power,
         ?string $name = null,
         ?string $animationMethod = null,
         ?string $messageMethod = null,
@@ -52,7 +52,7 @@ class HealAction extends AbstractAction
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
 
-        $this->power = $power ?? $actionUnit->getDamage();
+        $this->power = $power;
         $this->name = $name ?? self::NAME;
         $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
         $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;

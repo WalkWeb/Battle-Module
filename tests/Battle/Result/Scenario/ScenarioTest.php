@@ -376,7 +376,13 @@ class ScenarioTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $woundedUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new HealAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_WOUNDED_ALLIES);
+        $action = new HealAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_WOUNDED_ALLIES,
+            $unit->getDamage()
+        );
 
         self::assertTrue($action->canByUsed());
 

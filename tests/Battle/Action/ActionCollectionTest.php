@@ -46,19 +46,25 @@ class ActionCollectionTest extends AbstractUnitTest
     public function testActionCollectionAddCollection(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $defendUnit = UnitFactory::createByTemplate(2);
-        $defendCommand = CommandFactory::create([$defendUnit]);
-        $alliesCommand = CommandFactory::create([$unit]);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $damageAction = new DamageAction(
             $unit,
-            $defendCommand,
-            $alliesCommand,
+            $enemyCommand,
+            $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage()
         );
 
-        $healAction = new HealAction($unit, $defendCommand, $alliesCommand, HealAction::TARGET_WOUNDED_ALLIES);
+        $healAction = new HealAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_WOUNDED_ALLIES,
+            $unit->getDamage()
+        );
 
         $actionCollection = new ActionCollection();
         $actionCollection->add($damageAction);

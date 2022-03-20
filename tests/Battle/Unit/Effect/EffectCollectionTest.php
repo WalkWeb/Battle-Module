@@ -146,7 +146,14 @@ class EffectCollectionTest extends AbstractUnitTest
         $collection = new EffectCollection($unit);
 
         $actions = new ActionCollection();
-        $actions->add(new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES));
+
+        $actions->add(new HealAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_WOUNDED_ALLIES,
+            $unit->getDamage()
+        ));
 
         $collection->add(new Effect(
             'Effect#1',
@@ -183,7 +190,14 @@ class EffectCollectionTest extends AbstractUnitTest
         $collection = new EffectCollection($unit);
 
         $actions = new ActionCollection();
-        $actions->add(new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES));
+
+        $actions->add(new HealAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_WOUNDED_ALLIES,
+            $unit->getDamage()
+        ));
 
         $collection->add(new Effect(
             'Effect#1',

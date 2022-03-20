@@ -146,7 +146,13 @@ class HealActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $healAction = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
+        $healAction = new HealAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_WOUNDED_ALLIES,
+            $unit->getDamage()
+        );
 
         self::assertEquals($unit->getDamage(), $healAction->getPower());
     }
@@ -190,7 +196,13 @@ class HealActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
+        $action = new HealAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_WOUNDED_ALLIES,
+            $unit->getDamage()
+        );
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_TARGET_UNIT);
@@ -209,7 +221,13 @@ class HealActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
+        $action = new HealAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_WOUNDED_ALLIES,
+            $unit->getDamage()
+        );
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_TARGET_FOR_HEAL);
@@ -296,7 +314,13 @@ class HealActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $healAction = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
+        $healAction = new HealAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_WOUNDED_ALLIES,
+            $unit->getDamage()
+        );
 
         self::assertFalse($healAction->isBlocked($enemyUnit));
     }

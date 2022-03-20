@@ -230,7 +230,13 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $otherUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_WOUNDED_ALLIES);
+        $action = new HealAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_WOUNDED_ALLIES,
+            $unit->getDamage()
+        );
 
         self::assertTrue($action->canByUsed());
 

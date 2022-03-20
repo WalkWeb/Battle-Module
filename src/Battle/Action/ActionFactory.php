@@ -58,32 +58,10 @@ class ActionFactory
 
         $className = self::$map[$type];
 
-        if ($className === DamageAction::class) {
+        if ($className === DamageAction::class || $className === HealAction::class) {
 
             $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
             $power = self::int($data, 'power', ActionException::INVALID_POWER_DATA);
-            $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
-            $animationMethod = self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA);
-            $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
-
-            return new $className(
-                $actionUnit,
-                $enemyCommand,
-                $alliesCommand,
-                $typeTarget,
-                $power,
-                $name,
-                $animationMethod,
-                $messageMethod,
-                $icon
-            );
-        }
-
-        // TODO Это временное разделение с DamageAction - когда у HealAction будет убран дефолтный power - можно будет объединить обратно
-        if ($className === HealAction::class) {
-
-            $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
-            $power = self::intOrNull($data, 'power', ActionException::INVALID_POWER_DATA);
             $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
             $animationMethod = self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA);
             $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
