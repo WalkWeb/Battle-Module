@@ -52,7 +52,7 @@ class DamageAction extends AbstractAction
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         int $typeTarget,
-        ?int $damage = null,
+        int $damage,
         ?string $name = null,
         ?string $animationMethod = null,
         ?string $messageMethod = null,
@@ -60,7 +60,7 @@ class DamageAction extends AbstractAction
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
-        $this->damage = $damage ?? $actionUnit->getDamage();
+        $this->damage = $damage;
         $this->name = $name ?? self::DEFAULT_NAME;
         $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
         $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;

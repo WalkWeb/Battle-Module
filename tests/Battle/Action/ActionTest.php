@@ -26,7 +26,14 @@ class ActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $defendCommand,
+            $alliesCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getSummonUnit');
@@ -44,7 +51,14 @@ class ActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $defendCommand,
+            $alliesCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getModifyMethod');
@@ -62,7 +76,14 @@ class ActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $defendCommand,
+            $alliesCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::setRevertValue');
@@ -80,7 +101,14 @@ class ActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $defendCommand,
+            $alliesCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getRevertValue');
@@ -98,7 +126,14 @@ class ActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $defendCommand,
+            $alliesCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getRevertAction');
@@ -116,7 +151,14 @@ class ActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $defendCommand,
+            $alliesCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getEffect');
@@ -168,7 +210,13 @@ class ActionTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(1, 2);
 
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals($unit, $action->getCreatorUnit());
@@ -191,7 +239,13 @@ class ActionTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(1, 2);
 
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         $cloneAction = clone $action;
 

@@ -20,10 +20,17 @@ class ActionCollectionTest extends AbstractUnitTest
     public function testActionCollectionCreateSuccess(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $defendUnit = UnitFactory::createByTemplate(2);
-        $defendCommand = CommandFactory::create([$defendUnit]);
-        $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         $actionCollection = new ActionCollection();
         $actionCollection->add($action);
@@ -43,7 +50,14 @@ class ActionCollectionTest extends AbstractUnitTest
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
 
-        $damageAction = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $damageAction = new DamageAction(
+            $unit,
+            $defendCommand,
+            $alliesCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
+
         $healAction = new HealAction($unit, $defendCommand, $alliesCommand, HealAction::TARGET_WOUNDED_ALLIES);
 
         $actionCollection = new ActionCollection();

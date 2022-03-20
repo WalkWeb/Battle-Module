@@ -63,25 +63,38 @@ class UnitTest extends AbstractUnitTest
         $container = new Container();
         $attackUnitTemplate = 2;
         $defendUnitTemplate = 6;
-        $attackUnit = UnitFactory::createByTemplate($attackUnitTemplate, $container);
-        $defendUnit = UnitFactory::createByTemplate($defendUnitTemplate, $container);
+        $unit = UnitFactory::createByTemplate($attackUnitTemplate, $container);
+        $enemyUnit = UnitFactory::createByTemplate($defendUnitTemplate, $container);
 
-        $enemyCommand = CommandFactory::create([$defendUnit], $container);
-        $alliesCommand = CommandFactory::create([$attackUnit], $container);
+        $command = CommandFactory::create([$unit], $container);
+        $enemyCommand = CommandFactory::create([$enemyUnit], $container);
 
-        $action = new DamageAction($attackUnit, $enemyCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         $action->handle();
 
         $defendLife = UnitFactory::getData($defendUnitTemplate)['life'];
 
-        self::assertEquals($defendLife - $attackUnit->getDamage(), $defendUnit->getLife());
+        self::assertEquals($defendLife - $unit->getDamage(), $enemyUnit->getLife());
 
-        $action2 = new DamageAction($attackUnit, $enemyCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $action2 = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
+
         $action2->handle();
 
-        self::assertEquals(0, $defendUnit->getLife());
-        self::assertFalse($defendUnit->isAlive());
+        self::assertEquals(0, $enemyUnit->getLife());
+        self::assertFalse($enemyUnit->isAlive());
     }
 
     /**

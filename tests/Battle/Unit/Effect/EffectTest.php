@@ -152,6 +152,7 @@ class EffectTest extends AbstractUnitTest
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
+                    'power'          => 20,
                 ]
             ],
             'on_next_round_actions' => [
@@ -161,6 +162,7 @@ class EffectTest extends AbstractUnitTest
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
+                    'power'          => 20,
                 ]
             ],
             'on_disable_actions'    => [
@@ -170,6 +172,7 @@ class EffectTest extends AbstractUnitTest
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
+                    'power'          => 20,
                 ]
             ],
         ];

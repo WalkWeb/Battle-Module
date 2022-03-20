@@ -37,11 +37,18 @@ class ScenarioTest extends AbstractUnitTest
     public function testScenarioAddDamage(): void
     {
         $statistic = new Statistic();
-        $attackUnit = UnitFactory::createByTemplate(1);
-        $defendUnit = UnitFactory::createByTemplate(2);
-        $attackCommand = CommandFactory::create([$attackUnit]);
-        $defendCommand = CommandFactory::create([$defendUnit]);
-        $action = new DamageAction($attackUnit, $defendCommand, $attackCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         $action->handle();
 
@@ -53,7 +60,7 @@ class ScenarioTest extends AbstractUnitTest
             'attack'  => $statistic->getStrokeNumber(),
             'effects' => [
                 [
-                    'user_id'        => $attackUnit->getId(),
+                    'user_id'        => $unit->getId(),
                     'class'          => 'd_attack',
                     'unit_cons_bar2' => 0,
                     'unit_rage_bar2' => 0,
@@ -61,9 +68,9 @@ class ScenarioTest extends AbstractUnitTest
                     'targets'        => [
                         [
                             'type'              => 'change',
-                            'user_id'           => $defendUnit->getId(),
-                            'hp'                => $defendUnit->getTotalLife() - $attackUnit->getDamage(),
-                            'thp'               => $defendUnit->getTotalLife(),
+                            'user_id'           => $enemyUnit->getId(),
+                            'hp'                => $enemyUnit->getTotalLife() - $unit->getDamage(),
+                            'thp'               => $enemyUnit->getTotalLife(),
                             'hp_bar_class'      => 'unit_hp_bar',
                             'hp_bar_class2'     => 'unit_hp_bar2',
                             'recdam'            => '-20',
@@ -94,7 +101,14 @@ class ScenarioTest extends AbstractUnitTest
         $enemyUnit = UnitFactory::createByTemplate(28);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         $action->handle();
 
@@ -139,7 +153,13 @@ class ScenarioTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
 
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            $unit->getDamage()
+        );
 
         self::assertTrue($action->canByUsed());
 
@@ -796,7 +816,7 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_SELF,
-            null,
+            10,
             null,
             'undefinedAnimationMethod'
         );

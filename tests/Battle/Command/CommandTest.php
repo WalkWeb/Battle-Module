@@ -226,7 +226,14 @@ class CommandTest extends AbstractUnitTest
         self::assertInstanceOf(UnitInterface::class, $alliesCommand->getUnitForAction());
 
         // убиваем первого юнита ($alliesCommand и $enemyCommand переставлены местами - это правильно, ходит вражеская команда)
-        $action = new DamageAction($enemyUnit, $alliesCommand, $enemyCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $action = new DamageAction(
+            $enemyUnit,
+            $alliesCommand,
+            $enemyCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $enemyUnit->getDamage()
+        );
+
         $action->handle();
 
         // указываем, что второй юнит походил
@@ -289,7 +296,14 @@ class CommandTest extends AbstractUnitTest
         $zombie = UnitFactory::createByTemplate(1);
         $enemyCommand = CommandFactory::create([$zombie]);
 
-        $damage = new DamageAction($zombie, $command, $enemyCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $damage = new DamageAction(
+            $zombie,
+            $command,
+            $enemyCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $zombie->getDamage()
+        );
+
         $damage->handle();
 
         self::assertEquals($warrior->getTotalLife() + $priest->getTotalLife() - $zombie->getDamage(), $command->getTotalLife());

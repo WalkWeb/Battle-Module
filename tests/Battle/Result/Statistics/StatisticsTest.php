@@ -113,7 +113,13 @@ class StatisticsTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
 
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            $unit->getDamage()
+        );
 
         $action->handle();
 
@@ -373,15 +379,22 @@ class StatisticsTest extends AbstractUnitTest
     {
         $statistics = new Statistic();
         $unit = UnitFactory::createByTemplate(12);
-        $defendUnit = UnitFactory::createByTemplate(1);
-        $defendCommand = CommandFactory::create([$defendUnit]);
-        $alliesCommand = CommandFactory::create([$unit]);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
+
         $action->handle();
         $statistics->addUnitAction($action);
 
-        self::assertFalse($defendUnit->isAlive());
+        self::assertFalse($enemyUnit->isAlive());
         self::assertEquals(1, $statistics->getUnitsStatistics()->get($unit->getId())->getKilling());
     }
 

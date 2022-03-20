@@ -45,6 +45,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'enemy_command'  => $enemyCommand,
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
+            'power'          => $damage = 150,
         ];
 
         $action = $actionFactory->create($data);
@@ -52,7 +53,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertInstanceOf(DamageAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_RANDOM_ENEMY, $action->getTypeTarget());
-        self::assertEquals($unit->getDamage(), $action->getPower());
+        self::assertEquals($damage, $action->getPower());
         self::assertEquals('attack', $action->getNameAction());
         self::assertEquals('', $action->getIcon());
 
@@ -1175,6 +1176,19 @@ class ActionFactoryTest extends AbstractUnitTest
                     'message_method' => true,
                 ],
                 ActionException::INVALID_MESSAGE_METHOD,
+            ],
+            // TODO Временный кейс
+            [
+                // Некорректный power для HealAction
+                [
+                    'type'           => ActionInterface::HEAL,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES,
+                    'power'          => true,
+                ],
+                ActionException::INVALID_POWER_DATA,
             ],
         ];
     }

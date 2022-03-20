@@ -23,7 +23,14 @@ class DamageActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $defendCommand,
+            $alliesCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals($unit, $action->getCreatorUnit());
@@ -43,7 +50,15 @@ class DamageActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $defendCommand,
+            $alliesCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
+
         $action->handle();
         self::assertEquals($unit->getDamage(), $action->getPower());
     }
@@ -57,7 +72,15 @@ class DamageActionTest extends AbstractUnitTest
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$enemyUnit]);
         $enemyCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $command, $enemyCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $command,
+            $enemyCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
+
         $action->handle();
 
         self::assertEquals(20, $action->getPower());
@@ -144,7 +167,13 @@ class DamageActionTest extends AbstractUnitTest
 
         $typeTarget = 10;
 
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, $typeTarget);
+        $action = new DamageAction(
+            $unit,
+            $defendCommand,
+            $alliesCommand,
+            $typeTarget,
+            $unit->getDamage()
+        );
 
         self::assertEquals($typeTarget, $action->getTypeTarget());
 
@@ -164,7 +193,15 @@ class DamageActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $defendCommand,
+            $alliesCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
+
         $action->handle();
 
         // Общий factualPower получаем нормально
@@ -193,7 +230,13 @@ class DamageActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
 
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            $unit->getDamage()
+        );
 
         $action->handle();
 
@@ -210,19 +253,26 @@ class DamageActionTest extends AbstractUnitTest
     public function testDamageActionManualBlocked(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $defendUnit = UnitFactory::createByTemplate(2);
-        $defendCommand = CommandFactory::create([$defendUnit]);
-        $alliesCommand = CommandFactory::create([$unit]);
-        $action = new DamageAction($unit, $defendCommand, $alliesCommand, DamageAction::TARGET_RANDOM_ENEMY);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
 
         // По-умолчанию isBlocked возвращает false
-        self::assertFalse($action->isBlocked($defendUnit));
+        self::assertFalse($action->isBlocked($enemyUnit));
 
         // Указываем, что урон был заблокирован
-        $action->blocked($defendUnit);
+        $action->blocked($enemyUnit);
 
         // И получаем true
-        self::assertTrue($action->isBlocked($defendUnit));
+        self::assertTrue($action->isBlocked($enemyUnit));
     }
 
     /**
@@ -236,7 +286,15 @@ class DamageActionTest extends AbstractUnitTest
         $enemyUnit = UnitFactory::createByTemplate(28);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
-        $action = new DamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage()
+        );
+
         $action->handle();
 
         self::assertTrue($action->isBlocked($enemyUnit));
