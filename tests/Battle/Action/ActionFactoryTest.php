@@ -177,6 +177,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'damage'       => 10,
             'attack_speed' => 1,
             'block'        => 0,
+            'block_ignore' => 0,
             'life'         => 30,
             'total_life'   => 30,
             'melee'        => true,

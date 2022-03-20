@@ -43,6 +43,7 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['total_life'], $unit->getTotalLife());
         self::assertEquals($data['attack_speed'], $unit->getAttackSpeed());
         self::assertEquals($data['block'], $unit->getBlock());
+        self::assertEquals($data['block_ignore'], $unit->getBlockIgnore());
         self::assertFalse($unit->isAction());
         self::assertEquals($data['life'] > 0, $unit->isAlive());
         self::assertEquals($data['melee'], $unit->isMelee());

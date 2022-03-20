@@ -32,6 +32,7 @@ class UnitFactory
      *     'damage'       => 15,
      *     'attack_speed' => 1.2,
      *     'block'        => 20,
+     *     'block_ignore' => 0,
      *     'life'         => 80,
      *     'total_life'   => 80,
      *     'melee'        => true,
@@ -59,11 +60,13 @@ class UnitFactory
         self::existAndInt($data, 'race', UnitException::INCORRECT_RACE);
         self::existAndInt($data, 'command', UnitException::INCORRECT_COMMAND);
         self::existAndInt($data, 'block', UnitException::INCORRECT_BLOCK);
+        self::existAndInt($data, 'block_ignore', UnitException::INCORRECT_BLOCK_IGNORE);
         self::intMinMaxValue($data['damage'], UnitInterface::MIN_DAMAGE, UnitInterface::MAX_DAMAGE, UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE);
         self::intMinMaxValue($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
         self::intMinMaxValue($data['total_life'], UnitInterface::MIN_TOTAL_LIFE, UnitInterface::MAX_TOTAL_LIFE, UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE);
         self::intMinMaxValue($data['level'], UnitInterface::MIN_LEVEL, UnitInterface::MAX_LEVEL, UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL);
         self::intMinMaxValue($data['block'], UnitInterface::MIN_BLOCK, UnitInterface::MAX_BLOCK, UnitException::INCORRECT_BLOCK_VALUE . UnitInterface::MIN_BLOCK . '-' . UnitInterface::MAX_BLOCK);
+        self::intMinMaxValue($data['block_ignore'], UnitInterface::MIN_BLOCK_IGNORE, UnitInterface::MAX_BLOCK_IGNORE, UnitException::INCORRECT_BLOCK_IGNORE_VALUE . UnitInterface::MIN_BLOCK_IGNORE . '-' . UnitInterface::MAX_BLOCK_IGNORE);
         self::stringMinMaxLength($data['name'], UnitInterface::MIN_NAME_LENGTH, UnitInterface::MAX_NAME_LENGTH, UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH);
         self::stringMinMaxLength($data['id'], UnitInterface::MIN_ID_LENGTH, UnitInterface::MAX_ID_LENGTH, UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH);
 
@@ -93,6 +96,7 @@ class UnitFactory
             $data['damage'],
             $data['attack_speed'],
             $data['block'],
+            $data['block_ignore'],
             $data['life'],
             $data['total_life'],
             $data['melee'],

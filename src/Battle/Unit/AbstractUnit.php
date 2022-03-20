@@ -54,6 +54,11 @@ abstract class AbstractUnit implements UnitInterface
     protected $block;
 
     /**
+     * @var int - Игнорирование блока цели
+     */
+    protected $blockIgnore;
+
+    /**
      * @var int - Текущее здоровье
      */
     protected $life;
@@ -121,6 +126,7 @@ abstract class AbstractUnit implements UnitInterface
      * @param int $damage
      * @param float $attackSpeed
      * @param int $block
+     * @param int $blockIgnore
      * @param int $life
      * @param int $totalLife
      * @param bool $melee
@@ -139,6 +145,7 @@ abstract class AbstractUnit implements UnitInterface
         int $damage,
         float $attackSpeed,
         int $block,
+        int $blockIgnore,
         int $life,
         int $totalLife,
         bool $melee,
@@ -157,6 +164,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->damage = $damage;
         $this->attackSpeed = $attackSpeed;
         $this->block = $block;
+        $this->blockIgnore = $blockIgnore;
         $this->life = $life;
         $this->totalLife = $totalLife;
         $this->melee = $melee;
@@ -226,6 +234,11 @@ abstract class AbstractUnit implements UnitInterface
     public function getBlock(): int
     {
         return $this->block;
+    }
+
+    public function getBlockIgnore(): int
+    {
+        return $this->blockIgnore;
     }
 
     public function getLife(): int

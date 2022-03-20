@@ -40,6 +40,9 @@ interface UnitInterface
     public const MIN_BLOCK        = 0;
     public const MAX_BLOCK        = 100;
 
+    public const MIN_BLOCK_IGNORE = 0;
+    public const MAX_BLOCK_IGNORE = 100;
+
     public const MIN_LIFE         = 0;
     public const MAX_LIFE         = 100000;
 
@@ -158,6 +161,15 @@ interface UnitInterface
      * @return int
      */
     public function getBlock(): int;
+
+    /**
+     * Возвращает значение игнорирования блока цели. Необходимо для реализации механик, когда, например, определенное
+     * оружие может игнорировать блок цели. Для полного игнорирования блока цели необходимо вернуть 100. Хотя можно
+     * и вернуть другое значение, например 10, и тогда шанс блока целью в 25% будет уменьшен до шанса в 15%
+     *
+     * @return int
+     */
+    public function getBlockIgnore(): int;
 
     /**
      * Возвращает текущее здоровье юнита

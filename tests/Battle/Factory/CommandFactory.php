@@ -54,6 +54,7 @@ class CommandFactory
             'damage'       => 20,
             'attack_speed' => 1.00,
             'block'        => 0,
+            'block_ignore' => 0,
             'life'         => 100,
             'total_life'   => 100,
             'melee'        => true,

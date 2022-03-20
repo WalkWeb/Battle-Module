@@ -95,6 +95,7 @@ class StrokeTest extends AbstractUnitTest
             20,
             1,
             0,
+            0,
             100,
             100,
             false,

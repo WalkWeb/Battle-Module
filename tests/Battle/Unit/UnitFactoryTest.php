@@ -56,6 +56,8 @@ class UnitFactoryTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на замену спецсимволов в имени юнита
+     *
      * @throws Exception
      */
     public function testUnitFactoryHtmlspecialchars(): void
@@ -68,6 +70,7 @@ class UnitFactoryTest extends AbstractUnitTest
             'damage'       => 15,
             'attack_speed' => 1.2,
             'block'        => 0,
+            'block_ignore' => 0,
             'life'         => 80,
             'total_life'   => 80,
             'melee'        => true,
@@ -97,6 +100,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -115,6 +119,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -133,6 +138,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -150,6 +156,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -176,6 +183,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -183,7 +191,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_ID,
+                UnitException::INCORRECT_ID,
             ],
             [
                 [
@@ -195,6 +203,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -202,7 +211,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_ID,
+                UnitException::INCORRECT_ID,
             ],
             [
                 [
@@ -214,6 +223,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -221,7 +231,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH,
+                UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH,
             ],
             [
                 [
@@ -233,6 +243,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -240,7 +251,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH,
+                UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH,
             ],
             [
                 [
@@ -251,6 +262,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -258,7 +270,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_NAME,
+                UnitException::INCORRECT_NAME,
             ],
             [
                 [
@@ -270,6 +282,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -277,7 +290,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_NAME,
+                UnitException::INCORRECT_NAME,
             ],
             [
                 [
@@ -289,6 +302,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -296,7 +310,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH,
+                UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH,
             ],
             [
                 [
@@ -308,6 +322,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -315,7 +330,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH,
+                UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH,
             ],
             [
                 [
@@ -326,6 +341,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -333,7 +349,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_AVATAR,
+                UnitException::INCORRECT_AVATAR,
             ],
             [
                 [
@@ -345,6 +361,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -352,7 +369,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_AVATAR,
+                UnitException::INCORRECT_AVATAR,
             ],
             [
                 [
@@ -363,6 +380,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'avatar'       => '/images/avas/monsters/003.png',
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -370,7 +388,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_DAMAGE,
+                UnitException::INCORRECT_DAMAGE,
             ],
             [
                 [
@@ -382,6 +400,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15.3,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -389,7 +408,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_DAMAGE,
+                UnitException::INCORRECT_DAMAGE,
             ],
             [
                 [
@@ -401,6 +420,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => UnitInterface::MIN_DAMAGE - 1,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -408,7 +428,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
+                UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
             ],
             [
                 [
@@ -420,6 +440,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => UnitInterface::MAX_DAMAGE + 1,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -427,7 +448,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
+                UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
             ],
             [
                 [
@@ -438,6 +459,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -445,7 +467,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_ATTACK_SPEED,
+                UnitException::INCORRECT_ATTACK_SPEED,
             ],
             [
                 [
@@ -457,6 +479,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => '1',
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -464,7 +487,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_ATTACK_SPEED,
+                UnitException::INCORRECT_ATTACK_SPEED,
             ],
             [
                 [
@@ -476,6 +499,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => UnitInterface::MIN_ATTACK_SPEED - 0.1,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -483,7 +507,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
+                UnitException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
             ],
             [
                 [
@@ -495,6 +519,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' =>  UnitInterface::MAX_ATTACK_SPEED + 0.1,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -502,7 +527,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
+                UnitException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
             ],
             [
                 [
@@ -514,12 +539,13 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'melee'        => true,
                     'class'        => 1,
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_LIFE,
+                UnitException::INCORRECT_LIFE,
             ],
             [
                 [
@@ -531,6 +557,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80.0,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -538,7 +565,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_LIFE,
+                UnitException::INCORRECT_LIFE,
             ],
             [
                 [
@@ -550,6 +577,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => UnitInterface::MIN_LIFE - 1,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -557,7 +585,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE,
+                UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE,
             ],
             [
                 [
@@ -569,6 +597,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => UnitInterface::MAX_LIFE + 1,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -576,7 +605,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE,
+                UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE,
             ],
             [
                 [
@@ -588,13 +617,14 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'melee'        => true,
                     'class'        => 1,
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_TOTAL_LIFE,
+                UnitException::INCORRECT_TOTAL_LIFE,
             ],
             [
                 [
@@ -606,6 +636,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80.0,
                     'melee'        => true,
@@ -613,7 +644,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_TOTAL_LIFE,
+                UnitException::INCORRECT_TOTAL_LIFE,
             ],
             [
                 [
@@ -625,6 +656,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 0,
                     'total_life'   => UnitInterface::MIN_TOTAL_LIFE - 1,
                     'melee'        => true,
@@ -632,7 +664,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE,
+                UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE,
             ],
             [
                 [
@@ -644,6 +676,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 0,
                     'total_life'   => UnitInterface::MAX_TOTAL_LIFE + 1,
                     'melee'        => true,
@@ -651,7 +684,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE,
+                UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE,
             ],
             [
                 [
@@ -663,13 +696,14 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'class'        => 1,
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_MELEE,
+                UnitException::INCORRECT_MELEE,
             ],
             [
                 [
@@ -681,6 +715,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => 1,
@@ -688,7 +723,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_MELEE,
+                UnitException::INCORRECT_MELEE,
             ],
             [
                 [
@@ -700,6 +735,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -707,7 +743,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_CLASS,
+                UnitException::INCORRECT_CLASS,
             ],
             [
                 [
@@ -719,6 +755,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 90,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -726,7 +763,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::LIFE_MORE_TOTAL_LIFE,
+                UnitException::LIFE_MORE_TOTAL_LIFE,
             ],
             [
                 [
@@ -737,6 +774,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -744,7 +782,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_LEVEL,
+                UnitException::INCORRECT_LEVEL,
             ],
             [
                 [
@@ -756,6 +794,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -763,7 +802,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_LEVEL,
+                UnitException::INCORRECT_LEVEL,
             ],
             [
                 [
@@ -775,6 +814,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -782,7 +822,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL,
+                UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL,
             ],
             [
                 [
@@ -794,6 +834,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -801,7 +842,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL,
+                UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL,
             ],
             [
                 [
@@ -813,13 +854,14 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_RACE,
+                UnitException::INCORRECT_RACE,
             ],
             [
                 [
@@ -831,6 +873,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -838,7 +881,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 'human',
                     'command'      => 1,
                 ],
-                'error' => UnitException::INCORRECT_RACE,
+                UnitException::INCORRECT_RACE,
             ],
             [
                 [
@@ -850,13 +893,14 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
                     'class'        => 1,
                     'race'         => 1,
                 ],
-                'error' => UnitException::INCORRECT_COMMAND,
+                UnitException::INCORRECT_COMMAND,
             ],
             [
                 [
@@ -868,6 +912,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -875,7 +920,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 'left',
                 ],
-                'error' => UnitException::INCORRECT_COMMAND,
+                UnitException::INCORRECT_COMMAND,
             ],
             [
                 [
@@ -887,6 +932,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'block'        => 0,
+                    'block_ignore' => 0,
                     'life'         => 80,
                     'total_life'   => 80,
                     'melee'        => true,
@@ -894,7 +940,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 3,
                 ],
-                'error' => UnitException::INCORRECT_COMMAND,
+                UnitException::INCORRECT_COMMAND,
             ],
             [
                 // Отсутствует block
@@ -907,12 +953,13 @@ class UnitFactoryTest extends AbstractUnitTest
                     'attack_speed' => 1.00,
                     'life'         => 100,
                     'total_life'   => 100,
+                    'block_ignore' => 0,
                     'melee'        => true,
                     'command'      => 1,
                     'class'        => 1,
                     'race'         => 1,
                 ],
-                'error' => UnitException::INCORRECT_BLOCK,
+                UnitException::INCORRECT_BLOCK,
             ],
             [
                 // block некорректного типа
@@ -924,6 +971,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 20,
                     'attack_speed' => 1.00,
                     'block'        => '50',
+                    'block_ignore' => 0,
                     'life'         => 100,
                     'total_life'   => 100,
                     'melee'        => true,
@@ -931,7 +979,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'class'        => 1,
                     'race'         => 1,
                 ],
-                'error' => UnitException::INCORRECT_BLOCK,
+                UnitException::INCORRECT_BLOCK,
             ],
             [
                 // block меньше минимального значения
@@ -943,6 +991,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 20,
                     'attack_speed' => 1.00,
                     'block'        => UnitInterface::MIN_BLOCK - 1,
+                    'block_ignore' => 0,
                     'life'         => 100,
                     'total_life'   => 100,
                     'melee'        => true,
@@ -950,7 +999,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'class'        => 1,
                     'race'         => 1,
                 ],
-                'error' => UnitException::INCORRECT_BLOCK_VALUE . UnitInterface::MIN_BLOCK . '-' . UnitInterface::MAX_BLOCK,
+                UnitException::INCORRECT_BLOCK_VALUE . UnitInterface::MIN_BLOCK . '-' . UnitInterface::MAX_BLOCK,
             ],
             [
                 // block больше максимального значения
@@ -962,6 +1011,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 20,
                     'attack_speed' => 1.00,
                     'block'        => UnitInterface::MAX_BLOCK + 1,
+                    'block_ignore' => 0,
                     'life'         => 100,
                     'total_life'   => 100,
                     'melee'        => true,
@@ -969,7 +1019,86 @@ class UnitFactoryTest extends AbstractUnitTest
                     'class'        => 1,
                     'race'         => 1,
                 ],
-                'error' => UnitException::INCORRECT_BLOCK_VALUE . UnitInterface::MIN_BLOCK . '-' . UnitInterface::MAX_BLOCK,
+                UnitException::INCORRECT_BLOCK_VALUE . UnitInterface::MIN_BLOCK . '-' . UnitInterface::MAX_BLOCK,
+            ],
+            [
+                // Отсутствует block_ignore
+                [
+                    'id'           => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',
+                    'name'         => 'unit_1',
+                    'level'        => 1,
+                    'avatar'       => '/images/avas/humans/human001.jpg',
+                    'damage'       => 20,
+                    'attack_speed' => 1.00,
+                    'block'        => 0,
+                    'life'         => 100,
+                    'total_life'   => 100,
+                    'melee'        => true,
+                    'command'      => 1,
+                    'class'        => 1,
+                    'race'         => 1,
+                ],
+                UnitException::INCORRECT_BLOCK_IGNORE,
+            ],
+            [
+                // block_ignore некорректного типа
+                [
+                    'id'           => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',
+                    'name'         => 'unit_1',
+                    'level'        => 1,
+                    'avatar'       => '/images/avas/humans/human001.jpg',
+                    'damage'       => 20,
+                    'attack_speed' => 1.00,
+                    'block'        => 0,
+                    'block_ignore' => '50',
+                    'life'         => 100,
+                    'total_life'   => 100,
+                    'melee'        => true,
+                    'command'      => 1,
+                    'class'        => 1,
+                    'race'         => 1,
+                ],
+                UnitException::INCORRECT_BLOCK_IGNORE,
+            ],
+            [
+                // block_ignore меньше минимального значения
+                [
+                    'id'           => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',
+                    'name'         => 'unit_1',
+                    'level'        => 1,
+                    'avatar'       => '/images/avas/humans/human001.jpg',
+                    'damage'       => 20,
+                    'attack_speed' => 1.00,
+                    'block'        => 0,
+                    'block_ignore' => UnitInterface::MIN_BLOCK_IGNORE - 1,
+                    'life'         => 100,
+                    'total_life'   => 100,
+                    'melee'        => true,
+                    'command'      => 1,
+                    'class'        => 1,
+                    'race'         => 1,
+                ],
+                UnitException::INCORRECT_BLOCK_IGNORE_VALUE. UnitInterface::MIN_BLOCK_IGNORE . '-' . UnitInterface::MAX_BLOCK_IGNORE,
+            ],
+            [
+                // block_ignore больше максимального значения
+                [
+                    'id'           => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',
+                    'name'         => 'unit_1',
+                    'level'        => 1,
+                    'avatar'       => '/images/avas/humans/human001.jpg',
+                    'damage'       => 20,
+                    'attack_speed' => 1.00,
+                    'block'        => 0,
+                    'block_ignore' => UnitInterface::MAX_BLOCK_IGNORE + 1,
+                    'life'         => 100,
+                    'total_life'   => 100,
+                    'melee'        => true,
+                    'command'      => 1,
+                    'class'        => 1,
+                    'race'         => 1,
+                ],
+                UnitException::INCORRECT_BLOCK_IGNORE_VALUE. UnitInterface::MIN_BLOCK_IGNORE . '-' . UnitInterface::MAX_BLOCK_IGNORE,
             ],
         ];
     }
