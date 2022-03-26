@@ -187,7 +187,7 @@ class Unit extends AbstractUnit
      * При этом само событие указывает, в getModifyMethod(), какой метод должен обработать текущее изменение
      * характеристик
      *
-     * @uses multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert
+     * @uses multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert
      * @param BuffAction $action
      * @throws ActionException
      * @throws UnitException
@@ -276,6 +276,35 @@ class Unit extends AbstractUnit
     private function multiplierAttackSpeedRevert(BuffAction $action): void
     {
         $this->attackSpeed -= $action->getRevertValue();
+    }
+
+    /**
+     * Увеличивает блок юнита на фиксированную величину
+     *
+     * @param BuffAction $action
+     * @throws ActionException
+     */
+    private function addBlock(BuffAction $action): void
+    {
+        $oldBlock = $this->block;
+        $this->block += $action->getPower();
+
+        if ($this->block > self::MAX_BLOCK) {
+            $this->block = self::MAX_BLOCK;
+        }
+
+        $action->setRevertValue($this->block - $oldBlock);
+    }
+
+    /**
+     * Возвращает блок юнита к исходному значению
+     *
+     * @param BuffAction $action
+     * @throws ActionException
+     */
+    private function addBlockRevert(BuffAction $action): void
+    {
+        $this->block -= $action->getRevertValue();
     }
 
     /**

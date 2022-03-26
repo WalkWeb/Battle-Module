@@ -53,6 +53,7 @@ return [
     'Hellfire'                         => 'Hellfire',
     'General Heal'                     => 'General Heal',
     'Incineration'                     => 'Incineration',
+    'Blessed Shield'                   => 'Blessed Shield',
     // Statistics
     'Statistics'                       => 'Statistics',
     'Unit'                             => 'Unit',

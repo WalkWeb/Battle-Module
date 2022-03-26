@@ -51,6 +51,7 @@ return [
     'Hellfire'                         => 'Адское пламя',
     'General Heal'                     => 'Общее исцеление',
     'Incineration'                     => 'Испепеление',
+    'Blessed Shield'                   => 'Благословенный щит',
     // Statistics
     'Statistics'                       => 'Статистика',
     'Unit'                             => 'Кто',
