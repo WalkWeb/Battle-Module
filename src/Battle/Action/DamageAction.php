@@ -23,6 +23,13 @@ class DamageAction extends AbstractAction
     protected $damage;
 
     /**
+     * Игнорирование блока цели
+     *
+     * @var int
+     */
+    protected $blockIgnore;
+
+    /**
      * @var string
      */
     protected $name;
@@ -53,6 +60,7 @@ class DamageAction extends AbstractAction
         CommandInterface $alliesCommand,
         int $typeTarget,
         int $damage,
+        int $blockIgnore,
         ?string $name = null,
         ?string $animationMethod = null,
         ?string $messageMethod = null,
@@ -61,6 +69,7 @@ class DamageAction extends AbstractAction
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->damage = $damage;
+        $this->blockIgnore = $blockIgnore;
         $this->name = $name ?? self::DEFAULT_NAME;
         $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
         $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
@@ -164,5 +173,13 @@ class DamageAction extends AbstractAction
     public function blocked(UnitInterface $unit): void
     {
         $this->blockedByUnit[$unit->getId()] = true;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBlockIgnore(): int
+    {
+        return $this->blockIgnore;
     }
 }

@@ -74,7 +74,8 @@ class UnitTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $action->handle();
@@ -88,7 +89,8 @@ class UnitTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $action2->handle();
@@ -328,7 +330,14 @@ class UnitTest extends AbstractUnitTest
         self::assertCount(1, $unit->getEffects());
 
         // Убиваем юнита
-        $damageAction = new DamageAction($enemyUnit, $command, $enemyCommand, DamageAction::TARGET_RANDOM_ENEMY, 500);
+        $damageAction = new DamageAction(
+            $enemyUnit,
+            $command,
+            $enemyCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            500,
+            0
+        );
 
         $damageAction->handle();
 

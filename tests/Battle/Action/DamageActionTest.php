@@ -29,12 +29,14 @@ class DamageActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals($unit, $action->getCreatorUnit());
         self::assertEquals($unit->getDamage(), $action->getPower());
+        self::assertEquals($unit->getBlockIgnore(), $action->getBlockIgnore());
         self::assertTrue($action->canByUsed());
         self::assertEquals(DamageAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
         self::assertEquals('damage', $action->getMessageMethod());
@@ -56,7 +58,8 @@ class DamageActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $action->handle();
@@ -78,7 +81,8 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $action->handle();
@@ -172,7 +176,8 @@ class DamageActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             $typeTarget,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         self::assertEquals($typeTarget, $action->getTypeTarget());
@@ -199,7 +204,8 @@ class DamageActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $action->handle();
@@ -235,7 +241,8 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $action->handle();
@@ -262,7 +269,8 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         // По-умолчанию isBlocked возвращает false
@@ -292,7 +300,8 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $action->handle();

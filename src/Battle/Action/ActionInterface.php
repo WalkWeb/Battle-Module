@@ -285,4 +285,16 @@ interface ActionInterface
      * @param UnitInterface $unit
      */
     public function blocked(UnitInterface $unit): void;
+
+    /**
+     * Возвращает blockIgnore Action, актуально только для DamageAction, при вызове у прочих Action будет получен
+     * Exception
+     *
+     * По-умолчанию используется blockIgnore атакующего юнита, но если это урон от эффекта - игнорирование будет 100,
+     * независимо от blockIgnore атакующего юнита, т.к. урон от эффекта не может быть заблокирован
+     *
+     * @return int
+     * @throws ActionException
+     */
+    public function getBlockIgnore(): int;
 }

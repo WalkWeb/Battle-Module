@@ -384,6 +384,7 @@ class EffectActionTest extends AbstractUnitTest
                         'type_target'      => ActionInterface::TARGET_SELF,
                         'name'             => 'Poison',
                         'power'            => 8,
+                        'block_ignore'     => 100,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                         'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
                     ],

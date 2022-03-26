@@ -32,7 +32,8 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $this->expectException(ActionException::class);
@@ -57,7 +58,8 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $this->expectException(ActionException::class);
@@ -82,7 +84,8 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $this->expectException(ActionException::class);
@@ -107,7 +110,8 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $this->expectException(ActionException::class);
@@ -132,7 +136,8 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $this->expectException(ActionException::class);
@@ -157,7 +162,8 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $this->expectException(ActionException::class);
@@ -202,6 +208,24 @@ class ActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ситуацию, когда у не-DamageAction вызывается метод getBlockIgnore()
+     *
+     * @throws Exception
+     */
+    public function testActionNoBlockIgnore(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new WaitAction($unit, $defendCommand, $alliesCommand);
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getBlockIgnore');
+        $action->getBlockIgnore();
+    }
+
+    /**
      * Тест на изменение $actionUnit в Action
      *
      * @throws Exception
@@ -215,7 +239,8 @@ class ActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         self::assertEquals($unit, $action->getActionUnit());
@@ -244,7 +269,8 @@ class ActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage()
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
         );
 
         $cloneAction = clone $action;

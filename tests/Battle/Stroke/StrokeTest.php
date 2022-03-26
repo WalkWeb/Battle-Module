@@ -354,6 +354,7 @@ class StrokeTest extends AbstractUnitTest
                         'type_target'      => ActionInterface::TARGET_SELF,
                         'name'             => 'Effect Damage',
                         'power'            => 1000,
+                        'block_ignore'     => 100,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                     ],
                 ],

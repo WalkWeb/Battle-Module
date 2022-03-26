@@ -33,6 +33,7 @@ class HellfireAbility extends AbstractAbility
             $alliesCommand,
             DamageAction::TARGET_ALL_ENEMY,
             (int)($this->unit->getDamage() * 1.5),
+            $this->unit->getBlockIgnore(),
             self::NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             self::MESSAGE_METHOD,

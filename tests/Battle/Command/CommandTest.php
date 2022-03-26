@@ -231,7 +231,8 @@ class CommandTest extends AbstractUnitTest
             $alliesCommand,
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $enemyUnit->getDamage()
+            $enemyUnit->getDamage(),
+            $enemyUnit->getBlockIgnore()
         );
 
         $action->handle();
@@ -301,7 +302,8 @@ class CommandTest extends AbstractUnitTest
             $command,
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $zombie->getDamage()
+            $zombie->getDamage(),
+            $zombie->getBlockIgnore()
         );
 
         $damage->handle();
@@ -800,6 +802,7 @@ class CommandTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_SELF,
                     'name'             => 'Poison',
                     'power'            => 15,
+                    'block_ignore'     => 100,
                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                     'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
                 ],

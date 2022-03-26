@@ -58,7 +58,31 @@ class ActionFactory
 
         $className = self::$map[$type];
 
-        if ($className === DamageAction::class || $className === HealAction::class) {
+        if ($className === DamageAction::class) {
+
+            $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
+            // TODO Т.е. DamageAction и HealAction разделены, в DamageAction power параметр можно заменить на damage
+            $damage = self::int($data, 'power', ActionException::INVALID_POWER_DATA);
+            $blockIgnore = self::int($data, 'block_ignore', ActionException::INVALID_BLOCK_IGNORE_DATA);
+            $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
+            $animationMethod = self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA);
+            $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
+
+            return new $className(
+                $actionUnit,
+                $enemyCommand,
+                $alliesCommand,
+                $typeTarget,
+                $damage,
+                $blockIgnore,
+                $name,
+                $animationMethod,
+                $messageMethod,
+                $icon
+            );
+        }
+
+        if ($className === HealAction::class) {
 
             $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
             $power = self::int($data, 'power', ActionException::INVALID_POWER_DATA);

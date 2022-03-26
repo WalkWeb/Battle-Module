@@ -81,7 +81,7 @@ class Unit extends AbstractUnit
     private function applyDamageAction(DamageAction $action): void
     {
         // Проверка блока
-        if ($this->block && $this->block > random_int(1, 100)) {
+        if ($this->block && $this->block >= random_int(0, 100)) {
             $action->addFactualPower($this->id, 0);
             $action->blocked($this);
             return;
@@ -295,7 +295,8 @@ class Unit extends AbstractUnit
                 $enemyCommand,
                 $alliesCommand,
                 DamageAction::TARGET_RANDOM_ENEMY,
-                $this->getDamage()
+                $this->getDamage(),
+                $this->getBlockIgnore()
             ));
         }
 

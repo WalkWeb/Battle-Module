@@ -481,6 +481,23 @@ class UnitFactory
             'class'        => 1,
             'race'         => 1,
         ],
+        // Юнит с игнорированием блока = 100
+        29  => [
+            'id'           => '43db979a-827e-4168-a729-11e51245952d',
+            'name'         => '100_block_ignore',
+            'level'        => 1,
+            'avatar'       => '/images/avas/humans/human001.jpg',
+            'damage'       => 20,
+            'attack_speed' => 1,
+            'block'        => 0,
+            'block_ignore' => 100,
+            'life'         => 100,
+            'total_life'   => 100,
+            'melee'        => true,
+            'command'      => 1,
+            'class'        => 1,
+            'race'         => 1,
+        ],
     ];
 
     /**

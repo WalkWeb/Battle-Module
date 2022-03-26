@@ -153,6 +153,7 @@ class EffectTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'power'          => 20,
+                    'block_ignore'   => 100,
                 ]
             ],
             'on_next_round_actions' => [
@@ -163,6 +164,7 @@ class EffectTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'power'          => 20,
+                    'block_ignore'   => 100,
                 ]
             ],
             'on_disable_actions'    => [
@@ -173,6 +175,7 @@ class EffectTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'power'          => 20,
+                    'block_ignore'   => 100,
                 ]
             ],
         ];
@@ -216,6 +219,7 @@ class EffectTest extends AbstractUnitTest
                         'type_target'      => ActionInterface::TARGET_SELF,
                         'name'             => 'Incineration',
                         'power'            => 6,
+                        'block_ignore'     => 100,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                         'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
                         'icon'             => '/images/icons/ability/232.png',
