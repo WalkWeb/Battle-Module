@@ -309,4 +309,32 @@ class DamageActionTest extends AbstractUnitTest
         self::assertTrue($action->isBlocked($enemyUnit));
         self::assertEquals(0, $action->getFactualPowerByUnit($enemyUnit));
     }
+
+    /**
+     * Тест на ситуацию, когда юнит со 100 игнорированием блока атакует цель со 100% блоком
+     *
+     * @throws Exception
+     */
+    public function testDamageActionIgnoreBlock(): void
+    {
+        $unit = UnitFactory::createByTemplate(29);
+        $enemyUnit = UnitFactory::createByTemplate(28);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
+        );
+
+        $action->handle();
+
+        self::assertTrue(!$action->isBlocked($enemyUnit));
+        self::assertEquals($unit->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
+        self::assertEquals($enemyUnit->getTotalLife() - $unit->getDamage(), $enemyUnit->getLife());
+    }
 }
