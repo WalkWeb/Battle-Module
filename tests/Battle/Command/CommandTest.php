@@ -801,7 +801,7 @@ class CommandTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_SELF,
                     'name'             => 'Poison',
-                    'power'            => 15,
+                    'damage'           => 15,
                     'block_ignore'     => 100,
                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                     'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,

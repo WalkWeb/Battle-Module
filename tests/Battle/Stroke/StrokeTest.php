@@ -353,7 +353,7 @@ class StrokeTest extends AbstractUnitTest
                         'allies_command'   => $command,
                         'type_target'      => ActionInterface::TARGET_SELF,
                         'name'             => 'Effect Damage',
-                        'power'            => 1000,
+                        'damage'           => 1000,
                         'block_ignore'     => 100,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                     ],

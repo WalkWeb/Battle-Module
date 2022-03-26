@@ -19,7 +19,7 @@ class IncinerationAbility extends AbstractAbility
     private const ICON           = '/images/icons/ability/232.png';
     private const MESSAGE_METHOD = 'applyEffect';
     private const DURATION       = 8;
-    private const POWER          = 6;
+    private const DAMAGE         = 6;
 
     /**
      * @var ActionCollection
@@ -134,7 +134,7 @@ class IncinerationAbility extends AbstractAbility
                             'allies_command'   => $alliesCommand,
                             'type_target'      => ActionInterface::TARGET_SELF,
                             'name'             => self::NAME,
-                            'power'            => self::POWER,
+                            'damage'           => self::DAMAGE,
                             'block_ignore'     => 100,
                             'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                             'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
