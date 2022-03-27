@@ -182,6 +182,8 @@ class ActionFactoryTest extends AbstractUnitTest
             'avatar'       => '/images/avas/monsters/004.png',
             'damage'       => 10,
             'attack_speed' => 1,
+            'accuracy'     => 200,
+            'defence'      => 100,
             'block'        => 0,
             'block_ignore' => 0,
             'life'         => 30,

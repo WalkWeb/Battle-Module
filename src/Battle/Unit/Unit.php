@@ -147,7 +147,6 @@ class Unit extends AbstractUnit
      * Обрабатывает action на добавление эффекта юниту
      *
      * @param EffectAction $action
-     * @throws ActionException
      */
     private function applyEffectAction(EffectAction $action): void
     {
