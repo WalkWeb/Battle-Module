@@ -67,6 +67,7 @@ return [
     'Runtime'                          => 'Время выполнения',
     'Memory cost'                      => 'Затрачено памяти',
     'Block'                            => 'Блок',
+    'Blocked hits'                     => 'Заблокировал ударов',
     // Races
     'People'                           => 'Люди',
     'Human'                            => 'Человек',

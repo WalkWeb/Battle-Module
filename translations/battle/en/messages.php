@@ -69,6 +69,7 @@ return [
     'Runtime'                          => 'Runtime',
     'Memory cost'                      => 'Memory cost',
     'Block'                            => 'Block',
+    'Blocked hits'                     => 'Blocked hits',
     // Races
     'People'                           => 'People',
     'Human'                            => 'Human',
