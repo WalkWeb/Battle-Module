@@ -97,7 +97,7 @@ class StatisticsTest extends AbstractUnitTest
     }
 
     /**
-     * Подсчет полученного урона от Action с несколькими целями
+     * Тест на подсчет полученного урона от Action с несколькими целями
      *
      * @throws Exception
      */
@@ -133,6 +133,59 @@ class StatisticsTest extends AbstractUnitTest
         self::assertEquals($unit->getDamage(), $statistics->getUnitsStatistics()->get($firstEnemyUnit->getId())->getTakenDamage());
         self::assertEquals($unit->getDamage(), $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getTakenDamage());
         self::assertEquals($unit->getDamage(), $statistics->getUnitsStatistics()->get($thirdEnemyUnit->getId())->getTakenDamage());
+    }
+
+    /**
+     * Тест на подсчет заблокированных ударов
+     *
+     * @throws Exception
+     */
+    public function testStatisticsCausedBlockedHits(): void
+    {
+        $statistics = new Statistic();
+
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        // Юнит со 100% блоком
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(28);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
+        );
+
+        $action->handle();
+
+        $statistics->addUnitAction($action);
+
+        // Проверяем, что статистика по блокам обновилась
+        self::assertEquals(0, $statistics->getUnitsStatistics()->get($firstEnemyUnit->getId())->getBlockedHits());
+        self::assertEquals(1, $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getBlockedHits());
+
+        // И делаем удар еще раз
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
+        );
+
+        $action->handle();
+
+        $statistics->addUnitAction($action);
+
+        // И еще раз проверяем статистику по блокам
+        self::assertEquals(0, $statistics->getUnitsStatistics()->get($firstEnemyUnit->getId())->getBlockedHits());
+        self::assertEquals(2, $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getBlockedHits());
     }
 
     /**
