@@ -68,6 +68,7 @@ return [
     'Total stroke'                     => 'Total stroke',
     'Runtime'                          => 'Runtime',
     'Memory cost'                      => 'Memory cost',
+    'Block'                            => 'Block',
     // Races
     'People'                           => 'People',
     'Human'                            => 'Human',

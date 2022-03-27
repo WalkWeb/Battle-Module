@@ -26,6 +26,7 @@ if (empty($this) || !($this instanceof ViewInterface)) {
             <td><p><?= $this->getTranslation()->trans('Life') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Damage') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Attack Speed') ?></p></td>
+            <td><p><?= $this->getTranslation()->trans('Block') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Concentration') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Rage') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Melee') ?>?</p></td>
@@ -45,6 +46,7 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 <td><p><?= $unit->getLife() ?>/<?= $unit->getTotalLife() ?></p></td>
                 <td><p><?= $unit->getDamage() ?></p></td>
                 <td><p><?= $unit->getAttackSpeed() ?></p></td>
+                <td><p><?= $unit->getBlock() ?></p></td>
                 <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONS ?></p></td>
                 <td><p><?= $unit->getRage() ?>/<?= $unit::MAX_RAGE ?></p></td>
                 <td><p><?= ($unit->isMelee() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
@@ -65,6 +67,7 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 <td><p><?= $unit->getLife() ?>/<?= $unit->getTotalLife() ?></p></td>
                 <td><p><?= $unit->getDamage() ?></p></td>
                 <td><p><?= $unit->getAttackSpeed() ?></p></td>
+                <td><p><?= $unit->getBlock() ?></p></td>
                 <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONS ?></p></td>
                 <td><p><?= $unit->getRage() ?>/<?= $unit::MAX_RAGE ?></p></td>
                 <td><p><?= ($unit->isMelee() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>

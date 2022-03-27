@@ -66,6 +66,7 @@ return [
     'Total stroke'                     => 'Всего ходов',
     'Runtime'                          => 'Время выполнения',
     'Memory cost'                      => 'Затрачено памяти',
+    'Block'                            => 'Блок',
     // Races
     'People'                           => 'Люди',
     'Human'                            => 'Человек',
