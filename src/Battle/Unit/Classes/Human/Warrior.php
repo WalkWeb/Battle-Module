@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes\Human;
 
+use Battle\Unit\Ability\Effect\BlessedShieldAbility;
 use Battle\Unit\Classes\AbstractUnitClass;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
@@ -34,6 +35,7 @@ class Warrior extends AbstractUnitClass
     {
         $collection = new AbilityCollection();
         $collection->add(new HeavyStrikeAbility($unit));
+        $collection->add(new BlessedShieldAbility($unit));
         return $collection;
     }
 }
