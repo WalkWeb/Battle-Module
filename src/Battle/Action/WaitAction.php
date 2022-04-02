@@ -7,6 +7,15 @@ namespace Battle\Action;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 
+/**
+ * WaitAction это событие пропуска хода юнитом. Пропуск хода может быть в следующих вариантах:
+ *
+ * 1. Скорость атаки меньше 1, например 0.7, соответственно с 30% шансом юнит не совершит атаки в свой ход – и
+ *    выполнится WaitAction
+ * 2. Юнит оглушен или обездвижен каким-то другим способом – в этом случае также будет выполнен WaitAction
+ *
+ * @package Battle\Action
+ */
 class WaitAction extends AbstractAction
 {
     private const NAME                     = 'preparing to attack';
@@ -56,7 +65,7 @@ class WaitAction extends AbstractAction
     }
 
     /**
-     * Пропуск хода всегда доступен для использования - никаких ограничений нет
+     * Пропуск хода всегда доступен для использования – никаких ограничений нет
      *
      * @return bool
      */
@@ -65,13 +74,11 @@ class WaitAction extends AbstractAction
         return true;
     }
 
-
     /**
-     * У ожидания нет силы действия - соответственно метод ничего не делает
+     * У ожидания нет силы действия – соответственно метод ничего не делает
      *
      * @param string $unitId
      * @param int $factualPower
      */
     public function addFactualPower(string $unitId, int $factualPower): void {}
-
 }

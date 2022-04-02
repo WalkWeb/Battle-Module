@@ -202,9 +202,31 @@ class ActionTest extends AbstractUnitTest
         $alliesCommand = CommandFactory::create([$unit]);
         $action = new WaitAction($unit, $defendCommand, $alliesCommand);
 
+        self::assertFalse($action->isBlocked($defendUnit));
+
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::blocked');
         $action->blocked($defendUnit);
+    }
+
+    /**
+     * Тест на ситуацию, когда у не-DamageAction вызывается метод blocked()
+     *
+     * @throws Exception
+     */
+    public function testActionNoDodged(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+        $action = new WaitAction($unit, $enemyCommand, $command);
+
+        self::assertFalse($action->isDodged($enemyUnit));
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::dodged');
+        $action->dodged($enemyUnit);
     }
 
     /**

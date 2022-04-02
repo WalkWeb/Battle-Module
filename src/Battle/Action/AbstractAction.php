@@ -233,6 +233,27 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Фактическая проверка на уклонение актуальна только для DamageAction, для всех остальных событий просто
+     * возвращается false
+     *
+     * @param UnitInterface $unit
+     * @return bool
+     */
+    public function isDodged(UnitInterface $unit): bool
+    {
+        return false;
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @throws ActionException
+     */
+    public function dodged(UnitInterface $unit): void
+    {
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
+    }
+
+    /**
      * @return int
      * @throws ActionException
      */

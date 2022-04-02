@@ -48,11 +48,26 @@ class DamageAction extends AbstractAction
      * Было ли событие заблокировано
      *
      * Данные хранятся в виде массива:
-     * unit_id => true
+     * [
+     *   'unit_id1' => true,
+     *   'unit_id2' => true,
+     * ]
+     *
+     * Примечание: для простоты кода можно было бы хранить просто id юнитов: ['unit_id1', 'unit_id2'], и проверять через
+     * in_array(), но это бы создавало пространство для ошибки, когда один и тот же юнит как бы заблокировал один удар
+     * дважды, и сообщение в чат о таком DamageAction сформировалось бы некорректно. Используемый же формат чуть менее
+     * оптимален с точки зрения кода, но избавляет от возможности такой ошибки
      *
      * @var bool
      */
     protected $blockedByUnit = [];
+
+    /**
+     * Аналогично с blockedByUnit, только для уклонившихся юнитов
+     *
+     * @var array
+     */
+    protected $dodgedByUnit = [];
 
     public function __construct(
         UnitInterface $actionUnit,
@@ -75,6 +90,9 @@ class DamageAction extends AbstractAction
         $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
     }
 
+    /**
+     * @return string
+     */
     public function getHandleMethod(): string
     {
         return self::HANDLE_METHOD;
@@ -101,11 +119,18 @@ class DamageAction extends AbstractAction
         }
     }
 
+    /**
+     * @return int
+     */
     public function getPower(): int
     {
         return $this->damage;
     }
 
+    /**
+     * @param string $unitId
+     * @param int $factualPower
+     */
     public function addFactualPower(string $unitId, int $factualPower): void
     {
         $this->factualPower += $factualPower;
@@ -126,16 +151,25 @@ class DamageAction extends AbstractAction
         return $this->factualPowerByUnit[$unit->getId()];
     }
 
+    /**
+     * @return string
+     */
     public function getNameAction(): string
     {
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function getAnimationMethod(): string
     {
         return $this->animationMethod;
     }
 
+    /**
+     * @return string
+     */
     public function getMessageMethod(): string
     {
         return $this->messageMethod;
@@ -173,6 +207,27 @@ class DamageAction extends AbstractAction
     public function blocked(UnitInterface $unit): void
     {
         $this->blockedByUnit[$unit->getId()] = true;
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @return bool
+     */
+    public function isDodged(UnitInterface $unit): bool
+    {
+        if (!array_key_exists($unit->getId(), $this->dodgedByUnit)) {
+            return false;
+        }
+
+        return (bool)$this->dodgedByUnit[$unit->getId()];
+    }
+
+    /**
+     * @param UnitInterface $unit
+     */
+    public function dodged(UnitInterface $unit): void
+    {
+        $this->dodgedByUnit[$unit->getId()] = true;
     }
 
     /**

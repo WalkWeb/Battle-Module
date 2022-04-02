@@ -121,6 +121,9 @@ interface ActionInterface
      *
      * В Action не имеющих силу действия (например, призыв существ) вернет 0
      *
+     * TODO Метод стоит разделить на два: getPower для HealAction и getDamage (который в будущем будет возвращать объект
+     * TODO Offence) для DamageAction
+     *
      * @return mixed
      */
     public function getPower(): int;
@@ -285,6 +288,25 @@ interface ActionInterface
      * @param UnitInterface $unit
      */
     public function blocked(UnitInterface $unit): void;
+
+    /**
+     * Уклонился ли указанный юнит от данного события
+     *
+     * По умолчанию возвращает всегда false, true может быть только в DamageAction, если противник уклонился от удара
+     *
+     * @param UnitInterface $unit
+     * @return bool
+     */
+    public function isDodged(UnitInterface $unit): bool;
+
+    /**
+     * Указывает, что юнит уклонился от данного события
+     *
+     * По умолчанию вызов метода возвращает Exception, успешно обработан данный метод будет только в DamageAction
+     *
+     * @param UnitInterface $unit
+     */
+    public function dodged(UnitInterface $unit): void;
 
     /**
      * Возвращает blockIgnore Action, актуально только для DamageAction, при вызове у прочих Action будет получен
