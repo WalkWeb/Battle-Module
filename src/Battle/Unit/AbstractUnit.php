@@ -56,7 +56,7 @@ abstract class AbstractUnit implements UnitInterface
     /**
      * @var int - Защита
      */
-    protected $defence;
+    protected $defense;
 
     /**
      * @var int - Шанс блока вражеских атак
@@ -178,7 +178,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->damage = $damage;
         $this->attackSpeed = $attackSpeed;
         $this->accuracy = $accuracy;
-        $this->defence = $defence;
+        $this->defense = $defence;
         $this->block = $block;
         $this->blockIgnore = $blockIgnore;
         $this->life = $life;
@@ -252,9 +252,9 @@ abstract class AbstractUnit implements UnitInterface
         return $this->accuracy;
     }
 
-    public function getDefence(): int
+    public function getDefense(): int
     {
-        return $this->defence;
+        return $this->defense;
     }
 
     public function getBlock(): int

@@ -55,7 +55,7 @@ class UnitFactory
         self::existAndString($data, 'avatar', UnitException::INCORRECT_AVATAR);
         self::existAndInt($data, 'damage', UnitException::INCORRECT_DAMAGE);
         self::existAndInt($data, 'accuracy', UnitException::INCORRECT_ACCURACY);
-        self::existAndInt($data, 'defence', UnitException::INCORRECT_DEFENCE);
+        self::existAndInt($data, 'defense', UnitException::INCORRECT_DEFENSE);
         self::existAndInt($data, 'life', UnitException::INCORRECT_LIFE);
         self::existAndInt($data, 'total_life', UnitException::INCORRECT_TOTAL_LIFE);
         self::existAndInt($data, 'level', UnitException::INCORRECT_LEVEL);
@@ -65,7 +65,7 @@ class UnitFactory
         self::existAndInt($data, 'block_ignore', UnitException::INCORRECT_BLOCK_IGNORE);
         self::intMinMaxValue($data['damage'], UnitInterface::MIN_DAMAGE, UnitInterface::MAX_DAMAGE, UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE);
         self::intMinValue($data['accuracy'], UnitInterface::MIN_ACCURACY, UnitException::INCORRECT_ACCURACY_VALUE . UnitInterface::MIN_ACCURACY);
-        self::intMinValue($data['defence'], UnitInterface::MIN_DEFENCE, UnitException::INCORRECT_DEFENCE_VALUE . UnitInterface::MIN_DEFENCE);
+        self::intMinValue($data['defense'], UnitInterface::MIN_DEFENCE, UnitException::INCORRECT_DEFENSE_VALUE . UnitInterface::MIN_DEFENCE);
         self::intMinMaxValue($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
         self::intMinMaxValue($data['total_life'], UnitInterface::MIN_TOTAL_LIFE, UnitInterface::MAX_TOTAL_LIFE, UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE);
         self::intMinMaxValue($data['level'], UnitInterface::MIN_LEVEL, UnitInterface::MAX_LEVEL, UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL);
@@ -100,7 +100,7 @@ class UnitFactory
             $data['damage'],
             $data['attack_speed'],
             $data['accuracy'],
-            $data['defence'],
+            $data['defense'],
             $data['block'],
             $data['block_ignore'],
             $data['life'],

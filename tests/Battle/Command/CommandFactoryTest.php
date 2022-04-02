@@ -39,7 +39,7 @@ class CommandFactoryTest extends AbstractUnitTest
             self::assertEquals($data[$i]['damage'], $unit->getDamage());
             self::assertEquals($data[$i]['attack_speed'], $unit->getAttackSpeed());
             self::assertEquals($data[$i]['accuracy'], $unit->getAccuracy());
-            self::assertEquals($data[$i]['defence'], $unit->getDefence());
+            self::assertEquals($data[$i]['defense'], $unit->getDefense());
             self::assertEquals($data[$i]['life'], $unit->getTotalLife());
             self::assertEquals($data[$i]['life'], $unit->getLife());
             self::assertEquals($data[$i]['melee'], $unit->isMelee());
@@ -107,7 +107,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'damage'       => 15,
                         'attack_speed' => 1.2,
                         'accuracy'     => 200,
-                        'defence'      => 100,
+                        'defense'      => 100,
                         'block'        => 0,
                         'block_ignore' => 0,
                         'life'         => 80,
@@ -125,7 +125,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'damage'       => 11,
                         'attack_speed' => 0.9,
                         'accuracy'     => 200,
-                        'defence'      => 100,
+                        'defense'      => 100,
                         'block'        => 0,
                         'block_ignore' => 0,
                         'life'         => 75,
@@ -156,7 +156,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'damage'       => 15,
                         'attack_speed' => 1.2,
                         'accuracy'     => 200,
-                        'defence'      => 100,
+                        'defense'      => 100,
                         'block'        => 0,
                         'block_ignore' => 0,
                         'life'         => 80,

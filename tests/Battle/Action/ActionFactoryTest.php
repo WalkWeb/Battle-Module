@@ -183,7 +183,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'damage'       => 10,
             'attack_speed' => 1,
             'accuracy'     => 200,
-            'defence'      => 100,
+            'defense'      => 100,
             'block'        => 0,
             'block_ignore' => 0,
             'life'         => 30,

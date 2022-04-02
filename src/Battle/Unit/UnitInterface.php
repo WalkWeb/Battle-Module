@@ -23,8 +23,8 @@ use Battle\Unit\Race\RaceInterface;
 interface UnitInterface
 {
     // TODO Количество параметров юнита увеличивается, и необходимо вынести в отдельные объекты следующие параметры:
-    // TODO Offence: damage, attackSpeed, accuracy
-    // TODO Defence: block, defence
+    // TODO Offense: damage, attackSpeed, accuracy, blockIgnore
+    // TODO Defense: block, defense
 
     public const ADD_CON_NEW_ROUND       = 200;
     public const ADD_CON_ACTION_UNIT     = 180;
@@ -174,7 +174,7 @@ interface UnitInterface
      *
      * @return int
      */
-    public function getDefence(): int;
+    public function getDefense(): int;
 
     /**
      * Возвращает шанс блока вражеских атак юнита
