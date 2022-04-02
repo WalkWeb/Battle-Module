@@ -142,6 +142,63 @@ class ScenarioTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на формирование массива параметров для анимации уклонения от удара
+     *
+     * @throws Exception
+     */
+    public function testScenarioAddDodgedDamage(): void
+    {
+        $statistic = new Statistic();
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
+        );
+
+        $action->handle();
+
+        // TODO Пока у юнита нет механики уклонения - мы указываем уклонение вручную, потом необходимо будет убрать
+        // TODO Также нужно будет добавить сделать два теста: один на уклонение юнита в левой команде, другой на
+        // TODO уклонение юнита из правой команды
+        $action->dodged($enemyUnit);
+
+        $scenario = new Scenario();
+        $scenario->addAnimation($action, $statistic);
+
+        $expectedData = [
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'        => $unit->getId(),
+                    'class'          => 'd_attack',
+                    'unit_cons_bar2' => 0,
+                    'unit_rage_bar2' => 0,
+                    'unit_effects'   => [],
+                    'targets'        => [
+                        [
+                            'type'         => 'change',
+                            'user_id'      => $enemyUnit->getId(),
+                            'class'        => 'd_evasion',
+                            'unit_effects' => [],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
+    }
+
+    /**
      * @throws Exception
      */
     public function testScenarioAddMultipleDamage(): void

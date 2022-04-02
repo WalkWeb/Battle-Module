@@ -55,6 +55,8 @@ class Scenario implements ScenarioInterface
         foreach ($action->getTargetUnits() as $targetUnit) {
             if ($action->isBlocked($targetUnit)) {
                 $targetEffects[] = $this->createBlockedDamageTargetEffect($targetUnit);
+            } elseif ($action->isDodged($targetUnit)) {
+                $targetEffects[] = $this->createDodgedDamageTargetEffect($targetUnit);
             } else {
                 $targetEffects[] = $this->createDamageTargetEffect($action, $targetUnit);
             }
@@ -452,6 +454,23 @@ class Scenario implements ScenarioInterface
             'type'    => 'change',
             'user_id' => $targetUnit->getId(),
             'class'   => 'd_block',
+            // TODO 'unit_effects'
+        ];
+    }
+
+    /**
+     * Создает массив параметров для анимации уклонения от удара
+     *
+     * @param UnitInterface $targetUnit
+     * @return array
+     */
+    private function createDodgedDamageTargetEffect(UnitInterface $targetUnit): array
+    {
+        return [
+            'type'         => 'change',
+            'user_id'      => $targetUnit->getId(),
+            'class'        => $targetUnit->getCommand() === 1 ? 'd_evasion' : 'd_evasion_s2',
+            'unit_effects' => $this->getUnitEffects($targetUnit),
         ];
     }
 }
