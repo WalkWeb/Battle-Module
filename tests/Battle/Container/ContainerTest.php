@@ -246,4 +246,15 @@ class ContainerTest extends AbstractUnitTest
         // Пытаемся добавить его, под именем класса, который отсутствует в Container->map - получаем исключение
         $container->set(Unit::class, $invalidService);
     }
+
+    public function testContainerIsTestMode(): void
+    {
+        $container = new Container();
+
+        self::assertFalse($container->isTestMode());
+
+        $container = new Container(true);
+
+        self::assertTrue($container->isTestMode());
+    }
 }

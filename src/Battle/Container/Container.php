@@ -49,6 +49,13 @@ class Container implements ContainerInterface
 
     private $storage = [];
 
+    private $testMode;
+
+    public function __construct(bool $testMode = false)
+    {
+        $this->testMode = $testMode;
+    }
+
     /**
      * @param string $id
      * @return object
@@ -87,9 +94,17 @@ class Container implements ContainerInterface
             return array_key_exists($class, $this->storage);
         } catch (ContainerException $e) {
             // Контейнер может иметь только фиксированный набор сервисов. Если указан неизвестный - значит он не может
-            // быть добавлен. Если будет добавлен метод set(), то данную механику нужно будет переделывать
+            // быть добавлен.
             return false;
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTestMode(): bool
+    {
+        return $this->testMode;
     }
 
     /**

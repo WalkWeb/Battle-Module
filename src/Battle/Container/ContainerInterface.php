@@ -33,10 +33,20 @@ interface ContainerInterface
     public function set(string $id, object $object): void;
 
     /**
+     * Проверяет существование во внутреннем хранилище уже созданного объекта данного класса
+     *
      * @param string $class
      * @return bool
      */
     public function exist(string $class): bool;
+
+    /**
+     * Некоторые сервисы должны работать по-разному в обычном режиме и режиме тестов (например, в тестах по-другому
+     * рассчитывается шанс попадания по противнику)
+     *
+     * @return bool
+     */
+    public function isTestMode(): bool;
 
     /**
      * @return StatisticInterface
