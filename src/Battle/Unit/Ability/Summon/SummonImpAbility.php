@@ -17,7 +17,7 @@ class SummonImpAbility extends AbstractSummonAbility
     private const SUMMON_DAMAGE       = 10;
     private const SUMMON_ATTACK_SPEED = 1;
     private const SUMMON_ACCURACY     = 200;
-    private const SUMMON_DEFENCE      = 100;
+    private const SUMMON_DEFENSE      = 100;
     private const SUMMON_BLOCK        = 0;
     private const SUMMON_BLOCK_IGNORE = 0;
     private const SUMMON_LIFE         = 30;
@@ -34,7 +34,7 @@ class SummonImpAbility extends AbstractSummonAbility
             self::SUMMON_DAMAGE,
             self::SUMMON_ATTACK_SPEED,
             self::SUMMON_ACCURACY,
-            self::SUMMON_DEFENCE,
+            self::SUMMON_DEFENSE,
             self::SUMMON_BLOCK,
             self::SUMMON_BLOCK_IGNORE,
             self::SUMMON_LIFE,

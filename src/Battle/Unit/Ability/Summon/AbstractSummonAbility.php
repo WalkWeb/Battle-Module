@@ -51,7 +51,7 @@ abstract class AbstractSummonAbility extends AbstractAbility
     /**
      * @var int
      */
-    private $summonDefence;
+    private $summonDefense;
 
     /**
      * @var int
@@ -91,7 +91,7 @@ abstract class AbstractSummonAbility extends AbstractAbility
         int $summonDamage,
         float $summonAttackSpeed,
         int $summonAccuracy,
-        int $summonDefence,
+        int $summonDefense,
         int $summonBlock,
         int $summonBlockIgnore,
         int $summonLife,
@@ -107,7 +107,7 @@ abstract class AbstractSummonAbility extends AbstractAbility
         $this->summonDamage = $summonDamage;
         $this->summonAttackSpeed = $summonAttackSpeed;
         $this->summonAccuracy = $summonAccuracy;
-        $this->summonDefence = $summonDefence;
+        $this->summonDefense = $summonDefense;
         $this->summonBlock = $summonBlock;
         $this->summonBlockIgnore = $summonBlockIgnore;
         $this->summonLife = $summonLife;
@@ -141,7 +141,7 @@ abstract class AbstractSummonAbility extends AbstractAbility
                 $this->summonDamage,
                 $this->summonAttackSpeed,
                 $this->summonAccuracy,
-                $this->summonDefence,
+                $this->summonDefense,
                 $this->summonBlock,
                 $this->summonBlockIgnore,
                 $this->summonLife,

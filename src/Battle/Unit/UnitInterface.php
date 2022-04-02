@@ -42,7 +42,7 @@ interface UnitInterface
     public const MAX_ATTACK_SPEED = 10;
 
     public const MIN_ACCURACY     = 1;
-    public const MIN_DEFENCE      = 1;
+    public const MIN_DEFENSE      = 1;
 
     public const MIN_BLOCK        = 0;
     public const MAX_BLOCK        = 100;

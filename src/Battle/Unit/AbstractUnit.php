@@ -136,7 +136,7 @@ abstract class AbstractUnit implements UnitInterface
      * @param int $damage
      * @param float $attackSpeed
      * @param int $accuracy
-     * @param int $defence
+     * @param int $defense
      * @param int $block
      * @param int $blockIgnore
      * @param int $life
@@ -157,7 +157,7 @@ abstract class AbstractUnit implements UnitInterface
         int $damage,
         float $attackSpeed,
         int $accuracy,
-        int $defence,
+        int $defense,
         int $block,
         int $blockIgnore,
         int $life,
@@ -178,7 +178,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->damage = $damage;
         $this->attackSpeed = $attackSpeed;
         $this->accuracy = $accuracy;
-        $this->defense = $defence;
+        $this->defense = $defense;
         $this->block = $block;
         $this->blockIgnore = $blockIgnore;
         $this->life = $life;

@@ -1324,7 +1324,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'accuracy'     => 200,
-                    'defense'      => UnitInterface::MIN_DEFENCE - 1,
+                    'defense'      => UnitInterface::MIN_DEFENSE - 1,
                     'block'        => 0,
                     'block_ignore' => 0,
                     'life'         => 80,
@@ -1334,7 +1334,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                UnitException::INCORRECT_DEFENSE_VALUE . UnitInterface::MIN_DEFENCE,
+                UnitException::INCORRECT_DEFENSE_VALUE . UnitInterface::MIN_DEFENSE,
             ],
         ];
     }

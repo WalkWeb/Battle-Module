@@ -65,7 +65,7 @@ class UnitFactory
         self::existAndInt($data, 'block_ignore', UnitException::INCORRECT_BLOCK_IGNORE);
         self::intMinMaxValue($data['damage'], UnitInterface::MIN_DAMAGE, UnitInterface::MAX_DAMAGE, UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE);
         self::intMinValue($data['accuracy'], UnitInterface::MIN_ACCURACY, UnitException::INCORRECT_ACCURACY_VALUE . UnitInterface::MIN_ACCURACY);
-        self::intMinValue($data['defense'], UnitInterface::MIN_DEFENCE, UnitException::INCORRECT_DEFENSE_VALUE . UnitInterface::MIN_DEFENCE);
+        self::intMinValue($data['defense'], UnitInterface::MIN_DEFENSE, UnitException::INCORRECT_DEFENSE_VALUE . UnitInterface::MIN_DEFENSE);
         self::intMinMaxValue($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
         self::intMinMaxValue($data['total_life'], UnitInterface::MIN_TOTAL_LIFE, UnitInterface::MAX_TOTAL_LIFE, UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE);
         self::intMinMaxValue($data['level'], UnitInterface::MIN_LEVEL, UnitInterface::MAX_LEVEL, UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL);
