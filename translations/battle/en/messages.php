@@ -38,6 +38,7 @@ return [
     'tried to strike, but'             => 'tried to strike, but',
     'blocked it'                       => 'blocked it',
     'but'                              => 'but',
+    'dodged'                           => 'dodged',
     // Ability
     'Great Heal'                       => 'Great Heal',
     'Imp'                              => 'Imp',

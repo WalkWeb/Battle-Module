@@ -35,11 +35,23 @@ class ChatTest extends AbstractUnitTest
     private const BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
     private const BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
+    private const DODGE_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">unit_2</span> dodged!';
+    private const DODGE_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">unit_2</span> уклонился!';
+
     private const DAMAGE_TWO_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> and <span style="color: #1e72e3">unit_3</span> on 40 damage';
     private const DAMAGE_TWO_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> и <span style="color: #1e72e3">unit_3</span> на 40 урона';
 
     private const DAMAGE_AND_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
     private const DAMAGE_AND_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
+
+    private const DAMAGE_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 40 damage. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">unit_3</span> dodged!';
+    private const DAMAGE_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 40 урона. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">unit_3</span> уклонился!';
+
+    private const BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">unit_2</span> dodged!';
+    private const BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">unit_2</span> уклонился!';
+
+    private const DAMAGE_AND_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> dodged!';
+    private const DAMAGE_AND_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> уклонился!';
 
     private const DAMAGE_THREE_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> and <span style="color: #1e72e3">unit_4</span> on 60 damage';
     private const DAMAGE_THREE_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> и <span style="color: #1e72e3">unit_4</span> на 60 урона';
@@ -160,6 +172,35 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::BLOCK_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::BLOCK_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения об уклонении
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageDodgedDamage(): void
+    {
+        [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(1, 2);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
+        $action->dodged($enemyUnit);
+
+        self::assertEquals(self::DODGE_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::DODGE_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -542,7 +583,7 @@ class ChatTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testChatAddMessageDamageAndBlock(): void
+    public function testChatAddMessageDamageAndBlocked(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $firstEnemyUnit = UnitFactory::createByTemplate(2);
@@ -566,6 +607,109 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::DAMAGE_AND_BLOCK_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::DAMAGE_AND_BLOCK_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения, когда одна цель получила урон, а другая уклонилась
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageDamageAndDodged(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
+        $action->dodged($secondaryEnemyUnit);
+
+        self::assertEquals(self::DAMAGE_AND_DODGE_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::DAMAGE_AND_DODGE_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения, когда одна цель заблокировала урон, а другая уклонилась
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageBlockedAndDodged(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(28);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
+        $action->dodged($firstEnemyUnit);
+
+        self::assertEquals(self::BLOCK_AND_DODGE_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::BLOCK_AND_DODGE_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения, когда одна цель получила урон, другая заблокировала урон, а третья уклонилась
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageDamageAndBlockedAndDodged(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $blockedUnit = UnitFactory::createByTemplate(28);
+        $dodgedUnit = UnitFactory::createByTemplate(28);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit, $blockedUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            $unit->getDamage(),
+            $unit->getBlockIgnore()
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
+        $action->dodged($dodgedUnit);
+
+        self::assertEquals(self::DAMAGE_AND_BLOCK_AND_DODGE_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::DAMAGE_AND_BLOCK_AND_DODGE_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**

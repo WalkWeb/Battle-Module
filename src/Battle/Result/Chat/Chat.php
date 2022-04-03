@@ -69,6 +69,9 @@ class Chat implements ChatInterface
      * 3. Нанесение урона + урон заблокирован, если было атаковано сразу несколько целей, и там были и те, кто получил
      *    урон и те, кто его заблокировал
      *
+     * TODO В текущей механике юниты запрашиваются два раза - в текущем методе, и потом еще раз при формировании
+     * TODO сообщения. Можно оптимизировать
+     *
      * @param ActionInterface $action
      * @return string
      * @throws ActionException
@@ -77,17 +80,34 @@ class Chat implements ChatInterface
     {
         $damagedUnits = $this->getTargetsName($action);
         $blockedUnits = $this->getTargetsBlockedName($action);
+        $dodgedUnits = $this->getTargetsDodgedName($action);
+
+        if ($damagedUnits && $blockedUnits && $dodgedUnits) {
+            return
+                $this->getDamagedMessage($action) . '. ' . $this->getBlockedMessage($action) . ' ' . $this->getDodgedMessage($action);
+        }
 
         if ($damagedUnits && $blockedUnits) {
-            return
-                $this->getDamagedMessage($action) . '. ' . $this->getBlockedMessage($action);
+            return $this->getDamagedMessage($action) . '. ' . $this->getBlockedMessage($action);
         }
 
-        if ($damagedUnits) {
-            return $this->getDamagedMessage($action);
+        if ($damagedUnits && $dodgedUnits) {
+            return $this->getDamagedMessage($action) . '. ' . $this->getDodgedMessage($action);
         }
 
-        return $this->getBlockedMessage($action);
+        if ($blockedUnits && $dodgedUnits) {
+            return $this->getBlockedMessage($action) . ' ' . $this->getDodgedMessage($action);
+        }
+
+        if ($blockedUnits) {
+            return $this->getBlockedMessage($action);
+        }
+
+        if ($dodgedUnits) {
+            return $this->getDodgedMessage($action);
+        }
+
+        return $this->getDamagedMessage($action);
     }
 
     /**
@@ -358,7 +378,7 @@ class Chat implements ChatInterface
         $names = [];
 
         foreach ($targets as $target) {
-            if (!$action->isBlocked($target)) {
+            if (!$action->isBlocked($target) && !$action->isDodged($target)) {
                 $names[] = '<span style="color: ' . $target->getRace()->getColor() . '">' . $target->getName() . '</span>';
             }
         }
@@ -378,6 +398,25 @@ class Chat implements ChatInterface
 
         foreach ($targets as $target) {
             if ($action->isBlocked($target)) {
+                $names[] = '<span style="color: ' . $target->getRace()->getColor() . '">' . $target->getName() . '</span>';
+            }
+        }
+
+        return $this->gluingNames($names);
+    }
+
+    /**
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    private function getTargetsDodgedName(ActionInterface $action): string
+    {
+        $targets = clone $action->getTargetUnits();
+        $names = [];
+
+        foreach ($targets as $target) {
+            if ($action->isDodged($target)) {
                 $names[] = '<span style="color: ' . $target->getRace()->getColor() . '">' . $target->getName() . '</span>';
             }
         }
@@ -472,7 +511,7 @@ class Chat implements ChatInterface
     }
 
     /**
-     * Формирует сообщение о юнитах которые заблокировали атаку.
+     * Формирует сообщение о юнитах которые заблокировали удар.
      *
      * @param $action
      * @return string
@@ -489,6 +528,26 @@ class Chat implements ChatInterface
             $this->getTargetsBlockedName($action) . ' ' .
             // "blocked it!"
             $this->translation->trans('blocked it') . '!';
+    }
+
+    /**
+     * Формирует сообщение о юнитах которые увернулись от удара
+     *
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    private function getDodgedMessage(ActionInterface $action): string
+    {
+        return
+            // unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // "tried to strike, but"
+            $this->translation->trans('tried to strike, but') . ' ' .
+            // targets
+            $this->getTargetsDodgedName($action) . ' ' .
+            // "dodged!"
+            $this->translation->trans('dodged') . '!';
     }
 
     /**
