@@ -9,6 +9,11 @@ use Battle\Action\ActionInterface;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationInterface;
 
+/**
+ * TODO Можно подумать над оптимизацией количества строк и объединением методов
+ *
+ * @package Battle\Result\Chat
+ */
 class Chat implements ChatInterface
 {
     /**
@@ -123,17 +128,34 @@ class Chat implements ChatInterface
     {
         $damagedUnits = $this->getTargetsName($action);
         $blockedUnits = $this->getTargetsBlockedName($action);
+        $dodgedUnits = $this->getTargetsDodgedName($action);
+
+        if ($damagedUnits && $blockedUnits && $dodgedUnits) {
+            return
+                $this->getDamagedAbilityMessage($action) . '. ' . $this->getBlockedAbilityMessage($action) . ' ' . $this->getDodgedAbilityMessage($action);
+        }
 
         if ($damagedUnits && $blockedUnits) {
-            return
-                $this->getDamagedAbilityMessage($action) . '. ' . $this->getBlockedAbilityMessage($action);
+            return $this->getDamagedAbilityMessage($action) . '. ' . $this->getBlockedAbilityMessage($action);
         }
 
-        if ($damagedUnits) {
-            return $this->getDamagedAbilityMessage($action);
+        if ($damagedUnits && $dodgedUnits) {
+            return $this->getDamagedAbilityMessage($action) . '. ' . $this->getDodgedAbilityMessage($action);
         }
 
-        return $this->getBlockedAbilityMessage($action);
+        if ($blockedUnits && $dodgedUnits) {
+            return $this->getBlockedAbilityMessage($action) . ' ' . $this->getDodgedAbilityMessage($action);
+        }
+
+        if ($blockedUnits) {
+            return $this->getBlockedAbilityMessage($action);
+        }
+
+        if ($dodgedUnits) {
+            return $this->getDodgedAbilityMessage($action);
+        }
+
+        return $this->getDamagedAbilityMessage($action);
     }
 
     /**
@@ -602,5 +624,32 @@ class Chat implements ChatInterface
             $this->getTargetsBlockedName($action) . ' ' .
             // "blocked it!"
             $this->translation->trans('blocked it') . '!';
+    }
+
+
+    /**
+     * Формирует сообщение о юнитах которые уклонились от способности
+     *
+     * @param $action
+     * @return string
+     * @throws ActionException
+     */
+    private function getDodgedAbilityMessage(ActionInterface $action): string
+    {
+        return
+            // unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // "use"
+            $this->translation->trans('use') . ' ' .
+            // ability icon
+            $this->getIcon($action) .
+            // ability name
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
+            // "but"
+            $this->translation->trans('but') . ' ' .
+            // targets
+            $this->getTargetsDodgedName($action) . ' ' .
+            // "blocked it!"
+            $this->translation->trans('dodged') . '!';
     }
 }
