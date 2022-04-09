@@ -21,7 +21,7 @@ class ActionException extends Exception
     public const INVALID_TYPE_DATA          = 'ActionFactory: Invalid type data';
     public const INVALID_POWER_DATA         = 'ActionFactory: Invalid power data: int expected';
     public const INVALID_DAMAGE_DATA        = 'ActionFactory: Invalid damage data: int expected';
-    public const INVALID_BLOCK_IGNORE_DATA  = 'ActionFactory: Invalid block_ignore data: int expected';
+    public const INVALID_CAN_BE_AVOIDED     = 'ActionFactory: Invalid can_be_avoided data: bool expected';
     public const INVALID_TYPE_TARGET_DATA   = 'ActionFactory: Invalid type_target: int expected';
     public const INVALID_NAME_DATA          = 'ActionFactory: Invalid name data: string or null expected';
     public const INVALID_ANIMATION_DATA     = 'ActionFactory: Invalid animation_name data: string or null expected';

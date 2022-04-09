@@ -23,6 +23,7 @@ class DamageActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
+        $canBeAvoided = true;
 
         $action = new DamageAction(
             $unit,
@@ -30,13 +31,13 @@ class DamageActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            $canBeAvoided
         );
 
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals($unit, $action->getCreatorUnit());
         self::assertEquals($unit->getDamage(), $action->getPower());
-        self::assertEquals($unit->getBlockIgnore(), $action->getBlockIgnore());
+        self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
         self::assertTrue($action->canByUsed());
         self::assertEquals(DamageAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
         self::assertEquals('damage', $action->getMessageMethod());
@@ -59,7 +60,7 @@ class DamageActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -82,7 +83,7 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -177,7 +178,7 @@ class DamageActionTest extends AbstractUnitTest
             $alliesCommand,
             $typeTarget,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertEquals($typeTarget, $action->getTypeTarget());
@@ -205,7 +206,7 @@ class DamageActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -242,7 +243,7 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -270,7 +271,7 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         // По-умолчанию isBlocked возвращает false
@@ -301,7 +302,7 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -328,7 +329,7 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertFalse($action->isDodged($enemyUnit));
@@ -339,7 +340,7 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на ситуацию, когда юнит со 100 игнорированием блока атакует цель со 100% блоком
+     * Тест на ситуацию, когда юнит со 100 игнорированием блока атакует цель со 100% блоком - урон проходит
      *
      * @throws Exception
      */
@@ -356,7 +357,35 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
+        );
+
+        $action->handle();
+
+        self::assertTrue(!$action->isBlocked($enemyUnit));
+        self::assertEquals($unit->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
+        self::assertEquals($enemyUnit->getTotalLife() - $unit->getDamage(), $enemyUnit->getLife());
+    }
+
+    /**
+     * Тест на ситуацию, когда юнит со 100% блока получает урон от DamageAction с canBeAvoided=false - урон проходит
+     *
+     * @throws Exception
+     */
+    public function testDamageActionCantBeAvoid(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(28);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage(),
+            false
         );
 
         $action->handle();

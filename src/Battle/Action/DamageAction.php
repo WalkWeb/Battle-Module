@@ -23,11 +23,9 @@ class DamageAction extends AbstractAction
     protected $damage;
 
     /**
-     * Игнорирование блока цели
-     *
      * @var int
      */
-    protected $blockIgnore;
+    protected $canBeAvoided;
 
     /**
      * @var string
@@ -54,7 +52,7 @@ class DamageAction extends AbstractAction
      * ]
      *
      * Примечание: для простоты кода можно было бы хранить просто id юнитов: ['unit_id1', 'unit_id2'], и проверять через
-     * in_array(), но это бы создавало пространство для ошибки, когда один и тот же юнит как бы заблокировал один удар
+     * in_array(), но это создавало бы пространство для ошибки, когда один и тот же юнит как бы заблокировал один удар
      * дважды, и сообщение в чат о таком DamageAction сформировалось бы некорректно. Используемый же формат чуть менее
      * оптимален с точки зрения кода, но избавляет от возможности такой ошибки
      *
@@ -69,13 +67,15 @@ class DamageAction extends AbstractAction
      */
     protected $dodgedByUnit = [];
 
+    // TODO В будущем надо избавиться от null параметров в конструкторе
+
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         int $typeTarget,
         int $damage,
-        int $blockIgnore,
+        bool $canBeAvoided,
         ?string $name = null,
         ?string $animationMethod = null,
         ?string $messageMethod = null,
@@ -84,7 +84,7 @@ class DamageAction extends AbstractAction
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->damage = $damage;
-        $this->blockIgnore = $blockIgnore;
+        $this->canBeAvoided = $canBeAvoided;
         $this->name = $name ?? self::DEFAULT_NAME;
         $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
         $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
@@ -231,10 +231,10 @@ class DamageAction extends AbstractAction
     }
 
     /**
-     * @return int
+     * @return bool
      */
-    public function getBlockIgnore(): int
+    public function isCanBeAvoided(): bool
     {
-        return $this->blockIgnore;
+        return $this->canBeAvoided;
     }
 }

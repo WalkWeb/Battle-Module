@@ -48,7 +48,7 @@ class ScenarioTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -109,7 +109,7 @@ class ScenarioTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -160,7 +160,7 @@ class ScenarioTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -218,7 +218,7 @@ class ScenarioTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertTrue($action->canByUsed());
@@ -883,7 +883,7 @@ class ScenarioTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_SELF,
             10,
-            0,
+            true,
             null,
             'undefinedAnimationMethod'
         );

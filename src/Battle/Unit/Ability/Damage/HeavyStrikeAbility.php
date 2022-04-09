@@ -33,7 +33,7 @@ class HeavyStrikeAbility extends AbstractAbility
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             (int)($this->unit->getDamage() * 2.5),
-            $this->unit->getBlockIgnore(),
+            true,
             self::NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             self::MESSAGE_METHOD,

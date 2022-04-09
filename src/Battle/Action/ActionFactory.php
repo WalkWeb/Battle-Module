@@ -62,7 +62,7 @@ class ActionFactory
 
             $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
             $damage = self::int($data, 'damage', ActionException::INVALID_DAMAGE_DATA);
-            $blockIgnore = self::int($data, 'block_ignore', ActionException::INVALID_BLOCK_IGNORE_DATA);
+            $canBeAvoided = self::bool($data, 'can_be_avoided', ActionException::INVALID_CAN_BE_AVOIDED);
             $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
             $animationMethod = self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA);
             $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
@@ -73,7 +73,7 @@ class ActionFactory
                 $alliesCommand,
                 $typeTarget,
                 $damage,
-                $blockIgnore,
+                $canBeAvoided,
                 $name,
                 $animationMethod,
                 $messageMethod,

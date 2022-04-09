@@ -135,7 +135,7 @@ class IncinerationAbility extends AbstractAbility
                             'type_target'      => ActionInterface::TARGET_SELF,
                             'name'             => self::NAME,
                             'damage'           => self::DAMAGE,
-                            'block_ignore'     => 100,
+                            'can_be_avoided'   => false,
                             'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                             'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
                             'icon'             => self::ICON,

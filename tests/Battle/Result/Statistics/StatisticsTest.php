@@ -119,7 +119,7 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -158,7 +158,7 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -176,7 +176,7 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -443,7 +443,7 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -476,7 +476,7 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             1000,
-            0
+            true
         );
 
         $action->handle();
@@ -525,7 +525,7 @@ class StatisticsTest extends AbstractUnitTest
                         'type_target'      => ActionInterface::TARGET_SELF,
                         'name'             => 'Poison',
                         'damage'           => 8,
-                        'block_ignore'     => 100,
+                        'can_be_avoided'   => false,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                         'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
                         'icon'             => '/images/icons/ability/202.png',

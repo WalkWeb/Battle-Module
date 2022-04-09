@@ -232,7 +232,7 @@ class CommandTest extends AbstractUnitTest
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $enemyUnit->getDamage(),
-            $enemyUnit->getBlockIgnore()
+            true
         );
 
         $action->handle();
@@ -294,21 +294,21 @@ class CommandTest extends AbstractUnitTest
         self::assertEquals($warrior->getTotalLife() + $priest->getTotalLife(), $command->getTotalLife());
 
         // Нанесем урон и проверим общее здоровье еще раз
-        $zombie = UnitFactory::createByTemplate(1);
-        $enemyCommand = CommandFactory::create([$zombie]);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $damage = new DamageAction(
-            $zombie,
+            $enemyUnit,
             $command,
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $zombie->getDamage(),
-            $zombie->getBlockIgnore()
+            $enemyUnit->getDamage(),
+            true
         );
 
         $damage->handle();
 
-        self::assertEquals($warrior->getTotalLife() + $priest->getTotalLife() - $zombie->getDamage(), $command->getTotalLife());
+        self::assertEquals($warrior->getTotalLife() + $priest->getTotalLife() - $enemyUnit->getDamage(), $command->getTotalLife());
     }
 
     // ---------------------------------- Тест на метод getUnitForEffect() ---------------------------------------------
@@ -810,7 +810,7 @@ class CommandTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_SELF,
                     'name'             => 'Poison',
                     'damage'           => 15,
-                    'block_ignore'     => 100,
+                    'can_be_avoided'   => false,
                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                     'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
                 ],

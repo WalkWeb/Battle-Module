@@ -254,10 +254,10 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
-     * @return int
+     * @return bool
      * @throws ActionException
      */
-    public function getBlockIgnore(): int
+    public function isCanBeAvoided(): bool
     {
         throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }

@@ -124,7 +124,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertTrue($action->canByUsed());
@@ -149,7 +149,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertTrue($action->canByUsed());
@@ -175,7 +175,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertTrue($action->canByUsed());
@@ -201,7 +201,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertTrue($action->canByUsed());
@@ -230,7 +230,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             50,
-            0,
+            true,
             HeavyStrikeAbility::NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             HeavyStrikeAbility::MESSAGE_METHOD,
@@ -260,7 +260,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             50,
-            0,
+            true,
             HeavyStrikeAbility::NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             HeavyStrikeAbility::MESSAGE_METHOD,
@@ -290,7 +290,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             50,
-            0,
+            true,
             HeavyStrikeAbility::NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             HeavyStrikeAbility::MESSAGE_METHOD,
@@ -495,7 +495,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             10,
-            0,
+            true,
             'Poison',
             null,
             DamageAction::EFFECT_MESSAGE_METHOD
@@ -581,7 +581,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             30,
-            0,
+            true,
             'test attack',
             null,
             'undefinedMessageMethod'
@@ -612,7 +612,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertTrue($action->canByUsed());
@@ -643,7 +643,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertTrue($action->canByUsed());
@@ -674,7 +674,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertTrue($action->canByUsed());
@@ -708,7 +708,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertTrue($action->canByUsed());
@@ -743,7 +743,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertTrue($action->canByUsed());
@@ -777,7 +777,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             50,
-            0,
+            true,
             HeavyStrikeAbility::NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             HeavyStrikeAbility::MESSAGE_METHOD,
@@ -812,7 +812,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             50,
-            0,
+            true,
             HeavyStrikeAbility::NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             HeavyStrikeAbility::MESSAGE_METHOD,
@@ -850,7 +850,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             50,
-            0,
+            true,
             HeavyStrikeAbility::NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             HeavyStrikeAbility::MESSAGE_METHOD,
@@ -889,7 +889,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             50,
-            0,
+            true,
             HeavyStrikeAbility::NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             HeavyStrikeAbility::MESSAGE_METHOD,
@@ -928,7 +928,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getDamage(),
-            $unit->getBlockIgnore()
+            true
         );
 
         self::assertTrue($action->canByUsed());

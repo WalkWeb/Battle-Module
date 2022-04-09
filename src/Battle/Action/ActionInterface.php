@@ -309,14 +309,12 @@ interface ActionInterface
     public function dodged(UnitInterface $unit): void;
 
     /**
-     * Возвращает blockIgnore Action, актуально только для DamageAction, при вызове у прочих Action будет получен
-     * Exception
+     * Показывает, можно ли заблокировать или увернуться от данного события (актуально только для DamageAction)
      *
-     * По-умолчанию используется blockIgnore атакующего юнита, но если это урон от эффекта - игнорирование будет 100,
-     * независимо от blockIgnore атакующего юнита, т.к. урон от эффекта не может быть заблокирован
+     * Например, если это урон от эффекта, то его нельзя избежать. Соответственно для обычных ударов вернет true, для
+     * урона от эффектов - false
      *
-     * @return int
-     * @throws ActionException
+     * @return bool
      */
-    public function getBlockIgnore(): int;
+    public function isCanBeAvoided(): bool;
 }

@@ -46,7 +46,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
             'damage'         => $damage = 150,
-            'block_ignore'   => 0,
+            'can_be_avoided' => $canBeAvoided = true,
         ];
 
         $action = $actionFactory->create($data);
@@ -57,7 +57,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($damage, $action->getPower());
         self::assertEquals('attack', $action->getNameAction());
         self::assertEquals('', $action->getIcon());
-        self::assertEquals(0, $action->getBlockIgnore());
+        self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
 
         // Полный набор данных
         $data = [
@@ -67,7 +67,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'allies_command'   => $command,
             'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
             'damage'           => $damage = 50,
-            'block_ignore'     => $blockIgnore = 10,
+            'can_be_avoided'   => $canBeAvoided = false,
             'name'             => $name = 'action name 123',
             'animation_method' => $animationMethod = 'effectDamage',
             'icon'             => $icon = 'icon.png',
@@ -82,7 +82,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($animationMethod, $action->getAnimationMethod());
         self::assertEquals($icon, $action->getIcon());
-        self::assertEquals($blockIgnore, $action->getBlockIgnore());
+        self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
     }
 
     /**
@@ -479,7 +479,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'damage'         => 50,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_TYPE_DATA,
@@ -505,7 +505,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'damage'         => 50,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_ACTION_UNIT_DATA,
@@ -519,7 +519,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'damage'         => 50,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_ACTION_UNIT_DATA,
@@ -532,7 +532,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'damage'         => 50,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
@@ -546,7 +546,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'damage'         => 50,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
@@ -559,7 +559,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command' => $enemyCommand,
                     'type_target'   => ActionInterface::TARGET_RANDOM_ENEMY,
                     'damage'        => 50,
-                    'block_ignore'  => 0,
+                    'can_be_avoided' => true,
                     'name'          => 'action name',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
@@ -573,7 +573,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => new UnitFactory(),
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'damage'         => 50,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
@@ -586,7 +586,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'damage'         => 50,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_TYPE_TARGET_DATA,
@@ -600,13 +600,13 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => true,
                     'damage'         => 50,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 11: Отсутствует block_ignore [для DamageAction]
+                // 11: Отсутствует can_be_avoided [для DamageAction]
                 [
                     'type'           => ActionInterface::DAMAGE,
                     'action_unit'    => $actionUnit,
@@ -615,10 +615,10 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'damage'         => $damage = 150,
                 ],
-                ActionException::INVALID_BLOCK_IGNORE_DATA,
+                ActionException::INVALID_CAN_BE_AVOIDED,
             ],
             [
-                // 12: block_ignore некорректного типа [для DamageAction]
+                // 12: can_be_avoided некорректного типа [для DamageAction]
                 [
                     'type'           => ActionInterface::DAMAGE,
                     'action_unit'    => $actionUnit,
@@ -626,9 +626,9 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'damage'         => $damage = 150,
-                    'block_ignore'   => '0',
+                    'can_be_avoided' => '0',
                 ],
-                ActionException::INVALID_BLOCK_IGNORE_DATA,
+                ActionException::INVALID_CAN_BE_AVOIDED,
             ],
             [
                 // 13: Отсутствует type_target [для HealAction]
@@ -664,7 +664,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'damage'         => '50',
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_DAMAGE_DATA,
@@ -678,7 +678,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'damage'         => 50,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => ['action name'],
                 ],
                 ActionException::INVALID_NAME_DATA,
@@ -692,7 +692,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'power'          => 50,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => 123,
                 ],
                 ActionException::INVALID_NAME_DATA,
@@ -1121,7 +1121,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'icon'           => 123,
                     'damage'         => 30,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                 ],
                 ActionException::INVALID_ICON,
             ],
@@ -1243,7 +1243,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'block_ignore'   => 0,
+                    'can_be_avoided' => true,
                     'name'           => 'action name',
                 ],
                 ActionException::INVALID_DAMAGE_DATA,

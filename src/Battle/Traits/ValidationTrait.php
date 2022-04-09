@@ -130,6 +130,22 @@ trait ValidationTrait
      * @param array $data
      * @param string $filed
      * @param string $error
+     * @return bool
+     * @throws BattleException
+     */
+    protected static function bool(array $data, string $filed, string $error): bool
+    {
+        if (!array_key_exists($filed, $data) || !is_bool($data[$filed])) {
+            throw new BattleException($error);
+        }
+
+        return $data[$filed];
+    }
+
+    /**
+     * @param array $data
+     * @param string $filed
+     * @param string $error
      * @return array
      * @throws BattleException
      */

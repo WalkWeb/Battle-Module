@@ -46,7 +46,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $enemyUnit->getDamage(),
-            $enemyUnit->getBlockIgnore()
+            true
         );
 
         $damage->handle();
