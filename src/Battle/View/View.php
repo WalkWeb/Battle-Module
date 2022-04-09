@@ -277,9 +277,12 @@ class View implements ViewInterface
 
         foreach ($unit->getEffects() as $effect) {
             $duration = $effect->getDuration() < 10 ? (string)$effect->getDuration() : '';
-            $html .= '<img src="' . $effect->getIcon() . '" width="22" alt="" /> <span>' . $duration . '</span>';
+            $html .=
+                '<div class="unit_effect_icon" style="background-image: url(' . $effect->getIcon() . ')"><div>' .
+                    $duration .
+                '</div></div>';
         }
-        
+
         return $html;
     }
 }

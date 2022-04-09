@@ -334,16 +334,20 @@ div.life_text {
     margin-left: 5px;
 }
 
-.unit_effect_container span {
-    font-size: 13px;
-    margin-left: -12px;
-    color: red;
-    text-shadow: 0 0 3px #000;
-}
-
-.unit_effect_container img {
+.unit_effect_icon {
+    width: 24px;
+    height: 24px;
+    background-size: cover;
     border: 1px solid #2b1a04;
     border-radius: 3px;
+    display: inline-block;
+}
+
+.unit_effect_icon div {
+    font-size: 13px;
+    color: red;
+    text-shadow: 0 0 3px #000;
+    padding: 10px 0 0 15px;
 }
 
 /* Table statistics styles */

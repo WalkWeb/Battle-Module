@@ -391,7 +391,7 @@ EOT;
                     </div>
                 </div>
                 <div class="unit_effect_container">
-                    <img src="/images/icons/ability/156.png" width="22" alt="" /> <span>6</span>                </div>
+                    <div class="unit_effect_icon" style="background-image: url(/images/icons/ability/156.png)"><div>6</div></div>                </div>
             </div>
             <div class="unit_box2_left">
                 <div class="unit_icon">

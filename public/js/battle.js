@@ -383,7 +383,7 @@ function createEffectsView(effects) {
     let html = '';
 
     effects.forEach(function(effect) {
-        html += '<img src="' + effect.icon + '" width="22" alt="" /> <span>' + effect.duration + '</span>';
+        html += '<div class="unit_effect_icon" style="background-image: url(' + effect.icon + ')" /><div>' + effect.duration + '</div></div>';
     });
 
     return html;
