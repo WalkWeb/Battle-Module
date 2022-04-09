@@ -60,7 +60,7 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
                 <td><p><span class="stat_damage"><?= $result->getTranslation()->trans('Hits') ?></span></p></td>
                 <td><p><span class="stat_damage"><?= $result->getTranslation()->trans('Caused Damage') ?></span></p></td>
                 <td><p><span class="stat_taken"><?= $result->getTranslation()->trans('Taken Damage') ?></span></p></td>
-                <td><p><span class="stat_taken"><?= $result->getTranslation()->trans('Blocked hits') ?></span></p></td>
+                <td><p><span class="stat_taken"><?= $result->getTranslation()->trans('Blocked') ?></span></p></td>
                 <td><p><span class="stat_heal"><?= $result->getTranslation()->trans('Heal') ?></span></p></td>
                 <td><p><span class="stat_kill"><?= $result->getTranslation()->trans('Killing') ?></span></p></td>
                 <td><p><span class="stat_kill"><?= $result->getTranslation()->trans('Summons') ?></span></p></td>

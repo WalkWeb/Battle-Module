@@ -34,6 +34,11 @@ class UnitStatistic implements UnitStatisticInterface
     private $blockedHits = 0;
 
     /**
+     * @var int - Уклонился от получаемых ударов
+     */
+    private $dodgedHits = 0;
+
+    /**
      * @var int - Суммарное вылеченное здоровье юнитом
      */
     private $heal = 0;
@@ -95,6 +100,11 @@ class UnitStatistic implements UnitStatisticInterface
         $this->blockedHits++;
     }
 
+    public function addDodgedHit(): void
+    {
+        $this->dodgedHits++;
+    }
+
     /**
      * @param int $heal
      */
@@ -145,6 +155,11 @@ class UnitStatistic implements UnitStatisticInterface
     public function getBlockedHits(): int
     {
         return $this->blockedHits;
+    }
+
+    public function getDodgedHits(): int
+    {
+        return $this->dodgedHits;
     }
 
     /**

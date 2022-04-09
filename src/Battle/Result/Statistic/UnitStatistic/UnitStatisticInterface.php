@@ -38,6 +38,11 @@ interface UnitStatisticInterface
     public function addBlockedHit(): void;
 
     /**
+     * Указывает, что юнит уклонился от входящего удара
+     */
+    public function addDodgedHit(): void;
+
+    /**
      * Добавляет вылеченное здоровье юнитом
      *
      * @param int $heal
@@ -86,6 +91,13 @@ interface UnitStatisticInterface
      * @return int
      */
     public function getBlockedHits(): int;
+
+    /**
+     * Возвращает суммарное количество уклонений от входящих ударов по юниту
+     *
+     * @return int
+     */
+    public function getDodgedHits(): int;
 
     /**
      * Возвращает суммарное вылеченное здоровье юнитом
