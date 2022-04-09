@@ -556,6 +556,25 @@ class UnitFactory
             'class'        => 1,
             'race'         => 1,
         ],
+        // Юнит с очень высокими показателями accuracy и defense
+        30  => [
+            'id'           => '1e7a83ff-bce6-4a76-bb35-fea7130dfc28',
+            'name'         => 'nimble_unit',
+            'level'        => 1,
+            'avatar'       => '/images/avas/humans/human001.jpg',
+            'damage'       => 20,
+            'attack_speed' => 1,
+            'accuracy'     => 100000,
+            'defense'      => 100000,
+            'block'        => 0,
+            'block_ignore' => 0,
+            'life'         => 100,
+            'total_life'   => 100,
+            'melee'        => true,
+            'command'      => 1,
+            'class'        => 1,
+            'race'         => 1,
+        ],
     ];
 
     /**
@@ -589,7 +608,7 @@ class UnitFactory
             self::$units[$template]['melee'],
             self::$units[$template]['command'],
             RaceFactory::create(self::$units[$template]['race']),
-            $container ?? new Container(),
+            $container ?? new Container(true),
             $class
         );
     }

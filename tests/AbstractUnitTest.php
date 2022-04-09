@@ -21,7 +21,7 @@ abstract class AbstractUnitTest extends TestCase
     protected function getContainerWithRuLanguage(): ContainerInterface
     {
         $translation = new Translation('ru');
-        $container = new Container();
+        $container = new Container(true);
         $container->set(Translation::class, $translation);
         return $container;
     }

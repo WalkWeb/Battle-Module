@@ -469,7 +469,7 @@ class Scenario implements ScenarioInterface
         return [
             'type'         => 'change',
             'user_id'      => $targetUnit->getId(),
-            'class'        => $targetUnit->getCommand() === 1 ? 'd_evasion' : 'd_evasion_s2',
+            'class'        => $targetUnit->getCommand() === 1 ? 'd_evasion_s2' : 'd_evasion',
             'unit_effects' => $this->getUnitEffects($targetUnit),
         ];
     }

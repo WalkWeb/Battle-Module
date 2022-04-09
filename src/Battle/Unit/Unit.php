@@ -80,12 +80,13 @@ class Unit extends AbstractUnit
      */
     private function applyDamageAction(DamageAction $action): void
     {
-        // Проверка блока
-        if (
-            $this->block &&
-            $action->isCanBeAvoided() &&
-            ($this->block - $action->getActionUnit()->getBlockIgnore()) >= random_int(0, 100)
-        ) {
+        if ($this->isDodged($action)) {
+            $action->addFactualPower($this->id, 0);
+            $action->dodged($this);
+            return;
+        }
+
+        if ($this->isBlocked($action)) {
             $action->addFactualPower($this->id, 0);
             $action->blocked($this);
             return;
@@ -337,5 +338,78 @@ class Unit extends AbstractUnit
         }
 
         return $collection;
+    }
+
+    /**
+     * Рассчитывает вероятность юнита уклониться от получаемого удара
+     *
+     * В тестах мы не можем допустить случайности нанесения удара, по этому если бой работает в режиме теста, шанс
+     * попадания определяется (т.е. не-уклонения) так: если шанс 50% или больше - всегда true, иначе всегда false
+     *
+     * TODO Позже, когда механики будут усложняться (пока рассчитывается только шанс блока и уклонения) все формулы
+     * TODO будут вынесены в отдельный Calculator, это разгрузит данный класс от кода и сложности
+     *
+     * TODO Когда будут добавлены обездвиживающие эффекты (оглушение, паралич) нужно не забыть добавить проверку,
+     * TODO что если они есть - юнит не может уклониться (что логично)
+     *
+     * @param DamageAction $action
+     * @return bool
+     * @throws Exception
+     */
+    private function isDodged(DamageAction $action): bool
+    {
+        if (!$action->isCanBeAvoided()) {
+            return false;
+        }
+
+        $chanceOfHit = $this->getChanceOfHit($action);
+
+        if ($this->container->isTestMode()) {
+            return !(bool)(int)round($chanceOfHit/100);
+        }
+
+        return $chanceOfHit <= random_int(0, 100);
+    }
+
+    /**
+     * Рассчитывает шанс попадания по текущему юниту
+     *
+     * @param DamageAction $action
+     * @return int
+     */
+    private function getChanceOfHit(DamageAction $action): int
+    {
+        $accuracy = $action->getActionUnit()->getAccuracy();
+        $chanceOfHit = (int)round(($accuracy - $this->defense) / ($accuracy / 10) * 2 + 80);
+
+        // TODO Можно добавить шанс попадания в FullLog, для большей информативности логов
+
+        if ($chanceOfHit < self::MIN_HIT_CHANCE) {
+            return self::MIN_HIT_CHANCE;
+        }
+
+        if ($chanceOfHit > self::MAX_HIT_CHANCE) {
+            return self::MAX_HIT_CHANCE;
+        }
+
+        return $chanceOfHit;
+    }
+
+    /**
+     * @param DamageAction $action
+     * @return bool
+     * @throws Exception
+     */
+    private function isBlocked(DamageAction $action): bool
+    {
+        if ($this->block === 0) {
+            return false;
+        }
+
+        if (!$action->isCanBeAvoided()) {
+            return false;
+        }
+
+        return ($this->block - $action->getActionUnit()->getBlockIgnore()) >= random_int(0, 100);
     }
 }

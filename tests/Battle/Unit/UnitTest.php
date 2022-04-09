@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit;
 
 use Battle\Action\ActionException;
-use Battle\Container\Container;
 use Exception;
 use Battle\Unit\Unit;
 use Battle\Command\Command;
@@ -60,14 +59,13 @@ class UnitTest extends AbstractUnitTest
      */
     public function testUnitApplyDamage(): void
     {
-        $container = new Container();
         $attackUnitTemplate = 2;
         $defendUnitTemplate = 6;
-        $unit = UnitFactory::createByTemplate($attackUnitTemplate, $container);
-        $enemyUnit = UnitFactory::createByTemplate($defendUnitTemplate, $container);
+        $unit = UnitFactory::createByTemplate($attackUnitTemplate);
+        $enemyUnit = UnitFactory::createByTemplate($defendUnitTemplate);
 
-        $command = CommandFactory::create([$unit], $container);
-        $enemyCommand = CommandFactory::create([$enemyUnit], $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
             $unit,

@@ -187,7 +187,7 @@ class ScenarioTest extends AbstractUnitTest
                         [
                             'type'         => 'change',
                             'user_id'      => $enemyUnit->getId(),
-                            'class'        => 'd_evasion',
+                            'class'        => 'd_evasion_s2',
                             'unit_effects' => [],
                         ],
                     ],
@@ -297,7 +297,7 @@ class ScenarioTest extends AbstractUnitTest
      */
     public function testScenarioAddEffectDamage(): void
     {
-        $container = new Container();
+        $container = new Container(true);
         [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(23, 2, $container);
 
         $ability = new PoisonAbility($unit);

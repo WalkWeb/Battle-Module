@@ -66,6 +66,9 @@ interface UnitInterface
     public const MIN_ID_LENGTH    = 1;
     public const MAX_ID_LENGTH    = 36;
 
+    public const MIN_HIT_CHANCE   = 5;
+    public const MAX_HIT_CHANCE   = 95;
+
     /**
      * UUID or random string
      *

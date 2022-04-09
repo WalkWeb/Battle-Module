@@ -32,7 +32,7 @@ class StrokeTest extends AbstractUnitTest
      */
     public function testStrokeHandle(): void
     {
-        $container = new Container();
+        $container = new Container(true);
         $unit = UnitFactory::createByTemplate(1, $container);
         $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);

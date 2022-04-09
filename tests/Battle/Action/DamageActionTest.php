@@ -394,4 +394,73 @@ class DamageActionTest extends AbstractUnitTest
         self::assertEquals($unit->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
         self::assertEquals($enemyUnit->getTotalLife() - $unit->getDamage(), $enemyUnit->getLife());
     }
+
+    /**
+     * Тест на ситуацию, когда шанс попадания по юниту выше максимального (UnitInterface::MIN_HIT_CHANCE), и
+     * приравнивается к максимальному
+     *
+     * В текущем варианте кода, единственный вариант проверить, что происходит именно то, что ожидается - это заменить
+     * покрытие кода тестами (php vendor/bin/phpunit --coverage-html html) и увидеть, что код
+     *
+     * if ($chanceOfHit > self::MAX_HIT_CHANCE) {
+     *   return self::MAX_HIT_CHANCE;
+     * }
+     *
+     * тестами покрыт
+     *
+     * TODO В будущем, когда будет добавлен Calculator тест будет переписан, и он станет более очевидным - будет
+     * TODO простой публичный метод, который будет возвращать шанс попадания, на основании меткости/защиты сражающихся
+     *
+     * @throws Exception
+     */
+    public function testDamageActionMaxChanceOfHit(): void
+    {
+        $unit = UnitFactory::createByTemplate(30);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage(),
+            true
+        );
+
+        $action->handle();
+
+        // Максимальный шанс попадания 95%, т.е. все равно может промахнуться. Соответственно мы не можем проверить
+        // конкретное попадание или конкретное уклонение, по этому делается простая условная проверка
+        self::assertIsInt($action->getPower());
+    }
+
+    /**
+     * TODO Аналогично testDamageActionMaxChanceOfHit() только для минимального шанса попадания
+     *
+     * @throws Exception
+     */
+    public function testDamageActionMinChanceOfHit(): void
+    {
+        $unit = UnitFactory::createByTemplate(2);
+        $enemyUnit = UnitFactory::createByTemplate(30);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getDamage(),
+            true
+        );
+
+        $action->handle();
+
+        // Минимальный шанс попадания 5%, т.е. все равно может попасть. Соответственно мы не можем проверить
+        // конкретное попадание или конкретное уклонение, по этому делается простая условная проверка
+        self::assertIsInt($action->getPower());
+    }
 }
