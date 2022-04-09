@@ -53,7 +53,7 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
     <div class="statistics_box">
         <table class="statistics">
             <tr class="header">
-                <td colspan="9"><p><?= $result->getTranslation()->trans('Statistics') ?></p></td>
+                <td colspan="10"><p><?= $result->getTranslation()->trans('Statistics') ?></p></td>
             </tr>
             <tr class="header">
                 <td><p><span class="stat_unit"><?= $result->getTranslation()->trans('Unit') ?></span></p></td>
@@ -61,6 +61,7 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
                 <td><p><span class="stat_damage"><?= $result->getTranslation()->trans('Caused Damage') ?></span></p></td>
                 <td><p><span class="stat_taken"><?= $result->getTranslation()->trans('Taken Damage') ?></span></p></td>
                 <td><p><span class="stat_taken"><?= $result->getTranslation()->trans('Blocked') ?></span></p></td>
+                <td><p><span class="stat_taken"><?= $result->getTranslation()->trans('Dodged') ?></span></p></td>
                 <td><p><span class="stat_heal"><?= $result->getTranslation()->trans('Heal') ?></span></p></td>
                 <td><p><span class="stat_kill"><?= $result->getTranslation()->trans('Killing') ?></span></p></td>
                 <td><p><span class="stat_kill"><?= $result->getTranslation()->trans('Summons') ?></span></p></td>
@@ -82,6 +83,7 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
                     <td><p><span class="stat_damage"><?= $unit->getCausedDamage() ?></span></p></td>
                     <td><p><span class="stat_taken"><?= $unit->getTakenDamage() ?></span></p></td>
                     <td><p><span class="stat_taken"><?= $unit->getBlockedHits() ?></span></p></td>
+                    <td><p><span class="stat_taken"><?= $unit->getDodgedHits() ?></span></p></td>
                     <td><p><span class="stat_heal"><?= $unit->getHeal() ?></span></p></td>
                     <td><p><span class="stat_kill"><?= $unit->getKilling() ?></span></p></td>
                     <td><p><span class="stat_kill"><?= $unit->getSummons() ?></span></p></td>
@@ -90,19 +92,19 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
             <?php endforeach; ?>
             <tr>
                 <td><p class="right"><?= $result->getTranslation()->trans('Total rounds') ?>:</p></td>
-                <td colspan="8"><p class="left"><?= $result->getStatistic()->getRoundNumber() ?></p></td>
+                <td colspan="9"><p class="left"><?= $result->getStatistic()->getRoundNumber() ?></p></td>
             </tr>
             <tr>
                 <td><p class="right"><?= $result->getTranslation()->trans('Total stroke') ?>:</p></td>
-                <td colspan="8"><p class="left"><?= $result->getStatistic()->getStrokeNumber() ?></p></td>
+                <td colspan="9"><p class="left"><?= $result->getStatistic()->getStrokeNumber() ?></p></td>
             </tr>
             <tr>
                 <td><p class="right"><?= $result->getTranslation()->trans('Runtime') ?>:</p></td>
-                <td colspan="8"><p class="left"><?= $result->getStatistic()->getRuntime() ?> ms</p></td>
+                <td colspan="9"><p class="left"><?= $result->getStatistic()->getRuntime() ?> ms</p></td>
             </tr>
             <tr>
                 <td><p class="right"><?= $result->getTranslation()->trans('Memory cost') ?>:</p></td>
-                <td colspan="8"><p class="left"><?= $result->getStatistic()->getMemoryCostClipped() ?></p></td>
+                <td colspan="9"><p class="left"><?= $result->getStatistic()->getMemoryCostClipped() ?></p></td>
             </tr>
         </table>
     </div>
