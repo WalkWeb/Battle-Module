@@ -109,6 +109,7 @@ class Statistic implements StatisticInterface
                 $this->countingCausedDamage($action);
                 $this->countingTakenDamage($action);
                 $this->countingBlockedHits($action);
+                $this->countingDodgedHits($action);
                 break;
             case $action instanceof ResurrectionAction:
             case $action instanceof HealAction:
@@ -219,7 +220,7 @@ class Statistic implements StatisticInterface
     private function countingTakenDamage(ActionInterface $action): void
     {
         foreach ($action->getTargetUnits() as $targetUnit) {
-            if (!$action->isBlocked($targetUnit)) {
+            if (!$action->isBlocked($targetUnit) && !$action->isDodged($targetUnit)) {
                 if (!$this->unitsStatistics->exist($targetUnit->getId())) {
                     $unit = new UnitStatistic($targetUnit);
                     $unit->addTakenDamage($action->getFactualPowerByUnit($targetUnit));
@@ -233,7 +234,7 @@ class Statistic implements StatisticInterface
     }
 
     /**
-     * Подсчитывает заблокированные атаки
+     * Подсчитывает заблокированные удары
      *
      * @param ActionInterface $action
      * @throws ActionException
@@ -250,6 +251,29 @@ class Statistic implements StatisticInterface
                 } else {
                     $unit = $this->getUnitStatistics($targetUnit->getId());
                     $unit->addBlockedHit();
+                }
+            }
+        }
+    }
+
+    /**
+     * Подсчитывает удары от которых юнит уклонился
+     *
+     * @param ActionInterface $action
+     * @throws ActionException
+     * @throws StatisticException
+     */
+    private function countingDodgedHits(ActionInterface $action): void
+    {
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            if ($action->isDodged($targetUnit)) {
+                if (!$this->unitsStatistics->exist($targetUnit->getId())) {
+                    $unit = new UnitStatistic($targetUnit);
+                    $unit->addDodgedHit();
+                    $this->unitsStatistics->add($unit);
+                } else {
+                    $unit = $this->getUnitStatistics($targetUnit->getId());
+                    $unit->addDodgedHit();
                 }
             }
         }

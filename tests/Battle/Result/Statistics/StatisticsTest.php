@@ -189,6 +189,59 @@ class StatisticsTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на подсчет удары от которых юнит уклонился
+     *
+     * @throws Exception
+     */
+    public function testStatisticsCausedDodgedHits(): void
+    {
+        $statistics = new Statistic();
+
+        $unit = UnitFactory::createByTemplate(1);
+        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        // Юнит с высоким уклонением
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(30);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
+
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            $unit->getDamage(),
+            true
+        );
+
+        $action->handle();
+
+        $statistics->addUnitAction($action);
+
+        // Проверяем, что статистика по уклонениям обновилась
+        self::assertEquals(0, $statistics->getUnitsStatistics()->get($firstEnemyUnit->getId())->getDodgedHits());
+        self::assertEquals(1, $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getDodgedHits());
+
+        // И делаем удар еще раз
+        $action = new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            $unit->getDamage(),
+            true
+        );
+
+        $action->handle();
+
+        $statistics->addUnitAction($action);
+
+        // И еще раз проверяем статистику по уклонениям
+        self::assertEquals(0, $statistics->getUnitsStatistics()->get($firstEnemyUnit->getId())->getDodgedHits());
+        self::assertEquals(2, $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getDodgedHits());
+    }
+
+    /**
      * Тест на подсчет полученного урона от EffectAction, а именно то, что нанесенный урон засчитывается юниту который
      * создал эффект, а не тому, на ком эффект находится
      *
