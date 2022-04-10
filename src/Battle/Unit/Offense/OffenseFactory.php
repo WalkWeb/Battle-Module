@@ -6,7 +6,6 @@ namespace Battle\Unit\Offense;
 
 use Battle\Traits\ValidationTrait;
 use Battle\Unit\UnitException;
-use Battle\Unit\UnitInterface;
 use Exception;
 
 class OffenseFactory
@@ -28,31 +27,31 @@ class OffenseFactory
 
         self::intMinMaxValue(
             $data['damage'],
-            UnitInterface::MIN_DAMAGE,
-            UnitInterface::MAX_DAMAGE,
-            OffenseException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE
+            OffenseInterface::MIN_DAMAGE,
+            OffenseInterface::MAX_DAMAGE,
+            OffenseException::INCORRECT_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
         );
 
         self::intMinValue(
             $data['accuracy'],
-            UnitInterface::MIN_ACCURACY,
-            OffenseException::INCORRECT_ACCURACY_VALUE . UnitInterface::MIN_ACCURACY
+            OffenseInterface::MIN_ACCURACY,
+            OffenseException::INCORRECT_ACCURACY_VALUE . OffenseInterface::MIN_ACCURACY
         );
 
         self::intMinMaxValue(
             $data['block_ignore'],
-            UnitInterface::MIN_BLOCK_IGNORE,
-            UnitInterface::MAX_BLOCK_IGNORE,
-            OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . UnitInterface::MIN_BLOCK_IGNORE . '-' . UnitInterface::MAX_BLOCK_IGNORE
+            OffenseInterface::MIN_BLOCK_IGNORE,
+            OffenseInterface::MAX_BLOCK_IGNORE,
+            OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE
         );
 
         if (!array_key_exists('attack_speed', $data) || (!is_float($data['attack_speed']) && !is_int($data['attack_speed']))) {
             throw new OffenseException(OffenseException::INCORRECT_ATTACK_SPEED);
         }
 
-        if ($data['attack_speed'] < UnitInterface::MIN_ATTACK_SPEED || $data['attack_speed'] > UnitInterface::MAX_ATTACK_SPEED) {
+        if ($data['attack_speed'] < OffenseInterface::MIN_ATTACK_SPEED || $data['attack_speed'] > OffenseInterface::MAX_ATTACK_SPEED) {
             throw new UnitException(
-                OffenseException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED
+                OffenseException::INCORRECT_ATTACK_SPEED_VALUE . OffenseInterface::MIN_ATTACK_SPEED . '-' . OffenseInterface::MAX_ATTACK_SPEED
             );
         }
 

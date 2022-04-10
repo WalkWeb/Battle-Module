@@ -6,7 +6,7 @@ namespace Tests\Battle\Unit\Offense;
 
 use Battle\Unit\Offense\OffenseException;
 use Battle\Unit\Offense\OffenseFactory;
-use Battle\Unit\UnitInterface;
+use Battle\Unit\Offense\OffenseInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 
@@ -100,22 +100,22 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // damage меньше минимального значения
                 [
-                    'damage'       => UnitInterface::MIN_DAMAGE - 1,
+                    'damage'       => OffenseInterface::MIN_DAMAGE - 1,
                     'attack_speed' => 1.3,
                     'accuracy'     => 200,
                     'block_ignore' => 0,
                 ],
-                OffenseException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
+                OffenseException::INCORRECT_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE,
             ],
             [
                 // damage больше максимального значения
                 [
-                    'damage'       => UnitInterface::MAX_DAMAGE + 1,
+                    'damage'       => OffenseInterface::MAX_DAMAGE + 1,
                     'attack_speed' => 1.3,
                     'accuracy'     => 200,
                     'block_ignore' => 0,
                 ],
-                OffenseException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
+                OffenseException::INCORRECT_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE,
             ],
 
             // attack_speed
@@ -142,21 +142,21 @@ class OffenseFactoryTest extends AbstractUnitTest
                 // attack_speed меньше минимального значения
                 [
                     'damage'       => 20,
-                    'attack_speed' => UnitInterface::MIN_ATTACK_SPEED - 0.1,
+                    'attack_speed' => OffenseInterface::MIN_ATTACK_SPEED - 0.1,
                     'accuracy'     => 200,
                     'block_ignore' => 0,
                 ],
-                OffenseException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
+                OffenseException::INCORRECT_ATTACK_SPEED_VALUE . OffenseInterface::MIN_ATTACK_SPEED . '-' . OffenseInterface::MAX_ATTACK_SPEED,
             ],
             [
                 // attack_speed больше максимального значения
                 [
                     'damage'       => 20,
-                    'attack_speed' => UnitInterface::MAX_ATTACK_SPEED + 0.1,
+                    'attack_speed' => OffenseInterface::MAX_ATTACK_SPEED + 0.1,
                     'accuracy'     => 200,
                     'block_ignore' => 0,
                 ],
-                OffenseException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
+                OffenseException::INCORRECT_ATTACK_SPEED_VALUE . OffenseInterface::MIN_ATTACK_SPEED . '-' . OffenseInterface::MAX_ATTACK_SPEED,
             ],
 
             // accuracy
@@ -184,10 +184,10 @@ class OffenseFactoryTest extends AbstractUnitTest
                 [
                     'damage'       => 20,
                     'attack_speed' => 1.3,
-                    'accuracy'     => UnitInterface::MIN_ACCURACY - 1,
+                    'accuracy'     => OffenseInterface::MIN_ACCURACY - 1,
                     'block_ignore' => 0,
                 ],
-                OffenseException::INCORRECT_ACCURACY_VALUE . UnitInterface::MIN_ACCURACY,
+                OffenseException::INCORRECT_ACCURACY_VALUE . OffenseInterface::MIN_ACCURACY,
             ],
 
             // block_ignore
@@ -216,9 +216,9 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'damage'       => 20,
                     'attack_speed' => 1.3,
                     'accuracy'     => 200,
-                    'block_ignore' => UnitInterface::MIN_BLOCK_IGNORE - 1,
+                    'block_ignore' => OffenseInterface::MIN_BLOCK_IGNORE - 1,
                 ],
-                OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . UnitInterface::MIN_BLOCK_IGNORE . '-' . UnitInterface::MAX_BLOCK_IGNORE,
+                OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE,
             ],
             [
                 // block_ignore больше максимального значения
@@ -226,9 +226,9 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'damage'       => 20,
                     'attack_speed' => 1.3,
                     'accuracy'     => 200,
-                    'block_ignore' => UnitInterface::MAX_BLOCK_IGNORE + 1,
+                    'block_ignore' => OffenseInterface::MAX_BLOCK_IGNORE + 1,
                 ],
-                OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . UnitInterface::MIN_BLOCK_IGNORE . '-' . UnitInterface::MAX_BLOCK_IGNORE,
+                OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE,
             ],
         ];
     }

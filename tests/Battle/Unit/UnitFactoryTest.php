@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit;
 
 use Battle\Unit\Classes\UnitClassFactory;
+use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
@@ -453,7 +454,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'name'         => 'Skeleton',
                     'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
-                    'damage'       => UnitInterface::MIN_DAMAGE - 1,
+                    'damage'       => OffenseInterface::MIN_DAMAGE - 1,
                     'attack_speed' => 1.2,
                     'accuracy'     => 200,
                     'defense'      => 100,
@@ -466,7 +467,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
+                UnitException::INCORRECT_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE,
             ],
             [
                 [
@@ -475,7 +476,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'name'         => 'Skeleton',
                     'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
-                    'damage'       => UnitInterface::MAX_DAMAGE + 1,
+                    'damage'       => OffenseInterface::MAX_DAMAGE + 1,
                     'attack_speed' => 1.2,
                     'accuracy'     => 200,
                     'defense'      => 100,
@@ -488,7 +489,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                UnitException::INCORRECT_DAMAGE_VALUE . UnitInterface::MIN_DAMAGE . '-' . UnitInterface::MAX_DAMAGE,
+                UnitException::INCORRECT_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE,
             ],
             [
                 [
@@ -541,7 +542,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
-                    'attack_speed' => UnitInterface::MIN_ATTACK_SPEED - 0.1,
+                    'attack_speed' => OffenseInterface::MIN_ATTACK_SPEED - 0.1,
                     'accuracy'     => 200,
                     'defense'      => 100,
                     'block'        => 0,
@@ -553,7 +554,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                UnitException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
+                UnitException::INCORRECT_ATTACK_SPEED_VALUE . OffenseInterface::MIN_ATTACK_SPEED . '-' . OffenseInterface::MAX_ATTACK_SPEED,
             ],
             [
                 [
@@ -563,7 +564,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'level'        => 3,
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
-                    'attack_speed' =>  UnitInterface::MAX_ATTACK_SPEED + 0.1,
+                    'attack_speed' => OffenseInterface::MAX_ATTACK_SPEED + 0.1,
                     'accuracy'     => 200,
                     'defense'      => 100,
                     'block'        => 0,
@@ -575,7 +576,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                UnitException::INCORRECT_ATTACK_SPEED_VALUE . UnitInterface::MIN_ATTACK_SPEED . '-' . UnitInterface::MAX_ATTACK_SPEED,
+                UnitException::INCORRECT_ATTACK_SPEED_VALUE . OffenseInterface::MIN_ATTACK_SPEED . '-' . OffenseInterface::MAX_ATTACK_SPEED,
             ],
             [
                 [
@@ -1174,7 +1175,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'accuracy'     => 200,
                     'defense'      => 100,
                     'block'        => 0,
-                    'block_ignore' => UnitInterface::MIN_BLOCK_IGNORE - 1,
+                    'block_ignore' => OffenseInterface::MIN_BLOCK_IGNORE - 1,
                     'life'         => 100,
                     'total_life'   => 100,
                     'melee'        => true,
@@ -1182,7 +1183,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'class'        => 1,
                     'race'         => 1,
                 ],
-                UnitException::INCORRECT_BLOCK_IGNORE_VALUE. UnitInterface::MIN_BLOCK_IGNORE . '-' . UnitInterface::MAX_BLOCK_IGNORE,
+                UnitException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE,
             ],
             [
                 // block_ignore больше максимального значения
@@ -1196,7 +1197,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'accuracy'     => 200,
                     'defense'      => 100,
                     'block'        => 0,
-                    'block_ignore' => UnitInterface::MAX_BLOCK_IGNORE + 1,
+                    'block_ignore' => OffenseInterface::MAX_BLOCK_IGNORE + 1,
                     'life'         => 100,
                     'total_life'   => 100,
                     'melee'        => true,
@@ -1204,7 +1205,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'class'        => 1,
                     'race'         => 1,
                 ],
-                UnitException::INCORRECT_BLOCK_IGNORE_VALUE. UnitInterface::MIN_BLOCK_IGNORE . '-' . UnitInterface::MAX_BLOCK_IGNORE,
+                UnitException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE,
             ],
             [
                 // Отсутствует accuracy
@@ -1225,7 +1226,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                UnitException::INCORRECT_ACCURACY
+                UnitException::INCORRECT_ACCURACY,
             ],
             [
                 // accuracy некорректного типа
@@ -1247,7 +1248,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                UnitException::INCORRECT_ACCURACY
+                UnitException::INCORRECT_ACCURACY,
             ],
             [
                 // accuracy меньше минимальной длины
@@ -1258,7 +1259,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'avatar'       => '/images/avas/monsters/003.png',
                     'damage'       => 15,
                     'attack_speed' => 1.2,
-                    'accuracy'     => UnitInterface::MIN_ACCURACY - 1,
+                    'accuracy'     => OffenseInterface::MIN_ACCURACY - 1,
                     'defense'      => 100,
                     'block'        => 0,
                     'block_ignore' => 0,
@@ -1269,7 +1270,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                UnitException::INCORRECT_ACCURACY_VALUE . UnitInterface::MIN_ACCURACY,
+                UnitException::INCORRECT_ACCURACY_VALUE . OffenseInterface::MIN_ACCURACY,
             ],
             [
                 // Отсутствует defense
@@ -1290,7 +1291,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                UnitException::INCORRECT_DEFENSE
+                UnitException::INCORRECT_DEFENSE,
             ],
             [
                 // defense некорректного типа
@@ -1312,7 +1313,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                UnitException::INCORRECT_DEFENSE
+                UnitException::INCORRECT_DEFENSE,
             ],
             [
                 // defense меньше минимальной длины
