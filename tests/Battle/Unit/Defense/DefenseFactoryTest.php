@@ -6,7 +6,7 @@ namespace Tests\Battle\Unit\Defense;
 
 use Battle\Unit\Defense\DefenseException;
 use Battle\Unit\Defense\DefenseFactory;
-use Battle\Unit\UnitInterface;
+use Battle\Unit\Defense\DefenseInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 
@@ -87,10 +87,10 @@ class DefenseFactoryTest extends AbstractUnitTest
             [
                 // defense меньше минимального значения
                 [
-                    'defense' => UnitInterface::MIN_DEFENSE - 1,
+                    'defense' => DefenseInterface::MIN_DEFENSE - 1,
                     'block'   => 0,
                 ],
-                DefenseException::INCORRECT_DEFENSE_VALUE . UnitInterface::MIN_DEFENSE,
+                DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE,
             ],
 
             // block
@@ -113,19 +113,18 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // block меньше минимального значения
                 [
                     'defense' => 100,
-                    'block'   => UnitInterface::MIN_BLOCK - 1,
+                    'block'   => DefenseInterface::MIN_BLOCK - 1,
                 ],
-                DefenseException::INCORRECT_BLOCK_VALUE . UnitInterface::MIN_BLOCK . '-' . UnitInterface::MAX_BLOCK,
+                DefenseException::INCORRECT_BLOCK_VALUE . DefenseInterface::MIN_BLOCK . '-' . DefenseInterface::MAX_BLOCK,
             ],
             [
                 // block больше максимального значения
                 [
                     'defense' => 100,
-                    'block'   => UnitInterface::MAX_BLOCK + 1,
+                    'block'   => DefenseInterface::MAX_BLOCK + 1,
                 ],
-                DefenseException::INCORRECT_BLOCK_VALUE . UnitInterface::MIN_BLOCK . '-' . UnitInterface::MAX_BLOCK,
+                DefenseException::INCORRECT_BLOCK_VALUE . DefenseInterface::MIN_BLOCK . '-' . DefenseInterface::MAX_BLOCK,
             ],
-
         ];
     }
 

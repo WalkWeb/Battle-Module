@@ -11,6 +11,12 @@ namespace Battle\Unit\Defense;
  */
 interface DefenseInterface
 {
+    public const MIN_DEFENSE = 1;
+    // TODO Add MAX_DEFENSE
+
+    public const MIN_BLOCK   = 0;
+    public const MAX_BLOCK   = 100;
+
     /**
      * Возвращает защиту юнита. Влияет на шанс уклониться от вражеской атаки (с оружия)
      *

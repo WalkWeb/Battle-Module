@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit;
 
 use Battle\Unit\Classes\UnitClassFactory;
+use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\UnitException;
@@ -1087,7 +1088,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'attack_speed' => 1.00,
                     'accuracy'     => 200,
                     'defense'      => 100,
-                    'block'        => UnitInterface::MIN_BLOCK - 1,
+                    'block'        => DefenseInterface::MIN_BLOCK - 1,
                     'block_ignore' => 0,
                     'life'         => 100,
                     'total_life'   => 100,
@@ -1096,7 +1097,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'class'        => 1,
                     'race'         => 1,
                 ],
-                UnitException::INCORRECT_BLOCK_VALUE . UnitInterface::MIN_BLOCK . '-' . UnitInterface::MAX_BLOCK,
+                UnitException::INCORRECT_BLOCK_VALUE . DefenseInterface::MIN_BLOCK . '-' . DefenseInterface::MAX_BLOCK,
             ],
             [
                 // block больше максимального значения
@@ -1109,7 +1110,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'attack_speed' => 1.00,
                     'accuracy'     => 200,
                     'defense'      => 100,
-                    'block'        => UnitInterface::MAX_BLOCK + 1,
+                    'block'        => DefenseInterface::MAX_BLOCK + 1,
                     'block_ignore' => 0,
                     'life'         => 100,
                     'total_life'   => 100,
@@ -1118,7 +1119,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'class'        => 1,
                     'race'         => 1,
                 ],
-                UnitException::INCORRECT_BLOCK_VALUE . UnitInterface::MIN_BLOCK . '-' . UnitInterface::MAX_BLOCK,
+                UnitException::INCORRECT_BLOCK_VALUE . DefenseInterface::MIN_BLOCK . '-' . DefenseInterface::MAX_BLOCK,
             ],
             [
                 // Отсутствует block_ignore
@@ -1325,7 +1326,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'damage'       => 15,
                     'attack_speed' => 1.2,
                     'accuracy'     => 200,
-                    'defense'      => UnitInterface::MIN_DEFENSE - 1,
+                    'defense'      => DefenseInterface::MIN_DEFENSE - 1,
                     'block'        => 0,
                     'block_ignore' => 0,
                     'life'         => 80,
@@ -1335,7 +1336,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'         => 1,
                     'command'      => 1,
                 ],
-                UnitException::INCORRECT_DEFENSE_VALUE . UnitInterface::MIN_DEFENSE,
+                UnitException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE,
             ],
         ];
     }

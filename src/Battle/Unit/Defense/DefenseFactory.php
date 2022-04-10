@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Unit\Defense;
 
 use Battle\Traits\ValidationTrait;
-use Battle\Unit\UnitInterface;
 use Exception;
 
 class DefenseFactory
@@ -25,17 +24,17 @@ class DefenseFactory
 
         self::intMinMaxValue(
             $data['block'],
-            UnitInterface::MIN_BLOCK,
-            UnitInterface::MAX_BLOCK,
-            DefenseException::INCORRECT_BLOCK_VALUE . UnitInterface::MIN_BLOCK . '-' . UnitInterface::MAX_BLOCK
+            DefenseInterface::MIN_BLOCK,
+            DefenseInterface::MAX_BLOCK,
+            DefenseException::INCORRECT_BLOCK_VALUE . DefenseInterface::MIN_BLOCK . '-' . DefenseInterface::MAX_BLOCK
         );
 
         self::existAndInt($data, 'defense', DefenseException::INCORRECT_DEFENSE);
 
         self::intMinValue(
             $data['defense'],
-            UnitInterface::MIN_DEFENSE,
-            DefenseException::INCORRECT_DEFENSE_VALUE . UnitInterface::MIN_DEFENSE
+            DefenseInterface::MIN_DEFENSE,
+            DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE
         );
 
         return new Defense($data['defense'], $data['block']);

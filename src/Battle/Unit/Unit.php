@@ -15,6 +15,7 @@ use Battle\Action\ResurrectionAction;
 use Battle\Action\WaitAction;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Defense\DefenseInterface;
 use Exception;
 
 class Unit extends AbstractUnit
@@ -293,8 +294,8 @@ class Unit extends AbstractUnit
         $oldBlock = $this->block;
         $this->block += $action->getPower();
 
-        if ($this->block > self::MAX_BLOCK) {
-            $this->block = self::MAX_BLOCK;
+        if ($this->block > DefenseInterface::MAX_BLOCK) {
+            $this->block = DefenseInterface::MAX_BLOCK;
         }
 
         $action->setRevertValue($this->block - $oldBlock);
