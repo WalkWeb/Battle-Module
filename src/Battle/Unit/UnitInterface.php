@@ -26,6 +26,10 @@ interface UnitInterface
     // TODO Offense: damage, attackSpeed, accuracy, blockIgnore
     // TODO Defense: block, defense
 
+    // TODO Вынести константы на урон в Offense
+
+    // TODO Добавить ограничение на максимальную меткость
+
     public const ADD_CON_NEW_ROUND       = 200;
     public const ADD_CON_ACTION_UNIT     = 180;
     public const ADD_CON_RECEIVING_UNIT  = 100;

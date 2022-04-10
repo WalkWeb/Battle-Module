@@ -8,6 +8,8 @@ use Exception;
 
 class UnitException extends Exception
 {
+    // TODO Удалить константы на урон - они переехали в OffenseException
+
     public const UNDEFINED_ACTION_METHOD      = 'Undefined action';
     public const INCORRECT_ID                 = 'Incorrect parameter id, it required and type string';
     public const INCORRECT_ID_VALUE           = 'Incorrect id, should be min-max length: ';
