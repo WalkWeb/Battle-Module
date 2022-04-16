@@ -32,7 +32,7 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -58,7 +58,7 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -84,7 +84,7 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -110,7 +110,7 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -136,7 +136,7 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -162,7 +162,7 @@ class ActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -261,7 +261,7 @@ class ActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -291,7 +291,7 @@ class ActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 

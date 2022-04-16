@@ -43,6 +43,22 @@ trait ValidationTrait
     }
 
     /**
+     * @param array $data
+     * @param string $field
+     * @param string $error
+     * @return array
+     * @throws BattleException
+     */
+    protected static function existAndArray(array $data, string $field, string $error): array
+    {
+        if (!array_key_exists($field, $data) || !is_array($data[$field])) {
+            throw new BattleException($error);
+        }
+
+        return $data[$field];
+    }
+
+    /**
      * @param int $value
      * @param int $min
      * @param int $max

@@ -36,10 +36,12 @@ class CommandFactoryTest extends AbstractUnitTest
             self::assertEquals($data[$i]['name'], $unit->getName());
             self::assertEquals($data[$i]['level'], $unit->getLevel());
             self::assertEquals($data[$i]['avatar'], $unit->getAvatar());
-            self::assertEquals($data[$i]['damage'], $unit->getDamage());
-            self::assertEquals($data[$i]['attack_speed'], $unit->getAttackSpeed());
-            self::assertEquals($data[$i]['accuracy'], $unit->getAccuracy());
-            self::assertEquals($data[$i]['defense'], $unit->getDefense());
+            self::assertEquals($data[$i]['offense']['damage'], $unit->getOffense()->getDamage());
+            self::assertEquals($data[$i]['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
+            self::assertEquals($data[$i]['offense']['accuracy'], $unit->getOffense()->getAccuracy());
+            self::assertEquals($data[$i]['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());
+            self::assertEquals($data[$i]['defense']['defense'], $unit->getDefense()->getDefense());
+            self::assertEquals($data[$i]['defense']['block'], $unit->getDefense()->getBlock());
             self::assertEquals($data[$i]['life'], $unit->getTotalLife());
             self::assertEquals($data[$i]['life'], $unit->getLife());
             self::assertEquals($data[$i]['melee'], $unit->isMelee());
@@ -100,40 +102,48 @@ class CommandFactoryTest extends AbstractUnitTest
             [
                 [
                     [
-                        'id'           => '63ad76c6-6a11-44ef-997b-fea1778bebe5',
-                        'name'         => 'Skeleton',
-                        'level'        => 3,
-                        'avatar'       => 'url avatar 1',
-                        'damage'       => 15,
-                        'attack_speed' => 1.2,
-                        'accuracy'     => 200,
-                        'defense'      => 100,
-                        'block'        => 0,
-                        'block_ignore' => 0,
-                        'life'         => 80,
-                        'total_life'   => 80,
-                        'melee'        => true,
-                        'class'        => 1,
-                        'race'         => 8,
-                        'command'      => 1,
+                        'id'         => '63ad76c6-6a11-44ef-997b-fea1778bebe5',
+                        'name'       => 'Skeleton',
+                        'level'      => 3,
+                        'avatar'     => 'url avatar 1',
+                        'life'       => 80,
+                        'total_life' => 80,
+                        'melee'      => true,
+                        'class'      => 1,
+                        'race'       => 8,
+                        'command'    => 1,
+                        'offense'    => [
+                            'damage'       => 15,
+                            'attack_speed' => 1.2,
+                            'accuracy'     => 200,
+                            'block_ignore' => 0,
+                        ],
+                        'defense'    => [
+                            'defense' => 100,
+                            'block'   => 0,
+                        ],
                     ],
                     [
-                        'id'           => 'fb8be211-0782-4c60-8865-68b177ffbe0c',
-                        'name'         => 'Ghost',
-                        'level'        => 12,
-                        'avatar'       => 'url avatar 2',
-                        'damage'       => 11,
-                        'attack_speed' => 0.9,
-                        'accuracy'     => 200,
-                        'defense'      => 100,
-                        'block'        => 0,
-                        'block_ignore' => 0,
-                        'life'         => 75,
-                        'total_life'   => 75,
-                        'melee'        => false,
-                        'class'        => 2,
-                        'race'         => 8,
-                        'command'      => 1,
+                        'id'         => 'fb8be211-0782-4c60-8865-68b177ffbe0c',
+                        'name'       => 'Ghost',
+                        'level'      => 12,
+                        'avatar'     => 'url avatar 2',
+                        'life'       => 75,
+                        'total_life' => 75,
+                        'melee'      => false,
+                        'class'      => 2,
+                        'race'       => 8,
+                        'command'    => 1,
+                        'offense'    => [
+                            'damage'       => 15,
+                            'attack_speed' => 1.2,
+                            'accuracy'     => 200,
+                            'block_ignore' => 0,
+                        ],
+                        'defense'    => [
+                            'defense' => 100,
+                            'block'   => 0,
+                        ],
                     ],
                 ],
             ],
@@ -150,20 +160,24 @@ class CommandFactoryTest extends AbstractUnitTest
                 // отсутствует name
                 [
                     [
-                        'id'           => 'f83b1152-b186-4a17-a3dd-88ac75e3cd23',
-                        'level'        => 1,
-                        'avatar'       => 'url avatar 1',
-                        'damage'       => 15,
-                        'attack_speed' => 1.2,
-                        'accuracy'     => 200,
-                        'defense'      => 100,
-                        'block'        => 0,
-                        'block_ignore' => 0,
-                        'life'         => 80,
-                        'total_life'   => 80,
-                        'melee'        => true,
-                        'class'        => 1,
-                        'race'         => 1,
+                        'id'         => 'f83b1152-b186-4a17-a3dd-88ac75e3cd23',
+                        'level'      => 1,
+                        'avatar'     => 'url avatar 1',
+                        'life'       => 80,
+                        'total_life' => 80,
+                        'melee'      => true,
+                        'class'      => 1,
+                        'race'       => 1,
+                        'offense'    => [
+                            'damage'       => 15,
+                            'attack_speed' => 1.2,
+                            'accuracy'     => 200,
+                            'block_ignore' => 0,
+                        ],
+                        'defense'    => [
+                            'defense' => 100,
+                            'block'   => 0,
+                        ],
                     ],
                 ],
                 UnitException::INCORRECT_NAME . ' (1 element)',

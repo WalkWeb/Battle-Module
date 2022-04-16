@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Defense;
 
+// TODO В сеттерах добавить проверки на допустимое значение
+
 class Defense implements DefenseInterface
 {
     /**
@@ -31,10 +33,26 @@ class Defense implements DefenseInterface
     }
 
     /**
+     * @param int $defense
+     */
+    public function setDefense(int $defense): void
+    {
+        $this->defense = $defense;
+    }
+
+    /**
      * @return int
      */
     public function getBlock(): int
     {
         return $this->block;
+    }
+
+    /**
+     * @param int $block
+     */
+    public function setBlock(int $block): void
+    {
+        $this->block = $block;
     }
 }

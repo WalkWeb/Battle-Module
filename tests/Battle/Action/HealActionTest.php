@@ -60,8 +60,8 @@ class HealActionTest extends AbstractUnitTest
             $action->handle();
 
             // Проверяем factualPower
-            self::assertEquals($priest->getDamage(), $action->getFactualPower());
-            self::assertEquals($priest->getDamage(), $action->getFactualPowerByUnit($unit));
+            self::assertEquals($priest->getOffense()->getDamage(), $action->getFactualPower());
+            self::assertEquals($priest->getOffense()->getDamage(), $action->getFactualPowerByUnit($unit));
         }
 
         // Проверяем, что оба юнита стали здоровы
@@ -94,7 +94,7 @@ class HealActionTest extends AbstractUnitTest
         }
 
         // Проверяем лечение
-        self::assertEquals(1 + $actionUnit->getDamage() * 3, $woundedUnit->getLife());
+        self::assertEquals(1 + $actionUnit->getOffense()->getDamage() * 3, $woundedUnit->getLife());
     }
 
     /**
@@ -123,10 +123,10 @@ class HealActionTest extends AbstractUnitTest
         }
 
         // Общий factualPower получаем нормально
-        self::assertEquals($unit->getDamage() * 3, $action->getFactualPower());
+        self::assertEquals($unit->getOffense()->getDamage() * 3, $action->getFactualPower());
 
         // factualPower, по юниту, по которому урон наносился - тоже
-        self::assertEquals($unit->getDamage() * 3, $action->getFactualPowerByUnit($woundedUnit));
+        self::assertEquals($unit->getOffense()->getDamage() * 3, $action->getFactualPowerByUnit($woundedUnit));
 
         // А вот factualPower по юниту, по которому урон не наносился - отсутствует
         $this->expectException(ActionException::class);
@@ -151,10 +151,10 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getDamage()
+            $unit->getOffense()->getDamage()
         );
 
-        self::assertEquals($unit->getDamage(), $healAction->getPower());
+        self::assertEquals($unit->getOffense()->getDamage(), $healAction->getPower());
     }
 
     /**
@@ -180,7 +180,7 @@ class HealActionTest extends AbstractUnitTest
             $action->handle();
         }
 
-        self::assertEquals($enemyUnit->getTotalLife() - $alliesUnit->getDamage(), $enemyUnit->getLife());
+        self::assertEquals($enemyUnit->getTotalLife() - $alliesUnit->getOffense()->getDamage(), $enemyUnit->getLife());
     }
 
     /**
@@ -201,7 +201,7 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getDamage()
+            $unit->getOffense()->getDamage()
         );
 
         $this->expectException(ActionException::class);
@@ -226,7 +226,7 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getDamage()
+            $unit->getOffense()->getDamage()
         );
 
         $this->expectException(ActionException::class);
@@ -319,7 +319,7 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getDamage()
+            $unit->getOffense()->getDamage()
         );
 
         self::assertFalse($healAction->isBlocked($enemyUnit));

@@ -31,12 +31,24 @@ interface OffenseInterface
     public function getDamage(): int;
 
     /**
+     * Устанавливает новое значение урона. Применяется в эффектах, изменяющих урон юнита
+     * 
+     * @param int $damage
+     */
+    public function setDamage(int $damage): void;
+    
+    /**
      * Возвращает скорость атаки
      *
      * @return float
      */
     public function getAttackSpeed(): float;
 
+    /**
+     * @param float $attackSpeed
+     */
+    public function setAttackSpeed(float $attackSpeed): void;
+    
     /**
      * Возвращает меткость
      *
@@ -45,9 +57,21 @@ interface OffenseInterface
     public function getAccuracy(): int;
 
     /**
-     * Возвращает показатель игнорирования блока цели
+     * @param int $accuracy
+     */
+    public function setAccuracy(int $accuracy): void;
+
+    /**
+     * Возвращает значение игнорирования блока цели. Необходимо для реализации механик, когда, например, определенное
+     * оружие может игнорировать блок цели. Для полного игнорирования блока цели необходимо вернуть 100. Хотя можно
+     * и вернуть другое значение, например 10, и тогда шанс блока целью в 25% будет уменьшен до шанса в 15%
      *
      * @return int
      */
     public function getBlockIgnore(): int;
+
+    /**
+     * @param int $blockIgnore
+     */
+    public function setBlockIgnore(int $blockIgnore): void;
 }

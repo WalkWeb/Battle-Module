@@ -144,7 +144,7 @@ class SuccubusTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_ALL_WOUNDED_ALLIES,
-            (int)($unit->getDamage() * 1.2),
+            (int)($unit->getOffense()->getDamage() * 1.2),
             'General Heal',
             HealAction::UNIT_ANIMATION_METHOD,
             HealAction::ABILITY_MESSAGE_METHOD,

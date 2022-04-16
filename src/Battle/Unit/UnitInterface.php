@@ -10,7 +10,9 @@ use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Defense\Defense;
 use Battle\Unit\Effect\EffectCollection;
+use Battle\Unit\Offense\Offense;
 use Battle\Unit\Race\RaceInterface;
 
 /**
@@ -140,43 +142,6 @@ interface UnitInterface
     public function isMelee(): bool;
 
     /**
-     * Возвращает скорость атаки юнита
-     *
-     * @return float
-     */
-    public function getAttackSpeed(): float;
-
-    /**
-     * Возвращает меткость юнита. Влияет на шанс попадания по цели атаками (с оружия)
-     *
-     * @return int
-     */
-    public function getAccuracy(): int;
-
-    /**
-     * Возвращает защиту юнита. Влияет на шанс уклониться от вражеской атаки (с оружия)
-     *
-     * @return int
-     */
-    public function getDefense(): int;
-
-    /**
-     * Возвращает шанс блока вражеских атак юнита
-     *
-     * @return int
-     */
-    public function getBlock(): int;
-
-    /**
-     * Возвращает значение игнорирования блока цели. Необходимо для реализации механик, когда, например, определенное
-     * оружие может игнорировать блок цели. Для полного игнорирования блока цели необходимо вернуть 100. Хотя можно
-     * и вернуть другое значение, например 10, и тогда шанс блока целью в 25% будет уменьшен до шанса в 15%
-     *
-     * @return int
-     */
-    public function getBlockIgnore(): int;
-
-    /**
      * Возвращает текущее здоровье юнита
      *
      * @return int
@@ -219,14 +184,9 @@ interface UnitInterface
     public function getRace(): RaceInterface;
 
     /**
-     * Возвращает урон юнита
-     *
-     * @return int
-     */
-    public function getDamage(): int;
-
-    /**
      * Возвращает ДПС юнита (средний урон за ход = урон * скорость атаки)
+     *
+     * TODO Перенести в Offense
      *
      * @return float
      */
@@ -280,4 +240,18 @@ interface UnitInterface
      * @return EffectCollection
      */
     public function getEffects(): EffectCollection;
+
+    /**
+     * Возвращает атакующие характеристики
+     *
+     * @return Offense
+     */
+    public function getOffense(): Offense;
+
+    /**
+     * Возвращает защитные характеристики
+     *
+     * @return Defense
+     */
+    public function getDefense(): Defense;
 }

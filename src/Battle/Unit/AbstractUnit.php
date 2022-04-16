@@ -12,7 +12,9 @@ use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Defense\Defense;
 use Battle\Unit\Effect\EffectCollection;
+use Battle\Unit\Offense\Offense;
 use Battle\Unit\Race\RaceInterface;
 use Exception;
 
@@ -37,36 +39,6 @@ abstract class AbstractUnit implements UnitInterface
      * @var string - URL к картинке-аватару юнита
      */
     protected $avatar;
-
-    /**
-     * @var int - Урон
-     */
-    protected $damage;
-
-    /**
-     * @var float - Скорость атаки
-     */
-    protected $attackSpeed;
-
-    /**
-     * @var int - Меткость
-     */
-    protected $accuracy;
-
-    /**
-     * @var int - Защита
-     */
-    protected $defense;
-
-    /**
-     * @var int - Шанс блока вражеских атак
-     */
-    protected $block;
-
-    /**
-     * @var int - Игнорирование блока цели
-     */
-    protected $blockIgnore;
 
     /**
      * @var int - Текущее здоровье
@@ -129,20 +101,26 @@ abstract class AbstractUnit implements UnitInterface
     protected $effects;
 
     /**
+     * @var Offense
+     */
+    protected $offense;
+
+    /**
+     * @var Defense
+     */
+    protected $defense;
+
+    /**
      * @param string $id
      * @param string $name
      * @param int $level
      * @param string $avatar
-     * @param int $damage
-     * @param float $attackSpeed
-     * @param int $accuracy
-     * @param int $defense
-     * @param int $block
-     * @param int $blockIgnore
      * @param int $life
      * @param int $totalLife
      * @param bool $melee
      * @param int $command
+     * @param Offense $offense
+     * @param Defense $defense
      * @param RaceInterface $race
      * @param ContainerInterface $container
      * @param UnitClassInterface|null $class
@@ -154,16 +132,12 @@ abstract class AbstractUnit implements UnitInterface
         string $name,
         int $level,
         string $avatar,
-        int $damage,
-        float $attackSpeed,
-        int $accuracy,
-        int $defense,
-        int $block,
-        int $blockIgnore,
         int $life,
         int $totalLife,
         bool $melee,
         int $command,
+        Offense $offense,
+        Defense $defense,
         RaceInterface $race,
         ContainerInterface $container,
         ?UnitClassInterface $class = null,
@@ -175,16 +149,12 @@ abstract class AbstractUnit implements UnitInterface
         $this->name = $name;
         $this->level = $level;
         $this->avatar = $avatar;
-        $this->damage = $damage;
-        $this->attackSpeed = $attackSpeed;
-        $this->accuracy = $accuracy;
-        $this->defense = $defense;
-        $this->block = $block;
-        $this->blockIgnore = $blockIgnore;
         $this->life = $life;
         $this->totalLife = $totalLife;
         $this->melee = $melee;
         $this->command = $command;
+        $this->offense = $offense;
+        $this->defense = $defense;
         $this->race = $race;
         $this->container = $container;
         $this->class = $class;
@@ -232,39 +202,9 @@ abstract class AbstractUnit implements UnitInterface
         return $this->avatar;
     }
 
-    public function getDamage(): int
-    {
-        return $this->damage;
-    }
-
     public function getDPS(): float
     {
-        return round($this->damage * $this->attackSpeed, 1);
-    }
-
-    public function getAttackSpeed(): float
-    {
-        return $this->attackSpeed;
-    }
-
-    public function getAccuracy(): int
-    {
-        return $this->accuracy;
-    }
-
-    public function getDefense(): int
-    {
-        return $this->defense;
-    }
-
-    public function getBlock(): int
-    {
-        return $this->block;
-    }
-
-    public function getBlockIgnore(): int
-    {
-        return $this->blockIgnore;
+        return round($this->offense->getDamage() * $this->offense->getAttackSpeed(), 1);
     }
 
     public function getLife(): int
@@ -285,6 +225,16 @@ abstract class AbstractUnit implements UnitInterface
     public function getCommand(): int
     {
         return $this->command;
+    }
+
+    public function getOffense(): Offense
+    {
+        return $this->offense;
+    }
+
+    public function getDefense(): Defense
+    {
+        return $this->defense;
     }
 
     public function getRage(): int
@@ -369,8 +319,10 @@ abstract class AbstractUnit implements UnitInterface
      */
     protected function calculateAttackSpeed(): int
     {
-        $result = (int)floor($this->attackSpeed);
-        $residue = $this->attackSpeed - $result;
+        $attackSpeed = $this->offense->getAttackSpeed();
+
+        $result = (int)floor($attackSpeed);
+        $residue = $attackSpeed - $result;
         if (($residue > 0) && ($residue * 100 > random_int(0, 100))) {
             $result++;
         }

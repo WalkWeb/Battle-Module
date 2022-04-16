@@ -47,7 +47,7 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -70,7 +70,7 @@ class ScenarioTest extends AbstractUnitTest
                         [
                             'type'              => 'change',
                             'user_id'           => $enemyUnit->getId(),
-                            'hp'                => $enemyUnit->getTotalLife() - $unit->getDamage(),
+                            'hp'                => $enemyUnit->getTotalLife() - $unit->getOffense()->getDamage(),
                             'thp'               => $enemyUnit->getTotalLife(),
                             'hp_bar_class'      => 'unit_hp_bar',
                             'hp_bar_class2'     => 'unit_hp_bar2',
@@ -108,7 +108,7 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -159,7 +159,7 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -217,7 +217,7 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -389,7 +389,7 @@ class ScenarioTest extends AbstractUnitTest
         }
 
         // Проверяем лечение
-        self::assertEquals(1 + $actionUnit->getDamage() * 3, $woundedUnit->getLife());
+        self::assertEquals(1 + $actionUnit->getOffense()->getDamage() * 3, $woundedUnit->getLife());
 
         $expectedData = [
             'step'    => $statistic->getRoundNumber(),
@@ -405,8 +405,8 @@ class ScenarioTest extends AbstractUnitTest
                             'type'              => 'change',
                             'user_id'           => $woundedUnit->getId(),
                             'ava'               => 'unit_ava_green',
-                            'recdam'            => '+' . $actionUnit->getDamage() * 3,
-                            'hp'                => 1 + $actionUnit->getDamage() * 3,
+                            'recdam'            => '+' . $actionUnit->getOffense()->getDamage() * 3,
+                            'hp'                => 1 + $actionUnit->getOffense()->getDamage() * 3,
                             'thp'               => $woundedUnit->getTotalLife(),
                             'hp_bar_class'      => 'unit_hp_bar',
                             'hp_bar_class2'     => 'unit_hp_bar2',
@@ -441,7 +441,7 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_WOUNDED_ALLIES,
-            $unit->getDamage()
+            $unit->getOffense()->getDamage()
         );
 
         self::assertTrue($action->canByUsed());

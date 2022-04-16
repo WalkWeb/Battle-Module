@@ -105,7 +105,7 @@ class BuffActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $oldAttackSpeed = $unit->getAttackSpeed();
+        $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
 
         $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
@@ -113,7 +113,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals('buff', $action->getMessageMethod());
 
         $multiplier = $power / 100;
-        $newAttackSpeed = $unit->getAttackSpeed() * $multiplier;
+        $newAttackSpeed = $unit->getOffense()->getAttackSpeed() * $multiplier;
 
         // BuffAction всегда готов примениться (а EffectAction - только если аналогичный эффект на юните отсутствует)
         self::assertTrue($action->canByUsed());
@@ -121,12 +121,12 @@ class BuffActionTest extends AbstractUnitTest
         // Применяем баф
         $action->handle();
 
-        self::assertEquals($newAttackSpeed, $unit->getAttackSpeed());
+        self::assertEquals($newAttackSpeed, $unit->getOffense()->getAttackSpeed());
 
         // Откат изменения
         $action->getRevertAction()->handle();
 
-        self::assertEquals($oldAttackSpeed, $unit->getAttackSpeed());
+        self::assertEquals($oldAttackSpeed, $unit->getOffense()->getAttackSpeed());
     }
 
     /**

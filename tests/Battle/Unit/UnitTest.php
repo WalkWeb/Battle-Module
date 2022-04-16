@@ -36,17 +36,22 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['name'], $unit->getName());
         self::assertEquals($data['level'], $unit->getLevel());
         self::assertEquals($data['avatar'], $unit->getAvatar());
-        self::assertEquals($data['damage'], $unit->getDamage());
-        self::assertEquals(round($data['damage'] * $data['attack_speed'], 1), $unit->getDPS());
         self::assertEquals($data['life'], $unit->getLife());
         self::assertEquals($data['total_life'], $unit->getTotalLife());
-        self::assertEquals($data['attack_speed'], $unit->getAttackSpeed());
-        self::assertEquals($data['block'], $unit->getBlock());
-        self::assertEquals($data['block_ignore'], $unit->getBlockIgnore());
         self::assertFalse($unit->isAction());
         self::assertEquals($data['life'] > 0, $unit->isAlive());
         self::assertEquals($data['melee'], $unit->isMelee());
         self::assertEquals($data['race'], $unit->getRace()->getId());
+
+        self::assertEquals($data['offense']['damage'], $unit->getOffense()->getDamage());
+        self::assertEquals($data['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
+        self::assertEquals($data['offense']['accuracy'], $unit->getOffense()->getAccuracy());
+        self::assertEquals($data['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());
+        self::assertEquals(round($data['offense']['damage'] * $data['offense']['attack_speed'], 1), $unit->getDPS());
+
+        self::assertEquals($data['defense']['defense'], $unit->getDefense()->getDefense());
+        self::assertEquals($data['defense']['block'], $unit->getDefense()->getBlock());
+
 
         if ($data['class']) {
             self::assertEquals($data['class'], $unit->getClass()->getId());
@@ -72,7 +77,7 @@ class UnitTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -80,14 +85,14 @@ class UnitTest extends AbstractUnitTest
 
         $defendLife = UnitFactory::getData($defendUnitTemplate)['life'];
 
-        self::assertEquals($defendLife - $unit->getDamage(), $enemyUnit->getLife());
+        self::assertEquals($defendLife - $unit->getOffense()->getDamage(), $enemyUnit->getLife());
 
         $action2 = new DamageAction(
             $unit,
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 

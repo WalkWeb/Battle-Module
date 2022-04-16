@@ -85,7 +85,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $oldAttackSpeed = $unit->getAttackSpeed();
+        $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
 
         // Up concentration
         for ($i = 0; $i < 20; $i++) {
@@ -105,7 +105,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
         }
 
         // Проверяем, что скорость атаки юнита выросла
-        self::assertEquals($oldAttackSpeed * $power , $unit->getAttackSpeed());
+        self::assertEquals($oldAttackSpeed * $power , $unit->getOffense()->getAttackSpeed());
 
         // Пропускаем ходы
         for ($i = 0; $i < 30; $i++) {
@@ -113,7 +113,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
         }
 
         // Проверяем, что скорость атаки вернулась к исходному
-        self::assertEquals($oldAttackSpeed, $unit->getAttackSpeed());
+        self::assertEquals($oldAttackSpeed, $unit->getOffense()->getAttackSpeed());
     }
 
     /**

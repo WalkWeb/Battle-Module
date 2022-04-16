@@ -30,13 +30,13 @@ class DamageActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             $canBeAvoided
         );
 
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals($unit, $action->getCreatorUnit());
-        self::assertEquals($unit->getDamage(), $action->getPower());
+        self::assertEquals($unit->getOffense()->getDamage(), $action->getPower());
         self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
         self::assertTrue($action->canByUsed());
         self::assertEquals(DamageAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
@@ -59,12 +59,12 @@ class DamageActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
         $action->handle();
-        self::assertEquals($unit->getDamage(), $action->getPower());
+        self::assertEquals($unit->getOffense()->getDamage(), $action->getPower());
     }
 
     /**
@@ -82,7 +82,7 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -177,7 +177,7 @@ class DamageActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             $typeTarget,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -205,17 +205,17 @@ class DamageActionTest extends AbstractUnitTest
             $defendCommand,
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
         $action->handle();
 
         // Общий factualPower получаем нормально
-        self::assertEquals($unit->getDamage(), $action->getFactualPower());
+        self::assertEquals($unit->getOffense()->getDamage(), $action->getFactualPower());
 
         // factualPower, по юниту, по которому урон наносился - тоже
-        self::assertEquals($unit->getDamage(), $action->getFactualPowerByUnit($defendUnit));
+        self::assertEquals($unit->getOffense()->getDamage(), $action->getFactualPowerByUnit($defendUnit));
 
         // А вот factualPower по юниту, по которому урон не наносился - отсутствует
         $this->expectException(ActionException::class);
@@ -242,15 +242,15 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
         $action->handle();
 
         // Проверяем, что урон нанесен по обоим юнитам
-        self::assertEquals($firstEnemyUnit->getTotalLife() - $unit->getDamage(), $firstEnemyUnit->getLife());
-        self::assertEquals($secondaryEnemyUnit->getTotalLife() - $unit->getDamage(), $secondaryEnemyUnit->getLife());
+        self::assertEquals($firstEnemyUnit->getTotalLife() - $unit->getOffense()->getDamage(), $firstEnemyUnit->getLife());
+        self::assertEquals($secondaryEnemyUnit->getTotalLife() - $unit->getOffense()->getDamage(), $secondaryEnemyUnit->getLife());
     }
 
     /**
@@ -270,7 +270,7 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -301,7 +301,7 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -328,7 +328,7 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -356,15 +356,15 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
         $action->handle();
 
         self::assertTrue(!$action->isBlocked($enemyUnit));
-        self::assertEquals($unit->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
-        self::assertEquals($enemyUnit->getTotalLife() - $unit->getDamage(), $enemyUnit->getLife());
+        self::assertEquals($unit->getOffense()->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
+        self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage(), $enemyUnit->getLife());
     }
 
     /**
@@ -384,15 +384,15 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             false
         );
 
         $action->handle();
 
         self::assertTrue(!$action->isBlocked($enemyUnit));
-        self::assertEquals($unit->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
-        self::assertEquals($enemyUnit->getTotalLife() - $unit->getDamage(), $enemyUnit->getLife());
+        self::assertEquals($unit->getOffense()->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
+        self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage(), $enemyUnit->getLife());
     }
 
     /**
@@ -425,7 +425,7 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -453,7 +453,7 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 

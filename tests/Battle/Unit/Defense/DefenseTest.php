@@ -22,4 +22,18 @@ class DefenseTest extends AbstractUnitTest
         self::assertEquals($defenseValue, $defense->getDefense());
         self::assertEquals($block, $defense->getBlock());
     }
+
+    /**
+     * Тест на обновление параметров Defense
+     */
+    public function testDefenseUpdate(): void
+    {
+        $defense = new Defense(10, 10);
+
+        $defense->setDefense($defenseValue = 1000);
+        $defense->setBlock($block = 5);
+
+        self::assertEquals($defenseValue, $defense->getDefense());
+        self::assertEquals($block, $defense->getBlock());
+    }
 }

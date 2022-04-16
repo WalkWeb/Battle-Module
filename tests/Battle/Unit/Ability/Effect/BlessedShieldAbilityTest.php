@@ -102,7 +102,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         self::assertCount(0, $unit->getEffects());
 
         // Проверка блока перед использованием
-        self::assertEquals(0, $unit->getBlock());
+        self::assertEquals(0, $unit->getDefense()->getBlock());
 
         // Применяем способность
         $actions = $ability->getAction($enemyCommand, $command);
@@ -118,7 +118,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
         // Проверка блока после использования
-        self::assertEquals(15, $unit->getBlock());
+        self::assertEquals(15, $unit->getDefense()->getBlock());
         self::assertCount(1, $unit->getEffects());
 
         // Пропускаем 10 ходов
@@ -128,7 +128,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
 
         // И проверяем, что блок вернулся к исходному
         self::assertCount(0, $unit->getEffects());
-        self::assertEquals(0, $unit->getBlock());
+        self::assertEquals(0, $unit->getDefense()->getBlock());
     }
 
     /**
@@ -162,7 +162,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         $collection->update($unit);
 
         // Проверка блока перед использованием
-        self::assertEquals(100, $unit->getBlock());
+        self::assertEquals(100, $unit->getDefense()->getBlock());
 
         // Применяем способность
         $actions = $ability->getAction($enemyCommand, $command);
@@ -173,7 +173,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         }
 
         // Проверка блока после использования, он также равен 100
-        self::assertEquals(100, $unit->getBlock());
+        self::assertEquals(100, $unit->getDefense()->getBlock());
 
 
         // Пропускаем 10 ходов
@@ -183,7 +183,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
 
         // И проверяем, что блок вернулся к исходному (не изменился)
         self::assertCount(0, $unit->getEffects());
-        self::assertEquals(100, $unit->getBlock());
+        self::assertEquals(100, $unit->getDefense()->getBlock());
     }
 
     /**

@@ -152,7 +152,7 @@ class EffectCollectionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getDamage()
+            $unit->getOffense()->getDamage()
         ));
 
         $collection->add(new Effect(
@@ -196,7 +196,7 @@ class EffectCollectionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getDamage()
+            $unit->getOffense()->getDamage()
         ));
 
         $collection->add(new Effect(

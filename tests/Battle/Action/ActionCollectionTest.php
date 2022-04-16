@@ -29,7 +29,7 @@ class ActionCollectionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -56,7 +56,7 @@ class ActionCollectionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -65,7 +65,7 @@ class ActionCollectionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getDamage()
+            $unit->getOffense()->getDamage()
         );
 
         $actionCollection = new ActionCollection();

@@ -118,7 +118,7 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -127,12 +127,12 @@ class StatisticsTest extends AbstractUnitTest
         $statistics->addUnitAction($action);
 
         // Проверяем, что атакующий юнит нанес тройной урон (урон * 3 цели)
-        self::assertEquals($unit->getDamage() * 3, $statistics->getUnitsStatistics()->get($unit->getId())->getCausedDamage());
+        self::assertEquals($unit->getOffense()->getDamage() * 3, $statistics->getUnitsStatistics()->get($unit->getId())->getCausedDamage());
 
         // Проверяем, что всем врагам добавлен полученный урон
-        self::assertEquals($unit->getDamage(), $statistics->getUnitsStatistics()->get($firstEnemyUnit->getId())->getTakenDamage());
-        self::assertEquals($unit->getDamage(), $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getTakenDamage());
-        self::assertEquals($unit->getDamage(), $statistics->getUnitsStatistics()->get($thirdEnemyUnit->getId())->getTakenDamage());
+        self::assertEquals($unit->getOffense()->getDamage(), $statistics->getUnitsStatistics()->get($firstEnemyUnit->getId())->getTakenDamage());
+        self::assertEquals($unit->getOffense()->getDamage(), $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getTakenDamage());
+        self::assertEquals($unit->getOffense()->getDamage(), $statistics->getUnitsStatistics()->get($thirdEnemyUnit->getId())->getTakenDamage());
     }
 
     /**
@@ -157,7 +157,7 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -175,7 +175,7 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -210,7 +210,7 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -228,7 +228,7 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 
@@ -308,7 +308,7 @@ class StatisticsTest extends AbstractUnitTest
             $statistics->addUnitAction($action);
         }
 
-        self::assertEquals($priest->getDamage() * 3, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
+        self::assertEquals($priest->getOffense()->getDamage() * 3, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
 
         // И еще раз
         for ($i = 0; $i < 10; $i++) {
@@ -322,7 +322,7 @@ class StatisticsTest extends AbstractUnitTest
             $statistics->addUnitAction($action);
         }
 
-        self::assertEquals($priest->getDamage() * 6, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
+        self::assertEquals($priest->getOffense()->getDamage() * 6, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
     }
 
     /**
@@ -495,7 +495,7 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getDamage(),
+            $unit->getOffense()->getDamage(),
             true
         );
 

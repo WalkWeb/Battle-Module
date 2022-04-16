@@ -45,7 +45,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
             $command,
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $enemyUnit->getDamage(),
+            $enemyUnit->getOffense()->getDamage(),
             true
         );
 
@@ -74,7 +74,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertInstanceOf(HealAction::class, $action);
-            self::assertEquals($unit->getDamage() * 3, $action->getPower());
+            self::assertEquals($unit->getOffense()->getDamage() * 3, $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));

@@ -31,7 +31,7 @@ class GeneralHealAbility extends AbstractAbility
             $enemyCommand,
             $alliesCommand,
             HealAction::TARGET_ALL_WOUNDED_ALLIES,
-            (int)($this->unit->getDamage() * 1.2),
+            (int)($this->unit->getOffense()->getDamage() * 1.2),
             self::NAME,
             HealAction::UNIT_ANIMATION_METHOD,
             HealAction::ABILITY_MESSAGE_METHOD,

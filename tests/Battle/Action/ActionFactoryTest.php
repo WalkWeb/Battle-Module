@@ -180,17 +180,22 @@ class ActionFactoryTest extends AbstractUnitTest
             'name'         => 'Imp',
             'level'        => 1,
             'avatar'       => '/images/avas/monsters/004.png',
-            'damage'       => 10,
-            'attack_speed' => 1,
-            'accuracy'     => 200,
-            'defense'      => 100,
-            'block'        => 0,
             'block_ignore' => 0,
             'life'         => 30,
             'total_life'   => 30,
             'melee'        => true,
             'class'        => 1,
             'race'         => 9,
+            'offense'    => [
+                'damage'       => 10,
+                'attack_speed' => 1,
+                'accuracy'     => 200,
+                'block_ignore' => 0,
+            ],
+            'defense'    => [
+                'defense' => 100,
+                'block'   => 0,
+            ],
         ];
 
         $data = [
@@ -212,8 +217,12 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($summonData['name'], $action->getSummonUnit()->getName());
         self::assertEquals($summonData['level'], $action->getSummonUnit()->getLevel());
         self::assertEquals($summonData['avatar'], $action->getSummonUnit()->getAvatar());
-        self::assertEquals($summonData['damage'], $action->getSummonUnit()->getDamage());
-        self::assertEquals($summonData['attack_speed'], $action->getSummonUnit()->getAttackSpeed());
+        self::assertEquals($summonData['offense']['damage'], $action->getSummonUnit()->getOffense()->getDamage());
+        self::assertEquals($summonData['offense']['attack_speed'], $action->getSummonUnit()->getOffense()->getAttackSpeed());
+        self::assertEquals($summonData['offense']['accuracy'], $action->getSummonUnit()->getOffense()->getAccuracy());
+        self::assertEquals($summonData['offense']['block_ignore'], $action->getSummonUnit()->getOffense()->getBlockIgnore());
+        self::assertEquals($summonData['defense']['defense'], $action->getSummonUnit()->getDefense()->getDefense());
+        self::assertEquals($summonData['defense']['block'], $action->getSummonUnit()->getDefense()->getBlock());
         self::assertEquals($summonData['life'], $action->getSummonUnit()->getLife());
         self::assertEquals($summonData['total_life'], $action->getSummonUnit()->getTotalLife());
         self::assertEquals($summonData['melee'], $action->getSummonUnit()->isMelee());

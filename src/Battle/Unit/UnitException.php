@@ -8,9 +8,6 @@ use Exception;
 
 class UnitException extends Exception
 {
-    // TODO Удалить константы на урон - они переехали в OffenseException
-    // TODO Удалить константы на защиту - они переехали в DefenseException
-
     public const UNDEFINED_ACTION_METHOD      = 'Undefined action';
     public const INCORRECT_ID                 = 'Incorrect parameter id, it required and type string';
     public const INCORRECT_ID_VALUE           = 'Incorrect id, should be min-max length: ';
@@ -19,18 +16,6 @@ class UnitException extends Exception
     public const INCORRECT_LEVEL              = 'Incorrect parameter level, it required and type int';
     public const INCORRECT_LEVEL_VALUE        = 'Incorrect level, should be min-max value: ';
     public const INCORRECT_AVATAR             = 'Incorrect parameter avatar, it required and type string';
-    public const INCORRECT_DAMAGE             = 'Incorrect damage, it required and type int';
-    public const INCORRECT_ACCURACY           = 'Incorrect accuracy, it required and type int';
-    public const INCORRECT_DEFENSE            = 'Incorrect defense, it required and type int';
-    public const INCORRECT_DAMAGE_VALUE       = 'Incorrect damage, should be min-max value: ';
-    public const INCORRECT_ACCURACY_VALUE     = 'Incorrect accuracy, should be min value: ';
-    public const INCORRECT_DEFENSE_VALUE      = 'Incorrect defense, should be min value: ';
-    public const INCORRECT_ATTACK_SPEED       = 'Incorrect attack speed, it required and type float or int';
-    public const INCORRECT_ATTACK_SPEED_VALUE = 'Incorrect attack speed, should be min-max value: ';
-    public const INCORRECT_BLOCK              = 'Incorrect block, it required and type int';
-    public const INCORRECT_BLOCK_VALUE        = 'Incorrect block, should be min-max value: ';
-    public const INCORRECT_BLOCK_IGNORE       = 'Incorrect block_ignore, it required and type int';
-    public const INCORRECT_BLOCK_IGNORE_VALUE = 'Incorrect block_ignore, should be min-max value: ';
     public const INCORRECT_LIFE               = 'Incorrect life, it required and type int';
     public const INCORRECT_LIFE_VALUE         = 'Incorrect life, should be min-max value: ';
     public const INCORRECT_TOTAL_LIFE         = 'Incorrect total life, it required and type int';
@@ -44,4 +29,6 @@ class UnitException extends Exception
     public const NO_REDUCED_MAXIMUM_LIFE      = 'No reduced maximum life';
     public const NO_REDUCED_ATTACK_SPEED      = 'No reduced attack speed';
     public const UNDEFINED_MODIFY_METHOD      = 'Undefined modify method';
+    public const INCORRECT_DEFENSE            = 'Incorrect defense, it required and type array';
+    public const INCORRECT_OFFENSE            = 'Incorrect offense, it required and type array';
 }

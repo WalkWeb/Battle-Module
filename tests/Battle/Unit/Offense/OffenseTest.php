@@ -26,4 +26,22 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($accuracy, $offense->getAccuracy());
         self::assertEquals($blockIgnore, $offense->getBlockIgnore());
     }
+
+    /**
+     * Тест на обновление Offense
+     */
+    public function testOffenseUpdate(): void
+    {
+        $offense = new Offense(10, 1, 100, 0);
+
+        $offense->setDamage($damage = 50);
+        $offense->setAttackSpeed($attackSpeed = 1.2);
+        $offense->setAccuracy($accuracy = 250);
+        $offense->setBlockIgnore($blockIgnore = 100);
+
+        self::assertEquals($damage, $offense->getDamage());
+        self::assertEquals($attackSpeed, $offense->getAttackSpeed());
+        self::assertEquals($accuracy, $offense->getAccuracy());
+        self::assertEquals($blockIgnore, $offense->getBlockIgnore());
+    }
 }

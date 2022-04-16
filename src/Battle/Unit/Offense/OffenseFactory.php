@@ -19,7 +19,7 @@ class OffenseFactory
      * @return Offense
      * @throws Exception
      */
-    public function create(array $data): Offense
+    public static function create(array $data): Offense
     {
         self::int($data, 'damage', OffenseException::INCORRECT_DAMAGE);
         self::existAndInt($data, 'accuracy', OffenseException::INCORRECT_ACCURACY);

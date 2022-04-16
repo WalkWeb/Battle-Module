@@ -25,9 +25,23 @@ interface DefenseInterface
     public function getDefense(): int;
 
     /**
+     * Устанавливает новое значение защиты. Применяется в эффектах, изменяющих защиту юнита
+     *
+     * @param int $defense
+     */
+    public function setDefense(int $defense): void;
+
+    /**
      * Возвращает шанс блока вражеских атак юнита
      *
      * @return int
      */
     public function getBlock(): int;
+
+    /**
+     *  Устанавливает новое значение блока. Применяется в эффектах, изменяющих блок юнита
+     *
+     * @param int $block
+     */
+    public function setBlock(int $block): void;
 }

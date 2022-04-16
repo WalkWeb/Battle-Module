@@ -16,36 +16,44 @@ $data = [
         'name'         => 'Warrior',
         'level'        => 3,
         'avatar'       => '/images/avas/humans/human001.jpg',
-        'damage'       => 25,
-        'attack_speed' => 0.8,
-        'accuracy'     => 200,
-        'defense'      => 120,
-        'block'        => 0,
-        'block_ignore' => 0,
         'life'         => 110,
         'total_life'   => 110,
         'melee'        => true,
         'class'        => 1,
         'race'         => 1,
         'command'      => 1,
+        'offense'      => [
+            'damage'       => 25,
+            'attack_speed' => 0.8,
+            'accuracy'     => 200,
+            'block_ignore' => 0,
+        ],
+        'defense'      => [
+            'defense' => 120,
+            'block'   => 0,
+        ],
     ],
     [
         'id'           => 'bf75c4a3-b866-4787-88c7-8db57daf3d64',
         'name'         => 'Skeleton',
         'level'        => 2,
         'avatar'       => '/images/avas/monsters/005.png',
-        'damage'       => 20,
-        'attack_speed' => 1.2,
-        'accuracy'     => 240,
-        'defense'      => 150,
-        'block'        => 0,
-        'block_ignore' => 0,
         'life'         => 65,
         'total_life'   => 65,
         'melee'        => true,
         'class'        => null,
         'race'         => 8,
         'command'      => 2,
+        'offense'      => [
+            'damage'       => 20,
+            'attack_speed' => 1.2,
+            'accuracy'     => 240,
+            'block_ignore' => 0,
+        ],
+        'defense'      => [
+            'defense' => 150,
+            'block'   => 0,
+        ],
     ],
 ];
 
@@ -126,10 +134,6 @@ echo $view->renderResult($result);
 люди - шанс избежать смерти и восстановить 50% здоровья
 - Добавить больше разнообразных способностей
 - Расширить варианты классов, добавив новым классам новые варианты способностей
-- Переделать простой int урон на объект Damage с расширенными параметрами, такие как шанс крита, сила крита, стихии 
-урона и т.д.
-- Реализовать расширенный вариант защитных параметров defense - с такими параметрами как шанс блока, уклонение, 
-сопротивления различным стихиям
 - Сделать сайт-пример с боем
 - Добавить ману
 - Добавить параметр магического щита - когда часть урона идет по мане, перед здоровьем

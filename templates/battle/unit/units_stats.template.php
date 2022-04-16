@@ -1,6 +1,7 @@
 <?php
 
 use Battle\Command\CommandInterface;
+use Battle\Unit\UnitInterface;
 use Battle\View\ViewException;
 use Battle\View\ViewInterface;
 
@@ -15,6 +16,8 @@ if (empty($rightCommand) || !($rightCommand instanceof CommandInterface)) {
 if (empty($this) || !($this instanceof ViewInterface)) {
     throw new ViewException(ViewException::MISSING_VIEW);
 }
+
+/** @var UnitInterface $unit */
 
 ?>
 <div class="units_stats_box">
@@ -44,9 +47,9 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 </td>
                 <td><p><?= $this->getTranslation()->trans($unit->getRace()->getSingleName()) ?></p></td>
                 <td><p><?= $unit->getLife() ?>/<?= $unit->getTotalLife() ?></p></td>
-                <td><p><?= $unit->getDamage() ?></p></td>
-                <td><p><?= $unit->getAttackSpeed() ?></p></td>
-                <td><p><?= $unit->getBlock() ?></p></td>
+                <td><p><?= $unit->getOffense()->getDamage() ?></p></td>
+                <td><p><?= $unit->getOffense()->getAttackSpeed() ?></p></td>
+                <td><p><?= $unit->getDefense()->getBlock() ?></p></td>
                 <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONS ?></p></td>
                 <td><p><?= $unit->getRage() ?>/<?= $unit::MAX_RAGE ?></p></td>
                 <td><p><?= ($unit->isMelee() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
@@ -65,9 +68,9 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 </td>
                 <td><p><?= $this->getTranslation()->trans($unit->getRace()->getSingleName()) ?></p></td>
                 <td><p><?= $unit->getLife() ?>/<?= $unit->getTotalLife() ?></p></td>
-                <td><p><?= $unit->getDamage() ?></p></td>
-                <td><p><?= $unit->getAttackSpeed() ?></p></td>
-                <td><p><?= $unit->getBlock() ?></p></td>
+                <td><p><?= $unit->getOffense()->getDamage() ?></p></td>
+                <td><p><?= $unit->getOffense()->getAttackSpeed() ?></p></td>
+                <td><p><?= $unit->getDefense()->getBlock() ?></p></td>
                 <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONS ?></p></td>
                 <td><p><?= $unit->getRage() ?>/<?= $unit::MAX_RAGE ?></p></td>
                 <td><p><?= ($unit->isMelee() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>

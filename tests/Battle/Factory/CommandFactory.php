@@ -51,18 +51,22 @@ class CommandFactory
             'name'         => 'unit_1',
             'level'        => 1,
             'avatar'       => '/images/avas/humans/human001.jpg',
-            'damage'       => 20,
-            'attack_speed' => 1.00,
-            'accuracy'     => 200,
-            'defense'      => 100,
-            'block'        => 0,
-            'block_ignore' => 0,
             'life'         => 100,
             'total_life'   => 100,
             'melee'        => true,
             'class'        => 1,
             'race'         => 1,
             'command'      => 1,
+            'offense'    => [
+                'damage'       => 15,
+                'attack_speed' => 1.2,
+                'accuracy'     => 200,
+                'block_ignore' => 0,
+            ],
+            'defense'    => [
+                'defense' => 100,
+                'block'   => 0,
+            ],
         ];
 
         $i = 0;

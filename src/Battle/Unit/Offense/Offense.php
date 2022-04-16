@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Offense;
 
+// TODO В сеттерах добавить проверки на допустимое значение
+
 class Offense implements OffenseInterface
 {
     /**
@@ -43,11 +45,27 @@ class Offense implements OffenseInterface
     }
 
     /**
+     * @param int $damage
+     */
+    public function setDamage(int $damage): void
+    {
+        $this->damage = $damage;
+    }
+
+    /**
      * @return float
      */
     public function getAttackSpeed(): float
     {
         return $this->attackSpeed;
+    }
+
+    /**
+     * @param float $attackSpeed
+     */
+    public function setAttackSpeed(float $attackSpeed): void
+    {
+        $this->attackSpeed = $attackSpeed;
     }
 
     /**
@@ -59,10 +77,26 @@ class Offense implements OffenseInterface
     }
 
     /**
+     * @param int $accuracy
+     */
+    public function setAccuracy(int $accuracy): void
+    {
+        $this->accuracy = $accuracy;
+    }
+
+    /**
      * @return int
      */
     public function getBlockIgnore(): int
     {
         return $this->blockIgnore;
+    }
+
+    /**
+     * @param int $blockIgnore
+     */
+    public function setBlockIgnore(int $blockIgnore): void
+    {
+        $this->blockIgnore = $blockIgnore;
     }
 }

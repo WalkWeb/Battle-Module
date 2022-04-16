@@ -47,7 +47,7 @@ class PriestTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertContainsOnlyInstancesOf(HealAction::class, [$action]);
-                    self::assertEquals($unit->getDamage() * 3, $action->getPower());
+                    self::assertEquals($unit->getOffense()->getDamage() * 3, $action->getPower());
                 }
             }
             if ($i === 1) {

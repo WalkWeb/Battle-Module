@@ -18,7 +18,7 @@ class DefenseFactory
      * @return Defense
      * @throws Exception
      */
-    public function create(array $data): Defense
+    public static function create(array $data): Defense
     {
         self::existAndInt($data, 'block', DefenseException::INCORRECT_BLOCK);
 

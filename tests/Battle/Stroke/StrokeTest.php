@@ -11,6 +11,8 @@ use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
 use Battle\Stroke\StrokeException;
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Offense\Offense;
 use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -41,7 +43,7 @@ class StrokeTest extends AbstractUnitTest
         $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
         $stroke->handle();
 
-        self::assertEquals($enemyUnit->getTotalLife() - $unit->getDamage(), $enemyUnit->getLife());
+        self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage(), $enemyUnit->getLife());
 
         self::assertTrue($unit->isAction());
         self::assertFalse($enemyUnit->isAction());
@@ -93,15 +95,11 @@ class StrokeTest extends AbstractUnitTest
             1,
             'avatar',
             20,
+            20,
+            true,
             1,
-            200,
-            100,
-            0,
-            0,
-            100,
-            100,
-            false,
-            1,
+            new Offense(10, 1, 100, 0),
+            new Defense(10, 0),
             RaceFactory::create(1),
             $enemyUnit->getContainer()
         );

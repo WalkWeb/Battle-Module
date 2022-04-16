@@ -262,13 +262,13 @@ class Unit extends AbstractUnit
 
         $multiplier = $action->getPower() / 100;
 
-        $oldAttackSpeed = $this->attackSpeed;
-        $newAttackSpeed = $this->attackSpeed * $multiplier;
+        $attackSpeed = $this->offense->getAttackSpeed();
+        $oldAttackSpeed = $attackSpeed;
+        $newAttackSpeed = $attackSpeed * $multiplier;
 
         $bonus = $newAttackSpeed - $oldAttackSpeed;
 
-        $this->attackSpeed += $bonus;
-
+        $this->offense->setAttackSpeed($newAttackSpeed);
         $action->setRevertValue($bonus);
     }
 
@@ -280,7 +280,9 @@ class Unit extends AbstractUnit
      */
     private function multiplierAttackSpeedRevert(BuffAction $action): void
     {
-        $this->attackSpeed -= $action->getRevertValue();
+        $attackSpeed = $this->offense->getAttackSpeed();
+        $attackSpeed -= $action->getRevertValue();
+        $this->offense->setAttackSpeed($attackSpeed);
     }
 
     /**
@@ -291,14 +293,15 @@ class Unit extends AbstractUnit
      */
     private function addBlock(BuffAction $action): void
     {
-        $oldBlock = $this->block;
-        $this->block += $action->getPower();
+        $oldBlock = $block = $this->defense->getBlock();
+        $block += $action->getPower();
 
-        if ($this->block > DefenseInterface::MAX_BLOCK) {
-            $this->block = DefenseInterface::MAX_BLOCK;
+        if ($block > DefenseInterface::MAX_BLOCK) {
+            $block = DefenseInterface::MAX_BLOCK;
         }
 
-        $action->setRevertValue($this->block - $oldBlock);
+        $this->defense->setBlock($block);
+        $action->setRevertValue($block - $oldBlock);
     }
 
     /**
@@ -309,7 +312,9 @@ class Unit extends AbstractUnit
      */
     private function addBlockRevert(BuffAction $action): void
     {
-        $this->block -= $action->getRevertValue();
+        $block = $this->defense->getBlock();
+        $block -= $action->getRevertValue();
+        $this->defense->setBlock($block);
     }
 
     /**
@@ -329,7 +334,7 @@ class Unit extends AbstractUnit
                 $enemyCommand,
                 $alliesCommand,
                 DamageAction::TARGET_RANDOM_ENEMY,
-                $this->getDamage(),
+                $this->getOffense()->getDamage(),
                 true
             ));
         }
@@ -380,8 +385,8 @@ class Unit extends AbstractUnit
      */
     private function getChanceOfHit(DamageAction $action): int
     {
-        $accuracy = $action->getActionUnit()->getAccuracy();
-        $chanceOfHit = (int)round(($accuracy - $this->defense) / ($accuracy / 10) * 2 + 80);
+        $accuracy = $action->getActionUnit()->getOffense()->getAccuracy();
+        $chanceOfHit = (int)round(($accuracy - $this->defense->getDefense()) / ($accuracy / 10) * 2 + 80);
 
         // TODO Можно добавить шанс попадания в FullLog, для большей информативности логов
 
@@ -403,7 +408,7 @@ class Unit extends AbstractUnit
      */
     private function isBlocked(DamageAction $action): bool
     {
-        if ($this->block === 0) {
+        if ($this->getDefense()->getBlock() === 0) {
             return false;
         }
 
@@ -411,6 +416,6 @@ class Unit extends AbstractUnit
             return false;
         }
 
-        return ($this->block - $action->getActionUnit()->getBlockIgnore()) >= random_int(0, 100);
+        return ($this->getDefense()->getBlock() - $action->getActionUnit()->getOffense()->getBlockIgnore()) >= random_int(1, 100);
     }
 }

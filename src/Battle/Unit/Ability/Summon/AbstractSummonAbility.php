@@ -9,6 +9,8 @@ use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
 use Battle\Traits\IdTrait;
 use Battle\Unit\Ability\AbstractAbility;
+use Battle\Unit\Defense\DefenseFactory;
+use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitInterface;
@@ -128,6 +130,8 @@ abstract class AbstractSummonAbility extends AbstractAbility
     {
         $collection = new ActionCollection();
 
+        // TODO Вынести создание Offense и Defense в дочерние классы
+
         $collection->add(new SummonAction(
             $this->unit,
             $enemyCommand,
@@ -138,16 +142,20 @@ abstract class AbstractSummonAbility extends AbstractAbility
                 $this->summonName,
                 $this->summonLevel,
                 $this->summonAvatar,
-                $this->summonDamage,
-                $this->summonAttackSpeed,
-                $this->summonAccuracy,
-                $this->summonDefense,
-                $this->summonBlock,
-                $this->summonBlockIgnore,
                 $this->summonLife,
                 $this->summonLife,
                 $this->summonMelee,
                 $this->unit->getCommand(),
+                OffenseFactory::create([
+                    'damage'       => $this->summonDamage,
+                    'attack_speed' => $this->summonAttackSpeed,
+                    'accuracy'     => $this->summonAccuracy,
+                    'block_ignore' => $this->summonBlockIgnore,
+                ]),
+                DefenseFactory::create([
+                    'defense' => $this->summonDefense,
+                    'block'   => $this->summonBlock,
+                ]),
                 RaceFactory::create($this->summonRaceId),
                 $this->unit->getContainer()
             ),
