@@ -150,7 +150,7 @@ class ScenarioTest extends AbstractUnitTest
     {
         $statistic = new Statistic();
         $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $enemyUnit = UnitFactory::createByTemplate(30);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -164,11 +164,6 @@ class ScenarioTest extends AbstractUnitTest
         );
 
         $action->handle();
-
-        // TODO Пока у юнита нет механики уклонения - мы указываем уклонение вручную, потом необходимо будет убрать
-        // TODO Также нужно будет добавить сделать два теста: один на уклонение юнита в левой команде, другой на
-        // TODO уклонение юнита из правой команды
-        $action->dodged($enemyUnit);
 
         $scenario = new Scenario();
         $scenario->addAnimation($action, $statistic);

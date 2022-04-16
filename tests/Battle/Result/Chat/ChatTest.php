@@ -35,8 +35,8 @@ class ChatTest extends AbstractUnitTest
     private const BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
     private const BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
-    private const DODGE_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">unit_2</span> dodged!';
-    private const DODGE_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">unit_2</span> уклонился!';
+    private const DODGE_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const DODGE_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
     private const DAMAGE_TWO_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> and <span style="color: #1e72e3">unit_3</span> on 40 damage';
     private const DAMAGE_TWO_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> и <span style="color: #1e72e3">unit_3</span> на 40 урона';
@@ -44,14 +44,14 @@ class ChatTest extends AbstractUnitTest
     private const DAMAGE_AND_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
     private const DAMAGE_AND_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
-    private const DAMAGE_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 40 damage. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">unit_3</span> dodged!';
-    private const DAMAGE_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 40 урона. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">unit_3</span> уклонился!';
+    private const DAMAGE_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const DAMAGE_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">unit_2</span> dodged!';
-    private const BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">unit_2</span> уклонился!';
+    private const BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const DAMAGE_AND_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> dodged!';
-    private const DAMAGE_AND_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> уклонился!';
+    private const DAMAGE_AND_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const DAMAGE_AND_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
     private const DAMAGE_THREE_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> and <span style="color: #1e72e3">unit_4</span> on 60 damage';
     private const DAMAGE_THREE_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> и <span style="color: #1e72e3">unit_4</span> на 60 урона';
@@ -62,20 +62,20 @@ class ChatTest extends AbstractUnitTest
     private const DAMAGE_ABILITY_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it!';
     private const DAMAGE_ABILITY_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
-    private const DAMAGE_ABILITY_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">unit_2</span> dodged!';
-    private const DAMAGE_ABILITY_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">unit_2</span> уклонился!';
+    private const DAMAGE_ABILITY_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const DAMAGE_ABILITY_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
     private const ABILITY_DAMAGE_AND_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> at <span style="color: #1e72e3">unit_2</span> on 50 damage. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it!';
     private const ABILITY_DAMAGE_AND_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> по <span style="color: #1e72e3">unit_2</span> на 50 урона. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
-    private const ABILITY_DAMAGE_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> at <span style="color: #1e72e3">unit_2</span> on 100 damage. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">unit_3</span> dodged!';
-    private const ABILITY_DAMAGE_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> по <span style="color: #1e72e3">unit_2</span> на 100 урона. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">unit_3</span> уклонился!';
+    private const ABILITY_DAMAGE_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> at <span style="color: #1e72e3">unit_2</span> on 50 damage. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const ABILITY_DAMAGE_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> по <span style="color: #1e72e3">unit_2</span> на 50 урона. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const ABILITY_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">unit_3</span> dodged!';
-    private const ABILITY_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">unit_3</span> уклонился!';
+    private const ABILITY_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const ABILITY_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const ABILITY_DAMAGE_AND_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> at <span style="color: #1e72e3">unit_2</span> on 100 damage. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">unit_3</span> dodged!';
-    private const ABILITY_DAMAGE_AND_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> по <span style="color: #1e72e3">unit_2</span> на 100 урона. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">unit_3</span> уклонился!';
+    private const ABILITY_DAMAGE_AND_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> at <span style="color: #1e72e3">unit_2</span> on 50 damage. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const ABILITY_DAMAGE_AND_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> по <span style="color: #1e72e3">unit_2</span> на 50 урона. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
     private const HEAL_EN = '<span style="color: #1e72e3">unit_1</span> heal <span style="color: #1e72e3">wounded_unit</span> on 20 life';
     private const HEAL_RU = '<span style="color: #1e72e3">unit_1</span> вылечил <span style="color: #1e72e3">wounded_unit</span> на 20 здоровья';
@@ -193,7 +193,7 @@ class ChatTest extends AbstractUnitTest
      */
     public function testChatAddMessageDodgedDamage(): void
     {
-        [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(1, 2);
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 30);
 
         $action = new DamageAction(
             $unit,
@@ -207,9 +207,6 @@ class ChatTest extends AbstractUnitTest
         self::assertTrue($action->canByUsed());
 
         $action->handle();
-
-        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
-        $action->dodged($enemyUnit);
 
         self::assertEquals(self::DODGE_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::DODGE_RU, $this->getChatRu()->addMessage($action));
@@ -282,7 +279,7 @@ class ChatTest extends AbstractUnitTest
      */
     public function testChatAddMessageDodgedDamageAbility(): void
     {
-        [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(1, 2);
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 30);
 
         $action = new DamageAction(
             $unit,
@@ -300,9 +297,6 @@ class ChatTest extends AbstractUnitTest
         self::assertTrue($action->canByUsed());
 
         $action->handle();
-
-        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
-        $action->dodged($enemyUnit);
 
         self::assertEquals(self::DAMAGE_ABILITY_DODGE_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::DAMAGE_ABILITY_DODGE_RU, $this->getChatRu()->addMessage($action));
@@ -663,7 +657,7 @@ class ChatTest extends AbstractUnitTest
     {
         $unit = UnitFactory::createByTemplate(1);
         $firstEnemyUnit = UnitFactory::createByTemplate(2);
-        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(30);
 
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
@@ -681,9 +675,6 @@ class ChatTest extends AbstractUnitTest
 
         $action->handle();
 
-        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
-        $action->dodged($secondaryEnemyUnit);
-
         self::assertEquals(self::DAMAGE_AND_DODGE_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::DAMAGE_AND_DODGE_RU, $this->getChatRu()->addMessage($action));
     }
@@ -696,7 +687,7 @@ class ChatTest extends AbstractUnitTest
     public function testChatAddMessageBlockedAndDodged(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $firstEnemyUnit = UnitFactory::createByTemplate(30);
         $secondaryEnemyUnit = UnitFactory::createByTemplate(28);
 
         $command = CommandFactory::create([$unit]);
@@ -715,9 +706,6 @@ class ChatTest extends AbstractUnitTest
 
         $action->handle();
 
-        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
-        $action->dodged($firstEnemyUnit);
-
         self::assertEquals(self::BLOCK_AND_DODGE_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::BLOCK_AND_DODGE_RU, $this->getChatRu()->addMessage($action));
     }
@@ -732,10 +720,10 @@ class ChatTest extends AbstractUnitTest
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $blockedUnit = UnitFactory::createByTemplate(28);
-        $dodgedUnit = UnitFactory::createByTemplate(28);
+        $dodgedUnit = UnitFactory::createByTemplate(30);
 
         $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit, $blockedUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit, $blockedUnit, $dodgedUnit]);
 
         $action = new DamageAction(
             $unit,
@@ -749,9 +737,6 @@ class ChatTest extends AbstractUnitTest
         self::assertTrue($action->canByUsed());
 
         $action->handle();
-
-        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
-        $action->dodged($dodgedUnit);
 
         self::assertEquals(self::DAMAGE_AND_BLOCK_AND_DODGE_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::DAMAGE_AND_BLOCK_AND_DODGE_RU, $this->getChatRu()->addMessage($action));
@@ -800,11 +785,11 @@ class ChatTest extends AbstractUnitTest
     public function testChatAddMessageAbilityDamageAndDodged(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $firstEnemyUnit = UnitFactory::createByTemplate(2);
-        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $dodgeUnit = UnitFactory::createByTemplate(30);
 
         $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit, $dodgeUnit]);
 
         $action = new DamageAction(
             $unit,
@@ -823,9 +808,6 @@ class ChatTest extends AbstractUnitTest
 
         $action->handle();
 
-        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
-        $action->dodged($secondaryEnemyUnit);
-
         self::assertEquals(self::ABILITY_DAMAGE_AND_DODGE_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::ABILITY_DAMAGE_AND_DODGE_RU, $this->getChatRu()->addMessage($action));
     }
@@ -839,7 +821,7 @@ class ChatTest extends AbstractUnitTest
     {
         $unit = UnitFactory::createByTemplate(1);
         $blockedUnit = UnitFactory::createByTemplate(28);
-        $dodgedUnit = UnitFactory::createByTemplate(3);
+        $dodgedUnit = UnitFactory::createByTemplate(30);
 
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$blockedUnit, $dodgedUnit]);
@@ -861,9 +843,6 @@ class ChatTest extends AbstractUnitTest
 
         $action->handle();
 
-        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
-        $action->dodged($dodgedUnit);
-
         self::assertEquals(self::ABILITY_BLOCK_AND_DODGE_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::ABILITY_BLOCK_AND_DODGE_RU, $this->getChatRu()->addMessage($action));
     }
@@ -878,7 +857,7 @@ class ChatTest extends AbstractUnitTest
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $blockedUnit = UnitFactory::createByTemplate(28);
-        $dodgedUnit = UnitFactory::createByTemplate(3);
+        $dodgedUnit = UnitFactory::createByTemplate(30);
 
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit, $blockedUnit, $dodgedUnit]);
@@ -899,9 +878,6 @@ class ChatTest extends AbstractUnitTest
         self::assertTrue($action->canByUsed());
 
         $action->handle();
-
-        // TODO Пока механика уклонения не реализована - вручную указываем, что юнит уклонился
-        $action->dodged($dodgedUnit);
 
         self::assertEquals(self::ABILITY_DAMAGE_AND_BLOCK_AND_DODGE_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::ABILITY_DAMAGE_AND_BLOCK_AND_DODGE_RU, $this->getChatRu()->addMessage($action));

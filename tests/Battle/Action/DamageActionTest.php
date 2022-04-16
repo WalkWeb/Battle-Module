@@ -312,14 +312,12 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
-     * TODO Когда будет реализована механика уклонения dodge в Unit нужно будет переписать тест по аналогии с тестом выше
-     *
      * @throws Exception
      */
     public function testDamageActionDodged(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(28);
+        $enemyUnit = UnitFactory::createByTemplate(30);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -334,7 +332,9 @@ class DamageActionTest extends AbstractUnitTest
 
         self::assertFalse($action->isDodged($enemyUnit));
 
-        $action->dodged($enemyUnit);
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
 
         self::assertTrue($action->isDodged($enemyUnit));
     }
