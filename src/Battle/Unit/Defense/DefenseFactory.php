@@ -31,10 +31,11 @@ class DefenseFactory
 
         self::existAndInt($data, 'defense', DefenseException::INCORRECT_DEFENSE);
 
-        self::intMinValue(
+        self::intMinMaxValue(
             $data['defense'],
             DefenseInterface::MIN_DEFENSE,
-            DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE
+            DefenseInterface::MAX_DEFENSE,
+            DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE . '-' . DefenseInterface::MAX_DEFENSE
         );
 
         return new Defense($data['defense'], $data['block']);

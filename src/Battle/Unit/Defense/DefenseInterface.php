@@ -12,7 +12,7 @@ namespace Battle\Unit\Defense;
 interface DefenseInterface
 {
     public const MIN_DEFENSE = 1;
-    // TODO Add MAX_DEFENSE
+    public const MAX_DEFENSE = 1000000;
 
     public const MIN_BLOCK   = 0;
     public const MAX_BLOCK   = 100;

@@ -90,7 +90,15 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense' => DefenseInterface::MIN_DEFENSE - 1,
                     'block'   => 0,
                 ],
-                DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE,
+                DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE . '-' . DefenseInterface::MAX_DEFENSE,
+            ],
+            [
+                // defense больше максимального значения
+                [
+                    'defense' => DefenseInterface::MAX_DEFENSE + 1,
+                    'block'   => 0,
+                ],
+                DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE . '-' . DefenseInterface::MAX_DEFENSE,
             ],
 
             // block

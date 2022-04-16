@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Offense;
 
-// TODO В сеттерах добавить проверки на допустимое значение
-
 class Offense implements OffenseInterface
 {
     /**

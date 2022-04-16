@@ -76,22 +76,6 @@ trait ValidationTrait
     }
 
     /**
-     * @param int $value
-     * @param int $min
-     * @param string $error
-     * @return int
-     * @throws BattleException
-     */
-    protected static function intMinValue(int $value, int $min, string $error): int
-    {
-        if ($value < $min) {
-            throw new BattleException($error);
-        }
-
-        return $value;
-    }
-
-    /**
      * @param string $string
      * @param int $minLength
      * @param int $maxLength
