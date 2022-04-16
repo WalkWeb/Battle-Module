@@ -184,15 +184,6 @@ interface UnitInterface
     public function getRace(): RaceInterface;
 
     /**
-     * Возвращает ДПС юнита (средний урон за ход = урон * скорость атаки)
-     *
-     * TODO Перенести в Offense
-     *
-     * @return float
-     */
-    public function getDPS(): float;
-
-    /**
      * Сообщает юниту, что была использована его способность завязанная на концентрацию
      *
      * Юнит, в свою очередь обнуляет свою концентрацию

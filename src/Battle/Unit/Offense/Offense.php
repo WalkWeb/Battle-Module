@@ -99,4 +99,12 @@ class Offense implements OffenseInterface
     {
         $this->blockIgnore = $blockIgnore;
     }
+
+    /**
+     * @return float
+     */
+    public function getDPS(): float
+    {
+        return round($this->damage * $this->attackSpeed, 1);
+    }
 }

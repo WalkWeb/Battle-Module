@@ -74,7 +74,7 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
                             <img src="<?= $unit->getUnit()->getAvatar() ?>" class="stat_ava" alt="" />
                             <span class="stat_unit"><?= $unit->getUnit()->getName() ?></span>
                             <img src="/images/icons/damage.png" width="21" height="23" class="stat_damage" alt="" />
-                            <?= $unit->getUnit()->getDPS() ?>
+                            <?= $unit->getUnit()->getOffense()->getDPS() ?>
                             <img src="/images/icons/life.png" width="21" height="19" class="stat_damage" alt="" />
                             <?= $unit->getUnit()->getTotalLife() ?>
                         </p>

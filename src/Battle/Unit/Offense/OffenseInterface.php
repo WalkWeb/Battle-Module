@@ -74,4 +74,11 @@ interface OffenseInterface
      * @param int $blockIgnore
      */
     public function setBlockIgnore(int $blockIgnore): void;
+
+    /**
+     * Возвращает ДПС (средний урон за ход = урон * скорость атаки)
+     *
+     * @return float
+     */
+    public function getDPS(): float;
 }

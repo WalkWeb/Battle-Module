@@ -25,6 +25,7 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($attackSpeed, $offense->getAttackSpeed());
         self::assertEquals($accuracy, $offense->getAccuracy());
         self::assertEquals($blockIgnore, $offense->getBlockIgnore());
+        self::assertEquals(round($damage * $attackSpeed, 1), $offense->getDPS());
     }
 
     /**

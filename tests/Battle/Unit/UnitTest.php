@@ -47,7 +47,7 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
         self::assertEquals($data['offense']['accuracy'], $unit->getOffense()->getAccuracy());
         self::assertEquals($data['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());
-        self::assertEquals(round($data['offense']['damage'] * $data['offense']['attack_speed'], 1), $unit->getDPS());
+        self::assertEquals(round($data['offense']['damage'] * $data['offense']['attack_speed'], 1), $unit->getOffense()->getDPS());
 
         self::assertEquals($data['defense']['defense'], $unit->getDefense()->getDefense());
         self::assertEquals($data['defense']['block'], $unit->getDefense()->getBlock());
