@@ -46,9 +46,16 @@ class Offense implements OffenseInterface
 
     /**
      * @param int $damage
+     * @throws OffenseException
      */
     public function setDamage(int $damage): void
     {
+        if ($damage < self::MIN_DAMAGE || $damage > self::MAX_DAMAGE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+            );
+        }
+
         $this->damage = $damage;
     }
 
@@ -62,9 +69,16 @@ class Offense implements OffenseInterface
 
     /**
      * @param float $attackSpeed
+     * @throws OffenseException
      */
     public function setAttackSpeed(float $attackSpeed): void
     {
+        if ($attackSpeed < self::MIN_ATTACK_SPEED || $attackSpeed > self::MAX_ATTACK_SPEED) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_ATTACK_SPEED_VALUE . OffenseInterface::MIN_ATTACK_SPEED . '-' . OffenseInterface::MAX_ATTACK_SPEED
+            );
+        }
+
         $this->attackSpeed = $attackSpeed;
     }
 
@@ -78,9 +92,16 @@ class Offense implements OffenseInterface
 
     /**
      * @param int $accuracy
+     * @throws OffenseException
      */
     public function setAccuracy(int $accuracy): void
     {
+        if ($accuracy < self::MIN_ACCURACY || $accuracy > self::MAX_ACCURACY) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_ACCURACY_VALUE . OffenseInterface::MIN_ACCURACY . '-' . OffenseInterface::MAX_ACCURACY
+            );
+        }
+
         $this->accuracy = $accuracy;
     }
 
@@ -94,9 +115,16 @@ class Offense implements OffenseInterface
 
     /**
      * @param int $blockIgnore
+     * @throws OffenseException
      */
     public function setBlockIgnore(int $blockIgnore): void
     {
+        if ($blockIgnore < self::MIN_BLOCK_IGNORE || $blockIgnore > self::MAX_BLOCK_IGNORE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE
+            );
+        }
+
         $this->blockIgnore = $blockIgnore;
     }
 
