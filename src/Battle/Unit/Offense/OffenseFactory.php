@@ -32,10 +32,11 @@ class OffenseFactory
             OffenseException::INCORRECT_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
         );
 
-        self::intMinValue(
+        self::intMinMaxValue(
             $data['accuracy'],
             OffenseInterface::MIN_ACCURACY,
-            OffenseException::INCORRECT_ACCURACY_VALUE . OffenseInterface::MIN_ACCURACY
+            OffenseInterface::MAX_ACCURACY,
+            OffenseException::INCORRECT_ACCURACY_VALUE . OffenseInterface::MIN_ACCURACY . '-' . OffenseInterface::MAX_ACCURACY
         );
 
         self::intMinMaxValue(

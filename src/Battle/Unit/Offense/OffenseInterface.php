@@ -18,7 +18,7 @@ interface OffenseInterface
     public const MAX_ATTACK_SPEED = 10;
 
     public const MIN_ACCURACY     = 1;
-    // TODO Добавить MAX_ACCURACY
+    public const MAX_ACCURACY     = 1000000;
 
     public const MIN_BLOCK_IGNORE = 0;
     public const MAX_BLOCK_IGNORE = 100;

@@ -187,7 +187,17 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'accuracy'     => OffenseInterface::MIN_ACCURACY - 1,
                     'block_ignore' => 0,
                 ],
-                OffenseException::INCORRECT_ACCURACY_VALUE . OffenseInterface::MIN_ACCURACY,
+                OffenseException::INCORRECT_ACCURACY_VALUE . OffenseInterface::MIN_ACCURACY . '-' . OffenseInterface::MAX_ACCURACY,
+            ],
+            [
+                // accuracy больше максимального значения
+                [
+                    'damage'       => 20,
+                    'attack_speed' => 1.3,
+                    'accuracy'     => OffenseInterface::MAX_ACCURACY + 1,
+                    'block_ignore' => 0,
+                ],
+                OffenseException::INCORRECT_ACCURACY_VALUE . OffenseInterface::MIN_ACCURACY . '-' . OffenseInterface::MAX_ACCURACY,
             ],
 
             // block_ignore
