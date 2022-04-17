@@ -135,6 +135,8 @@ interface ActionInterface
      *
      * Этот параметр необходим, например, для корректного расчета вампиризма
      *
+     * TODO Передавать не "string $unitId", а "UnitInterface $unit"
+     *
      * @param string $unitId
      * @param int $factualPower
      * @return mixed

@@ -451,10 +451,10 @@ class Scenario implements ScenarioInterface
     private function createBlockedDamageTargetEffect(UnitInterface $targetUnit): array
     {
         return [
-            'type'    => 'change',
-            'user_id' => $targetUnit->getId(),
-            'class'   => 'd_block',
-            // TODO 'unit_effects'
+            'type'         => 'change',
+            'user_id'      => $targetUnit->getId(),
+            'class'        => 'd_block',
+            'unit_effects' => $this->getUnitEffects($targetUnit),
         ];
     }
 

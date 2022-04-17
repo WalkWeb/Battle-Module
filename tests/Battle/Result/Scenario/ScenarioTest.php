@@ -129,9 +129,10 @@ class ScenarioTest extends AbstractUnitTest
                     'unit_effects'   => [],
                     'targets'        => [
                         [
-                            'type'    => 'change',
-                            'user_id' => $enemyUnit->getId(),
-                            'class'   => 'd_block',
+                            'type'         => 'change',
+                            'user_id'      => $enemyUnit->getId(),
+                            'class'        => 'd_block',
+                            'unit_effects' => [],
                         ],
                     ],
                 ],
