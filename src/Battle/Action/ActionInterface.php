@@ -117,31 +117,27 @@ interface ActionInterface
     public function getTargetUnits(): UnitCollection;
 
     /**
-     * Возвращает силу действия (например, силу удара или силу лечения)
+     * Возвращает суммарную силу действия (например, силу удара или силу лечения) по всем юнитам
+     *
+     * Этот параметр необходим для статистики и, например, для корректного расчета вампиризма - когда лечение
+     * рассчитывает от фактически нанесенного урона, а не от самого показателя удара
      *
      * В Action не имеющих силу действия (например, призыв существ) вернет 0
-     *
-     * TODO Метод стоит разделить на два: getPower для HealAction и getDamage (который в будущем будет возвращать объект
-     * TODO Offence) для DamageAction
      *
      * @return mixed
      */
     public function getPower(): int;
 
     /**
-     * Задает фактическую силу действия, суммарно по всем юнитам
+     * Задает фактическую силу действия, по указанному юниту
      *
      * Например, у юнита осталось 5 здоровья и он получает 50 удара. В этом случае фактический удар будет на 5 здоровья
      *
-     * Этот параметр необходим, например, для корректного расчета вампиризма
-     *
-     * TODO Передавать не "string $unitId", а "UnitInterface $unit"
-     *
-     * @param string $unitId
+     * @param UnitInterface $unit
      * @param int $factualPower
      * @return mixed
      */
-    public function addFactualPower(string $unitId, int $factualPower): void;
+    public function addFactualPower(UnitInterface $unit, int $factualPower): void;
 
     /**
      * Сбрасывает factualPower у Action

@@ -15,7 +15,9 @@ use Battle\Action\ResurrectionAction;
 use Battle\Action\WaitAction;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Defense\DefenseException;
 use Battle\Unit\Defense\DefenseInterface;
+use Battle\Unit\Offense\OffenseException;
 use Exception;
 
 class Unit extends AbstractUnit
@@ -82,13 +84,13 @@ class Unit extends AbstractUnit
     private function applyDamageAction(DamageAction $action): void
     {
         if ($this->isDodged($action)) {
-            $action->addFactualPower($this->id, 0);
+            $action->addFactualPower($this, 0);
             $action->dodged($this);
             return;
         }
 
         if ($this->isBlocked($action)) {
-            $action->addFactualPower($this->id, 0);
+            $action->addFactualPower($this, 0);
             $action->blocked($this);
             return;
         }
@@ -112,7 +114,7 @@ class Unit extends AbstractUnit
             }
         }
 
-        $action->addFactualPower($this->id, $primordialLife - $this->life);
+        $action->addFactualPower($this, $primordialLife - $this->life);
     }
 
     /**
@@ -130,7 +132,7 @@ class Unit extends AbstractUnit
             $this->life = $this->totalLife;
         }
 
-        $action->addFactualPower($this->id, $this->life - $primordialLife);
+        $action->addFactualPower($this, $this->life - $primordialLife);
     }
 
     /**
@@ -183,7 +185,7 @@ class Unit extends AbstractUnit
 
         $this->life += $restoreLife;
 
-        $action->addFactualPower($this->id, $restoreLife);
+        $action->addFactualPower($this, $restoreLife);
     }
     
     /**
@@ -252,6 +254,7 @@ class Unit extends AbstractUnit
      *
      * @param BuffAction $action
      * @throws ActionException
+     * @throws OffenseException
      * @throws UnitException
      */
     private function multiplierAttackSpeed(BuffAction $action): void
@@ -277,6 +280,7 @@ class Unit extends AbstractUnit
      *
      * @param BuffAction $action
      * @throws ActionException
+     * @throws OffenseException
      */
     private function multiplierAttackSpeedRevert(BuffAction $action): void
     {
@@ -290,6 +294,7 @@ class Unit extends AbstractUnit
      *
      * @param BuffAction $action
      * @throws ActionException
+     * @throws DefenseException
      */
     private function addBlock(BuffAction $action): void
     {
@@ -309,6 +314,7 @@ class Unit extends AbstractUnit
      *
      * @param BuffAction $action
      * @throws ActionException
+     * @throws DefenseException
      */
     private function addBlockRevert(BuffAction $action): void
     {

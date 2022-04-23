@@ -141,6 +141,16 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Во всех события, кроме урона и лечения (и воскрешения, кторое также лечит) нет силы действия - соответственно по
+     * умолчанию этот метод ничего не делает, и только в DamageAction, HealAction и ResurrectionAction этот метод
+     * подменяется
+     *
+     * @param UnitInterface $unit
+     * @param int $factualPower
+     */
+    public function addFactualPower(UnitInterface $unit, int $factualPower): void {}
+
+    /**
      * @param UnitInterface $unit
      * @return int
      * @throws ActionException

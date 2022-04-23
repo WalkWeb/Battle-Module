@@ -128,13 +128,13 @@ class DamageAction extends AbstractAction
     }
 
     /**
-     * @param string $unitId
+     * @param UnitInterface $unit
      * @param int $factualPower
      */
-    public function addFactualPower(string $unitId, int $factualPower): void
+    public function addFactualPower(UnitInterface $unit, int $factualPower): void
     {
         $this->factualPower += $factualPower;
-        $this->factualPowerByUnit[$unitId] = $factualPower;
+        $this->factualPowerByUnit[$unit->getId()] = $factualPower;
     }
 
     /**

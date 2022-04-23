@@ -88,10 +88,10 @@ class HealAction extends AbstractAction
         return $this->power;
     }
 
-    public function addFactualPower(string $unitId, int $factualPower): void
+    public function addFactualPower(UnitInterface $unit, int $factualPower): void
     {
         $this->factualPower += $factualPower;
-        $this->factualPowerByUnit[$unitId] = $factualPower;
+        $this->factualPowerByUnit[$unit->getId()] = $factualPower;
     }
 
     /**

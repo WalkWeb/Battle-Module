@@ -73,12 +73,4 @@ class WaitAction extends AbstractAction
     {
         return true;
     }
-
-    /**
-     * У ожидания нет силы действия – соответственно метод ничего не делает
-     *
-     * @param string $unitId
-     * @param int $factualPower
-     */
-    public function addFactualPower(string $unitId, int $factualPower): void {}
 }

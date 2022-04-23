@@ -137,12 +137,4 @@ class EffectAction extends AbstractAction
     {
         return $this->messageMethod;
     }
-
-    /**
-     * У эффекта нет силы действия - соответственно метод ничего не делает
-     *
-     * @param string $unitId
-     * @param int $factualPower
-     */
-    public function addFactualPower(string $unitId, int $factualPower): void {}
 }

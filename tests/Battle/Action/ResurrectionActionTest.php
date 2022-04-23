@@ -40,7 +40,7 @@ class ResurrectionActionTest extends AbstractUnitTest
 
         $factualPower = 123;
 
-        $action->addFactualPower($unit->getId(), $factualPower);
+        $action->addFactualPower($unit, $factualPower);
 
         self::assertEquals($factualPower, $action->getFactualPower());
         self::assertEquals($factualPower, $action->getFactualPowerByUnit($unit));

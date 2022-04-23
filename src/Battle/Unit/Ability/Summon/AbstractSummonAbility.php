@@ -130,8 +130,6 @@ abstract class AbstractSummonAbility extends AbstractAbility
     {
         $collection = new ActionCollection();
 
-        // TODO Вынести создание Offense и Defense в дочерние классы
-
         $collection->add(new SummonAction(
             $this->unit,
             $enemyCommand,

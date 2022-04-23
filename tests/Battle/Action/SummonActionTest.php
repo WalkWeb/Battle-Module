@@ -65,7 +65,7 @@ class SummonActionTest extends AbstractUnitTest
 
         self::assertEquals(0, $action->getFactualPower());
 
-        $action->addFactualPower($actionUnit->getId(), 100);
+        $action->addFactualPower($actionUnit, 100);
 
         // В любом случае будет 0
         self::assertEquals(0, $action->getFactualPower());
