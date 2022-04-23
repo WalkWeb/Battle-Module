@@ -32,19 +32,25 @@ class Race implements RaceInterface
     private $icon;
 
     /**
-     * @param int $id
-     * @param string $name
-     * @param string $singleName
-     * @param string $color
-     * @param string $icon
+     * @var string[]
      */
-    public function __construct(int $id, string $name, string $singleName, string $color, string $icon)
+    private $abilities;
+
+    public function __construct(
+        int $id,
+        string $name,
+        string $singleName,
+        string $color,
+        string $icon,
+        array $abilities
+    )
     {
         $this->id = $id;
         $this->name = $name;
         $this->singleName = $singleName;
         $this->color = $color;
         $this->icon = $icon;
+        $this->abilities = $abilities;
     }
 
     /**
@@ -85,5 +91,13 @@ class Race implements RaceInterface
     public function getIcon(): string
     {
         return $this->icon;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getAbilities(): array
+    {
+        return $this->abilities;
     }
 }

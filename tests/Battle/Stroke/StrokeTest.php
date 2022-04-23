@@ -100,7 +100,7 @@ class StrokeTest extends AbstractUnitTest
             1,
             new Offense(10, 1, 100, 0),
             new Defense(10, 0),
-            RaceFactory::create(1),
+            RaceFactory::createById(1),
             $enemyUnit->getContainer()
         );
 

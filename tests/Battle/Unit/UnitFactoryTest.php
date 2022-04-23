@@ -25,7 +25,7 @@ class UnitFactoryTest extends AbstractUnitTest
     {
         $unit = UnitFactory::create($data);
         $class = array_key_exists('class', $data) && is_int($data['class']) ? UnitClassFactory::create($data['class']) : null;
-        $race = RaceFactory::create($data['race']);
+        $race = RaceFactory::createById($data['race']);
 
         self::assertEquals($data['name'], $unit->getName());
         self::assertEquals($data['level'], $unit->getLevel());

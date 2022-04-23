@@ -14,4 +14,6 @@ class RaceException extends Exception
     public const INCORRECT_SINGLE_NAME = 'Incorrect parameter single_name, it required and type string';
     public const INCORRECT_COLOR       = 'Incorrect parameter color, it required and type string';
     public const INCORRECT_ICON        = 'Incorrect parameter icon, it required and type string';
+    public const INCORRECT_ABILITIES   = 'Incorrect parameter icon, it required and type array';
+    public const INCORRECT_ABILITY     = 'Incorrect parameter icon, it required and type string';
 }

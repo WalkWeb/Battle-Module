@@ -154,7 +154,7 @@ abstract class AbstractSummonAbility extends AbstractAbility
                     'defense' => $this->summonDefense,
                     'block'   => $this->summonBlock,
                 ]),
-                RaceFactory::create($this->summonRaceId),
+                RaceFactory::createById($this->summonRaceId),
                 $this->unit->getContainer()
             ),
             $this->icon

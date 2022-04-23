@@ -40,4 +40,14 @@ interface RaceInterface
      * @return string
      */
     public function getIcon(): string;
+
+    /**
+     * Возвращает массив (названий классов) способностей - базовых, для этой расы
+     *
+     * AbilityCollection не используется, потому что для создания самой способности нужен объект юнита, а его на момент
+     * создания объекта расы еще нет
+     *
+     * @return string[]
+     */
+    public function getAbilities(): array;
 }

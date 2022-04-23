@@ -88,7 +88,7 @@ class UnitFactory
             $data['command'],
             OffenseFactory::create($data['offense']),
             DefenseFactory::create($data['defense']),
-            RaceFactory::create($data['race']),
+            RaceFactory::createById($data['race']),
             $container,
             self::getClass($data, $container->getChat())
         );
