@@ -112,8 +112,6 @@ abstract class AbstractAction implements ActionInterface
      */
     public function getTargetUnits(): UnitCollection
     {
-        // TODO Нужно разобраться, почему в тесте testHealActionNoTargetException() в $this->targetUnits появляется NULL
-        // TODO В EffectAction такая ситуация возникала из-за того, что перед handle() не вызвался canByUsed()
         if ($this->targetUnits === null || count($this->targetUnits) === 0) {
             throw new ActionException(ActionException::NO_TARGET_UNIT);
         }

@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
+use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
+use Battle\Action\ActionFactory;
+use Battle\Action\ActionInterface;
+use Battle\Command\CommandInterface;
 use Exception;
 use Battle\Unit\Unit;
 use Battle\Command\Command;
@@ -352,11 +356,88 @@ class UnitTest extends AbstractUnitTest
         self::assertCount(0, $unit->getEffects());
     }
 
+    /**
+     * Тест на ситуацию, когда идет попытка уменьшения урон (на данный момент урон может только увеличиваться)
+     *
+     * @throws Exception
+     */
+    public function testUnitMultiplierDamageInvalidPower(): void
+    {
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Применяем способность
+        foreach ($this->getRageActions($unit, $enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+
+            $this->expectException(UnitException::class);
+            $this->expectExceptionMessage(UnitException::NO_REDUCED_DAMAGE);
+            $action->handle();
+        }
+    }
+
+    /**
+     * @return array
+     */
     public function createDataProvider(): array
     {
         return [
             [1], [2], [3], [4], [5], [6], [7], [8], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20],
             [21], [22], [23], [24], [25], [26], [27], [28],
         ];
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @return ActionCollection
+     * @throws Exception
+     */
+    private function getRageActions(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $alliesCommand
+    ): ActionCollection
+    {
+        $actionFactory = new ActionFactory();
+        $collection = new ActionCollection();
+
+        $data = [
+            'type'           => ActionInterface::EFFECT,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $alliesCommand,
+            'type_target'    => ActionInterface::TARGET_SELF,
+            'name'           => 'Rage',
+            'icon'           => '/images/icons/ability/285.png',
+            'message_method' => 'applyEffect',
+            'effect'         => [
+                'name'                  => 'Rage',
+                'icon'                  => '/images/icons/ability/285.png',
+                'duration'              => 8,
+                'on_apply_actions'      => [
+                    [
+                        'type'           => ActionInterface::BUFF,
+                        'action_unit'    => $unit,
+                        'enemy_command'  => $enemyCommand,
+                        'allies_command' => $alliesCommand,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Rage',
+                        'modify_method'  => 'multiplierDamage',
+                        'power'          => 80,
+                        'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                    ],
+                ],
+                'on_next_round_actions' => [],
+                'on_disable_actions'    => [],
+            ],
+        ];
+
+        $collection->add($actionFactory->create($data));
+
+        return $collection;
     }
 }

@@ -194,7 +194,7 @@ class Unit extends AbstractUnit
      * При этом само событие указывает, в getModifyMethod(), какой метод должен обработать текущее изменение
      * характеристик
      *
-     * @uses multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert
+     * @uses multiplierDamage, multiplierDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert
      * @param BuffAction $action
      * @throws ActionException
      * @throws UnitException
@@ -206,6 +206,44 @@ class Unit extends AbstractUnit
         }
 
         $this->$modifyMethod($action);
+    }
+
+    /**
+     * Увеличивает урон юнита (можно сделать и уменьшение, но пока делаем только увеличение)
+     *
+     * @param BuffAction $action
+     * @throws ActionException
+     * @throws UnitException
+     * @throws OffenseException
+     */
+    private function multiplierDamage(BuffAction $action): void
+    {
+        if ($action->getPower() <= 100) {
+            throw new UnitException(UnitException::NO_REDUCED_DAMAGE);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldDamage = $this->offense->getDamage();
+        $newDamage = (int)($this->offense->getDamage() * $multiplier);
+
+        $bonus = $newDamage - $oldDamage;
+
+        $this->offense->setDamage($newDamage);
+
+        $action->setRevertValue($bonus);
+    }
+
+    /**
+     * Откатывает изменение урона юнита
+     *
+     * @param BuffAction $action
+     * @throws ActionException
+     * @throws OffenseException
+     */
+    private function multiplierDamageRevert(BuffAction $action): void
+    {
+        $this->offense->setDamage($this->offense->getDamage() - $action->getRevertValue());
     }
 
     /**
