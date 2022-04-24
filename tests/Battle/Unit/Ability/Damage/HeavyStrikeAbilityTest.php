@@ -18,6 +18,8 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> по <span style="color: #1e72e3">unit_2</span> на 50 урона';
 
     /**
+     * Тест на создание и применение способности HeavyStrikeAbility
+     *
      * @throws Exception
      */
     public function testHeavyStrikeAbilityUse(): void
@@ -36,6 +38,8 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
 
         // Up concentration
         for ($i = 0; $i < 10; $i++) {
@@ -63,5 +67,9 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
     }
 }

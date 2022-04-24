@@ -13,13 +13,19 @@ use Battle\Unit\UnitInterface;
 
 class BackToLifeAbility extends AbstractAbility
 {
-    private const NAME = 'Back to Life';
-    private const ICON = '/images/icons/ability/053.png';
+    private const NAME       = 'Back to Life';
+    private const ICON       = '/images/icons/ability/053.png';
+    private const DISPOSABLE = false;
 
     /**
      * @var ActionCollection
      */
     private $actionCollection;
+
+    public function __construct(UnitInterface $unit)
+    {
+        parent::__construct($unit, self::DISPOSABLE);
+    }
 
     /**
      * Back to Life - это воскрешение мертвого юнита восстанавливая ему 30% от максимального здоровья
@@ -64,6 +70,7 @@ class BackToLifeAbility extends AbstractAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
         $this->unit->useRageAbility();
     }
 

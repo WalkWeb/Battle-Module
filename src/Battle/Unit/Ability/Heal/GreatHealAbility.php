@@ -12,8 +12,14 @@ use Battle\Unit\UnitInterface;
 
 class GreatHealAbility extends AbstractAbility
 {
-    private const NAME = 'Great Heal';
-    private const ICON = '/images/icons/ability/196.png';
+    private const NAME       = 'Great Heal';
+    private const ICON       = '/images/icons/ability/196.png';
+    private const DISPOSABLE = false;
+
+    public function __construct(UnitInterface $unit)
+    {
+        parent::__construct($unit, self::DISPOSABLE);
+    }
 
     /**
      * Great Heal лечение в 300% от силы удара юнита
@@ -57,6 +63,7 @@ class GreatHealAbility extends AbstractAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
         $this->unit->useConcentrationAbility();
     }
 

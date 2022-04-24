@@ -36,6 +36,8 @@ class IncinerationAbilityTest extends AbstractUnitTest
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
 
         // Up concentration
         for ($i = 0; $i < 10; $i++) {
@@ -63,6 +65,7 @@ class IncinerationAbilityTest extends AbstractUnitTest
 
         $ability->usage();
 
+        self::assertTrue($ability->isUsage());
         self::assertFalse($ability->isReady());
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 

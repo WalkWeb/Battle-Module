@@ -36,8 +36,9 @@ class GreatHealAbilityTest extends AbstractUnitTest
         self::assertEquals($icon, $ability->getIcon());
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
-
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
 
         // Наносим урон юниту, чтобы способность перешла в "возможную для использования"
         $damage = new DamageAction(
@@ -80,6 +81,10 @@ class GreatHealAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
     }
 
     /**

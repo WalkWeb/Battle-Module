@@ -12,18 +12,22 @@ use Battle\Unit\Ability\AbstractAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
 
-// TODO Добавить механику единственного применения за все время боя
-
 class WillToLiveAbility extends AbstractAbility
 {
     private const NAME           = 'Will to live';
     private const ICON           = '/images/icons/ability/429.png';
     private const MESSAGE_METHOD = 'selfRaceResurrected';
+    private const DISPOSABLE     = true;
 
     /**
      * @var ActionCollection
      */
     private $actionCollection;
+
+    public function __construct(UnitInterface $unit)
+    {
+        parent::__construct($unit, self::DISPOSABLE);
+    }
 
     /**
      * Will to live – врожденная способность расы людей, позволяет с 25% шансом при смерти воскреснуть с 50% здоровья
@@ -65,9 +69,9 @@ class WillToLiveAbility extends AbstractAbility
     public function update(UnitInterface $unit, bool $testMode = false): void
     {
         if ($testMode) {
-            $this->ready = !$this->unit->isAlive();
+            $this->ready = !$this->usage && !$this->unit->isAlive();
         } else {
-            $this->ready = !$this->unit->isAlive() && random_int(0, 100) <= 25;
+            $this->ready = !$this->usage && !$this->unit->isAlive() && random_int(0, 100) <= 25;
         }
     }
 
@@ -77,11 +81,12 @@ class WillToLiveAbility extends AbstractAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
     }
 
     /**
-     * Проверяет, может ли способность быть применена. Учитывая, что способность активируется при смерти – эта проверка
-     * и не нужна. Но на всякий случай делаем.
+     * Проверяет, может ли способность быть применена. Достаточно проверить, что способность не применялась ранее -
+     * если не применялась - значит может.
      *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -89,7 +94,7 @@ class WillToLiveAbility extends AbstractAbility
      */
     public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
     {
-        return !$this->unit->isAlive();
+        return !$this->usage;
     }
 
     /**

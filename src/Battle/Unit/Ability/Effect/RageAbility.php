@@ -12,8 +12,6 @@ use Battle\Unit\Ability\AbstractAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
 
-// TODO Добавить механику единственного применения за все время боя
-
 class RageAbility extends AbstractAbility
 {
     private const NAME           = 'Rage';
@@ -22,6 +20,12 @@ class RageAbility extends AbstractAbility
     private const MODIFY_METHOD  = 'multiplierDamage';
     private const MODIFY_POWER   = 200;
     private const MESSAGE_METHOD = 'applyEffect';
+    private const DISPOSABLE     = true;
+
+    public function __construct(UnitInterface $unit)
+    {
+        parent::__construct($unit, self::DISPOSABLE);
+    }
 
     /**
      * @var ActionCollection
@@ -64,7 +68,7 @@ class RageAbility extends AbstractAbility
      */
     public function update(UnitInterface $unit): void
     {
-        $this->ready = $this->unit->getLife() < $this->unit->getTotalLife() * 0.3;
+        $this->ready = !$this->usage && $this->unit->getLife() < $this->unit->getTotalLife() * 0.3;
     }
 
     /**
@@ -73,10 +77,14 @@ class RageAbility extends AbstractAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
     }
 
     /**
-     * Может ли способность быть применена - если аналогичный эффект существует, то нет
+     * Может ли способность быть применена
+     *
+     * Так как способность может быть применена только один раз за бой - не нужно проверять наличие аналогичного
+     * эффекта, достаточно лишь проверить, что способность не была уже использована
      *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -85,13 +93,7 @@ class RageAbility extends AbstractAbility
      */
     public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
     {
-        foreach ($this->createEffectActions($enemyCommand, $alliesCommand) as $action) {
-            if (!$action->canByUsed()) {
-                return false;
-            }
-        }
-
-        return true;
+        return !$this->usage;
     }
 
     /**

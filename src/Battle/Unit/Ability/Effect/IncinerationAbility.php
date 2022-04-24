@@ -20,6 +20,12 @@ class IncinerationAbility extends AbstractAbility
     private const MESSAGE_METHOD = 'applyEffect';
     private const DURATION       = 8;
     private const DAMAGE         = 6;
+    private const DISPOSABLE     = false;
+
+    public function __construct(UnitInterface $unit)
+    {
+        parent::__construct($unit, self::DISPOSABLE);
+    }
 
     /**
      * @var ActionCollection
@@ -61,6 +67,7 @@ class IncinerationAbility extends AbstractAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
         $this->unit->useConcentrationAbility();
     }
 

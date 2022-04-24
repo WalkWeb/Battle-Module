@@ -42,6 +42,8 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
 
         // Up rage
         for ($i = 0; $i < 20; $i++) {
@@ -65,7 +67,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         );
 
         $ability->usage();
-
+        self::assertTrue($ability->isUsage());
         self::assertFalse($ability->isReady());
     }
 

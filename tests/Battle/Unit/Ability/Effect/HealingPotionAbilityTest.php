@@ -47,6 +47,8 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
 
         // Up concentration
         for ($i = 0; $i < 10; $i++) {
@@ -87,7 +89,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         }
 
         $ability->usage();
-
+        self::assertTrue($ability->isUsage());
         self::assertFalse($ability->isReady());
     }
 
@@ -134,7 +136,6 @@ class HealingPotionAbilityTest extends AbstractUnitTest
             $action->handle();
             self::assertEquals(self::MESSAGE_APPLY_SELF_RU, $this->getChatRu()->addMessage($action));
         }
-
 
         $effects = $unit->getEffects();
 
@@ -352,6 +353,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
     /**
      * @param UnitInterface $unit
+     * @throws Exception
      */
     private function nextRound(UnitInterface $unit): void
     {

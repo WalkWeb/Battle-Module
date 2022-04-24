@@ -12,8 +12,14 @@ use Battle\Unit\UnitInterface;
 
 class GeneralHealAbility extends AbstractAbility
 {
-    private const NAME = 'General Heal';
-    private const ICON = '/images/icons/ability/452.png';
+    private const NAME       = 'General Heal';
+    private const ICON       = '/images/icons/ability/452.png';
+    private const DISPOSABLE = false;
+
+    public function __construct(UnitInterface $unit)
+    {
+        parent::__construct($unit, self::DISPOSABLE);
+    }
 
     /**
      * General Heal - лечение всей команды на 120% от силы удара юнита
@@ -57,6 +63,7 @@ class GeneralHealAbility extends AbstractAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
         $this->unit->useRageAbility();
     }
 

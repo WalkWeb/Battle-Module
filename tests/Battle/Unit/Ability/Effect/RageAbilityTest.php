@@ -43,6 +43,8 @@ class RageAbilityTest extends AbstractUnitTest
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertTrue($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
 
         // Активируем - созданный юнит изначально ранен и имеет здоровье < 30%
         $collection = new AbilityCollection();
@@ -62,7 +64,7 @@ class RageAbilityTest extends AbstractUnitTest
         );
 
         $ability->usage();
-
+        self::assertTrue($ability->isUsage());
         self::assertFalse($ability->isReady());
     }
 
@@ -137,6 +139,8 @@ class RageAbilityTest extends AbstractUnitTest
             $action->handle();
         }
 
+        $ability->usage();
+
         // После появления эффекта на юните - способность уже не может быть применена
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
@@ -145,8 +149,8 @@ class RageAbilityTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        // Эффект исчез - способность опять может быть применена
-        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        // Эффект исчез - но способность не может быть опять применена, потому что она одноразовая
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
     }
 
     /**

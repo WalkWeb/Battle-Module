@@ -99,10 +99,11 @@ abstract class AbstractSummonAbility extends AbstractAbility
         int $summonLife,
         bool $summonMelee,
         int $summonRaceId,
+        bool $disposable,
         string $icon = ''
     )
     {
-        parent::__construct($unit);
+        parent::__construct($unit, $disposable);
         $this->summonName = $summonName;
         $this->summonLevel = $summonLevel;
         $this->summonAvatar = $summonAvatar;

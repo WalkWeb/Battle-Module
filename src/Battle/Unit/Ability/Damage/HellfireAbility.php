@@ -15,6 +15,12 @@ class HellfireAbility extends AbstractAbility
     public const NAME           = 'Hellfire';
     public const ICON           = '/images/icons/ability/276.png';
     public const MESSAGE_METHOD = 'damageAbility';
+    public const DISPOSABLE     = false;
+
+    public function __construct(UnitInterface $unit)
+    {
+        parent::__construct($unit, self::DISPOSABLE);
+    }
 
     /**
      * Hellfire наносит 150% урона от базового урона юнита по всем живым противникам
@@ -59,6 +65,7 @@ class HellfireAbility extends AbstractAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
         $this->unit->useRageAbility();
     }
 

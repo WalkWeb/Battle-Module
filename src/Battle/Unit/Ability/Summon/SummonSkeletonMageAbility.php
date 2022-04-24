@@ -27,6 +27,8 @@ class SummonSkeletonMageAbility extends AbstractSummonAbility
     private const SUMMON_MELEE        = false;
     private const SUMMON_RACE_ID      = 8;
 
+    public const DISPOSABLE           = false;
+
     public function __construct(UnitInterface $unit)
     {
         parent::__construct(
@@ -43,6 +45,7 @@ class SummonSkeletonMageAbility extends AbstractSummonAbility
             self::SUMMON_LIFE,
             self::SUMMON_MELEE,
             self::SUMMON_RACE_ID,
+            self::DISPOSABLE,
             self::ICON
         );
     }
@@ -63,6 +66,7 @@ class SummonSkeletonMageAbility extends AbstractSummonAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
         $this->unit->useConcentrationAbility();
     }
 

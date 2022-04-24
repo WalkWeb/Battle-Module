@@ -36,6 +36,8 @@ class BackToLifeAbilityTest extends AbstractUnitTest
         self::assertEquals('Back to Life', $ability->getName());
         self::assertEquals('/images/icons/ability/053.png', $ability->getIcon());
         self::assertFalse($ability->isReady());
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
 
         // Увеличиваем ярость у юнита до максимальной
         for ($i = 0; $i < 20; $i++) {
@@ -70,6 +72,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
         // Проверяем, что ярость у юнита = 0, а способность вновь не готова к использованию
         self::assertEquals(0, $unit->getRage());
         self::assertFalse($ability->isReady());
+        self::assertTrue($ability->isUsage());
     }
 
     /**

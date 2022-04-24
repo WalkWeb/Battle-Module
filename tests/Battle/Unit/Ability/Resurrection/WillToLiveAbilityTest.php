@@ -41,6 +41,8 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertTrue($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
 
         // Активируем - созданный юнит изначально мертв
         $ability->update($unit, true);
@@ -53,7 +55,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         );
 
         $ability->usage();
-
+        self::assertTrue($ability->isUsage());
         self::assertFalse($ability->isReady());
     }
 
@@ -90,9 +92,65 @@ class WillToLiveAbilityTest extends AbstractUnitTest
 
         $ability->usage();
 
-        // Здоровье восстановилось
+        // Проверяем, что здоровье восстановилось
         self::assertEquals($unit->getTotalLife() / 2, $unit->getLife());
 
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на проверку того, что способность не может использоваться повторно
+     *
+     * @throws Exception
+     */
+    public function testWillToLiveAbilityNoRepeatUsage(): void
+    {
+        $unit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(12);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new WillToLiveAbility($unit);
+
+        // Изначально юнит мертв
+        self::assertEquals(0, $unit->getLife());
+
+        // Активируем способность
+        $ability->update($unit, true);
+
+        // Проверяем, что способность может быть использована
+        self::assertTrue($ability->isReady());
+
+        // Применяем способность
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        $ability->usage();
+
+        // Проверяем, что здоровье восстановилось
+        self::assertEquals($unit->getTotalLife() / 2, $unit->getLife());
+
+        // Проверяем, что способность больше не активна
+        self::assertFalse($ability->isReady());
+
+        // Убиваем юнита повторно
+        $actions = $enemyUnit->getAction($command, $enemyCommand);
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Проверяем, что юнит мертв
+        self::assertEquals(0, $unit->getLife());
+
+        // Пытаемся активировать способность повторно
+        $ability->update($unit, true);
+
+        // Но она больше не активируется
         self::assertFalse($ability->isReady());
     }
 

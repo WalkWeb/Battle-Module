@@ -24,6 +24,8 @@ class SummonImpAbility extends AbstractSummonAbility
     private const SUMMON_MELEE        = true;
     private const SUMMON_RACE_ID      = 9;
 
+    public const DISPOSABLE           = false;
+
     public function __construct(UnitInterface $unit)
     {
         parent::__construct(
@@ -40,6 +42,7 @@ class SummonImpAbility extends AbstractSummonAbility
             self::SUMMON_LIFE,
             self::SUMMON_MELEE,
             self::SUMMON_RACE_ID,
+            self::DISPOSABLE,
             self::ICON
         );
     }
@@ -60,6 +63,7 @@ class SummonImpAbility extends AbstractSummonAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
         $this->unit->useConcentrationAbility();
     }
 

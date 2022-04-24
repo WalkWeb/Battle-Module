@@ -20,6 +20,12 @@ class PoisonAbility extends AbstractAbility
     private const MESSAGE_METHOD = 'applyEffect';
     private const DURATION       = 5;
     private const DAMAGE         = 8;
+    private const DISPOSABLE     = false;
+
+    public function __construct(UnitInterface $unit)
+    {
+        parent::__construct($unit, self::DISPOSABLE);
+    }
 
     /**
      * @var ActionCollection
@@ -61,6 +67,7 @@ class PoisonAbility extends AbstractAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
         $this->unit->useConcentrationAbility();
     }
 

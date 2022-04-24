@@ -20,6 +20,12 @@ class ReserveForcesAbility extends AbstractAbility
     private const MODIFY_METHOD  = 'multiplierMaxLife';
     private const MODIFY_POWER   = 130;
     private const MESSAGE_METHOD = 'applyEffect';
+    private const DISPOSABLE     = false;
+
+    public function __construct(UnitInterface $unit)
+    {
+        parent::__construct($unit, self::DISPOSABLE);
+    }
 
     /**
      * @var ActionCollection
@@ -69,6 +75,7 @@ class ReserveForcesAbility extends AbstractAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
         $this->unit->useConcentrationAbility();
     }
 

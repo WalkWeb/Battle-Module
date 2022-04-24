@@ -36,6 +36,8 @@ class SummonFireElementalAbilityTest extends AbstractUnitTest
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
 
         // Up concentration
         for ($i = 0; $i < 20; $i++) {
@@ -59,8 +61,8 @@ class SummonFireElementalAbilityTest extends AbstractUnitTest
 
         $ability->usage();
 
+        self::assertTrue($ability->isUsage());
         self::assertFalse($ability->isReady());
-
         self::assertEquals(0, $unit->getRage());
     }
 

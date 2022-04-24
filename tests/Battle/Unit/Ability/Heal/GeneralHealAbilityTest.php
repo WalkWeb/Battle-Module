@@ -47,6 +47,8 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
         self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
 
         // Способность не готова к использованию - т.к. ярость у юнита не полная
         self::assertFalse($ability->isReady());
@@ -82,6 +84,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         }
 
         $ability->usage();
+        self::assertTrue($ability->isUsage());
         self::assertFalse($ability->isReady());
     }
 

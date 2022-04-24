@@ -36,6 +36,13 @@ interface AbilityInterface
     public function isReady(): bool;
 
     /**
+     * Является ли способность одноразовой - т.е. может быть использована только один раз за бой
+     *
+     * @return bool
+     */
+    public function isDisposable(): bool;
+
+    /**
      * Может ли способность быть применена. Например, способность лечения может быть готова для использования, но нет
      * цели для лечения - в этом случае способность применять пока не нужно
      *
@@ -77,4 +84,11 @@ interface AbilityInterface
      *    или ярости
      */
     public function usage(): void;
+
+    /**
+     * Была ли способность использована хотя бы один раз
+     *
+     * @return bool
+     */
+    public function isUsage(): bool;
 }

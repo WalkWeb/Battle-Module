@@ -15,6 +15,16 @@ abstract class AbstractAbility implements AbilityInterface
     protected $ready = false;
 
     /**
+     * @var bool
+     */
+    protected $disposable;
+
+    /**
+     * @var bool
+     */
+    protected $usage = false;
+
+    /**
      * @var UnitInterface
      */
     protected $unit;
@@ -26,10 +36,12 @@ abstract class AbstractAbility implements AbilityInterface
 
     /**
      * @param UnitInterface $unit
+     * @param bool $disposable
      */
-    public function __construct(UnitInterface $unit)
+    public function __construct(UnitInterface $unit, bool $disposable)
     {
         $this->unit = $unit;
+        $this->disposable = $disposable;
         $this->container = $unit->getContainer();
     }
 
@@ -47,5 +59,21 @@ abstract class AbstractAbility implements AbilityInterface
     public function getUnit(): UnitInterface
     {
         return $this->unit;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDisposable(): bool
+    {
+        return $this->disposable;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUsage(): bool
+    {
+        return $this->usage;
     }
 }

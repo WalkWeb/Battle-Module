@@ -15,6 +15,12 @@ class HeavyStrikeAbility extends AbstractAbility
     public const NAME           = 'Heavy Strike';
     public const ICON           = '/images/icons/ability/335.png';
     public const MESSAGE_METHOD = 'damageAbility';
+    public const DISPOSABLE     = false;
+
+    public function __construct(UnitInterface $unit)
+    {
+        parent::__construct($unit, self::DISPOSABLE);
+    }
 
     /**
      * Heavy Strike наносит 250% урона от базового урона юнита
@@ -59,6 +65,7 @@ class HeavyStrikeAbility extends AbstractAbility
     public function usage(): void
     {
         $this->ready = false;
+        $this->usage = true;
         $this->unit->useConcentrationAbility();
     }
 
