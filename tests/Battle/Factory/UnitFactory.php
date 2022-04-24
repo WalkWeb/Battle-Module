@@ -697,6 +697,29 @@ class UnitFactory
                 'block'   => 0,
             ],
         ],
+        // Юнит с 29% здоровья, для проверки активации RageAbility
+        31 => [
+            'id'         => '92e7b39c-dbfc-4493-b563-50314c524c3c',
+            'name'       => 'wounded_orc',
+            'level'      => 1,
+            'avatar'     => '/images/avas/monsters/005.png',
+            'life'       => 29,
+            'total_life' => 100,
+            'melee'      => true,
+            'command'    => 1,
+            'class'      => 1,
+            'race'       => 3,
+            'offense'    => [
+                'damage'       => 35,
+                'attack_speed' => 1.00,
+                'accuracy'     => 200,
+                'block_ignore' => 0,
+            ],
+            'defense'    => [
+                'defense' => 100,
+                'block'   => 0,
+            ],
+        ],
     ];
 
     /**

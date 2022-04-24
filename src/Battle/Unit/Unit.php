@@ -115,6 +115,9 @@ class Unit extends AbstractUnit
         }
 
         $action->addFactualPower($this, $primordialLife - $this->life);
+
+        // Для активации способностей, которые завязаны на уровень здоровья
+        $this->abilities->update($this);
     }
 
     /**

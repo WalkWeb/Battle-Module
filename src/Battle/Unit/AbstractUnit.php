@@ -160,6 +160,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->class = $class;
         $this->abilities = $class ? $class->getAbilities($this) : new AbilityCollection();
         $this->effects = $effects ?? new EffectCollection($this);
+        $this->createRaceAbilities();
     }
 
     public function getId(): string
@@ -383,6 +384,16 @@ abstract class AbstractUnit implements UnitInterface
     {
         if ($command !== 1 && $command !== 2) {
             throw new UnitException(UnitException::INCORRECT_COMMAND);
+        }
+    }
+
+    /**
+     * Создает врожденные расовые способности
+     */
+    private function createRaceAbilities(): void
+    {
+        foreach ($this->race->getAbilities() as $abilityClass) {
+            $this->abilities->add(new $abilityClass($this));
         }
     }
 }

@@ -9,6 +9,9 @@ use Battle\Action\ActionException;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Classes\UnitClassFactory;
+use Battle\Unit\Race\RaceFactory;
 use Exception;
 use Battle\Unit\Unit;
 use Battle\Command\Command;
@@ -29,7 +32,7 @@ class UnitTest extends AbstractUnitTest
     /**
      * @dataProvider createDataProvider
      * @param int $template
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testUniCreate(int $template): void
     {
@@ -56,11 +59,19 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['defense']['defense'], $unit->getDefense()->getDefense());
         self::assertEquals($data['defense']['block'], $unit->getDefense()->getBlock());
 
+        $expectedAbilities = new AbilityCollection();
 
         if ($data['class']) {
-            self::assertEquals($data['class'], $unit->getClass()->getId());
-            self::assertEquals($unit->getClass()->getAbilities($unit), $unit->getAbilities());
+            foreach (UnitClassFactory::create($data['class'])->getAbilities($unit) as $ability) {
+                $expectedAbilities->add($ability);
+            }
         }
+
+        foreach (RaceFactory::createById($data['race'])->getAbilities() as $abilityClass) {
+            $expectedAbilities->add(new $abilityClass($unit));
+        }
+
+        self::assertEquals($expectedAbilities, $unit->getAbilities());
     }
 
     /**

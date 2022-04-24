@@ -65,7 +65,7 @@ class RageAbility extends AbstractAbility
      */
     public function update(UnitInterface $unit): void
     {
-        $this->ready = $this->unit->getLife() < $this->unit->getTotalLife() / 30;
+        $this->ready = $this->unit->getLife() < $this->unit->getTotalLife() * 0.3;
     }
 
     /**

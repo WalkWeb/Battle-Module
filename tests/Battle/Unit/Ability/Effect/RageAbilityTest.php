@@ -18,8 +18,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class RageAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/285.png" alt="" /> <span class="ability">Rage</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/285.png" alt="" /> <span class="ability">Ярость</span>';
+    private const MESSAGE_EN = '<span style="color: #ae882d">wounded_orc</span> use <img src="/images/icons/ability/285.png" alt="" /> <span class="ability">Rage</span>';
+    private const MESSAGE_RU = '<span style="color: #ae882d">wounded_orc</span> использовал <img src="/images/icons/ability/285.png" alt="" /> <span class="ability">Ярость</span>';
 
     /**
      * Тест на создание способности RageAbility
@@ -31,7 +31,7 @@ class RageAbilityTest extends AbstractUnitTest
         $name = 'Rage';
         $icon = '/images/icons/ability/285.png';
 
-        $unit = UnitFactory::createByTemplate(11);
+        $unit = UnitFactory::createByTemplate(31);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -44,7 +44,7 @@ class RageAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        // Активируем - созданный юнит изначально сильно ранен и имеет здоровье < 30%
+        // Активируем - созданный юнит изначально ранен и имеет здоровье < 30%
         $collection = new AbilityCollection();
         $collection->add($ability);
 
@@ -73,7 +73,7 @@ class RageAbilityTest extends AbstractUnitTest
      */
     public function testRageAbilityApply(): void
     {
-        $unit = UnitFactory::createByTemplate(11);
+        $unit = UnitFactory::createByTemplate(31);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -122,7 +122,7 @@ class RageAbilityTest extends AbstractUnitTest
      */
     public function testRageAbilityCanByUsed(): void
     {
-        $unit = UnitFactory::createByTemplate(11);
+        $unit = UnitFactory::createByTemplate(31);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
