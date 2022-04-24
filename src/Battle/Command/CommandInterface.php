@@ -8,6 +8,7 @@ use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
+use Exception;
 
 interface CommandInterface
 {
@@ -146,6 +147,8 @@ interface CommandInterface
      *
      * У всех юнитов action будет переведен в false
      * А также будут сделаны другие действия, соответствующие началу нового раунда
+     *
+     * @throws Exception
      */
     public function newRound(): void;
 

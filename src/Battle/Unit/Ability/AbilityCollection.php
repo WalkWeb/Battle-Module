@@ -7,6 +7,7 @@ namespace Battle\Unit\Ability;
 use Battle\Traits\CollectionTrait;
 use Battle\Unit\UnitInterface;
 use Countable;
+use Exception;
 use Iterator;
 
 class AbilityCollection implements Iterator, Countable
@@ -38,6 +39,7 @@ class AbilityCollection implements Iterator, Countable
      * Сообщает всем способностям, что юнит изменился - способности проверят, должны ли они активироваться
      *
      * @param UnitInterface $unit
+     * @throws Exception
      */
     public function update(UnitInterface $unit): void
     {

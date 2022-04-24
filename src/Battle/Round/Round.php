@@ -188,7 +188,7 @@ class Round implements RoundInterface
      * 3. Возвращается номер команды, которая будет делать следующий ход
      *
      * @return int
-     * @throws ContainerException
+     * @throws Exception
      */
     private function endRound(): int
     {

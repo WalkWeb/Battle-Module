@@ -53,6 +53,7 @@ return [
     'General Heal'                     => 'Общее исцеление',
     'Incineration'                     => 'Испепеление',
     'Blessed Shield'                   => 'Благословенный щит',
+    'Will to live'                     => 'Воля к жизни',
     // Statistics
     'Statistics'                       => 'Статистика',
     'Unit'                             => 'Кто',

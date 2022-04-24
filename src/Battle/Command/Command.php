@@ -8,6 +8,7 @@ use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
+use Exception;
 
 class Command implements CommandInterface
 {
@@ -299,6 +300,9 @@ class Command implements CommandInterface
         return false;
     }
 
+    /**
+     * @throws Exception
+     */
     public function newRound(): void
     {
         foreach ($this->units as $unit) {

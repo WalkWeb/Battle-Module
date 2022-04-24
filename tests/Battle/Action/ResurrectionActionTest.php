@@ -201,9 +201,6 @@ class ResurrectionActionTest extends AbstractUnitTest
     {
         return [
             [
-                ActionInterface::TARGET_SELF,
-            ],
-            [
                 ActionInterface::TARGET_RANDOM_ENEMY,
             ],
             [

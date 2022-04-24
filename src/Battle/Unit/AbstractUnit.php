@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\ActionException;
 use Battle\Command\CommandInterface;
-use Battle\Container\ContainerException;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
@@ -270,8 +268,7 @@ abstract class AbstractUnit implements UnitInterface
     }
 
     /**
-     * @throws ActionException
-     * @throws ContainerException
+     * @throws Exception
      */
     public function newRound(): void
     {
@@ -290,12 +287,18 @@ abstract class AbstractUnit implements UnitInterface
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function useConcentrationAbility(): void
     {
         $this->concentration = 0;
         $this->abilities->update($this);
     }
 
+    /**
+     * @throws Exception
+     */
     public function useRageAbility(): void
     {
         $this->rage = 0;
@@ -329,6 +332,7 @@ abstract class AbstractUnit implements UnitInterface
 
     /**
      * @param int $concentration
+     * @throws Exception
      */
     protected function addConcentration(int $concentration): void
     {

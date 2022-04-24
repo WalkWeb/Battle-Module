@@ -149,8 +149,10 @@ class ResurrectionAction extends AbstractAction
     }
 
     /**
-     * Проверяет тип выбора цели. Текущая логика подразумевает воскрешение мертвых только из своей команды.
-     * Соответственно, любые другие типы выбора цели, кроме TARGET_DEAD_ALLIES будут некорректны
+     * Проверяет тип выбора цели. Текущие способности подразумевают воскрешение мертвых только из своей команды, или
+     * самого себя.
+     *
+     * Соответственно, любые другие типы выбора цели, кроме TARGET_DEAD_ALLIES и TARGET_SELF будут некорректны
      *
      * @param int $typeTarget
      * @return int
@@ -158,7 +160,7 @@ class ResurrectionAction extends AbstractAction
      */
     private function validateTypeTarget(int $typeTarget): int
     {
-        if ($typeTarget !== self::TARGET_DEAD_ALLIES) {
+        if ($typeTarget !== self::TARGET_DEAD_ALLIES && $typeTarget !== self::TARGET_SELF) {
             throw new ActionException(ActionException::INVALID_RESURRECTED_TARGET);
         }
 

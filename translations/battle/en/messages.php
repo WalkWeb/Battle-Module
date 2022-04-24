@@ -55,6 +55,7 @@ return [
     'General Heal'                     => 'General Heal',
     'Incineration'                     => 'Incineration',
     'Blessed Shield'                   => 'Blessed Shield',
+    'Will to live'                     => 'Will to live',
     // Statistics
     'Statistics'                       => 'Statistics',
     'Unit'                             => 'Unit',

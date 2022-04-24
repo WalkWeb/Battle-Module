@@ -7,6 +7,7 @@ namespace Battle\Unit\Ability;
 use Battle\Action\ActionCollection;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
+use Exception;
 
 interface AbilityInterface
 {
@@ -56,6 +57,7 @@ interface AbilityInterface
     /**
      * Сообщает об изменившихся параметрах юнита. В этом методе способность определяет, должна ли она активироваться
      *
+     * @throws Exception
      * @param UnitInterface $unit
      */
     public function update(UnitInterface $unit): void;

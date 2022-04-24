@@ -12,11 +12,8 @@ use Battle\Unit\Ability\AbstractAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
 
-/**
- * Способность увеличивает наносимый урон юнитом в 2 раза, когда его здоровье меньше 30%
- *
- * @package Battle\Unit\Ability\Effect
- */
+// TODO Добавить механику единственного применения за все время боя
+
 class RageAbility extends AbstractAbility
 {
     private const NAME           = 'Rage';
@@ -32,6 +29,8 @@ class RageAbility extends AbstractAbility
     private $actions;
 
     /**
+     * Rage - врожденная способность расы орков, увеличивает наносимый урон юнитом в 2 раза, когда здоровье меньше 30%
+     *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection

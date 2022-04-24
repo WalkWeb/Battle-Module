@@ -263,9 +263,6 @@ class Chat implements ChatInterface
      *
      * "Unit use <icon> NameAction and resurrected Target"
      *
-     * Воскрешение подразумевается только одним юнитом другого. Воскрешение самого себя на данный момент не
-     * предусмотренно
-     *
      * @param ActionInterface $action
      * @return string
      * @throws ActionException
@@ -286,6 +283,8 @@ class Chat implements ChatInterface
             // Targets
             ' ' . $this->getTargetsName($action);
     }
+
+    // TODO Add selfResurrected
 
     /**
      * Сообщение строится по разному, в зависимости от того, на кого применяется эффект - на себя, или на другого юнита

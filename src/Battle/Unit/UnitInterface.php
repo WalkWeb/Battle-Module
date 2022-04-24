@@ -14,6 +14,7 @@ use Battle\Unit\Defense\Defense;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Offense\Offense;
 use Battle\Unit\Race\RaceInterface;
+use Exception;
 
 /**
  * Одна боевая единица.
@@ -131,6 +132,8 @@ interface UnitInterface
     /**
      * Сообщает юниту о том, что начался новый раунд (нужно обновить isAction, применить эффекты и сделать прочие
      * действия для нового раунда)
+     *
+     * @throws Exception
      */
     public function newRound(): void;
 
