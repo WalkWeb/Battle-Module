@@ -9,8 +9,12 @@ use Battle\Action\ActionException;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
+use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Classes\UnitClassFactory;
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Offense\Offense;
+use Battle\Unit\Race\Race;
 use Battle\Unit\Race\RaceFactory;
 use Exception;
 use Battle\Unit\Unit;
@@ -21,6 +25,8 @@ use Battle\Unit\UnitInterface;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandException;
 use Tests\AbstractUnitTest;
+use Tests\Battle\Factory\Mock\BrokenAbility;
+use Tests\Battle\Factory\Mock\BrokenPriestUnit;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Action\DamageAction;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -387,6 +393,76 @@ class UnitTest extends AbstractUnitTest
             $this->expectExceptionMessage(UnitException::NO_REDUCED_DAMAGE);
             $action->handle();
         }
+    }
+
+    /**
+     * Тест на ситуацию, когда юнит получает расу с со способностью, которая не является классом
+     *
+     * @throws Exception
+     */
+    public function testUnitRaceAbilityNoClass(): void
+    {
+        $race = new Race(
+            1,
+            'broken_race',
+            'broken_race',
+            '#000000',
+            'icon',
+            [$brokenAbilityClass = 'broken_ability_class']
+        );
+
+        $this->expectException(UnitException::class);
+        $this->expectExceptionMessage(UnitException::INCORRECT_RACE_ABILITY . ': ' . $brokenAbilityClass);
+
+        new BrokenPriestUnit(
+            'id',
+            'Broken Priest',
+            1,
+            'avatar',
+            20,
+            20,
+            true,
+            1,
+            new Offense(10, 1, 100, 0),
+            new Defense(10, 0),
+            $race,
+            new Container()
+        );
+    }
+
+    /**
+     * Тест на ситуацию, когда юнит получает расу с со способностью, которая не реализует интерфейс AbilityInterface
+     *
+     * Т.е. получен какой-то другой класс
+     */
+    public function testUnitRaceInvalidAbility(): void
+    {
+        $race = new Race(
+            1,
+            'broken_race',
+            'broken_race',
+            '#000000',
+            'icon',
+            [$brokenAbilityClass = BrokenAbility::class]
+        );
+
+        $this->expectException(UnitException::class);
+        $this->expectExceptionMessage(UnitException::INCORRECT_RACE_ABILITY . ': ' . $brokenAbilityClass);
+
+        new BrokenPriestUnit(
+            'id',
+            'Broken Priest',
+            1,
+            'avatar',
+            20,
+            20,
+            true,
+            1,
+            new Offense(10, 1, 100, 0),
+            new Defense(10, 0),
+            $race,
+            new Container()
+        );
     }
 
     /**

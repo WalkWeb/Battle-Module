@@ -17,6 +17,7 @@ use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Offense\Offense;
 use Battle\Unit\Race\RaceInterface;
 use Exception;
+use Throwable;
 
 abstract class AbstractUnit implements UnitInterface
 {
@@ -389,11 +390,17 @@ abstract class AbstractUnit implements UnitInterface
 
     /**
      * Создает врожденные расовые способности
+     *
+     * @throws UnitException
      */
     private function createRaceAbilities(): void
     {
         foreach ($this->race->getAbilities() as $abilityClass) {
-            $this->abilities->add(new $abilityClass($this));
+            try {
+                $this->abilities->add(new $abilityClass($this));
+            } catch (Throwable $e) {
+                throw new UnitException(UnitException::INCORRECT_RACE_ABILITY . ': ' . $abilityClass);
+            }
         }
     }
 }
