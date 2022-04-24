@@ -38,7 +38,7 @@ class Chat implements ChatInterface
      * @param ActionInterface $action
      * @return string
      * @throws ChatException
-     * @uses damage, damageAbility, heal, healAbility, summon, wait, buff, resurrected, applyEffect, effectDamage, effectHeal, skip
+     * @uses damage, damageAbility, heal, healAbility, summon, wait, buff, resurrected, selfRaceResurrected, applyEffect, effectDamage, effectHeal, skip
      */
     public function addMessage(ActionInterface $action): string
     {
@@ -284,7 +284,28 @@ class Chat implements ChatInterface
             ' ' . $this->getTargetsName($action);
     }
 
-    // TODO Add selfResurrected
+    /**
+     * Самовоскрешение юнитом себя от расовой способности. Сообщение вида:
+     *
+     * "$unit умер, но благодаря врожденной способности $name вернулся к жизни"
+     *
+     * @param ActionInterface $action
+     * @return string
+     */
+    private function selfRaceResurrected(ActionInterface $action): string
+    {
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // died, but due to the innate ability
+            $this->translation->trans('died, but due to the innate ability') . ' ' .
+            // ability icon
+            $this->getIcon($action) .
+            // ability name
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
+            // came back to life
+            $this->translation->trans('came back to life');
+    }
 
     /**
      * Сообщение строится по разному, в зависимости от того, на кого применяется эффект - на себя, или на другого юнита

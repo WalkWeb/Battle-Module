@@ -32,6 +32,11 @@ class ResurrectionAction extends AbstractAction
     private $power;
 
     /**
+     * @var string
+     */
+    private $messageMethod;
+
+    /**
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -39,6 +44,7 @@ class ResurrectionAction extends AbstractAction
      * @param int $power
      * @param string|null $name
      * @param string $icon
+     * @param string|null $messageMethod
      * @throws ActionException
      */
     public function __construct(
@@ -48,13 +54,15 @@ class ResurrectionAction extends AbstractAction
         int $typeTarget,
         int $power,
         ?string $name = null,
-        string $icon = ''
+        string $icon = '',
+        ?string $messageMethod = null
     )
     {
         $typeTarget = $this->validateTypeTarget($typeTarget);
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->name = $name ?? self::DEFAULT_NAME;
         $this->power = $this->validatePower($power);
+        $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
     }
 
     /**
@@ -127,7 +135,7 @@ class ResurrectionAction extends AbstractAction
 
     public function getMessageMethod(): string
     {
-        return self::DEFAULT_MESSAGE_METHOD;
+        return $this->messageMethod;
     }
 
     /**

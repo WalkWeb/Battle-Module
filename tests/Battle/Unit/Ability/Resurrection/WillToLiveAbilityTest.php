@@ -16,8 +16,8 @@ use Tests\Battle\Factory\UnitFactory;
 
 class WillToLiveAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">dead_unit</span> use <img src="/images/icons/ability/429.png" alt="" /> <span class="ability">Will to live</span> and resurrected <span style="color: #1e72e3">dead_unit</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">dead_unit</span> использовал <img src="/images/icons/ability/429.png" alt="" /> <span class="ability">Воля к жизни</span> и воскресил <span style="color: #1e72e3">dead_unit</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">dead_unit</span> died, but due to the innate ability <img src="/images/icons/ability/429.png" alt="" /> <span class="ability">Will to live</span> came back to life';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">dead_unit</span> умер, но за счет врожденной способности <img src="/images/icons/ability/429.png" alt="" /> <span class="ability">Воля к жизни</span> вернулся к жизни';
 
     /**
      * Тест на создание способности WillToLiveAbility
@@ -118,7 +118,8 @@ class WillToLiveAbilityTest extends AbstractUnitTest
             ResurrectionAction::TARGET_SELF,
             50,
             'Will to live',
-            '/images/icons/ability/429.png'
+            '/images/icons/ability/429.png',
+            'selfRaceResurrected'
         ));
 
         return $actionCollection;

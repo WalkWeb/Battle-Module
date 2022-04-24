@@ -16,10 +16,9 @@ use Exception;
 
 class WillToLiveAbility extends AbstractAbility
 {
-    private const NAME = 'Will to live';
-    private const ICON = '/images/icons/ability/429.png';
-
-    // TODO Сделать специальное сообщение в чате для этой способности вида "$unit умер, но благодаря врожденной способности $name вернулся к жизни"
+    private const NAME           = 'Will to live';
+    private const ICON           = '/images/icons/ability/429.png';
+    private const MESSAGE_METHOD = 'selfRaceResurrected';
 
     /**
      * @var ActionCollection
@@ -46,7 +45,8 @@ class WillToLiveAbility extends AbstractAbility
                 ResurrectionAction::TARGET_SELF,
                 50,
                 self::NAME,
-                self::ICON
+                self::ICON,
+                self::MESSAGE_METHOD
             ));
         }
 
