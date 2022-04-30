@@ -7,6 +7,7 @@ namespace Battle\Unit\Race;
 use Battle\BattleException;
 use Battle\Traits\ValidationTrait;
 use Battle\Unit\Ability\Effect\RageAbility;
+use Battle\Unit\Ability\Resurrection\WillToLiveAbility;
 
 class RaceFactory
 {
@@ -20,7 +21,9 @@ class RaceFactory
             'single_name' => 'Human',
             'color'       => '#1e72e3',
             'icon'        => '',
-            'abilities'   => [],
+            'abilities'   => [
+                WillToLiveAbility::class,
+            ],
         ],
         2 => [
             'id'          => 2,

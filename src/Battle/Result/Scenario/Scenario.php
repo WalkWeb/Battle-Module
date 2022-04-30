@@ -260,6 +260,8 @@ class Scenario implements ScenarioInterface
      * Создает анимацию воскрешения. Пока она аналогична лечению, но в будущем скорее всего изменится - по этому
      * делается сразу отдельным методом
      *
+     * TODO Добавить обновление аватара - чтобы череп на аватаре исчезал после воскрешения
+     *
      * @param ResurrectionAction $action
      * @param StatisticInterface $statistic
      * @throws ActionException

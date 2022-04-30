@@ -157,9 +157,10 @@ abstract class AbstractUnit implements UnitInterface
         $this->race = $race;
         $this->container = $container;
         $this->class = $class;
-        $this->abilities = $class ? $class->getAbilities($this) : new AbilityCollection();
+        $this->abilities = new AbilityCollection($this->container->isTestMode());
         $this->effects = $effects ?? new EffectCollection($this);
-        $this->createRaceAbilities();
+        $this->addClassAbilities();
+        $this->addRaceAbilities();
     }
 
     public function getId(): string
@@ -393,11 +394,27 @@ abstract class AbstractUnit implements UnitInterface
     }
 
     /**
+     * Добавляет классовые способности
+     */
+    private function addClassAbilities(): void
+    {
+        if ($this->class) {
+            foreach ($this->class->getAbilities($this) as $ability) {
+                $this->abilities->add($ability);
+            }
+        }
+    }
+
+    /**
      * Создает врожденные расовые способности
+     *
+     * В отличие от классовых способностей, расовые создаются с нуля, потому что на момент создания расы юнита еще нет
+     *
+     * Возможно в будущем способности у рас и классов будут приведены к единому формату
      *
      * @throws UnitException
      */
-    private function createRaceAbilities(): void
+    private function addRaceAbilities(): void
     {
         foreach ($this->race->getAbilities() as $abilityClass) {
             try {

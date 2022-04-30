@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Stroke;
 
+use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitInterface;
@@ -83,8 +84,7 @@ class Stroke implements StrokeInterface
 
         $this->handleUnitEffects();
         $this->handleUnitActions($enemyCommand, $alliesCommand);
-
-        // В будущем здесь также будут выполняться события при рефлекте урона и события при смерти юнита
+        $this->handleDeadActions($enemyCommand, $alliesCommand);
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -104,13 +104,7 @@ class Stroke implements StrokeInterface
     {
         foreach ($this->actionUnit->getOnNewRoundActions() as $action) {
             if ($action->canByUsed()) {
-
-                $action->handle();
-
-                $message = $this->container->getChat()->addMessage($action);
-                $this->container->getStatistic()->addUnitAction($action);
-                $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
-                $this->container->getFullLog()->addText($message);
+                $this->runAction($action);
             }
 
             // Если юнит умер после применении эффекта - дальнейшие эффекты применять не нужно
@@ -144,14 +138,59 @@ class Stroke implements StrokeInterface
                     );
                 }
 
-                $action->handle();
-
-                $message = $this->container->getChat()->addMessage($action);
-
-                $this->container->getStatistic()->addUnitAction($action);
-                $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
-                $this->container->getFullLog()->addText($message);
+                $this->runAction($action);
             }
         }
+    }
+
+    /**
+     * Некоторые способности активируются только после смерти юнита
+     *
+     * Их реализацию можно сделать более абстрактным способом, когда юнит получая и обрабатывая событие возвращает
+     * коллекцию событий в ответ (например, для нанесения урона от рефлекта), но эта реализация затронет большое
+     * количество изменений и пока избыточна - просто отдельным методом запрашиваем через отдельный метод способности
+     * при смерти, если они есть и готовы к использованию
+     *
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @throws Exception
+     */
+    private function handleDeadActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): void
+    {
+        foreach ($enemyCommand->getUnits() as $unit) {
+
+            if (!$unit->isAlive()) {
+
+                $abilities = $unit->getDeadAbilities();
+
+                foreach ($abilities as $ability) {
+
+                    $ability->usage();
+
+                    $actions = $ability->getAction($alliesCommand, $enemyCommand);
+
+                    foreach ($actions as $action) {
+                        if ($action->canByUsed()) {
+                            $this->runAction($action);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function runAction(ActionInterface $action): void
+    {
+        $action->handle();
+
+        $message = $this->container->getChat()->addMessage($action);
+
+        $this->container->getStatistic()->addUnitAction($action);
+        $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
+        $this->container->getFullLog()->addText($message);
     }
 }

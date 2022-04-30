@@ -64,10 +64,14 @@ interface AbilityInterface
     /**
      * Сообщает об изменившихся параметрах юнита. В этом методе способность определяет, должна ли она активироваться
      *
-     * @throws Exception
+     * Некоторые способности активируются с определенным шансом. Чтобы покрыть их тестами используется дополнительный
+     * параметр $testMode, который убирает фактор случайности
+     *
      * @param UnitInterface $unit
+     * @param bool $testMode
+     * @throws Exception
      */
-    public function update(UnitInterface $unit): void;
+    public function update(UnitInterface $unit, bool $testMode = false): void;
 
     /**
      * Возвращает владельца способности

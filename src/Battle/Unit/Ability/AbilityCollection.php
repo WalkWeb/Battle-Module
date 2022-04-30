@@ -20,6 +20,16 @@ class AbilityCollection implements Iterator, Countable
     private $elements = [];
 
     /**
+     * @var bool
+     */
+    private $testMode;
+
+    public function __construct(bool $testMode = false)
+    {
+        $this->testMode = $testMode;
+    }
+
+    /**
      * @param AbilityInterface $ability
      */
     public function add(AbilityInterface $ability): void
@@ -44,7 +54,7 @@ class AbilityCollection implements Iterator, Countable
     public function update(UnitInterface $unit): void
     {
         foreach ($this->elements as $ability) {
-            $ability->update($unit);
+            $ability->update($unit, $this->testMode);
         }
     }
 }

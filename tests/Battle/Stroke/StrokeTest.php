@@ -63,7 +63,7 @@ class StrokeTest extends AbstractUnitTest
     public function testStrokeBreakAction(): void
     {
         $unit = UnitFactory::createByTemplate(13);
-        $enemyUnit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(18);
 
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -270,6 +270,32 @@ class StrokeTest extends AbstractUnitTest
         ];
 
         self::assertEquals($expectedData, $container->getScenario()->getArray()[0]);
+    }
+
+    /**
+     * Тест на применение способностей после смерти юнита, на примере WillToLiveAbility
+     *
+     * @throws Exception
+     */
+    public function testStrokeDeadAbilitiesUse(): void
+    {
+        $container = new Container(true);
+        // Юнит с ударом 3000
+        $unit = UnitFactory::createByTemplate(12, $container);
+        // Юнит с хп 250
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+
+        $stroke->handle();
+
+        // После удара юнит умирает, и затем воскрешается, восстанавливая 50% здоровья
+        self::assertEquals($enemyUnit->getTotalLife() / 2, $enemyUnit->getLife());
+
+        // Проверяем, что сгенерировано две анимации - удара и оживления
+        self::assertCount(2, $container->getScenario()->getArray());
     }
 
     /**

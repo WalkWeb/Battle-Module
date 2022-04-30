@@ -77,11 +77,23 @@ class PriestTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        foreach ($unit->getAbilities() as $ability) {
+        foreach ($unit->getAbilities() as $i => $ability) {
+            if ($i === 0) {
+                // Лечение не может быть применено - лечить некого
+                self::assertTrue($ability->isReady());
+                self::assertFalse($ability->canByUsed($enemyCommand, $command));
+            }
+            if ($i === 1) {
+                // Воскрешение не может быть применено - воскрешать некого
+                self::assertTrue($ability->isReady());
+                self::assertFalse($ability->canByUsed($enemyCommand, $command));
+            }
+            if ($i === 2) {
+                // Расовая способность к воскрешению не готова, но может быть применена (еще не использовалась)
+                self::assertFalse($ability->isReady());
+                self::assertTrue($ability->canByUsed($enemyCommand, $command));
+            }
 
-            // Лечение не может быть применено - лечить некого
-            self::assertTrue($ability->isReady());
-            self::assertFalse($ability->canByUsed($enemyCommand, $command));
         }
     }
 }

@@ -14,10 +14,11 @@ use Exception;
 
 class WillToLiveAbility extends AbstractAbility
 {
-    private const NAME           = 'Will to live';
-    private const ICON           = '/images/icons/ability/429.png';
-    private const MESSAGE_METHOD = 'selfRaceResurrected';
-    private const DISPOSABLE     = true;
+    private const NAME            = 'Will to live';
+    private const ICON            = '/images/icons/ability/429.png';
+    private const MESSAGE_METHOD  = 'selfRaceResurrected';
+    private const DISPOSABLE      = true;
+    private const ACTIVATE_CHANCE = 25;
 
     /**
      * @var ActionCollection
@@ -71,7 +72,7 @@ class WillToLiveAbility extends AbstractAbility
         if ($testMode) {
             $this->ready = !$this->usage && !$this->unit->isAlive();
         } else {
-            $this->ready = !$this->usage && !$this->unit->isAlive() && random_int(0, 100) <= 25;
+            $this->ready = !$this->usage && !$this->unit->isAlive() && random_int(0, 100) <= self::ACTIVATE_CHANCE;
         }
     }
 

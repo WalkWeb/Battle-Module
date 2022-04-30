@@ -248,4 +248,14 @@ interface UnitInterface
      * @return Defense
      */
     public function getDefense(): Defense;
+
+    /**
+     * Возвращает особые способности юнита, которые срабатывают только при его смерти, если они есть и готовы к
+     * использованию
+     *
+     * TODO Когда будет реализована более сложная механика ответных событий при получении события юнитом - этот метод удалится
+     *
+     * @return AbilityCollection
+     */
+    public function getDeadAbilities(): AbilityCollection;
 }

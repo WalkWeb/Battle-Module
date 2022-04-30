@@ -59,7 +59,11 @@ class IncinerationAbility extends AbstractAbility
         return self::ICON;
     }
 
-    public function update(UnitInterface $unit): void
+    /**
+     * @param UnitInterface $unit
+     * @param bool $testMode
+     */
+    public function update(UnitInterface $unit, bool $testMode = false): void
     {
         $this->ready = $unit->getConcentration() === UnitInterface::MAX_CONS;
     }

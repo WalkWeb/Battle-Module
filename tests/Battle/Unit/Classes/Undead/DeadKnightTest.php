@@ -59,9 +59,17 @@ class DeadKnightTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        foreach ($unit->getAbilities() as $ability) {
-            self::assertTrue($ability->isReady());
-            self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        foreach ($unit->getAbilities() as $i => $ability) {
+            if ($i === 0) {
+                // HeavyStrikeAbility готов и может быть применен
+                self::assertTrue($ability->isReady());
+                self::assertTrue($ability->canByUsed($enemyCommand, $command));
+            }
+            if ($i === 1) {
+                // WillToLiveAbility не готов (юнит не мертв), но может быть применен (ранее не применялся)
+                self::assertFalse($ability->isReady());
+                self::assertTrue($ability->canByUsed($enemyCommand, $command));
+            }
         }
     }
 }

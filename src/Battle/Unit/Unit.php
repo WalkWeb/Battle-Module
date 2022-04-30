@@ -15,6 +15,8 @@ use Battle\Action\ResurrectionAction;
 use Battle\Action\WaitAction;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\Resurrection\WillToLiveAbility;
 use Battle\Unit\Defense\DefenseException;
 use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Offense\OffenseException;
@@ -49,6 +51,26 @@ class Unit extends AbstractUnit
         // Базовую атака не проверяется на canByUsed(), потому что такой ситуации быть не должно - если противников нет
         // Бой должен закончиться. Плюс, это избавляет от дополнительных проверок на каждую атаку
         return $this->getDamageAction($enemyCommand, $alliesCommand);
+    }
+
+    /**
+     * @return AbilityCollection
+     */
+    public function getDeadAbilities(): AbilityCollection
+    {
+        $abilities = new AbilityCollection();
+
+        if (!$this->isAlive()) {
+            foreach ($this->abilities as $ability) {
+                // Сейчас существует только одна подобная способность, по этому проверка делается по простому
+                // Потом, будет добавлена отдельная механика для такого рода способностей
+                if ($ability instanceof WillToLiveAbility && $ability->isReady()) {
+                    $abilities->add($ability);
+                }
+            }
+        }
+
+        return $abilities;
     }
 
     /**

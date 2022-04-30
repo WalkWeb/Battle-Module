@@ -54,8 +54,9 @@ class SummonSkeletonMageAbility extends AbstractSummonAbility
      * Способность активируется при полной концентрации юнита
      *
      * @param UnitInterface $unit
+     * @param bool $testMode
      */
-    public function update(UnitInterface $unit): void
+    public function update(UnitInterface $unit, bool $testMode = false): void
     {
         $this->ready = $unit->getConcentration() === UnitInterface::MAX_CONS;
     }

@@ -65,8 +65,9 @@ class RageAbility extends AbstractAbility
      * Способность активируется при здоровье < 30%
      *
      * @param UnitInterface $unit
+     * @param bool $testMode
      */
-    public function update(UnitInterface $unit): void
+    public function update(UnitInterface $unit, bool $testMode = false): void
     {
         $this->ready = !$this->usage && $this->unit->getLife() < $this->unit->getTotalLife() * 0.3;
     }
