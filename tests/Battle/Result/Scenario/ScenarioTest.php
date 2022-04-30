@@ -800,6 +800,7 @@ class ScenarioTest extends AbstractUnitTest
                             'hp_bar_class'      => 'unit_hp_bar',
                             'hp_bar_class2'     => 'unit_hp_bar2',
                             'unit_hp_bar_width' => 30,
+                            'avas'              => 'unit_ava_blank',
                             'unit_effects'      => [],
                         ],
                     ],

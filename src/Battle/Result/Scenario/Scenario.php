@@ -260,8 +260,6 @@ class Scenario implements ScenarioInterface
      * Создает анимацию воскрешения. Пока она аналогична лечению, но в будущем скорее всего изменится - по этому
      * делается сразу отдельным методом
      *
-     * TODO Добавить обновление аватара - чтобы череп на аватаре исчезал после воскрешения
-     *
      * @param ResurrectionAction $action
      * @param StatisticInterface $statistic
      * @throws ActionException
@@ -281,6 +279,7 @@ class Scenario implements ScenarioInterface
                 'hp_bar_class'      => 'unit_hp_bar',
                 'hp_bar_class2'     => 'unit_hp_bar2',
                 'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
+                'avas'              => $this->getAvaClassTarget($targetUnit),
                 'unit_effects'      => $this->getUnitEffects($targetUnit),
             ];
         }
