@@ -10,6 +10,7 @@ use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
+use Battle\Action\ParalysisAction;
 use Battle\Action\ResurrectionAction;
 use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
@@ -85,6 +86,9 @@ class ChatTest extends AbstractUnitTest
 
     private const WAIT_EN = '<span style="color: #1e72e3">unit_1</span> preparing to attack';
     private const WAIT_RU = '<span style="color: #1e72e3">unit_1</span> готовится к атаке';
+
+    private const PARALYSIS_EN = '<span style="color: #1e72e3">unit_1</span> paralyzed and unable to move';
+    private const PARALYSIS_RU = '<span style="color: #1e72e3">unit_1</span> парализован и не может двигаться';
 
     private const EFFECT_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> received damage on 10 life from effect <span class="ability">Poison</span>';
     private const EFFECT_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> получил урон на 10 здоровья от эффекта <span class="ability">Отравление</span>';
@@ -376,6 +380,25 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::WAIT_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::WAIT_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщение о параличе (пропуске хода аналогично wait)
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageParalysis(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $action = new ParalysisAction($unit, $enemyCommand, $command);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::PARALYSIS_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::PARALYSIS_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**

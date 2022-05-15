@@ -162,7 +162,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertInstanceOf(WaitAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
-        self::assertEquals('preparing to attack', $action->getNameAction());
+        self::assertEquals('', $action->getNameAction());
     }
 
     /**

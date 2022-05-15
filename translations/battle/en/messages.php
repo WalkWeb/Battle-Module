@@ -41,6 +41,7 @@ return [
     'dodged'                              => 'dodged',
     'died, but due to the innate ability' => 'died, but due to the innate ability',
     'came back to life'                   => 'came back to life',
+    'paralyzed and unable to move'        => 'paralyzed and unable to move',
     // Ability
     'Great Heal'                          => 'Great Heal',
     'Imp'                                 => 'Imp',

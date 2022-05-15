@@ -33,6 +33,7 @@ class WaitActionTest extends AbstractUnitTest
             self::assertContainsOnlyInstancesOf(WaitAction::class, [$action]);
             self::assertEquals('wait', $action->getAnimationMethod());
             self::assertEquals('wait', $action->getMessageMethod());
+            self::assertEquals('', $action->getNameAction());
             self::assertTrue($action->canByUsed());
             $action->handle();
         }

@@ -39,6 +39,7 @@ return [
     'dodged'                              => 'уклонился',
     'died, but due to the innate ability' => 'умер, но за счет врожденной способности',
     'came back to life'                   => 'вернулся к жизни',
+    'paralyzed and unable to move'        => 'парализован и не может двигаться',
     // Ability
     'Imp'                                 => 'Беса', // в сформированном сообщении будет "призвал Беса"
     'Skeleton'                            => 'Скелета',

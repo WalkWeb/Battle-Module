@@ -18,7 +18,6 @@ use Battle\Unit\UnitInterface;
  */
 class WaitAction extends AbstractAction
 {
-    private const NAME                     = 'preparing to attack';
     private const HANDLE_METHOD            = 'applyWaitAction';
     private const DEFAULT_ANIMATION_METHOD = 'wait';
     private const DEFAULT_MESSAGE_METHOD   = 'wait';
@@ -51,7 +50,7 @@ class WaitAction extends AbstractAction
 
     public function getNameAction(): string
     {
-        return self::NAME;
+        return '';
     }
 
     public function getAnimationMethod(): string

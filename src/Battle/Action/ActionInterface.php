@@ -81,6 +81,8 @@ interface ActionInterface
     /**
      * Название события, используется для создания сообщений в чате
      *
+     * TODO Формирование сообщения в чате через getNameAction() уже много где не используется. Можно удалить этот метод
+     *
      * @return string
      */
     public function getNameAction(): string;

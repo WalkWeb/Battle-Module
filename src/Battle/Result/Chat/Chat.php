@@ -38,7 +38,7 @@ class Chat implements ChatInterface
      * @param ActionInterface $action
      * @return string
      * @throws ChatException
-     * @uses damage, damageAbility, heal, healAbility, summon, wait, buff, resurrected, selfRaceResurrected, applyEffect, effectDamage, effectHeal, skip
+     * @uses damage, damageAbility, heal, healAbility, summon, wait, paralysis, buff, resurrected, selfRaceResurrected, applyEffect, effectDamage, effectHeal, skip
      */
     public function addMessage(ActionInterface $action): string
     {
@@ -239,7 +239,20 @@ class Chat implements ChatInterface
             // Unit
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
             // preparing to attack
-            $this->translation->trans($action->getNameAction());
+            $this->translation->trans('preparing to attack');
+    }
+
+    /**
+     * @param ActionInterface $action
+     * @return string
+     */
+    private function paralysis(ActionInterface $action): string
+    {
+        return
+            // Unit
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
+            // paralyzed and unable to move
+            $this->translation->trans('paralyzed and unable to move');
     }
 
     /**
