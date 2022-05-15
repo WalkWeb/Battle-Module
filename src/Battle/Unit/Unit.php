@@ -7,13 +7,8 @@ namespace Battle\Unit;
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
-use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
-use Battle\Action\EffectAction;
-use Battle\Action\HealAction;
-use Battle\Action\ResurrectionAction;
 use Battle\Action\WaitAction;
-use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Resurrection\WillToLiveAbility;
@@ -81,9 +76,6 @@ class Unit extends AbstractUnit
     /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
      *
-     * TODO Во всех связанных методах заменить $action на ActionInterface, т.к. мы не можем заранее знать, что
-     * TODO будет правильно указан handleMethod
-     *
      * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction, applyResurrectionAction, applyParalysisAction
      * @param ActionInterface $action
      * @throws Exception
@@ -108,10 +100,10 @@ class Unit extends AbstractUnit
      * Позже, когда будет добавлен магический блок, игнорирование бока, уклонение, критические удары - все эти
      * механики будут вынесены в отдельный класс Calculator
      *
-     * @param DamageAction $action
+     * @param ActionInterface $action - ожидается DamageAction
      * @throws Exception
      */
-    private function applyDamageAction(DamageAction $action): void
+    private function applyDamageAction(ActionInterface $action): void
     {
         if ($this->isDodged($action)) {
             $action->addFactualPower($this, 0);
@@ -153,10 +145,10 @@ class Unit extends AbstractUnit
     /**
      * Обрабатывает action на лечение
      *
-     * @param HealAction $action
+     * @param ActionInterface $action - ожидается HealAction
      * @throws ActionException
      */
-    private function applyHealAction(HealAction $action): void
+    private function applyHealAction(ActionInterface $action): void
     {
         $primordialLife = $this->life;
 
@@ -173,23 +165,24 @@ class Unit extends AbstractUnit
      *
      * Призыв суммона в команду происходит в самом SummonAction, от юнита ничего не нужно
      *
-     * @param SummonAction $action
+     * @param ActionInterface $action
      */
-    private function applySummonAction(SummonAction $action): void {}
+    private function applySummonAction(ActionInterface $action): void {}
 
     /**
      * Обрабатывает action на пропуск хода
      *
-     * @param WaitAction $action
+     * @param ActionInterface $action
      */
-    private function applyWaitAction(WaitAction $action): void {}
+    private function applyWaitAction(ActionInterface $action): void {}
 
     /**
      * Обрабатывает action на добавление эффекта юниту
      *
-     * @param EffectAction $action
+     * @param ActionInterface $action - ожидается EffectAction
+     * @throws ActionException
      */
-    private function applyEffectAction(EffectAction $action): void
+    private function applyEffectAction(ActionInterface $action): void
     {
         $onApplyAction = $this->effects->add($action->getEffect());
 
@@ -204,10 +197,10 @@ class Unit extends AbstractUnit
      * Обрабатывает action на воскрешение. При этом power - количество здоровья (в % от максимального), которое будет
      * восстановлено юниту при воскрешении
      *
-     * @param ResurrectionAction $action
+     * @param ActionInterface $action - ожидается ResurrectionAction
      * @throws ActionException
      */
-    private function applyResurrectionAction(ResurrectionAction $action): void
+    private function applyResurrectionAction(ActionInterface $action): void
     {
         $restoreLife = (int)($this->totalLife * ($action->getPower()/100));
 
@@ -228,11 +221,11 @@ class Unit extends AbstractUnit
      * характеристик
      *
      * @uses multiplierDamage, multiplierDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert
-     * @param BuffAction $action
+     * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws UnitException
      */
-    private function applyBuffAction(BuffAction $action): void
+    private function applyBuffAction(ActionInterface $action): void
     {
         if (!method_exists($this, $modifyMethod = $action->getModifyMethod())) {
             throw new UnitException(UnitException::UNDEFINED_MODIFY_METHOD . ': ' . $modifyMethod);
@@ -244,12 +237,12 @@ class Unit extends AbstractUnit
     /**
      * Увеличивает урон юнита (можно сделать и уменьшение, но пока делаем только увеличение)
      *
-     * @param BuffAction $action
+     * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws UnitException
      * @throws OffenseException
      */
-    private function multiplierDamage(BuffAction $action): void
+    private function multiplierDamage(ActionInterface $action): void
     {
         if ($action->getPower() <= 100) {
             throw new UnitException(UnitException::NO_REDUCED_DAMAGE);
@@ -270,11 +263,11 @@ class Unit extends AbstractUnit
     /**
      * Откатывает изменение урона юнита
      *
-     * @param BuffAction $action
+     * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws OffenseException
      */
-    private function multiplierDamageRevert(BuffAction $action): void
+    private function multiplierDamageRevert(ActionInterface $action): void
     {
         $this->offense->setDamage($this->offense->getDamage() - $action->getRevertValue());
     }
@@ -282,11 +275,11 @@ class Unit extends AbstractUnit
     /**
      * Увеличивает здоровье юнита (можно сделать и уменьшение, но пока делаем только увеличение)
      *
-     * @param BuffAction $action
+     * @param ActionInterface $action - ожидается BuffAction
      * @throws UnitException
      * @throws ActionException
      */
-    private function multiplierMaxLife(BuffAction $action): void
+    private function multiplierMaxLife(ActionInterface $action): void
     {
         if ($action->getPower() <= 100) {
             throw new UnitException(UnitException::NO_REDUCED_MAXIMUM_LIFE);
@@ -308,10 +301,10 @@ class Unit extends AbstractUnit
     /**
      * Откатывает изменения по здоровью
      *
-     * @param BuffAction $action
+     * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      */
-    private function multiplierMaxLifeRevert(BuffAction $action): void
+    private function multiplierMaxLifeRevert(ActionInterface $action): void
     {
         $this->totalLife -= $action->getRevertValue();
 
@@ -323,12 +316,12 @@ class Unit extends AbstractUnit
     /**
      * Увеличивает скорость атаки юнита
      *
-     * @param BuffAction $action
+     * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws OffenseException
      * @throws UnitException
      */
-    private function multiplierAttackSpeed(BuffAction $action): void
+    private function multiplierAttackSpeed(ActionInterface $action): void
     {
         if ($action->getPower() <= 100) {
             throw new UnitException(UnitException::NO_REDUCED_ATTACK_SPEED);
@@ -349,11 +342,11 @@ class Unit extends AbstractUnit
     /**
      * Откатывает обратно увеличенную скорость атаки
      *
-     * @param BuffAction $action
+     * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws OffenseException
      */
-    private function multiplierAttackSpeedRevert(BuffAction $action): void
+    private function multiplierAttackSpeedRevert(ActionInterface $action): void
     {
         $attackSpeed = $this->offense->getAttackSpeed();
         $attackSpeed -= $action->getRevertValue();
@@ -363,11 +356,11 @@ class Unit extends AbstractUnit
     /**
      * Увеличивает блок юнита на фиксированную величину
      *
-     * @param BuffAction $action
+     * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws DefenseException
      */
-    private function addBlock(BuffAction $action): void
+    private function addBlock(ActionInterface $action): void
     {
         $oldBlock = $block = $this->defense->getBlock();
         $block += $action->getPower();
@@ -383,11 +376,11 @@ class Unit extends AbstractUnit
     /**
      * Возвращает блок юнита к исходному значению
      *
-     * @param BuffAction $action
+     * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws DefenseException
      */
-    private function addBlockRevert(BuffAction $action): void
+    private function addBlockRevert(ActionInterface $action): void
     {
         $block = $this->defense->getBlock();
         $block -= $action->getRevertValue();
@@ -435,11 +428,11 @@ class Unit extends AbstractUnit
      * TODO Когда будут добавлены обездвиживающие эффекты (оглушение, паралич) нужно не забыть добавить проверку,
      * TODO что если они есть - юнит не может уклониться (что логично)
      *
-     * @param DamageAction $action
+     * @param ActionInterface $action - ожидается DamageAction
      * @return bool
      * @throws Exception
      */
-    private function isDodged(DamageAction $action): bool
+    private function isDodged(ActionInterface $action): bool
     {
         if (!$action->isCanBeAvoided()) {
             return false;
@@ -457,10 +450,10 @@ class Unit extends AbstractUnit
     /**
      * Рассчитывает шанс попадания по текущему юниту
      *
-     * @param DamageAction $action
+     * @param ActionInterface $action - ожидается DamageAction
      * @return int
      */
-    private function getChanceOfHit(DamageAction $action): int
+    private function getChanceOfHit(ActionInterface $action): int
     {
         $accuracy = $action->getActionUnit()->getOffense()->getAccuracy();
         $chanceOfHit = (int)round(($accuracy - $this->defense->getDefense()) / ($accuracy / 10) * 2 + 80);
@@ -479,11 +472,11 @@ class Unit extends AbstractUnit
     }
 
     /**
-     * @param DamageAction $action
+     * @param ActionInterface $action - ожидается DamageAction
      * @return bool
      * @throws Exception
      */
-    private function isBlocked(DamageAction $action): bool
+    private function isBlocked(ActionInterface $action): bool
     {
         if ($this->getDefense()->getBlock() === 0) {
             return false;

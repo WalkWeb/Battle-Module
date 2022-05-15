@@ -128,6 +128,7 @@ interface ActionInterface
      * В Action не имеющих силу действия (например, призыв существ) вернет 0
      *
      * @return mixed
+     * @throws ActionException
      */
     public function getPower(): int;
 
