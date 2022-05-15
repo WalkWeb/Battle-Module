@@ -74,8 +74,6 @@ class ResurrectionAction extends AbstractAction
      */
     public function canByUsed(): bool
     {
-        // TODO Action может применяться от мертвого юнита, это не выглядит нормальным
-
         $this->targetUnits = $this->searchTargetUnits($this);
         return count($this->targetUnits) > 0;
     }

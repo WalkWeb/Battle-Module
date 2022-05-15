@@ -37,6 +37,11 @@ class Unit extends AbstractUnit
      */
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
+        // Если юнит мертв или уже ходил - бросаем исключение
+        if (!$this->isAlive() || $this->isAction()) {
+            throw new UnitException(UnitException::CANNOT_ACTION);
+        }
+
         // Если есть способность готовая к использованию - применяем её
         if (($ability = $this->getAbility($enemyCommand, $alliesCommand))) {
             $ability->usage();
@@ -76,7 +81,10 @@ class Unit extends AbstractUnit
     /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
      *
-     * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction, applyResurrectionAction
+     * TODO Во всех связанных методах заменить $action на ActionInterface, т.к. мы не можем заранее знать, что
+     * TODO будет правильно указан handleMethod
+     *
+     * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction, applyResurrectionAction, applyParalysisAction
      * @param ActionInterface $action
      * @throws Exception
      */

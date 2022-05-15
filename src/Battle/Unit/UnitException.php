@@ -33,4 +33,5 @@ class UnitException extends Exception
     public const INCORRECT_DEFENSE            = 'Incorrect defense, it required and type array';
     public const INCORRECT_OFFENSE            = 'Incorrect offense, it required and type array';
     public const INCORRECT_RACE_ABILITY       = 'Incorrect race ability';
+    public const CANNOT_ACTION                = 'Unit cannot action. He died or already action';
 }

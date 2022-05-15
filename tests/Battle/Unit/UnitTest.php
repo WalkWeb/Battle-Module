@@ -466,6 +466,42 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ситуацию, когда у мертвого юнита запрашиваются действия - получаем ошибку
+     *
+     * @throws Exception
+     */
+    public function testUnitGetActionDiedUnit(): void
+    {
+        $unit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $this->expectException(UnitException::class);
+        $this->expectExceptionMessage(UnitException::CANNOT_ACTION);
+        $unit->getAction($enemyCommand, $command);
+    }
+
+    /**
+     * Тест на ситуацию, когда у юнита, который уже ходил запрашиваются действия - получаем ошибку
+     *
+     * @throws Exception
+     */
+    public function testUnitGetActionAlreadyAction(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $unit->madeAction();
+
+        $this->expectException(UnitException::class);
+        $this->expectExceptionMessage(UnitException::CANNOT_ACTION);
+        $unit->getAction($enemyCommand, $command);
+    }
+
+    /**
      * @return array
      */
     public function createDataProvider(): array

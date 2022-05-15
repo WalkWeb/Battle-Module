@@ -117,13 +117,16 @@ class Stroke implements StrokeInterface
     /**
      * Выполняет действия юнита, который ходит
      *
+     * При этом действия выполняются только если он жив (а он мог умереть от эффектов) и не ходил (некоторые эффекты
+     * обездвиживают юнита, отмечая его, как "уже походил")
+     *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @throws Exception
      */
     private function handleUnitActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): void
     {
-        if ($this->actionUnit->isAlive()) {
+        if ($this->actionUnit->isAlive() && !$this->actionUnit->isAction()) {
             foreach ($this->actionUnit->getAction($enemyCommand, $alliesCommand) as $action) {
 
                 if (!$enemyCommand->isAlive()) {
