@@ -213,7 +213,17 @@ class Unit extends AbstractUnit
 
         $action->addFactualPower($this, $restoreLife);
     }
-    
+
+    /**
+     * Обрабатывает action который обездвиживает цель и не дает ей ходить
+     *
+     * По факту просто указываем у юнита, что он ходил.
+     */
+    protected function applyParalysisAction(): void
+    {
+        $this->action = true;
+    }
+
     /**
      * Обрабатывает action на изменение характеристик юнита
      *
