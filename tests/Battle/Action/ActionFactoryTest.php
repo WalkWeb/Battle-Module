@@ -11,6 +11,7 @@ use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
+use Battle\Action\ParalysisAction;
 use Battle\Action\ResurrectionAction;
 use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
@@ -160,6 +161,32 @@ class ActionFactoryTest extends AbstractUnitTest
         $action = $actionFactory->create($data);
 
         self::assertInstanceOf(WaitAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
+        self::assertEquals('', $action->getNameAction());
+    }
+
+    /**
+     * Тест на успешное создание ParalysisAction на основе массива с данными
+     *
+     * @throws Exception
+     */
+    public function testActionFactoryCreateParalysisSuccess(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $actionFactory = new ActionFactory();
+
+        $data = [
+            'type'           => ActionInterface::PARALYSIS,
+            'action_unit'    => $unit,
+            'enemy_command'  => $enemyCommand,
+            'allies_command' => $command,
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertInstanceOf(ParalysisAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
         self::assertEquals('', $action->getNameAction());

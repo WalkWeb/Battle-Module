@@ -23,7 +23,7 @@ class ActionFactory
         ActionInterface::BUFF         => BuffAction::class,
         ActionInterface::EFFECT       => EffectAction::class,
         ActionInterface::RESURRECTION => ResurrectionAction::class,
-
+        ActionInterface::PARALYSIS    => ParalysisAction::class,
     ];
 
     /**
@@ -104,6 +104,14 @@ class ActionFactory
 
         if ($className === WaitAction::class) {
             return new WaitAction(
+                $actionUnit,
+                $enemyCommand,
+                $alliesCommand
+            );
+        }
+
+        if ($className === ParalysisAction::class) {
+            return new ParalysisAction(
                 $actionUnit,
                 $enemyCommand,
                 $alliesCommand

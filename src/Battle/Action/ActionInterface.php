@@ -17,6 +17,7 @@ interface ActionInterface
     public const BUFF         = 5;
     public const EFFECT       = 6;
     public const RESURRECTION = 7;
+    public const PARALYSIS    = 8;
 
     // Применяет событие на себя
     public const TARGET_SELF                  = 1;
@@ -80,8 +81,6 @@ interface ActionInterface
 
     /**
      * Название события, используется для создания сообщений в чате
-     *
-     * TODO Формирование сообщения в чате через getNameAction() уже много где не используется. Можно удалить этот метод
      *
      * @return string
      */
