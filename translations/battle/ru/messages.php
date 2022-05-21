@@ -57,6 +57,7 @@ return [
     'Incineration'                        => 'Испепеление',
     'Blessed Shield'                      => 'Благословенный щит',
     'Will to live'                        => 'Воля к жизни',
+    'Paralysis'                           => 'Паралич',
     // Statistics
     'Statistics'                          => 'Статистика',
     'Unit'                                => 'Кто',

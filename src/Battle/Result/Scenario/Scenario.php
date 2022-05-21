@@ -300,11 +300,11 @@ class Scenario implements ScenarioInterface
     }
 
     /**
-     * @param WaitAction $action
+     * @param ActionInterface $action
      * @param StatisticInterface $statistic
      * @return WaitAction только для того, чтобы IDE не ругался на то, что $action не используется в методе
      */
-    private function wait(WaitAction $action, StatisticInterface $statistic): WaitAction
+    private function wait(ActionInterface $action, StatisticInterface $statistic): ActionInterface
     {
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),

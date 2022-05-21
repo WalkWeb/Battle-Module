@@ -71,6 +71,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'can_be_avoided'   => $canBeAvoided = false,
             'name'             => $name = 'action name 123',
             'animation_method' => $animationMethod = 'effectDamage',
+            'message_method'   => $messageMethod = 'damageAbility',
             'icon'             => $icon = 'icon.png',
         ];
 
@@ -82,6 +83,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($damage, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($animationMethod, $action->getAnimationMethod());
+        self::assertEquals($messageMethod, $action->getMessageMethod());
         self::assertEquals($icon, $action->getIcon());
         self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
     }
