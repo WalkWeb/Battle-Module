@@ -11,4 +11,5 @@ class BattleException extends Exception
     public const INCORRECT_UNIT_DATA      = 'Переданы некорректные данные по юнитам. Ожидается массив параметров';
     public const NO_COMMAND_PARAMETER     = 'Отсутствует параметр, указывающий на принадлежность юнита к какой-либо команде';
     public const DOUBLE_UNIT_ID           = 'Найден повторяющийся ID юнита';
+    public const INCORRECT_START_COMMAND  = 'Некорректное указание команды, начинающей раунд';
 }

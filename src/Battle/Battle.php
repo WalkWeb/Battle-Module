@@ -14,37 +14,53 @@ class Battle implements BattleInterface
 {
     public const LIMIT_ROUND_MESSAGE = 'Limit round. Winner by max life';
 
-    /** @var CommandInterface */
+    /**
+     * @var CommandInterface
+     */
     private $leftCommand;
 
-    /** @var CommandInterface */
+    /**
+     * @var CommandInterface
+     */
     private $rightCommand;
 
-    /** @var int - Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand */
+    /**
+     * Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand
+     *
+     * @var int
+     */
     private $actionCommand;
 
-    /** @var int */
+    /**
+     * TODO Лучше переделать на лимит Stroke
+     *
+     * @var int
+     */
     private $maxRound = 100;
 
-    /** @var ContainerInterface */
+    /**
+     * @var ContainerInterface
+     */
     private $container;
 
     /**
      * @param CommandInterface $leftCommand
      * @param CommandInterface $rightCommand
      * @param ContainerInterface $container
+     * @param int|null $actionCommand
      * @throws Exception
      */
     public function __construct(
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
-        ContainerInterface $container
+        ContainerInterface $container,
+        ?int $actionCommand = null
     )
     {
         $this->checkDoubleUnitId($leftCommand, $rightCommand);
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;
-        $this->actionCommand = random_int(1, 2);
+        $this->actionCommand = $this->createActionCommand($actionCommand);
         $this->container = $container;
     }
 
@@ -165,5 +181,23 @@ class Battle implements BattleInterface
         }
 
         return $this->leftCommand->getTotalLife() > $this->rightCommand->getTotalLife() ? 1 : 2;
+    }
+
+    /**
+     * @param int|null $actionCommand
+     * @return int
+     * @throws Exception
+     */
+    private function createActionCommand(?int $actionCommand): int
+    {
+        if ($actionCommand === null) {
+            return random_int(1, 2);
+        }
+
+        if ($actionCommand !== 1 && $actionCommand !== 2) {
+            throw new BattleException(BattleException::INCORRECT_START_COMMAND);
+        }
+
+        return $actionCommand;
     }
 }

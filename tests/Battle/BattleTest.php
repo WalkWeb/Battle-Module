@@ -205,6 +205,49 @@ class BattleTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на фиксированное указание начинающей команды
+     *
+     * @throws Exception
+     */
+    public function testBattleStartActionCommand(): void
+    {
+        $actionUnit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(17);
+        $command = \Battle\Command\CommandFactory::create([$actionUnit]);
+        $enemyCommand = \Battle\Command\CommandFactory::create([$enemyUnit]);
+        $container = new Container(true);
+
+        // Начинает левая команда, т.е. $actionUnit
+        $actionCommand = 1;
+
+        $battle = new Battle($command, $enemyCommand, $container, $actionCommand);
+        $result = $battle->handle();
+
+        $scenario = $result->getScenario();
+
+        // Весь бой (и его сценарий) должен состоять из 1 удара $actionUnit
+        self::assertCount(1, $scenario->getArray());
+        self::assertEquals($actionUnit->getId(), $scenario->getArray()[0]['effects'][0]['user_id']);
+    }
+
+    /**
+     * Тест на ситуацию, когда передан некорректный $actionCommand - получаем исключение
+     *
+     * @throws Exception
+     */
+    public function testBattleInvalidActionCommand(): void
+    {
+        $command = CommandFactory::createLeftCommand();
+        $enemyCommand = CommandFactory::createRightCommand();
+
+        $container = new Container();
+
+        $this->expectException(BattleException::class);
+        $this->expectExceptionMessage(BattleException::INCORRECT_START_COMMAND);
+        new Battle($command, $enemyCommand, $container, 3);
+    }
+
+    /**
      * Эмулируем коллекцию, которая будет возвращать одного и того же юнита на каждый вызов метода current()
      *
      * @return UnitCollection
