@@ -7,11 +7,10 @@ namespace Tests\Battle\Unit\Classes\Demon;
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
-use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Ability\Effect\ParalysisAbility;
 use Battle\Unit\Ability\Effect\PoisonAbility;
-use Battle\Unit\Ability\Heal\GeneralHealAbility;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
@@ -50,21 +49,21 @@ class SuccubusTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createEffect($unit, $enemyCommand, $command),
+                        $this->createEffectPoison($unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }
             }
 
             if ($i === 1) {
-                self::assertContainsOnlyInstancesOf(GeneralHealAbility::class, [$ability]);
+                self::assertContainsOnlyInstancesOf(ParalysisAbility::class, [$ability]);
 
                 $actions = $ability->getAction($enemyCommand, $command);
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createHeal($unit, $enemyCommand, $command),
-                        $action
+                        $this->createEffectParalysis($unit, $enemyCommand, $command),
+                        $action->getEffect()
                     );
                 }
             }
@@ -99,7 +98,7 @@ class SuccubusTest extends AbstractUnitTest
      * @return EffectInterface
      * @throws Exception
      */
-    private function createEffect(
+    private function createEffectPoison(
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $command
@@ -133,22 +132,43 @@ class SuccubusTest extends AbstractUnitTest
         return $effectFactory->create($data);
     }
 
-    private function createHeal(
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @return EffectInterface
+     * @throws Exception
+     */
+    private function createEffectParalysis(
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $command
-    ): ActionInterface
+    ): EffectInterface
     {
-        return new HealAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            HealAction::TARGET_ALL_WOUNDED_ALLIES,
-            (int)($unit->getOffense()->getDamage() * 1.2),
-            'General Heal',
-            HealAction::UNIT_ANIMATION_METHOD,
-            HealAction::ABILITY_MESSAGE_METHOD,
-            '/images/icons/ability/452.png'
-        );
+        $effectFactory = new EffectFactory(new ActionFactory());
+
+        $data = [
+            'name'                  => 'Paralysis',
+            'icon'                  => '/images/icons/ability/086.png',
+            'duration'              => 2,
+            'on_apply_actions'      => [],
+            'on_next_round_actions' => [
+                [
+                    'type'             => ActionInterface::PARALYSIS,
+                    'action_unit'      => $unit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'name'             => 'Paralysis',
+                    'can_be_avoided'   => false,
+                    'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                    'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                    'icon'             => '/images/icons/ability/086.png',
+                ],
+            ],
+            'on_disable_actions'    => [],
+        ];
+
+        return $effectFactory->create($data);
     }
 }

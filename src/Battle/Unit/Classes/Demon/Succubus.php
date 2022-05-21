@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Battle\Unit\Classes\Demon;
 
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\Effect\ParalysisAbility;
 use Battle\Unit\Ability\Effect\PoisonAbility;
-use Battle\Unit\Ability\Heal\GeneralHealAbility;
 use Battle\Unit\Classes\AbstractUnitClass;
 use Battle\Unit\UnitInterface;
 
@@ -35,9 +35,7 @@ class Succubus extends AbstractUnitClass
     {
         $collection = new AbilityCollection();
         $collection->add(new PoisonAbility($unit));
-        // В будущем Суккуб будет иметь уникальную способность переманивать на несколько раундов противника в свою
-        // команду. GeneralHealAbility - временная способность для этого класса
-        $collection->add(new GeneralHealAbility($unit));
+        $collection->add(new ParalysisAbility($unit));
         return $collection;
     }
 }
