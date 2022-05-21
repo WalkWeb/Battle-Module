@@ -219,7 +219,7 @@ class UnitTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        self::assertEquals(Unit::MAX_CONS, $unit->getConcentration());
+        self::assertEquals(Unit::MAX_CONCENTRATION, $unit->getConcentration());
     }
 
     /**
@@ -251,7 +251,7 @@ class UnitTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        self::assertEquals(Unit::MAX_CONS, $unit->getConcentration());
+        self::assertEquals(Unit::MAX_CONCENTRATION, $unit->getConcentration());
 
         $unit->useConcentrationAbility();
         self::assertEquals(0, $unit->getConcentration());

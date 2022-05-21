@@ -339,8 +339,8 @@ abstract class AbstractUnit implements UnitInterface
     {
         $this->concentration += $concentration;
 
-        if ($this->concentration > self::MAX_CONS) {
-            $this->concentration = self::MAX_CONS;
+        if ($this->concentration > self::MAX_CONCENTRATION) {
+            $this->concentration = self::MAX_CONCENTRATION;
         }
 
         $this->abilities->update($this);

@@ -65,7 +65,7 @@ class PoisonAbility extends AbstractAbility
      */
     public function update(UnitInterface $unit, bool $testMode = false): void
     {
-        $this->ready = $unit->getConcentration() === UnitInterface::MAX_CONS;
+        $this->ready = $unit->getConcentration() === UnitInterface::MAX_CONCENTRATION;
     }
 
     public function usage(): void

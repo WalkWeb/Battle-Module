@@ -33,7 +33,7 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                             </div>
                             <?php if ($unit->getClass()): ?>
                                 <div class="unit_cons">
-                                    <div class="unit_cons_bar2" style="width: <?= $this->getWidth($unit->getConcentration(), UnitInterface::MAX_CONS) ?>%;"></div>
+                                    <div class="unit_cons_bar2" style="width: <?= $this->getWidth($unit->getConcentration(), UnitInterface::MAX_CONCENTRATION) ?>%;"></div>
                                 </div>
                                 <div class="unit_rage">
                                     <div class="unit_rage_bar2" style="width: <?= $this->getWidth($unit->getRage(), UnitInterface::MAX_RAGE) ?>%;"></div>

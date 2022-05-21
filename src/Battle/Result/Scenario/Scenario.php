@@ -369,7 +369,7 @@ class Scenario implements ScenarioInterface
 
     private function getConcentrationBarWidth(UnitInterface $unit): int
     {
-        return (int)($unit->getConcentration() / UnitInterface::MAX_CONS * 100);
+        return (int)($unit->getConcentration() / UnitInterface::MAX_CONCENTRATION * 100);
     }
 
     private function getRageBarWidth(UnitInterface $unit): int

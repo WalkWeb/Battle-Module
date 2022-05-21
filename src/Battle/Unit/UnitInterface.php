@@ -31,7 +31,7 @@ interface UnitInterface
     public const ADD_RAGE_NEW_ROUND      = 50;
     public const ADD_RAGE_ACTION_UNIT    = 90;
     public const ADD_RAGE_RECEIVING_UNIT = 70;
-    public const MAX_CONS                = 1000;
+    public const MAX_CONCENTRATION       = 1000;
     public const MAX_RAGE                = 1000;
 
     public const MIN_LIFE         = 0;

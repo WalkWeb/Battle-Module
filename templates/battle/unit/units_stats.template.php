@@ -50,7 +50,7 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 <td><p><?= $unit->getOffense()->getDamage() ?></p></td>
                 <td><p><?= $unit->getOffense()->getAttackSpeed() ?></p></td>
                 <td><p><?= $unit->getDefense()->getBlock() ?></p></td>
-                <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONS ?></p></td>
+                <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONCENTRATION ?></p></td>
                 <td><p><?= $unit->getRage() ?>/<?= $unit::MAX_RAGE ?></p></td>
                 <td><p><?= ($unit->isMelee() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
                 <td><p><?= ($unit->isAction() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
@@ -71,7 +71,7 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 <td><p><?= $unit->getOffense()->getDamage() ?></p></td>
                 <td><p><?= $unit->getOffense()->getAttackSpeed() ?></p></td>
                 <td><p><?= $unit->getDefense()->getBlock() ?></p></td>
-                <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONS ?></p></td>
+                <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONCENTRATION ?></p></td>
                 <td><p><?= $unit->getRage() ?>/<?= $unit::MAX_RAGE ?></p></td>
                 <td><p><?= ($unit->isMelee() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
                 <td><p><?= ($unit->isAction() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
