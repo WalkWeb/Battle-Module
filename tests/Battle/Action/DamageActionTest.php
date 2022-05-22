@@ -7,6 +7,8 @@ namespace Tests\Battle\Action;
 use Battle\Action\DamageAction;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
+use Battle\Command\CommandInterface;
+use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\Mock\CommandMockFactory;
@@ -20,21 +22,12 @@ class DamageActionTest extends AbstractUnitTest
     public function testCreateDamageAction(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $defendUnit = UnitFactory::createByTemplate(2);
-        $defendCommand = CommandFactory::create([$defendUnit]);
-        $alliesCommand = CommandFactory::create([$unit]);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
         $canBeAvoided = true;
 
-        $action = new DamageAction(
-            $unit,
-            $defendCommand,
-            $alliesCommand,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            $canBeAvoided,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals($unit, $action->getCreatorUnit());
@@ -52,20 +45,11 @@ class DamageActionTest extends AbstractUnitTest
     public function testApplyDamageAction(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $defendUnit = UnitFactory::createByTemplate(2);
-        $defendCommand = CommandFactory::create([$defendUnit]);
-        $alliesCommand = CommandFactory::create([$unit]);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $defendCommand,
-            $alliesCommand,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
         self::assertEquals($unit->getOffense()->getDamage(), $action->getPower());
@@ -78,19 +62,10 @@ class DamageActionTest extends AbstractUnitTest
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$enemyUnit]);
-        $enemyCommand = CommandFactory::create([$unit]);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $command,
-            $enemyCommand,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
 
@@ -186,7 +161,8 @@ class DamageActionTest extends AbstractUnitTest
             $unit->getOffense()->getDamage(),
             true,
             DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
         );
 
         self::assertEquals($typeTarget, $action->getTypeTarget());
@@ -204,20 +180,11 @@ class DamageActionTest extends AbstractUnitTest
     public function testDamageActionNoPowerByUnit(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $defendUnit = UnitFactory::createByTemplate(2);
-        $defendCommand = CommandFactory::create([$defendUnit]);
-        $alliesCommand = CommandFactory::create([$unit]);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $defendCommand,
-            $alliesCommand,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
 
@@ -225,7 +192,7 @@ class DamageActionTest extends AbstractUnitTest
         self::assertEquals($unit->getOffense()->getDamage(), $action->getFactualPower());
 
         // factualPower, по юниту, по которому урон наносился - тоже
-        self::assertEquals($unit->getOffense()->getDamage(), $action->getFactualPowerByUnit($defendUnit));
+        self::assertEquals($unit->getOffense()->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
 
         // А вот factualPower по юниту, по которому урон не наносился - отсутствует
         $this->expectException(ActionException::class);
@@ -241,27 +208,17 @@ class DamageActionTest extends AbstractUnitTest
     public function testDamageActionTargetAllAliveEnemy(): void
     {
         $unit = UnitFactory::createByTemplate(1);
-        $firstEnemyUnit = UnitFactory::createByTemplate(2);
+        $enemyUnit = UnitFactory::createByTemplate(2);
         $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
-
         $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit, $secondaryEnemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         $action->handle();
 
         // Проверяем, что урон нанесен по обоим юнитам
-        self::assertEquals($firstEnemyUnit->getTotalLife() - $unit->getOffense()->getDamage(), $firstEnemyUnit->getLife());
+        self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage(), $enemyUnit->getLife());
         self::assertEquals($secondaryEnemyUnit->getTotalLife() - $unit->getOffense()->getDamage(), $secondaryEnemyUnit->getLife());
     }
 
@@ -277,16 +234,7 @@ class DamageActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         // По-умолчанию isBlocked возвращает false
         self::assertFalse($action->isBlocked($enemyUnit));
@@ -310,16 +258,7 @@ class DamageActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
 
@@ -337,16 +276,7 @@ class DamageActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertFalse($action->isDodged($enemyUnit));
 
@@ -369,16 +299,7 @@ class DamageActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
 
@@ -407,7 +328,8 @@ class DamageActionTest extends AbstractUnitTest
             $unit->getOffense()->getDamage(),
             false,
             DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
         );
 
         $action->handle();
@@ -442,16 +364,7 @@ class DamageActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
 
@@ -472,21 +385,39 @@ class DamageActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
 
         // Минимальный шанс попадания 5%, т.е. все равно может попасть. Соответственно мы не можем проверить
         // конкретное попадание или конкретное уклонение, по этому делается простая условная проверка
         self::assertIsInt($action->getPower());
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param int $typeTarget
+     * @return DamageAction
+     */
+    private function createDamageAction(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        int $typeTarget
+    ): DamageAction
+    {
+        return new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            $typeTarget,
+            $unit->getOffense()->getDamage(),
+            true,
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
+        );
     }
 }

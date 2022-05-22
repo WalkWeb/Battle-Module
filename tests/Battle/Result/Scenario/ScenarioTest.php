@@ -42,16 +42,7 @@ class ScenarioTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
 
@@ -105,16 +96,7 @@ class ScenarioTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
 
@@ -159,16 +141,7 @@ class ScenarioTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
 
@@ -214,16 +187,7 @@ class ScenarioTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -890,7 +854,8 @@ class ScenarioTest extends AbstractUnitTest
             10,
             true,
             DamageAction::DEFAULT_NAME,
-            'undefinedAnimationMethod'
+            'undefinedAnimationMethod',
+            DamageAction::DEFAULT_MESSAGE_METHOD
         );
 
         $this->expectException(ScenarioException::class);
@@ -994,5 +959,32 @@ class ScenarioTest extends AbstractUnitTest
         ];
 
         return $actionFactory->create($data);
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param int $typeTarget
+     * @return DamageAction
+     */
+    private function createDamageAction(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        int $typeTarget
+    ): DamageAction
+    {
+        return new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            $typeTarget,
+            $unit->getOffense()->getDamage(),
+            true,
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
+        );
     }
 }

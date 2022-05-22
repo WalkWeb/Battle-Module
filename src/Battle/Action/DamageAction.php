@@ -67,8 +67,6 @@ class DamageAction extends AbstractAction
      */
     protected $dodgedByUnit = [];
 
-    // TODO Избавиться от null параметров в конструкторе
-
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
@@ -78,7 +76,7 @@ class DamageAction extends AbstractAction
         bool $canBeAvoided,
         string $name,
         string $animationMethod,
-        ?string $messageMethod = null,
+        string $messageMethod,
         string $icon = ''
     )
     {
@@ -87,7 +85,7 @@ class DamageAction extends AbstractAction
         $this->canBeAvoided = $canBeAvoided;
         $this->name = $name;
         $this->animationMethod = $animationMethod;
-        $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
+        $this->messageMethod = $messageMethod;
     }
 
     /**

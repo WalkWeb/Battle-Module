@@ -122,16 +122,7 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -145,20 +136,11 @@ class ChatTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testChatAddMessageDamage(): void
+    public function testChatAddMessageDamageDefault(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -177,16 +159,7 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 28);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -205,16 +178,7 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 30);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -631,16 +595,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -655,7 +610,7 @@ class ChatTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testChatAddMessageDamageAndBlocked(): void
+    public function testChatAddMessageDamageAndBlockedDefault(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $firstEnemyUnit = UnitFactory::createByTemplate(2);
@@ -664,16 +619,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -697,16 +643,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -730,16 +667,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -764,16 +692,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit, $blockedUnit, $dodgedUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -939,16 +858,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -1008,5 +918,32 @@ class ChatTest extends AbstractUnitTest
         ];
 
         return $actionFactory->create($data);
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param int $typeTarget
+     * @return DamageAction
+     */
+    private function createDamageAction(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        int $typeTarget
+    ): DamageAction
+    {
+        return new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            $typeTarget,
+            $unit->getOffense()->getDamage(),
+            true,
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
+        );
     }
 }

@@ -113,16 +113,7 @@ class StatisticsTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command);
 
         $action->handle();
 
@@ -154,16 +145,7 @@ class StatisticsTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command);
 
         $action->handle();
 
@@ -174,16 +156,7 @@ class StatisticsTest extends AbstractUnitTest
         self::assertEquals(1, $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getBlockedHits());
 
         // И делаем удар еще раз
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command);
 
         $action->handle();
 
@@ -211,16 +184,7 @@ class StatisticsTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command);
 
         $action->handle();
 
@@ -231,16 +195,7 @@ class StatisticsTest extends AbstractUnitTest
         self::assertEquals(1, $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getDodgedHits());
 
         // И делаем удар еще раз
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command);
 
         $action->handle();
 
@@ -500,16 +455,7 @@ class StatisticsTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
-        );
+        $action = $this->createDamageAction($unit, $enemyCommand, $command);
 
         $action->handle();
         $statistics->addUnitAction($action);
@@ -543,7 +489,8 @@ class StatisticsTest extends AbstractUnitTest
             1000,
             true,
             DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
         );
 
         $action->handle();
@@ -653,5 +600,30 @@ class StatisticsTest extends AbstractUnitTest
         ];
 
         return $actionFactory->create($data);
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @return DamageAction
+     */
+    private function createDamageAction(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command
+    ): DamageAction
+    {
+        return new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_ALL_ENEMY,
+            $unit->getOffense()->getDamage(),
+            true,
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
+        );
     }
 }

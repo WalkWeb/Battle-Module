@@ -101,7 +101,8 @@ class UnitTest extends AbstractUnitTest
             $unit->getOffense()->getDamage(),
             true,
             DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
         );
 
         $action->handle();
@@ -118,7 +119,8 @@ class UnitTest extends AbstractUnitTest
             $unit->getOffense()->getDamage(),
             true,
             DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
         );
 
         $action2->handle();
@@ -366,7 +368,8 @@ class UnitTest extends AbstractUnitTest
             500,
             true,
             DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
         );
 
         $damageAction->handle();

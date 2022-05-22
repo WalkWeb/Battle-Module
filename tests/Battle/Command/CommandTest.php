@@ -234,7 +234,8 @@ class CommandTest extends AbstractUnitTest
             $enemyUnit->getOffense()->getDamage(),
             true,
             DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
         );
 
         $action->handle();
@@ -307,7 +308,8 @@ class CommandTest extends AbstractUnitTest
             $enemyUnit->getOffense()->getDamage(),
             true,
             DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
         );
 
         $damage->handle();

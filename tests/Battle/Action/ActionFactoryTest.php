@@ -41,15 +41,16 @@ class ActionFactoryTest extends AbstractUnitTest
 
         // Вариант с минимальным набором данных
         $data = [
-            'type'           => ActionInterface::DAMAGE,
-            'action_unit'    => $unit,
-            'enemy_command'  => $enemyCommand,
-            'allies_command' => $command,
-            'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-            'damage'         => $damage = 150,
-            'can_be_avoided' => $canBeAvoided = true,
-            'name'           => $name = 'attack',
+            'type'             => ActionInterface::DAMAGE,
+            'action_unit'      => $unit,
+            'enemy_command'    => $enemyCommand,
+            'allies_command'   => $command,
+            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+            'damage'           => $damage = 150,
+            'can_be_avoided'   => $canBeAvoided = true,
+            'name'             => $name = 'attack',
             'animation_method' => $animationMethod = 'animation test',
+            'message_method'   => $messageMethod = 'message test',
         ];
 
         $action = $actionFactory->create($data);
@@ -62,8 +63,9 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals('', $action->getIcon());
         self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
         self::assertEquals($animationMethod, $action->getAnimationMethod());
+        self::assertEquals($messageMethod, $action->getMessageMethod());
 
-        // Полный набор данных
+        // Полный набор данных (добавляется только icon)
         $data = [
             'type'             => ActionInterface::DAMAGE,
             'action_unit'      => $unit,
@@ -218,13 +220,13 @@ class ActionFactoryTest extends AbstractUnitTest
             'melee'        => true,
             'class'        => 1,
             'race'         => 9,
-            'offense'    => [
+            'offense'      => [
                 'damage'       => 10,
                 'attack_speed' => 1,
                 'accuracy'     => 200,
                 'block_ignore' => 0,
             ],
-            'defense'    => [
+            'defense'      => [
                 'defense' => 100,
                 'block'   => 0,
             ],
@@ -541,204 +543,218 @@ class ActionFactoryTest extends AbstractUnitTest
             [
                 // 3: Отсутствует action_unit
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
-                    'can_be_avoided' => true,
-                    'name'           => 'action name',
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_ACTION_UNIT_DATA,
             ],
             [
                 // 4: action_unit содержит некорректный объект
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => new UnitFactory(),
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
-                    'can_be_avoided' => true,
-                    'name'           => 'action name',
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => new UnitFactory(),
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_ACTION_UNIT_DATA,
             ],
             [
                 // 5: Отсутствует enemy_command
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
-                    'can_be_avoided' => true,
-                    'name'           => 'action name',
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
             ],
             [
                 // 6: enemy_command содержит некорректный объект
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => new UnitFactory(),
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
-                    'can_be_avoided' => true,
-                    'name'           => 'action name',
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => new UnitFactory(),
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
             ],
             [
                 // 7: Отсутствует allies_command
                 [
-                    'type'          => ActionInterface::DAMAGE,
-                    'action_unit'   => $actionUnit,
-                    'enemy_command' => $enemyCommand,
-                    'type_target'   => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'        => 50,
-                    'can_be_avoided' => true,
-                    'name'          => 'action name',
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
             ],
             [
                 // 8: allies_command содержит некорректный объект
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => new UnitFactory(),
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
-                    'can_be_avoided' => true,
-                    'name'           => 'action name',
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => new UnitFactory(),
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_COMMAND_DATA,
             ],
             [
                 // 9: Отсутствует type_target [для DamageAction]
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'damage'         => 50,
-                    'can_be_avoided' => true,
-                    'name'           => 'action name',
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
                 // 10: type_target некорректного типа [для DamageAction]
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => true,
-                    'damage'         => 50,
-                    'can_be_avoided' => true,
-                    'name'           => 'action name',
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => true,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
                 // 11: Отсутствует can_be_avoided [для DamageAction]
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => $damage = 150,
-                    'name'           => 'action name',
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => $damage = 150,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_CAN_BE_AVOIDED,
             ],
             [
                 // 12: can_be_avoided некорректного типа [для DamageAction]
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => $damage = 150,
-                    'can_be_avoided' => '0',
-                    'name'           => 'action name',
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => $damage = 150,
+                    'can_be_avoided'   => '0',
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_CAN_BE_AVOIDED,
             ],
             [
                 // 13: damage некорректного типа
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => '50',
-                    'can_be_avoided' => true,
-                    'name'           => 'action name',
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => '50',
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_DAMAGE_DATA,
             ],
             [
                 // 14: Отсутствует name [для DamageAction]
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
-                    'can_be_avoided' => true,
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_NAME_DATA,
             ],
             [
                 // 15: name null [для DamageAction]
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
-                    'can_be_avoided' => true,
-                    'name'           => null,
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => null,
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_NAME_DATA,
             ],
             [
                 // 16: name некорректного типа [для DamageAction]
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
-                    'can_be_avoided' => true,
-                    'name'           => ['action name'],
-                    'animation_method' => $animationMethod = 'animation test',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => ['action name'],
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_NAME_DATA,
             ],
@@ -753,26 +769,59 @@ class ActionFactoryTest extends AbstractUnitTest
                     'damage'         => 50,
                     'can_be_avoided' => true,
                     'name'           => 'action name',
+                    'message_method' => 'message test',
                 ],
                 ActionException::INVALID_ANIMATION_DATA,
             ],
             [
                 // 18: animation_method некорректного типа [для DamageAction]
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
-                    'can_be_avoided' => true,
-                    'name'           => 'action name',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
                     'animation_method' => null,
+                    'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_ANIMATION_DATA,
             ],
             [
-                // 19: Отсутствует type_target [для HealAction]
+                // 19: Отсутствует message_method [для DamageAction]
+                [
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                ],
+                ActionException::INVALID_MESSAGE_METHOD,
+            ],
+            [
+                // 20: message_method некорректного типа [для DamageAction]
+                [
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'damage'           => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => null,
+                ],
+                ActionException::INVALID_MESSAGE_METHOD,
+            ],
+            [
+                // 21: Отсутствует type_target [для HealAction]
                 [
                     'type'           => ActionInterface::HEAL,
                     'action_unit'    => $actionUnit,
@@ -784,7 +833,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 20: type_target некорректного типа [для HealAction]
+                // 22: type_target некорректного типа [для HealAction]
                 [
                     'type'           => ActionInterface::HEAL,
                     'action_unit'    => $actionUnit,
@@ -797,7 +846,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 21: name некорректного типа [для HealAction]
+                // 23: name некорректного типа [для HealAction]
                 [
                     'type'           => ActionInterface::HEAL,
                     'action_unit'    => $actionUnit,
@@ -811,7 +860,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 22: Отсутствует name [для SummonAction]
+                // 24: Отсутствует name [для SummonAction]
                 [
                     'type'           => ActionInterface::SUMMON,
                     'action_unit'    => $actionUnit,
@@ -821,7 +870,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 23: name некорректного типа [для SummonAction]
+                // 25: name некорректного типа [для SummonAction]
                 [
                     'type'           => ActionInterface::SUMMON,
                     'action_unit'    => $actionUnit,
@@ -832,7 +881,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 24: Отсутствует summon [для SummonAction]
+                // 26: Отсутствует summon [для SummonAction]
                 [
                     'type'           => ActionInterface::SUMMON,
                     'action_unit'    => $actionUnit,
@@ -843,7 +892,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_SUMMON_DATA,
             ],
             [
-                // 25: summon некорректного типа [для SummonAction]
+                // 27: summon некорректного типа [для SummonAction]
                 [
                     'type'           => ActionInterface::SUMMON,
                     'action_unit'    => $actionUnit,
@@ -855,7 +904,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_SUMMON_DATA,
             ],
             [
-                // 26: summon не содержит нужных параметров [для SummonAction]. Для данного теста достаточно одной проверки,
+                // 28: summon не содержит нужных параметров [для SummonAction]. Для данного теста достаточно одной проверки,
                 // так как все варианты невалидных данных по юниту проверяются уже в UnitFactory
                 [
                     'type'           => ActionInterface::SUMMON,
@@ -868,7 +917,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 UnitException::INCORRECT_NAME,
             ],
             [
-                // 27: Отсутствует type_target [для BuffAction]
+                // 29: Отсутствует type_target [для BuffAction]
                 [
                     'type'           => ActionInterface::HEAL,
                     'action_unit'    => $actionUnit,
@@ -881,7 +930,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 28: type_target некорректного типа [для BuffAction]
+                // 30: type_target некорректного типа [для BuffAction]
                 [
                     'type'           => ActionInterface::HEAL,
                     'action_unit'    => $actionUnit,
@@ -895,7 +944,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 29: Отсутствует name [для BuffAction]
+                // 31: Отсутствует name [для BuffAction]
                 [
                     'type'           => ActionInterface::BUFF,
                     'action_unit'    => $actionUnit,
@@ -908,7 +957,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 30: name некорректного типа [для BuffAction]
+                // 32: name некорректного типа [для BuffAction]
                 [
                     'type'           => ActionInterface::BUFF,
                     'action_unit'    => $actionUnit,
@@ -922,7 +971,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 31: Отсутствует modify_method [для BuffAction]
+                // 33: Отсутствует modify_method [для BuffAction]
                 [
                     'type'           => ActionInterface::BUFF,
                     'action_unit'    => $actionUnit,
@@ -935,7 +984,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MODIFY_METHOD_DATA,
             ],
             [
-                // 32: modify_method некорректного типа [для BuffAction]
+                // 34: modify_method некорректного типа [для BuffAction]
                 [
                     'type'           => ActionInterface::BUFF,
                     'action_unit'    => $actionUnit,
@@ -949,7 +998,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MODIFY_METHOD_DATA,
             ],
             [
-                // 33: Отсутствует power [для BuffAction]
+                // 35: Отсутствует power [для BuffAction]
                 [
                     'type'           => ActionInterface::BUFF,
                     'action_unit'    => $actionUnit,
@@ -962,7 +1011,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 34: power некорректного типа [для BuffAction]
+                // 36: power некорректного типа [для BuffAction]
                 [
                     'type'           => ActionInterface::BUFF,
                     'action_unit'    => $actionUnit,
@@ -976,7 +1025,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 35: message_method некорректного типа [для BuffAction]
+                // 37: message_method некорректного типа [для BuffAction]
                 [
                     'type'           => ActionInterface::BUFF,
                     'action_unit'    => $actionUnit,
@@ -991,7 +1040,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD,
             ],
             // EffectAction
-            // 36: Отсутствует type_target
+            // 38: Отсутствует type_target
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1023,7 +1072,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
-            // 37: type_target некорректного типа
+            // 39: type_target некорректного типа
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1056,7 +1105,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
-            // 38: Отсутствует name
+            // 40: Отсутствует name
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1088,7 +1137,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_NAME_DATA,
             ],
-            // 39: name некорректного типа
+            // 41: name некорректного типа
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1121,7 +1170,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_NAME_DATA,
             ],
-            // 40: Отсутствует effect
+            // 42: Отсутствует effect
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1133,7 +1182,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_EFFECT_DATA,
             ],
-            // 41: effects некорректного типа
+            // 43: effects некорректного типа
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1146,7 +1195,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_EFFECT_DATA,
             ],
-            // 42: effects вместо массива данных по эффекту содержит строку
+            // 44: effects вместо массива данных по эффекту содержит строку
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1161,7 +1210,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_EFFECT_DATA,
             ],
-            // 43: ResurrectionAction - отсутствует type_target
+            // 45: ResurrectionAction - отсутствует type_target
             [
                 [
                     'type'           => ActionInterface::RESURRECTION,
@@ -1173,7 +1222,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
-            // 44: ResurrectionAction - type_target некорректного типа
+            // 46: ResurrectionAction - type_target некорректного типа
             [
                 [
                     'type'           => ActionInterface::RESURRECTION,
@@ -1186,7 +1235,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
-            // 45: ResurrectionAction - отсутствует power
+            // 47: ResurrectionAction - отсутствует power
             [
                 [
                     'type'           => ActionInterface::RESURRECTION,
@@ -1198,7 +1247,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_POWER_DATA,
             ],
-            // 46: ResurrectionAction - power некорректного типа
+            // 48: ResurrectionAction - power некорректного типа
             [
                 [
                     'type'           => ActionInterface::RESURRECTION,
@@ -1211,7 +1260,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_POWER_DATA,
             ],
-            // 47: ResurrectionAction - name некорректного типа
+            // 49: ResurrectionAction - name некорректного типа
             [
                 [
                     'type'           => ActionInterface::RESURRECTION,
@@ -1224,7 +1273,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_NAME_DATA,
             ],
-            // 48: DamageAction - некорректный icon
+            // 50: DamageAction - некорректный icon
             [
                 [
                     'type'           => ActionInterface::DAMAGE,
@@ -1238,7 +1287,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_ICON,
             ],
-            // 49: EffectAction - некорректный icon
+            // 51: EffectAction - некорректный icon
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1248,7 +1297,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'Effect',
                     'icon'           => true,
-                    'effect'           => [
+                    'effect'         => [
                         'name'                  => 'Effect test #1',
                         'icon'                  => 'effect_icon_#1',
                         'duration'              => 10,
@@ -1270,7 +1319,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_ICON,
             ],
-            // 50: EffectAction - некорректный animation_method
+            // 52: EffectAction - некорректный animation_method
             [
                 [
                     'type'             => ActionInterface::EFFECT,
@@ -1303,7 +1352,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_ANIMATION_DATA,
             ],
-            // 51: EffectAction - некорректный message_method
+            // 53: EffectAction - некорректный message_method
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1313,7 +1362,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'Effect',
                     'icon'           => 'icon.png',
-                    'effect'           => [
+                    'effect'         => [
                         'name'                  => 'Effect test #1',
                         'icon'                  => 'effect_icon_#1',
                         'duration'              => 10,
@@ -1337,7 +1386,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD,
             ],
             [
-                // 52: Некорректный power для HealAction
+                // 54: Некорректный power для HealAction
                 [
                     'type'           => ActionInterface::HEAL,
                     'action_unit'    => $actionUnit,
@@ -1349,7 +1398,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 53: отсутствует damage для DamageAction
+                // 55: отсутствует damage для DamageAction
                 [
                     'type'           => ActionInterface::DAMAGE,
                     'action_unit'    => $actionUnit,

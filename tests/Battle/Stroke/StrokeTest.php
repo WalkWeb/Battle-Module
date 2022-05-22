@@ -382,6 +382,7 @@ class StrokeTest extends AbstractUnitTest
                         'damage'           => 1000,
                         'can_be_avoided'   => false,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                        'message_method'   => DamageAction::DEFAULT_MESSAGE_METHOD,
                     ],
                 ],
                 'on_disable_actions'    => [],

@@ -156,6 +156,7 @@ class EffectTest extends AbstractUnitTest
                     'can_be_avoided'   => true,
                     'name'             => '',
                     'animation_method' => DamageAction::UNIT_ANIMATION_METHOD,
+                    'message_method'   => DamageAction::DEFAULT_MESSAGE_METHOD,
                 ],
             ],
             'on_next_round_actions' => [
@@ -169,6 +170,7 @@ class EffectTest extends AbstractUnitTest
                     'can_be_avoided'   => true,
                     'name'             => '',
                     'animation_method' => DamageAction::UNIT_ANIMATION_METHOD,
+                    'message_method'   => DamageAction::DEFAULT_MESSAGE_METHOD,
                 ],
             ],
             'on_disable_actions'    => [
@@ -182,6 +184,7 @@ class EffectTest extends AbstractUnitTest
                     'can_be_avoided'   => true,
                     'name'             => '',
                     'animation_method' => DamageAction::UNIT_ANIMATION_METHOD,
+                    'message_method'   => DamageAction::DEFAULT_MESSAGE_METHOD,
                 ],
             ],
         ];
