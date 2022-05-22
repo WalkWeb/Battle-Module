@@ -248,7 +248,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        $actions = $unit->getAction($enemyCommand, $command);
+        $actions = $unit->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
@@ -270,7 +270,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        $actions = $unit->getAction($enemyCommand, $command);
+        $actions = $unit->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());

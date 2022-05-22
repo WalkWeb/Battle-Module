@@ -138,7 +138,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->isReady());
 
         // Убиваем юнита повторно
-        $actions = $enemyUnit->getAction($command, $enemyCommand);
+        $actions = $enemyUnit->getActions($command, $enemyCommand);
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();

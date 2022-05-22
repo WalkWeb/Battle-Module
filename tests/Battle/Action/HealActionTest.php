@@ -35,7 +35,7 @@ class HealActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         // Наносим урон
-        $damages = $enemyUnit->getAction($alliesCommand, $enemyCommand);
+        $damages = $enemyUnit->getActions($alliesCommand, $enemyCommand);
 
         foreach ($damages as $damage) {
             $damage->handle();
@@ -50,7 +50,7 @@ class HealActionTest extends AbstractUnitTest
         }
 
         // Применяем лечение (получаем Action от способности GreatHealAbility)
-        $actions =  $priest->getAction($enemyCommand, $alliesCommand);
+        $actions =  $priest->getActions($enemyCommand, $alliesCommand);
 
         foreach ($actions as $action) {
             self::assertEquals(HealAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
@@ -87,7 +87,7 @@ class HealActionTest extends AbstractUnitTest
         }
 
         // Применяем лечение
-        $actions = $actionUnit->getAction($enemyCommand, $actionCommand);
+        $actions = $actionUnit->getActions($enemyCommand, $actionCommand);
 
         foreach ($actions as $action) {
             $action->handle();
@@ -116,7 +116,7 @@ class HealActionTest extends AbstractUnitTest
         }
 
         // Применяем лечение
-        $actions = $unit->getAction($enemyCommand, $actionCommand);
+        $actions = $unit->getActions($enemyCommand, $actionCommand);
 
         foreach ($actions as $action) {
             $action->handle();
@@ -173,7 +173,7 @@ class HealActionTest extends AbstractUnitTest
         }
 
         // Лечить некого - по этому будет получен удар
-        $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
+        $actionCollection = $alliesUnit->getActions($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(DamageAction::class, [$action]);

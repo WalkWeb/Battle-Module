@@ -97,7 +97,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
         // Обнуляем концентрацию, чтобы получить способность связанную с яростью
         $unit->useConcentrationAbility();
 
-        $actions = $unit->getAction($enemyCommand, $command);
+        $actions = $unit->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());

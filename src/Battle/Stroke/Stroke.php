@@ -127,7 +127,7 @@ class Stroke implements StrokeInterface
     private function handleUnitActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): void
     {
         if ($this->actionUnit->isAlive() && !$this->actionUnit->isAction()) {
-            foreach ($this->actionUnit->getAction($enemyCommand, $alliesCommand) as $action) {
+            foreach ($this->actionUnit->getActions($enemyCommand, $alliesCommand) as $action) {
 
                 if (!$enemyCommand->isAlive()) {
                     break;

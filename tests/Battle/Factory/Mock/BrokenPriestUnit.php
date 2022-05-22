@@ -18,7 +18,7 @@ class BrokenPriestUnit extends Unit
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
      */
-    public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
+    public function getActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         $collection = new ActionCollection();
 

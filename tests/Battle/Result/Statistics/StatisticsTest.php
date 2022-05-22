@@ -68,7 +68,7 @@ class StatisticsTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$attackUnit]);
 
-        $actionCollection = $attackUnit->getAction($enemyCommand, $alliesCommand);
+        $actionCollection = $attackUnit->getActions($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
             $action->handle();
@@ -78,7 +78,7 @@ class StatisticsTest extends AbstractUnitTest
 
         // Делаем 10 ударов
         for ($i = 0; $i < 10; $i++) {
-            $actionCollection = $attackUnit->getAction($enemyCommand, $alliesCommand);
+            $actionCollection = $attackUnit->getActions($enemyCommand, $alliesCommand);
 
             foreach ($actionCollection as $action) {
 
@@ -301,7 +301,7 @@ class StatisticsTest extends AbstractUnitTest
             $priest->newRound();
         }
 
-        $actionCollection = $priest->getAction($enemyCommand, $alliesCommand);
+        $actionCollection = $priest->getActions($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
             $action->handle();
@@ -315,7 +315,7 @@ class StatisticsTest extends AbstractUnitTest
             $priest->newRound();
         }
 
-        $actionCollection = $priest->getAction($enemyCommand, $alliesCommand);
+        $actionCollection = $priest->getActions($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
             $action->handle();
@@ -417,7 +417,7 @@ class StatisticsTest extends AbstractUnitTest
             $darkMage->newRound();
         }
 
-        $actions = $darkMage->getAction($enemyCommand, $command);
+        $actions = $darkMage->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertInstanceOf(SummonAction::class, $action);
@@ -433,7 +433,7 @@ class StatisticsTest extends AbstractUnitTest
             $darkMage->newRound();
         }
 
-        $actions = $darkMage->getAction($enemyCommand, $command);
+        $actions = $darkMage->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertInstanceOf(SummonAction::class, $action);

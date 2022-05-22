@@ -192,7 +192,7 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals(0, $unit->getRage());
         self::assertEquals(0, $enemyUnit->getRage());
 
-        $actionCollection = $unit->getAction($enemyCommand, $command);
+        $actionCollection = $unit->getActions($enemyCommand, $command);
 
         self::assertEquals(UnitInterface::ADD_CON_ACTION_UNIT, $unit->getConcentration());
         self::assertEquals(UnitInterface::ADD_RAGE_ACTION_UNIT, $unit->getRage());
@@ -295,7 +295,7 @@ class UnitTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactoryTest::createRightCommand();
 
-        $actions = $unit->getAction($enemyCommand, $command);
+        $actions = $unit->getActions($enemyCommand, $command);
 
         self::assertCount(2, $actions);
 
@@ -309,7 +309,7 @@ class UnitTest extends AbstractUnitTest
         $unit = UnitFactory::createByTemplate(16);
         $command = CommandFactory::create([$unit]);
 
-        $actions = $unit->getAction($enemyCommand, $command);
+        $actions = $unit->getActions($enemyCommand, $command);
 
         self::assertCount(1, $actions);
 
@@ -341,7 +341,7 @@ class UnitTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        $actions = $unit->getAction($enemyCommand, $command);
+        $actions = $unit->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
@@ -479,7 +479,7 @@ class UnitTest extends AbstractUnitTest
 
         $this->expectException(UnitException::class);
         $this->expectExceptionMessage(UnitException::CANNOT_ACTION);
-        $unit->getAction($enemyCommand, $command);
+        $unit->getActions($enemyCommand, $command);
     }
 
     /**
@@ -498,7 +498,7 @@ class UnitTest extends AbstractUnitTest
 
         $this->expectException(UnitException::class);
         $this->expectExceptionMessage(UnitException::CANNOT_ACTION);
-        $unit->getAction($enemyCommand, $command);
+        $unit->getActions($enemyCommand, $command);
     }
 
     /**

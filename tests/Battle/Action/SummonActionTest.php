@@ -31,7 +31,7 @@ class SummonActionTest extends AbstractUnitTest
             $alliesUnit->newRound();
         }
 
-        $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
+        $actionCollection = $alliesUnit->getActions($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(SummonAction::class, [$action]);

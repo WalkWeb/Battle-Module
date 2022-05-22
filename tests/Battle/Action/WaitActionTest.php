@@ -27,7 +27,7 @@ class WaitActionTest extends AbstractUnitTest
         $alliesCommand = CommandFactory::create([$alliesUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $actionCollection = $alliesUnit->getAction($enemyCommand, $alliesCommand);
+        $actionCollection = $alliesUnit->getActions($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
             self::assertContainsOnlyInstancesOf(WaitAction::class, [$action]);

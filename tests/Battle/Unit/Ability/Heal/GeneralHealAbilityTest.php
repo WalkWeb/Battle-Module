@@ -112,7 +112,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         }
 
         // По этому, получая способности через getAction - получаем DamageAction, а не GreatHealAbility
-        $abilities = $unit->getAction($enemyCommand, $command);
+        $abilities = $unit->getActions($enemyCommand, $command);
 
         foreach ($abilities as $ability) {
             self::assertInstanceOf(DamageAction::class, $ability);

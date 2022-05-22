@@ -30,7 +30,7 @@ class Unit extends AbstractUnit
      * @return ActionCollection
      * @throws Exception
      */
-    public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
+    public function getActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         // Если юнит мертв или уже ходил - бросаем исключение
         if (!$this->isAlive() || $this->isAction()) {

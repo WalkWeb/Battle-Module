@@ -377,7 +377,7 @@ class ScenarioTest extends AbstractUnitTest
         }
 
         // Применяем лечение
-        $actions = $actionUnit->getAction($enemyCommand, $actionCommand);
+        $actions = $actionUnit->getActions($enemyCommand, $actionCommand);
 
         foreach ($actions as $action) {
             $action->handle();

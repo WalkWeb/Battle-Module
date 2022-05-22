@@ -90,7 +90,7 @@ interface UnitInterface
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
      */
-    public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
+    public function getActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
 
     /**
      * Универсальный метод, через который мы применяем действие к юниту. Какое бы это действие не было - удар, лечение,

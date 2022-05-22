@@ -109,7 +109,7 @@ class DamageActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $alliesCommand = CommandFactory::create([$attackerUnit]);
 
-        $actionCollection = $attackerUnit->getAction($enemyCommand, $alliesCommand);
+        $actionCollection = $attackerUnit->getActions($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
             $action->handle();
@@ -130,7 +130,7 @@ class DamageActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $alliesCommand = CommandFactory::create([$attackerUnit]);
 
-        $actionCollection = $attackerUnit->getAction($enemyCommand, $alliesCommand);
+        $actionCollection = $attackerUnit->getActions($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
             $this->expectException(ActionException::class);
@@ -151,7 +151,7 @@ class DamageActionTest extends AbstractUnitTest
         $alliesCommand = CommandFactory::create([$attackerUnit]);
         $enemyCommand = (new CommandMockFactory())->createAliveAndNoDefinedUnit();
 
-        $actionCollection = $attackerUnit->getAction($enemyCommand, $alliesCommand);
+        $actionCollection = $attackerUnit->getActions($enemyCommand, $alliesCommand);
 
         foreach ($actionCollection as $action) {
             $this->expectException(ActionException::class);
