@@ -119,7 +119,8 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -158,7 +159,8 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -176,7 +178,8 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -211,7 +214,8 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -229,7 +233,8 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -496,7 +501,8 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -529,7 +535,8 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             1000,
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();

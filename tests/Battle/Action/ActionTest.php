@@ -33,7 +33,8 @@ class ActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $this->expectException(ActionException::class);
@@ -59,7 +60,8 @@ class ActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $this->expectException(ActionException::class);
@@ -85,7 +87,8 @@ class ActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $this->expectException(ActionException::class);
@@ -111,7 +114,8 @@ class ActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $this->expectException(ActionException::class);
@@ -137,7 +141,8 @@ class ActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $this->expectException(ActionException::class);
@@ -163,7 +168,8 @@ class ActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $this->expectException(ActionException::class);
@@ -262,7 +268,8 @@ class ActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertEquals($unit, $action->getActionUnit());
@@ -292,7 +299,8 @@ class ActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $cloneAction = clone $action;

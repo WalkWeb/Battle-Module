@@ -128,7 +128,8 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertTrue($action->canByUsed());
@@ -153,7 +154,8 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertTrue($action->canByUsed());
@@ -179,7 +181,8 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertTrue($action->canByUsed());
@@ -205,7 +208,8 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertTrue($action->canByUsed());
@@ -629,7 +633,8 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertTrue($action->canByUsed());
@@ -660,7 +665,8 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertTrue($action->canByUsed());
@@ -691,7 +697,8 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertTrue($action->canByUsed());
@@ -722,7 +729,8 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertTrue($action->canByUsed());
@@ -754,7 +762,8 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertTrue($action->canByUsed());
@@ -927,7 +936,8 @@ class ChatTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertTrue($action->canByUsed());

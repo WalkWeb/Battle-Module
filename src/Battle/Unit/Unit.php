@@ -415,7 +415,8 @@ class Unit extends AbstractUnit
                 $alliesCommand,
                 DamageAction::TARGET_RANDOM_ENEMY,
                 $this->getOffense()->getDamage(),
-                true
+                true,
+                DamageAction::DEFAULT_NAME
             ));
         }
 

@@ -63,7 +63,7 @@ class ActionFactory
             $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
             $damage = self::int($data, 'damage', ActionException::INVALID_DAMAGE_DATA);
             $canBeAvoided = self::bool($data, 'can_be_avoided', ActionException::INVALID_CAN_BE_AVOIDED);
-            $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
+            $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
             $animationMethod = self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA);
             $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
 

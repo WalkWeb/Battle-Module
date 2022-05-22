@@ -31,7 +31,8 @@ class DamageActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            $canBeAvoided
+            $canBeAvoided,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertEquals($unit, $action->getActionUnit());
@@ -60,7 +61,8 @@ class DamageActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -83,7 +85,8 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -178,7 +181,8 @@ class DamageActionTest extends AbstractUnitTest
             $alliesCommand,
             $typeTarget,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertEquals($typeTarget, $action->getTypeTarget());
@@ -206,7 +210,8 @@ class DamageActionTest extends AbstractUnitTest
             $alliesCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -243,7 +248,8 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -271,7 +277,8 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         // По-умолчанию isBlocked возвращает false
@@ -302,7 +309,8 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -327,7 +335,8 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         self::assertFalse($action->isDodged($enemyUnit));
@@ -357,7 +366,8 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -385,7 +395,8 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            false
+            false,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -426,7 +437,8 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -454,7 +466,8 @@ class DamageActionTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();

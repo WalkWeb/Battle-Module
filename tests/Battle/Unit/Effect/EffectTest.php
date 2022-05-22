@@ -154,6 +154,7 @@ class EffectTest extends AbstractUnitTest
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'damage'         => 20,
                     'can_be_avoided' => true,
+                    'name'           => '',
                 ]
             ],
             'on_next_round_actions' => [
@@ -165,6 +166,7 @@ class EffectTest extends AbstractUnitTest
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'damage'         => 20,
                     'can_be_avoided' => true,
+                    'name'           => '',
                 ]
             ],
             'on_disable_actions'    => [
@@ -176,6 +178,7 @@ class EffectTest extends AbstractUnitTest
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'damage'         => 20,
                     'can_be_avoided' => true,
+                    'name'           => '',
                 ]
             ],
         ];

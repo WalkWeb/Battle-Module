@@ -23,7 +23,7 @@ class ActionException extends Exception
     public const INVALID_DAMAGE_DATA        = 'ActionFactory: Invalid damage data: int expected';
     public const INVALID_CAN_BE_AVOIDED     = 'ActionFactory: Invalid can_be_avoided data: bool expected';
     public const INVALID_TYPE_TARGET_DATA   = 'ActionFactory: Invalid type_target: int expected';
-    public const INVALID_NAME_DATA          = 'ActionFactory: Invalid name data: string or null expected';
+    public const INVALID_NAME_DATA          = 'ActionFactory: Invalid name data: string expected';
     public const INVALID_ANIMATION_DATA     = 'ActionFactory: Invalid animation_name data: string or null expected';
     public const INVALID_ACTION_UNIT_DATA   = 'ActionFactory: Invalid unit data';
     public const INVALID_COMMAND_DATA       = 'ActionFactory: Invalid command data';

@@ -99,7 +99,8 @@ class UnitTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action->handle();
@@ -114,7 +115,8 @@ class UnitTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $action2->handle();
@@ -360,7 +362,8 @@ class UnitTest extends AbstractUnitTest
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
             500,
-            true
+            true,
+            DamageAction::DEFAULT_NAME
         );
 
         $damageAction->handle();

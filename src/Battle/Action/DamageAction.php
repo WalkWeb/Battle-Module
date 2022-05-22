@@ -10,8 +10,8 @@ use Battle\Unit\UnitInterface;
 
 class DamageAction extends AbstractAction
 {
-    private const HANDLE_METHOD          = 'applyDamageAction';
-    private const DEFAULT_NAME           = 'attack';
+    public const HANDLE_METHOD           = 'applyDamageAction';
+    public const DEFAULT_NAME            = 'attack';
     public const UNIT_ANIMATION_METHOD   = 'damage';
     public const EFFECT_ANIMATION_METHOD = 'effectDamage';
     public const DEFAULT_MESSAGE_METHOD  = 'damage';
@@ -67,7 +67,7 @@ class DamageAction extends AbstractAction
      */
     protected $dodgedByUnit = [];
 
-    // TODO В будущем надо избавиться от null параметров в конструкторе
+    // TODO Избавиться от null параметров в конструкторе
 
     public function __construct(
         UnitInterface $actionUnit,
@@ -76,7 +76,7 @@ class DamageAction extends AbstractAction
         int $typeTarget,
         int $damage,
         bool $canBeAvoided,
-        ?string $name = null,
+        string $name,
         ?string $animationMethod = null,
         ?string $messageMethod = null,
         string $icon = ''
@@ -85,7 +85,7 @@ class DamageAction extends AbstractAction
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->damage = $damage;
         $this->canBeAvoided = $canBeAvoided;
-        $this->name = $name ?? self::DEFAULT_NAME;
+        $this->name = $name;
         $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
         $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
     }
