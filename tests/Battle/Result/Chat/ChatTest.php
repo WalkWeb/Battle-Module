@@ -129,7 +129,8 @@ class ChatTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertTrue($action->canByUsed());
@@ -155,7 +156,8 @@ class ChatTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertTrue($action->canByUsed());
@@ -182,7 +184,8 @@ class ChatTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertTrue($action->canByUsed());
@@ -209,7 +212,8 @@ class ChatTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertTrue($action->canByUsed());
@@ -518,7 +522,7 @@ class ChatTest extends AbstractUnitTest
             10,
             true,
             'Poison',
-            null,
+            DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::EFFECT_MESSAGE_METHOD
         );
 
@@ -604,7 +608,7 @@ class ChatTest extends AbstractUnitTest
             30,
             true,
             'test attack',
-            null,
+            DamageAction::UNIT_ANIMATION_METHOD,
             'undefinedMessageMethod'
         );
 
@@ -634,7 +638,8 @@ class ChatTest extends AbstractUnitTest
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertTrue($action->canByUsed());
@@ -666,7 +671,8 @@ class ChatTest extends AbstractUnitTest
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertTrue($action->canByUsed());
@@ -698,7 +704,8 @@ class ChatTest extends AbstractUnitTest
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertTrue($action->canByUsed());
@@ -730,7 +737,8 @@ class ChatTest extends AbstractUnitTest
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertTrue($action->canByUsed());
@@ -763,7 +771,8 @@ class ChatTest extends AbstractUnitTest
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertTrue($action->canByUsed());
@@ -937,7 +946,8 @@ class ChatTest extends AbstractUnitTest
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertTrue($action->canByUsed());

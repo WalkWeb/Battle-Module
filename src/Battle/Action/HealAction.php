@@ -38,6 +38,8 @@ class HealAction extends AbstractAction
      */
     protected $messageMethod;
 
+    // TODO Избавиться от null параметров в конструкторе
+
     public function __construct(
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,

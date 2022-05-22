@@ -77,7 +77,7 @@ class DamageAction extends AbstractAction
         int $damage,
         bool $canBeAvoided,
         string $name,
-        ?string $animationMethod = null,
+        string $animationMethod,
         ?string $messageMethod = null,
         string $icon = ''
     )
@@ -86,7 +86,7 @@ class DamageAction extends AbstractAction
         $this->damage = $damage;
         $this->canBeAvoided = $canBeAvoided;
         $this->name = $name;
-        $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
+        $this->animationMethod = $animationMethod;
         $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
     }
 

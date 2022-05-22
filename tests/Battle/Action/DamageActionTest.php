@@ -32,7 +32,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             $canBeAvoided,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertEquals($unit, $action->getActionUnit());
@@ -62,7 +63,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         $action->handle();
@@ -86,7 +88,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         $action->handle();
@@ -182,7 +185,8 @@ class DamageActionTest extends AbstractUnitTest
             $typeTarget,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertEquals($typeTarget, $action->getTypeTarget());
@@ -211,7 +215,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         $action->handle();
@@ -249,7 +254,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_ALL_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         $action->handle();
@@ -278,7 +284,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         // По-умолчанию isBlocked возвращает false
@@ -310,7 +317,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         $action->handle();
@@ -336,7 +344,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         self::assertFalse($action->isDodged($enemyUnit));
@@ -367,7 +376,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         $action->handle();
@@ -396,7 +406,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             false,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         $action->handle();
@@ -438,7 +449,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         $action->handle();
@@ -467,7 +479,8 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::TARGET_RANDOM_ENEMY,
             $unit->getOffense()->getDamage(),
             true,
-            DamageAction::DEFAULT_NAME
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD
         );
 
         $action->handle();
