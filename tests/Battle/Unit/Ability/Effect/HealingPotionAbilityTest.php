@@ -7,7 +7,6 @@ namespace Tests\Battle\Unit\Ability\Effect;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
-use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
@@ -185,13 +184,27 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         }
 
         for ($i = 1; $i < 5; $i++) {
-            $this->nextRound($unit);
+
+            // Применяем события от эффектов на юните
+            foreach ($unit->getBeforeActions() as $beforeAction) {
+                if ($beforeAction->canByUsed()) {
+                    $beforeAction->handle();
+                }
+            }
 
             // Проверяем FactualPower после применения - он не должен меняться
             self::assertEquals(1 + $power * $i, $unit->getLife());
+
             foreach ($unit->getEffects() as $effect) {
                 foreach ($effect->getOnNextRoundActions() as $effectAction) {
                     self::assertEquals($power, $effectAction->getFactualPower());
+                }
+            }
+
+            // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
                 }
             }
         }
@@ -222,9 +235,13 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         // После появления эффекта на юните - способность уже не может быть применена
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
-        // Пропускаем ходы
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
         }
 
         // Эффект исчез - способность опять может быть применена
@@ -349,19 +366,5 @@ class HealingPotionAbilityTest extends AbstractUnitTest
             $action->handle();
             self::assertEquals(self::MESSAGE_APPLY_TO_RU, $this->getChatRu()->addMessage($action));
         }
-    }
-
-    /**
-     * @param UnitInterface $unit
-     * @throws Exception
-     */
-    private function nextRound(UnitInterface $unit): void
-    {
-        foreach ($unit->getOnNewRoundActions() as $action) {
-            if ($action->canByUsed()) {
-                $action->handle();
-            }
-        }
-        $unit->newRound();
     }
 }

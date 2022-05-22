@@ -109,9 +109,13 @@ class BattleFuryAbilityTest extends AbstractUnitTest
         // Проверяем, что скорость атаки юнита выросла
         self::assertEquals($oldAttackSpeed * $power , $unit->getOffense()->getAttackSpeed());
 
-        // Пропускаем ходы
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 30; $i++) {
-            $unit->newRound();
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
         }
 
         // Проверяем, что скорость атаки вернулась к исходному
@@ -143,9 +147,13 @@ class BattleFuryAbilityTest extends AbstractUnitTest
         // После появления эффекта на юните - способность уже не может быть применена
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
-        // Пропускаем ходы
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 30; $i++) {
-            $unit->newRound();
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
         }
 
         // Эффект исчез - способность опять может быть применена

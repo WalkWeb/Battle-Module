@@ -79,9 +79,13 @@ class EffectActionTest extends AbstractUnitTest
         self::assertEquals((int)($unitBaseLife * 1.3), $unit->getTotalLife());
         self::assertEquals((int)($unitBaseLife * 1.3), $unit->getLife());
 
-        // Пропускаем ходы и проверяем, что здоровье вернулось к исходному
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
         }
 
         self::assertEquals($unitBaseLife, $unit->getTotalLife());

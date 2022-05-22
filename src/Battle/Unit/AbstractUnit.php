@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit;
 
 use Battle\Action\ActionCollection;
+use Battle\Action\ActionException;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\ContainerInterface;
@@ -276,16 +277,6 @@ abstract class AbstractUnit implements UnitInterface
         $this->action = false;
         $this->addConcentration(self::ADD_CON_NEW_ROUND);
         $this->addRage(self::ADD_RAGE_NEW_ROUND);
-
-        // События, которые должны примениться при отмене эффекта
-        $effectActions = $this->effects->nextRound();
-
-        foreach ($effectActions as $action) {
-            if ($action->canByUsed()) {
-                $action->handle();
-                $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
-            }
-        }
     }
 
     /**
@@ -309,6 +300,23 @@ abstract class AbstractUnit implements UnitInterface
     public function getEffects(): EffectCollection
     {
         return $this->effects;
+    }
+
+    /**
+     * @return ActionCollection
+     */
+    public function getBeforeActions(): ActionCollection
+    {
+        return $this->getOnNewRoundActions();
+    }
+
+    /**
+     * @return ActionCollection
+     * @throws ActionException
+     */
+    public function getAfterActions(): ActionCollection
+    {
+        return $this->effects->nextRound();
     }
 
     /**

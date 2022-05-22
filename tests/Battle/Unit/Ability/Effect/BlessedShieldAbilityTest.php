@@ -123,9 +123,13 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         self::assertEquals(15, $unit->getDefense()->getBlock());
         self::assertCount(1, $unit->getEffects());
 
-        // Пропускаем 10 ходов
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
         }
 
         // И проверяем, что блок вернулся к исходному
@@ -177,10 +181,13 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         // Проверка блока после использования, он также равен 100
         self::assertEquals(100, $unit->getDefense()->getBlock());
 
-
-        // Пропускаем 10 ходов
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
         }
 
         // И проверяем, что блок вернулся к исходному (не изменился)

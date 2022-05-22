@@ -104,9 +104,13 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         self::assertEquals((int)($unitBaseLife * 1.3), $unit->getTotalLife());
         self::assertEquals((int)($unitBaseLife * 1.3), $unit->getLife());
 
-        // Пропускаем ходы
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
         }
 
         // Проверяем, что здоровье вернулось к исходному
@@ -167,9 +171,13 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         // После появления эффекта на юните - способность уже не может быть применена
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
-        // Пропускаем ходы
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
         }
 
         // Эффект исчез - способность опять может быть применена
@@ -205,16 +213,21 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
             self::assertEquals(6, $effect->getDuration());
         }
 
-        // Пропускаем ходы
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+        for ($i = 0; $i < 10; $i++) {
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        // Up concentration
         for ($i = 0; $i < 10; $i++) {
             $unit->newRound();
         }
 
         // Применяем способность еще раз
-        for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
-        }
-
         $actions = $unit->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {

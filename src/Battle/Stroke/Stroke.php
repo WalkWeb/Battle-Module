@@ -82,8 +82,9 @@ class Stroke implements StrokeInterface
         $enemyCommand = $this->actionCommand === 1 ? $this->rightCommand : $this->leftCommand;
         $alliesCommand = $this->actionCommand === 1 ? $this->leftCommand : $this->rightCommand;
 
-        $this->handleUnitEffects();
+        $this->handleBeforeActionUnit();
         $this->handleUnitActions($enemyCommand, $alliesCommand);
+        $this->handleAfterActionUnit();
         $this->handleDeadActions($enemyCommand, $alliesCommand);
 
         //--------------------------------------------------------------------------------------------------------------
@@ -98,11 +99,14 @@ class Stroke implements StrokeInterface
      * Перед тем как юнит начинает ходить - нужно выполнить события эффектов на данном юните, которые срабатывают на
      * каждом раунде
      *
+     * Важно: события выполняются только если они могут выполниться. Например, на юните имеется эффект постепенного
+     * лечения, но юнит уже здоров - событие лечения от эффекта примениться не сможет, и это нормально
+     *
      * @throws Exception
      */
-    private function handleUnitEffects(): void
+    private function handleBeforeActionUnit(): void
     {
-        foreach ($this->actionUnit->getOnNewRoundActions() as $action) {
+        foreach ($this->actionUnit->getBeforeActions() as $action) {
             if ($action->canByUsed()) {
                 $this->runAction($action);
             }
@@ -142,6 +146,25 @@ class Stroke implements StrokeInterface
                 }
 
                 $this->runAction($action);
+            }
+        }
+    }
+
+    /**
+     * После того как юнит походил, необходимо выполнить события связанные с окончанием действием эффектов
+     *
+     * Важно: события выполняются только если они могут выполниться. Например, на юните имеется эффект лечения при
+     * завершении эффекта, но юнит уже здоров - событие лечения от эффекта примениться не сможет, и это нормально
+     *
+     * @throws Exception
+     */
+    public function handleAfterActionUnit(): void
+    {
+        foreach ($this->actionUnit->getAfterActions() as $action) {
+            if ($action->canByUsed()) {
+                $this->runAction($action);
+//                $action->handle();
+//                $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
             }
         }
     }

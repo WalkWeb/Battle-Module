@@ -102,7 +102,13 @@ class ParalysisAbilityTest extends AbstractUnitTest
         // Пропускаем ходы - заполняем ярость. А также сбрасываем эффект у противника
         for ($i = 0; $i < 20; $i++) {
             $unit->newRound();
-            $enemyUnit->newRound();
+
+            // Длительность эффектов обновляется в getAfterActions()
+            foreach ($enemyUnit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
         }
 
         // Эффект исчез

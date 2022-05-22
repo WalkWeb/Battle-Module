@@ -72,7 +72,7 @@ $data = [
             'block'   => 0,
         ],
     ],
-    23 => [
+    [
         'id'         => '942be229-2272-45d5-94ec-4c20be94a344',
         'name'       => 'Succubus',
         'level'      => 2,

@@ -108,11 +108,16 @@ class RageAbilityTest extends AbstractUnitTest
         // Проверяем, что урон вырос в 2 раза
         self::assertEquals(70, $unit->getOffense()->getDamage());
 
-        // Пропускаем 10 ходов и проверяем, что урон вернулся к прежнему
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
         }
 
+        // И проверяем, что урон вернулся к прежнему
         self::assertEquals(35, $unit->getOffense()->getDamage());
         self::assertCount(0, $unit->getEffects());
     }
