@@ -46,6 +46,22 @@ class Ability extends AbstractAbility
      */
     private $chanceActivate;
 
+    /**
+     * @var ActionFactory
+     */
+    private $actionFactory;
+
+    /**
+     * @param UnitInterface $unit
+     * @param bool $disposable
+     * @param string $name
+     * @param string $icon
+     * @param array $actionsData
+     * @param int $typeActivate
+     * @param int $chanceActivate
+     * @param ActionFactory|null $actionFactory
+     * @throws Exception
+     */
     public function __construct(
         UnitInterface $unit,
         bool $disposable,
@@ -53,15 +69,17 @@ class Ability extends AbstractAbility
         string $icon,
         array $actionsData,
         int $typeActivate,
-        int $chanceActivate = 100
+        int $chanceActivate = 100,
+        ?ActionFactory $actionFactory = null
     )
     {
         parent::__construct($unit, $disposable);
         $this->name = $name;
         $this->icon = $icon;
-        $this->actionsData = $actionsData;
         $this->typeActivate = $typeActivate;
         $this->chanceActivate = $chanceActivate;
+        $this->actionFactory = $actionFactory ?? new ActionFactory();
+        $this->actionsData = $this->validateActionsData($actionsData);
     }
 
     public function getName(): string
@@ -105,13 +123,17 @@ class Ability extends AbstractAbility
     {
         $actions = new ActionCollection();
         foreach ($this->actionsData as $actionData) {
-            // TODO Проверка, что $actionData это массив
-            $actions->add((new ActionFactory())->create($actionData));
+            $actions->add($this->actionFactory->create($actionData));
         }
 
         return $actions;
     }
 
+    /**
+     * @param UnitInterface $unit
+     * @param bool $testMode
+     * @throws Exception
+     */
     public function update(UnitInterface $unit, bool $testMode = false): void
     {
         if ($this->disposable && $this->usage) {
@@ -119,22 +141,23 @@ class Ability extends AbstractAbility
             return;
         }
 
-        // TODO Переписать на switch
-        if ($this->typeActivate === self::ACTIVATE_CONCENTRATION) {
-            $this->ready = $unit->getConcentration() === UnitInterface::MAX_CONCENTRATION;
-        }
-        if ($this->typeActivate === self::ACTIVATE_RAGE) {
-            $this->ready = $unit->getRage() === UnitInterface::MAX_RAGE;
-        }
-        if ($this->typeActivate === self::ACTIVATE_LOW_LIFE) {
-            $this->ready = !$this->usage && $this->unit->getLife() < $this->unit->getTotalLife() * 0.3;
-        }
-        if ($this->typeActivate === self::ACTIVATE_DEAD) {
-            if ($testMode) {
-                $this->ready = !$this->unit->isAlive();
-            } else {
-                $this->ready = !$this->unit->isAlive() && random_int(0, 100) <= $this->chanceActivate;
-            }
+        switch ($this->typeActivate) {
+            case self::ACTIVATE_CONCENTRATION:
+                $this->ready = $unit->getConcentration() === UnitInterface::MAX_CONCENTRATION;
+                break;
+            case self::ACTIVATE_RAGE:
+                $this->ready = $unit->getRage() === UnitInterface::MAX_RAGE;
+                break;
+            case self::ACTIVATE_LOW_LIFE:
+                $this->ready = !$this->usage && $this->unit->getLife() < $this->unit->getTotalLife() * 0.3;
+                break;
+            case self::ACTIVATE_DEAD:
+                if ($testMode) {
+                    $this->ready = !$this->unit->isAlive();
+                } else {
+                    $this->ready = !$this->unit->isAlive() && random_int(0, 100) <= $this->chanceActivate;
+                }
+                break;
         }
     }
 
@@ -149,5 +172,24 @@ class Ability extends AbstractAbility
         if ($this->typeActivate === self::ACTIVATE_RAGE) {
             $this->unit->useRageAbility();
         }
+    }
+
+    /**
+     * @param array $actionsData
+     * @return array
+     * @throws Exception
+     */
+    private function validateActionsData(array $actionsData): array
+    {
+        foreach ($actionsData as $actionData) {
+            // Проверяем, что передан массив из массивов
+            if (!is_array($actionData)) {
+                throw new AbilityException(AbilityException::INVALID_ACTION_DATA);
+            }
+            // Сразу создаем из массива Action, чтобы если переданы некорректные данные - ошибка была сразу при создании
+            $this->actionFactory->create($actionData);
+        }
+
+        return $actionsData;
     }
 }
