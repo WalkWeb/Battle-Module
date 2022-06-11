@@ -39,11 +39,6 @@ class Ability extends AbstractAbility
     /**
      * @var int
      */
-    private $typeAbility;
-
-    /**
-     * @var int
-     */
     private $typeActivate;
 
     /**
@@ -57,7 +52,6 @@ class Ability extends AbstractAbility
         string $name,
         string $icon,
         array $actionsData,
-        int $typeAbility,
         int $typeActivate,
         int $chanceActivate = 100
     )
@@ -66,8 +60,6 @@ class Ability extends AbstractAbility
         $this->name = $name;
         $this->icon = $icon;
         $this->actionsData = $actionsData;
-        // TODO remove typeAbility
-        $this->typeAbility = $typeAbility;
         $this->typeActivate = $typeActivate;
         $this->chanceActivate = $chanceActivate;
     }

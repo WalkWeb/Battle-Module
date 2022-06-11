@@ -122,7 +122,6 @@ class SummonImpAbilityTest extends AbstractUnitTest
                     ],
                 ],
             ],
-            AbilityInterface::TYPE_SUMMON,
             AbilityInterface::ACTIVATE_CONCENTRATION,
             0
         );

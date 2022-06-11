@@ -11,14 +11,7 @@ use Exception;
 
 interface AbilityInterface
 {
-    // Способности
-    public const TYPE_DAMAGE       = 1;
-    public const TYPE_HEAL         = 2;
-    public const TYPE_EFFECT       = 3;
-    public const TYPE_SUMMON       = 4;
-    public const TYPE_RESURRECTION = 5;
-
-    // Варианты активации
+    // Варианты активации способности
     public const ACTIVATE_CONCENTRATION = 1;
     public const ACTIVATE_RAGE          = 2;
     public const ACTIVATE_LOW_LIFE      = 3;

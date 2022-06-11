@@ -122,7 +122,6 @@ class SummonFireElementalAbilityTest extends AbstractUnitTest
                     ],
                 ],
             ],
-            AbilityInterface::TYPE_SUMMON,
             AbilityInterface::ACTIVATE_RAGE,
             0
         );

@@ -137,7 +137,6 @@ class IncinerationAbilityTest extends AbstractUnitTest
                     ],
                 ],
             ],
-            AbilityInterface::TYPE_EFFECT,
             AbilityInterface::ACTIVATE_CONCENTRATION,
             0
         );

@@ -219,7 +219,6 @@ class BackToLifeAbilityTest extends AbstractUnitTest
                     'icon'           => $icon,
                 ],
             ],
-            AbilityInterface::TYPE_RESURRECTION,
             AbilityInterface::ACTIVATE_RAGE,
             0
         );

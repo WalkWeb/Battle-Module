@@ -359,7 +359,6 @@ class WillToLiveAbilityTest extends AbstractUnitTest
                     'message_method' => $messageMethod,
                 ],
             ],
-            AbilityInterface::TYPE_RESURRECTION,
             AbilityInterface::ACTIVATE_DEAD,
             0
         );

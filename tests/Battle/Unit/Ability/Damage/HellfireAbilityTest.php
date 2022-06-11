@@ -119,7 +119,6 @@ class HellfireAbilityTest extends AbstractUnitTest
                     'icon'             => $icon,
                 ],
             ],
-            AbilityInterface::TYPE_DAMAGE,
             AbilityInterface::ACTIVATE_CONCENTRATION,
             0
         );
