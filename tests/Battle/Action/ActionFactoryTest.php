@@ -342,6 +342,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'name'           => $name = 'resurrection name test',
             'power'          => $power = 50,
             'icon'           => $icon = 'icon.png',
+            'message_method' => $messageMethod = 'message method test',
         ];
 
         $action = $actionFactory->create($data);
@@ -352,6 +353,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($power, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($icon, $action->getIcon());
+        self::assertEquals($messageMethod, $action->getMessageMethod());
 
         // Минимальный вариант данных
         $data = [
@@ -1273,7 +1275,21 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_NAME_DATA,
             ],
-            // 50: DamageAction - некорректный icon
+            // 50: ResurrectionAction - message_method некорректного типа
+            [
+                [
+                    'type'           => ActionInterface::RESURRECTION,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
+                    'name'           => 'name',
+                    'power'          => 50,
+                    'message_method' => true,
+                ],
+                ActionException::INVALID_MESSAGE_METHOD,
+            ],
+            // 51: DamageAction - некорректный icon
             [
                 [
                     'type'           => ActionInterface::DAMAGE,
@@ -1287,7 +1303,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_ICON,
             ],
-            // 51: EffectAction - некорректный icon
+            // 52: EffectAction - некорректный icon
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1319,7 +1335,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_ICON,
             ],
-            // 52: EffectAction - некорректный animation_method
+            // 53: EffectAction - некорректный animation_method
             [
                 [
                     'type'             => ActionInterface::EFFECT,
@@ -1352,7 +1368,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_ANIMATION_DATA,
             ],
-            // 53: EffectAction - некорректный message_method
+            // 54: EffectAction - некорректный message_method
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1386,7 +1402,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD,
             ],
             [
-                // 54: Некорректный power для HealAction
+                // 55: Некорректный power для HealAction
                 [
                     'type'           => ActionInterface::HEAL,
                     'action_unit'    => $actionUnit,
@@ -1398,7 +1414,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 55: отсутствует damage для DamageAction
+                // 56: отсутствует damage для DamageAction
                 [
                     'type'           => ActionInterface::DAMAGE,
                     'action_unit'    => $actionUnit,

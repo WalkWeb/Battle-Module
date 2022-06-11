@@ -10,7 +10,9 @@ use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Ability\Effect\ParalysisAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -21,6 +23,8 @@ class ParalysisAbilityTest extends AbstractUnitTest
 {
     /**
      * Тест на создание способности ParalysisAction
+     *
+     * TODO В будущем этот ест будет удален вместе с классом ParalysisAbility
      *
      * @throws Exception
      */
@@ -71,6 +75,8 @@ class ParalysisAbilityTest extends AbstractUnitTest
     }
 
     /**
+     * TODO В будущем этот ест будет удален вместе с классом ParalysisAbility
+     *
      * @throws Exception
      */
     public function testParalysisAbilityCanByUsed(): void
@@ -81,6 +87,111 @@ class ParalysisAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $ability = new ParalysisAbility($unit);
+
+        // Изначально эффектов на юните нет
+        self::assertCount(0, $enemyUnit->getEffects());
+
+        // Перед применением способности эффекта на юните еще нет - способность может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Эффект появляется
+        self::assertCount(1, $enemyUnit->getEffects());
+
+        // После появления эффекта на юните - способность уже не может быть применена
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        // Пропускаем ходы - заполняем ярость. А также сбрасываем эффект у противника
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+
+            // Длительность эффектов обновляется в getAfterActions()
+            foreach ($enemyUnit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        // Эффект исчез
+        self::assertCount(0, $enemyUnit->getEffects());
+
+        // Способность опять может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+    }
+
+    /**
+     * Тест на создание способности ParalysisAction через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testNewParalysisAbilityCreate(): void
+    {
+        $name = 'Paralysis';
+        $icon = '/images/icons/ability/086.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Up rage
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        self::assertEquals(
+            $this->getParalysisActions($unit, $enemyCommand, $command),
+            $ability->getAction($enemyCommand, $command)
+        );
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testNewParalysisAbilityCanByUsed(): void
+    {
+        $name = 'Paralysis';
+        $icon = '/images/icons/ability/086.png';
+        $disposable = false;
+
+
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
 
         // Изначально эффектов на юните нет
         self::assertCount(0, $enemyUnit->getEffects());
@@ -169,5 +280,68 @@ class ParalysisAbilityTest extends AbstractUnitTest
         $collection->add($actionFactory->create($data));
 
         return $collection;
+    }
+
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param string $name
+     * @param string $icon
+     * @param bool $disposable
+     * @return AbilityInterface
+     */
+    private function createAbility(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        string $name,
+        string $icon,
+        bool $disposable
+    ): AbilityInterface
+    {
+        return new Ability(
+            $unit,
+            $disposable,
+            $name,
+            $icon,
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $unit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'name'           => $name,
+                    'icon'           => $icon,
+                    'message_method' => 'applyEffect',
+                    'effect'         => [
+                        'name'                  => $name,
+                        'icon'                  => $icon,
+                        'duration'              => 2,
+                        'on_apply_actions'      => [],
+                        'on_next_round_actions' => [
+                            [
+                                'type'             => ActionInterface::PARALYSIS,
+                                'action_unit'      => $unit,
+                                'enemy_command'    => $enemyCommand,
+                                'allies_command'   => $command,
+                                'type_target'      => ActionInterface::TARGET_SELF,
+                                'name'             => $name,
+                                'can_be_avoided'   => false,
+                                'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                                'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                                'icon'             => $icon,
+                            ],
+                        ],
+                        'on_disable_actions'    => [],
+                    ],
+                ],
+            ],
+            AbilityInterface::TYPE_EFFECT,
+            AbilityInterface::ACTIVATE_RAGE,
+            0
+        );
     }
 }

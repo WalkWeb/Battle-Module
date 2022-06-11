@@ -10,7 +10,9 @@ use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Ability\Effect\PoisonAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -30,6 +32,9 @@ class PoisonAbilityTest extends AbstractUnitTest
     // Сообщения об уроне от эффекта
     private const MESSAGE_DAMAGE_EN = '<span style="color: #1e72e3">unit_2</span> received damage on 8 life from effect <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
     private const MESSAGE_DAMAGE_RU = '<span style="color: #1e72e3">unit_2</span> получил урон на 8 здоровья от эффекта <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
+
+    // TODO В будущем тесты на PoisonAbility будут удалены, и оставлены только тесты на аналогичный функционал
+    // TODO через универсальный объект Ability
 
     /**
      * Тест на создание способности PoisonAbility
@@ -122,6 +127,7 @@ class PoisonAbilityTest extends AbstractUnitTest
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_APPLY_TO_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_APPLY_TO_RU, $this->getChatRu()->addMessage($action));
         }
 
         // Теперь эффект у противника есть, и больше способность примениться не может
@@ -139,55 +145,13 @@ class PoisonAbilityTest extends AbstractUnitTest
                 self::assertTrue($action->canByUsed());
                 $action->handle();
                 self::assertEquals(self::MESSAGE_DAMAGE_EN, $this->getChat()->addMessage($action));
-            }
-        }
-    }
-
-    /**
-     * Тест на формирование сообщения на русском
-     *
-     * @throws Exception
-     */
-    public function testPoisonAbilityRuMessage(): void
-    {
-        $container = $this->getContainerWithRuLanguage();
-
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = new PoisonAbility($unit);
-
-        // Up concentration
-        for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
-        }
-
-        // Применяем эффект
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
-            self::assertTrue($action->canByUsed());
-            $action->handle();
-            self::assertEquals(self::MESSAGE_APPLY_TO_RU, $this->getChatRu()->addMessage($action));
-        }
-
-        $effects = $enemyUnit->getEffects();
-
-        self::assertCount(1, $effects);
-
-        foreach ($effects as $effect) {
-            $actions = $effect->getOnNextRoundActions();
-            self::assertCount(1, $actions);
-            foreach ($actions as $action) {
-                self::assertTrue($action->canByUsed());
-                $action->handle();
                 self::assertEquals(self::MESSAGE_DAMAGE_RU, $this->getChatRu()->addMessage($action));
             }
         }
     }
 
     /**
-     * Тест на формирование сообщения о применении эффекта на себя, на английском
+     * Тест на формирование сообщения о применении эффекта на себя
      *
      * @throws Exception
      */
@@ -203,20 +167,148 @@ class PoisonAbilityTest extends AbstractUnitTest
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_APPLY_SELF_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_APPLY_SELF_RU, $this->getChatRu()->addMessage($action));
         }
     }
 
     /**
-     * Тест на формирование сообщения о применении эффекта на себя, на русском
+     * Тест на создание способности PoisonAbility через универсальный объект Ability
      *
      * @throws Exception
      */
-    public function testPoisonAbilityApplySelfRuMessage(): void
+    public function testNewPoisonAbilityCreate(): void
     {
-        $container = $this->getContainerWithRuLanguage();
+        $name = 'Poison';
+        $icon = '/images/icons/ability/202.png';
+        $disposable = false;
 
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на получение Actions из PoisonAbility через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testNewPoisonAbilityGetActions(): void
+    {
+        $name = 'Poison';
+        $icon = '/images/icons/ability/202.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        self::assertEquals(
+            $this->createActions($unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
+            $ability->getAction($enemyCommand, $command)
+        );
+    }
+
+    /**
+     * Тест на получение false в $ability->canByUsed(), когда все противники уже имеют такой эффект, через универсальный
+     * объект Ability
+     *
+     * @throws Exception
+     */
+    public function testNewPoisonAbilityCantByUsed(): void
+    {
+        $name = 'Poison';
+        $icon = '/images/icons/ability/202.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        // Применяем эффект
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_TO_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_APPLY_TO_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        // Теперь эффект у противника есть, и больше способность примениться не может
+        // Так как все противники (один противник) уже имеют такой эффект
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        $effects = $enemyUnit->getEffects();
+
+        self::assertCount(1, $effects);
+
+        foreach ($effects as $effect) {
+            $actions = $effect->getOnNextRoundActions();
+            self::assertCount(1, $actions);
+            foreach ($actions as $action) {
+                self::assertTrue($action->canByUsed());
+                $action->handle();
+                self::assertEquals(self::MESSAGE_DAMAGE_EN, $this->getChat()->addMessage($action));
+                self::assertEquals(self::MESSAGE_DAMAGE_RU, $this->getChatRu()->addMessage($action));
+            }
+        }
+    }
+
+    /**
+     * Тест на формирование сообщения о применении эффекта на себя через универсальный объект Ability
+     *
+     * TODO Он ни чем не отличается от теста testPoisonAbilityApplySelfMessage, но дублируется для того, чтобы не
+     * TODO забыть его, когда все не-new-ability тесты будут удаляться
+     *
+     * @throws Exception
+     */
+    public function testNewPoisonAbilityApplySelfMessage(): void
+    {
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -224,6 +316,7 @@ class PoisonAbilityTest extends AbstractUnitTest
         foreach ($this->createActions($unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ALLIES) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_SELF_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_APPLY_SELF_RU, $this->getChatRu()->addMessage($action));
         }
     }
@@ -282,5 +375,68 @@ class PoisonAbilityTest extends AbstractUnitTest
         $actions->add($actionFactory->create($data));
 
         return $actions;
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param string $name
+     * @param string $icon
+     * @param bool $disposable
+     * @return AbilityInterface
+     */
+    private function createAbility(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        string $name,
+        string $icon,
+        bool $disposable
+    ): AbilityInterface
+    {
+        return new Ability(
+            $unit,
+            $disposable,
+            $name,
+            $icon,
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $unit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
+                    'name'           => $name,
+                    'icon'           => $icon,
+                    'message_method' => 'applyEffect',
+                    'effect'         => [
+                        'name'                  => $name,
+                        'icon'                  => $icon,
+                        'duration'              => 5,
+                        'on_apply_actions'      => [],
+                        'on_next_round_actions' => [
+                            [
+                                'type'             => ActionInterface::DAMAGE,
+                                'action_unit'      => $unit,
+                                'enemy_command'    => $enemyCommand,
+                                'allies_command'   => $command,
+                                'type_target'      => ActionInterface::TARGET_SELF,
+                                'name'             => $name,
+                                'damage'           => 8,
+                                'can_be_avoided'   => false,
+                                'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                                'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                                'icon'             => $icon,
+                            ],
+                        ],
+                        'on_disable_actions'    => [],
+                    ],
+                ],
+            ],
+            AbilityInterface::TYPE_EFFECT,
+            AbilityInterface::ACTIVATE_CONCENTRATION,
+            0
+        );
     }
 }

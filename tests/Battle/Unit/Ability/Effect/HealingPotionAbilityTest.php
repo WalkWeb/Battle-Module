@@ -4,9 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Effect;
 
+use Battle\Action\ActionInterface;
+use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
+use Battle\Command\CommandInterface;
+use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
+use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
@@ -24,6 +30,9 @@ class HealingPotionAbilityTest extends AbstractUnitTest
     // Сообщения о лечении от эффекта
     private const MESSAGE_HEAL_EN       = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Healing Potion</span>';
     private const MESSAGE_HEAL_RU       = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Лечебное зелье</span>';
+
+    // TODO В будущем тесты на HealingPotionAbility будут удалены, и оставлены только тесты на аналогичный функционал
+    // TODO через универсальный объект Ability
 
     /**
      * Тест на создание способности HealingPotionAbility
@@ -305,7 +314,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testHealingPotionAbilityToEn(): void
+    public function testHealingPotionAbilityToMessage(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $woundedUnit = UnitFactory::createByTemplate(11);
@@ -330,21 +339,333 @@ class HealingPotionAbilityTest extends AbstractUnitTest
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_APPLY_TO_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_APPLY_TO_RU, $this->getChatRu()->addMessage($action));
         }
     }
 
     /**
-     * Тест на проверку сформированного сообщения при применении способности на другого юнита, на русском
+     * Тест на создание способности HealingPotionAbility через универсальный объект Ability
      *
      * @throws Exception
      */
-    public function testHealingPotionAbilityToRu(): void
+    public function testNewHealingPotionAbilitySelfCreateEn(): void
     {
+        $name = 'Healing Potion';
+        $icon = '/images/icons/ability/234.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_SELF_EN, $this->getChat()->addMessage($action));
+        }
+
+        $effects = $unit->getEffects();
+
+        self::assertCount(1, $effects);
+
+        foreach ($effects as $effect) {
+            $onNextRoundActions = $effect->getOnNextRoundActions();
+
+            foreach ($onNextRoundActions as $effectAction) {
+                self::assertTrue($effectAction->canByUsed());
+                $effectAction->handle();
+                self::assertEquals(self::MESSAGE_HEAL_EN, $this->getChat()->addMessage($effectAction));
+            }
+        }
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на формировании сообщении о применении и использовании эффекта на себя, на русском через универсальный
+     * объект Ability
+     *
+     * @throws Exception
+     */
+    public function testNewHealingPotionAbilitySelfCreateRuMessage(): void
+    {
+        $name = 'Healing Potion';
+        $icon = '/images/icons/ability/234.png';
+        $disposable = false;
+
         $container = $this->getContainerWithRuLanguage();
 
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $woundedUnit = UnitFactory::createByTemplate(11, $container);
+        $unit = UnitFactory::createByTemplate(11, $container);
         $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_SELF_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        $effects = $unit->getEffects();
+
+        self::assertCount(1, $effects);
+
+        foreach ($effects as $effect) {
+            $onNextRoundActions = $effect->getOnNextRoundActions();
+
+            foreach ($onNextRoundActions as $effectAction) {
+                self::assertTrue($effectAction->canByUsed());
+                $effectAction->handle();
+                self::assertEquals(self::MESSAGE_HEAL_RU, $this->getChatRu()->addMessage($effectAction));
+            }
+        }
+
+        $ability->usage();
+
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testNewHealingPotionAbilityApply(): void
+    {
+        $name = 'Healing Potion';
+        $icon = '/images/icons/ability/234.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $power = 15;
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        self::assertCount(1, $unit->getEffects());
+
+        self::assertEquals(1, $unit->getLife());
+
+        foreach ($unit->getEffects() as $effect) {
+            foreach ($effect->getOnNextRoundActions() as $effectAction) {
+                self::assertEquals(0, $effectAction->getFactualPower());
+            }
+        }
+
+        for ($i = 1; $i < 5; $i++) {
+
+            // Применяем события от эффектов на юните
+            foreach ($unit->getBeforeActions() as $beforeAction) {
+                if ($beforeAction->canByUsed()) {
+                    $beforeAction->handle();
+                }
+            }
+
+            // Проверяем FactualPower после применения - он не должен меняться
+            self::assertEquals(1 + $power * $i, $unit->getLife());
+
+            foreach ($unit->getEffects() as $effect) {
+                foreach ($effect->getOnNextRoundActions() as $effectAction) {
+                    self::assertEquals($power, $effectAction->getFactualPower());
+                }
+            }
+
+            // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        self::assertCount(0, $unit->getEffects());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testNewHealingPotionAbilityCanByUsed(): void
+    {
+        $name = 'Healing Potion';
+        $icon = '/images/icons/ability/234.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        // Перед применением способности эффекта на юните еще нет - способность может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // После появления эффекта на юните - способность уже не может быть применена
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+        for ($i = 0; $i < 10; $i++) {
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        // Эффект исчез - способность опять может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+    }
+
+    /**
+     * Тест на выявление ошибки, при котором повторное применение эффекта к персонажу добавляло эффект с длительностью 0
+     * через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testNewHealingPotionAbilityUpdateDuration(): void
+    {
+        $name = 'Healing Potion';
+        $icon = '/images/icons/ability/234.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Проверяем, что длительность = 4
+        foreach ($unit->getEffects() as $effect) {
+            self::assertEquals(4, $effect->getDuration());
+        }
+
+        // Пропускаем ходы
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        // Применяем способность еще раз
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $actions = $unit->getActions($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Проверяем еще раз, что при повторном применении эффекта длительность = 4
+        foreach ($unit->getEffects() as $effect) {
+            self::assertEquals(4, $effect->getDuration());
+        }
+    }
+
+    /**
+     * Тест на проверку сформированного сообщения при применении способности на другого юнита через универсальный объект
+     * Ability
+     *
+     * @throws Exception
+     */
+    public function testNewHealingPotionAbilityToMessage(): void
+    {
+        $name = 'Healing Potion';
+        $icon = '/images/icons/ability/234.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $woundedUnit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit, $woundedUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -353,7 +674,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        $ability = new HealingPotionAbility($unit);
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
 
         $collection = new AbilityCollection();
         $collection->add($ability);
@@ -364,7 +685,72 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_TO_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_APPLY_TO_RU, $this->getChatRu()->addMessage($action));
         }
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param string $name
+     * @param string $icon
+     * @param bool $disposable
+     * @return AbilityInterface
+     */
+    private function createAbility(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        string $name,
+        string $icon,
+        bool $disposable
+    ): AbilityInterface
+    {
+        $messageMethod = 'applyEffect';
+
+        return new Ability(
+            $unit,
+            $disposable,
+            $name,
+            $icon,
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $unit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                    'name'           => $name,
+                    'icon'           => $icon,
+                    'message_method' => $messageMethod,
+                    'effect'         => [
+                        'name'                  => $name,
+                        'icon'                  => $icon,
+                        'duration'              => 4,
+                        'on_apply_actions'      => [],
+                        'on_next_round_actions' => [
+                            [
+                                'type'             => ActionInterface::HEAL,
+                                'action_unit'      => $unit,
+                                'enemy_command'    => $enemyCommand,
+                                'allies_command'   => $command,
+                                'type_target'      => ActionInterface::TARGET_SELF,
+                                'name'             => $name,
+                                'power'            => 15,
+                                'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                'icon'             => $icon,
+                            ],
+                        ],
+                        'on_disable_actions'    => [],
+                    ],
+                ],
+            ],
+            AbilityInterface::TYPE_EFFECT,
+            AbilityInterface::ACTIVATE_CONCENTRATION,
+            0
+        );
     }
 }

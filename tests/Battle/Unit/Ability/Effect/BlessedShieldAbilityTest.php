@@ -9,7 +9,9 @@ use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Ability\Effect\BlessedShieldAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -20,6 +22,9 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/271.png" alt="" /> <span class="ability">Blessed Shield</span>';
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/271.png" alt="" /> <span class="ability">Благословенный щит</span>';
+
+    // TODO В будущем тесты на BlessedShieldAbility будут удалены, и оставлены только тесты на аналогичный функционал
+    // TODO через универсальный объект Ability
 
     /**
      * Тест на создание и использовании способности BlessedShieldAbility
@@ -196,6 +201,190 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на создание и использовании способности BlessedShieldAbility через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testNewBlessedShieldAbilityUse(): void
+    {
+        $name = 'Blessed Shield';
+        $icon = '/images/icons/ability/271.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Up rage
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        self::assertEquals(
+            $this->getBlessedShieldActions($unit, $enemyCommand, $command),
+            $ability->getAction($enemyCommand, $command)
+        );
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на применение способности BlessedShieldAbility через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testNewBlessedShieldAbilityApply(): void
+    {
+        $name = 'Blessed Shield';
+        $icon = '/images/icons/ability/271.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        // Up rage
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertCount(0, $unit->getEffects());
+
+        // Проверка блока перед использованием
+        self::assertEquals(0, $unit->getDefense()->getBlock());
+
+        // Применяем способность
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        // Проверяем, что способность больше не может быть использована, т.к. аналогичный эффект уже есть
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        // Проверка блока после использования
+        self::assertEquals(15, $unit->getDefense()->getBlock());
+        self::assertCount(1, $unit->getEffects());
+
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+        for ($i = 0; $i < 10; $i++) {
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        // И проверяем, что блок вернулся к исходному
+        self::assertCount(0, $unit->getEffects());
+        self::assertEquals(0, $unit->getDefense()->getBlock());
+    }
+
+    /**
+     * Тест на ситуацию, когда после прибавления блока блок выше 100, но из-за ограничения в любом случае будет только
+     * 100, через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testNewBlessedShieldAbilityOverValue(): void
+    {
+        $name = 'Blessed Shield';
+        $icon = '/images/icons/ability/271.png';
+        $disposable = false;
+
+        // Юнит со 100% блоком
+        $unit = UnitFactory::createByTemplate(28);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+
+        // Up rage
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        // Проверка блока перед использованием
+        self::assertEquals(100, $unit->getDefense()->getBlock());
+
+        // Применяем способность
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Проверка блока после использования, он также равен 100
+        self::assertEquals(100, $unit->getDefense()->getBlock());
+
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+        for ($i = 0; $i < 10; $i++) {
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        // И проверяем, что блок вернулся к исходному (не изменился)
+        self::assertCount(0, $unit->getEffects());
+        self::assertEquals(100, $unit->getDefense()->getBlock());
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -245,5 +434,66 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         $collection->add($actionFactory->create($data));
 
         return $collection;
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param string $name
+     * @param string $icon
+     * @param bool $disposable
+     * @return AbilityInterface
+     */
+    private function createAbility(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        string $name,
+        string $icon,
+        bool $disposable
+    ): AbilityInterface
+    {
+        return new Ability(
+            $unit,
+            $disposable,
+            $name,
+            $icon,
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'action_unit'    => $unit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => $name,
+                    'icon'           => $icon,
+                    'message_method' => 'applyEffect',
+                    'effect'         => [
+                        'name'                  => $name,
+                        'icon'                  => $icon,
+                        'duration'              => 6,
+                        'on_apply_actions'      => [
+                            [
+                                'type'           => ActionInterface::BUFF,
+                                'action_unit'    => $unit,
+                                'enemy_command'  => $enemyCommand,
+                                'allies_command' => $command,
+                                'type_target'    => ActionInterface::TARGET_SELF,
+                                'name'           => $name,
+                                'modify_method'  => 'addBlock',
+                                'power'          => 15,
+                                'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                            ],
+                        ],
+                        'on_next_round_actions' => [],
+                        'on_disable_actions'    => [],
+                    ],
+                ],
+            ],
+            AbilityInterface::TYPE_EFFECT,
+            AbilityInterface::ACTIVATE_RAGE,
+            0
+        );
     }
 }

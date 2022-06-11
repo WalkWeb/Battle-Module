@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Heal;
 
+use Battle\Action\ActionInterface;
+use Battle\Unit\Ability\Ability;
+use Battle\Unit\Ability\AbilityInterface;
 use Exception;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
@@ -19,6 +22,8 @@ class GreatHealAbilityTest extends AbstractUnitTest
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">unit_1</span> на 30 здоровья';
 
     /**
+     * TODO В будущем этот тест будет удален вместе с классом GeneralHealAbility
+     *
      * @throws Exception
      */
     public function testGreatHealAbilityCreateAndApply(): void
@@ -93,6 +98,8 @@ class GreatHealAbilityTest extends AbstractUnitTest
     /**
      * Тест на ситуацию, когда GreatHealAbility не может быть использован
      *
+     * TODO В будущем этот тест будет удален вместе с классом GeneralHealAbility
+     *
      * @throws Exception
      */
     public function testGreatHealAbilityCantByUsed(): void
@@ -104,6 +111,160 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         // Создаем напрямую, и проверяем, что способность не может быть применена
         $ability = new GreatHealAbility($unit);
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        // По этому, получая способности через getAction - получаем DamageAction, а не GreatHealAbility
+        $abilities = $unit->getActions($enemyCommand, $command);
+
+        foreach ($abilities as $ability) {
+            self::assertInstanceOf(DamageAction::class, $ability);
+        }
+    }
+
+    /**
+     * Тест на создание и применение способности GeneralHealAbility через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testNewGreatHealAbilityCreateAndApply(): void
+    {
+        $name = 'Great Heal';
+        $icon = '/images/icons/ability/196.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new Ability(
+            $unit,
+            $disposable,
+            $name,
+            $icon,
+            [
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $unit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                    'power'            => $power = 60,
+                    'can_be_avoided'   => $canBeAvoided = true,
+                    'name'             => $name,
+                    'animation_method' => $animationMethod = 'healAbility',
+                    'message_method'   => $messageMethod = 'healAbility',
+                    'icon'             => $icon,
+                ],
+            ],
+            AbilityInterface::TYPE_HEAL,
+            AbilityInterface::ACTIVATE_CONCENTRATION,
+            0
+        );
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Наносим урон юниту, чтобы способность перешла в "возможную для использования"
+        $damage = new DamageAction(
+            $enemyUnit,
+            $command,
+            $enemyCommand,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $enemyUnit->getOffense()->getDamage(),
+            true,
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
+        );
+
+        $damage->handle();
+
+        // После чего, способность может быть использована
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertInstanceOf(HealAction::class, $action);
+            self::assertEquals($unit->getOffense()->getDamage() * 3, $action->getPower());
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testNewGreatHealAbilityCantByUsed(): void
+    {
+        $name = 'Great Heal';
+        $icon = '/images/icons/ability/196.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(4);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Создаем напрямую, и проверяем, что способность не может быть применена
+        $ability = new Ability(
+            $unit,
+            $disposable,
+            $name,
+            $icon,
+            [
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $unit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                    'power'            => $power = 60,
+                    'can_be_avoided'   => $canBeAvoided = true,
+                    'name'             => $name,
+                    'animation_method' => $animationMethod = 'healAbility',
+                    'message_method'   => $messageMethod = 'healAbility',
+                    'icon'             => $icon,
+                ],
+            ],
+            AbilityInterface::TYPE_HEAL,
+            AbilityInterface::ACTIVATE_CONCENTRATION,
+            0
+        );
+
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
         // Up concentration

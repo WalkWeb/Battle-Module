@@ -11,6 +11,19 @@ use Exception;
 
 interface AbilityInterface
 {
+    // Способности
+    public const TYPE_DAMAGE       = 1;
+    public const TYPE_HEAL         = 2;
+    public const TYPE_EFFECT       = 3;
+    public const TYPE_SUMMON       = 4;
+    public const TYPE_RESURRECTION = 5;
+
+    // Варианты активации
+    public const ACTIVATE_CONCENTRATION = 1;
+    public const ACTIVATE_RAGE          = 2;
+    public const ACTIVATE_LOW_LIFE      = 3;
+    public const ACTIVATE_DEAD          = 4;
+
     /**
      * Название способности
      *
@@ -54,6 +67,8 @@ interface AbilityInterface
     
     /**
      * Возвращает коллекцию действия данной способности
+     *
+     * TODO Переименовать в getActions()
      *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
