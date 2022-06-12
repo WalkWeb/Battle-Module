@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
-use Battle\Result\Chat\ChatInterface;
 use Battle\Unit\Classes\ClassFactoryException;
 use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Classes\UnitClassInterface;
@@ -87,18 +86,17 @@ class UnitFactory
             DefenseFactory::create($data['defense']),
             RaceFactory::createById($data['race']),
             $container,
-            self::getClass($data, $container->getChat())
+            self::getClass($data)
         );
     }
 
     /**
      * @param array $data
-     * @param ChatInterface $chat
      * @return UnitClassInterface|null
      * @throws UnitException
      * @throws ClassFactoryException
      */
-    private static function getClass(array $data, ChatInterface $chat): ?UnitClassInterface
+    private static function getClass(array $data): ?UnitClassInterface
     {
         if (!array_key_exists('class', $data)) {
             return null;
@@ -112,6 +110,6 @@ class UnitFactory
             throw new UnitException(UnitException::INCORRECT_CLASS);
         }
 
-        return UnitClassFactory::create($data['class'], $chat);
+        return UnitClassFactory::create($data['class']);
     }
 }
