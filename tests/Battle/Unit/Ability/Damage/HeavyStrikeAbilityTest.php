@@ -102,11 +102,8 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
             [
                 [
                     'type'             => ActionInterface::DAMAGE,
-                    'action_unit'      => $unit,
-                    'enemy_command'    => $enemyCommand,
-                    'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => $damage = 50,
+                    'damage'           => 50,
                     'can_be_avoided'   => true,
                     'name'             => $name,
                     'animation_method' => 'damageAbility',

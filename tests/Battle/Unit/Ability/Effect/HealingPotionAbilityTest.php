@@ -7,7 +7,6 @@ namespace Tests\Battle\Unit\Ability\Effect;
 use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
-use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
@@ -352,14 +351,13 @@ class HealingPotionAbilityTest extends AbstractUnitTest
     {
         $name = 'Healing Potion';
         $icon = '/images/icons/ability/234.png';
-        $disposable = false;
 
         $unit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -420,10 +418,6 @@ class HealingPotionAbilityTest extends AbstractUnitTest
      */
     public function testNewHealingPotionAbilitySelfCreateRuMessage(): void
     {
-        $name = 'Healing Potion';
-        $icon = '/images/icons/ability/234.png';
-        $disposable = false;
-
         $container = $this->getContainerWithRuLanguage();
 
         $unit = UnitFactory::createByTemplate(11, $container);
@@ -431,7 +425,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
@@ -485,17 +479,13 @@ class HealingPotionAbilityTest extends AbstractUnitTest
      */
     public function testNewHealingPotionAbilityApply(): void
     {
-        $name = 'Healing Potion';
-        $icon = '/images/icons/ability/234.png';
-        $disposable = false;
-
         $unit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $power = 15;
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
@@ -546,16 +536,12 @@ class HealingPotionAbilityTest extends AbstractUnitTest
      */
     public function testNewHealingPotionAbilityCanByUsed(): void
     {
-        $name = 'Healing Potion';
-        $icon = '/images/icons/ability/234.png';
-        $disposable = false;
-
         $unit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
@@ -589,16 +575,12 @@ class HealingPotionAbilityTest extends AbstractUnitTest
      */
     public function testNewHealingPotionAbilityUpdateDuration(): void
     {
-        $name = 'Healing Potion';
-        $icon = '/images/icons/ability/234.png';
-        $disposable = false;
-
         $unit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         // Up concentration
         for ($i = 0; $i < 10; $i++) {
@@ -659,10 +641,6 @@ class HealingPotionAbilityTest extends AbstractUnitTest
      */
     public function testNewHealingPotionAbilityToMessage(): void
     {
-        $name = 'Healing Potion';
-        $icon = '/images/icons/ability/234.png';
-        $disposable = false;
-
         $unit = UnitFactory::createByTemplate(1);
         $woundedUnit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -674,7 +652,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         $collection = new AbilityCollection();
         $collection->add($ability);
@@ -692,39 +670,26 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $command
-     * @param string $name
-     * @param string $icon
-     * @param bool $disposable
      * @return AbilityInterface
+     * @throws Exception
      */
-    private function createAbility(
-        UnitInterface $unit,
-        CommandInterface $enemyCommand,
-        CommandInterface $command,
-        string $name,
-        string $icon,
-        bool $disposable
-    ): AbilityInterface
+    private function createAbility(UnitInterface $unit): AbilityInterface
     {
-        $messageMethod = 'applyEffect';
+        $name = 'Healing Potion';
+        $icon = '/images/icons/ability/234.png';
 
         return new Ability(
             $unit,
-            $disposable,
+            false,
             $name,
             $icon,
             [
                 [
                     'type'           => ActionInterface::EFFECT,
-                    'action_unit'    => $unit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
                     'name'           => $name,
                     'icon'           => $icon,
-                    'message_method' => $messageMethod,
+                    'message_method' => 'applyEffect',
                     'effect'         => [
                         'name'                  => $name,
                         'icon'                  => $icon,
@@ -733,9 +698,6 @@ class HealingPotionAbilityTest extends AbstractUnitTest
                         'on_next_round_actions' => [
                             [
                                 'type'             => ActionInterface::HEAL,
-                                'action_unit'      => $unit,
-                                'enemy_command'    => $enemyCommand,
-                                'allies_command'   => $command,
                                 'type_target'      => ActionInterface::TARGET_SELF,
                                 'name'             => $name,
                                 'power'            => 15,

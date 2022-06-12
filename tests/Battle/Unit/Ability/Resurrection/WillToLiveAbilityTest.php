@@ -175,7 +175,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $command, $enemyCommand);
+        $ability = $this->createAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -212,7 +212,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $command, $enemyCommand);
+        $ability = $this->createAbility($unit);
 
         // Изначально юнит мертв
         self::assertEquals(0, $unit->getLife());
@@ -251,7 +251,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $command, $enemyCommand);
+        $ability = $this->createAbility($unit);
 
         // Изначально юнит мертв
         self::assertEquals(0, $unit->getLife());
@@ -327,15 +327,10 @@ class WillToLiveAbilityTest extends AbstractUnitTest
 
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $command
-     * @param CommandInterface $enemyCommand
      * @return AbilityInterface
+     * @throws Exception
      */
-    private function createAbility(
-        UnitInterface $unit,
-        CommandInterface $command,
-        CommandInterface $enemyCommand
-    ): AbilityInterface
+    private function createAbility(UnitInterface $unit): AbilityInterface
     {
         $name = 'Will to live';
         $icon = '/images/icons/ability/429.png';
@@ -349,9 +344,6 @@ class WillToLiveAbilityTest extends AbstractUnitTest
             [
                 [
                     'type'           => ActionInterface::RESURRECTION,
-                    'action_unit'    => $unit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'power'          => 50,
                     'name'           => $name,

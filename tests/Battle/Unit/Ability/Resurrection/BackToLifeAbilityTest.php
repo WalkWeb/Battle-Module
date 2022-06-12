@@ -7,7 +7,6 @@ namespace Tests\Battle\Unit\Ability\Resurrection;
 use Battle\Action\ActionInterface;
 use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandFactory;
-use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Ability\Resurrection\BackToLifeAbility;
@@ -121,7 +120,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $deadUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $command, $enemyCommand);
+        $ability = $this->createAbility($unit);
 
         // Сверяем базовые параметры
         self::assertEquals($name, $ability->getName());
@@ -182,22 +181,17 @@ class BackToLifeAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $woundedUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit,$command, $enemyCommand);
+        $ability = $this->createAbility($unit);
 
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
     }
 
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $command
-     * @param CommandInterface $enemyCommand
      * @return AbilityInterface
+     * @throws Exception
      */
-    private function createAbility(
-        UnitInterface $unit,
-        CommandInterface $command,
-        CommandInterface $enemyCommand
-    ): AbilityInterface
+    private function createAbility(UnitInterface $unit): AbilityInterface
     {
         $name = 'Back to Life';
         $icon = '/images/icons/ability/053.png';
@@ -210,9 +204,6 @@ class BackToLifeAbilityTest extends AbstractUnitTest
             [
                 [
                     'type'           => ActionInterface::RESURRECTION,
-                    'action_unit'    => $unit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
                     'power'          => 30,
                     'name'           => $name,

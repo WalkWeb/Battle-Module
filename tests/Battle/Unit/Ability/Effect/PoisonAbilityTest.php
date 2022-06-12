@@ -180,14 +180,13 @@ class PoisonAbilityTest extends AbstractUnitTest
     {
         $name = 'Poison';
         $icon = '/images/icons/ability/202.png';
-        $disposable = false;
 
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -225,16 +224,12 @@ class PoisonAbilityTest extends AbstractUnitTest
      */
     public function testNewPoisonAbilityGetActions(): void
     {
-        $name = 'Poison';
-        $icon = '/images/icons/ability/202.png';
-        $disposable = false;
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         self::assertEquals(
             $this->createActions($unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
@@ -250,16 +245,12 @@ class PoisonAbilityTest extends AbstractUnitTest
      */
     public function testNewPoisonAbilityCantByUsed(): void
     {
-        $name = 'Poison';
-        $icon = '/images/icons/ability/202.png';
-        $disposable = false;
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         // Up concentration
         for ($i = 0; $i < 10; $i++) {
@@ -306,7 +297,6 @@ class PoisonAbilityTest extends AbstractUnitTest
      */
     public function testNewPoisonAbilityApplySelfMessage(): void
     {
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -379,33 +369,22 @@ class PoisonAbilityTest extends AbstractUnitTest
 
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $command
-     * @param string $name
-     * @param string $icon
-     * @param bool $disposable
      * @return AbilityInterface
+     * @throws Exception
      */
-    private function createAbility(
-        UnitInterface $unit,
-        CommandInterface $enemyCommand,
-        CommandInterface $command,
-        string $name,
-        string $icon,
-        bool $disposable
-    ): AbilityInterface
+    private function createAbility(UnitInterface $unit): AbilityInterface
     {
+        $name = 'Poison';
+        $icon = '/images/icons/ability/202.png';
+
         return new Ability(
             $unit,
-            $disposable,
+            false,
             $name,
             $icon,
             [
                 [
                     'type'           => ActionInterface::EFFECT,
-                    'action_unit'    => $unit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
                     'name'           => $name,
                     'icon'           => $icon,
@@ -418,9 +397,6 @@ class PoisonAbilityTest extends AbstractUnitTest
                         'on_next_round_actions' => [
                             [
                                 'type'             => ActionInterface::DAMAGE,
-                                'action_unit'      => $unit,
-                                'enemy_command'    => $enemyCommand,
-                                'allies_command'   => $command,
                                 'type_target'      => ActionInterface::TARGET_SELF,
                                 'name'             => $name,
                                 'damage'           => 8,

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability\Heal;
 
 use Battle\Action\ActionInterface;
-use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
@@ -143,7 +142,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $command, $enemyCommand);
+        $ability = $this->createAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -213,22 +212,17 @@ class GreatHealAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $command, $enemyCommand);
+        $ability = $this->createAbility($unit);
 
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
     }
 
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $command
-     * @param CommandInterface $enemyCommand
      * @return AbilityInterface
+     * @throws Exception
      */
-    private function createAbility(
-        UnitInterface $unit,
-        CommandInterface $command,
-        CommandInterface $enemyCommand
-    ): AbilityInterface
+    private function createAbility(UnitInterface $unit): AbilityInterface
     {
         $name = 'Great Heal';
         $icon = '/images/icons/ability/196.png';
@@ -241,9 +235,6 @@ class GreatHealAbilityTest extends AbstractUnitTest
             [
                 [
                     'type'             => ActionInterface::HEAL,
-                    'action_unit'      => $unit,
-                    'enemy_command'    => $enemyCommand,
-                    'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_ALL_WOUNDED_ALLIES,
                     'power'            => 60,
                     'can_be_avoided'   => true,

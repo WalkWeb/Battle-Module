@@ -228,14 +228,13 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
     {
         $name = 'Reserve Forces';
         $icon = '/images/icons/ability/156.png';
-        $disposable = false;
 
         $unit = UnitFactory::createByTemplate(21);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -278,10 +277,6 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
      */
     public function testNewReserveForcesAbilityApply(): void
     {
-        $name = 'Reserve Forces';
-        $icon = '/images/icons/ability/156.png';
-        $disposable = false;
-
         $container = new Container();
         $unit = UnitFactory::createByTemplate(21, $container);
         $enemyUnit = UnitFactory::createByTemplate(2, $container);
@@ -295,7 +290,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         $collection = new AbilityCollection();
         $collection->add($ability);
@@ -335,16 +330,12 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
      */
     public function testNewReserveForcesAbilityCanByUsed(): void
     {
-        $name = 'Reserve Forces';
-        $icon = '/images/icons/ability/156.png';
-        $disposable = false;
-
         $unit = UnitFactory::createByTemplate(21);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
@@ -378,10 +369,6 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
      */
     public function testNewReserveForcesAbilityUpdatedDuration(): void
     {
-        $name = 'Reserve Forces';
-        $icon = '/images/icons/ability/156.png';
-        $disposable = false;
-
         $unit = UnitFactory::createByTemplate(21);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -392,7 +379,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         $collection = new AbilityCollection();
         $collection->add($ability);
@@ -492,33 +479,22 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
 
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $command
-     * @param string $name
-     * @param string $icon
-     * @param bool $disposable
      * @return AbilityInterface
+     * @throws Exception
      */
-    private function createAbility(
-        UnitInterface $unit,
-        CommandInterface $enemyCommand,
-        CommandInterface $command,
-        string $name,
-        string $icon,
-        bool $disposable
-    ): AbilityInterface
+    private function createAbility(UnitInterface $unit): AbilityInterface
     {
+        $name = 'Reserve Forces';
+        $icon = '/images/icons/ability/156.png';
+
         return new Ability(
             $unit,
-            $disposable,
+            false,
             $name,
             $icon,
             [
                 [
                     'type'           => ActionInterface::EFFECT,
-                    'action_unit'    => $unit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => $name,
                     'icon'           => $icon,
@@ -530,9 +506,6 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
                         'on_apply_actions'      => [
                             [
                                 'type'           => ActionInterface::BUFF,
-                                'action_unit'    => $unit,
-                                'enemy_command'  => $enemyCommand,
-                                'allies_command' => $command,
                                 'type_target'    => ActionInterface::TARGET_SELF,
                                 'name'           => $name,
                                 'modify_method'  => 'multiplierMaxLife',

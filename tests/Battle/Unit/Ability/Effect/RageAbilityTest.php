@@ -169,14 +169,13 @@ class RageAbilityTest extends AbstractUnitTest
     {
         $name = 'Rage';
         $icon = '/images/icons/ability/285.png';
-        $disposable = true;
 
         $unit = UnitFactory::createByTemplate(31);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -215,16 +214,12 @@ class RageAbilityTest extends AbstractUnitTest
      */
     public function testNewRageAbilityApply(): void
     {
-        $name = 'Rage';
-        $icon = '/images/icons/ability/285.png';
-        $disposable = true;
-
         $unit = UnitFactory::createByTemplate(31);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         // Активируем - созданный юнит изначально сильно ранен и имеет здоровье < 30%
         $collection = new AbilityCollection();
@@ -356,33 +351,22 @@ class RageAbilityTest extends AbstractUnitTest
 
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $command
-     * @param string $name
-     * @param string $icon
-     * @param bool $disposable
      * @return AbilityInterface
+     * @throws Exception
      */
-    private function createAbility(
-        UnitInterface $unit,
-        CommandInterface $enemyCommand,
-        CommandInterface $command,
-        string $name,
-        string $icon,
-        bool $disposable
-    ): AbilityInterface
+    private function createAbility(UnitInterface $unit): AbilityInterface
     {
+        $name = 'Rage';
+        $icon = '/images/icons/ability/285.png';
+
         return new Ability(
             $unit,
-            $disposable,
+            true,
             $name,
             $icon,
             [
                 [
                     'type'           => ActionInterface::EFFECT,
-                    'action_unit'    => $unit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => $name,
                     'icon'           => $icon,
@@ -394,9 +378,6 @@ class RageAbilityTest extends AbstractUnitTest
                         'on_apply_actions'      => [
                             [
                                 'type'           => ActionInterface::BUFF,
-                                'action_unit'    => $unit,
-                                'enemy_command'  => $enemyCommand,
-                                'allies_command' => $command,
                                 'type_target'    => ActionInterface::TARGET_SELF,
                                 'name'           => $name,
                                 'modify_method'  => 'multiplierDamage',

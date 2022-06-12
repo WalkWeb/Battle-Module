@@ -8,7 +8,6 @@ use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
-use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
@@ -146,7 +145,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $slightlyWoundedUnit, $badlyWoundedUnit, $deadUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $command, $enemyCommand);
+        $ability = $this->createAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -205,22 +204,17 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $command, $enemyCommand);
+        $ability = $this->createAbility($unit);
 
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
     }
 
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $command
-     * @param CommandInterface $enemyCommand
      * @return AbilityInterface
+     * @throws Exception
      */
-    private function createAbility(
-        UnitInterface $unit,
-        CommandInterface $command,
-        CommandInterface $enemyCommand
-    ): AbilityInterface
+    private function createAbility(UnitInterface $unit): AbilityInterface
     {
         $name = 'General Heal';
         $icon = '/images/icons/ability/452.png';
@@ -233,9 +227,6 @@ class GeneralHealAbilityTest extends AbstractUnitTest
             [
                 [
                     'type'             => ActionInterface::HEAL,
-                    'action_unit'      => $unit,
-                    'enemy_command'    => $enemyCommand,
-                    'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_ALL_WOUNDED_ALLIES,
                     'power'            => 24,
                     'can_be_avoided'   => true,

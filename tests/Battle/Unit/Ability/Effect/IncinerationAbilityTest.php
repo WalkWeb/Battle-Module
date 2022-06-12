@@ -106,9 +106,6 @@ class IncinerationAbilityTest extends AbstractUnitTest
             [
                 [
                     'type'           => ActionInterface::EFFECT,
-                    'action_unit'    => $unit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_ALL_ENEMY,
                     'name'           => $name,
                     'icon'           => $icon,
@@ -121,9 +118,6 @@ class IncinerationAbilityTest extends AbstractUnitTest
                         'on_next_round_actions' => [
                             [
                                 'type'             => ActionInterface::DAMAGE,
-                                'action_unit'      => $unit,
-                                'enemy_command'    => $enemyCommand,
-                                'allies_command'   => $command,
                                 'type_target'      => ActionInterface::TARGET_SELF,
                                 'name'             => $name,
                                 'damage'           => 6,

@@ -122,7 +122,8 @@ class Ability extends AbstractAbility
     public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         $actions = new ActionCollection();
-        foreach ($this->actionsData as $actionData) {
+        foreach ($this->actionsData as &$actionData) {
+            $this->addParameters($actionData, $enemyCommand, $alliesCommand);
             $actions->add($this->actionFactory->create($actionData));
         }
 
@@ -183,13 +184,79 @@ class Ability extends AbstractAbility
     {
         foreach ($actionsData as $actionData) {
             // Проверяем, что передан массив из массивов
+            // Дальнейшая валидация будет происходить в ActionFactory
             if (!is_array($actionData)) {
                 throw new AbilityException(AbilityException::INVALID_ACTION_DATA);
             }
-            // Сразу создаем из массива Action, чтобы если переданы некорректные данные - ошибка была сразу при создании
-            $this->actionFactory->create($actionData);
         }
 
         return $actionsData;
+    }
+
+    /**
+     * Параметры способностей изначально не связаны с юнитом и командами - потому что изначально это просто массив с
+     * параметрами.
+     *
+     * Но для создания Actions уже нужна информация по юниту, который делает ход, и о командах. По этому нужные
+     * параметры добавляются в момент запроса Actions, когда уже юнит и команды существуют
+     *
+     * @param array $data
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @throws AbilityException
+     */
+    private function addParameters(array &$data, CommandInterface $enemyCommand, CommandInterface $alliesCommand): void
+    {
+        $data['action_unit'] = $this->unit;
+        $data['enemy_command'] = $enemyCommand;
+        $data['allies_command'] = $alliesCommand;
+
+        if (array_key_exists('effect', $data)) {
+            $this->validateEffectData($data['effect']);
+            foreach ($data['effect']['on_apply_actions'] as &$onApplyActionData) {
+                $this->addStageParameters($onApplyActionData, $enemyCommand, $alliesCommand);
+            }
+            unset($onApplyActionData);
+            foreach ($data['effect']['on_next_round_actions'] as &$onNextRoundActionData) {
+                $this->addStageParameters($onNextRoundActionData, $enemyCommand, $alliesCommand);
+            }
+            unset($onNextRoundActionData);
+            foreach ($data['effect']['on_disable_actions'] as &$onDisableActionData) {
+                $this->addStageParameters($onDisableActionData, $enemyCommand, $alliesCommand);
+            }
+            unset($onDisableActionData);
+        }
+    }
+
+    /**
+     * @param array $data
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     */
+    private function addStageParameters(array &$data, CommandInterface $enemyCommand, CommandInterface $alliesCommand): void
+    {
+        $data['action_unit'] = $this->unit;
+        $data['enemy_command'] = $enemyCommand;
+        $data['allies_command'] = $alliesCommand;
+    }
+
+    /**
+     * Проверяет наличие необходимых параметров в массиве параметров для создания эффекта:
+     * "on_apply_actions"
+     * "on_next_round_actions"
+     * "on_disable_actions"
+     *
+     * @param array $data
+     * @throws AbilityException
+     */
+    private function validateEffectData(array $data): void
+    {
+        if (
+            !array_key_exists('on_apply_actions', $data) ||
+            !array_key_exists('on_next_round_actions', $data) ||
+            !array_key_exists('on_disable_actions', $data)
+        ) {
+            throw new AbilityException(AbilityException::INVALID_EFFECT_DATA);
+        }
     }
 }

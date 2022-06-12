@@ -209,14 +209,13 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
     {
         $name = 'Blessed Shield';
         $icon = '/images/icons/ability/271.png';
-        $disposable = false;
 
         $unit = UnitFactory::createByTemplate(21);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -259,16 +258,12 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
      */
     public function testNewBlessedShieldAbilityApply(): void
     {
-        $name = 'Blessed Shield';
-        $icon = '/images/icons/ability/271.png';
-        $disposable = false;
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         // Up rage
         for ($i = 0; $i < 20; $i++) {
@@ -330,17 +325,13 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
      */
     public function testNewBlessedShieldAbilityOverValue(): void
     {
-        $name = 'Blessed Shield';
-        $icon = '/images/icons/ability/271.png';
-        $disposable = false;
-
         // Юнит со 100% блоком
         $unit = UnitFactory::createByTemplate(28);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         // Up rage
         for ($i = 0; $i < 20; $i++) {
@@ -438,33 +429,22 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
 
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $command
-     * @param string $name
-     * @param string $icon
-     * @param bool $disposable
      * @return AbilityInterface
+     * @throws Exception
      */
-    private function createAbility(
-        UnitInterface $unit,
-        CommandInterface $enemyCommand,
-        CommandInterface $command,
-        string $name,
-        string $icon,
-        bool $disposable
-    ): AbilityInterface
+    private function createAbility(UnitInterface $unit): AbilityInterface
     {
+        $name = 'Blessed Shield';
+        $icon = '/images/icons/ability/271.png';
+
         return new Ability(
             $unit,
-            $disposable,
+            false,
             $name,
             $icon,
             [
                 [
                     'type'           => ActionInterface::EFFECT,
-                    'action_unit'    => $unit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => $name,
                     'icon'           => $icon,
@@ -476,9 +456,6 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
                         'on_apply_actions'      => [
                             [
                                 'type'           => ActionInterface::BUFF,
-                                'action_unit'    => $unit,
-                                'enemy_command'  => $enemyCommand,
-                                'allies_command' => $command,
                                 'type_target'    => ActionInterface::TARGET_SELF,
                                 'name'           => $name,
                                 'modify_method'  => 'addBlock',

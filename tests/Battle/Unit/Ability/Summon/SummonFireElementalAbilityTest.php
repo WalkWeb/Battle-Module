@@ -95,9 +95,6 @@ class SummonFireElementalAbilityTest extends AbstractUnitTest
             [
                 [
                     'type'             => ActionInterface::SUMMON,
-                    'action_unit'      => $unit,
-                    'enemy_command'    => $enemyCommand,
-                    'allies_command'   => $command,
                     'name'             => $name,
                     'icon'             => $icon,
                     'summon'           => [

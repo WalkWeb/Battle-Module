@@ -133,14 +133,13 @@ class ParalysisAbilityTest extends AbstractUnitTest
     {
         $name = 'Paralysis';
         $icon = '/images/icons/ability/086.png';
-        $disposable = false;
 
         $unit = UnitFactory::createByTemplate(21);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -181,17 +180,12 @@ class ParalysisAbilityTest extends AbstractUnitTest
      */
     public function testNewParalysisAbilityCanByUsed(): void
     {
-        $name = 'Paralysis';
-        $icon = '/images/icons/ability/086.png';
-        $disposable = false;
-
-
         $unit = UnitFactory::createByTemplate(21);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbility($unit, $enemyCommand, $command, $name, $icon, $disposable);
+        $ability = $this->createAbility($unit);
 
         // Изначально эффектов на юните нет
         self::assertCount(0, $enemyUnit->getEffects());
@@ -282,36 +276,24 @@ class ParalysisAbilityTest extends AbstractUnitTest
         return $collection;
     }
 
-
     /**
      * @param UnitInterface $unit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $command
-     * @param string $name
-     * @param string $icon
-     * @param bool $disposable
      * @return AbilityInterface
+     * @throws Exception
      */
-    private function createAbility(
-        UnitInterface $unit,
-        CommandInterface $enemyCommand,
-        CommandInterface $command,
-        string $name,
-        string $icon,
-        bool $disposable
-    ): AbilityInterface
+    private function createAbility(UnitInterface $unit): AbilityInterface
     {
+        $name = 'Paralysis';
+        $icon = '/images/icons/ability/086.png';
+
         return new Ability(
             $unit,
-            $disposable,
+            false,
             $name,
             $icon,
             [
                 [
                     'type'           => ActionInterface::EFFECT,
-                    'action_unit'    => $unit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'name'           => $name,
                     'icon'           => $icon,
@@ -324,9 +306,6 @@ class ParalysisAbilityTest extends AbstractUnitTest
                         'on_next_round_actions' => [
                             [
                                 'type'             => ActionInterface::PARALYSIS,
-                                'action_unit'      => $unit,
-                                'enemy_command'    => $enemyCommand,
-                                'allies_command'   => $command,
                                 'type_target'      => ActionInterface::TARGET_SELF,
                                 'name'             => $name,
                                 'can_be_avoided'   => false,
