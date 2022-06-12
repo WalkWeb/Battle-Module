@@ -12,7 +12,7 @@ class AbilityFactory
 {
     use ValidationTrait;
 
-    private $activateTypes = [
+    private $typesActivate = [
         AbilityInterface::ACTIVATE_CONCENTRATION,
         AbilityInterface::ACTIVATE_RAGE,
         AbilityInterface::ACTIVATE_LOW_LIFE,
@@ -37,7 +37,7 @@ class AbilityFactory
         $icon = self::string($data, 'icon', AbilityException::INVALID_ICON_DATA);
         $disposable = self::bool($data, 'disposable', AbilityException::INVALID_DISPOSABLE_DATA);
         $typeActivate = self::int($data, 'type_activate', AbilityException::INVALID_TYPE_ACTIVATE_DATA);
-        self::in($typeActivate, $this->activateTypes, AbilityException::UNKNOWN_ACTIVATE_TYPE . ': ' . $typeActivate);
+        self::in($typeActivate, $this->typesActivate, AbilityException::UNKNOWN_ACTIVATE_TYPE . ': ' . $typeActivate);
         $chanceActivate = self::intOrMissing($data, 'chance_activate', AbilityException::INVALID_CHANCE_ACTIVATE_DATA);
         $actionsData = self::array($data, 'actions', AbilityException::INVALID_ACTIONS_DATA);
 

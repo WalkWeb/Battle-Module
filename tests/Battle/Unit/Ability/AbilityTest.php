@@ -86,6 +86,7 @@ class AbilityTest extends AbstractUnitTest
 
         $this->expectException(AbilityException::class);
         $this->expectExceptionMessage(AbilityException::INVALID_ACTION_DATA);
+
         new Ability(
             $unit,
             false,
@@ -95,6 +96,32 @@ class AbilityTest extends AbstractUnitTest
                 'invalid_data',
             ],
             AbilityInterface::ACTIVATE_CONCENTRATION,
+            0
+        );
+    }
+
+    /**
+     * Тест на неизвестный тип активации способности
+     *
+     * @throws Exception
+     */
+    public function testAbilityUnknownTypeActivate(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $typeActivate = 10;
+
+        $this->expectException(AbilityException::class);
+        $this->expectExceptionMessage(AbilityException::UNKNOWN_ACTIVATE_TYPE . ': ' . $typeActivate);
+
+        new Ability(
+            $unit,
+            false,
+            'Heavy Strike',
+            '/images/icons/ability/335.png',
+            [
+                [],
+            ],
+            $typeActivate,
             0
         );
     }

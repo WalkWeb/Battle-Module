@@ -21,6 +21,13 @@ use Exception;
  */
 class Ability extends AbstractAbility
 {
+    private $typesActivate = [
+        AbilityInterface::ACTIVATE_CONCENTRATION,
+        AbilityInterface::ACTIVATE_RAGE,
+        AbilityInterface::ACTIVATE_LOW_LIFE,
+        AbilityInterface::ACTIVATE_DEAD,
+    ];
+
     /**
      * @var string
      */
@@ -73,7 +80,7 @@ class Ability extends AbstractAbility
         parent::__construct($unit, $disposable, $chanceActivate);
         $this->name = $name;
         $this->icon = $icon;
-        $this->typeActivate = $typeActivate;
+        $this->typeActivate = $this->validateTypeActivate($typeActivate);
         $this->actionFactory = $actionFactory ?? new ActionFactory();
         $this->actionsData = $this->validateActionsData($actionsData);
     }
@@ -155,7 +162,6 @@ class Ability extends AbstractAbility
                     $this->ready = !$this->unit->isAlive() && random_int(0, 100) <= $this->chanceActivate;
                 }
                 break;
-            // TODO Default: exception unknown type activate
         }
     }
 
@@ -188,6 +194,20 @@ class Ability extends AbstractAbility
         }
 
         return $actionsData;
+    }
+
+    /**
+     * @param int $typeActivate
+     * @return int
+     * @throws AbilityException
+     */
+    private function validateTypeActivate(int $typeActivate): int
+    {
+        if (!in_array($typeActivate, $this->typesActivate, true)) {
+            throw new AbilityException(AbilityException::UNKNOWN_ACTIVATE_TYPE . ': ' . $typeActivate);
+        }
+
+        return $typeActivate;
     }
 
     /**
