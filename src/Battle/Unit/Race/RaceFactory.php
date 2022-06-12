@@ -116,7 +116,7 @@ class RaceFactory
             throw new RaceException(RaceException::UNDEFINED_RACE_ID);
         }
 
-        return self::createByArray( self::$data[$id]);
+        return self::createByArray(self::$data[$id]);
     }
 
     /**

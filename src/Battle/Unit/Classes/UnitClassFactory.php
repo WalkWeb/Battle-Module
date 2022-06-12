@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes;
 
-use Battle\Result\Chat\Chat;
-use Battle\Result\Chat\ChatInterface;
 use Battle\Unit\Classes\Bosses\Warden;
 use Battle\Unit\Classes\Demon\Succubus;
 use Battle\Unit\Classes\Dwarf\Alchemist;
@@ -39,20 +37,17 @@ class UnitClassFactory
      * От класса зависят способности, которые юнит будет применять в бою
      *
      * @param int $classId
-     * @param ChatInterface|null $chat
      * @return UnitClassInterface
      * @throws ClassFactoryException
      */
-    public static function create(int $classId, ?ChatInterface $chat = null): UnitClassInterface
+    public static function create(int $classId): UnitClassInterface
     {
-        $chat = $chat ?? new Chat();
-
         if (!array_key_exists($classId, self::$map)) {
             throw new ClassFactoryException(ClassFactoryException::UNDEFINED_CLASS_ID . ': ' . $classId);
         }
 
         $className = self::$map[$classId];
-        $class = new $className($chat);
+        $class = new $className();
 
         if (!($class instanceof UnitClassInterface)) {
             throw new ClassFactoryException(ClassFactoryException::INCORRECT_CLASS);
