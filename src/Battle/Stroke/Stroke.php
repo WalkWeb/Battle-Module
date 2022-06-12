@@ -163,8 +163,6 @@ class Stroke implements StrokeInterface
         foreach ($this->actionUnit->getAfterActions() as $action) {
             if ($action->canByUsed()) {
                 $this->runAction($action);
-//                $action->handle();
-//                $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
             }
         }
     }

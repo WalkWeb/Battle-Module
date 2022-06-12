@@ -33,6 +33,7 @@ class AbilityTest extends AbstractUnitTest
         $name = 'Heavy Strike';
         $icon = '/images/icons/ability/335.png';
         $disposable = false;
+        $chanceActivate = 50;
 
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -60,7 +61,7 @@ class AbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_CONCENTRATION,
-            0
+            $chanceActivate
         );
 
         self::assertEquals($unit, $ability->getUnit());
@@ -71,6 +72,7 @@ class AbilityTest extends AbstractUnitTest
         // Проверка значений по-умолчанию:
         self::assertFalse($ability->isReady());
         self::assertFalse($ability->isUsage());
+        self::assertEquals($chanceActivate, $ability->getChanceActivate());
     }
 
     /**

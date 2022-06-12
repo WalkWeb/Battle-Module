@@ -103,4 +103,9 @@ interface AbilityInterface
      * @return bool
      */
     public function isUsage(): bool;
+
+    /**
+     * @return int
+     */
+    public function getChanceActivate(): int;
 }

@@ -37,14 +37,11 @@ class Ability extends AbstractAbility
     private $actionsData;
 
     /**
+     * TODO В будущем, когда конкретные классы способностей будут удалены - этот параметр нужно вынести в AbstractAbility
+     *
      * @var int
      */
     private $typeActivate;
-
-    /**
-     * @var int
-     */
-    private $chanceActivate;
 
     /**
      * @var ActionFactory
@@ -73,11 +70,10 @@ class Ability extends AbstractAbility
         ?ActionFactory $actionFactory = null
     )
     {
-        parent::__construct($unit, $disposable);
+        parent::__construct($unit, $disposable, $chanceActivate);
         $this->name = $name;
         $this->icon = $icon;
         $this->typeActivate = $typeActivate;
-        $this->chanceActivate = $chanceActivate;
         $this->actionFactory = $actionFactory ?? new ActionFactory();
         $this->actionsData = $this->validateActionsData($actionsData);
     }
@@ -159,6 +155,7 @@ class Ability extends AbstractAbility
                     $this->ready = !$this->unit->isAlive() && random_int(0, 100) <= $this->chanceActivate;
                 }
                 break;
+            // TODO Default: exception unknown type activate
         }
     }
 
@@ -194,11 +191,12 @@ class Ability extends AbstractAbility
     }
 
     /**
-     * Параметры способностей изначально не связаны с юнитом и командами - потому что изначально это просто массив с
+     * Параметры способности изначально не связаны с юнитом (точнее есть только юнит, в момент создания способности, но
+     * не на момент написания массива параметров способности) и командами - потому что изначально это просто массив с
      * параметрами.
      *
      * Но для создания Actions уже нужна информация по юниту, который делает ход, и о командах. По этому нужные
-     * параметры добавляются в момент запроса Actions, когда уже юнит и команды существуют
+     * параметры добавляются в момент запроса Actions, когда юнит и команды уже существуют
      *
      * @param array $data
      * @param CommandInterface $enemyCommand

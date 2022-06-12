@@ -10,6 +10,8 @@ use Battle\Unit\UnitInterface;
 
 trait ValidationTrait
 {
+    // TODO Убрать дублирующиеся проверки типа existAndString и string
+
     /**
      * @param array $data
      * @param string $filed
@@ -202,6 +204,26 @@ trait ValidationTrait
      * @param array $data
      * @param string $filed
      * @param string $error
+     * @return int
+     * @throws BattleException
+     */
+    protected static function intOrMissing(array $data, string $filed, string $error): int
+    {
+        if (!array_key_exists($filed, $data)) {
+            return 0;
+        }
+
+        if (!is_int($data[$filed])) {
+            throw new BattleException($error);
+        }
+
+        return $data[$filed];
+    }
+
+    /**
+     * @param array $data
+     * @param string $filed
+     * @param string $error
      * @return UnitInterface
      * @throws BattleException
      */
@@ -228,5 +250,23 @@ trait ValidationTrait
         }
 
         return $data[$filed];
+    }
+
+    /**
+     * Проверяет, что указанное значение соответствует одному из указанных значений (в массиве)
+     *
+     * @param $param
+     * @param array $values
+     * @param string $error
+     * @return mixed
+     * @throws BattleException
+     */
+    protected static function in($param, array $values, string $error)
+    {
+        if (in_array($param, $values, true)) {
+            return $param;
+        }
+
+        throw new BattleException($error);
     }
 }

@@ -35,13 +35,20 @@ abstract class AbstractAbility implements AbilityInterface
     protected $container;
 
     /**
+     * @var int
+     */
+    protected $chanceActivate;
+
+    /**
      * @param UnitInterface $unit
      * @param bool $disposable
+     * @param int $chanceActivate
      */
-    public function __construct(UnitInterface $unit, bool $disposable)
+    public function __construct(UnitInterface $unit, bool $disposable, int $chanceActivate = 100)
     {
         $this->unit = $unit;
         $this->disposable = $disposable;
+        $this->chanceActivate = $chanceActivate;
         $this->container = $unit->getContainer();
     }
 
@@ -75,5 +82,13 @@ abstract class AbstractAbility implements AbilityInterface
     public function isUsage(): bool
     {
         return $this->usage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getChanceActivate(): int
+    {
+        return $this->chanceActivate;
     }
 }
