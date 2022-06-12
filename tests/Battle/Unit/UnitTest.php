@@ -68,7 +68,7 @@ class UnitTest extends AbstractUnitTest
         $expectedAbilities = new AbilityCollection(true);
 
         if ($data['class']) {
-            foreach (UnitClassFactory::create($data['class'])->getAbilities($unit) as $ability) {
+            foreach (UnitClassFactory::createById($data['class'])->getAbilities($unit) as $ability) {
                 $expectedAbilities->add($ability);
             }
         }

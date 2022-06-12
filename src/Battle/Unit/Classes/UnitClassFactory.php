@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes;
 
+use Battle\Traits\ValidationTrait;
 use Battle\Unit\Classes\Bosses\Warden;
 use Battle\Unit\Classes\Demon\Succubus;
 use Battle\Unit\Classes\Dwarf\Alchemist;
@@ -13,9 +14,12 @@ use Battle\Unit\Classes\Orc\Titan;
 use Battle\Unit\Classes\Other\IncorrectUnitClassForTest;
 use Battle\Unit\Classes\Undead\DarkMage;
 use Battle\Unit\Classes\Undead\DeadKnight;
+use Exception;
 
 class UnitClassFactory
 {
+    use ValidationTrait;
+
     private static $map = [
         1   => Warrior::class,
         2   => Priest::class,
@@ -36,11 +40,13 @@ class UnitClassFactory
      *
      * От класса зависят способности, которые юнит будет применять в бою
      *
+     * TODO В будущем этот вариант будет удален, вместе с php-классами под конкретные unit-классы
+     *
      * @param int $classId
      * @return UnitClassInterface
      * @throws UnitClassException
      */
-    public static function create(int $classId): UnitClassInterface
+    public static function createById(int $classId): UnitClassInterface
     {
         if (!array_key_exists($classId, self::$map)) {
             throw new UnitClassException(UnitClassException::UNDEFINED_CLASS_ID . ': ' . $classId);
@@ -54,5 +60,27 @@ class UnitClassFactory
         }
 
         return $class;
+    }
+
+    /**
+     * Создает класс юнита на основе массива с параметрами
+     *
+     * @param array $data
+     * @return UnitClassInterface
+     * @throws Exception
+     */
+    public static function createByArray(array $data): UnitClassInterface
+    {
+        self::int($data, 'id', UnitClassException::INVALID_ID_DATA);
+        self::string($data, 'name', UnitClassException::INVALID_NAME_DATA);
+        self::string($data, 'small_icon', UnitClassException::INVALID_SMALL_ICON_DATA);
+        self::array($data, 'abilities', UnitClassException::INVALID_ABILITIES_DATA);
+
+        return new UnitClass(
+            $data['id'],
+            $data['name'],
+            $data['small_icon'],
+            $data['abilities'],
+        );
     }
 }

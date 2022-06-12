@@ -110,6 +110,6 @@ class UnitFactory
             throw new UnitException(UnitException::INCORRECT_CLASS);
         }
 
-        return UnitClassFactory::create($data['class']);
+        return UnitClassFactory::createById($data['class']);
     }
 }

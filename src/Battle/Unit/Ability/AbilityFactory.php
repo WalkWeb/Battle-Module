@@ -33,28 +33,21 @@ class AbilityFactory
      */
     public function create(UnitInterface $unit, array $data): AbilityInterface
     {
-        $name = self::string($data, 'name', AbilityException::INVALID_NAME_DATA);
-        $icon = self::string($data, 'icon', AbilityException::INVALID_ICON_DATA);
-        $disposable = self::bool($data, 'disposable', AbilityException::INVALID_DISPOSABLE_DATA);
-        $typeActivate = self::int($data, 'type_activate', AbilityException::INVALID_TYPE_ACTIVATE_DATA);
-        self::in($typeActivate, $this->typesActivate, AbilityException::UNKNOWN_ACTIVATE_TYPE . ': ' . $typeActivate);
+        self::string($data, 'name', AbilityException::INVALID_NAME_DATA);
+        self::string($data, 'icon', AbilityException::INVALID_ICON_DATA);
+        self::bool($data, 'disposable', AbilityException::INVALID_DISPOSABLE_DATA);
+        self::int($data, 'type_activate', AbilityException::INVALID_TYPE_ACTIVATE_DATA);
+        self::in($data['type_activate'], $this->typesActivate, AbilityException::UNKNOWN_ACTIVATE_TYPE . ': ' . $data['type_activate']);
         $chanceActivate = self::intOrMissing($data, 'chance_activate', AbilityException::INVALID_CHANCE_ACTIVATE_DATA);
-        $actionsData = self::array($data, 'actions', AbilityException::INVALID_ACTIONS_DATA);
-
-        // Сразу проверяем, что массив параметров способностей состоит из массивов
-        foreach ($actionsData as $actionData) {
-            if (!is_array($actionData)) {
-                throw new AbilityException(AbilityException::INVALID_ACTION_DATA);
-            }
-        }
+        self::array($data, 'actions', AbilityException::INVALID_ACTIONS_DATA);
 
         return new Ability(
             $unit,
-            $disposable,
-            $name,
-            $icon,
-            $actionsData,
-            $typeActivate,
+            $data['disposable'],
+            $data['name'],
+            $data['icon'],
+            $data['actions'],
+            $data['type_activate'],
             $chanceActivate
         );
     }

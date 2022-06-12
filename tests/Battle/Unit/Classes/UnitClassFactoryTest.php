@@ -4,59 +4,93 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes;
 
-use Battle\Result\Chat\Chat;
 use Battle\Unit\Classes\UnitClassException;
 use Battle\Unit\Classes\Human\Priest;
 use Battle\Unit\Classes\Human\Warrior;
 use Battle\Unit\Classes\Undead\DarkMage;
 use Battle\Unit\Classes\Undead\DeadKnight;
 use Battle\Unit\Classes\UnitClassFactory;
+use Exception;
 use Tests\AbstractUnitTest;
 
 class UnitClassFactoryTest extends AbstractUnitTest
 {
     /**
-     * @dataProvider successDataProvider
+     * Тест на создание класса по ID класса
+     *
+     * @dataProvider createByIdSuccessDataProvider
      * @param int $classId
      * @param string $expectClassName
-     * @throws UnitClassException
+     * @throws Exception
      */
-    public function testUnitClassFactoryCreateSuccess(int $classId, string $expectClassName): void
+    public function testUnitClassFactoryCreateByIdSuccess(int $classId, string $expectClassName): void
     {
-        $chat = new Chat();
-        $class = UnitClassFactory::create($classId);
-        $expectClass = new $expectClassName($chat);
+        $class = UnitClassFactory::createById($classId);
+        $expectClass = new $expectClassName();
         self::assertEquals($expectClass, $class);
     }
 
     /**
-     * @throws UnitClassException
+     * @throws Exception
      */
-    public function testUnitClassFactoryCreateFail(): void
+    public function testUnitClassFactoryCreateByIdFail(): void
     {
         $classId = 55;
         $this->expectException(UnitClassException::class);
         $this->expectExceptionMessage(UnitClassException::UNDEFINED_CLASS_ID . ': ' . $classId);
-        UnitClassFactory::create($classId);
+        UnitClassFactory::createById($classId);
     }
 
     /**
      * Тест на некорректный класс юнита - когда класс не реализует интерфейс IncorrectUnitClassForTest
      *
-     * @throws UnitClassException
+     * @throws Exception
      */
-    public function testUnitClassFactoryIncorrectClass(): void
+    public function testUnitClassFactoryCreateByIdIncorrectClass(): void
     {
         $classId = 100;
         $this->expectException(UnitClassException::class);
         $this->expectExceptionMessage(UnitClassException::INCORRECT_CLASS);
-        UnitClassFactory::create($classId);
+        UnitClassFactory::createById($classId);
+    }
+
+    /**
+     * Тест на создание класса на основе массива параметров
+     *
+     * @dataProvider createByArraySuccessDataProvider
+     * @param array $data
+     * @throws Exception
+     */
+    public function testUnitClassFactoryCreateByArraySuccess(array $data): void
+    {
+        $class = UnitClassFactory::createByArray($data);
+
+        // Проверка базовых параметров
+        self::assertEquals($data['id'], $class->getId());
+        self::assertEquals($data['name'], $class->getName());
+        self::assertEquals($data['small_icon'], $class->getSmallIcon());
+
+        // Проверка способностей делается в UnitClassTest::testUnitClassCreate()
+    }
+
+    /**
+     * Тесты на различные варианты невалидных данных
+     *
+     * @dataProvider createByArrayFailDataProvider
+     * @param array $data
+     * @param string $error
+     */
+    public function testUnitClassFactoryCreateByArrayFail(array $data, string $error): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage($error);
+        UnitClassFactory::createByArray($data);
     }
 
     /**
      * @return array
      */
-    public function successDataProvider(): array
+    public function createByIdSuccessDataProvider(): array
     {
         return [
             [
@@ -74,6 +108,118 @@ class UnitClassFactoryTest extends AbstractUnitTest
             [
                 4,
                 DarkMage::class,
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function createByArraySuccessDataProvider(): array
+    {
+        return [
+            [
+                [
+                    'id'         => 1,
+                    'name'       => 'Warrior',
+                    'small_icon' => '/images/icons/small/warrior.png',
+                    'abilities'  => [],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function createByArrayFailDataProvider(): array
+    {
+        return [
+            [
+                // Отсутствует id
+                [
+                    'name'       => 'Warrior',
+                    'small_icon' => '/images/icons/small/warrior.png',
+                    'abilities'  => [],
+                ],
+                UnitClassException::INVALID_ID_DATA,
+            ],
+            [
+                // id некорректного типа
+                [
+                    'id'         => '1',
+                    'name'       => 'Warrior',
+                    'small_icon' => '/images/icons/small/warrior.png',
+                    'abilities'  => [],
+                ],
+                UnitClassException::INVALID_ID_DATA,
+            ],
+            [
+                // Отсутствует name
+                [
+                    'id'         => 1,
+                    'small_icon' => '/images/icons/small/warrior.png',
+                    'abilities'  => [],
+                ],
+                UnitClassException::INVALID_NAME_DATA,
+            ],
+            [
+                // name некорректного типа
+                [
+                    'id'         => 1,
+                    'name'       => true,
+                    'small_icon' => '/images/icons/small/warrior.png',
+                    'abilities'  => [],
+                ],
+                UnitClassException::INVALID_NAME_DATA,
+            ],
+            [
+                // Отсутствует small_icon
+                [
+                    'id'         => 1,
+                    'name'       => 'Warrior',
+                    'abilities'  => [],
+                ],
+                UnitClassException::INVALID_SMALL_ICON_DATA,
+            ],
+            [
+                // small_icon некорректного типа
+                [
+                    'id'         => 1,
+                    'name'       => 'Warrior',
+                    'small_icon' => null,
+                    'abilities'  => [],
+                ],
+                UnitClassException::INVALID_SMALL_ICON_DATA,
+            ],
+            [
+                // Отсутствует abilities
+                [
+                    'id'         => 1,
+                    'name'       => 'Warrior',
+                    'small_icon' => '/images/icons/small/warrior.png',
+                ],
+                UnitClassException::INVALID_ABILITIES_DATA,
+            ],
+            [
+                // abilities некорректного типа
+                [
+                    'id'         => 1,
+                    'name'       => 'Warrior',
+                    'small_icon' => '/images/icons/small/warrior.png',
+                    'abilities'  => 100,
+                ],
+                UnitClassException::INVALID_ABILITIES_DATA,
+            ],
+            [
+                // abilities содержит не массивы
+                [
+                    'id'         => 1,
+                    'name'       => 'Warrior',
+                    'small_icon' => '/images/icons/small/warrior.png',
+                    'abilities'  => ['invalid_data'],
+                ],
+                UnitClassException::INVALID_ABILITY_DATA,
             ],
         ];
     }

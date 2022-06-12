@@ -735,7 +735,7 @@ class UnitFactory
             throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
         }
 
-        $class = isset(self::$units[$template]['class']) ? UnitClassFactory::create(self::$units[$template]['class']) : null;
+        $class = isset(self::$units[$template]['class']) ? UnitClassFactory::createById(self::$units[$template]['class']) : null;
 
         return new Unit(
             self::$units[$template]['id'],
