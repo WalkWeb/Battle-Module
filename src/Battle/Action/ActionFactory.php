@@ -45,7 +45,7 @@ class ActionFactory
      */
     public function create(array $data): ActionInterface
     {
-        $type = self::existAndInt($data, 'type', ActionException::INVALID_TYPE_DATA);
+        $type = self::int($data, 'type', ActionException::INVALID_TYPE_DATA);
 
         if (!array_key_exists($type, self::$map)) {
             throw new ActionException(ActionException::UNKNOWN_TYPE_ACTION);

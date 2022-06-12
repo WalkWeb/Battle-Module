@@ -22,8 +22,8 @@ class OffenseFactory
     public static function create(array $data): Offense
     {
         self::int($data, 'damage', OffenseException::INCORRECT_DAMAGE);
-        self::existAndInt($data, 'accuracy', OffenseException::INCORRECT_ACCURACY);
-        self::existAndInt($data, 'block_ignore', OffenseException::INCORRECT_BLOCK_IGNORE);
+        self::int($data, 'accuracy', OffenseException::INCORRECT_ACCURACY);
+        self::int($data, 'block_ignore', OffenseException::INCORRECT_BLOCK_IGNORE);
 
         self::intMinMaxValue(
             $data['damage'],

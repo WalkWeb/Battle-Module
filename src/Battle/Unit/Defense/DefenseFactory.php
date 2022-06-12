@@ -20,7 +20,7 @@ class DefenseFactory
      */
     public static function create(array $data): Defense
     {
-        self::existAndInt($data, 'block', DefenseException::INCORRECT_BLOCK);
+        self::int($data, 'block', DefenseException::INCORRECT_BLOCK);
 
         self::intMinMaxValue(
             $data['block'],
@@ -29,7 +29,7 @@ class DefenseFactory
             DefenseException::INCORRECT_BLOCK_VALUE . DefenseInterface::MIN_BLOCK . '-' . DefenseInterface::MAX_BLOCK
         );
 
-        self::existAndInt($data, 'defense', DefenseException::INCORRECT_DEFENSE);
+        self::int($data, 'defense', DefenseException::INCORRECT_DEFENSE);
 
         self::intMinMaxValue(
             $data['defense'],

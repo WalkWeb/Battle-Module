@@ -52,29 +52,26 @@ class UnitFactory
     {
         $container = $container ?? new Container();
 
-        self::existAndString($data, 'id', UnitException::INCORRECT_ID);
-        self::existAndString($data, 'name', UnitException::INCORRECT_NAME);
-        self::existAndString($data, 'avatar', UnitException::INCORRECT_AVATAR);
-        self::existAndInt($data, 'life', UnitException::INCORRECT_LIFE);
-        self::existAndInt($data, 'total_life', UnitException::INCORRECT_TOTAL_LIFE);
-        self::existAndInt($data, 'level', UnitException::INCORRECT_LEVEL);
-        self::existAndInt($data, 'race', UnitException::INCORRECT_RACE);
-        self::existAndInt($data, 'command', UnitException::INCORRECT_COMMAND);
+        self::string($data, 'id', UnitException::INCORRECT_ID);
+        self::string($data, 'name', UnitException::INCORRECT_NAME);
+        self::string($data, 'avatar', UnitException::INCORRECT_AVATAR);
+        self::int($data, 'life', UnitException::INCORRECT_LIFE);
+        self::int($data, 'total_life', UnitException::INCORRECT_TOTAL_LIFE);
+        self::bool($data, 'melee', UnitException::INCORRECT_MELEE);
+        self::int($data, 'level', UnitException::INCORRECT_LEVEL);
+        self::int($data, 'race', UnitException::INCORRECT_RACE);
+        self::int($data, 'command', UnitException::INCORRECT_COMMAND);
         self::intMinMaxValue($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
         self::intMinMaxValue($data['total_life'], UnitInterface::MIN_TOTAL_LIFE, UnitInterface::MAX_TOTAL_LIFE, UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE);
         self::intMinMaxValue($data['level'], UnitInterface::MIN_LEVEL, UnitInterface::MAX_LEVEL, UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL);
         self::stringMinMaxLength($data['name'], UnitInterface::MIN_NAME_LENGTH, UnitInterface::MAX_NAME_LENGTH, UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH);
         self::stringMinMaxLength($data['id'], UnitInterface::MIN_ID_LENGTH, UnitInterface::MAX_ID_LENGTH, UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH);
 
-        self::existAndArray($data, 'offense', UnitException::INCORRECT_OFFENSE);
-        self::existAndArray($data, 'defense', UnitException::INCORRECT_DEFENSE);
+        self::array($data, 'offense', UnitException::INCORRECT_OFFENSE);
+        self::array($data, 'defense', UnitException::INCORRECT_DEFENSE);
 
         if ($data['life'] > $data['total_life']) {
             throw new UnitException(UnitException::LIFE_MORE_TOTAL_LIFE);
-        }
-
-        if (!array_key_exists('melee', $data) || !is_bool($data['melee'])) {
-            throw new UnitException(UnitException::INCORRECT_MELEE);
         }
 
         return new Unit(

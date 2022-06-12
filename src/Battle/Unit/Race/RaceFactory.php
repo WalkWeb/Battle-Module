@@ -129,12 +129,12 @@ class RaceFactory
      */
     public static function createByArray(array $data): RaceInterface
     {
-        self::existAndInt($data, 'id', RaceException::INCORRECT_ID);
-        self::existAndString($data, 'name', RaceException::INCORRECT_NAME);
-        self::existAndString($data, 'single_name', RaceException::INCORRECT_SINGLE_NAME);
-        self::existAndString($data, 'color', RaceException::INCORRECT_COLOR);
-        self::existAndString($data, 'icon', RaceException::INCORRECT_ICON);
-        self::existAndArray($data, 'abilities', RaceException::INCORRECT_ABILITIES);
+        self::int($data, 'id', RaceException::INCORRECT_ID);
+        self::string($data, 'name', RaceException::INCORRECT_NAME);
+        self::string($data, 'single_name', RaceException::INCORRECT_SINGLE_NAME);
+        self::string($data, 'color', RaceException::INCORRECT_COLOR);
+        self::string($data, 'icon', RaceException::INCORRECT_ICON);
+        self::array($data, 'abilities', RaceException::INCORRECT_ABILITIES);
 
         foreach ($data['abilities'] as $abilityClass) {
             if (!is_string($abilityClass)) {
