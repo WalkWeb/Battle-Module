@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Classes;
 
 use Battle\Result\Chat\Chat;
-use Battle\Unit\Classes\ClassFactoryException;
+use Battle\Unit\Classes\UnitClassException;
 use Battle\Unit\Classes\Human\Priest;
 use Battle\Unit\Classes\Human\Warrior;
 use Battle\Unit\Classes\Undead\DarkMage;
@@ -19,7 +19,7 @@ class UnitClassFactoryTest extends AbstractUnitTest
      * @dataProvider successDataProvider
      * @param int $classId
      * @param string $expectClassName
-     * @throws ClassFactoryException
+     * @throws UnitClassException
      */
     public function testUnitClassFactoryCreateSuccess(int $classId, string $expectClassName): void
     {
@@ -30,26 +30,26 @@ class UnitClassFactoryTest extends AbstractUnitTest
     }
 
     /**
-     * @throws ClassFactoryException
+     * @throws UnitClassException
      */
     public function testUnitClassFactoryCreateFail(): void
     {
         $classId = 55;
-        $this->expectException(ClassFactoryException::class);
-        $this->expectExceptionMessage(ClassFactoryException::UNDEFINED_CLASS_ID . ': ' . $classId);
+        $this->expectException(UnitClassException::class);
+        $this->expectExceptionMessage(UnitClassException::UNDEFINED_CLASS_ID . ': ' . $classId);
         UnitClassFactory::create($classId);
     }
 
     /**
      * Тест на некорректный класс юнита - когда класс не реализует интерфейс IncorrectUnitClassForTest
      *
-     * @throws ClassFactoryException
+     * @throws UnitClassException
      */
     public function testUnitClassFactoryIncorrectClass(): void
     {
         $classId = 100;
-        $this->expectException(ClassFactoryException::class);
-        $this->expectExceptionMessage(ClassFactoryException::INCORRECT_CLASS);
+        $this->expectException(UnitClassException::class);
+        $this->expectExceptionMessage(UnitClassException::INCORRECT_CLASS);
         UnitClassFactory::create($classId);
     }
 

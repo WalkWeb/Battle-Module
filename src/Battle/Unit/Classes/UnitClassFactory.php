@@ -38,19 +38,19 @@ class UnitClassFactory
      *
      * @param int $classId
      * @return UnitClassInterface
-     * @throws ClassFactoryException
+     * @throws UnitClassException
      */
     public static function create(int $classId): UnitClassInterface
     {
         if (!array_key_exists($classId, self::$map)) {
-            throw new ClassFactoryException(ClassFactoryException::UNDEFINED_CLASS_ID . ': ' . $classId);
+            throw new UnitClassException(UnitClassException::UNDEFINED_CLASS_ID . ': ' . $classId);
         }
 
         $className = self::$map[$classId];
         $class = new $className();
 
         if (!($class instanceof UnitClassInterface)) {
-            throw new ClassFactoryException(ClassFactoryException::INCORRECT_CLASS);
+            throw new UnitClassException(UnitClassException::INCORRECT_CLASS);
         }
 
         return $class;
