@@ -22,6 +22,8 @@ use Tests\Battle\Factory\UnitFactory;
 class WarriorTest extends AbstractUnitTest
 {
     /**
+     * TODO В будущем конкретные php-классы на классы юнитов будут удалены, и этот тест также
+     *
      * @throws CommandException
      * @throws UnitException
      * @throws Exception
@@ -68,6 +70,8 @@ class WarriorTest extends AbstractUnitTest
     }
 
     /**
+     * TODO В будущем конкретные php-классы на классы юнитов будут удалены, и этот тест также
+     *
      * @throws Exception
      */
     public function testWarriorReadyAbility(): void

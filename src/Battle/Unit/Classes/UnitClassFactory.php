@@ -42,6 +42,8 @@ class UnitClassFactory
      *
      * TODO В будущем этот вариант будет удален, вместе с php-классами под конкретные unit-классы
      *
+     * TODO Уйти от статики, поместить фабрику в контейнер
+     *
      * @param int $classId
      * @return UnitClassInterface
      * @throws UnitClassException
