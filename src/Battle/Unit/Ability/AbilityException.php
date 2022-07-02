@@ -8,6 +8,8 @@ use Exception;
 
 class AbilityException extends Exception
 {
+    public const UNDEFINED_ABILITY_NAME        = 'Undefined ability name';
+    public const UNDEFINED_ABILITY_LEVEL       = 'Undefined ability level';
     public const INVALID_ACTION_DATA           = 'Invalid action data: array expected';
     public const INVALID_EFFECT_DATA           = 'Invalid effect action data: expected array parameters: "on_apply_actions", "on_next_round_actions" and "on_disable_actions"';
     public const INVALID_ACTIONS_DATA          = 'Invalid "actions" data: array expected';
