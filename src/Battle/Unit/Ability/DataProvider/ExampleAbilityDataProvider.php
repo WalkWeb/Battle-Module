@@ -41,6 +41,40 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Blessed Shield' => [
+            1 => [
+                'name'          => 'Blessed Shield',
+                'icon'          => '/images/icons/ability/271.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Blessed Shield',
+                        'icon'           => '/images/icons/ability/271.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Blessed Shield',
+                            'icon'                  => '/images/icons/ability/271.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Blessed Shield',
+                                    'modify_method'  => 'addBlock',
+                                    'power'          => 15,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**

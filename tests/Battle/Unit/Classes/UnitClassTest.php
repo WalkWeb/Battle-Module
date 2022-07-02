@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Classes;
 
 use Battle\Command\CommandFactory;
+use Battle\Container\Container;
+use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClass;
 use Battle\Unit\Classes\UnitClassException;
@@ -26,7 +28,7 @@ class UnitClassTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $classData = (new ExampleClassDataProvider())->get(1);
+        $classData = $this->getClassDataProvider()->get(1);
 
         $class = new UnitClass(
             $classData['id'],
@@ -76,5 +78,13 @@ class UnitClassTest extends AbstractUnitTest
             'icon.png',
             ['invalid_data'],
         );
+    }
+
+    /**
+     * @return ClassDataProviderInterface
+     */
+    private function getClassDataProvider(): ClassDataProviderInterface
+    {
+        return new ExampleClassDataProvider(new Container());
     }
 }

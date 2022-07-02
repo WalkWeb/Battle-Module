@@ -770,12 +770,14 @@ class UnitFactory
         ?int $classId = null,
         ?ContainerInterface $container = null): UnitInterface
     {
+        $container = $container ?? new Container(true);
+
         if (empty(self::$units[$template])) {
             throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
         }
 
         if ($classId) {
-            $classData = self::getClassDataProvider()->get($classId);
+            $classData = self::getClassDataProvider($container)->get($classId);
             $class = UnitClassFactory::createByArray($classData);
         } else {
             $class = null;
@@ -793,7 +795,7 @@ class UnitFactory
             OffenseFactory::create(self::$units[$template]['offense']),
             DefenseFactory::create(self::$units[$template]['defense']),
             RaceFactory::createById(self::$units[$template]['race']),
-            $container ?? new Container(true),
+            $container,
             $class
         );
     }
@@ -813,10 +815,11 @@ class UnitFactory
     }
 
     /**
+     * @param ContainerInterface $container
      * @return ExampleClassDataProvider
      */
-    private static function getClassDataProvider(): ExampleClassDataProvider
+    private static function getClassDataProvider(ContainerInterface $container): ExampleClassDataProvider
     {
-        return new ExampleClassDataProvider();
+        return new ExampleClassDataProvider($container);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\DataProvider;
 
+use Battle\Container\Container;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassException;
@@ -51,6 +52,6 @@ class ExampleClassDataProviderTest extends AbstractUnitTest
      */
     private function getDataProvider(): ClassDataProviderInterface
     {
-        return new ExampleClassDataProvider();
+        return new ExampleClassDataProvider(new Container());
     }
 }
