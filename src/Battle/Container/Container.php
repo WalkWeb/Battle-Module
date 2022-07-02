@@ -17,34 +17,56 @@ use Battle\Round\RoundFactory;
 use Battle\Stroke\StrokeFactory;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
+use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
+use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\View\ViewFactory;
 
 class Container implements ContainerInterface
 {
     private $map = [
-        StatisticInterface::class   => Statistic::class,
-        Statistic::class            => Statistic::class,
-        'Statistic'                 => Statistic::class,
-        ChatInterface::class        => Chat::class,
-        Chat::class                 => Chat::class,
-        'Chat'                      => Chat::class,
-        TranslationInterface::class => Translation::class,
-        Translation::class          => Translation::class,
-        'Translation'               => Translation::class,
-        ScenarioInterface::class    => Scenario::class,
-        Scenario::class             => Scenario::class,
-        'Scenario'                  => Scenario::class,
-        FullLogInterface::class     => FullLog::class,
-        FullLog::class              => FullLog::class,
-        'FullLog'                   => FullLog::class,
-        BattleFactory::class        => BattleFactory::class,
-        'BattleFactory'             => BattleFactory::class,
-        RoundFactory::class         => RoundFactory::class,
-        'RoundFactory'              => RoundFactory::class,
-        StrokeFactory::class        => StrokeFactory::class,
-        'StrokeFactory'             => StrokeFactory::class,
-        ViewFactory::class          => ViewFactory::class,
-        'ViewFactory'               => ViewFactory::class,
+        StatisticInterface::class           => Statistic::class,
+        Statistic::class                    => Statistic::class,
+        'Statistic'                         => Statistic::class,
+
+        ChatInterface::class                => Chat::class,
+        Chat::class                         => Chat::class,
+        'Chat'                              => Chat::class,
+
+        TranslationInterface::class         => Translation::class,
+        Translation::class                  => Translation::class,
+        'Translation'                       => Translation::class,
+
+        ScenarioInterface::class            => Scenario::class,
+        Scenario::class                     => Scenario::class,
+        'Scenario'                          => Scenario::class,
+
+        FullLogInterface::class             => FullLog::class,
+        FullLog::class                      => FullLog::class,
+        'FullLog'                           => FullLog::class,
+
+        BattleFactory::class                => BattleFactory::class,
+        'BattleFactory'                     => BattleFactory::class,
+
+        RoundFactory::class                 => RoundFactory::class,
+        'RoundFactory'                      => RoundFactory::class,
+
+        StrokeFactory::class                => StrokeFactory::class,
+        'StrokeFactory'                     => StrokeFactory::class,
+
+        ViewFactory::class                  => ViewFactory::class,
+        'ViewFactory'                       => ViewFactory::class,
+
+        // Исключительно как примеры поставщиков. Подразумевается, что в реальном проекте эти поставщики будут подменены
+        // через метод в контейнере set()
+        ExampleClassDataProvider::class     => ExampleClassDataProvider::class,
+        ClassDataProviderInterface::class   => ExampleClassDataProvider::class,
+        'ClassDataProvider'                 => ExampleClassDataProvider::class,
+
+        ExampleAbilityDataProvider::class   => ExampleAbilityDataProvider::class,
+        AbilityDataProviderInterface::class => ExampleAbilityDataProvider::class,
+        'AbilityDataProvider'               => ExampleAbilityDataProvider::class,
     ];
 
     private $storage = [];
@@ -174,17 +196,6 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @return ViewFactory
-     * @throws ContainerException
-     */
-    public function getViewFactory(): ViewFactory
-    {
-        /** @var ViewFactory $service */
-        $service = $this->get(ViewFactory::class);
-        return $service;
-    }
-
-    /**
      * @return RoundFactory
      * @throws ContainerException
      */
@@ -203,6 +214,39 @@ class Container implements ContainerInterface
     {
         /** @var StrokeFactory $service */
         $service = $this->get(StrokeFactory::class);
+        return $service;
+    }
+
+    /**
+     * @return ViewFactory
+     * @throws ContainerException
+     */
+    public function getViewFactory(): ViewFactory
+    {
+        /** @var ViewFactory $service */
+        $service = $this->get(ViewFactory::class);
+        return $service;
+    }
+
+    /**
+     * @return ClassDataProviderInterface
+     * @throws ContainerException
+     */
+    public function getClassDataProvider(): ClassDataProviderInterface
+    {
+        /** @var ClassDataProviderInterface $service */
+        $service = $this->get(ClassDataProviderInterface::class);
+        return $service;
+    }
+
+    /**
+     * @return AbilityDataProviderInterface
+     * @throws ContainerException
+     */
+    public function getAbilityDataProvider(): AbilityDataProviderInterface
+    {
+        /** @var AbilityDataProviderInterface $service */
+        $service = $this->get(AbilityDataProviderInterface::class);
         return $service;
     }
 

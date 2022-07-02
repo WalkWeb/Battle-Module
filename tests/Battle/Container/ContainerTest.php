@@ -20,6 +20,10 @@ use Battle\Stroke\StrokeFactory;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationException;
 use Battle\Translation\TranslationInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
+use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
+use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Unit;
 use Battle\View\ViewFactory;
 use stdClass;
@@ -195,6 +199,40 @@ class ContainerTest extends AbstractUnitTest
 
         $viewFactory = $container->get('ViewFactory');
         self::assertInstanceOf(ViewFactory::class, $viewFactory);
+    }
+
+    /**
+     * @throws ContainerException
+     */
+    public function testContainerGetClassDataProvider(): void
+    {
+        $container = new Container();
+
+        $dataProvider = $container->get(ClassDataProviderInterface::class);
+        self::assertInstanceOf(ExampleClassDataProvider::class, $dataProvider);
+
+        $dataProvider = $container->get('ClassDataProvider');
+        self::assertInstanceOf(ExampleClassDataProvider::class, $dataProvider);
+
+        $dataProvider = $container->getClassDataProvider();
+        self::assertInstanceOf(ExampleClassDataProvider::class, $dataProvider);
+    }
+
+    /**
+     * @throws ContainerException
+     */
+    public function testContainerGetAbilityDataProvider(): void
+    {
+        $container = new Container();
+
+        $dataProvider = $container->get(AbilityDataProviderInterface::class);
+        self::assertInstanceOf(ExampleAbilityDataProvider::class, $dataProvider);
+
+        $dataProvider = $container->get('AbilityDataProvider');
+        self::assertInstanceOf(ExampleAbilityDataProvider::class, $dataProvider);
+
+        $dataProvider = $container->getAbilityDataProvider();
+        self::assertInstanceOf(ExampleAbilityDataProvider::class, $dataProvider);
     }
 
     /**

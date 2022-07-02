@@ -12,6 +12,8 @@ use Battle\Result\Statistic\StatisticInterface;
 use Battle\Round\RoundFactory;
 use Battle\Stroke\StrokeFactory;
 use Battle\Translation\TranslationInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\View\ViewFactory;
 
 interface ContainerInterface
@@ -101,4 +103,19 @@ interface ContainerInterface
      * @throws ContainerException
      */
     public function getViewFactory(): ViewFactory;
+
+    /**
+     * Поставщик данных классов юнитов
+     *
+     * @return ClassDataProviderInterface
+     * @throws ContainerException
+     */
+    public function getClassDataProvider(): ClassDataProviderInterface;
+
+    /**
+     * Поставщик данных способностей юнитов
+     *
+     * @return AbilityDataProviderInterface
+     */
+    public function getAbilityDataProvider(): AbilityDataProviderInterface;
 }
