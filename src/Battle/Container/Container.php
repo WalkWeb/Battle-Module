@@ -251,23 +251,14 @@ class Container implements ContainerInterface
     }
 
     /**
-     * TODO В будущем во всех сервисы можно добавить контейнер в конструктор, это избавит от необходимости некоторые
-     * TODO сервисы создавать через отдельную логику
-     *
      * @param string $class
      * @return object
-     * @throws ContainerException
      */
     private function create(string $class): object
     {
-        if ($class === Chat::class) {
-            $object = $this->createChat();
-            $this->storage[$this->map[$class]] = $object;
-            return $object;
-        }
-
-        if ($class === ExampleClassDataProvider::class) {
-            $object = $this->createClassDataProvider();
+        // Некоторые сервисы требуют передачу контейнера в конструктор
+        if ($class === Chat::class || $class === ExampleClassDataProvider::class) {
+            $object = new $class($this);
             $this->storage[$this->map[$class]] = $object;
             return $object;
         }
@@ -276,29 +267,6 @@ class Container implements ContainerInterface
         $this->storage[$this->map[$class]] = $object;
 
         return $object;
-    }
-
-    /**
-     * Логика создания чата отличается от других объектов - необходимо использовать Translation из контейнера, а не
-     * создавать новый
-     *
-     * @return ChatInterface
-     * @throws ContainerException
-     */
-    private function createChat(): ChatInterface
-    {
-        return new Chat($this);
-    }
-
-    /**
-     * Логика создания ExampleClassDataProvider отличается от других объектов - необходимо передать контейнер в
-     * конструктор
-     *
-     * @return ClassDataProviderInterface
-     */
-    private function createClassDataProvider(): ClassDataProviderInterface
-    {
-        return new ExampleClassDataProvider($this);
     }
 
     /**
