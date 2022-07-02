@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Factory;
 
+use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
@@ -755,6 +756,49 @@ class UnitFactory
     }
 
     /**
+     * TODO Это временный метод для создания юнита с альтернативной механикой создания класса. В будущем будет
+     * TODO createByTemplate будет использовать такую механику, а этот метод просто удалится
+     *
+     * @param int $template
+     * @param int|null $classId
+     * @param ContainerInterface|null $container
+     * @return UnitInterface
+     * @throws Exception
+     */
+    public static function createByTemplateNewClassMechanic(
+        int $template,
+        ?int $classId = null,
+        ?ContainerInterface $container = null): UnitInterface
+    {
+        if (empty(self::$units[$template])) {
+            throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
+        }
+
+        if ($classId) {
+            $classData = self::getClassDataProvider()->get($classId);
+            $class = UnitClassFactory::createByArray($classData);
+        } else {
+            $class = null;
+        }
+
+        return new Unit(
+            self::$units[$template]['id'],
+            self::$units[$template]['name'],
+            self::$units[$template]['level'],
+            self::$units[$template]['avatar'],
+            self::$units[$template]['life'],
+            self::$units[$template]['total_life'],
+            self::$units[$template]['melee'],
+            self::$units[$template]['command'],
+            OffenseFactory::create(self::$units[$template]['offense']),
+            DefenseFactory::create(self::$units[$template]['defense']),
+            RaceFactory::createById(self::$units[$template]['race']),
+            $container ?? new Container(true),
+            $class
+        );
+    }
+
+    /**
      * @param int $template
      * @return array
      * @throws UnitFactoryException
@@ -766,5 +810,13 @@ class UnitFactory
         }
 
         return self::$units[$template];
+    }
+
+    /**
+     * @return ExampleClassDataProvider
+     */
+    private static function getClassDataProvider(): ExampleClassDataProvider
+    {
+        return new ExampleClassDataProvider();
     }
 }

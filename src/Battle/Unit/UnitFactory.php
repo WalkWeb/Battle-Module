@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
-use Battle\Unit\Classes\ClassFactoryException;
 use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\Container;
@@ -93,8 +92,7 @@ class UnitFactory
     /**
      * @param array $data
      * @return UnitClassInterface|null
-     * @throws UnitException
-     * @throws ClassFactoryException
+     * @throws Exception
      */
     private static function getClass(array $data): ?UnitClassInterface
     {

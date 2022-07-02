@@ -6,7 +6,6 @@ namespace Tests\Battle\Command;
 
 use Battle\Result\FullLog\FullLog;
 use Battle\Unit\Classes\UnitClassFactory;
-use Battle\Unit\Classes\ClassFactoryException;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
@@ -19,9 +18,7 @@ class CommandFactoryTest extends AbstractUnitTest
     /**
      * @dataProvider successDataProvider
      * @param array $data
-     * @throws ClassFactoryException
-     * @throws CommandException
-     * @throws UnitException
+     * @throws Exception
      */
     public function testCommandFactoryCreateFromDataSuccess(array $data): void
     {

@@ -9,6 +9,7 @@ use Battle\Action\ActionInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
 use Battle\Unit\Ability\Effect\BlessedShieldAbility;
 use Battle\Unit\Effect\EffectFactory;
@@ -77,6 +78,87 @@ class WarriorTest extends AbstractUnitTest
     public function testWarriorReadyAbility(): void
     {
         $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        for ($i = 0; $i < 30; $i++) {
+            $unit->newRound();
+        }
+
+        foreach ($unit->getAbilities() as $i => $ability) {
+            if ($i === 0) {
+                // HeavyStrikeAbility готов и может быть применен
+                self::assertTrue($ability->isReady());
+                self::assertTrue($ability->canByUsed($enemyCommand, $command));
+            }
+            if ($i === 1) {
+                // BlessedShieldAbility готов и может быть применен
+                self::assertTrue($ability->isReady());
+                self::assertTrue($ability->canByUsed($enemyCommand, $command));
+            }
+            if ($i === 2) {
+                // WillToLiveAbility не готов (юнит не мертв), но может быть применен (ранее не применялся)
+                self::assertFalse($ability->isReady());
+                self::assertTrue($ability->canByUsed($enemyCommand, $command));
+            }
+        }
+    }
+
+    /**
+     * Тест аналогичен testCreateWarriorClass, но с тем отличием, что класс создается через DataProvider
+     *
+     * @throws Exception
+     */
+    public function testNewCreateWarriorClass(): void
+    {
+        $unit = UnitFactory::createByTemplateNewClassMechanic(1, 1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $warrior = $unit->getClass();
+
+        self::assertEquals(1, $warrior->getId());
+        self::assertEquals('Warrior', $warrior->getName());
+        self::assertEquals('/images/icons/small/warrior.png', $warrior->getSmallIcon());
+
+        $abilities = $warrior->getAbilities($unit);
+
+        foreach ($abilities as $i => $ability) {
+            if ($i === 0) {
+                self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
+
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertEquals((int)($unit->getOffense()->getDamage() * 2.5), $action->getPower());
+                }
+            }
+
+            if ($i === 1) {
+                self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
+
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertEquals(
+                        $this->createBlessedShieldEffect($unit, $enemyCommand, $command),
+                        $action->getEffect()
+                    );
+                }
+            }
+        }
+    }
+
+    /**
+     * @throws CommandException
+     * @throws UnitException
+     * @throws Exception
+     */
+    public function testNewWarriorReadyAbility(): void
+    {
+        $unit = UnitFactory::createByTemplateNewClassMechanic(1, 1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
