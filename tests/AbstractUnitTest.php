@@ -26,13 +26,23 @@ abstract class AbstractUnitTest extends TestCase
         return $container;
     }
 
+    /**
+     * @return ChatInterface
+     * @throws ContainerException
+     */
     protected function getChat(): ChatInterface
     {
-        return new Chat();
+        return new Chat(new Container());
     }
 
+    /**
+     * @return ChatInterface
+     * @throws ContainerException
+     */
     protected function getChatRu(): ChatInterface
     {
-        return new Chat(new Translation('ru'));
+        $container = new Container();
+        $container->set(Translation::class, new Translation('ru'));
+        return new Chat($container);
     }
 }

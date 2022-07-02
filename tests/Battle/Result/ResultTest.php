@@ -24,7 +24,7 @@ class ResultTest extends AbstractUnitTest
     {
         $leftCommand = CommandFactory::createLeftCommand();
         $rightCommand = CommandFactory::createRightCommand();
-        $chat = new Chat();
+        $chat = new Chat(new Container());
         $translation = new Translation();
         $scenario = new Scenario();
 

@@ -287,7 +287,7 @@ class Container implements ContainerInterface
      */
     private function createChat(): ChatInterface
     {
-        return new Chat($this->getTranslation());
+        return new Chat($this);
     }
 
     /**

@@ -6,7 +6,8 @@ namespace Battle\Result\Chat;
 
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
-use Battle\Translation\Translation;
+use Battle\Container\ContainerException;
+use Battle\Container\ContainerInterface;
 use Battle\Translation\TranslationInterface;
 
 /**
@@ -27,11 +28,12 @@ class Chat implements ChatInterface
     private $messages = [];
 
     /**
-     * @param TranslationInterface|null $translation
+     * @param ContainerInterface $container
+     * @throws ContainerException
      */
-    public function __construct(?TranslationInterface $translation = null)
+    public function __construct(ContainerInterface $container)
     {
-        $this->translation = $translation ?? new Translation();
+        $this->translation = $container->getTranslation();
     }
 
     /**

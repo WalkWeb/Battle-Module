@@ -562,7 +562,7 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
-        $chat = new Chat();
+        $chat = new Chat(new Container());
 
         $action = new DamageAction(
             $unit,
