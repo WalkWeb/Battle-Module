@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability\Summon;
 
 use Battle\Action\ActionInterface;
+use Battle\Result\Scenario\Scenario;
+use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
@@ -167,6 +169,9 @@ class SummonSkeletonAbilityTest extends AbstractUnitTest
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+
+            // Дополнительное проверяем, что по событию успешно создается анимация
+            (new Scenario())->addAnimation($action, new Statistic());
         }
 
         $ability->usage();

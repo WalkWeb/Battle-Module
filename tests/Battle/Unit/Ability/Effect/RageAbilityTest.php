@@ -9,6 +9,8 @@ use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Result\Scenario\Scenario;
+use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityFactory;
@@ -343,6 +345,9 @@ class RageAbilityTest extends AbstractUnitTest
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+
+            // Дополнительное проверяем, что по событию успешно создается анимация
+            (new Scenario())->addAnimation($action, new Statistic());
         }
 
         // Проверяем, что урон вырос в 2 раза

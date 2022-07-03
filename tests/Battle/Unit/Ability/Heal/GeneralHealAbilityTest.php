@@ -8,6 +8,8 @@ use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
+use Battle\Result\Scenario\Scenario;
+use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityFactory;
@@ -278,6 +280,9 @@ class GeneralHealAbilityTest extends AbstractUnitTest
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+
+            // Дополнительное проверяем, что по событию успешно создается анимация
+            (new Scenario())->addAnimation($action, new Statistic());
         }
 
         $ability->usage();
@@ -325,7 +330,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
                     'power'            => 24,
                     'can_be_avoided'   => true,
                     'name'             => $name,
-                    'animation_method' => 'healAbility',
+                    'animation_method' => 'heal',
                     'message_method'   => 'healAbility',
                     'icon'             => $icon,
                 ],

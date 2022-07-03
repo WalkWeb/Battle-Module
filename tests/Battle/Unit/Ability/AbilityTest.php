@@ -55,7 +55,7 @@ class AbilityTest extends AbstractUnitTest
                     'damage'           => 50,
                     'can_be_avoided'   => true,
                     'name'             => $name,
-                    'animation_method' => 'damageAbility',
+                    'animation_method' => 'damage',
                     'message_method'   => 'damageAbility',
                     'icon'             => $icon,
                 ],

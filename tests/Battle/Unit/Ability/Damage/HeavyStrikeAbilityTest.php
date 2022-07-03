@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability\Damage;
 
 use Battle\Action\ActionInterface;
+use Battle\Result\Scenario\Scenario;
+use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
@@ -114,7 +116,7 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
                     'damage'           => 50,
                     'can_be_avoided'   => true,
                     'name'             => $name,
-                    'animation_method' => 'damageAbility',
+                    'animation_method' => 'damage',
                     'message_method'   => 'damageAbility',
                     'icon'             => $icon,
                 ],
@@ -218,6 +220,9 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+
+            // Дополнительное проверяем, что по событию успешно создается анимация
+            (new Scenario())->addAnimation($action, new Statistic());
         }
 
         $ability->usage();

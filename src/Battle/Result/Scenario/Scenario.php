@@ -37,7 +37,7 @@ class Scenario implements ScenarioInterface
         $animationMethod = $action->getAnimationMethod();
 
         if (!method_exists($this, $animationMethod)) {
-            throw new ScenarioException(ScenarioException::UNDEFINED_ANIMATION_METHOD);
+            throw new ScenarioException(ScenarioException::UNDEFINED_ANIMATION_METHOD . ': ' . $animationMethod);
         }
 
         $this->$animationMethod($action, $statistic);

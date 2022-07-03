@@ -7,6 +7,8 @@ namespace Tests\Battle\Unit\Ability\Damage;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
+use Battle\Result\Scenario\Scenario;
+use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityFactory;
@@ -119,7 +121,7 @@ class HellfireAbilityTest extends AbstractUnitTest
                     'damage'           => 30,
                     'can_be_avoided'   => true,
                     'name'             => $name,
-                    'animation_method' => 'damageAbility',
+                    'animation_method' => 'damage',
                     'message_method'   => 'damageAbility',
                     'icon'             => $icon,
                 ],
@@ -225,6 +227,9 @@ class HellfireAbilityTest extends AbstractUnitTest
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+
+            // Дополнительное проверяем, что по событию успешно создается анимация
+            (new Scenario())->addAnimation($action, new Statistic());
         }
 
         $ability->usage();

@@ -846,6 +846,8 @@ class ScenarioTest extends AbstractUnitTest
         $scenario = new Scenario();
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
+        $animationMethod = 'undefinedAnimationMethod';
+
         $action = new DamageAction(
             $unit,
             $enemyCommand,
@@ -854,12 +856,12 @@ class ScenarioTest extends AbstractUnitTest
             10,
             true,
             DamageAction::DEFAULT_NAME,
-            'undefinedAnimationMethod',
+            $animationMethod,
             DamageAction::DEFAULT_MESSAGE_METHOD
         );
 
         $this->expectException(ScenarioException::class);
-        $this->expectExceptionMessage(ScenarioException::UNDEFINED_ANIMATION_METHOD);
+        $this->expectExceptionMessage(ScenarioException::UNDEFINED_ANIMATION_METHOD . ': ' . $animationMethod);
         $scenario->addAnimation($action, new Statistic());
     }
 

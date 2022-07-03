@@ -10,6 +10,8 @@ use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Result\Scenario\Scenario;
+use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityFactory;
@@ -306,6 +308,9 @@ class ParalysisAbilityTest extends AbstractUnitTest
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
+
+            // Дополнительное проверяем, что по событию успешно создается анимация
+            (new Scenario())->addAnimation($action, new Statistic());
         }
 
         // Эффект появляется

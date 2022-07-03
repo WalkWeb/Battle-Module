@@ -10,6 +10,8 @@ use Battle\Action\ActionInterface;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
+use Battle\Result\Scenario\Scenario;
+use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityFactory;
@@ -325,7 +327,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Тест на создание способности BattleFuryAbility через универсальный объект Ability
+     * Тест на создание способности BattleFuryAbility через AbilityDataProvider
      *
      * @throws Exception
      */
@@ -377,7 +379,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на применение способности BattleFuryAbility через универсальный объект Ability
+     * Тест на применение способности BattleFuryAbility через AbilityDataProvider
      *
      * @throws Exception
      */
@@ -415,6 +417,9 @@ class BattleFuryAbilityTest extends AbstractUnitTest
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+
+            // Дополнительное проверяем, что по событию успешно создается анимация
+            (new Scenario())->addAnimation($action, new Statistic());
         }
 
         // Проверяем, что скорость атаки юнита выросла

@@ -9,6 +9,8 @@ use Battle\Action\ActionInterface;
 use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Result\Scenario\Scenario;
+use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
@@ -411,6 +413,9 @@ class WillToLiveAbilityTest extends AbstractUnitTest
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+
+            // Дополнительное проверяем, что по событию успешно создается анимация
+            (new Scenario())->addAnimation($action, new Statistic());
         }
 
         $ability->usage();
