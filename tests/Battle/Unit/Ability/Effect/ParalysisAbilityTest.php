@@ -12,7 +12,10 @@ use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Ability\Effect\ParalysisAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -124,6 +127,10 @@ class ParalysisAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------   Тесты через Ability   ----------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * Тест на создание способности ParalysisAction через универсальный объект Ability
      *
@@ -186,6 +193,109 @@ class ParalysisAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $ability = $this->createAbility($unit);
+
+        // Изначально эффектов на юните нет
+        self::assertCount(0, $enemyUnit->getEffects());
+
+        // Перед применением способности эффекта на юните еще нет - способность может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Эффект появляется
+        self::assertCount(1, $enemyUnit->getEffects());
+
+        // После появления эффекта на юните - способность уже не может быть применена
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        // Пропускаем ходы - заполняем ярость. А также сбрасываем эффект у противника
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+
+            // Длительность эффектов обновляется в getAfterActions()
+            foreach ($enemyUnit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        // Эффект исчез
+        self::assertCount(0, $enemyUnit->getEffects());
+
+        // Способность опять может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // -------------------------------   Аналогичные тесты через AbilityDataProvider   ---------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Тест на создание способности ParalysisAction через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testParalysisAbilityDataProviderCreate(): void
+    {
+        $name = 'Paralysis';
+        $icon = '/images/icons/ability/086.png';
+
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Up rage
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        self::assertEquals(
+            $this->getParalysisActions($unit, $enemyCommand, $command),
+            $ability->getAction($enemyCommand, $command)
+        );
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testParalysisAbilityDataProviderCanByUsed(): void
+    {
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
 
         // Изначально эффектов на юните нет
         self::assertCount(0, $enemyUnit->getEffects());
@@ -321,5 +431,36 @@ class ParalysisAbilityTest extends AbstractUnitTest
             AbilityInterface::ACTIVATE_RAGE,
             0
         );
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        return $this->getFactory()->create(
+            $unit,
+            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
+    }
+
+    /**
+     * @return AbilityFactory
+     */
+    private function getFactory(): AbilityFactory
+    {
+        return new AbilityFactory();
+    }
+
+    /**
+     * @return AbilityDataProviderInterface
+     */
+    private function getAbilityDataProvider(): AbilityDataProviderInterface
+    {
+        return new ExampleAbilityDataProvider();
     }
 }

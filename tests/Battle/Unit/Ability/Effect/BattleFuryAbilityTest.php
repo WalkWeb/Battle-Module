@@ -12,7 +12,10 @@ use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Ability\Effect\BattleFuryAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -165,6 +168,10 @@ class BattleFuryAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------   Тесты через Ability   ----------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * Тест на создание способности BattleFuryAbility через универсальный объект Ability
      *
@@ -313,6 +320,158 @@ class BattleFuryAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // -------------------------------   Аналогичные тесты через AbilityDataProvider   ---------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Тест на создание способности BattleFuryAbility через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testBattleFuryAbilityDataProviderCreate(): void
+    {
+        $name = 'Battle Fury';
+        $icon = '/images/icons/ability/102.png';
+        $disposable = false;
+
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Battle Fury');
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertEquals($disposable, $ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Up concentration
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        self::assertEquals(
+            $this->getBattleFuryActions($unit, $enemyCommand, $command),
+            $ability->getAction($enemyCommand, $command)
+        );
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на применение способности BattleFuryAbility через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testBattleFuryAbilityDataProviderApply(): void
+    {
+        $container = new Container();
+        $power = 1.4;
+        $unit = UnitFactory::createByTemplate(21, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Battle Fury');
+
+        // Up concentration
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        // Проверяем, что скорость атаки юнита выросла
+        self::assertEquals($oldAttackSpeed * $power , $unit->getOffense()->getAttackSpeed());
+
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+        for ($i = 0; $i < 30; $i++) {
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        // Проверяем, что скорость атаки вернулась к исходному
+        self::assertEquals($oldAttackSpeed, $unit->getOffense()->getAttackSpeed());
+    }
+
+    /**
+     * Тест на проверку перехода события из способного к применению, в невозможное к применение и обратно через
+     * универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testBattleFuryAbilityDataProviderCanByUsed(): void
+    {
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Battle Fury');
+
+        // Перед применением способности эффекта на юните еще нет - способность может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // После появления эффекта на юните - способность уже не может быть применена
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+        for ($i = 0; $i < 30; $i++) {
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        // Эффект исчез - способность опять может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+    }
+
     /**
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
@@ -409,5 +568,36 @@ class BattleFuryAbilityTest extends AbstractUnitTest
             AbilityInterface::ACTIVATE_RAGE,
             0
         );
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        return $this->getFactory()->create(
+            $unit,
+            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
+    }
+
+    /**
+     * @return AbilityFactory
+     */
+    private function getFactory(): AbilityFactory
+    {
+        return new AbilityFactory();
+    }
+
+    /**
+     * @return AbilityDataProviderInterface
+     */
+    private function getAbilityDataProvider(): AbilityDataProviderInterface
+    {
+        return new ExampleAbilityDataProvider();
     }
 }

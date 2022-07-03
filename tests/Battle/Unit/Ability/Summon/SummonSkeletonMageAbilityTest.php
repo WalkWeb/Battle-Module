@@ -6,7 +6,11 @@ namespace Tests\Battle\Unit\Ability\Summon;
 
 use Battle\Action\ActionInterface;
 use Battle\Unit\Ability\Ability;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
+use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
@@ -76,6 +80,10 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->isReady());
         self::assertEquals(0, $unit->getConcentration());
     }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------   Тесты через Ability   ----------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * Тест на создание и применение способности SummonSkeletonMageAbility через универсальный объект Ability
@@ -166,5 +174,97 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isUsage());
         self::assertFalse($ability->isReady());
         self::assertEquals(0, $unit->getConcentration());
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // -------------------------------   Аналогичные тесты через AbilityDataProvider   ---------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Тест на создание и применение способности SummonSkeletonMageAbility через AbilityDataProvider
+     *
+     * @throws Exception
+     */
+    public function testSummonSkeletonMageAbilityDataProviderUse(): void
+    {
+        $name = 'Skeleton Mage';
+        $icon = '/images/icons/ability/503.png';
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, $name);
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertInstanceOf(SummonAction::class, $action);
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        $ability->usage();
+
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+        self::assertEquals(0, $unit->getConcentration());
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        return $this->getFactory()->create(
+            $unit,
+            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
+    }
+
+    /**
+     * @return AbilityFactory
+     */
+    private function getFactory(): AbilityFactory
+    {
+        return new AbilityFactory();
+    }
+
+    /**
+     * @return AbilityDataProviderInterface
+     */
+    private function getAbilityDataProvider(): AbilityDataProviderInterface
+    {
+        return new ExampleAbilityDataProvider();
     }
 }

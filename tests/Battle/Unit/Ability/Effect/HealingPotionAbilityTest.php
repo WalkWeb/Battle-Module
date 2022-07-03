@@ -9,7 +9,10 @@ use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Ability\Effect\HealingPotionAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -342,6 +345,10 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         }
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------   Тесты через Ability   ----------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * Тест на создание способности HealingPotionAbility через универсальный объект Ability
      *
@@ -633,6 +640,301 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         }
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // -------------------------------   Аналогичные тесты через AbilityDataProvider   ---------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Тест на создание способности HealingPotionAbility через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testHealingPotionAbilityDataProviderSelfCreateEn(): void
+    {
+        $name = 'Healing Potion';
+        $icon = '/images/icons/ability/234.png';
+
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Healing Potion');
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_SELF_EN, $this->getChat()->addMessage($action));
+        }
+
+        $effects = $unit->getEffects();
+
+        self::assertCount(1, $effects);
+
+        foreach ($effects as $effect) {
+            $onNextRoundActions = $effect->getOnNextRoundActions();
+
+            foreach ($onNextRoundActions as $effectAction) {
+                self::assertTrue($effectAction->canByUsed());
+                $effectAction->handle();
+                self::assertEquals(self::MESSAGE_HEAL_EN, $this->getChat()->addMessage($effectAction));
+            }
+        }
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на формировании сообщении о применении и использовании эффекта на себя, на русском через универсальный
+     * объект Ability
+     *
+     * @throws Exception
+     */
+    public function testHealingPotionAbilityDataProviderSelfCreateRuMessage(): void
+    {
+        $container = $this->getContainerWithRuLanguage();
+
+        $unit = UnitFactory::createByTemplate(11, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Healing Potion');
+
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_SELF_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        $effects = $unit->getEffects();
+
+        self::assertCount(1, $effects);
+
+        foreach ($effects as $effect) {
+            $onNextRoundActions = $effect->getOnNextRoundActions();
+
+            foreach ($onNextRoundActions as $effectAction) {
+                self::assertTrue($effectAction->canByUsed());
+                $effectAction->handle();
+                self::assertEquals(self::MESSAGE_HEAL_RU, $this->getChatRu()->addMessage($effectAction));
+            }
+        }
+
+        $ability->usage();
+
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testHealingPotionDataProviderAbilityApply(): void
+    {
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $power = 15;
+        $ability = $this->createAbilityByDataProvider($unit, 'Healing Potion');
+
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        self::assertCount(1, $unit->getEffects());
+
+        self::assertEquals(1, $unit->getLife());
+
+        foreach ($unit->getEffects() as $effect) {
+            foreach ($effect->getOnNextRoundActions() as $effectAction) {
+                self::assertEquals(0, $effectAction->getFactualPower());
+            }
+        }
+
+        for ($i = 1; $i < 5; $i++) {
+
+            // Применяем события от эффектов на юните
+            foreach ($unit->getBeforeActions() as $beforeAction) {
+                if ($beforeAction->canByUsed()) {
+                    $beforeAction->handle();
+                }
+            }
+
+            // Проверяем FactualPower после применения - он не должен меняться
+            self::assertEquals(1 + $power * $i, $unit->getLife());
+
+            foreach ($unit->getEffects() as $effect) {
+                foreach ($effect->getOnNextRoundActions() as $effectAction) {
+                    self::assertEquals($power, $effectAction->getFactualPower());
+                }
+            }
+
+            // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        self::assertCount(0, $unit->getEffects());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testHealingPotionDataProviderAbilityCanByUsed(): void
+    {
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Healing Potion');
+
+        // Перед применением способности эффекта на юните еще нет - способность может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // После появления эффекта на юните - способность уже не может быть применена
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+        for ($i = 0; $i < 10; $i++) {
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        // Эффект исчез - способность опять может быть применена
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+    }
+
+    /**
+     * Тест на выявление ошибки, при котором повторное применение эффекта к персонажу добавляло эффект с длительностью 0
+     * через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testHealingPotionAbilityDataProviderUpdateDuration(): void
+    {
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Healing Potion');
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Проверяем, что длительность = 4
+        foreach ($unit->getEffects() as $effect) {
+            self::assertEquals(4, $effect->getDuration());
+        }
+
+        // Пропускаем ходы
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        // Применяем способность еще раз
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $actions = $unit->getActions($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Проверяем еще раз, что при повторном применении эффекта длительность = 4
+        foreach ($unit->getEffects() as $effect) {
+            self::assertEquals(4, $effect->getDuration());
+        }
+    }
+
     /**
      * Тест на проверку сформированного сообщения при применении способности на другого юнита через универсальный объект
      * Ability
@@ -713,5 +1015,36 @@ class HealingPotionAbilityTest extends AbstractUnitTest
             AbilityInterface::ACTIVATE_CONCENTRATION,
             0
         );
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        return $this->getFactory()->create(
+            $unit,
+            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
+    }
+
+    /**
+     * @return AbilityFactory
+     */
+    private function getFactory(): AbilityFactory
+    {
+        return new AbilityFactory();
+    }
+
+    /**
+     * @return AbilityDataProviderInterface
+     */
+    private function getAbilityDataProvider(): AbilityDataProviderInterface
+    {
+        return new ExampleAbilityDataProvider();
     }
 }

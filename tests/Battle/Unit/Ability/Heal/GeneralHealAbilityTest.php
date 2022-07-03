@@ -10,7 +10,10 @@ use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Ability\Heal\GeneralHealAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -126,6 +129,10 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         }
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------   Тесты через Ability   ----------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * Тест на создание и применение способности GeneralHealAbility через универсальный объект Ability
      *
@@ -209,6 +216,93 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // -------------------------------   Аналогичные тесты через AbilityDataProvider   ---------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Тест на создание и применение способности GeneralHealAbility через AbilityDataProvider
+     *
+     * @throws Exception
+     */
+    public function testGeneralHealAbilityDataProviderCreateAndApply(): void
+    {
+        $name = 'General Heal';
+        $icon = '/images/icons/ability/452.png';
+
+        $unit = UnitFactory::createByTemplate(1);
+        $slightlyWoundedUnit = UnitFactory::createByTemplate(9);
+        $badlyWoundedUnit = UnitFactory::createByTemplate(11);
+        $deadUnit =  UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+
+        $command = CommandFactory::create([$unit, $slightlyWoundedUnit, $badlyWoundedUnit, $deadUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, $name);
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Способность не готова к использованию - т.к. ярость у юнита не полная
+        self::assertFalse($ability->isReady());
+
+        // Но она может примениться, так как в команде есть раненые юниты
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        // Активируем способность
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        // Up concentration
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection->update($unit);
+
+        // Ярость у юнита полная, и теперь способность готова к использованию
+        self::assertTrue($ability->isReady());
+
+        // Применяем способность
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertInstanceOf(HealAction::class, $action);
+            self::assertEquals(HealAction::TARGET_ALL_WOUNDED_ALLIES, $action->getTypeTarget());
+            self::assertEquals((int)($unit->getOffense()->getDamage() * 1.2), $action->getPower());
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на ситуацию, когда лечить некого через AbilityDataProvider
+     *
+     * @throws Exception
+     */
+    public function testGeneralHealAbilityDataProviderCantByUsed(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'General Heal');
+
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+    }
+
     /**
      * @param UnitInterface $unit
      * @return AbilityInterface
@@ -239,5 +333,36 @@ class GeneralHealAbilityTest extends AbstractUnitTest
             AbilityInterface::ACTIVATE_RAGE,
             0
         );
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        return $this->getFactory()->create(
+            $unit,
+            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
+    }
+
+    /**
+     * @return AbilityFactory
+     */
+    private function getFactory(): AbilityFactory
+    {
+        return new AbilityFactory();
+    }
+
+    /**
+     * @return AbilityDataProviderInterface
+     */
+    private function getAbilityDataProvider(): AbilityDataProviderInterface
+    {
+        return new ExampleAbilityDataProvider();
     }
 }

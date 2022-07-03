@@ -12,7 +12,10 @@ use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Ability\Effect\PoisonAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -171,6 +174,10 @@ class PoisonAbilityTest extends AbstractUnitTest
         }
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------   Тесты через Ability   ----------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * Тест на создание способности PoisonAbility через универсальный объект Ability
      *
@@ -311,6 +318,126 @@ class PoisonAbilityTest extends AbstractUnitTest
         }
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // -------------------------------   Аналогичные тесты через AbilityDataProvider   ---------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Тест на создание способности PoisonAbility через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testPoisonAbilityDataProviderCreate(): void
+    {
+        $name = 'Poison';
+        $icon = '/images/icons/ability/202.png';
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Poison');
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на получение Actions из PoisonAbility через универсальный объект Ability
+     *
+     * @throws Exception
+     */
+    public function testPoisonAbilityDataProviderGetActions(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Poison');
+
+        self::assertEquals(
+            $this->createActions($unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
+            $ability->getAction($enemyCommand, $command)
+        );
+    }
+
+    /**
+     * Тест на получение false в $ability->canByUsed(), когда все противники уже имеют такой эффект, через универсальный
+     * объект Ability
+     *
+     * @throws Exception
+     */
+    public function testPoisonAbilityDataProviderCantByUsed(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Poison');
+
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+
+        // Применяем эффект
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_APPLY_TO_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_APPLY_TO_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        // Теперь эффект у противника есть, и больше способность примениться не может
+        // Так как все противники (один противник) уже имеют такой эффект
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        $effects = $enemyUnit->getEffects();
+
+        self::assertCount(1, $effects);
+
+        foreach ($effects as $effect) {
+            $actions = $effect->getOnNextRoundActions();
+            self::assertCount(1, $actions);
+            foreach ($actions as $action) {
+                self::assertTrue($action->canByUsed());
+                $action->handle();
+                self::assertEquals(self::MESSAGE_DAMAGE_EN, $this->getChat()->addMessage($action));
+                self::assertEquals(self::MESSAGE_DAMAGE_RU, $this->getChatRu()->addMessage($action));
+            }
+        }
+    }
+
     /**
      * @param UnitInterface $unit
      * @param CommandInterface $command
@@ -413,5 +540,36 @@ class PoisonAbilityTest extends AbstractUnitTest
             AbilityInterface::ACTIVATE_CONCENTRATION,
             0
         );
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        return $this->getFactory()->create(
+            $unit,
+            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
+    }
+
+    /**
+     * @return AbilityFactory
+     */
+    private function getFactory(): AbilityFactory
+    {
+        return new AbilityFactory();
+    }
+
+    /**
+     * @return AbilityDataProviderInterface
+     */
+    private function getAbilityDataProvider(): AbilityDataProviderInterface
+    {
+        return new ExampleAbilityDataProvider();
     }
 }

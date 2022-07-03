@@ -11,7 +11,10 @@ use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Ability\Effect\BlessedShieldAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -24,7 +27,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/271.png" alt="" /> <span class="ability">Благословенный щит</span>';
 
     // TODO В будущем тесты на BlessedShieldAbility будут удалены, и оставлены только тесты на аналогичный функционал
-    // TODO через универсальный объект Ability
+    // TODO через универсальный объект Ability и аналогичные на способность созданную через AbilityDataProvider
 
     /**
      * Тест на создание и использовании способности BlessedShieldAbility
@@ -200,8 +203,12 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         self::assertEquals(100, $unit->getDefense()->getBlock());
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------   Тесты через Ability   ----------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
-     * Тест на создание и использовании способности BlessedShieldAbility через универсальный объект Ability
+     * Тест на создание и использовании способности BlessedShieldAbility
      *
      * @throws Exception
      */
@@ -252,7 +259,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на применение способности BlessedShieldAbility через универсальный объект Ability
+     * Тест на применение способности BlessedShieldAbility
      *
      * @throws Exception
      */
@@ -319,7 +326,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
 
     /**
      * Тест на ситуацию, когда после прибавления блока блок выше 100, но из-за ограничения в любом случае будет только
-     * 100, через универсальный объект Ability
+     * 100
      *
      * @throws Exception
      */
@@ -332,6 +339,185 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $ability = $this->createAbility($unit);
+
+        // Up rage
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        // Проверка блока перед использованием
+        self::assertEquals(100, $unit->getDefense()->getBlock());
+
+        // Применяем способность
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Проверка блока после использования, он также равен 100
+        self::assertEquals(100, $unit->getDefense()->getBlock());
+
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+        for ($i = 0; $i < 10; $i++) {
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        // И проверяем, что блок вернулся к исходному (не изменился)
+        self::assertCount(0, $unit->getEffects());
+        self::assertEquals(100, $unit->getDefense()->getBlock());
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // -------------------------------   Аналогичные тесты через AbilityDataProvider   ---------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Тест на создание и использовании способности BlessedShieldAbility
+     *
+     * @throws Exception
+     */
+    public function testBlessedShieldAbilityDataProviderUse(): void
+    {
+        $name = 'Blessed Shield';
+        $icon = '/images/icons/ability/271.png';
+
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Blessed Shield');
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertFalse($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Up rage
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        self::assertEquals(
+            $this->getBlessedShieldActions($unit, $enemyCommand, $command),
+            $ability->getAction($enemyCommand, $command)
+        );
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на применение способности BlessedShieldAbility
+     *
+     * @throws Exception
+     */
+    public function testBlessedShieldAbilityDataProviderApply(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Blessed Shield');
+
+        // Up rage
+        for ($i = 0; $i < 20; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertCount(0, $unit->getEffects());
+
+        // Проверка блока перед использованием
+        self::assertEquals(0, $unit->getDefense()->getBlock());
+
+        // Применяем способность
+        $actions = $ability->getAction($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        // Проверяем, что способность больше не может быть использована, т.к. аналогичный эффект уже есть
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+
+        // Проверка блока после использования
+        self::assertEquals(15, $unit->getDefense()->getBlock());
+        self::assertCount(1, $unit->getEffects());
+
+        // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
+        for ($i = 0; $i < 10; $i++) {
+            foreach ($unit->getAfterActions() as $afterAction) {
+                if ($afterAction->canByUsed()) {
+                    $afterAction->handle();
+                }
+            }
+        }
+
+        // И проверяем, что блок вернулся к исходному
+        self::assertCount(0, $unit->getEffects());
+        self::assertEquals(0, $unit->getDefense()->getBlock());
+    }
+
+    /**
+     * Тест на ситуацию, когда после прибавления блока блок выше 100, но из-за ограничения в любом случае будет только
+     * 100
+     *
+     * @throws Exception
+     */
+    public function testBlessedShieldAbilityDataProviderOverValue(): void
+    {
+        // Юнит со 100% блоком
+        $unit = UnitFactory::createByTemplate(28);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Blessed Shield');
 
         // Up rage
         for ($i = 0; $i < 20; $i++) {
@@ -471,5 +657,36 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
             AbilityInterface::ACTIVATE_RAGE,
             0
         );
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        return $this->getFactory()->create(
+            $unit,
+            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
+    }
+
+    /**
+     * @return AbilityFactory
+     */
+    private function getFactory(): AbilityFactory
+    {
+        return new AbilityFactory();
+    }
+
+    /**
+     * @return AbilityDataProviderInterface
+     */
+    private function getAbilityDataProvider(): AbilityDataProviderInterface
+    {
+        return new ExampleAbilityDataProvider();
     }
 }

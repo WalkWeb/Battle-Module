@@ -10,7 +10,10 @@ use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Ability;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Ability\Resurrection\WillToLiveAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -160,6 +163,10 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->isReady());
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------   Тесты через Ability   ----------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     /**
      * Тест на создание способности WillToLiveAbility через универсальный объект Ability
      *
@@ -297,6 +304,146 @@ class WillToLiveAbilityTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на создание способности WillToLiveAbility через AbilityDataProvider
+     *
+     * @throws Exception
+     */
+    public function testNewWillToLiveAbilityDataProviderCreate(): void
+    {
+        $name = 'Will to live';
+        $icon = '/images/icons/ability/429.png';
+
+        $unit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, $name);
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertTrue($ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+
+        // Активируем - созданный юнит изначально мертв
+        $ability->update($unit, true);
+
+        self::assertTrue($ability->isReady());
+
+        self::assertEquals(
+            $this->getWillToLiveActions($unit, $enemyCommand, $command),
+            $ability->getAction($enemyCommand, $command)
+        );
+
+        $ability->usage();
+        self::assertTrue($ability->isUsage());
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на применение способности WillToLiveAbility через AbilityDataProvider
+     *
+     * @throws Exception
+     */
+    public function testNewWillToLiveAbilityDataProviderApply(): void
+    {
+        $unit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Will to live');
+
+        // Изначально юнит мертв
+        self::assertEquals(0, $unit->getLife());
+
+        // Активируем способность
+        // Вначале используем метод в обычном режиме - для 100% покрытия кода тестами
+        $ability->update($unit);
+        // Но чтобы активировать её точно - используем в тестовом режиме
+        $ability->update($unit, true);
+
+        // Применяем способность
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        $ability->usage();
+
+        // Проверяем, что здоровье восстановилось
+        self::assertEquals($unit->getTotalLife() / 2, $unit->getLife());
+
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на проверку того, что способность не может использоваться повторно через AbilityDataProvider
+     *
+     * @throws Exception
+     */
+    public function testWillToLiveAbilityDataProviderNoRepeatUsage(): void
+    {
+        $unit = UnitFactory::createByTemplate(10);
+        $enemyUnit = UnitFactory::createByTemplate(12);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Will to live');
+
+        // Изначально юнит мертв
+        self::assertEquals(0, $unit->getLife());
+
+        // Активируем способность
+        $ability->update($unit, true);
+
+        // Проверяем, что способность может быть использована
+        self::assertTrue($ability->isReady());
+
+        // Применяем способность
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+        }
+
+        $ability->usage();
+
+        // Проверяем, что здоровье восстановилось
+        self::assertEquals($unit->getTotalLife() / 2, $unit->getLife());
+
+        // Проверяем, что способность больше не активна
+        self::assertFalse($ability->isReady());
+
+        // Убиваем юнита повторно
+        $actions = $enemyUnit->getActions($command, $enemyCommand);
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Проверяем, что юнит мертв
+        self::assertEquals(0, $unit->getLife());
+
+        // Пытаемся активировать способность повторно
+        $ability->update($unit, true);
+
+        // Но она больше не активируется
+        self::assertFalse($ability->isReady());
+        self::assertFalse($ability->canByUsed($enemyCommand, $command));
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // -------------------------------   Аналогичные тесты через AbilityDataProvider   ---------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
@@ -354,5 +501,36 @@ class WillToLiveAbilityTest extends AbstractUnitTest
             AbilityInterface::ACTIVATE_DEAD,
             0
         );
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        return $this->getFactory()->create(
+            $unit,
+            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
+    }
+
+    /**
+     * @return AbilityFactory
+     */
+    private function getFactory(): AbilityFactory
+    {
+        return new AbilityFactory();
+    }
+
+    /**
+     * @return AbilityDataProviderInterface
+     */
+    private function getAbilityDataProvider(): AbilityDataProviderInterface
+    {
+        return new ExampleAbilityDataProvider();
     }
 }
