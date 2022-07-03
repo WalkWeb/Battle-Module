@@ -9,6 +9,7 @@ use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\Effect\ParalysisAbility;
 use Battle\Unit\Ability\Effect\PoisonAbility;
 use Battle\Unit\Effect\EffectFactory;
@@ -22,6 +23,8 @@ class SuccubusTest extends AbstractUnitTest
 {
     /**
      * Тест на создание класса Succubus
+     *
+     * TODO Этот тест будет удален вместе с отдельными php-классами на юнит-классы
      *
      * @throws Exception
      */
@@ -71,11 +74,84 @@ class SuccubusTest extends AbstractUnitTest
     }
 
     /**
+     * TODO Этот тест будет удален вместе с отдельными php-классами на юнит-классы
+     *
      * @throws Exception
      */
     public function testSuccubusReadyAbility(): void
     {
         $unit = UnitFactory::createByTemplate(23);
+        $woundedUnit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit, $woundedUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        for ($i = 0; $i < 30; $i++) {
+            $unit->newRound();
+        }
+
+        foreach ($unit->getAbilities() as $ability) {
+            self::assertTrue($ability->isReady());
+            self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        }
+    }
+
+    /**
+     * Тест на создание класса Succubus
+     *
+     * @throws Exception
+     */
+    public function testNewSuccubusCreate(): void
+    {
+        $unit = UnitFactory::createByTemplateNewClassMechanic(23, 7);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $succubus = $unit->getClass();
+
+        self::assertEquals(7, $succubus->getId());
+        self::assertEquals('Succubus', $succubus->getName());
+        self::assertEquals('/images/icons/small/dark-mage.png', $succubus->getSmallIcon());
+
+        $abilities = $succubus->getAbilities($unit);
+
+        foreach ($abilities as $i => $ability) {
+
+            if ($i === 0) {
+                self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
+
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertEquals(
+                        $this->createEffectPoison($unit, $enemyCommand, $command),
+                        $action->getEffect()
+                    );
+                }
+            }
+
+            if ($i === 1) {
+                self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
+
+                $actions = $ability->getAction($enemyCommand, $command);
+
+                foreach ($actions as $action) {
+                    self::assertEquals(
+                        $this->createEffectParalysis($unit, $enemyCommand, $command),
+                        $action->getEffect()
+                    );
+                }
+            }
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testNewSuccubusReadyAbility(): void
+    {
+        $unit = UnitFactory::createByTemplateNewClassMechanic(23, 7);
         $woundedUnit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit, $woundedUnit]);

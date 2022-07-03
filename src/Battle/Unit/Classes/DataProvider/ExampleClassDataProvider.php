@@ -41,6 +41,105 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
                 ],
             ],
         ],
+        2 => [
+            'id'         => 2,
+            'name'       => 'Priest',
+            'small_icon' => '/images/icons/small/priest.png',
+            'abilities'  => [
+                [
+                    'name'  => 'Great Heal',
+                    'level' => 1,
+                ],
+                [
+                    'name'  => 'Back to Life',
+                    'level' => 1,
+                ],
+            ],
+        ],
+        3 => [
+            'id'         => 3,
+            'name'       => 'Dead Knight',
+            'small_icon' => '/images/icons/small/dead-knight.png',
+            'abilities'  => [
+                [
+                    'name'  => 'Heavy Strike',
+                    'level' => 1,
+                ],
+            ],
+        ],
+        4 => [
+            'id'         => 4,
+            'name'       => 'Dark Mage',
+            'small_icon' => '/images/icons/small/dark-mage.png',
+            'abilities'  => [
+                [
+                    'name'  => 'Skeleton',
+                    'level' => 1,
+                ],
+            ],
+        ],
+        5 => [
+            'id'         => 5,
+            'name'       => 'Titan',
+            'small_icon' => '/images/icons/small/titan.png',
+            'abilities'  => [
+                [
+                    'name'  => 'Reserve Forces',
+                    'level' => 1,
+                ],
+                [
+                    'name'  => 'Battle Fury',
+                    'level' => 1,
+                ],
+            ],
+        ],
+        6 => [
+            'id'         => 6,
+            'name'       => 'Alchemist',
+            'small_icon' => '/images/icons/small/alchemist.png',
+            'abilities'  => [
+                [
+                    'name'  => 'Healing Potion',
+                    'level' => 1,
+                ],
+                [
+                    'name'  => 'Fire Elemental',
+                    'level' => 1,
+                ],
+            ],
+        ],
+        7 => [
+            'id'         => 7,
+            'name'       => 'Succubus',
+            'small_icon' => '/images/icons/small/dark-mage.png',
+            'abilities'  => [
+                [
+                    'name'  => 'Poison',
+                    'level' => 1,
+                ],
+                [
+                    'name'  => 'Paralysis',
+                    'level' => 1,
+                ],
+            ],
+        ],
+        50 => [
+            'id'         => 50,
+            'name'       => 'Warden',
+            'small_icon' => '/images/icons/small/base-inferno.png',
+            'abilities'  => [
+                [
+                    'name'  => 'Hellfire',
+                    'level' => 1,
+                ],
+                [
+                    'name'  => 'Incineration',
+                    'level' => 1,
+                ],
+            ],
+        ],
+
+
     ];
 
     public function __construct(ContainerInterface $container)
