@@ -106,6 +106,8 @@ class Stroke implements StrokeInterface
      */
     private function handleBeforeActionUnit(): void
     {
+        // TODO Переадресация вызова $unit->getBeforeActions()->getOnNewRoundActions() - нужно отрефакторить
+        // $effects->newRound()
         foreach ($this->actionUnit->getBeforeActions() as $action) {
             if ($action->canByUsed()) {
                 $this->runAction($action);

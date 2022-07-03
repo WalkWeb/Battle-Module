@@ -14,6 +14,8 @@ use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\Race\RaceFactory;
 use Exception;
 
+// TODO Уйти от статики и добавить фабрику в контейнер
+
 class UnitFactory
 {
     use ValidationTrait;
@@ -85,16 +87,17 @@ class UnitFactory
             DefenseFactory::create($data['defense']),
             RaceFactory::createById($data['race']),
             $container,
-            self::getClass($data)
+            self::getClass($data, $container)
         );
     }
 
     /**
      * @param array $data
+     * @param ContainerInterface $container
      * @return UnitClassInterface|null
      * @throws Exception
      */
-    private static function getClass(array $data): ?UnitClassInterface
+    private static function getClass(array $data, ContainerInterface $container): ?UnitClassInterface
     {
         if (!array_key_exists('class', $data)) {
             return null;
@@ -108,6 +111,8 @@ class UnitFactory
             throw new UnitException(UnitException::INCORRECT_CLASS);
         }
 
-        return UnitClassFactory::createById($data['class']);
+        return UnitClassFactory::createByArray(
+            $container->getClassDataProvider()->get($data['class'])
+        );
     }
 }

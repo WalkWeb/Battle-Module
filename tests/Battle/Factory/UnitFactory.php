@@ -736,6 +736,7 @@ class UnitFactory
             throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
         }
 
+        $container = $container ?? new Container(true);
         $class = isset(self::$units[$template]['class']) ? UnitClassFactory::createById(self::$units[$template]['class']) : null;
 
         return new Unit(
@@ -750,7 +751,7 @@ class UnitFactory
             OffenseFactory::create(self::$units[$template]['offense']),
             DefenseFactory::create(self::$units[$template]['defense']),
             RaceFactory::createById(self::$units[$template]['race']),
-            $container ?? new Container(true),
+            $container,
             $class
         );
     }

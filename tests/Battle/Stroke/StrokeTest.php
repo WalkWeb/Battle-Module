@@ -11,6 +11,7 @@ use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
 use Battle\Stroke\StrokeException;
+use Battle\Unit\Ability\Effect\BattleFuryAbility;
 use Battle\Unit\Defense\Defense;
 use Battle\Unit\Offense\Offense;
 use Battle\Unit\Race\RaceFactory;
@@ -296,6 +297,48 @@ class StrokeTest extends AbstractUnitTest
 
         // Проверяем, что сгенерировано две анимации - удара и оживления
         self::assertCount(2, $container->getScenario()->getArray());
+    }
+
+    /**
+     * Тест на выполнение метода handleAfterActionUnit() в Stroke
+     *
+     * @throws Exception
+     */
+    public function testStrokeHandleAfterActionUnit(): void
+    {
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
+
+        // Накладываем на юнита баф
+        $ability = new BattleFuryAbility($unit);
+
+        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Прокручиваем длительность эффекта до значения 1, чтобы во время хода эффект закончился
+        for ($i = 0; $i < 14; $i++) {
+            $unit->getAfterActions();
+        }
+
+        // Проверяем, что эффект еще есть
+        self::assertCount(1, $unit->getEffects());
+
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+
+        $stroke->handle();
+
+        // А после выполнения хода он исчез
+        self::assertCount(0, $unit->getEffects());
+
+        // А также проверяем то, что скорость вернулась к прежнему значению
+        self::assertEquals($oldAttackSpeed, $unit->getOffense()->getAttackSpeed());
     }
 
     /**

@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
+use Battle\Container\Container;
+use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
+use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassFactory;
+use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
@@ -23,8 +27,9 @@ class UnitFactoryTest extends AbstractUnitTest
      */
     public function testUnitFactorySuccess(array $data): void
     {
+        $classDataProvider = new ExampleClassDataProvider(new Container());
         $unit = UnitFactory::create($data);
-        $class = array_key_exists('class', $data) && is_int($data['class']) ? UnitClassFactory::createById($data['class']) : null;
+        $class = $this->createClass($data, $classDataProvider);
         $race = RaceFactory::createById($data['race']);
 
         self::assertEquals($data['name'], $unit->getName());
@@ -1093,5 +1098,26 @@ class UnitFactoryTest extends AbstractUnitTest
                 UnitException::INCORRECT_DEFENSE,
             ],
         ];
+    }
+
+    /**
+     * @param array $data
+     * @param ClassDataProviderInterface $classDataProvider
+     * @return UnitClassInterface|null
+     * @throws Exception
+     */
+    private function createClass(array $data, ClassDataProviderInterface $classDataProvider): ?UnitClassInterface
+    {
+        if (!array_key_exists('class', $data)) {
+            return null;
+        }
+
+        if (!is_int($data['class'])) {
+            return null;
+        }
+
+        return UnitClassFactory::createByArray(
+            $classDataProvider->get($data['class'])
+        );
     }
 }

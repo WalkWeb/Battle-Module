@@ -16,6 +16,8 @@ use Battle\Unit\Classes\Undead\DarkMage;
 use Battle\Unit\Classes\Undead\DeadKnight;
 use Exception;
 
+// TODO Уйти от статики, добавить в контейнер
+
 class UnitClassFactory
 {
     use ValidationTrait;

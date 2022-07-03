@@ -38,6 +38,8 @@ class HealingPotionAbilityTest extends AbstractUnitTest
     // TODO В будущем тесты на HealingPotionAbility будут удалены, и оставлены только тесты на аналогичный функционал
     // TODO через универсальный объект Ability
 
+    // TODO Тесты на EN- и RU-сообщения можно объединить
+
     /**
      * Тест на создание способности HealingPotionAbility
      *
