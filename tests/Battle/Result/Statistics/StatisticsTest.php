@@ -273,7 +273,7 @@ class StatisticsTest extends AbstractUnitTest
             $statistics->addUnitAction($action);
         }
 
-        self::assertEquals($priest->getOffense()->getDamage() * 3, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
+        self::assertEquals($action->getPower(), $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
 
         // И еще раз
         for ($i = 0; $i < 10; $i++) {
@@ -287,7 +287,7 @@ class StatisticsTest extends AbstractUnitTest
             $statistics->addUnitAction($action);
         }
 
-        self::assertEquals($priest->getOffense()->getDamage() * 6, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
+        self::assertEquals(99, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
     }
 
     /**

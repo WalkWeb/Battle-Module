@@ -29,7 +29,7 @@ class ExampleClassDataProviderTest extends AbstractUnitTest
     {
         $classId = 1;
         $classData = $this->getDataProvider()->get($classId);
-        $class = UnitClassFactory::createByArray($classData);
+        $class = UnitClassFactory::create($classData);
 
         // Детальная проверка созданного класса делается в отдельных тестах по каждому классу
         // В текущем же случае нам достаточно того, что класс успешно создался. И делаем одну простую проверку

@@ -94,7 +94,7 @@ class HealActionTest extends AbstractUnitTest
         }
 
         // Проверяем лечение
-        self::assertEquals(1 + $actionUnit->getOffense()->getDamage() * 3, $woundedUnit->getLife());
+        self::assertEquals(1 + $action->getPower(), $woundedUnit->getLife());
     }
 
     /**
@@ -123,10 +123,10 @@ class HealActionTest extends AbstractUnitTest
         }
 
         // Общий factualPower получаем нормально
-        self::assertEquals($unit->getOffense()->getDamage() * 3, $action->getFactualPower());
+        self::assertEquals($action->getPower(), $action->getFactualPower());
 
         // factualPower, по юниту, по которому урон наносился - тоже
-        self::assertEquals($unit->getOffense()->getDamage() * 3, $action->getFactualPowerByUnit($woundedUnit));
+        self::assertEquals($action->getPower(), $action->getFactualPowerByUnit($woundedUnit));
 
         // А вот factualPower по юниту, по которому урон не наносился - отсутствует
         $this->expectException(ActionException::class);

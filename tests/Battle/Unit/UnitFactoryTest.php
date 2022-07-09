@@ -1116,7 +1116,7 @@ class UnitFactoryTest extends AbstractUnitTest
             return null;
         }
 
-        return UnitClassFactory::createByArray(
+        return UnitClassFactory::create(
             $classDataProvider->get($data['class'])
         );
     }

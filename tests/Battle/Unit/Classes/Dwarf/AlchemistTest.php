@@ -10,8 +10,6 @@ use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Ability;
-use Battle\Unit\Ability\Effect\HealingPotionAbility;
-use Battle\Unit\Ability\Summon\SummonFireElementalAbility;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
@@ -22,8 +20,6 @@ use Tests\Battle\Factory\UnitFactory;
 class AlchemistTest extends AbstractUnitTest
 {
     /**
-     * TODO Этот тест будет удален вместе с отдельными php-классами на юнит-классы
-     *
      * @throws Exception
      */
     public function testAlchemistCreate(): void
@@ -44,7 +40,7 @@ class AlchemistTest extends AbstractUnitTest
         foreach ($abilities as $i => $ability) {
 
             if ($i === 0) {
-                self::assertContainsOnlyInstancesOf(HealingPotionAbility::class, [$ability]);
+                self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
 
                 $actions = $ability->getAction($enemyCommand, $command);
 
@@ -56,7 +52,7 @@ class AlchemistTest extends AbstractUnitTest
                 }
             }
             if ($i === 1) {
-                self::assertContainsOnlyInstancesOf(SummonFireElementalAbility::class, [$ability]);
+                self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
 
                 $actions = $ability->getAction($enemyCommand, $command);
 
@@ -77,96 +73,11 @@ class AlchemistTest extends AbstractUnitTest
     }
 
     /**
-     * TODO Этот тест будет удален вместе с отдельными php-классами на юнит-классы
-     *
      * @throws Exception
      */
     public function testAlchemistReadyAbility(): void
     {
         $unit = UnitFactory::createByTemplate(22);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        for ($i = 0; $i < 30; $i++) {
-            $unit->newRound();
-        }
-
-        foreach ($unit->getAbilities() as $i => $ability) {
-
-            // Эффект на лечение - лечить некого
-            if ($i === 0) {
-                self::assertTrue($ability->isReady());
-                self::assertFalse($ability->canByUsed($enemyCommand, $command));
-            }
-
-            // Призыв
-            if ($i === 1) {
-                self::assertTrue($ability->isReady());
-                self::assertTrue($ability->canByUsed($enemyCommand, $command));
-            }
-        }
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function testNewAlchemistCreate(): void
-    {
-        $unit = UnitFactory::createByTemplateNewClassMechanic(22, 6);
-        $enemyUnit = UnitFactory::createByTemplate(1);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $alchemist = $unit->getClass();
-
-        self::assertEquals(6, $alchemist->getId());
-        self::assertEquals('Alchemist', $alchemist->getName());
-        self::assertEquals('/images/icons/small/alchemist.png', $alchemist->getSmallIcon());
-
-        $abilities = $alchemist->getAbilities($unit);
-
-        foreach ($abilities as $i => $ability) {
-
-            if ($i === 0) {
-                self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
-
-                $actions = $ability->getAction($enemyCommand, $command);
-
-                foreach ($actions as $action) {
-                    self::assertEquals(
-                        $this->createEffect($unit, $enemyCommand, $command),
-                        $action->getEffect()
-                    );
-                }
-            }
-            if ($i === 1) {
-                self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
-
-                $actions = $ability->getAction($enemyCommand, $command);
-
-                foreach ($actions as $action) {
-                    self::assertEquals($this->getSummon()->getName(), $action->getSummonUnit()->getName());
-                    self::assertEquals($this->getSummon()->getLevel(), $action->getSummonUnit()->getLevel());
-                    self::assertEquals($this->getSummon()->getAvatar(), $action->getSummonUnit()->getAvatar());
-                    self::assertEquals($this->getSummon()->getOffense()->getDamage(), $action->getSummonUnit()->getOffense()->getDamage());
-                    self::assertEquals($this->getSummon()->getOffense()->getAttackSpeed(), $action->getSummonUnit()->getOffense()->getAttackSpeed());
-                    self::assertEquals($this->getSummon()->getLife(), $action->getSummonUnit()->getLife());
-                    self::assertEquals($this->getSummon()->getTotalLife(), $action->getSummonUnit()->getTotalLife());
-                    self::assertEquals($this->getSummon()->isMelee(), $action->getSummonUnit()->isMelee());
-                    self::assertEquals($this->getSummon()->getClass(), $action->getSummonUnit()->getClass());
-                    self::assertEquals($this->getSummon()->getRace(), $action->getSummonUnit()->getRace());
-                }
-            }
-        }
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function testNewAlchemistReadyAbility(): void
-    {
-        $unit = UnitFactory::createByTemplateNewClassMechanic(22, 6);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);

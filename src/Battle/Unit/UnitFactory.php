@@ -111,7 +111,7 @@ class UnitFactory
             throw new UnitException(UnitException::INCORRECT_CLASS);
         }
 
-        return UnitClassFactory::createByArray(
+        return UnitClassFactory::create(
             $container->getClassDataProvider()->get($data['class'])
         );
     }

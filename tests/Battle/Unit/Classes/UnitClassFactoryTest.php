@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes;
 
+use Battle\Container\Container;
+use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
+use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassException;
-use Battle\Unit\Classes\Human\Priest;
-use Battle\Unit\Classes\Human\Warrior;
-use Battle\Unit\Classes\Undead\DarkMage;
-use Battle\Unit\Classes\Undead\DeadKnight;
 use Battle\Unit\Classes\UnitClassFactory;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -20,14 +19,14 @@ class UnitClassFactoryTest extends AbstractUnitTest
      *
      * @dataProvider createByIdSuccessDataProvider
      * @param int $classId
-     * @param string $expectClassName
      * @throws Exception
      */
-    public function testUnitClassFactoryCreateByIdSuccess(int $classId, string $expectClassName): void
+    public function testUnitClassFactoryCreateByIdSuccess(int $classId): void
     {
-        $class = UnitClassFactory::createById($classId);
-        $expectClass = new $expectClassName();
-        self::assertEquals($expectClass, $class);
+        $class = UnitClassFactory::create(
+            $this->getClassDataProvider()->get($classId)
+        );
+        self::assertEquals($classId, $class->getId());
     }
 
     /**
@@ -38,20 +37,9 @@ class UnitClassFactoryTest extends AbstractUnitTest
         $classId = 55;
         $this->expectException(UnitClassException::class);
         $this->expectExceptionMessage(UnitClassException::UNDEFINED_CLASS_ID . ': ' . $classId);
-        UnitClassFactory::createById($classId);
-    }
-
-    /**
-     * Тест на некорректный класс юнита - когда класс не реализует интерфейс IncorrectUnitClassForTest
-     *
-     * @throws Exception
-     */
-    public function testUnitClassFactoryCreateByIdIncorrectClass(): void
-    {
-        $classId = 100;
-        $this->expectException(UnitClassException::class);
-        $this->expectExceptionMessage(UnitClassException::INCORRECT_CLASS);
-        UnitClassFactory::createById($classId);
+        UnitClassFactory::create(
+            $this->getClassDataProvider()->get($classId)
+        );
     }
 
     /**
@@ -63,7 +51,7 @@ class UnitClassFactoryTest extends AbstractUnitTest
      */
     public function testUnitClassFactoryCreateByArraySuccess(array $data): void
     {
-        $class = UnitClassFactory::createByArray($data);
+        $class = UnitClassFactory::create($data);
 
         // Проверка базовых параметров
         self::assertEquals($data['id'], $class->getId());
@@ -84,7 +72,7 @@ class UnitClassFactoryTest extends AbstractUnitTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        UnitClassFactory::createByArray($data);
+        UnitClassFactory::create($data);
     }
 
     /**
@@ -94,20 +82,16 @@ class UnitClassFactoryTest extends AbstractUnitTest
     {
         return [
             [
-                1,
-                Warrior::class,
+                1
             ],
             [
-                2,
-                Priest::class,
+                2
             ],
             [
-                3,
-                DeadKnight::class,
+                3
             ],
             [
-                4,
-                DarkMage::class,
+                4
             ],
         ];
     }
@@ -222,5 +206,13 @@ class UnitClassFactoryTest extends AbstractUnitTest
                 UnitClassException::INVALID_ABILITY_DATA,
             ],
         ];
+    }
+
+    /**
+     * @return ClassDataProviderInterface
+     */
+    private function getClassDataProvider(): ClassDataProviderInterface
+    {
+        return new ExampleClassDataProvider(new Container());
     }
 }

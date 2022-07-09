@@ -10,8 +10,6 @@ use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Ability;
-use Battle\Unit\Ability\Damage\HellfireAbility;
-use Battle\Unit\Ability\Effect\IncinerationAbility;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
@@ -22,84 +20,11 @@ use Tests\Battle\Factory\UnitFactory;
 class WardenTest extends AbstractUnitTest
 {
     /**
-     * TODO Этот тест будет удален вместе с отдельными php-классами на юнит-классы
-     *
      * @throws Exception
      */
     public function testCreateWardenClass(): void
     {
         $unit = UnitFactory::createByTemplate(27);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $warden = $unit->getClass();
-
-        self::assertEquals(50, $warden->getId());
-        self::assertEquals('Warden', $warden->getName());
-        self::assertEquals('/images/icons/small/base-inferno.png', $warden->getSmallIcon());
-
-        $abilities = $warden->getAbilities($unit);
-
-        foreach ($abilities as $i => $ability) {
-
-            if ($i === 0) {
-                self::assertContainsOnlyInstancesOf(HellfireAbility::class, [$ability]);
-
-                $actions = $ability->getAction($enemyCommand, $command);
-
-                foreach ($actions as $action) {
-                    self::assertEquals((int)($unit->getOffense()->getDamage() * 1.5), $action->getPower());
-                }
-            }
-
-            if ($i === 1) {
-                self::assertContainsOnlyInstancesOf(IncinerationAbility::class, [$ability]);
-
-                $actions = $ability->getAction($enemyCommand, $command);
-
-                foreach ($actions as $action) {
-                    self::assertEquals(
-                        $this->createEffect($unit, $enemyCommand, $command),
-                        $action->getEffect()
-                    );
-                }
-            }
-        }
-    }
-
-    /**
-     * TODO Этот тест будет удален вместе с отдельными php-классами на юнит-классы
-     *
-     * @throws Exception
-     */
-    public function testWardenReadyAbility(): void
-    {
-        $unit = UnitFactory::createByTemplate(27);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        for ($i = 0; $i < 30; $i++) {
-            $unit->newRound();
-        }
-
-        foreach ($unit->getAbilities() as $ability) {
-            self::assertTrue($ability->isReady());
-            self::assertTrue($ability->canByUsed($enemyCommand, $command));
-        }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    // -------------------------------   Аналогичные тесты через ClassDataProvider   -----------------------------------
-    // -----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * @throws Exception
-     */
-    public function testNewCreateWardenClass(): void
-    {
-        $unit = UnitFactory::createByTemplateNewClassMechanic(27, 50);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -142,9 +67,9 @@ class WardenTest extends AbstractUnitTest
     /**
      * @throws Exception
      */
-    public function testNewWardenReadyAbility(): void
+    public function testWardenReadyAbility(): void
     {
-        $unit = UnitFactory::createByTemplateNewClassMechanic(27, 50);
+        $unit = UnitFactory::createByTemplate(27);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);

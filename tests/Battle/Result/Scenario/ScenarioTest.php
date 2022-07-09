@@ -357,7 +357,7 @@ class ScenarioTest extends AbstractUnitTest
         }
 
         // Проверяем лечение
-        self::assertEquals(1 + $actionUnit->getOffense()->getDamage() * 3, $woundedUnit->getLife());
+        self::assertEquals(1 + $action->getPower(), $woundedUnit->getLife());
 
         $expectedData = [
             'step'    => $statistic->getRoundNumber(),
@@ -373,12 +373,12 @@ class ScenarioTest extends AbstractUnitTest
                             'type'              => 'change',
                             'user_id'           => $woundedUnit->getId(),
                             'ava'               => 'unit_ava_green',
-                            'recdam'            => '+' . $actionUnit->getOffense()->getDamage() * 3,
-                            'hp'                => 1 + $actionUnit->getOffense()->getDamage() * 3,
+                            'recdam'            => '+' . $action->getPower(),
+                            'hp'                => 1 + $action->getPower(),
                             'thp'               => $woundedUnit->getTotalLife(),
                             'hp_bar_class'      => 'unit_hp_bar',
                             'hp_bar_class2'     => 'unit_hp_bar2',
-                            'unit_hp_bar_width' => 46,
+                            'unit_hp_bar_width' => 61,
                             'unit_effects'      => [],
                         ],
                     ],

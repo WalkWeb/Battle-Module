@@ -11,6 +11,8 @@ use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
+use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Defense\Defense;
 use Battle\Unit\Offense\Offense;
@@ -68,7 +70,8 @@ class UnitTest extends AbstractUnitTest
         $expectedAbilities = new AbilityCollection(true);
 
         if ($data['class']) {
-            foreach (UnitClassFactory::createById($data['class'])->getAbilities($unit) as $ability) {
+            $classData = $this->getClassDataProvider()->get($data['class']);
+            foreach (UnitClassFactory::create($classData)->getAbilities($unit) as $ability) {
                 $expectedAbilities->add($ability);
             }
         }
@@ -571,5 +574,13 @@ class UnitTest extends AbstractUnitTest
         $collection->add($actionFactory->create($data));
 
         return $collection;
+    }
+
+    /**
+     * @return ClassDataProviderInterface
+     */
+    private function getClassDataProvider(): ClassDataProviderInterface
+    {
+        return new ExampleClassDataProvider(new Container());
     }
 }

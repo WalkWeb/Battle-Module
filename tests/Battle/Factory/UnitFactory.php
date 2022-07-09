@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Factory;
 
-use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
@@ -737,52 +736,9 @@ class UnitFactory
         }
 
         $container = $container ?? new Container(true);
-        $class = isset(self::$units[$template]['class']) ? UnitClassFactory::createById(self::$units[$template]['class']) : null;
-
-        return new Unit(
-            self::$units[$template]['id'],
-            self::$units[$template]['name'],
-            self::$units[$template]['level'],
-            self::$units[$template]['avatar'],
-            self::$units[$template]['life'],
-            self::$units[$template]['total_life'],
-            self::$units[$template]['melee'],
-            self::$units[$template]['command'],
-            OffenseFactory::create(self::$units[$template]['offense']),
-            DefenseFactory::create(self::$units[$template]['defense']),
-            RaceFactory::createById(self::$units[$template]['race']),
-            $container,
-            $class
-        );
-    }
-
-    /**
-     * TODO Это временный метод для создания юнита с альтернативной механикой создания класса. В будущем будет
-     * TODO createByTemplate будет использовать такую механику, а этот метод просто удалится
-     *
-     * @param int $template
-     * @param int|null $classId
-     * @param ContainerInterface|null $container
-     * @return UnitInterface
-     * @throws Exception
-     */
-    public static function createByTemplateNewClassMechanic(
-        int $template,
-        ?int $classId = null,
-        ?ContainerInterface $container = null): UnitInterface
-    {
-        $container = $container ?? new Container(true);
-
-        if (empty(self::$units[$template])) {
-            throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
-        }
-
-        if ($classId) {
-            $classData = self::getClassDataProvider($container)->get($classId);
-            $class = UnitClassFactory::createByArray($classData);
-        } else {
-            $class = null;
-        }
+        $class = isset(self::$units[$template]['class']) ? UnitClassFactory::create(
+            $container->getClassDataProvider()->get(self::$units[$template]['class'])
+        ) : null;
 
         return new Unit(
             self::$units[$template]['id'],
@@ -813,14 +769,5 @@ class UnitFactory
         }
 
         return self::$units[$template];
-    }
-
-    /**
-     * @param ContainerInterface $container
-     * @return ExampleClassDataProvider
-     */
-    private static function getClassDataProvider(ContainerInterface $container): ExampleClassDataProvider
-    {
-        return new ExampleClassDataProvider($container);
     }
 }

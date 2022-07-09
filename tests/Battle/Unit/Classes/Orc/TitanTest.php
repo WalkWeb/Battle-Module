@@ -8,8 +8,6 @@ use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\Ability;
-use Battle\Unit\Ability\Effect\BattleFuryAbility;
-use Battle\Unit\Ability\Effect\ReserveForcesAbility;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
@@ -21,61 +19,11 @@ use Tests\Battle\Factory\UnitFactory;
 class TitanTest extends AbstractUnitTest
 {
     /**
-     * TODO Этот тест будет удален вместе с отдельными php-классами на юнит-классы
-     *
      * @throws Exception
      */
     public function testCreateTitanClass(): void
     {
         $unit = UnitFactory::createByTemplate(21);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $class = $unit->getClass();
-
-        self::assertEquals(5, $class->getId());
-        self::assertEquals('Titan', $class->getName());
-        self::assertEquals('/images/icons/small/titan.png', $class->getSmallIcon());
-
-        $abilities = $class->getAbilities($unit);
-
-        foreach ($abilities as $i => $ability) {
-
-            if ($i === 0) {
-                self::assertContainsOnlyInstancesOf(ReserveForcesAbility::class, [$ability]);
-
-                $actions = $ability->getAction($enemyCommand, $command);
-
-                foreach ($actions as $action) {
-                    self::assertEquals(
-                        $this->createReserveForcesEffect($unit, $enemyCommand, $command),
-                        $action->getEffect()
-                    );
-                }
-            }
-
-            if ($i === 1) {
-                self::assertContainsOnlyInstancesOf(BattleFuryAbility::class, [$ability]);
-
-                $actions = $ability->getAction($enemyCommand, $command);
-
-                foreach ($actions as $action) {
-                    self::assertEquals(
-                        $this->createBattleFuryEffect($unit, $enemyCommand, $command),
-                        $action->getEffect()
-                    );
-                }
-            }
-        }
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function testNewCreateTitanClass(): void
-    {
-        $unit = UnitFactory::createByTemplateNewClassMechanic(21, 5);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);

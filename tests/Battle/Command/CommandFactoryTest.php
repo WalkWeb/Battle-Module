@@ -31,7 +31,7 @@ class CommandFactoryTest extends AbstractUnitTest
 
         $i = 0;
         foreach ($command->getUnits() as $unit) {
-            $class = UnitClassFactory::createByArray(
+            $class = UnitClassFactory::create(
                 $classDataProvider->get($data[$i]['class'])
             );
 
