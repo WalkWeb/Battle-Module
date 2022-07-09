@@ -2,24 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Battle\Unit\Race;
+namespace Battle\Unit\Race\DataProvider;
 
-use Battle\BattleException;
-use Battle\Traits\ValidationTrait;
-use Battle\Unit\Ability\Effect\RageAbility;
-use Battle\Unit\Ability\Resurrection\WillToLiveAbility;
+use Battle\Container\ContainerInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Race\RaceException;
 
-class RaceFactory
+/**
+ * Пример простого поставщика данных по расе юнита, когда данные хранятся в самом классе. Сделан для примера.
+ *
+ * @package Battle\Unit\Classes\DataProvider
+ */
+class ExampleRaceDataProvider implements RaceDataProviderInterface
 {
-    use ValidationTrait;
-
     /**
-     * TODO На удаление
-     *
-     * @var array[]
+     * @var AbilityDataProviderInterface
      */
+    private $abilityDataProvider;
+
     private static $data = [
-        // played races
         1 => [
             'id'          => 1,
             'name'        => 'People',
@@ -27,7 +28,10 @@ class RaceFactory
             'color'       => '#1e72e3',
             'icon'        => '',
             'abilities'   => [
-                WillToLiveAbility::class,
+                [
+                    'name'  => 'Will to live',
+                    'level' => 1,
+                ],
             ],
         ],
         2 => [
@@ -45,7 +49,10 @@ class RaceFactory
             'color'       => '#ae882d',
             'icon'        => '',
             'abilities'   => [
-                RageAbility::class,
+                [
+                    'name'  => 'Rage',
+                    'level' => 1,
+                ],
             ],
         ],
         4 => [
@@ -72,7 +79,6 @@ class RaceFactory
             'icon'        => '',
             'abilities'   => [],
         ],
-        // other races
         7 => [
             'id'          => 7,
             'name'        => 'Animals',
@@ -107,58 +113,28 @@ class RaceFactory
         ],
     ];
 
+    public function __construct(ContainerInterface $container)
+    {
+        $this->abilityDataProvider = $container->getAbilityDataProvider();
+    }
+
     /**
-     * Создает расу на основании id
-     *
-     * TODO На удаление. В будущем останется только один вариант создания расы из массива, а данные будут получаться из
-     * TODO RaceDataProvider
-     *
      * @param int $id
-     * @return RaceInterface
-     * @throws BattleException
+     * @return array
      * @throws RaceException
      */
-    public static function createById(int $id): RaceInterface
+    public function get(int $id): array
     {
         if (!array_key_exists($id, self::$data)) {
-            throw new RaceException(RaceException::UNDEFINED_RACE_ID);
+            throw new RaceException(RaceException::UNDEFINED_RACE_ID . ': ' . $id);
         }
 
-        return self::createByArray(self::$data[$id]);
-    }
+        $data = self::$data[$id];
 
-    /**
-     * Создает расу на основании массива параметров
-     *
-     * @param array $data
-     * @return RaceInterface
-     * @throws BattleException
-     * @throws RaceException
-     */
-    public static function createByArray(array $data): RaceInterface
-    {
-        self::int($data, 'id', RaceException::INCORRECT_ID);
-        self::string($data, 'name', RaceException::INCORRECT_NAME);
-        self::string($data, 'single_name', RaceException::INCORRECT_SINGLE_NAME);
-        self::string($data, 'color', RaceException::INCORRECT_COLOR);
-        self::string($data, 'icon', RaceException::INCORRECT_ICON);
-        self::array($data, 'abilities', RaceException::INCORRECT_ABILITIES);
+        foreach ($data['abilities'] as $i => $ability) {
+            $data['abilities'][$i] = $this->abilityDataProvider->get($ability['name'], $ability['level']);
+        }
 
-        return new Race(
-            $data['id'],
-            $data['name'],
-            $data['single_name'],
-            $data['color'],
-            $data['icon'],
-            $data['abilities']
-        );
-    }
-
-    /**
-     * @return array[]
-     */
-    public static function getData(): array
-    {
-        return self::$data;
+        return $data;
     }
 }

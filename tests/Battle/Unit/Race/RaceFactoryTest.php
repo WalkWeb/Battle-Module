@@ -220,20 +220,6 @@ class RaceFactoryTest extends AbstractUnitTest
                 ],
                 RaceException::INCORRECT_ABILITIES,
             ],
-            [
-                // abilities содержит не строку
-                [
-                    'id'          => 1,
-                    'name'        => 'People',
-                    'single_name' => 'Human',
-                    'color'       => '#1e72e3',
-                    'icon'        => '',
-                    'abilities'   => [
-                        123, 456,
-                    ],
-                ],
-                RaceException::INCORRECT_ABILITY,
-            ],
         ];
     }
 }
