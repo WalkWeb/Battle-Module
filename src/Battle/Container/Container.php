@@ -21,6 +21,8 @@ use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
 use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
+use Battle\Unit\Race\DataProvider\ExampleRaceDataProvider;
+use Battle\Unit\Race\DataProvider\RaceDataProviderInterface;
 use Battle\View\ViewFactory;
 
 class Container implements ContainerInterface
@@ -67,6 +69,10 @@ class Container implements ContainerInterface
         ExampleAbilityDataProvider::class   => ExampleAbilityDataProvider::class,
         AbilityDataProviderInterface::class => ExampleAbilityDataProvider::class,
         'AbilityDataProvider'               => ExampleAbilityDataProvider::class,
+
+        ExampleRaceDataProvider::class      => ExampleRaceDataProvider::class,
+        RaceDataProviderInterface::class    => ExampleRaceDataProvider::class,
+        'RaceDataProvider'                  => ExampleRaceDataProvider::class,
     ];
 
     private $storage = [];
@@ -251,13 +257,24 @@ class Container implements ContainerInterface
     }
 
     /**
+     * @return RaceDataProviderInterface
+     * @throws ContainerException
+     */
+    public function getRaceDataProvider(): RaceDataProviderInterface
+    {
+        /** @var RaceDataProviderInterface $service */
+        $service = $this->get(RaceDataProviderInterface::class);
+        return $service;
+    }
+
+    /**
      * @param string $class
      * @return object
      */
     private function create(string $class): object
     {
         // Некоторые сервисы требуют передачу контейнера в конструктор
-        if ($class === Chat::class || $class === ExampleClassDataProvider::class) {
+        if ($class === Chat::class || $class === ExampleClassDataProvider::class || $class === ExampleRaceDataProvider::class) {
             $object = new $class($this);
             $this->storage[$this->map[$class]] = $object;
             return $object;

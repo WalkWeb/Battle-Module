@@ -14,6 +14,7 @@ use Battle\Stroke\StrokeFactory;
 use Battle\Translation\TranslationInterface;
 use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
+use Battle\Unit\Race\DataProvider\RaceDataProviderInterface;
 use Battle\View\ViewFactory;
 
 interface ContainerInterface
@@ -118,4 +119,11 @@ interface ContainerInterface
      * @return AbilityDataProviderInterface
      */
     public function getAbilityDataProvider(): AbilityDataProviderInterface;
+
+    /**
+     * Поставщик данных по расам юнитов
+     *
+     * @return RaceDataProviderInterface
+     */
+    public function getRaceDataProvider(): RaceDataProviderInterface;
 }
