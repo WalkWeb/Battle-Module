@@ -11,7 +11,6 @@ use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Race\DataProvider\RaceDataProviderInterface;
 use Battle\Unit\Race\RaceException;
-use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -31,7 +30,7 @@ class RaceFactoryTest extends AbstractUnitTest
     {
         $container = new Container();
         $data = $this->getDataProvider()->get($id);
-        $race = RaceFactory::create($data, $container);
+        $race = $container->getRaceFactory()->create($data);
 
         self::assertEquals($data['id'], $race->getId());
         self::assertEquals($data['name'], $race->getName());
@@ -66,9 +65,10 @@ class RaceFactoryTest extends AbstractUnitTest
      */
     public function testRaceFactoryFail(array $data, string $error): void
     {
+        $container = new Container();
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        RaceFactory::create($data, new Container());
+        $container->getRaceFactory()->create($data);
     }
 
     /**

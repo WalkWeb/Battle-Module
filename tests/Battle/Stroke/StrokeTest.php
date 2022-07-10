@@ -14,7 +14,6 @@ use Battle\Stroke\StrokeException;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Defense\Defense;
 use Battle\Unit\Offense\Offense;
-use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Container\Container;
@@ -102,7 +101,7 @@ class StrokeTest extends AbstractUnitTest
             1,
             new Offense(10, 1, 100, 0),
             new Defense(10, 0),
-            RaceFactory::create($container->getRaceDataProvider()->get(1), $container),
+            $container->getRaceFactory()->create($container->getRaceDataProvider()->get(1)),
             $container
         );
 

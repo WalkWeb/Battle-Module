@@ -8,7 +8,6 @@ use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Defense\DefenseFactory;
 use Battle\Unit\Offense\OffenseFactory;
-use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\UnitInterface;
 use Battle\Unit\Unit;
 use Exception;
@@ -751,7 +750,7 @@ class UnitFactory
             $data['command'],
             OffenseFactory::create($data['offense']),
             DefenseFactory::create($data['defense']),
-            RaceFactory::create($container->getRaceDataProvider()->get($data['race']), $container),
+            $container->getRaceFactory()->create($container->getRaceDataProvider()->get($data['race'])),
             $container,
             $class
         );

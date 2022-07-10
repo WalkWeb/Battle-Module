@@ -13,14 +13,23 @@ class RaceFactory
     use ValidationTrait;
 
     /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
+    /**
      * Создает расу юнита на основе массива параметров
      *
      * @param array $data
-     * @param ContainerInterface $container
      * @return RaceInterface
      * @throws BattleException
      */
-    public static function create(array $data, ContainerInterface $container): RaceInterface
+    public function create(array $data): RaceInterface
     {
         self::int($data, 'id', RaceException::INCORRECT_ID);
         self::string($data, 'name', RaceException::INCORRECT_NAME);
@@ -36,7 +45,7 @@ class RaceFactory
             $data['color'],
             $data['icon'],
             $data['abilities'],
-            $container
+            $this->container
         );
     }
 }

@@ -10,7 +10,6 @@ use Battle\Container\ContainerInterface;
 use Battle\Traits\ValidationTrait;
 use Battle\Unit\Defense\DefenseFactory;
 use Battle\Unit\Offense\OffenseFactory;
-use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\Race\RaceInterface;
 use Exception;
 
@@ -124,8 +123,8 @@ class UnitFactory
      */
     private static function getRace(int $raceId, ContainerInterface $container): RaceInterface
     {
-        return RaceFactory::create(
-            $container->getRaceDataProvider()->get($raceId), $container
+        return $container->getRaceFactory()->create(
+            $container->getRaceDataProvider()->get($raceId)
         );
     }
 }
