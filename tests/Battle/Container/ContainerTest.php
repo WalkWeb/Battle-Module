@@ -20,6 +20,7 @@ use Battle\Stroke\StrokeFactory;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationException;
 use Battle\Translation\TranslationInterface;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
 use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
@@ -201,6 +202,23 @@ class ContainerTest extends AbstractUnitTest
 
         $viewFactory = $container->get('ViewFactory');
         self::assertInstanceOf(ViewFactory::class, $viewFactory);
+    }
+
+    /**
+     * @throws ContainerException
+     */
+    public function testContainerGetAbilityFactory(): void
+    {
+        $container = new Container();
+
+        $abilityFactory = $container->get(AbilityFactory::class);
+        self::assertInstanceOf(AbilityFactory::class, $abilityFactory);
+
+        $abilityFactory = $container->get('AbilityFactory');
+        self::assertInstanceOf(AbilityFactory::class, $abilityFactory);
+
+        $abilityFactory = $container->getAbilityFactory();
+        self::assertInstanceOf(AbilityFactory::class, $abilityFactory);
     }
 
     /**

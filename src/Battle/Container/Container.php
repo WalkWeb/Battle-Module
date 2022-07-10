@@ -17,6 +17,7 @@ use Battle\Round\RoundFactory;
 use Battle\Stroke\StrokeFactory;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationInterface;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
 use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
@@ -59,6 +60,9 @@ class Container implements ContainerInterface
 
         ViewFactory::class                  => ViewFactory::class,
         'ViewFactory'                       => ViewFactory::class,
+
+        AbilityFactory::class               => AbilityFactory::class,
+        'AbilityFactory'                    => AbilityFactory::class,
 
         // Исключительно как примеры поставщиков. Подразумевается, что в реальном проекте эти поставщики будут подменены
         // через метод в контейнере set()
@@ -231,6 +235,17 @@ class Container implements ContainerInterface
     {
         /** @var ViewFactory $service */
         $service = $this->get(ViewFactory::class);
+        return $service;
+    }
+
+    /**
+     * @return AbilityFactory
+     * @throws ContainerException
+     */
+    public function getAbilityFactory(): AbilityFactory
+    {
+        /** @var AbilityFactory $service */
+        $service = $this->get(AbilityFactory::class);
         return $service;
     }
 

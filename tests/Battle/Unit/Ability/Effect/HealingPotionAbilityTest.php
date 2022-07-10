@@ -574,7 +574,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testNewHealingPotionAbilityToMessage(): void
+    public function testHealingPotionAbilityToMessage(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $woundedUnit = UnitFactory::createByTemplate(11);
