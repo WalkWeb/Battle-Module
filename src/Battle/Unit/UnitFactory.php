@@ -12,6 +12,7 @@ use Battle\Traits\ValidationTrait;
 use Battle\Unit\Defense\DefenseFactory;
 use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\Race\RaceFactory;
+use Battle\Unit\Race\RaceInterface;
 use Exception;
 
 // TODO Уйти от статики и добавить фабрику в контейнер
@@ -85,7 +86,7 @@ class UnitFactory
             $data['command'],
             OffenseFactory::create($data['offense']),
             DefenseFactory::create($data['defense']),
-            RaceFactory::createById($data['race']),
+            self::getRace($data['race'], $container),
             $container,
             self::getClass($data, $container)
         );
@@ -113,6 +114,19 @@ class UnitFactory
 
         return UnitClassFactory::create(
             $container->getClassDataProvider()->get($data['class'])
+        );
+    }
+
+    /**
+     * @param int $raceId
+     * @param ContainerInterface $container
+     * @return RaceInterface
+     * @throws Exception
+     */
+    private static function getRace(int $raceId, ContainerInterface $container): RaceInterface
+    {
+        return RaceFactory::create(
+            $container->getRaceDataProvider()->get($raceId)
         );
     }
 }

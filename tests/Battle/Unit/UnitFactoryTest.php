@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
+use Battle\BattleException;
 use Battle\Container\Container;
-use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
-use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
+use Battle\Container\ContainerException;
+use Battle\Container\ContainerInterface;
+use Battle\Unit\Classes\UnitClassException;
 use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Unit\Race\RaceFactory;
+use Battle\Unit\Race\RaceInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
 use Battle\Unit\UnitInterface;
@@ -27,10 +30,10 @@ class UnitFactoryTest extends AbstractUnitTest
      */
     public function testUnitFactorySuccess(array $data): void
     {
-        $classDataProvider = new ExampleClassDataProvider(new Container());
+        $container = new Container();
         $unit = UnitFactory::create($data);
-        $class = $this->createClass($data, $classDataProvider);
-        $race = RaceFactory::createById($data['race']);
+        $class = $this->createClass($data, $container);
+        $race = $this->createRace($data['race'], $container);
 
         self::assertEquals($data['name'], $unit->getName());
         self::assertEquals($data['level'], $unit->getLevel());
@@ -1102,11 +1105,12 @@ class UnitFactoryTest extends AbstractUnitTest
 
     /**
      * @param array $data
-     * @param ClassDataProviderInterface $classDataProvider
+     * @param ContainerInterface $container
      * @return UnitClassInterface|null
-     * @throws Exception
+     * @throws ContainerException
+     * @throws UnitClassException
      */
-    private function createClass(array $data, ClassDataProviderInterface $classDataProvider): ?UnitClassInterface
+    private function createClass(array $data, ContainerInterface $container): ?UnitClassInterface
     {
         if (!array_key_exists('class', $data)) {
             return null;
@@ -1117,7 +1121,20 @@ class UnitFactoryTest extends AbstractUnitTest
         }
 
         return UnitClassFactory::create(
-            $classDataProvider->get($data['class'])
+            $container->getClassDataProvider()->get($data['class'])
+        );
+    }
+
+    /**
+     * @param int $raceId
+     * @param ContainerInterface $container
+     * @return RaceInterface
+     * @throws BattleException
+     */
+    private function createRace(int $raceId, ContainerInterface $container): RaceInterface
+    {
+        return RaceFactory::create(
+            $container->getRaceDataProvider()->get($raceId)
         );
     }
 }

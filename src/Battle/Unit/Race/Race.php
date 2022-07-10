@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Race;
 
+use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityFactory;
+use Battle\Unit\UnitInterface;
+use Exception;
+
 class Race implements RaceInterface
 {
     /**
@@ -32,9 +37,14 @@ class Race implements RaceInterface
     private $icon;
 
     /**
-     * @var string[]
+     * @var array
      */
-    private $abilities;
+    private $abilitiesData;
+
+    /**
+     * @var AbilityFactory
+     */
+    private $abilityFactory;
 
     public function __construct(
         int $id,
@@ -42,7 +52,8 @@ class Race implements RaceInterface
         string $singleName,
         string $color,
         string $icon,
-        array $abilities
+        array $abilitiesData,
+        ?AbilityFactory $abilityFactory = null
     )
     {
         $this->id = $id;
@@ -50,7 +61,8 @@ class Race implements RaceInterface
         $this->singleName = $singleName;
         $this->color = $color;
         $this->icon = $icon;
-        $this->abilities = $abilities;
+        $this->abilitiesData = $abilitiesData;
+        $this->abilityFactory = $abilityFactory ?? new AbilityFactory();
     }
 
     /**
@@ -94,10 +106,20 @@ class Race implements RaceInterface
     }
 
     /**
-     * @return string[]
+     * @param UnitInterface $unit
+     * @return AbilityCollection
+     * @throws Exception
      */
-    public function getAbilities(): array
+    public function getAbilities(UnitInterface $unit): AbilityCollection
     {
-        return $this->abilities;
+        $collection = new AbilityCollection();
+
+        foreach ($this->abilitiesData as $abilityData) {
+            $collection->add(
+                $this->abilityFactory->create($unit, $abilityData)
+            );
+        }
+
+        return $collection;
     }
 }

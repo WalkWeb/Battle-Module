@@ -89,6 +89,7 @@ class StrokeTest extends AbstractUnitTest
     public function testStrokeCantByUsedActionException(): void
     {
         $enemyUnit = UnitFactory::createByTemplate(3);
+        $container = $enemyUnit->getContainer();
 
         $brokenPriest = new BrokenPriestUnit(
             'id',
@@ -101,8 +102,8 @@ class StrokeTest extends AbstractUnitTest
             1,
             new Offense(10, 1, 100, 0),
             new Defense(10, 0),
-            RaceFactory::createById(1),
-            $enemyUnit->getContainer()
+            RaceFactory::create($container->getRaceDataProvider()->get(1)),
+            $container
         );
 
         $alliesCommand = CommandFactory::create([$brokenPriest]);

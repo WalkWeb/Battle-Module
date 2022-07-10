@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Race;
 
+use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\UnitInterface;
+
 interface RaceInterface
 {
     /**
@@ -42,12 +45,10 @@ interface RaceInterface
     public function getIcon(): string;
 
     /**
-     * Возвращает массив (названий классов) способностей - базовых, для этой расы
+     * Возвращает коллекцию способностей данного класса
      *
-     * AbilityCollection не используется, потому что для создания самой способности нужен объект юнита, а его на момент
-     * создания объекта расы еще нет
-     *
-     * @return string[]
+     * @param UnitInterface $unit
+     * @return AbilityCollection
      */
-    public function getAbilities(): array;
+    public function getAbilities(UnitInterface $unit): AbilityCollection;
 }

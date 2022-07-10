@@ -21,13 +21,6 @@ use Exception;
  */
 class Ability extends AbstractAbility
 {
-    private $typesActivate = [
-        AbilityInterface::ACTIVATE_CONCENTRATION,
-        AbilityInterface::ACTIVATE_RAGE,
-        AbilityInterface::ACTIVATE_LOW_LIFE,
-        AbilityInterface::ACTIVATE_DEAD,
-    ];
-
     /**
      * @var string
      */
@@ -42,13 +35,6 @@ class Ability extends AbstractAbility
      * @var array
      */
     private $actionsData;
-
-    /**
-     * TODO В будущем, когда конкретные классы способностей будут удалены - этот параметр нужно вынести в AbstractAbility
-     *
-     * @var int
-     */
-    private $typeActivate;
 
     /**
      * @var ActionFactory
@@ -77,13 +63,14 @@ class Ability extends AbstractAbility
         ?ActionFactory $actionFactory = null
     )
     {
-        parent::__construct($unit, $disposable, $chanceActivate);
+        parent::__construct($unit, $disposable, $chanceActivate, $typeActivate);
         $this->name = $name;
         $this->icon = $icon;
-        $this->typeActivate = $this->validateTypeActivate($typeActivate);
         $this->actionFactory = $actionFactory ?? new ActionFactory();
         $this->actionsData = $this->validateActionsData($actionsData);
     }
+
+    // TODO getName / getIcon можно вынести в AbstractAbility
 
     public function getName(): string
     {
@@ -194,20 +181,6 @@ class Ability extends AbstractAbility
         }
 
         return $actionsData;
-    }
-
-    /**
-     * @param int $typeActivate
-     * @return int
-     * @throws AbilityException
-     */
-    private function validateTypeActivate(int $typeActivate): int
-    {
-        if (!in_array($typeActivate, $this->typesActivate, true)) {
-            throw new AbilityException(AbilityException::UNKNOWN_ACTIVATE_TYPE . ': ' . $typeActivate);
-        }
-
-        return $typeActivate;
     }
 
     /**

@@ -105,6 +105,19 @@ interface AbilityInterface
     public function isUsage(): bool;
 
     /**
+     * Тип активации способности. На данный момент этот метод используется в одном месте - для реализации способностей,
+     * которые могут применяться после смерти юнита. И такие способности определяются по
+     *
+     * TypeActivate === self::ACTIVATE_DEAD
+     *
+     * @return int
+     */
+    public function getTypeActivate(): int;
+
+    /**
+     * Возвращает шанс активации способности. На данный момент применяется только в способностях которые могут
+     * активироваться после смерти юнита
+     *
      * @return int
      */
     public function getChanceActivate(): int;

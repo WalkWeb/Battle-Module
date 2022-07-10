@@ -18,6 +18,8 @@ class UnitClassFactory
      *
      * От класса зависят способности, которые юнит будет применять в бою
      *
+     * TODO Добавить AbilityFactory который будет прокидываться в UnitClass / или сразу Container
+     *
      * @param array $data
      * @return UnitClassInterface
      * @throws Exception

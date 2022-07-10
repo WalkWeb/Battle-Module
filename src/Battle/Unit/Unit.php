@@ -11,7 +11,7 @@ use Battle\Action\DamageAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Ability\AbilityCollection;
-use Battle\Unit\Ability\Resurrection\WillToLiveAbility;
+use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Defense\DefenseException;
 use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Offense\OffenseException;
@@ -58,13 +58,11 @@ class Unit extends AbstractUnit
      */
     public function getDeadAbilities(): AbilityCollection
     {
-        $abilities = new AbilityCollection();
+        $abilities = new AbilityCollection($this->container->isTestMode());
 
         if (!$this->isAlive()) {
             foreach ($this->abilities as $ability) {
-                // Сейчас существует только одна подобная способность, по этому проверка делается по простому
-                // Потом, будет добавлена отдельная механика для такого рода способностей
-                if ($ability instanceof WillToLiveAbility && $ability->isReady()) {
+                if ($ability->getTypeActivate() === AbilityInterface::ACTIVATE_DEAD && $ability->isReady()) {
                     $abilities->add($ability);
                 }
             }

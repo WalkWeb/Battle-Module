@@ -751,7 +751,7 @@ class UnitFactory
             self::$units[$template]['command'],
             OffenseFactory::create(self::$units[$template]['offense']),
             DefenseFactory::create(self::$units[$template]['defense']),
-            RaceFactory::createById(self::$units[$template]['race']),
+            RaceFactory::create($container->getRaceDataProvider()->get(self::$units[$template]['race'])),
             $container,
             $class
         );

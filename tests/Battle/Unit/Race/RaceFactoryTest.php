@@ -5,10 +5,17 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Race;
 
 use Battle\BattleException;
+use Battle\Container\Container;
+use Battle\Container\ContainerException;
+use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityFactory;
+use Battle\Unit\Race\DataProvider\RaceDataProviderInterface;
 use Battle\Unit\Race\RaceException;
 use Battle\Unit\Race\RaceFactory;
+use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
+use Tests\Battle\Factory\UnitFactory;
 
 class RaceFactoryTest extends AbstractUnitTest
 {
@@ -18,18 +25,34 @@ class RaceFactoryTest extends AbstractUnitTest
      * @dataProvider successDataProvider
      * @param int $id
      * @throws BattleException
-     * @throws RaceException
+     * @throws Exception
      */
     public function testRaceFactorySuccess(int $id): void
     {
-        $race = RaceFactory::createById($id);
-        $data = RaceFactory::getData()[$id];
+        $data = $this->getDataProvider()->get($id);
+        $race = RaceFactory::create($data);
 
         self::assertEquals($data['id'], $race->getId());
         self::assertEquals($data['name'], $race->getName());
         self::assertEquals($data['single_name'], $race->getSingleName());
         self::assertEquals($data['color'], $race->getColor());
         self::assertEquals($data['icon'], $race->getIcon());
+
+        // У некоторых рас есть расовые навыки. Чтобы сравнить ожидаемые и фактические нужен юнит определенной расы
+        // По этому ниже идут такие замороченные проверки. Врожденные навыки есть у расы людей (id: 1) и орков (id: 3)
+        if ($id === 1 || $id === 3) {
+
+            $unit = $id === 1 ? UnitFactory::createByTemplate(1) : UnitFactory::createByTemplate(21);
+
+            $expectedAbilities = $this->createAbilityCollection($unit, $data['abilities']);
+
+            self::assertSameSize($expectedAbilities, $race->getAbilities($unit));
+
+            self::assertEquals(
+                $expectedAbilities,
+                $race->getAbilities($unit)
+            );
+        }
     }
 
     /**
@@ -44,20 +67,7 @@ class RaceFactoryTest extends AbstractUnitTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        RaceFactory::createByArray($data);
-    }
-
-    /**
-     * Тест на ситуацию, когда передан id неизвестной расы
-     *
-     * @throws BattleException
-     * @throws RaceException
-     */
-    public function testRaceFactoryUndefinedRaceId(): void
-    {
-        $this->expectException(RaceException::class);
-        $this->expectExceptionMessage(RaceException::UNDEFINED_RACE_ID);
-        RaceFactory::createById(888);
+        RaceFactory::create($data);
     }
 
     /**
@@ -221,5 +231,32 @@ class RaceFactoryTest extends AbstractUnitTest
                 RaceException::INCORRECT_ABILITIES,
             ],
         ];
+    }
+
+    /**
+     * @return RaceDataProviderInterface
+     * @throws ContainerException
+     */
+    private function getDataProvider(): RaceDataProviderInterface
+    {
+        return (new Container())->getRaceDataProvider();
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param array $abilitiesData
+     * @return AbilityCollection
+     * @throws Exception
+     */
+    private function createAbilityCollection(UnitInterface $unit, array $abilitiesData): AbilityCollection
+    {
+        $collection = new AbilityCollection();
+        $factory = new AbilityFactory();
+
+        foreach ($abilitiesData as $abilityData) {
+            $collection->add($factory->create($unit, $abilityData));
+        }
+
+        return $collection;
     }
 }

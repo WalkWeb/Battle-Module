@@ -60,7 +60,7 @@ class AbilityTest extends AbstractUnitTest
                     'icon'             => $icon,
                 ],
             ],
-            AbilityInterface::ACTIVATE_CONCENTRATION,
+            $typeActivate = AbilityInterface::ACTIVATE_RAGE,
             $chanceActivate
         );
 
@@ -68,6 +68,7 @@ class AbilityTest extends AbstractUnitTest
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
         self::assertEquals($disposable, $ability->isDisposable());
+        self::assertEquals($typeActivate, $ability->getTypeActivate());
 
         // Проверка значений по-умолчанию:
         self::assertFalse($ability->isReady());

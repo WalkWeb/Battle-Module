@@ -12,6 +12,7 @@ use Battle\Unit\Ability\AbstractAbility;
 use Battle\Unit\Defense\DefenseFactory;
 use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\Race\RaceFactory;
+use Battle\Unit\Race\RaceInterface;
 use Battle\Unit\Unit;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -155,7 +156,7 @@ abstract class AbstractSummonAbility extends AbstractAbility
                     'defense' => $this->summonDefense,
                     'block'   => $this->summonBlock,
                 ]),
-                RaceFactory::createById($this->summonRaceId),
+                $this->createRace($this->summonRaceId),
                 $this->unit->getContainer()
             ),
             $this->icon
@@ -174,5 +175,17 @@ abstract class AbstractSummonAbility extends AbstractAbility
     public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool
     {
         return true;
+    }
+
+    /**
+     * @param int $raceId
+     * @return RaceInterface
+     * @throws Exception
+     */
+    private function createRace(int $raceId): RaceInterface
+    {
+        return RaceFactory::create(
+            $this->container->getRaceDataProvider()->get($raceId)
+        );
     }
 }

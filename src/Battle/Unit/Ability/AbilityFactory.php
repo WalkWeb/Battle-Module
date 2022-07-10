@@ -8,6 +8,8 @@ use Battle\Traits\ValidationTrait;
 use Battle\Unit\UnitInterface;
 use Exception;
 
+// TODO Поместить в контейнер
+
 class AbilityFactory
 {
     use ValidationTrait;
