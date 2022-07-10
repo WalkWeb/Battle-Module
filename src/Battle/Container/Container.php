@@ -304,7 +304,7 @@ class Container implements ContainerInterface
     private function create(string $class): object
     {
         // Некоторые сервисы требуют передачу контейнера в конструктор
-        if ($class === Chat::class || $class === ExampleClassDataProvider::class || $class === ExampleRaceDataProvider::class) {
+        if ($class === Chat::class || $class === ExampleClassDataProvider::class || $class === ExampleRaceDataProvider::class || $class === UnitClassFactory::class) {
             $object = new $class($this);
             $this->storage[$this->map[$class]] = $object;
             return $object;

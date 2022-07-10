@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Unit;
 
-use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
@@ -112,8 +111,8 @@ class UnitFactory
             throw new UnitException(UnitException::INCORRECT_CLASS);
         }
 
-        return UnitClassFactory::create(
-            $container->getClassDataProvider()->get($data['class']), $container
+        return $container->getUnitClassFactory()->create(
+            $container->getClassDataProvider()->get($data['class'])
         );
     }
 

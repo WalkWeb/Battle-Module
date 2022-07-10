@@ -6,7 +6,6 @@ namespace Tests\Battle\Unit\Classes;
 
 use Battle\Container\Container;
 use Battle\Unit\Classes\UnitClassException;
-use Battle\Unit\Classes\UnitClassFactory;
 use Exception;
 use Tests\AbstractUnitTest;
 
@@ -22,8 +21,8 @@ class UnitClassFactoryTest extends AbstractUnitTest
     public function testUnitClassFactoryCreateByIdSuccess(int $classId): void
     {
         $container = new Container();
-        $class = UnitClassFactory::create(
-            $container->getClassDataProvider()->get($classId), $container
+        $class = $container->getUnitClassFactory()->create(
+            $container->getClassDataProvider()->get($classId)
         );
         self::assertEquals($classId, $class->getId());
     }
@@ -37,8 +36,8 @@ class UnitClassFactoryTest extends AbstractUnitTest
         $classId = 55;
         $this->expectException(UnitClassException::class);
         $this->expectExceptionMessage(UnitClassException::UNDEFINED_CLASS_ID . ': ' . $classId);
-        UnitClassFactory::create(
-            $container->getClassDataProvider()->get($classId), $container
+        $container->getUnitClassFactory()->create(
+            $container->getClassDataProvider()->get($classId)
         );
     }
 
@@ -51,7 +50,7 @@ class UnitClassFactoryTest extends AbstractUnitTest
      */
     public function testUnitClassFactoryCreateByArraySuccess(array $data): void
     {
-        $class = UnitClassFactory::create($data, new Container());
+        $class = (new Container())->getUnitClassFactory()->create($data);
 
         // Проверка базовых параметров
         self::assertEquals($data['id'], $class->getId());
@@ -67,12 +66,13 @@ class UnitClassFactoryTest extends AbstractUnitTest
      * @dataProvider createByArrayFailDataProvider
      * @param array $data
      * @param string $error
+     * @throws Exception
      */
     public function testUnitClassFactoryCreateByArrayFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        UnitClassFactory::create($data, new Container());
+        (new Container())->getUnitClassFactory()->create($data);
     }
 
     /**

@@ -6,7 +6,6 @@ namespace Tests\Battle\Unit;
 
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
-use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\Race\RaceInterface;
@@ -1116,8 +1115,8 @@ class UnitFactoryTest extends AbstractUnitTest
             return null;
         }
 
-        return UnitClassFactory::create(
-            $container->getClassDataProvider()->get($data['class']), $container
+        return $container->getUnitClassFactory()->create(
+            $container->getClassDataProvider()->get($data['class'])
         );
     }
 

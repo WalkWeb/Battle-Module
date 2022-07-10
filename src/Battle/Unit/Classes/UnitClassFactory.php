@@ -8,11 +8,19 @@ use Battle\Container\ContainerInterface;
 use Battle\Traits\ValidationTrait;
 use Exception;
 
-// TODO Уйти от статики, добавить в контейнер
-
 class UnitClassFactory
 {
     use ValidationTrait;
+
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * Создает класс юнита на основе массива параметров. Массив параметров получается через ClassDataProvider
@@ -20,11 +28,10 @@ class UnitClassFactory
      * От класса зависят способности, которые юнит будет применять в бою
      *
      * @param array $data
-     * @param ContainerInterface $container
      * @return UnitClassInterface
      * @throws Exception
      */
-    public static function create(array $data, ContainerInterface $container): UnitClassInterface
+    public function create(array $data): UnitClassInterface
     {
         self::int($data, 'id', UnitClassException::INVALID_ID_DATA);
         self::string($data, 'name', UnitClassException::INVALID_NAME_DATA);
@@ -36,7 +43,7 @@ class UnitClassFactory
             $data['name'],
             $data['small_icon'],
             $data['abilities'],
-            $container
+            $this->container
         );
     }
 }

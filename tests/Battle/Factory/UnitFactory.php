@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Factory;
 
-use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Defense\DefenseFactory;
@@ -737,8 +736,8 @@ class UnitFactory
 
         $data = self::$units[$template];
         $container = $container ?? new Container(true);
-        $class = isset($data['class']) ? UnitClassFactory::create(
-            $container->getClassDataProvider()->get(self::$units[$template]['class']), $container
+        $class = isset($data['class']) ? $container->getUnitClassFactory()->create(
+            $container->getClassDataProvider()->get(self::$units[$template]['class'])
         ) : null;
 
         return new Unit(

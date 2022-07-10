@@ -8,7 +8,6 @@ use Battle\Container\Container;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassException;
-use Battle\Unit\Classes\UnitClassFactory;
 use Exception;
 use Tests\AbstractUnitTest;
 
@@ -29,7 +28,7 @@ class ExampleClassDataProviderTest extends AbstractUnitTest
     {
         $classId = 1;
         $classData = $this->getDataProvider()->get($classId);
-        $class = UnitClassFactory::create($classData, new Container());
+        $class = (new Container())->getUnitClassFactory()->create($classData);
 
         // Детальная проверка созданного класса делается в отдельных тестах по каждому классу
         // В текущем же случае нам достаточно того, что класс успешно создался. И делаем одну простую проверку

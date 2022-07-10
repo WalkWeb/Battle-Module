@@ -6,7 +6,6 @@ namespace Tests\Battle\Command;
 
 use Battle\Container\Container;
 use Battle\Result\FullLog\FullLog;
-use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
@@ -30,8 +29,8 @@ class CommandFactoryTest extends AbstractUnitTest
 
         $i = 0;
         foreach ($command->getUnits() as $unit) {
-            $class = UnitClassFactory::create(
-                $container->getClassDataProvider()->get($data[$i]['class']), $container
+            $class = $container->getUnitClassFactory()->create(
+                $container->getClassDataProvider()->get($data[$i]['class'])
             );
 
             self::assertEquals($data[$i]['name'], $unit->getName());

@@ -11,7 +11,6 @@ use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityCollection;
-use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Race\RaceFactory;
 use Exception;
 use Battle\Unit\Unit;
@@ -65,7 +64,7 @@ class UnitTest extends AbstractUnitTest
 
         if ($data['class']) {
             $classData = $container->getClassDataProvider()->get($data['class']);
-            foreach (UnitClassFactory::create($classData, $container)->getAbilities($unit) as $ability) {
+            foreach ($container->getUnitClassFactory()->create($classData)->getAbilities($unit) as $ability) {
                 $expectedAbilities->add($ability);
             }
         }
