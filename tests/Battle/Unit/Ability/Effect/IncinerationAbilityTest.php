@@ -101,7 +101,7 @@ class IncinerationAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
         // Проверяем, что перед использованием способности вражеские юниты не имеют эффекта
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             foreach ($enemyCommand->getUnits() as $unit) {
                 self::assertFalse($unit->getEffects()->exist($action->getEffect()));
             }
@@ -119,7 +119,7 @@ class IncinerationAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
         // Проверяем, что после использования способности вражеские юниты имеют эффект
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             foreach ($enemyCommand->getUnits() as $unit) {
                 self::assertTrue($unit->getEffects()->exist($action->getEffect()));
             }
@@ -168,7 +168,7 @@ class IncinerationAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
         // Проверяем, что перед использованием способности вражеские юниты не имеют эффекта
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             foreach ($enemyCommand->getUnits() as $unit) {
                 self::assertFalse($unit->getEffects()->exist($action->getEffect()));
             }
@@ -189,7 +189,7 @@ class IncinerationAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
 
         // Проверяем, что после использования способности вражеские юниты имеют эффект
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             foreach ($enemyCommand->getUnits() as $unit) {
                 self::assertTrue($unit->getEffects()->exist($action->getEffect()));
             }

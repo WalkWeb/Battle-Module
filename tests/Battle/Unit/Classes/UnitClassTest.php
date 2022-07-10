@@ -58,8 +58,8 @@ class UnitClassTest extends AbstractUnitTest
 
         foreach ($class->getAbilities($unit) as $i => $ability) {
             self::assertEquals(
-                $expectedAbilities[$i]->getAction($enemyCommand, $command),
-                $ability->getAction($enemyCommand, $command)
+                $expectedAbilities[$i]->getActions($enemyCommand, $command),
+                $ability->getActions($enemyCommand, $command)
             );
         }
     }

@@ -318,7 +318,7 @@ class StrokeTest extends AbstractUnitTest
         // Накладываем на юнита баф
         $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Battle Fury', 1));
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }

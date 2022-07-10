@@ -23,7 +23,7 @@ class Ability extends AbstractAbility
             return false;
         }
 
-        foreach ($this->getAction($enemyCommand, $alliesCommand) as $action) {
+        foreach ($this->getActions($enemyCommand, $alliesCommand) as $action) {
             if (!$action->canByUsed()) {
                 return false;
             }
@@ -38,7 +38,7 @@ class Ability extends AbstractAbility
      * @return ActionCollection
      * @throws Exception
      */
-    public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
+    public function getActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         $actions = new ActionCollection();
         foreach ($this->actionsData as &$actionData) {

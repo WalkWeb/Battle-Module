@@ -37,7 +37,7 @@ class DeadKnightTest extends AbstractUnitTest
         foreach ($abilities as $ability) {
             self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
 
-            $actions = $ability->getAction($enemyCommand, $actionCommand);
+            $actions = $ability->getActions($enemyCommand, $actionCommand);
 
             foreach ($actions as $action) {
                 self::assertEquals((int)($unit->getOffense()->getDamage() * 2.5), $action->getPower());

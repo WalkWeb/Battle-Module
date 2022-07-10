@@ -193,7 +193,7 @@ class Stroke implements StrokeInterface
 
                     $ability->usage();
 
-                    $actions = $ability->getAction($alliesCommand, $enemyCommand);
+                    $actions = $ability->getActions($alliesCommand, $enemyCommand);
 
                     foreach ($actions as $action) {
                         if ($action->canByUsed()) {

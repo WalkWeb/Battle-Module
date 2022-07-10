@@ -42,7 +42,7 @@ class WarriorTest extends AbstractUnitTest
             if ($i === 0) {
                 self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
 
-                $actions = $ability->getAction($enemyCommand, $command);
+                $actions = $ability->getActions($enemyCommand, $command);
 
                 foreach ($actions as $action) {
                     self::assertEquals((int)($unit->getOffense()->getDamage() * 2.5), $action->getPower());
@@ -52,7 +52,7 @@ class WarriorTest extends AbstractUnitTest
             if ($i === 1) {
                 self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
 
-                $actions = $ability->getAction($enemyCommand, $command);
+                $actions = $ability->getActions($enemyCommand, $command);
 
                 foreach ($actions as $action) {
                     self::assertEquals(

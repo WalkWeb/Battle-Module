@@ -61,13 +61,11 @@ interface AbilityInterface
     /**
      * Возвращает коллекцию действия данной способности
      *
-     * TODO Переименовать в getActions()
-     *
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
      */
-    public function getAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
+    public function getActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
 
     /**
      * Сообщает об изменившихся параметрах юнита. В этом методе способность определяет, должна ли она активироваться

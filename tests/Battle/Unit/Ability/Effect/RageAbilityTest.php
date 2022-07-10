@@ -58,7 +58,7 @@ class RageAbilityTest extends AbstractUnitTest
         self::assertEquals(35, $unit->getOffense()->getDamage());
 
         // Применяем способность
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
@@ -99,7 +99,7 @@ class RageAbilityTest extends AbstractUnitTest
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }
@@ -152,7 +152,7 @@ class RageAbilityTest extends AbstractUnitTest
         self::assertEquals(35, $unit->getOffense()->getDamage());
 
         // Применяем способность
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
@@ -196,7 +196,7 @@ class RageAbilityTest extends AbstractUnitTest
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }

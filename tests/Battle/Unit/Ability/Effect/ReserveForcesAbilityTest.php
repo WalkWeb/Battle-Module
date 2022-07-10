@@ -75,7 +75,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
 
         self::assertEquals(
             $this->getReserveForcesActions($unit, $enemyCommand, $command),
-            $ability->getAction($enemyCommand, $command)
+            $ability->getActions($enemyCommand, $command)
         );
 
         $ability->usage();
@@ -110,7 +110,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
 
         $collection->update($unit);
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
@@ -153,7 +153,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }
@@ -199,7 +199,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
 
         $collection->update($unit);
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }
@@ -226,7 +226,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         $collection->update($unit);
 
         // Применяем способность еще раз
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }
@@ -284,7 +284,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
 
         self::assertEquals(
             $this->getReserveForcesActions($unit, $enemyCommand, $command),
-            $ability->getAction($enemyCommand, $command)
+            $ability->getActions($enemyCommand, $command)
         );
 
         $ability->usage();
@@ -319,7 +319,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
 
         $collection->update($unit);
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
@@ -365,7 +365,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }
@@ -411,7 +411,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
 
         $collection->update($unit);
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }
@@ -438,7 +438,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         $collection->update($unit);
 
         // Применяем способность еще раз
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }

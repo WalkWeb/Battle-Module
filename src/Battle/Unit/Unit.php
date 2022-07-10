@@ -40,7 +40,7 @@ class Unit extends AbstractUnit
         // Если есть способность готовая к использованию - применяем её
         if (($ability = $this->getAbility($enemyCommand, $alliesCommand))) {
             $ability->usage();
-            return $ability->getAction($enemyCommand, $alliesCommand);
+            return $ability->getActions($enemyCommand, $alliesCommand);
         }
 
         // Пока концентрация применяется сразу, при попытке сделать атаку, можно переделать так, чтобы добавлялась

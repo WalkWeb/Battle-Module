@@ -62,7 +62,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
 
         self::assertEquals(
             $this->getWillToLiveActions($unit, $enemyCommand, $command),
-            $ability->getAction($enemyCommand, $command)
+            $ability->getActions($enemyCommand, $command)
         );
 
         $ability->usage();
@@ -94,7 +94,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $ability->update($unit, true);
 
         // Применяем способность
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
@@ -133,7 +133,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         // Применяем способность
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
@@ -198,7 +198,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
 
         self::assertEquals(
             $this->getWillToLiveActions($unit, $enemyCommand, $command),
-            $ability->getAction($enemyCommand, $command)
+            $ability->getActions($enemyCommand, $command)
         );
 
         $ability->usage();
@@ -230,7 +230,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $ability->update($unit, true);
 
         // Применяем способность
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
@@ -269,7 +269,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         // Применяем способность
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));

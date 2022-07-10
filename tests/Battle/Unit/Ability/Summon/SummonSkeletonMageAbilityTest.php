@@ -103,7 +103,7 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
 
         self::assertTrue($ability->isReady());
 
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertInstanceOf(SummonAction::class, $action);
@@ -164,7 +164,7 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
 
         self::assertTrue($ability->isReady());
 
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertInstanceOf(SummonAction::class, $action);

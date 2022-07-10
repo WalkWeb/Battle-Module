@@ -74,7 +74,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
 
         self::assertEquals(
             $this->getBlessedShieldActions($unit, $enemyCommand, $command),
-            $ability->getAction($enemyCommand, $command)
+            $ability->getActions($enemyCommand, $command)
         );
 
         $ability->usage();
@@ -118,7 +118,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         self::assertEquals(0, $unit->getDefense()->getBlock());
 
         // Применяем способность
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
@@ -182,7 +182,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         self::assertEquals(100, $unit->getDefense()->getBlock());
 
         // Применяем способность
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
@@ -253,7 +253,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
 
         self::assertEquals(
             $this->getBlessedShieldActions($unit, $enemyCommand, $command),
-            $ability->getAction($enemyCommand, $command)
+            $ability->getActions($enemyCommand, $command)
         );
 
         $ability->usage();
@@ -297,7 +297,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         self::assertEquals(0, $unit->getDefense()->getBlock());
 
         // Применяем способность
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
@@ -364,7 +364,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         self::assertEquals(100, $unit->getDefense()->getBlock());
 
         // Применяем способность
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());

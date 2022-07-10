@@ -37,7 +37,7 @@ class DarkMageTest extends AbstractUnitTest
         foreach ($abilities as $ability) {
             self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
 
-            $actions = $ability->getAction($enemyCommand, $actionCommand);
+            $actions = $ability->getActions($enemyCommand, $actionCommand);
 
             foreach ($actions as $action) {
                 $action->handle();

@@ -164,7 +164,7 @@ class AbilityTest extends AbstractUnitTest
         $this->expectException(AbilityException::class);
         $this->expectExceptionMessage(AbilityException::INVALID_EFFECT_DATA);
 
-        $ability->getAction($enemyCommand, $command);
+        $ability->getActions($enemyCommand, $command);
     }
 
     /**
@@ -220,7 +220,7 @@ class AbilityTest extends AbstractUnitTest
             0
         );
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }

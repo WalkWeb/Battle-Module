@@ -270,7 +270,7 @@ class ScenarioTest extends AbstractUnitTest
         $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Poison', 1));
 
         // Применение эффекта
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             $container->getScenario()->addAnimation($action, $container->getStatistic());
@@ -472,7 +472,7 @@ class ScenarioTest extends AbstractUnitTest
         $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Healing Potion', 1));
 
         // Применение эффекта
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             $container->getScenario()->addAnimation($action, $container->getStatistic());
@@ -746,7 +746,7 @@ class ScenarioTest extends AbstractUnitTest
 
         $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Back to Life', 1));
 
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());

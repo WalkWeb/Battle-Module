@@ -82,7 +82,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         // Применяем способность
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertInstanceOf(HealAction::class, $action);
@@ -169,7 +169,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         // Применяем способность
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertInstanceOf(HealAction::class, $action);

@@ -79,7 +79,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         self::assertTrue($ability->isReady());
 
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
@@ -121,7 +121,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         $power = 15;
         $ability = $this->createAbility($unit);
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }
@@ -180,7 +180,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }
@@ -232,7 +232,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         self::assertTrue($ability->isReady());
 
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
@@ -312,7 +312,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         self::assertTrue($ability->isReady());
 
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
@@ -382,7 +382,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         self::assertTrue($ability->isReady());
 
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
@@ -422,7 +422,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         $power = 15;
         $ability = $this->createAbilityByDataProvider($unit, 'Healing Potion');
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }
@@ -481,7 +481,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }
@@ -533,7 +533,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
 
         self::assertTrue($ability->isReady());
 
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
@@ -593,7 +593,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         $collection->add($ability);
         $collection->update($unit);
 
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());

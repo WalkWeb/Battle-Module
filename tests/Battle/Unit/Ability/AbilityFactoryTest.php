@@ -47,7 +47,7 @@ class AbilityFactoryTest extends AbstractUnitTest
 
         self::assertEquals(
             $this->createActionCollections($unit, $enemyCommand, $command, $data['actions']),
-            $ability->getAction($enemyCommand, $command)
+            $ability->getActions($enemyCommand, $command)
         );
     }
 

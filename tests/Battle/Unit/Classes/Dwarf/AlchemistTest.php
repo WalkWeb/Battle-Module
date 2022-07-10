@@ -42,7 +42,7 @@ class AlchemistTest extends AbstractUnitTest
             if ($i === 0) {
                 self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
 
-                $actions = $ability->getAction($enemyCommand, $command);
+                $actions = $ability->getActions($enemyCommand, $command);
 
                 foreach ($actions as $action) {
                     self::assertEquals(
@@ -54,7 +54,7 @@ class AlchemistTest extends AbstractUnitTest
             if ($i === 1) {
                 self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
 
-                $actions = $ability->getAction($enemyCommand, $command);
+                $actions = $ability->getActions($enemyCommand, $command);
 
                 foreach ($actions as $action) {
                     self::assertEquals($this->getSummon()->getName(), $action->getSummonUnit()->getName());

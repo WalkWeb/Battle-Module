@@ -334,7 +334,7 @@ EOT;
 
         $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Reserve Forces', 1));
 
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
         }

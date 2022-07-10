@@ -66,7 +66,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         // До применения способности юнит мертв
         self::assertEquals(0, $deadUnit->getLife());
@@ -154,7 +154,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        $actions = $ability->getAction($enemyCommand, $command);
+        $actions = $ability->getActions($enemyCommand, $command);
 
         // До применения способности юнит мертв
         self::assertEquals(0, $deadUnit->getLife());

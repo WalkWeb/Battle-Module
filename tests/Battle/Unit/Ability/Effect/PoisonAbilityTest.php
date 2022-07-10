@@ -103,7 +103,7 @@ class PoisonAbilityTest extends AbstractUnitTest
 
         self::assertEquals(
             $this->createActions($unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
-            $ability->getAction($enemyCommand, $command)
+            $ability->getActions($enemyCommand, $command)
         );
     }
 
@@ -130,7 +130,7 @@ class PoisonAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
         // Применяем эффект
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_APPLY_TO_EN, $this->getChat()->addMessage($action));
@@ -244,7 +244,7 @@ class PoisonAbilityTest extends AbstractUnitTest
 
         self::assertEquals(
             $this->createActions($unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
-            $ability->getAction($enemyCommand, $command)
+            $ability->getActions($enemyCommand, $command)
         );
     }
 
@@ -271,7 +271,7 @@ class PoisonAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
         // Применяем эффект
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_APPLY_TO_EN, $this->getChat()->addMessage($action));
