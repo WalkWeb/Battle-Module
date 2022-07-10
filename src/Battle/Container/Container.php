@@ -25,6 +25,7 @@ use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Race\DataProvider\ExampleRaceDataProvider;
 use Battle\Unit\Race\DataProvider\RaceDataProviderInterface;
+use Battle\Unit\Race\RaceFactory;
 use Battle\View\ViewFactory;
 
 class Container implements ContainerInterface
@@ -67,6 +68,9 @@ class Container implements ContainerInterface
 
         UnitClassFactory::class             => UnitClassFactory::class,
         'UnitClassFactory'                  => UnitClassFactory::class,
+
+        RaceFactory::class                  => RaceFactory::class,
+        'RaceFactory'                       => RaceFactory::class,
 
         // Исключительно как примеры поставщиков. Подразумевается, что в реальном проекте эти поставщики будут подменены
         // через метод в контейнере set()
@@ -261,6 +265,17 @@ class Container implements ContainerInterface
     {
         /** @var UnitClassFactory $service */
         $service = $this->get(UnitClassFactory::class);
+        return $service;
+    }
+
+    /**
+     * @return RaceFactory
+     * @throws ContainerException
+     */
+    public function getRaceFactory(): RaceFactory
+    {
+        /** @var RaceFactory $service */
+        $service = $this->get(RaceFactory::class);
         return $service;
     }
 

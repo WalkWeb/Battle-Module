@@ -17,6 +17,7 @@ use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Race\DataProvider\RaceDataProviderInterface;
+use Battle\Unit\Race\RaceFactory;
 use Battle\View\ViewFactory;
 
 interface ContainerInterface
@@ -116,7 +117,12 @@ interface ContainerInterface
      * @return UnitClassFactory
      */
     public function getUnitClassFactory(): UnitClassFactory;
-    
+
+    /**
+     * @return RaceFactory
+     */
+    public function getRaceFactory(): RaceFactory;
+
     /**
      * Поставщик данных классов юнитов
      *
