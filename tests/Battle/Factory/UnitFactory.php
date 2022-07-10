@@ -737,7 +737,7 @@ class UnitFactory
 
         $container = $container ?? new Container(true);
         $class = isset(self::$units[$template]['class']) ? UnitClassFactory::create(
-            $container->getClassDataProvider()->get(self::$units[$template]['class'])
+            $container->getClassDataProvider()->get(self::$units[$template]['class']), $container
         ) : null;
 
         return new Unit(

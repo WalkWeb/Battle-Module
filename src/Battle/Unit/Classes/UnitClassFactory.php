@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes;
 
+use Battle\Container\ContainerInterface;
 use Battle\Traits\ValidationTrait;
 use Exception;
 
@@ -18,13 +19,12 @@ class UnitClassFactory
      *
      * От класса зависят способности, которые юнит будет применять в бою
      *
-     * TODO Добавить AbilityFactory который будет прокидываться в UnitClass / или сразу Container
-     *
      * @param array $data
+     * @param ContainerInterface $container
      * @return UnitClassInterface
      * @throws Exception
      */
-    public static function create(array $data): UnitClassInterface
+    public static function create(array $data, ContainerInterface $container): UnitClassInterface
     {
         self::int($data, 'id', UnitClassException::INVALID_ID_DATA);
         self::string($data, 'name', UnitClassException::INVALID_NAME_DATA);
@@ -36,6 +36,7 @@ class UnitClassFactory
             $data['name'],
             $data['small_icon'],
             $data['abilities'],
+            $container
         );
     }
 }

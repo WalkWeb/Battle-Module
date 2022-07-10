@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
-use Battle\BattleException;
 use Battle\Container\Container;
-use Battle\Container\ContainerException;
 use Battle\Container\ContainerInterface;
-use Battle\Unit\Classes\UnitClassException;
 use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Unit\Race\RaceFactory;
@@ -1107,8 +1104,7 @@ class UnitFactoryTest extends AbstractUnitTest
      * @param array $data
      * @param ContainerInterface $container
      * @return UnitClassInterface|null
-     * @throws ContainerException
-     * @throws UnitClassException
+     * @throws Exception
      */
     private function createClass(array $data, ContainerInterface $container): ?UnitClassInterface
     {
@@ -1121,7 +1117,7 @@ class UnitFactoryTest extends AbstractUnitTest
         }
 
         return UnitClassFactory::create(
-            $container->getClassDataProvider()->get($data['class'])
+            $container->getClassDataProvider()->get($data['class']), $container
         );
     }
 
@@ -1129,7 +1125,7 @@ class UnitFactoryTest extends AbstractUnitTest
      * @param int $raceId
      * @param ContainerInterface $container
      * @return RaceInterface
-     * @throws BattleException
+     * @throws Exception
      */
     private function createRace(int $raceId, ContainerInterface $container): RaceInterface
     {

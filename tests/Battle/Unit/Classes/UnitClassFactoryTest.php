@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Classes;
 
 use Battle\Container\Container;
-use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
-use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassException;
 use Battle\Unit\Classes\UnitClassFactory;
 use Exception;
@@ -23,8 +21,9 @@ class UnitClassFactoryTest extends AbstractUnitTest
      */
     public function testUnitClassFactoryCreateByIdSuccess(int $classId): void
     {
+        $container = new Container();
         $class = UnitClassFactory::create(
-            $this->getClassDataProvider()->get($classId)
+            $container->getClassDataProvider()->get($classId), $container
         );
         self::assertEquals($classId, $class->getId());
     }
@@ -34,11 +33,12 @@ class UnitClassFactoryTest extends AbstractUnitTest
      */
     public function testUnitClassFactoryCreateByIdFail(): void
     {
+        $container = new Container();
         $classId = 55;
         $this->expectException(UnitClassException::class);
         $this->expectExceptionMessage(UnitClassException::UNDEFINED_CLASS_ID . ': ' . $classId);
         UnitClassFactory::create(
-            $this->getClassDataProvider()->get($classId)
+            $container->getClassDataProvider()->get($classId), $container
         );
     }
 
@@ -51,7 +51,7 @@ class UnitClassFactoryTest extends AbstractUnitTest
      */
     public function testUnitClassFactoryCreateByArraySuccess(array $data): void
     {
-        $class = UnitClassFactory::create($data);
+        $class = UnitClassFactory::create($data, new Container());
 
         // Проверка базовых параметров
         self::assertEquals($data['id'], $class->getId());
@@ -72,7 +72,7 @@ class UnitClassFactoryTest extends AbstractUnitTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        UnitClassFactory::create($data);
+        UnitClassFactory::create($data, new Container());
     }
 
     /**
@@ -206,13 +206,5 @@ class UnitClassFactoryTest extends AbstractUnitTest
                 UnitClassException::INVALID_ABILITY_DATA,
             ],
         ];
-    }
-
-    /**
-     * @return ClassDataProviderInterface
-     */
-    private function getClassDataProvider(): ClassDataProviderInterface
-    {
-        return new ExampleClassDataProvider(new Container());
     }
 }

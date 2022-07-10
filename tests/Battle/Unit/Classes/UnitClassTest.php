@@ -23,6 +23,7 @@ class UnitClassTest extends AbstractUnitTest
      */
     public function testUnitClassCreate(): void
     {
+        $container = new Container();
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -35,6 +36,7 @@ class UnitClassTest extends AbstractUnitTest
             $classData['name'],
             $classData['small_icon'],
             $classData['abilities'],
+            $container
         );
 
         // Проверяем базовые параметры
@@ -69,6 +71,7 @@ class UnitClassTest extends AbstractUnitTest
      */
     public function testUnitClassInvalidAbilitiesData(): void
     {
+        $container = new Container();
         $this->expectException(UnitClassException::class);
         $this->expectExceptionMessage(UnitClassException::INVALID_ABILITY_DATA);
 
@@ -77,6 +80,7 @@ class UnitClassTest extends AbstractUnitTest
             'Demo Class',
             'icon.png',
             ['invalid_data'],
+            $container
         );
     }
 

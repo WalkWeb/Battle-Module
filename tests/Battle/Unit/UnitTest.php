@@ -65,7 +65,7 @@ class UnitTest extends AbstractUnitTest
 
         if ($data['class']) {
             $classData = $container->getClassDataProvider()->get($data['class']);
-            foreach (UnitClassFactory::create($classData)->getAbilities($unit) as $ability) {
+            foreach (UnitClassFactory::create($classData, $container)->getAbilities($unit) as $ability) {
                 $expectedAbilities->add($ability);
             }
         }

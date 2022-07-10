@@ -113,7 +113,7 @@ class UnitFactory
         }
 
         return UnitClassFactory::create(
-            $container->getClassDataProvider()->get($data['class'])
+            $container->getClassDataProvider()->get($data['class']), $container
         );
     }
 

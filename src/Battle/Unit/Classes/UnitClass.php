@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes;
 
+use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\UnitInterface;
@@ -48,7 +50,7 @@ class UnitClass implements UnitClassInterface
      * @param string $name
      * @param string $smallIcon
      * @param array $abilitiesData
-     * @param AbilityFactory|null $abilityFactory
+     * @param ContainerInterface $container
      * @throws Exception
      */
     public function __construct(
@@ -56,14 +58,14 @@ class UnitClass implements UnitClassInterface
         string $name,
         string $smallIcon,
         array $abilitiesData,
-        ?AbilityFactory $abilityFactory = null
+        ContainerInterface $container
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->smallIcon = $smallIcon;
         $this->abilitiesData = $this->validateAbilitiesData($abilitiesData);
-        $this->abilityFactory = $abilityFactory ?? new AbilityFactory();
+        $this->abilityFactory = $container->getAbilityFactory();
     }
 
     public function getId(): int
