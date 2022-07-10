@@ -25,6 +25,7 @@ use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
 use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
+use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Race\DataProvider\ExampleRaceDataProvider;
 use Battle\Unit\Race\DataProvider\RaceDataProviderInterface;
 use Battle\Unit\Unit;
@@ -219,6 +220,23 @@ class ContainerTest extends AbstractUnitTest
 
         $abilityFactory = $container->getAbilityFactory();
         self::assertInstanceOf(AbilityFactory::class, $abilityFactory);
+    }
+
+    /**
+     * @throws ContainerException
+     */
+    public function testContainerGetUnitClassFactory(): void
+    {
+        $container = new Container();
+
+        $unitClassFactory = $container->get(UnitClassFactory::class);
+        self::assertInstanceOf(UnitClassFactory::class, $unitClassFactory);
+
+        $unitClassFactory = $container->get('UnitClassFactory');
+        self::assertInstanceOf(UnitClassFactory::class, $unitClassFactory);
+
+        $unitClassFactory = $container->getUnitClassFactory();
+        self::assertInstanceOf(UnitClassFactory::class, $unitClassFactory);
     }
 
     /**
