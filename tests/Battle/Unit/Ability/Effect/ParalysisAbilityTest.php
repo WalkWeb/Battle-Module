@@ -18,7 +18,6 @@ use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
 use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
-use Battle\Unit\Ability\Effect\ParalysisAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -26,109 +25,6 @@ use Tests\Battle\Factory\UnitFactory;
 
 class ParalysisAbilityTest extends AbstractUnitTest
 {
-    /**
-     * Тест на создание способности ParalysisAction
-     *
-     * TODO В будущем этот ест будет удален вместе с классом ParalysisAbility
-     *
-     * @throws Exception
-     */
-    public function testParalysisAbilityCreate(): void
-    {
-        $name = 'Paralysis';
-        $icon = '/images/icons/ability/086.png';
-
-        $unit = UnitFactory::createByTemplate(21);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = new ParalysisAbility($unit);
-
-        self::assertEquals($name, $ability->getName());
-        self::assertEquals($icon, $ability->getIcon());
-        self::assertEquals($unit, $ability->getUnit());
-        self::assertFalse($ability->isReady());
-        self::assertTrue($ability->canByUsed($enemyCommand, $command));
-        self::assertFalse($ability->isDisposable());
-        self::assertFalse($ability->isUsage());
-
-        // Up rage
-        for ($i = 0; $i < 20; $i++) {
-            $unit->newRound();
-        }
-
-        $collection = new AbilityCollection();
-        $collection->add($ability);
-
-        foreach ($collection as $item) {
-            self::assertEquals($ability, $item);
-        }
-
-        $collection->update($unit);
-
-        self::assertTrue($ability->isReady());
-
-        self::assertEquals(
-            $this->getParalysisActions($unit, $enemyCommand, $command),
-            $ability->getAction($enemyCommand, $command)
-        );
-
-        $ability->usage();
-        self::assertTrue($ability->isUsage());
-        self::assertFalse($ability->isReady());
-    }
-
-    /**
-     * TODO В будущем этот ест будет удален вместе с классом ParalysisAbility
-     *
-     * @throws Exception
-     */
-    public function testParalysisAbilityCanByUsed(): void
-    {
-        $unit = UnitFactory::createByTemplate(21);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = new ParalysisAbility($unit);
-
-        // Изначально эффектов на юните нет
-        self::assertCount(0, $enemyUnit->getEffects());
-
-        // Перед применением способности эффекта на юните еще нет - способность может быть применена
-        self::assertTrue($ability->canByUsed($enemyCommand, $command));
-
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
-            self::assertTrue($action->canByUsed());
-            $action->handle();
-        }
-
-        // Эффект появляется
-        self::assertCount(1, $enemyUnit->getEffects());
-
-        // После появления эффекта на юните - способность уже не может быть применена
-        self::assertFalse($ability->canByUsed($enemyCommand, $command));
-
-        // Пропускаем ходы - заполняем ярость. А также сбрасываем эффект у противника
-        for ($i = 0; $i < 20; $i++) {
-            $unit->newRound();
-
-            // Длительность эффектов обновляется в getAfterActions()
-            foreach ($enemyUnit->getAfterActions() as $afterAction) {
-                if ($afterAction->canByUsed()) {
-                    $afterAction->handle();
-                }
-            }
-        }
-
-        // Эффект исчез
-        self::assertCount(0, $enemyUnit->getEffects());
-
-        // Способность опять может быть применена
-        self::assertTrue($ability->canByUsed($enemyCommand, $command));
-    }
-
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
@@ -138,7 +34,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testNewParalysisAbilityCreate(): void
+    public function testParalysisAbilityCreate(): void
     {
         $name = 'Paralysis';
         $icon = '/images/icons/ability/086.png';
@@ -187,7 +83,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
     /**
      * @throws Exception
      */
-    public function testNewParalysisAbilityCanByUsed(): void
+    public function testParalysisAbilityCanByUsed(): void
     {
         $unit = UnitFactory::createByTemplate(21);
         $enemyUnit = UnitFactory::createByTemplate(2);

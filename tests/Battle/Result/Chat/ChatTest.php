@@ -19,7 +19,6 @@ use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\ChatException;
-use Battle\Unit\Ability\Damage\HeavyStrikeAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -197,18 +196,7 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            50,
-            true,
-            HeavyStrikeAbility::NAME,
-            DamageAction::UNIT_ANIMATION_METHOD,
-            HeavyStrikeAbility::MESSAGE_METHOD,
-            HeavyStrikeAbility::ICON
-        );
+        $action = $this->createAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -227,18 +215,7 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 28);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            50,
-            true,
-            HeavyStrikeAbility::NAME,
-            DamageAction::UNIT_ANIMATION_METHOD,
-            HeavyStrikeAbility::MESSAGE_METHOD,
-            HeavyStrikeAbility::ICON
-        );
+        $action = $this->createAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -257,18 +234,7 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 30);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            50,
-            true,
-            HeavyStrikeAbility::NAME,
-            DamageAction::UNIT_ANIMATION_METHOD,
-            HeavyStrikeAbility::MESSAGE_METHOD,
-            HeavyStrikeAbility::ICON
-        );
+        $action = $this->createAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -707,7 +673,7 @@ class ChatTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testChatAddMessageAbilityDamageAndBlocked(): void
+    public function testChatAddMessageAbilityDamageAndBlockedDefault(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $firstEnemyUnit = UnitFactory::createByTemplate(2);
@@ -716,18 +682,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            50,
-            true,
-            HeavyStrikeAbility::NAME,
-            DamageAction::UNIT_ANIMATION_METHOD,
-            HeavyStrikeAbility::MESSAGE_METHOD,
-            HeavyStrikeAbility::ICON
-        );
+        $action = $this->createAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -751,18 +706,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit, $dodgeUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            50,
-            true,
-            HeavyStrikeAbility::NAME,
-            DamageAction::UNIT_ANIMATION_METHOD,
-            HeavyStrikeAbility::MESSAGE_METHOD,
-            HeavyStrikeAbility::ICON
-        );
+        $action = $this->createAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -786,18 +730,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$blockedUnit, $dodgedUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            50,
-            true,
-            HeavyStrikeAbility::NAME,
-            DamageAction::UNIT_ANIMATION_METHOD,
-            HeavyStrikeAbility::MESSAGE_METHOD,
-            HeavyStrikeAbility::ICON
-        );
+        $action = $this->createAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -822,18 +755,7 @@ class ChatTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit, $blockedUnit, $dodgedUnit]);
 
-        $action = new DamageAction(
-            $unit,
-            $enemyCommand,
-            $command,
-            DamageAction::TARGET_ALL_ENEMY,
-            50,
-            true,
-            HeavyStrikeAbility::NAME,
-            DamageAction::UNIT_ANIMATION_METHOD,
-            HeavyStrikeAbility::MESSAGE_METHOD,
-            HeavyStrikeAbility::ICON
-        );
+        $action = $this->createAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -944,6 +866,34 @@ class ChatTest extends AbstractUnitTest
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD
+        );
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param int $typeTarget
+     * @return ActionInterface
+     */
+    private function createAbilityDamage(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        int $typeTarget
+    ): ActionInterface
+    {
+        return new DamageAction(
+            $unit,
+            $enemyCommand,
+            $command,
+            $typeTarget,
+            50,
+            true,
+            'Heavy Strike',
+            DamageAction::UNIT_ANIMATION_METHOD,
+            'damageAbility',
+            '/images/icons/ability/335.png'
         );
     }
 }

@@ -18,7 +18,6 @@ use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
 use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
-use Battle\Unit\Ability\Effect\PoisonAbility;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -38,144 +37,6 @@ class PoisonAbilityTest extends AbstractUnitTest
     private const MESSAGE_DAMAGE_EN = '<span style="color: #1e72e3">unit_2</span> received damage on 8 life from effect <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
     private const MESSAGE_DAMAGE_RU = '<span style="color: #1e72e3">unit_2</span> получил урон на 8 здоровья от эффекта <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
 
-    // TODO В будущем тесты на PoisonAbility будут удалены, и оставлены только тесты на аналогичный функционал
-    // TODO через универсальный объект Ability
-
-    /**
-     * Тест на создание способности PoisonAbility
-     *
-     * @throws Exception
-     */
-    public function testPoisonAbilityCreate(): void
-    {
-        $name = 'Poison';
-        $icon = '/images/icons/ability/202.png';
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = new PoisonAbility($unit);
-
-        self::assertEquals($name, $ability->getName());
-        self::assertEquals($icon, $ability->getIcon());
-        self::assertEquals($unit, $ability->getUnit());
-        self::assertFalse($ability->isReady());
-        self::assertTrue($ability->canByUsed($enemyCommand, $command));
-        self::assertFalse($ability->isDisposable());
-        self::assertFalse($ability->isUsage());
-
-        // Up concentration
-        for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
-        }
-
-        $collection = new AbilityCollection();
-        $collection->add($ability);
-
-        foreach ($collection as $item) {
-            self::assertEquals($ability, $item);
-        }
-
-        $collection->update($unit);
-
-        self::assertTrue($ability->isReady());
-
-        $ability->usage();
-        self::assertTrue($ability->isUsage());
-        self::assertFalse($ability->isReady());
-    }
-
-    /**
-     * Тест на получение Actions из PoisonAbility
-     *
-     * @throws Exception
-     */
-    public function testPoisonAbilityGetActions(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = new PoisonAbility($unit);
-
-        self::assertEquals(
-            $this->createActions($unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
-            $ability->getAction($enemyCommand, $command)
-        );
-    }
-
-    /**
-     * Тест на получение false в $ability->canByUsed(), когда все противники уже имеют такой эффект
-     *
-     * @throws Exception
-     */
-    public function testPoisonAbilityCantByUsed(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = new PoisonAbility($unit);
-
-        // Up concentration
-        for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
-        }
-
-        self::assertTrue($ability->canByUsed($enemyCommand, $command));
-
-        // Применяем эффект
-        foreach ($ability->getAction($enemyCommand, $command) as $action) {
-            self::assertTrue($action->canByUsed());
-            $action->handle();
-            self::assertEquals(self::MESSAGE_APPLY_TO_EN, $this->getChat()->addMessage($action));
-            self::assertEquals(self::MESSAGE_APPLY_TO_RU, $this->getChatRu()->addMessage($action));
-        }
-
-        // Теперь эффект у противника есть, и больше способность примениться не может
-        // Так как все противники (один противник) уже имеют такой эффект
-        self::assertFalse($ability->canByUsed($enemyCommand, $command));
-
-        $effects = $enemyUnit->getEffects();
-
-        self::assertCount(1, $effects);
-
-        foreach ($effects as $effect) {
-            $actions = $effect->getOnNextRoundActions();
-            self::assertCount(1, $actions);
-            foreach ($actions as $action) {
-                self::assertTrue($action->canByUsed());
-                $action->handle();
-                self::assertEquals(self::MESSAGE_DAMAGE_EN, $this->getChat()->addMessage($action));
-                self::assertEquals(self::MESSAGE_DAMAGE_RU, $this->getChatRu()->addMessage($action));
-            }
-        }
-    }
-
-    /**
-     * Тест на формирование сообщения о применении эффекта на себя
-     *
-     * @throws Exception
-     */
-    public function testPoisonAbilityApplySelfEnMessage(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        // Применяем эффект
-        foreach ($this->createActions($unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ALLIES) as $action) {
-            self::assertTrue($action->canByUsed());
-            $action->handle();
-            self::assertEquals(self::MESSAGE_APPLY_SELF_EN, $this->getChat()->addMessage($action));
-            self::assertEquals(self::MESSAGE_APPLY_SELF_RU, $this->getChatRu()->addMessage($action));
-        }
-    }
-
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
@@ -185,7 +46,7 @@ class PoisonAbilityTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testNewPoisonAbilityCreate(): void
+    public function testPoisonAbilityCreate(): void
     {
         $name = 'Poison';
         $icon = '/images/icons/ability/202.png';
@@ -231,7 +92,7 @@ class PoisonAbilityTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testNewPoisonAbilityGetActions(): void
+    public function testPoisonAbilityGetActions(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -252,7 +113,7 @@ class PoisonAbilityTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testNewPoisonAbilityCantByUsed(): void
+    public function testPoisonAbilityCantByUsed(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -299,12 +160,9 @@ class PoisonAbilityTest extends AbstractUnitTest
     /**
      * Тест на формирование сообщения о применении эффекта на себя через универсальный объект Ability
      *
-     * TODO Он ни чем не отличается от теста testPoisonAbilityApplySelfMessage, но дублируется для того, чтобы не
-     * TODO забыть его, когда все не-new-ability тесты будут удаляться
-     *
      * @throws Exception
      */
-    public function testNewPoisonAbilityApplySelfMessage(): void
+    public function testPoisonAbilityApplySelfMessage(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);

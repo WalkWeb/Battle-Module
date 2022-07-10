@@ -20,117 +20,11 @@ use Battle\Command\CommandFactory;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Unit\Ability\AbilityCollection;
-use Battle\Unit\Ability\Heal\GreatHealAbility;
 
 class GreatHealAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and heal <span style="color: #1e72e3">unit_1</span> on 30 life';
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">unit_1</span> на 30 здоровья';
-
-    /**
-     * TODO В будущем этот тест будет удален вместе с классом GeneralHealAbility
-     *
-     * @throws Exception
-     */
-    public function testGreatHealAbilityCreateAndApply(): void
-    {
-        $name = 'Great Heal';
-        $icon = '/images/icons/ability/196.png';
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = new GreatHealAbility($unit);
-
-        self::assertEquals($name, $ability->getName());
-        self::assertEquals($icon, $ability->getIcon());
-        self::assertEquals($unit, $ability->getUnit());
-        self::assertFalse($ability->isReady());
-        self::assertFalse($ability->canByUsed($enemyCommand, $command));
-        self::assertFalse($ability->isDisposable());
-        self::assertFalse($ability->isUsage());
-
-        // Наносим урон юниту, чтобы способность перешла в "возможную для использования"
-        $damage = new DamageAction(
-            $enemyUnit,
-            $command,
-            $enemyCommand,
-            DamageAction::TARGET_RANDOM_ENEMY,
-            $enemyUnit->getOffense()->getDamage(),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::DEFAULT_MESSAGE_METHOD
-        );
-
-        $damage->handle();
-
-        // После чего, способность может быть использована
-        self::assertTrue($ability->canByUsed($enemyCommand, $command));
-
-        // Up concentration
-        for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
-        }
-
-        $collection = new AbilityCollection();
-        $collection->add($ability);
-
-        foreach ($collection as $item) {
-            self::assertEquals($ability, $item);
-        }
-
-        $collection->update($unit);
-
-        self::assertTrue($ability->isReady());
-
-        $actions = $ability->getAction($enemyCommand, $command);
-
-        foreach ($actions as $action) {
-            self::assertInstanceOf(HealAction::class, $action);
-            self::assertEquals($unit->getOffense()->getDamage() * 3, $action->getPower());
-            self::assertTrue($action->canByUsed());
-            $action->handle();
-            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
-            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
-        }
-
-        $ability->usage();
-        self::assertTrue($ability->isUsage());
-        self::assertFalse($ability->isReady());
-    }
-
-    /**
-     * Тест на ситуацию, когда GreatHealAbility не может быть использован
-     *
-     * TODO В будущем этот тест будет удален вместе с классом GeneralHealAbility
-     *
-     * @throws Exception
-     */
-    public function testGreatHealAbilityCantByUsed(): void
-    {
-        $unit = UnitFactory::createByTemplate(4);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        // Создаем напрямую, и проверяем, что способность не может быть применена
-        $ability = new GreatHealAbility($unit);
-        self::assertFalse($ability->canByUsed($enemyCommand, $command));
-
-        // Up concentration
-        for ($i = 0; $i < 10; $i++) {
-            $unit->newRound();
-        }
-
-        // По этому, получая способности через getAction - получаем DamageAction, а не GreatHealAbility
-        $abilities = $unit->getActions($enemyCommand, $command);
-
-        foreach ($abilities as $ability) {
-            self::assertInstanceOf(DamageAction::class, $ability);
-        }
-    }
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -141,7 +35,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testNewGreatHealAbilityCreateAndApply(): void
+    public function testGreatHealAbilityCreateAndApply(): void
     {
         $name = 'Great Heal';
         $icon = '/images/icons/ability/196.png';
@@ -214,7 +108,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
     /**
      * @throws Exception
      */
-    public function testNewGreatHealAbilityCantByUsed(): void
+    public function testCreatHealAbilityCantByUsed(): void
     {
         $unit = UnitFactory::createByTemplate(4);
         $enemyUnit = UnitFactory::createByTemplate(2);

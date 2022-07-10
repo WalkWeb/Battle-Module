@@ -8,7 +8,7 @@ use Battle\Command\CommandFactory;
 use Battle\Container\Container;
 use Battle\Result\Result;
 use Battle\Translation\Translation;
-use Battle\Unit\Ability\Effect\ReserveForcesAbility;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\View\View;
 use Battle\View\ViewException;
 use Battle\View\ViewFactory;
@@ -325,12 +325,14 @@ EOT;
      */
     public function testViewRenderFullLogUnit(): void
     {
+        $abilityFactory = new AbilityFactory();
+        $container = new Container();
         $unit = UnitFactory::createByTemplate(21);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = new ReserveForcesAbility($unit);
+        $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Reserve Forces', 1));
 
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());

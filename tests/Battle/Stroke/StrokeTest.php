@@ -11,7 +11,7 @@ use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
 use Battle\Stroke\StrokeException;
-use Battle\Unit\Ability\Effect\BattleFuryAbility;
+use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Defense\Defense;
 use Battle\Unit\Offense\Offense;
 use Battle\Unit\Race\RaceFactory;
@@ -307,6 +307,7 @@ class StrokeTest extends AbstractUnitTest
      */
     public function testStrokeHandleAfterActionUnit(): void
     {
+        $abilityFactory = new AbilityFactory();
         $container = new Container();
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -316,7 +317,7 @@ class StrokeTest extends AbstractUnitTest
         $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
 
         // Накладываем на юнита баф
-        $ability = new BattleFuryAbility($unit);
+        $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Battle Fury', 1));
 
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());

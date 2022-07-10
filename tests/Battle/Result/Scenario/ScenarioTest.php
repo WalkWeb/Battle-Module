@@ -9,9 +9,7 @@ use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;
 use Battle\Container\Container;
 use Battle\Result\Scenario\ScenarioException;
-use Battle\Unit\Ability\Effect\HealingPotionAbility;
-use Battle\Unit\Ability\Effect\PoisonAbility;
-use Battle\Unit\Ability\Resurrection\BackToLifeAbility;
+use Battle\Unit\Ability\AbilityFactory;
 use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
@@ -265,10 +263,11 @@ class ScenarioTest extends AbstractUnitTest
      */
     public function testScenarioAddEffectDamage(): void
     {
+        $abilityFactory = new AbilityFactory();
         $container = new Container(true);
         [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(23, 2, $container);
 
-        $ability = new PoisonAbility($unit);
+        $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Poison', 1));
 
         // Применение эффекта
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
@@ -466,10 +465,11 @@ class ScenarioTest extends AbstractUnitTest
      */
     public function testScenarioAddEffectHeal(): void
     {
+        $abilityFactory = new AbilityFactory();
         $container = new Container();
         [$unit, $command, $enemyCommand] = BaseFactory::create(11, 2, $container);
 
-        $ability = new HealingPotionAbility($unit);
+        $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Healing Potion', 1));
 
         // Применение эффекта
         foreach ($ability->getAction($enemyCommand, $command) as $action) {
@@ -733,6 +733,8 @@ class ScenarioTest extends AbstractUnitTest
      */
     public function testScenarioAddResurrected(): void
     {
+        $abilityFactory = new AbilityFactory();
+        $container = new Container();
         $statistic = new Statistic();
         $scenario = new Scenario();
         $unit = UnitFactory::createByTemplate(1);
@@ -742,7 +744,7 @@ class ScenarioTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $deadUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = new BackToLifeAbility($unit);
+        $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Back to Life', 1));
 
         $actions = $ability->getAction($enemyCommand, $command);
 
