@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Ability;
 
+use Battle\Action\ActionFactory;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitInterface;
+use Exception;
 
 abstract class AbstractAbility implements AbilityInterface
 {
@@ -15,6 +17,25 @@ abstract class AbstractAbility implements AbilityInterface
         AbilityInterface::ACTIVATE_LOW_LIFE,
         AbilityInterface::ACTIVATE_DEAD,
     ];
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $icon;
+
+    /**
+     * @var array
+     */
+    protected $actionsData;
+
+    /**
+     * @var ActionFactory
+     */
+    protected $actionFactory;
 
     /**
      * @var bool
@@ -52,22 +73,52 @@ abstract class AbstractAbility implements AbilityInterface
     protected $chanceActivate;
 
     /**
-     * TODO Дефолтный вариант для $typeActivate задается временно - когда конкретные классы способностей будут удалены
-     * TODO дефолтный вариант также нужно будет удалить
-     *
      * @param UnitInterface $unit
      * @param bool $disposable
-     * @param int $chanceActivate
+     * @param string $name
+     * @param string $icon
+     * @param array $actionsData
      * @param int $typeActivate
-     * @throws AbilityException
+     * @param int $chanceActivate
+     * @param ActionFactory|null $actionFactory
+     * @throws Exception
      */
-    public function __construct(UnitInterface $unit, bool $disposable, int $chanceActivate = 100, int $typeActivate = 1)
+    public function __construct(
+        UnitInterface $unit,
+        bool $disposable,
+        string $name,
+        string $icon,
+        array $actionsData,
+        int $typeActivate,
+        int $chanceActivate = 100,
+        ?ActionFactory $actionFactory = null
+    )
     {
         $this->unit = $unit;
         $this->disposable = $disposable;
         $this->chanceActivate = $chanceActivate;
-        $this->typeActivate = $this->validateTypeActivate($typeActivate);
         $this->container = $unit->getContainer();
+        $this->name = $name;
+        $this->icon = $icon;
+        $this->actionFactory = $actionFactory ?? new ActionFactory();
+        $this->typeActivate = $this->validateTypeActivate($typeActivate);
+        $this->actionsData = $this->validateActionsData($actionsData);
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon(): string
+    {
+        return $this->icon;
     }
 
     /**
@@ -118,7 +169,7 @@ abstract class AbstractAbility implements AbilityInterface
     /**
      * @param int $typeActivate
      * @return int
-     * @throws AbilityException
+     * @throws Exception
      */
     private function validateTypeActivate(int $typeActivate): int
     {
@@ -127,5 +178,23 @@ abstract class AbstractAbility implements AbilityInterface
         }
 
         return $typeActivate;
+    }
+
+    /**
+     * @param array $actionsData
+     * @return array
+     * @throws Exception
+     */
+    private function validateActionsData(array $actionsData): array
+    {
+        foreach ($actionsData as $actionData) {
+            // Проверяем, что передан массив из массивов
+            // Дальнейшая валидация будет происходить в ActionFactory
+            if (!is_array($actionData)) {
+                throw new AbilityException(AbilityException::INVALID_ACTION_DATA);
+            }
+        }
+
+        return $actionsData;
     }
 }

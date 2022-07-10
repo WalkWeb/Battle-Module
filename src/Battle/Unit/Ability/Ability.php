@@ -5,83 +5,12 @@ declare(strict_types=1);
 namespace Battle\Unit\Ability;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\ActionFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 
-/**
- * TODO В будущем не будет отдельных классов на каждую способность, а будет один универсальный класс способности,
- * TODO который будет создаваться на основе массива с параметрами
- *
- * TODO Но т.к. это трудоемкий переход - он будет делаться постепенно, и на это время будут существовать сразу оба
- * TODO варианта с отдельными классами и одним универсальным
- *
- * @package Battle\Unit\Ability
- */
 class Ability extends AbstractAbility
 {
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $icon;
-
-    /**
-     * @var array
-     */
-    private $actionsData;
-
-    /**
-     * @var ActionFactory
-     */
-    private $actionFactory;
-
-    /**
-     * @param UnitInterface $unit
-     * @param bool $disposable
-     * @param string $name
-     * @param string $icon
-     * @param array $actionsData
-     * @param int $typeActivate
-     * @param int $chanceActivate
-     * @param ActionFactory|null $actionFactory
-     * @throws Exception
-     */
-    public function __construct(
-        UnitInterface $unit,
-        bool $disposable,
-        string $name,
-        string $icon,
-        array $actionsData,
-        int $typeActivate,
-        int $chanceActivate = 100,
-        ?ActionFactory $actionFactory = null
-    )
-    {
-        parent::__construct($unit, $disposable, $chanceActivate, $typeActivate);
-        $this->name = $name;
-        $this->icon = $icon;
-        $this->actionFactory = $actionFactory ?? new ActionFactory();
-        $this->actionsData = $this->validateActionsData($actionsData);
-    }
-
-    // TODO getName / getIcon можно вынести в AbstractAbility
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getIcon(): string
-    {
-        return $this->icon;
-    }
-
     /**
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -163,24 +92,6 @@ class Ability extends AbstractAbility
         if ($this->typeActivate === self::ACTIVATE_RAGE) {
             $this->unit->useRageAbility();
         }
-    }
-
-    /**
-     * @param array $actionsData
-     * @return array
-     * @throws Exception
-     */
-    private function validateActionsData(array $actionsData): array
-    {
-        foreach ($actionsData as $actionData) {
-            // Проверяем, что передан массив из массивов
-            // Дальнейшая валидация будет происходить в ActionFactory
-            if (!is_array($actionData)) {
-                throw new AbilityException(AbilityException::INVALID_ACTION_DATA);
-            }
-        }
-
-        return $actionsData;
     }
 
     /**
