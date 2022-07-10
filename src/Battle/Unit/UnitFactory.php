@@ -126,7 +126,7 @@ class UnitFactory
     private static function getRace(int $raceId, ContainerInterface $container): RaceInterface
     {
         return RaceFactory::create(
-            $container->getRaceDataProvider()->get($raceId)
+            $container->getRaceDataProvider()->get($raceId), $container
         );
     }
 }

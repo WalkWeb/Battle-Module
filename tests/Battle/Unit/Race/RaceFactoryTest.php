@@ -29,8 +29,9 @@ class RaceFactoryTest extends AbstractUnitTest
      */
     public function testRaceFactorySuccess(int $id): void
     {
+        $container = new Container();
         $data = $this->getDataProvider()->get($id);
-        $race = RaceFactory::create($data);
+        $race = RaceFactory::create($data, $container);
 
         self::assertEquals($data['id'], $race->getId());
         self::assertEquals($data['name'], $race->getName());
@@ -67,7 +68,7 @@ class RaceFactoryTest extends AbstractUnitTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        RaceFactory::create($data);
+        RaceFactory::create($data, new Container());
     }
 
     /**

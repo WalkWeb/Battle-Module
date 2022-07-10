@@ -1130,7 +1130,7 @@ class UnitFactoryTest extends AbstractUnitTest
     private function createRace(int $raceId, ContainerInterface $container): RaceInterface
     {
         return RaceFactory::create(
-            $container->getRaceDataProvider()->get($raceId)
+            $container->getRaceDataProvider()->get($raceId), $container
         );
     }
 }

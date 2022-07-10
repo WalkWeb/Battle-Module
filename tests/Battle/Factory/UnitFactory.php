@@ -735,23 +735,24 @@ class UnitFactory
             throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
         }
 
+        $data = self::$units[$template];
         $container = $container ?? new Container(true);
-        $class = isset(self::$units[$template]['class']) ? UnitClassFactory::create(
+        $class = isset($data['class']) ? UnitClassFactory::create(
             $container->getClassDataProvider()->get(self::$units[$template]['class']), $container
         ) : null;
 
         return new Unit(
-            self::$units[$template]['id'],
-            self::$units[$template]['name'],
-            self::$units[$template]['level'],
-            self::$units[$template]['avatar'],
-            self::$units[$template]['life'],
-            self::$units[$template]['total_life'],
-            self::$units[$template]['melee'],
-            self::$units[$template]['command'],
-            OffenseFactory::create(self::$units[$template]['offense']),
-            DefenseFactory::create(self::$units[$template]['defense']),
-            RaceFactory::create($container->getRaceDataProvider()->get(self::$units[$template]['race'])),
+            $data['id'],
+            $data['name'],
+            $data['level'],
+            $data['avatar'],
+            $data['life'],
+            $data['total_life'],
+            $data['melee'],
+            $data['command'],
+            OffenseFactory::create($data['offense']),
+            DefenseFactory::create($data['defense']),
+            RaceFactory::create($container->getRaceDataProvider()->get($data['race']), $container),
             $container,
             $class
         );

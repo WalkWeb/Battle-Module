@@ -22,9 +22,10 @@ class ExampleRaceDataProviderTest extends AbstractUnitTest
      */
     public function testExampleRaceDataProviderGetSuccess(int $raceId): void
     {
+        $container = new Container();
         $data = $this->getDataProvider()->get($raceId);
 
-        $race = RaceFactory::create($data);
+        $race = RaceFactory::create($data, $container);
 
         self::assertEquals($data['id'], $race->getId());
         self::assertEquals($data['name'], $race->getName());

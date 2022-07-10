@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit\Race;
 
 use Battle\BattleException;
+use Battle\Container\ContainerInterface;
 use Battle\Traits\ValidationTrait;
 
 class RaceFactory
@@ -15,10 +16,11 @@ class RaceFactory
      * Создает расу юнита на основе массива параметров
      *
      * @param array $data
+     * @param ContainerInterface $container
      * @return RaceInterface
      * @throws BattleException
      */
-    public static function create(array $data): RaceInterface
+    public static function create(array $data, ContainerInterface $container): RaceInterface
     {
         self::int($data, 'id', RaceException::INCORRECT_ID);
         self::string($data, 'name', RaceException::INCORRECT_NAME);
@@ -33,7 +35,8 @@ class RaceFactory
             $data['single_name'],
             $data['color'],
             $data['icon'],
-            $data['abilities']
+            $data['abilities'],
+            $container
         );
     }
 }

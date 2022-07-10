@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Race;
 
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\UnitInterface;
@@ -53,7 +54,7 @@ class Race implements RaceInterface
         string $color,
         string $icon,
         array $abilitiesData,
-        ?AbilityFactory $abilityFactory = null
+        ContainerInterface $container
     )
     {
         $this->id = $id;
@@ -62,7 +63,7 @@ class Race implements RaceInterface
         $this->color = $color;
         $this->icon = $icon;
         $this->abilitiesData = $abilitiesData;
-        $this->abilityFactory = $abilityFactory ?? new AbilityFactory();
+        $this->abilityFactory = $container->getAbilityFactory();
     }
 
     /**

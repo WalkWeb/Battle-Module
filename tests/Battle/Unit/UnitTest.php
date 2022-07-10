@@ -71,7 +71,7 @@ class UnitTest extends AbstractUnitTest
         }
 
         $classData = $container->getRaceDataProvider()->get($data['race']);
-        foreach (RaceFactory::create($classData)->getAbilities($unit) as $ability) {
+        foreach (RaceFactory::create($classData, $container)->getAbilities($unit) as $ability) {
             $expectedAbilities->add($ability);
         }
 
