@@ -58,6 +58,8 @@ class SummonImpAbilityTest extends AbstractUnitTest
                         'avatar'     => '/images/avas/monsters/004.png',
                         'life'       => 30,
                         'total_life' => 30,
+                        'mana'       => 0,
+                        'total_mana' => 0,
                         'melee'      => true,
                         'class'      => null,
                         'race'       => 9,

@@ -58,6 +58,8 @@ class SummonFireElementalAbilityTest extends AbstractUnitTest
                         'avatar'     => '/images/avas/summon/fire-elemental.png',
                         'life'       => 62,
                         'total_life' => 62,
+                        'mana'       => 17,
+                        'total_mana' => 17,
                         'melee'      => true,
                         'class'      => null,
                         'race'       => 10,

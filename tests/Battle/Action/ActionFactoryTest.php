@@ -217,6 +217,8 @@ class ActionFactoryTest extends AbstractUnitTest
             'block_ignore' => 0,
             'life'         => 30,
             'total_life'   => 30,
+            'mana'         => 0,
+            'total_mana'   => 0,
             'melee'        => true,
             'class'        => 1,
             'race'         => 9,

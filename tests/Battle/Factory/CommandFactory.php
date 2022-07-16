@@ -48,15 +48,17 @@ class CommandFactory
     {
         $unitCollection = new UnitCollection();
         $data = [
-            'name'         => 'unit_1',
-            'level'        => 1,
-            'avatar'       => '/images/avas/humans/human001.jpg',
-            'life'         => 100,
-            'total_life'   => 100,
-            'melee'        => true,
-            'class'        => 1,
-            'race'         => 1,
-            'command'      => 1,
+            'name'       => 'unit_1',
+            'level'      => 1,
+            'avatar'     => '/images/avas/humans/human001.jpg',
+            'life'       => 100,
+            'total_life' => 100,
+            'mana'       => 50,
+            'total_mana' => 50,
+            'melee'      => true,
+            'class'      => 1,
+            'race'       => 1,
+            'command'    => 1,
             'offense'    => [
                 'damage'       => 15,
                 'attack_speed' => 1.2,

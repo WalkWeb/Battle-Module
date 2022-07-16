@@ -21,6 +21,11 @@ class UnitException extends Exception
     public const INCORRECT_TOTAL_LIFE         = 'Incorrect total life, it required and type int';
     public const INCORRECT_TOTAL_LIFE_VALUE   = 'Incorrect total life, should be min-max value: ';
     public const LIFE_MORE_TOTAL_LIFE         = 'Life more total life';
+    public const INCORRECT_MANA               = 'Incorrect mana, it required and type int';
+    public const INCORRECT_MANA_VALUE         = 'Incorrect mana, should be min-max value: ';
+    public const INCORRECT_TOTAL_MANA         = 'Incorrect total mana, it required and type int';
+    public const INCORRECT_TOTAL_MANA_VALUE   = 'Incorrect total mana, should be min-max value: ';
+    public const MANA_MORE_TOTAL_MANA         = 'Mana more total mana';
     public const INCORRECT_MELEE              = 'Incorrect melee, it required and type bool';
     public const INCORRECT_CLASS              = 'Incorrect class, it empty, null or type int';
     public const INCORRECT_RACE               = 'Incorrect race, it required and type int';

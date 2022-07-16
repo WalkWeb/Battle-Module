@@ -97,6 +97,8 @@ class StrokeTest extends AbstractUnitTest
             'avatar',
             20,
             20,
+            10,
+            10,
             true,
             1,
             new Offense(10, 1, 100, 0),

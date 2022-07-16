@@ -40,6 +40,12 @@ interface UnitInterface
     public const MIN_TOTAL_LIFE   = 1;
     public const MAX_TOTAL_LIFE   = 100000;
 
+    public const MIN_MANA         = 0;
+    public const MAX_MANA         = 100000;
+
+    public const MIN_TOTAL_MANA   = 0;
+    public const MAX_TOTAL_MANA   = 100000;
+
     public const MIN_LEVEL        = 1;
     public const MAX_LEVEL        = 1000;
 
@@ -189,6 +195,20 @@ interface UnitInterface
      * @return int
      */
     public function getTotalLife(): int;
+
+    /**
+     * Возвращает текущую ману юнита
+     *
+     * @return int
+     */
+    public function getMana(): int;
+
+    /**
+     * Возвращает максимальную ману юнита
+     *
+     * @return int
+     */
+    public function getTotalMana(): int;
 
     /**
      * Возвращает количество концентрации юнита

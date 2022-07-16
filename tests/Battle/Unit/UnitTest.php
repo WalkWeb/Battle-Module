@@ -46,6 +46,8 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['avatar'], $unit->getAvatar());
         self::assertEquals($data['life'], $unit->getLife());
         self::assertEquals($data['total_life'], $unit->getTotalLife());
+        self::assertEquals($data['mana'], $unit->getMana());
+        self::assertEquals($data['total_mana'], $unit->getTotalMana());
         self::assertFalse($unit->isAction());
         self::assertEquals($data['life'] > 0, $unit->isAlive());
         self::assertEquals($data['melee'], $unit->isMelee());

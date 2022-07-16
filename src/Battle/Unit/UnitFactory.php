@@ -32,6 +32,8 @@ class UnitFactory
      *         'avatar'     => '/images/avas/orcs/orc001.jpg',
      *         'life'       => 185,
      *         'total_life' => 185,
+     *         'mana'       => 50,
+     *         'total_mana' => 50,
      *         'melee'      => true,
      *         'command'    => 1,
      *         'class'      => 5,
@@ -62,12 +64,16 @@ class UnitFactory
         self::string($data, 'avatar', UnitException::INCORRECT_AVATAR);
         self::int($data, 'life', UnitException::INCORRECT_LIFE);
         self::int($data, 'total_life', UnitException::INCORRECT_TOTAL_LIFE);
+        self::int($data, 'mana', UnitException::INCORRECT_MANA);
+        self::int($data, 'total_mana', UnitException::INCORRECT_TOTAL_MANA);
         self::bool($data, 'melee', UnitException::INCORRECT_MELEE);
         self::int($data, 'level', UnitException::INCORRECT_LEVEL);
         self::int($data, 'race', UnitException::INCORRECT_RACE);
         self::int($data, 'command', UnitException::INCORRECT_COMMAND);
         self::intMinMaxValue($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
         self::intMinMaxValue($data['total_life'], UnitInterface::MIN_TOTAL_LIFE, UnitInterface::MAX_TOTAL_LIFE, UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE);
+        self::intMinMaxValue($data['mana'], UnitInterface::MIN_MANA, UnitInterface::MAX_MANA, UnitException::INCORRECT_MANA_VALUE . UnitInterface::MIN_MANA . '-' . UnitInterface::MAX_MANA);
+        self::intMinMaxValue($data['total_mana'], UnitInterface::MIN_TOTAL_MANA, UnitInterface::MAX_TOTAL_MANA, UnitException::INCORRECT_TOTAL_MANA_VALUE . UnitInterface::MIN_TOTAL_MANA . '-' . UnitInterface::MAX_TOTAL_MANA);
         self::intMinMaxValue($data['level'], UnitInterface::MIN_LEVEL, UnitInterface::MAX_LEVEL, UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL);
         self::stringMinMaxLength($data['name'], UnitInterface::MIN_NAME_LENGTH, UnitInterface::MAX_NAME_LENGTH, UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH);
         self::stringMinMaxLength($data['id'], UnitInterface::MIN_ID_LENGTH, UnitInterface::MAX_ID_LENGTH, UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH);
@@ -79,6 +85,10 @@ class UnitFactory
             throw new UnitException(UnitException::LIFE_MORE_TOTAL_LIFE);
         }
 
+        if ($data['mana'] > $data['total_mana']) {
+            throw new UnitException(UnitException::MANA_MORE_TOTAL_MANA);
+        }
+
         return new Unit(
             $data['id'],
             htmlspecialchars($data['name']),
@@ -86,6 +96,8 @@ class UnitFactory
             $data['avatar'],
             $data['life'],
             $data['total_life'],
+            $data['mana'],
+            $data['total_mana'],
             $data['melee'],
             $data['command'],
             OffenseFactory::create($data['offense']),

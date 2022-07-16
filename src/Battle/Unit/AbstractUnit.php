@@ -50,6 +50,16 @@ abstract class AbstractUnit implements UnitInterface
     protected $totalLife;
 
     /**
+     * @var int - Текущая мана
+     */
+    protected $mana;
+
+    /**
+     * @var int - Максимальное здоровье
+     */
+    protected $totalMana;
+
+    /**
      * @var bool - Совершил ли юнит действие в текущем раунде
      */
     protected $action = false;
@@ -116,6 +126,8 @@ abstract class AbstractUnit implements UnitInterface
      * @param string $avatar
      * @param int $life
      * @param int $totalLife
+     * @param int $mana
+     * @param int $totalMana
      * @param bool $melee
      * @param int $command
      * @param Offense $offense
@@ -133,6 +145,8 @@ abstract class AbstractUnit implements UnitInterface
         string $avatar,
         int $life,
         int $totalLife,
+        int $mana,
+        int $totalMana,
         bool $melee,
         int $command,
         Offense $offense,
@@ -150,6 +164,8 @@ abstract class AbstractUnit implements UnitInterface
         $this->avatar = $avatar;
         $this->life = $life;
         $this->totalLife = $totalLife;
+        $this->mana = $mana;
+        $this->totalMana = $totalMana;
         $this->melee = $melee;
         $this->command = $command;
         $this->offense = $offense;
@@ -211,6 +227,16 @@ abstract class AbstractUnit implements UnitInterface
     public function getTotalLife(): int
     {
         return $this->totalLife;
+    }
+
+    public function getMana(): int
+    {
+        return $this->mana;
+    }
+
+    public function getTotalMana(): int
+    {
+        return $this->totalMana;
     }
 
     public function getConcentration(): int

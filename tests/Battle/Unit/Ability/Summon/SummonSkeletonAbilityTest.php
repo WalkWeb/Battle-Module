@@ -57,6 +57,8 @@ class SummonSkeletonAbilityTest extends AbstractUnitTest
                         'avatar'     => '/images/avas/monsters/003.png',
                         'life'       => 38,
                         'total_life' => 38,
+                        'mana'       => 0,
+                        'total_mana' => 0,
                         'melee'      => true,
                         'class'      => null,
                         'race'       => 8,
