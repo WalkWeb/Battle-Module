@@ -436,9 +436,6 @@ class Unit extends AbstractUnit
      * TODO Позже, когда механики будут усложняться (пока рассчитывается только шанс блока и уклонения) все формулы
      * TODO будут вынесены в отдельный Calculator, это разгрузит данный класс от кода и сложности
      *
-     * TODO Когда будут добавлены обездвиживающие эффекты (оглушение, паралич) нужно не забыть добавить проверку,
-     * TODO что если они есть - юнит не может уклониться (что логично)
-     *
      * @param ActionInterface $action - ожидается DamageAction
      * @return bool
      * @throws Exception
@@ -446,6 +443,10 @@ class Unit extends AbstractUnit
     private function isDodged(ActionInterface $action): bool
     {
         if (!$action->isCanBeAvoided()) {
+            return false;
+        }
+
+        if ($this->effects->existParalysis()) {
             return false;
         }
 
@@ -463,6 +464,7 @@ class Unit extends AbstractUnit
      *
      * @param ActionInterface $action - ожидается DamageAction
      * @return int
+     * @throws Exception
      */
     private function getChanceOfHit(ActionInterface $action): int
     {
@@ -470,6 +472,8 @@ class Unit extends AbstractUnit
         $chanceOfHit = (int)round(($accuracy - $this->defense->getDefense()) / ($accuracy / 10) * 2 + 80);
 
         // TODO Можно добавить шанс попадания в FullLog, для большей информативности логов
+        // TODO Но реализовать одно сообщение при ударе нескольких целей - не так просто
+        //$this->container->getFullLog()->add('<p>Шанс попадания: ' . $chanceOfHit . '%</p>');
 
         if ($chanceOfHit < self::MIN_HIT_CHANCE) {
             return self::MIN_HIT_CHANCE;
@@ -494,6 +498,10 @@ class Unit extends AbstractUnit
         }
 
         if (!$action->isCanBeAvoided()) {
+            return false;
+        }
+
+        if ($this->effects->existParalysis()) {
             return false;
         }
 

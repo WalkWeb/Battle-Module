@@ -9,9 +9,15 @@ use Battle\Action\ActionException;
 use Battle\Action\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\Ability\AbilityFactory;
+use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitException;
+use Battle\Unit\UnitInterface;
+use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Tests\Battle\Factory\UnitFactoryException;
@@ -218,5 +224,70 @@ class EffectCollectionTest extends AbstractUnitTest
 
         // Затем коллекция эффектов становится пустой - эффект удалился
         self::assertCount(0, $collection);
+    }
+
+    /**
+     * Тест на отсутствие эффектов паралича в коллекции
+     *
+     * @throws UnitFactoryException
+     */
+    public function testEffectCollectionExistParalysisFalse(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $collection = new EffectCollection($unit);
+        self::assertFalse($collection->existParalysis());
+    }
+
+    /**
+     * Тест на присутствие эффекта паралича в коллекции
+     *
+     * @throws Exception
+     */
+    public function testEffectCollectionExistNoParalysisTrue(): void
+    {
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        self::assertTrue($enemyUnit->getEffects()->existParalysis());
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        return $this->getFactory()->create(
+            $unit,
+            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
+    }
+
+    /**
+     * @return AbilityFactory
+     */
+    private function getFactory(): AbilityFactory
+    {
+        return new AbilityFactory();
+    }
+
+    /**
+     * @return AbilityDataProviderInterface
+     */
+    private function getAbilityDataProvider(): AbilityDataProviderInterface
+    {
+        return new ExampleAbilityDataProvider();
     }
 }

@@ -25,22 +25,28 @@ class UnitFactory
      *
      * Ожидаемые параметры в формате:
      *
-     * [
-     *     'id'           => 'a2763c19-7ec5-48f3-9242-2ea6c6d80c56',
-     *     'name'         => 'Skeleton',
-     *     'level'        => 3,
-     *     'avatar'       => '/images/avas/monsters/003.png',
-     *     'damage'       => 15,
-     *     'attack_speed' => 1.2,
-     *     'block'        => 20,
-     *     'block_ignore' => 0,
-     *     'life'         => 80,
-     *     'total_life'   => 80,
-     *     'melee'        => true,
-     *     'command'      => 1,
-     *     'class'        => 1,
-     *     'race'         => 1,
-     * ]
+     *     [
+     *         'id'         => '60f3c032-46a6-454d-ae3a-d066f150f6ef',
+     *         'name'       => 'Titan',
+     *         'level'      => 3,
+     *         'avatar'     => '/images/avas/orcs/orc001.jpg',
+     *         'life'       => 185,
+     *         'total_life' => 185,
+     *         'melee'      => true,
+     *         'command'    => 1,
+     *         'class'      => 5,
+     *         'race'       => 3,
+     *         'offense'    => [
+     *             'damage'       => 35,
+     *             'attack_speed' => 1.2,
+     *             'accuracy'     => 176,
+     *             'block_ignore' => 0,
+     *         ],
+     *         'defense'    => [
+     *             'defense' => 134,
+     *             'block'   => 0,
+     *         ],
+     *     ]
      *
      * @param array $data
      * @param ContainerInterface|null $container

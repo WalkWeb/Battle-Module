@@ -4,20 +4,12 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes;
 
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
 
-/**
- * TODO В будущем будут удалены php-классы на каждый отдельный класс юнита, и будет только один универсальный класс
- * TODO Но на некоторое время реализации и отладки будет существовать сразу два варианта - с отдельными классами и с
- * TODO одним универсальным
- *
- * @package Battle\Unit\Classes
- */
 class UnitClass implements UnitClassInterface
 {
     /**

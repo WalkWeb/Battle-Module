@@ -6,6 +6,7 @@ namespace Battle\Unit\Effect;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
+use Battle\Action\ParalysisAction;
 use Battle\Traits\CollectionTrait;
 use Battle\Unit\UnitInterface;
 use Countable;
@@ -130,5 +131,25 @@ class EffectCollection implements Iterator, Countable
         $this->elements = [];
 
         return $collection;
+    }
+
+    /**
+     * Присутствует ли эффект обездвиживающий цель. Такие эффекты в стадии on_next_round_actions имеют ParalysisAction
+     *
+     * Используется в проверках блока/уклонения цели - обездвиженная цель не может ни уклониться, ни увернуться от удара
+     *
+     * TODO Так как парализованность это отдельное состояние юнита - лучше добавить такое свойство юниту и проверять его
+     */
+    public function existParalysis(): bool
+    {
+        foreach ($this->elements as $effect) {
+            foreach ($effect->getOnNextRoundActions() as $action) {
+                if ($action instanceof ParalysisAction) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

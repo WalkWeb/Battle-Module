@@ -8,6 +8,10 @@ use Battle\Action\DamageAction;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Ability\AbilityFactory;
+use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -267,6 +271,35 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ситуацию, когда юнит со 100% блоком с эффектом паралича получает урон и не может его заблокировать
+     *
+     * @throws Exception
+     */
+    public function testDamageActionParalysisNoBlocked(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(28); // Юнит со 100% блоком
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Накладываем паралич на $enemyUnit
+        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Наносим удар $enemyUnit
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+        $action->handle();
+
+        // Удар не заблокирован
+        self::assertFalse($action->isBlocked($enemyUnit));
+        self::assertEquals($unit->getOffense()->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
+    }
+
+    /**
      * @throws Exception
      */
     public function testDamageActionDodged(): void
@@ -285,6 +318,36 @@ class DamageActionTest extends AbstractUnitTest
         $action->handle();
 
         self::assertTrue($action->isDodged($enemyUnit));
+    }
+
+    /**
+     * Тест на ситуацию, когда юнит большой защитой (шанс попадания 0%) с эффектом паралича получает урон и не может от
+     * него уклониться
+     *
+     * @throws Exception
+     */
+    public function testDamageActionParalysisNoDodged(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(30);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Накладываем паралич на $enemyUnit
+        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Наносим удар $enemyUnit
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+        $action->handle();
+
+        // Уклонение не сработало
+        self::assertFalse($action->isDodged($enemyUnit));
+        self::assertEquals($unit->getOffense()->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
     }
 
     /**
@@ -419,5 +482,36 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD
         );
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        return $this->getFactory()->create(
+            $unit,
+            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
+    }
+
+    /**
+     * @return AbilityFactory
+     */
+    private function getFactory(): AbilityFactory
+    {
+        return new AbilityFactory();
+    }
+
+    /**
+     * @return AbilityDataProviderInterface
+     */
+    private function getAbilityDataProvider(): AbilityDataProviderInterface
+    {
+        return new ExampleAbilityDataProvider();
     }
 }
