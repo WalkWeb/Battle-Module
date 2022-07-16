@@ -8,10 +8,8 @@ use Battle\Action\DamageAction;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Unit\Ability\AbilityFactory;
+use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityInterface;
-use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
-use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -493,25 +491,11 @@ class DamageActionTest extends AbstractUnitTest
      */
     private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
     {
-        return $this->getFactory()->create(
+        $container = new Container();
+
+        return $container->getAbilityFactory()->create(
             $unit,
-            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
         );
-    }
-
-    /**
-     * @return AbilityFactory
-     */
-    private function getFactory(): AbilityFactory
-    {
-        return new AbilityFactory();
-    }
-
-    /**
-     * @return AbilityDataProviderInterface
-     */
-    private function getAbilityDataProvider(): AbilityDataProviderInterface
-    {
-        return new ExampleAbilityDataProvider();
     }
 }

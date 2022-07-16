@@ -446,7 +446,7 @@ class Unit extends AbstractUnit
             return false;
         }
 
-        if ($this->effects->existParalysis()) {
+        if ($this->isParalysis()) {
             return false;
         }
 
@@ -501,7 +501,7 @@ class Unit extends AbstractUnit
             return false;
         }
 
-        if ($this->effects->existParalysis()) {
+        if ($this->isParalysis()) {
             return false;
         }
 

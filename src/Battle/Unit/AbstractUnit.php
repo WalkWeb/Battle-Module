@@ -319,6 +319,14 @@ abstract class AbstractUnit implements UnitInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isParalysis(): bool
+    {
+        return $this->effects->existParalysis();
+    }
+
+    /**
      * Считает фактическое количество атак. Если скорость атаки 1.2, то с 80% вероятностью это будет 1 атака, а с 20%
      * вероятностью - 2 атаки
      *

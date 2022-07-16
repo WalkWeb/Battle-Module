@@ -290,4 +290,11 @@ interface UnitInterface
      * @return AbilityCollection
      */
     public function getDeadAbilities(): AbilityCollection;
+
+    /**
+     * Обездвижен (например, находится под эффектом паралича или оглушения) ли юнит в текущий момент
+     *
+     * @return bool
+     */
+    public function isParalysis(): bool;
 }

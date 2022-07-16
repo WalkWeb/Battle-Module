@@ -11,6 +11,7 @@ use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityInterface;
 use Exception;
 use Battle\Unit\Unit;
 use Battle\Command\Command;
@@ -49,6 +50,7 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['life'] > 0, $unit->isAlive());
         self::assertEquals($data['melee'], $unit->isMelee());
         self::assertEquals($data['race'], $unit->getRace()->getId());
+        self::assertFalse($unit->isParalysis());
 
         self::assertEquals($data['offense']['damage'], $unit->getOffense()->getDamage());
         self::assertEquals($data['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
@@ -437,6 +439,31 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
+     * @throws Exception
+     */
+    public function testUnitParalysis(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Изначально юнит не обездвижен
+        self::assertFalse($enemyUnit->isParalysis());
+
+        // Накладываем паралич на $unit
+        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Теперь обездвижен
+        self::assertTrue($enemyUnit->isParalysis());
+    }
+
+    /**
      * @return array
      */
     public function createDataProvider(): array
@@ -497,5 +524,22 @@ class UnitTest extends AbstractUnitTest
         $collection->add($actionFactory->create($data));
 
         return $collection;
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        $container = new Container();
+
+        return $container->getAbilityFactory()->create(
+            $unit,
+            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
     }
 }
