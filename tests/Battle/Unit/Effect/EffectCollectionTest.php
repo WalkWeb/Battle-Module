@@ -9,10 +9,8 @@ use Battle\Action\ActionException;
 use Battle\Action\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Unit\Ability\AbilityFactory;
+use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityInterface;
-use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
-use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitException;
@@ -269,25 +267,11 @@ class EffectCollectionTest extends AbstractUnitTest
      */
     private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
     {
-        return $this->getFactory()->create(
+        $container = new Container();
+
+        return $container->getAbilityFactory()->create(
             $unit,
-            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
         );
-    }
-
-    /**
-     * @return AbilityFactory
-     */
-    private function getFactory(): AbilityFactory
-    {
-        return new AbilityFactory();
-    }
-
-    /**
-     * @return AbilityDataProviderInterface
-     */
-    private function getAbilityDataProvider(): AbilityDataProviderInterface
-    {
-        return new ExampleAbilityDataProvider();
     }
 }

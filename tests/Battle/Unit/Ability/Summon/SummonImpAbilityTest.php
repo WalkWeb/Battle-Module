@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability\Summon;
 
 use Battle\Action\ActionInterface;
+use Battle\Container\Container;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
-use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
-use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
-use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Action\SummonAction;
@@ -185,25 +183,11 @@ class SummonImpAbilityTest extends AbstractUnitTest
      */
     private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
     {
-        return $this->getFactory()->create(
+        $container = new Container();
+
+        return $container->getAbilityFactory()->create(
             $unit,
-            $this->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
         );
-    }
-
-    /**
-     * @return AbilityFactory
-     */
-    private function getFactory(): AbilityFactory
-    {
-        return new AbilityFactory();
-    }
-
-    /**
-     * @return AbilityDataProviderInterface
-     */
-    private function getAbilityDataProvider(): AbilityDataProviderInterface
-    {
-        return new ExampleAbilityDataProvider();
     }
 }
