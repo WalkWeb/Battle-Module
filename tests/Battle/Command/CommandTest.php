@@ -727,8 +727,9 @@ class CommandTest extends AbstractUnitTest
                             'block_ignore' => 0,
                         ],
                         'defense'    => [
-                            'defense' => 100,
-                            'block'   => 0,
+                            'defense'        => 100,
+                            'block'          => 0,
+                            'mental_barrier' => 0,
                         ],
                     ],
                     // Самый битый юнит - именно он должен выбираться для лечения
@@ -752,8 +753,9 @@ class CommandTest extends AbstractUnitTest
                             'block_ignore' => 0,
                         ],
                         'defense'    => [
-                            'defense' => 100,
-                            'block'   => 0,
+                            'defense'        => 100,
+                            'block'          => 0,
+                            'mental_barrier' => 0,
                         ],
                     ],
                     [
@@ -776,8 +778,9 @@ class CommandTest extends AbstractUnitTest
                             'block_ignore' => 0,
                         ],
                         'defense'    => [
-                            'defense' => 100,
-                            'block'   => 0,
+                            'defense'        => 100,
+                            'block'          => 0,
+                            'mental_barrier' => 0,
                         ],
                     ],
                     // Мертвый юнит - он выбираться не должен
@@ -801,8 +804,9 @@ class CommandTest extends AbstractUnitTest
                             'block_ignore' => 0,
                         ],
                         'defense'    => [
-                            'defense' => 100,
-                            'block'   => 0,
+                            'defense'        => 100,
+                            'block'          => 0,
+                            'mental_barrier' => 0,
                         ],
                     ],
                 ],

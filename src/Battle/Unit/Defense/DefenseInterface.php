@@ -17,6 +17,9 @@ interface DefenseInterface
     public const MIN_BLOCK   = 0;
     public const MAX_BLOCK   = 100;
 
+    public const MIN_MENTAL_BARRIER = 0;
+    public const MAX_MENTAL_BARRIER = 100;
+
     /**
      * Возвращает защиту юнита. Влияет на шанс уклониться от вражеской атаки (с оружия)
      *
@@ -39,9 +42,24 @@ interface DefenseInterface
     public function getBlock(): int;
 
     /**
-     *  Устанавливает новое значение блока. Применяется в эффектах, изменяющих блок юнита
+     * Устанавливает новое значение блока. Применяется в эффектах, изменяющих блок юнита
      *
      * @param int $block
      */
     public function setBlock(int $block): void;
+
+    /**
+     * Возвращает значение ментального барьера (часть урона, которая вначале будет идти по мане, и только потом по
+     * здоровью). В диапазоне от 0 до 100%
+     *
+     * @return int
+     */
+    public function getMentalBarrier(): int;
+
+    /**
+     * Устанавливает новое значение ментального барьера. Применяется в эффектах, изменяющих его
+     *
+     * @param int $mentalBarrier
+     */
+    public function setMentalBarrier(int $mentalBarrier): void;
 }

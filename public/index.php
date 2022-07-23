@@ -26,8 +26,9 @@ $data = [
             'block_ignore' => 0,
         ],
         'defense'    => [
-            'defense' => 134,
-            'block'   => 0,
+            'defense'        => 134,
+            'block'          => 0,
+            'mental_barrier' => 0,
         ],
     ],
     [
@@ -50,8 +51,9 @@ $data = [
             'block_ignore' => 0,
         ],
         'defense'    => [
-            'defense' => 155,
-            'block'   => 25,
+            'defense'        => 155,
+            'block'          => 25,
+            'mental_barrier' => 0,
         ],
     ],
     [
@@ -74,8 +76,9 @@ $data = [
             'block_ignore' => 0,
         ],
         'defense'    => [
-            'defense' => 138,
-            'block'   => 0,
+            'defense'        => 138,
+            'block'          => 0,
+            'mental_barrier' => 0,
         ],
     ],
     [
@@ -98,8 +101,9 @@ $data = [
             'block_ignore' => 0,
         ],
         'defense'    => [
-            'defense' => 178,
-            'block'   => 0,
+            'defense'        => 178,
+            'block'          => 0,
+            'mental_barrier' => 0,
         ],
     ],
     [
@@ -122,8 +126,9 @@ $data = [
             'block_ignore' => 0,
         ],
         'defense'    => [
-            'defense' => 106,
-            'block'   => 20,
+            'defense'        => 106,
+            'block'          => 20,
+            'mental_barrier' => 0,
         ],
     ],
 ];

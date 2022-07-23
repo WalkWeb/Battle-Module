@@ -66,8 +66,9 @@ class CommandFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ];
 

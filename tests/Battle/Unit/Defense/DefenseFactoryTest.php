@@ -25,6 +25,7 @@ class DefenseFactoryTest extends AbstractUnitTest
 
         self::assertEquals($data['defense'], $defense->getDefense());
         self::assertEquals($data['block'], $defense->getBlock());
+        self::assertEquals($data['mental_barrier'], $defense->getMentalBarrier());
     }
 
     /**
@@ -49,14 +50,16 @@ class DefenseFactoryTest extends AbstractUnitTest
         return [
             [
                 [
-                    'defense' => 100,
-                    'block'   => 0,
+                    'defense'        => 100,
+                    'block'          => 0,
+                    'mental_barrier' => 0,
                 ],
             ],
             [
                 [
-                    'defense' => 654,
-                    'block'   => 34,
+                    'defense'        => 654,
+                    'block'          => 34,
+                    'mental_barrier' => 100,
                 ],
             ],
         ];
@@ -72,31 +75,35 @@ class DefenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует defense
                 [
-                    'block'   => 0,
+                    'block'          => 0,
+                    'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_DEFENSE,
             ],
             [
                 // defense некорректного типа
                 [
-                    'defense' => '100',
-                    'block'   => 0,
+                    'defense'        => '100',
+                    'block'          => 0,
+                    'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_DEFENSE,
             ],
             [
                 // defense меньше минимального значения
                 [
-                    'defense' => DefenseInterface::MIN_DEFENSE - 1,
-                    'block'   => 0,
+                    'defense'        => DefenseInterface::MIN_DEFENSE - 1,
+                    'block'          => 0,
+                    'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE . '-' . DefenseInterface::MAX_DEFENSE,
             ],
             [
                 // defense больше максимального значения
                 [
-                    'defense' => DefenseInterface::MAX_DEFENSE + 1,
-                    'block'   => 0,
+                    'defense'        => DefenseInterface::MAX_DEFENSE + 1,
+                    'block'          => 0,
+                    'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE . '-' . DefenseInterface::MAX_DEFENSE,
             ],
@@ -105,33 +112,74 @@ class DefenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует block
                 [
-                    'defense' => 100,
+                    'defense'        => 100,
+                    'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_BLOCK,
             ],
             [
                 // block некорректного типа
                 [
-                    'defense' => 100,
-                    'block'   => 50.5,
+                    'defense'        => 100,
+                    'block'          => 50.5,
+                    'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_BLOCK,
             ],
             [
                 // block меньше минимального значения
                 [
-                    'defense' => 100,
-                    'block'   => DefenseInterface::MIN_BLOCK - 1,
+                    'defense'        => 100,
+                    'block'          => DefenseInterface::MIN_BLOCK - 1,
+                    'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_BLOCK_VALUE . DefenseInterface::MIN_BLOCK . '-' . DefenseInterface::MAX_BLOCK,
             ],
             [
                 // block больше максимального значения
                 [
-                    'defense' => 100,
-                    'block'   => DefenseInterface::MAX_BLOCK + 1,
+                    'defense'        => 100,
+                    'block'          => DefenseInterface::MAX_BLOCK + 1,
+                    'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_BLOCK_VALUE . DefenseInterface::MIN_BLOCK . '-' . DefenseInterface::MAX_BLOCK,
+            ],
+
+            // mental_barrier
+            [
+                // Отсутствует mental_barrier
+                [
+                    'defense'        => 100,
+                    'block'          => 75,
+                ],
+                DefenseException::INCORRECT_MENTAL_BARRIER,
+            ],
+            [
+                // mental_barrier некорректного типа
+                [
+                    'defense'        => 100,
+                    'block'          => 75,
+                    'mental_barrier' => '50',
+                ],
+                DefenseException::INCORRECT_MENTAL_BARRIER,
+            ],
+            [
+                // mental_barrier меньше минимального значения
+                [
+                    'defense'        => 100,
+                    'block'          => 75,
+                    'mental_barrier' => DefenseInterface::MIN_MENTAL_BARRIER - 1,
+                ],
+                DefenseException::INCORRECT_MENTAL_BARRIER_VALUE . DefenseInterface::MIN_MENTAL_BARRIER . '-' . DefenseInterface::MAX_MENTAL_BARRIER,
+            ],
+            [
+                // mental_barrier больше максимального значения
+                [
+                    'defense'        => 100,
+                    'block'          => 75,
+                    'mental_barrier' => DefenseInterface::MAX_MENTAL_BARRIER + 1,
+                ],
+                DefenseException::INCORRECT_MENTAL_BARRIER_VALUE . DefenseInterface::MIN_MENTAL_BARRIER . '-' . DefenseInterface::MAX_MENTAL_BARRIER,
             ],
         ];
     }

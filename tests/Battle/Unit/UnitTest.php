@@ -62,6 +62,7 @@ class UnitTest extends AbstractUnitTest
 
         self::assertEquals($data['defense']['defense'], $unit->getDefense()->getDefense());
         self::assertEquals($data['defense']['block'], $unit->getDefense()->getBlock());
+        self::assertEquals($data['defense']['mental_barrier'], $unit->getDefense()->getMentalBarrier());
 
         $expectedAbilities = new AbilityCollection(true);
 

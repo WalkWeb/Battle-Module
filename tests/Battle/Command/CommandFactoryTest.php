@@ -42,6 +42,7 @@ class CommandFactoryTest extends AbstractUnitTest
             self::assertEquals($data[$i]['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());
             self::assertEquals($data[$i]['defense']['defense'], $unit->getDefense()->getDefense());
             self::assertEquals($data[$i]['defense']['block'], $unit->getDefense()->getBlock());
+            self::assertEquals($data[$i]['defense']['mental_barrier'], $unit->getDefense()->getMentalBarrier());
             self::assertEquals($data[$i]['life'], $unit->getTotalLife());
             self::assertEquals($data[$i]['life'], $unit->getLife());
             self::assertEquals($data[$i]['melee'], $unit->isMelee());
@@ -123,6 +124,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'defense'    => [
                             'defense' => 100,
                             'block'   => 0,
+                            'mental_barrier' => 0,
                         ],
                     ],
                     [
@@ -147,6 +149,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'defense'    => [
                             'defense' => 100,
                             'block'   => 0,
+                            'mental_barrier' => 0,
                         ],
                     ],
                 ],
@@ -183,6 +186,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'defense'    => [
                             'defense' => 100,
                             'block'   => 0,
+                            'mental_barrier' => 0,
                         ],
                     ],
                 ],

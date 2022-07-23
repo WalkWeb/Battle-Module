@@ -38,6 +38,15 @@ class DefenseFactory
             DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE . '-' . DefenseInterface::MAX_DEFENSE
         );
 
-        return new Defense($data['defense'], $data['block']);
+        self::int($data, 'mental_barrier', DefenseException::INCORRECT_MENTAL_BARRIER);
+
+        self::intMinMaxValue(
+            $data['mental_barrier'],
+            DefenseInterface::MIN_MENTAL_BARRIER,
+            DefenseInterface::MAX_MENTAL_BARRIER,
+            DefenseException::INCORRECT_MENTAL_BARRIER_VALUE . DefenseInterface::MIN_MENTAL_BARRIER . '-' . DefenseInterface::MAX_MENTAL_BARRIER
+        );
+
+        return new Defense($data['defense'], $data['block'], $data['mental_barrier']);
     }
 }

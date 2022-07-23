@@ -36,8 +36,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         2  => [
@@ -60,8 +61,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         3  => [
@@ -84,8 +86,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         4  => [
@@ -108,8 +111,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Priest
@@ -133,8 +137,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         6  => [
@@ -157,8 +162,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         7  => [
@@ -181,8 +187,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         8  => [
@@ -205,8 +212,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Слегка раненый юнит
@@ -230,8 +238,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Мертвый юнит
@@ -255,8 +264,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Сильно раненый юнит
@@ -280,8 +290,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         12 => [
@@ -304,8 +315,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         13 => [
@@ -328,8 +340,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         14 => [
@@ -352,8 +365,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Юнит для подсчета дополнительных атак, с.м. тест testUnitCalculateAttackSpeed
@@ -377,8 +391,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Юнит для подсчета дополнительных атак, с.м. тест testUnitCalculateAttackSpeed
@@ -402,8 +417,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         17 => [
@@ -426,8 +442,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Аналог юнита из SummonImpAbility
@@ -451,8 +468,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Аналог юнита из SummonSkeletonMageAbility
@@ -476,8 +494,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Аналог юнита из SummonSkeletonAbility
@@ -501,8 +520,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Орк с классом Титан
@@ -526,8 +546,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Гном с классом Алхимик
@@ -551,8 +572,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Демон с классом Суккуб
@@ -576,8 +598,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Мертвый юнит с небольшим количеством здоровья
@@ -601,8 +624,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Человек с классом Priest
@@ -626,8 +650,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Элементаль огня
@@ -651,8 +676,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Босс Warden
@@ -676,8 +702,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Юнит со 100% шансом блока
@@ -701,8 +728,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 100,
+                'defense'        => 100,
+                'block'          => 100,
+                'mental_barrier' => 0,
             ],
         ],
         // Юнит с игнорированием блока = 100
@@ -726,8 +754,9 @@ class UnitFactory
                 'block_ignore' => 100,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Юнит с очень высокими показателями accuracy и defense
@@ -751,8 +780,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100000,
-                'block'   => 0,
+                'defense'        => 100000,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
         // Юнит с 29% здоровья, для проверки активации RageAbility
@@ -776,8 +806,9 @@ class UnitFactory
                 'block_ignore' => 0,
             ],
             'defense'    => [
-                'defense' => 100,
-                'block'   => 0,
+                'defense'        => 100,
+                'block'          => 0,
+                'mental_barrier' => 0,
             ],
         ],
     ];

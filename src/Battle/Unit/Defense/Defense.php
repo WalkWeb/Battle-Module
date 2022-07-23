@@ -12,14 +12,26 @@ class Defense implements DefenseInterface
     private $defense;
 
     /**
-     * @var int
+     * @var int - Блок (0-100%)
      */
     private $block;
 
-    public function __construct(int $defense, int $block)
+    /**
+     * @var int - Ментальный барьер (0-100%)
+     */
+    private $mentalBarrier;
+
+    /**
+     * @param int $defense
+     * @param int $block
+     * @param int $mentalBarrier
+     * @throws DefenseException
+     */
+    public function __construct(int $defense, int $block, int $mentalBarrier)
     {
-        $this->defense = $defense;
-        $this->block = $block;
+        $this->setDefense($defense);
+        $this->setBlock($block);
+        $this->setMentalBarrier($mentalBarrier);
     }
 
     /**
@@ -66,5 +78,28 @@ class Defense implements DefenseInterface
         }
 
         $this->block = $block;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMentalBarrier(): int
+    {
+        return $this->mentalBarrier;
+    }
+
+    /**
+     * @param int $mentalBarrier
+     * @throws DefenseException
+     */
+    public function setMentalBarrier(int $mentalBarrier): void
+    {
+        if ($mentalBarrier < self::MIN_MENTAL_BARRIER || $mentalBarrier > self::MAX_MENTAL_BARRIER) {
+            throw new DefenseException(
+                DefenseException::INCORRECT_MENTAL_BARRIER_VALUE . DefenseInterface::MIN_MENTAL_BARRIER . '-' . DefenseInterface::MAX_MENTAL_BARRIER
+            );
+        }
+
+        $this->mentalBarrier = $mentalBarrier;
     }
 }

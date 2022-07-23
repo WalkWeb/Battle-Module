@@ -49,10 +49,10 @@ class SummonImpAbilityTest extends AbstractUnitTest
             $icon,
             [
                 [
-                    'type'             => ActionInterface::SUMMON,
-                    'name'             => $name,
-                    'icon'             => $icon,
-                    'summon'           => [
+                    'type'   => ActionInterface::SUMMON,
+                    'name'   => $name,
+                    'icon'   => $icon,
+                    'summon' => [
                         'name'       => $name,
                         'level'      => 1,
                         'avatar'     => '/images/avas/monsters/004.png',
@@ -70,8 +70,9 @@ class SummonImpAbilityTest extends AbstractUnitTest
                             'block_ignore' => 0,
                         ],
                         'defense'    => [
-                            'defense' => 100,
-                            'block'   => 0,
+                            'defense'        => 100,
+                            'block'          => 0,
+                            'mental_barrier' => 0,
                         ],
                     ],
                 ],

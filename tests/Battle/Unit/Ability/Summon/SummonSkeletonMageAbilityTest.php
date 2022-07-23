@@ -48,10 +48,10 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
             $icon,
             [
                 [
-                    'type'             => ActionInterface::SUMMON,
-                    'name'             => $name,
-                    'icon'             => $icon,
-                    'summon'           => [
+                    'type'   => ActionInterface::SUMMON,
+                    'name'   => $name,
+                    'icon'   => $icon,
+                    'summon' => [
                         'name'       => $name,
                         'level'      => 2,
                         'avatar'     => '/images/avas/monsters/008.png',
@@ -69,8 +69,9 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
                             'block_ignore' => 0,
                         ],
                         'defense'    => [
-                            'defense' => 100,
-                            'block'   => 0,
+                            'defense'        => 100,
+                            'block'          => 0,
+                            'mental_barrier' => 0,
                         ],
                     ],
                 ],

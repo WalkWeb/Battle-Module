@@ -69,8 +69,9 @@ class BattleTest extends AbstractUnitTest
                     'block_ignore' => 0,
                 ],
                 'defense'    => [
-                    'defense' => 100,
-                    'block'   => 0,
+                    'defense'        => 100,
+                    'block'          => 0,
+                    'mental_barrier' => 0,
                 ],
             ],
             [
@@ -93,8 +94,9 @@ class BattleTest extends AbstractUnitTest
                     'block_ignore' => 0,
                 ],
                 'defense'    => [
-                    'defense' => 100,
-                    'block'   => 0,
+                    'defense'        => 100,
+                    'block'          => 0,
+                    'mental_barrier' => 0,
                 ],
             ],
         ];
@@ -131,8 +133,8 @@ class BattleTest extends AbstractUnitTest
                 'block_ignore' => 0,
                 'life'         => 1500,
                 'total_life'   => 1500,
-                'mana'       => 50,
-                'total_mana' => 50,
+                'mana'         => 50,
+                'total_mana'   => 50,
                 'melee'        => true,
                 'class'        => 1,
                 'race'         => 1,
@@ -144,8 +146,9 @@ class BattleTest extends AbstractUnitTest
                     'block_ignore' => 0,
                 ],
                 'defense'      => [
-                    'defense' => 100,
-                    'block'   => 0,
+                    'defense'        => 100,
+                    'block'          => 0,
+                    'mental_barrier' => 0,
                 ],
             ],
             [
@@ -168,8 +171,9 @@ class BattleTest extends AbstractUnitTest
                     'block_ignore' => 0,
                 ],
                 'defense'    => [
-                    'defense' => 100,
-                    'block'   => 0,
+                    'defense'        => 100,
+                    'block'          => 0,
+                    'mental_barrier' => 0,
                 ],
             ],
         ];
