@@ -115,12 +115,9 @@ class Unit extends AbstractUnit
             return;
         }
 
-        // Применение урона
-        $primordialLife = $this->life;
-        $this->life -= $action->getPower();
+        $factualPower = $this->applyDamage($action);
 
-        if ($this->life < 1) {
-            $this->life = 0;
+        if ($this->life === 0) {
 
             // Обрабатываем события от эффектов при смерти
             // TODO Когда будут добавлены сложные эффекты при смерти - нужно будет отдельно создавать сообщения в чат
@@ -134,7 +131,7 @@ class Unit extends AbstractUnit
             }
         }
 
-        $action->addFactualPower($this, $primordialLife - $this->life);
+        $action->addFactualPower($this, $factualPower);
 
         // Для активации способностей, которые завязаны на уровень здоровья
         $this->abilities->update($this);
@@ -506,5 +503,47 @@ class Unit extends AbstractUnit
         }
 
         return ($this->getDefense()->getBlock() - $action->getActionUnit()->getOffense()->getBlockIgnore()) >= random_int(1, 100);
+    }
+
+    /**
+     * Фактически наносит урон юниту и возвращает нанесенный урон: если у юнита 10 здоровья, а он получил 100 урона -
+     * нанесенный урон будет 10
+     *
+     * Также в этом методе считается эффект ментального барьера - когда часть урона идет по мане
+     *
+     * @param ActionInterface $action
+     * @return int
+     * @throws ActionException
+     */
+    private function applyDamage(ActionInterface $action): int
+    {
+        $oldLife = $this->life;
+        $oldMana = $this->mana;
+
+        if ($this->defense->getMentalBarrier() > 0) {
+            $damageByMana = (int)($action->getPower() / (100 / $this->defense->getMentalBarrier()));
+            $damageByLife = $action->getPower() - $damageByMana;
+        } else {
+            $damageByMana = 0;
+            $damageByLife = $action->getPower();
+        }
+
+        if ($damageByMana > 0) {
+
+            $this->mana -= $damageByMana;
+
+            if ($this->mana < 0) {
+                $this->life += $this->mana;
+                $this->mana = 0;
+            }
+        }
+
+        $this->life -= $damageByLife;
+
+        if ($this->life < 0) {
+            $this->life = 0;
+        }
+
+        return $oldLife - $this->life + $oldMana - $this->mana;
     }
 }

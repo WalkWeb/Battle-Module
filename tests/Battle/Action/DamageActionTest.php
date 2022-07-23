@@ -456,6 +456,119 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на урон по юниту со 100% ментальным барьером и 100 маны
+     *
+     * @throws Exception
+     */
+    public function testDamageActionBy100MentalBarrierAnd100Mana(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(32);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->handle();
+
+        // Здоровье не изменилось
+        self::assertEquals($enemyUnit->getTotalLife(), $enemyUnit->getLife());
+        // А вот мана уменьшилась
+        self::assertEquals($enemyUnit->getTotalMana() - $unit->getOffense()->getDamage(), $enemyUnit->getMana());
+    }
+
+    /**
+     * Тест на урон по юниту со 100% ментальным барьером и 0 маны
+     *
+     * @throws Exception
+     */
+    public function testDamageActionBy100MentalBarrierAnd0Mana(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(33);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->handle();
+
+        // Так как маны не было - урон по здоровью прошел, не смотря на 100% ментальный барьер
+        self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage(), $enemyUnit->getLife());
+        // Мана как была 0 так и осталась
+        self::assertEquals(0, $enemyUnit->getMana());
+    }
+
+    /**
+     * Тест на урон по юниту со 100% ментальным барьером и 10 маны - в итоге часть урона идет по здоровью, часть по мане
+     *
+     * @throws Exception
+     */
+    public function testDamageActionBy100MentalBarrierAnd10Mana(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(34);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->handle();
+
+        // 10 оставшегося урона пошло по здоровью
+        self::assertEquals($enemyUnit->getTotalLife() - 10, $enemyUnit->getLife());
+        // 10 урона пошло по мане - осталось 0 маны
+        self::assertEquals(0, $enemyUnit->getMana());
+    }
+
+    /**
+     * Тест на урон по юниту со 50% ментальным барьером и 100 маны - 50% урона идет по здоровью, 50% по мане
+     *
+     * @throws Exception
+     */
+    public function testDamageActionBy50MentalBarrierAnd100Mana(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(35);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->handle();
+
+        // 50% урона идет по здоровью
+        self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage() / 2, $enemyUnit->getLife());
+        // 50% урона идет по мане
+        self::assertEquals($enemyUnit->getTotalMana() - $unit->getOffense()->getDamage() / 2, $enemyUnit->getMana());
+    }
+
+    /**
+     * И в завершение тестов на ментальный барьер - тест без круглых цифр: по юниту со 80% ментальным барьером и 5 маны
+     *
+     * @throws Exception
+     */
+    public function testDamageActionBy80MentalBarrierAnd5Mana(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(36);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->handle();
+
+        // Общий урон: 20
+        // Урон по мане: 16
+        // Урон по здоровью: 4
+        // Мана после урона становится 0
+        self::assertEquals(0, $enemyUnit->getMana());
+        // При этом остаток урона (15) идет по здоровью
+        self::assertEquals($enemyUnit->getTotalLife() - 15, $enemyUnit->getLife());
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
