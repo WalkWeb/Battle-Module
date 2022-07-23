@@ -48,7 +48,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'          => 'Hellfire',
                 'icon'          => '/images/icons/ability/276.png',
                 'disposable'    => false,
-                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
                     [
                         'type'             => ActionInterface::DAMAGE,
