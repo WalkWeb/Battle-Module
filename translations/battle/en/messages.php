@@ -103,6 +103,8 @@ return [
     'Name'                                => 'Name',
     'Race'                                => 'Race',
     'Life'                                => 'Life',
+    'Mana'                                => 'Mana',
+    'Mental Barrier'                      => 'Mental Barrier',
     'Damage'                              => 'Damage',
     'Attack Speed'                        => 'Attack Speed',
     'Concentration'                       => 'Concentration',

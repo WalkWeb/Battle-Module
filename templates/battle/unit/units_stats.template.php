@@ -27,6 +27,8 @@ if (empty($this) || !($this instanceof ViewInterface)) {
             <td><p><?= $this->getTranslation()->trans('Name') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Race') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Life') ?></p></td>
+            <td><p><?= $this->getTranslation()->trans('Mana') ?></p></td>
+            <td><p><?= $this->getTranslation()->trans('Mental Barrier') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Damage') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Attack Speed') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Block') ?></p></td>
@@ -47,6 +49,8 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 </td>
                 <td><p><?= $this->getTranslation()->trans($unit->getRace()->getSingleName()) ?></p></td>
                 <td><p><?= $unit->getLife() ?>/<?= $unit->getTotalLife() ?></p></td>
+                <td><p><?= $unit->getMana() ?>/<?= $unit->getTotalMana() ?></p></td>
+                <td><p><?= $unit->getDefense()->getMentalBarrier() ?>%</p></td>
                 <td><p><?= $unit->getOffense()->getDamage() ?></p></td>
                 <td><p><?= $unit->getOffense()->getAttackSpeed() ?></p></td>
                 <td><p><?= $unit->getDefense()->getBlock() ?></p></td>
@@ -68,6 +72,8 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 </td>
                 <td><p><?= $this->getTranslation()->trans($unit->getRace()->getSingleName()) ?></p></td>
                 <td><p><?= $unit->getLife() ?>/<?= $unit->getTotalLife() ?></p></td>
+                <td><p><?= $unit->getMana() ?>/<?= $unit->getTotalMana() ?></p></td>
+                <td><p><?= $unit->getDefense()->getMentalBarrier() ?>%</p></td>
                 <td><p><?= $unit->getOffense()->getDamage() ?></p></td>
                 <td><p><?= $unit->getOffense()->getAttackSpeed() ?></p></td>
                 <td><p><?= $unit->getDefense()->getBlock() ?></p></td>

@@ -513,6 +513,8 @@ EOT;
             <td><p>Name</p></td>
             <td><p>Race</p></td>
             <td><p>Life</p></td>
+            <td><p>Mana</p></td>
+            <td><p>Mental Barrier</p></td>
             <td><p>Damage</p></td>
             <td><p>Attack Speed</p></td>
             <td><p>Block</p></td>
@@ -531,6 +533,8 @@ EOT;
                 </td>
                 <td><p>Human</p></td>
                 <td><p>100/100</p></td>
+                <td><p>50/50</p></td>
+                <td><p>0%</p></td>
                 <td><p>20</p></td>
                 <td><p>1</p></td>
                 <td><p>0</p></td>
@@ -549,6 +553,8 @@ EOT;
                 </td>
                 <td><p>Human</p></td>
                 <td><p>100/100</p></td>
+                <td><p>50/50</p></td>
+                <td><p>0%</p></td>
                 <td><p>20</p></td>
                 <td><p>1</p></td>
                 <td><p>0</p></td>

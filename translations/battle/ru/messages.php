@@ -101,6 +101,8 @@ return [
     'Name'                                => 'Имя',
     'Race'                                => 'Раса',
     'Life'                                => 'Здоровье',
+    'Mana'                                => 'Мана',
+    'Mental Barrier'                      => 'Ментальный барьер',
     'Damage'                              => 'Урон',
     'Attack Speed'                        => 'Скорость атаки',
     'Concentration'                       => 'Концентрация',
