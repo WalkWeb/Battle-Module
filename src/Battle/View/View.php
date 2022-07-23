@@ -83,7 +83,6 @@ class View implements ViewInterface
         $this->rowTemplate = $rowTemplate;
         $this->unitFullLogTemplate = $unitFullLogTemplate;
         $this->unitTemplate = $unitTemplate;
-
         $this->unitsStatsTemplate = $unitsStatsTemplate;
     }
 

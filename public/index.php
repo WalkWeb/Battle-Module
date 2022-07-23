@@ -103,7 +103,7 @@ $data = [
         'defense'    => [
             'defense'        => 178,
             'block'          => 0,
-            'mental_barrier' => 0,
+            'mental_barrier' => 100,
         ],
     ],
     [

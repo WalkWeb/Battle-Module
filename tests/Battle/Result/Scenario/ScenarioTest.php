@@ -26,13 +26,15 @@ use Tests\Battle\Factory\UnitFactory;
 class ScenarioTest extends AbstractUnitTest
 {
     /**
+     * Тест на создание анимации урона по юниту (без ментального барьера)
+     *
      * За основу берется DamageActionTest::testApplyDamageAction()
      *
      * И дополняется созданием и проверкой сценария
      *
      * @throws Exception
      */
-    public function testScenarioAddDamage(): void
+    public function testScenarioAddDamageByLife(): void
     {
         $statistic = new Statistic();
         $unit = UnitFactory::createByTemplate(1);
@@ -67,6 +69,60 @@ class ScenarioTest extends AbstractUnitTest
                             'hp_bar_class2'     => 'unit_hp_bar2',
                             'recdam'            => '-20',
                             'unit_hp_bar_width' => 92,
+                            'unit_cons_bar2'    => 10,
+                            'unit_rage_bar2'    => 7,
+                            'ava'               => 'unit_ava_red',
+                            'avas'              => 'unit_ava_blank',
+                            'unit_effects'      => [],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
+    }
+
+    /**
+     * Тест на создание анимации урона по юниту с ментальным барьером и маной
+     *
+     * @throws Exception
+     */
+    public function testScenarioAddDamageByMana(): void
+    {
+        $statistic = new Statistic();
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(32);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->handle();
+
+        $scenario = new Scenario();
+        $scenario->addAnimation($action, $statistic);
+
+        $expectedData = [
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'        => $unit->getId(),
+                    'class'          => 'd_attack',
+                    'unit_cons_bar2' => 0,
+                    'unit_rage_bar2' => 0,
+                    'unit_effects'   => [],
+                    'targets'        => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => $enemyUnit->getId(),
+                            'hp'                => $enemyUnit->getTotalMana() - $unit->getOffense()->getDamage(),
+                            'thp'               => $enemyUnit->getTotalMana(),
+                            'hp_bar_class'      => 'unit_hp_bar_mana',
+                            'hp_bar_class2'     => 'unit_hp_bar2_mana',
+                            'recdam'            => '-20',
+                            'unit_hp_bar_width' => 80,
                             'unit_cons_bar2'    => 10,
                             'unit_rage_bar2'    => 7,
                             'ava'               => 'unit_ava_red',

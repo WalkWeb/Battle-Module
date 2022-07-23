@@ -7,6 +7,18 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
     throw new ViewException(ViewException::MISSING_UNIT);
 }
 
+if ($unit->getMana() > 0 && $unit->getDefense()->getMentalBarrier() > 0) {
+    $life = $unit->getMana();
+    $totalLife = $unit->getTotalMana();
+    $hpBarClassBackground = 'unit_hp_bar_mana';
+    $hpBarClass = 'unit_hp_bar2_mana';
+} else {
+    $life = $unit->getLife();
+    $totalLife = $unit->getTotalLife();
+    $hpBarClassBackground = 'unit_hp_bar';
+    $hpBarClass = 'unit_hp_bar2';
+}
+
 ?>
 <div align="center">
     <div class="unit_main_box" id="usr_<?= $unit->getId() ?>">
@@ -16,11 +28,11 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                     <div class="unit_box1_right3">
                         <div class="unit_box1_right4">
                             <div class="unit_hp">
-                                <div id="hp_bar_bg_<?= $unit->getId() ?>" class="unit_hp_bar">
-                                    <div id="hp_bar_<?= $unit->getId() ?>" class="unit_hp_bar2" style="width: <?= $this->getWidth($unit->getLife(), $unit->getTotalLife()) ?>%;"></div>
+                                <div id="hp_bar_bg_<?= $unit->getId() ?>" class="<?= $hpBarClassBackground ?>">
+                                    <div id="hp_bar_<?= $unit->getId() ?>" class="<?= $hpBarClass ?>" style="width: <?= $this->getWidth($unit->getLife(), $unit->getTotalLife()) ?>%;"></div>
                                 </div>
                                 <div class="unit_hp_text">
-                                    <span class="hp"><?= $unit->getLife() ?></span> / <span class="thp"><?= $unit->getTotalLife() ?></span>
+                                    <span class="hp"><?= $life ?></span> / <span class="thp"><?= $totalLife ?></span>
                                 </div>
                                 <div class="unit_hp_text_add">
                                     <span class="recdam"></span>

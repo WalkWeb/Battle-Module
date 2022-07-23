@@ -138,8 +138,6 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
                 ],
             ],
         ],
-
-
     ];
 
     public function __construct(ContainerInterface $container)

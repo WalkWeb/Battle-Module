@@ -10,7 +10,19 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
     throw new ViewException(ViewException::MISSING_UNIT);
 }
 
-// No id attributes
+// Unit full log template no have id attributes
+
+if ($unit->getMana() > 0 && $unit->getDefense()->getMentalBarrier() > 0) {
+    $life = $unit->getMana();
+    $totalLife = $unit->getTotalMana();
+    $hpBarClassBackground = 'unit_hp_bar_mana';
+    $hpBarClass = 'unit_hp_bar2_mana';
+} else {
+    $life = $unit->getLife();
+    $totalLife = $unit->getTotalLife();
+    $hpBarClassBackground = 'unit_hp_bar';
+    $hpBarClass = 'unit_hp_bar2';
+}
 
 ?>
 <div align="center">
@@ -21,11 +33,11 @@ if (empty($unit) || !($unit instanceof UnitInterface)) {
                     <div class="unit_box1_right3">
                         <div class="unit_box1_right4">
                             <div class="unit_hp">
-                                <div class="unit_hp_bar">
-                                    <div class="unit_hp_bar2" style="width: <?= $this->getWidth($unit->getLife(), $unit->getTotalLife()) ?>%;"></div>
+                                <div class="<?= $hpBarClassBackground ?>">
+                                    <div class="<?= $hpBarClass ?>" style="width: <?= $this->getWidth($life, $totalLife) ?>%;"></div>
                                 </div>
                                 <div class="unit_hp_text">
-                                    <span class="hp"><?= $unit->getLife() ?></span> / <span class="thp"><?= $unit->getTotalLife() ?></span>
+                                    <span class="hp"><?= $life ?></span> / <span class="thp"><?= $totalLife ?></span>
                                 </div>
                                 <div class="unit_hp_text_add">
                                     <span class="recdam"></span>

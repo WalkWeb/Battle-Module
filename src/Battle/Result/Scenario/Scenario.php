@@ -119,10 +119,10 @@ class Scenario implements ScenarioInterface
                 'user_id'           => $targetUnit->getId(),
                 'ava'               => 'unit_ava_green',
                 'recdam'            => '+' . $action->getFactualPowerByUnit($targetUnit),
-                'hp'                => $targetUnit->getLife(),
-                'thp'               => $targetUnit->getTotalLife(),
-                'hp_bar_class'      => 'unit_hp_bar',
-                'hp_bar_class2'     => 'unit_hp_bar2',
+                'hp'                => $this->getLife($targetUnit),
+                'thp'               => $this->getTotalLife($targetUnit),
+                'hp_bar_class'      => $this->getHpBarClassBackground($targetUnit),
+                'hp_bar_class2'     => $this->getHpBarClass($targetUnit),
                 'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
                 'unit_effects'      => $this->getUnitEffects($targetUnit),
             ];
@@ -158,8 +158,8 @@ class Scenario implements ScenarioInterface
                 'user_id'           => $action->getActionUnit()->getId(),
                 'ava'               => 'unit_ava_green',
                 'recdam'            => '+' . $action->getFactualPowerByUnit($targetUnit),
-                'hp'                => $targetUnit->getLife(),
-                'thp'               => $targetUnit->getTotalLife(),
+                'hp'                => $this->getLife($targetUnit),
+                'thp'               => $this->getTotalLife($targetUnit),
                 'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
             ];
         }
@@ -183,6 +183,8 @@ class Scenario implements ScenarioInterface
      */
     private function summon(SummonAction $action, StatisticInterface $statistic): void
     {
+        $summon = $action->getSummonUnit();
+
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
             'attack'  => $statistic->getStrokeNumber(),
@@ -197,21 +199,21 @@ class Scenario implements ScenarioInterface
                             'type'            => 'summon',
                             'summon_row'      => $this->getSummonRow($action),
                             // Summon
-                            'id'              => $action->getSummonUnit()->getId(),
-                            'hp_bar_class'    => 'unit_hp_bar',
-                            'hp_bar_class2'   => 'unit_hp_bar2',
-                            'hp_bar_width'    => $this->getLifeBarWidth($action->getSummonUnit()),
-                            'unit_box2_class' => $this->getUnitBoxClass($action->getSummonUnit()),
-                            'hp'              => $action->getSummonUnit()->getLife(),
-                            'thp'             => $action->getSummonUnit()->getTotalLife(),
-                            'cons_bar_width'  => $this->getConcentrationBarWidth($action->getSummonUnit()),
-                            'rage_bar_width'  => $this->getRageBarWidth($action->getSummonUnit()),
-                            'avatar'          => $action->getSummonUnit()->getAvatar(),
-                            'name'            => $action->getSummonUnit()->getName(),
-                            'name_color'      => $action->getSummonUnit()->getRace()->getColor(),
-                            'icon'            => $action->getSummonUnit()->getIcon(),
-                            'level'           => $action->getSummonUnit()->getLevel(),
-                            'exist_class'     => (bool)$action->getSummonUnit()->getClass(),
+                            'id'              => $summon->getId(),
+                            'hp_bar_class'    => $this->getHpBarClassBackground($summon),
+                            'hp_bar_class2'   => $this->getHpBarClass($summon),
+                            'hp_bar_width'    => $this->getLifeBarWidth($summon),
+                            'unit_box2_class' => $this->getUnitBoxClass($summon),
+                            'hp'              => $this->getLife($summon),
+                            'thp'             => $this->getTotalLife($summon),
+                            'cons_bar_width'  => $this->getConcentrationBarWidth($summon),
+                            'rage_bar_width'  => $this->getRageBarWidth($summon),
+                            'avatar'          => $summon->getAvatar(),
+                            'name'            => $summon->getName(),
+                            'name_color'      => $summon->getRace()->getColor(),
+                            'icon'            => $summon->getIcon(),
+                            'level'           => $summon->getLevel(),
+                            'exist_class'     => (bool)$summon->getClass(),
                         ],
                     ],
                 ],
@@ -245,8 +247,8 @@ class Scenario implements ScenarioInterface
                 [
                     'user_id'        => $action->getActionUnit()->getId(),
                     'class'          => 'd_buff', // TODO 1) Эффекта на аватаре не происходит, 2) Необходимо разделять эффекты на положительные и отрицательные
-                    'hp'             => $action->getActionUnit()->getLife(),
-                    'thp'            => $action->getActionUnit()->getTotalLife(),
+                    'hp'             => $this->getLife($action->getActionUnit()),
+                    'thp'            => $this->getTotalLife($action->getActionUnit()),
                     'unit_cons_bar2' => $this->getConcentrationBarWidth($action->getActionUnit()),
                     'unit_rage_bar2' => $this->getRageBarWidth($action->getActionUnit()),
                     'unit_effects'   => $this->getUnitEffects($action->getActionUnit()),
@@ -274,10 +276,10 @@ class Scenario implements ScenarioInterface
                 'user_id'           => $targetUnit->getId(),
                 'ava'               => 'unit_ava_green',
                 'recdam'            => '+' . $action->getFactualPower(),
-                'hp'                => $targetUnit->getLife(),
-                'thp'               => $targetUnit->getTotalLife(),
-                'hp_bar_class'      => 'unit_hp_bar',
-                'hp_bar_class2'     => 'unit_hp_bar2',
+                'hp'                => $this->getLife($targetUnit),
+                'thp'               => $this->getTotalLife($targetUnit),
+                'hp_bar_class'      => $this->getHpBarClassBackground($targetUnit),
+                'hp_bar_class2'     => $this->getHpBarClass($targetUnit),
                 'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
                 'avas'              => $this->getAvaClassTarget($targetUnit),
                 'unit_effects'      => $this->getUnitEffects($targetUnit),
@@ -364,6 +366,10 @@ class Scenario implements ScenarioInterface
 
     private function getLifeBarWidth(UnitInterface $unit): int
     {
+        if ($unit->getMana() > 0 && $unit->getDefense()->getMentalBarrier() > 0) {
+            return (int)($unit->getMana() / $unit->getTotalMana() * 100);
+        }
+
         return (int)($unit->getLife() / $unit->getTotalLife() * 100);
     }
 
@@ -429,10 +435,10 @@ class Scenario implements ScenarioInterface
         return [
             'type'              => 'change',
             'user_id'           => $targetUnit->getId(),
-            'hp'                => $targetUnit->getLife(),
-            'thp'               => $targetUnit->getTotalLife(),
-            'hp_bar_class'      => 'unit_hp_bar',
-            'hp_bar_class2'     => 'unit_hp_bar2',
+            'hp'                => $this->getLife($targetUnit),
+            'thp'               => $this->getTotalLife($targetUnit),
+            'hp_bar_class'      => $this->getHpBarClassBackground($targetUnit),
+            'hp_bar_class2'     => $this->getHpBarClass($targetUnit),
             'recdam'            => '-' . $action->getFactualPowerByUnit($targetUnit),
             'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
             'unit_cons_bar2'    => $this->getConcentrationBarWidth($targetUnit),
@@ -473,5 +479,69 @@ class Scenario implements ScenarioInterface
             'class'        => $targetUnit->getCommand() === 1 ? 'd_evasion_s2' : 'd_evasion',
             'unit_effects' => $this->getUnitEffects($targetUnit),
         ];
+    }
+
+    /**
+     * Возвращает значения "здоровья" на полоске со здоровьем. Если юнит имеет ментальный барьер и ману - то будет
+     * отображаться полоска с маной
+     *
+     * @param UnitInterface $unit
+     * @return int
+     */
+    private function getLife(UnitInterface $unit): int
+    {
+        if ($unit->getMana() > 0 && $unit->getDefense()->getMentalBarrier() > 0) {
+            return $unit->getMana();
+        }
+
+        return $unit->getLife();
+    }
+
+    /**
+     * Возвращает значения "здоровья" на полоске со здоровьем. Если юнит имеет ментальный барьер и ману - то будет
+     * отображаться полоска с маной
+     *
+     * @param UnitInterface $unit
+     * @return int
+     */
+    private function getTotalLife(UnitInterface $unit): int
+    {
+        if ($unit->getMana() > 0 && $unit->getDefense()->getMentalBarrier() > 0) {
+            return $unit->getTotalMana();
+        }
+
+        return $unit->getTotalLife();
+    }
+
+    /**
+     * Возвращает класс для отображения стилей полоски здоровья. Если юнит имеет ману и ментальный щит - будет
+     * отображаться синяя полоска, иначе красная
+     *
+     * @param UnitInterface $unit
+     * @return string
+     */
+    private function getHpBarClass(UnitInterface $unit): string
+    {
+        if ($unit->getMana() > 0 && $unit->getDefense()->getMentalBarrier() > 0) {
+            return 'unit_hp_bar2_mana';
+        }
+
+        return 'unit_hp_bar2';
+    }
+
+    /**
+     * Возвращает класс для отображения стилей фона полоски здоровья. Если юнит имеет ману и ментальный щит - будет
+     * отображаться синяя полоска, иначе красная
+     *
+     * @param UnitInterface $unit
+     * @return string
+     */
+    private function getHpBarClassBackground(UnitInterface $unit): string
+    {
+        if ($unit->getMana() > 0 && $unit->getDefense()->getMentalBarrier() > 0) {
+            return 'unit_hp_bar_mana';
+        }
+
+        return 'unit_hp_bar';
     }
 }
