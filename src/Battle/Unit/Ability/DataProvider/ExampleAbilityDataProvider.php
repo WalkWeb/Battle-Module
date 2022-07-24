@@ -440,10 +440,11 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'      => null,
                             'race'       => 10,
                             'offense'    => [
-                                'damage'       => 17,
-                                'attack_speed' => 1.1,
-                                'accuracy'     => 200,
-                                'block_ignore' => 0,
+                                'damage'         => 17,
+                                'attack_speed'   => 1.1,
+                                'accuracy'       => 200,
+                                'magic_accuracy' => 100,
+                                'block_ignore'   => 0,
                             ],
                             'defense'    => [
                                 'defense'        => 100,
@@ -479,10 +480,11 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'      => null,
                             'race'       => 9,
                             'offense'    => [
-                                'damage'       => 10,
-                                'attack_speed' => 1,
-                                'accuracy'     => 200,
-                                'block_ignore' => 0,
+                                'damage'         => 10,
+                                'attack_speed'   => 1,
+                                'accuracy'       => 200,
+                                'magic_accuracy' => 100,
+                                'block_ignore'   => 0,
                             ],
                             'defense'    => [
                                 'defense'        => 100,
@@ -518,10 +520,11 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'      => null,
                             'race'       => 8,
                             'offense'    => [
-                                'damage'       => 16,
-                                'attack_speed' => 1,
-                                'accuracy'     => 200,
-                                'block_ignore' => 0,
+                                'damage'         => 16,
+                                'attack_speed'   => 1,
+                                'accuracy'       => 200,
+                                'magic_accuracy' => 100,
+                                'block_ignore'   => 0,
                             ],
                             'defense'    => [
                                 'defense'        => 100,
@@ -557,10 +560,11 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'      => null,
                             'race'       => 8,
                             'offense'    => [
-                                'damage'       => 13,
-                                'attack_speed' => 1.2,
-                                'accuracy'     => 200,
-                                'block_ignore' => 0,
+                                'damage'         => 13,
+                                'attack_speed'   => 1.2,
+                                'accuracy'       => 200,
+                                'magic_accuracy' => 100,
+                                'block_ignore'   => 0,
                             ],
                             'defense'    => [
                                 'defense'        => 100,

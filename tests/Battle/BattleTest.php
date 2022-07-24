@@ -63,10 +63,11 @@ class BattleTest extends AbstractUnitTest
                 'race'       => 1,
                 'command'    => 1,
                 'offense'    => [
-                    'damage'       => 7,
-                    'attack_speed' => 1,
-                    'accuracy'     => 200,
-                    'block_ignore' => 0,
+                    'damage'         => 7,
+                    'attack_speed'   => 1,
+                    'accuracy'       => 200,
+                    'magic_accuracy' => 100,
+                    'block_ignore'   => 0,
                 ],
                 'defense'    => [
                     'defense'        => 100,
@@ -89,10 +90,11 @@ class BattleTest extends AbstractUnitTest
                 'race'       => 8,
                 'command'    => 2,
                 'offense'    => [
-                    'damage'       => 5,
-                    'attack_speed' => 1,
-                    'accuracy'     => 200,
-                    'block_ignore' => 0,
+                    'damage'         => 5,
+                    'attack_speed'   => 1,
+                    'accuracy'       => 200,
+                    'magic_accuracy' => 100,
+                    'block_ignore'   => 0,
                 ],
                 'defense'    => [
                     'defense'        => 100,
@@ -142,10 +144,11 @@ class BattleTest extends AbstractUnitTest
                 'race'         => 1,
                 'command'      => 1,
                 'offense'      => [
-                    'damage'       => 15,
-                    'attack_speed' => 1.2,
-                    'accuracy'     => 200,
-                    'block_ignore' => 0,
+                    'damage'         => 15,
+                    'attack_speed'   => 1.2,
+                    'accuracy'       => 200,
+                    'magic_accuracy' => 100,
+                    'block_ignore'   => 0,
                 ],
                 'defense'      => [
                     'defense'        => 100,
@@ -168,10 +171,11 @@ class BattleTest extends AbstractUnitTest
                 'race'       => 8,
                 'command'    => 2,
                 'offense'    => [
-                    'damage'       => 15,
-                    'attack_speed' => 1.2,
-                    'accuracy'     => 200,
-                    'block_ignore' => 0,
+                    'damage'         => 15,
+                    'attack_speed'   => 1.2,
+                    'accuracy'       => 200,
+                    'magic_accuracy' => 100,
+                    'block_ignore'   => 0,
                 ],
                 'defense'    => [
                     'defense'        => 100,

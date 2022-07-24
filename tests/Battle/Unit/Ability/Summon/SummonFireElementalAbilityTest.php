@@ -64,10 +64,11 @@ class SummonFireElementalAbilityTest extends AbstractUnitTest
                         'class'      => null,
                         'race'       => 10,
                         'offense'    => [
-                            'damage'       => 17,
-                            'attack_speed' => 1.1,
-                            'accuracy'     => 200,
-                            'block_ignore' => 0,
+                            'damage'         => 17,
+                            'attack_speed'   => 1.1,
+                            'accuracy'       => 200,
+                            'magic_accuracy' => 100,
+                            'block_ignore'   => 0,
                         ],
                         'defense'    => [
                             'defense'        => 100,

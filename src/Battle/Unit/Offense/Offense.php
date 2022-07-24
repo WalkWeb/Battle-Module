@@ -24,20 +24,27 @@ class Offense implements OffenseInterface
     /**
      * @var int
      */
+    private $magicAccuracy;
+
+    /**
+     * @var int
+     */
     private $blockIgnore;
 
     /**
      * @param int $damage
      * @param float $attackSpeed
      * @param int $accuracy
+     * @param int $magicAccuracy
      * @param int $blockIgnore
      * @throws OffenseException
      */
-    public function __construct(int $damage, float $attackSpeed, int $accuracy, int $blockIgnore)
+    public function __construct(int $damage, float $attackSpeed, int $accuracy, int $magicAccuracy, int $blockIgnore)
     {
         $this->setDamage($damage);
         $this->setAttackSpeed($attackSpeed);
         $this->setAccuracy($accuracy);
+        $this->setMagicAccuracy($magicAccuracy);
         $this->setBlockIgnore($blockIgnore);
     }
 
@@ -108,6 +115,29 @@ class Offense implements OffenseInterface
         }
 
         $this->accuracy = $accuracy;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMagicAccuracy(): int
+    {
+        return $this->magicAccuracy;
+    }
+
+    /**
+     * @param int $magicAccuracy
+     * @throws OffenseException
+     */
+    public function setMagicAccuracy(int $magicAccuracy): void
+    {
+        if ($magicAccuracy < self::MIN_MAGIC_ACCURACY || $magicAccuracy > self::MAX_MAGIC_ACCURACY) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_MAGIC_ACCURACY_VALUE . OffenseInterface::MIN_MAGIC_ACCURACY . '-' . OffenseInterface::MAX_MAGIC_ACCURACY
+            );
+        }
+
+        $this->magicAccuracy = $magicAccuracy;
     }
 
     /**

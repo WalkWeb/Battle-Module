@@ -721,10 +721,11 @@ class CommandTest extends AbstractUnitTest
                         'race'       => 1,
                         'command'    => 1,
                         'offense'    => [
-                            'damage'       => 15,
-                            'attack_speed' => 1.2,
-                            'accuracy'     => 200,
-                            'block_ignore' => 0,
+                            'damage'         => 15,
+                            'attack_speed'   => 1.2,
+                            'accuracy'       => 200,
+                            'magic_accuracy' => 100,
+                            'block_ignore'   => 0,
                         ],
                         'defense'    => [
                             'defense'        => 100,
@@ -748,10 +749,11 @@ class CommandTest extends AbstractUnitTest
                         'race'       => 1,
                         'command'    => 1,
                         'offense'    => [
-                            'damage'       => 15,
-                            'attack_speed' => 1.2,
-                            'accuracy'     => 200,
-                            'block_ignore' => 0,
+                            'damage'         => 15,
+                            'attack_speed'   => 1.2,
+                            'accuracy'       => 200,
+                            'magic_accuracy' => 100,
+                            'block_ignore'   => 0,
                         ],
                         'defense'    => [
                             'defense'        => 100,
@@ -774,10 +776,11 @@ class CommandTest extends AbstractUnitTest
                         'race'       => 1,
                         'command'    => 1,
                         'offense'    => [
-                            'damage'       => 15,
-                            'attack_speed' => 1.2,
-                            'accuracy'     => 200,
-                            'block_ignore' => 0,
+                            'damage'         => 15,
+                            'attack_speed'   => 1.2,
+                            'accuracy'       => 200,
+                            'magic_accuracy' => 100,
+                            'block_ignore'   => 0,
                         ],
                         'defense'    => [
                             'defense'        => 100,
@@ -801,10 +804,11 @@ class CommandTest extends AbstractUnitTest
                         'race'       => 1,
                         'command'    => 1,
                         'offense'    => [
-                            'damage'       => 15,
-                            'attack_speed' => 1.2,
-                            'accuracy'     => 200,
-                            'block_ignore' => 0,
+                            'damage'         => 15,
+                            'attack_speed'   => 1.2,
+                            'accuracy'       => 200,
+                            'magic_accuracy' => 100,
+                            'block_ignore'   => 0,
                         ],
                         'defense'    => [
                             'defense'        => 100,

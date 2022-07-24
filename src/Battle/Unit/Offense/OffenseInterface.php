@@ -11,17 +11,20 @@ namespace Battle\Unit\Offense;
  */
 interface OffenseInterface
 {
-    public const MIN_DAMAGE       = 0;
-    public const MAX_DAMAGE       = 100000;
+    public const MIN_DAMAGE         = 0;
+    public const MAX_DAMAGE         = 100000;
 
-    public const MIN_ATTACK_SPEED = 0.0;
-    public const MAX_ATTACK_SPEED = 10;
+    public const MIN_ATTACK_SPEED   = 0.0;
+    public const MAX_ATTACK_SPEED   = 10;
 
-    public const MIN_ACCURACY     = 1;
-    public const MAX_ACCURACY     = 1000000;
+    public const MIN_ACCURACY       = 1;
+    public const MAX_ACCURACY       = 1000000;
 
-    public const MIN_BLOCK_IGNORE = 0;
-    public const MAX_BLOCK_IGNORE = 100;
+    public const MIN_MAGIC_ACCURACY = 1;
+    public const MAX_MAGIC_ACCURACY = 1000000;
+
+    public const MIN_BLOCK_IGNORE   = 0;
+    public const MAX_BLOCK_IGNORE   = 100;
 
     /**
      * Возвращает урон
@@ -50,16 +53,32 @@ interface OffenseInterface
     public function setAttackSpeed(float $attackSpeed): void;
     
     /**
-     * Возвращает меткость
+     * Возвращает меткость (влияет на шанс попадания при использовании атак)
      *
      * @return int
      */
     public function getAccuracy(): int;
 
     /**
+     * Устанавливает новое значение меткости. Применяется в эффектах, изменяющих её
+     *
      * @param int $accuracy
      */
     public function setAccuracy(int $accuracy): void;
+
+    /**
+     * Возвращает магическую меткость (влияет на шанс попадания при использовании заклинаний)
+     *
+     * @return int
+     */
+    public function getMagicAccuracy(): int;
+
+    /**
+     * Устанавливает новое значение магической меткости. Применяется в эффектах, изменяющих её
+     *
+     * @param int $magicAccuracy
+     */
+    public function setMagicAccuracy(int $magicAccuracy): void;
 
     /**
      * Возвращает значение игнорирования блока цели. Необходимо для реализации механик, когда, например, определенное

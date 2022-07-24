@@ -63,10 +63,11 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
                         'class'      => null,
                         'race'       => 8,
                         'offense'    => [
-                            'damage'       => 13,
-                            'attack_speed' => 1.2,
-                            'accuracy'     => 200,
-                            'block_ignore' => 0,
+                            'damage'         => 13,
+                            'attack_speed'   => 1.2,
+                            'accuracy'       => 200,
+                            'magic_accuracy' => 100,
+                            'block_ignore'   => 0,
                         ],
                         'defense'    => [
                             'defense'        => 100,

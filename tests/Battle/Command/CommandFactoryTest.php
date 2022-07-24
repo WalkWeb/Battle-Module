@@ -116,10 +116,11 @@ class CommandFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'command'    => 1,
                         'offense'    => [
-                            'damage'       => 15,
-                            'attack_speed' => 1.2,
-                            'accuracy'     => 200,
-                            'block_ignore' => 0,
+                            'damage'         => 15,
+                            'attack_speed'   => 1.2,
+                            'accuracy'       => 200,
+                            'magic_accuracy' => 100,
+                            'block_ignore'   => 0,
                         ],
                         'defense'    => [
                             'defense'        => 100,
@@ -142,10 +143,11 @@ class CommandFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'command'    => 1,
                         'offense'    => [
-                            'damage'       => 15,
-                            'attack_speed' => 1.2,
-                            'accuracy'     => 200,
-                            'block_ignore' => 0,
+                            'damage'         => 15,
+                            'attack_speed'   => 1.2,
+                            'accuracy'       => 200,
+                            'magic_accuracy' => 100,
+                            'block_ignore'   => 0,
                         ],
                         'defense'    => [
                             'defense'        => 100,
@@ -180,10 +182,11 @@ class CommandFactoryTest extends AbstractUnitTest
                         'class'      => 1,
                         'race'       => 1,
                         'offense'    => [
-                            'damage'       => 15,
-                            'attack_speed' => 1.2,
-                            'accuracy'     => 200,
-                            'block_ignore' => 0,
+                            'damage'         => 15,
+                            'attack_speed'   => 1.2,
+                            'accuracy'       => 200,
+                            'magic_accuracy' => 100,
+                            'block_ignore'   => 0,
                         ],
                         'defense'    => [
                             'defense'        => 100,

@@ -30,10 +30,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 20,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 20,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -56,10 +57,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 30,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 30,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -82,10 +84,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 15,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 15,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -108,10 +111,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 15,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 15,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -135,10 +139,11 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 15,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 15,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -161,10 +166,11 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 12,
-                'attack_speed' => 1.1,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 12,
+                'attack_speed'   => 1.1,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -187,10 +193,11 @@ class UnitFactory
             'class'      => 4,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 15,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 15,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -213,10 +220,11 @@ class UnitFactory
             'class'      => 3,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 20,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 20,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -240,10 +248,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 35,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 35,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -267,10 +276,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 35,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 35,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -294,10 +304,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 35,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 35,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -320,10 +331,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 3000,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 3000,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -346,10 +358,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 3000,
-                'attack_speed' => 5, // Не просто большой урон, но и 5 атак за ход
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 3000,
+                'attack_speed'   => 5, // Не просто большой урон, но и 5 атак за ход
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -372,10 +385,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 32,
-                'attack_speed' => 0, // нулевая скорость атаки
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 32,
+                'attack_speed'   => 0, // нулевая скорость атаки
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -399,10 +413,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 32,
-                'attack_speed' => 1.9999,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 32,
+                'attack_speed'   => 1.9999,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -426,10 +441,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 32,
-                'attack_speed' => 1.0001,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 32,
+                'attack_speed'   => 1.0001,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -452,10 +468,11 @@ class UnitFactory
             'race'       => 8,
             'command'    => 2,
             'offense'    => [
-                'damage'       => 23,
-                'attack_speed' => 0.7,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 23,
+                'attack_speed'   => 0.7,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -479,10 +496,11 @@ class UnitFactory
             'race'       => 9,
             'command'    => 2,
             'offense'    => [
-                'damage'       => 10,
-                'attack_speed' => 1,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 10,
+                'attack_speed'   => 1,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -506,10 +524,11 @@ class UnitFactory
             'race'       => 8,
             'command'    => 2,
             'offense'    => [
-                'damage'       => 13,
-                'attack_speed' => 1.2,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 13,
+                'attack_speed'   => 1.2,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -533,10 +552,11 @@ class UnitFactory
             'race'       => 8,
             'command'    => 2,
             'offense'    => [
-                'damage'       => 16,
-                'attack_speed' => 1,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 16,
+                'attack_speed'   => 1,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -560,10 +580,11 @@ class UnitFactory
             'class'      => 5,
             'race'       => 3,
             'offense'    => [
-                'damage'       => 27,
-                'attack_speed' => 0.8,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 27,
+                'attack_speed'   => 0.8,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -587,10 +608,11 @@ class UnitFactory
             'class'      => 6,
             'race'       => 4,
             'offense'    => [
-                'damage'       => 13,
-                'attack_speed' => 1.1,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 13,
+                'attack_speed'   => 1.1,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -614,10 +636,11 @@ class UnitFactory
             'class'      => 7,
             'race'       => 6,
             'offense'    => [
-                'damage'       => 11,
-                'attack_speed' => 1.2,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 11,
+                'attack_speed'   => 1.2,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -641,10 +664,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 35,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 35,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -668,10 +692,11 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 13,
-                'attack_speed' => 1.20,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 13,
+                'attack_speed'   => 1.20,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -695,10 +720,11 @@ class UnitFactory
             'class'      => null,
             'race'       => 10,
             'offense'    => [
-                'damage'       => 17,
-                'attack_speed' => 1.1,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 17,
+                'attack_speed'   => 1.1,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -722,10 +748,11 @@ class UnitFactory
             'class'      => 50,
             'race'       => 9,
             'offense'    => [
-                'damage'       => 40,
-                'attack_speed' => 1,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 40,
+                'attack_speed'   => 1,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -749,10 +776,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 20,
-                'attack_speed' => 1,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 20,
+                'attack_speed'   => 1,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -776,10 +804,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 20,
-                'attack_speed' => 1,
-                'accuracy'     => 200,
-                'block_ignore' => 100,
+                'damage'         => 20,
+                'attack_speed'   => 1,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 100,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -803,10 +832,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 20,
-                'attack_speed' => 1,
-                'accuracy'     => 100000,
-                'block_ignore' => 0,
+                'damage'         => 20,
+                'attack_speed'   => 1,
+                'accuracy'       => 100000,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100000,
@@ -830,10 +860,11 @@ class UnitFactory
             'class'      => 1,
             'race'       => 3,
             'offense'    => [
-                'damage'       => 35,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 35,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -843,7 +874,7 @@ class UnitFactory
             ],
         ],
         // Юнит со 100% ментальным барьером и 100 маны
-        32  => [
+        32 => [
             'id'         => '5ab57a34-232f-4d94-a2c9-bb19f41b4e25',
             'name'       => 'unit_5',
             'level'      => 1,
@@ -857,10 +888,11 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 15,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 15,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -870,7 +902,7 @@ class UnitFactory
             ],
         ],
         // Юнит со 100% ментальным барьером и 0 маны
-        33  => [
+        33 => [
             'id'         => '87fc2e80-360c-46df-956d-6a8811b43805',
             'name'       => 'unit_5',
             'level'      => 1,
@@ -884,10 +916,11 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 15,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 15,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -897,7 +930,7 @@ class UnitFactory
             ],
         ],
         // Юнит со 100% ментальным барьером и 10 маны
-        34  => [
+        34 => [
             'id'         => 'b7eac98a-5628-43f9-b0c8-8389ca5e4667',
             'name'       => 'unit_5',
             'level'      => 1,
@@ -911,10 +944,11 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 15,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 15,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -924,7 +958,7 @@ class UnitFactory
             ],
         ],
         // Юнит со 50% ментальным барьером и 100 маны
-        35  => [
+        35 => [
             'id'         => 'e9d27aac-eb38-4077-ad51-f4b6e335af01',
             'name'       => 'unit_5',
             'level'      => 1,
@@ -938,10 +972,11 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 15,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 15,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
@@ -951,7 +986,7 @@ class UnitFactory
             ],
         ],
         // Юнит со 75% ментальным барьером и 5 маны
-        36  => [
+        36 => [
             'id'         => 'e9d27aac-eb38-4077-ad51-f4b6e335af01',
             'name'       => 'unit_5',
             'level'      => 1,
@@ -965,10 +1000,11 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
-                'damage'       => 15,
-                'attack_speed' => 1.00,
-                'accuracy'     => 200,
-                'block_ignore' => 0,
+                'damage'         => 15,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
             ],
             'defense'    => [
                 'defense'        => 100,
