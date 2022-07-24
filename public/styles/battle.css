@@ -787,7 +787,7 @@ p.view {
 
 div.units_stats_box {
     margin: 30px auto;
-    width: 90%;
+    width: 94%;
 }
 
 table.units_stats {
@@ -799,6 +799,10 @@ table.units_stats {
 table.units_stats td {
     border: 1px solid #444;
     text-align: center;
+}
+
+table.units_stats td.name {
+    min-width: 140px;
 }
 
 table.units_stats .header td {

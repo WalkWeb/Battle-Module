@@ -503,20 +503,24 @@ EOT;
         $view = $factory->create();
 
         $leftCommand = TestCommandFactory::createLeftCommand();
-        $rightCommand = TestCommandFactory::createLeftCommand();
+        $rightCommand = TestCommandFactory::createRightCommand();
 
         $expectHtml = <<<EOT
 <div class="units_stats_box">
     <table class="units_stats">
         <tr class="header">
             <td><p>Command</p></td>
-            <td><p>Name</p></td>
+            <td class="name"><p>Name</p></td>
             <td><p>Race</p></td>
             <td><p>Life</p></td>
             <td><p>Mana</p></td>
             <td><p>Mental Barrier</p></td>
             <td><p>Damage</p></td>
             <td><p>Attack Speed</p></td>
+            <td><p>Accuracy</p></td>
+            <td><p>Magic Accuracy</p></td>
+            <td><p>Defense</p></td>
+            <td><p>Magic Defense</p></td>
             <td><p>Block</p></td>
             <td><p>Concentration</p></td>
             <td><p>Rage</p></td>
@@ -537,6 +541,10 @@ EOT;
                 <td><p>0%</p></td>
                 <td><p>20</p></td>
                 <td><p>1</p></td>
+                <td><p>200</p></td>
+                <td><p>100</p></td>
+                <td><p>100</p></td>
+                <td><p>50</p></td>
                 <td><p>0</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>0/1000</p></td>
@@ -544,19 +552,23 @@ EOT;
                 <td><p>No</p></td>
                 <td><p>Yes</p></td>
             </tr>
-                            <tr>
+                    <tr>
                 <td><p>1</p></td>
                 <td>
                     <p>
-                        <img src="/images/avas/humans/human001.jpg" class="stat_ava" alt="" />
-                        unit_1                    </p>
+                        <img src="/images/avas/humans/human002.jpg" class="stat_ava" alt="" />
+                        unit_2                    </p>
                 </td>
                 <td><p>Human</p></td>
-                <td><p>100/100</p></td>
+                <td><p>250/250</p></td>
                 <td><p>50/50</p></td>
                 <td><p>0%</p></td>
-                <td><p>20</p></td>
+                <td><p>30</p></td>
                 <td><p>1</p></td>
+                <td><p>200</p></td>
+                <td><p>100</p></td>
+                <td><p>100</p></td>
+                <td><p>50</p></td>
                 <td><p>0</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>0/1000</p></td>
