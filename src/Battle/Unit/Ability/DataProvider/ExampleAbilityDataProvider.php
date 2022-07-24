@@ -440,6 +440,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'      => null,
                             'race'       => 10,
                             'offense'    => [
+                                'type_damage'    => 2,
                                 'damage'         => 17,
                                 'attack_speed'   => 1.1,
                                 'accuracy'       => 200,
@@ -480,6 +481,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'      => null,
                             'race'       => 9,
                             'offense'    => [
+                                'type_damage'    => 1,
                                 'damage'         => 10,
                                 'attack_speed'   => 1,
                                 'accuracy'       => 200,
@@ -520,6 +522,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'      => null,
                             'race'       => 8,
                             'offense'    => [
+                                'type_damage'    => 1,
                                 'damage'         => 16,
                                 'attack_speed'   => 1,
                                 'accuracy'       => 200,
@@ -560,6 +563,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'      => null,
                             'race'       => 8,
                             'offense'    => [
+                                'type_damage'    => 2,
                                 'damage'         => 13,
                                 'attack_speed'   => 1.2,
                                 'accuracy'       => 200,

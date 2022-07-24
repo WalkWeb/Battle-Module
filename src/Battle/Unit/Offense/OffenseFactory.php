@@ -21,11 +21,18 @@ class OffenseFactory
      */
     public static function create(array $data): Offense
     {
+        self::int($data, 'type_damage', OffenseException::INCORRECT_TYPE_DAMAGE);
         self::int($data, 'damage', OffenseException::INCORRECT_DAMAGE);
         self::intOrFloat($data, 'attack_speed', OffenseException::INCORRECT_ATTACK_SPEED);
         self::int($data, 'accuracy', OffenseException::INCORRECT_ACCURACY);
         self::int($data, 'magic_accuracy', OffenseException::INCORRECT_MAGIC_ACCURACY);
         self::int($data, 'block_ignore', OffenseException::INCORRECT_BLOCK_IGNORE);
+
+        self::in(
+            $data['type_damage'],
+            [OffenseInterface::TYPE_ATTACK, OffenseInterface::TYPE_SPELL],
+            OffenseException::INCORRECT_TYPE_DAMAGE_VALUE
+        );
 
         self::intMinMaxValue(
             $data['damage'],
@@ -61,6 +68,6 @@ class OffenseFactory
             OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE
         );
 
-        return new Offense($data['damage'], $data['attack_speed'], $data['accuracy'], $data['magic_accuracy'], $data['block_ignore']);
+        return new Offense($data['type_damage'], $data['damage'], $data['attack_speed'], $data['accuracy'], $data['magic_accuracy'], $data['block_ignore']);
     }
 }

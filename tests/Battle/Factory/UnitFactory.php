@@ -30,6 +30,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 20,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -57,6 +58,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 30,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -84,6 +86,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 15,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -111,6 +114,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 15,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -139,6 +143,7 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 15,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -166,6 +171,7 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 12,
                 'attack_speed'   => 1.1,
                 'accuracy'       => 200,
@@ -193,6 +199,7 @@ class UnitFactory
             'class'      => 4,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 15,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -220,6 +227,7 @@ class UnitFactory
             'class'      => 3,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 20,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -248,6 +256,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 35,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -276,6 +285,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 35,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -304,6 +314,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 35,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -331,6 +342,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 3000,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -358,6 +370,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 3000,
                 'attack_speed'   => 5, // Не просто большой урон, но и 5 атак за ход
                 'accuracy'       => 200,
@@ -385,6 +398,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 32,
                 'attack_speed'   => 0, // нулевая скорость атаки
                 'accuracy'       => 200,
@@ -413,6 +427,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 32,
                 'attack_speed'   => 1.9999,
                 'accuracy'       => 200,
@@ -441,6 +456,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 32,
                 'attack_speed'   => 1.0001,
                 'accuracy'       => 200,
@@ -468,6 +484,7 @@ class UnitFactory
             'race'       => 8,
             'command'    => 2,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 23,
                 'attack_speed'   => 0.7,
                 'accuracy'       => 200,
@@ -496,6 +513,7 @@ class UnitFactory
             'race'       => 9,
             'command'    => 2,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 10,
                 'attack_speed'   => 1,
                 'accuracy'       => 200,
@@ -524,6 +542,7 @@ class UnitFactory
             'race'       => 8,
             'command'    => 2,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 13,
                 'attack_speed'   => 1.2,
                 'accuracy'       => 200,
@@ -552,6 +571,7 @@ class UnitFactory
             'race'       => 8,
             'command'    => 2,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 16,
                 'attack_speed'   => 1,
                 'accuracy'       => 200,
@@ -580,6 +600,7 @@ class UnitFactory
             'class'      => 5,
             'race'       => 3,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 27,
                 'attack_speed'   => 0.8,
                 'accuracy'       => 200,
@@ -608,6 +629,7 @@ class UnitFactory
             'class'      => 6,
             'race'       => 4,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 13,
                 'attack_speed'   => 1.1,
                 'accuracy'       => 200,
@@ -636,6 +658,7 @@ class UnitFactory
             'class'      => 7,
             'race'       => 6,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 11,
                 'attack_speed'   => 1.2,
                 'accuracy'       => 200,
@@ -664,6 +687,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 35,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -692,6 +716,7 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 13,
                 'attack_speed'   => 1.20,
                 'accuracy'       => 200,
@@ -720,6 +745,7 @@ class UnitFactory
             'class'      => null,
             'race'       => 10,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 17,
                 'attack_speed'   => 1.1,
                 'accuracy'       => 200,
@@ -748,6 +774,7 @@ class UnitFactory
             'class'      => 50,
             'race'       => 9,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 40,
                 'attack_speed'   => 1,
                 'accuracy'       => 200,
@@ -776,6 +803,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 20,
                 'attack_speed'   => 1,
                 'accuracy'       => 200,
@@ -804,6 +832,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 20,
                 'attack_speed'   => 1,
                 'accuracy'       => 200,
@@ -832,6 +861,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 20,
                 'attack_speed'   => 1,
                 'accuracy'       => 100000,
@@ -860,6 +890,7 @@ class UnitFactory
             'class'      => 1,
             'race'       => 3,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 35,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -888,6 +919,7 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 15,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -916,6 +948,7 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 15,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -944,6 +977,7 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 15,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -972,6 +1006,7 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 15,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,
@@ -1000,6 +1035,7 @@ class UnitFactory
             'class'      => 2,
             'race'       => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 15,
                 'attack_speed'   => 1.00,
                 'accuracy'       => 200,

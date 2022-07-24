@@ -63,6 +63,7 @@ class BattleTest extends AbstractUnitTest
                 'race'       => 1,
                 'command'    => 1,
                 'offense'    => [
+                    'type_damage'    => 1,
                     'damage'         => 7,
                     'attack_speed'   => 1,
                     'accuracy'       => 200,
@@ -90,6 +91,7 @@ class BattleTest extends AbstractUnitTest
                 'race'       => 8,
                 'command'    => 2,
                 'offense'    => [
+                    'type_damage'    => 1,
                     'damage'         => 5,
                     'attack_speed'   => 1,
                     'accuracy'       => 200,
@@ -144,6 +146,7 @@ class BattleTest extends AbstractUnitTest
                 'race'         => 1,
                 'command'      => 1,
                 'offense'      => [
+                    'type_damage'    => 1,
                     'damage'         => 15,
                     'attack_speed'   => 1.2,
                     'accuracy'       => 200,
@@ -171,6 +174,7 @@ class BattleTest extends AbstractUnitTest
                 'race'       => 8,
                 'command'    => 2,
                 'offense'    => [
+                    'type_damage'    => 1,
                     'damage'         => 15,
                     'attack_speed'   => 1.2,
                     'accuracy'       => 200,

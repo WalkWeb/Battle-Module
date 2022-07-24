@@ -60,6 +60,7 @@ class CommandFactory
             'race'       => 1,
             'command'    => 1,
             'offense'    => [
+                'type_damage'    => 1,
                 'damage'         => 15,
                 'attack_speed'   => 1.2,
                 'accuracy'       => 200,

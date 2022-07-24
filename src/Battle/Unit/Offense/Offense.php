@@ -9,6 +9,11 @@ class Offense implements OffenseInterface
     /**
      * @var int
      */
+    private $typeDamage;
+
+    /**
+     * @var int
+     */
     private $damage;
 
     /**
@@ -32,6 +37,7 @@ class Offense implements OffenseInterface
     private $blockIgnore;
 
     /**
+     * @param int $typeDamage
      * @param int $damage
      * @param float $attackSpeed
      * @param int $accuracy
@@ -39,13 +45,22 @@ class Offense implements OffenseInterface
      * @param int $blockIgnore
      * @throws OffenseException
      */
-    public function __construct(int $damage, float $attackSpeed, int $accuracy, int $magicAccuracy, int $blockIgnore)
+    public function __construct(int $typeDamage, int $damage, float $attackSpeed, int $accuracy, int $magicAccuracy, int $blockIgnore)
     {
+        $this->setTypeDamage($typeDamage);
         $this->setDamage($damage);
         $this->setAttackSpeed($attackSpeed);
         $this->setAccuracy($accuracy);
         $this->setMagicAccuracy($magicAccuracy);
         $this->setBlockIgnore($blockIgnore);
+    }
+
+    /**
+     * @return int
+     */
+    public function getTypeDamage(): int
+    {
+        return $this->typeDamage;
     }
 
     /**
@@ -169,5 +184,22 @@ class Offense implements OffenseInterface
     public function getDPS(): float
     {
         return round($this->damage * $this->attackSpeed, 1);
+    }
+
+    /**
+     * Задает тип урона. В отличие от других параметров тип урона не может меняться, по этому метод приватный
+     *
+     * @param int $typeDamage
+     * @throws OffenseException
+     */
+    private function setTypeDamage(int $typeDamage): void
+    {
+        if ($typeDamage !== self::TYPE_ATTACK && $typeDamage !== self::TYPE_SPELL) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_TYPE_DAMAGE_VALUE
+            );
+        }
+
+        $this->typeDamage = $typeDamage;
     }
 }

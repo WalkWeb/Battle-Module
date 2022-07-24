@@ -484,6 +484,8 @@ class Unit extends AbstractUnit
     }
 
     /**
+     * TODO Когда будет добавлен тип удара заклинание и магический блок - не забыть добавить проверку на магический блок
+     *
      * @param ActionInterface $action - ожидается DamageAction
      * @return bool
      * @throws Exception

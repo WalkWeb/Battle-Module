@@ -116,6 +116,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'command'    => 1,
                         'offense'    => [
+                            'type_damage'    => 1,
                             'damage'         => 15,
                             'attack_speed'   => 1.2,
                             'accuracy'       => 200,
@@ -143,6 +144,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'command'    => 1,
                         'offense'    => [
+                            'type_damage'    => 1,
                             'damage'         => 15,
                             'attack_speed'   => 1.2,
                             'accuracy'       => 200,
@@ -182,6 +184,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'class'      => 1,
                         'race'       => 1,
                         'offense'    => [
+                            'type_damage'    => 1,
                             'damage'         => 15,
                             'attack_speed'   => 1.2,
                             'accuracy'       => 200,

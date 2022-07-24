@@ -11,6 +11,9 @@ namespace Battle\Unit\Offense;
  */
 interface OffenseInterface
 {
+    public const TYPE_ATTACK        = 1;
+    public const TYPE_SPELL         = 2;
+
     public const MIN_DAMAGE         = 0;
     public const MAX_DAMAGE         = 100000;
 
@@ -25,6 +28,13 @@ interface OffenseInterface
 
     public const MIN_BLOCK_IGNORE   = 0;
     public const MAX_BLOCK_IGNORE   = 100;
+
+    /**
+     * Возвращает тип урона: атака или заклинание
+     *
+     * @return int
+     */
+    public function getTypeDamage(): int;
 
     /**
      * Возвращает урон

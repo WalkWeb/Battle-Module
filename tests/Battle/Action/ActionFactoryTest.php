@@ -223,6 +223,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'class'        => 1,
             'race'         => 9,
             'offense'      => [
+                'type_damage'    => 1,
                 'damage'         => 10,
                 'attack_speed'   => 1,
                 'accuracy'       => 200,
