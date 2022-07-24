@@ -11,11 +11,14 @@ namespace Battle\Unit\Defense;
  */
 interface DefenseInterface
 {
-    public const MIN_DEFENSE = 1;
-    public const MAX_DEFENSE = 1000000;
+    public const MIN_DEFENSE        = 1;
+    public const MAX_DEFENSE        = 1000000;
 
-    public const MIN_BLOCK   = 0;
-    public const MAX_BLOCK   = 100;
+    public const MIN_MAGIC_DEFENSE  = 1;
+    public const MAX_MAGIC_DEFENSE  = 1000000;
+
+    public const MIN_BLOCK          = 0;
+    public const MAX_BLOCK          = 100;
 
     public const MIN_MENTAL_BARRIER = 0;
     public const MAX_MENTAL_BARRIER = 100;
@@ -33,6 +36,20 @@ interface DefenseInterface
      * @param int $defense
      */
     public function setDefense(int $defense): void;
+
+    /**
+     * Возвращает магическую защиту юнита. Влияет на шанс уклониться от вражеского заклинания
+     *
+     * @return int
+     */
+    public function getMagicDefense(): int;
+
+    /**
+     * Устанавливает новое значение магической защиты. Применяется в эффектах, изменяющих магическую защиту юнита
+     *
+     * @param int $magicDefense
+     */
+    public function setMagicDefense(int $magicDefense): void;
 
     /**
      * Возвращает шанс блока вражеских атак юнита

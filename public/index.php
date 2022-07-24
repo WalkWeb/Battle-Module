@@ -27,6 +27,7 @@ $data = [
         ],
         'defense'    => [
             'defense'        => 134,
+            'magic_defense'  => 31,
             'block'          => 0,
             'mental_barrier' => 0,
         ],
@@ -52,6 +53,7 @@ $data = [
         ],
         'defense'    => [
             'defense'        => 155,
+            'magic_defense'  => 63,
             'block'          => 25,
             'mental_barrier' => 0,
         ],
@@ -77,6 +79,7 @@ $data = [
         ],
         'defense'    => [
             'defense'        => 138,
+            'magic_defense'  => 193,
             'block'          => 0,
             'mental_barrier' => 0,
         ],
@@ -102,6 +105,7 @@ $data = [
         ],
         'defense'    => [
             'defense'        => 178,
+            'magic_defense'  => 146,
             'block'          => 0,
             'mental_barrier' => 100,
         ],
@@ -127,6 +131,7 @@ $data = [
         ],
         'defense'    => [
             'defense'        => 106,
+            'magic_defense'  => 211,
             'block'          => 20,
             'mental_barrier' => 0,
         ],

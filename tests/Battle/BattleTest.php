@@ -70,6 +70,7 @@ class BattleTest extends AbstractUnitTest
                 ],
                 'defense'    => [
                     'defense'        => 100,
+                    'magic_defense'  => 50,
                     'block'          => 0,
                     'mental_barrier' => 0,
                 ],
@@ -95,6 +96,7 @@ class BattleTest extends AbstractUnitTest
                 ],
                 'defense'    => [
                     'defense'        => 100,
+                    'magic_defense'  => 50,
                     'block'          => 0,
                     'mental_barrier' => 0,
                 ],
@@ -147,6 +149,7 @@ class BattleTest extends AbstractUnitTest
                 ],
                 'defense'      => [
                     'defense'        => 100,
+                    'magic_defense'  => 50,
                     'block'          => 0,
                     'mental_barrier' => 0,
                 ],
@@ -172,6 +175,7 @@ class BattleTest extends AbstractUnitTest
                 ],
                 'defense'    => [
                     'defense'        => 100,
+                    'magic_defense'  => 50,
                     'block'          => 0,
                     'mental_barrier' => 0,
                 ],

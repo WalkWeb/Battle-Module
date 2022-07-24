@@ -46,7 +46,9 @@ class UnitFactoryTest extends AbstractUnitTest
         self::assertEquals($data['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());
 
         self::assertEquals($data['defense']['defense'], $unit->getDefense()->getDefense());
+        self::assertEquals($data['defense']['magic_defense'], $unit->getDefense()->getMagicDefense());
         self::assertEquals($data['defense']['block'], $unit->getDefense()->getBlock());
+        self::assertEquals($data['defense']['mental_barrier'], $unit->getDefense()->getMentalBarrier());
     }
 
     /**
@@ -92,6 +94,7 @@ class UnitFactoryTest extends AbstractUnitTest
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -131,6 +134,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -159,6 +163,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -186,6 +191,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -214,6 +220,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -250,6 +257,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -279,6 +287,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -308,6 +317,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -337,6 +347,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -365,6 +376,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -394,6 +406,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -423,6 +436,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -452,6 +466,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -480,6 +495,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -509,6 +525,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -537,6 +554,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -566,6 +584,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -595,6 +614,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -624,6 +644,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -652,6 +673,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -681,6 +703,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -710,6 +733,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -739,6 +763,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -767,6 +792,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -796,6 +822,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -825,6 +852,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -854,6 +882,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -882,6 +911,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -911,6 +941,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -940,6 +971,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -969,6 +1001,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -997,6 +1030,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1026,6 +1060,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1054,6 +1089,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1083,6 +1119,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1112,6 +1149,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1135,6 +1173,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1159,6 +1198,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'offense'    => true,
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1237,6 +1277,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1266,6 +1307,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1295,6 +1337,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1324,6 +1367,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1352,6 +1396,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1381,6 +1426,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1410,6 +1456,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1439,6 +1486,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],
@@ -1468,6 +1516,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                     'defense'    => [
                         'defense'        => 100,
+                        'magic_defense'  => 50,
                         'block'          => 0,
                         'mental_barrier' => 0,
                     ],

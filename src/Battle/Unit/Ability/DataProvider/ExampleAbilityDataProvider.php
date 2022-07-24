@@ -447,6 +447,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             ],
                             'defense'    => [
                                 'defense'        => 100,
+                                'magic_defense'  => 50,
                                 'block'          => 0,
                                 'mental_barrier' => 0,
                             ],
@@ -485,6 +486,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             ],
                             'defense'    => [
                                 'defense'        => 100,
+                                'magic_defense'  => 50,
                                 'block'          => 0,
                                 'mental_barrier' => 0,
                             ],
@@ -523,6 +525,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             ],
                             'defense'    => [
                                 'defense'        => 100,
+                                'magic_defense'  => 50,
                                 'block'          => 0,
                                 'mental_barrier' => 0,
                             ],
@@ -561,6 +564,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             ],
                             'defense'    => [
                                 'defense'        => 100,
+                                'magic_defense'  => 150,
                                 'block'          => 0,
                                 'mental_barrier' => 0,
                             ],

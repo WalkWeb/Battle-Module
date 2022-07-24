@@ -7,22 +7,27 @@ namespace Tests\Battle\Unit\Defense;
 use Battle\Unit\Defense\Defense;
 use Battle\Unit\Defense\DefenseException;
 use Battle\Unit\Defense\DefenseInterface;
+use Exception;
 use Tests\AbstractUnitTest;
 
 class DefenseTest extends AbstractUnitTest
 {
     /**
      * Тест на создание Defense
+     *
+     * @throws Exception
      */
     public function testDefenseCreate(): void
     {
         $defenseValue = 100;
+        $magicDefence = 50;
         $block = 0;
         $mentalBarrier = 50;
 
-        $defense = new Defense($defenseValue, $block, $mentalBarrier);
+        $defense = new Defense($defenseValue, $magicDefence, $block, $mentalBarrier);
 
         self::assertEquals($defenseValue, $defense->getDefense());
+        self::assertEquals($magicDefence, $defense->getMagicDefense());
         self::assertEquals($block, $defense->getBlock());
         self::assertEquals($mentalBarrier, $defense->getMentalBarrier());
     }
@@ -34,13 +39,15 @@ class DefenseTest extends AbstractUnitTest
      */
     public function testDefenseUpdate(): void
     {
-        $defense = new Defense(10, 10, 0);
+        $defense = new Defense(10, 10, 10, 0);
 
         $defense->setDefense($defenseValue = 1000);
+        $defense->setMagicDefense($magicDefence = 500);
         $defense->setBlock($block = 5);
         $defense->setMentalBarrier($mentalBarrier = 50);
 
         self::assertEquals($defenseValue, $defense->getDefense());
+        self::assertEquals($magicDefence, $defense->getMagicDefense());
         self::assertEquals($block, $defense->getBlock());
         self::assertEquals($mentalBarrier, $defense->getMentalBarrier());
     }
@@ -52,7 +59,7 @@ class DefenseTest extends AbstractUnitTest
      */
     public function testDefenseSetUltraMinDefense(): void
     {
-        $defense = new Defense(10, 10, 0);
+        $defense = new Defense(10, 10, 10, 0);
 
         $this->expectException(DefenseException::class);
         $this->expectExceptionMessage(
@@ -68,7 +75,7 @@ class DefenseTest extends AbstractUnitTest
      */
     public function testDefenseSetUltraMaxDefense(): void
     {
-        $defense = new Defense(10, 10, 0);
+        $defense = new Defense(10, 10, 10, 0);
 
         $this->expectException(DefenseException::class);
         $this->expectExceptionMessage(
@@ -78,13 +85,45 @@ class DefenseTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком низкое значение магической защиты
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMinMagicDefense(): void
+    {
+        $defense = new Defense(10, 10, 10, 0);
+
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAGIC_DEFENSE_VALUE . DefenseInterface::MIN_MAGIC_DEFENSE . '-' . DefenseInterface::MAX_MAGIC_DEFENSE
+        );
+        $defense->setMagicDefense(DefenseInterface::MIN_MAGIC_DEFENSE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком большое значение магической защиты
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMaxMagicDefense(): void
+    {
+        $defense = new Defense(10, 10, 10, 0);
+
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAGIC_DEFENSE_VALUE . DefenseInterface::MIN_MAGIC_DEFENSE . '-' . DefenseInterface::MAX_MAGIC_DEFENSE
+        );
+        $defense->setMagicDefense(DefenseInterface::MAX_MAGIC_DEFENSE + 1);
+    }
+
+    /**
      * Тест на ошибку, когда в Defense пытаются записать слишком низкое значение блока
      *
      * @throws DefenseException
      */
     public function testDefenseSetUltraMinBlock(): void
     {
-        $defense = new Defense(10, 10, 0);
+        $defense = new Defense(10, 10, 10, 0);
 
         $this->expectException(DefenseException::class);
         $this->expectExceptionMessage(
@@ -100,7 +139,7 @@ class DefenseTest extends AbstractUnitTest
      */
     public function testDefenseSetUltraMaxBlock(): void
     {
-        $defense = new Defense(10, 10, 0);
+        $defense = new Defense(10, 10, 10, 0);
 
         $this->expectException(DefenseException::class);
         $this->expectExceptionMessage(
@@ -116,7 +155,7 @@ class DefenseTest extends AbstractUnitTest
      */
     public function testDefenseSetUltraMinMentalBarrier(): void
     {
-        $defense = new Defense(10, 10, 0);
+        $defense = new Defense(10, 10, 10, 0);
 
         $this->expectException(DefenseException::class);
         $this->expectExceptionMessage(
@@ -132,7 +171,7 @@ class DefenseTest extends AbstractUnitTest
      */
     public function testDefenseSetUltraMaxMentalBarrier(): void
     {
-        $defense = new Defense(10, 10, 0);
+        $defense = new Defense(10, 10, 10, 0);
 
         $this->expectException(DefenseException::class);
         $this->expectExceptionMessage(

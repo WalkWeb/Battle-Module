@@ -37,6 +37,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -62,6 +63,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -87,6 +89,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -112,6 +115,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -138,6 +142,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -163,6 +168,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -188,6 +194,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -213,6 +220,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -239,6 +247,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -265,6 +274,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -291,6 +301,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -316,6 +327,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -341,6 +353,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -366,6 +379,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -392,6 +406,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -418,6 +433,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -443,6 +459,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -469,6 +486,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -495,6 +513,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -521,6 +540,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -547,6 +567,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -573,6 +594,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -599,6 +621,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -625,6 +648,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -651,6 +675,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -677,6 +702,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -703,6 +729,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -729,6 +756,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 100,
                 'mental_barrier' => 0,
             ],
@@ -755,6 +783,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -781,6 +810,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100000,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -807,6 +837,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 0,
             ],
@@ -833,6 +864,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 100,
             ],
@@ -859,6 +891,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 100,
             ],
@@ -885,6 +918,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 100,
             ],
@@ -911,6 +945,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 50,
             ],
@@ -937,6 +972,7 @@ class UnitFactory
             ],
             'defense'    => [
                 'defense'        => 100,
+                'magic_defense'  => 50,
                 'block'          => 0,
                 'mental_barrier' => 80,
             ],

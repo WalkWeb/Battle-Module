@@ -26,12 +26,19 @@ class Offense implements OffenseInterface
      */
     private $blockIgnore;
 
+    /**
+     * @param int $damage
+     * @param float $attackSpeed
+     * @param int $accuracy
+     * @param int $blockIgnore
+     * @throws OffenseException
+     */
     public function __construct(int $damage, float $attackSpeed, int $accuracy, int $blockIgnore)
     {
-        $this->damage = $damage;
-        $this->attackSpeed = $attackSpeed;
-        $this->accuracy = $accuracy;
-        $this->blockIgnore = $blockIgnore;
+        $this->setDamage($damage);
+        $this->setAttackSpeed($attackSpeed);
+        $this->setAccuracy($accuracy);
+        $this->setBlockIgnore($blockIgnore);
     }
 
     /**

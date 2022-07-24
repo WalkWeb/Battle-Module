@@ -102,7 +102,7 @@ class StrokeTest extends AbstractUnitTest
             true,
             1,
             new Offense(10, 1, 100, 0),
-            new Defense(10, 0, 0),
+            new Defense(10, 10, 0, 0),
             $container->getRaceFactory()->create($container->getRaceDataProvider()->get(1)),
             $container
         );
