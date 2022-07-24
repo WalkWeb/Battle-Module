@@ -1,6 +1,7 @@
 <?php
 
 use Battle\Command\CommandInterface;
+use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitInterface;
 use Battle\View\ViewException;
 use Battle\View\ViewInterface;
@@ -29,6 +30,7 @@ if (empty($this) || !($this instanceof ViewInterface)) {
             <td><p><?= $this->getTranslation()->trans('Life') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Mana') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Mental Barrier') ?></p></td>
+            <td><p><?= $this->getTranslation()->trans('Type Damage') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Damage') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Attack Speed') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Accuracy') ?></p></td>
@@ -55,6 +57,7 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 <td><p><?= $unit->getLife() ?>/<?= $unit->getTotalLife() ?></p></td>
                 <td><p><?= $unit->getMana() ?>/<?= $unit->getTotalMana() ?></p></td>
                 <td><p><?= $unit->getDefense()->getMentalBarrier() ?>%</p></td>
+                <td><p><?= ($unit->getOffense()->getTypeDamage() === OffenseInterface::TYPE_ATTACK ? $this->getTranslation()->trans('Attack') : $this->getTranslation()->trans('Spell')) ?></p></td>
                 <td><p><?= $unit->getOffense()->getDamage() ?></p></td>
                 <td><p><?= $unit->getOffense()->getAttackSpeed() ?></p></td>
                 <td><p><?= $unit->getOffense()->getAccuracy() ?></p></td>

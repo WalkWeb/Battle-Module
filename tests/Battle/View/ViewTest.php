@@ -515,6 +515,7 @@ EOT;
             <td><p>Life</p></td>
             <td><p>Mana</p></td>
             <td><p>Mental Barrier</p></td>
+            <td><p>Type Damage</p></td>
             <td><p>Damage</p></td>
             <td><p>Attack Speed</p></td>
             <td><p>Accuracy</p></td>
@@ -539,6 +540,7 @@ EOT;
                 <td><p>100/100</p></td>
                 <td><p>50/50</p></td>
                 <td><p>0%</p></td>
+                <td><p>Attack</p></td>
                 <td><p>20</p></td>
                 <td><p>1</p></td>
                 <td><p>200</p></td>
@@ -563,6 +565,7 @@ EOT;
                 <td><p>250/250</p></td>
                 <td><p>50/50</p></td>
                 <td><p>0%</p></td>
+                <td><p>Attack</p></td>
                 <td><p>30</p></td>
                 <td><p>1</p></td>
                 <td><p>200</p></td>
