@@ -298,9 +298,38 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на попадание атаки
+     *
+     * Юнит с accuracy=100000 бьет по юниту с defense=100
+     *
      * @throws Exception
      */
-    public function testDamageActionDodged(): void
+    public function testDamageActionNoDodgedAttack(): void
+    {
+        $unit = UnitFactory::createByTemplate(30);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertFalse($action->isDodged($enemyUnit));
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertFalse($action->isDodged($enemyUnit));
+    }
+
+    /**
+     * Тест на уклонение от атаки
+     *
+     * Юнит с accuracy=200 бьет по юниту с defense=100000
+     *
+     * @throws Exception
+     */
+    public function testDamageActionDodgedAttack(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(30);
@@ -319,8 +348,58 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на ситуацию, когда юнит большой защитой (шанс попадания 0%) с эффектом паралича получает урон и не может от
-     * него уклониться
+     * Тест на попадание заклинания
+     *
+     * Юнит с magic_accuracy=100000 и type_damage=2 бьет по юниту с magic_defense=50
+     *
+     * @throws Exception
+     */
+    public function testDamageActionNoDodgedSpell(): void
+    {
+        $unit = UnitFactory::createByTemplate(37);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertFalse($action->isDodged($enemyUnit));
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertFalse($action->isDodged($enemyUnit));
+    }
+
+    /**
+     * Тест на уклонение от заклинания
+     *
+     * Юнит с magic_accuracy=100 и type_damage=2 бьет по юниту с magic_defense=100000
+     *
+     * @throws Exception
+     */
+    public function testDamageActionDodgedSpell(): void
+    {
+        $unit = UnitFactory::createByTemplate(5);
+        $enemyUnit = UnitFactory::createByTemplate(37);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertFalse($action->isDodged($enemyUnit));
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertTrue($action->isDodged($enemyUnit));
+    }
+
+    /**
+     * Тест на ситуацию, когда юнит с большой защитой (шанс попадания 0%) с эффектом паралича получает урон и не может
+     * от него уклониться
      *
      * @throws Exception
      */
@@ -405,15 +484,13 @@ class DamageActionTest extends AbstractUnitTest
      * приравнивается к максимальному
      *
      * В текущем варианте кода, единственный вариант проверить, что происходит именно то, что ожидается - это заменить
-     * покрытие кода тестами (php vendor/bin/phpunit --coverage-html html) и увидеть, что код
+     * покрытие кода тестами (php vendor/bin/phpunit --coverage-html html) и увидеть, что код ниже покрыт тестами:
      *
      * if ($chanceOfHit > self::MAX_HIT_CHANCE) {
      *   return self::MAX_HIT_CHANCE;
      * }
      *
-     * тестами покрыт
-     *
-     * TODO В будущем, когда будет добавлен Calculator тест будет переписан, и он станет более очевидным - будет
+     * TODO В будущем, когда будет добавлен класс Calculator тест будет переписан, и он станет более очевидным - будет
      * TODO простой публичный метод, который будет возвращать шанс попадания, на основании меткости/защиты сражающихся
      *
      * @throws Exception

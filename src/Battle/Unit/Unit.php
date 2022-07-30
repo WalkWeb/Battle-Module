@@ -15,6 +15,7 @@ use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Defense\DefenseException;
 use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Offense\OffenseException;
+use Battle\Unit\Offense\OffenseInterface;
 use Exception;
 
 class Unit extends AbstractUnit
@@ -465,8 +466,16 @@ class Unit extends AbstractUnit
      */
     private function getChanceOfHit(ActionInterface $action): int
     {
-        $accuracy = $action->getActionUnit()->getOffense()->getAccuracy();
-        $chanceOfHit = (int)round(($accuracy - $this->defense->getDefense()) / ($accuracy / 10) * 2 + 80);
+        // Если атака - используется обычная меткость и защита, если заклинание - магическая меткость и защита
+        if ($action->getActionUnit()->getOffense()->getTypeDamage() === OffenseInterface::TYPE_ATTACK) {
+            $accuracy = $action->getActionUnit()->getOffense()->getAccuracy();
+            $defense = $this->defense->getDefense();
+        } else {
+            $accuracy = $action->getActionUnit()->getOffense()->getMagicAccuracy();
+            $defense = $this->defense->getMagicDefense();
+        }
+
+        $chanceOfHit = (int)round(($accuracy - $defense) / ($accuracy / 10) * 2 + 80);
 
         // TODO Можно добавить шанс попадания в FullLog, для большей информативности логов
         // TODO Но реализовать одно сообщение при ударе нескольких целей - не так просто
