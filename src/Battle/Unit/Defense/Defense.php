@@ -22,6 +22,11 @@ class Defense implements DefenseInterface
     private $block;
 
     /**
+     * @var int - Магический блок (0-100%)
+     */
+    private $magicBlock;
+
+    /**
      * @var int - Ментальный барьер (0-100%)
      */
     private $mentalBarrier;
@@ -30,14 +35,16 @@ class Defense implements DefenseInterface
      * @param int $defense
      * @param int $magicDefence
      * @param int $block
+     * @param int $magicBlock
      * @param int $mentalBarrier
      * @throws DefenseException
      */
-    public function __construct(int $defense, int $magicDefence, int $block, int $mentalBarrier)
+    public function __construct(int $defense, int $magicDefence, int $block, int $magicBlock, int $mentalBarrier)
     {
         $this->setDefense($defense);
         $this->setMagicDefense($magicDefence);
         $this->setBlock($block);
+        $this->setMagicBlock($magicBlock);
         $this->setMentalBarrier($mentalBarrier);
     }
 
@@ -108,6 +115,29 @@ class Defense implements DefenseInterface
         }
 
         $this->block = $block;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMagicBlock(): int
+    {
+        return $this->magicBlock;
+    }
+
+    /**
+     * @param int $magicBlock
+     * @throws DefenseException
+     */
+    public function setMagicBlock(int $magicBlock): void
+    {
+        if ($magicBlock < self::MIN_MAGIC_BLOCK || $magicBlock > self::MAX_MAGIC_BLOCK) {
+            throw new DefenseException(
+                DefenseException::INCORRECT_MAGIC_BLOCK_VALUE . DefenseInterface::MIN_MAGIC_BLOCK . '-' . DefenseInterface::MAX_MAGIC_BLOCK
+            );
+        }
+
+        $this->magicBlock = $magicBlock;
     }
 
     /**

@@ -23,6 +23,7 @@ class DefenseFactory
         self::int($data, 'defense', DefenseException::INCORRECT_DEFENSE);
         self::int($data, 'magic_defense', DefenseException::INCORRECT_MAGIC_DEFENSE);
         self::int($data, 'block', DefenseException::INCORRECT_BLOCK);
+        self::int($data, 'magic_block', DefenseException::INCORRECT_MAGIC_BLOCK);
         self::int($data, 'mental_barrier', DefenseException::INCORRECT_MENTAL_BARRIER);
 
         self::intMinMaxValue(
@@ -47,12 +48,19 @@ class DefenseFactory
         );
 
         self::intMinMaxValue(
+            $data['magic_block'],
+            DefenseInterface::MIN_MAGIC_BLOCK,
+            DefenseInterface::MAX_MAGIC_BLOCK,
+            DefenseException::INCORRECT_MAGIC_BLOCK_VALUE . DefenseInterface::MIN_MAGIC_BLOCK . '-' . DefenseInterface::MAX_MAGIC_BLOCK
+        );
+
+        self::intMinMaxValue(
             $data['mental_barrier'],
             DefenseInterface::MIN_MENTAL_BARRIER,
             DefenseInterface::MAX_MENTAL_BARRIER,
             DefenseException::INCORRECT_MENTAL_BARRIER_VALUE . DefenseInterface::MIN_MENTAL_BARRIER . '-' . DefenseInterface::MAX_MENTAL_BARRIER
         );
 
-        return new Defense($data['defense'], $data['magic_defense'], $data['block'], $data['mental_barrier']);
+        return new Defense($data['defense'], $data['magic_defense'], $data['block'], $data['magic_block'], $data['mental_barrier']);
     }
 }

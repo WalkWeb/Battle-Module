@@ -20,6 +20,9 @@ interface DefenseInterface
     public const MIN_BLOCK          = 0;
     public const MAX_BLOCK          = 100;
 
+    public const MIN_MAGIC_BLOCK    = 0;
+    public const MAX_MAGIC_BLOCK    = 100;
+
     public const MIN_MENTAL_BARRIER = 0;
     public const MAX_MENTAL_BARRIER = 100;
 
@@ -52,7 +55,7 @@ interface DefenseInterface
     public function setMagicDefense(int $magicDefense): void;
 
     /**
-     * Возвращает шанс блока вражеских атак юнита
+     * Возвращает шанс блока вражеских атак юнита (0-100%)
      *
      * @return int
      */
@@ -64,6 +67,20 @@ interface DefenseInterface
      * @param int $block
      */
     public function setBlock(int $block): void;
+
+    /**
+     * Возвращает шанс блока вражеских заклинаний юнита (0-100%)
+     *
+     * @return int
+     */
+    public function getMagicBlock(): int;
+
+    /**
+     * Устанавливает новое значение магического блока. Применяется в эффектах, изменяющих магический блок юнита
+     *
+     * @param int $magicBlock
+     */
+    public function setMagicBlock(int $magicBlock): void;
 
     /**
      * Возвращает значение ментального барьера (часть урона, которая вначале будет идти по мане, и только потом по

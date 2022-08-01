@@ -26,6 +26,7 @@ class DefenseFactoryTest extends AbstractUnitTest
         self::assertEquals($data['defense'], $defense->getDefense());
         self::assertEquals($data['magic_defense'], $defense->getMagicDefense());
         self::assertEquals($data['block'], $defense->getBlock());
+        self::assertEquals($data['magic_block'], $defense->getMagicBlock());
         self::assertEquals($data['mental_barrier'], $defense->getMentalBarrier());
     }
 
@@ -54,6 +55,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 100,
                     'magic_defense'  => 50,
                     'block'          => 0,
+                    'magic_block'    => 0,
                     'mental_barrier' => 0,
                 ],
             ],
@@ -62,6 +64,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 654,
                     'magic_defense'  => 150,
                     'block'          => 34,
+                    'magic_block'    => 25,
                     'mental_barrier' => 100,
                 ],
             ],
@@ -79,6 +82,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // Отсутствует defense
                 [
                     'block'          => 0,
+                    'magic_block'    => 25,
                     'magic_defense'  => 50,
                     'mental_barrier' => 0,
                 ],
@@ -90,6 +94,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => '100',
                     'magic_defense'  => 50,
                     'block'          => 0,
+                    'magic_block'    => 25,
                     'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_DEFENSE,
@@ -100,6 +105,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => DefenseInterface::MIN_DEFENSE - 1,
                     'magic_defense'  => 50,
                     'block'          => 0,
+                    'magic_block'    => 25,
                     'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE . '-' . DefenseInterface::MAX_DEFENSE,
@@ -110,6 +116,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => DefenseInterface::MAX_DEFENSE + 1,
                     'magic_defense'  => 50,
                     'block'          => 0,
+                    'magic_block'    => 25,
                     'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_DEFENSE_VALUE . DefenseInterface::MIN_DEFENSE . '-' . DefenseInterface::MAX_DEFENSE,
@@ -121,6 +128,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                 [
                     'defense'        => 100,
                     'block'          => 0,
+                    'magic_block'    => 25,
                     'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_MAGIC_DEFENSE,
@@ -131,6 +139,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 100,
                     'magic_defense'  => true,
                     'block'          => 0,
+                    'magic_block'    => 25,
                     'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_MAGIC_DEFENSE,
@@ -141,6 +150,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 100,
                     'magic_defense'  => DefenseInterface::MIN_MAGIC_DEFENSE - 1,
                     'block'          => 0,
+                    'magic_block'    => 25,
                     'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_MAGIC_DEFENSE_VALUE . DefenseInterface::MIN_MAGIC_DEFENSE . '-' . DefenseInterface::MAX_MAGIC_DEFENSE
@@ -151,6 +161,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 100,
                     'magic_defense'  => DefenseInterface::MAX_MAGIC_DEFENSE + 1,
                     'block'          => 0,
+                    'magic_block'    => 25,
                     'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_MAGIC_DEFENSE_VALUE . DefenseInterface::MIN_MAGIC_DEFENSE . '-' . DefenseInterface::MAX_MAGIC_DEFENSE
@@ -162,6 +173,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                 [
                     'defense'        => 100,
                     'magic_defense'  => 50,
+                    'magic_block'    => 25,
                     'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_BLOCK,
@@ -172,6 +184,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 100,
                     'magic_defense'  => 50,
                     'block'          => 50.5,
+                    'magic_block'    => 25,
                     'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_BLOCK,
@@ -182,6 +195,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 100,
                     'magic_defense'  => 50,
                     'block'          => DefenseInterface::MIN_BLOCK - 1,
+                    'magic_block'    => 25,
                     'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_BLOCK_VALUE . DefenseInterface::MIN_BLOCK . '-' . DefenseInterface::MAX_BLOCK,
@@ -192,9 +206,55 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 100,
                     'magic_defense'  => 50,
                     'block'          => DefenseInterface::MAX_BLOCK + 1,
+                    'magic_block'    => 25,
                     'mental_barrier' => 0,
                 ],
                 DefenseException::INCORRECT_BLOCK_VALUE . DefenseInterface::MIN_BLOCK . '-' . DefenseInterface::MAX_BLOCK,
+            ],
+
+            // magic_block
+            [
+                // Отсутствует magic_block
+                [
+                    'defense'        => 100,
+                    'magic_defense'  => 50,
+                    'block'          => 0,
+                    'mental_barrier' => 0,
+                ],
+                DefenseException::INCORRECT_MAGIC_BLOCK,
+            ],
+            [
+                // magic_block некорректного типа
+                [
+                    'defense'        => 100,
+                    'magic_defense'  => 50,
+                    'block'          => 0,
+                    'magic_block'    => '0',
+                    'mental_barrier' => 0,
+                ],
+                DefenseException::INCORRECT_MAGIC_BLOCK,
+            ],
+            [
+                // magic_block меньше минимального значения
+                [
+                    'defense'        => 100,
+                    'magic_defense'  => 50,
+                    'block'          => 0,
+                    'magic_block'    => DefenseInterface::MIN_MAGIC_BLOCK - 1,
+                    'mental_barrier' => 0,
+                ],
+                DefenseException::INCORRECT_MAGIC_BLOCK_VALUE . DefenseInterface::MIN_MAGIC_BLOCK . '-' . DefenseInterface::MAX_MAGIC_BLOCK,
+            ],
+            [
+                // magic_block больше максимального значения
+                [
+                    'defense'        => 100,
+                    'magic_defense'  => 50,
+                    'block'          => 0,
+                    'magic_block'    => DefenseInterface::MAX_MAGIC_BLOCK + 1,
+                    'mental_barrier' => 0,
+                ],
+                DefenseException::INCORRECT_MAGIC_BLOCK_VALUE . DefenseInterface::MIN_MAGIC_BLOCK . '-' . DefenseInterface::MAX_MAGIC_BLOCK,
             ],
 
             // mental_barrier
@@ -204,6 +264,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 100,
                     'magic_defense'  => 50,
                     'block'          => 75,
+                    'magic_block'    => 25,
                 ],
                 DefenseException::INCORRECT_MENTAL_BARRIER,
             ],
@@ -213,6 +274,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 100,
                     'magic_defense'  => 50,
                     'block'          => 75,
+                    'magic_block'    => 25,
                     'mental_barrier' => '50',
                 ],
                 DefenseException::INCORRECT_MENTAL_BARRIER,
@@ -223,6 +285,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 100,
                     'magic_defense'  => 50,
                     'block'          => 75,
+                    'magic_block'    => 25,
                     'mental_barrier' => DefenseInterface::MIN_MENTAL_BARRIER - 1,
                 ],
                 DefenseException::INCORRECT_MENTAL_BARRIER_VALUE . DefenseInterface::MIN_MENTAL_BARRIER . '-' . DefenseInterface::MAX_MENTAL_BARRIER,
@@ -233,6 +296,7 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'defense'        => 100,
                     'magic_defense'  => 50,
                     'block'          => 75,
+                    'magic_block'    => 25,
                     'mental_barrier' => DefenseInterface::MAX_MENTAL_BARRIER + 1,
                 ],
                 DefenseException::INCORRECT_MENTAL_BARRIER_VALUE . DefenseInterface::MIN_MENTAL_BARRIER . '-' . DefenseInterface::MAX_MENTAL_BARRIER,

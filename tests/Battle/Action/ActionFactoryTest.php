@@ -234,6 +234,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 'defense'        => 100,
                 'magic_defense'  => 50,
                 'block'          => 0,
+                'magic_block'    => 0,
                 'mental_barrier' => 0,
             ],
         ];
