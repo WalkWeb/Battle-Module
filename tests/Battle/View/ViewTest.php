@@ -512,17 +512,18 @@ EOT;
             <td><p>Command</p></td>
             <td class="name"><p>Name</p></td>
             <td><p>Race</p></td>
-            <td><p>Life</p></td>
-            <td><p>Mana</p></td>
-            <td><p>Mental Barrier</p></td>
+            <td><p><abbr title="Life"><img src="/images/battle/stats_icon/life.png" alt=""></abbr></p></td>
+            <td><p><abbr title="Mana"><img src="/images/battle/stats_icon/mana.png" alt=""></abbr></p></td>
+            <td><p><abbr title="Mental Barrier"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
             <td><p>Type Damage</p></td>
             <td><p>Damage</p></td>
-            <td><p>Attack Speed</p></td>
-            <td><p>Accuracy</p></td>
-            <td><p>Magic Accuracy</p></td>
-            <td><p>Defense</p></td>
-            <td><p>Magic Defense</p></td>
-            <td><p>Block</p></td>
+            <td><p><abbr title="Attack Speed"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
+            <td><p><abbr title="Accuracy"><img src="/images/battle/stats_icon/accuracy.png" alt=""></abbr></p></td>
+            <td><p><abbr title="Magic Accuracy"><img src="/images/battle/stats_icon/magic_accuracy.png" alt=""></abbr></p></td>
+            <td><p><abbr title="Defense"><img src="/images/battle/stats_icon/defence.png" alt=""></abbr></p></td>
+            <td><p><abbr title="Magic Defense"><img src="/images/battle/stats_icon/magic_defence.png" alt=""></abbr></p></td>
+            <td><p><abbr title="Block"><img src="/images/battle/stats_icon/block.png" alt=""></abbr></p></td>
+            <td><p><abbr title="Magic Block"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
             <td><p>Concentration</p></td>
             <td><p>Rage</p></td>
             <td><p>Melee?</p></td>
@@ -548,6 +549,7 @@ EOT;
                 <td><p>100</p></td>
                 <td><p>50</p></td>
                 <td><p>0</p></td>
+                <td><p>0</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>Yes</p></td>
@@ -572,6 +574,7 @@ EOT;
                 <td><p>100</p></td>
                 <td><p>100</p></td>
                 <td><p>50</p></td>
+                <td><p>0</p></td>
                 <td><p>0</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>0/1000</p></td>

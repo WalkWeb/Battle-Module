@@ -27,17 +27,18 @@ if (empty($this) || !($this instanceof ViewInterface)) {
             <td><p><?= $this->getTranslation()->trans('Command') ?></p></td>
             <td class="name"><p><?= $this->getTranslation()->trans('Name') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Race') ?></p></td>
-            <td><p><?= $this->getTranslation()->trans('Life') ?></p></td>
-            <td><p><?= $this->getTranslation()->trans('Mana') ?></p></td>
-            <td><p><?= $this->getTranslation()->trans('Mental Barrier') ?></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Life') ?>"><img src="/images/battle/stats_icon/life.png" alt=""></abbr></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Mana') ?>"><img src="/images/battle/stats_icon/mana.png" alt=""></abbr></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Mental Barrier') ?>"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
             <td><p><?= $this->getTranslation()->trans('Type Damage') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Damage') ?></p></td>
-            <td><p><?= $this->getTranslation()->trans('Attack Speed') ?></p></td>
-            <td><p><?= $this->getTranslation()->trans('Accuracy') ?></p></td>
-            <td><p><?= $this->getTranslation()->trans('Magic Accuracy') ?></p></td>
-            <td><p><?= $this->getTranslation()->trans('Defense') ?></p></td>
-            <td><p><?= $this->getTranslation()->trans('Magic Defense') ?></p></td>
-            <td><p><?= $this->getTranslation()->trans('Block') ?></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Attack Speed') ?>"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Accuracy') ?>"><img src="/images/battle/stats_icon/accuracy.png" alt=""></abbr></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Magic Accuracy') ?>"><img src="/images/battle/stats_icon/magic_accuracy.png" alt=""></abbr></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Defense') ?>"><img src="/images/battle/stats_icon/defence.png" alt=""></abbr></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Magic Defense') ?>"><img src="/images/battle/stats_icon/magic_defence.png" alt=""></abbr></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Block') ?>"><img src="/images/battle/stats_icon/block.png" alt=""></abbr></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Magic Block') ?>"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
             <td><p><?= $this->getTranslation()->trans('Concentration') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Rage') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Melee') ?>?</p></td>
@@ -65,6 +66,7 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 <td><p><?= $unit->getDefense()->getDefense() ?></p></td>
                 <td><p><?= $unit->getDefense()->getMagicDefense() ?></p></td>
                 <td><p><?= $unit->getDefense()->getBlock() ?></p></td>
+                <td><p><?= $unit->getDefense()->getMagicBlock() ?></p></td>
                 <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONCENTRATION ?></p></td>
                 <td><p><?= $unit->getRage() ?>/<?= $unit::MAX_RAGE ?></p></td>
                 <td><p><?= ($unit->isMelee() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>

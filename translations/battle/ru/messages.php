@@ -73,6 +73,7 @@ return [
     'Runtime'                             => 'Время выполнения',
     'Memory cost'                         => 'Затрачено памяти',
     'Block'                               => 'Блок',
+    'Magic Block'                         => 'Магический блок',
     'Blocked'                             => 'Заблокировал',
     'Dodged'                              => 'Уклонился',
     // Races

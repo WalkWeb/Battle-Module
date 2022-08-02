@@ -75,6 +75,7 @@ return [
     'Runtime'                             => 'Runtime',
     'Memory cost'                         => 'Memory cost',
     'Block'                               => 'Block',
+    'Magic Block'                         => 'Magic Block',
     'Blocked'                             => 'Blocked',
     'Dodged'                              => 'Dodged',
     // Races
