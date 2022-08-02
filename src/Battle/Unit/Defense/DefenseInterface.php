@@ -17,12 +17,15 @@ interface DefenseInterface
     public const MIN_MAGIC_DEFENSE  = 1;
     public const MAX_MAGIC_DEFENSE  = 1000000;
 
+    // TODO Может быть отрицательным до -100 (этакий штраф), при подсчете если минусовой, приравнивается 0
     public const MIN_BLOCK          = 0;
     public const MAX_BLOCK          = 100;
 
+    // TODO Аналогично
     public const MIN_MAGIC_BLOCK    = 0;
     public const MAX_MAGIC_BLOCK    = 100;
 
+    // TODO Аналогично
     public const MIN_MENTAL_BARRIER = 0;
     public const MAX_MENTAL_BARRIER = 100;
 

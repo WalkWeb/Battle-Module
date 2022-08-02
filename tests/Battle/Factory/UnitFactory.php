@@ -1115,6 +1115,36 @@ class UnitFactory
                 'mental_barrier' => 0,
             ],
         ],
+        // юнит со 100% магическим блоком
+        38  => [
+            'id'         => 'c04fefac-d06d-45b5-9f47-52679b7b5c4a',
+            'name'       => 'unit_1',
+            'level'      => 1,
+            'avatar'     => '/images/avas/humans/human001.jpg',
+            'life'       => 100,
+            'total_life' => 100,
+            'mana'       => 50,
+            'total_mana' => 50,
+            'melee'      => true,
+            'command'    => 1,
+            'class'      => 1,
+            'race'       => 1,
+            'offense'    => [
+                'type_damage'    => 1,
+                'damage'         => 20,
+                'attack_speed'   => 1.00,
+                'accuracy'       => 200,
+                'magic_accuracy' => 100,
+                'block_ignore'   => 0,
+            ],
+            'defense'    => [
+                'defense'        => 100,
+                'magic_defense'  => 50,
+                'block'          => 0,
+                'magic_block'    => 100,
+                'mental_barrier' => 0,
+            ],
+        ],
     ];
 
     /**

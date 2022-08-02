@@ -249,14 +249,74 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на блокирование урона
+     * Тест на ситуацию, когда атака не блокируется
      *
      * @throws Exception
      */
-    public function testDamageActionBlocked(): void
+    public function testDamageActionAttackNoBlocked(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->handle();
+
+        self::assertFalse($action->isBlocked($enemyUnit));
+        self::assertEquals($unit->getOffense()->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
+    }
+
+    /**
+     * Тест на блокирование атаки (цель имеет 100% блок)
+     *
+     * @throws Exception
+     */
+    public function testDamageActionAttackBlocked(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(28);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->handle();
+
+        self::assertTrue($action->isBlocked($enemyUnit));
+        self::assertEquals(0, $action->getFactualPowerByUnit($enemyUnit));
+    }
+
+    /**
+     * Тест на ситуацию, когда заклинание не блокируется (хотя цель имеет обычный блок 100%)
+     *
+     * @throws Exception
+     */
+    public function testDamageActionSpellNoBlocked(): void
+    {
+        $unit = UnitFactory::createByTemplate(5);
+        $enemyUnit = UnitFactory::createByTemplate(28);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->handle();
+
+        self::assertFalse($action->isBlocked($enemyUnit));
+        self::assertEquals($unit->getOffense()->getDamage(), $action->getFactualPowerByUnit($enemyUnit));
+    }
+
+    /**
+     * Тест на ситуацию, когда заклинание блокируется (цель имеет магический блок 100%)
+     *
+     * @throws Exception
+     */
+    public function testDamageActionSpellBlocked(): void
+    {
+        $unit = UnitFactory::createByTemplate(5);
+        $enemyUnit = UnitFactory::createByTemplate(38);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 

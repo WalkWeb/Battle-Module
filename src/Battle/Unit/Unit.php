@@ -493,15 +493,16 @@ class Unit extends AbstractUnit
     }
 
     /**
-     * TODO Когда будет добавлен тип удара заклинание и магический блок - не забыть добавить проверку на магический блок
-     *
      * @param ActionInterface $action - ожидается DamageAction
      * @return bool
      * @throws Exception
      */
     private function isBlocked(ActionInterface $action): bool
     {
-        if ($this->getDefense()->getBlock() === 0) {
+        $block = $action->getActionUnit()->getOffense()->getTypeDamage() === OffenseInterface::TYPE_ATTACK ?
+            $this->getDefense()->getBlock() : $this->getDefense()->getMagicBlock();
+
+        if ($block === 0) {
             return false;
         }
 
@@ -513,7 +514,7 @@ class Unit extends AbstractUnit
             return false;
         }
 
-        return ($this->getDefense()->getBlock() - $action->getActionUnit()->getOffense()->getBlockIgnore()) >= random_int(1, 100);
+        return ($block - $action->getActionUnit()->getOffense()->getBlockIgnore()) >= random_int(1, 100);
     }
 
     /**
