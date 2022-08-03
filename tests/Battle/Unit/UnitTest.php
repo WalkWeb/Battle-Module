@@ -55,6 +55,7 @@ class UnitTest extends AbstractUnitTest
         self::assertFalse($unit->isParalysis());
 
         self::assertEquals($data['offense']['damage'], $unit->getOffense()->getDamage());
+        self::assertEquals($data['offense']['physical_damage'], $unit->getOffense()->getPhysicalDamage());
         self::assertEquals($data['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
         self::assertEquals($data['offense']['accuracy'], $unit->getOffense()->getAccuracy());
         self::assertEquals($data['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());

@@ -20,15 +20,17 @@ class OffenseTest extends AbstractUnitTest
     {
         $typeDamage = 1;
         $damage = 100;
+        $physicalDamage = 300;
         $attackSpeed = 1.2;
         $accuracy = 200;
         $magicAccuracy = 100;
         $blockIgnore = 0;
 
-        $offense = new Offense($typeDamage, $damage, $attackSpeed, $accuracy, $magicAccuracy, $blockIgnore);
+        $offense = new Offense($typeDamage, $damage, $physicalDamage, $attackSpeed, $accuracy, $magicAccuracy, $blockIgnore);
 
         self::assertEquals($typeDamage, $offense->getTypeDamage());
         self::assertEquals($damage, $offense->getDamage());
+        self::assertEquals($physicalDamage, $offense->getPhysicalDamage());
         self::assertEquals($attackSpeed, $offense->getAttackSpeed());
         self::assertEquals($accuracy, $offense->getAccuracy());
         self::assertEquals($magicAccuracy, $offense->getMagicAccuracy());
@@ -43,15 +45,17 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseUpdate(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0);
+        $offense = new Offense(1, 10, 20, 1, 100, 50, 0);
 
         $offense->setDamage($damage = 50);
+        $offense->setPhysicalDamage($physicalDamage = 15);
         $offense->setAttackSpeed($attackSpeed = 1.2);
         $offense->setAccuracy($accuracy = 250);
         $offense->setMagicAccuracy($magicAccuracy = 150);
         $offense->setBlockIgnore($blockIgnore = 100);
 
         self::assertEquals($damage, $offense->getDamage());
+        self::assertEquals($physicalDamage, $offense->getPhysicalDamage());
         self::assertEquals($attackSpeed, $offense->getAttackSpeed());
         self::assertEquals($accuracy, $offense->getAccuracy());
         self::assertEquals($magicAccuracy, $offense->getMagicAccuracy());
@@ -65,7 +69,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMinDamage(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0);
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -81,7 +85,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxDamage(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0);
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -91,13 +95,45 @@ class OffenseTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ошибку, когда в Offense пытаются записать слишком низкое значение физического урона
+     *
+     * @throws OffenseException
+     */
+    public function testOffenseSetUltraMinPhysicalDamage(): void
+    {
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
+
+        $this->expectException(OffenseException::class);
+        $this->expectExceptionMessage(
+            OffenseException::INCORRECT_PHYSICAL_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+        );
+        $offense->setPhysicalDamage(OffenseInterface::MIN_DAMAGE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Offense пытаются записать слишком высокое значение физического урона
+     *
+     * @throws OffenseException
+     */
+    public function testOffenseSetUltraMaxPhysicalDamage(): void
+    {
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
+
+        $this->expectException(OffenseException::class);
+        $this->expectExceptionMessage(
+            OffenseException::INCORRECT_PHYSICAL_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+        );
+        $offense->setPhysicalDamage(OffenseInterface::MAX_DAMAGE + 1);
+    }
+
+    /**
      * Тест на ошибку, когда в Offense пытаются записать слишком низкое значение скорости атаки
      *
      * @throws OffenseException
      */
     public function testOffenseSetUltraMinAttackSpeed(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0);
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -113,7 +149,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxAttackSpeed(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0);
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -129,7 +165,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMinAccuracy(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0);
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -145,7 +181,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxAccuracy(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0);
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -161,7 +197,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMinMagicAccuracy(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0);
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -177,7 +213,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxMagicAccuracy(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0);
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -193,7 +229,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMinBlockIgnore(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0);
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -209,7 +245,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxBlockIgnore(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0);
+        $offense = new Offense(1, 10, 10, 1, 100, 50, 0);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -227,6 +263,6 @@ class OffenseTest extends AbstractUnitTest
     {
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(OffenseException::INCORRECT_TYPE_DAMAGE_VALUE);
-        new Offense(3, 10, 1, 100, 50, 0);
+        new Offense(3, 10, 10, 1, 100, 50, 0);
     }
 }

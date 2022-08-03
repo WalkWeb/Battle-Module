@@ -39,6 +39,9 @@ interface OffenseInterface
     /**
      * Возвращает урон
      *
+     * TODO Сейчас это единственный параметр урона, в будущем он будет возвращать суммарный урон по всем стихиям
+     * TODO с учетом сопротивлений цели
+     *
      * @return int
      */
     public function getDamage(): int;
@@ -49,7 +52,21 @@ interface OffenseInterface
      * @param int $damage
      */
     public function setDamage(int $damage): void;
-    
+
+    /**
+     * Возвращает физический урон
+     *
+     * @return int
+     */
+    public function getPhysicalDamage(): int;
+
+    /**
+     * Устанавливает новое значение физического урона. Применяется в эффектах, изменяющих физический урон юнита
+     *
+     * @param int $physicalDamage
+     */
+    public function setPhysicalDamage(int $physicalDamage): void;
+
     /**
      * Возвращает скорость атаки
      *

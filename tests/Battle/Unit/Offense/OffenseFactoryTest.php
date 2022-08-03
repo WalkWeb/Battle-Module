@@ -24,6 +24,7 @@ class OffenseFactoryTest extends AbstractUnitTest
         $offense = $this->getFactory()->create($data);
 
         self::assertEquals($data['damage'], $offense->getDamage());
+        self::assertEquals($data['physical_damage'], $offense->getPhysicalDamage());
         self::assertEquals($data['attack_speed'], $offense->getAttackSpeed());
         self::assertEquals($data['accuracy'], $offense->getAccuracy());
         self::assertEquals($data['magic_accuracy'], $offense->getMagicAccuracy());
@@ -54,23 +55,25 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Скорость атаки int
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
             ],
             [
                 // Скорость атаки float
                 [
-                    'type_damage'    => 2,
-                    'damage'         => 20,
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 2,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
             ],
         ];
@@ -87,133 +90,197 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует type_damage
                 [
-                    'damage'         => 20,
-                    'attack_speed'   => 1,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_TYPE_DAMAGE,
             ],
             [
                 // type_damage некорректного типа
                 [
-                    'type_damage'    => '1',
-                    'damage'         => 20,
-                    'attack_speed'   => 1,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => '1',
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_TYPE_DAMAGE,
             ],
             [
                 // type_damage выходит за пределы допустимых значений (1 или 2)
                 [
-                    'type_damage'    => 3,
-                    'damage'         => 20,
-                    'attack_speed'   => 1,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 3,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
-                OffenseException::INCORRECT_TYPE_DAMAGE_VALUE
+                OffenseException::INCORRECT_TYPE_DAMAGE_VALUE,
             ],
 
             // damage
             [
                 // Отсутствует damage
                 [
-                    'type_damage'    => 1,
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_DAMAGE,
             ],
             [
                 // damage некорректного типа
                 [
-                    'type_damage'    => 1,
-                    'damage'         => '20',
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => '20',
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_DAMAGE,
             ],
             [
                 // damage меньше минимального значения
                 [
-                    'type_damage'    => 1,
-                    'damage'         => OffenseInterface::MIN_DAMAGE - 1,
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => OffenseInterface::MIN_DAMAGE - 1,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE,
             ],
             [
                 // damage больше максимального значения
                 [
-                    'type_damage'    => 1,
-                    'damage'         => OffenseInterface::MAX_DAMAGE + 1,
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => OffenseInterface::MAX_DAMAGE + 1,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE,
+            ],
+
+            // physical_damage
+            [
+                // Отсутствует physical_damage
+                [
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
+                ],
+                OffenseException::INCORRECT_PHYSICAL_DAMAGE,
+            ],
+            [
+                // physical_damage некорректного типа
+                [
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10.5,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
+                ],
+                OffenseException::INCORRECT_PHYSICAL_DAMAGE,
+            ],
+            [
+                // physical_damage меньше минимального значения
+                [
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => OffenseInterface::MIN_DAMAGE - 1,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
+                ],
+                OffenseException::INCORRECT_PHYSICAL_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE,
+            ],
+            [
+                // physical_damage больше максимального значения
+                [
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => OffenseInterface::MAX_DAMAGE + 1,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
+                ],
+                OffenseException::INCORRECT_PHYSICAL_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE,
             ],
 
             // attack_speed
             [
                 // Отсутствует attack_speed
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_ATTACK_SPEED,
             ],
             [
                 // attack_speed некорректного типа
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => true,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => true,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_ATTACK_SPEED,
             ],
             [
                 // attack_speed меньше минимального значения
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => OffenseInterface::MIN_ATTACK_SPEED - 0.1,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => OffenseInterface::MIN_ATTACK_SPEED - 0.1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_ATTACK_SPEED_VALUE . OffenseInterface::MIN_ATTACK_SPEED . '-' . OffenseInterface::MAX_ATTACK_SPEED,
             ],
             [
                 // attack_speed больше максимального значения
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => OffenseInterface::MAX_ATTACK_SPEED + 0.1,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => OffenseInterface::MAX_ATTACK_SPEED + 0.1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_ATTACK_SPEED_VALUE . OffenseInterface::MIN_ATTACK_SPEED . '-' . OffenseInterface::MAX_ATTACK_SPEED,
             ],
@@ -222,47 +289,51 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует accuracy
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1.3,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_ACCURACY,
             ],
             [
                 // accuracy некорректного типа
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => [200],
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => [200],
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_ACCURACY,
             ],
             [
                 // accuracy меньше минимального значения
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => OffenseInterface::MIN_ACCURACY - 1,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => OffenseInterface::MIN_ACCURACY - 1,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_ACCURACY_VALUE . OffenseInterface::MIN_ACCURACY . '-' . OffenseInterface::MAX_ACCURACY,
             ],
             [
                 // accuracy больше максимального значения
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => OffenseInterface::MAX_ACCURACY + 1,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => OffenseInterface::MAX_ACCURACY + 1,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_ACCURACY_VALUE . OffenseInterface::MIN_ACCURACY . '-' . OffenseInterface::MAX_ACCURACY,
             ],
@@ -271,47 +342,51 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует magic_accuracy
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1,
-                    'accuracy'       => 200,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_MAGIC_ACCURACY,
             ],
             [
                 // magic_accuracy некорректного типа
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => '100',
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => '100',
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_MAGIC_ACCURACY,
             ],
             [
                 // magic_accuracy меньше минимального значения
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => OffenseInterface::MIN_MAGIC_ACCURACY - 1,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => OffenseInterface::MIN_MAGIC_ACCURACY - 1,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_MAGIC_ACCURACY_VALUE . OffenseInterface::MIN_MAGIC_ACCURACY . '-' . OffenseInterface::MAX_MAGIC_ACCURACY,
             ],
             [
                 // magic_accuracy больше максимального значения
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => OffenseInterface::MAX_MAGIC_ACCURACY + 1,
-                    'block_ignore'   => 0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => OffenseInterface::MAX_MAGIC_ACCURACY + 1,
+                    'block_ignore'    => 0,
                 ],
                 OffenseException::INCORRECT_MAGIC_ACCURACY_VALUE . OffenseInterface::MIN_MAGIC_ACCURACY . '-' . OffenseInterface::MAX_MAGIC_ACCURACY,
             ],
@@ -320,47 +395,51 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует block_ignore
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
                 ],
                 OffenseException::INCORRECT_BLOCK_IGNORE,
             ],
             [
                 // block_ignore некорректного типа
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => 0.0,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => 0.0,
                 ],
                 OffenseException::INCORRECT_BLOCK_IGNORE,
             ],
             [
                 // block_ignore меньше минимального значения
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => OffenseInterface::MIN_BLOCK_IGNORE - 1,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => OffenseInterface::MIN_BLOCK_IGNORE - 1,
                 ],
                 OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE,
             ],
             [
                 // block_ignore больше максимального значения
                 [
-                    'type_damage'    => 1,
-                    'damage'         => 20,
-                    'attack_speed'   => 1.3,
-                    'accuracy'       => 200,
-                    'magic_accuracy' => 100,
-                    'block_ignore'   => OffenseInterface::MAX_BLOCK_IGNORE + 1,
+                    'type_damage'     => 1,
+                    'damage'          => 20,
+                    'physical_damage' => 10,
+                    'attack_speed'    => 1.3,
+                    'accuracy'        => 200,
+                    'magic_accuracy'  => 100,
+                    'block_ignore'    => OffenseInterface::MAX_BLOCK_IGNORE + 1,
                 ],
                 OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE,
             ],

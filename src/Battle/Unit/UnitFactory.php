@@ -39,14 +39,20 @@ class UnitFactory
      *         'class'      => 5,
      *         'race'       => 3,
      *         'offense'    => [
-     *             'damage'       => 35,
-     *             'attack_speed' => 1.2,
-     *             'accuracy'     => 176,
-     *             'block_ignore' => 0,
+     *             'type_damage'     => 1,
+     *             'damage'          => 35,
+     *             'physical_damage' => 0,
+     *             'attack_speed'    => 1.2,
+     *             'accuracy'        => 176,
+     *             'magic_accuracy'  => 413,
+     *             'block_ignore'    => 0,
      *         ],
      *         'defense'    => [
-     *             'defense' => 134,
-     *             'block'   => 0,
+     *             'defense'        => 134,
+     *             'magic_defense'  => 211,
+     *             'block'          => 0,
+     *             'magic_block'    => 0,
+     *             'mental_barrier' => 0,
      *         ],
      *     ]
      *

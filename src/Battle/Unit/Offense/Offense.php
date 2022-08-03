@@ -12,9 +12,16 @@ class Offense implements OffenseInterface
     private $typeDamage;
 
     /**
+     * TODO На удаление - общий урон будет считаться как сумма всех стихийных уронов
+     *
      * @var int
      */
     private $damage;
+
+    /**
+     * @var int
+     */
+    private $physicalDamage;
 
     /**
      * @var float
@@ -39,16 +46,18 @@ class Offense implements OffenseInterface
     /**
      * @param int $typeDamage
      * @param int $damage
+     * @param int $physicalDamage
      * @param float $attackSpeed
      * @param int $accuracy
      * @param int $magicAccuracy
      * @param int $blockIgnore
      * @throws OffenseException
      */
-    public function __construct(int $typeDamage, int $damage, float $attackSpeed, int $accuracy, int $magicAccuracy, int $blockIgnore)
+    public function __construct(int $typeDamage, int $damage, int $physicalDamage, float $attackSpeed, int $accuracy, int $magicAccuracy, int $blockIgnore)
     {
         $this->setTypeDamage($typeDamage);
         $this->setDamage($damage);
+        $this->setPhysicalDamage($physicalDamage);
         $this->setAttackSpeed($attackSpeed);
         $this->setAccuracy($accuracy);
         $this->setMagicAccuracy($magicAccuracy);
@@ -84,6 +93,29 @@ class Offense implements OffenseInterface
         }
 
         $this->damage = $damage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPhysicalDamage(): int
+    {
+        return $this->physicalDamage;
+    }
+
+    /**
+     * @param int $physicalDamage
+     * @throws OffenseException
+     */
+    public function setPhysicalDamage(int $physicalDamage): void
+    {
+        if ($physicalDamage < self::MIN_DAMAGE || $physicalDamage > self::MAX_DAMAGE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_PHYSICAL_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+            );
+        }
+
+        $this->physicalDamage = $physicalDamage;
     }
 
     /**
