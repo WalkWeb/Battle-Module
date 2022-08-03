@@ -20,11 +20,19 @@ class DefenseFactory
      */
     public static function create(array $data): Defense
     {
+        self::int($data, 'physical_resist', DefenseException::INCORRECT_PHYSICAL_RESIST);
         self::int($data, 'defense', DefenseException::INCORRECT_DEFENSE);
         self::int($data, 'magic_defense', DefenseException::INCORRECT_MAGIC_DEFENSE);
         self::int($data, 'block', DefenseException::INCORRECT_BLOCK);
         self::int($data, 'magic_block', DefenseException::INCORRECT_MAGIC_BLOCK);
         self::int($data, 'mental_barrier', DefenseException::INCORRECT_MENTAL_BARRIER);
+
+        self::intMinMaxValue(
+            $data['physical_resist'],
+            DefenseInterface::MIN_RESISTANCE,
+            DefenseInterface::MAX_RESISTANCE,
+            DefenseException::INCORRECT_PHYSICAL_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
 
         self::intMinMaxValue(
             $data['defense'],
@@ -61,6 +69,6 @@ class DefenseFactory
             DefenseException::INCORRECT_MENTAL_BARRIER_VALUE . DefenseInterface::MIN_MENTAL_BARRIER . '-' . DefenseInterface::MAX_MENTAL_BARRIER
         );
 
-        return new Defense($data['defense'], $data['magic_defense'], $data['block'], $data['magic_block'], $data['mental_barrier']);
+        return new Defense($data['physical_resist'], $data['defense'], $data['magic_defense'], $data['block'], $data['magic_block'], $data['mental_barrier']);
     }
 }

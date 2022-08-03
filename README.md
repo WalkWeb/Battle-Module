@@ -28,19 +28,21 @@ $data = [
         'race'         => 1,
         'command'      => 1,
         'offense'      => [
-            'type_damage'    => 1,
-            'damage'         => 25,
-            'attack_speed'   => 0.8,
-            'accuracy'       => 200,
-            'magic_accuracy' => 100,
-            'block_ignore'   => 0,
+            'type_damage'     => 1,
+            'damage'          => 25,
+            'physical_damage' => 0,
+            'attack_speed'    => 0.8,
+            'accuracy'        => 200,
+            'magic_accuracy'  => 100,
+            'block_ignore'    => 0,
         ],
         'defense'      => [
-            'defense'        => 120,
-            'magic_defense'  => 80,
-            'block'          => 0,
-            'magic_block'    => 0,
-            'mental_barrier' => 0,
+            'physical_resist' => 0,
+            'defense'         => 120,
+            'magic_defense'   => 80,
+            'block'           => 0,
+            'magic_block'     => 0,
+            'mental_barrier'  => 0,
         ],
     ],
     [
@@ -57,19 +59,21 @@ $data = [
         'race'         => 8,
         'command'      => 2,
         'offense'      => [
-            'type_damage'    => 1,
-            'damage'         => 20,
-            'attack_speed'   => 1.2,
-            'accuracy'       => 240,
-            'magic_accuracy' => 140,
-            'block_ignore'   => 0,
+            'type_damage'     => 1,
+            'damage'          => 20,
+            'physical_damage' => 0,
+            'attack_speed'    => 1.2,
+            'accuracy'        => 240,
+            'magic_accuracy'  => 140,
+            'block_ignore'    => 0,
         ],
         'defense'      => [
-            'defense'        => 150,
-            'magic_defense'  => 30,
-            'block'          => 0,
-            'magic_block'    => 0,
-            'mental_barrier' => 0,
+            'physical_resist' => 0,
+            'defense'         => 150,
+            'magic_defense'   => 30,
+            'block'           => 0,
+            'magic_block'     => 0,
+            'mental_barrier'  => 0,
         ],
     ],
 ];
@@ -180,7 +184,7 @@ Alchemist во время боя призвал Fire Elemental в свою ко�
 - [ ] `earth damage` – Урон стихией земли
 - [ ] `life damage` – Урон магией жизни
 - [ ] `death damage` – Урон магией смерти
-- [ ] `physical resist` – Сопротивление физическому урону
+- [x] `physical resist` – Сопротивление физическому урону
 - [ ] `fire resist` – Сопротивление урону огнем
 - [ ] `water resist` – Сопротивление урону водой
 - [ ] `air resist` – Сопротивление урону воздухом

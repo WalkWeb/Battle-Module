@@ -11,6 +11,9 @@ namespace Battle\Unit\Defense;
  */
 interface DefenseInterface
 {
+    public const MIN_RESISTANCE     = -1000;
+    public const MAX_RESISTANCE     = 100;
+
     public const MIN_DEFENSE        = 1;
     public const MAX_DEFENSE        = 1000000;
 
@@ -30,6 +33,21 @@ interface DefenseInterface
     public const MAX_MENTAL_BARRIER = 100;
 
     /**
+     * Возвращает сопротивление физическому урону
+     *
+     * @return int
+     */
+    public function getPhysicalResist(): int;
+
+    /**
+     * Устанавливает новое значение сопротивления физическому урону. Применяется в эффектах, изменяющих этот параметр
+     *
+     * @param int $physicalResist
+     * @throws DefenseException
+     */
+    public function setPhysicalResist(int $physicalResist): void;
+
+    /**
      * Возвращает защиту юнита. Влияет на шанс уклониться от вражеской атаки (с оружия)
      *
      * @return int
@@ -40,6 +58,7 @@ interface DefenseInterface
      * Устанавливает новое значение защиты. Применяется в эффектах, изменяющих защиту юнита
      *
      * @param int $defense
+     * @throws DefenseException
      */
     public function setDefense(int $defense): void;
 
@@ -54,6 +73,7 @@ interface DefenseInterface
      * Устанавливает новое значение магической защиты. Применяется в эффектах, изменяющих магическую защиту юнита
      *
      * @param int $magicDefense
+     * @throws DefenseException
      */
     public function setMagicDefense(int $magicDefense): void;
 
@@ -68,6 +88,7 @@ interface DefenseInterface
      * Устанавливает новое значение блока. Применяется в эффектах, изменяющих блок юнита
      *
      * @param int $block
+     * @throws DefenseException
      */
     public function setBlock(int $block): void;
 
@@ -82,6 +103,7 @@ interface DefenseInterface
      * Устанавливает новое значение магического блока. Применяется в эффектах, изменяющих магический блок юнита
      *
      * @param int $magicBlock
+     * @throws DefenseException
      */
     public function setMagicBlock(int $magicBlock): void;
 
@@ -97,6 +119,7 @@ interface DefenseInterface
      * Устанавливает новое значение ментального барьера. Применяется в эффектах, изменяющих его
      *
      * @param int $mentalBarrier
+     * @throws DefenseException
      */
     public function setMentalBarrier(int $mentalBarrier): void;
 }

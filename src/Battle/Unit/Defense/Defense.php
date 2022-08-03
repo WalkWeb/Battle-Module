@@ -9,9 +9,16 @@ class Defense implements DefenseInterface
     /**
      * @var int
      */
+    private $physicalResist;
+
+    /**
+     * @var int
+     */
     private $defense;
 
     /**
+     * TODO Rename to $magicDefense
+     *
      * @var int
      */
     private $magicDefence;
@@ -32,6 +39,7 @@ class Defense implements DefenseInterface
     private $mentalBarrier;
 
     /**
+     * @param int $physicalResist
      * @param int $defense
      * @param int $magicDefence
      * @param int $block
@@ -39,13 +47,37 @@ class Defense implements DefenseInterface
      * @param int $mentalBarrier
      * @throws DefenseException
      */
-    public function __construct(int $defense, int $magicDefence, int $block, int $magicBlock, int $mentalBarrier)
+    public function __construct(int $physicalResist, int $defense, int $magicDefence, int $block, int $magicBlock, int $mentalBarrier)
     {
+        $this->setPhysicalResist($physicalResist);
         $this->setDefense($defense);
         $this->setMagicDefense($magicDefence);
         $this->setBlock($block);
         $this->setMagicBlock($magicBlock);
         $this->setMentalBarrier($mentalBarrier);
+    }
+
+    /**
+     * @return int
+     */
+    public function getPhysicalResist(): int
+    {
+        return $this->physicalResist;
+    }
+
+    /**
+     * @param int $physicalResist
+     * @throws DefenseException
+     */
+    public function setPhysicalResist(int $physicalResist): void
+    {
+        if ($physicalResist < self::MIN_RESISTANCE || $physicalResist > self::MAX_RESISTANCE) {
+            throw new DefenseException(
+                DefenseException::INCORRECT_PHYSICAL_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+            );
+        }
+
+        $this->physicalResist = $physicalResist;
     }
 
     /**

@@ -232,11 +232,12 @@ class ActionFactoryTest extends AbstractUnitTest
                 'block_ignore'    => 0,
             ],
             'defense'      => [
-                'defense'        => 100,
-                'magic_defense'  => 50,
-                'block'          => 0,
-                'magic_block'    => 0,
-                'mental_barrier' => 0,
+                'physical_resist' => 0,
+                'defense'         => 100,
+                'magic_defense'   => 50,
+                'block'           => 0,
+                'magic_block'     => 0,
+                'mental_barrier'  => 0,
             ],
         ];
 
