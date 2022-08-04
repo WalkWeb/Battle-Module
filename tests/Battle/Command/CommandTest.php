@@ -231,7 +231,7 @@ class CommandTest extends AbstractUnitTest
             $alliesCommand,
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $enemyUnit->getOffense()->getDamage(),
+            $enemyUnit->getOffense()->getDamage($unit->getDefense()),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -305,7 +305,7 @@ class CommandTest extends AbstractUnitTest
             $command,
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $enemyUnit->getOffense()->getDamage(),
+            $enemyUnit->getOffense()->getDamage($warrior->getDefense()),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -314,7 +314,7 @@ class CommandTest extends AbstractUnitTest
 
         $damage->handle();
 
-        self::assertEquals($warrior->getTotalLife() + $priest->getTotalLife() - $enemyUnit->getOffense()->getDamage(), $command->getTotalLife());
+        self::assertEquals($warrior->getTotalLife() + $priest->getTotalLife() - $enemyUnit->getOffense()->getDamage($warrior->getDefense()), $command->getTotalLife());
     }
 
     // ---------------------------------- Тест на метод getUnitForEffect() ---------------------------------------------

@@ -85,7 +85,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         foreach ($actions as $action) {
             self::assertInstanceOf(HealAction::class, $action);
             self::assertEquals(HealAction::TARGET_ALL_WOUNDED_ALLIES, $action->getTypeTarget());
-            self::assertEquals((int)($unit->getOffense()->getDamage() * 1.2), $action->getPower());
+            self::assertEquals(24, $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
@@ -172,7 +172,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         foreach ($actions as $action) {
             self::assertInstanceOf(HealAction::class, $action);
             self::assertEquals(HealAction::TARGET_ALL_WOUNDED_ALLIES, $action->getTypeTarget());
-            self::assertEquals((int)($unit->getOffense()->getDamage() * 1.2), $action->getPower());
+            self::assertEquals(24, $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));

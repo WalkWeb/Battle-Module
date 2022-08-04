@@ -243,6 +243,11 @@ class Unit extends AbstractUnit
     /**
      * Увеличивает урон юнита (можно сделать и уменьшение, но пока делаем только увеличение)
      *
+     * TODO Метод на удаление вместе с $damage параметром
+     * TODO Вместо него будут другие методы, на изменение стихийного урона
+     *
+     * TODO Временно увеличение урона изменено на увеличение физического урона
+     *
      * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws UnitException
@@ -256,12 +261,12 @@ class Unit extends AbstractUnit
 
         $multiplier = $action->getPower() / 100;
 
-        $oldDamage = $this->offense->getDamage();
-        $newDamage = (int)($this->offense->getDamage() * $multiplier);
+        $oldDamage = $this->offense->getPhysicalDamage();
+        $newDamage = (int)($this->offense->getPhysicalDamage() * $multiplier);
 
         $bonus = $newDamage - $oldDamage;
 
-        $this->offense->setDamage($newDamage);
+        $this->offense->setPhysicalDamage($newDamage);
 
         $action->setRevertValue($bonus);
     }
@@ -269,13 +274,16 @@ class Unit extends AbstractUnit
     /**
      * Откатывает изменение урона юнита
      *
+     * TODO Метод на удаление вместе с $damage параметром
+     * TODO Вместо него будут другие методы, на изменение стихийного урона
+     *
      * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws OffenseException
      */
     private function multiplierDamageRevert(ActionInterface $action): void
     {
-        $this->offense->setDamage($this->offense->getDamage() - $action->getRevertValue());
+        $this->offense->setPhysicalDamage($this->offense->getPhysicalDamage() - $action->getRevertValue());
     }
 
     /**
@@ -410,7 +418,8 @@ class Unit extends AbstractUnit
                 $enemyCommand,
                 $alliesCommand,
                 DamageAction::TARGET_RANDOM_ENEMY,
-                $this->getOffense()->getDamage(),
+                // TODO То, что идет проверка по своей же защите - это временный костыль, будет передаваться Offense
+                $this->getOffense()->getDamage($this->defense),
                 true,
                 DamageAction::DEFAULT_NAME,
                 DamageAction::UNIT_ANIMATION_METHOD,

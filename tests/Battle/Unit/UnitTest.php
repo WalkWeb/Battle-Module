@@ -12,6 +12,8 @@ use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseInterface;
 use Exception;
 use Battle\Unit\Unit;
 use Battle\Command\Command;
@@ -54,7 +56,7 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['race'], $unit->getRace()->getId());
         self::assertFalse($unit->isParalysis());
 
-        self::assertEquals($data['offense']['damage'], $unit->getOffense()->getDamage());
+        self::assertEquals($data['offense']['physical_damage'], $unit->getOffense()->getDamage($this->getDefense()));
         self::assertEquals($data['offense']['physical_damage'], $unit->getOffense()->getPhysicalDamage());
         self::assertEquals($data['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
         self::assertEquals($data['offense']['accuracy'], $unit->getOffense()->getAccuracy());
@@ -101,7 +103,7 @@ class UnitTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
+            $unit->getOffense()->getDamage($enemyUnit->getDefense()),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -112,14 +114,14 @@ class UnitTest extends AbstractUnitTest
 
         $defendLife = UnitFactory::getData($defendUnitTemplate)['life'];
 
-        self::assertEquals($defendLife - $unit->getOffense()->getDamage(), $enemyUnit->getLife());
+        self::assertEquals($defendLife - $unit->getOffense()->getDamage($enemyUnit->getDefense()), $enemyUnit->getLife());
 
         $action2 = new DamageAction(
             $unit,
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
+            $unit->getOffense()->getDamage($enemyUnit->getDefense()),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -546,5 +548,14 @@ class UnitTest extends AbstractUnitTest
             $unit,
             $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
         );
+    }
+
+    /**
+     * @return DefenseInterface
+     * @throws Exception
+     */
+    private function getDefense(): DefenseInterface
+    {
+        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

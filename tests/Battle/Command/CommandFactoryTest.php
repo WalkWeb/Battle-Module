@@ -8,6 +8,8 @@ use Battle\Container\Container;
 use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\UnitException;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -36,7 +38,7 @@ class CommandFactoryTest extends AbstractUnitTest
             self::assertEquals($data[$i]['name'], $unit->getName());
             self::assertEquals($data[$i]['level'], $unit->getLevel());
             self::assertEquals($data[$i]['avatar'], $unit->getAvatar());
-            self::assertEquals($data[$i]['offense']['damage'], $unit->getOffense()->getDamage());
+            self::assertEquals($data[$i]['offense']['physical_damage'], $unit->getOffense()->getDamage($this->getDefense()));
             self::assertEquals($data[$i]['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
             self::assertEquals($data[$i]['offense']['accuracy'], $unit->getOffense()->getAccuracy());
             self::assertEquals($data[$i]['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());
@@ -218,5 +220,14 @@ class CommandFactoryTest extends AbstractUnitTest
                 CommandException::INCORRECT_UNIT_DATA,
             ],
         ];
+    }
+
+    /**
+     * @return DefenseInterface
+     * @throws Exception
+     */
+    private function getDefense(): DefenseInterface
+    {
+        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

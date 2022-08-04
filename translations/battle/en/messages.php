@@ -78,6 +78,7 @@ return [
     'Magic Block'                         => 'Magic Block',
     'Blocked'                             => 'Blocked',
     'Dodged'                              => 'Dodged',
+    'Physical Damage'                     => 'Physical Damage',
     // Races
     'People'                              => 'People',
     'Human'                               => 'Human',

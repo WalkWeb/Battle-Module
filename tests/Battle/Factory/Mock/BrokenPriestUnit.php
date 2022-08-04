@@ -27,7 +27,7 @@ class BrokenPriestUnit extends Unit
             $enemyCommand,
             $alliesCommand,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $this->getOffense()->getDamage()
+            30
         ));
 
         return $collection;

@@ -9,6 +9,8 @@ use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;
 use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Action\DamageAction;
@@ -120,12 +122,12 @@ class StatisticsTest extends AbstractUnitTest
         $statistics->addUnitAction($action);
 
         // Проверяем, что атакующий юнит нанес тройной урон (урон * 3 цели)
-        self::assertEquals($unit->getOffense()->getDamage() * 3, $statistics->getUnitsStatistics()->get($unit->getId())->getCausedDamage());
+        self::assertEquals(60, $statistics->getUnitsStatistics()->get($unit->getId())->getCausedDamage());
 
         // Проверяем, что всем врагам добавлен полученный урон
-        self::assertEquals($unit->getOffense()->getDamage(), $statistics->getUnitsStatistics()->get($firstEnemyUnit->getId())->getTakenDamage());
-        self::assertEquals($unit->getOffense()->getDamage(), $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getTakenDamage());
-        self::assertEquals($unit->getOffense()->getDamage(), $statistics->getUnitsStatistics()->get($thirdEnemyUnit->getId())->getTakenDamage());
+        self::assertEquals($unit->getOffense()->getDamage($firstEnemyUnit->getDefense()), $statistics->getUnitsStatistics()->get($firstEnemyUnit->getId())->getTakenDamage());
+        self::assertEquals($unit->getOffense()->getDamage($secondaryEnemyUnit->getDefense()), $statistics->getUnitsStatistics()->get($secondaryEnemyUnit->getId())->getTakenDamage());
+        self::assertEquals($unit->getOffense()->getDamage($thirdEnemyUnit->getDefense()), $statistics->getUnitsStatistics()->get($thirdEnemyUnit->getId())->getTakenDamage());
     }
 
     /**
@@ -607,6 +609,7 @@ class StatisticsTest extends AbstractUnitTest
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
      * @return DamageAction
+     * @throws Exception
      */
     private function createDamageAction(
         UnitInterface $unit,
@@ -619,11 +622,20 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage(),
+            $unit->getOffense()->getDamage($this->getDefense()),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD
         );
+    }
+
+    /**
+     * @return DefenseInterface
+     * @throws Exception
+     */
+    private function getDefense(): DefenseInterface
+    {
+        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

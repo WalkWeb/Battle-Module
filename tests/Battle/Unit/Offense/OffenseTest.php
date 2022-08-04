@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Offense;
 
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseException;
 use Battle\Unit\Offense\Offense;
 use Battle\Unit\Offense\OffenseException;
 use Battle\Unit\Offense\OffenseInterface;
@@ -15,6 +17,7 @@ class OffenseTest extends AbstractUnitTest
      * Тест на создание Offense
      *
      * @throws OffenseException
+     * @throws DefenseException
      */
     public function testOffenseCreate(): void
     {
@@ -27,9 +30,10 @@ class OffenseTest extends AbstractUnitTest
         $blockIgnore = 0;
 
         $offense = new Offense($typeDamage, $damage, $physicalDamage, $attackSpeed, $accuracy, $magicAccuracy, $blockIgnore);
+        $defense = new Defense(0, 10, 10, 10, 5, 0);
 
         self::assertEquals($typeDamage, $offense->getTypeDamage());
-        self::assertEquals($damage, $offense->getDamage());
+        self::assertEquals($physicalDamage, $offense->getDamage($defense));
         self::assertEquals($physicalDamage, $offense->getPhysicalDamage());
         self::assertEquals($attackSpeed, $offense->getAttackSpeed());
         self::assertEquals($accuracy, $offense->getAccuracy());
@@ -40,12 +44,14 @@ class OffenseTest extends AbstractUnitTest
 
     /**
      * Тест на обновление Offense
-     * 
+     *
      * @throws OffenseException
+     * @throws DefenseException
      */
     public function testOffenseUpdate(): void
     {
         $offense = new Offense(1, 10, 20, 1, 100, 50, 0);
+        $defense = new Defense(0, 10, 10, 10, 5, 0);
 
         $offense->setDamage($damage = 50);
         $offense->setPhysicalDamage($physicalDamage = 15);
@@ -54,7 +60,7 @@ class OffenseTest extends AbstractUnitTest
         $offense->setMagicAccuracy($magicAccuracy = 150);
         $offense->setBlockIgnore($blockIgnore = 100);
 
-        self::assertEquals($damage, $offense->getDamage());
+        self::assertEquals($physicalDamage, $offense->getDamage($defense));
         self::assertEquals($physicalDamage, $offense->getPhysicalDamage());
         self::assertEquals($attackSpeed, $offense->getAttackSpeed());
         self::assertEquals($accuracy, $offense->getAccuracy());
@@ -264,5 +270,60 @@ class OffenseTest extends AbstractUnitTest
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(OffenseException::INCORRECT_TYPE_DAMAGE_VALUE);
         new Offense(3, 10, 10, 1, 100, 50, 0);
+    }
+
+    /**
+     * @dataProvider resistDataProvider
+     * @param int $physicalDamage
+     * @param int $physicalResist
+     * @param int $exceptedDamage
+     * @throws OffenseException
+     * @throws DefenseException
+     */
+    public function testOffenseResist(int $physicalDamage, int $physicalResist, int $exceptedDamage): void
+    {
+        $offense = new Offense(1, 10, $physicalDamage, 1, 100, 50, 0);
+        $defense = new Defense($physicalResist, 10, 10, 10, 5, 0);
+
+        self::assertEquals($exceptedDamage, $offense->getDamage($defense));
+    }
+
+    /**
+     * @return array
+     */
+    public function resistDataProvider(): array
+    {
+        return [
+            [
+                100,
+                0,
+                100,
+            ],
+            [
+                100,
+                25,
+                75,
+            ],
+            [
+                100,
+                50,
+                50,
+            ],
+            [
+                100,
+                75,
+                25,
+            ],
+            [
+                100,
+                100,
+                0,
+            ],
+            [
+                100,
+                -100,
+                200,
+            ],
+        ];
     }
 }

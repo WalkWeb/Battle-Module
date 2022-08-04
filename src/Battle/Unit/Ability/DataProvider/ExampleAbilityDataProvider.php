@@ -442,7 +442,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'offense'    => [
                                 'type_damage'     => 2,
                                 'damage'          => 17,
-                                'physical_damage' => 0,
+                                'physical_damage' => 17,
                                 'attack_speed'    => 1.1,
                                 'accuracy'        => 200,
                                 'magic_accuracy'  => 100,
@@ -486,7 +486,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'offense'    => [
                                 'type_damage'     => 1,
                                 'damage'          => 10,
-                                'physical_damage' => 0,
+                                'physical_damage' => 10,
                                 'attack_speed'    => 1,
                                 'accuracy'        => 200,
                                 'magic_accuracy'  => 100,
@@ -530,7 +530,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'offense'    => [
                                 'type_damage'     => 1,
                                 'damage'          => 16,
-                                'physical_damage' => 0,
+                                'physical_damage' => 16,
                                 'attack_speed'    => 1,
                                 'accuracy'        => 200,
                                 'magic_accuracy'  => 100,
@@ -574,7 +574,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'offense'    => [
                                 'type_damage'     => 2,
                                 'damage'          => 13,
-                                'physical_damage' => 0,
+                                'physical_damage' => 13,
                                 'attack_speed'    => 1.2,
                                 'accuracy'        => 200,
                                 'magic_accuracy'  => 100,

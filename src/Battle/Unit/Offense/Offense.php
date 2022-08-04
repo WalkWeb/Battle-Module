@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Offense;
 
+use Battle\Unit\Defense\DefenseInterface;
+
 class Offense implements OffenseInterface
 {
     /**
@@ -73,11 +75,12 @@ class Offense implements OffenseInterface
     }
 
     /**
+     * @param DefenseInterface $defense
      * @return int
      */
-    public function getDamage(): int
+    public function getDamage(DefenseInterface $defense): int
     {
-        return $this->damage;
+        return (int)($this->physicalDamage * ((100 - $defense->getPhysicalResist()) / 100));
     }
 
     /**

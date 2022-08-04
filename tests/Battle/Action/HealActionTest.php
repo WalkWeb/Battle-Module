@@ -60,8 +60,8 @@ class HealActionTest extends AbstractUnitTest
             $action->handle();
 
             // Проверяем factualPower
-            self::assertEquals($priest->getOffense()->getDamage(), $action->getFactualPower());
-            self::assertEquals($priest->getOffense()->getDamage(), $action->getFactualPowerByUnit($unit));
+            self::assertEquals($priest->getOffense()->getDamage($enemyUnit->getDefense()), $action->getFactualPower());
+            self::assertEquals($priest->getOffense()->getDamage($enemyUnit->getDefense()), $action->getFactualPowerByUnit($unit));
         }
 
         // Проверяем, что оба юнита стали здоровы
@@ -151,10 +151,10 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getOffense()->getDamage()
+            20
         );
 
-        self::assertEquals($unit->getOffense()->getDamage(), $healAction->getPower());
+        self::assertEquals($unit->getOffense()->getDamage($enemyUnit->getDefense()), $healAction->getPower());
     }
 
     /**
@@ -180,7 +180,7 @@ class HealActionTest extends AbstractUnitTest
             $action->handle();
         }
 
-        self::assertEquals($enemyUnit->getTotalLife() - $alliesUnit->getOffense()->getDamage(), $enemyUnit->getLife());
+        self::assertEquals($enemyUnit->getTotalLife() - $alliesUnit->getOffense()->getDamage($enemyUnit->getDefense()), $enemyUnit->getLife());
     }
 
     /**
@@ -201,7 +201,7 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getOffense()->getDamage()
+            20
         );
 
         $this->expectException(ActionException::class);
@@ -226,7 +226,7 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getOffense()->getDamage()
+            20
         );
 
         $this->expectException(ActionException::class);
@@ -319,7 +319,7 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getOffense()->getDamage()
+            20
         );
 
         self::assertFalse($healAction->isBlocked($enemyUnit));

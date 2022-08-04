@@ -43,7 +43,7 @@ class StrokeTest extends AbstractUnitTest
         $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
         $stroke->handle();
 
-        self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage(), $enemyUnit->getLife());
+        self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()), $enemyUnit->getLife());
 
         self::assertTrue($unit->isAction());
         self::assertFalse($enemyUnit->isAction());

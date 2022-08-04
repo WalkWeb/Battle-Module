@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Offense;
 
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Offense\OffenseException;
 use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\Offense\OffenseInterface;
@@ -23,7 +25,7 @@ class OffenseFactoryTest extends AbstractUnitTest
     {
         $offense = $this->getFactory()->create($data);
 
-        self::assertEquals($data['damage'], $offense->getDamage());
+        self::assertEquals($data['physical_damage'], $offense->getDamage($this->getDefense()));
         self::assertEquals($data['physical_damage'], $offense->getPhysicalDamage());
         self::assertEquals($data['attack_speed'], $offense->getAttackSpeed());
         self::assertEquals($data['accuracy'], $offense->getAccuracy());
@@ -452,5 +454,14 @@ class OffenseFactoryTest extends AbstractUnitTest
     private function getFactory(): OffenseFactory
     {
         return new OffenseFactory();
+    }
+
+    /**
+     * @return DefenseInterface
+     * @throws Exception
+     */
+    private function getDefense(): DefenseInterface
+    {
+        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

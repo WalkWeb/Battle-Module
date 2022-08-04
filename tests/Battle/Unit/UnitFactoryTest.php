@@ -7,6 +7,8 @@ namespace Tests\Battle\Unit;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Classes\UnitClassInterface;
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Race\RaceInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
@@ -40,7 +42,7 @@ class UnitFactoryTest extends AbstractUnitTest
         self::assertEquals($class, $unit->getClass());
         self::assertEquals($race, $unit->getRace());
 
-        self::assertEquals($data['offense']['damage'], $unit->getOffense()->getDamage());
+        self::assertEquals($data['offense']['physical_damage'], $unit->getOffense()->getDamage($this->getDefense()));
         self::assertEquals($data['offense']['physical_damage'], $unit->getOffense()->getPhysicalDamage());
         self::assertEquals($data['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
         self::assertEquals($data['offense']['accuracy'], $unit->getOffense()->getAccuracy());
@@ -1796,5 +1798,14 @@ class UnitFactoryTest extends AbstractUnitTest
         return $container->getRaceFactory()->create(
             $container->getRaceDataProvider()->get($raceId)
         );
+    }
+
+    /**
+     * @return DefenseInterface
+     * @throws Exception
+     */
+    private function getDefense(): DefenseInterface
+    {
+        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

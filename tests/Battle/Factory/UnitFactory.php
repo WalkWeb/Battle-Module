@@ -32,7 +32,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 20,
-                'physical_damage' => 0,
+                'physical_damage' => 20,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -63,7 +63,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 30,
-                'physical_damage' => 0,
+                'physical_damage' => 30,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -94,7 +94,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 15,
-                'physical_damage' => 0,
+                'physical_damage' => 15,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -125,7 +125,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 15,
-                'physical_damage' => 0,
+                'physical_damage' => 15,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -157,7 +157,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 2,
                 'damage'          => 15,
-                'physical_damage' => 0,
+                'physical_damage' => 15,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -188,7 +188,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 12,
-                'physical_damage' => 0,
+                'physical_damage' => 12,
                 'attack_speed'    => 1.1,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -219,7 +219,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 15,
-                'physical_damage' => 0,
+                'physical_damage' => 15,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -250,7 +250,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 20,
-                'physical_damage' => 0,
+                'physical_damage' => 20,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -282,7 +282,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 35,
-                'physical_damage' => 0,
+                'physical_damage' => 35,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -314,7 +314,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 35,
-                'physical_damage' => 0,
+                'physical_damage' => 35,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -346,7 +346,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 35,
-                'physical_damage' => 0,
+                'physical_damage' => 35,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -377,7 +377,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 3000,
-                'physical_damage' => 0,
+                'physical_damage' => 3000,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -408,7 +408,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 3000,
-                'physical_damage' => 0,
+                'physical_damage' => 3000,
                 'attack_speed'    => 5, // Не просто большой урон, но и 5 атак за ход
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -439,7 +439,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 32,
-                'physical_damage' => 0,
+                'physical_damage' => 32,
                 'attack_speed'    => 0, // нулевая скорость атаки
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -471,7 +471,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 32,
-                'physical_damage' => 0,
+                'physical_damage' => 32,
                 'attack_speed'    => 1.9999,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -503,7 +503,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 32,
-                'physical_damage' => 0,
+                'physical_damage' => 32,
                 'attack_speed'    => 1.0001,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -534,7 +534,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 23,
-                'physical_damage' => 0,
+                'physical_damage' => 23,
                 'attack_speed'    => 0.7,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -566,7 +566,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 10,
-                'physical_damage' => 0,
+                'physical_damage' => 10,
                 'attack_speed'    => 1,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -598,7 +598,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 13,
-                'physical_damage' => 0,
+                'physical_damage' => 13,
                 'attack_speed'    => 1.2,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -630,7 +630,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 16,
-                'physical_damage' => 0,
+                'physical_damage' => 16,
                 'attack_speed'    => 1,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -662,7 +662,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 27,
-                'physical_damage' => 0,
+                'physical_damage' => 27,
                 'attack_speed'    => 0.8,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -694,7 +694,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 13,
-                'physical_damage' => 0,
+                'physical_damage' => 13,
                 'attack_speed'    => 1.1,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -726,7 +726,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 11,
-                'physical_damage' => 0,
+                'physical_damage' => 11,
                 'attack_speed'    => 1.2,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -758,7 +758,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 35,
-                'physical_damage' => 0,
+                'physical_damage' => 35,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -790,7 +790,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 13,
-                'physical_damage' => 0,
+                'physical_damage' => 13,
                 'attack_speed'    => 1.20,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -822,7 +822,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 17,
-                'physical_damage' => 0,
+                'physical_damage' => 17,
                 'attack_speed'    => 1.1,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -854,7 +854,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 40,
-                'physical_damage' => 0,
+                'physical_damage' => 40,
                 'attack_speed'    => 1,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -886,7 +886,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 20,
-                'physical_damage' => 0,
+                'physical_damage' => 20,
                 'attack_speed'    => 1,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -918,7 +918,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 20,
-                'physical_damage' => 0,
+                'physical_damage' => 20,
                 'attack_speed'    => 1,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -950,7 +950,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 20,
-                'physical_damage' => 0,
+                'physical_damage' => 20,
                 'attack_speed'    => 1,
                 'accuracy'        => 100000,
                 'magic_accuracy'  => 100,
@@ -982,7 +982,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 35,
-                'physical_damage' => 0,
+                'physical_damage' => 35,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -1014,7 +1014,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 15,
-                'physical_damage' => 0,
+                'physical_damage' => 15,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -1046,7 +1046,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 15,
-                'physical_damage' => 0,
+                'physical_damage' => 15,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -1078,7 +1078,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 15,
-                'physical_damage' => 0,
+                'physical_damage' => 15,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -1110,7 +1110,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 15,
-                'physical_damage' => 0,
+                'physical_damage' => 15,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -1142,7 +1142,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 15,
-                'physical_damage' => 0,
+                'physical_damage' => 15,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -1174,7 +1174,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 2,
                 'damage'          => 15,
-                'physical_damage' => 0,
+                'physical_damage' => 15,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100000,
@@ -1206,7 +1206,7 @@ class UnitFactory
             'offense'    => [
                 'type_damage'     => 1,
                 'damage'          => 20,
-                'physical_damage' => 0,
+                'physical_damage' => 20,
                 'attack_speed'    => 1.00,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -1214,6 +1214,38 @@ class UnitFactory
             ],
             'defense'    => [
                 'physical_resist' => 0,
+                'defense'         => 100,
+                'magic_defense'   => 50,
+                'block'           => 0,
+                'magic_block'     => 100,
+                'mental_barrier'  => 0,
+            ],
+        ],
+        // юнит с 80% сопротивлением физическому урону
+        39 => [
+            'id'         => 'a7fbefd4-a90e-4077-88d5-11ea4d51bbc9',
+            'name'       => 'unit_1',
+            'level'      => 1,
+            'avatar'     => '/images/avas/humans/human001.jpg',
+            'life'       => 100,
+            'total_life' => 100,
+            'mana'       => 50,
+            'total_mana' => 50,
+            'melee'      => true,
+            'command'    => 1,
+            'class'      => 1,
+            'race'       => 1,
+            'offense'    => [
+                'type_damage'     => 1,
+                'damage'          => 20,
+                'physical_damage' => 20,
+                'attack_speed'    => 1.00,
+                'accuracy'        => 200,
+                'magic_accuracy'  => 100,
+                'block_ignore'    => 0,
+            ],
+            'defense'    => [
+                'physical_resist' => 80,
                 'defense'         => 100,
                 'magic_defense'   => 50,
                 'block'           => 0,

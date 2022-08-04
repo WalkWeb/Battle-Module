@@ -53,7 +53,7 @@ class RageAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         // Изначальный урон = 35
-        self::assertEquals(35, $unit->getOffense()->getDamage());
+        self::assertEquals(35, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
 
         // Применяем способность
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
@@ -64,7 +64,7 @@ class RageAbilityTest extends AbstractUnitTest
         }
 
         // Проверяем, что урон вырос в 2 раза
-        self::assertEquals(70, $unit->getOffense()->getDamage());
+        self::assertEquals(70, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
 
         // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 10; $i++) {
@@ -76,7 +76,7 @@ class RageAbilityTest extends AbstractUnitTest
         }
 
         // И проверяем, что урон вернулся к прежнему
-        self::assertEquals(35, $unit->getOffense()->getDamage());
+        self::assertEquals(35, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
         self::assertCount(0, $unit->getEffects());
     }
 
@@ -147,7 +147,7 @@ class RageAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         // Изначальный урон = 35
-        self::assertEquals(35, $unit->getOffense()->getDamage());
+        self::assertEquals(35, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
 
         // Применяем способность
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
@@ -161,7 +161,7 @@ class RageAbilityTest extends AbstractUnitTest
         }
 
         // Проверяем, что урон вырос в 2 раза
-        self::assertEquals(70, $unit->getOffense()->getDamage());
+        self::assertEquals(70, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
 
         // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 10; $i++) {
@@ -173,7 +173,7 @@ class RageAbilityTest extends AbstractUnitTest
         }
 
         // И проверяем, что урон вернулся к прежнему
-        self::assertEquals(35, $unit->getOffense()->getDamage());
+        self::assertEquals(35, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
         self::assertCount(0, $unit->getEffects());
     }
 

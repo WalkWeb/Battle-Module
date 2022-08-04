@@ -10,6 +10,8 @@ use Battle\Action\HealAction;
 use Battle\Container\Container;
 use Battle\Result\Scenario\ScenarioException;
 use Battle\Unit\Ability\AbilityFactory;
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseInterface;
 use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
@@ -63,7 +65,7 @@ class ScenarioTest extends AbstractUnitTest
                         [
                             'type'              => 'change',
                             'user_id'           => $enemyUnit->getId(),
-                            'hp'                => $enemyUnit->getTotalLife() - $unit->getOffense()->getDamage(),
+                            'hp'                => $enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()),
                             'thp'               => $enemyUnit->getTotalLife(),
                             'hp_bar_class'      => 'unit_hp_bar',
                             'hp_bar_class2'     => 'unit_hp_bar2',
@@ -117,7 +119,7 @@ class ScenarioTest extends AbstractUnitTest
                         [
                             'type'              => 'change',
                             'user_id'           => $enemyUnit->getId(),
-                            'hp'                => $enemyUnit->getTotalMana() - $unit->getOffense()->getDamage(),
+                            'hp'                => $enemyUnit->getTotalMana() - $unit->getOffense()->getDamage($enemyUnit->getDefense()),
                             'thp'               => $enemyUnit->getTotalMana(),
                             'hp_bar_class'      => 'unit_hp_bar_mana',
                             'hp_bar_class2'     => 'unit_hp_bar2_mana',
@@ -464,7 +466,7 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_WOUNDED_ALLIES,
-            $unit->getOffense()->getDamage()
+            35
         );
 
         self::assertTrue($action->canByUsed());
@@ -1027,6 +1029,7 @@ class ScenarioTest extends AbstractUnitTest
      * @param CommandInterface $command
      * @param int $typeTarget
      * @return DamageAction
+     * @throws Exception
      */
     private function createDamageAction(
         UnitInterface $unit,
@@ -1040,11 +1043,20 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            $unit->getOffense()->getDamage(),
+            $unit->getOffense()->getDamage($this->getDefense()),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD
         );
+    }
+
+    /**
+     * @return DefenseInterface
+     * @throws Exception
+     */
+    private function getDefense(): DefenseInterface
+    {
+        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

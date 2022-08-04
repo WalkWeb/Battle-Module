@@ -516,7 +516,7 @@ EOT;
             <td><p><abbr title="Mana"><img src="/images/battle/stats_icon/mana.png" alt=""></abbr></p></td>
             <td><p><abbr title="Mental Barrier"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
             <td><p>Type Damage</p></td>
-            <td><p>Damage</p></td>
+            <td><p>Physical Damage</p></td>
             <td><p><abbr title="Attack Speed"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
             <td><p><abbr title="Accuracy"><img src="/images/battle/stats_icon/accuracy.png" alt=""></abbr></p></td>
             <td><p><abbr title="Magic Accuracy"><img src="/images/battle/stats_icon/magic_accuracy.png" alt=""></abbr></p></td>

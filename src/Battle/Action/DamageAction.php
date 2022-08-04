@@ -81,6 +81,8 @@ class DamageAction extends AbstractAction
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
+
+        // TODO Переделать на $offense, и конечный урон будет рассчитываться уже по каждой отдельной цели, в зависимости от её сопротивлений
         $this->damage = $damage;
         $this->canBeAvoided = $canBeAvoided;
         $this->name = $name;

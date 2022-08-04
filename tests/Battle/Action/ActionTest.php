@@ -6,6 +6,8 @@ namespace Tests\Battle\Action;
 
 use Battle\Action\WaitAction;
 use Battle\Command\CommandInterface;
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Action\ActionException;
@@ -257,6 +259,7 @@ class ActionTest extends AbstractUnitTest
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
      * @return DamageAction
+     * @throws Exception
      */
     private function createDamageAction(
         UnitInterface $unit,
@@ -269,11 +272,20 @@ class ActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage(),
+            $unit->getOffense()->getDamage($this->getDefense()),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD
         );
+    }
+
+    /**
+     * @return DefenseInterface
+     * @throws Exception
+     */
+    private function getDefense(): DefenseInterface
+    {
+        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

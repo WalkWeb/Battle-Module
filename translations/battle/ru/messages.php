@@ -76,6 +76,7 @@ return [
     'Magic Block'                         => 'Магический блок',
     'Blocked'                             => 'Заблокировал',
     'Dodged'                              => 'Уклонился',
+    'Physical Damage'                     => 'Физический урон',
     // Races
     'People'                              => 'Люди',
     'Human'                               => 'Человек',

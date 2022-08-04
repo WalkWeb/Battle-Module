@@ -40,7 +40,7 @@ class DeadKnightTest extends AbstractUnitTest
             $actions = $ability->getActions($enemyCommand, $actionCommand);
 
             foreach ($actions as $action) {
-                self::assertEquals((int)($unit->getOffense()->getDamage() * 2.5), $action->getPower());
+                self::assertEquals(50, $action->getPower());
             }
         }
     }

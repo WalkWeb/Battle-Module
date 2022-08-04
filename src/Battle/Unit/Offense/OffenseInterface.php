@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Offense;
 
+use Battle\Unit\Defense\DefenseInterface;
+
 /**
  * Offense – это объект-хранилище атакующих характеристик. По умолчанию подразумеваются атакующие характеристики юнита.
  *
@@ -37,14 +39,12 @@ interface OffenseInterface
     public function getTypeDamage(): int;
 
     /**
-     * Возвращает урон
+     * Возвращает общий урон (по всем стихиям), с учетом сопротивлений цели
      *
-     * TODO Сейчас это единственный параметр урона, в будущем он будет возвращать суммарный урон по всем стихиям
-     * TODO с учетом сопротивлений цели
-     *
+     * @param DefenseInterface $defense
      * @return int
      */
-    public function getDamage(): int;
+    public function getDamage(DefenseInterface $defense): int;
 
     /**
      * Устанавливает новое значение урона. Применяется в эффектах, изменяющих урон юнита

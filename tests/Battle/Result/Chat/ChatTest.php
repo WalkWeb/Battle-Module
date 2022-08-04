@@ -19,6 +19,8 @@ use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\ChatException;
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -262,7 +264,7 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            $unit->getOffense()->getDamage()
+            20
         );
 
         self::assertTrue($action->canByUsed());
@@ -848,6 +850,7 @@ class ChatTest extends AbstractUnitTest
      * @param CommandInterface $command
      * @param int $typeTarget
      * @return DamageAction
+     * @throws Exception
      */
     private function createDamageAction(
         UnitInterface $unit,
@@ -861,7 +864,7 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            $unit->getOffense()->getDamage(),
+            $unit->getOffense()->getDamage($this->getDefense()),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -895,5 +898,14 @@ class ChatTest extends AbstractUnitTest
             'damageAbility',
             '/images/icons/ability/335.png'
         );
+    }
+
+    /**
+     * @return DefenseInterface
+     * @throws Exception
+     */
+    private function getDefense(): DefenseInterface
+    {
+        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

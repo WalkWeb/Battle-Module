@@ -95,7 +95,7 @@ class HellfireAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertInstanceOf(DamageAction::class, $action);
-            self::assertEquals((int)($unit->getOffense()->getDamage() * 1.5), $action->getPower());
+            self::assertEquals((int)($unit->getOffense()->getDamage($firstEnemyUnit->getDefense()) * 1.5), $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
@@ -159,7 +159,7 @@ class HellfireAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertInstanceOf(DamageAction::class, $action);
-            self::assertEquals((int)($unit->getOffense()->getDamage() * 1.5), $action->getPower());
+            self::assertEquals((int)($unit->getOffense()->getDamage($firstEnemyUnit->getDefense()) * 1.5), $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));

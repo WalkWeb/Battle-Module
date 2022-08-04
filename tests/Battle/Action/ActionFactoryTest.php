@@ -17,6 +17,8 @@ use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\UnitException;
 use Exception;
@@ -225,7 +227,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'offense'      => [
                 'type_damage'     => 1,
                 'damage'          => 10,
-                'physical_damage' => 0,
+                'physical_damage' => 10,
                 'attack_speed'    => 1,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -260,7 +262,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($summonData['name'], $action->getSummonUnit()->getName());
         self::assertEquals($summonData['level'], $action->getSummonUnit()->getLevel());
         self::assertEquals($summonData['avatar'], $action->getSummonUnit()->getAvatar());
-        self::assertEquals($summonData['offense']['damage'], $action->getSummonUnit()->getOffense()->getDamage());
+        self::assertEquals($summonData['offense']['damage'], $action->getSummonUnit()->getOffense()->getDamage($this->getDefense()));
         self::assertEquals($summonData['offense']['attack_speed'], $action->getSummonUnit()->getOffense()->getAttackSpeed());
         self::assertEquals($summonData['offense']['accuracy'], $action->getSummonUnit()->getOffense()->getAccuracy());
         self::assertEquals($summonData['offense']['block_ignore'], $action->getSummonUnit()->getOffense()->getBlockIgnore());
@@ -1436,5 +1438,14 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_DAMAGE_DATA,
             ],
         ];
+    }
+
+    /**
+     * @return DefenseInterface
+     * @throws Exception
+     */
+    private function getDefense(): DefenseInterface
+    {
+        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }
