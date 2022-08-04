@@ -55,7 +55,15 @@ class HellfireAbilityTest extends AbstractUnitTest
                 [
                     'type'             => ActionInterface::DAMAGE,
                     'type_target'      => ActionInterface::TARGET_ALL_ENEMY,
-                    'damage'           => 30,
+                    'offense'    => [
+                        'type_damage'     => 2,
+                        'damage'          => 30,
+                        'physical_damage' => 30,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 500,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => $name,
                     'animation_method' => 'damage',
@@ -95,9 +103,10 @@ class HellfireAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertInstanceOf(DamageAction::class, $action);
-            self::assertEquals((int)($unit->getOffense()->getDamage($firstEnemyUnit->getDefense()) * 1.5), $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();
+            // У одного из юнитов 20 здоровья, по этому суммарный урон не 90, а 80
+            self::assertEquals(80, $action->getFactualPower());
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
@@ -159,9 +168,10 @@ class HellfireAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertInstanceOf(DamageAction::class, $action);
-            self::assertEquals((int)($unit->getOffense()->getDamage($firstEnemyUnit->getDefense()) * 1.5), $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();
+            // У одного из юнитов 20 здоровья, по этому суммарный урон не 90, а 80
+            self::assertEquals(80, $action->getFactualPower());
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
 

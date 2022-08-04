@@ -17,9 +17,8 @@ use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Unit\Defense\Defense;
-use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Effect\EffectFactory;
+use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitException;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -41,6 +40,16 @@ class ActionFactoryTest extends AbstractUnitTest
 
         $actionFactory = new ActionFactory();
 
+        $offenseData = [
+            'type_damage'     => 1,
+            'damage'          => 35,
+            'physical_damage' => 0,
+            'attack_speed'    => 1.2,
+            'accuracy'        => 176,
+            'magic_accuracy'  => 12,
+            'block_ignore'    => 0,
+        ];
+
         // Вариант с минимальным набором данных
         $data = [
             'type'             => ActionInterface::DAMAGE,
@@ -48,7 +57,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'enemy_command'    => $enemyCommand,
             'allies_command'   => $command,
             'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-            'damage'           => $damage = 150,
+            'offense'          => $offenseData,
             'can_be_avoided'   => $canBeAvoided = true,
             'name'             => $name = 'attack',
             'animation_method' => $animationMethod = 'animation test',
@@ -60,7 +69,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertInstanceOf(DamageAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_RANDOM_ENEMY, $action->getTypeTarget());
-        self::assertEquals($damage, $action->getPower());
+        self::assertEquals(OffenseFactory::create($offenseData), $action->getOffense());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals('', $action->getIcon());
         self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
@@ -74,7 +83,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'enemy_command'    => $enemyCommand,
             'allies_command'   => $command,
             'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-            'damage'           => $damage = 50,
+            'offense'          => $offenseData,
             'can_be_avoided'   => $canBeAvoided = false,
             'name'             => $name = 'action name 123',
             'animation_method' => $animationMethod = 'effectDamage',
@@ -87,7 +96,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertInstanceOf(DamageAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_RANDOM_ENEMY, $action->getTypeTarget());
-        self::assertEquals($damage, $action->getPower());
+        self::assertEquals(OffenseFactory::create($offenseData), $action->getOffense());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($animationMethod, $action->getAnimationMethod());
         self::assertEquals($messageMethod, $action->getMessageMethod());
@@ -262,17 +271,25 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($summonData['name'], $action->getSummonUnit()->getName());
         self::assertEquals($summonData['level'], $action->getSummonUnit()->getLevel());
         self::assertEquals($summonData['avatar'], $action->getSummonUnit()->getAvatar());
-        self::assertEquals($summonData['offense']['damage'], $action->getSummonUnit()->getOffense()->getDamage($this->getDefense()));
-        self::assertEquals($summonData['offense']['attack_speed'], $action->getSummonUnit()->getOffense()->getAttackSpeed());
-        self::assertEquals($summonData['offense']['accuracy'], $action->getSummonUnit()->getOffense()->getAccuracy());
-        self::assertEquals($summonData['offense']['block_ignore'], $action->getSummonUnit()->getOffense()->getBlockIgnore());
-        self::assertEquals($summonData['defense']['defense'], $action->getSummonUnit()->getDefense()->getDefense());
-        self::assertEquals($summonData['defense']['block'], $action->getSummonUnit()->getDefense()->getBlock());
         self::assertEquals($summonData['life'], $action->getSummonUnit()->getLife());
         self::assertEquals($summonData['total_life'], $action->getSummonUnit()->getTotalLife());
         self::assertEquals($summonData['melee'], $action->getSummonUnit()->isMelee());
         self::assertEquals($summonData['class'], $action->getSummonUnit()->getClass()->getId());
         self::assertEquals($summonData['race'], $action->getSummonUnit()->getRace()->getId());
+
+        self::assertEquals($summonData['offense']['type_damage'], $action->getSummonUnit()->getOffense()->getTypeDamage());
+        self::assertEquals($summonData['offense']['physical_damage'], $action->getSummonUnit()->getOffense()->getPhysicalDamage());
+        self::assertEquals($summonData['offense']['attack_speed'], $action->getSummonUnit()->getOffense()->getAttackSpeed());
+        self::assertEquals($summonData['offense']['accuracy'], $action->getSummonUnit()->getOffense()->getAccuracy());
+        self::assertEquals($summonData['offense']['magic_accuracy'], $action->getSummonUnit()->getOffense()->getMagicAccuracy());
+        self::assertEquals($summonData['offense']['block_ignore'], $action->getSummonUnit()->getOffense()->getBlockIgnore());
+
+        self::assertEquals($summonData['defense']['physical_resist'], $action->getSummonUnit()->getDefense()->getPhysicalResist());
+        self::assertEquals($summonData['defense']['defense'], $action->getSummonUnit()->getDefense()->getDefense());
+        self::assertEquals($summonData['defense']['magic_defense'], $action->getSummonUnit()->getDefense()->getMagicDefense());
+        self::assertEquals($summonData['defense']['block'], $action->getSummonUnit()->getDefense()->getBlock());
+        self::assertEquals($summonData['defense']['magic_block'], $action->getSummonUnit()->getDefense()->getMagicBlock());
+        self::assertEquals($summonData['defense']['mental_barrier'], $action->getSummonUnit()->getDefense()->getMentalBarrier());
     }
 
     /**
@@ -534,7 +551,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
+                    'offense'        => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided' => true,
                     'name'           => 'action name',
                 ],
@@ -560,7 +585,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
@@ -576,7 +609,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
@@ -591,7 +632,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'action_unit'      => $actionUnit,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
@@ -607,7 +656,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => new UnitFactory(),
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
@@ -622,7 +679,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'action_unit'      => $actionUnit,
                     'enemy_command'    => $enemyCommand,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
@@ -638,7 +703,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => new UnitFactory(),
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
@@ -653,7 +726,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'action_unit'      => $actionUnit,
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
@@ -669,7 +750,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => true,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
@@ -685,7 +774,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => $damage = 150,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
                     'message_method'   => 'message test',
@@ -700,29 +797,21 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => $damage = 150,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => '0',
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
                     'message_method'   => 'message test',
                 ],
                 ActionException::INVALID_CAN_BE_AVOIDED,
-            ],
-            [
-                // 13: damage некорректного типа
-                [
-                    'type'             => ActionInterface::DAMAGE,
-                    'action_unit'      => $actionUnit,
-                    'enemy_command'    => $enemyCommand,
-                    'allies_command'   => $command,
-                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => '50',
-                    'can_be_avoided'   => true,
-                    'name'             => 'action name',
-                    'animation_method' => 'animation test',
-                    'message_method'   => 'message test',
-                ],
-                ActionException::INVALID_DAMAGE_DATA,
             ],
             [
                 // 14: Отсутствует name [для DamageAction]
@@ -732,7 +821,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'animation_method' => 'animation test',
                     'message_method'   => 'message test',
@@ -747,7 +844,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => null,
                     'animation_method' => 'animation test',
@@ -763,7 +868,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => ['action name'],
                     'animation_method' => 'animation test',
@@ -779,7 +892,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'         => 50,
+                    'offense'        => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided' => true,
                     'name'           => 'action name',
                     'message_method' => 'message test',
@@ -794,7 +915,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => 'action name',
                     'animation_method' => null,
@@ -810,7 +939,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
@@ -825,7 +962,15 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'          => [
+                        'type_damage'     => 1,
+                        'damage'          => 10,
+                        'physical_damage' => 10,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 200,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
@@ -1424,28 +1569,41 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_POWER_DATA,
             ],
+
+            // offense для DamageAction. Проверяем наличие параметра и что он массив. Остальная валидация происходит в OffenseFactory
+
+            // 55: Отсутствует offense
             [
-                // 56: отсутствует damage для DamageAction
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'can_be_avoided' => true,
-                    'name'           => 'action name',
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'test',
                 ],
-                ActionException::INVALID_DAMAGE_DATA,
+                ActionException::INVALID_OFFENSE_DATA,
+            ],
+
+            [
+                // 55: offense некорректного типа
+                [
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'offense'          => 60,
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'test',
+                ],
+                ActionException::INVALID_OFFENSE_DATA,
             ],
         ];
-    }
-
-    /**
-     * @return DefenseInterface
-     * @throws Exception
-     */
-    private function getDefense(): DefenseInterface
-    {
-        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

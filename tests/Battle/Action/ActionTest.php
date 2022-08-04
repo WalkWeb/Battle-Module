@@ -6,8 +6,6 @@ namespace Tests\Battle\Action;
 
 use Battle\Action\WaitAction;
 use Battle\Command\CommandInterface;
-use Battle\Unit\Defense\Defense;
-use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Action\ActionException;
@@ -192,11 +190,11 @@ class ActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на ситуацию, когда у не-DamageAction вызывается метод getBlockIgnore()
+     * Тест на ситуацию, когда у не-DamageAction вызывается метод isCanBeAvoided()
      *
      * @throws Exception
      */
-    public function testActionNoBlockIgnore(): void
+    public function testActionNoCanBeAvoided(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $defendUnit = UnitFactory::createByTemplate(2);
@@ -207,6 +205,24 @@ class ActionTest extends AbstractUnitTest
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::isCanBeAvoided');
         $action->isCanBeAvoided();
+    }
+
+    /**
+     * Тест на ситуацию, когда у не-DamageAction вызывается метод getOffense()
+     *
+     * @throws Exception
+     */
+    public function testActionNoOffense(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new WaitAction($unit, $defendCommand, $alliesCommand);
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getOffense');
+        $action->getOffense();
     }
 
     /**
@@ -272,20 +288,11 @@ class ActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage($this->getDefense()),
+            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD
         );
-    }
-
-    /**
-     * @return DefenseInterface
-     * @throws Exception
-     */
-    private function getDefense(): DefenseInterface
-    {
-        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

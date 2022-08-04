@@ -6,6 +6,7 @@ namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
 use Battle\Unit\Effect\EffectInterface;
+use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
@@ -124,6 +125,15 @@ abstract class AbstractAction implements ActionInterface
      * @throws ActionException
      */
     public function getPower(): int
+    {
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
+    }
+
+    /**
+     * @return OffenseInterface
+     * @throws ActionException
+     */
+    public function getOffense(): OffenseInterface
     {
         throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }

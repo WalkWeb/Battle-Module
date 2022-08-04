@@ -86,7 +86,15 @@ class AbilityFactoryTest extends AbstractUnitTest
                         [
                             'type'             => ActionInterface::DAMAGE,
                             'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'offense'    => [
+                                'type_damage'     => 1,
+                                'damage'          => 50,
+                                'physical_damage' => 50,
+                                'attack_speed'    => 1,
+                                'accuracy'        => 500,
+                                'magic_accuracy'  => 100,
+                                'block_ignore'    => 0,
+                            ],
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',
@@ -108,7 +116,15 @@ class AbilityFactoryTest extends AbstractUnitTest
                         [
                             'type'             => ActionInterface::DAMAGE,
                             'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'offense'    => [
+                                'type_damage'     => 1,
+                                'damage'          => 50,
+                                'physical_damage' => 50,
+                                'attack_speed'    => 1,
+                                'accuracy'        => 500,
+                                'magic_accuracy'  => 100,
+                                'block_ignore'    => 0,
+                            ],
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',
@@ -135,9 +151,9 @@ class AbilityFactoryTest extends AbstractUnitTest
                     'type_activate'   => AbilityInterface::ACTIVATE_CONCENTRATION,
                     'actions'         => [
                         [
-                            'type'             => ActionInterface::DAMAGE,
-                            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',
@@ -158,9 +174,9 @@ class AbilityFactoryTest extends AbstractUnitTest
                     'type_activate'   => AbilityInterface::ACTIVATE_CONCENTRATION,
                     'actions'         => [
                         [
-                            'type'             => ActionInterface::DAMAGE,
-                            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',
@@ -180,9 +196,9 @@ class AbilityFactoryTest extends AbstractUnitTest
                     'type_activate'   => AbilityInterface::ACTIVATE_CONCENTRATION,
                     'actions'         => [
                         [
-                            'type'             => ActionInterface::DAMAGE,
-                            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',
@@ -203,9 +219,9 @@ class AbilityFactoryTest extends AbstractUnitTest
                     'type_activate'   => AbilityInterface::ACTIVATE_CONCENTRATION,
                     'actions'         => [
                         [
-                            'type'             => ActionInterface::DAMAGE,
-                            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',
@@ -225,9 +241,9 @@ class AbilityFactoryTest extends AbstractUnitTest
                     'type_activate'   => AbilityInterface::ACTIVATE_CONCENTRATION,
                     'actions'         => [
                         [
-                            'type'             => ActionInterface::DAMAGE,
-                            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',
@@ -248,9 +264,9 @@ class AbilityFactoryTest extends AbstractUnitTest
                     'type_activate'   => AbilityInterface::ACTIVATE_CONCENTRATION,
                     'actions'         => [
                         [
-                            'type'             => ActionInterface::DAMAGE,
-                            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',
@@ -270,9 +286,9 @@ class AbilityFactoryTest extends AbstractUnitTest
                     'disposable'      => true,
                     'actions'         => [
                         [
-                            'type'             => ActionInterface::DAMAGE,
-                            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',
@@ -293,9 +309,9 @@ class AbilityFactoryTest extends AbstractUnitTest
                     'type_activate'   => 'AbilityInterface::ACTIVATE_CONCENTRATION',
                     'actions'         => [
                         [
-                            'type'             => ActionInterface::DAMAGE,
-                            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',
@@ -316,9 +332,9 @@ class AbilityFactoryTest extends AbstractUnitTest
                     'type_activate'   => 8,
                     'actions'         => [
                         [
-                            'type'             => ActionInterface::DAMAGE,
-                            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',
@@ -339,9 +355,9 @@ class AbilityFactoryTest extends AbstractUnitTest
                     'type_activate'   => AbilityInterface::ACTIVATE_CONCENTRATION,
                     'actions'         => [
                         [
-                            'type'             => ActionInterface::DAMAGE,
-                            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'damage'           => 50,
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
                             'animation_method' => 'damage',

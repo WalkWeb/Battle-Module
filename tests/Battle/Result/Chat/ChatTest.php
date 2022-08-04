@@ -19,8 +19,7 @@ use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\ChatException;
-use Battle\Unit\Defense\Defense;
-use Battle\Unit\Defense\DefenseInterface;
+use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -91,8 +90,8 @@ class ChatTest extends AbstractUnitTest
     private const PARALYSIS_EN = '<span style="color: #1e72e3">unit_1</span> paralyzed and unable to move';
     private const PARALYSIS_RU = '<span style="color: #1e72e3">unit_1</span> парализован и не может двигаться';
 
-    private const EFFECT_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> received damage on 10 life from effect <span class="ability">Poison</span>';
-    private const EFFECT_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> получил урон на 10 здоровья от эффекта <span class="ability">Отравление</span>';
+    private const EFFECT_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> received damage on 20 life from effect <span class="ability">Poison</span>';
+    private const EFFECT_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> получил урон на 20 здоровья от эффекта <span class="ability">Отравление</span>';
 
     // В текущих способностях сообщение от BuffAction не формируется, оно формируется через EffectAction
     // По этому это сообщение выглядит кривовато, но это нормально
@@ -451,7 +450,7 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            10,
+            $unit->getOffense(),
             true,
             'Poison',
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -537,7 +536,7 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            30,
+            $unit->getOffense(),
             true,
             'test attack',
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -864,7 +863,7 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            $unit->getOffense()->getDamage($this->getDefense()),
+            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -878,6 +877,7 @@ class ChatTest extends AbstractUnitTest
      * @param CommandInterface $command
      * @param int $typeTarget
      * @return ActionInterface
+     * @throws Exception
      */
     private function createAbilityDamage(
         UnitInterface $unit,
@@ -891,21 +891,20 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            50,
+            OffenseFactory::create([
+                'type_damage'     => 1,
+                'damage'          => 50,
+                'physical_damage' => 50,
+                'attack_speed'    => 1,
+                'accuracy'        => 500,
+                'magic_accuracy'  => 100,
+                'block_ignore'    => 0,
+            ]),
             true,
             'Heavy Strike',
             DamageAction::UNIT_ANIMATION_METHOD,
             'damageAbility',
             '/images/icons/ability/335.png'
         );
-    }
-
-    /**
-     * @return DefenseInterface
-     * @throws Exception
-     */
-    private function getDefense(): DefenseInterface
-    {
-        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

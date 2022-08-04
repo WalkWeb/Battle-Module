@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
@@ -18,9 +19,9 @@ class DamageAction extends AbstractAction
     public const EFFECT_MESSAGE_METHOD   = 'effectDamage';
 
     /**
-     * @var int
+     * @var OffenseInterface
      */
-    protected $damage;
+    protected $offense;
 
     /**
      * @var int
@@ -72,7 +73,7 @@ class DamageAction extends AbstractAction
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         int $typeTarget,
-        int $damage,
+        OffenseInterface $offense,
         bool $canBeAvoided,
         string $name,
         string $animationMethod,
@@ -81,9 +82,7 @@ class DamageAction extends AbstractAction
     )
     {
         parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
-
-        // TODO Переделать на $offense, и конечный урон будет рассчитываться уже по каждой отдельной цели, в зависимости от её сопротивлений
-        $this->damage = $damage;
+        $this->offense = $offense;
         $this->canBeAvoided = $canBeAvoided;
         $this->name = $name;
         $this->animationMethod = $animationMethod;
@@ -120,11 +119,11 @@ class DamageAction extends AbstractAction
     }
 
     /**
-     * @return int
+     * @return OffenseInterface
      */
-    public function getPower(): int
+    public function getOffense(): OffenseInterface
     {
-        return $this->damage;
+        return $this->offense;
     }
 
     /**

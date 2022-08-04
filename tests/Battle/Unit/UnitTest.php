@@ -103,7 +103,7 @@ class UnitTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage($enemyUnit->getDefense()),
+            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -121,7 +121,7 @@ class UnitTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage($enemyUnit->getDefense()),
+            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -340,7 +340,7 @@ class UnitTest extends AbstractUnitTest
     public function testUnitRemoveEffectsAtDie(): void
     {
         $unit = UnitFactory::createByTemplate(21);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $enemyUnit = UnitFactory::createByTemplate(13);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -370,7 +370,7 @@ class UnitTest extends AbstractUnitTest
             $command,
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            500,
+            $enemyUnit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,

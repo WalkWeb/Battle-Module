@@ -10,8 +10,6 @@ use Battle\Action\HealAction;
 use Battle\Container\Container;
 use Battle\Result\Scenario\ScenarioException;
 use Battle\Unit\Ability\AbilityFactory;
-use Battle\Unit\Defense\Defense;
-use Battle\Unit\Defense\DefenseInterface;
 use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandInterface;
@@ -913,7 +911,7 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_SELF,
-            10,
+            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             $animationMethod,
@@ -1043,20 +1041,11 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            $unit->getOffense()->getDamage($this->getDefense()),
+            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD
         );
-    }
-
-    /**
-     * @return DefenseInterface
-     * @throws Exception
-     */
-    private function getDefense(): DefenseInterface
-    {
-        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

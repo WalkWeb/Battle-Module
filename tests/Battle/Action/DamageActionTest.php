@@ -10,8 +10,6 @@ use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityInterface;
-use Battle\Unit\Defense\Defense;
-use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -33,9 +31,9 @@ class DamageActionTest extends AbstractUnitTest
 
         $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
+        self::assertEquals($unit->getOffense(), $action->getOffense());
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals($unit, $action->getCreatorUnit());
-        self::assertEquals($unit->getOffense()->getDamage($enemyUnit->getDefense()), $action->getPower());
         self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
         self::assertTrue($action->canByUsed());
         self::assertEquals(DamageAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
@@ -56,24 +54,7 @@ class DamageActionTest extends AbstractUnitTest
         $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
-        self::assertEquals($unit->getOffense()->getDamage($enemyUnit->getDefense()), $action->getPower());
-    }
 
-    /**
-     * @throws Exception
-     */
-    public function testDamageActionApplyUnit(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
-
-        $action->handle();
-
-        self::assertEquals(20, $action->getPower());
         self::assertEquals(20, $action->getFactualPower());
         self::assertEquals(20, $action->getFactualPowerByUnit($enemyUnit));
         self::assertEquals($unit->getId(), $action->getActionUnit()->getId());
@@ -82,6 +63,11 @@ class DamageActionTest extends AbstractUnitTest
         foreach ($action->getTargetUnits() as $targetUnit) {
             self::assertEquals($enemyUnit->getId(), $targetUnit->getId());
         }
+
+        self::assertEquals(
+            $enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()),
+            $enemyUnit->getLife()
+        );
     }
 
     /**
@@ -98,7 +84,7 @@ class DamageActionTest extends AbstractUnitTest
 
         foreach ($actionCollection as $action) {
             $action->handle();
-            self::assertEquals(30, $action->getPower());
+            self::assertEquals(30, $action->getOffense()->getDamage($enemyUnit->getDefense()));
             self::assertEquals(20, $action->getFactualPower());
         }
     }
@@ -162,7 +148,7 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            $unit->getOffense()->getDamage($enemyUnit->getDefense()),
+            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -527,7 +513,7 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense()->getDamage($enemyUnit->getDefense()),
+            $unit->getOffense(),
             false,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -570,7 +556,7 @@ class DamageActionTest extends AbstractUnitTest
 
         // Максимальный шанс попадания 95%, т.е. все равно может промахнуться. Соответственно мы не можем проверить
         // конкретное попадание или конкретное уклонение, по этому делается простая условная проверка
-        self::assertIsInt($action->getPower());
+        self::assertIsInt($action->getFactualPower());
     }
 
     /**
@@ -591,7 +577,7 @@ class DamageActionTest extends AbstractUnitTest
 
         // Минимальный шанс попадания 5%, т.е. все равно может попасть. Соответственно мы не можем проверить
         // конкретное попадание или конкретное уклонение, по этому делается простая условная проверка
-        self::assertIsInt($action->getPower());
+        self::assertIsInt($action->getFactualPower());
     }
 
     /**
@@ -753,7 +739,7 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            $unit->getOffense()->getDamage($this->getDefense()),
+            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -776,14 +762,5 @@ class DamageActionTest extends AbstractUnitTest
             $unit,
             $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
         );
-    }
-
-    /**
-     * @return DefenseInterface
-     * @throws Exception
-     */
-    private function getDefense(): DefenseInterface
-    {
-        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

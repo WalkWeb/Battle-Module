@@ -9,8 +9,7 @@ use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;
 use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandInterface;
-use Battle\Unit\Defense\Defense;
-use Battle\Unit\Defense\DefenseInterface;
+use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Action\DamageAction;
@@ -488,7 +487,15 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            1000,
+            OffenseFactory::create([
+                'type_damage'     => 1,
+                'damage'          => 1000,
+                'physical_damage' => 1000,
+                'attack_speed'    => 1,
+                'accuracy'        => 10000,
+                'magic_accuracy'  => 10000,
+                'block_ignore'    => 0,
+            ]),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -540,7 +547,15 @@ class StatisticsTest extends AbstractUnitTest
                         'allies_command'   => $command,
                         'type_target'      => ActionInterface::TARGET_SELF,
                         'name'             => 'Poison',
-                        'damage'           => 8,
+                        'offense'    => [
+                            'type_damage'     => 2,
+                            'damage'          => 8,
+                            'physical_damage' => 8,
+                            'attack_speed'    => 1,
+                            'accuracy'        => 500,
+                            'magic_accuracy'  => 500,
+                            'block_ignore'    => 0,
+                        ],
                         'can_be_avoided'   => false,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                         'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
@@ -622,20 +637,11 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense()->getDamage($this->getDefense()),
+            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD
         );
-    }
-
-    /**
-     * @return DefenseInterface
-     * @throws Exception
-     */
-    private function getDefense(): DefenseInterface
-    {
-        return new Defense(0, 10, 10, 10, 5, 0);
     }
 }

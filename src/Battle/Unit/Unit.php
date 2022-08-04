@@ -418,8 +418,7 @@ class Unit extends AbstractUnit
                 $enemyCommand,
                 $alliesCommand,
                 DamageAction::TARGET_RANDOM_ENEMY,
-                // TODO То, что идет проверка по своей же защите - это временный костыль, будет передаваться Offense
-                $this->getOffense()->getDamage($this->defense),
+                $this->getOffense(),
                 true,
                 DamageAction::DEFAULT_NAME,
                 DamageAction::UNIT_ANIMATION_METHOD,
@@ -468,6 +467,8 @@ class Unit extends AbstractUnit
 
     /**
      * Рассчитывает шанс попадания по текущему юниту
+     *
+     * TODO Брать меткость нападающего не от юнита, а от Offense
      *
      * @param ActionInterface $action - ожидается DamageAction
      * @return int
@@ -540,13 +541,14 @@ class Unit extends AbstractUnit
     {
         $oldLife = $this->life;
         $oldMana = $this->mana;
+        $damage = $action->getOffense()->getDamage($this->defense);
 
         if ($this->defense->getMentalBarrier() > 0) {
-            $damageByMana = (int)($action->getPower() / (100 / $this->defense->getMentalBarrier()));
-            $damageByLife = $action->getPower() - $damageByMana;
+            $damageByMana = (int)($damage / (100 / $this->defense->getMentalBarrier()));
+            $damageByLife = $damage - $damageByMana;
         } else {
             $damageByMana = 0;
-            $damageByLife = $action->getPower();
+            $damageByLife = $damage;
         }
 
         if ($damageByMana > 0) {

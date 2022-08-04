@@ -52,7 +52,15 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
                 [
                     'type'             => ActionInterface::DAMAGE,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'damage'           => 50,
+                    'offense'    => [
+                        'type_damage'     => 1,
+                        'damage'          => 50,
+                        'physical_damage' => 50,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 500,
+                        'magic_accuracy'  => 100,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => true,
                     'name'             => $name,
                     'animation_method' => 'damage',
@@ -92,9 +100,9 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertInstanceOf(DamageAction::class, $action);
-            self::assertEquals((int)($unit->getOffense()->getDamage($enemyUnit->getDefense()) * 2.5), $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();
+            self::assertEquals(50, $action->getFactualPower());
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
@@ -154,9 +162,9 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertInstanceOf(DamageAction::class, $action);
-            self::assertEquals((int)($unit->getOffense()->getDamage($enemyUnit->getDefense()) * 2.5), $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();
+            self::assertEquals(50, $action->getFactualPower());
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
 

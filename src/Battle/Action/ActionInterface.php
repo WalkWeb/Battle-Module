@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Unit\Effect\EffectInterface;
+use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 
@@ -121,12 +122,7 @@ interface ActionInterface
     public function getTargetUnits(): UnitCollection;
 
     /**
-     * Возвращает суммарную силу действия (например, силу удара или силу лечения) по всем юнитам
-     *
-     * Этот параметр необходим для статистики и, например, для корректного расчета вампиризма - когда лечение
-     * рассчитывает от фактически нанесенного урона, а не от самого показателя удара
-     *
-     * В Action не имеющих силу действия (например, призыв существ) вернет 0
+     * Возвращает суммарную силу действия Action. Например, HealAction вернет силу лечения
      *
      * @return mixed
      * @throws ActionException
@@ -134,9 +130,24 @@ interface ActionInterface
     public function getPower(): int;
 
     /**
+     * Если это DamageAction - то вернет параметры урона.
+     *
+     * Во всех остальных Action, при обращении к этому методу будет брошено исключение
+     *
+     * @return OffenseInterface
+     * @throws ActionException
+     */
+    public function getOffense(): OffenseInterface;
+
+    /**
      * Задает фактическую силу действия, по указанному юниту
      *
+     * Этот параметр необходим для статистики и, например, для корректного расчета вампиризма - когда лечение
+     * рассчитывает от фактически нанесенного урона, а не от самого показателя удара
+
      * Например, у юнита осталось 5 здоровья и он получает 50 удара. В этом случае фактический удар будет на 5 здоровья
+     *
+     * По умолчанию, в Action у которых нет никакой силы (например, призыв существ), возвращает 0
      *
      * @param UnitInterface $unit
      * @param int $factualPower

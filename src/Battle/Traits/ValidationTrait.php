@@ -187,6 +187,24 @@ trait ValidationTrait
     }
 
     /**
+     * Проверяет, что указанное значение соответствует одному из указанных значений (в массиве)
+     *
+     * @param $param
+     * @param array $values
+     * @param string $error
+     * @return mixed
+     * @throws BattleException
+     */
+    protected static function in($param, array $values, string $error)
+    {
+        if (in_array($param, $values, true)) {
+            return $param;
+        }
+
+        throw new BattleException($error);
+    }
+
+    /**
      * @param array $data
      * @param string $filed
      * @param string $error
@@ -216,23 +234,5 @@ trait ValidationTrait
         }
 
         return $data[$filed];
-    }
-
-    /**
-     * Проверяет, что указанное значение соответствует одному из указанных значений (в массиве)
-     *
-     * @param $param
-     * @param array $values
-     * @param string $error
-     * @return mixed
-     * @throws BattleException
-     */
-    protected static function in($param, array $values, string $error)
-    {
-        if (in_array($param, $values, true)) {
-            return $param;
-        }
-
-        throw new BattleException($error);
     }
 }

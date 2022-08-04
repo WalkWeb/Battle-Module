@@ -45,7 +45,7 @@ class WardenTest extends AbstractUnitTest
                 $actions = $ability->getActions($enemyCommand, $command);
 
                 foreach ($actions as $action) {
-                    self::assertEquals(30, $action->getPower());
+                    self::assertEquals(30, $action->getOffense()->getPhysicalDamage());
                 }
             }
 
@@ -112,7 +112,15 @@ class WardenTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_SELF,
                     'name'             => 'Incineration',
-                    'damage'           => 6,
+                    'offense'    => [
+                        'type_damage'     => 2,
+                        'damage'          => 6,
+                        'physical_damage' => 6,
+                        'attack_speed'    => 1,
+                        'accuracy'        => 500,
+                        'magic_accuracy'  => 500,
+                        'block_ignore'    => 0,
+                    ],
                     'can_be_avoided'   => false,
                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                     'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
