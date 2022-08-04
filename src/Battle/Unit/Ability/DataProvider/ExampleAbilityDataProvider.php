@@ -35,7 +35,6 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 50,
                             'physical_damage' => 50,
                             'attack_speed'    => 1,
                             'accuracy'        => 500,
@@ -63,7 +62,6 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'type_target'      => ActionInterface::TARGET_ALL_ENEMY,
                         'offense'    => [
                             'type_damage'     => 2,
-                            'damage'          => 30,
                             'physical_damage' => 30,
                             'attack_speed'    => 1,
                             'accuracy'        => 500,
@@ -207,7 +205,6 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'name'             => 'Incineration',
                                     'offense'    => [
                                         'type_damage'     => 2,
-                                        'damage'          => 6,
                                         'physical_damage' => 6,
                                         'attack_speed'    => 1,
                                         'accuracy'        => 500,
@@ -286,7 +283,6 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'name'             => 'Poison',
                                     'offense'    => [
                                         'type_damage'     => 2,
-                                        'damage'          => 8,
                                         'physical_damage' => 8,
                                         'attack_speed'    => 1,
                                         'accuracy'        => 500,
@@ -473,7 +469,6 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'race'       => 10,
                             'offense'    => [
                                 'type_damage'     => 2,
-                                'damage'          => 17,
                                 'physical_damage' => 17,
                                 'attack_speed'    => 1.1,
                                 'accuracy'        => 200,
@@ -517,7 +512,6 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'race'       => 9,
                             'offense'    => [
                                 'type_damage'     => 1,
-                                'damage'          => 10,
                                 'physical_damage' => 10,
                                 'attack_speed'    => 1,
                                 'accuracy'        => 200,
@@ -561,7 +555,6 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'race'       => 8,
                             'offense'    => [
                                 'type_damage'     => 1,
-                                'damage'          => 16,
                                 'physical_damage' => 16,
                                 'attack_speed'    => 1,
                                 'accuracy'        => 200,
@@ -605,7 +598,6 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'race'       => 8,
                             'offense'    => [
                                 'type_damage'     => 2,
-                                'damage'          => 13,
                                 'physical_damage' => 13,
                                 'attack_speed'    => 1.2,
                                 'accuracy'        => 200,

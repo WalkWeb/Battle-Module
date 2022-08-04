@@ -427,7 +427,6 @@ class StrokeTest extends AbstractUnitTest
                         'name'             => 'Effect Damage',
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 1000,
                             'physical_damage' => 1000,
                             'attack_speed'    => 1,
                             'accuracy'        => 1000,

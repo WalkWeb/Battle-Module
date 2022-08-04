@@ -22,7 +22,6 @@ class OffenseFactory
     public static function create(array $data): Offense
     {
         self::int($data, 'type_damage', OffenseException::INCORRECT_TYPE_DAMAGE);
-        self::int($data, 'damage', OffenseException::INCORRECT_DAMAGE);
         self::int($data, 'physical_damage', OffenseException::INCORRECT_PHYSICAL_DAMAGE);
         self::intOrFloat($data, 'attack_speed', OffenseException::INCORRECT_ATTACK_SPEED);
         self::int($data, 'accuracy', OffenseException::INCORRECT_ACCURACY);
@@ -33,13 +32,6 @@ class OffenseFactory
             $data['type_damage'],
             [OffenseInterface::TYPE_ATTACK, OffenseInterface::TYPE_SPELL],
             OffenseException::INCORRECT_TYPE_DAMAGE_VALUE
-        );
-
-        self::intMinMaxValue(
-            $data['damage'],
-            OffenseInterface::MIN_DAMAGE,
-            OffenseInterface::MAX_DAMAGE,
-            OffenseException::INCORRECT_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
         );
 
         self::intMinMaxValue(
@@ -78,7 +70,6 @@ class OffenseFactory
 
         return new Offense(
             $data['type_damage'],
-            $data['damage'],
             $data['physical_damage'],
             $data['attack_speed'],
             $data['accuracy'],

@@ -47,13 +47,6 @@ interface OffenseInterface
     public function getDamage(DefenseInterface $defense): int;
 
     /**
-     * Устанавливает новое значение урона. Применяется в эффектах, изменяющих урон юнита
-     * 
-     * @param int $damage
-     */
-    public function setDamage(int $damage): void;
-
-    /**
      * Возвращает физический урон
      *
      * @return int

@@ -64,8 +64,7 @@ class SummonSkeletonAbilityTest extends AbstractUnitTest
                         'race'       => 8,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 16,
-                            'physical_damage' => 0,
+                            'physical_damage' => 16,
                             'attack_speed'    => 1,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,

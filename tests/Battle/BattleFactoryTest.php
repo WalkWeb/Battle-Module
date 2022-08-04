@@ -89,8 +89,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 15,
-                            'physical_damage' => 0,
+                            'physical_damage' => 15,
                             'attack_speed'    => 1.2,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,
@@ -120,8 +119,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 2,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 15,
-                            'physical_damage' => 0,
+                            'physical_damage' => 15,
                             'attack_speed'    => 1.2,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,
@@ -166,8 +164,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 15,
-                            'physical_damage' => 0,
+                            'physical_damage' => 15,
                             'attack_speed'    => 1.2,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,
@@ -200,8 +197,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 15,
-                            'physical_damage' => 0,
+                            'physical_damage' => 15,
                             'attack_speed'    => 1.2,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,
@@ -238,8 +234,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 15,
-                            'physical_damage' => 0,
+                            'physical_damage' => 15,
                             'attack_speed'    => 1.2,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,
@@ -269,8 +264,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 2,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 15,
-                            'physical_damage' => 0,
+                            'physical_damage' => 15,
                             'attack_speed'    => 1.2,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,
@@ -303,8 +297,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 15,
-                            'physical_damage' => 0,
+                            'physical_damage' => 15,
                             'attack_speed'    => 1.2,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,
@@ -341,8 +334,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 15,
-                            'physical_damage' => 0,
+                            'physical_damage' => 15,
                             'attack_speed'    => 1.2,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,
@@ -372,8 +364,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 2,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 15,
-                            'physical_damage' => 0,
+                            'physical_damage' => 15,
                             'attack_speed'    => 1.2,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,
@@ -406,8 +397,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 2,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 15,
-                            'physical_damage' => 0,
+                            'physical_damage' => 15,
                             'attack_speed'    => 1.2,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,
@@ -456,8 +446,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 15,
-                            'physical_damage' => 0,
+                            'physical_damage' => 15,
                             'attack_speed'    => 1.2,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,

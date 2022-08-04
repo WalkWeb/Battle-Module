@@ -93,8 +93,7 @@ class UnitFactoryTest extends AbstractUnitTest
             'command'    => 1,
             'offense'    => [
                 'type_damage'     => 1,
-                'damage'          => 15,
-                'physical_damage' => 0,
+                'physical_damage' => 15,
                 'attack_speed'    => 1.2,
                 'accuracy'        => 200,
                 'magic_accuracy'  => 100,
@@ -138,8 +137,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -172,8 +170,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -205,8 +202,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -239,8 +235,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 2,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -281,8 +276,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -316,8 +310,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -351,8 +344,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -386,8 +378,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -420,8 +411,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -455,8 +445,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -490,8 +479,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -525,8 +513,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -559,8 +546,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -594,8 +580,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -628,8 +613,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -663,8 +647,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -698,8 +681,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -733,8 +715,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -767,8 +748,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -802,8 +782,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -837,8 +816,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -872,8 +850,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -906,8 +883,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -941,8 +917,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -976,8 +951,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1011,8 +985,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1045,8 +1018,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1080,8 +1052,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1115,8 +1086,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1150,8 +1120,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1184,8 +1153,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1219,8 +1187,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1253,8 +1220,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'       => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1288,8 +1254,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 'left',
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1323,8 +1288,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 3,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1411,8 +1375,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1438,8 +1401,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1.2,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1466,8 +1428,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1501,8 +1462,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1536,8 +1496,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1571,8 +1530,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1605,8 +1563,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1640,8 +1597,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1675,8 +1631,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1710,8 +1665,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,
@@ -1745,8 +1699,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'     => 1,
-                        'damage'          => 15,
-                        'physical_damage' => 0,
+                        'physical_damage' => 15,
                         'attack_speed'    => 1,
                         'accuracy'        => 200,
                         'magic_accuracy'  => 100,

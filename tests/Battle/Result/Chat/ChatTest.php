@@ -893,7 +893,6 @@ class ChatTest extends AbstractUnitTest
             $typeTarget,
             OffenseFactory::create([
                 'type_damage'     => 1,
-                'damage'          => 50,
                 'physical_damage' => 50,
                 'attack_speed'    => 1,
                 'accuracy'        => 500,

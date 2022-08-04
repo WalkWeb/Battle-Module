@@ -65,8 +65,7 @@ class SummonImpAbilityTest extends AbstractUnitTest
                         'race'       => 9,
                         'offense'    => [
                             'type_damage'     => 1,
-                            'damage'          => 10,
-                            'physical_damage' => 0,
+                            'physical_damage' => 10,
                             'attack_speed'    => 1,
                             'accuracy'        => 200,
                             'magic_accuracy'  => 100,

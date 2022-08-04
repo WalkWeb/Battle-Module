@@ -120,7 +120,6 @@ class SuccubusTest extends AbstractUnitTest
                     'name'             => 'Poison',
                     'offense'    => [
                         'type_damage'     => 2,
-                        'damage'          => 8,
                         'physical_damage' => 8,
                         'attack_speed'    => 1,
                         'accuracy'        => 500,

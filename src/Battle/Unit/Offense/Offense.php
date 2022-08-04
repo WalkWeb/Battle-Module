@@ -14,13 +14,6 @@ class Offense implements OffenseInterface
     private $typeDamage;
 
     /**
-     * TODO На удаление - общий урон будет считаться как сумма всех стихийных уронов
-     *
-     * @var int
-     */
-    private $damage;
-
-    /**
      * @var int
      */
     private $physicalDamage;
@@ -47,7 +40,6 @@ class Offense implements OffenseInterface
 
     /**
      * @param int $typeDamage
-     * @param int $damage
      * @param int $physicalDamage
      * @param float $attackSpeed
      * @param int $accuracy
@@ -55,10 +47,9 @@ class Offense implements OffenseInterface
      * @param int $blockIgnore
      * @throws OffenseException
      */
-    public function __construct(int $typeDamage, int $damage, int $physicalDamage, float $attackSpeed, int $accuracy, int $magicAccuracy, int $blockIgnore)
+    public function __construct(int $typeDamage, int $physicalDamage, float $attackSpeed, int $accuracy, int $magicAccuracy, int $blockIgnore)
     {
         $this->setTypeDamage($typeDamage);
-        $this->setDamage($damage);
         $this->setPhysicalDamage($physicalDamage);
         $this->setAttackSpeed($attackSpeed);
         $this->setAccuracy($accuracy);
@@ -81,21 +72,6 @@ class Offense implements OffenseInterface
     public function getDamage(DefenseInterface $defense): int
     {
         return (int)($this->physicalDamage * ((100 - $defense->getPhysicalResist()) / 100));
-    }
-
-    /**
-     * @param int $damage
-     * @throws OffenseException
-     */
-    public function setDamage(int $damage): void
-    {
-        if ($damage < self::MIN_DAMAGE || $damage > self::MAX_DAMAGE) {
-            throw new OffenseException(
-                OffenseException::INCORRECT_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
-            );
-        }
-
-        $this->damage = $damage;
     }
 
     /**
@@ -218,7 +194,7 @@ class Offense implements OffenseInterface
      */
     public function getDPS(): float
     {
-        return round($this->damage * $this->attackSpeed, 1);
+        return round($this->physicalDamage * $this->attackSpeed, 1);
     }
 
     /**

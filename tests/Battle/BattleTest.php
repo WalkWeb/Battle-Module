@@ -64,8 +64,7 @@ class BattleTest extends AbstractUnitTest
                 'command'    => 1,
                 'offense'    => [
                     'type_damage'     => 1,
-                    'damage'          => 7,
-                    'physical_damage' => 0,
+                    'physical_damage' => 7,
                     'attack_speed'    => 1,
                     'accuracy'        => 200,
                     'magic_accuracy'  => 100,
@@ -95,8 +94,7 @@ class BattleTest extends AbstractUnitTest
                 'command'    => 2,
                 'offense'    => [
                     'type_damage'     => 1,
-                    'damage'          => 5,
-                    'physical_damage' => 0,
+                    'physical_damage' => 5,
                     'attack_speed'    => 1,
                     'accuracy'        => 200,
                     'magic_accuracy'  => 100,
@@ -153,8 +151,7 @@ class BattleTest extends AbstractUnitTest
                 'command'      => 1,
                 'offense'      => [
                     'type_damage'     => 1,
-                    'damage'          => 15,
-                    'physical_damage' => 0,
+                    'physical_damage' => 15,
                     'attack_speed'    => 1.2,
                     'accuracy'        => 200,
                     'magic_accuracy'  => 100,
@@ -184,8 +181,7 @@ class BattleTest extends AbstractUnitTest
                 'command'    => 2,
                 'offense'    => [
                     'type_damage'     => 1,
-                    'damage'          => 15,
-                    'physical_damage' => 0,
+                    'physical_damage' => 15,
                     'attack_speed'    => 1.2,
                     'accuracy'        => 200,
                     'magic_accuracy'  => 100,

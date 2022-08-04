@@ -114,7 +114,6 @@ class WardenTest extends AbstractUnitTest
                     'name'             => 'Incineration',
                     'offense'    => [
                         'type_damage'     => 2,
-                        'damage'          => 6,
                         'physical_damage' => 6,
                         'attack_speed'    => 1,
                         'accuracy'        => 500,

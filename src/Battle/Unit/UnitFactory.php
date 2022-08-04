@@ -40,8 +40,7 @@ class UnitFactory
      *         'race'       => 3,
      *         'offense'    => [
      *             'type_damage'     => 1,
-     *             'damage'          => 35,
-     *             'physical_damage' => 0,
+     *             'physical_damage' => 35,
      *             'attack_speed'    => 1.2,
      *             'accuracy'        => 176,
      *             'magic_accuracy'  => 413,

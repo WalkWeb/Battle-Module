@@ -489,7 +489,6 @@ class StatisticsTest extends AbstractUnitTest
             DamageAction::TARGET_ALL_ENEMY,
             OffenseFactory::create([
                 'type_damage'     => 1,
-                'damage'          => 1000,
                 'physical_damage' => 1000,
                 'attack_speed'    => 1,
                 'accuracy'        => 10000,
@@ -549,7 +548,6 @@ class StatisticsTest extends AbstractUnitTest
                         'name'             => 'Poison',
                         'offense'    => [
                             'type_damage'     => 2,
-                            'damage'          => 8,
                             'physical_damage' => 8,
                             'attack_speed'    => 1,
                             'accuracy'        => 500,
