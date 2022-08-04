@@ -693,31 +693,29 @@ class DamageActionTest extends AbstractUnitTest
         self::assertEquals($enemyUnit->getTotalLife() - 15, $enemyUnit->getLife());
     }
 
-    // TODO Пока не работает. Нужны значительные изменение DamageAction
+    /**
+     * Тест на уменьшение получаемого урона от сопротивлений (юнит с 80% сопротивления физическому урону)
+     *
+     * @throws Exception
+     */
+    public function testDamageActionPhysicalResist(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(39);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-//    /**
-//     * Тест на уменьшение получаемого урона от сопротивлений (юнит с 80% сопротивления физическому урону)
-//     *
-//     * @throws Exception
-//     */
-//    public function testDamageActionPhysicalResist(): void
-//    {
-//        $unit = UnitFactory::createByTemplate(1);
-//        $enemyUnit = UnitFactory::createByTemplate(39);
-//        $command = CommandFactory::create([$unit]);
-//        $enemyCommand = CommandFactory::create([$enemyUnit]);
-//
-//        $actions = $unit->getActions($enemyCommand, $command);
-//
-//        foreach ($actions as $action) {
-//            self::assertTrue($action->canByUsed());
-//            $action->handle();
-//        }
-//
-//        // Проверяем, что нанесено 20% урона
-//        self::assertEquals(96, $enemyUnit->getLife());
-//        self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()), $enemyUnit->getLife());
-//    }
+        $actions = $unit->getActions($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Проверяем, что нанесено 20% урона
+        self::assertEquals(96, $enemyUnit->getLife());
+        self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()), $enemyUnit->getLife());
+    }
 
     /**
      * @param UnitInterface $unit

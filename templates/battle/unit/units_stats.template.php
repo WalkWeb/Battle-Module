@@ -31,7 +31,8 @@ if (empty($this) || !($this instanceof ViewInterface)) {
             <td><p><abbr title="<?= $this->getTranslation()->trans('Mana') ?>"><img src="/images/battle/stats_icon/mana.png" alt=""></abbr></p></td>
             <td><p><abbr title="<?= $this->getTranslation()->trans('Mental Barrier') ?>"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
             <td><p><?= $this->getTranslation()->trans('Type Damage') ?></p></td>
-            <td><p><?= $this->getTranslation()->trans('Physical Damage') ?></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Physical Damage') ?>"><img src="/images/battle/stats_icon/physical_damage.png" alt=""></abbr></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Physical Damage Resistance') ?>"><img src="/images/battle/stats_icon/physical_resistance.png" alt=""></abbr></p></td>
             <td><p><abbr title="<?= $this->getTranslation()->trans('Attack Speed') ?>"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
             <td><p><abbr title="<?= $this->getTranslation()->trans('Accuracy') ?>"><img src="/images/battle/stats_icon/accuracy.png" alt=""></abbr></p></td>
             <td><p><abbr title="<?= $this->getTranslation()->trans('Magic Accuracy') ?>"><img src="/images/battle/stats_icon/magic_accuracy.png" alt=""></abbr></p></td>
@@ -60,6 +61,7 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 <td><p><?= $unit->getDefense()->getMentalBarrier() ?>%</p></td>
                 <td><p><?= ($unit->getOffense()->getTypeDamage() === OffenseInterface::TYPE_ATTACK ? $this->getTranslation()->trans('Attack') : $this->getTranslation()->trans('Spell')) ?></p></td>
                 <td><p><?= $unit->getOffense()->getPhysicalDamage() ?></p></td>
+                <td><p><?= $unit->getDefense()->getPhysicalResist() ?>%</p></td>
                 <td><p><?= $unit->getOffense()->getAttackSpeed() ?></p></td>
                 <td><p><?= $unit->getOffense()->getAccuracy() ?></p></td>
                 <td><p><?= $unit->getOffense()->getMagicAccuracy() ?></p></td>

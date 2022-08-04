@@ -77,6 +77,7 @@ return [
     'Blocked'                             => 'Заблокировал',
     'Dodged'                              => 'Уклонился',
     'Physical Damage'                     => 'Физический урон',
+    'Physical Damage Resistance'          => 'Сопротивление физическому урону',
     // Races
     'People'                              => 'Люди',
     'Human'                               => 'Человек',

@@ -148,7 +148,7 @@ $data = [
             'block_ignore'    => 0,
         ],
         'defense'    => [
-            'physical_resist' => 0,
+            'physical_resist' => 34,
             'defense'         => 106,
             'magic_defense'   => 211,
             'block'           => 20,

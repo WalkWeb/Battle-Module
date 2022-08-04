@@ -79,6 +79,7 @@ return [
     'Blocked'                             => 'Blocked',
     'Dodged'                              => 'Dodged',
     'Physical Damage'                     => 'Physical Damage',
+    'Physical Damage Resistance'          => 'Physical Damage Resistance',
     // Races
     'People'                              => 'People',
     'Human'                               => 'Human',

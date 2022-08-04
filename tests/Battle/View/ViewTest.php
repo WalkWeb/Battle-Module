@@ -516,7 +516,8 @@ EOT;
             <td><p><abbr title="Mana"><img src="/images/battle/stats_icon/mana.png" alt=""></abbr></p></td>
             <td><p><abbr title="Mental Barrier"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
             <td><p>Type Damage</p></td>
-            <td><p>Physical Damage</p></td>
+            <td><p><abbr title="Physical Damage"><img src="/images/battle/stats_icon/physical_damage.png" alt=""></abbr></p></td>
+            <td><p><abbr title="Physical Damage Resistance"><img src="/images/battle/stats_icon/physical_resistance.png" alt=""></abbr></p></td>
             <td><p><abbr title="Attack Speed"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
             <td><p><abbr title="Accuracy"><img src="/images/battle/stats_icon/accuracy.png" alt=""></abbr></p></td>
             <td><p><abbr title="Magic Accuracy"><img src="/images/battle/stats_icon/magic_accuracy.png" alt=""></abbr></p></td>
@@ -543,6 +544,7 @@ EOT;
                 <td><p>0%</p></td>
                 <td><p>Attack</p></td>
                 <td><p>20</p></td>
+                <td><p>0%</p></td>
                 <td><p>1</p></td>
                 <td><p>200</p></td>
                 <td><p>100</p></td>
@@ -569,6 +571,7 @@ EOT;
                 <td><p>0%</p></td>
                 <td><p>Attack</p></td>
                 <td><p>30</p></td>
+                <td><p>0%</p></td>
                 <td><p>1</p></td>
                 <td><p>200</p></td>
                 <td><p>100</p></td>
