@@ -368,19 +368,14 @@ class Chat implements ChatInterface
      */
     private function effectDamage(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // "received damage"
-            $this->translation->trans('received damage') . ' ' .
-            // "on" #
-            $this->translation->trans('on') . ' ' . $action->getFactualPower() . ' ' .
-            // "life from effect"
-            $this->translation->trans('life from effect') . ' ' .
-            // ability icon
-            $this->getIcon($action) .
-            // ability name
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>';
+        // $unit received $power damage from effect $icon $ability
+        return sprintf(
+            $this->translation->trans('%s received %d damage from effect %s %s'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $action->getFactualPower(),
+            trim($this->getIcon($action)),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>'
+        );
     }
 
     /**
@@ -416,6 +411,8 @@ class Chat implements ChatInterface
     }
 
     /**
+     * TODO В будущем нужно будет переделать - убрав пробел на конце
+     *
      * @param ActionInterface $action
      * @return string
      */
@@ -431,10 +428,9 @@ class Chat implements ChatInterface
      */
     private function getTargetsName(ActionInterface $action): string
     {
-        $targets = clone $action->getTargetUnits();
         $names = [];
 
-        foreach ($targets as $target) {
+        foreach ($action->getTargetUnits() as $target) {
             if (!$action->isBlocked($target) && !$action->isDodged($target)) {
                 $names[] = '<span style="color: ' . $target->getRace()->getColor() . '">' . $target->getName() . '</span>';
             }
@@ -450,10 +446,9 @@ class Chat implements ChatInterface
      */
     private function getTargetsBlockedName(ActionInterface $action): string
     {
-        $targets = clone $action->getTargetUnits();
         $names = [];
 
-        foreach ($targets as $target) {
+        foreach ($action->getTargetUnits() as $target) {
             if ($action->isBlocked($target)) {
                 $names[] = '<span style="color: ' . $target->getRace()->getColor() . '">' . $target->getName() . '</span>';
             }
@@ -469,10 +464,9 @@ class Chat implements ChatInterface
      */
     private function getTargetsDodgedName(ActionInterface $action): string
     {
-        $targets = clone $action->getTargetUnits();
         $names = [];
 
-        foreach ($targets as $target) {
+        foreach ($action->getTargetUnits() as $target) {
             if ($action->isDodged($target)) {
                 $names[] = '<span style="color: ' . $target->getRace()->getColor() . '">' . $target->getName() . '</span>';
             }

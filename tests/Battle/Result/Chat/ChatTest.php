@@ -90,8 +90,8 @@ class ChatTest extends AbstractUnitTest
     private const PARALYSIS_EN = '<span style="color: #1e72e3">unit_1</span> paralyzed and unable to move';
     private const PARALYSIS_RU = '<span style="color: #1e72e3">unit_1</span> парализован и не может двигаться';
 
-    private const EFFECT_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> received damage on 20 life from effect <span class="ability">Poison</span>';
-    private const EFFECT_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> получил урон на 20 здоровья от эффекта <span class="ability">Отравление</span>';
+    private const EFFECT_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> received 20 damage from effect <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
+    private const EFFECT_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> получил 20 урона от эффекта <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
 
     // В текущих способностях сообщение от BuffAction не формируется, оно формируется через EffectAction
     // По этому это сообщение выглядит кривовато, но это нормально
@@ -454,7 +454,8 @@ class ChatTest extends AbstractUnitTest
             true,
             'Poison',
             DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::EFFECT_MESSAGE_METHOD
+            DamageAction::EFFECT_MESSAGE_METHOD,
+            '/images/icons/ability/202.png'
         );
 
         self::assertTrue($action->canByUsed());

@@ -32,8 +32,8 @@ class PoisonAbilityTest extends AbstractUnitTest
     private const MESSAGE_APPLY_SELF_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
 
     // Сообщения об уроне от эффекта
-    private const MESSAGE_DAMAGE_EN = '<span style="color: #1e72e3">unit_2</span> received damage on 8 life from effect <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
-    private const MESSAGE_DAMAGE_RU = '<span style="color: #1e72e3">unit_2</span> получил урон на 8 здоровья от эффекта <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
+    private const MESSAGE_DAMAGE_EN = '<span style="color: #1e72e3">unit_2</span> received 8 damage from effect <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
+    private const MESSAGE_DAMAGE_RU = '<span style="color: #1e72e3">unit_2</span> получил 8 урона от эффекта <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
