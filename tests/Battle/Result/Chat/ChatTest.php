@@ -28,7 +28,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class ChatTest extends AbstractUnitTest
 {
-    private const MESSAGE   = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
 
     private const DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
     private const DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> атаковал <span style="color: #1e72e3">unit_2</span> на 20 урона';
@@ -408,7 +408,7 @@ class ChatTest extends AbstractUnitTest
     /**
      * Тест на формирование сообщения о воскрешении
      *
-     *  @throws Exception
+     * @throws Exception
      */
     public function testChatAddMessageResurrection(): void
     {
@@ -893,12 +893,14 @@ class ChatTest extends AbstractUnitTest
             $command,
             $typeTarget,
             OffenseFactory::create([
-                'type_damage'     => 1,
-                'physical_damage' => 50,
-                'attack_speed'    => 1,
-                'accuracy'        => 500,
-                'magic_accuracy'  => 100,
-                'block_ignore'    => 0,
+                'type_damage'         => 1,
+                'physical_damage'     => 50,
+                'attack_speed'        => 1,
+                'accuracy'            => 500,
+                'magic_accuracy'      => 100,
+                'block_ignore'        => 0,
+                'critical_chance'     => 0,
+                'critical_multiplier' => 0,
             ]),
             true,
             'Heavy Strike',

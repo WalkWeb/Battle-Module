@@ -13,23 +13,29 @@ use Battle\Unit\Defense\DefenseInterface;
  */
 interface OffenseInterface
 {
-    public const TYPE_ATTACK        = 1;
-    public const TYPE_SPELL         = 2;
+    public const TYPE_ATTACK             = 1;
+    public const TYPE_SPELL              = 2;
 
-    public const MIN_DAMAGE         = 0;
-    public const MAX_DAMAGE         = 100000;
+    public const MIN_DAMAGE              = 0;
+    public const MAX_DAMAGE              = 100000;
 
-    public const MIN_ATTACK_SPEED   = 0.0;
-    public const MAX_ATTACK_SPEED   = 10;
+    public const MIN_ATTACK_SPEED        = 0.0;
+    public const MAX_ATTACK_SPEED        = 10;
 
-    public const MIN_ACCURACY       = 1;
-    public const MAX_ACCURACY       = 1000000;
+    public const MIN_ACCURACY            = 1;
+    public const MAX_ACCURACY            = 1000000;
 
-    public const MIN_MAGIC_ACCURACY = 1;
-    public const MAX_MAGIC_ACCURACY = 1000000;
+    public const MIN_MAGIC_ACCURACY      = 1;
+    public const MAX_MAGIC_ACCURACY      = 1000000;
 
-    public const MIN_BLOCK_IGNORE   = 0;
-    public const MAX_BLOCK_IGNORE   = 100;
+    public const MIN_BLOCK_IGNORE        = 0;
+    public const MAX_BLOCK_IGNORE        = 100;
+
+    public const MIN_CRITICAL_CHANCE     = 0;
+    public const MAX_CRITICAL_CHANCE     = 100;
+
+    public const MIN_CRITICAL_MULTIPLIER = 0;
+    public const MAX_CRITICAL_MULTIPLIER = 10000;
 
     /**
      * Возвращает тип урона: атака или заклинание
@@ -57,6 +63,7 @@ interface OffenseInterface
      * Устанавливает новое значение физического урона. Применяется в эффектах, изменяющих физический урон юнита
      *
      * @param int $physicalDamage
+     * @throws OffenseException
      */
     public function setPhysicalDamage(int $physicalDamage): void;
 
@@ -69,6 +76,7 @@ interface OffenseInterface
 
     /**
      * @param float $attackSpeed
+     * @throws OffenseException
      */
     public function setAttackSpeed(float $attackSpeed): void;
     
@@ -83,6 +91,7 @@ interface OffenseInterface
      * Устанавливает новое значение меткости. Применяется в эффектах, изменяющих её
      *
      * @param int $accuracy
+     * @throws OffenseException
      */
     public function setAccuracy(int $accuracy): void;
 
@@ -97,6 +106,7 @@ interface OffenseInterface
      * Устанавливает новое значение магической меткости. Применяется в эффектах, изменяющих её
      *
      * @param int $magicAccuracy
+     * @throws OffenseException
      */
     public function setMagicAccuracy(int $magicAccuracy): void;
 
@@ -111,8 +121,42 @@ interface OffenseInterface
 
     /**
      * @param int $blockIgnore
+     * @throws OffenseException
      */
     public function setBlockIgnore(int $blockIgnore): void;
+
+    /**
+     * Возвращает шанс критического удара в %
+     *
+     * 0 - значит критических ударов никогда не будет, 100% - каждый удар будет критическим
+     *
+     * @return int
+     */
+    public function getCriticalChance(): int;
+
+    /**
+     * Устанавливает новое значение шанса критического удара. Используется в эффектах, изменяющих этот параметр
+     *
+     * @param int $criticalChance
+     * @throws OffenseException
+     */
+    public function setCriticalChance(int $criticalChance): void;
+
+    /**
+     * Возвращает множитель критического удара в % (и уже в конкретных расчетах критического урона значение делится на
+     * 100)
+     *
+     * @return int
+     */
+    public function getCriticalMultiplier(): int;
+
+    /**
+     * Устанавливает новое значение силы критического удара. Используется в эффектах, изменяющих этот параметр
+     *
+     * @param int $criticalMultiplier
+     * @throws OffenseException
+     */
+    public function setCriticalMultiplier(int $criticalMultiplier): void;
 
     /**
      * Возвращает ДПС (средний урон за ход = урон * скорость атаки)

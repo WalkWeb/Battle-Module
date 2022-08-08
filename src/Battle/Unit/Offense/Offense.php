@@ -39,15 +39,36 @@ class Offense implements OffenseInterface
     private $blockIgnore;
 
     /**
+     * @var int
+     */
+    private $criticalChance;
+
+    /**
+     * @var int
+     */
+    private $criticalMultiplier;
+
+    /**
      * @param int $typeDamage
      * @param int $physicalDamage
      * @param float $attackSpeed
      * @param int $accuracy
      * @param int $magicAccuracy
      * @param int $blockIgnore
+     * @param int $criticalChance
+     * @param int $criticalMultiplier
      * @throws OffenseException
      */
-    public function __construct(int $typeDamage, int $physicalDamage, float $attackSpeed, int $accuracy, int $magicAccuracy, int $blockIgnore)
+    public function __construct(
+        int $typeDamage,
+        int $physicalDamage,
+        float $attackSpeed,
+        int $accuracy,
+        int $magicAccuracy,
+        int $blockIgnore,
+        int $criticalChance,
+        int $criticalMultiplier
+    )
     {
         $this->setTypeDamage($typeDamage);
         $this->setPhysicalDamage($physicalDamage);
@@ -55,6 +76,8 @@ class Offense implements OffenseInterface
         $this->setAccuracy($accuracy);
         $this->setMagicAccuracy($magicAccuracy);
         $this->setBlockIgnore($blockIgnore);
+        $this->setCriticalChance($criticalChance);
+        $this->setCriticalMultiplier($criticalMultiplier);
     }
 
     /**
@@ -195,6 +218,52 @@ class Offense implements OffenseInterface
     public function getDPS(): float
     {
         return round($this->physicalDamage * $this->attackSpeed, 1);
+    }
+
+    /**
+     * @return int
+     */
+    public function getCriticalChance(): int
+    {
+        return $this->criticalChance;
+    }
+
+    /**
+     * @param int $criticalChance
+     * @throws OffenseException
+     */
+    public function setCriticalChance(int $criticalChance): void
+    {
+        if ($criticalChance < self::MIN_CRITICAL_CHANCE || $criticalChance > self::MAX_CRITICAL_CHANCE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_CRITICAL_CHANCE_VALUE . OffenseInterface::MIN_CRITICAL_CHANCE . '-' . OffenseInterface::MAX_CRITICAL_CHANCE
+            );
+        }
+
+        $this->criticalChance = $criticalChance;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCriticalMultiplier(): int
+    {
+        return $this->criticalMultiplier;
+    }
+
+    /**
+     * @param int $criticalMultiplier
+     * @throws OffenseException
+     */
+    public function setCriticalMultiplier(int $criticalMultiplier): void
+    {
+        if ($criticalMultiplier < self::MIN_CRITICAL_MULTIPLIER || $criticalMultiplier > self::MAX_CRITICAL_MULTIPLIER) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_CRITICAL_MULTIPLIER_VALUE . OffenseInterface::MIN_CRITICAL_MULTIPLIER . '-' . OffenseInterface::MAX_CRITICAL_MULTIPLIER
+            );
+        }
+
+        $this->criticalMultiplier = $criticalMultiplier;
     }
 
     /**

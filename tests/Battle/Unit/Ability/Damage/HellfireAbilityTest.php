@@ -55,13 +55,15 @@ class HellfireAbilityTest extends AbstractUnitTest
                 [
                     'type'             => ActionInterface::DAMAGE,
                     'type_target'      => ActionInterface::TARGET_ALL_ENEMY,
-                    'offense'    => [
-                        'type_damage'     => 2,
-                        'physical_damage' => 30,
-                        'attack_speed'    => 1,
-                        'accuracy'        => 500,
-                        'magic_accuracy'  => 100,
-                        'block_ignore'    => 0,
+                    'offense'          => [
+                        'type_damage'         => 2,
+                        'physical_damage'     => 30,
+                        'attack_speed'        => 1,
+                        'accuracy'            => 500,
+                        'magic_accuracy'      => 100,
+                        'block_ignore'        => 0,
+                        'critical_chance'     => 0,
+                        'critical_multiplier' => 0,
                     ],
                     'can_be_avoided'   => true,
                     'name'             => $name,

@@ -78,7 +78,7 @@ class AbilityFactoryTest extends AbstractUnitTest
             [
                 // Вариант с полным набором данных (с chance_activate)
                 [
-                    'name'            => 'Demo Ability',
+                    'name'            => 'Demo Ability #1',
                     'icon'            => 'icon.png',
                     'disposable'      => true,
                     'type_activate'   => AbilityInterface::ACTIVATE_CONCENTRATION,
@@ -86,13 +86,15 @@ class AbilityFactoryTest extends AbstractUnitTest
                         [
                             'type'             => ActionInterface::DAMAGE,
                             'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'offense'    => [
-                                'type_damage'     => 1,
-                                'physical_damage' => 50,
-                                'attack_speed'    => 1,
-                                'accuracy'        => 500,
-                                'magic_accuracy'  => 100,
-                                'block_ignore'    => 0,
+                            'offense'          => [
+                                'type_damage'         => 1,
+                                'physical_damage'     => 50,
+                                'attack_speed'        => 1,
+                                'accuracy'            => 500,
+                                'magic_accuracy'      => 100,
+                                'block_ignore'        => 0,
+                                'critical_chance'     => 5,
+                                'critical_multiplier' => 200,
                             ],
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
@@ -107,21 +109,23 @@ class AbilityFactoryTest extends AbstractUnitTest
             [
                 // Вариант с неполным набором данных (без chance_activate)
                 [
-                    'name'            => 'Demo Ability',
-                    'icon'            => 'icon.png',
-                    'disposable'      => true,
-                    'type_activate'   => AbilityInterface::ACTIVATE_CONCENTRATION,
-                    'actions'         => [
+                    'name'          => 'Demo Ability #2',
+                    'icon'          => 'icon.png',
+                    'disposable'    => true,
+                    'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
+                    'actions'       => [
                         [
                             'type'             => ActionInterface::DAMAGE,
                             'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                            'offense'    => [
-                                'type_damage'     => 1,
-                                'physical_damage' => 50,
-                                'attack_speed'    => 1,
-                                'accuracy'        => 500,
-                                'magic_accuracy'  => 100,
-                                'block_ignore'    => 0,
+                            'offense'          => [
+                                'type_damage'         => 1,
+                                'physical_damage'     => 50,
+                                'attack_speed'        => 1,
+                                'accuracy'            => 500,
+                                'magic_accuracy'      => 100,
+                                'block_ignore'        => 0,
+                                'critical_chance'     => 5,
+                                'critical_multiplier' => 200,
                             ],
                             'can_be_avoided'   => true,
                             'name'             => 'Demo Ability',
