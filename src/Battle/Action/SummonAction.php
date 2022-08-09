@@ -17,12 +17,12 @@ class SummonAction extends AbstractAction
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var UnitInterface
      */
-    private $summon;
+    private UnitInterface $summon;
 
     /**
      * В отличие от прочих событий, SummonAction всегда применяется к себе и не требует $typeTarget в конструктор

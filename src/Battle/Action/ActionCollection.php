@@ -15,7 +15,7 @@ class ActionCollection implements Iterator, Countable
     /**
      * @var ActionInterface[]
      */
-    private $elements = [];
+    private array $elements = [];
 
     public function add(ActionInterface $action): void
     {

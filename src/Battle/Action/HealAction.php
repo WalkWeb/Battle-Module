@@ -20,22 +20,22 @@ class HealAction extends AbstractAction
     /**
      * @var int
      */
-    protected $power;
+    protected int $power;
 
     /**
      * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var string
      */
-    protected $animationMethod;
+    protected string $animationMethod;
 
     /**
      * @var string
      */
-    protected $messageMethod;
+    protected string $messageMethod;
 
     // TODO Избавиться от null параметров в конструкторе
 

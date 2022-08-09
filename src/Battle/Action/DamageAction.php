@@ -21,27 +21,27 @@ class DamageAction extends AbstractAction
     /**
      * @var OffenseInterface
      */
-    protected $offense;
+    protected OffenseInterface $offense;
 
     /**
-     * @var int
+     * @var bool
      */
-    protected $canBeAvoided;
-
-    /**
-     * @var string
-     */
-    protected $name;
+    protected bool $canBeAvoided;
 
     /**
      * @var string
      */
-    protected $animationMethod;
+    protected string $name;
 
     /**
      * @var string
      */
-    protected $messageMethod;
+    protected string $animationMethod;
+
+    /**
+     * @var string
+     */
+    protected string $messageMethod;
 
     /**
      * Было ли событие заблокировано
@@ -57,16 +57,16 @@ class DamageAction extends AbstractAction
      * дважды, и сообщение в чат о таком DamageAction сформировалось бы некорректно. Используемый же формат чуть менее
      * оптимален с точки зрения кода, но избавляет от возможности такой ошибки
      *
-     * @var bool
+     * @var array
      */
-    protected $blockedByUnit = [];
+    protected array $blockedByUnit = [];
 
     /**
      * Аналогично с blockedByUnit, только для уклонившихся юнитов
      *
      * @var array
      */
-    protected $dodgedByUnit = [];
+    protected array $dodgedByUnit = [];
 
     public function __construct(
         UnitInterface $actionUnit,

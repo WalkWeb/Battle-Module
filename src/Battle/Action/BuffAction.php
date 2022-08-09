@@ -17,27 +17,27 @@ class BuffAction extends AbstractAction
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string
      */
-    private $modifyMethod;
+    private string $modifyMethod;
 
     /**
      * @var int
      */
-    private $power;
+    private int $power;
 
     /**
-     * @var int
+     * @var float|int
      */
     private $revertValue;
 
     /**
      * @var string
      */
-    private $messageMethod;
+    private string $messageMethod;
 
     public function __construct(
         UnitInterface $actionUnit,
@@ -99,6 +99,9 @@ class BuffAction extends AbstractAction
         $this->revertValue = $revertValue;
     }
 
+    /**
+     * @return float|int
+     */
     public function getRevertValue()
     {
         return $this->revertValue;

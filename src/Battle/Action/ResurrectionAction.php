@@ -22,19 +22,19 @@ class ResurrectionAction extends AbstractAction
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * % от максимального здоровья, который будет восстановлен воскрешаемому юниту
      *
      * @var int
      */
-    private $power;
+    private int $power;
 
     /**
      * @var string
      */
-    private $messageMethod;
+    private string $messageMethod;
 
     /**
      * @param UnitInterface $actionUnit

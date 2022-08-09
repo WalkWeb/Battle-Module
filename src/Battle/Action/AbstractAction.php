@@ -16,41 +16,41 @@ abstract class AbstractAction implements ActionInterface
     /**
      * @var UnitInterface
      */
-    protected $creatorUnit;
+    protected UnitInterface $creatorUnit;
 
     /**
      * @var UnitInterface
      */
-    protected $actionUnit;
+    protected UnitInterface $actionUnit;
 
     /**
-     * @var UnitCollection
+     * @var UnitCollection|null
      */
-    protected $targetUnits;
-
-    /**
-     * @var CommandInterface
-     */
-    protected $alliesCommand;
+    protected ?UnitCollection $targetUnits = null;
 
     /**
      * @var CommandInterface
      */
-    protected $enemyCommand;
+    protected CommandInterface $alliesCommand;
+
+    /**
+     * @var CommandInterface
+     */
+    protected CommandInterface $enemyCommand;
 
     /**
      * Тип выбора цели для применения события, например: на себя, на врага, на самого раненого союзника и т.д.
      *
      * @var int
      */
-    protected $typeTarget;
+    protected int $typeTarget;
 
     /**
      * Фактическая сила действия события. Актуально для урона и лечения - где подсчитывается суммарный урон или лечение
      *
      * @var int
      */
-    protected $factualPower = 0;
+    protected int $factualPower = 0;
 
     /**
      * Фактическая сила действия отдельно по каждому юниту, в формате:
@@ -62,12 +62,12 @@ abstract class AbstractAction implements ActionInterface
      *
      * @var array
      */
-    protected $factualPowerByUnit = [];
+    protected array $factualPowerByUnit = [];
 
     /**
      * @var string
      */
-    protected $icon;
+    protected string $icon;
 
     public function __construct(
         UnitInterface $actionUnit,

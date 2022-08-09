@@ -16,7 +16,7 @@ class ActionFactory
     use ValidationTrait;
     use IdTrait;
 
-    private static $map = [
+    private static array $map = [
         ActionInterface::DAMAGE       => DamageAction::class,
         ActionInterface::HEAL         => HealAction::class,
         ActionInterface::WAIT         => WaitAction::class,

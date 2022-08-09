@@ -122,7 +122,8 @@ interface ActionInterface
     public function getTargetUnits(): UnitCollection;
 
     /**
-     * Возвращает суммарную силу действия Action. Например, HealAction вернет силу лечения
+     * Возвращает суммарную силу действия Action. Например, HealAction вернет силу лечения, а BuffAction - силу
+     * изменения характеристики
      *
      * @return mixed
      * @throws ActionException
