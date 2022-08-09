@@ -80,7 +80,6 @@ abstract class AbstractAbility implements AbilityInterface
      * @param array $actionsData
      * @param int $typeActivate
      * @param int $chanceActivate
-     * @param ActionFactory|null $actionFactory
      * @throws Exception
      */
     public function __construct(
@@ -90,8 +89,7 @@ abstract class AbstractAbility implements AbilityInterface
         string $icon,
         array $actionsData,
         int $typeActivate,
-        int $chanceActivate = 100,
-        ?ActionFactory $actionFactory = null
+        int $chanceActivate = 100
     )
     {
         $this->unit = $unit;
@@ -100,8 +98,7 @@ abstract class AbstractAbility implements AbilityInterface
         $this->container = $unit->getContainer();
         $this->name = $name;
         $this->icon = $icon;
-        // TODO Получать из Container
-        $this->actionFactory = $actionFactory ?? new ActionFactory();
+        $this->actionFactory = $this->container->getActionFactory();
         $this->typeActivate = $this->validateTypeActivate($typeActivate);
         $this->actionsData = $this->validateActionsData($actionsData);
     }
