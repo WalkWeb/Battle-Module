@@ -7,8 +7,8 @@ namespace Battle\Result;
 use Battle\Container\ContainerException;
 use Battle\Container\ContainerInterface;
 use Battle\Result\Chat\ChatInterface;
-use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
+use Battle\Result\FullLog\FullLogInterface;
 use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Result\Statistic\StatisticInterface;
 use Battle\Translation\TranslationInterface;
@@ -18,32 +18,32 @@ class Result implements ResultInterface
     /**
      * @var CommandInterface
      */
-    private $startLeftCommand;
+    private CommandInterface $startLeftCommand;
 
     /**
      * @var CommandInterface
      */
-    private $startRightCommand;
+    private CommandInterface $startRightCommand;
 
     /**
      * @var CommandInterface
      */
-    private $endLeftCommand;
+    private CommandInterface $endLeftCommand;
 
     /**
      * @var CommandInterface
      */
-    private $endRightCommand;
+    private CommandInterface $endRightCommand;
 
     /**
      * @var int - Победившая команда: 1 - левая команда, 2 - правая команда
      */
-    private $winner;
+    private int $winner;
 
     /**
      * @var ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * @param CommandInterface $startLeftCommand
@@ -106,10 +106,10 @@ class Result implements ResultInterface
     }
 
     /**
-     * @return FullLog
+     * @return FullLogInterface
      * @throws ContainerException
      */
-    public function getFullLog(): FullLog
+    public function getFullLog(): FullLogInterface
     {
         return $this->container->getFullLog();
     }

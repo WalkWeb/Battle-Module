@@ -14,7 +14,7 @@ use Exception;
 
 class UnitFactory
 {
-    private static $units = [
+    private static array $units = [
         // Warrior
         1  => [
             'id'         => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',

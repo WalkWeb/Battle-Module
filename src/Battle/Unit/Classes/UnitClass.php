@@ -15,27 +15,27 @@ class UnitClass implements UnitClassInterface
     /**
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string
      */
-    private $smallIcon;
+    private string $smallIcon;
 
     /**
      * @var array
      */
-    private $abilitiesData;
+    private array $abilitiesData;
 
     /**
      * @var AbilityFactory
      */
-    private $abilityFactory;
+    private AbilityFactory $abilityFactory;
 
     /**
      * @param int $id

@@ -15,37 +15,37 @@ class Race implements RaceInterface
     /**
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string
      */
-    private $singleName;
+    private string $singleName;
 
     /**
      * @var string
      */
-    private $color;
+    private string $color;
 
     /**
      * @var string
      */
-    private $icon;
+    private string $icon;
 
     /**
      * @var array
      */
-    private $abilitiesData;
+    private array $abilitiesData;
 
     /**
      * @var AbilityFactory
      */
-    private $abilityFactory;
+    private AbilityFactory $abilityFactory;
 
     public function __construct(
         int $id,

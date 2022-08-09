@@ -11,42 +11,42 @@ class Offense implements OffenseInterface
     /**
      * @var int
      */
-    private $typeDamage;
+    private int $typeDamage;
 
     /**
      * @var int
      */
-    private $physicalDamage;
+    private int $physicalDamage;
 
     /**
      * @var float
      */
-    private $attackSpeed;
+    private float $attackSpeed;
 
     /**
      * @var int
      */
-    private $accuracy;
+    private int $accuracy;
 
     /**
      * @var int
      */
-    private $magicAccuracy;
+    private int $magicAccuracy;
 
     /**
      * @var int
      */
-    private $blockIgnore;
+    private int $blockIgnore;
 
     /**
      * @var int
      */
-    private $criticalChance;
+    private int $criticalChance;
 
     /**
      * @var int
      */
-    private $criticalMultiplier;
+    private int $criticalMultiplier;
 
     /**
      * @param int $typeDamage

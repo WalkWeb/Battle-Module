@@ -20,12 +20,12 @@ class Chat implements ChatInterface
     /**
      * @var TranslationInterface
      */
-    private $translation;
+    private TranslationInterface $translation;
 
     /**
      * @var string[]
      */
-    private $messages = [];
+    private array $messages = [];
 
     /**
      * @param ContainerInterface $container

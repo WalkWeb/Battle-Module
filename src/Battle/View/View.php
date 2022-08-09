@@ -7,6 +7,7 @@ namespace Battle\View;
 use Battle\Command\CommandInterface;
 use Battle\Result\ResultInterface;
 use Battle\Translation\Translation;
+use Battle\Translation\TranslationInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
@@ -18,42 +19,42 @@ class View implements ViewInterface
     /**
      * @var string
      */
-    private $templateDir;
+    private string $templateDir;
 
     /**
-     * @var Translation
+     * @var TranslationInterface
      */
-    private $translation;
-
-    /**
-     * @var string
-     */
-    private $headTemplate;
+    private TranslationInterface $translation;
 
     /**
      * @var string
      */
-    private $resultTemplate;
+    private string $headTemplate;
 
     /**
      * @var string
      */
-    private $rowTemplate;
+    private string $resultTemplate;
 
     /**
      * @var string
      */
-    private $unitTemplate;
+    private string $rowTemplate;
 
     /**
      * @var string
      */
-    private $unitFullLogTemplate;
+    private string $unitTemplate;
 
     /**
      * @var string
      */
-    private $unitsStatsTemplate;
+    private string $unitFullLogTemplate;
+
+    /**
+     * @var string
+     */
+    private string $unitsStatsTemplate;
 
     /**
      * @param Translation $translation

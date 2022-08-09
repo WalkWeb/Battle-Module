@@ -11,7 +11,7 @@ use Exception;
 
 abstract class AbstractAbility implements AbilityInterface
 {
-    private $typesActivate = [
+    private array $typesActivate = [
         AbilityInterface::ACTIVATE_CONCENTRATION,
         AbilityInterface::ACTIVATE_RAGE,
         AbilityInterface::ACTIVATE_LOW_LIFE,
@@ -20,57 +20,57 @@ abstract class AbstractAbility implements AbilityInterface
     /**
      * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var string
      */
-    protected $icon;
+    protected string $icon;
 
     /**
      * @var array
      */
-    protected $actionsData;
+    protected array $actionsData;
 
     /**
      * @var ActionFactory
      */
-    protected $actionFactory;
+    protected ActionFactory $actionFactory;
 
     /**
      * @var bool
      */
-    protected $ready = false;
+    protected bool $ready = false;
 
     /**
      * @var bool
      */
-    protected $disposable;
+    protected bool $disposable;
 
     /**
      * @var bool
      */
-    protected $usage = false;
+    protected bool $usage = false;
 
     /**
      * @var UnitInterface
      */
-    protected $unit;
+    protected UnitInterface $unit;
 
     /**
      * @var ContainerInterface
      */
-    protected $container;
+    protected ContainerInterface $container;
 
     /**
      * @var int
      */
-    protected $typeActivate;
+    protected int $typeActivate;
 
     /**
      * @var int
      */
-    protected $chanceActivate;
+    protected int $chanceActivate;
 
     /**
      * @param UnitInterface $unit

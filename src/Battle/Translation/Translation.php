@@ -16,12 +16,12 @@ class Translation implements TranslationInterface
      *
      * @var array
      */
-    private $messages;
+    private array $messages;
 
     /**
      * @var string
      */
-    private $language;
+    private string $language;
 
     /**
      * @param string|null $language
@@ -80,14 +80,12 @@ class Translation implements TranslationInterface
      */
     private function defineLanguage(string $defaultLanguage): string
     {
-        if ($this->language === null) {
-            if (!array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER) || !is_string($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-                return $defaultLanguage;
-            }
-
-            $this->language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) ?: $defaultLanguage;
+        if (!array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER) || !is_string($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            $this->language = $defaultLanguage;
+            return $this->language;
         }
 
+        $this->language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) ?: $defaultLanguage;
         return $this->language;
     }
 

@@ -23,9 +23,9 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
     /**
      * @var AbilityDataProviderInterface
      */
-    private $abilityDataProvider;
+    private AbilityDataProviderInterface $abilityDataProvider;
 
-    private static $data = [
+    private static array $data = [
         1 => [
             'id'         => 1,
             'name'       => 'Warrior',

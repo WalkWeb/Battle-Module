@@ -11,9 +11,9 @@ use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
-use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Effect\EffectCollection;
-use Battle\Unit\Offense\Offense;
+use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\Race\RaceInterface;
 use Exception;
 
@@ -22,102 +22,102 @@ abstract class AbstractUnit implements UnitInterface
     /**
      * @var string
      */
-    protected $id;
+    protected string $id;
 
     /**
      * @var string - Имя юнита. Это может быть имя персонажа игрока, имя монстра или NPC
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var int - Уровень юнита
      */
-    protected $level;
+    protected int $level;
 
     /**
      * @var string - URL к картинке-аватару юнита
      */
-    protected $avatar;
+    protected string $avatar;
 
     /**
      * @var int - Текущее здоровье
      */
-    protected $life;
+    protected int $life;
 
     /**
      * @var int - Максимальное здоровье
      */
-    protected $totalLife;
+    protected int $totalLife;
 
     /**
      * @var int - Текущая мана
      */
-    protected $mana;
+    protected int $mana;
 
     /**
      * @var int - Максимальное здоровье
      */
-    protected $totalMana;
+    protected int $totalMana;
 
     /**
      * @var bool - Совершил ли юнит действие в текущем раунде
      */
-    protected $action = false;
+    protected bool $action = false;
 
     /**
      * @var bool - Является ли юнит бойцом ближнего боя
      */
-    protected $melee;
+    protected bool $melee;
 
     /**
      * @var int - Номер команды: 1 - левая команда, 2 - правая команда
      */
-    protected $command;
+    protected int $command;
 
     /**
      * @var int - Концентрация
      */
-    protected $concentration = 0;
+    protected int $concentration = 0;
 
     /**
      * @var int - Ярость
      */
-    protected $rage = 0;
+    protected int $rage = 0;
 
     /**
      * @var UnitClassInterface|null
      */
-    protected $class;
+    protected ?UnitClassInterface $class = null;
 
     /**
      * @var RaceInterface
      */
-    protected $race;
+    protected RaceInterface $race;
 
     /**
      * @var ContainerInterface
      */
-    protected $container;
+    protected ContainerInterface $container;
 
     /**
      * @var AbilityCollection
      */
-    protected $abilities;
+    protected AbilityCollection $abilities;
 
     /**
      * @var EffectCollection
      */
-    protected $effects;
+    protected EffectCollection $effects;
 
     /**
-     * @var Offense
+     * @var OffenseInterface
      */
-    protected $offense;
+    protected OffenseInterface $offense;
 
     /**
-     * @var Defense
+     * @var DefenseInterface
      */
-    protected $defense;
+    protected DefenseInterface $defense;
 
     /**
      * @param string $id
@@ -130,8 +130,8 @@ abstract class AbstractUnit implements UnitInterface
      * @param int $totalMana
      * @param bool $melee
      * @param int $command
-     * @param Offense $offense
-     * @param Defense $defense
+     * @param OffenseInterface $offense
+     * @param DefenseInterface $defense
      * @param RaceInterface $race
      * @param ContainerInterface $container
      * @param UnitClassInterface|null $class
@@ -149,8 +149,8 @@ abstract class AbstractUnit implements UnitInterface
         int $totalMana,
         bool $melee,
         int $command,
-        Offense $offense,
-        Defense $defense,
+        OffenseInterface $offense,
+        DefenseInterface $defense,
         RaceInterface $race,
         ContainerInterface $container,
         ?UnitClassInterface $class = null,
@@ -249,12 +249,12 @@ abstract class AbstractUnit implements UnitInterface
         return $this->command;
     }
 
-    public function getOffense(): Offense
+    public function getOffense(): OffenseInterface
     {
         return $this->offense;
     }
 
-    public function getDefense(): Defense
+    public function getDefense(): DefenseInterface
     {
         return $this->defense;
     }

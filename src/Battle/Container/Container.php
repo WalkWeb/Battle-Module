@@ -30,7 +30,7 @@ use Battle\View\ViewFactory;
 
 class Container implements ContainerInterface
 {
-    private $map = [
+    private array $map = [
         StatisticInterface::class           => Statistic::class,
         Statistic::class                    => Statistic::class,
         'Statistic'                         => Statistic::class,
@@ -87,9 +87,9 @@ class Container implements ContainerInterface
         'RaceDataProvider'                  => ExampleRaceDataProvider::class,
     ];
 
-    private $storage = [];
+    private array $storage = [];
 
-    private $testMode;
+    private bool $testMode;
 
     public function __construct(bool $testMode = false)
     {

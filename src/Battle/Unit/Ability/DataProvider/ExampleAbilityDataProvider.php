@@ -22,7 +22,7 @@ use Battle\Unit\Ability\AbilityInterface;
  */
 class ExampleAbilityDataProvider implements AbilityDataProviderInterface
 {
-    private static $data = [
+    private static array $data = [
         'Heavy Strike'   => [
             1 => [
                 'name'          => 'Heavy Strike',

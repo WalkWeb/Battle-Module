@@ -18,9 +18,9 @@ class ExampleRaceDataProvider implements RaceDataProviderInterface
     /**
      * @var AbilityDataProviderInterface
      */
-    private $abilityDataProvider;
+    private AbilityDataProviderInterface $abilityDataProvider;
 
-    private static $data = [
+    private static array $data = [
         1 => [
             'id'          => 1,
             'name'        => 'People',

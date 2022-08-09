@@ -10,9 +10,9 @@ use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityCollection;
-use Battle\Unit\Defense\Defense;
+use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Effect\EffectCollection;
-use Battle\Unit\Offense\Offense;
+use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\Race\RaceInterface;
 use Exception;
 
@@ -290,16 +290,16 @@ interface UnitInterface
     /**
      * Возвращает атакующие характеристики
      *
-     * @return Offense
+     * @return OffenseInterface
      */
-    public function getOffense(): Offense;
+    public function getOffense(): OffenseInterface;
 
     /**
      * Возвращает защитные характеристики
      *
-     * @return Defense
+     * @return DefenseInterface
      */
-    public function getDefense(): Defense;
+    public function getDefense(): DefenseInterface;
 
     /**
      * Возвращает особые способности юнита, которые срабатывают только при его смерти, если они есть и готовы к

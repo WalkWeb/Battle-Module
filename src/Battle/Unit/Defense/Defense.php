@@ -9,34 +9,34 @@ class Defense implements DefenseInterface
     /**
      * @var int
      */
-    private $physicalResist;
+    private int $physicalResist;
 
     /**
      * @var int
      */
-    private $defense;
+    private int $defense;
 
     /**
      * TODO Rename to $magicDefense
      *
      * @var int
      */
-    private $magicDefence;
+    private int $magicDefence;
 
     /**
      * @var int - Блок (0-100%)
      */
-    private $block;
+    private int $block;
 
     /**
      * @var int - Магический блок (0-100%)
      */
-    private $magicBlock;
+    private int $magicBlock;
 
     /**
      * @var int - Ментальный барьер (0-100%)
      */
-    private $mentalBarrier;
+    private int $mentalBarrier;
 
     /**
      * @param int $physicalResist

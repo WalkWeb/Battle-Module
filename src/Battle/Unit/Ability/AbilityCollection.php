@@ -17,12 +17,12 @@ class AbilityCollection implements Iterator, Countable
     /**
      * @var AbilityInterface[]
      */
-    private $elements = [];
+    private array $elements = [];
 
     /**
      * @var bool
      */
-    private $testMode;
+    private bool $testMode;
 
     public function __construct(bool $testMode = false)
     {

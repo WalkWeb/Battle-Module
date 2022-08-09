@@ -25,7 +25,7 @@ class Statistic implements StatisticInterface
      *
      * @var int - Количество раундов
      */
-    private $roundNumber = 1;
+    private int $roundNumber = 1;
 
     /***
      * Дублируется со счетчиком в Battle по той причине, что статистики в бою может и не быть, но подсчет ходов в любом
@@ -33,12 +33,12 @@ class Statistic implements StatisticInterface
      *
      * @var int - Количество ходов
      */
-    private $strokeNumber = 1;
+    private int $strokeNumber = 1;
 
     /**
      * @var UnitStatisticCollection - Статистика по юнитам
      */
-    private $unitsStatistics;
+    private UnitStatisticCollection $unitsStatistics;
 
     /**
      * Время начала боя
@@ -50,23 +50,23 @@ class Statistic implements StatisticInterface
     /**
      * Затраченное время на выполнения боя
      *
-     * @var float
+     * @var float|null
      */
-    private $runtime;
+    private ?float $runtime = null;
 
     /**
      * Затраченная память на начало боя
      *
      * @var int
      */
-    private $startMemory;
+    private int $startMemory;
 
     /**
      * Количество байт памяти затраченных на выполнение боя
      *
-     * @var int
+     * @var int|null
      */
-    private $memoryCost;
+    private ?int $memoryCost = null;
 
     public function __construct(?UnitStatisticCollection $collection = null)
     {

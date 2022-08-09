@@ -17,31 +17,31 @@ class Battle implements BattleInterface
     /**
      * @var CommandInterface
      */
-    private $leftCommand;
+    private CommandInterface $leftCommand;
 
     /**
      * @var CommandInterface
      */
-    private $rightCommand;
+    private CommandInterface $rightCommand;
 
     /**
      * Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand
      *
      * @var int
      */
-    private $actionCommand;
+    private int $actionCommand;
 
     /**
      * TODO Лучше переделать на лимит Stroke
      *
      * @var int
      */
-    private $maxRound = 100;
+    private int $maxRound = 100;
 
     /**
      * @var ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * @param CommandInterface $leftCommand

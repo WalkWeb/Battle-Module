@@ -17,33 +17,33 @@ class Stroke implements StrokeInterface
      *
      * @var int
      */
-    private $actionCommand;
+    private int $actionCommand;
 
     /**
      * Юнит совершающий действие
      *
      * @var UnitInterface
      */
-    private $actionUnit;
+    private UnitInterface $actionUnit;
 
     /**
      * Левая команда
      *
      * @var CommandInterface
      */
-    private $leftCommand;
+    private CommandInterface $leftCommand;
 
     /**
      * Правая команда
      *
      * @var CommandInterface
      */
-    private $rightCommand;
+    private CommandInterface $rightCommand;
 
     /**
      * @var ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * @param int $actionCommand

@@ -11,52 +11,52 @@ class UnitStatistic implements UnitStatisticInterface
     /**
      * @var UnitInterface
      */
-    private $unit;
+    private UnitInterface $unit;
 
     /**
      * @var int - Нанесенный юнитом урон
      */
-    private $causedDamage = 0;
+    private int $causedDamage = 0;
 
     /**
      * @var int - Количество ударов юнита
      */
-    private $hits = 0;
+    private int $hits = 0;
 
     /**
      * @var int - Полученный юнитом урон
      */
-    private $takenDamage = 0;
+    private int $takenDamage = 0;
 
     /**
      * @var int - Заблокировано получаемых ударов
      */
-    private $blockedHits = 0;
+    private int $blockedHits = 0;
 
     /**
      * @var int - Уклонился от получаемых ударов
      */
-    private $dodgedHits = 0;
+    private int $dodgedHits = 0;
 
     /**
      * @var int - Суммарное вылеченное здоровье юнитом
      */
-    private $heal = 0;
+    private int $heal = 0;
 
     /**
      * @var int - Убил юнитов
      */
-    private $killing = 0;
+    private int $killing = 0;
 
     /**
      * @var int - Призвал существ
      */
-    private $summons = 0;
+    private int $summons = 0;
 
     /**
      * @var int - Воскресил союзников
      */
-    private $resurrection = 0;
+    private int $resurrection = 0;
 
     /**
      * @param UnitInterface $unit

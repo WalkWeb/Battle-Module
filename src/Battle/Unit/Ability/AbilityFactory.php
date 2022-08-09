@@ -12,7 +12,7 @@ class AbilityFactory
 {
     use ValidationTrait;
 
-    private $typesActivate = [
+    private array $typesActivate = [
         AbilityInterface::ACTIVATE_CONCENTRATION,
         AbilityInterface::ACTIVATE_RAGE,
         AbilityInterface::ACTIVATE_LOW_LIFE,

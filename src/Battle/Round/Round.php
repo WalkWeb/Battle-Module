@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Battle\Round;
 
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerException;
 use Battle\Container\ContainerInterface;
 use Battle\Result\Statistic\Statistic;
@@ -26,33 +25,33 @@ class Round implements RoundInterface
      *
      * @var CommandInterface
      */
-    private $leftCommand;
+    private CommandInterface $leftCommand;
 
     /**
      * Правая команда
      *
      * @var CommandInterface
      */
-    private $rightCommand;
+    private CommandInterface $rightCommand;
 
     /**
      * Команда, которая совершает ход: 1 - leftCommand, 2 - rightCommand
      *
      * @var int
      */
-    private $actionCommand;
+    private int $actionCommand;
 
     /**
      * Максимальное количество ходов в рамках одного раунда
      *
      * @var int
      */
-    private $maxStroke = 20;
+    private int $maxStroke = 20;
 
     /**
-     * @var Container
+     * @var ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * @param CommandInterface $leftCommand

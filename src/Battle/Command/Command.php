@@ -15,7 +15,7 @@ class Command implements CommandInterface
     /**
      * @var UnitCollection
      */
-    private $units;
+    private UnitCollection $units;
 
     /**
      * @param UnitCollection $units

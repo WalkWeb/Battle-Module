@@ -22,7 +22,7 @@ class Scenario implements ScenarioInterface
     /**
      * @var array
      */
-    private $scenario = [];
+    private array $scenario = [];
 
     /**
      * Добавляет в сценарий анимацию, соответствующую указанному Action

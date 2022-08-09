@@ -14,37 +14,37 @@ class Effect implements EffectInterface
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string
      */
-    private $icon;
+    private string $icon;
 
     /**
      * @var int
      */
-    private $baseDuration;
+    private int $baseDuration;
 
     /**
      * @var int
      */
-    private $duration;
+    private int $duration;
 
     /**
      * @var ActionCollection
      */
-    private $onApplyActions;
+    private ActionCollection $onApplyActions;
 
     /**
      * @var ActionCollection
      */
-    private $onNextRoundActions;
+    private ActionCollection $onNextRoundActions;
 
     /**
      * @var ActionCollection
      */
-    private $onDisableActions;
+    private ActionCollection $onDisableActions;
 
     public function __construct(
         string $name,

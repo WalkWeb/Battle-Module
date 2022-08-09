@@ -3,8 +3,8 @@
 namespace Battle\Result;
 
 use Battle\Result\Chat\ChatInterface;
-use Battle\Result\FullLog\FullLog;
 use Battle\Command\CommandInterface;
+use Battle\Result\FullLog\FullLogInterface;
 use Battle\Result\Scenario\ScenarioInterface;
 use Battle\Result\Statistic\StatisticInterface;
 use Battle\Translation\TranslationInterface;
@@ -59,9 +59,9 @@ interface ResultInterface
     /**
      * Возвращает детальных лог боя
      *
-     * @return FullLog
+     * @return FullLogInterface
      */
-    public function getFullLog(): FullLog;
+    public function getFullLog(): FullLogInterface;
 
     /**
      * Возвращает итоговый чат по бою

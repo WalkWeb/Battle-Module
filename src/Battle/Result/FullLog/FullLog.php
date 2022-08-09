@@ -11,7 +11,7 @@ class FullLog implements FullLogInterface
     /**
      * @var string[]
      */
-    private $log = [];
+    private array $log = [];
 
     public function add(string $log): void
     {
