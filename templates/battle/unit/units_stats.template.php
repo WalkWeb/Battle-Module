@@ -40,6 +40,8 @@ if (empty($this) || !($this instanceof ViewInterface)) {
             <td><p><abbr title="<?= $this->getTranslation()->trans('Magic Defense') ?>"><img src="/images/battle/stats_icon/magic_defence.png" alt=""></abbr></p></td>
             <td><p><abbr title="<?= $this->getTranslation()->trans('Block') ?>"><img src="/images/battle/stats_icon/block.png" alt=""></abbr></p></td>
             <td><p><abbr title="<?= $this->getTranslation()->trans('Magic Block') ?>"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Chance Critical Damage') ?>"><img src="/images/battle/stats_icon/critical_chance.png" alt=""></abbr></p></td>
+            <td><p><abbr title="<?= $this->getTranslation()->trans('Critical Damage Multiplier') ?>"><img src="/images/battle/stats_icon/critical_multiplication.png" alt=""></abbr></p></td>
             <td><p><?= $this->getTranslation()->trans('Concentration') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Rage') ?></p></td>
             <td><p><?= $this->getTranslation()->trans('Melee') ?>?</p></td>
@@ -67,8 +69,10 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 <td><p><?= $unit->getOffense()->getMagicAccuracy() ?></p></td>
                 <td><p><?= $unit->getDefense()->getDefense() ?></p></td>
                 <td><p><?= $unit->getDefense()->getMagicDefense() ?></p></td>
-                <td><p><?= $unit->getDefense()->getBlock() ?></p></td>
-                <td><p><?= $unit->getDefense()->getMagicBlock() ?></p></td>
+                <td><p><?= $unit->getDefense()->getBlock() ?>%</p></td>
+                <td><p><?= $unit->getDefense()->getMagicBlock() ?>%</p></td>
+                <td><p><?= $unit->getOffense()->getCriticalChance() ?>%</p></td>
+                <td><p><?= $unit->getOffense()->getCriticalMultiplier() ?>%</p></td>
                 <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONCENTRATION ?></p></td>
                 <td><p><?= $unit->getRage() ?>/<?= $unit::MAX_RAGE ?></p></td>
                 <td><p><?= ($unit->isMelee() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>

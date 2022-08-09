@@ -78,6 +78,8 @@ return [
     'Magic Block'                             => 'Magic Block',
     'Blocked'                                 => 'Blocked',
     'Dodged'                                  => 'Dodged',
+    'Chance Critical Damage'                  => 'Chance Critical Damage',
+    'Critical Damage Multiplier'              => 'Critical Damage Multiplier',
     'Physical Damage'                         => 'Physical Damage',
     'Physical Damage Resistance'              => 'Physical Damage Resistance',
     // Races

@@ -76,6 +76,8 @@ return [
     'Magic Block'                             => 'Магический блок',
     'Blocked'                                 => 'Заблокировал',
     'Dodged'                                  => 'Уклонился',
+    'Chance Critical Damage'                  => 'Шанс критического удара',
+    'Critical Damage Multiplier'              => 'Множитель критического удара',
     'Physical Damage'                         => 'Физический урон',
     'Physical Damage Resistance'              => 'Сопротивление физическому урону',
     // Races
