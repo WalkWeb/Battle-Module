@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Container;
 
+use Battle\Action\ActionFactory;
 use Battle\BattleFactory;
 use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\ChatInterface;
@@ -72,7 +73,10 @@ class Container implements ContainerInterface
         RaceFactory::class                  => RaceFactory::class,
         'RaceFactory'                       => RaceFactory::class,
 
-        // Исключительно как примеры поставщиков. Подразумевается, что в реальном проекте эти поставщики будут подменены
+        ActionFactory::class                => ActionFactory::class,
+        'ActionFactory'                     => ActionFactory::class,
+
+        // Ниже идут примеры поставщиков. Подразумевается, что в реальном проекте эти поставщики будут подменены
         // через метод в контейнере set()
         ExampleClassDataProvider::class     => ExampleClassDataProvider::class,
         ClassDataProviderInterface::class   => ExampleClassDataProvider::class,
@@ -276,6 +280,17 @@ class Container implements ContainerInterface
     {
         /** @var RaceFactory $service */
         $service = $this->get(RaceFactory::class);
+        return $service;
+    }
+
+    /**
+     * @return ActionFactory
+     * @throws ContainerException
+     */
+    public function getActionFactory(): ActionFactory
+    {
+        /** @var ActionFactory $service */
+        $service = $this->get(ActionFactory::class);
         return $service;
     }
 

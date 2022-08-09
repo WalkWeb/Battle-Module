@@ -100,6 +100,7 @@ abstract class AbstractAbility implements AbilityInterface
         $this->container = $unit->getContainer();
         $this->name = $name;
         $this->icon = $icon;
+        // TODO Получать из Container
         $this->actionFactory = $actionFactory ?? new ActionFactory();
         $this->typeActivate = $this->validateTypeActivate($typeActivate);
         $this->actionsData = $this->validateActionsData($actionsData);

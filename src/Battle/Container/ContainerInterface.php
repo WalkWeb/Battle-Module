@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Container;
 
+use Battle\Action\ActionFactory;
 use Battle\BattleFactory;
 use Battle\Result\Chat\ChatInterface;
 use Battle\Result\FullLog\FullLogInterface;
@@ -131,6 +132,11 @@ interface ContainerInterface
      * @return RaceFactory
      */
     public function getRaceFactory(): RaceFactory;
+
+    /**
+     * @return ActionFactory
+     */
+    public function getActionFactory(): ActionFactory;
 
     /**
      * Поставщик данных классов юнитов

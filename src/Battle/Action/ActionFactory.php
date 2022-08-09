@@ -13,6 +13,8 @@ use Exception;
 
 class ActionFactory
 {
+    // TODO Добавить контейнер
+
     use ValidationTrait;
     use IdTrait;
 

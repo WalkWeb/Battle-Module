@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Container;
 
+use Battle\Action\ActionFactory;
 use Battle\BattleFactory;
 use Battle\Container\Container;
 use Battle\Container\ContainerException;
@@ -255,6 +256,23 @@ class ContainerTest extends AbstractUnitTest
 
         $raceFactory = $container->getRaceFactory();
         self::assertInstanceOf(RaceFactory::class, $raceFactory);
+    }
+
+    /**
+     * @throws ContainerException
+     */
+    public function testContainerGetActionFactory(): void
+    {
+        $container = new Container();
+
+        $raceFactory = $container->get(ActionFactory::class);
+        self::assertInstanceOf(ActionFactory::class, $raceFactory);
+
+        $raceFactory = $container->get('ActionFactory');
+        self::assertInstanceOf(ActionFactory::class, $raceFactory);
+
+        $raceFactory = $container->getActionFactory();
+        self::assertInstanceOf(ActionFactory::class, $raceFactory);
     }
 
     /**
