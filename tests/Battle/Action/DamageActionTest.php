@@ -718,6 +718,63 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на нанесение критического удара
+     *
+     * Один юнит с шансом критического удара 50% (будет округлен в 100%, т.к. тестовый режим) - всегда наносит удар
+     * Другой юнит с шансом критического удара 49% (будет округлен в 0%, т.к. тестовый режим) - всегда обычный удар
+     *
+     * @dataProvider criticalDamageDataProvider
+     * @param int $enemyUnitId
+     * @param bool $isCritical
+     * @throws Exception
+     */
+    public function testDamageActionCriticalDamage(int $enemyUnitId, bool $isCritical): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate($enemyUnitId);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $actions = $unit->getActions($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        if ($isCritical) {
+            self::assertEquals(
+                $enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()) * ($unit->getOffense()->getCriticalMultiplier()/100),
+                $enemyUnit->getLife()
+            );
+        } else {
+            self::assertEquals(
+                $enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()),
+                $enemyUnit->getLife()
+            );
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function criticalDamageDataProvider(): array
+    {
+        return [
+            // Этот юнит нанесет критический удар
+            [
+                40,
+                true
+            ],
+            // Этот юнит не нанесет критический удар
+            [
+                41,
+                false
+            ],
+        ];
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
