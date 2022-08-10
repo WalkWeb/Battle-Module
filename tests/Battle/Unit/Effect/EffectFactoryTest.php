@@ -6,6 +6,7 @@ namespace Tests\Battle\Unit\Effect;
 
 use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
+use Battle\Container\Container;
 use Battle\Unit\Effect\EffectException;
 use Battle\Unit\Effect\EffectFactory;
 use Exception;
@@ -385,6 +386,6 @@ class EffectFactoryTest extends AbstractUnitTest
      */
     private function getFactory(): EffectFactory
     {
-        return new EffectFactory(new ActionFactory());
+        return new EffectFactory(new ActionFactory(new Container(true)));
     }
 }

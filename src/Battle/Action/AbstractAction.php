@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitCollection;
@@ -13,6 +14,11 @@ use Battle\Unit\UnitInterface;
 
 abstract class AbstractAction implements ActionInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    protected ContainerInterface $container;
+
     /**
      * @var UnitInterface
      */
@@ -70,6 +76,7 @@ abstract class AbstractAction implements ActionInterface
     protected string $icon;
 
     public function __construct(
+        ContainerInterface $container,
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
@@ -77,6 +84,7 @@ abstract class AbstractAction implements ActionInterface
         string $icon = ''
     )
     {
+        $this->container = $container;
         // По умолчанию creatorUnit равен actionUnit, и только у Action от эффектов actionUnit меняется когда эффект
         // применяется к цели, а creatorUnit остается неизменным
         $this->creatorUnit = $actionUnit;

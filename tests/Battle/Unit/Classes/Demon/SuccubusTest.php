@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\Demon;
 
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
@@ -26,8 +27,9 @@ class SuccubusTest extends AbstractUnitTest
      */
     public function testSuccubusCreate(): void
     {
-        $unit = UnitFactory::createByTemplate(23);
-        $enemyUnit = UnitFactory::createByTemplate(1);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(23, $container);
+        $enemyUnit = UnitFactory::createByTemplate(1, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -48,7 +50,7 @@ class SuccubusTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createEffectPoison($unit, $enemyCommand, $command),
+                        $this->createEffectPoison($container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }
@@ -61,7 +63,7 @@ class SuccubusTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createEffectParalysis($unit, $enemyCommand, $command),
+                        $this->createEffectParalysis($container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }
@@ -91,6 +93,7 @@ class SuccubusTest extends AbstractUnitTest
     }
 
     /**
+     * @param ContainerInterface $container
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
@@ -98,12 +101,13 @@ class SuccubusTest extends AbstractUnitTest
      * @throws Exception
      */
     private function createEffectPoison(
+        ContainerInterface $container,
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $command
     ): EffectInterface
     {
-        $effectFactory = new EffectFactory(new ActionFactory());
+        $effectFactory = new EffectFactory($container->getActionFactory());
 
         $data = [
             'name'                  => 'Poison',
@@ -141,6 +145,7 @@ class SuccubusTest extends AbstractUnitTest
     }
 
     /**
+     * @param ContainerInterface $container
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
@@ -148,12 +153,13 @@ class SuccubusTest extends AbstractUnitTest
      * @throws Exception
      */
     private function createEffectParalysis(
+        ContainerInterface $container,
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $command
     ): EffectInterface
     {
-        $effectFactory = new EffectFactory(new ActionFactory());
+        $effectFactory = new EffectFactory($container->getActionFactory());
 
         $data = [
             'name'                  => 'Paralysis',

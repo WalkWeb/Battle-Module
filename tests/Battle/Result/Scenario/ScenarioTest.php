@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Scenario;
 
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;
 use Battle\Container\Container;
@@ -460,6 +459,7 @@ class ScenarioTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new HealAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -769,7 +769,12 @@ class ScenarioTest extends AbstractUnitTest
         $actionCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new WaitAction($actionUnit, $enemyCommand, $actionCommand);
+        $action = new WaitAction(
+            $this->getContainer(),
+            $actionUnit,
+            $enemyCommand,
+            $actionCommand
+        );
 
         $scenario = new Scenario();
 
@@ -907,6 +912,7 @@ class ScenarioTest extends AbstractUnitTest
         $animationMethod = 'undefinedAnimationMethod';
 
         $action = new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -939,6 +945,7 @@ class ScenarioTest extends AbstractUnitTest
     ): SummonAction
     {
         return new SummonAction(
+            $this->getContainer(),
             $actionUnit,
             $enemyCommand,
             $actionCommand,
@@ -963,6 +970,7 @@ class ScenarioTest extends AbstractUnitTest
     ): SummonAction
     {
         return new SummonAction(
+            $this->getContainer(),
             $actionUnit,
             $enemyCommand,
             $actionCommand,
@@ -988,8 +996,6 @@ class ScenarioTest extends AbstractUnitTest
         int $target
     ): ActionInterface
     {
-        $actionFactory = new ActionFactory();
-
         $data = [
             'type'           => ActionInterface::EFFECT,
             'action_unit'    => $unit,
@@ -1018,7 +1024,7 @@ class ScenarioTest extends AbstractUnitTest
             ],
         ];
 
-        return $actionFactory->create($data);
+        return $this->getContainer()->getActionFactory()->create($data);
     }
 
     /**
@@ -1037,6 +1043,7 @@ class ScenarioTest extends AbstractUnitTest
     ): DamageAction
     {
         return new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,

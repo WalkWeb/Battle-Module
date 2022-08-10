@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
+use Battle\Container\ContainerInterface;
 use Battle\Traits\IdTrait;
 use Battle\Traits\ValidationTrait;
 use Battle\Unit\Effect\EffectFactory;
@@ -13,7 +14,7 @@ use Exception;
 
 class ActionFactory
 {
-    // TODO Добавить контейнер
+    protected ContainerInterface $container;
 
     use ValidationTrait;
     use IdTrait;
@@ -28,6 +29,11 @@ class ActionFactory
         ActionInterface::RESURRECTION => ResurrectionAction::class,
         ActionInterface::PARALYSIS    => ParalysisAction::class,
     ];
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * Создает Action на основе массива параметров
@@ -72,6 +78,7 @@ class ActionFactory
             $messageMethod = self::string($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
 
             return new DamageAction(
+                $this->container,
                 $actionUnit,
                 $enemyCommand,
                 $alliesCommand,
@@ -94,6 +101,7 @@ class ActionFactory
             $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
 
             return new HealAction(
+                $this->container,
                 $actionUnit,
                 $enemyCommand,
                 $alliesCommand,
@@ -108,6 +116,7 @@ class ActionFactory
 
         if ($className === WaitAction::class) {
             return new WaitAction(
+                $this->container,
                 $actionUnit,
                 $enemyCommand,
                 $alliesCommand
@@ -116,6 +125,7 @@ class ActionFactory
 
         if ($className === ParalysisAction::class) {
             return new ParalysisAction(
+                $this->container,
                 $actionUnit,
                 $enemyCommand,
                 $alliesCommand
@@ -130,6 +140,7 @@ class ActionFactory
             $summonData['command'] = $actionUnit->getCommand();
 
             return new SummonAction(
+                $this->container,
                 $actionUnit,
                 $enemyCommand,
                 $alliesCommand,
@@ -149,6 +160,7 @@ class ActionFactory
             $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
 
             return new BuffAction(
+                $this->container,
                 $actionUnit,
                 $enemyCommand,
                 $alliesCommand,
@@ -167,6 +179,7 @@ class ActionFactory
             $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
 
             return new ResurrectionAction(
+                $this->container,
                 $actionUnit,
                 $enemyCommand,
                 $alliesCommand,
@@ -188,6 +201,7 @@ class ActionFactory
         $effect = $effectFactory->create($effectData);
 
         return new EffectAction(
+            $this->container,
             $actionUnit,
             $enemyCommand,
             $alliesCommand,

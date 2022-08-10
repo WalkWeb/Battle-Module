@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Statistics;
 
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;
 use Battle\Action\ResurrectionAction;
@@ -347,6 +346,7 @@ class StatisticsTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new ResurrectionAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -483,6 +483,7 @@ class StatisticsTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
 
         $action = new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -524,8 +525,6 @@ class StatisticsTest extends AbstractUnitTest
         CommandInterface $enemyCommand
     ): ActionInterface
     {
-        $actionFactory = new ActionFactory();
-
         $data = [
             'type'           => ActionInterface::EFFECT,
             'action_unit'    => $unit,
@@ -568,7 +567,7 @@ class StatisticsTest extends AbstractUnitTest
             ],
         ];
 
-        return $actionFactory->create($data);
+        return $this->getContainer()->getActionFactory()->create($data);
     }
 
     /**
@@ -584,8 +583,6 @@ class StatisticsTest extends AbstractUnitTest
         CommandInterface $enemyCommand
     ): ActionInterface
     {
-        $actionFactory = new ActionFactory();
-
         $data = [
             'type'           => ActionInterface::EFFECT,
             'action_unit'    => $unit,
@@ -618,7 +615,7 @@ class StatisticsTest extends AbstractUnitTest
             ],
         ];
 
-        return $actionFactory->create($data);
+        return $this->getContainer()->getActionFactory()->create($data);
     }
 
     /**
@@ -635,6 +632,7 @@ class StatisticsTest extends AbstractUnitTest
     ): DamageAction
     {
         return new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,

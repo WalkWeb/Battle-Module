@@ -24,7 +24,7 @@ class ParalysisActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$enemyUnit]);
         $enemyCommand = CommandFactory::create([$unit]);
 
-        $action = new ParalysisAction($unit, $enemyCommand, $command);
+        $action = new ParalysisAction($this->getContainer(), $unit, $enemyCommand, $command);
 
         self::assertEquals('', $action->getNameAction());
         self::assertEquals(ParalysisAction::DEFAULT_ANIMATION_METHOD, $action->getAnimationMethod());
@@ -48,7 +48,7 @@ class ParalysisActionTest extends AbstractUnitTest
         // По умолчанию юнит не ходил (в этом раунде)
         self::assertFalse($unit->isAction());
 
-        $action = new ParalysisAction($unit, $enemyCommand, $command);
+        $action = new ParalysisAction($this->getContainer(), $unit, $enemyCommand, $command);
 
         self::assertTrue($action->canByUsed());
 

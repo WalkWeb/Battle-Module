@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Chat;
 
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
@@ -259,6 +258,7 @@ class ChatTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new HealAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -286,6 +286,7 @@ class ChatTest extends AbstractUnitTest
         $icon = '/images/icons/ability/275.png';
 
         $action = new SummonAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -311,7 +312,12 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
-        $action = new WaitAction($unit, $enemyCommand, $command);
+        $action = new WaitAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command
+        );
 
         self::assertTrue($action->canByUsed());
 
@@ -330,7 +336,12 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
-        $action = new ParalysisAction($unit, $enemyCommand, $command);
+        $action = new ParalysisAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command
+        );
 
         self::assertTrue($action->canByUsed());
 
@@ -388,6 +399,7 @@ class ChatTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
         $action = new BuffAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -420,6 +432,7 @@ class ChatTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new ResurrectionAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -446,6 +459,7 @@ class ChatTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
         $action = new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -476,6 +490,7 @@ class ChatTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(11, 2);
 
         $action = new HealAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -506,6 +521,7 @@ class ChatTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
 
         $action = new BuffAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -533,6 +549,7 @@ class ChatTest extends AbstractUnitTest
         $chat = new Chat(new Container());
 
         $action = new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -809,8 +826,6 @@ class ChatTest extends AbstractUnitTest
         int $typeTarget
     ): ActionInterface
     {
-        $actionFactory = new ActionFactory();
-
         $data = [
             'type'           => ActionInterface::EFFECT,
             'action_unit'    => $unit,
@@ -841,7 +856,7 @@ class ChatTest extends AbstractUnitTest
             ],
         ];
 
-        return $actionFactory->create($data);
+        return $this->getContainer()->getActionFactory()->create($data);
     }
 
     /**
@@ -860,6 +875,7 @@ class ChatTest extends AbstractUnitTest
     ): DamageAction
     {
         return new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -888,6 +904,7 @@ class ChatTest extends AbstractUnitTest
     ): ActionInterface
     {
         return new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,

@@ -10,6 +10,7 @@ use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
@@ -38,8 +39,9 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $name = 'Will to live';
         $icon = '/images/icons/ability/429.png';
 
-        $unit = UnitFactory::createByTemplate(10);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(10, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -59,7 +61,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getWillToLiveActions($unit, $enemyCommand, $command),
+            $this->getWillToLiveActions($container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -174,8 +176,9 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $name = 'Will to live';
         $icon = '/images/icons/ability/429.png';
 
-        $unit = UnitFactory::createByTemplate(10);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(10, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -195,7 +198,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getWillToLiveActions($unit, $enemyCommand, $command),
+            $this->getWillToLiveActions($container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -308,6 +311,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
+     * @param ContainerInterface $container
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
@@ -315,6 +319,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
      * @throws Exception
      */
     private function getWillToLiveActions(
+        ContainerInterface $container,
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $command
@@ -323,6 +328,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $actionCollection = new ActionCollection();
 
         $actionCollection->add(new ResurrectionAction(
+            $container,
             $unit,
             $enemyCommand,
             $command,

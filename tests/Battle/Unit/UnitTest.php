@@ -6,7 +6,6 @@ namespace Tests\Battle\Unit;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
@@ -99,6 +98,7 @@ class UnitTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -117,6 +117,7 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($defendLife - $unit->getOffense()->getDamage($enemyUnit->getDefense()), $enemyUnit->getLife());
 
         $action2 = new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -366,6 +367,7 @@ class UnitTest extends AbstractUnitTest
 
         // Убиваем юнита
         $damageAction = new DamageAction(
+            $this->getContainer(),
             $enemyUnit,
             $command,
             $enemyCommand,
@@ -494,7 +496,6 @@ class UnitTest extends AbstractUnitTest
         CommandInterface $alliesCommand
     ): ActionCollection
     {
-        $actionFactory = new ActionFactory();
         $collection = new ActionCollection();
 
         $data = [
@@ -528,7 +529,7 @@ class UnitTest extends AbstractUnitTest
             ],
         ];
 
-        $collection->add($actionFactory->create($data));
+        $collection->add($this->getContainer()->getActionFactory()->create($data));
 
         return $collection;
     }

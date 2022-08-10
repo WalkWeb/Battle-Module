@@ -7,6 +7,7 @@ namespace Tests\Battle\Factory\Mock;
 use Battle\Action\ActionCollection;
 use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
+use Battle\Container\Container;
 use Battle\Unit\Unit;
 
 class BrokenPriestUnit extends Unit
@@ -23,6 +24,7 @@ class BrokenPriestUnit extends Unit
         $collection = new ActionCollection();
 
         $collection->add(new HealAction(
+            new Container(),
             $this,
             $enemyCommand,
             $alliesCommand,

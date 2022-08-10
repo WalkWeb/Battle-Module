@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\Human;
 
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
@@ -25,8 +26,9 @@ class WarriorTest extends AbstractUnitTest
      */
     public function testCreateWarriorClass(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -56,7 +58,7 @@ class WarriorTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createBlessedShieldEffect($unit, $enemyCommand, $command),
+                        $this->createBlessedShieldEffect($container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }
@@ -100,6 +102,7 @@ class WarriorTest extends AbstractUnitTest
     }
 
     /**
+     * @param ContainerInterface $container
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -107,12 +110,13 @@ class WarriorTest extends AbstractUnitTest
      * @throws Exception
      */
     private function createBlessedShieldEffect(
+        ContainerInterface $container,
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand
     ): EffectInterface
     {
-        $factory = new EffectFactory(new ActionFactory());
+        $factory = new EffectFactory($container->getActionFactory());
 
         $data = [
             'name'                  => 'Blessed Shield',

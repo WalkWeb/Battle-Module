@@ -45,4 +45,12 @@ abstract class AbstractUnitTest extends TestCase
         $container->set(Translation::class, new Translation('ru'));
         return new Chat($container);
     }
+
+    /**
+     * @return ContainerInterface
+     */
+    protected function getContainer(): ContainerInterface
+    {
+        return new Container(true);
+    }
 }

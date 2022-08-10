@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
@@ -69,6 +70,7 @@ class DamageAction extends AbstractAction
     protected array $dodgedByUnit = [];
 
     public function __construct(
+        ContainerInterface $container,
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
@@ -81,7 +83,7 @@ class DamageAction extends AbstractAction
         string $icon = ''
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
+        parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->offense = $offense;
         $this->canBeAvoided = $canBeAvoided;
         $this->name = $name;

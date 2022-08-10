@@ -336,7 +336,7 @@ class Container implements ContainerInterface
         // Некоторые сервисы требуют передачу контейнера в конструктор
         if (
             $class === Chat::class || $class === ExampleClassDataProvider::class || $class === UnitClassFactory::class ||
-            $class === ExampleRaceDataProvider::class || $class === RaceFactory::class
+            $class === ExampleRaceDataProvider::class || $class === RaceFactory::class || $class === ActionFactory::class
         ) {
             $object = new $class($this);
             $this->storage[$this->map[$class]] = $object;

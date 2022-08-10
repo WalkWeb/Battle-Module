@@ -61,7 +61,14 @@ class SummonActionTest extends AbstractUnitTest
         $alliesCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new SummonAction($actionUnit, $alliesCommand, $enemyCommand, $name, $summon);
+        $action = new SummonAction(
+            $this->getContainer(),
+            $actionUnit,
+            $alliesCommand,
+            $enemyCommand,
+            $name,
+            $summon
+        );
 
         self::assertEquals(0, $action->getFactualPower());
 
@@ -84,7 +91,14 @@ class SummonActionTest extends AbstractUnitTest
         $alliesCommand = CommandFactory::create([$actionUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new SummonAction($actionUnit, $alliesCommand, $enemyCommand, $name, $summon);
+        $action = new SummonAction(
+            $this->getContainer(),
+            $actionUnit,
+            $alliesCommand,
+            $enemyCommand,
+            $name,
+            $summon
+        );
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getPower');

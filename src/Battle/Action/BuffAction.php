@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
@@ -40,6 +41,7 @@ class BuffAction extends AbstractAction
     private string $messageMethod;
 
     public function __construct(
+        ContainerInterface $container,
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
@@ -50,7 +52,7 @@ class BuffAction extends AbstractAction
         ?string $messageMethod = null
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
+        parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget);
         $this->name = $name;
         $this->modifyMethod = $modifyMethod;
         $this->power = $power;
@@ -110,6 +112,7 @@ class BuffAction extends AbstractAction
     public function getRevertAction(): ActionInterface
     {
         $rollbackAction = new BuffAction(
+            $this->container,
             $this->actionUnit,
             $this->enemyCommand,
             $this->alliesCommand,

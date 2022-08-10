@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\Bosses;
 
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
@@ -24,8 +25,9 @@ class WardenTest extends AbstractUnitTest
      */
     public function testCreateWardenClass(): void
     {
-        $unit = UnitFactory::createByTemplate(27);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(27, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -56,7 +58,7 @@ class WardenTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createEffect($unit, $enemyCommand, $command),
+                        $this->createEffect($container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }
@@ -85,6 +87,7 @@ class WardenTest extends AbstractUnitTest
     }
 
     /**
+     * @param ContainerInterface $container
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
@@ -92,12 +95,13 @@ class WardenTest extends AbstractUnitTest
      * @throws Exception
      */
     private function createEffect(
+        ContainerInterface $container,
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $command
     ): EffectInterface
     {
-        $effectFactory = new EffectFactory(new ActionFactory());
+        $effectFactory = new EffectFactory($container->getActionFactory());
 
         $data = [
             'name'                  => 'Incineration',

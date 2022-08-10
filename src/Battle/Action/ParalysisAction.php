@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitInterface;
 
 /**
@@ -28,17 +29,19 @@ class ParalysisAction extends AbstractAction
     /**
      * В отличие от прочих событий, ParalysisAction всегда применяется к себе и не требует $typeTarget в конструктор
      *
+     * @param ContainerInterface $container
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      */
     public function __construct(
+        ContainerInterface $container,
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF);
+        parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF);
     }
 
     public function getHandleMethod(): string

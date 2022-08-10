@@ -152,6 +152,7 @@ class EffectCollectionTest extends AbstractUnitTest
         $actions = new ActionCollection();
 
         $actions->add(new HealAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -196,6 +197,7 @@ class EffectCollectionTest extends AbstractUnitTest
         $actions = new ActionCollection();
 
         $actions->add(new HealAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,

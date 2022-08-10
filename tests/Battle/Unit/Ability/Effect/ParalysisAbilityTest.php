@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability\Effect;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Result\Scenario\Scenario;
 use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
@@ -37,8 +37,9 @@ class ParalysisAbilityTest extends AbstractUnitTest
         $name = 'Paralysis';
         $icon = '/images/icons/ability/086.png';
 
-        $unit = UnitFactory::createByTemplate(21);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(21, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -69,7 +70,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getParalysisActions($unit, $enemyCommand, $command),
+            $this->getParalysisActions($container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -140,8 +141,9 @@ class ParalysisAbilityTest extends AbstractUnitTest
         $name = 'Paralysis';
         $icon = '/images/icons/ability/086.png';
 
-        $unit = UnitFactory::createByTemplate(21);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(21, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -172,7 +174,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getParalysisActions($unit, $enemyCommand, $command),
+            $this->getParalysisActions($container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -233,6 +235,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
     }
 
     /**
+     * @param ContainerInterface $container
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -240,12 +243,12 @@ class ParalysisAbilityTest extends AbstractUnitTest
      * @throws Exception
      */
     private function getParalysisActions(
+        ContainerInterface $container,
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand
     ): ActionCollection
     {
-        $actionFactory = new ActionFactory();
         $collection = new ActionCollection();
 
         $data = [
@@ -280,7 +283,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
             ],
         ];
 
-        $collection->add($actionFactory->create($data));
+        $collection->add($container->getActionFactory()->create($data));
 
         return $collection;
     }

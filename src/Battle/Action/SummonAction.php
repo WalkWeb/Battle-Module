@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
+use Battle\Container\ContainerInterface;
 use Exception;
 use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
@@ -27,6 +28,7 @@ class SummonAction extends AbstractAction
     /**
      * В отличие от прочих событий, SummonAction всегда применяется к себе и не требует $typeTarget в конструктор
      *
+     * @param ContainerInterface $container
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -35,6 +37,7 @@ class SummonAction extends AbstractAction
      * @param string $icon
      */
     public function __construct(
+        ContainerInterface $container,
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
@@ -43,7 +46,7 @@ class SummonAction extends AbstractAction
         string $icon = ''
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF, $icon);
+        parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF, $icon);
         $this->name = $name;
         $this->summon = $summon;
     }

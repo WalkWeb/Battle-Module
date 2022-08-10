@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Action;
 
 use Battle\Action\ActionException;
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
@@ -147,6 +146,7 @@ class HealActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $healAction = new HealAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -197,6 +197,7 @@ class HealActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new HealAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -222,6 +223,7 @@ class HealActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new HealAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -288,7 +290,14 @@ class HealActionTest extends AbstractUnitTest
         $power = 50;
         $oldLife = $badlyWoundedUnit->getLife();
 
-        $action = new HealAction($unit, $enemyCommand, $command, HealAction::TARGET_ALL_WOUNDED_ALLIES, $power);
+        $action = new HealAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_ALL_WOUNDED_ALLIES,
+            $power
+        );
 
         $action->handle();
 
@@ -315,6 +324,7 @@ class HealActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $healAction = new HealAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -338,8 +348,6 @@ class HealActionTest extends AbstractUnitTest
         CommandInterface $enemyCommand
     ): ActionInterface
     {
-        $actionFactory = new ActionFactory();
-
         $data = [
             'type'           => ActionInterface::EFFECT,
             'action_unit'    => $unit,
@@ -368,6 +376,6 @@ class HealActionTest extends AbstractUnitTest
             ],
         ];
 
-        return $actionFactory->create($data);
+        return $this->getContainer()->getActionFactory()->create($data);
     }
 }

@@ -414,6 +414,7 @@ class Unit extends AbstractUnit
 
         for ($i = 0; $i < $attacks; $i++) {
             $collection->add(new DamageAction(
+                $this->container,
                 $this,
                 $enemyCommand,
                 $alliesCommand,
@@ -427,7 +428,7 @@ class Unit extends AbstractUnit
         }
 
         if (count($collection) === 0) {
-            $collection->add(new WaitAction($this, $enemyCommand, $alliesCommand));
+            $collection->add(new WaitAction($this->container, $this, $enemyCommand, $alliesCommand));
         }
 
         return $collection;

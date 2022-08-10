@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
@@ -37,6 +38,9 @@ class ResurrectionAction extends AbstractAction
     private string $messageMethod;
 
     /**
+     * TODO Убрать null-параметры из конструктора
+     *
+     * @param ContainerInterface $container
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -48,6 +52,7 @@ class ResurrectionAction extends AbstractAction
      * @throws ActionException
      */
     public function __construct(
+        ContainerInterface $container,
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
@@ -59,7 +64,7 @@ class ResurrectionAction extends AbstractAction
     )
     {
         $typeTarget = $this->validateTypeTarget($typeTarget);
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
+        parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->name = $name ?? self::DEFAULT_NAME;
         $this->power = $this->validatePower($power);
         $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;

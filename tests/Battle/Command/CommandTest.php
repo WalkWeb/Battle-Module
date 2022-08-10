@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Command;
 
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\EffectAction;
 use Battle\Command\CommandInterface;
@@ -227,6 +226,7 @@ class CommandTest extends AbstractUnitTest
 
         // убиваем первого юнита ($alliesCommand и $enemyCommand переставлены местами - это правильно, ходит вражеская команда)
         $action = new DamageAction(
+            $this->getContainer(),
             $enemyUnit,
             $alliesCommand,
             $enemyCommand,
@@ -301,6 +301,7 @@ class CommandTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $damage = new DamageAction(
+            $this->getContainer(),
             $enemyUnit,
             $command,
             $enemyCommand,
@@ -856,7 +857,7 @@ class CommandTest extends AbstractUnitTest
         CommandInterface $enemyCommand
     ): EffectInterface
     {
-        $factory = new EffectFactory(new ActionFactory());
+        $factory = new EffectFactory($this->getContainer()->getActionFactory());
 
         $data = [
             'name'                  => 'Poison',
@@ -909,6 +910,7 @@ class CommandTest extends AbstractUnitTest
     ): ActionInterface
     {
         return new EffectAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,

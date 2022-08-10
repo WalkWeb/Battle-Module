@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
@@ -18,24 +19,25 @@ class EffectAction extends AbstractAction
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string
      */
-    protected $animationMethod;
+    protected string $animationMethod;
 
     /**
      * @var string
      */
-    protected $messageMethod;
+    protected string $messageMethod;
 
     /**
      * @var EffectInterface
      */
-    private $effect;
+    private EffectInterface $effect;
 
     public function __construct(
+        ContainerInterface $container,
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
@@ -47,7 +49,7 @@ class EffectAction extends AbstractAction
         ?string $messageMethod = null
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
+        parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->name = $name;
         $this->effect = $effect;
         $this->animationMethod = $animationMethod ?? self::DEFAULT_ANIMATION_METHOD;

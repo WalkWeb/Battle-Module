@@ -28,7 +28,15 @@ class ResurrectionActionTest extends AbstractUnitTest
         $power = 50;
         $typeTarget = ResurrectionAction::TARGET_DEAD_ALLIES;
 
-        $action = new ResurrectionAction($unit, $enemyCommand, $command, $typeTarget, $power, $name);
+        $action = new ResurrectionAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            $typeTarget,
+            $power,
+            $name
+        );
 
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($power, $action->getPower());
@@ -59,7 +67,15 @@ class ResurrectionActionTest extends AbstractUnitTest
         $power = 50;
         $typeTarget = ResurrectionAction::TARGET_DEAD_ALLIES;
 
-        $action = new ResurrectionAction($unit, $enemyCommand, $command, $typeTarget, $power, $name);
+        $action = new ResurrectionAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            $typeTarget,
+            $power,
+            $name
+        );
 
         self::assertFalse($unit->isAlive());
         self::assertEquals(0, $unit->getLife());
@@ -85,7 +101,15 @@ class ResurrectionActionTest extends AbstractUnitTest
         $power = 50;
         $typeTarget = ResurrectionAction::TARGET_DEAD_ALLIES;
 
-        $action = new ResurrectionAction($unit, $enemyCommand, $command, $typeTarget, $power, $name);
+        $action = new ResurrectionAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            $typeTarget,
+            $power,
+            $name
+        );
 
         self::assertTrue($action->canByUsed());
         $action->handle();
@@ -126,7 +150,14 @@ class ResurrectionActionTest extends AbstractUnitTest
         $power = 1;
         $typeTarget = ResurrectionAction::TARGET_DEAD_ALLIES;
 
-        $action = new ResurrectionAction($unit, $enemyCommand, $command, $typeTarget, $power);
+        $action = new ResurrectionAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            $typeTarget,
+            $power
+        );
 
         // Вначале убеждаемся, что юнит мертв
         self::assertEquals(0, $deadUnit->getLife());
@@ -153,7 +184,14 @@ class ResurrectionActionTest extends AbstractUnitTest
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('ResurrectionAction: invalid power: min: 1, max: 100');
-        new ResurrectionAction($unit, $enemyCommand, $command, ResurrectionAction::TARGET_DEAD_ALLIES, $power);
+        new ResurrectionAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            ResurrectionAction::TARGET_DEAD_ALLIES,
+            $power
+        );
     }
 
     /**
@@ -170,7 +208,14 @@ class ResurrectionActionTest extends AbstractUnitTest
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::INVALID_RESURRECTED_TARGET);
-        new ResurrectionAction($unit, $enemyCommand, $command, $typeTarget, 50);
+        new ResurrectionAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            $typeTarget,
+            50
+        );
     }
 
     /**

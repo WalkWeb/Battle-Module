@@ -36,7 +36,7 @@ class BuffActionTest extends AbstractUnitTest
 
         $oldLife = $unit->getTotalLife();
 
-        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
+        $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
         self::assertEquals('skip', $action->getAnimationMethod());
         self::assertEquals('buff', $action->getMessageMethod());
@@ -79,7 +79,7 @@ class BuffActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
+        $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
         $this->expectException(UnitException::class);
         $this->expectErrorMessage(UnitException::NO_REDUCED_MAXIMUM_LIFE);
@@ -107,7 +107,7 @@ class BuffActionTest extends AbstractUnitTest
 
         $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
 
-        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
+        $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
         self::assertEquals('skip', $action->getAnimationMethod());
         self::assertEquals('buff', $action->getMessageMethod());
@@ -148,7 +148,7 @@ class BuffActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
+        $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
         $this->expectException(UnitException::class);
         $this->expectErrorMessage(UnitException::NO_REDUCED_ATTACK_SPEED);
@@ -174,7 +174,7 @@ class BuffActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
+        $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
         $this->expectException(UnitException::class);
         $this->expectErrorMessage(UnitException::UNDEFINED_MODIFY_METHOD . ': ' . $modifyMethod);
@@ -199,7 +199,7 @@ class BuffActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         // Цель бафа - случайный противник, но противник мертв
-        $action = new BuffAction($unit, $enemyCommand, $command, BuffAction::TARGET_RANDOM_ENEMY, $name, $modifyMethod, $power);
+        $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_RANDOM_ENEMY, $name, $modifyMethod, $power);
 
         // Применяем баф и получаем исключение - нет цели для применения бафа
 

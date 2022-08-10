@@ -6,7 +6,6 @@ namespace Tests\Battle\Unit\Effect;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
@@ -139,7 +138,7 @@ class EffectTest extends AbstractUnitTest
         CommandInterface $enemyCommand
     ): EffectInterface
     {
-        $factory = new EffectFactory(new ActionFactory());
+        $factory = new EffectFactory($this->getContainer()->getActionFactory());
 
         $data = [
             'name'                  => 'Effect test #1',
@@ -274,6 +273,6 @@ class EffectTest extends AbstractUnitTest
             ],
         ];
 
-        return (new ActionFactory())->create($data);
+        return $this->getContainer()->getActionFactory()->create($data);
     }
 }

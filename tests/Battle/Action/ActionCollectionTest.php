@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Action;
 
 use Battle\Action\HealAction;
+use Battle\Container\Container;
 use Exception;
 use Battle\Action\ActionCollection;
 use Battle\Action\DamageAction;
@@ -19,12 +20,14 @@ class ActionCollectionTest extends AbstractUnitTest
      */
     public function testActionCollectionCreateSuccess(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
+            $container,
             $unit,
             $enemyCommand,
             $command,
@@ -49,12 +52,14 @@ class ActionCollectionTest extends AbstractUnitTest
      */
     public function testActionCollectionAddCollection(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $damageAction = new DamageAction(
+            $container,
             $unit,
             $enemyCommand,
             $command,
@@ -67,6 +72,7 @@ class ActionCollectionTest extends AbstractUnitTest
         );
 
         $healAction = new HealAction(
+            $container,
             $unit,
             $enemyCommand,
             $command,

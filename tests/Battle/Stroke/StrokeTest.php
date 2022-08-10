@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Stroke;
 
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
@@ -357,8 +356,6 @@ class StrokeTest extends AbstractUnitTest
         CommandInterface $enemyCommand
     ): ActionInterface
     {
-        $actionFactory = new ActionFactory();
-
         $data = [
             'type'           => ActionInterface::EFFECT,
             'action_unit'    => $unit,
@@ -387,7 +384,7 @@ class StrokeTest extends AbstractUnitTest
             ],
         ];
 
-        return $actionFactory->create($data);
+        return $this->getContainer()->getActionFactory()->create($data);
     }
 
     /**
@@ -403,8 +400,6 @@ class StrokeTest extends AbstractUnitTest
         CommandInterface $enemyCommand
     ): ActionInterface
     {
-        $actionFactory = new ActionFactory();
-
         $data = [
             'type'           => ActionInterface::EFFECT,
             'action_unit'    => $unit,
@@ -444,6 +439,6 @@ class StrokeTest extends AbstractUnitTest
             ],
         ];
 
-        return $actionFactory->create($data);
+        return $this->getContainer()->getActionFactory()->create($data);
     }
 }

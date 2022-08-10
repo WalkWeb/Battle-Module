@@ -144,6 +144,7 @@ class DamageActionTest extends AbstractUnitTest
         $typeTarget = 10;
 
         $action = new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -509,6 +510,7 @@ class DamageActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,
@@ -790,6 +792,7 @@ class DamageActionTest extends AbstractUnitTest
     ): DamageAction
     {
         return new DamageAction(
+            $this->getContainer(),
             $unit,
             $enemyCommand,
             $command,

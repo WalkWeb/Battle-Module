@@ -55,6 +55,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         // Наносим урон юниту, чтобы способность перешла в "возможную для использования"
         $damage = new DamageAction(
+            $this->getContainer(),
             $enemyUnit,
             $command,
             $enemyCommand,
@@ -145,6 +146,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         // Наносим урон юниту, чтобы способность перешла в "возможную для использования"
         $damage = new DamageAction(
+            $this->getContainer(),
             $enemyUnit,
             $command,
             $enemyCommand,

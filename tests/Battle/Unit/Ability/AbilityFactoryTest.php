@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
@@ -28,8 +29,9 @@ class AbilityFactoryTest extends AbstractUnitTest
      */
     public function testAbilityFactoryCreateSuccess(array $data): void
     {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -46,7 +48,7 @@ class AbilityFactoryTest extends AbstractUnitTest
         }
 
         self::assertEquals(
-            $this->createActionCollections($unit, $enemyCommand, $command, $data['actions']),
+            $this->createActionCollections($container, $unit, $enemyCommand, $command, $data['actions']),
             $ability->getActions($enemyCommand, $command)
         );
     }
@@ -420,6 +422,7 @@ class AbilityFactoryTest extends AbstractUnitTest
     }
 
     /**
+     * @param ContainerInterface $container
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -428,13 +431,13 @@ class AbilityFactoryTest extends AbstractUnitTest
      * @throws Exception
      */
     private function createActionCollections(
+        ContainerInterface $container,
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         array $actionsData
     ): ActionCollection
     {
-        $actionFactory = new ActionFactory();
         $collection = new ActionCollection();
 
         foreach ($actionsData as $actionData) {
@@ -443,7 +446,7 @@ class AbilityFactoryTest extends AbstractUnitTest
             $actionData['enemy_command'] = $enemyCommand;
             $actionData['allies_command'] = $alliesCommand;
 
-            $collection->add($actionFactory->create($actionData));
+            $collection->add($container->getActionFactory()->create($actionData));
         }
 
         return $collection;

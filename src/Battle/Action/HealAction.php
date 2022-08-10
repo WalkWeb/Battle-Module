@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
@@ -40,6 +41,7 @@ class HealAction extends AbstractAction
     // TODO Избавиться от null параметров в конструкторе
 
     public function __construct(
+        ContainerInterface $container,
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
@@ -51,7 +53,7 @@ class HealAction extends AbstractAction
         string $icon = ''
     )
     {
-        parent::__construct($actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
+        parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
 
         $this->power = $power;
         $this->name = $name ?? self::NAME;

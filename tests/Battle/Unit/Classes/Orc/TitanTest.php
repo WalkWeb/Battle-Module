@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\Orc;
 
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
+use Battle\Container\Container;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
@@ -23,8 +24,9 @@ class TitanTest extends AbstractUnitTest
      */
     public function testCreateTitanClass(): void
     {
-        $unit = UnitFactory::createByTemplate(21);
-        $enemyUnit = UnitFactory::createByTemplate(2);
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(21, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -45,7 +47,7 @@ class TitanTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createReserveForcesEffect($unit, $enemyCommand, $command),
+                        $this->createReserveForcesEffect($container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }
@@ -58,7 +60,7 @@ class TitanTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createBattleFuryEffect($unit, $enemyCommand, $command),
+                        $this->createBattleFuryEffect($container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }
@@ -67,6 +69,7 @@ class TitanTest extends AbstractUnitTest
     }
 
     /**
+     * @param ContainerInterface $container
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -74,12 +77,13 @@ class TitanTest extends AbstractUnitTest
      * @throws Exception
      */
     private function createReserveForcesEffect(
+        ContainerInterface $container,
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand
     ): EffectInterface
     {
-        $factory = new EffectFactory(new ActionFactory());
+        $factory = new EffectFactory($container->getActionFactory());
 
         $data = [
             'name'                  => 'Reserve Forces',
@@ -106,6 +110,7 @@ class TitanTest extends AbstractUnitTest
     }
 
     /**
+     * @param ContainerInterface $container
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -113,12 +118,13 @@ class TitanTest extends AbstractUnitTest
      * @throws Exception
      */
     private function createBattleFuryEffect(
+        ContainerInterface $container,
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand
     ): EffectInterface
     {
-        $factory = new EffectFactory(new ActionFactory());
+        $factory = new EffectFactory($container->getActionFactory());
 
         $data = [
             'name'                  => 'Battle Fury',

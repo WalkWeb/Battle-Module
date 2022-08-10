@@ -6,6 +6,7 @@ namespace Tests\Battle\Action;
 
 use Battle\Action\WaitAction;
 use Battle\Command\CommandInterface;
+use Battle\Container\Container;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Action\ActionException;
@@ -142,7 +143,7 @@ class ActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new WaitAction($unit, $defendCommand, $alliesCommand);
+        $action = new WaitAction($this->getContainer(), $unit, $defendCommand, $alliesCommand);
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getFactualPowerByUnit');
@@ -160,7 +161,7 @@ class ActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new WaitAction($unit, $defendCommand, $alliesCommand);
+        $action = new WaitAction($this->getContainer(), $unit, $defendCommand, $alliesCommand);
 
         self::assertFalse($action->isBlocked($defendUnit));
 
@@ -180,7 +181,7 @@ class ActionTest extends AbstractUnitTest
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
-        $action = new WaitAction($unit, $enemyCommand, $command);
+        $action = new WaitAction($this->getContainer(), $unit, $enemyCommand, $command);
 
         self::assertFalse($action->isDodged($enemyUnit));
 
@@ -200,7 +201,7 @@ class ActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new WaitAction($unit, $defendCommand, $alliesCommand);
+        $action = new WaitAction($this->getContainer(), $unit, $defendCommand, $alliesCommand);
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::isCanBeAvoided');
@@ -218,7 +219,7 @@ class ActionTest extends AbstractUnitTest
         $defendUnit = UnitFactory::createByTemplate(2);
         $defendCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$unit]);
-        $action = new WaitAction($unit, $defendCommand, $alliesCommand);
+        $action = new WaitAction($this->getContainer(), $unit, $defendCommand, $alliesCommand);
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getOffense');
@@ -284,6 +285,7 @@ class ActionTest extends AbstractUnitTest
     ): DamageAction
     {
         return new DamageAction(
+            new Container(),
             $unit,
             $enemyCommand,
             $command,
