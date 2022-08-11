@@ -17,11 +17,9 @@ class Defense implements DefenseInterface
     private int $defense;
 
     /**
-     * TODO Rename to $magicDefense
-     *
      * @var int
      */
-    private int $magicDefence;
+    private int $magicDefense;
 
     /**
      * @var int - Блок (0-100%)
@@ -41,17 +39,17 @@ class Defense implements DefenseInterface
     /**
      * @param int $physicalResist
      * @param int $defense
-     * @param int $magicDefence
+     * @param int $magicDefense
      * @param int $block
      * @param int $magicBlock
      * @param int $mentalBarrier
      * @throws DefenseException
      */
-    public function __construct(int $physicalResist, int $defense, int $magicDefence, int $block, int $magicBlock, int $mentalBarrier)
+    public function __construct(int $physicalResist, int $defense, int $magicDefense, int $block, int $magicBlock, int $mentalBarrier)
     {
         $this->setPhysicalResist($physicalResist);
         $this->setDefense($defense);
-        $this->setMagicDefense($magicDefence);
+        $this->setMagicDefense($magicDefense);
         $this->setBlock($block);
         $this->setMagicBlock($magicBlock);
         $this->setMentalBarrier($mentalBarrier);
@@ -108,7 +106,7 @@ class Defense implements DefenseInterface
      */
     public function getMagicDefense(): int
     {
-        return $this->magicDefence;
+        return $this->magicDefense;
     }
 
     /**
@@ -123,7 +121,7 @@ class Defense implements DefenseInterface
             );
         }
 
-        $this->magicDefence = $magicDefense;
+        $this->magicDefense = $magicDefense;
     }
 
     /**

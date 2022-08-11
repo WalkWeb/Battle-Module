@@ -27,6 +27,6 @@ class RaceTest extends AbstractUnitTest
         self::assertEquals($color, $race->getColor());
         self::assertEquals($icon, $race->getIcon());
 
-        // TODO Тесты на создание расовых способностей
+        // Тесты на создание расовых способностей делаются в RaceFactoryTest
     }
 }

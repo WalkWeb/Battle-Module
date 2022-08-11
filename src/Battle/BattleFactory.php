@@ -17,7 +17,72 @@ class BattleFactory
     /**
      * Create Battle object and dependencies
      *
-     * TODO Example data
+     * [
+     *     [
+     *         'id'         => '60f3c032-46a6-454d-ae3a-d066f150f6ef',
+     *         'name'       => 'Titan',
+     *         'level'      => 3,
+     *         'avatar'     => '/images/avas/orcs/orc001.jpg',
+     *         'life'       => 185,
+     *         'total_life' => 185,
+     *         'mana'       => 38,
+     *         'total_mana' => 38,
+     *         'melee'      => true,
+     *         'command'    => 1,
+     *         'class'      => 5,
+     *         'race'       => 3,
+     *         'offense'    => [
+     *             'type_damage'         => 1,
+     *             'physical_damage'     => 35,
+     *             'attack_speed'        => 1.2,
+     *             'accuracy'            => 176,
+     *             'magic_accuracy'      => 12,
+     *             'block_ignore'        => 0,
+     *             'critical_chance'     => 5,
+     *             'critical_multiplier' => 200,
+     *         ],
+     *         'defense'    => [
+     *             'physical_resist' => 0,
+     *             'defense'         => 134,
+     *             'magic_defense'   => 31,
+     *             'block'           => 0,
+     *             'magic_block'     => 0,
+     *             'mental_barrier'  => 0,
+     *         ],
+     *     ],
+     *     [
+     *         'id'         => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',
+     *         'name'       => 'Warrior',
+     *         'level'      => 2,
+     *         'avatar'     => '/images/avas/humans/human001.jpg',
+     *         'life'       => 160,
+     *         'total_life' => 160,
+     *         'mana'       => 61,
+     *         'total_mana' => 61,
+     *         'melee'      => true,
+     *         'command'    => 2,
+     *         'class'      => 1,
+     *         'race'       => 1,
+     *         'offense'    => [
+     *             'type_damage'         => 1,
+     *             'physical_damage'     => 28,
+     *             'attack_speed'        => 1.1,
+     *             'accuracy'            => 212,
+     *             'magic_accuracy'      => 14,
+     *             'block_ignore'        => 0,
+     *             'critical_chance'     => 10,
+     *             'critical_multiplier' => 200,
+     *         ],
+     *         'defense'    => [
+     *             'physical_resist' => 0,
+     *             'defense'         => 155,
+     *             'magic_defense'   => 63,
+     *             'block'           => 25,
+     *             'magic_block'     => 0,
+     *             'mental_barrier'  => 0,
+     *         ],
+     *     ]
+     * ];
      *
      * @param array $data
      * @param ContainerInterface|null $container
@@ -43,15 +108,14 @@ class BattleFactory
      *
      * @param array $data
      * @param $command
-     * @param ContainerInterface|null $container
+     * @param ContainerInterface $container
      * @return CommandInterface
      * @throws BattleException
      * @throws CommandException
      * @throws UnitException
      */
-    public static function createCommand(array $data, $command, ?ContainerInterface $container = null): CommandInterface
+    public static function createCommand(array $data, $command, ContainerInterface $container): CommandInterface
     {
-        $container = $container ?? new Container();
         $commandData = [];
 
         foreach ($data as $datum) {

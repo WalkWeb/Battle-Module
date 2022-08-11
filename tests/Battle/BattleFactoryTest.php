@@ -9,6 +9,7 @@ use Battle\BattleInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\BattleException;
+use Battle\Container\Container;
 use Battle\Unit\UnitException;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -48,7 +49,7 @@ class BattleFactoryTest extends AbstractUnitTest
      */
     public function testBattleFactoryCreateCommandSuccess(array $data, array $expectedData, int $command): void
     {
-        $command = BattleFactory::createCommand($data, $command);
+        $command = BattleFactory::createCommand($data, $command, new Container());
         $expectCommand = CommandFactory::create($expectedData);
         self::assertEquals($expectCommand, $command);
     }
