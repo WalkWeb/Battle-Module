@@ -13,7 +13,14 @@ interface AbilityDataProviderInterface
      *
      * Возвращает массив параметров способности. Сам он способности не создает - это не его задача.
      *
-     * TODO Инструкция по интегрированию своего провайдера в контейнер
+     * Инструкция по интегрированию своего провайдера в контейнер:
+     * 1. Создаете свой класс реализующий интерфейс AbilityDataProviderInterface
+     * 2. Заменяете ExampleAbilityDataProvider своей реализацией:
+     *
+     * $container = new Container();
+     * $abilityDataProvider = new YourAbilityDataProvider($container);
+     * $container->set(AbilityDataProviderInterface::class, $abilityDataProvider);
+     * $battle = BattleFactory::create($data, $container);
      *
      * @param string $abilityName
      * @param int $level

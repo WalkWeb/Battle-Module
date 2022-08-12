@@ -13,7 +13,14 @@ interface ClassDataProviderInterface
      *
      * Возвращает массив параметров класса. Сам он классы не создает - это не его задача.
      *
-     * TODO Инструкция по интегрированию своего провайдера в контейнер
+     * Инструкция по интегрированию своего провайдера в контейнер:
+     * 1. Создаете свой класс реализующий интерфейс ClassDataProviderInterface
+     * 2. Заменяете ExampleClassDataProvider своей реализацией:
+     *
+     * $container = new Container();
+     * $classDataProvider = new YourClassDataProvider($container);
+     * $container->set(ClassDataProviderInterface::class, $classDataProvider);
+     * $battle = BattleFactory::create($data, $container);
      *
      * @param int $id - Unit Class id
      * @return array - Data for UnitClassFactory
