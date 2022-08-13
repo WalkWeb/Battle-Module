@@ -727,14 +727,14 @@ class DamageActionTest extends AbstractUnitTest
      * Другой юнит с шансом критического удара 49% (будет округлен в 0%, т.к. тестовый режим) - всегда обычный удар
      *
      * @dataProvider criticalDamageDataProvider
-     * @param int $enemyUnitId
+     * @param int $unitId
      * @param bool $isCritical
      * @throws Exception
      */
-    public function testDamageActionCriticalDamage(int $enemyUnitId, bool $isCritical): void
+    public function testDamageActionCriticalDamage(int $unitId, bool $isCritical): void
     {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate($enemyUnitId);
+        $unit = UnitFactory::createByTemplate($unitId);
+        $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -742,6 +742,7 @@ class DamageActionTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
+            self::assertEquals($isCritical, $action->isCriticalDamage());
             $action->handle();
         }
 

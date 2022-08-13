@@ -436,7 +436,7 @@ class PoisonAbilityTest extends AbstractUnitTest
      */
     private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
     {
-        $container = new Container();
+        $container = new Container(true);
 
         return $container->getAbilityFactory()->create(
             $unit,

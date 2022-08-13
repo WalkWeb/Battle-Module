@@ -9,6 +9,7 @@ use Battle\Container\ContainerInterface;
 use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
+use Exception;
 
 class DamageAction extends AbstractAction
 {
@@ -47,7 +48,7 @@ class DamageAction extends AbstractAction
     /**
      * @var bool
      */
-    protected bool $criticalDamage = false;
+    protected bool $criticalDamage;
 
     /**
      * Было ли событие заблокировано
@@ -74,6 +75,20 @@ class DamageAction extends AbstractAction
      */
     protected array $dodgedByUnit = [];
 
+    /**
+     * @param ContainerInterface $container
+     * @param UnitInterface $actionUnit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @param int $typeTarget
+     * @param OffenseInterface $offense
+     * @param bool $canBeAvoided
+     * @param string $name
+     * @param string $animationMethod
+     * @param string $messageMethod
+     * @param string $icon
+     * @throws Exception
+     */
     public function __construct(
         ContainerInterface $container,
         UnitInterface $actionUnit,
@@ -94,6 +109,7 @@ class DamageAction extends AbstractAction
         $this->name = $name;
         $this->animationMethod = $animationMethod;
         $this->messageMethod = $messageMethod;
+        $this->calculateCriticalDamage();
     }
 
     /**
@@ -250,5 +266,19 @@ class DamageAction extends AbstractAction
     public function isCriticalDamage(): bool
     {
         return $this->criticalDamage;
+    }
+
+    /**
+     * В режиме тестов шанс критического удара считается не случайно, а округляется
+     *
+     * @throws Exception
+     */
+    private function calculateCriticalDamage(): void
+    {
+        if ($this->container->isTestMode()) {
+            $this->criticalDamage = (bool)(int)round($this->offense->getCriticalChance() / 100);
+        } else {
+            $this->criticalDamage = $this->offense->getCriticalChance() > random_int(0, 100);
+        }
     }
 }

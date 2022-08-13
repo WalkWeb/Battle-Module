@@ -545,14 +545,7 @@ class Unit extends AbstractUnit
 
         $baseDamage = $action->getOffense()->getDamage($this->defense);
 
-        // В режиме тестов шанс критического удара считается не случайно, а округляется
-        if ($this->container->isTestMode()) {
-            $isCriticalDamage = (bool)(int)round($this->offense->getCriticalChance() / 100);
-        } else {
-            $isCriticalDamage = $this->offense->getCriticalChance() > random_int(0, 100);
-        }
-
-        $damage = $isCriticalDamage ?
+        $damage = $action->isCriticalDamage() ?
             (int)($baseDamage * ($this->getOffense()->getCriticalMultiplier() / 100)) :
             $baseDamage;
 

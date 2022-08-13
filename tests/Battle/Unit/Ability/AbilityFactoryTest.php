@@ -29,7 +29,7 @@ class AbilityFactoryTest extends AbstractUnitTest
      */
     public function testAbilityFactoryCreateSuccess(array $data): void
     {
-        $container = new Container();
+        $container = new Container(true);
         $unit = UnitFactory::createByTemplate(1, $container);
         $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
