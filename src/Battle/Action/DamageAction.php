@@ -45,6 +45,11 @@ class DamageAction extends AbstractAction
     protected string $messageMethod;
 
     /**
+     * @var bool
+     */
+    protected bool $criticalDamage = false;
+
+    /**
      * Было ли событие заблокировано
      *
      * Данные хранятся в виде массива:
@@ -237,5 +242,13 @@ class DamageAction extends AbstractAction
     public function isCanBeAvoided(): bool
     {
         return $this->canBeAvoided;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCriticalDamage(): bool
+    {
+        return $this->criticalDamage;
     }
 }

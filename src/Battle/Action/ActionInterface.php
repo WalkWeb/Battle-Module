@@ -332,4 +332,14 @@ interface ActionInterface
      * @return bool
      */
     public function isCanBeAvoided(): bool;
+
+    /**
+     * Был ли удар критическим. Рассчитывается сразу при создании DamageAction в конструкторе
+     *
+     * Критический удар является общим для всех целей. Т.е. если юнит атакует 4-х противников, то критический удар либо
+     * не будет нанесен ни по кому, либо будет нанесен по всем сразу.
+     *
+     * @return bool
+     */
+    public function isCriticalDamage(): bool;
 }

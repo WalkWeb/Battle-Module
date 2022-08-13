@@ -289,6 +289,15 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * @return bool
+     * @throws ActionException
+     */
+    public function isCriticalDamage(): bool
+    {
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
+    }
+
+    /**
      * Ищет юнита для применения события.
      *
      * @param ActionInterface $action

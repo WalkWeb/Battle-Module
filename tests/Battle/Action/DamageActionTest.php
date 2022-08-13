@@ -39,6 +39,7 @@ class DamageActionTest extends AbstractUnitTest
         self::assertEquals(DamageAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
         self::assertEquals('damage', $action->getMessageMethod());
         self::assertEquals('attack', $action->getNameAction());
+        self::assertFalse($action->isCriticalDamage());
     }
 
     /**
