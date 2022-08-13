@@ -26,6 +26,11 @@ interface UnitStatisticInterface
     public function addHit(): void;
 
     /**
+     * Добавляет один критический нанесенный удар
+     */
+    public function addCriticalHit(): void;
+
+    /**
      * Добавляет полученный юнитом урон
      *
      * @param int $damage
@@ -77,6 +82,13 @@ interface UnitStatisticInterface
      * @return int
      */
     public function getHits(): int;
+
+    /**
+     * Возвращает суммарное количество критических ударов юнита
+     *
+     * @return int
+     */
+    public function getCriticalHits(): int;
 
     /**
      * Возвращает суммарный полученный урон юнитом

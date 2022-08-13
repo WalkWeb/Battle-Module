@@ -27,6 +27,7 @@ class UnitStatisticsTest extends AbstractUnitTest
         self::assertEquals($name, $unitStatistics->getUnit()->getName());
 
         self::assertEquals(0, $unitStatistics->getHits());
+        self::assertEquals(0, $unitStatistics->getCriticalHits());
         self::assertEquals(0, $unitStatistics->getCausedDamage());
         self::assertEquals(0, $unitStatistics->getTakenDamage());
         self::assertEquals(0, $unitStatistics->getBlockedHits());
@@ -39,6 +40,9 @@ class UnitStatisticsTest extends AbstractUnitTest
         $unitStatistics->addHit();
         $unitStatistics->addHit();
         $unitStatistics->addHit();
+
+        $unitStatistics->addCriticalHit();
+        $unitStatistics->addCriticalHit();
 
         $unitStatistics->addCausedDamage(15);
         $unitStatistics->addCausedDamage(15);
@@ -68,6 +72,7 @@ class UnitStatisticsTest extends AbstractUnitTest
         $unitStatistics->addResurrection();
 
         self::assertEquals(3, $unitStatistics->getHits());
+        self::assertEquals(2, $unitStatistics->getCriticalHits());
         self::assertEquals(45, $unitStatistics->getCausedDamage());
         self::assertEquals(60, $unitStatistics->getTakenDamage());
         self::assertEquals(4, $unitStatistics->getBlockedHits());

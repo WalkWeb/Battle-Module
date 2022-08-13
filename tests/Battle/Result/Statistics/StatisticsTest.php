@@ -61,10 +61,11 @@ class StatisticsTest extends AbstractUnitTest
      */
     public function testStatisticsUnitCausedDamage(): void
     {
-        $statistics = new Statistic();
+        $container = $this->getContainer();
+        $statistics = $container->getStatistic();
 
-        $attackUnit = UnitFactory::createByTemplate(1);
-        $defendUnit = UnitFactory::createByTemplate(2);
+        $attackUnit = UnitFactory::createByTemplate(1, $container);
+        $defendUnit = UnitFactory::createByTemplate(2, $container);
         $enemyCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$attackUnit]);
 
@@ -94,6 +95,9 @@ class StatisticsTest extends AbstractUnitTest
         $defendUnitData = UnitFactory::getData(2);
 
         self::assertEquals($defendUnitData['total_life'], $statistics->getUnitsStatistics()->get($attackUnit->getId())->getCausedDamage());
+
+        // Также проверяем, что было 0 критических ударов
+        self::assertEquals(0, $statistics->getUnitsStatistics()->get($attackUnit->getId())->getCriticalHits());
     }
 
     /**
@@ -510,6 +514,41 @@ class StatisticsTest extends AbstractUnitTest
 
         // Проверяем, что атакующий убил 3 юнита
         self::assertEquals(3, $statistics->getUnitsStatistics()->get($unit->getId())->getKilling());
+    }
+
+    /**
+     * Тест на подсчет критических ударов
+     *
+     * @throws Exception
+     */
+    public function testStatisticsUnitCriticalHits(): void
+    {
+        $container = $this->getContainer();
+        $statistics = $container->getStatistic();
+
+        $attackUnit = UnitFactory::createByTemplate(40, $container);
+        $defendUnit = UnitFactory::createByTemplate(2, $container);
+        $enemyCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$attackUnit]);
+
+        // Делаем 3 удара
+        $hits = 3;
+        for ($i = 0; $i < $hits; $i++) {
+            $actionCollection = $attackUnit->getActions($enemyCommand, $alliesCommand);
+
+            foreach ($actionCollection as $action) {
+
+                if (!$enemyCommand->isAlive()) {
+                    break;
+                }
+
+                $action->handle();
+                $statistics->addUnitAction($action);
+            }
+        }
+
+        // И все 3 удара были критическими (т.к. в тестовом режиме шанс критического удара округляется в большую сторону)
+        self::assertEquals($hits, $statistics->getUnitsStatistics()->get($attackUnit->getId())->getCriticalHits());
     }
 
     /**

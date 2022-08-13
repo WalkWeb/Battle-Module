@@ -24,6 +24,11 @@ class UnitStatistic implements UnitStatisticInterface
     private int $hits = 0;
 
     /**
+     * @var int - Количество критических ударов юнита
+     */
+    private $criticalHits = 0;
+
+    /**
      * @var int - Полученный юнитом урон
      */
     private int $takenDamage = 0;
@@ -87,6 +92,11 @@ class UnitStatistic implements UnitStatisticInterface
         $this->hits++;
     }
 
+    public function addCriticalHit(): void
+    {
+        $this->criticalHits++;
+    }
+
     /**
      * @param int $damage
      */
@@ -128,6 +138,9 @@ class UnitStatistic implements UnitStatisticInterface
         $this->resurrection++;
     }
 
+    /**
+     * @return int
+     */
     public function getCausedDamage(): int
     {
         return $this->causedDamage;
@@ -139,6 +152,14 @@ class UnitStatistic implements UnitStatisticInterface
     public function getHits(): int
     {
         return $this->hits;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCriticalHits(): int
+    {
+        return $this->criticalHits;
     }
 
     /**
@@ -157,6 +178,9 @@ class UnitStatistic implements UnitStatisticInterface
         return $this->blockedHits;
     }
 
+    /**
+     * @return int
+     */
     public function getDodgedHits(): int
     {
         return $this->dodgedHits;

@@ -13,6 +13,7 @@ use Battle\Action\SummonAction;
 use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
 use Battle\Result\Statistic\UnitStatistic\UnitStatisticCollection;
 use Battle\Result\Statistic\UnitStatistic\UnitStatisticInterface;
+use Battle\Unit\UnitInterface;
 
 /**
  * @package Battle\Statistic
@@ -184,29 +185,18 @@ class Statistic implements StatisticInterface
      */
     private function countingCausedDamage(ActionInterface $action): void
     {
-        if (!$this->unitsStatistics->exist($action->getCreatorUnit()->getId())) {
-            $unit = new UnitStatistic($action->getCreatorUnit());
-            $unit->addCausedDamage($action->getFactualPower());
-            $unit->addHit();
+        $unit = $this->getOrCreateUnitStatistic($action->getCreatorUnit());
+        $unit->addCausedDamage($action->getFactualPower());
+        $unit->addHit();
 
-            foreach ($action->getTargetUnits() as $targetUnit) {
-                if (!$targetUnit->isAlive()) {
-                    $unit->addKillingUnit();
-                }
+        if ($action->isCriticalDamage()) {
+            $unit->addCriticalHit();
+        }
+
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            if (!$targetUnit->isAlive()) {
+                $unit->addKillingUnit();
             }
-
-            $this->unitsStatistics->add($unit);
-        } else {
-            $unit = $this->getUnitStatistics($action->getCreatorUnit()->getId());
-
-            foreach ($action->getTargetUnits() as $targetUnit) {
-                if (!$targetUnit->isAlive()) {
-                    $unit->addKillingUnit();
-                }
-            }
-
-            $unit->addCausedDamage($action->getFactualPower());
-            $unit->addHit();
         }
     }
 
@@ -221,14 +211,8 @@ class Statistic implements StatisticInterface
     {
         foreach ($action->getTargetUnits() as $targetUnit) {
             if (!$action->isBlocked($targetUnit) && !$action->isDodged($targetUnit)) {
-                if (!$this->unitsStatistics->exist($targetUnit->getId())) {
-                    $unit = new UnitStatistic($targetUnit);
-                    $unit->addTakenDamage($action->getFactualPowerByUnit($targetUnit));
-                    $this->unitsStatistics->add($unit);
-                } else {
-                    $unit = $this->getUnitStatistics($targetUnit->getId());
-                    $unit->addTakenDamage($action->getFactualPowerByUnit($targetUnit));
-                }
+                $unit = $this->getOrCreateUnitStatistic($targetUnit);
+                $unit->addTakenDamage($action->getFactualPowerByUnit($targetUnit));
             }
         }
     }
@@ -244,14 +228,8 @@ class Statistic implements StatisticInterface
     {
         foreach ($action->getTargetUnits() as $targetUnit) {
             if ($action->isBlocked($targetUnit)) {
-                if (!$this->unitsStatistics->exist($targetUnit->getId())) {
-                    $unit = new UnitStatistic($targetUnit);
-                    $unit->addBlockedHit();
-                    $this->unitsStatistics->add($unit);
-                } else {
-                    $unit = $this->getUnitStatistics($targetUnit->getId());
-                    $unit->addBlockedHit();
-                }
+                $unit = $this->getOrCreateUnitStatistic($targetUnit);
+                $unit->addBlockedHit();
             }
         }
     }
@@ -267,14 +245,8 @@ class Statistic implements StatisticInterface
     {
         foreach ($action->getTargetUnits() as $targetUnit) {
             if ($action->isDodged($targetUnit)) {
-                if (!$this->unitsStatistics->exist($targetUnit->getId())) {
-                    $unit = new UnitStatistic($targetUnit);
-                    $unit->addDodgedHit();
-                    $this->unitsStatistics->add($unit);
-                } else {
-                    $unit = $this->getUnitStatistics($targetUnit->getId());
-                    $unit->addDodgedHit();
-                }
+                $unit = $this->getOrCreateUnitStatistic($targetUnit);
+                $unit->addDodgedHit();
             }
         }
     }
@@ -287,14 +259,8 @@ class Statistic implements StatisticInterface
      */
     private function countingHeal(ActionInterface $action): void
     {
-        if (!$this->unitsStatistics->exist($action->getCreatorUnit()->getId())) {
-            $unit = new UnitStatistic($action->getCreatorUnit());
-            $unit->addHeal($action->getFactualPower());
-            $this->unitsStatistics->add($unit);
-        } else {
-            $unit = $this->getUnitStatistics($action->getCreatorUnit()->getId());
-            $unit->addHeal($action->getFactualPower());
-        }
+        $unit = $this->getOrCreateUnitStatistic($action->getCreatorUnit());
+        $unit->addHeal($action->getFactualPower());
 
         if ($action instanceof ResurrectionAction) {
             $this->countingResurrections($action);
@@ -340,5 +306,21 @@ class Statistic implements StatisticInterface
         $unit = ['byte', 'kb', 'mb', 'gb', 'tb', 'pb'];
         $i = (int)floor(log($size, 1024));
         return round($size / 1024**$i, 2) . ' ' . $unit[$i];
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @return UnitStatisticInterface
+     * @throws StatisticException
+     */
+    private function getOrCreateUnitStatistic(UnitInterface $unit): UnitStatisticInterface
+    {
+        if ($this->unitsStatistics->exist($unit->getId())) {
+            return $this->getUnitStatistics($unit->getId());
+        }
+
+        $unitStatistic = new UnitStatistic($unit);
+        $this->unitsStatistics->add($unitStatistic);
+        return $unitStatistic;
     }
 }
