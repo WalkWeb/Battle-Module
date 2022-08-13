@@ -62,6 +62,7 @@ return [
     'Statistics'                              => 'Статистика',
     'Unit'                                    => 'Кто',
     'Hits'                                    => 'Ударов',
+    'Critical Hits'                           => 'Критических ударов',
     'Caused Damage'                           => 'Нанес урона',
     'Taken Damage'                            => 'Получил урона',
     'Heal'                                    => 'Вылечил',

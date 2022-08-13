@@ -122,7 +122,7 @@ $data = [
             'accuracy'            => 241,
             'magic_accuracy'      => 286,
             'block_ignore'        => 0,
-            'critical_chance'     => 10,
+            'critical_chance'     => 20,
             'critical_multiplier' => 250,
         ],
         'defense'    => [

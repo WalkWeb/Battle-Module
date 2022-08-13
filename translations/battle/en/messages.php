@@ -64,6 +64,7 @@ return [
     'Statistics'                              => 'Statistics',
     'Unit'                                    => 'Unit',
     'Hits'                                    => 'Hits',
+    'Critical Hits'                           => 'Critical Hits',
     'Caused Damage'                           => 'Caused Damage',
     'Taken Damage'                            => 'Taken Damage',
     'Heal'                                    => 'Heal',
