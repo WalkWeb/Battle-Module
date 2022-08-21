@@ -128,8 +128,8 @@ return [
     // Full-text messages
     // $unit received $power damage from effect $icon $ability
     '%s received %d damage from effect %s %s'                        => '%s получил %d урона от эффекта %s %s',
-    // $unit attack $unit on $power damage
-    '%s attack %s on %d damage'                                      => '%s атаковал %s на %d урона',
+    // $unit hit for $damage damage against $targets
+    '%s hit for %d damage against %s'                                => '%s нанес удар на %d урона по %s',
     // $unit heal $unit on $power life
     '%s heal %s on %d life'                                          => '%s вылечил %s на %d здоровья',
     // $unit use $icon $ability and heal $unit on $power life
@@ -154,8 +154,8 @@ return [
     '%s tried to strike, but %s blocked it!'                         => '%s попытался нанести удар, но %s заблокировал его!',
     // $unit tried to strike, but $targets dodged!
     '%s tried to strike, but %s dodged!'                             => '%s попытался нанести удар, но %s уклонился!',
-    // $unit use $icon $ability at $targets on $power damage
-    '%s use %s %s at %s on %d damage'                                => '%s использовал %s %s по %s на %d урона',
+    // $unit use $icon $ability and hit for $damage damage against $targets
+    '%s use %s %s and hit for %d damage against %s'                  => '%s использовал %s %s и нанес удар на %d урона по %s',
     // $unit use $icon $ability but $targets blocked it!
     '%s use %s %s but %s blocked it!'                                => '%s использовал %s %s но %s заблокировал его!',
     // $unit use $icon $ability but $targets dodged!

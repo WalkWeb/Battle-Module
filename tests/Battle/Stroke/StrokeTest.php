@@ -24,7 +24,7 @@ use Tests\Battle\Factory\UnitFactory;
 
 class StrokeTest extends AbstractUnitTest
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> attack <span style="color: #1e72e3">unit_2</span> on 20 damage';
+    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>';
 
     /**
      * Тест на базовую обработку одного хода

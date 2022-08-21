@@ -502,7 +502,7 @@ class Chat implements ChatInterface
 
     /**
      * Формирует сообщение о юнитах, которые получили урон в формате:
-     * $unit attack $unit on $power damage
+     * $unit hit for $damage damage against $targets
      *
      * @param ActionInterface $action
      * @return string
@@ -511,12 +511,10 @@ class Chat implements ChatInterface
     private function getDamagedMessage(ActionInterface $action): string
     {
         return sprintf(
-            $this->translation->trans('%s attack %s on %d damage'),
+            $this->translation->trans('%s hit for %d damage against %s'),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
-            $this->getTargetsName($action),
             $action->getFactualPower(),
-            $this->getIcon($action),
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>'
+            $this->getTargetsName($action)
         );
     }
 
@@ -559,7 +557,7 @@ class Chat implements ChatInterface
     /**
      * Формирует сообщение о юнитах, которые получили урон от способности:
      *
-     * $unit use $icon $ability at $targets on $power damage
+     * $unit use $icon $ability and hit for $damage damage against $targets
      *
      * @param ActionInterface $action
      * @return string
@@ -568,12 +566,12 @@ class Chat implements ChatInterface
     private function getDamagedAbilityMessage(ActionInterface $action): string
     {
         return sprintf(
-            $this->translation->trans('%s use %s %s at %s on %d damage'),
+            $this->translation->trans('%s use %s %s and hit for %d damage against %s'),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $this->getIcon($action),
             '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
-            $this->getTargetsName($action),
-            $action->getFactualPower()
+            $action->getFactualPower(),
+            $this->getTargetsName($action)
         );
     }
 
