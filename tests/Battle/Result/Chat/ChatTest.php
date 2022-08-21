@@ -80,6 +80,9 @@ class ChatTest extends AbstractUnitTest
     private const HEAL_EN = '<span style="color: #1e72e3">unit_1</span> heal <span style="color: #1e72e3">wounded_unit</span> on 20 life';
     private const HEAL_RU = '<span style="color: #1e72e3">unit_1</span> вылечил <span style="color: #1e72e3">wounded_unit</span> на 20 здоровья';
 
+    private const HEAL_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and heal <span style="color: #1e72e3">wounded_unit</span> on 60 life';
+    private const HEAL_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">wounded_unit</span> на 60 здоровья';
+
     private const SUMMON_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Imp</span>';
     private const SUMMON_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Беса</span>';
 
@@ -98,17 +101,17 @@ class ChatTest extends AbstractUnitTest
     private const BUFF_RU = '<span style="color: #1e72e3">unit_1</span> Резервные Силы';
 
     // Сейчас сообщения выглядят некорректно, т.к. сообщение о воскрешении подразумевает, что воскрешение использовано со способности
-    private const RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> use <span class="ability">ExampleActionName</span> and resurrected <span style="color: #1e72e3">dead_unit</span>';
-    private const RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> использовал <span class="ability">ExampleActionName</span> и воскресил <span style="color: #1e72e3">dead_unit</span>';
+    private const RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">ExampleActionName</span> and resurrected <span style="color: #1e72e3">dead_unit</span>';
+    private const RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">ExampleActionName</span> и воскресил <span style="color: #1e72e3">dead_unit</span>';
 
-    private const EFFECT_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <span class="ability">Healing Potion</span>';
-    private const EFFECT_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта <span class="ability">Лечебное зелье</span>';
+    private const EFFECT_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Healing Potion</span>';
+    private const EFFECT_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Лечебное зелье</span>';
 
-    private const APPLY_EFFECT_SELF_EN = '<span style="color: #1e72e3">unit_1</span> use <span class="ability">Reserve Forces</span>';
-    private const APPLY_EFFECT_SELF_RU = '<span style="color: #1e72e3">unit_1</span> использовал <span class="ability">Резервные Силы</span>';
+    private const APPLY_EFFECT_SELF_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Reserve Forces</span>';
+    private const APPLY_EFFECT_SELF_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Резервные Силы</span>';
 
-    private const APPLY_EFFECT_TO_EN = '<span style="color: #1e72e3">unit_1</span> use <span class="ability">Reserve Forces</span> on <span style="color: #1e72e3">unit_2</span>';
-    private const APPLY_EFFECT_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <span class="ability">Резервные Силы</span> на <span style="color: #1e72e3">unit_2</span>';
+    private const APPLY_EFFECT_TO_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Reserve Forces</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const APPLY_EFFECT_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Резервные Силы</span> на <span style="color: #1e72e3">unit_2</span>';
 
     private const SKIP_MESSAGE = '';
 
@@ -249,7 +252,7 @@ class ChatTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testChatAddMessageHeal(): void
+    public function testChatAddMessageHealBase(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $otherUnit = UnitFactory::createByTemplate(11);
@@ -272,6 +275,40 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::HEAL_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::HEAL_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения о лечении от способности
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageHealAbility(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $otherUnit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit, $otherUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new HealAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_WOUNDED_ALLIES,
+            60,
+            'Great Heal',
+            'heal',
+            'healAbility',
+            '/images/icons/ability/196.png'
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::HEAL_ABILITY_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::HEAL_ABILITY_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -438,7 +475,8 @@ class ChatTest extends AbstractUnitTest
             $command,
             BuffAction::TARGET_DEAD_ALLIES,
             50,
-            'ExampleActionName'
+            'ExampleActionName',
+            '/images/icons/ability/053.png'
         );
 
         self::assertTrue($action->canByUsed());
@@ -498,7 +536,8 @@ class ChatTest extends AbstractUnitTest
             15,
             'Healing Potion',
             HealAction::EFFECT_ANIMATION_METHOD,
-            HealAction::EFFECT_MESSAGE_METHOD
+            HealAction::EFFECT_MESSAGE_METHOD,
+            '/images/icons/ability/234.png'
         );
 
         self::assertTrue($action->canByUsed());
@@ -558,11 +597,11 @@ class ChatTest extends AbstractUnitTest
             true,
             'test attack',
             DamageAction::UNIT_ANIMATION_METHOD,
-            'undefinedMessageMethod'
+            $messageMethod = 'undefinedMessageMethod'
         );
 
         $this->expectException(ChatException::class);
-        $this->expectExceptionMessage(ChatException::UNDEFINED_MESSAGE_METHOD);
+        $this->expectExceptionMessage(ChatException::UNDEFINED_MESSAGE_METHOD . ': ' . $messageMethod);
         $chat->addMessage($action);
     }
 
@@ -835,9 +874,10 @@ class ChatTest extends AbstractUnitTest
             'name'           => 'Reserve Forces',
             'use_message'    => 'use',
             'message_method' => 'applyEffect',
+            'icon'           => '/images/icons/ability/156.png',
             'effect'         => [
                 'name'                  => 'Effect#123',
-                'icon'                  => 'icon.png',
+                'icon'                  => '/images/icons/ability/156.png',
                 'duration'              => 8,
                 'on_apply_actions'      => [
                     [

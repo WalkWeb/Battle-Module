@@ -11,8 +11,6 @@ use Battle\Container\ContainerInterface;
 use Battle\Translation\TranslationInterface;
 
 /**
- * TODO Можно подумать над оптимизацией количества строк и объединением методов
- *
  * @package Battle\Result\Chat
  */
 class Chat implements ChatInterface
@@ -47,7 +45,7 @@ class Chat implements ChatInterface
         $createMethod = $action->getMessageMethod();
 
         if (!method_exists($this, $createMethod)) {
-            throw new ChatException(ChatException::UNDEFINED_MESSAGE_METHOD);
+            throw new ChatException(ChatException::UNDEFINED_MESSAGE_METHOD . ': ' . $createMethod);
         }
 
         $message = $this->$createMethod($action);
@@ -161,29 +159,26 @@ class Chat implements ChatInterface
     }
 
     /**
+     * Формирует сообщение о лечении в формате:
+     * $unit heal $unit on $power life
+     *
      * @param ActionInterface $action
      * @return string
      * @throws ActionException
      */
     private function heal(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // ability icon, if any
-            $this->getIcon($action) .
-            // heal
-            $this->translation->trans($action->getNameAction()) .
-            // Targets
-            ' ' . $this->getTargetsName($action) . ' ' .
-            // "on"
-            $this->translation->trans('on') . ' ' .
-            // # life
-            $action->getFactualPower() . ' ' . $this->translation->trans('life');
+        return sprintf(
+            $this->translation->trans('%s heal %s on %d life'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getTargetsName($action),
+            $action->getFactualPower()
+        );
     }
 
     /**
-     * Использование лечение со способности. В отличие от обычного лечения добавляется иконка способности
+     * Формирует сообщение о использовании лечения со способности:
+     * $unit use $icon $ability and heal $unit on $power life
      *
      * @param ActionInterface $action
      * @return string
@@ -191,74 +186,67 @@ class Chat implements ChatInterface
      */
     public function healAbility(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // "use"
-            $this->translation->trans('use') . ' ' .
-            // ability icon
-            $this->getIcon($action) .
-            // ability name
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
-            // "and heal"
-            $this->translation->trans('and heal') .
-            // Targets
-            ' ' . $this->getTargetsName($action) . ' ' .
-            // "on"
-            $this->translation->trans('on') . ' ' .
-            // Power
-            $action->getFactualPower() . ' ' .
-            // "life"
-            $this->translation->trans('life');
+        return sprintf(
+            $this->translation->trans('%s use %s %s and heal %s on %d life'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
+            $this->getTargetsName($action),
+            $action->getFactualPower()
+        );
     }
 
     /**
-     * Призыв существ сейчас используется только со способностей
+     * Формирует сообщение о призыве существа в формате:
+     * $unit summon $icon $name
      *
      * @param ActionInterface $action
      * @return string
      */
     private function summon(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // summon
-            $this->translation->trans('summon') . ' ' .
-            // ability icon
-            $this->getIcon($action) .
-            // ability name
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>';
+        return sprintf(
+            $this->translation->trans('%s summon %s %s'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>'
+        );
     }
 
     /**
+     * Формирует сообщение о пропуске хода из-за атаки меньше 1:
+     * $unit preparing to attack
+     *
      * @param ActionInterface $action
      * @return string
      */
     private function wait(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // preparing to attack
-            $this->translation->trans('preparing to attack');
+        return sprintf(
+            $this->translation->trans('%s preparing to attack'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>'
+        );
     }
 
     /**
+     * Формирует сообщение о пропуске хода из-за эффектов паралича:
+     * $unit paralyzed and unable to move
+     *
      * @param ActionInterface $action
      * @return string
      */
     private function paralysis(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // paralyzed and unable to move
-            $this->translation->trans('paralyzed and unable to move');
+        return sprintf(
+            $this->translation->trans('%s paralyzed and unable to move'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>'
+        );
     }
 
     /**
      * В текущих способностях сам баф не формирует сообщение - его формирует эффект, от которого применяется баф.
+     *
+     * TODO Просто удалить метод?
      *
      * @param ActionInterface $action
      * @return string
@@ -276,7 +264,7 @@ class Chat implements ChatInterface
      * Воскрешение может быть использовано только со способностей. Формирует сообщение для события ResurrectionAction в
      * виде:
      *
-     * "Unit use <icon> NameAction and resurrected Target"
+     * $unit use $icon $ability and resurrected $targets
      *
      * @param ActionInterface $action
      * @return string
@@ -284,42 +272,32 @@ class Chat implements ChatInterface
      */
     private function resurrected(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // "use"
-            $this->translation->trans('use') . ' ' .
-            // ability icon
-            $this->getIcon($action) .
-            // ability name
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
-            // "and resurrected"
-            $this->translation->trans('and resurrected') .
-            // Targets
-            ' ' . $this->getTargetsName($action);
+        return sprintf(
+            $this->translation->trans('%s use %s %s and resurrected %s'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
+            $this->getTargetsName($action)
+        );
     }
 
     /**
      * Самовоскрешение юнитом себя от расовой способности. Сообщение вида:
      *
-     * "$unit умер, но благодаря врожденной способности $name вернулся к жизни"
+     * $unit died, but due to the innate ability $ability came back to life
+     * $unit умер, но благодаря врожденной способности $name вернулся к жизни
      *
      * @param ActionInterface $action
      * @return string
      */
     private function selfRaceResurrected(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // died, but due to the innate ability
-            $this->translation->trans('died, but due to the innate ability') . ' ' .
-            // ability icon
-            $this->getIcon($action) .
-            // ability name
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
-            // came back to life
-            $this->translation->trans('came back to life');
+        return sprintf(
+            $this->translation->trans('%s died, but due to the innate ability %s %s came back to life'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>'
+        );
     }
 
     /**
@@ -333,47 +311,40 @@ class Chat implements ChatInterface
     {
         // Если цель у эффекта одна, и эта цель сам юнит - сообщение нужно формировать по другому
         if ($this->isApplySelf($action)) {
-            return
-                // Unit
-                '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-                // "use"
-                $this->translation->trans('use') . ' ' .
-                // ability icon
-                $this->getIcon($action) .
-                // ability name
-                '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>';
+
+            // $unit use $icon $ability
+            return sprintf(
+                $this->translation->trans('%s use %s %s'),
+                '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+                $this->getIcon($action),
+                '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>'
+            );
         }
 
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // "use"
-            $this->translation->trans('use') . ' ' .
-            // ability icon
-            $this->getIcon($action) .
-            // ability name
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
-            // "on"
-            $this->translation->trans('on') .
-            // Targets
-            ' ' . $this->getTargetsName($action);
+        // $unit use $icon $ability on $targets
+        return sprintf(
+            $this->translation->trans('%s use %s %s on %s'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
+            $this->getTargetsName($action)
+        );
     }
 
     /**
      * Формирует сообщение урона от эффекта в формате:
-     * "$name получил урон на $damage от эффекта $effectName"
+     * $unit received $power damage from effect $icon $ability
      *
      * @param ActionInterface $action
      * @return string
      */
     private function effectDamage(ActionInterface $action): string
     {
-        // $unit received $power damage from effect $icon $ability
         return sprintf(
             $this->translation->trans('%s received %d damage from effect %s %s'),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $action->getFactualPower(),
-            trim($this->getIcon($action)),
+            $this->getIcon($action),
             '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>'
         );
     }
@@ -387,17 +358,13 @@ class Chat implements ChatInterface
      */
     private function effectHeal(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // "restored"
-            $this->translation->trans('restored') . ' ' .
-            // # "life from effect"
-            $action->getFactualPower() . ' ' . $this->translation->trans('life from effect') . ' ' .
-            // ability icon
-            $this->getIcon($action) .
-            // ability name
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>';
+        return sprintf(
+            $this->translation->trans('%s restored %d life from effect %s %s'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $action->getFactualPower(),
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>'
+        );
     }
 
     /**
@@ -411,14 +378,12 @@ class Chat implements ChatInterface
     }
 
     /**
-     * TODO В будущем нужно будет переделать - убрав пробел на конце
-     *
      * @param ActionInterface $action
      * @return string
      */
     private function getIcon(ActionInterface $action): string
     {
-        return $action->getIcon() === '' ? '' : '<img src="' . $action->getIcon() . '" alt="" /> ';
+        return $action->getIcon() === '' ? '' : '<img src="' . $action->getIcon() . '" alt="" />';
     }
 
     /**
@@ -506,8 +471,16 @@ class Chat implements ChatInterface
 
         return implode(', ', $names) . ' ' . $this->translation->trans('and') . ' ' . $last;
     }
-    
+
     /**
+     * Можно написать проще:
+     *
+     * foreach ($action->getTargetUnits() as $targetUnit) {
+     *    return $targetUnit->getId() === $action->getActionUnit()->getId();
+     * }
+     *
+     * Но IDE ругается на такой foreach как на ошибку. По этому написан более сложный вариант.
+     *
      * @param ActionInterface $action
      * @return bool
      * @throws ActionException
@@ -518,27 +491,18 @@ class Chat implements ChatInterface
             return false;
         }
 
-        /*
-         * Можно написать проще:
-         *
-         * foreach ($action->getTargetUnits() as $targetUnit) {
-         *    return $targetUnit->getId() === $action->getActionUnit()->getId();
-         * }
-         *
-         * Но IDE ругается на такой foreach как на ошибку. По этому написан более сложный вариант.
-         */
-
         $target = null;
 
         foreach ($action->getTargetUnits() as $targetUnit) {
-            $target =  $targetUnit;
+            $target = $targetUnit;
         }
 
         return $target->getId() === $action->getActionUnit()->getId();
     }
 
     /**
-     * Формирует сообщение о юнитах, которые получили урон
+     * Формирует сообщение о юнитах, которые получили урон в формате:
+     * $unit attack $unit on $power damage
      *
      * @param ActionInterface $action
      * @return string
@@ -546,43 +510,38 @@ class Chat implements ChatInterface
      */
     private function getDamagedMessage(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // ability icon, if any
-            $this->getIcon($action) .
-            // attack
-            $this->translation->trans( $action->getNameAction()) .
-            // Targets
-            ' ' . $this->getTargetsName($action) . ' ' .
-            // "on"
-            $this->translation->trans('on') . ' ' .
-            // # damage
-            $action->getFactualPower() . ' ' . $this->translation->trans('damage');
+        return sprintf(
+            $this->translation->trans('%s attack %s on %d damage'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getTargetsName($action),
+            $action->getFactualPower(),
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>'
+        );
     }
 
     /**
      * Формирует сообщение о юнитах которые заблокировали удар.
      *
-     * @param $action
+     * $unit tried to strike, but $targets blocked it!
+     *
+     * @param ActionInterface $action
      * @return string
      * @throws ActionException
      */
     private function getBlockedMessage(ActionInterface $action): string
     {
-        return
-            // unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // "tried to strike, but"
-            $this->translation->trans('tried to strike, but') . ' ' .
-            // targets
-            $this->getTargetsBlockedName($action) . ' ' .
-            // "blocked it!"
-            $this->translation->trans('blocked it') . '!';
+        return sprintf(
+            $this->translation->trans('%s tried to strike, but %s blocked it!'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getTargetsBlockedName($action)
+        );
     }
 
     /**
-     * Формирует сообщение о юнитах которые увернулись от удара
+     * Формирует сообщение о юнитах которые увернулись от удара:
+     *
+     * $unit tried to strike, but $targets dodged!
      *
      * @param ActionInterface $action
      * @return string
@@ -590,19 +549,17 @@ class Chat implements ChatInterface
      */
     private function getDodgedMessage(ActionInterface $action): string
     {
-        return
-            // unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // "tried to strike, but"
-            $this->translation->trans('tried to strike, but') . ' ' .
-            // targets
-            $this->getTargetsDodgedName($action) . ' ' .
-            // "dodged!"
-            $this->translation->trans('dodged') . '!';
+        return sprintf(
+            $this->translation->trans('%s tried to strike, but %s dodged!'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getTargetsDodgedName($action)
+        );
     }
 
     /**
-     * Формирует сообщение о юнитах, которые получили урон от способности
+     * Формирует сообщение о юнитах, которые получили урон от способности:
+     *
+     * $unit use $icon $ability at $targets on $power damage
      *
      * @param ActionInterface $action
      * @return string
@@ -610,75 +567,53 @@ class Chat implements ChatInterface
      */
     private function getDamagedAbilityMessage(ActionInterface $action): string
     {
-        return
-            // Unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // "use"
-            $this->translation->trans('use') . ' ' .
-            // ability icon
-            $this->getIcon($action) .
-            // ability name
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
-            // "at"
-            $this->translation->trans('at') .
-            // targets
-            ' ' . $this->getTargetsName($action) . ' ' .
-            // "on"
-            $this->translation->trans('on') . ' ' .
-            // # damage
-            $action->getFactualPower() . ' ' . $this->translation->trans('damage');
+        return sprintf(
+            $this->translation->trans('%s use %s %s at %s on %d damage'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
+            $this->getTargetsName($action),
+            $action->getFactualPower()
+        );
     }
 
     /**
-     * Формирует сообщение о юнитах которые заблокировали урон от способности
+     * Формирует сообщение о юнитах которые заблокировали урон от способности:
      *
-     * @param $action
+     * $unit use $icon $ability but $targets blocked it!
+     *
+     * @param ActionInterface $action
      * @return string
      * @throws ActionException
      */
     private function getBlockedAbilityMessage(ActionInterface $action): string
     {
-        return
-            // unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // "use"
-            $this->translation->trans('use') . ' ' .
-            // ability icon
-            $this->getIcon($action) .
-            // ability name
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
-            // "but"
-            $this->translation->trans('but') . ' ' .
-            // targets
-            $this->getTargetsBlockedName($action) . ' ' .
-            // "blocked it!"
-            $this->translation->trans('blocked it') . '!';
+        return sprintf(
+            $this->translation->trans('%s use %s %s but %s blocked it!'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
+            $this->getTargetsBlockedName($action)
+        );
     }
 
-
     /**
-     * Формирует сообщение о юнитах которые уклонились от способности
+     * Формирует сообщение о юнитах которые уклонились от способности:
      *
-     * @param $action
+     * $unit use $icon $ability but $targets dodged!
+     *
+     * @param ActionInterface $action
      * @return string
      * @throws ActionException
      */
     private function getDodgedAbilityMessage(ActionInterface $action): string
     {
-        return
-            // unit
-            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span> ' .
-            // "use"
-            $this->translation->trans('use') . ' ' .
-            // ability icon
-            $this->getIcon($action) .
-            // ability name
-            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span> ' .
-            // "but"
-            $this->translation->trans('but') . ' ' .
-            // targets
-            $this->getTargetsDodgedName($action) . ' ' .
-            // "blocked it!"
-            $this->translation->trans('dodged') . '!';
+        return sprintf(
+            $this->translation->trans('%s use %s %s but %s dodged!'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
+            $this->getTargetsDodgedName($action)
+        );
     }
 }
