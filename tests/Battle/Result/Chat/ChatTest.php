@@ -30,6 +30,9 @@ class ChatTest extends AbstractUnitTest
     private const DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>';
     private const DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_2</span>';
 
+    private const CRITICAL_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> critical hit for 40 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const CRITICAL_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес критический удар на 40 урона по <span style="color: #1e72e3">unit_2</span>';
+
     private const BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
     private const BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
@@ -56,6 +59,9 @@ class ChatTest extends AbstractUnitTest
 
     private const DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span>';
     private const DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span>';
+
+    private const CRITICAL_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and critical hit for 100 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const CRITICAL_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес критический удар на 100 урона по <span style="color: #1e72e3">unit_2</span>';
 
     private const DAMAGE_ABILITY_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it!';
     private const DAMAGE_ABILITY_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его!';
@@ -133,6 +139,25 @@ class ChatTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на формирование сообщения о критическом уроне
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageCriticalDamage(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(40, 2);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::CRITICAL_DAMAGE_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::CRITICAL_DAMAGE_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
      * Тест на формирование сообщения о блоке
      *
      * @throws Exception
@@ -187,6 +212,25 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::DAMAGE_ABILITY_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::DAMAGE_ABILITY_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения об уроне со способности
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageCriticalDamageAbility(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(40, 2);
+
+        $action = $this->createCriticalAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::CRITICAL_DAMAGE_ABILITY_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::CRITICAL_DAMAGE_ABILITY_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
@@ -938,6 +982,45 @@ class ChatTest extends AbstractUnitTest
                 'block_ignore'        => 0,
                 'critical_chance'     => 0,
                 'critical_multiplier' => 0,
+            ]),
+            true,
+            'Heavy Strike',
+            DamageAction::UNIT_ANIMATION_METHOD,
+            'damageAbility',
+            '/images/icons/ability/335.png'
+        );
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param int $typeTarget
+     * @return ActionInterface
+     * @throws Exception
+     */
+    private function createCriticalAbilityDamage(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        int $typeTarget
+    ): ActionInterface
+    {
+        return new DamageAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            $typeTarget,
+            OffenseFactory::create([
+                'type_damage'         => 1,
+                'physical_damage'     => 50,
+                'attack_speed'        => 1,
+                'accuracy'            => 500,
+                'magic_accuracy'      => 100,
+                'block_ignore'        => 0,
+                'critical_chance'     => 100,
+                'critical_multiplier' => 200,
             ]),
             true,
             'Heavy Strike',

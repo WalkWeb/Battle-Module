@@ -502,7 +502,7 @@ class Chat implements ChatInterface
 
     /**
      * Формирует сообщение о юнитах, которые получили урон в формате:
-     * $unit hit for $damage damage against $targets
+     * $unit [critical] hit for $damage damage against $targets
      *
      * @param ActionInterface $action
      * @return string
@@ -510,8 +510,11 @@ class Chat implements ChatInterface
      */
     private function getDamagedMessage(ActionInterface $action): string
     {
+        $message = $action->isCriticalDamage() ?
+            '%s critical hit for %d damage against %s' : '%s hit for %d damage against %s';
+
         return sprintf(
-            $this->translation->trans('%s hit for %d damage against %s'),
+            $this->translation->trans($message),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $action->getFactualPower(),
             $this->getTargetsName($action)
@@ -565,8 +568,11 @@ class Chat implements ChatInterface
      */
     private function getDamagedAbilityMessage(ActionInterface $action): string
     {
+        $message = $action->isCriticalDamage() ?
+            '%s use %s %s and critical hit for %d damage against %s' : '%s use %s %s and hit for %d damage against %s';
+
         return sprintf(
-            $this->translation->trans('%s use %s %s and hit for %d damage against %s'),
+            $this->translation->trans($message),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $this->getIcon($action),
             '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',

@@ -132,6 +132,8 @@ return [
     '%s received %d damage from effect %s %s'                        => '%s received %d damage from effect %s %s',
     // $unit hit for $damage damage against $targets
     '%s hit for %d damage against %s'                                => '%s hit for %d damage against %s',
+    // $unit critical hit for $damage damage against $targets
+    '%s critical hit for %d damage against %s'                       => '%s critical hit for %d damage against %s',
     // $unit heal $unit on $power life
     '%s heal %s on %d life'                                          => '%s heal %s on %d life',
     // $unit use $icon $ability and heal $unit on $power life
@@ -158,6 +160,8 @@ return [
     '%s tried to strike, but %s dodged!'                             => '%s tried to strike, but %s dodged!',
     // $unit use $icon $ability and hit for $damage damage against $targets
     '%s use %s %s and hit for %d damage against %s'                  => '%s use %s %s and hit for %d damage against %s',
+    // $unit use $icon $ability and critical hit for $damage damage against $targets
+    '%s use %s %s and critical hit for %d damage against %s'         => '%s use %s %s and critical hit for %d damage against %s',
     // $unit use $icon $ability but $targets blocked it!
     '%s use %s %s but %s blocked it!'                                => '%s use %s %s but %s blocked it!',
     // $unit use $icon $ability but $targets dodged!
