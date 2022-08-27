@@ -560,7 +560,7 @@ class Chat implements ChatInterface
     /**
      * Формирует сообщение о юнитах, которые получили урон от способности:
      *
-     * $unit use $icon $ability and hit for $damage damage against $targets
+     * $unit use $icon $ability and [critical] hit for $damage damage against $targets
      *
      * @param ActionInterface $action
      * @return string

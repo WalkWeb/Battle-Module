@@ -21,8 +21,8 @@ trait IdTrait
         $chars = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         $numChars = strlen($chars);
         $string = '';
-        for ($i = 1; $i < $length; $i++) {
-            if (abs($i) > $limit) {
+        for ($i = 0; $i < $length; $i++) {
+            if (abs($i) >= $limit) {
                 break;
             }
             $string .= $chars[random_int(1, $numChars) - 1];

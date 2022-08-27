@@ -13,15 +13,35 @@ class IdTraitTest extends AbstractUnitTest
     use IdTrait;
 
     /**
+     * Тест на генерацию случайной строки
+     *
+     * @dataProvider successDataProvider
+     * @param int $length
+     * @param int $expectedLength
      * @throws Exception
      */
-    public function testIdTraitLimitLength(): void
+    public function testIdTraitLimitLength(int $length, int $expectedLength): void
     {
-        $length = 150;
-        $limit = 100;
-
         $string = self::generateId($length);
 
-        self::assertEquals($limit, mb_strlen($string));
+        self::assertEquals($expectedLength, mb_strlen($string));
+    }
+
+    /**
+     * @return array
+     */
+    public function successDataProvider(): array
+    {
+        return [
+            [
+                5,
+                5,
+            ],
+            // Если указана длина больше 100 - она будет уменьшена до длины 100
+            [
+                150,
+                100,
+            ],
+        ];
     }
 }
