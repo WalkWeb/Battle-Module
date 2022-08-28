@@ -518,7 +518,7 @@ class Chat implements ChatInterface
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $action->getFactualPower(),
             $this->getTargetsName($action)
-        );
+        ) . $this->getVampirismMessage($action);
     }
 
     /**
@@ -578,7 +578,7 @@ class Chat implements ChatInterface
             '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
             $action->getFactualPower(),
             $this->getTargetsName($action)
-        );
+        ) . $this->getVampirismMessage($action);
     }
 
     /**
@@ -619,5 +619,25 @@ class Chat implements ChatInterface
             '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
             $this->getTargetsDodgedName($action)
         );
+    }
+
+    /**
+     * Формирует сообщение о восстановленном здоровье от удара, если юнит имел параметр вампиризма больше 0
+     *
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    private function getVampirismMessage(ActionInterface $action): string
+    {
+        if ($action->getOffense()->getVampire() > 0) {
+            return sprintf(
+                $this->translation->trans(' and restore %d life'),
+                // TODO Получать сворованное здоровье из Action
+                (int)($action->getFactualPower() * ($action->getOffense()->getVampire() / 100))
+            );
+        }
+
+        return '';
     }
 }

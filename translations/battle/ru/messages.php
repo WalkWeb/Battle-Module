@@ -164,4 +164,6 @@ return [
     '%s use %s %s but %s blocked it!'                                => '%s использовал %s %s но %s заблокировал его!',
     // $unit use $icon $ability but $targets dodged!
     '%s use %s %s but %s dodged!'                                    => '%s использовал %s %s но %s уклонился!',
+    // and restore $restore life
+    ' and restore %d life'                                           => ' и восстановил %d здоровья',
 ];

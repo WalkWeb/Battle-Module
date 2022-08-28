@@ -153,6 +153,7 @@ class DamageAction extends AbstractAction
                 $this->enemyCommand,
                 $this->alliesCommand,
                 HealAction::TARGET_SELF,
+                // TODO Сохранять значение восстановленного здоровья
                 (int)($this->factualPower * ($this->offense->getVampire() / 100)),
                 '',
                 HealAction::SKIP_ANIMATION_METHOD,
