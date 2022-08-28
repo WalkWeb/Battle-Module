@@ -55,6 +55,10 @@ class WeaponTypeTest extends AbstractUnitTest
     {
         return [
             [
+                0,
+                'None',
+            ],
+            [
                 1,
                 'Sword',
             ],
@@ -117,6 +121,10 @@ class WeaponTypeTest extends AbstractUnitTest
             [
                 16,
                 'Crossbow',
+            ],
+            [
+                17,
+                'Unarmed',
             ],
         ];
     }

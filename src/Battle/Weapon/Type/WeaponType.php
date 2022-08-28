@@ -10,6 +10,7 @@ use Battle\Command\CommandInterface;
 class WeaponType implements WeaponTypeInterface
 {
     private static array $map = [
+        self::NONE                 => 'None',
         self::SWORD                => 'Sword',
         self::AXE                  => 'Axe',
         self::MACE                 => 'Mace',
@@ -26,6 +27,7 @@ class WeaponType implements WeaponTypeInterface
         self::HEAVY_TWO_HAND_MACE  => 'Heavy two hand mace',
         self::LANCE                => 'Lance',
         self::CROSSBOW             => 'Crossbow',
+        self::UNARMED              => 'Unarmed',
     ];
 
     private int $id;

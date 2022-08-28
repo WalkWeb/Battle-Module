@@ -9,6 +9,7 @@ use Battle\Command\CommandInterface;
 
 interface WeaponTypeInterface
 {
+    public const NONE                 = 0; // Отсутствие типа оружия, например в уроне от эффекта
     public const SWORD                = 1;
     public const AXE                  = 2;
     public const MACE                 = 3;
@@ -25,6 +26,7 @@ interface WeaponTypeInterface
     public const HEAVY_TWO_HAND_MACE  = 14;
     public const LANCE                = 15;
     public const CROSSBOW             = 16;
+    public const UNARMED              = 17; // При сражении простыми кулаками
 
     /**
      * Возвращает ID типа оружия
