@@ -127,6 +127,7 @@ return [
     'Alive'                                                          => 'Alive',
     'Yes'                                                            => 'Yes',
     'No'                                                             => 'No',
+    'Vampirism'                                                      => 'Vampirism',
     // Full-text messages
     // $unit received $power damage from effect $icon $ability
     '%s received %d damage from effect %s %s'                        => '%s received %d damage from effect %s %s',

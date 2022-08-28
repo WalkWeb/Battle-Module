@@ -527,6 +527,7 @@ EOT;
             <td><p><abbr title="Magic Block"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
             <td><p><abbr title="Chance Critical Damage"><img src="/images/battle/stats_icon/critical_chance.png" alt=""></abbr></p></td>
             <td><p><abbr title="Critical Damage Multiplier"><img src="/images/battle/stats_icon/critical_multiplication.png" alt=""></abbr></p></td>
+            <td><p><abbr title="Vampirism"><img src="/images/battle/stats_icon/vampirism.png" alt=""></abbr></p></td>
             <td><p>Concentration</p></td>
             <td><p>Rage</p></td>
             <td><p>Melee?</p></td>
@@ -556,6 +557,7 @@ EOT;
                 <td><p>0%</p></td>
                 <td><p>5%</p></td>
                 <td><p>200%</p></td>
+                <td><p>0%</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>Yes</p></td>
@@ -585,6 +587,7 @@ EOT;
                 <td><p>0%</p></td>
                 <td><p>5%</p></td>
                 <td><p>200%</p></td>
+                <td><p>0%</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>0/1000</p></td>
                 <td><p>Yes</p></td>
