@@ -346,4 +346,14 @@ interface ActionInterface
      * @return bool
      */
     public function isCriticalDamage(): bool;
+
+    /**
+     * Возвращает восстановленное здоровье от вампиризма. По умолчанию 0
+     *
+     * Работает только для DamageAction, в остальных Action будет исключение
+     *
+     * @return int
+     * @throws ActionException
+     */
+    public function getRestoreLifeFromVampirism(): int;
 }

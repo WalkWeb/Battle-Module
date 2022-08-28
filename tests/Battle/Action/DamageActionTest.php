@@ -780,6 +780,9 @@ class DamageActionTest extends AbstractUnitTest
 
         // Количество здоровья после нанесения урона - восстановилось 25 здоровья
         self::assertEquals(75, $unit->getLife());
+
+        // Проверяем количество восстановленного здоровья в DamageAction
+        self::assertEquals(25, $action->getRestoreLifeFromVampirism());
     }
 
     /**

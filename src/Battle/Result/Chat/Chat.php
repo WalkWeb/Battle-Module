@@ -622,7 +622,8 @@ class Chat implements ChatInterface
     }
 
     /**
-     * Формирует сообщение о восстановленном здоровье от удара, если юнит имел параметр вампиризма больше 0
+     * Формирует сообщение о восстановленном здоровье от удара, если такое было (т.е. юнит имел параметр вампиризма
+     * больше 0 и ему удалось восстановить >0 здоровье от удара)
      *
      * @param ActionInterface $action
      * @return string
@@ -630,11 +631,10 @@ class Chat implements ChatInterface
      */
     private function getVampirismMessage(ActionInterface $action): string
     {
-        if ($action->getOffense()->getVampire() > 0) {
+        if ($action->getRestoreLifeFromVampirism() > 0) {
             return sprintf(
                 $this->translation->trans(' and restore %d life'),
-                // TODO Получать сворованное здоровье из Action
-                (int)($action->getFactualPower() * ($action->getOffense()->getVampire() / 100))
+                $action->getRestoreLifeFromVampirism()
             );
         }
 

@@ -76,6 +76,13 @@ class DamageAction extends AbstractAction
     protected array $dodgedByUnit = [];
 
     /**
+     * Восстановленное здоровье от вампиризма
+     *
+     * @var int
+     */
+    protected int $restoreLifeFromVampirism = 0;
+
+    /**
      * @param ContainerInterface $container
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
@@ -153,8 +160,7 @@ class DamageAction extends AbstractAction
                 $this->enemyCommand,
                 $this->alliesCommand,
                 HealAction::TARGET_SELF,
-                // TODO Сохранять значение восстановленного здоровья
-                (int)($this->factualPower * ($this->offense->getVampire() / 100)),
+                $this->restoreLifeFromVampirism = (int)($this->factualPower * ($this->offense->getVampire() / 100)),
                 '',
                 HealAction::SKIP_ANIMATION_METHOD,
                 HealAction::SKIP_MESSAGE_METHOD
@@ -287,6 +293,14 @@ class DamageAction extends AbstractAction
     public function isCriticalDamage(): bool
     {
         return $this->criticalDamage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRestoreLifeFromVampirism(): int
+    {
+        return $this->restoreLifeFromVampirism;
     }
 
     /**
