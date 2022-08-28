@@ -97,6 +97,7 @@ class BattleFactoryTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -129,6 +130,7 @@ class BattleFactoryTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -176,6 +178,7 @@ class BattleFactoryTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -211,6 +214,7 @@ class BattleFactoryTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -250,6 +254,7 @@ class BattleFactoryTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -282,6 +287,7 @@ class BattleFactoryTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -317,6 +323,7 @@ class BattleFactoryTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -356,6 +363,7 @@ class BattleFactoryTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -388,6 +396,7 @@ class BattleFactoryTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -423,6 +432,7 @@ class BattleFactoryTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -474,6 +484,7 @@ class BattleFactoryTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,

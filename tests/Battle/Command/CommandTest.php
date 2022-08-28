@@ -730,6 +730,7 @@ class CommandTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 0,
                             'critical_multiplier' => 0,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -763,6 +764,7 @@ class CommandTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 0,
                             'critical_multiplier' => 0,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -795,6 +797,7 @@ class CommandTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 0,
                             'critical_multiplier' => 0,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -828,6 +831,7 @@ class CommandTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 0,
                             'critical_multiplier' => 0,
+                            'vampire'             => 0,
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
@@ -881,6 +885,7 @@ class CommandTest extends AbstractUnitTest
                         'block_ignore'        => 0,
                         'critical_chance'     => 0,
                         'critical_multiplier' => 0,
+                        'vampire'             => 0,
                     ],
                     'can_be_avoided'   => false,
                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,

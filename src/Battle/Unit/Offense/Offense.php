@@ -8,45 +8,15 @@ use Battle\Unit\Defense\DefenseInterface;
 
 class Offense implements OffenseInterface
 {
-    /**
-     * @var int
-     */
     private int $typeDamage;
-
-    /**
-     * @var int
-     */
     private int $physicalDamage;
-
-    /**
-     * @var float
-     */
     private float $attackSpeed;
-
-    /**
-     * @var int
-     */
     private int $accuracy;
-
-    /**
-     * @var int
-     */
     private int $magicAccuracy;
-
-    /**
-     * @var int
-     */
     private int $blockIgnore;
-
-    /**
-     * @var int
-     */
     private int $criticalChance;
-
-    /**
-     * @var int
-     */
     private int $criticalMultiplier;
+    private int $vampire;
 
     /**
      * @param int $typeDamage
@@ -57,6 +27,7 @@ class Offense implements OffenseInterface
      * @param int $blockIgnore
      * @param int $criticalChance
      * @param int $criticalMultiplier
+     * @param int $vampire
      * @throws OffenseException
      */
     public function __construct(
@@ -67,7 +38,8 @@ class Offense implements OffenseInterface
         int $magicAccuracy,
         int $blockIgnore,
         int $criticalChance,
-        int $criticalMultiplier
+        int $criticalMultiplier,
+        int $vampire
     )
     {
         $this->setTypeDamage($typeDamage);
@@ -78,6 +50,7 @@ class Offense implements OffenseInterface
         $this->setBlockIgnore($blockIgnore);
         $this->setCriticalChance($criticalChance);
         $this->setCriticalMultiplier($criticalMultiplier);
+        $this->setVampire($vampire);
     }
 
     /**
@@ -210,6 +183,29 @@ class Offense implements OffenseInterface
         }
 
         $this->blockIgnore = $blockIgnore;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVampire(): int
+    {
+        return $this->vampire;
+    }
+
+    /**
+     * @param int $vampire
+     * @throws OffenseException
+     */
+    public function setVampire(int $vampire): void
+    {
+        if ($vampire < self::MIN_VAMPIRE || $vampire > self::MAX_VAMPIRE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_VAMPIRE_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+            );
+        }
+
+        $this->vampire = $vampire;
     }
 
     /**

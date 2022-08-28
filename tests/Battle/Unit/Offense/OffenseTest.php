@@ -29,6 +29,7 @@ class OffenseTest extends AbstractUnitTest
         $blockIgnore = 0;
         $criticalChance = 10;
         $criticalMultiplier = 200;
+        $vampire = 5;
 
         $offense = new Offense(
             $typeDamage,
@@ -38,7 +39,8 @@ class OffenseTest extends AbstractUnitTest
             $magicAccuracy,
             $blockIgnore,
             $criticalChance,
-            $criticalMultiplier
+            $criticalMultiplier,
+            $vampire
         );
 
         $defense = new Defense(0, 10, 10, 10, 5, 0);
@@ -52,6 +54,7 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($blockIgnore, $offense->getBlockIgnore());
         self::assertEquals($criticalChance, $offense->getCriticalChance());
         self::assertEquals($criticalMultiplier, $offense->getCriticalMultiplier());
+        self::assertEquals($vampire, $offense->getVampire());
         self::assertEquals(round($physicalDamage * $attackSpeed, 1), $offense->getDPS());
     }
 
@@ -63,7 +66,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseUpdate(): void
     {
-        $offense = new Offense(1, 20, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 20, 1, 100, 50, 0, 5, 200, 7);
         $defense = new Defense(0, 10, 10, 10, 5, 0);
 
         $offense->setPhysicalDamage($physicalDamage = 15);
@@ -87,7 +90,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMinPhysicalDamage(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -103,7 +106,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxPhysicalDamage(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -119,7 +122,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMinAttackSpeed(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -135,7 +138,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxAttackSpeed(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -151,7 +154,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMinAccuracy(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -167,7 +170,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxAccuracy(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -183,7 +186,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMinMagicAccuracy(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -199,7 +202,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxMagicAccuracy(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -215,7 +218,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMinBlockIgnore(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -231,7 +234,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxBlockIgnore(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -249,7 +252,7 @@ class OffenseTest extends AbstractUnitTest
     {
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(OffenseException::INCORRECT_TYPE_DAMAGE_VALUE);
-        new Offense(3, 10, 1, 100, 50, 0, 5, 200);
+        new Offense(3, 10, 1, 100, 50, 0, 5, 200, 7);
     }
 
     /**
@@ -259,7 +262,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMinCriticalChance(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -275,7 +278,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxCriticalChance(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -291,7 +294,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMinCriticalMultiplier(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
@@ -307,13 +310,45 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseSetUltraMaxCriticalMultiplier(): void
     {
-        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
             OffenseException::INCORRECT_CRITICAL_MULTIPLIER_VALUE . OffenseInterface::MIN_CRITICAL_MULTIPLIER . '-' . OffenseInterface::MAX_CRITICAL_MULTIPLIER
         );
         $offense->setCriticalMultiplier(OffenseInterface::MAX_CRITICAL_MULTIPLIER + 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Offense пытаются записать слишком низкое значение вампиризма
+     *
+     * @throws OffenseException
+     */
+    public function testOffenseSetUltraMinVampire(): void
+    {
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
+
+        $this->expectException(OffenseException::class);
+        $this->expectExceptionMessage(
+            OffenseException::INCORRECT_VAMPIRE_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+        );
+        $offense->setVampire(OffenseInterface::MIN_VAMPIRE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Offense пытаются записать слишком высокое значение вампиризма
+     *
+     * @throws OffenseException
+     */
+    public function testOffenseSetUltraMaxVampire(): void
+    {
+        $offense = new Offense(1, 10, 1, 100, 50, 0, 5, 200, 7);
+
+        $this->expectException(OffenseException::class);
+        $this->expectExceptionMessage(
+            OffenseException::INCORRECT_VAMPIRE_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+        );
+        $offense->setVampire(OffenseInterface::MAX_VAMPIRE + 1);
     }
 
     /**
@@ -326,7 +361,7 @@ class OffenseTest extends AbstractUnitTest
      */
     public function testOffenseGetDamage(int $physicalDamage, int $physicalResist, int $exceptedDamage): void
     {
-        $offense = new Offense(1, $physicalDamage, 1, 100, 50, 0, 5, 200);
+        $offense = new Offense(1, $physicalDamage, 1, 100, 50, 0, 5, 200, 7);
         $defense = new Defense($physicalResist, 10, 10, 10, 5, 0);
 
         self::assertEquals($exceptedDamage, $offense->getDamage($defense));

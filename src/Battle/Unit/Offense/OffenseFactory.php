@@ -29,6 +29,7 @@ class OffenseFactory
         self::int($data, 'block_ignore', OffenseException::INCORRECT_BLOCK_IGNORE);
         self::int($data, 'critical_chance', OffenseException::INCORRECT_CRITICAL_CHANCE);
         self::int($data, 'critical_multiplier', OffenseException::INCORRECT_CRITICAL_MULTIPLIER);
+        self::int($data, 'vampire', OffenseException::INCORRECT_VAMPIRE);
 
         self::in(
             $data['type_damage'],
@@ -84,6 +85,13 @@ class OffenseFactory
             OffenseException::INCORRECT_CRITICAL_MULTIPLIER_VALUE . OffenseInterface::MIN_CRITICAL_MULTIPLIER . '-' . OffenseInterface::MAX_CRITICAL_MULTIPLIER
         );
 
+        self::intMinMaxValue(
+            $data['vampire'],
+            OffenseInterface::MIN_VAMPIRE,
+            OffenseInterface::MAX_VAMPIRE,
+            OffenseException::INCORRECT_VAMPIRE_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+        );
+
         return new Offense(
             $data['type_damage'],
             $data['physical_damage'],
@@ -92,7 +100,8 @@ class OffenseFactory
             $data['magic_accuracy'],
             $data['block_ignore'],
             $data['critical_chance'],
-            $data['critical_multiplier']
+            $data['critical_multiplier'],
+            $data['vampire']
         );
     }
 }

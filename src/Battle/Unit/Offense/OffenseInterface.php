@@ -37,6 +37,9 @@ interface OffenseInterface
     public const MIN_CRITICAL_MULTIPLIER = 0;
     public const MAX_CRITICAL_MULTIPLIER = 10000;
 
+    public const MIN_VAMPIRE             = 0;
+    public const MAX_VAMPIRE             = 100;
+
     /**
      * Возвращает тип урона: атака или заклинание
      *
@@ -157,6 +160,21 @@ interface OffenseInterface
      * @throws OffenseException
      */
     public function setCriticalMultiplier(int $criticalMultiplier): void;
+
+    /**
+     * Возвращает значение вампиризма (0-100%) - указывает, какое количество от фактически нанесенного урона будет
+     * своровано в здоровье
+     *
+     * @return int
+     */
+    public function getVampire(): int;
+
+    /**
+     * Устанавливает новое значение вампиризма. Используется в эффектах, изменяющих этот параметр
+     *
+     * @param int $vampire
+     */
+    public function setVampire(int $vampire): void;
 
     /**
      * Возвращает ДПС (средний урон за ход = урон * скорость атаки)

@@ -100,8 +100,25 @@ class StrokeTest extends AbstractUnitTest
             10,
             true,
             1,
-            new Offense(1, 10, 5, 1, 100, 50, 5, 200),
-            new Defense(0, 10, 10, 0, 0, 0),
+            new Offense(
+                1,
+                10,
+                5,
+                1,
+                100,
+                50,
+                5,
+                200,
+            0
+            ),
+            new Defense(
+                0,
+                10,
+                10,
+                0,
+                0,
+                0
+            ),
             $container->getRaceFactory()->create($container->getRaceDataProvider()->get(1)),
             $container
         );
@@ -429,6 +446,7 @@ class StrokeTest extends AbstractUnitTest
                             'block_ignore'        => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
+                            'vampire'             => 0,
                         ],
                         'can_be_avoided'   => false,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,

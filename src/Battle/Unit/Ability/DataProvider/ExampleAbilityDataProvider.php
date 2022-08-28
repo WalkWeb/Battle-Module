@@ -42,6 +42,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'block_ignore'        => 0,
                             'critical_chance'     => 0,
                             'critical_multiplier' => 0,
+                            'vampire'             => 0,
                         ],
                         'can_be_avoided'   => true,
                         'name'             => 'Heavy Strike',
@@ -71,6 +72,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'block_ignore'        => 0,
                             'critical_chance'     => 0,
                             'critical_multiplier' => 0,
+                            'vampire'             => 0,
                         ],
                         'can_be_avoided'   => true,
                         'name'             => 'Hellfire',
@@ -216,6 +218,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                         'block_ignore'        => 0,
                                         'critical_chance'     => 0,
                                         'critical_multiplier' => 0,
+                                        'vampire'             => 0,
                                     ],
                                     'can_be_avoided'   => false,
                                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
@@ -296,6 +299,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                         'block_ignore'        => 0,
                                         'critical_chance'     => 0,
                                         'critical_multiplier' => 0,
+                                        'vampire'             => 0,
                                     ],
                                     'can_be_avoided'   => false,
                                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
@@ -484,6 +488,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'block_ignore'        => 0,
                                 'critical_chance'     => 5,
                                 'critical_multiplier' => 150,
+                                'vampire'             => 0,
                             ],
                             'defense'    => [
                                 'physical_resist' => 0,
@@ -529,6 +534,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'block_ignore'        => 0,
                                 'critical_chance'     => 5,
                                 'critical_multiplier' => 150,
+                                'vampire'             => 0,
                             ],
                             'defense'    => [
                                 'physical_resist' => 0,
@@ -574,6 +580,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'block_ignore'        => 0,
                                 'critical_chance'     => 5,
                                 'critical_multiplier' => 150,
+                                'vampire'             => 0,
                             ],
                             'defense'    => [
                                 'physical_resist' => 0,
@@ -619,6 +626,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'block_ignore'        => 0,
                                 'critical_chance'     => 5,
                                 'critical_multiplier' => 150,
+                                'vampire'             => 0,
                             ],
                             'defense'    => [
                                 'physical_resist' => 0,
