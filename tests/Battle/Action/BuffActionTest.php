@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Action;
 
 use Battle\Action\ActionException;
+use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -38,7 +39,7 @@ class BuffActionTest extends AbstractUnitTest
 
         $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
-        self::assertEquals('skip', $action->getAnimationMethod());
+        self::assertEquals(BuffAction::SKIP_ANIMATION_METHOD, $action->getAnimationMethod());
         self::assertEquals('buff', $action->getMessageMethod());
 
         $multiplier = $power / 100;
@@ -109,7 +110,7 @@ class BuffActionTest extends AbstractUnitTest
 
         $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
-        self::assertEquals('skip', $action->getAnimationMethod());
+        self::assertEquals(ActionInterface::SKIP_ANIMATION_METHOD, $action->getAnimationMethod());
         self::assertEquals('buff', $action->getMessageMethod());
 
         $multiplier = $power / 100;

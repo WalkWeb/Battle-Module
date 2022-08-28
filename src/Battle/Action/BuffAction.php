@@ -11,9 +11,8 @@ use Battle\Unit\UnitInterface;
 
 class BuffAction extends AbstractAction
 {
-    private const HANDLE_METHOD            = 'applyBuffAction';
-    private const DEFAULT_ANIMATION_METHOD = 'skip';
-    private const DEFAULT_MESSAGE_METHOD   = 'buff';
+    private const HANDLE_METHOD          = 'applyBuffAction';
+    private const DEFAULT_MESSAGE_METHOD = 'buff';
 
     /**
      * @var string
@@ -129,7 +128,7 @@ class BuffAction extends AbstractAction
 
     public function getAnimationMethod(): string
     {
-        return self::DEFAULT_ANIMATION_METHOD;
+        return self::SKIP_ANIMATION_METHOD;
     }
 
     public function getMessageMethod(): string
