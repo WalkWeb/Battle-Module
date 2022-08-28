@@ -121,6 +121,12 @@ class DamageAction extends AbstractAction
     }
 
     /**
+     * Вычисляет цель (цели) для нанесения урона
+     *
+     * Наносит им урон
+     *
+     * Если атакующий юнит имеет вампиризм - восстанавливает атакующему здоровье
+     *
      * @throws ActionException
      * @throws UnitException
      */
@@ -138,6 +144,20 @@ class DamageAction extends AbstractAction
 
         foreach ($this->targetUnits as $targetUnit) {
             $targetUnit->applyAction($this);
+        }
+
+        if ($this->offense->getVampire() > 0) {
+            $this->actionUnit->applyAction(new HealAction(
+                $this->container,
+                $this->actionUnit,
+                $this->enemyCommand,
+                $this->alliesCommand,
+                HealAction::TARGET_SELF,
+                (int)($this->factualPower * ($this->offense->getVampire() / 100)),
+                '',
+                HealAction::SKIP_ANIMATION_METHOD,
+                HealAction::SKIP_MESSAGE_METHOD
+            ));
         }
     }
 

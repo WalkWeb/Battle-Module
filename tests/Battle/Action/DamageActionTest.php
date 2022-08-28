@@ -760,6 +760,29 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на вампиризм от удара
+     *
+     * @throws Exception
+     */
+    public function testDamageActionVampire(): void
+    {
+        $unit = UnitFactory::createByTemplate(42);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        // Количество здоровья атакующего до нанесения урона
+        self::assertEquals(50, $unit->getLife());
+
+        $action->handle();
+
+        // Количество здоровья после нанесения урона - восстановилось 25 здоровья
+        self::assertEquals(75, $unit->getLife());
+    }
+
+    /**
      * @return array
      */
     public function criticalDamageDataProvider(): array

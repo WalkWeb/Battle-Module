@@ -1399,7 +1399,40 @@ class UnitFactory
                 'mental_barrier'  => 0,
             ],
         ],
-
+        // Юнит не с полным здоровьем и вампиризмом - для проверки работы вампиризма
+        42 => [
+            'id'         => '91cc27a4-0120-4d6b-9ad2-fca05c8aa3d7',
+            'name'       => 'unit_vampire',
+            'level'      => 1,
+            'avatar'     => '/images/avas/humans/human001.jpg',
+            'life'       => 50,
+            'total_life' => 100,
+            'mana'       => 50,
+            'total_mana' => 50,
+            'melee'      => true,
+            'command'    => 1,
+            'class'      => 1,
+            'race'       => 1,
+            'offense'    => [
+                'type_damage'         => 1,
+                'physical_damage'     => 50,
+                'attack_speed'        => 1,
+                'accuracy'            => 200,
+                'magic_accuracy'      => 100,
+                'block_ignore'        => 0,
+                'critical_chance'     => 0,
+                'critical_multiplier' => 0,
+                'vampire'             => 50,
+            ],
+            'defense'    => [
+                'physical_resist' => 0,
+                'defense'         => 100,
+                'magic_defense'   => 50,
+                'block'           => 0,
+                'magic_block'     => 0,
+                'mental_barrier'  => 0,
+            ],
+        ],
     ];
 
     /**

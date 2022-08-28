@@ -41,8 +41,12 @@ interface ActionInterface
 
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 
+    // TODO Проверить по проекту 'skip' и удалить - пусть во всех местах ссылаются на эти константы
     // Пропуск создания сообщения в чате
     public const SKIP_MESSAGE_METHOD    = 'skip';
+
+    // Пропуск создания анимации
+    public const SKIP_ANIMATION_METHOD  = 'skip';
 
     /**
      * Название метода в классе Unit, который будет обрабатывать данное событие
