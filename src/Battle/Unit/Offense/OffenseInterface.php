@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit\Offense;
 
 use Battle\Unit\Defense\DefenseInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 
 /**
  * Offense – это объект-хранилище атакующих характеристик. По умолчанию подразумеваются атакующие характеристики юнита.
@@ -43,9 +44,18 @@ interface OffenseInterface
     /**
      * Возвращает тип урона: атака или заклинание
      *
+     * TODO Переделать на DamageType и все по цепочке ниже, "type_damage" на "damage_type" и т.д.
+     *
      * @return int
      */
     public function getTypeDamage(): int;
+
+    /**
+     * Возвращает тип оружия
+     *
+     * @return WeaponTypeInterface
+     */
+    public function getWeaponType(): WeaponTypeInterface;
 
     /**
      * Возвращает общий урон (по всем стихиям), с учетом сопротивлений цели

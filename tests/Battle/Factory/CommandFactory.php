@@ -8,6 +8,7 @@ use Battle\Command\Command;
 use Battle\Command\CommandInterface;
 use Battle\Traits\IdTrait;
 use Battle\Unit\UnitCollection;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Battle\Unit\UnitFactory as BaseUnitFactory;
 
@@ -61,6 +62,7 @@ class CommandFactory
             'command'    => 1,
             'offense'    => [
                 'type_damage'         => 1,
+                'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 15,
                 'attack_speed'        => 1.2,
                 'accuracy'            => 200,

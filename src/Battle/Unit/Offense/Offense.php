@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace Battle\Unit\Offense;
 
 use Battle\Unit\Defense\DefenseInterface;
+use Battle\Weapon\Type\WeaponType;
+use Battle\Weapon\Type\WeaponTypeInterface;
+use Exception;
 
 class Offense implements OffenseInterface
 {
     private int $typeDamage;
+    protected WeaponTypeInterface $weaponType;
     private int $physicalDamage;
     private float $attackSpeed;
     private int $accuracy;
@@ -20,6 +24,7 @@ class Offense implements OffenseInterface
 
     /**
      * @param int $typeDamage
+     * @param int $weaponTypeId
      * @param int $physicalDamage
      * @param float $attackSpeed
      * @param int $accuracy
@@ -28,10 +33,11 @@ class Offense implements OffenseInterface
      * @param int $criticalChance
      * @param int $criticalMultiplier
      * @param int $vampire
-     * @throws OffenseException
+     * @throws Exception
      */
     public function __construct(
         int $typeDamage,
+        int $weaponTypeId,
         int $physicalDamage,
         float $attackSpeed,
         int $accuracy,
@@ -43,6 +49,7 @@ class Offense implements OffenseInterface
     )
     {
         $this->setTypeDamage($typeDamage);
+        $this->weaponType = new WeaponType($weaponTypeId);
         $this->setPhysicalDamage($physicalDamage);
         $this->setAttackSpeed($attackSpeed);
         $this->setAccuracy($accuracy);
@@ -59,6 +66,14 @@ class Offense implements OffenseInterface
     public function getTypeDamage(): int
     {
         return $this->typeDamage;
+    }
+
+    /**
+     * @return WeaponTypeInterface
+     */
+    public function getWeaponType(): WeaponTypeInterface
+    {
+        return $this->weaponType;
     }
 
     /**

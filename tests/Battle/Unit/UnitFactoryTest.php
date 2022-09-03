@@ -13,6 +13,7 @@ use Battle\Unit\Race\RaceInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitFactory;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 
@@ -96,6 +97,7 @@ class UnitFactoryTest extends AbstractUnitTest
             'command'    => 1,
             'offense'    => [
                 'type_damage'         => 1,
+                'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 15,
                 'attack_speed'        => 1.2,
                 'accuracy'            => 200,
@@ -143,6 +145,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -179,6 +182,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -214,6 +218,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -250,6 +255,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 2,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -294,6 +300,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -331,6 +338,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -368,6 +376,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -405,6 +414,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -441,6 +451,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -478,6 +489,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -515,6 +527,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -552,6 +565,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -588,6 +602,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -625,6 +640,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -661,6 +677,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -698,6 +715,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -735,6 +753,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -772,6 +791,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -808,6 +828,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -845,6 +866,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -882,6 +904,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -919,6 +942,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -955,6 +979,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -992,6 +1017,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1029,6 +1055,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1066,6 +1093,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1102,6 +1130,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1139,6 +1168,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1176,6 +1206,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1213,6 +1244,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1249,6 +1281,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1286,6 +1319,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1322,6 +1356,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'       => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1359,6 +1394,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 'left',
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1396,6 +1432,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 3,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1486,6 +1523,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1515,6 +1553,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
@@ -1545,6 +1584,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -1582,6 +1622,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -1619,6 +1660,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -1656,6 +1698,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -1692,6 +1735,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -1729,6 +1773,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -1766,6 +1811,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -1803,6 +1849,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -1840,6 +1887,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'command'    => 1,
                     'offense'    => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,

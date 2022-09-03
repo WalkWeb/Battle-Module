@@ -20,6 +20,7 @@ use Battle\Command\CommandFactory;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitException;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\BaseFactory;
@@ -40,6 +41,7 @@ class ActionFactoryTest extends AbstractUnitTest
 
         $offenseData = [
             'type_damage'         => 1,
+            'weapon_type'         => WeaponTypeInterface::SWORD,
             'physical_damage'     => 35,
             'attack_speed'        => 1.2,
             'accuracy'            => 176,
@@ -227,6 +229,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'race'         => 9,
             'offense'      => [
                 'type_damage'         => 1,
+                'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 10,
                 'attack_speed'        => 1,
                 'accuracy'            => 200,
@@ -272,6 +275,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($summonData['race'], $action->getSummonUnit()->getRace()->getId());
 
         self::assertEquals($summonData['offense']['type_damage'], $action->getSummonUnit()->getOffense()->getTypeDamage());
+        self::assertEquals($summonData['offense']['weapon_type'], $action->getSummonUnit()->getOffense()->getWeaponType()->getId());
         self::assertEquals($summonData['offense']['physical_damage'], $action->getSummonUnit()->getOffense()->getPhysicalDamage());
         self::assertEquals($summonData['offense']['attack_speed'], $action->getSummonUnit()->getOffense()->getAttackSpeed());
         self::assertEquals($summonData['offense']['accuracy'], $action->getSummonUnit()->getOffense()->getAccuracy());
@@ -541,6 +545,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'        => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -577,6 +582,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -603,6 +609,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -628,6 +635,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -654,6 +662,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -679,6 +688,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -705,6 +715,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -730,6 +741,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -756,6 +768,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => true,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -782,6 +795,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -807,6 +821,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -833,6 +848,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -858,6 +874,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -884,6 +901,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -910,6 +928,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'        => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -935,6 +954,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -961,6 +981,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -986,6 +1007,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,
@@ -1480,6 +1502,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'icon'           => 123,
                     'offense'        => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
                         'accuracy'            => 200,

@@ -20,6 +20,7 @@ use Battle\Result\Chat\Chat;
 use Battle\Result\Chat\ChatException;
 use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\BaseFactory;
@@ -1019,6 +1020,7 @@ class ChatTest extends AbstractUnitTest
             $typeTarget,
             OffenseFactory::create([
                 'type_damage'         => 1,
+                'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 50,
                 'attack_speed'        => 1,
                 'accuracy'            => 500,
@@ -1059,6 +1061,7 @@ class ChatTest extends AbstractUnitTest
             $typeTarget,
             OffenseFactory::create([
                 'type_damage'         => 1,
+                'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 50,
                 'attack_speed'        => 1,
                 'accuracy'            => 500,
@@ -1099,6 +1102,7 @@ class ChatTest extends AbstractUnitTest
             $typeTarget,
             OffenseFactory::create([
                 'type_damage'         => 1,
+                'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 50,
                 'attack_speed'        => 1,
                 'accuracy'            => 500,

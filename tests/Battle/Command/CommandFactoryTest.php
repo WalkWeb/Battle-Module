@@ -11,6 +11,7 @@ use Battle\Command\CommandFactory;
 use Battle\Unit\Defense\Defense;
 use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\UnitException;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
@@ -119,6 +120,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -152,6 +154,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -197,6 +200,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'race'       => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,

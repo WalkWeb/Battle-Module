@@ -18,6 +18,7 @@ use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
@@ -410,6 +411,7 @@ class EffectActionTest extends AbstractUnitTest
                         'name'             => 'Poison',
                         'offense'          => [
                             'type_damage'         => 2,
+                            'weapon_type'         => WeaponTypeInterface::NONE,
                             'physical_damage'     => 8,
                             'attack_speed'        => 1,
                             'accuracy'            => 500,

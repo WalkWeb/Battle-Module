@@ -6,7 +6,38 @@ namespace Battle\Weapon\Type;
 
 use Battle\Action\ActionCollection;
 use Battle\Command\CommandInterface;
+use Exception;
 
+/**
+ * Каждый тип оружия имеет свои особенности:
+ *
+ * Мечи, Двуручные мечи - бонус к меткости
+ * Топоры, Двуручные топоры - бонус к урону
+ * Дробящее, Двуручное дробящее - шанс оглушить цель на 1 ход при критическом ударе
+ * Кинжалы - накладывает кровотечение на 3 хода на 20% от удара
+ * Копья - бонус к защите
+ * Луки - бонус к скорости атаки
+ * Посохи - бонус к получаемой концентрации
+ * Жезлы - бонус к стихийному урону
+ * Безоружный бой - бонус к получаемой ярости
+ *
+ * Тяжелое оружие, Пики и Арбалеты помимо других бонусов имеют:
+ * 1. Сниженную скорость атаки
+ * 2. Увеличенный урон
+ * 3. Сильно увеличенный множитель критического удара
+ * 4. Игнорируют блок цели
+ *
+ * Помимо этого:
+ * Тяжелые мечи/топоры/булавы бонусы аналогичны не-тяжелым типам
+ * Пики - бонус к защите
+ * Арбалеты - бонус к скорости атаки
+ *
+ * Типы оружия в перспективу:
+ * Когти - бонус к vampire, т.е. имеют встроенное воровство здоровья при ударе
+ * Ритуальные кинжалы - бонус к magic_vampire, т.е. имеют встроенное воровство маны при ударе
+ *
+ * @package Battle\Weapon\Type
+ */
 interface WeaponTypeInterface
 {
     public const NONE                 = 0; // Отсутствие типа оружия, например в уроне от эффекта
@@ -49,6 +80,7 @@ interface WeaponTypeInterface
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
+     * @throws Exception
      */
     public function getActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
 }

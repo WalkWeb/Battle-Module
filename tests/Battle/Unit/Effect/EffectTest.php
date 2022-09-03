@@ -153,6 +153,7 @@ class EffectTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_SELF,
                     'offense'          => [
                         'type_damage'         => 2,
+                        'weapon_type'         => 0,
                         'physical_damage'     => 6,
                         'attack_speed'        => 1,
                         'accuracy'            => 500,
@@ -177,6 +178,7 @@ class EffectTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_SELF,
                     'offense'          => [
                         'type_damage'         => 2,
+                        'weapon_type'         => 0,
                         'physical_damage'     => 6,
                         'attack_speed'        => 1,
                         'accuracy'            => 500,
@@ -201,6 +203,7 @@ class EffectTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_SELF,
                     'offense'          => [
                         'type_damage'         => 2,
+                        'weapon_type'         => 0,
                         'physical_damage'     => 6,
                         'attack_speed'        => 1,
                         'accuracy'            => 500,
@@ -258,6 +261,7 @@ class EffectTest extends AbstractUnitTest
                         'name'             => 'Incineration',
                         'offense'          => [
                             'type_damage'         => 2,
+                            'weapon_type'         => 0,
                             'physical_damage'     => 6,
                             'attack_speed'        => 1,
                             'accuracy'            => 500,

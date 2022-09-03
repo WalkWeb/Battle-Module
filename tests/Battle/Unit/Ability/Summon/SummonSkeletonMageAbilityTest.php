@@ -11,6 +11,7 @@ use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
@@ -64,6 +65,7 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
                         'race'       => 8,
                         'offense'    => [
                             'type_damage'         => 2,
+                            'weapon_type'         => WeaponTypeInterface::STAFF,
                             'physical_damage'     => 13,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,

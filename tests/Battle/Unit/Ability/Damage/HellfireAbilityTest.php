@@ -14,6 +14,7 @@ use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
@@ -57,6 +58,7 @@ class HellfireAbilityTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_ALL_ENEMY,
                     'offense'          => [
                         'type_damage'         => 2,
+                        'weapon_type'         => WeaponTypeInterface::NONE,
                         'physical_damage'     => 30,
                         'attack_speed'        => 1,
                         'accuracy'            => 500,

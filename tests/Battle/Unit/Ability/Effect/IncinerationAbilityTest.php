@@ -14,6 +14,7 @@ use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
@@ -65,6 +66,7 @@ class IncinerationAbilityTest extends AbstractUnitTest
                                 'name'             => $name,
                                 'offense'          => [
                                     'type_damage'         => 2,
+                                    'weapon_type'         => WeaponTypeInterface::NONE,
                                     'physical_damage'     => 6,
                                     'attack_speed'        => 1,
                                     'accuracy'            => 500,

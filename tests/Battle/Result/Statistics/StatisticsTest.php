@@ -10,6 +10,7 @@ use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Battle\Action\DamageAction;
 use Battle\Action\SummonAction;
@@ -494,6 +495,7 @@ class StatisticsTest extends AbstractUnitTest
             DamageAction::TARGET_ALL_ENEMY,
             OffenseFactory::create([
                 'type_damage'         => 1,
+                'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 1000,
                 'attack_speed'        => 1,
                 'accuracy'            => 10000,
@@ -589,6 +591,7 @@ class StatisticsTest extends AbstractUnitTest
                         'name'             => 'Poison',
                         'offense'          => [
                             'type_damage'         => 2,
+                            'weapon_type'         => WeaponTypeInterface::NONE,
                             'physical_damage'     => 8,
                             'attack_speed'        => 1,
                             'accuracy'            => 500,

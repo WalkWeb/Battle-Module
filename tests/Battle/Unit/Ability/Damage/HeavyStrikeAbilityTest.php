@@ -11,6 +11,7 @@ use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
@@ -54,6 +55,7 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
                         'type_damage'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 50,
                         'attack_speed'        => 1,
                         'accuracy'            => 500,

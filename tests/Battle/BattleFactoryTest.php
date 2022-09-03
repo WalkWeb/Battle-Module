@@ -11,6 +11,7 @@ use Battle\Command\CommandFactory;
 use Battle\BattleException;
 use Battle\Container\Container;
 use Battle\Unit\UnitException;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 
@@ -90,6 +91,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -123,6 +125,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 2,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -171,6 +174,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -207,6 +211,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -247,6 +252,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -280,6 +286,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 2,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -316,6 +323,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -356,6 +364,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -389,6 +398,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 2,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -425,6 +435,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'command'    => 2,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -477,6 +488,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,

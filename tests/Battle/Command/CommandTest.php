@@ -9,6 +9,7 @@ use Battle\Action\EffectAction;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Battle\Battle;
 use Battle\Container\Container;
@@ -723,6 +724,7 @@ class CommandTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -757,6 +759,7 @@ class CommandTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -790,6 +793,7 @@ class CommandTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -824,6 +828,7 @@ class CommandTest extends AbstractUnitTest
                         'command'    => 1,
                         'offense'    => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
                             'accuracy'            => 200,
@@ -878,6 +883,7 @@ class CommandTest extends AbstractUnitTest
                     'name'             => 'Poison',
                     'offense'          => [
                         'type_damage'         => 2,
+                        'weapon_type'         => WeaponTypeInterface::NONE,
                         'physical_damage'     => 15,
                         'attack_speed'        => 1,
                         'accuracy'            => 500,

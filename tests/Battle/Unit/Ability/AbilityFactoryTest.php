@@ -14,6 +14,7 @@ use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
@@ -90,6 +91,7 @@ class AbilityFactoryTest extends AbstractUnitTest
                             'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                             'offense'          => [
                                 'type_damage'         => 1,
+                                'weapon_type'         => WeaponTypeInterface::SWORD,
                                 'physical_damage'     => 50,
                                 'attack_speed'        => 1,
                                 'accuracy'            => 500,
@@ -122,6 +124,7 @@ class AbilityFactoryTest extends AbstractUnitTest
                             'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                             'offense'          => [
                                 'type_damage'         => 1,
+                                'weapon_type'         => WeaponTypeInterface::SWORD,
                                 'physical_damage'     => 50,
                                 'attack_speed'        => 1,
                                 'accuracy'            => 500,

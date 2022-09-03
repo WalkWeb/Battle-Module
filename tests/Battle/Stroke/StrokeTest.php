@@ -14,6 +14,7 @@ use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Defense\Defense;
 use Battle\Unit\Offense\Offense;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Battle\Container\Container;
 use Battle\Command\CommandFactory;
@@ -101,6 +102,7 @@ class StrokeTest extends AbstractUnitTest
             true,
             1,
             new Offense(
+                1,
                 1,
                 10,
                 5,
@@ -439,6 +441,7 @@ class StrokeTest extends AbstractUnitTest
                         'name'             => 'Effect Damage',
                         'offense'          => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 1000,
                             'attack_speed'        => 1,
                             'accuracy'            => 1000,

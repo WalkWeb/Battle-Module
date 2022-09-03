@@ -9,6 +9,7 @@ use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 
 /**
  * Пример простого поставщика данных по способностям, когда данные хранятся в самом классе. Сделан для примера - при
@@ -35,6 +36,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                         'offense'          => [
                             'type_damage'         => 1,
+                            'weapon_type'         => WeaponTypeInterface::NONE,
                             'physical_damage'     => 50,
                             'attack_speed'        => 1,
                             'accuracy'            => 500,
@@ -65,6 +67,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'type_target'      => ActionInterface::TARGET_ALL_ENEMY,
                         'offense'          => [
                             'type_damage'         => 2,
+                            'weapon_type'         => WeaponTypeInterface::NONE,
                             'physical_damage'     => 30,
                             'attack_speed'        => 1,
                             'accuracy'            => 500,
@@ -211,6 +214,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'name'             => 'Incineration',
                                     'offense'          => [
                                         'type_damage'         => 2,
+                                        'weapon_type'         => WeaponTypeInterface::NONE,
                                         'physical_damage'     => 6,
                                         'attack_speed'        => 1,
                                         'accuracy'            => 500,
@@ -292,6 +296,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'name'             => 'Poison',
                                     'offense'          => [
                                         'type_damage'         => 2,
+                                        'weapon_type'         => WeaponTypeInterface::NONE,
                                         'physical_damage'     => 8,
                                         'attack_speed'        => 1,
                                         'accuracy'            => 500,
@@ -481,6 +486,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'race'       => 10,
                             'offense'    => [
                                 'type_damage'         => 2,
+                                'weapon_type'         => WeaponTypeInterface::UNARMED,
                                 'physical_damage'     => 17,
                                 'attack_speed'        => 1.1,
                                 'accuracy'            => 200,
@@ -527,6 +533,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'race'       => 9,
                             'offense'    => [
                                 'type_damage'         => 1,
+                                'weapon_type'         => WeaponTypeInterface::UNARMED,
                                 'physical_damage'     => 10,
                                 'attack_speed'        => 1,
                                 'accuracy'            => 200,
@@ -573,6 +580,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'race'       => 8,
                             'offense'    => [
                                 'type_damage'         => 1,
+                                'weapon_type'         => WeaponTypeInterface::SWORD,
                                 'physical_damage'     => 16,
                                 'attack_speed'        => 1,
                                 'accuracy'            => 200,
@@ -619,6 +627,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'race'       => 8,
                             'offense'    => [
                                 'type_damage'         => 2,
+                                'weapon_type'         => WeaponTypeInterface::STAFF,
                                 'physical_damage'     => 13,
                                 'attack_speed'        => 1.2,
                                 'accuracy'            => 200,
