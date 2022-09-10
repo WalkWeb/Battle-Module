@@ -478,7 +478,7 @@ class Unit extends AbstractUnit
     private function getChanceOfHit(ActionInterface $action): int
     {
         // Если атака - используется обычная меткость и защита, если заклинание - магическая меткость и защита
-        if ($action->getActionUnit()->getOffense()->getTypeDamage() === OffenseInterface::TYPE_ATTACK) {
+        if ($action->getActionUnit()->getOffense()->getDamageType() === OffenseInterface::TYPE_ATTACK) {
             $accuracy = $action->getActionUnit()->getOffense()->getAccuracy();
             $defense = $this->defense->getDefense();
         } else {
@@ -510,7 +510,7 @@ class Unit extends AbstractUnit
      */
     private function isBlocked(ActionInterface $action): bool
     {
-        $block = $action->getActionUnit()->getOffense()->getTypeDamage() === OffenseInterface::TYPE_ATTACK ?
+        $block = $action->getActionUnit()->getOffense()->getDamageType() === OffenseInterface::TYPE_ATTACK ?
             $this->getDefense()->getBlock() : $this->getDefense()->getMagicBlock();
 
         if ($block === 0) {

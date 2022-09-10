@@ -39,7 +39,7 @@ class UnitFactory
      *         'class'      => 5,
      *         'race'       => 3,
      *         'offense'    => [
-     *             'type_damage'     => 1,
+     *             'damage_type'     => 1,
      *             'physical_damage' => 35,
      *             'attack_speed'    => 1.2,
      *             'accuracy'        => 176,

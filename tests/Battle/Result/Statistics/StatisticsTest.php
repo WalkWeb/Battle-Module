@@ -494,7 +494,7 @@ class StatisticsTest extends AbstractUnitTest
             $command,
             DamageAction::TARGET_ALL_ENEMY,
             OffenseFactory::create([
-                'type_damage'         => 1,
+                'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 1000,
                 'attack_speed'        => 1,
@@ -590,7 +590,7 @@ class StatisticsTest extends AbstractUnitTest
                         'type_target'      => ActionInterface::TARGET_SELF,
                         'name'             => 'Poison',
                         'offense'          => [
-                            'type_damage'         => 2,
+                            'damage_type'         => 2,
                             'weapon_type'         => WeaponTypeInterface::NONE,
                             'physical_damage'     => 8,
                             'attack_speed'        => 1,

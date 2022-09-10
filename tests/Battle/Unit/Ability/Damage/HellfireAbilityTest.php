@@ -57,7 +57,7 @@ class HellfireAbilityTest extends AbstractUnitTest
                     'type'             => ActionInterface::DAMAGE,
                     'type_target'      => ActionInterface::TARGET_ALL_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 2,
+                        'damage_type'         => 2,
                         'weapon_type'         => WeaponTypeInterface::NONE,
                         'physical_damage'     => 30,
                         'attack_speed'        => 1,

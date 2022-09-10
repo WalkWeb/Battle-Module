@@ -53,7 +53,7 @@ class AbilityTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'    => [
-                        'type_damage'     => 1,
+                        'damage_type'     => 1,
                         'physical_damage' => 36,
                         'attack_speed'    => 1,
                         'accuracy'        => 252,

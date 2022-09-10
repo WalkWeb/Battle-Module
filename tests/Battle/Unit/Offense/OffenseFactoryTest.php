@@ -25,7 +25,7 @@ class OffenseFactoryTest extends AbstractUnitTest
     {
         $offense = $this->getFactory()->create($data);
 
-        self::assertEquals($data['type_damage'], $offense->getTypeDamage());
+        self::assertEquals($data['damage_type'], $offense->getDamageType());
         self::assertEquals($data['weapon_type'], $offense->getWeaponType()->getId());
         self::assertEquals($data['physical_damage'], $offense->getDamage($this->getDefense()));
         self::assertEquals($data['physical_damage'], $offense->getPhysicalDamage());
@@ -59,7 +59,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Скорость атаки int
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -74,7 +74,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Скорость атаки float
                 [
-                    'type_damage'         => 2,
+                    'damage_type'         => 2,
                     'weapon_type'         => 17,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1.3,
@@ -96,9 +96,9 @@ class OffenseFactoryTest extends AbstractUnitTest
     {
         return [
 
-            // type_damage
+            // damage_type
             [
-                // Отсутствует type_damage
+                // Отсутствует damage_type
                 [
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
@@ -110,12 +110,12 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'critical_multiplier' => 200,
                     'vampire'             => 0,
                 ],
-                OffenseException::INCORRECT_TYPE_DAMAGE,
+                OffenseException::INCORRECT_DAMAGE_TYPE,
             ],
             [
-                // type_damage некорректного типа
+                // damage_type некорректного типа
                 [
-                    'type_damage'         => '1',
+                    'damage_type'         => '1',
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -126,12 +126,12 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'critical_multiplier' => 200,
                     'vampire'             => 0,
                 ],
-                OffenseException::INCORRECT_TYPE_DAMAGE,
+                OffenseException::INCORRECT_DAMAGE_TYPE,
             ],
             [
-                // type_damage выходит за пределы допустимых значений (1 или 2)
+                // damage_type выходит за пределы допустимых значений (1 или 2)
                 [
-                    'type_damage'         => 3,
+                    'damage_type'         => 3,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -142,14 +142,14 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'critical_multiplier' => 200,
                     'vampire'             => 0,
                 ],
-                OffenseException::INCORRECT_TYPE_DAMAGE_VALUE,
+                OffenseException::INCORRECT_DAMAGE_TYPE_VALUE,
             ],
 
             // physical_damage
             [
                 // Отсутствует physical_damage
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'attack_speed'        => 1,
                     'accuracy'            => 200,
@@ -164,7 +164,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // physical_damage некорректного типа
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10.5,
                     'attack_speed'        => 1,
@@ -180,7 +180,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // physical_damage меньше минимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => OffenseInterface::MIN_DAMAGE - 1,
                     'attack_speed'        => 1,
@@ -196,7 +196,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // physical_damage больше максимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => OffenseInterface::MAX_DAMAGE + 1,
                     'attack_speed'        => 1,
@@ -214,7 +214,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует attack_speed
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'accuracy'            => 200,
@@ -229,7 +229,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // attack_speed некорректного типа
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => true,
@@ -245,7 +245,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // attack_speed меньше минимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => OffenseInterface::MIN_ATTACK_SPEED - 0.1,
@@ -261,7 +261,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // attack_speed больше максимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => OffenseInterface::MAX_ATTACK_SPEED + 0.1,
@@ -279,7 +279,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует accuracy
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1.3,
@@ -294,7 +294,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // accuracy некорректного типа
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1.3,
@@ -310,7 +310,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // accuracy меньше минимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1.3,
@@ -326,7 +326,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // accuracy больше максимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1.3,
@@ -344,7 +344,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует magic_accuracy
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -359,7 +359,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // magic_accuracy некорректного типа
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -375,7 +375,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // magic_accuracy меньше минимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -391,7 +391,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // magic_accuracy больше максимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -409,7 +409,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует block_ignore
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1.3,
@@ -424,7 +424,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // block_ignore некорректного типа
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1.3,
@@ -440,7 +440,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // block_ignore меньше минимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1.3,
@@ -456,7 +456,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // block_ignore больше максимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1.3,
@@ -474,7 +474,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует critical_chance
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -489,7 +489,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // critical_chance некорректного типа
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -505,7 +505,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // critical_chance меньше минимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -521,7 +521,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // critical_chance больше максимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -539,7 +539,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует critical_multiplier
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -554,7 +554,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // critical_multiplier некорректного типа
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -570,7 +570,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // critical_multiplier меньше минимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -586,7 +586,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // critical_multiplier больше максимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -604,7 +604,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует vampire
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -619,7 +619,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // vampire некорректного типа
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -635,7 +635,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // vampire меньше минимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -651,7 +651,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // vampire больше максимального значения
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
@@ -669,7 +669,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует weapon_type
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,
                     'accuracy'            => 200,
@@ -683,7 +683,7 @@ class OffenseFactoryTest extends AbstractUnitTest
             [
                 // weapon_type некорректного типа
                 [
-                    'type_damage'         => 1,
+                    'damage_type'         => 1,
                     'weapon_type'         => null,
                     'physical_damage'     => 10,
                     'attack_speed'        => 1,

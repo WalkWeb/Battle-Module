@@ -11,7 +11,7 @@ use Exception;
 
 class Offense implements OffenseInterface
 {
-    private int $typeDamage;
+    private int $damageType;
     protected WeaponTypeInterface $weaponType;
     private int $physicalDamage;
     private float $attackSpeed;
@@ -23,7 +23,7 @@ class Offense implements OffenseInterface
     private int $vampire;
 
     /**
-     * @param int $typeDamage
+     * @param int $damageType
      * @param int $weaponTypeId
      * @param int $physicalDamage
      * @param float $attackSpeed
@@ -36,7 +36,7 @@ class Offense implements OffenseInterface
      * @throws Exception
      */
     public function __construct(
-        int $typeDamage,
+        int $damageType,
         int $weaponTypeId,
         int $physicalDamage,
         float $attackSpeed,
@@ -48,7 +48,7 @@ class Offense implements OffenseInterface
         int $vampire
     )
     {
-        $this->setTypeDamage($typeDamage);
+        $this->setDamageType($damageType);
         $this->weaponType = new WeaponType($weaponTypeId);
         $this->setPhysicalDamage($physicalDamage);
         $this->setAttackSpeed($attackSpeed);
@@ -63,9 +63,9 @@ class Offense implements OffenseInterface
     /**
      * @return int
      */
-    public function getTypeDamage(): int
+    public function getDamageType(): int
     {
-        return $this->typeDamage;
+        return $this->damageType;
     }
 
     /**
@@ -283,14 +283,14 @@ class Offense implements OffenseInterface
      * @param int $typeDamage
      * @throws OffenseException
      */
-    private function setTypeDamage(int $typeDamage): void
+    private function setDamageType(int $typeDamage): void
     {
         if ($typeDamage !== self::TYPE_ATTACK && $typeDamage !== self::TYPE_SPELL) {
             throw new OffenseException(
-                OffenseException::INCORRECT_TYPE_DAMAGE_VALUE
+                OffenseException::INCORRECT_DAMAGE_TYPE_VALUE
             );
         }
 
-        $this->typeDamage = $typeDamage;
+        $this->damageType = $typeDamage;
     }
 }

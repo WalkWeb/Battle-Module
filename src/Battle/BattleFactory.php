@@ -32,7 +32,7 @@ class BattleFactory
      *         'class'      => 5,
      *         'race'       => 3,
      *         'offense'    => [
-     *             'type_damage'         => 1,
+     *             'damage_type'         => 1,
      *             'physical_damage'     => 35,
      *             'attack_speed'        => 1.2,
      *             'accuracy'            => 176,
@@ -64,7 +64,7 @@ class BattleFactory
      *         'class'      => 1,
      *         'race'       => 1,
      *         'offense'    => [
-     *             'type_damage'         => 1,
+     *             'damage_type'         => 1,
      *             'physical_damage'     => 28,
      *             'attack_speed'        => 1.1,
      *             'accuracy'            => 212,

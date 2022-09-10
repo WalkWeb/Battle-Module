@@ -64,7 +64,7 @@ class SummonSkeletonAbilityTest extends AbstractUnitTest
                         'class'      => null,
                         'race'       => 8,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 16,
                             'attack_speed'        => 1,

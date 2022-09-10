@@ -8,8 +8,8 @@ use Exception;
 
 class OffenseException extends Exception
 {
-    public const INCORRECT_TYPE_DAMAGE               = 'Incorrect "type_damage", it required and type int';
-    public const INCORRECT_TYPE_DAMAGE_VALUE         = 'Incorrect "type_damage", should be 1 or 2';
+    public const INCORRECT_DAMAGE_TYPE               = 'Incorrect "damage_type", it required and type int';
+    public const INCORRECT_DAMAGE_TYPE_VALUE         = 'Incorrect "damage_type", should be 1 or 2';
     public const INCORRECT_WEAPON_TYPE               = 'Incorrect "weapon_type", it required and type int';
     public const INCORRECT_PHYSICAL_DAMAGE           = 'Incorrect "physical_damage", it required and type int';
     public const INCORRECT_PHYSICAL_DAMAGE_VALUE     = 'Incorrect "physical_damage", should be min-max value: ';

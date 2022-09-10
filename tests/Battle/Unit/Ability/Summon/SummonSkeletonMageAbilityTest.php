@@ -64,7 +64,7 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
                         'class'      => null,
                         'race'       => 8,
                         'offense'    => [
-                            'type_damage'         => 2,
+                            'damage_type'         => 2,
                             'weapon_type'         => WeaponTypeInterface::STAFF,
                             'physical_damage'     => 13,
                             'attack_speed'        => 1.2,

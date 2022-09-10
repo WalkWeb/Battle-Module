@@ -400,7 +400,7 @@ class DamageActionTest extends AbstractUnitTest
     /**
      * Тест на попадание заклинания
      *
-     * Юнит с magic_accuracy=100000 и type_damage=2 бьет по юниту с magic_defense=50
+     * Юнит с magic_accuracy=100000 и damage_type=2 бьет по юниту с magic_defense=50
      *
      * @throws Exception
      */
@@ -425,7 +425,7 @@ class DamageActionTest extends AbstractUnitTest
     /**
      * Тест на уклонение от заклинания
      *
-     * Юнит с magic_accuracy=100 и type_damage=2 бьет по юниту с magic_defense=100000
+     * Юнит с magic_accuracy=100 и damage_type=2 бьет по юниту с magic_defense=100000
      *
      * @throws Exception
      */

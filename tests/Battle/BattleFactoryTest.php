@@ -90,7 +90,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 1,
                         'command'    => 1,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
@@ -124,7 +124,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'command'    => 2,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
@@ -173,7 +173,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'command'    => 1,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
@@ -210,7 +210,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'command'    => 1,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
@@ -251,7 +251,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'command'    => 1,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
@@ -285,7 +285,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 1,
                         'command'    => 2,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
@@ -322,7 +322,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'command'    => 1,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
@@ -363,7 +363,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 8,
                         'command'    => 1,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
@@ -397,7 +397,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 1,
                         'command'    => 2,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
@@ -434,7 +434,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'       => 1,
                         'command'    => 2,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,
@@ -487,7 +487,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'class'      => 1,
                         'race'       => 8,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
                             'attack_speed'        => 1.2,

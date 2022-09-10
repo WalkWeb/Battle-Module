@@ -440,7 +440,7 @@ class StrokeTest extends AbstractUnitTest
                         'type_target'      => ActionInterface::TARGET_SELF,
                         'name'             => 'Effect Damage',
                         'offense'          => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 1000,
                             'attack_speed'        => 1,

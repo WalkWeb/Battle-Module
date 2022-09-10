@@ -65,7 +65,7 @@ class SummonImpAbilityTest extends AbstractUnitTest
                         'class'      => null,
                         'race'       => 9,
                         'offense'    => [
-                            'type_damage'         => 1,
+                            'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::UNARMED,
                             'physical_damage'     => 10,
                             'attack_speed'        => 1,

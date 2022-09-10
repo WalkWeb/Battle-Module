@@ -40,7 +40,7 @@ class ActionFactoryTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
         $offenseData = [
-            'type_damage'         => 1,
+            'damage_type'         => 1,
             'weapon_type'         => WeaponTypeInterface::SWORD,
             'physical_damage'     => 35,
             'attack_speed'        => 1.2,
@@ -228,7 +228,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'class'        => 1,
             'race'         => 9,
             'offense'      => [
-                'type_damage'         => 1,
+                'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 10,
                 'attack_speed'        => 1,
@@ -274,7 +274,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($summonData['class'], $action->getSummonUnit()->getClass()->getId());
         self::assertEquals($summonData['race'], $action->getSummonUnit()->getRace()->getId());
 
-        self::assertEquals($summonData['offense']['type_damage'], $action->getSummonUnit()->getOffense()->getTypeDamage());
+        self::assertEquals($summonData['offense']['damage_type'], $action->getSummonUnit()->getOffense()->getDamageType());
         self::assertEquals($summonData['offense']['weapon_type'], $action->getSummonUnit()->getOffense()->getWeaponType()->getId());
         self::assertEquals($summonData['offense']['physical_damage'], $action->getSummonUnit()->getOffense()->getPhysicalDamage());
         self::assertEquals($summonData['offense']['attack_speed'], $action->getSummonUnit()->getOffense()->getAttackSpeed());
@@ -544,7 +544,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'        => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -581,7 +581,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -608,7 +608,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -634,7 +634,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -661,7 +661,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -687,7 +687,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -714,7 +714,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => new UnitFactory(),
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -740,7 +740,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -767,7 +767,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => true,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -794,7 +794,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -820,7 +820,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -847,7 +847,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -873,7 +873,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -900,7 +900,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -927,7 +927,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'        => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -953,7 +953,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -980,7 +980,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -1006,7 +1006,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
                     'offense'          => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,
@@ -1501,7 +1501,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
                     'icon'           => 123,
                     'offense'        => [
-                        'type_damage'         => 1,
+                        'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
                         'attack_speed'        => 1,

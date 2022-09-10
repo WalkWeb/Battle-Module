@@ -410,7 +410,7 @@ class EffectActionTest extends AbstractUnitTest
                         'type_target'      => ActionInterface::TARGET_SELF,
                         'name'             => 'Poison',
                         'offense'          => [
-                            'type_damage'         => 2,
+                            'damage_type'         => 2,
                             'weapon_type'         => WeaponTypeInterface::NONE,
                             'physical_damage'     => 8,
                             'attack_speed'        => 1,

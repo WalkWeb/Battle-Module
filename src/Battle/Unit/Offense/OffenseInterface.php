@@ -44,11 +44,9 @@ interface OffenseInterface
     /**
      * Возвращает тип урона: атака или заклинание
      *
-     * TODO Переделать на DamageType и все по цепочке ниже, "type_damage" на "damage_type" и т.д.
-     *
      * @return int
      */
-    public function getTypeDamage(): int;
+    public function getDamageType(): int;
 
     /**
      * Возвращает тип оружия

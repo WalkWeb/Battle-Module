@@ -1019,7 +1019,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             $typeTarget,
             OffenseFactory::create([
-                'type_damage'         => 1,
+                'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 50,
                 'attack_speed'        => 1,
@@ -1060,7 +1060,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             $typeTarget,
             OffenseFactory::create([
-                'type_damage'         => 1,
+                'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 50,
                 'attack_speed'        => 1,
@@ -1101,7 +1101,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             $typeTarget,
             OffenseFactory::create([
-                'type_damage'         => 1,
+                'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 50,
                 'attack_speed'        => 1,

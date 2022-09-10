@@ -46,7 +46,7 @@ class OffenseTest extends AbstractUnitTest
 
         $defense = new Defense(0, 10, 10, 10, 5, 0);
 
-        self::assertEquals($typeDamage, $offense->getTypeDamage());
+        self::assertEquals($typeDamage, $offense->getDamageType());
         self::assertEquals($weaponTypeId, $offense->getWeaponType()->getId());
         self::assertEquals($physicalDamage, $offense->getDamage($defense));
         self::assertEquals($physicalDamage, $offense->getPhysicalDamage());
@@ -252,7 +252,7 @@ class OffenseTest extends AbstractUnitTest
     public function testOffenseInvalidTypeDamage(): void
     {
         $this->expectException(OffenseException::class);
-        $this->expectExceptionMessage(OffenseException::INCORRECT_TYPE_DAMAGE_VALUE);
+        $this->expectExceptionMessage(OffenseException::INCORRECT_DAMAGE_TYPE_VALUE);
         new Offense(3, 1, 10, 1, 100, 50, 0, 5, 200, 7);
     }
 

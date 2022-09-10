@@ -152,7 +152,7 @@ class EffectTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_SELF,
                     'offense'          => [
-                        'type_damage'         => 2,
+                        'damage_type'         => 2,
                         'weapon_type'         => 0,
                         'physical_damage'     => 6,
                         'attack_speed'        => 1,
@@ -177,7 +177,7 @@ class EffectTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_SELF,
                     'offense'          => [
-                        'type_damage'         => 2,
+                        'damage_type'         => 2,
                         'weapon_type'         => 0,
                         'physical_damage'     => 6,
                         'attack_speed'        => 1,
@@ -202,7 +202,7 @@ class EffectTest extends AbstractUnitTest
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_SELF,
                     'offense'          => [
-                        'type_damage'         => 2,
+                        'damage_type'         => 2,
                         'weapon_type'         => 0,
                         'physical_damage'     => 6,
                         'attack_speed'        => 1,
@@ -260,7 +260,7 @@ class EffectTest extends AbstractUnitTest
                         'type_target'      => ActionInterface::TARGET_SELF,
                         'name'             => 'Incineration',
                         'offense'          => [
-                            'type_damage'         => 2,
+                            'damage_type'         => 2,
                             'weapon_type'         => 0,
                             'physical_damage'     => 6,
                             'attack_speed'        => 1,
