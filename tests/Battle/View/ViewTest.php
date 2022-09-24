@@ -6,12 +6,14 @@ namespace Tests\Battle\View;
 
 use Battle\Command\CommandFactory;
 use Battle\Container\Container;
+use Battle\Container\ContainerException;
 use Battle\Result\Result;
 use Battle\Translation\Translation;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\View\View;
 use Battle\View\ViewException;
 use Battle\View\ViewFactory;
+use Battle\View\ViewInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
@@ -28,9 +30,6 @@ class ViewTest extends AbstractUnitTest
     {
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
-        $view = (new ViewFactory)->create();
-
-        $html = $view->renderCommandView($leftCommand, $rightCommand);
 
         $expectHtml = <<<EOT
 <div class="row">
@@ -163,7 +162,7 @@ class ViewTest extends AbstractUnitTest
 </div>
 EOT;
 
-        self::assertEquals($expectHtml, $html);
+        self::assertEquals($expectHtml, $this->getView()->renderCommandView($leftCommand, $rightCommand));
     }
 
     /**
@@ -178,9 +177,6 @@ EOT;
 
         $leftCommand = CommandFactory::create([$lifeUnit]);
         $rightCommand = CommandFactory::create([$rightUnit]);
-        $view = (new ViewFactory)->create();
-
-        $html = $view->renderCommandView($leftCommand, $rightCommand);
 
         $expectHtml = <<<EOT
 <div class="row">
@@ -313,7 +309,7 @@ EOT;
 </div>
 EOT;
 
-        self::assertEquals($expectHtml, $html);
+        self::assertEquals($expectHtml, $this->getView()->renderCommandView($leftCommand, $rightCommand));
     }
 
     /**
@@ -338,10 +334,6 @@ EOT;
             self::assertTrue($action->canByUsed());
             $action->handle();
         }
-
-        $view = (new ViewFactory)->create();
-
-        $html = $view->renderCommandView($command, $enemyCommand, true);
 
         $expectHtml = <<<EOT
 <div class="row">
@@ -470,14 +462,14 @@ EOT;
 </div>
 EOT;
 
-        self::assertEquals($expectHtml, $html);
+        self::assertEquals($expectHtml, $this->getView()->renderCommandView($command, $enemyCommand, true));
     }
 
+    /**
+     * @throws ContainerException
+     */
     public function testViewRenderHead(): void
     {
-        $factory = new ViewFactory();
-        $view = $factory->create();
-
         $expectHtml = <<<EOT
 <html lang="ru">
 <head>
@@ -489,7 +481,7 @@ EOT;
 <body>
 EOT;
 
-        self::assertEquals($expectHtml, $view->renderHead());
+        self::assertEquals($expectHtml, $this->getView()->renderHead());
     }
 
     /**
@@ -499,9 +491,6 @@ EOT;
      */
     public function testViewGetUnitsStats(): void
     {
-        $factory = new ViewFactory();
-        $view = $factory->create();
-
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
 
@@ -601,7 +590,7 @@ EOT;
 </div>
 EOT;
 
-        self::assertEquals($expectHtml, $view->getUnitsStats($leftCommand, $rightCommand));
+        self::assertEquals($expectHtml, $this->getView()->getUnitsStats($leftCommand, $rightCommand));
     }
 
     /**
@@ -613,11 +602,10 @@ EOT;
         $rightCommand = TestCommandFactory::createRightCommand();
 
         $result = new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, 1, new Container());
-        $view = (new ViewFactory)->create();
 
         // Из-за вывода статистики, и подсчета времени выполнения в статистике, мы никогда не сможем точно узнать
         // какой код будет выведен. По этому просто проверяем, что рендер прошел без ошибок, и получили строку
-        self::assertIsString($view->renderResult($result));
+        self::assertIsString($this->getView()->renderResult($result));
     }
 
     /**
@@ -641,5 +629,14 @@ EOT;
         $this->expectException(ViewException::class);
         $this->expectExceptionMessage(ViewException::MISSING_TEMPLATE . ': Head Template');
         $view->renderHead();
+    }
+
+    /**
+     * @return ViewInterface
+     * @throws ContainerException
+     */
+    private function getView(): ViewInterface
+    {
+        return (new ViewFactory($this->getContainer()))->create();
     }
 }

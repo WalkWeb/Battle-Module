@@ -74,7 +74,7 @@ class Stroke implements StrokeInterface
      */
     public function handle(): void
     {
-        $view = $this->container->getViewFactory()->create($this->container->getTranslation());
+        $view = $this->container->getViewFactory()->create();
         $this->container->getFullLog()->add($view->getUnitsStats($this->leftCommand, $this->rightCommand));
 
         //--------------------------------------------------------------------------------------------------------------

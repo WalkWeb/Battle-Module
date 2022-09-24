@@ -3,7 +3,6 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Battle\BattleFactory;
-use Battle\View\ViewFactory;
 
 $data = [
     [
@@ -182,7 +181,7 @@ try {
     $battle = BattleFactory::create($data);
     $result = $battle->handle();
 
-    $view = (new ViewFactory())->create($battle->getContainer()->getTranslation());
+    $view = $battle->getContainer()->getViewFactory()->create();
     echo $view->renderHead(); // example layout styles
     echo $view->renderResult($result);
 

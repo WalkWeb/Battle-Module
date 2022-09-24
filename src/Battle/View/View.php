@@ -57,7 +57,7 @@ class View implements ViewInterface
     private string $unitsStatsTemplate;
 
     /**
-     * @param Translation $translation
+     * @param TranslationInterface $translation
      * @param string $templateDir
      * @param string $headTemplate
      * @param string $resultTemplate
@@ -67,7 +67,7 @@ class View implements ViewInterface
      * @param string $unitsStatsTemplate
      */
     public function __construct(
-        Translation $translation,
+        TranslationInterface $translation,
         string $templateDir,
         string $headTemplate,
         string $resultTemplate,

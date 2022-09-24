@@ -4,17 +4,23 @@ declare(strict_types=1);
 
 namespace Battle\View;
 
-use Battle\Translation\Translation;
-use Battle\Translation\TranslationInterface;
+use Battle\Container\ContainerException;
+use Battle\Container\ContainerInterface;
 
 class ViewFactory
 {
+    private ContainerInterface $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
     /**
      * Создает View
      *
      * Фабрика простая, и создана для того, чтобы в Stroke отвязаться от конкретной реализации
      *
-     * @param TranslationInterface|null $translation
      * @param string|null $templateDir
      * @param string|null $headTemplate
      * @param string|null $resultTemplate
@@ -23,9 +29,9 @@ class ViewFactory
      * @param string $unitFullLogTemplate
      * @param string|null $unitsStatsTemplate
      * @return ViewInterface
+     * @throws ContainerException
      */
     public function create(
-        ?TranslationInterface $translation = null,
         string $templateDir = __DIR__ . '/../../../templates/',
         string $headTemplate = 'battle/head.template.php',
         string $resultTemplate = 'battle/result.template.php',
@@ -37,7 +43,7 @@ class ViewFactory
     ): ViewInterface
     {
         return new View(
-            $translation ?? new Translation(),
+            $this->container->getTranslation(),
             $templateDir,
             $headTemplate,
             $resultTemplate,
