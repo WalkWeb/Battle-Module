@@ -27,6 +27,8 @@ class ResurrectionActionTest extends AbstractUnitTest
         $name = 'Resurrection';
         $power = 50;
         $typeTarget = ResurrectionAction::TARGET_DEAD_ALLIES;
+        $icon = 'icon.ong';
+        $messageMethod = 'message_method';
 
         $action = new ResurrectionAction(
             $this->getContainer(),
@@ -35,7 +37,9 @@ class ResurrectionActionTest extends AbstractUnitTest
             $command,
             $typeTarget,
             $power,
-            $name
+            $name,
+            $messageMethod,
+            $icon
         );
 
         self::assertEquals($name, $action->getNameAction());
@@ -43,7 +47,8 @@ class ResurrectionActionTest extends AbstractUnitTest
         self::assertEquals($typeTarget, $action->getTypeTarget());
         self::assertEquals('applyResurrectionAction', $action->getHandleMethod());
         self::assertEquals('resurrected', $action->getAnimationMethod());
-        self::assertEquals('resurrected', $action->getMessageMethod());
+        self::assertEquals($icon, $action->getIcon());
+        self::assertEquals($messageMethod, $action->getMessageMethod());
         self::assertTrue($action->canByUsed());
 
         $factualPower = 123;
@@ -74,7 +79,8 @@ class ResurrectionActionTest extends AbstractUnitTest
             $command,
             $typeTarget,
             $power,
-            $name
+            $name,
+            ResurrectionAction::DEFAULT_MESSAGE_METHOD
         );
 
         self::assertFalse($unit->isAlive());
@@ -108,7 +114,8 @@ class ResurrectionActionTest extends AbstractUnitTest
             $command,
             $typeTarget,
             $power,
-            $name
+            $name,
+            ResurrectionAction::DEFAULT_MESSAGE_METHOD
         );
 
         self::assertTrue($action->canByUsed());
@@ -156,7 +163,9 @@ class ResurrectionActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            $power
+            $power,
+            ResurrectionAction::DEFAULT_NAME,
+            ResurrectionAction::DEFAULT_MESSAGE_METHOD
         );
 
         // Вначале убеждаемся, что юнит мертв
@@ -190,7 +199,9 @@ class ResurrectionActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             ResurrectionAction::TARGET_DEAD_ALLIES,
-            $power
+            $power,
+            ResurrectionAction::DEFAULT_NAME,
+            ResurrectionAction::DEFAULT_MESSAGE_METHOD
         );
     }
 
@@ -214,7 +225,9 @@ class ResurrectionActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            50
+            50,
+            ResurrectionAction::DEFAULT_NAME,
+            ResurrectionAction::DEFAULT_MESSAGE_METHOD
         );
     }
 

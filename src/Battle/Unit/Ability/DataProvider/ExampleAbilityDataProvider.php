@@ -7,6 +7,7 @@ namespace Battle\Unit\Ability\DataProvider;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
+use Battle\Action\ResurrectionAction;
 use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
@@ -459,11 +460,12 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
                     [
-                        'type'        => ActionInterface::RESURRECTION,
-                        'type_target' => ActionInterface::TARGET_DEAD_ALLIES,
-                        'power'       => 30,
-                        'name'        => 'Back to Life',
-                        'icon'        => '/images/icons/ability/053.png',
+                        'type'           => ActionInterface::RESURRECTION,
+                        'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
+                        'power'          => 30,
+                        'name'           => 'Back to Life',
+                        'icon'           => '/images/icons/ability/053.png',
+                        'message_method' => ResurrectionAction::DEFAULT_MESSAGE_METHOD,
                     ],
                 ],
             ],

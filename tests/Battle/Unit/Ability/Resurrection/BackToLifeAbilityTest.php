@@ -223,6 +223,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
                     'power'          => 30,
                     'name'           => $name,
                     'icon'           => $icon,
+                    'message_method' => ResurrectionAction::DEFAULT_MESSAGE_METHOD,
                 ],
             ],
             AbilityInterface::ACTIVATE_RAGE,

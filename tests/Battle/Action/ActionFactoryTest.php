@@ -389,7 +389,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($icon, $action->getIcon());
         self::assertEquals($messageMethod, $action->getMessageMethod());
 
-        // Минимальный вариант данных
+        // Минимальный вариант данных (может отсутствовать только icon)
         $data = [
             'type'           => ActionInterface::RESURRECTION,
             'action_unit'    => $unit,
@@ -397,6 +397,8 @@ class ActionFactoryTest extends AbstractUnitTest
             'allies_command' => $command,
             'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
             'power'          => $power = 50,
+            'name'           => ResurrectionAction::DEFAULT_NAME,
+            'message_method' => $messageMethod = 'message method test',
         ];
 
         $action = $this->getActionFactory()->create($data);
@@ -405,8 +407,9 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_DEAD_ALLIES, $action->getTypeTarget());
         self::assertEquals($power, $action->getPower());
-        self::assertEquals('resurrected', $action->getNameAction());
+        self::assertEquals(ResurrectionAction::DEFAULT_NAME, $action->getNameAction());
         self::assertEquals('', $action->getIcon());
+        self::assertEquals($messageMethod, $action->getMessageMethod());
     }
 
     /**
@@ -1584,7 +1587,19 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_POWER_DATA,
             ],
-            // 49: ResurrectionAction - name некорректного типа
+            // 49: ResurrectionAction - отсутствует name
+            [
+                [
+                    'type'           => ActionInterface::RESURRECTION,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
+                    'power'          => 50,
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            // 50: ResurrectionAction - name некорректного типа
             [
                 [
                     'type'           => ActionInterface::RESURRECTION,
@@ -1597,7 +1612,20 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_NAME_DATA,
             ],
-            // 50: ResurrectionAction - message_method некорректного типа
+            // 51: ResurrectionAction - отсутствует message_method
+            [
+                [
+                    'type'           => ActionInterface::RESURRECTION,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,
+                    'name'           => 'name',
+                    'power'          => 50,
+                ],
+                ActionException::INVALID_MESSAGE_METHOD,
+            ],
+            // 52: ResurrectionAction - message_method некорректного типа
             [
                 [
                     'type'           => ActionInterface::RESURRECTION,
@@ -1611,7 +1639,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_MESSAGE_METHOD,
             ],
-            // 51: DamageAction - некорректный icon
+            // 53: DamageAction - некорректный icon
             [
                 [
                     'type'           => ActionInterface::DAMAGE,
@@ -1642,7 +1670,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_ICON,
             ],
-            // 52: EffectAction - некорректный icon
+            // 54: EffectAction - некорректный icon
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1674,7 +1702,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_ICON,
             ],
-            // 53: EffectAction - некорректный animation_method
+            // 55: EffectAction - некорректный animation_method
             [
                 [
                     'type'             => ActionInterface::EFFECT,
@@ -1707,7 +1735,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_ANIMATION_DATA,
             ],
-            // 54: EffectAction - некорректный message_method
+            // 56: EffectAction - некорректный message_method
             [
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -1740,8 +1768,8 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_MESSAGE_METHOD,
             ],
+            // 57: Некорректный power для HealAction
             [
-                // 55: Некорректный power для HealAction
                 [
                     'type'           => ActionInterface::HEAL,
                     'action_unit'    => $actionUnit,
@@ -1755,7 +1783,7 @@ class ActionFactoryTest extends AbstractUnitTest
 
             // offense для DamageAction. Проверяем наличие параметра и что он массив. Остальная валидация происходит в OffenseFactory
 
-            // 55: Отсутствует offense
+            // 58: Отсутствует offense
             [
                 [
                     'type'             => ActionInterface::DAMAGE,
@@ -1771,8 +1799,8 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_OFFENSE_DATA,
             ],
 
+            // 59: offense некорректного типа
             [
-                // 55: offense некорректного типа
                 [
                     'type'             => ActionInterface::DAMAGE,
                     'action_unit'      => $actionUnit,
@@ -1790,6 +1818,9 @@ class ActionFactoryTest extends AbstractUnitTest
         ];
     }
 
+    /**
+     * @return ActionFactory
+     */
     private function getActionFactory(): ActionFactory
     {
         return $this->getContainer()->getActionFactory();

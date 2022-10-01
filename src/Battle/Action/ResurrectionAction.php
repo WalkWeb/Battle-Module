@@ -16,8 +16,8 @@ class ResurrectionAction extends AbstractAction
 
     private const HANDLE_METHOD          = 'applyResurrectionAction';
 
-    private const DEFAULT_NAME           = 'resurrected';
-    private const DEFAULT_MESSAGE_METHOD = 'resurrected';
+    public const DEFAULT_NAME            = 'resurrected';
+    public const DEFAULT_MESSAGE_METHOD  = 'resurrected';
     private const ANIMATION_METHOD       = 'resurrected';
 
     /**
@@ -38,17 +38,15 @@ class ResurrectionAction extends AbstractAction
     private string $messageMethod;
 
     /**
-     * TODO Убрать null-параметры из конструктора
-     *
      * @param ContainerInterface $container
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @param int $typeTarget
      * @param int $power
-     * @param string|null $name
+     * @param string $name
      * @param string $icon
-     * @param string|null $messageMethod
+     * @param string $messageMethod
      * @throws ActionException
      */
     public function __construct(
@@ -58,16 +56,16 @@ class ResurrectionAction extends AbstractAction
         CommandInterface $alliesCommand,
         int $typeTarget,
         int $power,
-        ?string $name = null,
-        string $icon = '',
-        ?string $messageMethod = null
+        string $name,
+        string $messageMethod,
+        string $icon = ''
     )
     {
         $typeTarget = $this->validateTypeTarget($typeTarget);
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
-        $this->name = $name ?? self::DEFAULT_NAME;
+        $this->name = $name;
         $this->power = $this->validatePower($power);
-        $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
+        $this->messageMethod = $messageMethod;
     }
 
     /**

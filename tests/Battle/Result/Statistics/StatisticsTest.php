@@ -356,7 +356,10 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             ResurrectionAction::TARGET_DEAD_ALLIES,
-            50
+            50,
+            ResurrectionAction::DEFAULT_NAME,
+            '',
+            ResurrectionAction::DEFAULT_MESSAGE_METHOD
         );
 
         self::assertTrue($action->canByUsed());

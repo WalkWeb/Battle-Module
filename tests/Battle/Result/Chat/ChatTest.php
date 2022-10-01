@@ -545,6 +545,7 @@ class ChatTest extends AbstractUnitTest
             BuffAction::TARGET_DEAD_ALLIES,
             50,
             'ExampleActionName',
+            ResurrectionAction::DEFAULT_MESSAGE_METHOD,
             '/images/icons/ability/053.png'
         );
 

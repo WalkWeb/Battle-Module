@@ -335,8 +335,8 @@ class WillToLiveAbilityTest extends AbstractUnitTest
             ResurrectionAction::TARGET_SELF,
             50,
             'Will to live',
-            '/images/icons/ability/429.png',
-            'selfRaceResurrected'
+            'selfRaceResurrected',
+            '/images/icons/ability/429.png'
         ));
 
         return $actionCollection;

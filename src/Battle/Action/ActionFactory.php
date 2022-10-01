@@ -175,8 +175,8 @@ class ActionFactory
         if ($className === ResurrectionAction::class) {
             $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
             $power = self::int($data, 'power', ActionException::INVALID_POWER_DATA);
-            $name = self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA);
-            $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
+            $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
+            $messageMethod = self::string($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
 
             return new ResurrectionAction(
                 $this->container,
@@ -186,8 +186,8 @@ class ActionFactory
                 $typeTarget,
                 $power,
                 $name,
-                $icon,
-                $messageMethod
+                $messageMethod,
+                $icon
             );
         }
 
