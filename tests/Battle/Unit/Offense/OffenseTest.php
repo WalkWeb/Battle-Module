@@ -74,7 +74,10 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($criticalChance, $offense->getCriticalChance());
         self::assertEquals($criticalMultiplier, $offense->getCriticalMultiplier());
         self::assertEquals($vampire, $offense->getVampire());
-        self::assertEquals(round($physicalDamage * $attackSpeed, 1), $offense->getDPS());
+        self::assertEquals(
+            round(($physicalDamage + $fireDamage + $waterDamage + $airDamage + $earthDamage + $lifeDamage + $deathDamage) * $attackSpeed, 1),
+            $offense->getDPS()
+        );
     }
 
     /**

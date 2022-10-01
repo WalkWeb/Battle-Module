@@ -390,7 +390,7 @@ class Offense implements OffenseInterface
      */
     public function getDPS(): float
     {
-        return round($this->physicalDamage * $this->attackSpeed, 1);
+        return round(($this->physicalDamage + $this->fireDamage + $this->waterDamage + $this->airDamage + $this->earthDamage + $this->lifeDamage + $this->deathDamage) * $this->attackSpeed, 1);
     }
 
     /**
