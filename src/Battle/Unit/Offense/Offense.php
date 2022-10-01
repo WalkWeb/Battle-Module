@@ -14,6 +14,12 @@ class Offense implements OffenseInterface
     private int $damageType;
     protected WeaponTypeInterface $weaponType;
     private int $physicalDamage;
+    private int $fireDamage;
+    private int $waterDamage;
+    private int $airDamage;
+    private int $earthDamage;
+    private int $lifeDamage;
+    private int $deathDamage;
     private float $attackSpeed;
     private int $accuracy;
     private int $magicAccuracy;
@@ -26,6 +32,12 @@ class Offense implements OffenseInterface
      * @param int $damageType
      * @param int $weaponTypeId
      * @param int $physicalDamage
+     * @param int $fireDamage
+     * @param int $waterDamage
+     * @param int $airDamage
+     * @param int $earthDamage
+     * @param int $lifeDamage
+     * @param int $deathDamage
      * @param float $attackSpeed
      * @param int $accuracy
      * @param int $magicAccuracy
@@ -39,6 +51,12 @@ class Offense implements OffenseInterface
         int $damageType,
         int $weaponTypeId,
         int $physicalDamage,
+        int $fireDamage,
+        int $waterDamage,
+        int $airDamage,
+        int $earthDamage,
+        int $lifeDamage,
+        int $deathDamage,
         float $attackSpeed,
         int $accuracy,
         int $magicAccuracy,
@@ -51,6 +69,12 @@ class Offense implements OffenseInterface
         $this->setDamageType($damageType);
         $this->weaponType = new WeaponType($weaponTypeId);
         $this->setPhysicalDamage($physicalDamage);
+        $this->setFireDamage($fireDamage);
+        $this->setWaterDamage($waterDamage);
+        $this->setAirDamage($airDamage);
+        $this->setEarthDamage($earthDamage);
+        $this->setLifeDamage($lifeDamage);
+        $this->setDeathDamage($deathDamage);
         $this->setAttackSpeed($attackSpeed);
         $this->setAccuracy($accuracy);
         $this->setMagicAccuracy($magicAccuracy);
@@ -106,6 +130,144 @@ class Offense implements OffenseInterface
         }
 
         $this->physicalDamage = $physicalDamage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFireDamage(): int
+    {
+        return $this->fireDamage;
+    }
+
+    /**
+     * @param int $fireDamage
+     * @throws OffenseException
+     */
+    public function setFireDamage(int $fireDamage): void
+    {
+        if ($fireDamage < self::MIN_DAMAGE || $fireDamage > self::MAX_DAMAGE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_FIRE_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+            );
+        }
+
+        $this->fireDamage = $fireDamage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWaterDamage(): int
+    {
+        return $this->waterDamage;
+    }
+
+    /**
+     * @param int $waterDamage
+     * @throws OffenseException
+     */
+    public function setWaterDamage(int $waterDamage): void
+    {
+        if ($waterDamage < self::MIN_DAMAGE || $waterDamage > self::MAX_DAMAGE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_WATER_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+            );
+        }
+
+        $this->waterDamage = $waterDamage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAirDamage(): int
+    {
+        return $this->airDamage;
+    }
+
+    /**
+     * @param int $airDamage
+     * @throws OffenseException
+     */
+    public function setAirDamage(int $airDamage): void
+    {
+        if ($airDamage < self::MIN_DAMAGE || $airDamage > self::MAX_DAMAGE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_AIR_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+            );
+        }
+
+        $this->airDamage = $airDamage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEarthDamage(): int
+    {
+        return $this->earthDamage;
+    }
+
+    /**
+     * @param int $earthDamage
+     * @throws OffenseException
+     */
+    public function setEarthDamage(int $earthDamage): void
+    {
+        if ($earthDamage < self::MIN_DAMAGE || $earthDamage > self::MAX_DAMAGE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_EARTH_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+            );
+        }
+
+        $this->earthDamage = $earthDamage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLifeDamage(): int
+    {
+        return $this->lifeDamage;
+    }
+
+    /**
+     * @param int $lifeDamage
+     * @throws OffenseException
+     */
+    public function setLifeDamage(int $lifeDamage): void
+    {
+        if ($lifeDamage < self::MIN_DAMAGE || $lifeDamage > self::MAX_DAMAGE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_LIFE_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+            );
+        }
+
+        $this->lifeDamage = $lifeDamage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDeathDamage(): int
+    {
+        return $this->deathDamage;
+    }
+
+    /**
+     * @param int $deathDamage
+     * @throws OffenseException
+     */
+    public function setDeathDamage(int $deathDamage): void
+    {
+        if ($deathDamage < self::MIN_DAMAGE || $deathDamage > self::MAX_DAMAGE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_DEATH_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+            );
+        }
+
+        $this->deathDamage = $deathDamage;
     }
 
     /**

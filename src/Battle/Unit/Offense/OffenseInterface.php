@@ -79,6 +79,96 @@ interface OffenseInterface
     public function setPhysicalDamage(int $physicalDamage): void;
 
     /**
+     * Возвращает урон огнем
+     *
+     * @return int
+     */
+    public function getFireDamage(): int;
+
+    /**
+     * Устанавливает новое значение урона огнем. Применяется в эффектах, изменяющих урон огнем юнита
+     *
+     * @param int $fireDamage
+     * @throws OffenseException
+     */
+    public function setFireDamage(int $fireDamage): void;
+
+    /**
+     * Возвращает урон водой
+     *
+     * @return int
+     */
+    public function getWaterDamage(): int;
+
+    /**
+     * Устанавливает новое значение урона водой. Применяется в эффектах, изменяющих урон водой юнита
+     *
+     * @param int $waterDamage
+     * @throws OffenseException
+     */
+    public function setWaterDamage(int $waterDamage): void;
+
+    /**
+     * Возвращает урон воздухом
+     *
+     * @return int
+     */
+    public function getAirDamage(): int;
+
+    /**
+     * Устанавливает новое значение урона воздухом. Применяется в эффектах, изменяющих урон воздухом юнита
+     *
+     * @param int $airDamage
+     * @throws OffenseException
+     */
+    public function setAirDamage(int $airDamage): void;
+
+    /**
+     * Возвращает урон землей
+     *
+     * @return int
+     */
+    public function getEarthDamage(): int;
+
+    /**
+     * Устанавливает новое значение урона землей. Применяется в эффектах, изменяющих урон землей юнита
+     *
+     * @param int $earthDamage
+     * @throws OffenseException
+     */
+    public function setEarthDamage(int $earthDamage): void;
+
+    /**
+     * Возвращает урон магией жизни
+     *
+     * @return int
+     */
+    public function getLifeDamage(): int;
+
+    /**
+     * Устанавливает новое значение урона магией жизни. Применяется в эффектах, изменяющих урон магией жизни юнита
+     *
+     * @param int $lifeDamage
+     * @throws OffenseException
+     */
+    public function setLifeDamage(int $lifeDamage): void;
+
+    /**
+     * Возвращает урон магией смерти
+     *
+     * @return int
+     */
+    public function getDeathDamage(): int;
+
+    /**
+     * Устанавливает новое значение урона магией смерти. Применяется в эффектах, изменяющих урон магией смерти юнита
+     *
+     * @param int $deathDamage
+     * @throws OffenseException
+     */
+    public function setDeathDamage(int $deathDamage): void;
+
+    /**
      * Возвращает скорость атаки
      *
      * @return float

@@ -24,6 +24,12 @@ class OffenseFactory
         self::int($data, 'damage_type', OffenseException::INCORRECT_DAMAGE_TYPE);
         self::int($data, 'weapon_type', OffenseException::INCORRECT_WEAPON_TYPE);
         self::int($data, 'physical_damage', OffenseException::INCORRECT_PHYSICAL_DAMAGE);
+        self::int($data, 'fire_damage', OffenseException::INCORRECT_FIRE_DAMAGE);
+        self::int($data, 'water_damage', OffenseException::INCORRECT_WATER_DAMAGE);
+        self::int($data, 'air_damage', OffenseException::INCORRECT_AIR_DAMAGE);
+        self::int($data, 'earth_damage', OffenseException::INCORRECT_EARTH_DAMAGE);
+        self::int($data, 'life_damage', OffenseException::INCORRECT_LIFE_DAMAGE);
+        self::int($data, 'death_damage', OffenseException::INCORRECT_DEATH_DAMAGE);
         self::intOrFloat($data, 'attack_speed', OffenseException::INCORRECT_ATTACK_SPEED);
         self::int($data, 'accuracy', OffenseException::INCORRECT_ACCURACY);
         self::int($data, 'magic_accuracy', OffenseException::INCORRECT_MAGIC_ACCURACY);
@@ -43,6 +49,48 @@ class OffenseFactory
             OffenseInterface::MIN_DAMAGE,
             OffenseInterface::MAX_DAMAGE,
             OffenseException::INCORRECT_PHYSICAL_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+        );
+
+        self::intMinMaxValue(
+            $data['fire_damage'],
+            OffenseInterface::MIN_DAMAGE,
+            OffenseInterface::MAX_DAMAGE,
+            OffenseException::INCORRECT_FIRE_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+        );
+
+        self::intMinMaxValue(
+            $data['water_damage'],
+            OffenseInterface::MIN_DAMAGE,
+            OffenseInterface::MAX_DAMAGE,
+            OffenseException::INCORRECT_WATER_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+        );
+
+        self::intMinMaxValue(
+            $data['air_damage'],
+            OffenseInterface::MIN_DAMAGE,
+            OffenseInterface::MAX_DAMAGE,
+            OffenseException::INCORRECT_AIR_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+        );
+
+        self::intMinMaxValue(
+            $data['earth_damage'],
+            OffenseInterface::MIN_DAMAGE,
+            OffenseInterface::MAX_DAMAGE,
+            OffenseException::INCORRECT_EARTH_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+        );
+
+        self::intMinMaxValue(
+            $data['life_damage'],
+            OffenseInterface::MIN_DAMAGE,
+            OffenseInterface::MAX_DAMAGE,
+            OffenseException::INCORRECT_LIFE_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
+        );
+
+        self::intMinMaxValue(
+            $data['death_damage'],
+            OffenseInterface::MIN_DAMAGE,
+            OffenseInterface::MAX_DAMAGE,
+            OffenseException::INCORRECT_DEATH_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
         );
 
         if ($data['attack_speed'] < OffenseInterface::MIN_ATTACK_SPEED || $data['attack_speed'] > OffenseInterface::MAX_ATTACK_SPEED) {
@@ -97,6 +145,12 @@ class OffenseFactory
             $data['damage_type'],
             $data['weapon_type'],
             $data['physical_damage'],
+            $data['fire_damage'],
+            $data['water_damage'],
+            $data['air_damage'],
+            $data['earth_damage'],
+            $data['life_damage'],
+            $data['death_damage'],
             $data['attack_speed'],
             $data['accuracy'],
             $data['magic_accuracy'],
