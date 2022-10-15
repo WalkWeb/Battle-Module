@@ -43,8 +43,19 @@ class UnitFactoryTest extends AbstractUnitTest
         self::assertEquals($class, $unit->getClass());
         self::assertEquals($race, $unit->getRace());
 
-        self::assertEquals($data['offense']['physical_damage'], $unit->getOffense()->getDamage($this->getDefense()));
+        self::assertEquals(
+            $data['offense']['physical_damage'] + $data['offense']['fire_damage'] + $data['offense']['water_damage'] + $data['offense']['air_damage'] + $data['offense']['earth_damage'] + $data['offense']['life_damage'] + $data['offense']['death_damage'],
+            $unit->getOffense()->getDamage($this->getDefense())
+        );
+
         self::assertEquals($data['offense']['physical_damage'], $unit->getOffense()->getPhysicalDamage());
+        self::assertEquals($data['offense']['fire_damage'], $unit->getOffense()->getFireDamage());
+        self::assertEquals($data['offense']['water_damage'], $unit->getOffense()->getWaterDamage());
+        self::assertEquals($data['offense']['air_damage'], $unit->getOffense()->getAirDamage());
+        self::assertEquals($data['offense']['earth_damage'], $unit->getOffense()->getEarthDamage());
+        self::assertEquals($data['offense']['life_damage'], $unit->getOffense()->getLifeDamage());
+        self::assertEquals($data['offense']['death_damage'], $unit->getOffense()->getDeathDamage());
+
         self::assertEquals($data['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
         self::assertEquals($data['offense']['accuracy'], $unit->getOffense()->getAccuracy());
         self::assertEquals($data['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());
@@ -53,6 +64,13 @@ class UnitFactoryTest extends AbstractUnitTest
         self::assertEquals($data['offense']['vampire'], $unit->getOffense()->getVampire());
 
         self::assertEquals($data['defense']['physical_resist'], $unit->getDefense()->getPhysicalResist());
+        self::assertEquals($data['defense']['fire_resist'], $unit->getDefense()->getFireResist());
+        self::assertEquals($data['defense']['water_resist'], $unit->getDefense()->getWaterResist());
+        self::assertEquals($data['defense']['air_resist'], $unit->getDefense()->getAirResist());
+        self::assertEquals($data['defense']['earth_resist'], $unit->getDefense()->getEarthResist());
+        self::assertEquals($data['defense']['life_resist'], $unit->getDefense()->getLifeResist());
+        self::assertEquals($data['defense']['death_resist'], $unit->getDefense()->getDeathResist());
+
         self::assertEquals($data['defense']['defense'], $unit->getDefense()->getDefense());
         self::assertEquals($data['defense']['magic_defense'], $unit->getDefense()->getMagicDefense());
         self::assertEquals($data['defense']['block'], $unit->getDefense()->getBlock());
@@ -159,12 +177,12 @@ class UnitFactoryTest extends AbstractUnitTest
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
-                        'fire_damage'         => 0,
-                        'water_damage'        => 0,
-                        'air_damage'          => 0,
-                        'earth_damage'        => 0,
-                        'life_damage'         => 0,
-                        'death_damage'        => 0,
+                        'fire_damage'         => 18,
+                        'water_damage'        => 19,
+                        'air_damage'          => 20,
+                        'earth_damage'        => 21,
+                        'life_damage'         => 22,
+                        'death_damage'        => 23,
                         'attack_speed'        => 1.2,
                         'accuracy'            => 200,
                         'magic_accuracy'      => 100,

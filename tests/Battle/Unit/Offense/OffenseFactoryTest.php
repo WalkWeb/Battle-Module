@@ -25,10 +25,14 @@ class OffenseFactoryTest extends AbstractUnitTest
     {
         $offense = $this->getFactory()->create($data);
 
+        // Так как сопротивления нулевые - итоговый урон будет суммой всех типов урона
+        self::assertEquals(
+            $data['physical_damage'] + $data['fire_damage'] + $data['water_damage'] + $data['air_damage'] + $data['earth_damage'] + $data['life_damage'] + $data['death_damage'],
+            $offense->getDamage($this->getDefense())
+        );
+
         self::assertEquals($data['damage_type'], $offense->getDamageType());
         self::assertEquals($data['weapon_type'], $offense->getWeaponType()->getId());
-        self::assertEquals($data['physical_damage'], $offense->getDamage($this->getDefense()));
-
         self::assertEquals($data['physical_damage'], $offense->getPhysicalDamage());
         self::assertEquals($data['fire_damage'], $offense->getFireDamage());
         self::assertEquals($data['water_damage'], $offense->getWaterDamage());
@@ -106,7 +110,27 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'vampire'             => 100,
                 ],
             ],
-            // todo fire_damage/water_damage/air_damage/earth_damage/life_damage/death_damage
+            [
+                // урон со всех стихий
+                [
+                    'damage_type'         => 2,
+                    'weapon_type'         => 17,
+                    'physical_damage'     => 110,
+                    'fire_damage'         => 120,
+                    'water_damage'        => 130,
+                    'air_damage'          => 140,
+                    'earth_damage'        => 150,
+                    'life_damage'         => 160,
+                    'death_damage'        => 170,
+                    'attack_speed'        => 1,
+                    'accuracy'            => 200,
+                    'magic_accuracy'      => 100,
+                    'block_ignore'        => 0,
+                    'critical_chance'     => 100,
+                    'critical_multiplier' => 150,
+                    'vampire'             => 100,
+                ],
+            ],
         ];
     }
 
