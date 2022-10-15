@@ -138,6 +138,12 @@ class CommandFactoryTest extends AbstractUnitTest
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
+                            'fire_resist'     => 0,
+                            'water_resist'    => 0,
+                            'air_resist'      => 0,
+                            'earth_resist'    => 0,
+                            'life_resist'     => 0,
+                            'death_resist'    => 0,
                             'defense'         => 100,
                             'magic_defense'   => 50,
                             'block'           => 0,
@@ -178,6 +184,12 @@ class CommandFactoryTest extends AbstractUnitTest
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
+                            'fire_resist'     => 0,
+                            'water_resist'    => 0,
+                            'air_resist'      => 0,
+                            'earth_resist'    => 0,
+                            'life_resist'     => 0,
+                            'death_resist'    => 0,
                             'defense'         => 100,
                             'magic_defense'   => 50,
                             'block'           => 0,
@@ -230,6 +242,12 @@ class CommandFactoryTest extends AbstractUnitTest
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
+                            'fire_resist'     => 0,
+                            'water_resist'    => 0,
+                            'air_resist'      => 0,
+                            'earth_resist'    => 0,
+                            'life_resist'     => 0,
+                            'death_resist'    => 0,
                             'defense'         => 100,
                             'magic_defense'   => 50,
                             'block'           => 0,
@@ -256,6 +274,6 @@ class CommandFactoryTest extends AbstractUnitTest
      */
     private function getDefense(): DefenseInterface
     {
-        return new Defense(0, 10, 10, 10, 5, 0);
+        return new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0);
     }
 }

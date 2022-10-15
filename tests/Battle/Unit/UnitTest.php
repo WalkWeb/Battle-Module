@@ -557,6 +557,6 @@ class UnitTest extends AbstractUnitTest
      */
     private function getDefense(): DefenseInterface
     {
-        return new Defense(0, 10, 10, 10, 5, 0);
+        return new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0);
     }
 }

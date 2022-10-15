@@ -121,6 +121,12 @@ class StrokeTest extends AbstractUnitTest
             ),
             new Defense(
                 0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
                 10,
                 10,
                 0,

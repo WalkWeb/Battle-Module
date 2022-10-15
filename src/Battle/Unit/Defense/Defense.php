@@ -14,6 +14,36 @@ class Defense implements DefenseInterface
     /**
      * @var int
      */
+    private int $fireResist;
+
+    /**
+     * @var int
+     */
+    private int $waterResist;
+
+    /**
+     * @var int
+     */
+    private int $airResist;
+
+    /**
+     * @var int
+     */
+    private int $earthResist;
+
+    /**
+     * @var int
+     */
+    private int $lifeResist;
+
+    /**
+     * @var int
+     */
+    private int $deathResist;
+
+    /**
+     * @var int
+     */
     private int $defense;
 
     /**
@@ -38,6 +68,12 @@ class Defense implements DefenseInterface
 
     /**
      * @param int $physicalResist
+     * @param int $fireResist
+     * @param int $waterResist
+     * @param int $airResist
+     * @param int $earthResist
+     * @param int $lifeResist
+     * @param int $deathResist
      * @param int $defense
      * @param int $magicDefense
      * @param int $block
@@ -45,9 +81,28 @@ class Defense implements DefenseInterface
      * @param int $mentalBarrier
      * @throws DefenseException
      */
-    public function __construct(int $physicalResist, int $defense, int $magicDefense, int $block, int $magicBlock, int $mentalBarrier)
+    public function __construct(
+        int $physicalResist,
+        int $fireResist,
+        int $waterResist,
+        int $airResist,
+        int $earthResist,
+        int $lifeResist,
+        int $deathResist,
+        int $defense,
+        int $magicDefense,
+        int $block,
+        int $magicBlock,
+        int $mentalBarrier
+    )
     {
         $this->setPhysicalResist($physicalResist);
+        $this->setFireResist($fireResist);
+        $this->setWaterResist($waterResist);
+        $this->setAirResist($airResist);
+        $this->setEarthResist($earthResist);
+        $this->setLifeResist($lifeResist);
+        $this->setDeathResist($deathResist);
         $this->setDefense($defense);
         $this->setMagicDefense($magicDefense);
         $this->setBlock($block);
@@ -76,6 +131,144 @@ class Defense implements DefenseInterface
         }
 
         $this->physicalResist = $physicalResist;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFireResist(): int
+    {
+        return $this->fireResist;
+    }
+
+    /**
+     * @param int $fireResist
+     * @throws DefenseException
+     */
+    public function setFireResist(int $fireResist): void
+    {
+        if ($fireResist < self::MIN_RESISTANCE || $fireResist > self::MAX_RESISTANCE) {
+            throw new DefenseException(
+                DefenseException::INCORRECT_FIRE_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+            );
+        }
+
+        $this->fireResist = $fireResist;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWaterResist(): int
+    {
+        return $this->waterResist;
+    }
+
+    /**
+     * @param int $waterResist
+     * @throws DefenseException
+     */
+    public function setWaterResist(int $waterResist): void
+    {
+        if ($waterResist < self::MIN_RESISTANCE || $waterResist > self::MAX_RESISTANCE) {
+            throw new DefenseException(
+                DefenseException::INCORRECT_WATER_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+            );
+        }
+
+        $this->waterResist = $waterResist;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAirResist(): int
+    {
+        return $this->airResist;
+    }
+
+    /**
+     * @param int $airResist
+     * @throws DefenseException
+     */
+    public function setAirResist(int $airResist): void
+    {
+        if ($airResist < self::MIN_RESISTANCE || $airResist > self::MAX_RESISTANCE) {
+            throw new DefenseException(
+                DefenseException::INCORRECT_AIR_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+            );
+        }
+
+        $this->airResist = $airResist;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEarthResist(): int
+    {
+        return $this->earthResist;
+    }
+
+    /**
+     * @param int $earthResist
+     * @throws DefenseException
+     */
+    public function setEarthResist(int $earthResist): void
+    {
+        if ($earthResist < self::MIN_RESISTANCE || $earthResist > self::MAX_RESISTANCE) {
+            throw new DefenseException(
+                DefenseException::INCORRECT_EARTH_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+            );
+        }
+
+        $this->earthResist = $earthResist;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLifeResist(): int
+    {
+        return $this->lifeResist;
+    }
+
+    /**
+     * @param int $lifeResist
+     * @throws DefenseException
+     */
+    public function setLifeResist(int $lifeResist): void
+    {
+        if ($lifeResist < self::MIN_RESISTANCE || $lifeResist > self::MAX_RESISTANCE) {
+            throw new DefenseException(
+                DefenseException::INCORRECT_LIFE_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+            );
+        }
+
+        $this->lifeResist = $lifeResist;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDeathResist(): int
+    {
+        return $this->deathResist;
+    }
+
+    /**
+     * @param int $deathResist
+     * @throws DefenseException
+     */
+    public function setDeathResist(int $deathResist): void
+    {
+        if ($deathResist < self::MIN_RESISTANCE || $deathResist > self::MAX_RESISTANCE) {
+            throw new DefenseException(
+                DefenseException::INCORRECT_DEATH_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+            );
+        }
+
+        $this->deathResist = $deathResist;
     }
 
     /**

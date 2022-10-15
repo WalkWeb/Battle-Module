@@ -24,6 +24,12 @@ class DefenseFactoryTest extends AbstractUnitTest
         $defense = $this->getFactory()->create($data);
 
         self::assertEquals($data['physical_resist'], $defense->getPhysicalResist());
+        self::assertEquals($data['fire_resist'], $defense->getFireResist());
+        self::assertEquals($data['water_resist'], $defense->getWaterResist());
+        self::assertEquals($data['air_resist'], $defense->getAirResist());
+        self::assertEquals($data['earth_resist'], $defense->getEarthResist());
+        self::assertEquals($data['life_resist'], $defense->getLifeResist());
+        self::assertEquals($data['death_resist'], $defense->getDeathResist());
         self::assertEquals($data['defense'], $defense->getDefense());
         self::assertEquals($data['magic_defense'], $defense->getMagicDefense());
         self::assertEquals($data['block'], $defense->getBlock());
@@ -54,6 +60,12 @@ class DefenseFactoryTest extends AbstractUnitTest
             [
                 [
                     'physical_resist' => -100,
+                    'fire_resist'     => -90,
+                    'water_resist'    => -80,
+                    'air_resist'      => -70,
+                    'earth_resist'    => -60,
+                    'life_resist'     => -50,
+                    'death_resist'    => -40,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => 0,
@@ -64,10 +76,16 @@ class DefenseFactoryTest extends AbstractUnitTest
             [
                 [
                     'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 654,
                     'magic_defense'   => 150,
                     'block'           => 34,
-                    'magic_block'     => 25,
+                    'magic_block'     => 24,
                     'mental_barrier'  => 100,
                 ],
             ],
@@ -85,11 +103,17 @@ class DefenseFactoryTest extends AbstractUnitTest
             [
                 // Отсутствует physical_resist
                 [
-                    'defense'         => 654,
-                    'magic_defense'   => 150,
-                    'block'           => 34,
-                    'magic_block'     => 25,
-                    'mental_barrier'  => 100,
+                    'fire_resist'    => 5,
+                    'water_resist'   => 10,
+                    'air_resist'     => 15,
+                    'earth_resist'   => 20,
+                    'life_resist'    => 25,
+                    'death_resist'   => 30,
+                    'defense'        => 654,
+                    'magic_defense'  => 150,
+                    'block'          => 34,
+                    'magic_block'    => 25,
+                    'mental_barrier' => 100,
                 ],
                 DefenseException::INCORRECT_PHYSICAL_RESIST,
             ],
@@ -97,6 +121,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // physical_resist некорректного типа
                 [
                     'physical_resist' => [30],
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 654,
                     'magic_defense'   => 150,
                     'block'           => 34,
@@ -109,6 +139,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // physical_resist меньше минимального значения
                 [
                     'physical_resist' => DefenseInterface::MIN_RESISTANCE - 1,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 654,
                     'magic_defense'   => 150,
                     'block'           => 34,
@@ -121,6 +157,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // physical_resist больше максимального значения
                 [
                     'physical_resist' => DefenseInterface::MAX_RESISTANCE + 1,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 654,
                     'magic_defense'   => 150,
                     'block'           => 34,
@@ -130,11 +172,455 @@ class DefenseFactoryTest extends AbstractUnitTest
                 DefenseException::INCORRECT_PHYSICAL_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
             ],
 
+            // fire_resist
+            [
+                // Отсутствует fire_resist
+                [
+                    'physical_resist' => 0,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_FIRE_RESIST,
+            ],
+            [
+                // fire_resist некорректного типа
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => '5',
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_FIRE_RESIST,
+            ],
+            [
+                // fire_resist меньше минимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => DefenseInterface::MIN_RESISTANCE - 1,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_FIRE_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+            [
+                // fire_resist больше максимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => DefenseInterface::MAX_RESISTANCE + 1,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_FIRE_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+
+            // water_resist
+            [
+                // Отсутствует water_resist
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_WATER_RESIST,
+            ],
+            [
+                // water_resist некорректного типа
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => null,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_WATER_RESIST,
+            ],
+            [
+                // water_resist меньше минимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => DefenseInterface::MIN_RESISTANCE - 1,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_WATER_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+            [
+                // water_resist больше максимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => DefenseInterface::MAX_RESISTANCE + 1,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_WATER_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+
+            // air_resist
+            [
+                // Отсутствует air_resist
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_AIR_RESIST,
+            ],
+            [
+                // air_resist некорректного типа
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 0.0,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_AIR_RESIST,
+            ],
+            [
+                // air_resist меньше минимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => DefenseInterface::MIN_RESISTANCE - 1,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_AIR_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+            [
+                // air_resist больше максимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => DefenseInterface::MAX_RESISTANCE + 1,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_AIR_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+
+            // earth_resist
+            [
+                // Отсутствует earth_resist
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_EARTH_RESIST,
+            ],
+            [
+                // earth_resist некорректного типа
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => true,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_EARTH_RESIST,
+            ],
+            [
+                // earth_resist меньше минимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => DefenseInterface::MIN_RESISTANCE - 1,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_EARTH_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+            [
+                // earth_resist больше максимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => DefenseInterface::MAX_RESISTANCE + 1,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_EARTH_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+
+            // life_resist
+            [
+                // Отсутствует life_resist
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_LIFE_RESIST,
+            ],
+            [
+                // life_resist некорректного типа
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => [25],
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_LIFE_RESIST,
+            ],
+            [
+                // life_resist меньше минимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => DefenseInterface::MIN_RESISTANCE - 1,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_LIFE_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+            [
+                // life_resist больше максимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => DefenseInterface::MAX_RESISTANCE + 1,
+                    'death_resist'    => 30,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_LIFE_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+
+            // death_resist
+            [
+                // Отсутствует death_resist
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_DEATH_RESIST,
+            ],
+            [
+                // death_resist некорректного типа
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => '30',
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_DEATH_RESIST,
+            ],
+            [
+                // death_resist меньше минимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => DefenseInterface::MIN_RESISTANCE - 1,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_DEATH_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+            [
+                // death_resist больше максимального значения
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => DefenseInterface::MAX_RESISTANCE + 1,
+                    'defense'         => 654,
+                    'magic_defense'   => 150,
+                    'block'           => 34,
+                    'magic_block'     => 25,
+                    'mental_barrier'  => 100,
+                ],
+                DefenseException::INCORRECT_DEATH_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE,
+            ],
+
             // defense
             [
                 // Отсутствует defense
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'block'           => 0,
                     'magic_block'     => 25,
                     'magic_defense'   => 50,
@@ -146,6 +632,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // defense некорректного типа
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => '100',
                     'magic_defense'   => 50,
                     'block'           => 0,
@@ -158,6 +650,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // defense меньше минимального значения
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => DefenseInterface::MIN_DEFENSE - 1,
                     'magic_defense'   => 50,
                     'block'           => 0,
@@ -170,6 +668,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // defense больше максимального значения
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => DefenseInterface::MAX_DEFENSE + 1,
                     'magic_defense'   => 50,
                     'block'           => 0,
@@ -184,6 +688,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // Отсутствует magic_defense
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'block'           => 0,
                     'magic_block'     => 25,
@@ -195,6 +705,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // magic_defense некорректного типа
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => true,
                     'block'           => 0,
@@ -207,6 +723,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // magic_defense меньше минимального значения
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => DefenseInterface::MIN_MAGIC_DEFENSE - 1,
                     'block'           => 0,
@@ -219,6 +741,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // magic_defense больше максимального значения
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => DefenseInterface::MAX_MAGIC_DEFENSE + 1,
                     'block'           => 0,
@@ -233,6 +761,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // Отсутствует block
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'magic_block'     => 25,
@@ -244,6 +778,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // block некорректного типа
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => 50.5,
@@ -256,6 +796,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // block меньше минимального значения
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => DefenseInterface::MIN_BLOCK - 1,
@@ -268,6 +814,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // block больше максимального значения
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => DefenseInterface::MAX_BLOCK + 1,
@@ -282,6 +834,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // Отсутствует magic_block
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => 0,
@@ -293,6 +851,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // magic_block некорректного типа
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => 0,
@@ -305,6 +869,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // magic_block меньше минимального значения
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => 0,
@@ -317,6 +887,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // magic_block больше максимального значения
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => 0,
@@ -331,6 +907,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // Отсутствует mental_barrier
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => 75,
@@ -342,6 +924,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // mental_barrier некорректного типа
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => 75,
@@ -354,6 +942,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // mental_barrier меньше минимального значения
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => 75,
@@ -366,6 +960,12 @@ class DefenseFactoryTest extends AbstractUnitTest
                 // mental_barrier больше максимального значения
                 [
                     'physical_resist' => 30,
+                    'fire_resist'     => 5,
+                    'water_resist'    => 10,
+                    'air_resist'      => 15,
+                    'earth_resist'    => 20,
+                    'life_resist'     => 25,
+                    'death_resist'    => 30,
                     'defense'         => 100,
                     'magic_defense'   => 50,
                     'block'           => 75,

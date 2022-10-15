@@ -48,6 +48,96 @@ interface DefenseInterface
     public function setPhysicalResist(int $physicalResist): void;
 
     /**
+     * Возвращает сопротивление урону огнем
+     *
+     * @return int
+     */
+    public function getFireResist(): int;
+
+    /**
+     * Устанавливает новое значение сопротивления урону огнем. Применяется в эффектах, изменяющих этот параметр
+     *
+     * @param int $physicalResist
+     * @throws DefenseException
+     */
+    public function setFireResist(int $physicalResist): void;
+
+    /**
+     * Возвращает сопротивление урону водой
+     *
+     * @return int
+     */
+    public function getWaterResist(): int;
+
+    /**
+     * Устанавливает новое значение сопротивления урону водой. Применяется в эффектах, изменяющих этот параметр
+     *
+     * @param int $physicalResist
+     * @throws DefenseException
+     */
+    public function setWaterResist(int $physicalResist): void;
+
+    /**
+     * Возвращает сопротивление урону воздухом
+     *
+     * @return int
+     */
+    public function getAirResist(): int;
+
+    /**
+     * Устанавливает новое значение сопротивления урону воздухом. Применяется в эффектах, изменяющих этот параметр
+     *
+     * @param int $physicalResist
+     * @throws DefenseException
+     */
+    public function setAirResist(int $physicalResist): void;
+
+    /**
+     * Возвращает сопротивление урону землей
+     *
+     * @return int
+     */
+    public function getEarthResist(): int;
+
+    /**
+     * Устанавливает новое значение сопротивления урону землей. Применяется в эффектах, изменяющих этот параметр
+     *
+     * @param int $physicalResist
+     * @throws DefenseException
+     */
+    public function setEarthResist(int $physicalResist): void;
+
+    /**
+     * Возвращает сопротивление урону магией жизни
+     *
+     * @return int
+     */
+    public function getLifeResist(): int;
+
+    /**
+     * Устанавливает новое значение сопротивления урону магией жизни. Применяется в эффектах, изменяющих этот параметр
+     *
+     * @param int $physicalResist
+     * @throws DefenseException
+     */
+    public function setLifeResist(int $physicalResist): void;
+
+    /**
+     * Возвращает сопротивление урону магией смерти
+     *
+     * @return int
+     */
+    public function getDeathResist(): int;
+
+    /**
+     * Устанавливает новое значение сопротивления урону магией смерти. Применяется в эффектах, изменяющих этот параметр
+     *
+     * @param int $physicalResist
+     * @throws DefenseException
+     */
+    public function setDeathResist(int $physicalResist): void;
+
+    /**
      * Возвращает защиту юнита. Влияет на шанс уклониться от вражеской атаки (с оружия)
      *
      * @return int

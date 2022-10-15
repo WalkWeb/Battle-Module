@@ -56,7 +56,7 @@ class OffenseTest extends AbstractUnitTest
             $vampire
         );
 
-        $defense = new Defense(0, 10, 10, 10, 5, 0);
+        $defense = new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0);
 
         self::assertEquals($typeDamage, $offense->getDamageType());
         self::assertEquals($weaponTypeId, $offense->getWeaponType()->getId());
@@ -88,7 +88,7 @@ class OffenseTest extends AbstractUnitTest
     public function testOffenseUpdate(): void
     {
         $offense = $this->createOffence();
-        $defense = new Defense(0, 10, 10, 10, 5, 0);
+        $defense = new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0);
 
         $offense->setPhysicalDamage($physicalDamage = 15);
         $offense->setFireDamage($fireDamage = 16);
@@ -588,7 +588,7 @@ class OffenseTest extends AbstractUnitTest
     public function testOffenseGetDamage(int $physicalDamage, int $physicalResist, int $exceptedDamage): void
     {
         $offense = new Offense(1, 1, $physicalDamage, 0, 0, 0, 0, 0, 0, 1, 100, 50, 0, 5, 200, 7);
-        $defense = new Defense($physicalResist, 10, 10, 10, 5, 0);
+        $defense = new Defense($physicalResist, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0);
 
         self::assertEquals($exceptedDamage, $offense->getDamage($defense));
     }

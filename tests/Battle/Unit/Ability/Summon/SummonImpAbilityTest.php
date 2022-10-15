@@ -84,6 +84,12 @@ class SummonImpAbilityTest extends AbstractUnitTest
                         ],
                         'defense'    => [
                             'physical_resist' => 0,
+                            'fire_resist'     => 0,
+                            'water_resist'    => 0,
+                            'air_resist'      => 0,
+                            'earth_resist'    => 0,
+                            'life_resist'     => 0,
+                            'death_resist'    => 0,
                             'defense'         => 100,
                             'magic_defense'   => 50,
                             'block'           => 0,
