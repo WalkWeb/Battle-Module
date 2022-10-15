@@ -58,9 +58,14 @@ class OffenseTest extends AbstractUnitTest
 
         $defense = new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0);
 
+        // Так как сопротивления нулевые - итоговый урон будет суммой всех типов урона
+        self::assertEquals(
+            $physicalDamage + $fireDamage + $waterDamage + $airDamage + $earthDamage + $lifeDamage + $deathDamage,
+            $offense->getDamage($defense)
+        );
+
         self::assertEquals($typeDamage, $offense->getDamageType());
         self::assertEquals($weaponTypeId, $offense->getWeaponType()->getId());
-        self::assertEquals($physicalDamage, $offense->getDamage($defense));
         self::assertEquals($fireDamage, $offense->getFireDamage());
         self::assertEquals($waterDamage, $offense->getWaterDamage());
         self::assertEquals($airDamage, $offense->getAirDamage());
@@ -103,7 +108,11 @@ class OffenseTest extends AbstractUnitTest
         $offense->setMagicAccuracy($magicAccuracy = 150);
         $offense->setBlockIgnore($blockIgnore = 100);
 
-        self::assertEquals($physicalDamage, $offense->getDamage($defense));
+        // Так как сопротивления нулевые - итоговый урон будет суммой всех типов урона
+        self::assertEquals(
+            $physicalDamage + $fireDamage + $waterDamage + $airDamage + $earthDamage + $lifeDamage + $deathDamage,
+            $offense->getDamage($defense)
+        );
 
         self::assertEquals($physicalDamage, $offense->getPhysicalDamage());
         self::assertEquals($fireDamage, $offense->getFireDamage());
@@ -580,15 +589,46 @@ class OffenseTest extends AbstractUnitTest
 
     /**
      * @dataProvider resistDataProvider
-     * @param int $physicalDamage
-     * @param int $physicalResist
+     * @param array $damage
+     * @param array $resist
      * @param int $exceptedDamage
      * @throws Exception
      */
-    public function testOffenseGetDamage(int $physicalDamage, int $physicalResist, int $exceptedDamage): void
+    public function testOffenseGetDamage(array $damage, array $resist, int $exceptedDamage): void
     {
-        $offense = new Offense(1, 1, $physicalDamage, 0, 0, 0, 0, 0, 0, 1, 100, 50, 0, 5, 200, 7);
-        $defense = new Defense($physicalResist, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0);
+        $offense = new Offense(
+            1,
+            1,
+            $damage['physical_damage'],
+            $damage['fire_damage'],
+            $damage['water_damage'],
+            $damage['air_damage'],
+            $damage['earth_damage'],
+            $damage['life_damage'],
+            $damage['death_damage'],
+            1,
+            100,
+            50,
+            0,
+            5,
+            200,
+            7
+        );
+
+        $defense = new Defense(
+            $resist['physical_resist'],
+            $resist['fire_resist'],
+            $resist['water_resist'],
+            $resist['air_resist'],
+            $resist['earth_resist'],
+            $resist['life_resist'],
+            $resist['death_resist'],
+            10,
+            10,
+            10,
+            5,
+            0
+        );
 
         self::assertEquals($exceptedDamage, $offense->getDamage($defense));
     }
@@ -599,35 +639,924 @@ class OffenseTest extends AbstractUnitTest
     public function resistDataProvider(): array
     {
         return [
+
+            // physical_damage vs physical_resist
             [
-                100,
-                0,
+                [
+                    'physical_damage' => 100,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
                 100,
             ],
             [
-                100,
-                25,
+                [
+                    'physical_damage' => 100,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 25,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
                 75,
             ],
             [
-                100,
-                50,
+                [
+                    'physical_damage' => 100,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 50,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
                 50,
             ],
             [
-                100,
-                75,
+                [
+                    'physical_damage' => 100,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 75,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
                 25,
             ],
             [
-                100,
-                100,
+                [
+                    'physical_damage' => 100,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 100,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
                 0,
             ],
             [
-                100,
-                -100,
+                [
+                    'physical_damage' => 100,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => -100,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
                 200,
+            ],
+
+            // water_damage vs fire_resist
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 100,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                100,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 100,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 25,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                75,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 100,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 50,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                50,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 100,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 75,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                25,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 100,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 100,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                0,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 100,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => -100,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                200,
+            ],
+
+            // water_damage vs water_resist
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 100,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                100,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 100,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 25,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                75,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 100,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 50,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                50,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 100,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 75,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                25,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 100,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 100,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                0,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 100,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => -100,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                200,
+            ],
+
+            // air_damage vs air_resist
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 100,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                100,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 100,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 25,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                75,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 100,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 50,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                50,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 100,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 75,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                25,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 100,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 100,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                0,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 100,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => -100,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                200,
+            ],
+
+            // earth_damage vs earth_resist
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 100,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                100,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 100,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 25,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                75,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 100,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 50,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                50,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 100,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 75,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                25,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 100,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 100,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                0,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 100,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => -100,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                200,
+            ],
+
+            // life_damage vs life_resist
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 100,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                100,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 100,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 25,
+                    'death_resist'    => 0,
+                ],
+                75,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 100,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 50,
+                    'death_resist'    => 0,
+                ],
+                50,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 100,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 75,
+                    'death_resist'    => 0,
+                ],
+                25,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 100,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 100,
+                    'death_resist'    => 0,
+                ],
+                0,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 100,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => -100,
+                    'death_resist'    => 0,
+                ],
+                200,
+            ],
+
+            // death_damage vs death_resist
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 100,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                ],
+                100,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 100,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 25,
+                ],
+                75,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 100,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 50,
+                ],
+                50,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 100,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 75,
+                ],
+                25,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 100,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 100,
+                ],
+                0,
+            ],
+            [
+                [
+                    'physical_damage' => 0,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 100,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => -100,
+                ],
+                200,
+            ],
+
+            // hybrid
+            [
+                [
+                    'physical_damage' => 100,
+                    'fire_damage'     => 100,
+                    'water_damage'    => 100,
+                    'air_damage'      => 100,
+                    'earth_damage'    => 100,
+                    'life_damage'     => 100,
+                    'death_damage'    => 100,
+                ],
+                [
+                    'physical_resist' => 0,
+                    'fire_resist'     => 10,
+                    'water_resist'    => 20,
+                    'air_resist'      => 30,
+                    'earth_resist'    => 40,
+                    'life_resist'     => 50,
+                    'death_resist'    => 60,
+                ],
+                100 + 90 + 80 + 70 + 60 + 50 + 40,
             ],
         ];
     }
