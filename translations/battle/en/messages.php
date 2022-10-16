@@ -126,7 +126,8 @@ return [
     'Mana'                                                           => 'Mana',
     'Mental Barrier'                                                 => 'Mental Barrier',
     'Damage'                                                         => 'Damage',
-    'Type Damage'                                                    => 'Type Damage',
+    'Damage Type'                                                    => 'Damage Type',
+    'Weapon Type'                                                    => 'Weapon Type',
     'Attack'                                                         => 'Attack',
     'Spell'                                                          => 'Spell',
     'Accuracy'                                                       => 'Accuracy',
@@ -142,7 +143,6 @@ return [
     'Yes'                                                            => 'Yes',
     'No'                                                             => 'No',
     'Vampirism'                                                      => 'Vampirism',
-    'Weapon Type'                                                    => 'Weapon Type',
     // Weapon types
     'None'                                                           => 'None',
     'Sword'                                                          => 'Sword',

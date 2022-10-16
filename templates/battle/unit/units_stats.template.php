@@ -20,8 +20,45 @@ if (empty($this) || !($this instanceof ViewInterface)) {
 
 /** @var UnitInterface $unit */
 
-// TODO При выводе информации одни и те же слова каждый раз запрашиваются в Translation
-// TODO Имеет смысл один раз получить их, записать в переменные и далее использовать переменные
+// Чтобы каждый раз не делать запрос к Translation, один раз получаем нужный перевод и используем переменные
+$meleeTitle = $this->getTranslation()->trans('Melee');
+$raceTitle = $this->getTranslation()->trans('Race');
+$lifeTitle = $this->getTranslation()->trans('Life');
+$mataTitle = $this->getTranslation()->trans('Mana');
+$aliveTitle = $this->getTranslation()->trans('Alive');
+$actionTitle = $this->getTranslation()->trans('Action');
+$physicalDamageTitle = $this->getTranslation()->trans('Physical Damage');
+$fireDamageTitle = $this->getTranslation()->trans('Fire Damage');
+$waterDamageTitle = $this->getTranslation()->trans('Water Damage');
+$airDamageTitle = $this->getTranslation()->trans('Air Damage');
+$earthDamageTitle = $this->getTranslation()->trans('Earth Damage');
+$lifeDamageTitle = $this->getTranslation()->trans('Life Magic Damage');
+$deathDamageTitle = $this->getTranslation()->trans('Death Magic Damage');
+$accuracyTitle = $this->getTranslation()->trans('Accuracy');
+$magicAccuracyTitle = $this->getTranslation()->trans('Magic Accuracy');
+$chanceCriticalDamageTitle = $this->getTranslation()->trans('Chance Critical Damage');
+$criticalDamageMultiplierTitle = $this->getTranslation()->trans('Critical Damage Multiplier');
+$attackSpeedTitle = $this->getTranslation()->trans('Attack Speed');
+$yesTitle = $this->getTranslation()->trans('Yes');
+$noTitle = $this->getTranslation()->trans('No');
+$concentrationTitle = $this->getTranslation()->trans('Concentration');
+$rageTitle = $this->getTranslation()->trans('Rage');
+$levelTitle = $this->getTranslation()->trans('Level');
+$mentalBarrierTitle = $this->getTranslation()->trans('Mental Barrier');
+$damageTypeTitle = $this->getTranslation()->trans('Type Damage');
+$weaponTypeTitle = $this->getTranslation()->trans('Weapon Type');
+$physicalDamageResistTitle = $this->getTranslation()->trans('Physical Damage Resistance');
+$fireDamageResistTitle = $this->getTranslation()->trans('Fire Damage Resistance');
+$waterDamageResistTitle = $this->getTranslation()->trans('Water Damage Resistance');
+$airDamageResistTitle = $this->getTranslation()->trans('Air Damage Resistance');
+$earthDamageResistTitle = $this->getTranslation()->trans('Earth Damage Resistance');
+$lifeDamageResistTitle = $this->getTranslation()->trans('Life Magic Damage Resistance');
+$deathDamageResistTitle = $this->getTranslation()->trans('Death Magic Damage Resistance');
+$defenseTitle = $this->getTranslation()->trans('Defense');
+$magicDefenseTitle = $this->getTranslation()->trans('Magic Defense');
+$blockTitle = $this->getTranslation()->trans('Block');
+$magicBlockTitle = $this->getTranslation()->trans('Magic Block');
+$blockIgnoringTitle = $this->getTranslation()->trans('Block Ignoring');
 
 ?>
 <div class="units_stats_box">
@@ -29,32 +66,32 @@ if (empty($this) || !($this instanceof ViewInterface)) {
         <?php foreach (array_merge(iterator_to_array($leftCommand->getUnits()), iterator_to_array($rightCommand->getUnits())) as $unit): ?>
             <tr class="header">
                 <td colspan="1" rowspan="4"><p><img src="<?= $unit->getAvatar() ?>" width="90" alt="" /><br /><?= $unit->getName() ?></p></td>
-                <td><p><?= $this->getTranslation()->trans('Melee') ?>?</p></td>
-                <td><p><?= $this->getTranslation()->trans('Race') ?></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Life') ?>"><img src="/images/battle/stats_icon/life.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Mana') ?>"><img src="/images/battle/stats_icon/mana.png" alt=""></abbr></p></td>
-                <td><p><?= $this->getTranslation()->trans('Alive') ?>?</p></td>
-                <td><p><?= $this->getTranslation()->trans('Action') ?>?</p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Physical Damage') ?>"><img src="/images/battle/stats_icon/physical_damage.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Fire Damage') ?>"><img src="/images/battle/stats_icon/fire_damage.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Water Damage') ?>"><img src="/images/battle/stats_icon/water_damage.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Air Damage') ?>"><img src="/images/battle/stats_icon/air_damage.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Earth Damage') ?>"><img src="/images/battle/stats_icon/earth_damage.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Life Magic Damage') ?>"><img src="/images/battle/stats_icon/life_damage.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Death Magic Damage') ?>"><img src="/images/battle/stats_icon/death_damage.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Accuracy') ?>"><img src="/images/battle/stats_icon/accuracy.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Magic Accuracy') ?>"><img src="/images/battle/stats_icon/magic_accuracy.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Chance Critical Damage') ?>"><img src="/images/battle/stats_icon/critical_chance.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Critical Damage Multiplier') ?>"><img src="/images/battle/stats_icon/critical_multiplication.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Attack Speed') ?>"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
+                <td><p><?= $meleeTitle ?>?</p></td>
+                <td><p><?= $raceTitle ?></p></td>
+                <td><p><abbr title="<?= $lifeTitle ?>"><img src="/images/battle/stats_icon/life.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $mataTitle ?>"><img src="/images/battle/stats_icon/mana.png" alt=""></abbr></p></td>
+                <td><p><?= $aliveTitle ?>?</p></td>
+                <td><p><?= $actionTitle ?>?</p></td>
+                <td><p><abbr title="<?= $physicalDamageTitle ?>"><img src="/images/battle/stats_icon/physical_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $fireDamageTitle ?>"><img src="/images/battle/stats_icon/fire_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $waterDamageTitle ?>"><img src="/images/battle/stats_icon/water_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $airDamageTitle ?>"><img src="/images/battle/stats_icon/air_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $earthDamageTitle ?>"><img src="/images/battle/stats_icon/earth_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $lifeDamageTitle ?>"><img src="/images/battle/stats_icon/life_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $deathDamageTitle ?>"><img src="/images/battle/stats_icon/death_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $accuracyTitle ?>"><img src="/images/battle/stats_icon/accuracy.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $magicAccuracyTitle ?>"><img src="/images/battle/stats_icon/magic_accuracy.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $chanceCriticalDamageTitle ?>"><img src="/images/battle/stats_icon/critical_chance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $criticalDamageMultiplierTitle ?>"><img src="/images/battle/stats_icon/critical_multiplication.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $attackSpeedTitle ?>"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
             </tr>
             <tr>
-                <td><p><?= ($unit->isMelee() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
+                <td><p><?= ($unit->isMelee() ? $yesTitle : $noTitle) ?></p></td>
                 <td><p><?= $this->getTranslation()->trans($unit->getRace()->getSingleName()) ?></p></td>
                 <td><p><?= $unit->getLife() ?>/<?= $unit->getTotalLife() ?></p></td>
                 <td><p><?= $unit->getMana() ?>/<?= $unit->getTotalMana() ?></p></td>
-                <td><p><?= ($unit->isAlive() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
-                <td><p><?= ($unit->isAction() ? $this->getTranslation()->trans('Yes') : $this->getTranslation()->trans('No')) ?></p></td>
+                <td><p><?= ($unit->isAlive() ? $yesTitle : $noTitle) ?></p></td>
+                <td><p><?= ($unit->isAction() ? $yesTitle : $noTitle) ?></p></td>
                 <td><p><?= $unit->getOffense()->getPhysicalDamage() ?></p></td>
                 <td><p><?= $unit->getOffense()->getFireDamage() ?></p></td>
                 <td><p><?= $unit->getOffense()->getWaterDamage() ?></p></td>
@@ -69,24 +106,24 @@ if (empty($this) || !($this instanceof ViewInterface)) {
                 <td><p><?= $unit->getOffense()->getAttackSpeed() ?></p></td>
             </tr>
             <tr class="header">
-                <td><p><?= $this->getTranslation()->trans('Concentration') ?></p></td>
-                <td><p><?= $this->getTranslation()->trans('Rage') ?></p></td>
-                <td><p><?= $this->getTranslation()->trans('Level') ?></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Mental Barrier') ?>"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
-                <td><p><?= $this->getTranslation()->trans('Type Damage') ?></p></td>
-                <td><p><?= $this->getTranslation()->trans('Weapon Type') ?></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Physical Damage Resistance') ?>"><img src="/images/battle/stats_icon/physical_resistance.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Fire Damage Resistance') ?>"><img src="/images/battle/stats_icon/fire_resistance.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Water Damage Resistance') ?>"><img src="/images/battle/stats_icon/water_resistance.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Air Damage Resistance') ?>"><img src="/images/battle/stats_icon/air_resistance.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Earth Damage Resistance') ?>"><img src="/images/battle/stats_icon/earth_resistance.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Life Magic Damage Resistance') ?>"><img src="/images/battle/stats_icon/life_resistance.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Death Magic Damage Resistance') ?>"><img src="/images/battle/stats_icon/death_resistance.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Defense') ?>"><img src="/images/battle/stats_icon/defence.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Magic Defense') ?>"><img src="/images/battle/stats_icon/magic_defence.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Block') ?>"><img src="/images/battle/stats_icon/block.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Magic Block') ?>"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
-                <td><p><abbr title="<?= $this->getTranslation()->trans('Block Ignoring') ?>"><img src="/images/battle/stats_icon/block_ignore.png" alt=""></abbr></p></td>
+                <td><p><?= $concentrationTitle ?></p></td>
+                <td><p><?= $rageTitle ?></p></td>
+                <td><p><?= $levelTitle ?></p></td>
+                <td><p><abbr title="<?= $mentalBarrierTitle ?>"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
+                <td><p><?= $damageTypeTitle ?></p></td>
+                <td><p><?= $weaponTypeTitle ?></p></td>
+                <td><p><abbr title="<?= $physicalDamageResistTitle ?>"><img src="/images/battle/stats_icon/physical_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $fireDamageResistTitle ?>"><img src="/images/battle/stats_icon/fire_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $waterDamageResistTitle ?>"><img src="/images/battle/stats_icon/water_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $airDamageResistTitle ?>"><img src="/images/battle/stats_icon/air_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $earthDamageResistTitle ?>"><img src="/images/battle/stats_icon/earth_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $lifeDamageResistTitle ?>"><img src="/images/battle/stats_icon/life_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $deathDamageResistTitle ?>"><img src="/images/battle/stats_icon/death_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $defenseTitle ?>"><img src="/images/battle/stats_icon/defence.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $magicDefenseTitle ?>"><img src="/images/battle/stats_icon/magic_defence.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $blockTitle ?>"><img src="/images/battle/stats_icon/block.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $magicBlockTitle ?>"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $blockIgnoringTitle ?>"><img src="/images/battle/stats_icon/block_ignore.png" alt=""></abbr></p></td>
             </tr>
             <tr>
                 <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONCENTRATION ?></p></td>

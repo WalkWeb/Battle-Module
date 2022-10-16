@@ -124,7 +124,8 @@ return [
     'Mana'                                                           => 'Мана',
     'Mental Barrier'                                                 => 'Ментальный барьер',
     'Damage'                                                         => 'Урон',
-    'Type Damage'                                                    => 'Тип урона',
+    'Damage Type'                                                    => 'Тип урона',
+    'Weapon Type'                                                    => 'Тип оружия',
     'Attack'                                                         => 'Атака',
     'Spell'                                                          => 'Заклинание',
     'Accuracy'                                                       => 'Меткость',
@@ -140,7 +141,6 @@ return [
     'Yes'                                                            => 'Да',
     'No'                                                             => 'Нет',
     'Vampirism'                                                      => 'Вампиризм',
-    'Weapon Type'                                                    => 'Тип оружия',
     // Weapon types
     'None'                                                           => 'Отсутствует',
     'Sword'                                                          => 'Меч',

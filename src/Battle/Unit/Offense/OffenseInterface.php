@@ -216,6 +216,8 @@ interface OffenseInterface
      * оружие может игнорировать блок цели. Для полного игнорирования блока цели необходимо вернуть 100. Хотя можно
      * и вернуть другое значение, например 10, и тогда шанс блока целью в 25% будет уменьшен до шанса в 15%
      *
+     * TODO Rename to getBlockIgnoring
+     *
      * @return int
      */
     public function getBlockIgnore(): int;
