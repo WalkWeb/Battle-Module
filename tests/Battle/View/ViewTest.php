@@ -497,94 +497,167 @@ EOT;
         $expectHtml = <<<EOT
 <div class="units_stats_box">
     <table class="units_stats">
-        <tr class="header">
-            <td><p>Command</p></td>
-            <td class="name"><p>Name</p></td>
-            <td><p>Race</p></td>
-            <td><p><abbr title="Life"><img src="/images/battle/stats_icon/life.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Mana"><img src="/images/battle/stats_icon/mana.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Mental Barrier"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
-            <td><p>Type Damage</p></td>
-            <td><p><abbr title="Physical Damage"><img src="/images/battle/stats_icon/physical_damage.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Physical Damage Resistance"><img src="/images/battle/stats_icon/physical_resistance.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Attack Speed"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Accuracy"><img src="/images/battle/stats_icon/accuracy.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Magic Accuracy"><img src="/images/battle/stats_icon/magic_accuracy.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Defense"><img src="/images/battle/stats_icon/defence.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Magic Defense"><img src="/images/battle/stats_icon/magic_defence.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Block"><img src="/images/battle/stats_icon/block.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Magic Block"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Chance Critical Damage"><img src="/images/battle/stats_icon/critical_chance.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Critical Damage Multiplier"><img src="/images/battle/stats_icon/critical_multiplication.png" alt=""></abbr></p></td>
-            <td><p><abbr title="Vampirism"><img src="/images/battle/stats_icon/vampirism.png" alt=""></abbr></p></td>
-            <td><p>Weapon Type</p></td>
-            <td><p>Concentration</p></td>
-            <td><p>Rage</p></td>
-            <td><p>Melee?</p></td>
-            <td><p>Action?</p></td>
-            <td><p>Alive?</p></td>
-        </tr>
-                    <tr>
-                <td><p>1</p></td>
-                <td>
-                    <p>
-                        <img src="/images/avas/humans/human001.jpg" class="stat_ava" alt="" />
-                        unit_1                    </p>
-                </td>
+                    <tr class="header">
+                <td colspan="1" rowspan="4"><p><img src="/images/avas/humans/human001.jpg" width="90" alt="" /><br />unit_1</p></td>
+                <td><p>Melee?</p></td>
+                <td><p>Race</p></td>
+                <td><p><abbr title="Life"><img src="/images/battle/stats_icon/life.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Mana"><img src="/images/battle/stats_icon/mana.png" alt=""></abbr></p></td>
+                <td><p>Alive?</p></td>
+                <td><p>Action?</p></td>
+                <td><p><abbr title="Physical Damage"><img src="/images/battle/stats_icon/physical_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Fire Damage"><img src="/images/battle/stats_icon/fire_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Water Damage"><img src="/images/battle/stats_icon/water_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Air Damage"><img src="/images/battle/stats_icon/air_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Earth Damage"><img src="/images/battle/stats_icon/earth_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Life Magic Damage"><img src="/images/battle/stats_icon/life_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Death Magic Damage"><img src="/images/battle/stats_icon/death_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Accuracy"><img src="/images/battle/stats_icon/accuracy.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Magic Accuracy"><img src="/images/battle/stats_icon/magic_accuracy.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Chance Critical Damage"><img src="/images/battle/stats_icon/critical_chance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Critical Damage Multiplier"><img src="/images/battle/stats_icon/critical_multiplication.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Attack Speed"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
+            </tr>
+            <tr>
+                <td><p>Yes</p></td>
                 <td><p>Human</p></td>
                 <td><p>100/100</p></td>
                 <td><p>50/50</p></td>
-                <td><p>0%</p></td>
-                <td><p>Attack</p></td>
+                <td><p>Yes</p></td>
+                <td><p>No</p></td>
                 <td><p>20</p></td>
-                <td><p>0%</p></td>
-                <td><p>1</p></td>
+                <td><p>0</p></td>
+                <td><p>0</p></td>
+                <td><p>0</p></td>
+                <td><p>0</p></td>
+                <td><p>0</p></td>
+                <td><p>0</p></td>
                 <td><p>200</p></td>
                 <td><p>100</p></td>
+                <td><p>5%</p></td>
+                <td><p>200%</p></td>
+                <td><p>1</p></td>
+            </tr>
+            <tr class="header">
+                <td><p>Concentration</p></td>
+                <td><p>Rage</p></td>
+                <td><p>Level</p></td>
+                <td><p><abbr title="Mental Barrier"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
+                <td><p>Type Damage</p></td>
+                <td><p>Weapon Type</p></td>
+                <td><p><abbr title="Physical Damage Resistance"><img src="/images/battle/stats_icon/physical_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Fire Damage Resistance"><img src="/images/battle/stats_icon/fire_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Water Damage Resistance"><img src="/images/battle/stats_icon/water_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Air Damage Resistance"><img src="/images/battle/stats_icon/air_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Earth Damage Resistance"><img src="/images/battle/stats_icon/earth_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Life Magic Damage Resistance"><img src="/images/battle/stats_icon/life_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Death Magic Damage Resistance"><img src="/images/battle/stats_icon/death_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Defense"><img src="/images/battle/stats_icon/defence.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Magic Defense"><img src="/images/battle/stats_icon/magic_defence.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Block"><img src="/images/battle/stats_icon/block.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Magic Block"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Block Ignoring"><img src="/images/battle/stats_icon/block_ignore.png" alt=""></abbr></p></td>
+            </tr>
+            <tr>
+                <td><p>0/1000</p></td>
+                <td><p>0/1000</p></td>
+                <td><p>1</p></td>
+                <td><p>0%</p></td>
+                <td><p>Attack</p></td>
+                <td><p>Sword</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
                 <td><p>100</p></td>
                 <td><p>50</p></td>
                 <td><p>0%</p></td>
                 <td><p>0%</p></td>
-                <td><p>5%</p></td>
-                <td><p>200%</p></td>
-                <td><p>0%</p></td>
-                <td><p>Sword</p></td>
-                <td><p>0/1000</p></td>
-                <td><p>0/1000</p></td>
-                <td><p>Yes</p></td>
-                <td><p>No</p></td>
-                <td><p>Yes</p></td>
+                <td><p>0</p></td>
             </tr>
-                    <tr>
-                <td><p>1</p></td>
-                <td>
-                    <p>
-                        <img src="/images/avas/humans/human002.jpg" class="stat_ava" alt="" />
-                        unit_2                    </p>
-                </td>
+                    <tr class="header">
+                <td colspan="1" rowspan="4"><p><img src="/images/avas/humans/human002.jpg" width="90" alt="" /><br />unit_2</p></td>
+                <td><p>Melee?</p></td>
+                <td><p>Race</p></td>
+                <td><p><abbr title="Life"><img src="/images/battle/stats_icon/life.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Mana"><img src="/images/battle/stats_icon/mana.png" alt=""></abbr></p></td>
+                <td><p>Alive?</p></td>
+                <td><p>Action?</p></td>
+                <td><p><abbr title="Physical Damage"><img src="/images/battle/stats_icon/physical_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Fire Damage"><img src="/images/battle/stats_icon/fire_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Water Damage"><img src="/images/battle/stats_icon/water_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Air Damage"><img src="/images/battle/stats_icon/air_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Earth Damage"><img src="/images/battle/stats_icon/earth_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Life Magic Damage"><img src="/images/battle/stats_icon/life_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Death Magic Damage"><img src="/images/battle/stats_icon/death_damage.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Accuracy"><img src="/images/battle/stats_icon/accuracy.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Magic Accuracy"><img src="/images/battle/stats_icon/magic_accuracy.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Chance Critical Damage"><img src="/images/battle/stats_icon/critical_chance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Critical Damage Multiplier"><img src="/images/battle/stats_icon/critical_multiplication.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Attack Speed"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
+            </tr>
+            <tr>
+                <td><p>Yes</p></td>
                 <td><p>Human</p></td>
                 <td><p>250/250</p></td>
                 <td><p>50/50</p></td>
-                <td><p>0%</p></td>
-                <td><p>Attack</p></td>
+                <td><p>Yes</p></td>
+                <td><p>No</p></td>
                 <td><p>30</p></td>
-                <td><p>0%</p></td>
-                <td><p>1</p></td>
+                <td><p>0</p></td>
+                <td><p>0</p></td>
+                <td><p>0</p></td>
+                <td><p>0</p></td>
+                <td><p>0</p></td>
+                <td><p>0</p></td>
                 <td><p>200</p></td>
                 <td><p>100</p></td>
+                <td><p>5%</p></td>
+                <td><p>200%</p></td>
+                <td><p>1</p></td>
+            </tr>
+            <tr class="header">
+                <td><p>Concentration</p></td>
+                <td><p>Rage</p></td>
+                <td><p>Level</p></td>
+                <td><p><abbr title="Mental Barrier"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
+                <td><p>Type Damage</p></td>
+                <td><p>Weapon Type</p></td>
+                <td><p><abbr title="Physical Damage Resistance"><img src="/images/battle/stats_icon/physical_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Fire Damage Resistance"><img src="/images/battle/stats_icon/fire_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Water Damage Resistance"><img src="/images/battle/stats_icon/water_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Air Damage Resistance"><img src="/images/battle/stats_icon/air_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Earth Damage Resistance"><img src="/images/battle/stats_icon/earth_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Life Magic Damage Resistance"><img src="/images/battle/stats_icon/life_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Death Magic Damage Resistance"><img src="/images/battle/stats_icon/death_resistance.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Defense"><img src="/images/battle/stats_icon/defence.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Magic Defense"><img src="/images/battle/stats_icon/magic_defence.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Block"><img src="/images/battle/stats_icon/block.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Magic Block"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Block Ignoring"><img src="/images/battle/stats_icon/block_ignore.png" alt=""></abbr></p></td>
+            </tr>
+            <tr>
+                <td><p>0/1000</p></td>
+                <td><p>0/1000</p></td>
+                <td><p>1</p></td>
+                <td><p>0%</p></td>
+                <td><p>Attack</p></td>
+                <td><p>Sword</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
+                <td><p>0%</p></td>
                 <td><p>100</p></td>
                 <td><p>50</p></td>
                 <td><p>0%</p></td>
                 <td><p>0%</p></td>
-                <td><p>5%</p></td>
-                <td><p>200%</p></td>
-                <td><p>0%</p></td>
-                <td><p>Sword</p></td>
-                <td><p>0/1000</p></td>
-                <td><p>0/1000</p></td>
-                <td><p>Yes</p></td>
-                <td><p>No</p></td>
-                <td><p>Yes</p></td>
+                <td><p>0</p></td>
             </tr>
             </table>
 </div>
