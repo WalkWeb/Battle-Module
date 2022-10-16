@@ -243,10 +243,7 @@ class Unit extends AbstractUnit
     /**
      * Увеличивает урон юнита (можно сделать и уменьшение, но пока делаем только увеличение)
      *
-     * TODO Метод на удаление вместе с $damage параметром
-     * TODO Вместо него будут другие методы, на изменение стихийного урона
-     *
-     * TODO Временно увеличение урона изменено на увеличение физического урона
+     * TODO Переименовать в multiplierPhysicalDamage
      *
      * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
@@ -274,8 +271,7 @@ class Unit extends AbstractUnit
     /**
      * Откатывает изменение урона юнита
      *
-     * TODO Метод на удаление вместе с $damage параметром
-     * TODO Вместо него будут другие методы, на изменение стихийного урона
+     * TODO Переименовать в multiplierPhysicalDamageRevert
      *
      * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException

@@ -87,3 +87,101 @@ $effect = $this->getFactory()->create($data);
 
 Такая ситуация конечно нас не устраивает. По этому длительность эффектов обновляется после хода этого конкретного юнита,
 в методе getAfterActions().
+
+## План по реализации эффектов изменения характеристик
+
+Реализация эффектов которые изменяют характеристики персонажа довольно трудоемкая, т.к. помимо отдельного метода на
+изменение каждой характеристики нужно внимательно покрыть данный функционал тестами, предусмотрев все особые ситуации.
+При этом они будут разные для увеличения и уменьшения. Чтобы отслеживать прогресс по этому процессу сделан список ниже.
+Также указано название способности, где можно посмотреть пример реализации изменения данной характеристики.
+
+- [ ] `side` – 
+- [ ] `row` – 
+- [x] `life` – increased. Пример в способности "Reserve Forces"
+- [ ] `life` – reduced
+- [ ] `mana` – increased
+- [ ] `mana` – reduced
+- [ ] `mental barrier` – increased
+- [ ] `mental barrier` – reduced
+- [x] `physical damage` – increased. Пример в способности "Rage"
+- [ ] `physical damage` – reduced
+- [ ] `fire damage` – increased
+- [ ] `fire damage` – reduced
+- [ ] `water damage` – increased
+- [ ] `water damage` – reduced
+- [ ] `air damage` – increased
+- [ ] `air damage` – reduced
+- [ ] `earth damage` – increased
+- [ ] `earth damage` – reduced
+- [ ] `life damage` – increased
+- [ ] `life damage` – reduced
+- [ ] `death damage` – increased
+- [ ] `death damage` – reduced
+- [ ] `physical resist` – increased
+- [ ] `physical resist` – reduced
+- [ ] `fire resist` – increased
+- [ ] `fire resist` – reduced
+- [ ] `water resist` – increased
+- [ ] `water resist` – reduced
+- [ ] `air resist` – increased
+- [ ] `air resist` – reduced
+- [ ] `earth resist` – increased
+- [ ] `earth resist` – reduced
+- [ ] `life resist` – increased
+- [ ] `life resist` – reduced
+- [ ] `death resist` – increased
+- [ ] `death resist` – reduced
+- [ ] `physical max resist` – increased
+- [ ] `physical max resist` – reduced
+- [ ] `fire max resist` – increased
+- [ ] `fire max resist` – reduced
+- [ ] `water max resist` – increased
+- [ ] `water max resist` – reduced
+- [ ] `air max resist` – increased
+- [ ] `air max resist` – reduced
+- [ ] `earth max resist` – increased
+- [ ] `earth max resist` – reduced
+- [ ] `life max resist` – increased
+- [ ] `life max resist` – reduced
+- [ ] `death max resist` – increased
+- [ ] `death max resist` – reduced
+- [ ] `accuracy` – increased
+- [ ] `accuracy` – reduced
+- [ ] `magic accuracy` – increased
+- [ ] `magic accuracy` – reduced
+- [ ] `defense` – increased
+- [ ] `defense` – reduced
+- [ ] `magic defense` – increased
+- [ ] `magic defense` – reduced
+- [ ] `critical chance` – increased
+- [ ] `critical chance` – reduced
+- [ ] `critical multiplier` – increased
+- [ ] `critical multiplier` – reduced
+- [ ] `damage type` – increased
+- [ ] `damage type` – reduced
+- [ ] `weapon type` – increased
+- [ ] `weapon type` – reduced
+- [x] `attack speed` – increased. Пример в способности "Battle Fury"
+- [ ] `attack speed` – reduced
+- [ ] `cast speed` – increased
+- [ ] `cast speed` – reduced
+- [x] `block` – increased. Пример в способности "Blessed Shield"
+- [ ] `block` – reduced
+- [ ] `magic block` – increased
+- [ ] `magic block` – reduced
+- [ ] `block ignore` – increased
+- [ ] `block ignore` – reduced
+- [ ] `dodge` – increased
+- [ ] `dodge` – reduced
+- [ ] `add concentration` – increased
+- [ ] `add concentration` – reduced
+- [ ] `add cunning` – increased
+- [ ] `add cunning` – reduced
+- [ ] `add rage` – increased
+- [ ] `add rage` – reduced
+- [ ] `global damage resist` – increased
+- [ ] `global damage resist` – reduced
+- [ ] `vampire` – increased
+- [ ] `vampire` – reduced
+- [ ] `magic vampire` – increased
+- [ ] `magic vampire` – reduced
