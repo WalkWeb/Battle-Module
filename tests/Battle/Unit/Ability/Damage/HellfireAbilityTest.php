@@ -66,8 +66,8 @@ class HellfireAbilityTest extends AbstractUnitTest
                         'earth_damage'        => 0,
                         'life_damage'         => 0,
                         'death_damage'        => 0,
-                        'attack_speed'        => 1, // TODO
-                        'cast_speed'          => 0,
+                        'attack_speed'        => 0,
+                        'cast_speed'          => 1,
                         'accuracy'            => 500,
                         'magic_accuracy'      => 100,
                         'block_ignore'        => 0,

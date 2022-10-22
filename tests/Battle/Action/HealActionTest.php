@@ -180,7 +180,10 @@ class HealActionTest extends AbstractUnitTest
             $action->handle();
         }
 
-        self::assertEquals($enemyUnit->getTotalLife() - $alliesUnit->getOffense()->getDamage($enemyUnit->getDefense()), $enemyUnit->getLife());
+        self::assertEquals(
+            $enemyUnit->getTotalLife() - $alliesUnit->getOffense()->getDamage($enemyUnit->getDefense()),
+            $enemyUnit->getLife()
+        );
     }
 
     /**

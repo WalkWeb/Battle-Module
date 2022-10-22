@@ -353,18 +353,23 @@ abstract class AbstractUnit implements UnitInterface
     }
 
     /**
-     * Считает фактическое количество атак. Если скорость атаки 1.2, то с 80% вероятностью это будет 1 атака, а с 20%
-     * вероятностью - 2 атаки
+     * Считает фактическое количество атак/заклинаний которые совершит юнит.
+     *
+     * Если скорость атаки 1.2, то с 80% вероятностью это будет 1 атака, а с 20% вероятностью - 2 атаки
      *
      * @return int
      * @throws Exception
      */
-    protected function calculateAttackSpeed(): int
+    protected function calculateHits(): int
     {
-        $attackSpeed = $this->offense->getAttackSpeed();
+        if ($this->offense->getDamageType() === OffenseInterface::TYPE_ATTACK) {
+            $speed = $this->offense->getAttackSpeed();
+        } else {
+            $speed = $this->offense->getCastSpeed();
+        }
 
-        $result = (int)floor($attackSpeed);
-        $residue = $attackSpeed - $result;
+        $result = (int)floor($speed);
+        $residue = $speed - $result;
         if (($residue > 0) && ($residue * 100 > random_int(0, 100))) {
             $result++;
         }

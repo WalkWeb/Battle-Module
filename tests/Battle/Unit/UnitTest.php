@@ -331,6 +331,33 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
+     * В этом тесте проверяется, что если у юнита указан тип урона заклинание: 'damage_type' => 2
+     *
+     * То в расчете количества ударов используется параметр cast_speed, а не attack_speed
+     *
+     * @throws Exception
+     */
+    public function testUnitCalculateCastSpeed(): void
+    {
+        $unit = UnitFactory::createByTemplate(43);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactoryTest::createRightCommand();
+
+        // Вначале на всякий случай проверяем, что скорость attack_speed = 0, а cast_speed = 3
+        self::assertEquals(0, $unit->getOffense()->getAttackSpeed());
+        self::assertEquals(3, $unit->getOffense()->getCastSpeed());
+
+        $actions = $unit->getActions($enemyCommand, $command);
+
+        // Проверяем, что получено 3 DamageAction
+        self::assertCount(3, $actions);
+
+        foreach ($actions as $action) {
+            self::assertInstanceOf(DamageAction::class, $action);
+        }
+    }
+
+    /**
      * Тест на удаление эффектов при смерти юнита
      *
      * @throws CommandException

@@ -69,6 +69,7 @@ class AlchemistTest extends AbstractUnitTest
                     );
 
                     self::assertEquals($this->getSummon()->getOffense()->getAttackSpeed(), $action->getSummonUnit()->getOffense()->getAttackSpeed());
+                    self::assertEquals($this->getSummon()->getOffense()->getCastSpeed(), $action->getSummonUnit()->getOffense()->getCastSpeed());
                     self::assertEquals($this->getSummon()->getLife(), $action->getSummonUnit()->getLife());
                     self::assertEquals($this->getSummon()->getTotalLife(), $action->getSummonUnit()->getTotalLife());
                     self::assertEquals($this->getSummon()->isMelee(), $action->getSummonUnit()->isMelee());
