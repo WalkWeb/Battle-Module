@@ -39,13 +39,14 @@ $magicAccuracyTitle = $this->getTranslation()->trans('Magic Accuracy');
 $chanceCriticalDamageTitle = $this->getTranslation()->trans('Chance Critical Damage');
 $criticalDamageMultiplierTitle = $this->getTranslation()->trans('Critical Damage Multiplier');
 $attackSpeedTitle = $this->getTranslation()->trans('Attack Speed');
+$castSpeedTitle = $this->getTranslation()->trans('Cast Speed');
 $yesTitle = $this->getTranslation()->trans('Yes');
 $noTitle = $this->getTranslation()->trans('No');
 $concentrationTitle = $this->getTranslation()->trans('Concentration');
 $rageTitle = $this->getTranslation()->trans('Rage');
 $levelTitle = $this->getTranslation()->trans('Level');
 $mentalBarrierTitle = $this->getTranslation()->trans('Mental Barrier');
-$damageTypeTitle = $this->getTranslation()->trans('Type Damage');
+$damageTypeTitle = $this->getTranslation()->trans('Damage Type');
 $weaponTypeTitle = $this->getTranslation()->trans('Weapon Type');
 $physicalDamageResistTitle = $this->getTranslation()->trans('Physical Damage Resistance');
 $fireDamageResistTitle = $this->getTranslation()->trans('Fire Damage Resistance');
@@ -59,6 +60,7 @@ $magicDefenseTitle = $this->getTranslation()->trans('Magic Defense');
 $blockTitle = $this->getTranslation()->trans('Block');
 $magicBlockTitle = $this->getTranslation()->trans('Magic Block');
 $blockIgnoringTitle = $this->getTranslation()->trans('Block Ignoring');
+$vampirismTitle = $this->getTranslation()->trans('Vampirism');
 
 ?>
 <div class="units_stats_box">
@@ -84,6 +86,7 @@ $blockIgnoringTitle = $this->getTranslation()->trans('Block Ignoring');
                 <td><p><abbr title="<?= $chanceCriticalDamageTitle ?>"><img src="/images/battle/stats_icon/critical_chance.png" alt=""></abbr></p></td>
                 <td><p><abbr title="<?= $criticalDamageMultiplierTitle ?>"><img src="/images/battle/stats_icon/critical_multiplication.png" alt=""></abbr></p></td>
                 <td><p><abbr title="<?= $attackSpeedTitle ?>"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $attackSpeedTitle ?>"><img src="/images/battle/stats_icon/cast_speed.png" alt=""></abbr></p></td>
             </tr>
             <tr>
                 <td><p><?= ($unit->isMelee() ? $yesTitle : $noTitle) ?></p></td>
@@ -104,6 +107,7 @@ $blockIgnoringTitle = $this->getTranslation()->trans('Block Ignoring');
                 <td><p><?= $unit->getOffense()->getCriticalChance() ?>%</p></td>
                 <td><p><?= $unit->getOffense()->getCriticalMultiplier() ?>%</p></td>
                 <td><p><?= $unit->getOffense()->getAttackSpeed() ?></p></td>
+                <td><p><?= $unit->getOffense()->getCastSpeed() ?></p></td>
             </tr>
             <tr class="header">
                 <td><p><?= $concentrationTitle ?></p></td>
@@ -124,6 +128,7 @@ $blockIgnoringTitle = $this->getTranslation()->trans('Block Ignoring');
                 <td><p><abbr title="<?= $blockTitle ?>"><img src="/images/battle/stats_icon/block.png" alt=""></abbr></p></td>
                 <td><p><abbr title="<?= $magicBlockTitle ?>"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
                 <td><p><abbr title="<?= $blockIgnoringTitle ?>"><img src="/images/battle/stats_icon/block_ignore.png" alt=""></abbr></p></td>
+                <td><p><abbr title="<?= $vampirismTitle ?>"><img src="/images/battle/stats_icon/vampirism.png" alt=""></abbr></p></td>
             </tr>
             <tr>
                 <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONCENTRATION ?></p></td>
@@ -144,6 +149,7 @@ $blockIgnoringTitle = $this->getTranslation()->trans('Block Ignoring');
                 <td><p><?= $unit->getDefense()->getBlock() ?>%</p></td>
                 <td><p><?= $unit->getDefense()->getMagicBlock() ?>%</p></td>
                 <td><p><?= $unit->getOffense()->getBlockIgnore() ?></p></td>
+                <td><p><?= $unit->getOffense()->getVampire() ?>%</p></td>
             </tr>
         <?php endforeach; ?>
     </table>

@@ -517,6 +517,7 @@ EOT;
                 <td><p><abbr title="Chance Critical Damage"><img src="/images/battle/stats_icon/critical_chance.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Critical Damage Multiplier"><img src="/images/battle/stats_icon/critical_multiplication.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Attack Speed"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Attack Speed"><img src="/images/battle/stats_icon/cast_speed.png" alt=""></abbr></p></td>
             </tr>
             <tr>
                 <td><p>Yes</p></td>
@@ -537,13 +538,14 @@ EOT;
                 <td><p>5%</p></td>
                 <td><p>200%</p></td>
                 <td><p>1</p></td>
+                <td><p>0</p></td>
             </tr>
             <tr class="header">
                 <td><p>Concentration</p></td>
                 <td><p>Rage</p></td>
                 <td><p>Level</p></td>
                 <td><p><abbr title="Mental Barrier"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
-                <td><p>Type Damage</p></td>
+                <td><p>Damage Type</p></td>
                 <td><p>Weapon Type</p></td>
                 <td><p><abbr title="Physical Damage Resistance"><img src="/images/battle/stats_icon/physical_resistance.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Fire Damage Resistance"><img src="/images/battle/stats_icon/fire_resistance.png" alt=""></abbr></p></td>
@@ -557,6 +559,7 @@ EOT;
                 <td><p><abbr title="Block"><img src="/images/battle/stats_icon/block.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Magic Block"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Block Ignoring"><img src="/images/battle/stats_icon/block_ignore.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Vampirism"><img src="/images/battle/stats_icon/vampirism.png" alt=""></abbr></p></td>
             </tr>
             <tr>
                 <td><p>0/1000</p></td>
@@ -577,6 +580,7 @@ EOT;
                 <td><p>0%</p></td>
                 <td><p>0%</p></td>
                 <td><p>0</p></td>
+                <td><p>0%</p></td>
             </tr>
                     <tr class="header">
                 <td colspan="1" rowspan="4"><p><img src="/images/avas/humans/human002.jpg" width="90" alt="" /><br />unit_2</p></td>
@@ -598,6 +602,7 @@ EOT;
                 <td><p><abbr title="Chance Critical Damage"><img src="/images/battle/stats_icon/critical_chance.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Critical Damage Multiplier"><img src="/images/battle/stats_icon/critical_multiplication.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Attack Speed"><img src="/images/battle/stats_icon/attack_speed.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Attack Speed"><img src="/images/battle/stats_icon/cast_speed.png" alt=""></abbr></p></td>
             </tr>
             <tr>
                 <td><p>Yes</p></td>
@@ -618,13 +623,14 @@ EOT;
                 <td><p>5%</p></td>
                 <td><p>200%</p></td>
                 <td><p>1</p></td>
+                <td><p>0</p></td>
             </tr>
             <tr class="header">
                 <td><p>Concentration</p></td>
                 <td><p>Rage</p></td>
                 <td><p>Level</p></td>
                 <td><p><abbr title="Mental Barrier"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
-                <td><p>Type Damage</p></td>
+                <td><p>Damage Type</p></td>
                 <td><p>Weapon Type</p></td>
                 <td><p><abbr title="Physical Damage Resistance"><img src="/images/battle/stats_icon/physical_resistance.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Fire Damage Resistance"><img src="/images/battle/stats_icon/fire_resistance.png" alt=""></abbr></p></td>
@@ -638,6 +644,7 @@ EOT;
                 <td><p><abbr title="Block"><img src="/images/battle/stats_icon/block.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Magic Block"><img src="/images/battle/stats_icon/magic_block.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Block Ignoring"><img src="/images/battle/stats_icon/block_ignore.png" alt=""></abbr></p></td>
+                <td><p><abbr title="Vampirism"><img src="/images/battle/stats_icon/vampirism.png" alt=""></abbr></p></td>
             </tr>
             <tr>
                 <td><p>0/1000</p></td>
@@ -658,6 +665,7 @@ EOT;
                 <td><p>0%</p></td>
                 <td><p>0%</p></td>
                 <td><p>0</p></td>
+                <td><p>0%</p></td>
             </tr>
             </table>
 </div>

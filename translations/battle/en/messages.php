@@ -135,6 +135,7 @@ return [
     'Defense'                                                        => 'Defense',
     'Magic Defense'                                                  => 'Magic Defense',
     'Attack Speed'                                                   => 'Attack Speed',
+    'Cast Speed'                                                     => 'Cast Speed',
     'Concentration'                                                  => 'Concentration',
     'Rage'                                                           => 'Rage',
     'Melee'                                                          => 'Melee',
