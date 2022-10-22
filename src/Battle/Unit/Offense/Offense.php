@@ -21,6 +21,7 @@ class Offense implements OffenseInterface
     private int $lifeDamage;
     private int $deathDamage;
     private float $attackSpeed;
+    private float $castSpeed;
     private int $accuracy;
     private int $magicAccuracy;
     private int $blockIgnore;
@@ -39,6 +40,7 @@ class Offense implements OffenseInterface
      * @param int $lifeDamage
      * @param int $deathDamage
      * @param float $attackSpeed
+     * @param float $castSpeed
      * @param int $accuracy
      * @param int $magicAccuracy
      * @param int $blockIgnore
@@ -58,6 +60,7 @@ class Offense implements OffenseInterface
         int $lifeDamage,
         int $deathDamage,
         float $attackSpeed,
+        float $castSpeed,
         int $accuracy,
         int $magicAccuracy,
         int $blockIgnore,
@@ -76,6 +79,7 @@ class Offense implements OffenseInterface
         $this->setLifeDamage($lifeDamage);
         $this->setDeathDamage($deathDamage);
         $this->setAttackSpeed($attackSpeed);
+        $this->setCastSpeed($castSpeed);
         $this->setAccuracy($accuracy);
         $this->setMagicAccuracy($magicAccuracy);
         $this->setBlockIgnore($blockIgnore);
@@ -305,6 +309,29 @@ class Offense implements OffenseInterface
         }
 
         $this->attackSpeed = $attackSpeed;
+    }
+
+    /**
+     * @return float
+     */
+    public function getCastSpeed(): float
+    {
+        return $this->castSpeed;
+    }
+
+    /**
+     * @param float $castSpeed
+     * @throws OffenseException
+     */
+    public function setCastSpeed(float $castSpeed): void
+    {
+        if ($castSpeed < self::MIN_CAST_SPEED || $castSpeed > self::MAX_CAST_SPEED) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_CAST_SPEED_VALUE . OffenseInterface::MIN_CAST_SPEED . '-' . OffenseInterface::MAX_CAST_SPEED
+            );
+        }
+
+        $this->castSpeed = $castSpeed;
     }
 
     /**

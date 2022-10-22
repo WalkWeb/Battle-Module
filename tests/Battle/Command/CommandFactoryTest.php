@@ -41,6 +41,7 @@ class CommandFactoryTest extends AbstractUnitTest
             self::assertEquals($data[$i]['avatar'], $unit->getAvatar());
             self::assertEquals($data[$i]['offense']['physical_damage'], $unit->getOffense()->getDamage($this->getDefense()));
             self::assertEquals($data[$i]['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
+            self::assertEquals($data[$i]['offense']['cast_speed'], $unit->getOffense()->getCastSpeed());
             self::assertEquals($data[$i]['offense']['accuracy'], $unit->getOffense()->getAccuracy());
             self::assertEquals($data[$i]['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());
             self::assertEquals($data[$i]['defense']['defense'], $unit->getDefense()->getDefense());
@@ -129,6 +130,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'life_damage'         => 0,
                             'death_damage'        => 0,
                             'attack_speed'        => 1.2,
+                            'cast_speed'          => 0,
                             'accuracy'            => 200,
                             'magic_accuracy'      => 100,
                             'block_ignore'        => 0,
@@ -175,6 +177,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'life_damage'         => 0,
                             'death_damage'        => 0,
                             'attack_speed'        => 1.2,
+                            'cast_speed'          => 0,
                             'accuracy'            => 200,
                             'magic_accuracy'      => 100,
                             'block_ignore'        => 0,
@@ -233,6 +236,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'life_damage'         => 0,
                             'death_damage'        => 0,
                             'attack_speed'        => 1.2,
+                            'cast_speed'          => 0,
                             'accuracy'            => 200,
                             'magic_accuracy'      => 100,
                             'block_ignore'        => 0,

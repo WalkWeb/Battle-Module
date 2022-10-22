@@ -30,6 +30,7 @@ class OffenseTest extends AbstractUnitTest
         $lifeDamage = 350;
         $deathDamage = 360;
         $attackSpeed = 1.2;
+        $castSpeed = 1.3;
         $accuracy = 200;
         $magicAccuracy = 100;
         $blockIgnore = 0;
@@ -48,6 +49,7 @@ class OffenseTest extends AbstractUnitTest
             $lifeDamage,
             $deathDamage,
             $attackSpeed,
+            $castSpeed,
             $accuracy,
             $magicAccuracy,
             $blockIgnore,
@@ -73,6 +75,7 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($lifeDamage, $offense->getLifeDamage());
         self::assertEquals($deathDamage, $offense->getDeathDamage());
         self::assertEquals($attackSpeed, $offense->getAttackSpeed());
+        self::assertEquals($castSpeed, $offense->getCastSpeed());
         self::assertEquals($accuracy, $offense->getAccuracy());
         self::assertEquals($magicAccuracy, $offense->getMagicAccuracy());
         self::assertEquals($blockIgnore, $offense->getBlockIgnore());
@@ -364,7 +367,7 @@ class OffenseTest extends AbstractUnitTest
         $this->expectExceptionMessage(
             OffenseException::INCORRECT_ATTACK_SPEED_VALUE . OffenseInterface::MIN_ATTACK_SPEED . '-' . OffenseInterface::MAX_ATTACK_SPEED
         );
-        $offense->setAttackSpeed(OffenseInterface::MIN_ATTACK_SPEED - 1);
+        $offense->setAttackSpeed(OffenseInterface::MIN_ATTACK_SPEED - 0.1);
     }
 
     /**
@@ -381,6 +384,38 @@ class OffenseTest extends AbstractUnitTest
             OffenseException::INCORRECT_ATTACK_SPEED_VALUE . OffenseInterface::MIN_ATTACK_SPEED . '-' . OffenseInterface::MAX_ATTACK_SPEED
         );
         $offense->setAttackSpeed(OffenseInterface::MAX_ATTACK_SPEED + 0.01);
+    }
+
+    /**
+     * Тест на ошибку, когда в Offense пытаются записать слишком низкое значение создания заклинаний
+     *
+     * @throws Exception
+     */
+    public function testOffenseSetUltraMinCastSpeed(): void
+    {
+        $offense = $this->createOffence();
+
+        $this->expectException(OffenseException::class);
+        $this->expectExceptionMessage(
+            OffenseException::INCORRECT_CAST_SPEED_VALUE . OffenseInterface::MIN_CAST_SPEED . '-' . OffenseInterface::MAX_CAST_SPEED
+        );
+        $offense->setCastSpeed(OffenseInterface::MIN_CAST_SPEED - 0.1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Offense пытаются записать слишком высокое значение создания заклинаний
+     *
+     * @throws Exception
+     */
+    public function testOffenseSetUltraMaxCastSpeed(): void
+    {
+        $offense = $this->createOffence();
+
+        $this->expectException(OffenseException::class);
+        $this->expectExceptionMessage(
+            OffenseException::INCORRECT_CAST_SPEED_VALUE . OffenseInterface::MIN_CAST_SPEED . '-' . OffenseInterface::MAX_CAST_SPEED
+        );
+        $offense->setCastSpeed(OffenseInterface::MAX_CAST_SPEED + 0.01);
     }
 
     /**
@@ -488,7 +523,7 @@ class OffenseTest extends AbstractUnitTest
     {
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(OffenseException::INCORRECT_DAMAGE_TYPE_VALUE);
-        new Offense(3, 1, 10, 0, 0, 0, 0, 0, 0, 1, 100, 50, 0, 5, 200, 7);
+        new Offense(3, 1, 10, 0, 0, 0, 0, 0, 0, 1, 1, 100, 50, 0, 5, 200, 7);
     }
 
     /**
@@ -606,6 +641,7 @@ class OffenseTest extends AbstractUnitTest
             $damage['earth_damage'],
             $damage['life_damage'],
             $damage['death_damage'],
+            1,
             1,
             100,
             50,
@@ -1577,6 +1613,7 @@ class OffenseTest extends AbstractUnitTest
             24,
             25,
             26,
+            1,
             1,
             100,
             50,

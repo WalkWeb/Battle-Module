@@ -75,6 +75,7 @@ class SummonFireElementalAbilityTest extends AbstractUnitTest
                             'life_damage'         => 0,
                             'death_damage'        => 0,
                             'attack_speed'        => 1.1,
+                            'cast_speed'          => 0,
                             'accuracy'            => 200,
                             'magic_accuracy'      => 100,
                             'block_ignore'        => 0,

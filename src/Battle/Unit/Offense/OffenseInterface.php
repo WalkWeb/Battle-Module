@@ -23,6 +23,9 @@ interface OffenseInterface
     public const MIN_ATTACK_SPEED        = 0.0;
     public const MAX_ATTACK_SPEED        = 10;
 
+    public const MIN_CAST_SPEED          = 0.0;
+    public const MAX_CAST_SPEED          = 10;
+
     public const MIN_ACCURACY            = 1;
     public const MAX_ACCURACY            = 1000000;
 
@@ -180,7 +183,20 @@ interface OffenseInterface
      * @throws OffenseException
      */
     public function setAttackSpeed(float $attackSpeed): void;
-    
+
+    /**
+     * Возвращает скорость создания заклинаний (параметр аналогичный скорости атаки но для типа урона заклинание
+     *
+     * @return float
+     */
+    public function getCastSpeed(): float;
+
+    /**
+     * @param float $castSpeed
+     * @throws OffenseException
+     */
+    public function setCastSpeed(float $castSpeed): void;
+
     /**
      * Возвращает меткость (влияет на шанс попадания при использовании атак)
      *

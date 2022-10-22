@@ -419,7 +419,8 @@ class EffectActionTest extends AbstractUnitTest
                             'earth_damage'        => 0,
                             'life_damage'         => 0,
                             'death_damage'        => 0,
-                            'attack_speed'        => 1,
+                            'attack_speed'        => 1, // TODO
+                            'cast_speed'          => 0,
                             'accuracy'            => 500,
                             'magic_accuracy'      => 500,
                             'block_ignore'        => 0,

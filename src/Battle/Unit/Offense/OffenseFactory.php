@@ -31,6 +31,7 @@ class OffenseFactory
         self::int($data, 'life_damage', OffenseException::INCORRECT_LIFE_DAMAGE);
         self::int($data, 'death_damage', OffenseException::INCORRECT_DEATH_DAMAGE);
         self::intOrFloat($data, 'attack_speed', OffenseException::INCORRECT_ATTACK_SPEED);
+        self::intOrFloat($data, 'cast_speed', OffenseException::INCORRECT_CAST_SPEED);
         self::int($data, 'accuracy', OffenseException::INCORRECT_ACCURACY);
         self::int($data, 'magic_accuracy', OffenseException::INCORRECT_MAGIC_ACCURACY);
         self::int($data, 'block_ignore', OffenseException::INCORRECT_BLOCK_IGNORE);
@@ -43,6 +44,8 @@ class OffenseFactory
             [OffenseInterface::TYPE_ATTACK, OffenseInterface::TYPE_SPELL],
             OffenseException::INCORRECT_DAMAGE_TYPE_VALUE
         );
+
+        // TODO Проверка на min-max значение проводится и в самом Offense, здесь её можно убрать
 
         self::intMinMaxValue(
             $data['physical_damage'],
@@ -93,9 +96,17 @@ class OffenseFactory
             OffenseException::INCORRECT_DEATH_DAMAGE_VALUE . OffenseInterface::MIN_DAMAGE . '-' . OffenseInterface::MAX_DAMAGE
         );
 
+        // TODO Вынести в отдельный метод floatMinMaxValue
+
         if ($data['attack_speed'] < OffenseInterface::MIN_ATTACK_SPEED || $data['attack_speed'] > OffenseInterface::MAX_ATTACK_SPEED) {
             throw new UnitException(
                 OffenseException::INCORRECT_ATTACK_SPEED_VALUE . OffenseInterface::MIN_ATTACK_SPEED . '-' . OffenseInterface::MAX_ATTACK_SPEED
+            );
+        }
+
+        if ($data['cast_speed'] < OffenseInterface::MIN_CAST_SPEED || $data['cast_speed'] > OffenseInterface::MAX_CAST_SPEED) {
+            throw new UnitException(
+                OffenseException::INCORRECT_CAST_SPEED_VALUE . OffenseInterface::MIN_CAST_SPEED . '-' . OffenseInterface::MAX_CAST_SPEED
             );
         }
 
@@ -152,6 +163,7 @@ class OffenseFactory
             $data['life_damage'],
             $data['death_damage'],
             $data['attack_speed'],
+            $data['cast_speed'],
             $data['accuracy'],
             $data['magic_accuracy'],
             $data['block_ignore'],
