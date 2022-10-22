@@ -2022,6 +2022,7 @@ class UnitFactory
             ],
         ],
         // Юнит с damage_type = 2 и cast_speed = 3
+        // А также в отличие от всех остальных юнитов имеет урон помимо physical_damage
         43  => [
             'id'         => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',
             'name'       => 'unit_1',
@@ -2039,7 +2040,7 @@ class UnitFactory
                 'damage_type'         => 2,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
-                'fire_damage'         => 0,
+                'fire_damage'         => 30,
                 'water_damage'        => 0,
                 'air_damage'          => 0,
                 'earth_damage'        => 0,

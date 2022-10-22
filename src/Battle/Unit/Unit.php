@@ -406,9 +406,9 @@ class Unit extends AbstractUnit
     private function getDamageAction(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         $collection = new ActionCollection();
-        $attacks = $this->calculateHits();
+        $hits = $this->calculateHits();
 
-        for ($i = 0; $i < $attacks; $i++) {
+        for ($i = 0; $i < $hits; $i++) {
             $collection->add(new DamageAction(
                 $this->container,
                 $this,

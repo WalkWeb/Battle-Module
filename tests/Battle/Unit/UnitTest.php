@@ -13,6 +13,7 @@ use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Defense\Defense;
 use Battle\Unit\Defense\DefenseInterface;
+use Battle\Unit\Offense\OffenseInterface;
 use Exception;
 use Battle\Unit\Unit;
 use Battle\Command\Command;
@@ -55,12 +56,39 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['race'], $unit->getRace()->getId());
         self::assertFalse($unit->isParalysis());
 
-        self::assertEquals($data['offense']['physical_damage'], $unit->getOffense()->getDamage($this->getDefense()));
+        // Проверка метода getDamage подразумевает, что все юниты имеют 0 сопротивления
+        self::assertEquals(
+            $data['offense']['physical_damage'] +
+            $data['offense']['fire_damage'] +
+            $data['offense']['water_damage'] +
+            $data['offense']['air_damage'] +
+            $data['offense']['earth_damage'] +
+            $data['offense']['life_damage'] +
+            $data['offense']['death_damage'],
+            $unit->getOffense()->getDamage($this->getDefense())
+        );
+
         self::assertEquals($data['offense']['physical_damage'], $unit->getOffense()->getPhysicalDamage());
         self::assertEquals($data['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
+        self::assertEquals($data['offense']['cast_speed'], $unit->getOffense()->getCastSpeed());
         self::assertEquals($data['offense']['accuracy'], $unit->getOffense()->getAccuracy());
         self::assertEquals($data['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());
-        self::assertEquals(round($data['offense']['physical_damage'] * $data['offense']['attack_speed'], 1), $unit->getOffense()->getDPS());
+
+        $speed = $data['offense']['damage_type'] === OffenseInterface::TYPE_ATTACK ?
+            $data['offense']['attack_speed'] : $data['offense']['cast_speed'];
+
+        self::assertEquals(
+            round((
+            $data['offense']['physical_damage'] +
+            $data['offense']['fire_damage'] +
+            $data['offense']['water_damage'] +
+            $data['offense']['air_damage'] +
+            $data['offense']['earth_damage'] +
+            $data['offense']['life_damage'] +
+            $data['offense']['death_damage']
+            ) * $speed, 1),
+            $unit->getOffense()->getDPS()
+        );
 
         self::assertEquals($data['defense']['defense'], $unit->getDefense()->getDefense());
         self::assertEquals($data['defense']['magic_defense'], $unit->getDefense()->getMagicDefense());
@@ -506,7 +534,8 @@ class UnitTest extends AbstractUnitTest
     {
         return [
             [1], [2], [3], [4], [5], [6], [7], [8], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20],
-            [21], [22], [23], [24], [25], [26], [27], [28],
+            [21], [22], [23], [24], [25], [26], [27], [28], [29], [30], [31], [32], [33], [34], [35], [36], [37], [38],
+            [39], [40], [41], [42], [43],
         ];
     }
 
