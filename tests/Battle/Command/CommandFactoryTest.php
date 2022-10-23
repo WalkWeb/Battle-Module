@@ -43,7 +43,7 @@ class CommandFactoryTest extends AbstractUnitTest
             self::assertEquals($data[$i]['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
             self::assertEquals($data[$i]['offense']['cast_speed'], $unit->getOffense()->getCastSpeed());
             self::assertEquals($data[$i]['offense']['accuracy'], $unit->getOffense()->getAccuracy());
-            self::assertEquals($data[$i]['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());
+            self::assertEquals($data[$i]['offense']['block_ignoring'], $unit->getOffense()->getBlockIgnoring());
             self::assertEquals($data[$i]['defense']['defense'], $unit->getDefense()->getDefense());
             self::assertEquals($data[$i]['defense']['block'], $unit->getDefense()->getBlock());
             self::assertEquals($data[$i]['defense']['mental_barrier'], $unit->getDefense()->getMentalBarrier());
@@ -133,7 +133,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'cast_speed'          => 0,
                             'accuracy'            => 200,
                             'magic_accuracy'      => 100,
-                            'block_ignore'        => 0,
+                            'block_ignoring'      => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
                             'vampire'             => 0,
@@ -180,7 +180,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'cast_speed'          => 0,
                             'accuracy'            => 200,
                             'magic_accuracy'      => 100,
-                            'block_ignore'        => 0,
+                            'block_ignoring'      => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
                             'vampire'             => 0,
@@ -239,7 +239,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'cast_speed'          => 0,
                             'accuracy'            => 200,
                             'magic_accuracy'      => 100,
-                            'block_ignore'        => 0,
+                            'block_ignoring'      => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
                             'vampire'             => 0,

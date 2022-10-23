@@ -33,8 +33,8 @@ class OffenseException extends Exception
     public const INCORRECT_ATTACK_SPEED_VALUE        = 'Incorrect "attack_speed", should be min-max value: ';
     public const INCORRECT_CAST_SPEED                = 'Incorrect "cast_speed", it required and type float or int';
     public const INCORRECT_CAST_SPEED_VALUE          = 'Incorrect "cast_speed", should be min-max value: ';
-    public const INCORRECT_BLOCK_IGNORE              = 'Incorrect "block_ignore", it required and type int';
-    public const INCORRECT_BLOCK_IGNORE_VALUE        = 'Incorrect "block_ignore", should be min-max value: ';
+    public const INCORRECT_BLOCK_IGNORING            = 'Incorrect "block_ignoring", it required and type int';
+    public const INCORRECT_BLOCK_IGNORING_VALUE      = 'Incorrect "block_ignoring", should be min-max value: ';
     public const INCORRECT_CRITICAL_CHANCE           = 'Incorrect "block_ignore", it required and type int';
     public const INCORRECT_CRITICAL_CHANCE_VALUE     = 'Incorrect "block_ignore", should be min-max value: ';
     public const INCORRECT_CRITICAL_MULTIPLIER       = 'Incorrect "block_ignore", it required and type int';

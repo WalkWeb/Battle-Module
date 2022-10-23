@@ -78,7 +78,7 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($castSpeed, $offense->getCastSpeed());
         self::assertEquals($accuracy, $offense->getAccuracy());
         self::assertEquals($magicAccuracy, $offense->getMagicAccuracy());
-        self::assertEquals($blockIgnore, $offense->getBlockIgnore());
+        self::assertEquals($blockIgnore, $offense->getBlockIgnoring());
         self::assertEquals($criticalChance, $offense->getCriticalChance());
         self::assertEquals($criticalMultiplier, $offense->getCriticalMultiplier());
         self::assertEquals($vampire, $offense->getVampire());
@@ -109,7 +109,7 @@ class OffenseTest extends AbstractUnitTest
         $offense->setAttackSpeed($attackSpeed = 1.2);
         $offense->setAccuracy($accuracy = 250);
         $offense->setMagicAccuracy($magicAccuracy = 150);
-        $offense->setBlockIgnore($blockIgnore = 100);
+        $offense->setBlockIgnoring($blockIgnore = 100);
 
         // Так как сопротивления нулевые - итоговый урон будет суммой всех типов урона
         self::assertEquals(
@@ -127,7 +127,7 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($attackSpeed, $offense->getAttackSpeed());
         self::assertEquals($accuracy, $offense->getAccuracy());
         self::assertEquals($magicAccuracy, $offense->getMagicAccuracy());
-        self::assertEquals($blockIgnore, $offense->getBlockIgnore());
+        self::assertEquals($blockIgnore, $offense->getBlockIgnoring());
     }
 
     /**
@@ -493,9 +493,9 @@ class OffenseTest extends AbstractUnitTest
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
-            OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE
+            OffenseException::INCORRECT_BLOCK_IGNORING_VALUE . OffenseInterface::MIN_BLOCK_IGNORING . '-' . OffenseInterface::MAX_BLOCK_IGNORING
         );
-        $offense->setBlockIgnore(OffenseInterface::MIN_BLOCK_IGNORE - 1);
+        $offense->setBlockIgnoring(OffenseInterface::MIN_BLOCK_IGNORING - 1);
     }
 
     /**
@@ -509,9 +509,9 @@ class OffenseTest extends AbstractUnitTest
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
-            OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE
+            OffenseException::INCORRECT_BLOCK_IGNORING_VALUE . OffenseInterface::MIN_BLOCK_IGNORING . '-' . OffenseInterface::MAX_BLOCK_IGNORING
         );
-        $offense->setBlockIgnore(OffenseInterface::MAX_BLOCK_IGNORE + 1);
+        $offense->setBlockIgnoring(OffenseInterface::MAX_BLOCK_IGNORING + 1);
     }
 
     /**

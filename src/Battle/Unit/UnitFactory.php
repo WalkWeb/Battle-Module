@@ -44,7 +44,7 @@ class UnitFactory
      *             'attack_speed'    => 1.2,
      *             'accuracy'        => 176,
      *             'magic_accuracy'  => 413,
-     *             'block_ignore'    => 0,
+     *             'block_ignoring'  => 0,
      *         ],
      *         'defense'    => [
      *             'defense'        => 134,

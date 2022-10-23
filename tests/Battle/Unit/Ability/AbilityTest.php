@@ -52,13 +52,13 @@ class AbilityTest extends AbstractUnitTest
                     'enemy_command'    => $enemyCommand,
                     'allies_command'   => $command,
                     'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'offense'    => [
+                    'offense'          => [
                         'damage_type'     => 1,
                         'physical_damage' => 36,
                         'attack_speed'    => 1,
                         'accuracy'        => 252,
                         'magic_accuracy'  => 413,
-                        'block_ignore'    => 0,
+                        'block_ignoring'  => 0,
                     ],
                     'can_be_avoided'   => true,
                     'name'             => $name,
@@ -264,11 +264,11 @@ class AbilityTest extends AbstractUnitTest
             [
                 // Отсутствует on_next_round_actions
                 [
-                    'name'                  => 'Battle Fury',
-                    'icon'                  => '/images/icons/ability/102.png',
-                    'duration'              => 15,
-                    'on_apply_actions'      => [],
-                    'on_disable_actions'    => [],
+                    'name'               => 'Battle Fury',
+                    'icon'               => '/images/icons/ability/102.png',
+                    'duration'           => 15,
+                    'on_apply_actions'   => [],
+                    'on_disable_actions' => [],
                 ],
             ],
             [

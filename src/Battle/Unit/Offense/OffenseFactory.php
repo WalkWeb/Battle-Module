@@ -33,7 +33,7 @@ class OffenseFactory
         self::intOrFloat($data, 'cast_speed', OffenseException::INCORRECT_CAST_SPEED);
         self::int($data, 'accuracy', OffenseException::INCORRECT_ACCURACY);
         self::int($data, 'magic_accuracy', OffenseException::INCORRECT_MAGIC_ACCURACY);
-        self::int($data, 'block_ignore', OffenseException::INCORRECT_BLOCK_IGNORE);
+        self::int($data, 'block_ignoring', OffenseException::INCORRECT_BLOCK_IGNORING);
         self::int($data, 'critical_chance', OffenseException::INCORRECT_CRITICAL_CHANCE);
         self::int($data, 'critical_multiplier', OffenseException::INCORRECT_CRITICAL_MULTIPLIER);
         self::int($data, 'vampire', OffenseException::INCORRECT_VAMPIRE);
@@ -58,7 +58,7 @@ class OffenseFactory
             $data['cast_speed'],
             $data['accuracy'],
             $data['magic_accuracy'],
-            $data['block_ignore'],
+            $data['block_ignoring'],
             $data['critical_chance'],
             $data['critical_multiplier'],
             $data['vampire']

@@ -521,7 +521,7 @@ class Unit extends AbstractUnit
             return false;
         }
 
-        return ($block - $action->getActionUnit()->getOffense()->getBlockIgnore()) >= random_int(1, 100);
+        return ($block - $action->getActionUnit()->getOffense()->getBlockIgnoring()) >= random_int(1, 100);
     }
 
     /**

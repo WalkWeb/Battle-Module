@@ -24,7 +24,7 @@ class Offense implements OffenseInterface
     private float $castSpeed;
     private int $accuracy;
     private int $magicAccuracy;
-    private int $blockIgnore;
+    private int $blockIgnoring;
     private int $criticalChance;
     private int $criticalMultiplier;
     private int $vampire;
@@ -43,7 +43,7 @@ class Offense implements OffenseInterface
      * @param float $castSpeed
      * @param int $accuracy
      * @param int $magicAccuracy
-     * @param int $blockIgnore
+     * @param int $blockIgnoring
      * @param int $criticalChance
      * @param int $criticalMultiplier
      * @param int $vampire
@@ -63,7 +63,7 @@ class Offense implements OffenseInterface
         float $castSpeed,
         int $accuracy,
         int $magicAccuracy,
-        int $blockIgnore,
+        int $blockIgnoring,
         int $criticalChance,
         int $criticalMultiplier,
         int $vampire
@@ -82,7 +82,7 @@ class Offense implements OffenseInterface
         $this->setCastSpeed($castSpeed);
         $this->setAccuracy($accuracy);
         $this->setMagicAccuracy($magicAccuracy);
-        $this->setBlockIgnore($blockIgnore);
+        $this->setBlockIgnoring($blockIgnoring);
         $this->setCriticalChance($criticalChance);
         $this->setCriticalMultiplier($criticalMultiplier);
         $this->setVampire($vampire);
@@ -383,24 +383,24 @@ class Offense implements OffenseInterface
     /**
      * @return int
      */
-    public function getBlockIgnore(): int
+    public function getBlockIgnoring(): int
     {
-        return $this->blockIgnore;
+        return $this->blockIgnoring;
     }
 
     /**
-     * @param int $blockIgnore
+     * @param int $blockIgnoring
      * @throws OffenseException
      */
-    public function setBlockIgnore(int $blockIgnore): void
+    public function setBlockIgnoring(int $blockIgnoring): void
     {
-        if ($blockIgnore < self::MIN_BLOCK_IGNORE || $blockIgnore > self::MAX_BLOCK_IGNORE) {
+        if ($blockIgnoring < self::MIN_BLOCK_IGNORING || $blockIgnoring > self::MAX_BLOCK_IGNORING) {
             throw new OffenseException(
-                OffenseException::INCORRECT_BLOCK_IGNORE_VALUE . OffenseInterface::MIN_BLOCK_IGNORE . '-' . OffenseInterface::MAX_BLOCK_IGNORE
+                OffenseException::INCORRECT_BLOCK_IGNORING_VALUE . OffenseInterface::MIN_BLOCK_IGNORING . '-' . OffenseInterface::MAX_BLOCK_IGNORING
             );
         }
 
-        $this->blockIgnore = $blockIgnore;
+        $this->blockIgnoring = $blockIgnoring;
     }
 
     /**

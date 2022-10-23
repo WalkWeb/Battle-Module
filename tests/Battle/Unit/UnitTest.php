@@ -72,7 +72,7 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
         self::assertEquals($data['offense']['cast_speed'], $unit->getOffense()->getCastSpeed());
         self::assertEquals($data['offense']['accuracy'], $unit->getOffense()->getAccuracy());
-        self::assertEquals($data['offense']['block_ignore'], $unit->getOffense()->getBlockIgnore());
+        self::assertEquals($data['offense']['block_ignoring'], $unit->getOffense()->getBlockIgnoring());
 
         $speed = $data['offense']['damage_type'] === OffenseInterface::TYPE_ATTACK ?
             $data['offense']['attack_speed'] : $data['offense']['cast_speed'];

@@ -77,7 +77,7 @@ class SummonSkeletonAbilityTest extends AbstractUnitTest
                             'cast_speed'          => 0,
                             'accuracy'            => 200,
                             'magic_accuracy'      => 100,
-                            'block_ignore'        => 0,
+                            'block_ignoring'      => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 150,
                             'vampire'             => 0,

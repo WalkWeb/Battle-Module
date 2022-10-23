@@ -118,7 +118,7 @@ class StrokeTest extends AbstractUnitTest
                 50,
                 5,
                 200,
-            0
+                0
             ),
             new Defense(
                 0,
@@ -466,7 +466,7 @@ class StrokeTest extends AbstractUnitTest
                             'cast_speed'          => 0,
                             'accuracy'            => 1000,
                             'magic_accuracy'      => 1000,
-                            'block_ignore'        => 0,
+                            'block_ignoring'      => 0,
                             'critical_chance'     => 5,
                             'critical_multiplier' => 200,
                             'vampire'             => 0,

@@ -70,7 +70,7 @@ class HellfireAbilityTest extends AbstractUnitTest
                         'cast_speed'          => 1,
                         'accuracy'            => 500,
                         'magic_accuracy'      => 100,
-                        'block_ignore'        => 0,
+                        'block_ignoring'      => 0,
                         'critical_chance'     => 0,
                         'critical_multiplier' => 0,
                         'vampire'             => 0,
