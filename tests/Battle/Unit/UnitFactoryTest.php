@@ -61,7 +61,7 @@ class UnitFactoryTest extends AbstractUnitTest
         self::assertEquals($data['offense']['block_ignoring'], $unit->getOffense()->getBlockIgnoring());
         self::assertEquals($data['offense']['critical_chance'], $unit->getOffense()->getCriticalChance());
         self::assertEquals($data['offense']['critical_multiplier'], $unit->getOffense()->getCriticalMultiplier());
-        self::assertEquals($data['offense']['vampire'], $unit->getOffense()->getVampire());
+        self::assertEquals($data['offense']['vampirism'], $unit->getOffense()->getVampirism());
 
         self::assertEquals($data['defense']['physical_resist'], $unit->getDefense()->getPhysicalResist());
         self::assertEquals($data['defense']['fire_resist'], $unit->getDefense()->getFireResist());
@@ -130,7 +130,7 @@ class UnitFactoryTest extends AbstractUnitTest
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -191,7 +191,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -241,7 +241,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -290,7 +290,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -340,7 +340,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -398,7 +398,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -449,7 +449,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -500,7 +500,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -551,7 +551,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -601,7 +601,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -652,7 +652,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -703,7 +703,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -754,7 +754,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -804,7 +804,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -855,7 +855,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -905,7 +905,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -956,7 +956,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1007,7 +1007,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1058,7 +1058,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1108,7 +1108,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1159,7 +1159,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1210,7 +1210,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1261,7 +1261,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1311,7 +1311,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1362,7 +1362,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1413,7 +1413,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1464,7 +1464,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1514,7 +1514,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1565,7 +1565,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1616,7 +1616,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1667,7 +1667,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1717,7 +1717,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1768,7 +1768,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1818,7 +1818,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1869,7 +1869,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -1920,7 +1920,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -2036,7 +2036,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                 ],
                 UnitException::INCORRECT_DEFENSE,
@@ -2073,7 +2073,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => 100,
                 ],
@@ -2111,7 +2111,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -2162,7 +2162,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -2213,7 +2213,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -2264,7 +2264,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -2314,7 +2314,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -2365,7 +2365,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -2416,7 +2416,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -2467,7 +2467,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,
@@ -2518,7 +2518,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 5,
                         'critical_multiplier' => 200,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'defense'    => [
                         'physical_resist' => 0,

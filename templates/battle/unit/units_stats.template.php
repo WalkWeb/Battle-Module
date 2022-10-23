@@ -149,7 +149,7 @@ $vampirismTitle = $this->getTranslation()->trans('Vampirism');
                 <td><p><?= $unit->getDefense()->getBlock() ?>%</p></td>
                 <td><p><?= $unit->getDefense()->getMagicBlock() ?>%</p></td>
                 <td><p><?= $unit->getOffense()->getBlockIgnoring() ?></p></td>
-                <td><p><?= $unit->getOffense()->getVampire() ?>%</p></td>
+                <td><p><?= $unit->getOffense()->getVampirism() ?>%</p></td>
             </tr>
         <?php endforeach; ?>
     </table>

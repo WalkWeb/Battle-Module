@@ -27,7 +27,7 @@ class Offense implements OffenseInterface
     private int $blockIgnoring;
     private int $criticalChance;
     private int $criticalMultiplier;
-    private int $vampire;
+    private int $vampirism;
 
     /**
      * @param int $damageType
@@ -46,7 +46,7 @@ class Offense implements OffenseInterface
      * @param int $blockIgnoring
      * @param int $criticalChance
      * @param int $criticalMultiplier
-     * @param int $vampire
+     * @param int $vampirism
      * @throws Exception
      */
     public function __construct(
@@ -66,7 +66,7 @@ class Offense implements OffenseInterface
         int $blockIgnoring,
         int $criticalChance,
         int $criticalMultiplier,
-        int $vampire
+        int $vampirism
     )
     {
         $this->setDamageType($damageType);
@@ -85,7 +85,7 @@ class Offense implements OffenseInterface
         $this->setBlockIgnoring($blockIgnoring);
         $this->setCriticalChance($criticalChance);
         $this->setCriticalMultiplier($criticalMultiplier);
-        $this->setVampire($vampire);
+        $this->setVampirism($vampirism);
     }
 
     /**
@@ -406,24 +406,24 @@ class Offense implements OffenseInterface
     /**
      * @return int
      */
-    public function getVampire(): int
+    public function getVampirism(): int
     {
-        return $this->vampire;
+        return $this->vampirism;
     }
 
     /**
-     * @param int $vampire
+     * @param int $vampirism
      * @throws OffenseException
      */
-    public function setVampire(int $vampire): void
+    public function setVampirism(int $vampirism): void
     {
-        if ($vampire < self::MIN_VAMPIRE || $vampire > self::MAX_VAMPIRE) {
+        if ($vampirism < self::MIN_VAMPIRE || $vampirism > self::MAX_VAMPIRE) {
             throw new OffenseException(
-                OffenseException::INCORRECT_VAMPIRE_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+                OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
             );
         }
 
-        $this->vampire = $vampire;
+        $this->vampirism = $vampirism;
     }
 
     /**

@@ -39,6 +39,6 @@ class OffenseException extends Exception
     public const INCORRECT_CRITICAL_CHANCE_VALUE     = 'Incorrect "block_ignore", should be min-max value: ';
     public const INCORRECT_CRITICAL_MULTIPLIER       = 'Incorrect "block_ignore", it required and type int';
     public const INCORRECT_CRITICAL_MULTIPLIER_VALUE = 'Incorrect "block_ignore", should be min-max value: ';
-    public const INCORRECT_VAMPIRE                   = 'Incorrect "vampire", it required and type int';
-    public const INCORRECT_VAMPIRE_VALUE             = 'Incorrect "vampire", should be min-max value: ';
+    public const INCORRECT_VAMPIRISM                 = 'Incorrect "vampirism", it required and type int';
+    public const INCORRECT_VAMPIRISM_VALUE           = 'Incorrect "vampirism", should be min-max value: ';
 }

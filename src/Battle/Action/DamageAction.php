@@ -153,14 +153,14 @@ class DamageAction extends AbstractAction
             $targetUnit->applyAction($this);
         }
 
-        if ($this->offense->getVampire() > 0) {
+        if ($this->offense->getVampirism() > 0) {
             $this->actionUnit->applyAction(new HealAction(
                 $this->container,
                 $this->actionUnit,
                 $this->enemyCommand,
                 $this->alliesCommand,
                 HealAction::TARGET_SELF,
-                $this->restoreLifeFromVampirism = (int)($this->factualPower * ($this->offense->getVampire() / 100)),
+                $this->restoreLifeFromVampirism = (int)($this->factualPower * ($this->offense->getVampirism() / 100)),
                 '',
                 HealAction::SKIP_ANIMATION_METHOD,
                 HealAction::SKIP_MESSAGE_METHOD

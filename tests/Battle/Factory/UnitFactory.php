@@ -46,7 +46,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -93,7 +93,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -140,7 +140,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -187,7 +187,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -235,7 +235,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -282,7 +282,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -329,7 +329,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -376,7 +376,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -424,7 +424,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -472,7 +472,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -520,7 +520,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -567,7 +567,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -614,7 +614,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -661,7 +661,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -709,7 +709,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -757,7 +757,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -804,7 +804,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -852,7 +852,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -900,7 +900,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -948,7 +948,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -996,7 +996,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1044,7 +1044,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1092,7 +1092,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1140,7 +1140,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1188,7 +1188,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1236,7 +1236,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1284,7 +1284,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1332,7 +1332,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1380,7 +1380,7 @@ class UnitFactory
                 'block_ignoring'      => 100,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1428,7 +1428,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1476,7 +1476,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1524,7 +1524,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1572,7 +1572,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1620,7 +1620,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1668,7 +1668,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1716,7 +1716,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1764,7 +1764,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1812,7 +1812,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1860,7 +1860,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 80,
@@ -1908,7 +1908,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 50,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -1956,7 +1956,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 49,
                 'critical_multiplier' => 300,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -2004,7 +2004,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 0,
                 'critical_multiplier' => 0,
-                'vampire'             => 50,
+                'vampirism'           => 50,
             ],
             'defense'    => [
                 'physical_resist' => 0,
@@ -2053,7 +2053,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
-                'vampire'             => 0,
+                'vampirism'           => 0,
             ],
             'defense'    => [
                 'physical_resist' => 0,

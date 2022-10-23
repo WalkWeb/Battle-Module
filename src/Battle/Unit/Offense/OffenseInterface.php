@@ -281,14 +281,14 @@ interface OffenseInterface
      *
      * @return int
      */
-    public function getVampire(): int;
+    public function getVampirism(): int;
 
     /**
      * Устанавливает новое значение вампиризма. Используется в эффектах, изменяющих этот параметр
      *
-     * @param int $vampire
+     * @param int $vampirism
      */
-    public function setVampire(int $vampire): void;
+    public function setVampirism(int $vampirism): void;
 
     /**
      * Возвращает ДПС (средний урон за ход = урон * скорость атаки)

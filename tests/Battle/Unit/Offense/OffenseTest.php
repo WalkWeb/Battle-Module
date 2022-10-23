@@ -81,7 +81,7 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($blockIgnore, $offense->getBlockIgnoring());
         self::assertEquals($criticalChance, $offense->getCriticalChance());
         self::assertEquals($criticalMultiplier, $offense->getCriticalMultiplier());
-        self::assertEquals($vampire, $offense->getVampire());
+        self::assertEquals($vampire, $offense->getVampirism());
         self::assertEquals(
             round(($physicalDamage + $fireDamage + $waterDamage + $airDamage + $earthDamage + $lifeDamage + $deathDamage) * $attackSpeed, 1),
             $offense->getDPS()
@@ -601,9 +601,9 @@ class OffenseTest extends AbstractUnitTest
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
-            OffenseException::INCORRECT_VAMPIRE_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+            OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
         );
-        $offense->setVampire(OffenseInterface::MIN_VAMPIRE - 1);
+        $offense->setVampirism(OffenseInterface::MIN_VAMPIRE - 1);
     }
 
     /**
@@ -617,9 +617,9 @@ class OffenseTest extends AbstractUnitTest
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
-            OffenseException::INCORRECT_VAMPIRE_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+            OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
         );
-        $offense->setVampire(OffenseInterface::MAX_VAMPIRE + 1);
+        $offense->setVampirism(OffenseInterface::MAX_VAMPIRE + 1);
     }
 
     /**

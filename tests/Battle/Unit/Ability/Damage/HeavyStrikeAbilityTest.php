@@ -70,7 +70,7 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
                         'block_ignoring'      => 0,
                         'critical_chance'     => 0,
                         'critical_multiplier' => 0,
-                        'vampire'             => 0,
+                        'vampirism'           => 0,
                     ],
                     'can_be_avoided'   => true,
                     'name'             => $name,
