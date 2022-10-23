@@ -47,7 +47,7 @@ class WardenTest extends AbstractUnitTest
                 $actions = $ability->getActions($enemyCommand, $command);
 
                 foreach ($actions as $action) {
-                    self::assertEquals(30, $action->getOffense()->getPhysicalDamage());
+                    self::assertEquals(30, $action->getOffense()->getFireDamage());
                 }
             }
 
@@ -119,8 +119,8 @@ class WardenTest extends AbstractUnitTest
                     'offense'          => [
                         'damage_type'         => 2,
                         'weapon_type'         => 0,
-                        'physical_damage'     => 6,
-                        'fire_damage'         => 0,
+                        'physical_damage'     => 0,
+                        'fire_damage'         => 6,
                         'water_damage'        => 0,
                         'air_damage'          => 0,
                         'earth_damage'        => 0,
