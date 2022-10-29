@@ -42,6 +42,8 @@ class WarriorTest extends AbstractUnitTest
 
         $abilities = $warrior->getAbilities($unit);
 
+        self::assertCount(2, $abilities);
+
         foreach ($abilities as $i => $ability) {
             if ($i === 0) {
                 self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);

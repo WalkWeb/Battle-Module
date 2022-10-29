@@ -58,6 +58,7 @@ return [
     'Blessed Shield'                                                 => 'Благословенный щит',
     'Will to live'                                                   => 'Воля к жизни',
     'Paralysis'                                                      => 'Паралич',
+    'Stun'                                                           => 'Оглушение',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

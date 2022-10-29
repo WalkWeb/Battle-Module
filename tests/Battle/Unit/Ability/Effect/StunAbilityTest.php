@@ -28,7 +28,7 @@ use Tests\Battle\Factory\UnitFactory;
 class StunAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Stun</span> on <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Stun</span> на <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Оглушение</span> на <span style="color: #1e72e3">unit_2</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------

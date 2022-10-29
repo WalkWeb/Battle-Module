@@ -60,6 +60,7 @@ return [
     'Blessed Shield'                                                 => 'Blessed Shield',
     'Will to live'                                                   => 'Will to live',
     'Paralysis'                                                      => 'Paralysis',
+    'Stun'                                                           => 'Stun',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
