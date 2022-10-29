@@ -7,6 +7,7 @@ namespace Tests\Battle\Unit\Ability\Effect;
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
+use Battle\Action\ParalysisAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
@@ -27,8 +28,11 @@ use Tests\Battle\Factory\UnitFactory;
  */
 class StunAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Stun</span> on <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Оглушение</span> на <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_APPLY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Stun</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_APPLY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Оглушение</span> на <span style="color: #1e72e3">unit_2</span>';
+
+    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> stunned and unable to move';
+    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> оглушен и не может двигаться';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -109,8 +113,8 @@ class StunAbilityTest extends AbstractUnitTest
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
-            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
-            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+            self::assertEquals(self::MESSAGE_APPLY_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_APPLY_RU, $this->getChatRu()->addMessage($action));
         }
 
         // Эффект появляется
@@ -122,6 +126,14 @@ class StunAbilityTest extends AbstractUnitTest
         // Пропускаем ходы - заполняем ярость. А также сбрасываем эффект у противника
         for ($i = 0; $i < 20; $i++) {
             $unit->newRound();
+
+            foreach ($enemyUnit->getBeforeActions() as $beforeAction) {
+                if ($beforeAction->canByUsed()) {
+                    $beforeAction->handle();
+                    self::assertEquals(self::MESSAGE_EFFECT_EN, $this->getChat()->addMessage($beforeAction));
+                    self::assertEquals(self::MESSAGE_EFFECT_RU, $this->getChatRu()->addMessage($beforeAction));
+                }
+            }
 
             // Длительность эффектов обновляется в getAfterActions()
             foreach ($enemyUnit->getAfterActions() as $afterAction) {
@@ -217,8 +229,8 @@ class StunAbilityTest extends AbstractUnitTest
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
-            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
-            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+            self::assertEquals(self::MESSAGE_APPLY_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_APPLY_RU, $this->getChatRu()->addMessage($action));
         }
 
         // Эффект появляется
@@ -230,6 +242,14 @@ class StunAbilityTest extends AbstractUnitTest
         // Пропускаем ходы - заполняем ярость. А также сбрасываем эффект у противника
         for ($i = 0; $i < 20; $i++) {
             $unit->newRound();
+
+            foreach ($enemyUnit->getBeforeActions() as $beforeAction) {
+                if ($beforeAction->canByUsed()) {
+                    $beforeAction->handle();
+                    self::assertEquals(self::MESSAGE_EFFECT_EN, $this->getChat()->addMessage($beforeAction));
+                    self::assertEquals(self::MESSAGE_EFFECT_RU, $this->getChatRu()->addMessage($beforeAction));
+                }
+            }
 
             // Длительность эффектов обновляется в getAfterActions()
             foreach ($enemyUnit->getAfterActions() as $afterAction) {
@@ -290,7 +310,7 @@ class StunAbilityTest extends AbstractUnitTest
                         'name'             => $name,
                         'can_be_avoided'   => false,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
-                        'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                        'message_method'   => ParalysisAction::STUN_MESSAGE_METHOD,
                         'icon'             => $icon,
                     ],
                 ],
@@ -337,7 +357,7 @@ class StunAbilityTest extends AbstractUnitTest
                                 'name'             => $name,
                                 'can_be_avoided'   => false,
                                 'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
-                                'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                                'message_method'   => ParalysisAction::STUN_MESSAGE_METHOD,
                                 'icon'             => $icon,
                             ],
                         ],

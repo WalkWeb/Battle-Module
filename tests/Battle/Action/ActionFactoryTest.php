@@ -203,6 +203,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'action_unit'    => $unit,
             'enemy_command'  => $enemyCommand,
             'allies_command' => $command,
+            'message_method' => ParalysisAction::PARALYSIS_MESSAGE_METHOD,
         ];
 
         $action = $this->getActionFactory()->create($data);

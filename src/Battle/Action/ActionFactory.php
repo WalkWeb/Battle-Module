@@ -124,11 +124,15 @@ class ActionFactory
         }
 
         if ($className === ParalysisAction::class) {
+
+            $messageMethod = self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
+
             return new ParalysisAction(
                 $this->container,
                 $actionUnit,
                 $enemyCommand,
-                $alliesCommand
+                $alliesCommand,
+                $messageMethod
             );
         }
 

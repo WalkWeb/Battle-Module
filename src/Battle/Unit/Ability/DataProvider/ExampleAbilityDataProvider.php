@@ -7,6 +7,7 @@ namespace Battle\Unit\Ability\DataProvider;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
+use Battle\Action\ParalysisAction;
 use Battle\Action\ResurrectionAction;
 use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityInterface;
@@ -283,7 +284,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'name'             => 'Paralysis',
                                     'can_be_avoided'   => false,
                                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
-                                    'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                                    'message_method'   => ParalysisAction::PARALYSIS_MESSAGE_METHOD,
                                     'icon'             => '/images/icons/ability/086.png',
                                 ],
                             ],
@@ -317,8 +318,8 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'      => ActionInterface::TARGET_SELF,
                                     'name'             => 'Stun',
                                     'can_be_avoided'   => false,
-                                    'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
-                                    'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                                    'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD, // TODO Способность не должна обращаться к чужим константам
+                                    'message_method'   => ParalysisAction::STUN_MESSAGE_METHOD,
                                     'icon'             => '/images/icons/ability/186.png',
                                 ],
                             ],

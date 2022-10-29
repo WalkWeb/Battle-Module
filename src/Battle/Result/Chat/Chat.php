@@ -35,10 +35,12 @@ class Chat implements ChatInterface
     }
 
     /**
+     * Добавляет сообщение в чат на основе его типа и параметров
+     *
      * @param ActionInterface $action
      * @return string
      * @throws ChatException
-     * @uses damage, damageAbility, heal, healAbility, summon, wait, paralysis, buff, resurrected, selfRaceResurrected, applyEffect, effectDamage, effectHeal, skip
+     * @uses damage, damageAbility, heal, healAbility, summon, wait, paralysis, stunned, buff, resurrected, selfRaceResurrected, applyEffect, effectDamage, effectHeal, skip
      */
     public function addMessage(ActionInterface $action): string
     {
@@ -229,7 +231,7 @@ class Chat implements ChatInterface
     }
 
     /**
-     * Формирует сообщение о пропуске хода из-за эффектов паралича:
+     * Формирует сообщение о пропуске хода из-за эффекта паралича:
      * $unit paralyzed and unable to move
      *
      * @param ActionInterface $action
@@ -239,6 +241,21 @@ class Chat implements ChatInterface
     {
         return sprintf(
             $this->translation->trans('%s paralyzed and unable to move'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>'
+        );
+    }
+
+    /**
+     * Формирует сообщение о пропуске хода из-за эффекта оглушения:
+     * $unit stunned and unable to move
+     *
+     * @param ActionInterface $action
+     * @return string
+     */
+    private function stunned(ActionInterface $action): string
+    {
+        return sprintf(
+            $this->translation->trans('%s stunned and unable to move'),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>'
         );
     }

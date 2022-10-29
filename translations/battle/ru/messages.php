@@ -179,6 +179,8 @@ return [
     '%s preparing to attack'                                         => '%s готовится к атаке',
     // $unit paralyzed and unable to move
     '%s paralyzed and unable to move'                                => '%s парализован и не может двигаться',
+    // $unit stunned and unable to move
+    '%s stunned and unable to move'                                  => '%s оглушен и не может двигаться',
     // $unit use $icon $ability and resurrected $targets
     '%s use %s %s and resurrected %s'                                => '%s использовал %s %s и воскресил %s',
     // $unit died, but due to the innate ability $icon $ability came back to life

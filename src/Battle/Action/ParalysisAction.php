@@ -22,9 +22,14 @@ class ParalysisAction extends AbstractAction
 {
     private const HANDLE_METHOD           = 'applyParalysisAction';
 
-    // Анимация (точнее её отсутствие) полностью совпадает с аналогичной для WaitAction, по этому используем её
     public const DEFAULT_ANIMATION_METHOD = 'wait';
-    public const DEFAULT_MESSAGE_METHOD   = 'paralysis';
+    public const PARALYSIS_MESSAGE_METHOD = 'paralysis';
+    public const STUN_MESSAGE_METHOD      = 'stunned';
+
+    /**
+     * @var string
+     */
+    protected string $messageMethod;
 
     /**
      * В отличие от прочих событий, ParalysisAction всегда применяется к себе и не требует $typeTarget в конструктор
@@ -33,15 +38,19 @@ class ParalysisAction extends AbstractAction
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
+     * @param string $messageMethod
      */
     public function __construct(
         ContainerInterface $container,
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
-        CommandInterface $alliesCommand
+        CommandInterface $alliesCommand,
+        string $messageMethod
     )
     {
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF);
+
+        $this->messageMethod = $messageMethod;
     }
 
     public function getHandleMethod(): string
@@ -66,7 +75,7 @@ class ParalysisAction extends AbstractAction
 
     public function getMessageMethod(): string
     {
-        return self::DEFAULT_MESSAGE_METHOD;
+        return $this->messageMethod;
     }
 
     /**

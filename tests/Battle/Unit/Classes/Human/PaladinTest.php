@@ -7,6 +7,7 @@ namespace Tests\Battle\Unit\Classes\Human;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
+use Battle\Action\ParalysisAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
@@ -93,7 +94,7 @@ class PaladinTest extends AbstractUnitTest
                     'name'             => 'Stun',
                     'can_be_avoided'   => false,
                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
-                    'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                    'message_method'   => ParalysisAction::STUN_MESSAGE_METHOD,
                     'icon'             => '/images/icons/ability/186.png',
                 ],
             ],

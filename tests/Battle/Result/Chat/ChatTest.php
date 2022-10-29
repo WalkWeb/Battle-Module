@@ -446,7 +446,8 @@ class ChatTest extends AbstractUnitTest
             $this->getContainer(),
             $unit,
             $enemyCommand,
-            $command
+            $command,
+            ParalysisAction::PARALYSIS_MESSAGE_METHOD
         );
 
         self::assertTrue($action->canByUsed());
