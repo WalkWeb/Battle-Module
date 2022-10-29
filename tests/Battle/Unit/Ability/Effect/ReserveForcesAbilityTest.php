@@ -449,6 +449,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
     }
 
     /**
+     * @param ContainerInterface $container
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
@@ -462,6 +463,9 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         CommandInterface $alliesCommand
     ): ActionCollection
     {
+        $name = 'Reserve Forces';
+        $icon = '/images/icons/ability/156.png';
+
         $collection = new ActionCollection();
 
         $data = [
@@ -470,13 +474,13 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
             'enemy_command'  => $enemyCommand,
             'allies_command' => $alliesCommand,
             'type_target'    => ActionInterface::TARGET_SELF,
-            'name'           => 'Reserve Forces',
+            'name'           => $name,
             'use_message'    => 'use',
             'message_method' => 'applyEffect',
-            'icon'           => '/images/icons/ability/156.png',
+            'icon'           => $icon,
             'effect'         => [
-                'name'                  => 'Reserve Forces',
-                'icon'                  => '/images/icons/ability/156.png',
+                'name'                  => $name,
+                'icon'                  => $icon,
                 'duration'              => 6,
                 'on_apply_actions'      => [
                     [
@@ -485,7 +489,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
                         'enemy_command'  => $enemyCommand,
                         'allies_command' => $alliesCommand,
                         'type_target'    => ActionInterface::TARGET_SELF,
-                        'name'           => 'Reserve Forces',
+                        'name'           => $name,
                         'modify_method'  => 'multiplierMaxLife',
                         'power'          => 130,
                         'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,

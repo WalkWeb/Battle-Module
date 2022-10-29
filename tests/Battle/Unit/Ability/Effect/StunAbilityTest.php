@@ -11,8 +11,6 @@ use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
-use Battle\Result\Scenario\Scenario;
-use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
@@ -22,28 +20,31 @@ use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 
 /**
- * ParalysisAbilityTest почти аналогичен тесту StunAbilityTest, т.к. у обоих способностей аналогичное действие -
+ * StunAbilityTest почти аналогичен тесту ParalysisAbilityTest, т.к. у обоих способностей аналогичное действие -
  * блокируют действия юнита в его ходе
  *
  * @package Tests\Battle\Unit\Ability\Effect
  */
-class ParalysisAbilityTest extends AbstractUnitTest
+class StunAbilityTest extends AbstractUnitTest
 {
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Stun</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Stun</span> на <span style="color: #1e72e3">unit_2</span>';
+
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Тест на создание способности Paralysis через универсальный объект Ability
+     * Тест на создание способности Stun через универсальный объект Ability
      *
      * @throws Exception
      */
-    public function testParalysisAbilityCreate(): void
+    public function testStunAbilityCreate(): void
     {
-        $name = 'Paralysis';
-        $icon = '/images/icons/ability/086.png';
-
         $container = new Container();
+        $name = 'Stun';
+        $icon = '/images/icons/ability/186.png';
+
         $unit = UnitFactory::createByTemplate(1, $container);
         $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
@@ -59,8 +60,8 @@ class ParalysisAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->isDisposable());
         self::assertFalse($ability->isUsage());
 
-        // Up rage
-        for ($i = 0; $i < 20; $i++) {
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
             $unit->newRound();
         }
 
@@ -76,7 +77,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getParalysisActions($container, $unit, $enemyCommand, $command),
+            $this->getStunActions($container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -86,11 +87,11 @@ class ParalysisAbilityTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на применение способности Paralysis
+     * Тест на применение способности Stun
      *
      * @throws Exception
      */
-    public function testParalysisAbilityUse(): void
+    public function testStunAbilityUse(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -108,6 +109,8 @@ class ParalysisAbilityTest extends AbstractUnitTest
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
 
         // Эффект появляется
@@ -140,22 +143,22 @@ class ParalysisAbilityTest extends AbstractUnitTest
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * Тест на создание способности ParalysisAction через AbilityDataProvider
+     * Тест на создание способности Stun через AbilityDataProvider
      *
      * @throws Exception
      */
-    public function testParalysisAbilityDataProviderCreate(): void
+    public function testStunAbilityDataProviderCreate(): void
     {
-        $name = 'Paralysis';
-        $icon = '/images/icons/ability/086.png';
-
         $container = new Container();
-        $unit = UnitFactory::createByTemplate(21, $container);
+        $name = 'Stun';
+        $icon = '/images/icons/ability/186.png';
+
+        $unit = UnitFactory::createByTemplate(1, $container);
         $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+        $ability = $this->createAbilityByDataProvider($unit, 'Stun');
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -165,8 +168,8 @@ class ParalysisAbilityTest extends AbstractUnitTest
         self::assertFalse($ability->isDisposable());
         self::assertFalse($ability->isUsage());
 
-        // Up rage
-        for ($i = 0; $i < 20; $i++) {
+        // Up concentration
+        for ($i = 0; $i < 10; $i++) {
             $unit->newRound();
         }
 
@@ -182,7 +185,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getParalysisActions($container, $unit, $enemyCommand, $command),
+            $this->getStunActions($container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -192,16 +195,18 @@ class ParalysisAbilityTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на применение способности Stun через AbilityDataProvider
+     *
      * @throws Exception
      */
-    public function testParalysisAbilityDataProviderCanByUsed(): void
+    public function testStunAbilityDataProviderUse(): void
     {
-        $unit = UnitFactory::createByTemplate(21);
+        $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+        $ability = $this->createAbilityByDataProvider($unit, 'Stun');
 
         // Изначально эффектов на юните нет
         self::assertCount(0, $enemyUnit->getEffects());
@@ -212,9 +217,8 @@ class ParalysisAbilityTest extends AbstractUnitTest
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
-
-            // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
+            self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
         }
 
         // Эффект появляется
@@ -250,13 +254,16 @@ class ParalysisAbilityTest extends AbstractUnitTest
      * @return ActionCollection
      * @throws Exception
      */
-    private function getParalysisActions(
+    private function getStunActions(
         ContainerInterface $container,
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand
     ): ActionCollection
     {
+        $name = 'Stun';
+        $icon = '/images/icons/ability/186.png';
+
         $collection = new ActionCollection();
 
         $data = [
@@ -265,12 +272,12 @@ class ParalysisAbilityTest extends AbstractUnitTest
             'enemy_command'  => $enemyCommand,
             'allies_command' => $alliesCommand,
             'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-            'name'           => 'Paralysis',
-            'icon'           => '/images/icons/ability/086.png',
+            'name'           => $name,
+            'icon'           => $icon,
             'message_method' => 'applyEffect',
             'effect'         => [
-                'name'                  => 'Paralysis',
-                'icon'                  => '/images/icons/ability/086.png',
+                'name'                  => $name,
+                'icon'                  => $icon,
                 'duration'              => 2,
                 'on_apply_actions'      => [],
                 'on_next_round_actions' => [
@@ -280,11 +287,11 @@ class ParalysisAbilityTest extends AbstractUnitTest
                         'enemy_command'    => $enemyCommand,
                         'allies_command'   => $alliesCommand,
                         'type_target'      => ActionInterface::TARGET_SELF,
-                        'name'             => 'Paralysis',
+                        'name'             => $name,
                         'can_be_avoided'   => false,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                         'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
-                        'icon'             => '/images/icons/ability/086.png',
+                        'icon'             => $icon,
                     ],
                 ],
                 'on_disable_actions'    => [],
@@ -303,8 +310,8 @@ class ParalysisAbilityTest extends AbstractUnitTest
      */
     private function createAbility(UnitInterface $unit): AbilityInterface
     {
-        $name = 'Paralysis';
-        $icon = '/images/icons/ability/086.png';
+        $name = 'Stun';
+        $icon = '/images/icons/ability/186.png';
 
         return new Ability(
             $unit,
@@ -338,8 +345,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
                     ],
                 ],
             ],
-            AbilityInterface::ACTIVATE_RAGE,
-            0
+            AbilityInterface::ACTIVATE_CONCENTRATION,
         );
     }
 

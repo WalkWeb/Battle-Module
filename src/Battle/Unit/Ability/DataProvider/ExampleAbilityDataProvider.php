@@ -293,6 +293,41 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Stun'      => [
+            1 => [
+                'name'          => 'Stun',
+                'icon'          => '/images/icons/ability/186.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'name'           => 'Stun',
+                        'icon'           => '/images/icons/ability/186.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Stun',
+                            'icon'                  => '/images/icons/ability/186.png',
+                            'duration'              => 2,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::PARALYSIS,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Stun',
+                                    'can_be_avoided'   => false,
+                                    'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/186.png',
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+        ],
         'Poison'         => [
             1 => [
                 'name'          => 'Poison',
