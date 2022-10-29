@@ -123,6 +123,12 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
                 ],
             ],
         ],
+        8 => [
+            'id'         => 8,
+            'name'       => 'Paladin',
+            'small_icon' => '/images/icons/small/paladin.png',
+            'abilities'  => [],
+        ],
         50 => [
             'id'         => 50,
             'name'       => 'Warden',

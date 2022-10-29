@@ -22,9 +22,11 @@ use Tests\Battle\Factory\UnitFactory;
 class WarriorTest extends AbstractUnitTest
 {
     /**
+     * Тест на создание класса Warrior и проверка его способностей
+     *
      * @throws Exception
      */
-    public function testCreateWarriorClass(): void
+    public function testWarriorCreateClass(): void
     {
         $container = new Container();
         $unit = UnitFactory::createByTemplate(1, $container);
@@ -67,6 +69,8 @@ class WarriorTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на активацию способностей Warrior
+     *
      * @throws CommandException
      * @throws UnitException
      * @throws Exception

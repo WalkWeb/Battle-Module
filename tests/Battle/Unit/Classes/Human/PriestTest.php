@@ -17,11 +17,13 @@ use Tests\Battle\Factory\UnitFactory;
 class PriestTest extends AbstractUnitTest
 {
     /**
+     * Тест на создание класса Priest и проверка его способностей
+     *
      * @throws CommandException
      * @throws UnitException
      * @throws Exception
      */
-    public function testCreatePriestClass(): void
+    public function testPriestCreateClass(): void
     {
         $unit = UnitFactory::createByTemplate(5);
         $enemyUnit = UnitFactory::createByTemplate(1);
@@ -63,6 +65,8 @@ class PriestTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на активацию способностей Priest
+     *
      * @throws Exception
      */
     public function testPriestReadyAbility(): void
