@@ -118,7 +118,8 @@ class BuffAction extends AbstractAction
             $this->typeTarget,
             $this->name,
             $this->modifyMethod . self::ROLLBACK_METHOD_SUFFIX,
-            $this->power
+            $this->power,
+            self::SKIP_MESSAGE_METHOD
         );
 
         $rollbackAction->setRevertValue($this->getRevertValue());

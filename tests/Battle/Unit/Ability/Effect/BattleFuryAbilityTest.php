@@ -178,6 +178,34 @@ class BattleFuryAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
     }
 
+    /**
+     * Тест на проверку того, что при откате бафа BattleFury (должно работать со всеми бафами) сообщение в чат не
+     * формируется
+     *
+     * @throws Exception
+     */
+    public function testBattleFuryRevertMessage(): void
+    {
+        $unit = UnitFactory::createByTemplate(21);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbility($unit);
+
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
+
+            $effect = $action->getEffect();
+
+            $onDisableActions = $effect->getOnDisableActions();
+
+            foreach ($onDisableActions as $onDisableAction) {
+                self::assertEquals('', $this->getChat()->addMessage($onDisableAction));
+                self::assertEquals('', $this->getChatRu()->addMessage($onDisableAction));
+            }
+        }
+    }
+
     // -----------------------------------------------------------------------------------------------------------------
     // -------------------------------   Аналогичные тесты через AbilityDataProvider   ---------------------------------
     // -----------------------------------------------------------------------------------------------------------------
