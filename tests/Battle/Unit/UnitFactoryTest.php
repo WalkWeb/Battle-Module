@@ -40,6 +40,7 @@ class UnitFactoryTest extends AbstractUnitTest
         self::assertEquals($data['life'], $unit->getLife());
         self::assertEquals($data['melee'], $unit->isMelee());
         self::assertEquals($data['command'], $unit->getCommand());
+        self::assertEquals($data['add_concentration_multiplier'], $unit->getAddConcentrationMultiplier());
         self::assertEquals($class, $unit->getClass());
         self::assertEquals($race, $unit->getRace());
 
@@ -101,19 +102,20 @@ class UnitFactoryTest extends AbstractUnitTest
     public function testUnitFactoryHtmlspecialchars(): void
     {
         $data = [
-            'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-            'name'       => '<b>Skeleton</b>',
-            'level'      => 1,
-            'avatar'     => '/images/avas/monsters/003.png',
-            'life'       => 80,
-            'total_life' => 80,
-            'mana'       => 50,
-            'total_mana' => 50,
-            'melee'      => true,
-            'class'      => 1,
-            'race'       => 8,
-            'command'    => 1,
-            'offense'    => [
+            'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+            'name'                         => '<b>Skeleton</b>',
+            'level'                        => 1,
+            'avatar'                       => '/images/avas/monsters/003.png',
+            'life'                         => 80,
+            'total_life'                   => 80,
+            'mana'                         => 50,
+            'total_mana'                   => 50,
+            'melee'                        => true,
+            'class'                        => 1,
+            'race'                         => 8,
+            'command'                      => 1,
+            'add_concentration_multiplier' => 0,
+            'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 15,
@@ -132,7 +134,7 @@ class UnitFactoryTest extends AbstractUnitTest
                 'critical_multiplier' => 200,
                 'vampirism'           => 0,
             ],
-            'defense'    => [
+            'defense'                      => [
                 'physical_resist' => 0,
                 'fire_resist'     => 0,
                 'water_resist'    => 0,
@@ -162,19 +164,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // attack_speed и cast_speed float
                 [
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -193,7 +196,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -212,19 +215,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // attack_speed и cast_speed int - такой вариант также доступен
                 [
-                    'id'         => '5aa0d764-e92d-4137-beed-f7f590b08165',
-                    'name'       => 'Skeleton',
-                    'level'      => 5,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 8,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5aa0d764-e92d-4137-beed-f7f590b08165',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 5,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 8,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -243,7 +247,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -262,18 +266,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // отсутствует класс
                 [
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -292,7 +297,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -311,19 +316,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // класс = null
                 [
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => null,
-                    'race'       => 1,
-                    'command'    => 2,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => null,
+                    'race'                         => 1,
+                    'command'                      => 2,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -342,7 +348,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -370,18 +376,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 0. отсутствует id
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -400,7 +407,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -420,19 +427,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 1. id некорректного типа
-                    'id'         => 123123,
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => 123123,
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -451,7 +459,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -471,19 +479,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 2. id меньше минимальной длины (0)
-                    'id'         => '',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -502,7 +511,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -522,19 +531,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 3. id больше максимальной длины (4)
-                    'id'         => 'llllllllllllllllllllllllllllllllllllllll',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => 'llllllllllllllllllllllllllllllllllllllll',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -553,7 +563,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -573,18 +583,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 4. отсутствует name
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -603,7 +614,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -623,19 +634,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 5. некорректный name
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 123,
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 123,
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -654,7 +666,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -674,19 +686,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 6. Длина name меньше минимальной длины
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => '',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => '',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -705,7 +718,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -725,19 +738,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 7. Длина name больше максимальной длины
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'lllllllllllllllllllll',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'lllllllllllllllllllll',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -756,7 +770,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -776,18 +790,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 8. отсутствует avatar
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -806,7 +821,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -826,19 +841,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 9. некорректный avatar
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => ['ava' => '/images/avas/monsters/003.png'],
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => ['ava' => '/images/avas/monsters/003.png'],
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -857,7 +873,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -877,18 +893,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 10. отсутствует life
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'total_life' => 150,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'total_life'                   => 150,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -907,7 +924,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -927,19 +944,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 11. некорректный life
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80.0,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80.0,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -958,7 +976,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -978,19 +996,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 12. life < UnitInterface::MIN_LIFE
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => UnitInterface::MIN_LIFE - 1,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => UnitInterface::MIN_LIFE - 1,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1009,7 +1028,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1029,19 +1048,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 13. life > UnitInterface::MAX_LIFE
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => UnitInterface::MAX_LIFE + 1,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => UnitInterface::MAX_LIFE + 1,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1060,7 +1080,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1080,18 +1100,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 14. отсутствует total life
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1110,7 +1131,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1130,19 +1151,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 15. некорректный total life
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80.0,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80.0,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1161,7 +1183,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1181,19 +1203,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 16. total life < UnitInterface::MIN_TOTAL_LIFE
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 0,
-                    'total_life' => UnitInterface::MIN_TOTAL_LIFE - 1,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 0,
+                    'total_life'                   => UnitInterface::MIN_TOTAL_LIFE - 1,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1212,7 +1235,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1232,19 +1255,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 17. total life > UnitInterface::MAX_TOTAL_LIFE
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 0,
-                    'total_life' => UnitInterface::MAX_TOTAL_LIFE + 1,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 0,
+                    'total_life'                   => UnitInterface::MAX_TOTAL_LIFE + 1,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1263,7 +1287,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1283,18 +1307,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 18. отсутствует melee
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1313,7 +1338,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1333,19 +1358,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 19. некорректный melee
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => 1,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => 1,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1364,7 +1390,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1384,19 +1410,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 20. некорректный class
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 'warrior',
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 'warrior',
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1415,7 +1442,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1435,19 +1462,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 21. life большие total life
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 90,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 90,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1466,7 +1494,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1486,18 +1514,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 22. level отсутствует
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1516,7 +1545,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1536,19 +1565,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 23. level некорректного типа
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => '3',
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => '3',
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1567,7 +1597,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1587,19 +1617,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 24. level < UnitInterface::MIN_LEVEL
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => UnitInterface::MIN_LEVEL - 1,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => UnitInterface::MIN_LEVEL - 1,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1618,7 +1649,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1638,19 +1669,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 25. level > UnitInterface::MAX_LEVEL
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => UnitInterface::MAX_LEVEL + 1,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => UnitInterface::MAX_LEVEL + 1,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1669,7 +1701,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1689,18 +1721,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 26. отсутствует race
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1719,7 +1752,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1739,19 +1772,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 27. race некорректного типа
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 'human',
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 'human',
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1770,7 +1804,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1790,18 +1824,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 28. отсутствует command
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1820,7 +1855,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1840,19 +1875,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 29. command некорректного типа
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 'left',
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 'left',
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1871,7 +1907,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1891,19 +1927,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // 30. command != 1 && != 2
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 3,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 3,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -1922,7 +1959,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1942,19 +1979,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 31. Отсутствует offense
                 [
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'defense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -1974,20 +2012,21 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 32. offense некорректного типа
                 [
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => true,
-                    'defense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => true,
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -2007,19 +2046,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 33. Отсутствует defense
                 [
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2044,19 +2084,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 34. defense некорректного типа
                 [
-                    'id'         => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
-                    'name'       => 'Skeleton',
-                    'level'      => 3,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2075,7 +2116,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => 100,
+                    'defense'                      => 100,
                 ],
                 UnitException::INCORRECT_DEFENSE,
             ],
@@ -2083,18 +2124,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 35. Отсутствует mana
                 [
-                    'id'         => '5aa0d764-e92d-4137-beed-f7f590b08165',
-                    'name'       => 'Skeleton',
-                    'level'      => 5,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 8,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5aa0d764-e92d-4137-beed-f7f590b08165',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 5,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 8,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2113,7 +2155,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -2133,19 +2175,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 36. mana некорректного типа
                 [
-                    'id'         => '5aa0d764-e92d-4137-beed-f7f590b08165',
-                    'name'       => 'Skeleton',
-                    'level'      => 5,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50.0,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 8,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5aa0d764-e92d-4137-beed-f7f590b08165',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 5,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50.0,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 8,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2164,7 +2207,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -2184,19 +2227,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 37. mana меньше минимального значения
                 [
-                    'id'         => '5aa0d764-e92d-4137-beed-f7f590b08165',
-                    'name'       => 'Skeleton#37',
-                    'level'      => 5,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => UnitInterface::MIN_MANA - 1,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 8,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5aa0d764-e92d-4137-beed-f7f590b08165',
+                    'name'                         => 'Skeleton#37',
+                    'level'                        => 5,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => UnitInterface::MIN_MANA - 1,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 8,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2215,7 +2259,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -2235,19 +2279,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 38. mana больше максимального значения
                 [
-                    'id'         => '5aa0d764-e92d-4137-beed-f7f590b08165',
-                    'name'       => 'Skeleton',
-                    'level'      => 5,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => UnitInterface::MAX_MANA + 1,
-                    'total_mana' => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 8,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5aa0d764-e92d-4137-beed-f7f590b08165',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 5,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => UnitInterface::MAX_MANA + 1,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 8,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2266,7 +2311,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -2286,18 +2331,19 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 39. Отсутствует total_mana
                 [
-                    'id'         => '5aa0d764-e92d-4137-beed-f7f590b08165',
-                    'name'       => 'Skeleton',
-                    'level'      => 5,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 8,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5aa0d764-e92d-4137-beed-f7f590b08165',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 5,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 8,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2316,7 +2362,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -2336,19 +2382,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 40. total_mana некорректного типа
                 [
-                    'id'         => '5aa0d764-e92d-4137-beed-f7f590b08165',
-                    'name'       => 'Skeleton',
-                    'level'      => 5,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => '50',
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 8,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5aa0d764-e92d-4137-beed-f7f590b08165',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 5,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => '50',
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 8,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2367,7 +2414,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -2387,19 +2434,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 41. total_mana меньше минимального значения
                 [
-                    'id'         => '5aa0d764-e92d-4137-beed-f7f590b08165',
-                    'name'       => 'Skeleton',
-                    'level'      => 5,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => UnitInterface::MIN_TOTAL_MANA - 1,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 8,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5aa0d764-e92d-4137-beed-f7f590b08165',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 5,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => UnitInterface::MIN_TOTAL_MANA - 1,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 8,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2418,7 +2466,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -2438,19 +2486,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 42. total_mana больше максимального значения
                 [
-                    'id'         => '5aa0d764-e92d-4137-beed-f7f590b08165',
-                    'name'       => 'Skeleton',
-                    'level'      => 5,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 50,
-                    'total_mana' => UnitInterface::MAX_TOTAL_MANA + 1,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 8,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5aa0d764-e92d-4137-beed-f7f590b08165',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 5,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => UnitInterface::MAX_TOTAL_MANA + 1,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 8,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2469,7 +2518,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -2489,19 +2538,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 // 43. mana больше total_mana
                 [
-                    'id'         => '5aa0d764-e92d-4137-beed-f7f590b08165',
-                    'name'       => 'Skeleton',
-                    'level'      => 5,
-                    'avatar'     => '/images/avas/monsters/003.png',
-                    'life'       => 80,
-                    'total_life' => 80,
-                    'mana'       => 150,
-                    'total_mana' => 149,
-                    'melee'      => true,
-                    'class'      => 1,
-                    'race'       => 8,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                           => '5aa0d764-e92d-4137-beed-f7f590b08165',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 5,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 150,
+                    'total_mana'                   => 149,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 8,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2520,7 +2570,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'                      => [
                         'physical_resist' => 0,
                         'fire_resist'     => 0,
                         'water_resist'    => 0,
@@ -2536,6 +2586,215 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                 ],
                 UnitException::MANA_MORE_TOTAL_MANA,
+            ],
+
+            // add_concentration_multiplier
+            [
+                [
+                    // отсутствует add_concentration_multiplier
+                    'id'                           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
+                    'name'                         => 'Archer',
+                    'level'                        => 1,
+                    'avatar'                       => 'url avatar 3',
+                    'life'                         => 50,
+                    'total_life'                   => 75,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => false,
+                    'class'                        => 2,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'offense'                      => [
+                        'damage_type'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
+                        'physical_damage'     => 15,
+                        'fire_damage'         => 0,
+                        'water_damage'        => 0,
+                        'air_damage'          => 0,
+                        'earth_damage'        => 0,
+                        'life_damage'         => 0,
+                        'death_damage'        => 0,
+                        'attack_speed'        => 1.2,
+                        'cast_speed'          => 0,
+                        'accuracy'            => 200,
+                        'magic_accuracy'      => 100,
+                        'block_ignoring'      => 0,
+                        'critical_chance'     => 0,
+                        'critical_multiplier' => 0,
+                        'vampirism'           => 0,
+                    ],
+                    'defense'                      => [
+                        'physical_resist' => 0,
+                        'fire_resist'     => 0,
+                        'water_resist'    => 0,
+                        'air_resist'      => 0,
+                        'earth_resist'    => 0,
+                        'life_resist'     => 0,
+                        'death_resist'    => 0,
+                        'defense'         => 100,
+                        'magic_defense'   => 50,
+                        'block'           => 0,
+                        'magic_block'     => 0,
+                        'mental_barrier'  => 0,
+                    ],
+                ],
+                UnitException::INCORRECT_ADD_CONC_MULTIPLIER,
+            ],
+            [
+                [
+                    // add_concentration_multiplier некорректного типа
+                    'id'                           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
+                    'name'                         => 'Archer',
+                    'level'                        => 1,
+                    'avatar'                       => 'url avatar 3',
+                    'life'                         => 50,
+                    'total_life'                   => 75,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => false,
+                    'class'                        => 2,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => true,
+                    'offense'                      => [
+                        'damage_type'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
+                        'physical_damage'     => 15,
+                        'fire_damage'         => 0,
+                        'water_damage'        => 0,
+                        'air_damage'          => 0,
+                        'earth_damage'        => 0,
+                        'life_damage'         => 0,
+                        'death_damage'        => 0,
+                        'attack_speed'        => 1.2,
+                        'cast_speed'          => 0,
+                        'accuracy'            => 200,
+                        'magic_accuracy'      => 100,
+                        'block_ignoring'      => 0,
+                        'critical_chance'     => 0,
+                        'critical_multiplier' => 0,
+                        'vampirism'           => 0,
+                    ],
+                    'defense'                      => [
+                        'physical_resist' => 0,
+                        'fire_resist'     => 0,
+                        'water_resist'    => 0,
+                        'air_resist'      => 0,
+                        'earth_resist'    => 0,
+                        'life_resist'     => 0,
+                        'death_resist'    => 0,
+                        'defense'         => 100,
+                        'magic_defense'   => 50,
+                        'block'           => 0,
+                        'magic_block'     => 0,
+                        'mental_barrier'  => 0,
+                    ],
+                ],
+                UnitException::INCORRECT_ADD_CONC_MULTIPLIER,
+            ],
+            [
+                [
+                    // add_concentration_multiplier меньше минимального значения
+                    'id'                           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
+                    'name'                         => 'Archer',
+                    'level'                        => 1,
+                    'avatar'                       => 'url avatar 3',
+                    'life'                         => 50,
+                    'total_life'                   => 75,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => false,
+                    'class'                        => 2,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => UnitInterface::MIN_RESOURCE_MULTIPLIER - 1,
+                    'offense'                      => [
+                        'damage_type'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
+                        'physical_damage'     => 15,
+                        'fire_damage'         => 0,
+                        'water_damage'        => 0,
+                        'air_damage'          => 0,
+                        'earth_damage'        => 0,
+                        'life_damage'         => 0,
+                        'death_damage'        => 0,
+                        'attack_speed'        => 1.2,
+                        'cast_speed'          => 0,
+                        'accuracy'            => 200,
+                        'magic_accuracy'      => 100,
+                        'block_ignoring'      => 0,
+                        'critical_chance'     => 0,
+                        'critical_multiplier' => 0,
+                        'vampirism'           => 0,
+                    ],
+                    'defense'                      => [
+                        'physical_resist' => 0,
+                        'fire_resist'     => 0,
+                        'water_resist'    => 0,
+                        'air_resist'      => 0,
+                        'earth_resist'    => 0,
+                        'life_resist'     => 0,
+                        'death_resist'    => 0,
+                        'defense'         => 100,
+                        'magic_defense'   => 50,
+                        'block'           => 0,
+                        'magic_block'     => 0,
+                        'mental_barrier'  => 0,
+                    ],
+                ],
+                UnitException::INCORRECT_ADD_CONC_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            ],
+            [
+                [
+                    // add_concentration_multiplier больше максимального типа
+                    'id'                           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
+                    'name'                         => 'Archer',
+                    'level'                        => 1,
+                    'avatar'                       => 'url avatar 3',
+                    'life'                         => 50,
+                    'total_life'                   => 75,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => false,
+                    'class'                        => 2,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => UnitInterface::MAX_RESOURCE_MULTIPLIER + 1,
+                    'offense'                      => [
+                        'damage_type'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
+                        'physical_damage'     => 15,
+                        'fire_damage'         => 0,
+                        'water_damage'        => 0,
+                        'air_damage'          => 0,
+                        'earth_damage'        => 0,
+                        'life_damage'         => 0,
+                        'death_damage'        => 0,
+                        'attack_speed'        => 1.2,
+                        'cast_speed'          => 0,
+                        'accuracy'            => 200,
+                        'magic_accuracy'      => 100,
+                        'block_ignoring'      => 0,
+                        'critical_chance'     => 0,
+                        'critical_multiplier' => 0,
+                        'vampirism'           => 0,
+                    ],
+                    'defense'                      => [
+                        'physical_resist' => 0,
+                        'fire_resist'     => 0,
+                        'water_resist'    => 0,
+                        'air_resist'      => 0,
+                        'earth_resist'    => 0,
+                        'life_resist'     => 0,
+                        'death_resist'    => 0,
+                        'defense'         => 100,
+                        'magic_defense'   => 50,
+                        'block'           => 0,
+                        'magic_block'     => 0,
+                        'mental_barrier'  => 0,
+                    ],
+                ],
+                UnitException::INCORRECT_ADD_CONC_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER,
             ],
         ];
     }

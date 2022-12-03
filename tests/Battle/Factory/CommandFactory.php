@@ -49,18 +49,19 @@ class CommandFactory
     {
         $unitCollection = new UnitCollection();
         $data = [
-            'name'       => 'unit_1',
-            'level'      => 1,
-            'avatar'     => '/images/avas/humans/human001.jpg',
-            'life'       => 100,
-            'total_life' => 100,
-            'mana'       => 50,
-            'total_mana' => 50,
-            'melee'      => true,
-            'class'      => 1,
-            'race'       => 1,
-            'command'    => 1,
-            'offense'    => [
+            'name'                         => 'unit_1',
+            'level'                        => 1,
+            'avatar'                       => '/images/avas/humans/human001.jpg',
+            'life'                         => 100,
+            'total_life'                   => 100,
+            'mana'                         => 50,
+            'total_mana'                   => 50,
+            'melee'                        => true,
+            'class'                        => 1,
+            'race'                         => 1,
+            'command'                      => 1,
+            'add_concentration_multiplier' => 0,
+            'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 15,
@@ -79,7 +80,7 @@ class CommandFactory
                 'critical_multiplier' => 200,
                 'vampirism'           => 0,
             ],
-            'defense'    => [
+            'defense'                      => [
                 'physical_resist' => 0,
                 'fire_resist'     => 0,
                 'water_resist'    => 0,

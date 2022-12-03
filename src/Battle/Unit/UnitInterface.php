@@ -34,6 +34,10 @@ interface UnitInterface
     public const MAX_CONCENTRATION       = 1000;
     public const MAX_RAGE                = 1000;
 
+    // Максимально/минимальные множители получаемой концентрации/хитрости/ярости
+    public const MAX_RESOURCE_MULTIPLIER = 1000;
+    public const MIN_RESOURCE_MULTIPLIER = -100;
+
     public const MIN_LIFE         = 0;
     public const MAX_LIFE         = 100000;
 
@@ -223,6 +227,13 @@ interface UnitInterface
      * @return int
      */
     public function getRage(): int;
+
+    /**
+     * Возвращает множитель получаемой концентрации. Указываются в процентах (20 => +20%, -30 => -30%)
+     *
+     * @return int
+     */
+    public function getAddConcentrationMultiplier(): int;
 
     /**
      * Возвращает класс юнита, или null, если класса нет

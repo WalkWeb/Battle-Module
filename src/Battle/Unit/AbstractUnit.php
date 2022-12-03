@@ -85,6 +85,11 @@ abstract class AbstractUnit implements UnitInterface
     protected int $rage = 0;
 
     /**
+     * @var int - Множитель получаемой концентрации. Указываются в процентах (20 => +20%, -30 => -30%)
+     */
+    protected int $addConcentrationMultiplier;
+
+    /**
      * @var UnitClassInterface|null
      */
     protected ?UnitClassInterface $class = null;
@@ -130,6 +135,7 @@ abstract class AbstractUnit implements UnitInterface
      * @param int $totalMana
      * @param bool $melee
      * @param int $command
+     * @param int $addConcentrationMultiplier
      * @param OffenseInterface $offense
      * @param DefenseInterface $defense
      * @param RaceInterface $race
@@ -149,6 +155,7 @@ abstract class AbstractUnit implements UnitInterface
         int $totalMana,
         bool $melee,
         int $command,
+        int $addConcentrationMultiplier,
         OffenseInterface $offense,
         DefenseInterface $defense,
         RaceInterface $race,
@@ -168,6 +175,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->totalMana = $totalMana;
         $this->melee = $melee;
         $this->command = $command;
+        $this->addConcentrationMultiplier = $addConcentrationMultiplier;
         $this->offense = $offense;
         $this->defense = $defense;
         $this->race = $race;
@@ -262,6 +270,11 @@ abstract class AbstractUnit implements UnitInterface
     public function getRage(): int
     {
         return $this->rage;
+    }
+
+    public function getAddConcentrationMultiplier(): int
+    {
+        return $this->addConcentrationMultiplier;
     }
 
     public function getClass(): ?UnitClassInterface

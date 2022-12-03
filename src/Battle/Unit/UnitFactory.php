@@ -25,35 +25,54 @@ class UnitFactory
      *
      * Ожидаемые параметры в формате:
      *
-     *     [
-     *         'id'         => '60f3c032-46a6-454d-ae3a-d066f150f6ef',
-     *         'name'       => 'Titan',
-     *         'level'      => 3,
-     *         'avatar'     => '/images/avas/orcs/orc001.jpg',
-     *         'life'       => 185,
-     *         'total_life' => 185,
-     *         'mana'       => 50,
-     *         'total_mana' => 50,
-     *         'melee'      => true,
-     *         'command'    => 1,
-     *         'class'      => 5,
-     *         'race'       => 3,
-     *         'offense'    => [
-     *             'damage_type'     => 1,
-     *             'physical_damage' => 35,
-     *             'attack_speed'    => 1.2,
-     *             'accuracy'        => 176,
-     *             'magic_accuracy'  => 413,
-     *             'block_ignoring'  => 0,
-     *         ],
-     *         'defense'    => [
-     *             'defense'        => 134,
-     *             'magic_defense'  => 211,
-     *             'block'          => 0,
-     *             'magic_block'    => 0,
-     *             'mental_barrier' => 0,
-     *         ],
-     *     ]
+     * [
+     *     'id'                           => 'f7e84eab-e4f6-469f-b0e3-f5f965f9fbce',
+     *     'name'                         => 'name',
+     *     'level'                        => 1,
+     *     'avatar'                       => '/images/avas/humans/human001.jpg',
+     *     'life'                         => 100,
+     *     'total_life'                   => 100,
+     *     'mana'                         => 50,
+     *     'total_mana'                   => 50,
+     *     'melee'                        => true,
+     *     'command'                      => 1,
+     *     'add_concentration_multiplier' => 0,
+     *     'class'                        => 1,
+     *     'race'                         => 1,
+     *     'offense'                      => [
+     *         'damage_type'         => 2,
+     *         'weapon_type'         => 1,
+     *         'physical_damage'     => 20,
+     *         'fire_damage'         => 30,
+     *         'water_damage'        => 0,
+     *         'air_damage'          => 0,
+     *         'earth_damage'        => 0,
+     *         'life_damage'         => 0,
+     *         'death_damage'        => 0,
+     *         'attack_speed'        => 0,
+     *         'cast_speed'          => 3,
+     *         'accuracy'            => 200,
+     *         'magic_accuracy'      => 100,
+     *         'block_ignoring'      => 0,
+     *         'critical_chance'     => 5,
+     *         'critical_multiplier' => 200,
+     *         'vampirism'           => 0,
+     *     ],
+     *     'defense'                      => [
+     *         'physical_resist' => 0,
+     *         'fire_resist'     => 0,
+     *         'water_resist'    => 0,
+     *         'air_resist'      => 0,
+     *         'earth_resist'    => 0,
+     *         'life_resist'     => 0,
+     *         'death_resist'    => 0,
+     *         'defense'         => 100,
+     *         'magic_defense'   => 50,
+     *         'block'           => 0,
+     *         'magic_block'     => 0,
+     *         'mental_barrier'  => 0,
+     *     ],
+     * ]
      *
      * @param array $data
      * @param ContainerInterface|null $container
@@ -75,11 +94,50 @@ class UnitFactory
         self::int($data, 'level', UnitException::INCORRECT_LEVEL);
         self::int($data, 'race', UnitException::INCORRECT_RACE);
         self::int($data, 'command', UnitException::INCORRECT_COMMAND);
-        self::intMinMaxValue($data['life'], UnitInterface::MIN_LIFE, UnitInterface::MAX_LIFE, UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE);
-        self::intMinMaxValue($data['total_life'], UnitInterface::MIN_TOTAL_LIFE, UnitInterface::MAX_TOTAL_LIFE, UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE);
-        self::intMinMaxValue($data['mana'], UnitInterface::MIN_MANA, UnitInterface::MAX_MANA, UnitException::INCORRECT_MANA_VALUE . UnitInterface::MIN_MANA . '-' . UnitInterface::MAX_MANA);
-        self::intMinMaxValue($data['total_mana'], UnitInterface::MIN_TOTAL_MANA, UnitInterface::MAX_TOTAL_MANA, UnitException::INCORRECT_TOTAL_MANA_VALUE . UnitInterface::MIN_TOTAL_MANA . '-' . UnitInterface::MAX_TOTAL_MANA);
-        self::intMinMaxValue($data['level'], UnitInterface::MIN_LEVEL, UnitInterface::MAX_LEVEL, UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL);
+        self::int($data, 'add_concentration_multiplier', UnitException::INCORRECT_ADD_CONC_MULTIPLIER);
+
+        self::intMinMaxValue(
+            $data['life'],
+            UnitInterface::MIN_LIFE,
+            UnitInterface::MAX_LIFE,
+            UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE
+        );
+
+        self::intMinMaxValue(
+            $data['total_life'],
+            UnitInterface::MIN_TOTAL_LIFE,
+            UnitInterface::MAX_TOTAL_LIFE,
+            UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE
+        );
+
+        self::intMinMaxValue(
+            $data['mana'],
+            UnitInterface::MIN_MANA,
+            UnitInterface::MAX_MANA,
+            UnitException::INCORRECT_MANA_VALUE . UnitInterface::MIN_MANA . '-' . UnitInterface::MAX_MANA
+        );
+
+        self::intMinMaxValue(
+            $data['total_mana'],
+            UnitInterface::MIN_TOTAL_MANA,
+            UnitInterface::MAX_TOTAL_MANA,
+            UnitException::INCORRECT_TOTAL_MANA_VALUE . UnitInterface::MIN_TOTAL_MANA . '-' . UnitInterface::MAX_TOTAL_MANA
+        );
+
+        self::intMinMaxValue(
+            $data['level'],
+            UnitInterface::MIN_LEVEL,
+            UnitInterface::MAX_LEVEL,
+            UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL
+        );
+
+        self::intMinMaxValue(
+            $data['add_concentration_multiplier'],
+            UnitInterface::MIN_RESOURCE_MULTIPLIER,
+            UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            UnitException::INCORRECT_ADD_CONC_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+        );
+
         self::stringMinMaxLength($data['name'], UnitInterface::MIN_NAME_LENGTH, UnitInterface::MAX_NAME_LENGTH, UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH);
         self::stringMinMaxLength($data['id'], UnitInterface::MIN_ID_LENGTH, UnitInterface::MAX_ID_LENGTH, UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH);
 
@@ -105,6 +163,7 @@ class UnitFactory
             $data['total_mana'],
             $data['melee'],
             $data['command'],
+            $data['add_concentration_multiplier'],
             OffenseFactory::create($data['offense']),
             DefenseFactory::create($data['defense']),
             self::getRace($data['race'], $container),

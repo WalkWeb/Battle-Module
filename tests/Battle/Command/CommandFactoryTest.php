@@ -107,19 +107,20 @@ class CommandFactoryTest extends AbstractUnitTest
             [
                 [
                     [
-                        'id'         => '63ad76c6-6a11-44ef-997b-fea1778bebe5',
-                        'name'       => 'Skeleton',
-                        'level'      => 3,
-                        'avatar'     => 'url avatar 1',
-                        'life'       => 80,
-                        'total_life' => 80,
-                        'mana'       => 50,
-                        'total_mana' => 50,
-                        'melee'      => true,
-                        'class'      => 1,
-                        'race'       => 8,
-                        'command'    => 1,
-                        'offense'    => [
+                        'id'                           => '63ad76c6-6a11-44ef-997b-fea1778bebe5',
+                        'name'                         => 'Skeleton',
+                        'level'                        => 3,
+                        'avatar'                       => 'url avatar 1',
+                        'life'                         => 80,
+                        'total_life'                   => 80,
+                        'mana'                         => 50,
+                        'total_mana'                   => 50,
+                        'melee'                        => true,
+                        'class'                        => 1,
+                        'race'                         => 8,
+                        'command'                      => 1,
+                        'add_concentration_multiplier' => 0,
+                        'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
@@ -138,7 +139,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'critical_multiplier' => 200,
                             'vampirism'           => 0,
                         ],
-                        'defense'    => [
+                        'defense'                      => [
                             'physical_resist' => 0,
                             'fire_resist'     => 0,
                             'water_resist'    => 0,
@@ -154,19 +155,20 @@ class CommandFactoryTest extends AbstractUnitTest
                         ],
                     ],
                     [
-                        'id'         => 'fb8be211-0782-4c60-8865-68b177ffbe0c',
-                        'name'       => 'Ghost',
-                        'level'      => 12,
-                        'avatar'     => 'url avatar 2',
-                        'life'       => 75,
-                        'total_life' => 75,
-                        'mana'       => 50,
-                        'total_mana' => 50,
-                        'melee'      => false,
-                        'class'      => 2,
-                        'race'       => 8,
-                        'command'    => 1,
-                        'offense'    => [
+                        'id'                           => 'fb8be211-0782-4c60-8865-68b177ffbe0c',
+                        'name'                         => 'Ghost',
+                        'level'                        => 12,
+                        'avatar'                       => 'url avatar 2',
+                        'life'                         => 75,
+                        'total_life'                   => 75,
+                        'mana'                         => 50,
+                        'total_mana'                   => 50,
+                        'melee'                        => false,
+                        'class'                        => 2,
+                        'race'                         => 8,
+                        'command'                      => 1,
+                        'add_concentration_multiplier' => 0,
+                        'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
@@ -185,7 +187,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'critical_multiplier' => 200,
                             'vampirism'           => 0,
                         ],
-                        'defense'    => [
+                        'defense'                      => [
                             'physical_resist' => 0,
                             'fire_resist'     => 0,
                             'water_resist'    => 0,
@@ -215,17 +217,18 @@ class CommandFactoryTest extends AbstractUnitTest
                 // отсутствует name
                 [
                     [
-                        'id'         => 'f83b1152-b186-4a17-a3dd-88ac75e3cd23',
-                        'level'      => 1,
-                        'avatar'     => 'url avatar 1',
-                        'life'       => 80,
-                        'total_life' => 80,
-                        'mana'       => 50,
-                        'total_mana' => 50,
-                        'melee'      => true,
-                        'class'      => 1,
-                        'race'       => 1,
-                        'offense'    => [
+                        'id'                           => 'f83b1152-b186-4a17-a3dd-88ac75e3cd23',
+                        'level'                        => 1,
+                        'avatar'                       => 'url avatar 1',
+                        'life'                         => 80,
+                        'total_life'                   => 80,
+                        'mana'                         => 50,
+                        'total_mana'                   => 50,
+                        'melee'                        => true,
+                        'class'                        => 1,
+                        'race'                         => 1,
+                        'add_concentration_multiplier' => 0,
+                        'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
                             'physical_damage'     => 15,
@@ -244,7 +247,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'critical_multiplier' => 200,
                             'vampirism'           => 0,
                         ],
-                        'defense'    => [
+                        'defense'                      => [
                             'physical_resist' => 0,
                             'fire_resist'     => 0,
                             'water_resist'    => 0,

@@ -235,6 +235,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'melee'          => true,
             'class'          => 1,
             'race'           => 9,
+            'add_concentration_multiplier' => 0,
             'offense'        => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,

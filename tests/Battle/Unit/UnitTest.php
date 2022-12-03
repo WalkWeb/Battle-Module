@@ -55,6 +55,7 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['melee'], $unit->isMelee());
         self::assertEquals($data['race'], $unit->getRace()->getId());
         self::assertFalse($unit->isParalysis());
+        self::assertEquals($data['add_concentration_multiplier'], $unit->getAddConcentrationMultiplier());
 
         // Проверка метода getDamage подразумевает, что все юниты имеют 0 сопротивления
         self::assertEquals(

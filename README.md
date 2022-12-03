@@ -14,18 +14,19 @@ use Battle\BattleFactory;
 
 $data = [
     [
-        'id'           => '81941b8a-f7ca-447e-8951-36777ae6e79e',
-        'name'         => 'Warrior',
-        'level'        => 3,
-        'avatar'       => '/images/avas/humans/human001.jpg',
-        'life'         => 110,
-        'total_life'   => 110,
-        'mana'         => 60,
-        'total_mana'   => 60,
-        'melee'        => true,
-        'class'        => 1,
-        'race'         => 1,
-        'command'      => 1,
+        'id'                           => '81941b8a-f7ca-447e-8951-36777ae6e79e',
+        'name'                         => 'Warrior',
+        'level'                        => 3,
+        'avatar'                       => '/images/avas/humans/human001.jpg',
+        'life'                         => 110,
+        'total_life'                   => 110,
+        'mana'                         => 60,
+        'total_mana'                   => 60,
+        'melee'                        => true,
+        'class'                        => 1,
+        'race'                         => 1,
+        'command'                      => 1,
+        'add_concentration_multiplier' => 0,
         'offense'      => [
             'damage_type'         => 1,
             'weapon_type'         => 2,
@@ -61,18 +62,19 @@ $data = [
         ],
     ],
     [
-        'id'           => 'bf75c4a3-b866-4787-88c7-8db57daf3d64',
-        'name'         => 'Skeleton',
-        'level'        => 2,
-        'avatar'       => '/images/avas/monsters/005.png',
-        'life'         => 65,
-        'total_life'   => 65,
-        'mana'         => 0,
-        'total_mana'   => 0,
-        'melee'        => true,
-        'class'        => null,
-        'race'         => 8,
-        'command'      => 2,
+        'id'                           => 'bf75c4a3-b866-4787-88c7-8db57daf3d64',
+        'name'                         => 'Skeleton',
+        'level'                        => 2,
+        'avatar'                       => '/images/avas/monsters/005.png',
+        'life'                         => 65,
+        'total_life'                   => 65,
+        'mana'                         => 0,
+        'total_mana'                   => 0,
+        'melee'                        => true,
+        'class'                        => null,
+        'race'                         => 8,
+        'command'                      => 2,
+        'add_concentration_multiplier' => 0,
         'offense'      => [
             'damage_type'         => 1,
             'weapon_type'         => 1,
@@ -257,9 +259,9 @@ Alchemist во время боя призвал Fire Elemental в свою ко�
 Базовое значение: 15
 - [x] `rage` – Ярость. Постепенно накапливается в бою и при полном заполнении позволяет использовать способности требующие 
 ярость
-- [ ] `add concentration` – Отвечает за множитель получаемой концентрации
-- [ ] `add cunning` – Отвечает за множитель хитрости
-- [ ] `add rage` – Отвечает за множитель получаемой ярости
+- [ ] `add concentration multiplier` – Отвечает за множитель получаемой концентрации
+- [ ] `add cunning multiplier` – Отвечает за множитель хитрости
+- [ ] `add rage multiplier` – Отвечает за множитель получаемой ярости
 - [x] `race name` – Название расы юнита
 - [x] `race color` – Цвет расы юнита. Используется для цветового выделения имени юнита
 - [x] `race ability` – Способности расы
