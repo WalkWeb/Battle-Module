@@ -529,6 +529,25 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на бонус к получению концентрации
+     *
+     * @throws Exception
+     */
+    public function testUnitAddedConcentrationMultiplier(): void
+    {
+        // Юнит со +40% получаемой концентрации
+        $unit = UnitFactory::createByTemplate(45);
+
+        self::assertEquals(0, $unit->getConcentration());
+
+        // При новом раунде добавляется концентрация
+        $unit->newRound();
+
+        // Проверяем, что полученная концентрация больше на 40% чем базовое значение
+        self::assertEquals((int)(UnitInterface::ADD_CON_NEW_ROUND * 1.4), $unit->getConcentration());
+    }
+
+    /**
      * @return array
      */
     public function createDataProvider(): array

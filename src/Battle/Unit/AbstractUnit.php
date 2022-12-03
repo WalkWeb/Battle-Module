@@ -396,7 +396,7 @@ abstract class AbstractUnit implements UnitInterface
      */
     protected function addConcentration(int $concentration): void
     {
-        $this->concentration += $concentration;
+        $this->concentration += (int)($concentration * ((100 + $this->addConcentrationMultiplier) / 100));
 
         if ($this->concentration > self::MAX_CONCENTRATION) {
             $this->concentration = self::MAX_CONCENTRATION;
