@@ -212,4 +212,109 @@ interface DefenseInterface
      * @throws DefenseException
      */
     public function setMentalBarrier(int $mentalBarrier): void;
+
+    /**
+     * Возвращает максимальное сопротивление физическому урону
+     *
+     * @return int
+     */
+    public function getPhysicalMaxResist(): int;
+
+    /**
+     * Устанавливает новое максимальное значение сопротивления физическому урону. Используется в эффектах
+     *
+     * @param int $physicalMaxResist
+     * @throws DefenseException
+     */
+    public function setPhysicalMaxResist(int $physicalMaxResist): void;
+
+    /**
+     * Возвращает максимальное сопротивление урону огнем
+     *
+     * @return int
+     */
+    public function getFireMaxResist(): int;
+
+    /**
+     * Устанавливает новое максимальное значение сопротивления урону огнем. Используется в эффектах
+     *
+     * @param int $fireMaxResist
+     * @throws DefenseException
+     */
+    public function setFireMaxResist(int $fireMaxResist): void;
+
+    /**
+     * Возвращает максимальное сопротивление урону водой
+     *
+     * @return int
+     */
+    public function getWaterMaxResist(): int;
+
+    /**
+     * Устанавливает новое максимальное значение сопротивления урону водой. Используется в эффектах
+     *
+     * @param int $waterMaxResist
+     * @throws DefenseException
+     */
+    public function setWaterMaxResist(int $waterMaxResist): void;
+
+    /**
+     * Возвращает максимальное сопротивление урону воздухом
+     *
+     * @return int
+     */
+    public function getAirMaxResist(): int;
+
+    /**
+     * Устанавливает новое максимальное значение сопротивления урону воздухом. Используется в эффектах
+     *
+     * @param int $airMaxResist
+     * @throws DefenseException
+     */
+    public function setAirMaxResist(int $airMaxResist): void;
+
+    /**
+     * Возвращает максимальное сопротивление урону землей
+     *
+     * @return int
+     */
+    public function getEarthMaxResist(): int;
+
+    /**
+     * Устанавливает новое максимальное значение сопротивления урону землей. Используется в эффектах
+     *
+     * @param int $earthMaxResist
+     * @throws DefenseException
+     */
+    public function setEarthMaxResist(int $earthMaxResist): void;
+
+    /**
+     * Возвращает максимальное сопротивление урону магией жизни
+     *
+     * @return int
+     */
+    public function getLifeMaxResist(): int;
+
+    /**
+     * Устанавливает новое максимальное значение сопротивления урону магией жизни. Используется в эффектах
+     *
+     * @param int $lifeMaxResist
+     * @throws DefenseException
+     */
+    public function setLifeMaxResist(int $lifeMaxResist): void;
+
+    /**
+     * Возвращает максимальное сопротивление урону магией смерти
+     *
+     * @return int
+     */
+    public function getDeathMaxResist(): int;
+
+    /**
+     * Устанавливает новое максимальное значение сопротивления урону магией смерти. Используется в эффектах
+     *
+     * @param int $deathMaxResist
+     * @throws DefenseException
+     */
+    public function setDeathMaxResist(int $deathMaxResist): void;
 }

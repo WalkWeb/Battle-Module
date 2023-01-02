@@ -31,6 +31,13 @@ class DefenseTest extends AbstractUnitTest
         $block = 0;
         $magicBlock = 10;
         $mentalBarrier = 50;
+        $physicalMaxResist = 76;
+        $fireMaxResist = 77;
+        $waterMaxResist = 78;
+        $airMaxResist = 79;
+        $earthMaxResist = 80;
+        $lifeMaxResist = 81;
+        $deathMaxResist = 82;
 
         $defense = new Defense(
             $physicalResist,
@@ -44,7 +51,14 @@ class DefenseTest extends AbstractUnitTest
             $magicDefence,
             $block,
             $magicBlock,
-            $mentalBarrier
+            $mentalBarrier,
+            $physicalMaxResist,
+            $fireMaxResist,
+            $waterMaxResist,
+            $airMaxResist,
+            $earthMaxResist,
+            $lifeMaxResist,
+            $deathMaxResist
         );
 
         self::assertEquals($physicalResist, $defense->getPhysicalResist());
@@ -59,6 +73,13 @@ class DefenseTest extends AbstractUnitTest
         self::assertEquals($block, $defense->getBlock());
         self::assertEquals($magicBlock, $defense->getMagicBlock());
         self::assertEquals($mentalBarrier, $defense->getMentalBarrier());
+        self::assertEquals($physicalMaxResist, $defense->getPhysicalMaxResist());
+        self::assertEquals($fireMaxResist, $defense->getFireMaxResist());
+        self::assertEquals($waterMaxResist, $defense->getWaterMaxResist());
+        self::assertEquals($airMaxResist, $defense->getAirMaxResist());
+        self::assertEquals($earthMaxResist, $defense->getEarthMaxResist());
+        self::assertEquals($lifeMaxResist, $defense->getLifeMaxResist());
+        self::assertEquals($deathMaxResist, $defense->getDeathMaxResist());
     }
 
     /**
@@ -82,6 +103,13 @@ class DefenseTest extends AbstractUnitTest
         $defense->setBlock($block = 5);
         $defense->setMagicBlock($magicBlock = 15);
         $defense->setMentalBarrier($mentalBarrier = 50);
+        $defense->setPhysicalMaxResist($physicalMaxResist = 81);
+        $defense->setFireMaxResist($fireMaxResist = 82);
+        $defense->setWaterMaxResist($waterMaxResist = 83);
+        $defense->setAirMaxResist($airMaxResist = 84);
+        $defense->setEarthMaxResist($earthMaxResist = 85);
+        $defense->setLifeMaxResist($lifeMaxResist = 86);
+        $defense->setDeathMaxResist($deathMaxResist = 87);
 
         self::assertEquals($physicalResist, $defense->getPhysicalResist());
         self::assertEquals($fireResist, $defense->getFireResist());
@@ -95,6 +123,13 @@ class DefenseTest extends AbstractUnitTest
         self::assertEquals($block, $defense->getBlock());
         self::assertEquals($magicBlock, $defense->getMagicBlock());
         self::assertEquals($mentalBarrier, $defense->getMentalBarrier());
+        self::assertEquals($physicalMaxResist, $defense->getPhysicalMaxResist());
+        self::assertEquals($fireMaxResist, $defense->getFireMaxResist());
+        self::assertEquals($waterMaxResist, $defense->getWaterMaxResist());
+        self::assertEquals($airMaxResist, $defense->getAirMaxResist());
+        self::assertEquals($earthMaxResist, $defense->getEarthMaxResist());
+        self::assertEquals($lifeMaxResist, $defense->getLifeMaxResist());
+        self::assertEquals($deathMaxResist, $defense->getDeathMaxResist());
     }
 
     /**
@@ -434,11 +469,207 @@ class DefenseTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком низкое значение PhysicalMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMinPhysicalMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_PHYSICAL_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setPhysicalMaxResist(DefenseInterface::MIN_RESISTANCE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком большое значение PhysicalMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMaxPhysicalMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_PHYSICAL_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setPhysicalMaxResist(DefenseInterface::MAX_RESISTANCE + 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком низкое значение FireMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMinFireMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_FIRE_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setFireMaxResist(DefenseInterface::MIN_RESISTANCE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком большое значение FireMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMaxFireMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_FIRE_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setFireMaxResist(DefenseInterface::MAX_RESISTANCE + 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком низкое значение WaterMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMinWaterMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_WATER_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setWaterMaxResist(DefenseInterface::MIN_RESISTANCE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком большое значение WaterMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMaxWaterMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_WATER_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setWaterMaxResist(DefenseInterface::MAX_RESISTANCE + 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком низкое значение AirMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMinAirMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_AIR_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setAirMaxResist(DefenseInterface::MIN_RESISTANCE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком большое значение AirMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMaxAirMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_AIR_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setAirMaxResist(DefenseInterface::MAX_RESISTANCE + 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком низкое значение EarthMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMinEarthMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_EARTH_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setEarthMaxResist(DefenseInterface::MIN_RESISTANCE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком большое значение EarthMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMaxEarthMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_EARTH_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setEarthMaxResist(DefenseInterface::MAX_RESISTANCE + 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком низкое значение LifeMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMinLifeMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_LIFE_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setLifeMaxResist(DefenseInterface::MIN_RESISTANCE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком большое значение LifeMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMaxLifeMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_LIFE_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setLifeMaxResist(DefenseInterface::MAX_RESISTANCE + 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком низкое значение DeathMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMinDeathMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_DEATH_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setDeathMaxResist(DefenseInterface::MIN_RESISTANCE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком большое значение DeathMaxResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMaxDeathMaxResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_MAX_DEATH_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setDeathMaxResist(DefenseInterface::MAX_RESISTANCE + 1);
+    }
+
+    /**
      * @return DefenseInterface
      * @throws DefenseException
      */
     private function createDefense(): DefenseInterface
     {
-        return new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0);
+        return new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0, 75, 75, 75, 75, 75, 75, 75);
     }
 }

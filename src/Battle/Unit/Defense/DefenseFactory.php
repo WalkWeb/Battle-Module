@@ -32,6 +32,13 @@ class DefenseFactory
         self::int($data, 'block', DefenseException::INCORRECT_BLOCK);
         self::int($data, 'magic_block', DefenseException::INCORRECT_MAGIC_BLOCK);
         self::int($data, 'mental_barrier', DefenseException::INCORRECT_MENTAL_BARRIER);
+        self::int($data, 'max_physical_resist', DefenseException::INCORRECT_MAX_PHYSICAL_RESIST);
+        self::int($data, 'max_fire_resist', DefenseException::INCORRECT_MAX_FIRE_RESIST);
+        self::int($data, 'max_water_resist', DefenseException::INCORRECT_MAX_WATER_RESIST);
+        self::int($data, 'max_air_resist', DefenseException::INCORRECT_MAX_AIR_RESIST);
+        self::int($data, 'max_earth_resist', DefenseException::INCORRECT_MAX_EARTH_RESIST);
+        self::int($data, 'max_life_resist', DefenseException::INCORRECT_MAX_LIFE_RESIST);
+        self::int($data, 'max_death_resist', DefenseException::INCORRECT_MAX_DEATH_RESIST);
 
         return new Defense(
             $data['physical_resist'],
@@ -45,7 +52,14 @@ class DefenseFactory
             $data['magic_defense'],
             $data['block'],
             $data['magic_block'],
-            $data['mental_barrier']
+            $data['mental_barrier'],
+            $data['max_physical_resist'],
+            $data['max_fire_resist'],
+            $data['max_water_resist'],
+            $data['max_air_resist'],
+            $data['max_earth_resist'],
+            $data['max_life_resist'],
+            $data['max_death_resist']
         );
     }
 }
