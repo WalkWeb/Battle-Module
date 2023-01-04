@@ -6,11 +6,9 @@ namespace Tests\Battle\Factory;
 
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
-use Battle\Unit\Defense\DefenseFactory;
-use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitInterface;
-use Battle\Unit\Unit;
 use Exception;
+use Battle\Unit\UnitFactory as BaseUnitFactory;
 
 class UnitFactory
 {
@@ -2574,8 +2572,6 @@ class UnitFactory
     ];
 
     /**
-     * TODO Почему бы внутри не использовать базовую UnitFactory?
-     *
      * @param int $template
      * @param ContainerInterface|null $container
      * @return UnitInterface
@@ -2588,30 +2584,7 @@ class UnitFactory
             throw new UnitFactoryException(UnitFactoryException::NO_TEMPLATE);
         }
 
-        $data = self::$units[$template];
-        $container = $container ?? new Container(true);
-        $class = isset($data['class']) ? $container->getUnitClassFactory()->create(
-            $container->getClassDataProvider()->get(self::$units[$template]['class'])
-        ) : null;
-
-        return new Unit(
-            $data['id'],
-            $data['name'],
-            $data['level'],
-            $data['avatar'],
-            $data['life'],
-            $data['total_life'],
-            $data['mana'],
-            $data['total_mana'],
-            $data['melee'],
-            $data['command'],
-            $data['add_concentration_multiplier'],
-            OffenseFactory::create($data['offense']),
-            DefenseFactory::create($data['defense']),
-            $container->getRaceFactory()->create($container->getRaceDataProvider()->get($data['race'])),
-            $container,
-            $class
-        );
+        return BaseUnitFactory::create(self::$units[$template], $container ?? new Container(true));
     }
 
     /**
