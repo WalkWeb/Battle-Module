@@ -111,19 +111,21 @@ class Offense implements OffenseInterface
     public function getDamage(DefenseInterface $defense): int
     {
         return (int)(
-            $this->physicalDamage * ((100 - $defense->getPhysicalResist()) / 100)
-            +
-            $this->fireDamage * ((100 - $defense->getFireResist()) / 100)
-            +
-            $this->waterDamage * ((100 - $defense->getWaterResist()) / 100)
-            +
-            $this->airDamage * ((100 - $defense->getAirResist()) / 100)
-            +
-            $this->earthDamage * ((100 - $defense->getEarthResist()) / 100)
-            +
-            $this->lifeDamage * ((100 - $defense->getLifeResist()) / 100)
-            +
-            $this->deathDamage * ((100 - $defense->getDeathResist()) / 100)
+            (
+                $this->physicalDamage * ((100 - $defense->getPhysicalResist()) / 100)
+                +
+                $this->fireDamage * ((100 - $defense->getFireResist()) / 100)
+                +
+                $this->waterDamage * ((100 - $defense->getWaterResist()) / 100)
+                +
+                $this->airDamage * ((100 - $defense->getAirResist()) / 100)
+                +
+                $this->earthDamage * ((100 - $defense->getEarthResist()) / 100)
+                +
+                $this->lifeDamage * ((100 - $defense->getLifeResist()) / 100)
+                +
+                $this->deathDamage * ((100 - $defense->getDeathResist()) / 100)
+            ) * ((100 - $defense->getGlobalResist()) / 100)
         );
     }
 
