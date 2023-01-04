@@ -38,6 +38,7 @@ class DefenseTest extends AbstractUnitTest
         $earthMaxResist = 80;
         $lifeMaxResist = 81;
         $deathMaxResist = 82;
+        $globalResist = 5;
 
         $defense = new Defense(
             $physicalResist,
@@ -58,7 +59,8 @@ class DefenseTest extends AbstractUnitTest
             $airMaxResist,
             $earthMaxResist,
             $lifeMaxResist,
-            $deathMaxResist
+            $deathMaxResist,
+            $globalResist
         );
 
         self::assertEquals($physicalResist, $defense->getPhysicalResist());
@@ -80,6 +82,7 @@ class DefenseTest extends AbstractUnitTest
         self::assertEquals($earthMaxResist, $defense->getEarthMaxResist());
         self::assertEquals($lifeMaxResist, $defense->getLifeMaxResist());
         self::assertEquals($deathMaxResist, $defense->getDeathMaxResist());
+        self::assertEquals($globalResist, $defense->getGlobalResist());
     }
 
     /**
@@ -110,6 +113,7 @@ class DefenseTest extends AbstractUnitTest
         $defense->setEarthMaxResist($earthMaxResist = 85);
         $defense->setLifeMaxResist($lifeMaxResist = 86);
         $defense->setDeathMaxResist($deathMaxResist = 87);
+        $defense->setGlobalResist($globalResist = 10);
 
         self::assertEquals($physicalResist, $defense->getPhysicalResist());
         self::assertEquals($fireResist, $defense->getFireResist());
@@ -130,6 +134,7 @@ class DefenseTest extends AbstractUnitTest
         self::assertEquals($earthMaxResist, $defense->getEarthMaxResist());
         self::assertEquals($lifeMaxResist, $defense->getLifeMaxResist());
         self::assertEquals($deathMaxResist, $defense->getDeathMaxResist());
+        self::assertEquals($globalResist, $defense->getGlobalResist());
     }
 
     /**
@@ -665,11 +670,60 @@ class DefenseTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком низкое значение GlobalResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMinGlobalResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_GLOBAL_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setGlobalResist(DefenseInterface::MIN_RESISTANCE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком большое значение GlobalResist
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMaxGlobalResist(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_GLOBAL_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+        );
+        $this->createDefense()->setGlobalResist(DefenseInterface::MAX_RESISTANCE + 1);
+    }
+
+    /**
      * @return DefenseInterface
      * @throws DefenseException
      */
     private function createDefense(): DefenseInterface
     {
-        return new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0, 75, 75, 75, 75, 75, 75, 75);
+        return new Defense(
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            10,
+            10,
+            5,
+            0,
+            75,
+            75,
+            75,
+            75,
+            75,
+            75,
+            75,
+            0
+        );
     }
 }

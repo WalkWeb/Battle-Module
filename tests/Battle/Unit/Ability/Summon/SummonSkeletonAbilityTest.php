@@ -103,6 +103,7 @@ class SummonSkeletonAbilityTest extends AbstractUnitTest
                             'max_earth_resist'    => 75,
                             'max_life_resist'     => 75,
                             'max_death_resist'    => 75,
+                            'global_resist'       => 0,
                         ],
                     ],
                 ],

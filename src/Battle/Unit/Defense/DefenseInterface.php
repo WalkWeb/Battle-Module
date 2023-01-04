@@ -317,4 +317,19 @@ interface DefenseInterface
      * @throws DefenseException
      */
     public function setDeathMaxResist(int $deathMaxResist): void;
+
+    /**
+     * Возвращает значение общего множителя получаемого урона (в %, т.е. 30 = -30% получаемого урона, -20 - +20%)
+     *
+     * @return int
+     */
+    public function getGlobalResist(): int;
+
+    /**
+     * Устанавливает новое значение общего множителя получаемого урона. Используется в эффектах
+     *
+     * @param int $globalDamageResist
+     * @throws DefenseException
+     */
+    public function setGlobalResist(int $globalDamageResist): void;
 }

@@ -102,6 +102,11 @@ class Defense implements DefenseInterface
     private int $deathMaxResist;
 
     /**
+     * @var int - Общий множитель получаемого урона
+     */
+    private int $globalResist;
+
+    /**
      * @param int $physicalResist
      * @param int $fireResist
      * @param int $waterResist
@@ -121,6 +126,7 @@ class Defense implements DefenseInterface
      * @param int $earthMaxResist
      * @param int $lifeMaxResist
      * @param int $deathMaxResist
+     * @param int $globalResist
      * @throws DefenseException
      */
     public function __construct(
@@ -142,7 +148,8 @@ class Defense implements DefenseInterface
         int $airMaxResist,
         int $earthMaxResist,
         int $lifeMaxResist,
-        int $deathMaxResist
+        int $deathMaxResist,
+        int $globalResist
     )
     {
         $this->setPhysicalResist($physicalResist);
@@ -164,6 +171,7 @@ class Defense implements DefenseInterface
         $this->setEarthMaxResist($earthMaxResist);
         $this->setLifeMaxResist($lifeMaxResist);
         $this->setDeathMaxResist($deathMaxResist);
+        $this->setGlobalResist($globalResist);
     }
 
     /**
@@ -601,5 +609,28 @@ class Defense implements DefenseInterface
         }
 
         $this->deathMaxResist = $deathMaxResist;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGlobalResist(): int
+    {
+        return $this->globalResist;
+    }
+
+    /**
+     * @param int $globalResist
+     * @throws DefenseException
+     */
+    public function setGlobalResist(int $globalResist): void
+    {
+        if ($globalResist < self::MIN_RESISTANCE || $globalResist > self::MAX_RESISTANCE) {
+            throw new DefenseException(
+                DefenseException::INCORRECT_GLOBAL_RESIST_VALUE . DefenseInterface::MIN_RESISTANCE . '-' . DefenseInterface::MAX_RESISTANCE
+            );
+        }
+
+        $this->globalResist = $globalResist;
     }
 }

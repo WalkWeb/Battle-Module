@@ -39,6 +39,7 @@ class DefenseFactory
         self::int($data, 'max_earth_resist', DefenseException::INCORRECT_MAX_EARTH_RESIST);
         self::int($data, 'max_life_resist', DefenseException::INCORRECT_MAX_LIFE_RESIST);
         self::int($data, 'max_death_resist', DefenseException::INCORRECT_MAX_DEATH_RESIST);
+        self::int($data, 'global_resist', DefenseException::INCORRECT_GLOBAL_RESIST);
 
         return new Defense(
             $data['physical_resist'],
@@ -59,7 +60,8 @@ class DefenseFactory
             $data['max_air_resist'],
             $data['max_earth_resist'],
             $data['max_life_resist'],
-            $data['max_death_resist']
+            $data['max_death_resist'],
+            $data['global_resist']
         );
     }
 }

@@ -69,6 +69,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         2  => [
@@ -124,6 +125,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         3  => [
@@ -179,6 +181,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         4  => [
@@ -234,6 +237,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Priest
@@ -290,6 +294,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         6  => [
@@ -345,6 +350,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         7  => [
@@ -400,6 +406,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         8  => [
@@ -455,6 +462,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Слегка раненый юнит
@@ -511,6 +519,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Мертвый юнит
@@ -567,6 +576,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Сильно раненый юнит
@@ -623,6 +633,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         12 => [
@@ -678,6 +689,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         13 => [
@@ -733,6 +745,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         14 => [
@@ -788,6 +801,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит для подсчета дополнительных атак, с.м. тест testUnitCalculateAttackSpeed
@@ -844,6 +858,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит для подсчета дополнительных атак, с.м. тест testUnitCalculateAttackSpeed
@@ -900,6 +915,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         17 => [
@@ -955,6 +971,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Аналог юнита из SummonImpAbility
@@ -1011,6 +1028,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Аналог юнита из SummonSkeletonMageAbility
@@ -1067,6 +1085,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Аналог юнита из SummonSkeletonAbility
@@ -1123,6 +1142,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Орк с классом Титан
@@ -1179,6 +1199,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Гном с классом Алхимик
@@ -1235,6 +1256,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Демон с классом Суккуб
@@ -1291,6 +1313,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Мертвый юнит с небольшим количеством здоровья
@@ -1347,6 +1370,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Человек с классом Priest
@@ -1403,6 +1427,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Элементаль огня
@@ -1459,6 +1484,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Босс Warden
@@ -1515,6 +1541,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит со 100% шансом блока
@@ -1571,6 +1598,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит с игнорированием блока = 100
@@ -1627,6 +1655,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит с очень высокими показателями accuracy и defense
@@ -1683,6 +1712,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит с 29% здоровья, для проверки активации RageAbility
@@ -1739,6 +1769,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит со 100% ментальным барьером и 100 маны
@@ -1795,6 +1826,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит со 100% ментальным барьером и 0 маны
@@ -1851,6 +1883,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит со 100% ментальным барьером и 10 маны
@@ -1907,6 +1940,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит со 50% ментальным барьером и 100 маны
@@ -1963,6 +1997,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит со 75% ментальным барьером и 5 маны
@@ -2019,6 +2054,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // юнит с magic_accuracy и magic_defense = 100000 и типом атаки заклинание
@@ -2075,6 +2111,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // юнит со 100% магическим блоком
@@ -2131,6 +2168,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // юнит с 80% сопротивлением физическому урону
@@ -2187,6 +2225,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // юнит с 50% шансом критического удара - в тестовом режиме округляется в 100%
@@ -2243,6 +2282,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // юнит с 49% шансом критического удара - в тестовом режиме округляется в 0%
@@ -2299,6 +2339,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит не с полным здоровьем и вампиризмом - для проверки работы вампиризма
@@ -2355,6 +2396,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит с damage_type = 2 и cast_speed = 3
@@ -2412,6 +2454,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Paladin
@@ -2468,6 +2511,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
         // Юнит со +40% получаемой концентрации
@@ -2524,6 +2568,7 @@ class UnitFactory
                 'max_earth_resist'    => 75,
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
+                'global_resist'       => 0,
             ],
         ],
     ];

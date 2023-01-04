@@ -140,7 +140,8 @@ class StrokeTest extends AbstractUnitTest
                 75,
                 75,
                 75,
-                75
+                75,
+                0
             ),
             $container->getRaceFactory()->create($container->getRaceDataProvider()->get(1)),
             $container

@@ -1672,6 +1672,27 @@ class OffenseFactoryTest extends AbstractUnitTest
      */
     private function getDefense(): DefenseInterface
     {
-        return new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0, 75, 75, 75, 75, 75, 75, 75);
+        return new Defense(
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            10,
+            10,
+            5,
+            0,
+            75,
+            75,
+            75,
+            75,
+            75,
+            75,
+            75,
+            0
+        );
     }
 }

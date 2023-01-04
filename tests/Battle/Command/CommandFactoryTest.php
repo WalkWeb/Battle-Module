@@ -159,6 +159,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'max_earth_resist'    => 75,
                             'max_life_resist'     => 75,
                             'max_death_resist'    => 75,
+                            'global_resist'       => 0,
                         ],
                     ],
                     [
@@ -214,6 +215,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'max_earth_resist'    => 75,
                             'max_life_resist'     => 75,
                             'max_death_resist'    => 75,
+                            'global_resist'       => 0,
                         ],
                     ],
                 ],
@@ -281,6 +283,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'max_earth_resist'    => 75,
                             'max_life_resist'     => 75,
                             'max_death_resist'    => 75,
+                            'global_resist'       => 0,
                         ],
                     ],
                 ],
@@ -302,6 +305,27 @@ class CommandFactoryTest extends AbstractUnitTest
      */
     private function getDefense(): DefenseInterface
     {
-        return new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0, 75, 75, 75, 75, 75, 75, 75);
+        return new Defense(
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            10,
+            10,
+            5,
+            0,
+            75,
+            75,
+            75,
+            75,
+            75,
+            75,
+            75,
+            0
+        );
     }
 }

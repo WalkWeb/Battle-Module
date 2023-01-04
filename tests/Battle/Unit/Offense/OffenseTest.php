@@ -58,7 +58,28 @@ class OffenseTest extends AbstractUnitTest
             $vampire
         );
 
-        $defense = new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0, 75, 75, 75, 75, 75, 75, 75);
+        $defense = new Defense(
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            10,
+            10,
+            5,
+            0,
+            75,
+            75,
+            75,
+            75,
+            75,
+            75,
+            75,
+            0
+        );
 
         // Так как сопротивления нулевые - итоговый урон будет суммой всех типов урона
         self::assertEquals(
@@ -96,7 +117,28 @@ class OffenseTest extends AbstractUnitTest
     public function testOffenseUpdate(): void
     {
         $offense = $this->createOffence();
-        $defense = new Defense(0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 5, 0, 75, 75, 75, 75, 75, 75, 75);
+        $defense = new Defense(
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            10,
+            10,
+            5,
+            0,
+            75,
+            75,
+            75,
+            75,
+            75,
+            75,
+            75,
+            0
+        );
 
         $offense->setPhysicalDamage($physicalDamage = 15);
         $offense->setFireDamage($fireDamage = 16);
@@ -670,7 +712,8 @@ class OffenseTest extends AbstractUnitTest
             75,
             75,
             75,
-            75
+            75,
+            0
         );
 
         self::assertEquals($exceptedDamage, $offense->getDamage($defense));
