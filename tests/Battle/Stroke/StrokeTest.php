@@ -102,6 +102,7 @@ class StrokeTest extends AbstractUnitTest
             true,
             1,
             0,
+            0,
             new Offense(
                 1,
                 1,

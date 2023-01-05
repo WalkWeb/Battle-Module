@@ -41,6 +41,7 @@ class UnitFactoryTest extends AbstractUnitTest
         self::assertEquals($data['melee'], $unit->isMelee());
         self::assertEquals($data['command'], $unit->getCommand());
         self::assertEquals($data['add_concentration_multiplier'], $unit->getAddConcentrationMultiplier());
+        self::assertEquals($data['add_rage_multiplier'], $unit->getAddRageMultiplier());
         self::assertEquals($class, $unit->getClass());
         self::assertEquals($race, $unit->getRace());
 
@@ -115,6 +116,7 @@ class UnitFactoryTest extends AbstractUnitTest
             'race'                         => 8,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -185,6 +187,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -244,6 +247,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 8,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -302,6 +306,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -361,6 +366,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 2,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -428,6 +434,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -488,6 +495,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -548,6 +556,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -608,6 +617,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -667,6 +677,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -727,6 +738,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -787,6 +799,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -847,6 +860,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -906,6 +920,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -966,6 +981,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1025,6 +1041,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1085,6 +1102,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1145,6 +1163,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1205,6 +1224,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1264,6 +1284,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1324,6 +1345,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1384,6 +1406,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1444,6 +1467,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1503,6 +1527,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1563,6 +1588,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1623,6 +1649,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1683,6 +1710,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1742,6 +1770,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1802,6 +1831,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1862,6 +1892,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1922,6 +1953,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1981,6 +2013,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'class'                        => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2041,6 +2074,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 'human',
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2100,6 +2134,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'class'                        => 1,
                     'race'                         => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2160,6 +2195,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 'left',
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2220,6 +2256,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 3,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2280,6 +2317,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'defense'                      => [
                         'physical_resist'     => 0,
                         'fire_resist'         => 0,
@@ -2321,6 +2359,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => true,
                     'defense'                      => [
                         'physical_resist'     => 0,
@@ -2363,6 +2402,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2401,6 +2441,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2440,6 +2481,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 8,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2500,6 +2542,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 8,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2560,6 +2603,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 8,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2620,6 +2664,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 8,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2679,6 +2724,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 8,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2739,6 +2785,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 8,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2799,6 +2846,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 8,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2859,6 +2907,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 8,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2919,6 +2968,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 8,
                     'command'                      => 1,
                     'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2968,19 +3018,20 @@ class UnitFactoryTest extends AbstractUnitTest
             [
                 [
                     // отсутствует add_concentration_multiplier
-                    'id'         => 'fb8be211-0782-4c60-8865-68b177ffbedc',
-                    'name'       => 'Archer',
-                    'level'      => 1,
-                    'avatar'     => 'url avatar 3',
-                    'life'       => 50,
-                    'total_life' => 75,
-                    'mana'       => 50,
-                    'total_mana' => 50,
-                    'melee'      => false,
-                    'class'      => 2,
-                    'race'       => 1,
-                    'command'    => 1,
-                    'offense'    => [
+                    'id'                  => 'fb8be211-0782-4c60-8865-68b177ffbedc',
+                    'name'                => 'Archer',
+                    'level'               => 1,
+                    'avatar'              => 'url avatar 3',
+                    'life'                => 50,
+                    'total_life'          => 75,
+                    'mana'                => 50,
+                    'total_mana'          => 50,
+                    'melee'               => false,
+                    'class'               => 2,
+                    'race'                => 1,
+                    'command'             => 1,
+                    'add_rage_multiplier' => 0,
+                    'offense'             => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 15,
@@ -2999,7 +3050,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 0,
                         'vampirism'           => 0,
                     ],
-                    'defense'    => [
+                    'defense'             => [
                         'physical_resist'     => 0,
                         'fire_resist'         => 0,
                         'water_resist'        => 0,
@@ -3040,6 +3091,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => true,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -3100,6 +3152,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => UnitInterface::MIN_RESOURCE_MULTIPLIER - 1,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -3160,6 +3213,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                         => 1,
                     'command'                      => 1,
                     'add_concentration_multiplier' => UnitInterface::MAX_RESOURCE_MULTIPLIER + 1,
+                    'add_rage_multiplier'          => 0,
                     'offense'                      => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -3203,6 +3257,251 @@ class UnitFactoryTest extends AbstractUnitTest
                     ],
                 ],
                 UnitException::INCORRECT_ADD_CONC_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            ],
+
+            // add_rage_multiplier
+            [
+                [
+                    // отсутствует add_rage_multiplier
+                    'id'                           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
+                    'name'                         => 'Archer',
+                    'level'                        => 1,
+                    'avatar'                       => 'url avatar 3',
+                    'life'                         => 50,
+                    'total_life'                   => 75,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => false,
+                    'class'                        => 2,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'offense'                      => [
+                        'damage_type'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
+                        'physical_damage'     => 15,
+                        'fire_damage'         => 0,
+                        'water_damage'        => 0,
+                        'air_damage'          => 0,
+                        'earth_damage'        => 0,
+                        'life_damage'         => 0,
+                        'death_damage'        => 0,
+                        'attack_speed'        => 1.2,
+                        'cast_speed'          => 0,
+                        'accuracy'            => 200,
+                        'magic_accuracy'      => 100,
+                        'block_ignoring'      => 0,
+                        'critical_chance'     => 0,
+                        'critical_multiplier' => 0,
+                        'vampirism'           => 0,
+                    ],
+                    'defense'                      => [
+                        'physical_resist'     => 0,
+                        'fire_resist'         => 0,
+                        'water_resist'        => 0,
+                        'air_resist'          => 0,
+                        'earth_resist'        => 0,
+                        'life_resist'         => 0,
+                        'death_resist'        => 0,
+                        'defense'             => 100,
+                        'magic_defense'       => 50,
+                        'block'               => 0,
+                        'magic_block'         => 0,
+                        'mental_barrier'      => 0,
+                        'max_physical_resist' => 75,
+                        'max_fire_resist'     => 75,
+                        'max_water_resist'    => 75,
+                        'max_air_resist'      => 75,
+                        'max_earth_resist'    => 75,
+                        'max_life_resist'     => 75,
+                        'max_death_resist'    => 75,
+                        'global_resist'       => 0,
+                    ],
+                ],
+                UnitException::INCORRECT_ADD_RAGE_MULTIPLIER,
+            ],
+            [
+                [
+                    // add_rage_multiplier некорректного типа
+                    'id'                           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
+                    'name'                         => 'Archer',
+                    'level'                        => 1,
+                    'avatar'                       => 'url avatar 3',
+                    'life'                         => 50,
+                    'total_life'                   => 75,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => false,
+                    'class'                        => 2,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => null,
+                    'offense'                      => [
+                        'damage_type'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
+                        'physical_damage'     => 15,
+                        'fire_damage'         => 0,
+                        'water_damage'        => 0,
+                        'air_damage'          => 0,
+                        'earth_damage'        => 0,
+                        'life_damage'         => 0,
+                        'death_damage'        => 0,
+                        'attack_speed'        => 1.2,
+                        'cast_speed'          => 0,
+                        'accuracy'            => 200,
+                        'magic_accuracy'      => 100,
+                        'block_ignoring'      => 0,
+                        'critical_chance'     => 0,
+                        'critical_multiplier' => 0,
+                        'vampirism'           => 0,
+                    ],
+                    'defense'                      => [
+                        'physical_resist'     => 0,
+                        'fire_resist'         => 0,
+                        'water_resist'        => 0,
+                        'air_resist'          => 0,
+                        'earth_resist'        => 0,
+                        'life_resist'         => 0,
+                        'death_resist'        => 0,
+                        'defense'             => 100,
+                        'magic_defense'       => 50,
+                        'block'               => 0,
+                        'magic_block'         => 0,
+                        'mental_barrier'      => 0,
+                        'max_physical_resist' => 75,
+                        'max_fire_resist'     => 75,
+                        'max_water_resist'    => 75,
+                        'max_air_resist'      => 75,
+                        'max_earth_resist'    => 75,
+                        'max_life_resist'     => 75,
+                        'max_death_resist'    => 75,
+                        'global_resist'       => 0,
+                    ],
+                ],
+                UnitException::INCORRECT_ADD_RAGE_MULTIPLIER,
+            ],
+            [
+                [
+                    // add_rage_multiplier меньше минимального значения
+                    'id'                           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
+                    'name'                         => 'Archer',
+                    'level'                        => 1,
+                    'avatar'                       => 'url avatar 3',
+                    'life'                         => 50,
+                    'total_life'                   => 75,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => false,
+                    'class'                        => 2,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => UnitInterface::MIN_RESOURCE_MULTIPLIER - 1,
+                    'offense'                      => [
+                        'damage_type'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
+                        'physical_damage'     => 15,
+                        'fire_damage'         => 0,
+                        'water_damage'        => 0,
+                        'air_damage'          => 0,
+                        'earth_damage'        => 0,
+                        'life_damage'         => 0,
+                        'death_damage'        => 0,
+                        'attack_speed'        => 1.2,
+                        'cast_speed'          => 0,
+                        'accuracy'            => 200,
+                        'magic_accuracy'      => 100,
+                        'block_ignoring'      => 0,
+                        'critical_chance'     => 0,
+                        'critical_multiplier' => 0,
+                        'vampirism'           => 0,
+                    ],
+                    'defense'                      => [
+                        'physical_resist'     => 0,
+                        'fire_resist'         => 0,
+                        'water_resist'        => 0,
+                        'air_resist'          => 0,
+                        'earth_resist'        => 0,
+                        'life_resist'         => 0,
+                        'death_resist'        => 0,
+                        'defense'             => 100,
+                        'magic_defense'       => 50,
+                        'block'               => 0,
+                        'magic_block'         => 0,
+                        'mental_barrier'      => 0,
+                        'max_physical_resist' => 75,
+                        'max_fire_resist'     => 75,
+                        'max_water_resist'    => 75,
+                        'max_air_resist'      => 75,
+                        'max_earth_resist'    => 75,
+                        'max_life_resist'     => 75,
+                        'max_death_resist'    => 75,
+                        'global_resist'       => 0,
+                    ],
+                ],
+                UnitException::INCORRECT_ADD_RAGE_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            ],
+            [
+                [
+                    // add_rage_multiplier больше максимального типа
+                    'id'                           => 'fb8be211-0782-4c60-8865-68b177ffbedc',
+                    'name'                         => 'Archer',
+                    'level'                        => 1,
+                    'avatar'                       => 'url avatar 3',
+                    'life'                         => 50,
+                    'total_life'                   => 75,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => false,
+                    'class'                        => 2,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'add_rage_multiplier'          => UnitInterface::MAX_RESOURCE_MULTIPLIER + 1,
+                    'offense'                      => [
+                        'damage_type'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
+                        'physical_damage'     => 15,
+                        'fire_damage'         => 0,
+                        'water_damage'        => 0,
+                        'air_damage'          => 0,
+                        'earth_damage'        => 0,
+                        'life_damage'         => 0,
+                        'death_damage'        => 0,
+                        'attack_speed'        => 1.2,
+                        'cast_speed'          => 0,
+                        'accuracy'            => 200,
+                        'magic_accuracy'      => 100,
+                        'block_ignoring'      => 0,
+                        'critical_chance'     => 0,
+                        'critical_multiplier' => 0,
+                        'vampirism'           => 0,
+                    ],
+                    'defense'                      => [
+                        'physical_resist'     => 0,
+                        'fire_resist'         => 0,
+                        'water_resist'        => 0,
+                        'air_resist'          => 0,
+                        'earth_resist'        => 0,
+                        'life_resist'         => 0,
+                        'death_resist'        => 0,
+                        'defense'             => 100,
+                        'magic_defense'       => 50,
+                        'block'               => 0,
+                        'magic_block'         => 0,
+                        'mental_barrier'      => 0,
+                        'max_physical_resist' => 75,
+                        'max_fire_resist'     => 75,
+                        'max_water_resist'    => 75,
+                        'max_air_resist'      => 75,
+                        'max_earth_resist'    => 75,
+                        'max_life_resist'     => 75,
+                        'max_death_resist'    => 75,
+                        'global_resist'       => 0,
+                    ],
+                ],
+                UnitException::INCORRECT_ADD_RAGE_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER,
             ],
         ];
     }

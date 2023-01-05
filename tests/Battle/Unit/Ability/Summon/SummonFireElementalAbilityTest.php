@@ -65,6 +65,7 @@ class SummonFireElementalAbilityTest extends AbstractUnitTest
                         'class'                        => null,
                         'race'                         => 10,
                         'add_concentration_multiplier' => 0,
+                        'add_rage_multiplier'          => 0,
                         'offense'                      => [
                             'damage_type'         => 2,
                             'weapon_type'         => WeaponTypeInterface::UNARMED,

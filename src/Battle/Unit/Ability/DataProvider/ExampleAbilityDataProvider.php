@@ -551,6 +551,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'                        => null,
                             'race'                         => 10,
                             'add_concentration_multiplier' => 0,
+                            'add_rage_multiplier'          => 0,
                             'offense'                      => [
                                 'damage_type'         => 2,
                                 'weapon_type'         => WeaponTypeInterface::UNARMED,
@@ -620,6 +621,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'                        => null,
                             'race'                         => 9,
                             'add_concentration_multiplier' => 0,
+                            'add_rage_multiplier'          => 0,
                             'offense'                      => [
                                 'damage_type'         => 1,
                                 'weapon_type'         => WeaponTypeInterface::UNARMED,
@@ -689,6 +691,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'                        => null,
                             'race'                         => 8,
                             'add_concentration_multiplier' => 0,
+                            'add_rage_multiplier'          => 0,
                             'offense'                      => [
                                 'damage_type'         => 1,
                                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -758,6 +761,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'class'                        => null,
                             'race'                         => 8,
                             'add_concentration_multiplier' => 0,
+                            'add_rage_multiplier'          => 0,
                             'offense'                      => [
                                 'damage_type'         => 2,
                                 'weapon_type'         => WeaponTypeInterface::STAFF,

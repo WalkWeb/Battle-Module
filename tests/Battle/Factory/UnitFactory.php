@@ -26,6 +26,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -81,6 +82,7 @@ class UnitFactory
             'total_mana'                   => 50,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'melee'                        => true,
             'class'                        => 1,
             'race'                         => 1,
@@ -138,6 +140,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -194,6 +197,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -251,6 +255,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
@@ -307,6 +312,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
@@ -363,6 +369,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 4,
             'race'                         => 1,
             'offense'                      => [
@@ -419,6 +426,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 3,
             'race'                         => 1,
             'offense'                      => [
@@ -476,6 +484,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -533,6 +542,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -590,6 +600,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -646,6 +657,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 2,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -702,6 +714,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -758,6 +771,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -815,6 +829,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -872,6 +887,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -930,6 +946,7 @@ class UnitFactory
             'race'                         => 8,
             'command'                      => 2,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => 1,
@@ -987,6 +1004,7 @@ class UnitFactory
             'race'                         => 9,
             'command'                      => 2,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => 1,
@@ -1044,6 +1062,7 @@ class UnitFactory
             'race'                         => 8,
             'command'                      => 2,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => 1,
@@ -1101,6 +1120,7 @@ class UnitFactory
             'race'                         => 8,
             'command'                      => 2,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => 1,
@@ -1156,6 +1176,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 5,
             'race'                         => 3,
             'offense'                      => [
@@ -1213,6 +1234,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 6,
             'race'                         => 4,
             'offense'                      => [
@@ -1270,6 +1292,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 7,
             'race'                         => 6,
             'offense'                      => [
@@ -1327,6 +1350,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -1384,6 +1408,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
@@ -1441,6 +1466,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => null,
             'race'                         => 10,
             'offense'                      => [
@@ -1498,6 +1524,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 2,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 50,
             'race'                         => 9,
             'offense'                      => [
@@ -1555,6 +1582,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -1612,6 +1640,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -1669,6 +1698,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -1726,6 +1756,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 3,
             'offense'                      => [
@@ -1783,6 +1814,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
@@ -1840,6 +1872,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
@@ -1897,6 +1930,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
@@ -1954,6 +1988,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
@@ -2011,6 +2046,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
@@ -2068,6 +2104,7 @@ class UnitFactory
             'melee'                        => false,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
@@ -2125,6 +2162,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -2182,6 +2220,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -2239,6 +2278,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -2296,6 +2336,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -2353,6 +2394,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -2411,6 +2453,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
@@ -2468,6 +2511,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
+            'add_rage_multiplier'          => 0,
             'class'                        => 8,
             'race'                         => 1,
             'offense'                      => [
@@ -2525,6 +2569,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 40,
+            'add_rage_multiplier'          => 0,
             'class'                        => 8,
             'race'                         => 1,
             'offense'                      => [

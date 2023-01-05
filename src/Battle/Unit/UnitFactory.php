@@ -37,6 +37,7 @@ class UnitFactory
      *     'melee'                        => true,
      *     'command'                      => 1,
      *     'add_concentration_multiplier' => 0,
+     *     'add_rage_multiplier'          => 0,
      *     'class'                        => 1,
      *     'race'                         => 1,
      *     'offense'                      => [
@@ -59,18 +60,26 @@ class UnitFactory
      *         'vampirism'           => 0,
      *     ],
      *     'defense'                      => [
-     *         'physical_resist' => 0,
-     *         'fire_resist'     => 0,
-     *         'water_resist'    => 0,
-     *         'air_resist'      => 0,
-     *         'earth_resist'    => 0,
-     *         'life_resist'     => 0,
-     *         'death_resist'    => 0,
-     *         'defense'         => 100,
-     *         'magic_defense'   => 50,
-     *         'block'           => 0,
-     *         'magic_block'     => 0,
-     *         'mental_barrier'  => 0,
+     *         'physical_resist'     => 0,
+     *         'fire_resist'         => 0,
+     *         'water_resist'        => 0,
+     *         'air_resist'          => 0,
+     *         'earth_resist'        => 0,
+     *         'life_resist'         => 0,
+     *         'death_resist'        => 0,
+     *         'defense'             => 100,
+     *         'magic_defense'       => 50,
+     *         'block'               => 0,
+     *         'magic_block'         => 0,
+     *         'mental_barrier'      => 0,
+     *         'max_physical_resist' => 75,
+     *         'max_fire_resist'     => 75,
+     *         'max_water_resist'    => 75,
+     *         'max_air_resist'      => 75,
+     *         'max_earth_resist'    => 75,
+     *         'max_life_resist'     => 75,
+     *         'max_death_resist'    => 75,
+     *         'global_resist'       => 0,
      *     ],
      * ]
      *
@@ -95,6 +104,7 @@ class UnitFactory
         self::int($data, 'race', UnitException::INCORRECT_RACE);
         self::int($data, 'command', UnitException::INCORRECT_COMMAND);
         self::int($data, 'add_concentration_multiplier', UnitException::INCORRECT_ADD_CONC_MULTIPLIER);
+        self::int($data, 'add_rage_multiplier', UnitException::INCORRECT_ADD_RAGE_MULTIPLIER);
 
         self::intMinMaxValue(
             $data['life'],
@@ -138,6 +148,13 @@ class UnitFactory
             UnitException::INCORRECT_ADD_CONC_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
         );
 
+        self::intMinMaxValue(
+            $data['add_rage_multiplier'],
+            UnitInterface::MIN_RESOURCE_MULTIPLIER,
+            UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            UnitException::INCORRECT_ADD_RAGE_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+        );
+
         self::stringMinMaxLength($data['name'], UnitInterface::MIN_NAME_LENGTH, UnitInterface::MAX_NAME_LENGTH, UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH);
         self::stringMinMaxLength($data['id'], UnitInterface::MIN_ID_LENGTH, UnitInterface::MAX_ID_LENGTH, UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH);
 
@@ -164,6 +181,7 @@ class UnitFactory
             $data['melee'],
             $data['command'],
             $data['add_concentration_multiplier'],
+            $data['add_rage_multiplier'],
             OffenseFactory::create($data['offense']),
             DefenseFactory::create($data['defense']),
             self::getRace($data['race'], $container),

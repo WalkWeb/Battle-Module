@@ -33,12 +33,13 @@ class UnitException extends Exception
     public const INCORRECT_COMMAND                   = 'Incorrect "command". It required int 1 or 2';
     public const INCORRECT_ADD_CONC_MULTIPLIER       = 'Incorrect unit "add_concentration_multiplier", it required and type int';
     public const INCORRECT_ADD_CONC_MULTIPLIER_VALUE = 'Incorrect unit "add_concentration_multiplier", should be min-max value: ';
+    public const INCORRECT_ADD_RAGE_MULTIPLIER       = 'Incorrect unit "add_rage_multiplier", it required and type int';
+    public const INCORRECT_ADD_RAGE_MULTIPLIER_VALUE = 'Incorrect unit "add_rage_multiplier", should be min-max value: ';
     public const NO_REDUCED_DAMAGE                   = 'No reduced damage';
     public const NO_REDUCED_MAXIMUM_LIFE             = 'No reduced maximum life';
     public const NO_REDUCED_ATTACK_SPEED             = 'No reduced attack speed';
     public const UNDEFINED_MODIFY_METHOD             = 'Undefined modify method';
     public const INCORRECT_DEFENSE                   = 'Incorrect defense, it required and type array';
     public const INCORRECT_OFFENSE                   = 'Incorrect offense, it required and type array';
-    public const INCORRECT_RACE_ABILITY              = 'Incorrect race ability';
     public const CANNOT_ACTION                       = 'Unit cannot action. He died or already action';
 }

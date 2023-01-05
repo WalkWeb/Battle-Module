@@ -229,11 +229,18 @@ interface UnitInterface
     public function getRage(): int;
 
     /**
-     * Возвращает множитель получаемой концентрации. Указываются в процентах (20 => +20%, -30 => -30%)
+     * Возвращает множитель получаемой концентрации. Указывается в процентах (20 => +20%, -30 => -30%)
      *
      * @return int
      */
     public function getAddConcentrationMultiplier(): int;
+
+    /**
+     * Возвращает множитель получаемой ярости. Указывается в процентах (20 => +20%, -30 => -30%)
+     *
+     * @return int
+     */
+    public function getAddRageMultiplier(): int;
 
     /**
      * Возвращает класс юнита, или null, если класса нет

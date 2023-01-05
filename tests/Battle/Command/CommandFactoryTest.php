@@ -120,6 +120,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'race'                         => 8,
                         'command'                      => 1,
                         'add_concentration_multiplier' => 0,
+                        'add_rage_multiplier'          => 0,
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -176,6 +177,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'race'                         => 8,
                         'command'                      => 1,
                         'add_concentration_multiplier' => 0,
+                        'add_rage_multiplier'          => 0,
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -244,6 +246,7 @@ class CommandFactoryTest extends AbstractUnitTest
                         'class'                        => 1,
                         'race'                         => 1,
                         'add_concentration_multiplier' => 0,
+                        'add_rage_multiplier'          => 0,
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
