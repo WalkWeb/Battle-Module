@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
@@ -21,11 +20,9 @@ use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Battle\Command\CommandFactory;
-use Battle\Command\CommandException;
 use Tests\AbstractUnitTest;
 use Tests\Battle\Factory\UnitFactory;
 use Battle\Action\DamageAction;
-use Tests\Battle\Factory\UnitFactoryException;
 use Tests\Battle\Factory\Mock\ActionMockFactory;
 use Tests\Battle\Factory\CommandFactory as CommandFactoryTest;
 
@@ -212,8 +209,6 @@ class UnitTest extends AbstractUnitTest
     /**
      * Тест на получение концентрации и ярости при совершении действия, и получения действия от другого юнита
      *
-     * @throws CommandException
-     * @throws UnitException
      * @throws Exception
      */
     public function testUnitAddConcentrationAndRage(): void
@@ -389,10 +384,7 @@ class UnitTest extends AbstractUnitTest
     /**
      * Тест на удаление эффектов при смерти юнита
      *
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
-     * @throws ActionException
+     * @throws Exception
      */
     public function testUnitRemoveEffectsAtDie(): void
     {
@@ -446,11 +438,11 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на ситуацию, когда идет попытка уменьшения урон (на данный момент урон может только увеличиваться)
+     * Тест на ситуацию, когда идет попытка уменьшения физического урона (на данный момент урон может только увеличиваться)
      *
      * @throws Exception
      */
-    public function testUnitMultiplierDamageInvalidPower(): void
+    public function testUnitMultiplierPhysicalDamageInvalidPower(): void
     {
         $unit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -595,7 +587,7 @@ class UnitTest extends AbstractUnitTest
                         'allies_command' => $alliesCommand,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Rage',
-                        'modify_method'  => 'multiplierDamage',
+                        'modify_method'  => 'multiplierPhysicalDamage',
                         'power'          => 80,
                         'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                     ],

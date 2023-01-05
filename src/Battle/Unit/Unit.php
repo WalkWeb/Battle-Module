@@ -226,7 +226,7 @@ class Unit extends AbstractUnit
      * При этом само событие указывает, в getModifyMethod(), какой метод должен обработать текущее изменение
      * характеристик
      *
-     * @uses multiplierDamage, multiplierDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert
+     * @uses multiplierPhysicalDamage, multiplierPhysicalDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert
      * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws UnitException
@@ -243,14 +243,12 @@ class Unit extends AbstractUnit
     /**
      * Увеличивает урон юнита (можно сделать и уменьшение, но пока делаем только увеличение)
      *
-     * TODO Переименовать в multiplierPhysicalDamage
-     *
      * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws UnitException
      * @throws OffenseException
      */
-    private function multiplierDamage(ActionInterface $action): void
+    private function multiplierPhysicalDamage(ActionInterface $action): void
     {
         if ($action->getPower() <= 100) {
             throw new UnitException(UnitException::NO_REDUCED_DAMAGE);
@@ -271,13 +269,11 @@ class Unit extends AbstractUnit
     /**
      * Откатывает изменение урона юнита
      *
-     * TODO Переименовать в multiplierPhysicalDamageRevert
-     *
      * @param ActionInterface $action - ожидается BuffAction
      * @throws ActionException
      * @throws OffenseException
      */
-    private function multiplierDamageRevert(ActionInterface $action): void
+    private function multiplierPhysicalDamageRevert(ActionInterface $action): void
     {
         $this->offense->setPhysicalDamage($this->offense->getPhysicalDamage() - $action->getRevertValue());
     }

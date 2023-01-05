@@ -405,7 +405,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type'           => ActionInterface::BUFF,
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Rage',
-                                    'modify_method'  => 'multiplierDamage',
+                                    'modify_method'  => 'multiplierPhysicalDamage',
                                     'power'          => 200,
                                     'icon'           => '/images/icons/ability/285.png',
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
