@@ -521,7 +521,7 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на бонус к получению концентрации
+     * Тест на множитель к получению концентрации
      *
      * @throws Exception
      */
@@ -537,6 +537,25 @@ class UnitTest extends AbstractUnitTest
 
         // Проверяем, что полученная концентрация больше на 40% чем базовое значение
         self::assertEquals((int)(UnitInterface::ADD_CON_NEW_ROUND * 1.4), $unit->getConcentration());
+    }
+
+    /**
+     * Тест на множитель к получению концентрации
+     *
+     * @throws Exception
+     */
+    public function testUnitAddedRageMultiplier(): void
+    {
+        // Юнит со -20% получаемой ярости
+        $unit = UnitFactory::createByTemplate(45);
+
+        self::assertEquals(0, $unit->getRage());
+
+        // При новом раунде добавляется ярость
+        $unit->newRound();
+
+        // Проверяем, что полученная ярость на 20% меньше чем базовое значение
+        self::assertEquals((int)(UnitInterface::ADD_RAGE_NEW_ROUND * 0.8), $unit->getRage());
     }
 
     /**

@@ -2556,7 +2556,7 @@ class UnitFactory
                 'global_resist'       => 0,
             ],
         ],
-        // Юнит со +40% получаемой концентрации
+        // Юнит со +40% получаемой концентрации и -20% получаемой ярости
         45 => [
             'id'                           => '7c4bbcd2-601d-4322-8832-163f2b486886',
             'name'                         => 'Unit',
@@ -2569,7 +2569,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 40,
-            'add_rage_multiplier'          => 0,
+            'add_rage_multiplier'          => -20,
             'class'                        => 8,
             'race'                         => 1,
             'offense'                      => [

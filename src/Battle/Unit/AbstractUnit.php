@@ -420,14 +420,17 @@ abstract class AbstractUnit implements UnitInterface
 
     /**
      * @param int $rage
+     * @throws Exception
      */
     protected function addRage(int $rage): void
     {
-        $this->rage += $rage;
+        $this->rage += (int)($rage * ((100 + $this->addRageMultiplier) / 100));
 
         if ($this->rage > self::MAX_RAGE) {
             $this->rage = self::MAX_RAGE;
         }
+
+        $this->abilities->update($this);
     }
 
     /**
