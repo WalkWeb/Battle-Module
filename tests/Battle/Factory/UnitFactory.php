@@ -46,6 +46,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -103,6 +104,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -160,6 +162,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -217,6 +220,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -275,6 +279,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -332,6 +337,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -389,6 +395,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -446,6 +453,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -504,6 +512,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -562,6 +571,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -620,6 +630,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -677,6 +688,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -734,6 +746,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -791,6 +804,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -849,6 +863,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -907,6 +922,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -964,6 +980,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1022,6 +1039,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1080,6 +1098,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1138,6 +1157,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1196,6 +1216,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1254,6 +1275,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1312,6 +1334,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1370,6 +1393,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1428,6 +1452,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1486,6 +1511,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1544,6 +1570,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1602,6 +1629,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1660,6 +1688,7 @@ class UnitFactory
                 'block_ignoring'      => 100,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1718,6 +1747,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1776,6 +1806,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1834,6 +1865,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1892,6 +1924,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -1950,6 +1983,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -2008,6 +2042,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -2066,6 +2101,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -2124,6 +2160,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -2182,6 +2219,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -2240,6 +2278,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -2298,6 +2337,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 50,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -2356,6 +2396,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 49,
                 'critical_multiplier' => 300,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -2414,6 +2455,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 0,
                 'critical_multiplier' => 0,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 50,
             ],
             'defense'                      => [
@@ -2473,6 +2515,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -2531,6 +2574,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [
@@ -2589,6 +2633,7 @@ class UnitFactory
                 'block_ignoring'      => 0,
                 'critical_chance'     => 5,
                 'critical_multiplier' => 200,
+                'damage_multiplier'   => 100,
                 'vampirism'           => 0,
             ],
             'defense'                      => [

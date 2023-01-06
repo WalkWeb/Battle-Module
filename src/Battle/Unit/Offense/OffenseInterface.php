@@ -41,6 +41,9 @@ interface OffenseInterface
     public const MIN_CRITICAL_MULTIPLIER = 0;
     public const MAX_CRITICAL_MULTIPLIER = 10000;
 
+    public const MIN_DAMAGE_MULTIPLIER   = 0;
+    public const MAX_DAMAGE_MULTIPLIER   = 10000;
+
     public const MIN_VAMPIRE             = 0;
     public const MAX_VAMPIRE             = 100;
 
@@ -289,6 +292,21 @@ interface OffenseInterface
      * @param int $vampirism
      */
     public function setVampirism(int $vampirism): void;
+
+    /**
+     * Возвращает общий множитель наносимого урона. Значение в %, т.е. 120 => +20% наносимого урона, 80 => -20%
+     *
+     * @return int
+     */
+    public function getDamageMultiplier(): int;
+
+    /**
+     * Устанавливает новое значение общего множителя наносимого урона. Используется в эффектах
+     *
+     * @param int $damageMultiplier
+     * @throws OffenseException
+     */
+    public function setDamageMultiplier(int $damageMultiplier): void;
 
     /**
      * Возвращает ДПС (средний урон за ход = урон * скорость атаки)

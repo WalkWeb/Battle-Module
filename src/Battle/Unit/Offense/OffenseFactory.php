@@ -36,6 +36,7 @@ class OffenseFactory
         self::int($data, 'block_ignoring', OffenseException::INCORRECT_BLOCK_IGNORING);
         self::int($data, 'critical_chance', OffenseException::INCORRECT_CRITICAL_CHANCE);
         self::int($data, 'critical_multiplier', OffenseException::INCORRECT_CRITICAL_MULTIPLIER);
+        self::int($data, 'damage_multiplier', OffenseException::INCORRECT_DAMAGE_MULTIPLIER);
         self::int($data, 'vampirism', OffenseException::INCORRECT_VAMPIRISM);
 
         self::in(
@@ -61,6 +62,7 @@ class OffenseFactory
             $data['block_ignoring'],
             $data['critical_chance'],
             $data['critical_multiplier'],
+            $data['damage_multiplier'],
             $data['vampirism']
         );
     }

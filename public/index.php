@@ -37,6 +37,7 @@ $data = [
             'block_ignoring'      => 0,
             'critical_chance'     => 5,
             'critical_multiplier' => 200,
+            'damage_multiplier'   => 100,
             'vampirism'           => 0,
         ],
         'defense'                      => [
@@ -94,6 +95,7 @@ $data = [
             'block_ignoring'      => 0,
             'critical_chance'     => 10,
             'critical_multiplier' => 200,
+            'damage_multiplier'   => 100,
             'vampirism'           => 0,
         ],
         'defense'                      => [
@@ -151,6 +153,7 @@ $data = [
             'block_ignoring'      => 0,
             'critical_chance'     => 15,
             'critical_multiplier' => 150,
+            'damage_multiplier'   => 100,
             'vampirism'           => 0,
         ],
         'defense'                      => [
@@ -208,6 +211,7 @@ $data = [
             'block_ignoring'      => 0,
             'critical_chance'     => 20,
             'critical_multiplier' => 250,
+            'damage_multiplier'   => 100,
             'vampirism'           => 0,
         ],
         'defense'                      => [
@@ -265,6 +269,7 @@ $data = [
             'block_ignoring'      => 0,
             'critical_chance'     => 10,
             'critical_multiplier' => 200,
+            'damage_multiplier'   => 100,
             'vampirism'           => 0,
         ],
         'defense'                      => [

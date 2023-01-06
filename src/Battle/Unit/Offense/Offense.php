@@ -28,6 +28,7 @@ class Offense implements OffenseInterface
     private int $criticalChance;
     private int $criticalMultiplier;
     private int $vampirism;
+    private int $damageMultiplier;
 
     /**
      * @param int $damageType
@@ -47,6 +48,7 @@ class Offense implements OffenseInterface
      * @param int $criticalChance
      * @param int $criticalMultiplier
      * @param int $vampirism
+     * @param int $damageMultiplier
      * @throws Exception
      */
     public function __construct(
@@ -66,6 +68,7 @@ class Offense implements OffenseInterface
         int $blockIgnoring,
         int $criticalChance,
         int $criticalMultiplier,
+        int $damageMultiplier,
         int $vampirism
     )
     {
@@ -85,6 +88,7 @@ class Offense implements OffenseInterface
         $this->setBlockIgnoring($blockIgnoring);
         $this->setCriticalChance($criticalChance);
         $this->setCriticalMultiplier($criticalMultiplier);
+        $this->setDamageMultiplier($damageMultiplier);
         $this->setVampirism($vampirism);
     }
 
@@ -494,6 +498,29 @@ class Offense implements OffenseInterface
         }
 
         $this->criticalMultiplier = $criticalMultiplier;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDamageMultiplier(): int
+    {
+        return $this->damageMultiplier;
+    }
+
+    /**
+     * @param int $damageMultiplier
+     * @throws OffenseException
+     */
+    public function setDamageMultiplier(int $damageMultiplier): void
+    {
+        if ($damageMultiplier < self::MIN_DAMAGE_MULTIPLIER || $damageMultiplier > self::MAX_DAMAGE_MULTIPLIER) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_DAMAGE_MULTIPLIER_VALUE . OffenseInterface::MIN_DAMAGE_MULTIPLIER . '-' . OffenseInterface::MAX_DAMAGE_MULTIPLIER
+            );
+        }
+
+        $this->damageMultiplier = $damageMultiplier;
     }
 
     /**

@@ -36,6 +36,7 @@ class OffenseTest extends AbstractUnitTest
         $blockIgnore = 0;
         $criticalChance = 10;
         $criticalMultiplier = 200;
+        $damageMultiplier = 100;
         $vampire = 5;
 
         $offense = new Offense(
@@ -55,6 +56,7 @@ class OffenseTest extends AbstractUnitTest
             $blockIgnore,
             $criticalChance,
             $criticalMultiplier,
+            $damageMultiplier,
             $vampire
         );
 
@@ -102,6 +104,7 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($blockIgnore, $offense->getBlockIgnoring());
         self::assertEquals($criticalChance, $offense->getCriticalChance());
         self::assertEquals($criticalMultiplier, $offense->getCriticalMultiplier());
+        self::assertEquals($damageMultiplier, $offense->getDamageMultiplier());
         self::assertEquals($vampire, $offense->getVampirism());
         self::assertEquals(
             round(($physicalDamage + $fireDamage + $waterDamage + $airDamage + $earthDamage + $lifeDamage + $deathDamage) * $attackSpeed, 1),
@@ -565,7 +568,26 @@ class OffenseTest extends AbstractUnitTest
     {
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(OffenseException::INCORRECT_DAMAGE_TYPE_VALUE);
-        new Offense(3, 1, 10, 0, 0, 0, 0, 0, 0, 1, 1, 100, 50, 0, 5, 200, 7);
+        new Offense(
+            3,
+            1,
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            100,
+            50,
+            0,
+            5,
+            200,
+            100,
+            7
+        );
     }
 
     /**
@@ -690,6 +712,7 @@ class OffenseTest extends AbstractUnitTest
             0,
             5,
             200,
+            100,
             7
         );
 
@@ -1786,6 +1809,7 @@ class OffenseTest extends AbstractUnitTest
             0,
             5,
             200,
+            100,
             7
         );
     }

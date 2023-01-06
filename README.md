@@ -45,6 +45,7 @@ $data = [
             'block_ignoring'      => 0,
             'critical_chance'     => 10,
             'critical_multiplier' => 200,
+            'damage_multiplier'   => 100,
             'vampire'             => 0,
         ],
         'defense'      => [
@@ -102,6 +103,7 @@ $data = [
             'block_ignoring'      => 0,
             'critical_chance'     => 6,
             'critical_multiplier' => 200,
+            'damage_multiplier'   => 100,
             'vampire'             => 0,
         ],
         'defense'      => [

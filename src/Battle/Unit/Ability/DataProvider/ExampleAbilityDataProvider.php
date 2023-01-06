@@ -53,6 +53,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'block_ignoring'      => 0,
                             'critical_chance'     => 0,
                             'critical_multiplier' => 0,
+                            'damage_multiplier'   => 100,
                             'vampirism'           => 0,
                         ],
                         'can_be_avoided'   => true,
@@ -91,6 +92,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'block_ignoring'      => 0,
                             'critical_chance'     => 0,
                             'critical_multiplier' => 0,
+                            'damage_multiplier'   => 100,
                             'vampirism'           => 0,
                         ],
                         'can_be_avoided'   => true,
@@ -245,6 +247,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                         'block_ignoring'      => 0,
                                         'critical_chance'     => 0,
                                         'critical_multiplier' => 0,
+                                        'damage_multiplier'   => 100,
                                         'vampirism'           => 0,
                                     ],
                                     'can_be_avoided'   => false,
@@ -369,6 +372,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                         'block_ignoring'      => 0,
                                         'critical_chance'     => 0,
                                         'critical_multiplier' => 0,
+                                        'damage_multiplier'   => 100,
                                         'vampirism'           => 0,
                                     ],
                                     'can_be_avoided'   => false,
@@ -569,6 +573,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'block_ignoring'      => 0,
                                 'critical_chance'     => 5,
                                 'critical_multiplier' => 150,
+                                'damage_multiplier'   => 100,
                                 'vampirism'           => 0,
                             ],
                             'defense'                      => [
@@ -639,6 +644,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'block_ignoring'      => 0,
                                 'critical_chance'     => 5,
                                 'critical_multiplier' => 150,
+                                'damage_multiplier'   => 100,
                                 'vampirism'           => 0,
                             ],
                             'defense'                      => [
@@ -709,6 +715,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'block_ignoring'      => 0,
                                 'critical_chance'     => 5,
                                 'critical_multiplier' => 150,
+                                'damage_multiplier'   => 100,
                                 'vampirism'           => 0,
                             ],
                             'defense'                      => [
@@ -779,6 +786,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'block_ignoring'      => 0,
                                 'critical_chance'     => 5,
                                 'critical_multiplier' => 150,
+                                'damage_multiplier'   => 100,
                                 'vampirism'           => 0,
                             ],
                             'defense'                      => [

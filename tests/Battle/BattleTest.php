@@ -81,6 +81,7 @@ class BattleTest extends AbstractUnitTest
                     'block_ignoring'      => 0,
                     'critical_chance'     => 5,
                     'critical_multiplier' => 200,
+                    'damage_multiplier'   => 100,
                     'vampirism'           => 0,
                 ],
                 'defense'                      => [
@@ -138,6 +139,7 @@ class BattleTest extends AbstractUnitTest
                     'block_ignoring'      => 0,
                     'critical_chance'     => 5,
                     'critical_multiplier' => 200,
+                    'damage_multiplier'   => 100,
                     'vampirism'           => 0,
                 ],
                 'defense'                      => [
@@ -222,6 +224,7 @@ class BattleTest extends AbstractUnitTest
                     'block_ignoring'      => 0,
                     'critical_chance'     => 5,
                     'critical_multiplier' => 200,
+                    'damage_multiplier'   => 100,
                     'vampirism'           => 0,
                 ],
                 'defense'                      => [
@@ -279,6 +282,7 @@ class BattleTest extends AbstractUnitTest
                     'block_ignoring'      => 0,
                     'critical_chance'     => 5,
                     'critical_multiplier' => 200,
+                    'damage_multiplier'   => 100,
                     'vampirism'           => 0,
                 ],
                 'defense'                      => [
