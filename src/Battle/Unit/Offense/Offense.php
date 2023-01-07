@@ -129,7 +129,7 @@ class Offense implements OffenseInterface
                 $this->lifeDamage * ((100 - $defense->getLifeResist()) / 100)
                 +
                 $this->deathDamage * ((100 - $defense->getDeathResist()) / 100)
-            ) * ((100 - $defense->getGlobalResist()) / 100)
+            ) * ((100 - $defense->getGlobalResist()) / 100) * $this->damageMultiplier / 100
         );
     }
 
@@ -433,6 +433,8 @@ class Offense implements OffenseInterface
     }
 
     /**
+     * TODO Не учитывается крит
+     *
      * @return float
      */
     public function getDPS(): float
@@ -448,8 +450,7 @@ class Offense implements OffenseInterface
                 $this->earthDamage +
                 $this->lifeDamage +
                 $this->deathDamage
-            ) *
-            $speed,
+            ) * $speed * ($this->damageMultiplier / 100),
             1
         );
     }

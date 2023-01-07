@@ -687,13 +687,16 @@ class OffenseTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на корректный расчет наносимого урона
+     *
      * @dataProvider resistDataProvider
      * @param array $damage
      * @param array $resist
+     * @param int $damageMultiplier
      * @param int $exceptedDamage
      * @throws Exception
      */
-    public function testOffenseGetDamage(array $damage, array $resist, int $exceptedDamage): void
+    public function testOffenseGetDamage(array $damage, array $resist, int $damageMultiplier, int $exceptedDamage): void
     {
         $offense = new Offense(
             1,
@@ -712,7 +715,7 @@ class OffenseTest extends AbstractUnitTest
             0,
             5,
             200,
-            100,
+            $damageMultiplier,
             7
         );
 
@@ -771,6 +774,7 @@ class OffenseTest extends AbstractUnitTest
                     'global_resist'   => 0,
                 ],
                 100,
+                100,
             ],
             [
                 [
@@ -792,6 +796,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 75,
             ],
             [
@@ -814,6 +819,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 50,
             ],
             [
@@ -836,6 +842,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 25,
             ],
             [
@@ -858,6 +865,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 0,
             ],
             [
@@ -880,6 +888,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 200,
             ],
 
@@ -905,6 +914,7 @@ class OffenseTest extends AbstractUnitTest
                     'global_resist'   => 0,
                 ],
                 100,
+                100,
             ],
             [
                 [
@@ -926,6 +936,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 75,
             ],
             [
@@ -948,6 +959,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 50,
             ],
             [
@@ -970,6 +982,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 25,
             ],
             [
@@ -992,6 +1005,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 0,
             ],
             [
@@ -1014,6 +1028,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 200,
             ],
 
@@ -1039,6 +1054,7 @@ class OffenseTest extends AbstractUnitTest
                     'global_resist'   => 0,
                 ],
                 100,
+                100,
             ],
             [
                 [
@@ -1060,6 +1076,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 75,
             ],
             [
@@ -1082,6 +1099,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 50,
             ],
             [
@@ -1104,6 +1122,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 25,
             ],
             [
@@ -1126,6 +1145,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 0,
             ],
             [
@@ -1148,6 +1168,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 200,
             ],
 
@@ -1173,6 +1194,7 @@ class OffenseTest extends AbstractUnitTest
                     'global_resist'   => 0,
                 ],
                 100,
+                100,
             ],
             [
                 [
@@ -1194,6 +1216,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 75,
             ],
             [
@@ -1216,6 +1239,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 50,
             ],
             [
@@ -1238,6 +1262,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 25,
             ],
             [
@@ -1260,6 +1285,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 0,
             ],
             [
@@ -1282,6 +1308,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 200,
             ],
 
@@ -1307,6 +1334,7 @@ class OffenseTest extends AbstractUnitTest
                     'global_resist'   => 0,
                 ],
                 100,
+                100,
             ],
             [
                 [
@@ -1328,6 +1356,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 75,
             ],
             [
@@ -1350,6 +1379,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 50,
             ],
             [
@@ -1372,6 +1402,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 25,
             ],
             [
@@ -1394,6 +1425,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 0,
             ],
             [
@@ -1416,6 +1448,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 200,
             ],
 
@@ -1441,6 +1474,7 @@ class OffenseTest extends AbstractUnitTest
                     'global_resist'   => 0,
                 ],
                 100,
+                100,
             ],
             [
                 [
@@ -1462,6 +1496,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 75,
             ],
             [
@@ -1484,6 +1519,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 50,
             ],
             [
@@ -1506,6 +1542,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 25,
             ],
             [
@@ -1528,6 +1565,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 0,
             ],
             [
@@ -1550,6 +1588,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 0,
                 ],
+                100,
                 200,
             ],
 
@@ -1575,6 +1614,7 @@ class OffenseTest extends AbstractUnitTest
                     'global_resist'   => 0,
                 ],
                 100,
+                100,
             ],
             [
                 [
@@ -1596,6 +1636,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 25,
                     'global_resist'   => 0,
                 ],
+                100,
                 75,
             ],
             [
@@ -1618,6 +1659,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 50,
                     'global_resist'   => 0,
                 ],
+                100,
                 50,
             ],
             [
@@ -1640,6 +1682,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 75,
                     'global_resist'   => 0,
                 ],
+                100,
                 25,
             ],
             [
@@ -1662,6 +1705,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 100,
                     'global_resist'   => 0,
                 ],
+                100,
                 0,
             ],
             [
@@ -1684,6 +1728,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => -100,
                     'global_resist'   => 0,
                 ],
+                100,
                 200,
             ],
 
@@ -1708,6 +1753,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 60,
                     'global_resist'   => 0,
                 ],
+                100,
                 100 + 90 + 80 + 70 + 60 + 50 + 40,
             ],
 
@@ -1732,6 +1778,7 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 0,
                     'global_resist'   => 50,
                 ],
+                100,
                 25,
             ],
 
@@ -1757,6 +1804,7 @@ class OffenseTest extends AbstractUnitTest
                     'global_resist'   => -100,
                 ],
                 100,
+                100,
             ],
 
             // hybrid + global_resist
@@ -1780,7 +1828,58 @@ class OffenseTest extends AbstractUnitTest
                     'death_resist'    => 60,
                     'global_resist'   => 50,
                 ],
+                100,
                 (100 + 90 + 80 + 70 + 60 + 50 + 40) / 2,
+            ],
+
+            // Общий множитель наносимого урона +30%
+            [
+                [
+                    'physical_damage' => 100,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 50,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                    'global_resist'   => 0,
+                ],
+                130,
+                (int)(50 * 1.3),
+            ],
+
+            // Общий множитель наносимого урона -25%
+            [
+                [
+                    'physical_damage' => 100,
+                    'fire_damage'     => 0,
+                    'water_damage'    => 0,
+                    'air_damage'      => 0,
+                    'earth_damage'    => 0,
+                    'life_damage'     => 0,
+                    'death_damage'    => 0,
+                ],
+                [
+                    'physical_resist' => 50,
+                    'fire_resist'     => 0,
+                    'water_resist'    => 0,
+                    'air_resist'      => 0,
+                    'earth_resist'    => 0,
+                    'life_resist'     => 0,
+                    'death_resist'    => 0,
+                    'global_resist'   => 0,
+                ],
+                75,
+                (int)(50 * 0.75),
             ],
 
         ];

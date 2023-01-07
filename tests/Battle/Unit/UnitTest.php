@@ -56,13 +56,13 @@ class UnitTest extends AbstractUnitTest
 
         // Проверка метода getDamage подразумевает, что все юниты имеют 0 сопротивления
         self::assertEquals(
-            $data['offense']['physical_damage'] +
+            ($data['offense']['physical_damage'] +
             $data['offense']['fire_damage'] +
             $data['offense']['water_damage'] +
             $data['offense']['air_damage'] +
             $data['offense']['earth_damage'] +
             $data['offense']['life_damage'] +
-            $data['offense']['death_damage'],
+            $data['offense']['death_damage']) * ($data['offense']['damage_multiplier']/100),
             $unit->getOffense()->getDamage($this->getDefense())
         );
 
@@ -84,7 +84,7 @@ class UnitTest extends AbstractUnitTest
             $data['offense']['earth_damage'] +
             $data['offense']['life_damage'] +
             $data['offense']['death_damage']
-            ) * $speed, 1),
+            ) * $speed * ($data['offense']['damage_multiplier']/100), 1),
             $unit->getOffense()->getDPS()
         );
 
@@ -566,7 +566,7 @@ class UnitTest extends AbstractUnitTest
         return [
             [1], [2], [3], [4], [5], [6], [7], [8], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20],
             [21], [22], [23], [24], [25], [26], [27], [28], [29], [30], [31], [32], [33], [34], [35], [36], [37], [38],
-            [39], [40], [41], [42], [43],
+            [39], [40], [41], [42], [43], [44], [45], [46],
         ];
     }
 
