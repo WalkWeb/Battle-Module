@@ -433,8 +433,6 @@ class Offense implements OffenseInterface
     }
 
     /**
-     * TODO Не учитывается крит
-     *
      * @return float
      */
     public function getDPS(): float
@@ -442,6 +440,7 @@ class Offense implements OffenseInterface
         $speed = $this->damageType === self::TYPE_ATTACK ? $this->attackSpeed : $this->castSpeed;
 
         return round(
+            // Общий урон по всем стихиям
             (
                 $this->physicalDamage +
                 $this->fireDamage +
@@ -450,7 +449,13 @@ class Offense implements OffenseInterface
                 $this->earthDamage +
                 $this->lifeDamage +
                 $this->deathDamage
-            ) * $speed * ($this->damageMultiplier / 100),
+            )
+            // Множитель от скорости атаки
+            * $speed
+            // Множитель общего наносимого урона
+            * ($this->damageMultiplier / 100)
+            // Множитель от шанса и силы крита
+            * (1 + (($this->criticalChance / 100) * ($this->criticalMultiplier / 100 - 1))),
             1
         );
     }

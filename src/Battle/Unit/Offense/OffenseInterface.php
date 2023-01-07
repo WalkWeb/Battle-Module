@@ -309,7 +309,7 @@ interface OffenseInterface
     public function setDamageMultiplier(int $damageMultiplier): void;
 
     /**
-     * Возвращает ДПС (средний урон за ход = урон * скорость атаки)
+     * Возвращает ДПС (средний урон за ход = урон * скорость атаки * (1 + (шанс крита/100) * (сила крита/100 - 1))
      *
      * @return float
      */

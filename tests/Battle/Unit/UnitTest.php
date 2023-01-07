@@ -66,6 +66,7 @@ class UnitTest extends AbstractUnitTest
             $unit->getOffense()->getDamage($this->getDefense())
         );
 
+        // Здесь проверяется лишь несколько параметров Offense, все проверяются в OffenseFactoryTest
         self::assertEquals($data['offense']['physical_damage'], $unit->getOffense()->getPhysicalDamage());
         self::assertEquals($data['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
         self::assertEquals($data['offense']['cast_speed'], $unit->getOffense()->getCastSpeed());
@@ -76,18 +77,25 @@ class UnitTest extends AbstractUnitTest
             $data['offense']['attack_speed'] : $data['offense']['cast_speed'];
 
         self::assertEquals(
-            round((
-            $data['offense']['physical_damage'] +
-            $data['offense']['fire_damage'] +
-            $data['offense']['water_damage'] +
-            $data['offense']['air_damage'] +
-            $data['offense']['earth_damage'] +
-            $data['offense']['life_damage'] +
-            $data['offense']['death_damage']
-            ) * $speed * ($data['offense']['damage_multiplier']/100), 1),
+            round(
+                (
+                $data['offense']['physical_damage'] +
+                $data['offense']['fire_damage'] +
+                $data['offense']['water_damage'] +
+                $data['offense']['air_damage'] +
+                $data['offense']['earth_damage'] +
+                $data['offense']['life_damage'] +
+                $data['offense']['death_damage']
+                )
+                * $speed
+                * ($data['offense']['damage_multiplier']/100)
+                * (1 + ($data['offense']['critical_chance']/100) * ($data['offense']['critical_multiplier']/100 - 1)),
+                1
+            ),
             $unit->getOffense()->getDPS()
         );
 
+        // Здесь проверяется лишь несколько параметров Defense, все проверяются в DefenseFactoryTest
         self::assertEquals($data['defense']['defense'], $unit->getDefense()->getDefense());
         self::assertEquals($data['defense']['magic_defense'], $unit->getDefense()->getMagicDefense());
         self::assertEquals($data['defense']['block'], $unit->getDefense()->getBlock());
