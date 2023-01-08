@@ -315,11 +315,6 @@ abstract class AbstractUnit implements UnitInterface
         return $this->abilities;
     }
 
-    public function getOnNewRoundActions(): ActionCollection
-    {
-        return $this->effects->newRound();
-    }
-
     /**
      * @throws Exception
      */
@@ -358,7 +353,7 @@ abstract class AbstractUnit implements UnitInterface
      */
     public function getBeforeActions(): ActionCollection
     {
-        return $this->getOnNewRoundActions();
+        return $this->effects->newRound();
     }
 
     /**

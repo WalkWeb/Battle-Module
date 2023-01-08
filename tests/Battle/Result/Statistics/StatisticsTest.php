@@ -240,7 +240,7 @@ class StatisticsTest extends AbstractUnitTest
         self::assertCount(1, $enemyUnit->getEffects());
 
         // Наносим урон юниту от эффекта и считаем статистику от эффекта
-        foreach ($enemyUnit->getOnNewRoundActions() as $effectAction) {
+        foreach ($enemyUnit->getBeforeActions() as $effectAction) {
             $effectAction->handle();
             $statistics->addUnitAction($effectAction);
         }
@@ -324,7 +324,7 @@ class StatisticsTest extends AbstractUnitTest
         self::assertCount(1, $woundedUnit->getEffects());
 
         // Лечим юнита от эффекта и считаем статистику от эффекта
-        foreach ($woundedUnit->getOnNewRoundActions() as $effectAction) {
+        foreach ($woundedUnit->getBeforeActions() as $effectAction) {
             $effectAction->handle();
             $statistics->addUnitAction($effectAction);
         }

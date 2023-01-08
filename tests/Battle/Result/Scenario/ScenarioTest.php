@@ -332,7 +332,7 @@ class ScenarioTest extends AbstractUnitTest
         }
 
         // Применение эффекта от урона
-        foreach ($enemyUnit->getOnNewRoundActions() as $action) {
+        foreach ($enemyUnit->getBeforeActions() as $action) {
             if ($action->canByUsed()) {
                 $action->handle();
                 $container->getScenario()->addAnimation($action, $container->getStatistic());
@@ -535,7 +535,7 @@ class ScenarioTest extends AbstractUnitTest
         }
 
         // Применение эффекта от лечения
-        foreach ($unit->getOnNewRoundActions() as $action) {
+        foreach ($unit->getBeforeActions() as $action) {
             if ($action->canByUsed()) {
                 $action->handle();
                 $container->getScenario()->addAnimation($action, $container->getStatistic());
