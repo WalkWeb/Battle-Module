@@ -204,6 +204,8 @@ class ActionFactory
         $effectFactory = new EffectFactory($this);
         $effect = $effectFactory->create($effectData);
 
+        // TODO Add ManaRestoreAction
+
         return new EffectAction(
             $this->container,
             $actionUnit,

@@ -46,6 +46,12 @@ class OffenseFactoryTest extends AbstractUnitTest
         self::assertEquals($data['accuracy'], $offense->getAccuracy());
         self::assertEquals($data['magic_accuracy'], $offense->getMagicAccuracy());
         self::assertEquals($data['block_ignoring'], $offense->getBlockIgnoring());
+
+        self::assertEquals($data['critical_chance'], $offense->getCriticalChance());
+        self::assertEquals($data['critical_multiplier'], $offense->getCriticalMultiplier());
+        self::assertEquals($data['damage_multiplier'], $offense->getDamageMultiplier());
+        self::assertEquals($data['vampirism'], $offense->getVampirism());
+        self::assertEquals($data['magic_vampirism'], $offense->getMagicVampirism());
     }
 
     /**
@@ -90,7 +96,7 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'critical_multiplier' => 200,
                     'damage_multiplier'   => 100,
                     'vampirism'           => 0,
-                    'magic_vampirism'     => 0,
+                    'magic_vampirism'     => 3,
                 ],
             ],
             [

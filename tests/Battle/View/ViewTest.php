@@ -608,7 +608,7 @@ EOT;
                 <td><p>Yes</p></td>
                 <td><p>Human</p></td>
                 <td><p>250/250</p></td>
-                <td><p>50/50</p></td>
+                <td><p>20/50</p></td>
                 <td><p>Yes</p></td>
                 <td><p>No</p></td>
                 <td><p>30</p></td>

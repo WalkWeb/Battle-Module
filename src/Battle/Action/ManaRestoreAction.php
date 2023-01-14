@@ -6,17 +6,12 @@ namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
-use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
-class HealAction extends AbstractAction
+class ManaRestoreAction extends AbstractAction
 {
-    private const NAME                   = 'heal';
-    private const HANDLE_METHOD          = 'applyHealAction';
-    public const UNIT_ANIMATION_METHOD   = 'heal';
-    public const EFFECT_ANIMATION_METHOD = 'effectHeal';
-    public const DEFAULT_MESSAGE_METHOD  = 'heal';
-    public const EFFECT_MESSAGE_METHOD   = 'effectHeal';
+    public const NAME           = 'restore mana';
+    private const HANDLE_METHOD = 'applyManaRestoreAction';
 
     /**
      * @var int
@@ -38,8 +33,19 @@ class HealAction extends AbstractAction
      */
     protected string $messageMethod;
 
-    // TODO Избавиться от null параметров в конструкторе
-
+    /**
+     * @param ContainerInterface $container
+     * @param UnitInterface $actionUnit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $alliesCommand
+     * @param int $typeTarget
+     * @param int $power
+     * @param string $name
+     * @param string $animationMethod
+     * @param string $messageMethod
+     * @param string $icon
+     * @throws ActionException
+     */
     public function __construct(
         ContainerInterface $container,
         UnitInterface $actionUnit,
@@ -47,50 +53,53 @@ class HealAction extends AbstractAction
         CommandInterface $alliesCommand,
         int $typeTarget,
         int $power,
-        ?string $name = null,
-        ?string $animationMethod = null,
-        ?string $messageMethod = null,
+        string $name,
+        string $animationMethod,
+        string $messageMethod,
         string $icon = ''
     )
     {
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
 
+        if ($this->typeTarget !== self::TARGET_SELF) {
+            throw new ActionException(ActionException::INVALID_MANA_RESTORE_TARGET);
+        }
+
         $this->power = $power;
-        $this->name = $name ?? self::NAME;
-        $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
-        $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
+        $this->name = $name;
+        $this->animationMethod = $animationMethod;
+        $this->messageMethod = $messageMethod;
     }
 
+    /**
+     * @return string
+     */
     public function getHandleMethod(): string
     {
         return self::HANDLE_METHOD;
     }
 
     /**
-     * Выбирает цель для лечения и лечит её
-     *
-     * @throws ActionException
-     * @throws UnitException
+     * На данный момент ManaRestoreAction применяется только в механике магического вампиризма, соответственно Action
+     * применяется только к себе
      */
     public function handle(): void
     {
-        $this->targetUnits = $this->searchTargetUnits($this);
-
-        // Такой ситуации быть не должно, потому возможность применения события должна проверяться до её применения
-        if (count($this->targetUnits) === 0) {
-            throw new ActionException(ActionException::NO_TARGET_FOR_HEAL);
-        }
-
-        foreach ($this->targetUnits as $targetUnit) {
-            $targetUnit->applyAction($this);
-        }
+        $this->actionUnit->applyAction($this);
     }
 
+    /**
+     * @return int
+     */
     public function getPower(): int
     {
         return $this->power;
     }
 
+    /**
+     * @param UnitInterface $unit
+     * @param int $factualPower
+     */
     public function addFactualPower(UnitInterface $unit, int $factualPower): void
     {
         $this->factualPower += $factualPower;
@@ -120,25 +129,27 @@ class HealAction extends AbstractAction
     }
 
     /**
-     * Вариант применения эффект на противников не рассматривается - т.к. помогать противоположной команде не
-     * подразумевается
+     * Восстановление маны считается всегда доступным для использования. Если мана полная - то просто не будет ничего
+     * восстановлено
      *
      * @return bool
      */
     public function canByUsed(): bool
     {
-        if ($this->typeTarget === self::TARGET_SELF && $this->actionUnit->getLife() === $this->actionUnit->getTotalLife()) {
-            return false;
-        }
-
-        return (bool)$this->alliesCommand->getUnitForHeal();
+        return true;
     }
 
+    /**
+     * @return string
+     */
     public function getAnimationMethod(): string
     {
         return $this->animationMethod;
     }
 
+    /**
+     * @return string
+     */
     public function getMessageMethod(): string
     {
         return $this->messageMethod;

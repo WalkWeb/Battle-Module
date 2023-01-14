@@ -75,6 +75,7 @@ class UnitFactory
                 'global_resist'       => 0,
             ],
         ],
+        // У юнита не максимальная мана, а также есть магический вампиризм
         2  => [
             'id'                           => '1aab367d-37e8-4544-9915-cb3d7779308b',
             'name'                         => 'unit_2',
@@ -82,7 +83,7 @@ class UnitFactory
             'avatar'                       => '/images/avas/humans/human002.jpg',
             'life'                         => 250,
             'total_life'                   => 250,
-            'mana'                         => 50,
+            'mana'                         => 20,
             'total_mana'                   => 50,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
@@ -109,7 +110,7 @@ class UnitFactory
                 'critical_multiplier' => 200,
                 'damage_multiplier'   => 100,
                 'vampirism'           => 0,
-                'magic_vampirism'     => 0,
+                'magic_vampirism'     => 10,
             ],
             'defense'                      => [
                 'physical_resist'     => 0,

@@ -75,7 +75,7 @@ class Unit extends AbstractUnit
     /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
      *
-     * @uses applyDamageAction, applyHealAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction, applyResurrectionAction, applyParalysisAction
+     * @uses applyDamageAction, applyHealAction, applyManaRestoreAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction, applyResurrectionAction, applyParalysisAction
      * @param ActionInterface $action
      * @throws Exception
      */
@@ -154,6 +154,24 @@ class Unit extends AbstractUnit
         }
 
         $action->addFactualPower($this, $this->life - $primordialLife);
+    }
+
+    /**
+     * Обрабатывает action на восстановление маны
+     *
+     * @param ActionInterface $action - ожидается ManaRestoreAction
+     * @throws ActionException
+     */
+    private function applyManaRestoreAction(ActionInterface $action): void
+    {
+        $primordialMana = $this->mana;
+
+        $this->mana += $action->getPower();
+        if ($this->mana > $this->totalMana) {
+            $this->mana = $this->totalMana;
+        }
+
+        $action->addFactualPower($this, $this->mana - $primordialMana);
     }
 
     /**
