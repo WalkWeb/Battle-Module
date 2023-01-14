@@ -764,7 +764,7 @@ class DamageActionTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testDamageActionVampire(): void
+    public function testDamageActionVampirism(): void
     {
         $unit = UnitFactory::createByTemplate(42);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -783,6 +783,32 @@ class DamageActionTest extends AbstractUnitTest
 
         // Проверяем количество восстановленного здоровья в DamageAction
         self::assertEquals(25, $action->getRestoreLifeFromVampirism());
+    }
+
+    /**
+     * Тест на магический вампиризм от удара
+     *
+     * @throws Exception
+     */
+    public function testDamageActionMagicVampirism(): void
+    {
+        $unit = UnitFactory::createByTemplate(2);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        // Количество маны атакующего до нанесения урона
+        self::assertEquals(20, $unit->getMana());
+
+        $action->handle();
+
+        // Количество маны после нанесения урона - восстановилось 3 маны (30 урона и 10% магического вампиризма)
+        self::assertEquals(23, $unit->getMana());
+
+        // Проверяем количество восстановленной маны в DamageAction
+        self::assertEquals(3, $action->getRestoreManaFromMagicVampirism());
     }
 
     /**

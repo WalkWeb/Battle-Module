@@ -355,4 +355,13 @@ interface ActionInterface
      * @throws ActionException
      */
     public function getRestoreLifeFromVampirism(): int;
+
+    /**
+     * Возвращает восстановленную ману от магического вампиризма. По умолчанию 0
+     *
+     * Работает только для DamageAction, в остальных Action будет исключение
+     *
+     * @return int
+     */
+    public function getRestoreManaFromMagicVampirism(): int;
 }

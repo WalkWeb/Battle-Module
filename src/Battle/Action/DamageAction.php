@@ -83,6 +83,13 @@ class DamageAction extends AbstractAction
     protected int $restoreLifeFromVampirism = 0;
 
     /**
+     * Восстановленная мага от магического вампиризма
+     *
+     * @var int
+     */
+    protected int $restoreManaFromMagicVampirism = 0;
+
+    /**
      * @param ContainerInterface $container
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
@@ -153,18 +160,47 @@ class DamageAction extends AbstractAction
             $targetUnit->applyAction($this);
         }
 
-        if ($this->offense->getVampirism() > 0) {
-            $this->actionUnit->applyAction(new HealAction(
-                $this->container,
-                $this->actionUnit,
-                $this->enemyCommand,
-                $this->alliesCommand,
-                HealAction::TARGET_SELF,
-                $this->restoreLifeFromVampirism = (int)($this->factualPower * ($this->offense->getVampirism() / 100)),
-                '',
-                HealAction::SKIP_ANIMATION_METHOD,
-                HealAction::SKIP_MESSAGE_METHOD
-            ));
+        if ($this->factualPower > 0) {
+            if ($this->offense->getVampirism() > 0) {
+
+                $this->restoreLifeFromVampirism = (int)($this->factualPower * ($this->offense->getVampirism() / 100));
+
+                // Не смотря на наличие вампиризма и нанесенного урона - его может быть недостаточно для восстановления
+                // хотя бы единицы жизни. По этому дополнительно проверяем, что есть что восстанавливать
+                if ($this->restoreLifeFromVampirism > 0) {
+                    $this->actionUnit->applyAction(new HealAction(
+                        $this->container,
+                        $this->actionUnit,
+                        $this->enemyCommand,
+                        $this->alliesCommand,
+                        HealAction::TARGET_SELF,
+                        $this->restoreLifeFromVampirism,
+                        '',
+                        HealAction::SKIP_ANIMATION_METHOD,
+                        HealAction::SKIP_MESSAGE_METHOD
+                    ));
+                }
+            }
+
+            if ($this->offense->getMagicVampirism() > 0) {
+
+                // Тоже самое с магическим вампиризмом
+                $this->restoreManaFromMagicVampirism = (int)($this->factualPower * ($this->offense->getMagicVampirism() / 100));
+
+                if ($this->restoreManaFromMagicVampirism > 0) {
+                    $this->actionUnit->applyAction(new ManaRestoreAction(
+                        $this->container,
+                        $this->actionUnit,
+                        $this->enemyCommand,
+                        $this->alliesCommand,
+                        HealAction::TARGET_SELF,
+                        $this->restoreManaFromMagicVampirism,
+                        '',
+                        HealAction::SKIP_ANIMATION_METHOD,
+                        HealAction::SKIP_MESSAGE_METHOD
+                    ));
+                }
+            }
         }
     }
 
@@ -301,6 +337,14 @@ class DamageAction extends AbstractAction
     public function getRestoreLifeFromVampirism(): int
     {
         return $this->restoreLifeFromVampirism;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRestoreManaFromMagicVampirism(): int
+    {
+        return $this->restoreManaFromMagicVampirism;
     }
 
     /**
