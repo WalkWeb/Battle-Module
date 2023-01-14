@@ -83,6 +83,7 @@ class BattleTest extends AbstractUnitTest
                     'critical_multiplier' => 200,
                     'damage_multiplier'   => 100,
                     'vampirism'           => 0,
+                    'magic_vampirism'     => 0,
                 ],
                 'defense'                      => [
                     'physical_resist'     => 30,
@@ -141,6 +142,7 @@ class BattleTest extends AbstractUnitTest
                     'critical_multiplier' => 200,
                     'damage_multiplier'   => 100,
                     'vampirism'           => 0,
+                    'magic_vampirism'     => 0,
                 ],
                 'defense'                      => [
                     'physical_resist'     => 30,
@@ -226,6 +228,7 @@ class BattleTest extends AbstractUnitTest
                     'critical_multiplier' => 200,
                     'damage_multiplier'   => 100,
                     'vampirism'           => 0,
+                    'magic_vampirism'     => 0,
                 ],
                 'defense'                      => [
                     'physical_resist'     => 30,
@@ -284,6 +287,7 @@ class BattleTest extends AbstractUnitTest
                     'critical_multiplier' => 200,
                     'damage_multiplier'   => 100,
                     'vampirism'           => 0,
+                    'magic_vampirism'     => 0,
                 ],
                 'defense'                      => [
                     'physical_resist'     => 30,

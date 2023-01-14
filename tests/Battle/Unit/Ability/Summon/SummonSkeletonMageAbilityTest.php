@@ -84,6 +84,7 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
                             'critical_multiplier' => 150,
                             'damage_multiplier'   => 100,
                             'vampirism'           => 0,
+                            'magic_vampirism'     => 0,
                         ],
                         'defense'                      => [
                             'physical_resist'     => 0,

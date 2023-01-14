@@ -38,6 +38,7 @@ class OffenseFactory
         self::int($data, 'critical_multiplier', OffenseException::INCORRECT_CRITICAL_MULTIPLIER);
         self::int($data, 'damage_multiplier', OffenseException::INCORRECT_DAMAGE_MULTIPLIER);
         self::int($data, 'vampirism', OffenseException::INCORRECT_VAMPIRISM);
+        self::int($data, 'magic_vampirism', OffenseException::INCORRECT_MAGIC_VAMPIRISM);
 
         self::in(
             $data['damage_type'],
@@ -63,7 +64,8 @@ class OffenseFactory
             $data['critical_chance'],
             $data['critical_multiplier'],
             $data['damage_multiplier'],
-            $data['vampirism']
+            $data['vampirism'],
+            $data['magic_vampirism']
         );
     }
 }

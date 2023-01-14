@@ -290,8 +290,25 @@ interface OffenseInterface
      * Устанавливает новое значение вампиризма. Используется в эффектах, изменяющих этот параметр
      *
      * @param int $vampirism
+     * @throws OffenseException
      */
     public function setVampirism(int $vampirism): void;
+
+    /**
+     * Возвращает значение магического вампиризма (0-100%) - указывает, какое количество от фактически нанесенного урона
+     * будет своровано в ману
+     *
+     * @return int
+     */
+    public function getMagicVampirism(): int;
+
+    /**
+     * Устанавливает новое значение магического вампиризма. Используется в эффектах, изменяющих этот параметр
+     *
+     * @param int $magicVampirism
+     * @throws OffenseException
+     */
+    public function setMagicVampirism(int $magicVampirism): void;
 
     /**
      * Возвращает общий множитель наносимого урона. Значение в %, т.е. 120 => +20% наносимого урона, 80 => -20%

@@ -121,6 +121,7 @@ class StrokeTest extends AbstractUnitTest
                 5,
                 200,
                 100,
+                0,
                 0
             ),
             new Defense(
@@ -482,6 +483,7 @@ class StrokeTest extends AbstractUnitTest
                             'critical_multiplier' => 200,
                             'damage_multiplier'   => 100,
                             'vampirism'           => 0,
+                            'magic_vampirism'     => 0,
                         ],
                         'can_be_avoided'   => false,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,

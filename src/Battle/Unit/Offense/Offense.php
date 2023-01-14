@@ -27,8 +27,9 @@ class Offense implements OffenseInterface
     private int $blockIgnoring;
     private int $criticalChance;
     private int $criticalMultiplier;
-    private int $vampirism;
     private int $damageMultiplier;
+    private int $vampirism;
+    private int $magicVampirism;
 
     /**
      * @param int $damageType
@@ -47,8 +48,9 @@ class Offense implements OffenseInterface
      * @param int $blockIgnoring
      * @param int $criticalChance
      * @param int $criticalMultiplier
-     * @param int $vampirism
      * @param int $damageMultiplier
+     * @param int $vampirism
+     * @param int $magicVampirism
      * @throws Exception
      */
     public function __construct(
@@ -69,7 +71,8 @@ class Offense implements OffenseInterface
         int $criticalChance,
         int $criticalMultiplier,
         int $damageMultiplier,
-        int $vampirism
+        int $vampirism,
+        int $magicVampirism
     )
     {
         $this->setDamageType($damageType);
@@ -90,6 +93,7 @@ class Offense implements OffenseInterface
         $this->setCriticalMultiplier($criticalMultiplier);
         $this->setDamageMultiplier($damageMultiplier);
         $this->setVampirism($vampirism);
+        $this->setMagicVampirism($magicVampirism);
     }
 
     /**
@@ -430,6 +434,29 @@ class Offense implements OffenseInterface
         }
 
         $this->vampirism = $vampirism;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMagicVampirism(): int
+    {
+        return $this->magicVampirism;
+    }
+
+    /**
+     * @param int $magicVampirism
+     * @throws OffenseException
+     */
+    public function setMagicVampirism(int $magicVampirism): void
+    {
+        if ($magicVampirism < self::MIN_VAMPIRE || $magicVampirism > self::MAX_VAMPIRE) {
+            throw new OffenseException(
+                OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+            );
+        }
+
+        $this->magicVampirism = $magicVampirism;
     }
 
     /**

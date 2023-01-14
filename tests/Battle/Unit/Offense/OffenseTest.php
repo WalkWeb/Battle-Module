@@ -37,7 +37,8 @@ class OffenseTest extends AbstractUnitTest
         $criticalChance = 10;
         $criticalMultiplier = 200;
         $damageMultiplier = 100;
-        $vampire = 5;
+        $vampirism = 5;
+        $magicVampirism = 6;
 
         $offense = new Offense(
             $typeDamage,
@@ -57,7 +58,8 @@ class OffenseTest extends AbstractUnitTest
             $criticalChance,
             $criticalMultiplier,
             $damageMultiplier,
-            $vampire
+            $vampirism,
+            $magicVampirism
         );
 
         $defense = new Defense(
@@ -105,7 +107,8 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($criticalChance, $offense->getCriticalChance());
         self::assertEquals($criticalMultiplier, $offense->getCriticalMultiplier());
         self::assertEquals($damageMultiplier, $offense->getDamageMultiplier());
-        self::assertEquals($vampire, $offense->getVampirism());
+        self::assertEquals($vampirism, $offense->getVampirism());
+        self::assertEquals($magicVampirism, $offense->getMagicVampirism());
         self::assertEquals(
             round(
                 ($physicalDamage + $fireDamage + $waterDamage + $airDamage + $earthDamage + $lifeDamage + $deathDamage)
@@ -160,9 +163,14 @@ class OffenseTest extends AbstractUnitTest
         $offense->setMagicAccuracy($magicAccuracy = 150);
         $offense->setBlockIgnoring($blockIgnore = 100);
 
-        // Так как сопротивления нулевые - итоговый урон будет суммой всех типов урона
+        $offense->setCriticalMultiplier($criticalMultiplier = 211);
+        $offense->setCriticalChance($criticalChance = 13);
+        $offense->setDamageMultiplier($damageMultiplier = 110);
+        $offense->setVampirism($vampirism = 1);
+        $offense->setMagicVampirism($magicVampirism = 2);
+
         self::assertEquals(
-            $physicalDamage + $fireDamage + $waterDamage + $airDamage + $earthDamage + $lifeDamage + $deathDamage,
+            (int)(($physicalDamage + $fireDamage + $waterDamage + $airDamage + $earthDamage + $lifeDamage + $deathDamage) * ($damageMultiplier/100)),
             $offense->getDamage($defense)
         );
 
@@ -177,6 +185,12 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($accuracy, $offense->getAccuracy());
         self::assertEquals($magicAccuracy, $offense->getMagicAccuracy());
         self::assertEquals($blockIgnore, $offense->getBlockIgnoring());
+
+        self::assertEquals($criticalMultiplier, $offense->getCriticalMultiplier());
+        self::assertEquals($criticalChance, $offense->getCriticalChance());
+        self::assertEquals($damageMultiplier, $offense->getDamageMultiplier());
+        self::assertEquals($vampirism, $offense->getVampirism());
+        self::assertEquals($magicVampirism, $offense->getMagicVampirism());
     }
 
     /**
@@ -590,7 +604,8 @@ class OffenseTest extends AbstractUnitTest
             5,
             200,
             100,
-            7
+            7,
+            8
         );
     }
 
@@ -691,6 +706,38 @@ class OffenseTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ошибку, когда в Offense пытаются записать слишком низкое значение магического вампиризма
+     *
+     * @throws Exception
+     */
+    public function testOffenseSetUltraMinMagicVampire(): void
+    {
+        $offense = $this->createOffence();
+
+        $this->expectException(OffenseException::class);
+        $this->expectExceptionMessage(
+            OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+        );
+        $offense->setMagicVampirism(OffenseInterface::MIN_VAMPIRE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Offense пытаются записать слишком высокое значение магического вампиризма
+     *
+     * @throws Exception
+     */
+    public function testOffenseSetUltraMaxMagicVampire(): void
+    {
+        $offense = $this->createOffence();
+
+        $this->expectException(OffenseException::class);
+        $this->expectExceptionMessage(
+            OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+        );
+        $offense->setMagicVampirism(OffenseInterface::MAX_VAMPIRE + 1);
+    }
+
+    /**
      * Тест на корректный расчет наносимого урона
      *
      * @dataProvider resistDataProvider
@@ -720,7 +767,8 @@ class OffenseTest extends AbstractUnitTest
             5,
             200,
             $damageMultiplier,
-            7
+            7,
+            6
         );
 
         $defense = new Defense(
@@ -1913,7 +1961,8 @@ class OffenseTest extends AbstractUnitTest
             5,
             200,
             100,
-            7
+            7,
+            0
         );
     }
 }

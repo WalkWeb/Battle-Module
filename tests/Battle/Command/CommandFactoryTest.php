@@ -140,6 +140,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'critical_multiplier' => 200,
                             'damage_multiplier'   => 100,
                             'vampirism'           => 0,
+                            'magic_vampirism'     => 0,
                         ],
                         'defense'                      => [
                             'physical_resist'     => 0,
@@ -198,6 +199,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'critical_multiplier' => 200,
                             'damage_multiplier'   => 100,
                             'vampirism'           => 0,
+                            'magic_vampirism'     => 0,
                         ],
                         'defense'                      => [
                             'physical_resist'     => 0,
@@ -268,6 +270,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'critical_multiplier' => 200,
                             'damage_multiplier'   => 100,
                             'vampirism'           => 0,
+                            'magic_vampirism'     => 0,
                         ],
                         'defense'                      => [
                             'physical_resist'     => 0,

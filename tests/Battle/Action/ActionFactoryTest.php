@@ -58,6 +58,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'critical_multiplier' => 200,
             'damage_multiplier'   => 100,
             'vampirism'           => 0,
+            'magic_vampirism'     => 0,
         ];
 
         // Вариант с минимальным набором данных
@@ -257,6 +258,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 'critical_multiplier' => 150,
                 'damage_multiplier'   => 100,
                 'vampirism'           => 0,
+                'magic_vampirism'     => 0,
             ],
             'defense'                      => [
                 'physical_resist'     => 0,
@@ -1725,6 +1727,7 @@ class ActionFactoryTest extends AbstractUnitTest
                         'critical_multiplier' => 200,
                         'damage_multiplier'   => 100,
                         'vampirism'           => 0,
+                        'magic_vampirism'     => 0,
                     ],
                     'can_be_avoided' => true,
                 ],

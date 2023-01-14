@@ -55,6 +55,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'critical_multiplier' => 0,
                             'damage_multiplier'   => 100,
                             'vampirism'           => 0,
+                            'magic_vampirism'     => 0,
                         ],
                         'can_be_avoided'   => true,
                         'name'             => 'Heavy Strike',
@@ -94,6 +95,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                             'critical_multiplier' => 0,
                             'damage_multiplier'   => 100,
                             'vampirism'           => 0,
+                            'magic_vampirism'     => 0,
                         ],
                         'can_be_avoided'   => true,
                         'name'             => 'Hellfire',
@@ -249,6 +251,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                         'critical_multiplier' => 0,
                                         'damage_multiplier'   => 100,
                                         'vampirism'           => 0,
+                                        'magic_vampirism'     => 0,
                                     ],
                                     'can_be_avoided'   => false,
                                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
@@ -374,6 +377,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                         'critical_multiplier' => 0,
                                         'damage_multiplier'   => 100,
                                         'vampirism'           => 0,
+                                        'magic_vampirism'     => 0,
                                     ],
                                     'can_be_avoided'   => false,
                                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
@@ -575,6 +579,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'critical_multiplier' => 150,
                                 'damage_multiplier'   => 100,
                                 'vampirism'           => 0,
+                                'magic_vampirism'     => 0,
                             ],
                             'defense'                      => [
                                 'physical_resist'     => 0,
@@ -646,6 +651,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'critical_multiplier' => 150,
                                 'damage_multiplier'   => 100,
                                 'vampirism'           => 0,
+                                'magic_vampirism'     => 0,
                             ],
                             'defense'                      => [
                                 'physical_resist'     => 0,
@@ -717,6 +723,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'critical_multiplier' => 150,
                                 'damage_multiplier'   => 100,
                                 'vampirism'           => 0,
+                                'magic_vampirism'     => 0,
                             ],
                             'defense'                      => [
                                 'physical_resist'     => 0,
@@ -788,6 +795,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'critical_multiplier' => 150,
                                 'damage_multiplier'   => 100,
                                 'vampirism'           => 0,
+                                'magic_vampirism'     => 0,
                             ],
                             'defense'                      => [
                                 'physical_resist'     => 0,
