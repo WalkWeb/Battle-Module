@@ -11,7 +11,7 @@ use Battle\Unit\Effect\EffectException;
 use Battle\Unit\Effect\EffectFactory;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\BaseFactory;
+use Tests\Factory\BaseFactory;
 
 class EffectFactoryTest extends AbstractUnitTest
 {

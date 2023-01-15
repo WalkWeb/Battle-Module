@@ -9,7 +9,7 @@ use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 
 class ExampleAbilityDataProviderTest extends AbstractUnitTest
 {

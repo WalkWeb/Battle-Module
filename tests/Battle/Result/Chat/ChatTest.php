@@ -23,8 +23,8 @@ use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\BaseFactory;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\BaseFactory;
+use Tests\Factory\UnitFactory;
 
 class ChatTest extends AbstractUnitTest
 {

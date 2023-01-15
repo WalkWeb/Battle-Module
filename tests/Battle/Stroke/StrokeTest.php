@@ -20,8 +20,8 @@ use Battle\Container\Container;
 use Battle\Command\CommandFactory;
 use Battle\Stroke\Stroke;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\Mock\BrokenPriestUnit;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\Mock\BrokenPriestUnit;
+use Tests\Factory\UnitFactory;
 
 class StrokeTest extends AbstractUnitTest
 {

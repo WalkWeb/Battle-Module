@@ -11,8 +11,8 @@ use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
+use Tests\Factory\UnitFactory;
+use Tests\Factory\UnitFactoryException;
 
 class BuffActionTest extends AbstractUnitTest
 {

@@ -10,7 +10,7 @@ use Battle\Result\Statistic\UnitStatistic\UnitStatisticCollection;
 use Battle\Result\Statistic\UnitStatistic\UnitStatisticInterface;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 
 class UnitStatisticCollectionTest extends AbstractUnitTest
 {

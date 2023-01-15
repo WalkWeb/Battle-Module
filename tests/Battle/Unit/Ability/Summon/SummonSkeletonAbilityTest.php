@@ -16,7 +16,7 @@ use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 use Battle\Unit\Ability\AbilityCollection;
 
 class SummonSkeletonAbilityTest extends AbstractUnitTest

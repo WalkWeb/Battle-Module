@@ -14,8 +14,8 @@ use Battle\Container\Container;
 use Battle\Unit\UnitCollection;
 use Battle\Battle;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\CommandFactory;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\CommandFactory;
+use Tests\Factory\UnitFactory;
 
 class BattleTest extends AbstractUnitTest
 {

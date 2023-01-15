@@ -23,9 +23,9 @@ use Battle\Unit\UnitException;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\BaseFactory;
-use Tests\Battle\Factory\UnitFactory as TestUnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
+use Tests\Factory\BaseFactory;
+use Tests\Factory\UnitFactory as TestUnitFactory;
+use Tests\Factory\UnitFactoryException;
 use Battle\Unit\UnitFactory;
 
 class ActionFactoryTest extends AbstractUnitTest

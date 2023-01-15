@@ -20,7 +20,7 @@ use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 
 /**
  * ParalysisAbilityTest почти аналогичен тесту StunAbilityTest, т.к. у обоих способностей аналогичное действие -

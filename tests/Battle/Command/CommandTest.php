@@ -20,9 +20,9 @@ use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 use Battle\Action\DamageAction;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\Mock\UnitMockFactory;
-use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
+use Tests\Factory\UnitFactory;
+use Tests\Factory\Mock\UnitMockFactory;
+use Tests\Factory\CommandFactory as TestCommandFactory;
 
 class CommandTest extends AbstractUnitTest
 {

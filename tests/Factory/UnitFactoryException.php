@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Factory;
+namespace Tests\Factory;
 
 use Exception;
 

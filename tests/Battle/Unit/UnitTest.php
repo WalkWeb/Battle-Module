@@ -21,10 +21,10 @@ use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Battle\Command\CommandFactory;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 use Battle\Action\DamageAction;
-use Tests\Battle\Factory\Mock\ActionMockFactory;
-use Tests\Battle\Factory\CommandFactory as CommandFactoryTest;
+use Tests\Factory\Mock\ActionMockFactory;
+use Tests\Factory\CommandFactory as CommandFactoryTest;
 
 class UnitTest extends AbstractUnitTest
 {

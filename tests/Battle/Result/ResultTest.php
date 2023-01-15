@@ -11,7 +11,7 @@ use Battle\Result\Scenario\Scenario;
 use Battle\Translation\Translation;
 use Battle\Result\Result;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\CommandFactory;
+use Tests\Factory\CommandFactory;
 use Battle\Result\ResultException;
 
 class ResultTest extends AbstractUnitTest

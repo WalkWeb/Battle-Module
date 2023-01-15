@@ -9,7 +9,7 @@ use Battle\Action\ManaRestoreAction;
 use Battle\Command\CommandFactory;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 
 class ManaRestoreActionTest extends AbstractUnitTest
 {

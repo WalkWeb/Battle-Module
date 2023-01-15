@@ -13,8 +13,8 @@ use Battle\Action\ActionException;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\BaseFactory;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\BaseFactory;
+use Tests\Factory\UnitFactory;
 
 class ActionTest extends AbstractUnitTest
 {

@@ -16,7 +16,7 @@ use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 use Battle\Unit\Ability\AbilityCollection;
 
 class GreatHealAbilityTest extends AbstractUnitTest

@@ -10,8 +10,8 @@ use Battle\Round\RoundException;
 use Battle\Container\Container;
 use Battle\Command\CommandFactory;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\CommandFactory as TestCommandFactory;
+use Tests\Factory\UnitFactory;
 
 class RoundTest extends AbstractUnitTest
 {

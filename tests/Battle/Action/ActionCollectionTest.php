@@ -11,7 +11,7 @@ use Battle\Action\ActionCollection;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 
 class ActionCollectionTest extends AbstractUnitTest
 {

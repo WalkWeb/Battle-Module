@@ -10,7 +10,7 @@ use Battle\Weapon\Type\WeaponType;
 use Battle\Weapon\Type\WeaponTypeException;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 
 class WeaponTypeTest extends AbstractUnitTest
 {

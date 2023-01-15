@@ -10,8 +10,8 @@ use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandFactory;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\BaseFactory;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\BaseFactory;
+use Tests\Factory\UnitFactory;
 
 class ResurrectionActionTest extends AbstractUnitTest
 {

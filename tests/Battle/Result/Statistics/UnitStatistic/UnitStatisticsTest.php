@@ -6,7 +6,7 @@ namespace Tests\Battle\Result\Statistics\UnitStatistic;
 
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
 
 class UnitStatisticsTest extends AbstractUnitTest

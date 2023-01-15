@@ -16,8 +16,8 @@ use Battle\View\ViewFactory;
 use Battle\View\ViewInterface;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\CommandFactory as TestCommandFactory;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\CommandFactory as TestCommandFactory;
+use Tests\Factory\UnitFactory;
 
 class ViewTest extends AbstractUnitTest
 {

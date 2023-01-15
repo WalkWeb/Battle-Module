@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Factory;
+namespace Tests\Factory;
 
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Unit\UnitFactory as BaseUnitFactory;
-
-// TODO Вынести директорию Factory из Battle
 
 class UnitFactory
 {

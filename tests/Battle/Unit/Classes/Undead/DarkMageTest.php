@@ -10,7 +10,7 @@ use Battle\Unit\Ability\Ability;
 use Battle\Unit\UnitException;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 
 class DarkMageTest extends AbstractUnitTest
 {

@@ -12,7 +12,7 @@ use Battle\Unit\Classes\UnitClass;
 use Battle\Unit\Classes\UnitClassException;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 
 class UnitClassTest extends AbstractUnitTest
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Factory\Mock;
+namespace Tests\Factory\Mock;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\HealAction;

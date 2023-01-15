@@ -17,8 +17,8 @@ use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
-use Tests\Battle\Factory\UnitFactoryException;
+use Tests\Factory\UnitFactory;
+use Tests\Factory\UnitFactoryException;
 
 class EffectCollectionTest extends AbstractUnitTest
 {

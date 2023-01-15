@@ -17,7 +17,7 @@ use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityCollection;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 
 class HeavyStrikeAbilityTest extends AbstractUnitTest
 {

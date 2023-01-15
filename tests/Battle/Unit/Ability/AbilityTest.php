@@ -11,7 +11,7 @@ use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Battle\Factory\UnitFactory;
+use Tests\Factory\UnitFactory;
 
 /**
  * Способностей много, и создавать тесты на все варианты в одном классе неразумно. По этому тесты под способности
