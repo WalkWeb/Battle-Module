@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ManaRestoreAction;
 use Battle\Command\CommandFactory;
@@ -106,7 +107,9 @@ class ManaRestoreActionTest extends AbstractUnitTest
         );
 
         // Применяем способность
-        $action->handle();
+        $callbackActions = $action->handle();
+
+        self::assertEquals(new ActionCollection(), $callbackActions);
 
         // Проверяем, что мана восстановилась
         self::assertEquals(20 + $power, $unit->getMana());

@@ -65,7 +65,9 @@ class EffectActionTest extends AbstractUnitTest
         // Пока эффекта на юните нет - событие может примениться
         self::assertTrue($effectAction->canByUsed());
 
-        $effectAction->handle();
+        $callbackActions = $effectAction->handle();
+
+        self::assertEquals(new ActionCollection(), $callbackActions);
 
         // А вот когда эффект наложен - уже нет
         self::assertFalse($effectAction->canByUsed());

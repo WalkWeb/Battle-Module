@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\ActionCollection;
 use Battle\Action\ParalysisAction;
 use Battle\Command\CommandFactory;
 use Exception;
@@ -64,7 +65,9 @@ class ParalysisActionTest extends AbstractUnitTest
 
         self::assertTrue($action->canByUsed());
 
-        $action->handle();
+        $callbackActions = $action->handle();
+
+        self::assertEquals(new ActionCollection(), $callbackActions);
 
         // После применения ParalysisAction юнит отмечается как походивший
         self::assertTrue($unit->isAction());

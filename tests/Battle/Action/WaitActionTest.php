@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\ActionCollection;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -35,7 +36,7 @@ class WaitActionTest extends AbstractUnitTest
             self::assertEquals('wait', $action->getMessageMethod());
             self::assertEquals('', $action->getNameAction());
             self::assertTrue($action->canByUsed());
-            $action->handle();
+            self::assertEquals(new ActionCollection(), $action->handle());
         }
     }
 }

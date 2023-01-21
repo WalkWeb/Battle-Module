@@ -81,11 +81,13 @@ class ResurrectionAction extends AbstractAction
         return count($this->targetUnits) > 0;
     }
 
-    public function handle(): void
+    public function handle(): ActionCollection
     {
         foreach ($this->targetUnits as $targetUnit) {
             $targetUnit->applyAction($this);
         }
+
+        return new ActionCollection();
     }
 
     public function getHandleMethod(): string

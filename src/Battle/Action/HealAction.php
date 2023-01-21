@@ -72,7 +72,7 @@ class HealAction extends AbstractAction
      * @throws ActionException
      * @throws UnitException
      */
-    public function handle(): void
+    public function handle(): ActionCollection
     {
         $this->targetUnits = $this->searchTargetUnits($this);
 
@@ -84,6 +84,8 @@ class HealAction extends AbstractAction
         foreach ($this->targetUnits as $targetUnit) {
             $targetUnit->applyAction($this);
         }
+
+        return new ActionCollection();
     }
 
     public function getPower(): int

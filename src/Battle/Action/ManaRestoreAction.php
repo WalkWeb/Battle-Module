@@ -83,9 +83,10 @@ class ManaRestoreAction extends AbstractAction
      * На данный момент ManaRestoreAction применяется только в механике магического вампиризма, соответственно Action
      * применяется только к себе
      */
-    public function handle(): void
+    public function handle(): ActionCollection
     {
         $this->actionUnit->applyAction($this);
+        return new ActionCollection();
     }
 
     /**

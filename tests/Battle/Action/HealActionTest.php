@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
@@ -89,7 +90,7 @@ class HealActionTest extends AbstractUnitTest
         $actions = $actionUnit->getActions($enemyCommand, $actionCommand);
 
         foreach ($actions as $action) {
-            $action->handle();
+            self::assertEquals(new ActionCollection(), $action->handle());
         }
 
         // Проверяем лечение

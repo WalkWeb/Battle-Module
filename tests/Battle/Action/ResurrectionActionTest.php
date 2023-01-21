@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\ResurrectionAction;
@@ -87,7 +88,10 @@ class ResurrectionActionTest extends AbstractUnitTest
         self::assertEquals(0, $unit->getLife());
 
         self::assertTrue($action->canByUsed());
-        $action->handle();
+
+        $callbackActions = $action->handle();
+
+        self::assertEquals(new ActionCollection(), $callbackActions);
 
         self::assertTrue($unit->isAlive());
         self::assertEquals(50, $unit->getLife());

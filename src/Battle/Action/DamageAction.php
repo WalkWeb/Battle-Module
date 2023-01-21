@@ -144,7 +144,7 @@ class DamageAction extends AbstractAction
      * @throws ActionException
      * @throws UnitException
      */
-    public function handle(): void
+    public function handle(): ActionCollection
     {
         if (!$this->enemyCommand->isAlive()) {
             throw new ActionException(ActionException::NO_DEFINED);
@@ -202,6 +202,8 @@ class DamageAction extends AbstractAction
                 }
             }
         }
+
+        return new ActionCollection();
     }
 
     /**

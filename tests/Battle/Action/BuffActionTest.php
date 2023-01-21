@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
@@ -49,7 +50,9 @@ class BuffActionTest extends AbstractUnitTest
         self::assertTrue($action->canByUsed());
 
         // Применяем баф
-        $action->handle();
+        $callbackActions = $action->handle();
+
+        self::assertEquals(new ActionCollection(), $callbackActions);
 
         self::assertEquals($newLife, $unit->getTotalLife());
         self::assertEquals($newLife, $unit->getLife());

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\ActionCollection;
 use Battle\Action\DamageAction;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
@@ -54,7 +55,9 @@ class DamageActionTest extends AbstractUnitTest
 
         $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
-        $action->handle();
+        $callbackActions = $action->handle();
+
+        self::assertEquals(new ActionCollection(), $callbackActions);
 
         self::assertEquals(20, $action->getFactualPower());
         self::assertEquals(20, $action->getFactualPowerByUnit($enemyUnit));

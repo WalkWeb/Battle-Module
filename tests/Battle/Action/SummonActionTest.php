@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandException;
@@ -38,7 +39,7 @@ class SummonActionTest extends AbstractUnitTest
             self::assertTrue($action->canByUsed());
             self::assertEquals('summon', $action->getAnimationMethod());
             self::assertEquals('summon', $action->getMessageMethod());
-            $action->handle();
+            self::assertEquals(new ActionCollection(), $action->handle());
         }
 
         self::assertCount(2, $alliesCommand->getUnits());

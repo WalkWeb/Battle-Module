@@ -58,9 +58,10 @@ class ParalysisAction extends AbstractAction
         return self::HANDLE_METHOD;
     }
 
-    public function handle(): void
+    public function handle(): ActionCollection
     {
         $this->actionUnit->applyAction($this);
+        return new ActionCollection();
     }
 
     public function getNameAction(): string

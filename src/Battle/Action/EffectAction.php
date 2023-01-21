@@ -64,7 +64,7 @@ class EffectAction extends AbstractAction
     /**
      * @throws ActionException
      */
-    public function handle(): void
+    public function handle(): ActionCollection
     {
         if ($this->targetUnits === null || count($this->targetUnits) === 0) {
             throw new ActionException(ActionException::NO_TARGET_FOR_EFFECT);
@@ -73,6 +73,8 @@ class EffectAction extends AbstractAction
         foreach ($this->targetUnits as $targetUnit) {
             $targetUnit->applyAction($this);
         }
+
+        return new ActionCollection();
     }
 
     public function getNameAction(): string
