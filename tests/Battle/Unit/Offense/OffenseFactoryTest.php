@@ -23,7 +23,7 @@ class OffenseFactoryTest extends AbstractUnitTest
      */
     public function testOffenseFactoryCreateSuccess(array $data): void
     {
-        $offense = $this->getFactory()->create($data);
+        $offense = $this->getFactory()->create($data, $this->getContainer());
 
         // Так как сопротивления нулевые - итоговый урон будет суммой всех типов урона
         self::assertEquals(
@@ -66,7 +66,7 @@ class OffenseFactoryTest extends AbstractUnitTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        $this->getFactory()->create($data);
+        $this->getFactory()->create($data, $this->getContainer());
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Offense;
 
+use Battle\Container\ContainerInterface;
 use Battle\Traits\ValidationTrait;
 use Exception;
 
@@ -15,10 +16,11 @@ class OffenseFactory
      * Создает Offense на основе массива с данными
      *
      * @param array $data
+     * @param ContainerInterface $container
      * @return Offense
      * @throws Exception
      */
-    public static function create(array $data): Offense
+    public static function create(array $data, ContainerInterface $container): Offense
     {
         self::int($data, 'damage_type', OffenseException::INCORRECT_DAMAGE_TYPE);
         self::int($data, 'weapon_type', OffenseException::INCORRECT_WEAPON_TYPE);
@@ -47,6 +49,7 @@ class OffenseFactory
         );
 
         return new Offense(
+            $container,
             $data['damage_type'],
             $data['weapon_type'],
             $data['physical_damage'],

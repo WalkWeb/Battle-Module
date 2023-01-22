@@ -516,7 +516,7 @@ class StatisticsTest extends AbstractUnitTest
                 'damage_multiplier'   => 100,
                 'vampirism'           => 0,
                 'magic_vampirism'     => 0,
-            ]),
+            ], $this->getContainer()),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,

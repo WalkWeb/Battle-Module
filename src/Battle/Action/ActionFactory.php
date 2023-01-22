@@ -83,7 +83,7 @@ class ActionFactory
                 $enemyCommand,
                 $alliesCommand,
                 $typeTarget,
-                OffenseFactory::create($offenseData),
+                OffenseFactory::create($offenseData, $this->container),
                 $canBeAvoided,
                 $name,
                 $animationMethod,

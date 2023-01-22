@@ -37,7 +37,8 @@ class ActionFactoryTest extends AbstractUnitTest
      */
     public function testActionFactoryCreateDamageSuccess(): void
     {
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+        $container = $this->getContainer();
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
 
         $offenseData = [
             'damage_type'         => 1,
@@ -75,12 +76,12 @@ class ActionFactoryTest extends AbstractUnitTest
             'message_method'   => $messageMethod = 'message test',
         ];
 
-        $action = $this->getActionFactory()->create($data);
+        $action = $container->getActionFactory()->create($data);
 
         self::assertInstanceOf(DamageAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_RANDOM_ENEMY, $action->getTypeTarget());
-        self::assertEquals(OffenseFactory::create($offenseData), $action->getOffense());
+        self::assertEquals(OffenseFactory::create($offenseData, $container), $action->getOffense());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals('', $action->getIcon());
         self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
@@ -102,12 +103,12 @@ class ActionFactoryTest extends AbstractUnitTest
             'icon'             => $icon = 'icon.png',
         ];
 
-        $action = $this->getActionFactory()->create($data);
+        $action = $container->getActionFactory()->create($data);
 
         self::assertInstanceOf(DamageAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_RANDOM_ENEMY, $action->getTypeTarget());
-        self::assertEquals(OffenseFactory::create($offenseData), $action->getOffense());
+        self::assertEquals(OffenseFactory::create($offenseData, $container), $action->getOffense());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($animationMethod, $action->getAnimationMethod());
         self::assertEquals($messageMethod, $action->getMessageMethod());

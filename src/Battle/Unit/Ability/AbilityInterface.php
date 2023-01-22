@@ -9,6 +9,8 @@ use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 
+// TODO Способностям добавить требование к типу оружия, если тип оружия не подходит - способность не активируется
+
 interface AbilityInterface
 {
     // Варианты активации способности

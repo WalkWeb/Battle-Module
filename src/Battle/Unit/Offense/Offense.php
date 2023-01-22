@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Offense;
 
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Defense\DefenseInterface;
 use Battle\Weapon\Type\WeaponType;
 use Battle\Weapon\Type\WeaponTypeInterface;
@@ -32,6 +33,7 @@ class Offense implements OffenseInterface
     private int $magicVampirism;
 
     /**
+     * @param ContainerInterface $container
      * @param int $damageType
      * @param int $weaponTypeId
      * @param int $physicalDamage
@@ -54,6 +56,7 @@ class Offense implements OffenseInterface
      * @throws Exception
      */
     public function __construct(
+        ContainerInterface $container,
         int $damageType,
         int $weaponTypeId,
         int $physicalDamage,
@@ -76,7 +79,7 @@ class Offense implements OffenseInterface
     )
     {
         $this->setDamageType($damageType);
-        $this->weaponType = new WeaponType($weaponTypeId);
+        $this->weaponType = new WeaponType($weaponTypeId, $container);
         $this->setPhysicalDamage($physicalDamage);
         $this->setFireDamage($fireDamage);
         $this->setWaterDamage($waterDamage);

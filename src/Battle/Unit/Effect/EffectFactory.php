@@ -17,7 +17,7 @@ class EffectFactory
     /**
      * @var ActionFactory
      */
-    private $actionFactory;
+    private ActionFactory $actionFactory;
 
     public function __construct(ActionFactory $actionFactory)
     {

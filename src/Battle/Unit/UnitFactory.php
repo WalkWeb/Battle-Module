@@ -182,7 +182,7 @@ class UnitFactory
             $data['command'],
             $data['add_concentration_multiplier'],
             $data['add_rage_multiplier'],
-            OffenseFactory::create($data['offense']),
+            OffenseFactory::create($data['offense'], $container),
             DefenseFactory::create($data['defense']),
             self::getRace($data['race'], $container),
             $container,

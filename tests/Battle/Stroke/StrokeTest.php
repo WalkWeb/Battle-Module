@@ -104,6 +104,7 @@ class StrokeTest extends AbstractUnitTest
             0,
             0,
             new Offense(
+                $this->getContainer(),
                 1,
                 1,
                 10,

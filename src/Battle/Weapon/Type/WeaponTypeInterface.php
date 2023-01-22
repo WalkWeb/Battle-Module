@@ -6,6 +6,7 @@ namespace Battle\Weapon\Type;
 
 use Battle\Action\ActionCollection;
 use Battle\Command\CommandInterface;
+use Battle\Unit\UnitInterface;
 use Exception;
 
 /**
@@ -13,7 +14,8 @@ use Exception;
  *
  * Мечи, Двуручные мечи - бонус к меткости
  * Топоры, Двуручные топоры - бонус к урону
- * Дробящее, Двуручное дробящее - шанс оглушить цель на 1 ход при критическом ударе
+ * Дробящее, Двуручное дробящее - шанс оглушить цель при критическом ударе. Одноручные булавы оглушают на 1 ход,
+ * двуручные на 2, тяжелые булавы на 3 хода
  * Кинжалы - накладывает кровотечение на 3 хода на 20% от удара
  * Копья - бонус к защите
  * Луки - бонус к скорости атаки
@@ -74,13 +76,14 @@ interface WeaponTypeInterface
     public function getName(): string;
 
     /**
-     * Возвращает коллекцию Actions, которые будут применены к цели в случае критического удара. Например, булавы при
-     * критическом ударе оглушают, а кинжалы вызывают кровотечение
+     * Возвращает коллекцию эффектов (EffectAction), который будет применен к цели в случае критического удара.
+     * Например, булавы при критическом ударе оглушают, а кинжалы вызывают кровотечение
      *
+     * @param UnitInterface $parentUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
      * @throws Exception
      */
-    public function getActions(CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
+    public function getOnCriticalAction(UnitInterface $parentUnit, CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
 }
