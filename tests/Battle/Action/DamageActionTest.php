@@ -817,6 +817,34 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на возвращение коллекции эффектов оглушения, когда юнит с булавой делает критическую атаку
+     *
+     * @throws Exception
+     */
+    public function testDamageActionCallbackAction(): void
+    {
+        $unit = UnitFactory::createByTemplate(47);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit, $secondaryEnemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_ALL_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $callbackActions = $action->handle();
+
+        // Проверяем, что создано 2 события - по каждой из целей
+        self::assertCount(2 , $callbackActions);
+
+        // Проверяем, что это оглушение от оружия
+        foreach ($callbackActions as $callbackAction) {
+            self::assertEquals('Stun Weapon Effect', $callbackAction->getNameAction());
+        }
+    }
+
+    /**
      * @return array
      */
     public function criticalDamageDataProvider(): array

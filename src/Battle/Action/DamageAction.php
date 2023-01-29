@@ -146,6 +146,8 @@ class DamageAction extends AbstractAction
      */
     public function handle(): ActionCollection
     {
+        $callbackActions = new ActionCollection();
+
         if (!$this->enemyCommand->isAlive()) {
             throw new ActionException(ActionException::NO_DEFINED);
         }
@@ -157,7 +159,7 @@ class DamageAction extends AbstractAction
         }
 
         foreach ($this->targetUnits as $targetUnit) {
-            $targetUnit->applyAction($this);
+            $callbackActions->addCollection($targetUnit->applyAction($this));
         }
 
         if ($this->factualPower > 0) {
@@ -203,7 +205,7 @@ class DamageAction extends AbstractAction
             }
         }
 
-        return new ActionCollection();
+        return $callbackActions;
     }
 
     /**
