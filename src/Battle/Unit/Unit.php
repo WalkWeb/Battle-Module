@@ -75,11 +75,12 @@ class Unit extends AbstractUnit
     /**
      * Принимает и обрабатывает абстрактное действие от другого юнита.
      *
-     * @uses applyDamageAction, applyHealAction, applyManaRestoreAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction, applyResurrectionAction, applyParalysisAction
      * @param ActionInterface $action
+     * @return ActionCollection
      * @throws Exception
+     * @uses applyDamageAction, applyHealAction, applyManaRestoreAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction, applyResurrectionAction, applyParalysisAction
      */
-    public function applyAction(ActionInterface $action): void
+    public function applyAction(ActionInterface $action): ActionCollection
     {
         $method = $action->getHandleMethod();
 
@@ -90,7 +91,7 @@ class Unit extends AbstractUnit
         $this->addConcentration(self::ADD_CON_RECEIVING_UNIT);
         $this->addRage(self::ADD_RAGE_RECEIVING_UNIT);
 
-        $this->$method($action);
+        return $this->$method($action);
     }
 
     /**
@@ -100,20 +101,21 @@ class Unit extends AbstractUnit
      * механики будут вынесены в отдельный класс Calculator
      *
      * @param ActionInterface $action - ожидается DamageAction
+     * @return ActionCollection
      * @throws Exception
      */
-    private function applyDamageAction(ActionInterface $action): void
+    private function applyDamageAction(ActionInterface $action): ActionCollection
     {
         if ($this->isDodged($action)) {
             $action->addFactualPower($this, 0);
             $action->dodged($this);
-            return;
+            return new ActionCollection();
         }
 
         if ($this->isBlocked($action)) {
             $action->addFactualPower($this, 0);
             $action->blocked($this);
-            return;
+            return new ActionCollection();
         }
 
         $factualPower = $this->applyDamage($action);
@@ -136,15 +138,18 @@ class Unit extends AbstractUnit
 
         // Для активации способностей, которые завязаны на уровень здоровья
         $this->abilities->update($this);
+
+        return new ActionCollection();
     }
 
     /**
      * Обрабатывает action на лечение
      *
      * @param ActionInterface $action - ожидается HealAction
+     * @return ActionCollection
      * @throws ActionException
      */
-    private function applyHealAction(ActionInterface $action): void
+    private function applyHealAction(ActionInterface $action): ActionCollection
     {
         $primordialLife = $this->life;
 
@@ -154,15 +159,18 @@ class Unit extends AbstractUnit
         }
 
         $action->addFactualPower($this, $this->life - $primordialLife);
+
+        return new ActionCollection();
     }
 
     /**
      * Обрабатывает action на восстановление маны
      *
      * @param ActionInterface $action - ожидается ManaRestoreAction
+     * @return ActionCollection
      * @throws ActionException
      */
-    private function applyManaRestoreAction(ActionInterface $action): void
+    private function applyManaRestoreAction(ActionInterface $action): ActionCollection
     {
         $primordialMana = $this->mana;
 
@@ -172,6 +180,8 @@ class Unit extends AbstractUnit
         }
 
         $action->addFactualPower($this, $this->mana - $primordialMana);
+
+        return new ActionCollection();
     }
 
     /**
@@ -179,24 +189,31 @@ class Unit extends AbstractUnit
      *
      * Призыв суммона в команду происходит в самом SummonAction, от юнита ничего не нужно
      *
-     * @param ActionInterface $action
+     * @return ActionCollection
      */
-    private function applySummonAction(ActionInterface $action): void {}
+    private function applySummonAction(): ActionCollection
+    {
+        return new ActionCollection();
+    }
 
     /**
      * Обрабатывает action на пропуск хода
      *
-     * @param ActionInterface $action
+     * @return ActionCollection
      */
-    private function applyWaitAction(ActionInterface $action): void {}
+    private function applyWaitAction(): ActionCollection
+    {
+        return new ActionCollection();
+    }
 
     /**
      * Обрабатывает action на добавление эффекта юниту
      *
      * @param ActionInterface $action - ожидается EffectAction
+     * @return ActionCollection
      * @throws ActionException
      */
-    private function applyEffectAction(ActionInterface $action): void
+    private function applyEffectAction(ActionInterface $action): ActionCollection
     {
         $onApplyAction = $this->effects->add($action->getEffect());
 
@@ -205,6 +222,8 @@ class Unit extends AbstractUnit
                 $applyAction->handle();
             }
         }
+
+        return new ActionCollection();
     }
 
     /**
@@ -212,9 +231,10 @@ class Unit extends AbstractUnit
      * восстановлено юниту при воскрешении
      *
      * @param ActionInterface $action - ожидается ResurrectionAction
+     * @return ActionCollection
      * @throws ActionException
      */
-    private function applyResurrectionAction(ActionInterface $action): void
+    private function applyResurrectionAction(ActionInterface $action): ActionCollection
     {
         $restoreLife = (int)($this->totalLife * ($action->getPower()/100));
 
@@ -226,16 +246,21 @@ class Unit extends AbstractUnit
         $this->life += $restoreLife;
 
         $action->addFactualPower($this, $restoreLife);
+
+        return new ActionCollection();
     }
 
     /**
      * Обрабатывает action который обездвиживает цель и не дает ей ходить
      *
      * По факту просто указываем у юнита, что он ходил.
+     *
+     * @return ActionCollection
      */
-    protected function applyParalysisAction(): void
+    protected function applyParalysisAction(): ActionCollection
     {
         $this->action = true;
+        return new ActionCollection();
     }
 
     /**
@@ -246,16 +271,19 @@ class Unit extends AbstractUnit
      *
      * @uses multiplierPhysicalDamage, multiplierPhysicalDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert
      * @param ActionInterface $action - ожидается BuffAction
+     * @return ActionCollection
      * @throws ActionException
      * @throws UnitException
      */
-    private function applyBuffAction(ActionInterface $action): void
+    private function applyBuffAction(ActionInterface $action): ActionCollection
     {
         if (!method_exists($this, $modifyMethod = $action->getModifyMethod())) {
             throw new UnitException(UnitException::UNDEFINED_MODIFY_METHOD . ': ' . $modifyMethod);
         }
 
         $this->$modifyMethod($action);
+
+        return new ActionCollection();
     }
 
     /**

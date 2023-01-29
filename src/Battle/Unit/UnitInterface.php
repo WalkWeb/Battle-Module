@@ -136,9 +136,14 @@ interface UnitInterface
      * Универсальный метод, через который мы применяем действие к юниту. Какое бы это действие не было - удар, лечение,
      * применение эффекта или что-то другое
      *
+     * Возвращает коллекцию событий, которые стали следствием воздействия на юнита: это может быть особый эффект от
+     * оружия, рефлект урона или что-то другое. Подразумевается, что полученная коллекция событий будет сразу же
+     * выполнена
+     *
      * @param ActionInterface $action
+     * @return ActionCollection
      */
-    public function applyAction(ActionInterface $action): void;
+    public function applyAction(ActionInterface $action): ActionCollection;
 
     /**
      * Совершал ли юнит действие в этом раунде

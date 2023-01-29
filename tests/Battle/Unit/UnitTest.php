@@ -457,8 +457,12 @@ class UnitTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
+        $actions = $this->getRageActions($unit, $enemyCommand, $command);
+
+        self::assertCount(1, $actions);
+
         // Применяем способность
-        foreach ($this->getRageActions($unit, $enemyCommand, $command) as $action) {
+        foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
 
             $this->expectException(UnitException::class);
@@ -564,6 +568,28 @@ class UnitTest extends AbstractUnitTest
 
         // Проверяем, что полученная ярость на 20% меньше чем базовое значение
         self::assertEquals((int)(UnitInterface::ADD_RAGE_NEW_ROUND * 0.8), $unit->getRage());
+    }
+
+    /**
+     * Тест на получение (пустой) коллекции событий, когда юнит обрабатывает действие
+     *
+     * @throws Exception
+     */
+    public function testUnitApplyActionCallbackActions(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $actions = $enemyUnit->getActions($command, $enemyCommand);
+
+        self::assertCount(1, $actions);
+
+        foreach ($actions as $action) {
+            self::assertTrue($action->canByUsed());
+            self::assertEquals(new ActionCollection(), $action->handle());
+        }
     }
 
     /**
