@@ -139,6 +139,18 @@ class Unit extends AbstractUnit
         // Для активации способностей, которые завязаны на уровень здоровья
         $this->abilities->update($this);
 
+        // Если удар был критическим - необходимо создать коллекцию соответствующих событий от оружия
+        // Применяться полученная коллекция будет в Stroke. Юнит должен просто сообщить, что нужно выполнить
+        if ($action->isCriticalDamage()) {
+
+            // TODO Нужен отдельный тест на проверку корректности команд, т.к. они меняются на противоположные
+            return $action->getActionUnit()->getOffense()->getWeaponType()->getOnCriticalAction(
+                $this,
+                $action->getAlliesCommand(),
+                $action->getEnemyCommand()
+            );
+        }
+
         return new ActionCollection();
     }
 

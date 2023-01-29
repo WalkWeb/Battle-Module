@@ -42,7 +42,7 @@ class WeaponType implements WeaponTypeInterface
             [
                 'type'           => ActionInterface::EFFECT,
                 'type_target'    => ActionInterface::TARGET_SELF,
-                'name'           => 'Stun',
+                'name'           => 'Stun Weapon Effect',
                 'icon'           => '/images/icons/ability/435.png',
                 'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                 'effect'         => [
@@ -100,13 +100,13 @@ class WeaponType implements WeaponTypeInterface
     }
 
     /**
-     * @param UnitInterface $parentUnit
+     * @param UnitInterface $targetUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
      * @throws Exception
      */
-    public function getOnCriticalAction(UnitInterface $parentUnit, CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
+    public function getOnCriticalAction(UnitInterface $targetUnit, CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection
     {
         if (!array_key_exists($this->id, self::$onCriticalActions)) {
             return new ActionCollection();
@@ -114,7 +114,7 @@ class WeaponType implements WeaponTypeInterface
 
         $actions = new ActionCollection();
         foreach (self::$onCriticalActions[$this->id] as &$actionData) {
-            $this->addParameters($actionData, $parentUnit, $enemyCommand, $alliesCommand);
+            $this->addParameters($actionData, $targetUnit, $enemyCommand, $alliesCommand);
             $actions->add($this->container->getActionFactory()->create($actionData));
         }
 

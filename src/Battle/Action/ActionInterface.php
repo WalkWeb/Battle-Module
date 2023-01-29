@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Battle\Action;
 
+use Battle\Command\CommandInterface;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitCollection;
@@ -367,4 +368,18 @@ interface ActionInterface
      * @return int
      */
     public function getRestoreManaFromMagicVampirism(): int;
+
+    /**
+     * Возвращает команду союзников (с точки зрения юнита совершающего событие)
+     *
+     * @return CommandInterface
+     */
+    public function getAlliesCommand(): CommandInterface;
+
+    /**
+     * Возвращает команду врагов (с точки зрения юнита совершающего событие)
+     *
+     * @return CommandInterface
+     */
+    public function getEnemyCommand(): CommandInterface;
 }

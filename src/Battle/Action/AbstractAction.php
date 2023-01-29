@@ -316,6 +316,22 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * @return CommandInterface
+     */
+    public function getAlliesCommand(): CommandInterface
+    {
+        return $this->alliesCommand;
+    }
+
+    /**
+     * @return CommandInterface
+     */
+    public function getEnemyCommand(): CommandInterface
+    {
+        return $this->enemyCommand;
+    }
+
+    /**
      * Ищет юнита для применения события.
      *
      * @param ActionInterface $action

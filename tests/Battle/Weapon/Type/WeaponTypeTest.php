@@ -154,7 +154,7 @@ class WeaponTypeTest extends AbstractUnitTest
             [
                 'type'           => ActionInterface::EFFECT,
                 'type_target'    => ActionInterface::TARGET_SELF,
-                'name'           => 'Stun',
+                'name'           => 'Stun Weapon Effect',
                 'icon'           => '/images/icons/ability/435.png',
                 'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                 'effect'         => [

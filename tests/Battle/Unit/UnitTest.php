@@ -575,7 +575,7 @@ class UnitTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testUnitApplyActionCallbackActions(): void
+    public function testUnitApplyActionCallbackActionsEmpty(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -589,6 +589,40 @@ class UnitTest extends AbstractUnitTest
         foreach ($actions as $action) {
             self::assertTrue($action->canByUsed());
             self::assertEquals(new ActionCollection(), $action->handle());
+        }
+    }
+
+    /**
+     * Тест на получение коллекции событий с оглушением, когда юнит обрабатывает урон по себе. Урон наносит юнит с
+     * булавой и со 100% шансом нанесения критического удара
+     *
+     * @throws Exception
+     */
+    public function testUnitApplyActionCallbackActionsStun(): void
+    {
+        $container = $this->getContainer();
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(47, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $actions = $enemyUnit->getActions($command, $enemyCommand);
+
+        self::assertCount(1, $actions);
+
+        foreach ($actions as $action) {
+            // Проверяем, что получили атаку
+            self::assertEquals('attack', $action->getNameAction());
+
+            // Вручную применяем событие к юниту (обычно делается $action->handle)
+            $callbackActions = $unit->applyAction($action);
+
+            // Проверяем полученные $callbackActions, и что это именно оглушение от оружия
+            self::assertCount(1, $callbackActions);
+
+            foreach ($callbackActions as $callbackAction) {
+                self::assertEquals('Stun Weapon Effect', $callbackAction->getNameAction());
+            }
         }
     }
 

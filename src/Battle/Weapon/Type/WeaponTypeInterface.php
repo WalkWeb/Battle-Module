@@ -79,11 +79,11 @@ interface WeaponTypeInterface
      * Возвращает коллекцию эффектов (EffectAction), который будет применен к цели в случае критического удара.
      * Например, булавы при критическом ударе оглушают, а кинжалы вызывают кровотечение
      *
-     * @param UnitInterface $parentUnit
+     * @param UnitInterface $targetUnit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @return ActionCollection
      * @throws Exception
      */
-    public function getOnCriticalAction(UnitInterface $parentUnit, CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
+    public function getOnCriticalAction(UnitInterface $targetUnit, CommandInterface $enemyCommand, CommandInterface $alliesCommand): ActionCollection;
 }
