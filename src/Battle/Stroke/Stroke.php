@@ -211,7 +211,15 @@ class Stroke implements StrokeInterface
      */
     private function runAction(ActionInterface $action): void
     {
-        $action->handle();
+        $callbackActions = $action->handle();
+
+        // Обработка ответных событий. Сейчас это только эффекты от оружия. Их выполнение не требует создание
+        // дополнительной анимации или сообщений в чат
+        foreach ($callbackActions as $callbackAction) {
+            if ($callbackAction->canByUsed()) {
+                $callbackAction->handle();
+            }
+        }
 
         $message = $this->container->getChat()->addMessage($action);
 

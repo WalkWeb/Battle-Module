@@ -389,6 +389,32 @@ class StrokeTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на реалистичную ситуацию, когда критическая атака с булавы оглушает юнита
+     *
+     * @throws Exception
+     */
+    public function testStrokeStunEffectFromWeapon(): void
+    {
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(47);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+
+        $stroke->handle();
+
+        // Проверяем, что появился эффект на юните
+        self::assertCount(1, $enemyUnit->getEffects());
+
+        // Проверяем, что это оглушение от оружия
+        foreach ($unit->getEffects() as $effect) {
+            self::assertEquals('Stun Weapon Action', $effect->getName());
+        }
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $command
      * @param CommandInterface $enemyCommand

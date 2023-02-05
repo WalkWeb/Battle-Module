@@ -156,7 +156,7 @@ class WeaponTypeTest extends AbstractUnitTest
                 'type_target'    => ActionInterface::TARGET_SELF,
                 'name'           => 'Stun Weapon Effect',
                 'icon'           => '/images/icons/ability/435.png',
-                'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                'message_method' => 'applyEffect',
                 'effect'         => [
                     'name'                  => 'Stun',
                     'icon'                  => '/images/icons/ability/435.png',
@@ -169,7 +169,7 @@ class WeaponTypeTest extends AbstractUnitTest
                             'name'             => 'Stun',
                             'can_be_avoided'   => false,
                             'animation_method' => ActionInterface::SKIP_ANIMATION_METHOD,
-                            'message_method'   => ActionInterface::SKIP_MESSAGE_METHOD,
+                            'message_method'   => 'stunned',
                             'icon'             => '/images/icons/ability/435.png',
                         ],
                     ],

@@ -6,6 +6,8 @@ namespace Battle\Weapon\Type;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
+use Battle\Action\DamageAction;
+use Battle\Action\ParalysisAction;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
 use Battle\Traits\AbilityDataTrait;
@@ -44,7 +46,7 @@ class WeaponType implements WeaponTypeInterface
                 'type_target'    => ActionInterface::TARGET_SELF,
                 'name'           => 'Stun Weapon Effect',
                 'icon'           => '/images/icons/ability/435.png',
-                'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                'message_method' => 'applyEffect',
                 'effect'         => [
                     'name'                  => 'Stun',
                     'icon'                  => '/images/icons/ability/435.png',
@@ -56,8 +58,8 @@ class WeaponType implements WeaponTypeInterface
                             'type_target'      => ActionInterface::TARGET_SELF,
                             'name'             => 'Stun',
                             'can_be_avoided'   => false,
-                            'animation_method' => ActionInterface::SKIP_ANIMATION_METHOD,
-                            'message_method'   => ActionInterface::SKIP_MESSAGE_METHOD,
+                            'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                            'message_method'   => ParalysisAction::STUN_MESSAGE_METHOD,
                             'icon'             => '/images/icons/ability/435.png',
                         ],
                     ],
