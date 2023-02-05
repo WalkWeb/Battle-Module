@@ -40,6 +40,7 @@ class WeaponType implements WeaponTypeInterface
     ];
 
     private static array $onCriticalActions = [
+        // Одноручные булавы оглушают цель на 1 ход
         self::MACE => [
             [
                 'type'           => ActionInterface::EFFECT,
@@ -51,6 +52,62 @@ class WeaponType implements WeaponTypeInterface
                     'name'                  => 'Stun',
                     'icon'                  => '/images/icons/ability/435.png',
                     'duration'              => 1,
+                    'on_apply_actions'      => [],
+                    'on_next_round_actions' => [
+                        [
+                            'type'             => ActionInterface::PARALYSIS,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'name'             => 'Stun',
+                            'can_be_avoided'   => false,
+                            'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                            'message_method'   => ParalysisAction::STUN_MESSAGE_METHOD,
+                            'icon'             => '/images/icons/ability/435.png',
+                        ],
+                    ],
+                    'on_disable_actions'    => [],
+                ],
+            ],
+        ],
+        // Двуручные булавы оглушают цель на 2 хода
+        self::TWO_HAND_MACE => [
+            [
+                'type'           => ActionInterface::EFFECT,
+                'type_target'    => ActionInterface::TARGET_SELF,
+                'name'           => 'Stun Weapon Effect',
+                'icon'           => '/images/icons/ability/435.png',
+                'message_method' => 'applyEffect',
+                'effect'         => [
+                    'name'                  => 'Stun',
+                    'icon'                  => '/images/icons/ability/435.png',
+                    'duration'              => 2,
+                    'on_apply_actions'      => [],
+                    'on_next_round_actions' => [
+                        [
+                            'type'             => ActionInterface::PARALYSIS,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'name'             => 'Stun',
+                            'can_be_avoided'   => false,
+                            'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                            'message_method'   => ParalysisAction::STUN_MESSAGE_METHOD,
+                            'icon'             => '/images/icons/ability/435.png',
+                        ],
+                    ],
+                    'on_disable_actions'    => [],
+                ],
+            ],
+        ],
+        // Тяжелые двуручные булавы оглушают цель на 3 хода
+        self::HEAVY_TWO_HAND_MACE => [
+            [
+                'type'           => ActionInterface::EFFECT,
+                'type_target'    => ActionInterface::TARGET_SELF,
+                'name'           => 'Stun Weapon Effect',
+                'icon'           => '/images/icons/ability/435.png',
+                'message_method' => 'applyEffect',
+                'effect'         => [
+                    'name'                  => 'Stun',
+                    'icon'                  => '/images/icons/ability/435.png',
+                    'duration'              => 3,
                     'on_apply_actions'      => [],
                     'on_next_round_actions' => [
                         [

@@ -213,7 +213,7 @@ class Stroke implements StrokeInterface
     {
         $callbackActions = $action->handle();
 
-        // Обработка ответных событий. Сейчас это только эффекты от оружия. Их выполнение не требует создание
+        // Обработка ответных событий. Сейчас это только эффекты от оружия. Их выполнение не требует создания
         // дополнительной анимации или сообщений в чат
         foreach ($callbackActions as $callbackAction) {
             if ($callbackAction->canByUsed()) {

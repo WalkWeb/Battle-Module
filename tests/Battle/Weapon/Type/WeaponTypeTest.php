@@ -6,6 +6,7 @@ namespace Tests\Battle\Weapon\Type;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
+use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Traits\AbilityDataTrait;
@@ -41,10 +42,62 @@ class WeaponTypeTest extends AbstractUnitTest
         self::assertEquals($id, $weaponType->getId());
         self::assertEquals($expectedName, $weaponType->getName());
 
-        if ($id === WeaponTypeInterface::MACE ) {
-            self::assertEquals($this->createStunAction($unit, $enemyCommand, $command), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
+        if ($id === WeaponTypeInterface::MACE) {
+            self::assertEquals($this->createStunAction($unit, $enemyCommand, $command, 1), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
+        } elseif ($id === WeaponTypeInterface::TWO_HAND_MACE) {
+            self::assertEquals($this->createStunAction($unit, $enemyCommand, $command, 2), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
+        } elseif ($id === WeaponTypeInterface::HEAVY_TWO_HAND_MACE) {
+            self::assertEquals($this->createStunAction($unit, $enemyCommand, $command, 3), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
         } else {
             self::assertEquals(new ActionCollection(), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
+        }
+    }
+
+    /**
+     * Тест на применение эффекта на от разного вида дробящего оружия и длительность оглушения
+     *
+     * одноручные булавы - оглушение на 1 ход
+     * двуручные булавы - оглушение на 2 хода
+     * тяжелые двуручные булавы - оглушение на 3 хода
+     *
+     * @dataProvider maceDataProvider
+     * @param int $unitId
+     * @param int $stunDuration
+     * @throws Exception
+     */
+    public function testWeaponTypeMaceEffect(int $unitId, int $stunDuration): void
+    {
+        $unit = UnitFactory::createByTemplate($unitId);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            $unit->getOffense(),
+            true,
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $callbackActions = $action->handle();
+
+        // Проверяем наличие события от удара
+        self::assertCount(1 , $callbackActions);
+
+        // Проверяем, что это оглушение от оружия
+        foreach ($callbackActions as $callbackAction) {
+            self::assertEquals('Stun Weapon Effect', $callbackAction->getNameAction());
+
+            // Проверяем длительность эффекта
+            self::assertEquals($stunDuration, $callbackAction->getEffect()->getBaseDuration());
         }
     }
 
@@ -141,14 +194,44 @@ class WeaponTypeTest extends AbstractUnitTest
         ];
     }
 
+    public function maceDataProvider(): array
+    {
+        return [
+            [
+                // id юнита с одноручной булавой и 100% шансом крита
+                47,
+                // длительность оглушения
+                1,
+            ],
+            [
+                // id юнита с двуручной булавой и 100% шансом крита
+                48,
+                // длительность оглушения
+                2,
+            ],
+            [
+                // id юнита с тяжелой двуручной булавой и 100% шансом крита
+                49,
+                // длительность оглушения
+                3,
+            ],
+        ];
+    }
+
     /**
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
+     * @param int $stunDuration
      * @return ActionCollection
      * @throws Exception
      */
-    private function createStunAction(UnitInterface $unit, CommandInterface $enemyCommand, CommandInterface $command): ActionCollection
+    private function createStunAction(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        int $stunDuration
+    ): ActionCollection
     {
         $data = [
             [
@@ -160,7 +243,7 @@ class WeaponTypeTest extends AbstractUnitTest
                 'effect'         => [
                     'name'                  => 'Stun',
                     'icon'                  => '/images/icons/ability/435.png',
-                    'duration'              => 1,
+                    'duration'              => $stunDuration,
                     'on_apply_actions'      => [],
                     'on_next_round_actions' => [
                         [
