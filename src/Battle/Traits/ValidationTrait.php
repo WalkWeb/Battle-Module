@@ -29,6 +29,27 @@ trait ValidationTrait
     /**
      * @param array $data
      * @param string $filed
+     * @param float $default
+     * @param string $error
+     * @return float
+     * @throws BattleException
+     */
+    protected static function floatOrDefault(array $data, string $filed, float $default, string $error): float
+    {
+        if (!array_key_exists($filed, $data)) {
+            return $default;
+        }
+
+        if (!is_float($data[$filed])) {
+            throw new BattleException($error);
+        }
+
+        return $data[$filed];
+    }
+
+    /**
+     * @param array $data
+     * @param string $filed
      * @param string $error
      * @return int|float
      * @throws BattleException

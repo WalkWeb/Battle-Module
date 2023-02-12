@@ -1,0 +1,368 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Battle\Unit\Offense\MultipleOffense;
+
+use Battle\BattleException;
+use Battle\Unit\Offense\MultipleOffense\MultipleOffenseException;
+use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
+use SplObjectStorage;
+use Tests\AbstractUnitTest;
+
+class MultipleOffenseFactoryTest extends AbstractUnitTest
+{
+    /**
+     * Тест на успешное создание MultipleOffense на основе массива параметров
+     *
+     * @dataProvider successDataProvider
+     * @param array $data
+     * @throws BattleException
+     */
+    public function testMultipleOffenseFactoryCreateSuccess(array $data): void
+    {
+        $multipleOffense = $this->getFactory()->create($data);
+
+        self::assertEquals($data['physical_damage'], $multipleOffense->getPhysicalDamageMultiplier());
+        self::assertEquals($data['fire_damage'], $multipleOffense->getFireDamageMultiplier());
+        self::assertEquals($data['water_damage'], $multipleOffense->getWaterDamageMultiplier());
+        self::assertEquals($data['air_damage'], $multipleOffense->getAirDamageMultiplier());
+        self::assertEquals($data['earth_damage'], $multipleOffense->getEarthDamageMultiplier());
+        self::assertEquals($data['life_damage'], $multipleOffense->getLifeDamageMultiplier());
+        self::assertEquals($data['death_damage'], $multipleOffense->getDeathDamageMultiplier());
+        self::assertEquals($data['attack_speed'], $multipleOffense->getAttackSpeedMultiplier());
+        self::assertEquals($data['cast_speed'], $multipleOffense->getCastSpeedMultiplier());
+        self::assertEquals($data['accuracy'], $multipleOffense->getAccuracyMultiplier());
+        self::assertEquals($data['magic_accuracy'], $multipleOffense->getMagicAccuracyMultiplier());
+        self::assertEquals($data['critical_chance'], $multipleOffense->getCriticalChanceMultiplier());
+        self::assertEquals($data['critical_multiplier'], $multipleOffense->getCriticalMultiplierMultiplier());
+    }
+
+    /**
+     * Тест на заполнение MultipleOffense значениями по умолчанию (множителем х1)
+     *
+     * @throws BattleException
+     */
+    public function testMultipleOffenseFactoryCreateDefault(): void
+    {
+        $multipleOffense = $this->getFactory()->create([]);
+
+        self::assertEquals(1.0, $multipleOffense->getPhysicalDamageMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getFireDamageMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getWaterDamageMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getAirDamageMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getEarthDamageMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getLifeDamageMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getDeathDamageMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getAttackSpeedMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getCastSpeedMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getAccuracyMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getMagicAccuracyMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getCriticalChanceMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getCriticalMultiplierMultiplier());
+    }
+
+    /**
+     * Тесты на различные варианты невалидных данных
+     *
+     * @dataProvider failDataProvider
+     * @param array $data
+     * @param string $error
+     */
+    public function testMultipleOffenseFactoryCreateFail(array $data, string $error): void
+    {
+        $this->expectException(BattleException::class);
+        $this->expectExceptionMessage($error);
+        $this->getFactory()->create($data);
+    }
+
+    /**
+     * @return array
+     */
+    public function successDataProvider(): array
+    {
+        return [
+            [
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function failDataProvider(): array
+    {
+        return [
+            [
+                // physical_damage некорректного типа
+                [
+                    'physical_damage'     => 200,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_PHYSICAL_DAMAGE,
+            ],
+            [
+                // fire_damage некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => '2.2',
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_FIRE_DAMAGE,
+            ],
+            [
+                // water_damage некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => [2.3],
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_WATER_DAMAGE,
+            ],
+            [
+                // air_damage некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => null,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_AIR_DAMAGE,
+            ],
+            [
+                // earth_damage некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => true,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_EARTH_DAMAGE,
+            ],
+            [
+                // life_damage некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => new SplObjectStorage(),
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_LIFE_DAMAGE,
+            ],
+            [
+                // death_damage некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => null,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_DEATH_DAMAGE,
+            ],
+            [
+                // attack_speed некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => null,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_ATTACK_SPEED,
+            ],
+            [
+                // cast_speed некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => null,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_CAST_SPEED,
+            ],
+            [
+                // accuracy некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => null,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_ACCURACY,
+            ],
+            [
+                // magic_accuracy некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => null,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_MAGIC_ACCURACY,
+            ],
+            [
+                // critical_chance некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => null,
+                    'critical_multiplier' => 3.3,
+                ],
+                MultipleOffenseException::INVALID_CRITICAL_CHANCE,
+            ],
+            [
+                // critical_multiplier некорректного типа
+                [
+                    'physical_damage'     => 2.1,
+                    'fire_damage'         => 2.2,
+                    'water_damage'        => 2.3,
+                    'air_damage'          => 2.4,
+                    'earth_damage'        => 2.5,
+                    'life_damage'         => 2.6,
+                    'death_damage'        => 2.7,
+                    'attack_speed'        => 2.8,
+                    'cast_speed'          => 2.9,
+                    'accuracy'            => 3.0,
+                    'magic_accuracy'      => 3.1,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => null,
+                ],
+                MultipleOffenseException::INVALID_CRITICAL_MULTIPLIER,
+            ],
+        ];
+    }
+
+    /**
+     * @return MultipleOffenseFactory
+     */
+    private function getFactory(): MultipleOffenseFactory
+    {
+        return new MultipleOffenseFactory();
+    }
+}
