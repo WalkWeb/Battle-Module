@@ -469,11 +469,11 @@ class Unit extends AbstractUnit
                 $enemyCommand,
                 $alliesCommand,
                 DamageAction::TARGET_RANDOM_ENEMY,
-                $this->getOffense(),
                 true,
                 DamageAction::DEFAULT_NAME,
                 DamageAction::UNIT_ANIMATION_METHOD,
-                DamageAction::DEFAULT_MESSAGE_METHOD
+                DamageAction::DEFAULT_MESSAGE_METHOD,
+                $this->getOffense()
             ));
         }
 

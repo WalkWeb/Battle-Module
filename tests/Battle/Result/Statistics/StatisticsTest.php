@@ -496,6 +496,10 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
+            true,
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD,
             OffenseFactory::create([
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -517,10 +521,6 @@ class StatisticsTest extends AbstractUnitTest
                 'vampirism'           => 0,
                 'magic_vampirism'     => 0,
             ], $this->getContainer()),
-            true,
-            DamageAction::DEFAULT_NAME,
-            DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::DEFAULT_MESSAGE_METHOD
         );
 
         $action->handle();
@@ -702,11 +702,11 @@ class StatisticsTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_ENEMY,
-            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::DEFAULT_MESSAGE_METHOD
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
         );
     }
 }

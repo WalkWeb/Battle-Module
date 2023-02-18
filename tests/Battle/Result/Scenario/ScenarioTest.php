@@ -917,11 +917,11 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_SELF,
-            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             $animationMethod,
-            DamageAction::DEFAULT_MESSAGE_METHOD
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
         );
 
         $this->expectException(ScenarioException::class);
@@ -1048,11 +1048,11 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::DEFAULT_MESSAGE_METHOD
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
         );
     }
 }

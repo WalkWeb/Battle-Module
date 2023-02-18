@@ -35,4 +35,5 @@ class ActionException extends Exception
     public const INVALID_RESURRECTED_POWER   = 'ResurrectionAction: invalid power';
     public const INVALID_RESURRECTED_TARGET  = 'ResurrectionAction: invalid type target';
     public const INVALID_MANA_RESTORE_TARGET = 'ManaRestoreAction: invalid type target: available self-target only';
+    public const EMPTY_OFFENSE_AND_MULTIPLE  = 'DamageAction: empty $offense and $multipleOffense - nullable only one of them';
 }

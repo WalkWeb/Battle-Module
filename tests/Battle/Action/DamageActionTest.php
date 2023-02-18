@@ -11,6 +11,7 @@ use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -155,11 +156,11 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::DEFAULT_MESSAGE_METHOD
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
         );
 
         self::assertEquals($typeTarget, $action->getTypeTarget());
@@ -521,11 +522,11 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense(),
             false,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::DEFAULT_MESSAGE_METHOD
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
         );
 
         $action->handle();
@@ -845,6 +846,75 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ситуацию, когда DamageAction создают из null $offense и $multipleOffense - каждый по отдельности из них
+     * может быть null, но оба отсутствовать не могут
+     *
+     * @throws Exception
+     */
+    public function testDamageActionEmptyOffenseAndMultipleOffense(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage(ActionException::EMPTY_OFFENSE_AND_MULTIPLE);
+        new DamageAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            true,
+            '',
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            null,
+            null
+        );
+    }
+
+    /**
+     * Тест на ситуацию, когда базовый урон юнита изменяется в % соотношении, т.к. дополнительно передан
+     * $multipleOffense
+     *
+     * @throws Exception
+     */
+    public function testDamageActionMultipleOffense(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            true,
+            '',
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            null,
+            $this->getMultipleOffenseFactory()->create(['damage' => 2.0])
+        );
+
+        // Проверяем здоровье противника до удара
+        self::assertEquals(250, $enemyUnit->getLife());
+
+        $enemyUnit->applyAction($action);
+
+        // Проверяем, что нанесено х2 урона атакующего юнита
+        self::assertEquals(
+            $enemyUnit->getTotalLife() - 2 * $unit->getOffense()->getDamage($enemyUnit->getDefense()),
+            $enemyUnit->getLife()
+        );
+    }
+
+    /**
      * @return array
      */
     public function criticalDamageDataProvider(): array
@@ -884,11 +954,11 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::DEFAULT_MESSAGE_METHOD
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
         );
     }
 
@@ -907,5 +977,13 @@ class DamageActionTest extends AbstractUnitTest
             $unit,
             $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
         );
+    }
+
+    /**
+     * @return MultipleOffenseFactory
+     */
+    private function getMultipleOffenseFactory(): MultipleOffenseFactory
+    {
+        return new MultipleOffenseFactory();
     }
 }

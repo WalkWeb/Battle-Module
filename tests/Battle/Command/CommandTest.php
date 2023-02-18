@@ -232,11 +232,11 @@ class CommandTest extends AbstractUnitTest
             $alliesCommand,
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $enemyUnit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::DEFAULT_MESSAGE_METHOD
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $enemyUnit->getOffense()
         );
 
         $action->handle();
@@ -307,11 +307,11 @@ class CommandTest extends AbstractUnitTest
             $command,
             $enemyCommand,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $enemyUnit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::DEFAULT_MESSAGE_METHOD
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $enemyUnit->getOffense()
         );
 
         $damage->handle();

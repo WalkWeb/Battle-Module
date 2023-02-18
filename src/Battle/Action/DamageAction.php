@@ -6,6 +6,8 @@ namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
+use Battle\Unit\Offense\MultipleOffense\MultipleOffenseInterface;
+use Battle\Unit\Offense\Offense;
 use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
@@ -95,11 +97,12 @@ class DamageAction extends AbstractAction
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $alliesCommand
      * @param int $typeTarget
-     * @param OffenseInterface $offense
      * @param bool $canBeAvoided
      * @param string $name
      * @param string $animationMethod
      * @param string $messageMethod
+     * @param OffenseInterface|null $offense
+     * @param MultipleOffenseInterface|null $multipleOffense
      * @param string $icon
      * @throws Exception
      */
@@ -109,16 +112,28 @@ class DamageAction extends AbstractAction
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         int $typeTarget,
-        OffenseInterface $offense,
         bool $canBeAvoided,
         string $name,
         string $animationMethod,
         string $messageMethod,
+        OffenseInterface $offense = null,
+        MultipleOffenseInterface $multipleOffense = null,
         string $icon = ''
     )
     {
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
-        $this->offense = $offense;
+
+        if (is_null($offense)) {
+            if (is_null($multipleOffense)) {
+                throw new ActionException(ActionException::EMPTY_OFFENSE_AND_MULTIPLE);
+            }
+
+            $this->offense = $this->createMultipleOffense($actionUnit->getOffense(), $multipleOffense);
+
+        } else {
+            $this->offense = $offense;
+        }
+
         $this->canBeAvoided = $canBeAvoided;
         $this->name = $name;
         $this->animationMethod = $animationMethod;
@@ -363,5 +378,40 @@ class DamageAction extends AbstractAction
         } else {
             $this->criticalDamage = $this->offense->getCriticalChance() > random_int(0, 100);
         }
+    }
+
+    /**
+     * @param OffenseInterface $offense
+     * @param MultipleOffenseInterface $multipleOffense
+     * @return OffenseInterface
+     * @throws Exception
+     */
+    private function createMultipleOffense(
+        OffenseInterface $offense,
+        MultipleOffenseInterface $multipleOffense
+    ): OffenseInterface
+    {
+        return new Offense(
+            $this->container,
+            $offense->getDamageType(),
+            $offense->getWeaponType()->getId(),
+            (int)($offense->getPhysicalDamage() * $multipleOffense->getDamageMultiplier()),
+            (int)($offense->getFireDamage() * $multipleOffense->getDamageMultiplier()),
+            (int)($offense->getWaterDamage() * $multipleOffense->getDamageMultiplier()),
+            (int)($offense->getAirDamage() * $multipleOffense->getDamageMultiplier()),
+            (int)($offense->getEarthDamage() * $multipleOffense->getDamageMultiplier()),
+            (int)($offense->getLifeDamage() * $multipleOffense->getDamageMultiplier()),
+            (int)($offense->getDeathDamage() * $multipleOffense->getDamageMultiplier()),
+            round($offense->getAttackSpeed() * $multipleOffense->getAttackSpeedMultiplier(), 2),
+            round($offense->getCastSpeed() * $multipleOffense->getCastSpeedMultiplier(), 2),
+            (int)($offense->getAccuracy() * $multipleOffense->getAccuracyMultiplier()),
+            (int)($offense->getMagicAccuracy() * $multipleOffense->getMagicAccuracyMultiplier()),
+            $offense->getBlockIgnoring(),
+            (int)($offense->getCriticalChance() * $multipleOffense->getCriticalChanceMultiplier()),
+            (int)($offense->getCriticalMultiplier() * $multipleOffense->getCriticalMultiplierMultiplier()),
+            $offense->getDamageMultiplier(),
+            $offense->getVampirism(),
+            $offense->getMagicVampirism()
+        );
     }
 }

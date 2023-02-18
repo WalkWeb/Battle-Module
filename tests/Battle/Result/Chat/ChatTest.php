@@ -573,11 +573,12 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense(),
             true,
             'Poison',
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::EFFECT_MESSAGE_METHOD,
+            $unit->getOffense(),
+            null,
             '/images/icons/ability/202.png'
         );
 
@@ -664,11 +665,11 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_RANDOM_ENEMY,
-            $unit->getOffense(),
             true,
             'test attack',
             DamageAction::UNIT_ANIMATION_METHOD,
-            $messageMethod = 'undefinedMessageMethod'
+            $messageMethod = 'undefinedMessageMethod',
+            $unit->getOffense()
         );
 
         $this->expectException(ChatException::class);
@@ -991,11 +992,11 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            $unit->getOffense(),
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
-            DamageAction::DEFAULT_MESSAGE_METHOD
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
         );
     }
 
@@ -1020,6 +1021,10 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
+            true,
+            'Heavy Strike',
+            DamageAction::UNIT_ANIMATION_METHOD,
+            'damageAbility',
             OffenseFactory::create([
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1041,10 +1046,7 @@ class ChatTest extends AbstractUnitTest
                 'vampirism'           => 0,
                 'magic_vampirism'     => 0,
             ], $this->getContainer()),
-            true,
-            'Heavy Strike',
-            DamageAction::UNIT_ANIMATION_METHOD,
-            'damageAbility',
+            null,
             '/images/icons/ability/335.png'
         );
     }
@@ -1070,6 +1072,10 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
+            true,
+            'Heavy Strike',
+            DamageAction::UNIT_ANIMATION_METHOD,
+            'damageAbility',
             OffenseFactory::create([
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1091,10 +1097,7 @@ class ChatTest extends AbstractUnitTest
                 'vampirism'           => 50,
                 'magic_vampirism'     => 0,
             ], $this->getContainer()),
-            true,
-            'Heavy Strike',
-            DamageAction::UNIT_ANIMATION_METHOD,
-            'damageAbility',
+            null,
             '/images/icons/ability/335.png'
         );
     }
@@ -1120,6 +1123,10 @@ class ChatTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
+            true,
+            'Heavy Strike',
+            DamageAction::UNIT_ANIMATION_METHOD,
+            'damageAbility',
             OffenseFactory::create([
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1141,10 +1148,7 @@ class ChatTest extends AbstractUnitTest
                 'vampirism'           => 0,
                 'magic_vampirism'     => 0,
             ], $this->getContainer()),
-            true,
-            'Heavy Strike',
-            DamageAction::UNIT_ANIMATION_METHOD,
-            'damageAbility',
+            null,
             '/images/icons/ability/335.png'
         );
     }
