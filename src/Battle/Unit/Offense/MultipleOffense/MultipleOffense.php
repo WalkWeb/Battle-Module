@@ -6,13 +6,7 @@ namespace Battle\Unit\Offense\MultipleOffense;
 
 class MultipleOffense implements MultipleOffenseInterface
 {
-    private float $physicalDamageMultiplier;
-    private float $fireDamageMultiplier;
-    private float $waterDamageMultiplier;
-    private float $airDamageMultiplier;
-    private float $earthDamageMultiplier;
-    private float $lifeDamageMultiplier;
-    private float $deathDamageMultiplier;
+    private float $damageMultiplier;
     private float $attackSpeedMultiplier;
     private float $castSpeedMultiplier;
     private float $accuracyMultiplier;
@@ -21,13 +15,7 @@ class MultipleOffense implements MultipleOffenseInterface
     private float $criticalMultiplierMultiplier;
 
     public function __construct(
-        float $physicalDamageMultiplier,
-        float $fireDamageMultiplier,
-        float $waterDamageMultiplier,
-        float $airDamageMultiplier,
-        float $earthDamageMultiplier,
-        float $lifeDamageMultiplier,
-        float $deathDamageMultiplier,
+        float $damageMultiplier,
         float $attackSpeedMultiplier,
         float $castSpeedMultiplier,
         float $accuracyMultiplier,
@@ -36,13 +24,7 @@ class MultipleOffense implements MultipleOffenseInterface
         float $criticalMultiplierMultiplier
     )
     {
-        $this->physicalDamageMultiplier = $physicalDamageMultiplier;
-        $this->fireDamageMultiplier = $fireDamageMultiplier;
-        $this->waterDamageMultiplier = $waterDamageMultiplier;
-        $this->airDamageMultiplier = $airDamageMultiplier;
-        $this->earthDamageMultiplier = $earthDamageMultiplier;
-        $this->lifeDamageMultiplier = $lifeDamageMultiplier;
-        $this->deathDamageMultiplier = $deathDamageMultiplier;
+        $this->damageMultiplier = $damageMultiplier;
         $this->attackSpeedMultiplier = $attackSpeedMultiplier;
         $this->castSpeedMultiplier = $castSpeedMultiplier;
         $this->accuracyMultiplier = $accuracyMultiplier;
@@ -54,57 +36,9 @@ class MultipleOffense implements MultipleOffenseInterface
     /**
      * @return float
      */
-    public function getPhysicalDamageMultiplier(): float
+    public function getDamageMultiplier(): float
     {
-        return $this->physicalDamageMultiplier;
-    }
-
-    /**
-     * @return float
-     */
-    public function getFireDamageMultiplier(): float
-    {
-        return $this->fireDamageMultiplier;
-    }
-
-    /**
-     * @return float
-     */
-    public function getWaterDamageMultiplier(): float
-    {
-        return $this->waterDamageMultiplier;
-    }
-
-    /**
-     * @return float
-     */
-    public function getAirDamageMultiplier(): float
-    {
-        return $this->airDamageMultiplier;
-    }
-
-    /**
-     * @return float
-     */
-    public function getEarthDamageMultiplier(): float
-    {
-        return $this->earthDamageMultiplier;
-    }
-
-    /**
-     * @return float
-     */
-    public function getLifeDamageMultiplier(): float
-    {
-        return $this->lifeDamageMultiplier;
-    }
-
-    /**
-     * @return float
-     */
-    public function getDeathDamageMultiplier(): float
-    {
-        return $this->deathDamageMultiplier;
+        return $this->damageMultiplier;
     }
 
     /**

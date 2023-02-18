@@ -7,7 +7,6 @@ namespace Tests\Battle\Unit\Offense\MultipleOffense;
 use Battle\BattleException;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseException;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
-use SplObjectStorage;
 use Tests\AbstractUnitTest;
 
 class MultipleOffenseFactoryTest extends AbstractUnitTest
@@ -23,13 +22,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
     {
         $multipleOffense = $this->getFactory()->create($data);
 
-        self::assertEquals($data['physical_damage'], $multipleOffense->getPhysicalDamageMultiplier());
-        self::assertEquals($data['fire_damage'], $multipleOffense->getFireDamageMultiplier());
-        self::assertEquals($data['water_damage'], $multipleOffense->getWaterDamageMultiplier());
-        self::assertEquals($data['air_damage'], $multipleOffense->getAirDamageMultiplier());
-        self::assertEquals($data['earth_damage'], $multipleOffense->getEarthDamageMultiplier());
-        self::assertEquals($data['life_damage'], $multipleOffense->getLifeDamageMultiplier());
-        self::assertEquals($data['death_damage'], $multipleOffense->getDeathDamageMultiplier());
+        self::assertEquals($data['damage'], $multipleOffense->getDamageMultiplier());
         self::assertEquals($data['attack_speed'], $multipleOffense->getAttackSpeedMultiplier());
         self::assertEquals($data['cast_speed'], $multipleOffense->getCastSpeedMultiplier());
         self::assertEquals($data['accuracy'], $multipleOffense->getAccuracyMultiplier());
@@ -47,13 +40,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
     {
         $multipleOffense = $this->getFactory()->create([]);
 
-        self::assertEquals(1.0, $multipleOffense->getPhysicalDamageMultiplier());
-        self::assertEquals(1.0, $multipleOffense->getFireDamageMultiplier());
-        self::assertEquals(1.0, $multipleOffense->getWaterDamageMultiplier());
-        self::assertEquals(1.0, $multipleOffense->getAirDamageMultiplier());
-        self::assertEquals(1.0, $multipleOffense->getEarthDamageMultiplier());
-        self::assertEquals(1.0, $multipleOffense->getLifeDamageMultiplier());
-        self::assertEquals(1.0, $multipleOffense->getDeathDamageMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getDamageMultiplier());
         self::assertEquals(1.0, $multipleOffense->getAttackSpeedMultiplier());
         self::assertEquals(1.0, $multipleOffense->getCastSpeedMultiplier());
         self::assertEquals(1.0, $multipleOffense->getAccuracyMultiplier());
@@ -84,13 +71,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
         return [
             [
                 [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
+                    'damage'              => 2.1,
                     'attack_speed'        => 2.8,
                     'cast_speed'          => 2.9,
                     'accuracy'            => 3.0,
@@ -109,15 +90,9 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
     {
         return [
             [
-                // physical_damage некорректного типа
+                // damage некорректного типа
                 [
-                    'physical_damage'     => 200,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
+                    'damage'              => 200,
                     'attack_speed'        => 2.8,
                     'cast_speed'          => 2.9,
                     'accuracy'            => 3.0,
@@ -125,132 +100,12 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                 ],
-                MultipleOffenseException::INVALID_PHYSICAL_DAMAGE,
-            ],
-            [
-                // fire_damage некорректного типа
-                [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => '2.2',
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_FIRE_DAMAGE,
-            ],
-            [
-                // water_damage некорректного типа
-                [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => [2.3],
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_WATER_DAMAGE,
-            ],
-            [
-                // air_damage некорректного типа
-                [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => null,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_AIR_DAMAGE,
-            ],
-            [
-                // earth_damage некорректного типа
-                [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => true,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_EARTH_DAMAGE,
-            ],
-            [
-                // life_damage некорректного типа
-                [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => new SplObjectStorage(),
-                    'death_damage'        => 2.7,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_LIFE_DAMAGE,
-            ],
-            [
-                // death_damage некорректного типа
-                [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => null,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_DEATH_DAMAGE,
+                MultipleOffenseException::INVALID_DAMAGE,
             ],
             [
                 // attack_speed некорректного типа
                 [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
+                    'damage'              => 2.1,
                     'attack_speed'        => null,
                     'cast_speed'          => 2.9,
                     'accuracy'            => 3.0,
@@ -263,13 +118,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
             [
                 // cast_speed некорректного типа
                 [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
+                    'damage'              => 2.1,
                     'attack_speed'        => 2.8,
                     'cast_speed'          => null,
                     'accuracy'            => 3.0,
@@ -282,13 +131,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
             [
                 // accuracy некорректного типа
                 [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
+                    'damage'              => 2.1,
                     'attack_speed'        => 2.8,
                     'cast_speed'          => 2.9,
                     'accuracy'            => null,
@@ -301,13 +144,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
             [
                 // magic_accuracy некорректного типа
                 [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
+                    'damage'              => 2.1,
                     'attack_speed'        => 2.8,
                     'cast_speed'          => 2.9,
                     'accuracy'            => 3.0,
@@ -320,13 +157,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
             [
                 // critical_chance некорректного типа
                 [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
+                    'damage'              => 2.1,
                     'attack_speed'        => 2.8,
                     'cast_speed'          => 2.9,
                     'accuracy'            => 3.0,
@@ -339,13 +170,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
             [
                 // critical_multiplier некорректного типа
                 [
-                    'physical_damage'     => 2.1,
-                    'fire_damage'         => 2.2,
-                    'water_damage'        => 2.3,
-                    'air_damage'          => 2.4,
-                    'earth_damage'        => 2.5,
-                    'life_damage'         => 2.6,
-                    'death_damage'        => 2.7,
+                    'damage'              => 2.1,
                     'attack_speed'        => 2.8,
                     'cast_speed'          => 2.9,
                     'accuracy'            => 3.0,

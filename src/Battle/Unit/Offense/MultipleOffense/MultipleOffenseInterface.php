@@ -24,53 +24,11 @@ namespace Battle\Unit\Offense\MultipleOffense;
 interface MultipleOffenseInterface
 {
     /**
-     * Возвращает множитель физического урона
+     * Возвращает множитель урона
      *
      * @return float
      */
-    public function getPhysicalDamageMultiplier(): float;
-
-    /**
-     * Возвращает множитель урона огнем
-     *
-     * @return float
-     */
-    public function getFireDamageMultiplier(): float;
-
-    /**
-     * Возвращает множитель урона водой
-     *
-     * @return float
-     */
-    public function getWaterDamageMultiplier(): float;
-
-    /**
-     * Возвращает множитель урона воздухом
-     *
-     * @return float
-     */
-    public function getAirDamageMultiplier(): float;
-
-    /**
-     * Возвращает множитель урона землей
-     *
-     * @return float
-     */
-    public function getEarthDamageMultiplier(): float;
-
-    /**
-     * Возвращает множитель урона магией жизни
-     *
-     * @return float
-     */
-    public function getLifeDamageMultiplier(): float;
-
-    /**
-     * Возвращает множитель урона магией смерти
-     *
-     * @return float
-     */
-    public function getDeathDamageMultiplier(): float;
+    public function getDamageMultiplier(): float;
 
     /**
      * Возвращает множитель скорости атаки

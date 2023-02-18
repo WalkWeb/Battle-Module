@@ -23,13 +23,7 @@ class MultipleOffenseFactory
     public function create(array $data): MultipleOffenseInterface
     {
         return new MultipleOffense(
-            self::floatOrDefault($data, 'physical_damage', 1.0, MultipleOffenseException::INVALID_PHYSICAL_DAMAGE),
-            self::floatOrDefault($data, 'fire_damage', 1.0, MultipleOffenseException::INVALID_FIRE_DAMAGE),
-            self::floatOrDefault($data, 'water_damage', 1.0, MultipleOffenseException::INVALID_WATER_DAMAGE),
-            self::floatOrDefault($data, 'air_damage', 1.0, MultipleOffenseException::INVALID_AIR_DAMAGE),
-            self::floatOrDefault($data, 'earth_damage', 1.0, MultipleOffenseException::INVALID_EARTH_DAMAGE),
-            self::floatOrDefault($data, 'life_damage', 1.0, MultipleOffenseException::INVALID_LIFE_DAMAGE),
-            self::floatOrDefault($data, 'death_damage', 1.0, MultipleOffenseException::INVALID_DEATH_DAMAGE),
+            self::floatOrDefault($data, 'damage', 1.0, MultipleOffenseException::INVALID_DAMAGE),
             self::floatOrDefault($data, 'attack_speed', 1.0, MultipleOffenseException::INVALID_ATTACK_SPEED),
             self::floatOrDefault($data, 'cast_speed', 1.0, MultipleOffenseException::INVALID_CAST_SPEED),
             self::floatOrDefault($data, 'accuracy', 1.0, MultipleOffenseException::INVALID_ACCURACY),

@@ -8,7 +8,7 @@ use Exception;
 
 class MultipleOffenseException extends Exception
 {
-    public const INVALID_PHYSICAL_DAMAGE     = 'Incorrect "physical_damage", it empty or type float';
+    public const INVALID_DAMAGE              = 'Incorrect "damage", it empty or type float';
     public const INVALID_FIRE_DAMAGE         = 'Incorrect "fire_damage", it empty or type float';
     public const INVALID_WATER_DAMAGE        = 'Incorrect "water_damage", it empty or type float';
     public const INVALID_AIR_DAMAGE          = 'Incorrect "air_damage", it empty or type float';
