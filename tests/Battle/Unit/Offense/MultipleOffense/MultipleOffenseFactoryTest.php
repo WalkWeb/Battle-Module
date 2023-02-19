@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Offense\MultipleOffense;
 
-use Battle\BattleException;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseException;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseInterface;
+use Exception;
 use Tests\AbstractUnitTest;
 
 class MultipleOffenseFactoryTest extends AbstractUnitTest
@@ -17,7 +17,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
      *
      * @dataProvider successDataProvider
      * @param array $data
-     * @throws BattleException
+     * @throws Exception
      */
     public function testMultipleOffenseFactoryCreateSuccess(array $data): void
     {
@@ -35,11 +35,12 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
     /**
      * Тест на заполнение MultipleOffense значениями по умолчанию (множителем х1)
      *
-     * @throws BattleException
+     * @throws Exception
      */
     public function testMultipleOffenseFactoryCreateDefault(): void
     {
-        $multipleOffense = $this->getFactory()->create([]);
+        // Передаются мусорные данные, чтобы массив был чем-то заполнен, иначе будет другое исключение
+        $multipleOffense = $this->getFactory()->create([123]);
 
         self::assertEquals(1.0, $multipleOffense->getDamageMultiplier());
         self::assertEquals(1.0, $multipleOffense->getAttackSpeedMultiplier());
@@ -56,10 +57,11 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
      * @dataProvider failDataProvider
      * @param array $data
      * @param string $error
+     * @throws Exception
      */
     public function testMultipleOffenseFactoryCreateFail(array $data, string $error): void
     {
-        $this->expectException(BattleException::class);
+        $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
         $this->getFactory()->create($data);
     }
@@ -90,6 +92,11 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
     public function failDataProvider(): array
     {
         return [
+            [
+                // Пустые данные - в этом случае MultipleOffense не нужно указывать и создавать вовсе
+                [],
+                MultipleOffenseException::EMPTY_DATA,
+            ],
             [
                 // damage некорректного типа
                 [

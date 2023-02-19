@@ -8,6 +8,7 @@ use Exception;
 
 class MultipleOffenseException extends Exception
 {
+    public const EMPTY_DATA                        = 'MultipleOffenseFactory: empty data. Skip "multiple_offense" parameter for use default Unit Offense';
     public const INVALID_DAMAGE                    = 'MultipleOffenseFactory: Incorrect "damage", it empty or type float';
     public const INVALID_DAMAGE_VALUE              = 'MultipleOffenseFactory: Incorrect "damage", should be min-max value: ';
     public const INVALID_ATTACK_SPEED              = 'MultipleOffenseFactory: Incorrect "attack_speed", it empty or type float';

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Offense\MultipleOffense;
 
-use Battle\BattleException;
 use Battle\Traits\ValidationTrait;
+use Exception;
 
 class MultipleOffenseFactory
 {
@@ -14,14 +14,16 @@ class MultipleOffenseFactory
     /**
      * Создает объект MultipleOffense на основе массива с данными
      *
-     * TODO Проверка на полное отсутствие параметров - в этом случае не нужно указывать MultipleOffense вовсе
-     *
      * @param array $data
      * @return MultipleOffenseInterface
-     * @throws BattleException
+     * @throws Exception
      */
     public function create(array $data): MultipleOffenseInterface
     {
+        if (count($data) === 0) {
+            throw new MultipleOffenseException(MultipleOffenseException::EMPTY_DATA);
+        }
+
         $damage = self::floatOrDefault($data, 'damage', 1.0, MultipleOffenseException::INVALID_DAMAGE);
         $attackSpeed = self::floatOrDefault($data, 'attack_speed', 1.0, MultipleOffenseException::INVALID_ATTACK_SPEED);
         $castSpeed = self::floatOrDefault($data, 'cast_speed', 1.0, MultipleOffenseException::INVALID_CAST_SPEED);
