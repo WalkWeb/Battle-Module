@@ -129,6 +129,23 @@ trait ValidationTrait
     }
 
     /**
+     * @param float $value
+     * @param float $min
+     * @param float $max
+     * @param string $error
+     * @return float
+     * @throws BattleException
+     */
+    protected static function floatMinMaxValue(float $value, float $min, float $max, string $error): float
+    {
+        if ($value < $min || $value > $max) {
+            throw new BattleException($error);
+        }
+
+        return $value;
+    }
+
+    /**
      * @param string $string
      * @param int $minLength
      * @param int $maxLength

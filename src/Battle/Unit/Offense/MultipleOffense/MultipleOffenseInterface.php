@@ -23,6 +23,9 @@ namespace Battle\Unit\Offense\MultipleOffense;
  */
 interface MultipleOffenseInterface
 {
+    public const MIN_MULTIPLIER = 0;
+    public const MAX_MULTIPLIER = 10;
+
     /**
      * Возвращает множитель урона
      *
@@ -32,6 +35,8 @@ interface MultipleOffenseInterface
 
     /**
      * Возвращает множитель скорости атаки
+     *
+     * TODO AttackSpeedMultiplier и CastSpeedMultiplier можно объединить в один параметр
      *
      * @return float
      */
@@ -46,6 +51,8 @@ interface MultipleOffenseInterface
 
     /**
      * Возвращает множитель меткости
+     *
+     * TODO Аналогично с AccuracyMultiplier и MagicAccuracy
      *
      * @return float
      */
