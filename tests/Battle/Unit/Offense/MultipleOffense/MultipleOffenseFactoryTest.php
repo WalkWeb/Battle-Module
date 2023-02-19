@@ -24,10 +24,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
         $multipleOffense = $this->getFactory()->create($data);
 
         self::assertEquals($data['damage'], $multipleOffense->getDamageMultiplier());
-        self::assertEquals($data['attack_speed'], $multipleOffense->getAttackSpeedMultiplier());
-        self::assertEquals($data['cast_speed'], $multipleOffense->getCastSpeedMultiplier());
+        self::assertEquals($data['speed'], $multipleOffense->getSpeedMultiplier());
         self::assertEquals($data['accuracy'], $multipleOffense->getAccuracyMultiplier());
-        self::assertEquals($data['magic_accuracy'], $multipleOffense->getMagicAccuracyMultiplier());
         self::assertEquals($data['critical_chance'], $multipleOffense->getCriticalChanceMultiplier());
         self::assertEquals($data['critical_multiplier'], $multipleOffense->getCriticalMultiplierMultiplier());
     }
@@ -43,10 +41,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
         $multipleOffense = $this->getFactory()->create([123]);
 
         self::assertEquals(1.0, $multipleOffense->getDamageMultiplier());
-        self::assertEquals(1.0, $multipleOffense->getAttackSpeedMultiplier());
-        self::assertEquals(1.0, $multipleOffense->getCastSpeedMultiplier());
+        self::assertEquals(1.0, $multipleOffense->getSpeedMultiplier());
         self::assertEquals(1.0, $multipleOffense->getAccuracyMultiplier());
-        self::assertEquals(1.0, $multipleOffense->getMagicAccuracyMultiplier());
         self::assertEquals(1.0, $multipleOffense->getCriticalChanceMultiplier());
         self::assertEquals(1.0, $multipleOffense->getCriticalMultiplierMultiplier());
     }
@@ -75,10 +71,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
             [
                 [
                     'damage'              => 2.1,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.8,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                 ],
@@ -101,10 +95,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 // damage некорректного типа
                 [
                     'damage'              => 200,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.8,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                 ],
@@ -114,10 +106,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 // damage меньше минимального значения
                 [
                     'damage'              => MultipleOffenseInterface::MIN_MULTIPLIER - 0.1,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.8,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                 ],
@@ -127,10 +117,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 // damage больше максимального значения
                 [
                     'damage'              => MultipleOffenseInterface::MAX_MULTIPLIER + 0.1,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.8,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                 ],
@@ -140,88 +128,41 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 // attack_speed некорректного типа
                 [
                     'damage'              => 2.1,
-                    'attack_speed'        => null,
-                    'cast_speed'          => 2.9,
+                    'speed'               => null,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                 ],
-                MultipleOffenseException::INVALID_ATTACK_SPEED,
+                MultipleOffenseException::INVALID_SPEED,
             ],
             [
                 // attack_speed меньше минимального значения
                 [
                     'damage'              => 2.0,
-                    'attack_speed'        => MultipleOffenseInterface::MIN_MULTIPLIER - 0.1,
-                    'cast_speed'          => 2.9,
+                    'speed'               => MultipleOffenseInterface::MIN_MULTIPLIER - 0.1,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                 ],
-                MultipleOffenseException::INVALID_ATTACK_SPEED_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER,
+                MultipleOffenseException::INVALID_SPEED_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER,
             ],
             [
                 // attack_speed больше максимального значения
                 [
                     'damage'              => 2.0,
-                    'attack_speed'        => MultipleOffenseInterface::MAX_MULTIPLIER + 0.1,
-                    'cast_speed'          => 2.9,
+                    'speed'               => MultipleOffenseInterface::MAX_MULTIPLIER + 0.1,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                 ],
-                MultipleOffenseException::INVALID_ATTACK_SPEED_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER,
-            ],
-            [
-                // cast_speed некорректного типа
-                [
-                    'damage'              => 2.1,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => null,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_CAST_SPEED,
-            ],
-            [
-                // cast_speed меньше минимального значения
-                [
-                    'damage'              => 2.0,
-                    'attack_speed'        => 2.1,
-                    'cast_speed'          => MultipleOffenseInterface::MIN_MULTIPLIER - 0.1,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_CAST_SPEED_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER,
-            ],
-            [
-                // cast_speed больше максимального значения
-                [
-                    'damage'              => 2.0,
-                    'attack_speed'        => 2.1,
-                    'cast_speed'          => MultipleOffenseInterface::MAX_MULTIPLIER + 0.1,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_CAST_SPEED_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER,
+                MultipleOffenseException::INVALID_SPEED_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER,
             ],
             [
                 // accuracy некорректного типа
                 [
                     'damage'              => 2.1,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.8,
                     'accuracy'            => null,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                 ],
@@ -231,10 +172,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 // accuracy меньше минимального значения
                 [
                     'damage'              => 2.0,
-                    'attack_speed'        => 2.1,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.1,
                     'accuracy'            => MultipleOffenseInterface::MIN_MULTIPLIER - 0.1,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                 ],
@@ -244,62 +183,19 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 // accuracy больше максимального значения
                 [
                     'damage'              => 2.0,
-                    'attack_speed'        => 2.1,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.1,
                     'accuracy'            => MultipleOffenseInterface::MAX_MULTIPLIER + 0.1,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                 ],
                 MultipleOffenseException::INVALID_ACCURACY_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER,
             ],
             [
-                // magic_accuracy некорректного типа
-                [
-                    'damage'              => 2.1,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => null,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_MAGIC_ACCURACY,
-            ],
-            [
-                // magic_accuracy меньше минимального значения
-                [
-                    'damage'              => 2.0,
-                    'attack_speed'        => 2.1,
-                    'cast_speed'          => 2.9,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => MultipleOffenseInterface::MIN_MULTIPLIER - 0.1,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_MAGIC_ACCURACY_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER,
-            ],
-            [
-                // magic_accuracy больше максимального значения
-                [
-                    'damage'              => 2.0,
-                    'attack_speed'        => 2.1,
-                    'cast_speed'          => 2.9,
-                    'accuracy'            => 3.0,
-                    'magic_accuracy'      => MultipleOffenseInterface::MAX_MULTIPLIER + 0.1,
-                    'critical_chance'     => 3.2,
-                    'critical_multiplier' => 3.3,
-                ],
-                MultipleOffenseException::INVALID_MAGIC_ACCURACY_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER,
-            ],
-            [
                 // critical_chance некорректного типа
                 [
                     'damage'              => 2.1,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.8,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => null,
                     'critical_multiplier' => 3.3,
                 ],
@@ -309,10 +205,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 // critical_chance меньше минимального значения
                 [
                     'damage'              => 2.0,
-                    'attack_speed'        => 2.1,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.1,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => MultipleOffenseInterface::MIN_MULTIPLIER - 0.1,
                     'critical_multiplier' => 3.3,
                 ],
@@ -322,10 +216,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 // critical_chance больше максимального значения
                 [
                     'damage'              => 2.0,
-                    'attack_speed'        => 2.1,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.1,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => MultipleOffenseInterface::MAX_MULTIPLIER + 0.1,
                     'critical_multiplier' => 3.3,
                 ],
@@ -335,10 +227,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 // critical_multiplier некорректного типа
                 [
                     'damage'              => 2.1,
-                    'attack_speed'        => 2.8,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.8,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => null,
                 ],
@@ -348,10 +238,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 // critical_multiplier меньше минимального значения
                 [
                     'damage'              => 2.0,
-                    'attack_speed'        => 2.1,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.1,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => MultipleOffenseInterface::MIN_MULTIPLIER - 0.1,
                 ],
@@ -361,10 +249,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 // critical_multiplier больше максимального значения
                 [
                     'damage'              => 2.0,
-                    'attack_speed'        => 2.1,
-                    'cast_speed'          => 2.9,
+                    'speed'               => 2.1,
                     'accuracy'            => 3.0,
-                    'magic_accuracy'      => 3.1,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => MultipleOffenseInterface::MAX_MULTIPLIER + 0.1,
                 ],

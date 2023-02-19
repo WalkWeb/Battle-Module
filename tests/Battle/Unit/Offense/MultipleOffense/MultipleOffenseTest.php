@@ -15,28 +15,22 @@ class MultipleOffenseTest extends AbstractUnitTest
     public function testMultipleOffenseCreate(): void
     {
         $damageMultiplier = 1.1;
-        $attackSpeedMultiplier = 1.8;
-        $castSpeedMultiplier = 1.9;
+        $speedMultiplier = 1.8;
         $accuracyMultiplier = 2.0;
-        $magicAccuracyMultiplier = 2.1;
         $criticalChanceMultiplier = 2.2;
         $criticalMultiplierMultiplier = 2.2;
 
         $multipleOffense = new MultipleOffense(
             $damageMultiplier,
-            $attackSpeedMultiplier,
-            $castSpeedMultiplier,
+            $speedMultiplier,
             $accuracyMultiplier,
-            $magicAccuracyMultiplier,
             $criticalChanceMultiplier,
             $criticalMultiplierMultiplier,
         );
 
         self::assertEquals($damageMultiplier, $multipleOffense->getDamageMultiplier());
-        self::assertEquals($attackSpeedMultiplier, $multipleOffense->getAttackSpeedMultiplier());
-        self::assertEquals($castSpeedMultiplier, $multipleOffense->getCastSpeedMultiplier());
+        self::assertEquals($speedMultiplier, $multipleOffense->getSpeedMultiplier());
         self::assertEquals($accuracyMultiplier, $multipleOffense->getAccuracyMultiplier());
-        self::assertEquals($magicAccuracyMultiplier, $multipleOffense->getMagicAccuracyMultiplier());
         self::assertEquals($criticalChanceMultiplier, $multipleOffense->getCriticalChanceMultiplier());
         self::assertEquals($criticalMultiplierMultiplier, $multipleOffense->getCriticalMultiplierMultiplier());
     }

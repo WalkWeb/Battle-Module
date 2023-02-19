@@ -36,34 +36,16 @@ interface MultipleOffenseInterface
     /**
      * Возвращает множитель скорости атаки
      *
-     * TODO AttackSpeedMultiplier и CastSpeedMultiplier можно объединить в один параметр
-     *
      * @return float
      */
-    public function getAttackSpeedMultiplier(): float;
-
-    /**
-     * Возвращает множитель скорости создания заклинаний
-     *
-     * @return float
-     */
-    public function getCastSpeedMultiplier(): float;
+    public function getSpeedMultiplier(): float;
 
     /**
      * Возвращает множитель меткости
      *
-     * TODO Аналогично с AccuracyMultiplier и MagicAccuracy
-     *
      * @return float
      */
     public function getAccuracyMultiplier(): float;
-
-    /**
-     * Возвращает множитель магической меткости
-     *
-     * @return float
-     */
-    public function getMagicAccuracyMultiplier(): float;
 
     /**
      * Возвращает множитель шанса критического удара

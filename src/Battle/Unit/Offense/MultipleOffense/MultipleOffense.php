@@ -7,28 +7,22 @@ namespace Battle\Unit\Offense\MultipleOffense;
 class MultipleOffense implements MultipleOffenseInterface
 {
     private float $damageMultiplier;
-    private float $attackSpeedMultiplier;
-    private float $castSpeedMultiplier;
+    private float $speedMultiplier;
     private float $accuracyMultiplier;
-    private float $magicAccuracyMultiplier;
     private float $criticalChanceMultiplier;
     private float $criticalMultiplierMultiplier;
 
     public function __construct(
         float $damageMultiplier,
-        float $attackSpeedMultiplier,
-        float $castSpeedMultiplier,
+        float $speedMultiplier,
         float $accuracyMultiplier,
-        float $magicAccuracyMultiplier,
         float $criticalChanceMultiplier,
         float $criticalMultiplierMultiplier
     )
     {
         $this->damageMultiplier = $damageMultiplier;
-        $this->attackSpeedMultiplier = $attackSpeedMultiplier;
-        $this->castSpeedMultiplier = $castSpeedMultiplier;
+        $this->speedMultiplier = $speedMultiplier;
         $this->accuracyMultiplier = $accuracyMultiplier;
-        $this->magicAccuracyMultiplier = $magicAccuracyMultiplier;
         $this->criticalChanceMultiplier = $criticalChanceMultiplier;
         $this->criticalMultiplierMultiplier = $criticalMultiplierMultiplier;
     }
@@ -44,17 +38,9 @@ class MultipleOffense implements MultipleOffenseInterface
     /**
      * @return float
      */
-    public function getAttackSpeedMultiplier(): float
+    public function getSpeedMultiplier(): float
     {
-        return $this->attackSpeedMultiplier;
-    }
-
-    /**
-     * @return float
-     */
-    public function getCastSpeedMultiplier(): float
-    {
-        return $this->castSpeedMultiplier;
+        return $this->speedMultiplier;
     }
 
     /**
@@ -63,14 +49,6 @@ class MultipleOffense implements MultipleOffenseInterface
     public function getAccuracyMultiplier(): float
     {
         return $this->accuracyMultiplier;
-    }
-
-    /**
-     * @return float
-     */
-    public function getMagicAccuracyMultiplier(): float
-    {
-        return $this->magicAccuracyMultiplier;
     }
 
     /**

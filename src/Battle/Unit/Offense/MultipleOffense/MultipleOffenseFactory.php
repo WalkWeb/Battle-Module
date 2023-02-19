@@ -25,10 +25,8 @@ class MultipleOffenseFactory
         }
 
         $damage = self::floatOrDefault($data, 'damage', 1.0, MultipleOffenseException::INVALID_DAMAGE);
-        $attackSpeed = self::floatOrDefault($data, 'attack_speed', 1.0, MultipleOffenseException::INVALID_ATTACK_SPEED);
-        $castSpeed = self::floatOrDefault($data, 'cast_speed', 1.0, MultipleOffenseException::INVALID_CAST_SPEED);
+        $speed = self::floatOrDefault($data, 'speed', 1.0, MultipleOffenseException::INVALID_SPEED);
         $accuracy = self::floatOrDefault($data, 'accuracy', 1.0, MultipleOffenseException::INVALID_ACCURACY);
-        $magicAccuracy = self::floatOrDefault($data, 'magic_accuracy', 1.0, MultipleOffenseException::INVALID_MAGIC_ACCURACY);
         $criticalChance = self::floatOrDefault($data, 'critical_chance', 1.0, MultipleOffenseException::INVALID_CRITICAL_CHANCE);
         $criticalMultiplier = self::floatOrDefault($data, 'critical_multiplier', 1.0, MultipleOffenseException::INVALID_CRITICAL_MULTIPLIER);
 
@@ -40,17 +38,10 @@ class MultipleOffenseFactory
         );
 
         self::floatMinMaxValue(
-            $attackSpeed,
+            $speed,
             MultipleOffenseInterface::MIN_MULTIPLIER,
             MultipleOffenseInterface::MAX_MULTIPLIER,
-            MultipleOffenseException::INVALID_ATTACK_SPEED_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER
-        );
-
-        self::floatMinMaxValue(
-            $castSpeed,
-            MultipleOffenseInterface::MIN_MULTIPLIER,
-            MultipleOffenseInterface::MAX_MULTIPLIER,
-            MultipleOffenseException::INVALID_CAST_SPEED_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER
+            MultipleOffenseException::INVALID_SPEED_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER
         );
 
         self::floatMinMaxValue(
@@ -58,13 +49,6 @@ class MultipleOffenseFactory
             MultipleOffenseInterface::MIN_MULTIPLIER,
             MultipleOffenseInterface::MAX_MULTIPLIER,
             MultipleOffenseException::INVALID_ACCURACY_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER
-        );
-
-        self::floatMinMaxValue(
-            $magicAccuracy,
-            MultipleOffenseInterface::MIN_MULTIPLIER,
-            MultipleOffenseInterface::MAX_MULTIPLIER,
-            MultipleOffenseException::INVALID_MAGIC_ACCURACY_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER
         );
 
         self::floatMinMaxValue(
@@ -83,10 +67,8 @@ class MultipleOffenseFactory
 
         return new MultipleOffense(
             $damage,
-            $attackSpeed,
-            $castSpeed,
+            $speed,
             $accuracy,
-            $magicAccuracy,
             $criticalChance,
             $criticalMultiplier,
         );
