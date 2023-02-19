@@ -754,7 +754,7 @@ class DamageActionTest extends AbstractUnitTest
 
         if ($isCritical) {
             self::assertEquals(
-                $enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()) * ($unit->getOffense()->getCriticalMultiplier()/100),
+                $enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()) * ($unit->getOffense()->getCriticalMultiplier() / 100),
                 $enemyUnit->getLife()
             );
         } else {
@@ -837,7 +837,7 @@ class DamageActionTest extends AbstractUnitTest
         $callbackActions = $action->handle();
 
         // Проверяем, что создано 2 события - по каждой из целей
-        self::assertCount(2 , $callbackActions);
+        self::assertCount(2, $callbackActions);
 
         // Проверяем, что это оглушение от оружия
         foreach ($callbackActions as $callbackAction) {
@@ -899,7 +899,69 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD,
             null,
-            $this->getMultipleOffenseFactory()->create(['damage' => 2.0])
+            $this->getMultipleOffenseFactory()->create(
+                $multipleData = [
+                    'damage'              => 2.0,
+                    'speed'               => 2.5,
+                    'accuracy'            => 3.0,
+                    'critical_chance'     => 3.5,
+                    'critical_multiplier' => 4.0,
+                ]
+            )
+        );
+
+        // Проверяем модификацию параметров Offense
+        self::assertEquals(
+            (int)($unit->getOffense()->getPhysicalDamage() * $multipleData['damage']),
+            $action->getOffense()->getPhysicalDamage()
+        );
+        self::assertEquals(
+            (int)($unit->getOffense()->getFireDamage() * $multipleData['damage']),
+            $action->getOffense()->getFireDamage()
+        );
+        self::assertEquals(
+            (int)($unit->getOffense()->getWaterDamage() * $multipleData['damage']),
+            $action->getOffense()->getWaterDamage()
+        );
+        self::assertEquals(
+            (int)($unit->getOffense()->getAirDamage() * $multipleData['damage']),
+            $action->getOffense()->getAirDamage()
+        );
+        self::assertEquals(
+            (int)($unit->getOffense()->getEarthDamage() * $multipleData['damage']),
+            $action->getOffense()->getEarthDamage()
+        );
+        self::assertEquals(
+            (int)($unit->getOffense()->getLifeDamage() * $multipleData['damage']),
+            $action->getOffense()->getLifeDamage()
+        );
+        self::assertEquals(
+            (int)($unit->getOffense()->getDeathDamage() * $multipleData['damage']),
+            $action->getOffense()->getDeathDamage()
+        );
+        self::assertEquals(
+            round($unit->getOffense()->getAttackSpeed() * $multipleData['speed'], 2),
+            $action->getOffense()->getAttackSpeed()
+        );
+        self::assertEquals(
+            round($unit->getOffense()->getCastSpeed() * $multipleData['speed'], 2),
+            $action->getOffense()->getCastSpeed()
+        );
+        self::assertEquals(
+            (int)($unit->getOffense()->getAccuracy() * $multipleData['accuracy']),
+            $action->getOffense()->getAccuracy()
+        );
+        self::assertEquals(
+            (int)($unit->getOffense()->getMagicAccuracy() * $multipleData['accuracy']),
+            $action->getOffense()->getMagicAccuracy()
+        );
+        self::assertEquals(
+            (int)($unit->getOffense()->getCriticalChance() * $multipleData['critical_chance']),
+            $action->getOffense()->getCriticalChance()
+        );
+        self::assertEquals(
+            (int)($unit->getOffense()->getCriticalMultiplier() * $multipleData['critical_multiplier']),
+            $action->getOffense()->getCriticalMultiplier()
         );
 
         // Проверяем здоровье противника до удара
@@ -923,12 +985,12 @@ class DamageActionTest extends AbstractUnitTest
             // Этот юнит нанесет критический удар
             [
                 40,
-                true
+                true,
             ],
             // Этот юнит не нанесет критический удар
             [
                 41,
-                false
+                false,
             ],
         ];
     }
