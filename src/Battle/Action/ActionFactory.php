@@ -8,6 +8,7 @@ use Battle\Container\ContainerInterface;
 use Battle\Traits\IdTrait;
 use Battle\Traits\ValidationTrait;
 use Battle\Unit\Effect\EffectFactory;
+use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
 use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitFactory;
 use Exception;
@@ -69,13 +70,13 @@ class ActionFactory
 
         if ($className === DamageAction::class) {
 
-            // TODO Добавить возможность offense быть null, и в этом случае будет браться Offense атакующего юнита
-            $offenseData = self::array($data, 'offense', ActionException::INVALID_OFFENSE_DATA);
             $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
             $canBeAvoided = self::bool($data, 'can_be_avoided', ActionException::INVALID_CAN_BE_AVOIDED);
             $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
             $animationMethod = self::string($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA);
             $messageMethod = self::string($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
+            $offenseData = self::arrayOrNull($data, 'offense', ActionException::INVALID_OFFENSE_DATA);
+            $multipleOffenseData = self::arrayOrNull($data, 'multiple_offense', ActionException::INVALID_MULTIPLE_OFFENSE_DATA);
 
             return new DamageAction(
                 $this->container,
@@ -87,8 +88,8 @@ class ActionFactory
                 $name,
                 $animationMethod,
                 $messageMethod,
-                OffenseFactory::create($offenseData, $this->container),
-                null,
+                $offenseData ? OffenseFactory::create($offenseData, $this->container) : null,
+                $multipleOffenseData ? MultipleOffenseFactory::create($multipleOffenseData) : null,
                 $icon
             );
         }

@@ -21,7 +21,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
      */
     public function testMultipleOffenseFactoryCreateSuccess(array $data): void
     {
-        $multipleOffense = $this->getFactory()->create($data);
+        $multipleOffense = MultipleOffenseFactory::create($data);
 
         self::assertEquals($data['damage'], $multipleOffense->getDamageMultiplier());
         self::assertEquals($data['speed'], $multipleOffense->getSpeedMultiplier());
@@ -38,7 +38,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
     public function testMultipleOffenseFactoryCreateDefault(): void
     {
         // Передаются мусорные данные, чтобы массив был чем-то заполнен, иначе будет другое исключение
-        $multipleOffense = $this->getFactory()->create([123]);
+        $multipleOffense = MultipleOffenseFactory::create([123]);
 
         self::assertEquals(1.0, $multipleOffense->getDamageMultiplier());
         self::assertEquals(1.0, $multipleOffense->getSpeedMultiplier());
@@ -59,7 +59,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        $this->getFactory()->create($data);
+        MultipleOffenseFactory::create($data);
     }
 
     /**
@@ -257,13 +257,5 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                 MultipleOffenseException::INVALID_CRITICAL_MULTIPLIER_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER,
             ],
         ];
-    }
-
-    /**
-     * @return MultipleOffenseFactory
-     */
-    private function getFactory(): MultipleOffenseFactory
-    {
-        return new MultipleOffenseFactory();
     }
 }

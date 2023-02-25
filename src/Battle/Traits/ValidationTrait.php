@@ -112,6 +112,26 @@ trait ValidationTrait
     }
 
     /**
+     * @param array $data
+     * @param string $filed
+     * @param string $error
+     * @return array|null
+     * @throws BattleException
+     */
+    protected static function arrayOrNull(array $data, string $filed, string $error): ?array
+    {
+        if (!array_key_exists($filed, $data)) {
+            return null;
+        }
+
+        if (!is_array($data[$filed]) && !is_null($data[$filed])) {
+            throw new BattleException($error);
+        }
+
+        return $data[$filed];
+    }
+
+    /**
      * @param int $value
      * @param int $min
      * @param int $max

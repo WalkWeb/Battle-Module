@@ -899,7 +899,7 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD,
             null,
-            $this->getMultipleOffenseFactory()->create(
+            MultipleOffenseFactory::create(
                 $multipleData = [
                     'damage'              => 2.0,
                     'speed'               => 2.5,
@@ -1039,13 +1039,5 @@ class DamageActionTest extends AbstractUnitTest
             $unit,
             $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
         );
-    }
-
-    /**
-     * @return MultipleOffenseFactory
-     */
-    private function getMultipleOffenseFactory(): MultipleOffenseFactory
-    {
-        return new MultipleOffenseFactory();
     }
 }

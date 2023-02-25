@@ -18,7 +18,7 @@ class MultipleOffenseFactory
      * @return MultipleOffenseInterface
      * @throws Exception
      */
-    public function create(array $data): MultipleOffenseInterface
+    public static function create(array $data): MultipleOffenseInterface
     {
         if (count($data) === 0) {
             throw new MultipleOffenseException(MultipleOffenseException::EMPTY_DATA);
