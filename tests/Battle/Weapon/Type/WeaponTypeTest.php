@@ -48,6 +48,8 @@ class WeaponTypeTest extends AbstractUnitTest
             self::assertEquals($this->createStunAction($unit, $enemyCommand, $command, 2), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
         } elseif ($id === WeaponTypeInterface::HEAVY_TWO_HAND_MACE) {
             self::assertEquals($this->createStunAction($unit, $enemyCommand, $command, 3), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
+        } elseif ($id === WeaponTypeInterface::DAGGER) {
+            self::assertEquals($this->createBleedingAction($unit, $enemyCommand, $command, 3), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
         } else {
             self::assertEquals(new ActionCollection(), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
         }
@@ -98,6 +100,47 @@ class WeaponTypeTest extends AbstractUnitTest
 
             // Проверяем длительность эффекта
             self::assertEquals($stunDuration, $callbackAction->getEffect()->getBaseDuration());
+        }
+    }
+
+    /**
+     * Тест на применение эффекта на от критического удара с кинжала
+     *
+     * @throws Exception
+     */
+    public function testWeaponTypeDaggerEffect(): void
+    {
+        $unit = UnitFactory::createByTemplate(50);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            true,
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $callbackActions = $action->handle();
+
+        // Проверяем наличие события от удара
+        self::assertCount(1 , $callbackActions);
+
+        // Проверяем, что это кровотечение от оружия
+        foreach ($callbackActions as $callbackAction) {
+            self::assertEquals('Bleeding Weapon Effect', $callbackAction->getNameAction());
+
+            // Проверяем длительность эффекта
+            self::assertEquals(3, $callbackAction->getEffect()->getBaseDuration());
         }
     }
 
@@ -254,6 +297,65 @@ class WeaponTypeTest extends AbstractUnitTest
                             'animation_method' => ActionInterface::SKIP_ANIMATION_METHOD,
                             'message_method'   => 'stunned',
                             'icon'             => '/images/icons/ability/435.png',
+                        ],
+                    ],
+                    'on_disable_actions'    => [],
+                ],
+            ],
+        ];
+
+        $actions = new ActionCollection();
+        foreach ($data as &$actionData) {
+            $this->addParameters($actionData, $unit, $enemyCommand, $command);
+            $actions->add($this->getContainer()->getActionFactory()->create($actionData));
+        }
+
+        return $actions;
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @param int $stunDuration
+     * @return ActionCollection
+     * @throws Exception
+     */
+    private function createBleedingAction(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command,
+        int $stunDuration
+    ): ActionCollection
+    {
+        $data = [
+            [
+                'type'           => ActionInterface::EFFECT,
+                'type_target'    => ActionInterface::TARGET_SELF,
+                'name'           => 'Bleeding Weapon Effect',
+                'icon'           => '/images/icons/ability/438.png',
+                'message_method' => 'applyEffect',
+                'effect'         => [
+                    'name'                  => 'Bleeding',
+                    'icon'                  => '/images/icons/ability/438.png',
+                    'duration'              => 3,
+                    'on_apply_actions'      => [],
+                    'on_next_round_actions' => [
+                        [
+                            'type'             => ActionInterface::DAMAGE,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'name'             => 'Bleeding',
+                            'multiple_offense' => [
+                                'damage'              => 0.25,
+                                'speed'               => 1.0,
+                                'accuracy'            => 1.0,
+                                'critical_chance'     => 1.0,
+                                'critical_multiplier' => 1.0,
+                            ],
+                            'can_be_avoided'   => false,
+                            'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                            'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                            'icon'             => '/images/icons/ability/438.png',
                         ],
                     ],
                     'on_disable_actions'    => [],

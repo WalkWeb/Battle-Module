@@ -61,6 +61,7 @@ return [
     'Will to live'                                                   => 'Will to live',
     'Paralysis'                                                      => 'Paralysis',
     'Stun'                                                           => 'Stun',
+    'Bleeding'                                                       => 'Bleeding',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

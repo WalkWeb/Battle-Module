@@ -41,7 +41,7 @@ class WeaponType implements WeaponTypeInterface
 
     private static array $onCriticalActions = [
         // Одноручные булавы оглушают цель на 1 ход
-        self::MACE => [
+        self::MACE                => [
             [
                 'type'           => ActionInterface::EFFECT,
                 'type_target'    => ActionInterface::TARGET_SELF,
@@ -69,7 +69,7 @@ class WeaponType implements WeaponTypeInterface
             ],
         ],
         // Двуручные булавы оглушают цель на 2 хода
-        self::TWO_HAND_MACE => [
+        self::TWO_HAND_MACE       => [
             [
                 'type'           => ActionInterface::EFFECT,
                 'type_target'    => ActionInterface::TARGET_SELF,
@@ -118,6 +118,41 @@ class WeaponType implements WeaponTypeInterface
                             'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                             'message_method'   => ParalysisAction::STUN_MESSAGE_METHOD,
                             'icon'             => '/images/icons/ability/435.png',
+                        ],
+                    ],
+                    'on_disable_actions'    => [],
+                ],
+            ],
+        ],
+        // Кинжалы накладывают кровотечение при критическом ударе
+        self::DAGGER              => [
+            [
+                'type'           => ActionInterface::EFFECT,
+                'type_target'    => ActionInterface::TARGET_SELF,
+                'name'           => 'Bleeding Weapon Effect',
+                'icon'           => '/images/icons/ability/438.png',
+                'message_method' => 'applyEffect',
+                'effect'         => [
+                    'name'                  => 'Bleeding',
+                    'icon'                  => '/images/icons/ability/438.png',
+                    'duration'              => 3,
+                    'on_apply_actions'      => [],
+                    'on_next_round_actions' => [
+                        [
+                            'type'             => ActionInterface::DAMAGE,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'name'             => 'Bleeding',
+                            'multiple_offense' => [
+                                'damage'              => 0.25,
+                                'speed'               => 1.0,
+                                'accuracy'            => 1.0,
+                                'critical_chance'     => 1.0,
+                                'critical_multiplier' => 1.0,
+                            ],
+                            'can_be_avoided'   => false,
+                            'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
+                            'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                            'icon'             => '/images/icons/ability/438.png',
                         ],
                     ],
                     'on_disable_actions'    => [],

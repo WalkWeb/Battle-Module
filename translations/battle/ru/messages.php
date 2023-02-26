@@ -59,6 +59,7 @@ return [
     'Will to live'                                                   => 'Воля к жизни',
     'Paralysis'                                                      => 'Паралич',
     'Stun'                                                           => 'Оглушение',
+    'Bleeding'                                                       => 'Кровотечение',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
