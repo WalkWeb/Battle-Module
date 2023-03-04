@@ -17,6 +17,7 @@ use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
+use Battle\Container\Container;
 use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitException;
@@ -636,6 +637,64 @@ class ActionFactoryTest extends AbstractUnitTest
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
         $this->getActionFactory()->create($data);
+    }
+
+    /**
+     * Тест на ситуацию, когда внутри ActionFactory отсутствует нужный метод для создания объекта
+     *
+     * @throws Exception
+     */
+    public function testActionFactoryUnknownFactoryMethod(): void
+    {
+        $container = new Container();
+
+        // Мы подменяем карту методов, передавая отсутствующий метод для создания DamageAction
+        $methodMap = [
+            ActionInterface::DAMAGE => 'createDamageActionUnknown'
+        ];
+
+        $actionFactory = new ActionFactory($container, $methodMap);
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
+
+        $offenseData = [
+            'damage_type'         => 1,
+            'weapon_type'         => WeaponTypeInterface::SWORD,
+            'physical_damage'     => 35,
+            'fire_damage'         => 0,
+            'water_damage'        => 0,
+            'air_damage'          => 0,
+            'earth_damage'        => 0,
+            'life_damage'         => 0,
+            'death_damage'        => 0,
+            'attack_speed'        => 1.2,
+            'cast_speed'          => 0,
+            'accuracy'            => 176,
+            'magic_accuracy'      => 12,
+            'block_ignoring'      => 0,
+            'critical_chance'     => 5,
+            'critical_multiplier' => 200,
+            'damage_multiplier'   => 100,
+            'vampirism'           => 0,
+            'magic_vampirism'     => 0,
+        ];
+
+        $data = [
+            'type'             => ActionInterface::DAMAGE,
+            'action_unit'      => $unit,
+            'enemy_command'    => $enemyCommand,
+            'allies_command'   => $command,
+            'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+            'offense'          => $offenseData,
+            'can_be_avoided'   => $canBeAvoided = true,
+            'name'             => $name = 'attack',
+            'animation_method' => $animationMethod = 'animation test',
+            'message_method'   => $messageMethod = 'message test',
+        ];
+
+        // Получаем Exception
+        $this->expectExceptionMessage(ActionException::class);
+        $this->expectExceptionMessage(ActionException::UNKNOWN_FACTORY_METHOD);
+        $actionFactory->create($data);
     }
 
     /**
@@ -1343,6 +1402,64 @@ class ActionFactoryTest extends AbstractUnitTest
                     'action_unit'    => $actionUnit,
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
+                    'icon'           => '/images/icons/ability/198.png',
+                    'summon'         => [
+                        'name'                         => 'Fire Elemental',
+                        'level'                        => 3,
+                        'avatar'                       => '/images/avas/summon/fire-elemental.png',
+                        'life'                         => 62,
+                        'total_life'                   => 62,
+                        'mana'                         => 17,
+                        'total_mana'                   => 17,
+                        'melee'                        => true,
+                        'class'                        => null,
+                        'race'                         => 10,
+                        'add_concentration_multiplier' => 0,
+                        'add_rage_multiplier'          => 0,
+                        'offense'                      => [
+                            'damage_type'         => 2,
+                            'weapon_type'         => WeaponTypeInterface::UNARMED,
+                            'physical_damage'     => 0,
+                            'fire_damage'         => 17,
+                            'water_damage'        => 0,
+                            'air_damage'          => 0,
+                            'earth_damage'        => 0,
+                            'life_damage'         => 0,
+                            'death_damage'        => 0,
+                            'attack_speed'        => 0,
+                            'cast_speed'          => 1.1,
+                            'accuracy'            => 200,
+                            'magic_accuracy'      => 100,
+                            'block_ignoring'      => 0,
+                            'critical_chance'     => 5,
+                            'critical_multiplier' => 150,
+                            'damage_multiplier'   => 100,
+                            'vampirism'           => 0,
+                            'magic_vampirism'     => 0,
+                        ],
+                        'defense'                      => [
+                            'physical_resist'     => 0,
+                            'fire_resist'         => 0,
+                            'water_resist'        => 0,
+                            'air_resist'          => 0,
+                            'earth_resist'        => 0,
+                            'life_resist'         => 0,
+                            'death_resist'        => 0,
+                            'defense'             => 100,
+                            'magic_defense'       => 50,
+                            'block'               => 0,
+                            'magic_block'         => 0,
+                            'mental_barrier'      => 0,
+                            'max_physical_resist' => 75,
+                            'max_fire_resist'     => 75,
+                            'max_water_resist'    => 75,
+                            'max_air_resist'      => 75,
+                            'max_earth_resist'    => 75,
+                            'max_life_resist'     => 75,
+                            'max_death_resist'    => 75,
+                            'global_resist'       => 0,
+                        ],
+                    ],
                 ],
                 ActionException::INVALID_NAME_DATA,
             ],
@@ -1353,7 +1470,65 @@ class ActionFactoryTest extends AbstractUnitTest
                     'action_unit'    => $actionUnit,
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
-                    'name'           => [],
+                    'name'           => 123,
+                    'icon'           => '/images/icons/ability/198.png',
+                    'summon'         => [
+                        'name'                         => 'Fire Elemental',
+                        'level'                        => 3,
+                        'avatar'                       => '/images/avas/summon/fire-elemental.png',
+                        'life'                         => 62,
+                        'total_life'                   => 62,
+                        'mana'                         => 17,
+                        'total_mana'                   => 17,
+                        'melee'                        => true,
+                        'class'                        => null,
+                        'race'                         => 10,
+                        'add_concentration_multiplier' => 0,
+                        'add_rage_multiplier'          => 0,
+                        'offense'                      => [
+                            'damage_type'         => 2,
+                            'weapon_type'         => WeaponTypeInterface::UNARMED,
+                            'physical_damage'     => 0,
+                            'fire_damage'         => 17,
+                            'water_damage'        => 0,
+                            'air_damage'          => 0,
+                            'earth_damage'        => 0,
+                            'life_damage'         => 0,
+                            'death_damage'        => 0,
+                            'attack_speed'        => 0,
+                            'cast_speed'          => 1.1,
+                            'accuracy'            => 200,
+                            'magic_accuracy'      => 100,
+                            'block_ignoring'      => 0,
+                            'critical_chance'     => 5,
+                            'critical_multiplier' => 150,
+                            'damage_multiplier'   => 100,
+                            'vampirism'           => 0,
+                            'magic_vampirism'     => 0,
+                        ],
+                        'defense'                      => [
+                            'physical_resist'     => 0,
+                            'fire_resist'         => 0,
+                            'water_resist'        => 0,
+                            'air_resist'          => 0,
+                            'earth_resist'        => 0,
+                            'life_resist'         => 0,
+                            'death_resist'        => 0,
+                            'defense'             => 100,
+                            'magic_defense'       => 50,
+                            'block'               => 0,
+                            'magic_block'         => 0,
+                            'mental_barrier'      => 0,
+                            'max_physical_resist' => 75,
+                            'max_fire_resist'     => 75,
+                            'max_water_resist'    => 75,
+                            'max_air_resist'      => 75,
+                            'max_earth_resist'    => 75,
+                            'max_life_resist'     => 75,
+                            'max_death_resist'    => 75,
+                            'global_resist'       => 0,
+                        ],
+                    ],
                 ],
                 ActionException::INVALID_NAME_DATA,
             ],
@@ -1525,7 +1700,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'name'           => 'Effect test',
-                    'effects'        => [
+                    'effect'         => [
                         [
                             'name'                  => 'Effect test #1',
                             'icon'                  => 'effect_icon_#1',
@@ -1558,7 +1733,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => 'self',
                     'name'           => 'Effect test',
-                    'effects'        => [
+                    'effect'        => [
                         [
                             'name'                  => 'Effect test #1',
                             'icon'                  => 'effect_icon_#1',
@@ -1590,7 +1765,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
-                    'effects'        => [
+                    'effect'        => [
                         [
                             'name'                  => 'Effect test #1',
                             'icon'                  => 'effect_icon_#1',
@@ -1623,7 +1798,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => true,
-                    'effects'        => [
+                    'effect'        => [
                         [
                             'name'                  => 'Effect test #1',
                             'icon'                  => 'effect_icon_#1',
@@ -1660,7 +1835,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_EFFECT_DATA,
             ],
             [
-                // 42: effects некорректного типа
+                // 42: effect некорректного типа
                 [
                     'type'           => ActionInterface::EFFECT,
                     'action_unit'    => $actionUnit,
@@ -1668,27 +1843,12 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'Effect test',
-                    'effect'         => 'effects',
+                    'effect'         => 'effect',
                 ],
                 ActionException::INVALID_EFFECT_DATA,
             ],
             [
-                // 43: effects вместо массива данных по эффекту содержит строку
-                [
-                    'type'           => ActionInterface::EFFECT,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_SELF,
-                    'name'           => 'Effect test',
-                    'effects'        => [
-                        'buff effect',
-                    ],
-                ],
-                ActionException::INVALID_EFFECT_DATA,
-            ],
-            [
-                // 44: ResurrectionAction - отсутствует type_target
+                // 43: ResurrectionAction - отсутствует type_target
                 [
                     'type'           => ActionInterface::RESURRECTION,
                     'action_unit'    => $actionUnit,
@@ -1700,7 +1860,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 45: ResurrectionAction - type_target некорректного типа
+                // 44: ResurrectionAction - type_target некорректного типа
                 [
                     'type'           => ActionInterface::RESURRECTION,
                     'action_unit'    => $actionUnit,
@@ -1713,7 +1873,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 46: ResurrectionAction - отсутствует power
+                // 45: ResurrectionAction - отсутствует power
                 [
                     'type'           => ActionInterface::RESURRECTION,
                     'action_unit'    => $actionUnit,
@@ -1725,7 +1885,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 47: ResurrectionAction - power некорректного типа
+                // 46: ResurrectionAction - power некорректного типа
                 [
                     'type'           => ActionInterface::RESURRECTION,
                     'action_unit'    => $actionUnit,
@@ -1738,7 +1898,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 48: ResurrectionAction - отсутствует name
+                // 47: ResurrectionAction - отсутствует name
                 [
                     'type'           => ActionInterface::RESURRECTION,
                     'action_unit'    => $actionUnit,
@@ -1750,7 +1910,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 49: ResurrectionAction - name некорректного типа
+                // 48: ResurrectionAction - name некорректного типа
                 [
                     'type'           => ActionInterface::RESURRECTION,
                     'action_unit'    => $actionUnit,
@@ -1763,7 +1923,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 50: ResurrectionAction - отсутствует message_method
+                // 49: ResurrectionAction - отсутствует message_method
                 [
                     'type'           => ActionInterface::RESURRECTION,
                     'action_unit'    => $actionUnit,
@@ -1776,7 +1936,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD,
             ],
             [
-                // 51: ResurrectionAction - message_method некорректного типа
+                // 50: ResurrectionAction - message_method некорректного типа
                 [
                     'type'           => ActionInterface::RESURRECTION,
                     'action_unit'    => $actionUnit,
@@ -1790,7 +1950,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD,
             ],
             [
-                // 52: DamageAction - некорректный icon
+                // 51: DamageAction - некорректный icon
                 [
                     'type'           => ActionInterface::DAMAGE,
                     'action_unit'    => $actionUnit,
@@ -1824,7 +1984,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ICON,
             ],
             [
-                // 53: EffectAction - некорректный icon
+                // 52: EffectAction - некорректный icon
                 [
                     'type'           => ActionInterface::EFFECT,
                     'action_unit'    => $actionUnit,
@@ -1856,7 +2016,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ICON,
             ],
             [
-                // 54: EffectAction - некорректный animation_method
+                // 53: EffectAction - некорректный animation_method
                 [
                     'type'             => ActionInterface::EFFECT,
                     'action_unit'      => $actionUnit,
@@ -1889,7 +2049,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ANIMATION_DATA,
             ],
             [
-                // 55: EffectAction - некорректный message_method
+                // 54: EffectAction - некорректный message_method
                 [
                     'type'           => ActionInterface::EFFECT,
                     'action_unit'    => $actionUnit,
@@ -1922,7 +2082,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD,
             ],
             [
-                // 56: Некорректный power для HealAction
+                // 55: Некорректный power для HealAction
                 [
                     'type'           => ActionInterface::HEAL,
                     'action_unit'    => $actionUnit,
@@ -1937,7 +2097,7 @@ class ActionFactoryTest extends AbstractUnitTest
             // offense и multiple_offense для DamageAction. Проверяем наличие параметра и что он null или array.
             // Остальная валидация происходит в OffenseFactory
             [
-                // 57: offense некорректного типа
+                // 56: offense некорректного типа
                 [
                     'type'             => ActionInterface::DAMAGE,
                     'action_unit'      => $actionUnit,
@@ -1953,7 +2113,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_OFFENSE_DATA,
             ],
             [
-                // 58: multiple_offense некорректного типа
+                // 57: multiple_offense некорректного типа
                 [
                     'type'             => ActionInterface::DAMAGE,
                     'action_unit'      => $actionUnit,

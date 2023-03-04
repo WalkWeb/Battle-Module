@@ -17,7 +17,8 @@ class ActionException extends Exception
     public const NO_TARGET_FOR_EFFECT          = 'Action: No target for effect';
     public const UNKNOWN_TYPE_TARGET           = 'Action: Unknown type target';
     public const NO_POWER_BY_UNIT              = 'Action: No power by unit';
-    public const UNKNOWN_TYPE_ACTION           = 'ActionFactory: Unknown type action: int expected';
+    public const UNKNOWN_TYPE_ACTION           = 'ActionFactory: Unknown type action';
+    public const UNKNOWN_FACTORY_METHOD        = 'ActionFactory: Unknown factory method';
     public const INVALID_TYPE_DATA             = 'ActionFactory: Invalid type data';
     public const INVALID_POWER_DATA            = 'ActionFactory: Invalid power data: int expected';
     public const INVALID_OFFENSE_DATA          = 'ActionFactory: Invalid offense data: array or null expected';
