@@ -11,7 +11,6 @@ use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Unit\Effect\Effect;
-use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -138,8 +137,6 @@ class EffectTest extends AbstractUnitTest
         CommandInterface $enemyCommand
     ): EffectInterface
     {
-        $factory = new EffectFactory($this->getContainer()->getActionFactory());
-
         $data = [
             'name'                  => 'Effect test #1',
             'icon'                  => 'effect_icon_#1',
@@ -248,7 +245,7 @@ class EffectTest extends AbstractUnitTest
             ],
         ];
 
-        return $factory->create($data);
+        return $this->getContainer()->getEffectFactory()->create($data);
     }
 
     /**

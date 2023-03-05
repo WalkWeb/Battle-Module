@@ -27,6 +27,7 @@ use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassFactory;
+use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Race\DataProvider\ExampleRaceDataProvider;
 use Battle\Unit\Race\DataProvider\RaceDataProviderInterface;
 use Battle\Unit\Race\RaceFactory;
@@ -265,14 +266,31 @@ class ContainerTest extends AbstractUnitTest
     {
         $container = new Container();
 
-        $raceFactory = $container->get(ActionFactory::class);
-        self::assertInstanceOf(ActionFactory::class, $raceFactory);
+        $actionFactory = $container->get(ActionFactory::class);
+        self::assertInstanceOf(ActionFactory::class, $actionFactory);
 
-        $raceFactory = $container->get('ActionFactory');
-        self::assertInstanceOf(ActionFactory::class, $raceFactory);
+        $actionFactory = $container->get('ActionFactory');
+        self::assertInstanceOf(ActionFactory::class, $actionFactory);
 
-        $raceFactory = $container->getActionFactory();
-        self::assertInstanceOf(ActionFactory::class, $raceFactory);
+        $actionFactory = $container->getActionFactory();
+        self::assertInstanceOf(ActionFactory::class, $actionFactory);
+    }
+
+    /**
+     * @throws ContainerException
+     */
+    public function testContainerGetEffectFactory(): void
+    {
+        $container = new Container();
+
+        $effectFactory = $container->get(EffectFactory::class);
+        self::assertInstanceOf(EffectFactory::class, $effectFactory);
+
+        $effectFactory = $container->get('EffectFactory');
+        self::assertInstanceOf(EffectFactory::class, $effectFactory);
+
+        $effectFactory = $container->getEffectFactory();
+        self::assertInstanceOf(EffectFactory::class, $effectFactory);
     }
 
     /**

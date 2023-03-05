@@ -9,7 +9,6 @@ use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
-use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -83,8 +82,6 @@ class TitanTest extends AbstractUnitTest
         CommandInterface $alliesCommand
     ): EffectInterface
     {
-        $factory = new EffectFactory($container->getActionFactory());
-
         $data = [
             'name'                  => 'Reserve Forces',
             'icon'                  => '/images/icons/ability/156.png',
@@ -106,7 +103,7 @@ class TitanTest extends AbstractUnitTest
             'on_disable_actions'    => [],
         ];
 
-        return $factory->create($data);
+        return $container->getEffectFactory()->create($data);
     }
 
     /**
@@ -124,8 +121,6 @@ class TitanTest extends AbstractUnitTest
         CommandInterface $alliesCommand
     ): EffectInterface
     {
-        $factory = new EffectFactory($container->getActionFactory());
-
         $data = [
             'name'                  => 'Battle Fury',
             'icon'                  => '/images/icons/ability/102.png',
@@ -147,6 +142,6 @@ class TitanTest extends AbstractUnitTest
             'on_disable_actions'    => [],
         ];
 
-        return $factory->create($data);
+        return $container->getEffectFactory()->create($data);
     }
 }

@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Effect;
 
-use Battle\Action\ActionFactory;
 use Battle\Action\ActionInterface;
-use Battle\Container\Container;
 use Battle\Unit\Effect\EffectException;
-use Battle\Unit\Effect\EffectFactory;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\BaseFactory;
@@ -24,7 +21,7 @@ class EffectFactoryTest extends AbstractUnitTest
      */
     public function testEffectFactoryCreateSuccess(array $data): void
     {
-        $effect = $this->getFactory()->create($data);
+        $effect = $this->getContainer()->getEffectFactory()->create($data);
 
         self::assertEquals($data['name'], $effect->getName());
         self::assertEquals($data['icon'], $effect->getIcon());
@@ -59,7 +56,7 @@ class EffectFactoryTest extends AbstractUnitTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        $this->getFactory()->create($data);
+        $this->getContainer()->getEffectFactory()->create($data);
     }
 
     /**
@@ -379,13 +376,5 @@ class EffectFactoryTest extends AbstractUnitTest
                 EffectException::INVALID_ACTION_DATA,
             ],
         ];
-    }
-
-    /**
-     * @return EffectFactory
-     */
-    private function getFactory(): EffectFactory
-    {
-        return new EffectFactory(new ActionFactory(new Container(true)));
     }
 }

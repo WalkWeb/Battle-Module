@@ -7,7 +7,6 @@ namespace Battle\Action;
 use Battle\Container\ContainerInterface;
 use Battle\Traits\IdTrait;
 use Battle\Traits\ValidationTrait;
-use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
 use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitFactory;
@@ -193,10 +192,6 @@ class ActionFactory
      */
     private function createEffectAction(array $data): EffectAction
     {
-        $effectData = self::array($data, 'effect', ActionException::INVALID_EFFECT_DATA);
-        // TODO Вынести EffectFactory в контейнер и использовать из него
-        $effectFactory = new EffectFactory($this);
-
         return new EffectAction(
             $this->container,
             $data['action_unit'],
@@ -205,7 +200,7 @@ class ActionFactory
             self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA),
             self::string($data, 'name', ActionException::INVALID_NAME_DATA),
             self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA),
-            $effectFactory->create($effectData),
+            $this->container->getEffectFactory()->create(self::array($data, 'effect', ActionException::INVALID_EFFECT_DATA)),
             self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_METHOD_DATA),
             self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA)
         );

@@ -24,6 +24,7 @@ use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassFactory;
+use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Race\DataProvider\ExampleRaceDataProvider;
 use Battle\Unit\Race\DataProvider\RaceDataProviderInterface;
 use Battle\Unit\Race\RaceFactory;
@@ -75,6 +76,9 @@ class Container implements ContainerInterface
 
         ActionFactory::class                => ActionFactory::class,
         'ActionFactory'                     => ActionFactory::class,
+
+        EffectFactory::class                => EffectFactory::class,
+        'EffectFactory'                     => EffectFactory::class,
 
         // Ниже идут примеры поставщиков. Подразумевается, что в реальном проекте эти поставщики будут подменены
         // через метод в контейнере set()
@@ -310,6 +314,17 @@ class Container implements ContainerInterface
     }
 
     /**
+     * @return EffectFactory
+     * @throws ContainerException
+     */
+    public function getEffectFactory(): EffectFactory
+    {
+        /** @var EffectFactory $service */
+        $service = $this->get(EffectFactory::class);
+        return $service;
+    }
+
+    /**
      * @return ClassDataProviderInterface
      * @throws ContainerException
      */
@@ -343,8 +358,12 @@ class Container implements ContainerInterface
     }
 
     /**
+     * Паттерн контейнер внедрения зависимостей, который автоматически, через рефлексию, определяет зависимости в
+     * конструкторе и создает их не используется в целях максимальной производительности
+     *
      * @param string $class
      * @return object
+     * @throws ContainerException
      */
     private function create(string $class): object
     {
@@ -355,7 +374,8 @@ class Container implements ContainerInterface
             return $object;
         }
 
-        $object = new $class;
+        // У одного сервиса есть отдельная зависимость на другой сервис
+        $object = $class === EffectFactory::class ? new $class($this->getActionFactory()) : new $class;
         $this->storage[$this->map[$class]] = $object;
 
         return $object;

@@ -15,7 +15,6 @@ use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectCollection;
-use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
@@ -349,8 +348,6 @@ class EffectActionTest extends AbstractUnitTest
         CommandInterface $command
     ): EffectInterface
     {
-        $effectFactory = new EffectFactory($container->getActionFactory());
-
         $data = [
             'name'                  => 'Effect#123',
             'icon'                  => 'icon.png',
@@ -371,7 +368,7 @@ class EffectActionTest extends AbstractUnitTest
             'on_disable_actions'    => [],
         ];
 
-        return $effectFactory->create($data);
+        return $container->getEffectFactory()->create($data);
     }
 
     /**

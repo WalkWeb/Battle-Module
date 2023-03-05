@@ -11,7 +11,6 @@ use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
-use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
@@ -122,8 +121,6 @@ class WarriorTest extends AbstractUnitTest
         CommandInterface $alliesCommand
     ): EffectInterface
     {
-        $factory = new EffectFactory($container->getActionFactory());
-
         $data = [
             'name'                  => 'Blessed Shield',
             'icon'                  => '/images/icons/ability/271.png',
@@ -145,6 +142,6 @@ class WarriorTest extends AbstractUnitTest
             'on_disable_actions'    => [],
         ];
 
-        return $factory->create($data);
+        return $container->getEffectFactory()->create($data);
     }
 }

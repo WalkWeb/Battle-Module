@@ -13,7 +13,6 @@ use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
-use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -77,8 +76,6 @@ class PaladinTest extends AbstractUnitTest
         CommandInterface $alliesCommand
     ): EffectInterface
     {
-        $factory = new EffectFactory($container->getActionFactory());
-
         $data = [
             'name'                  => 'Stun',
             'icon'                  => '/images/icons/ability/186.png',
@@ -101,6 +98,6 @@ class PaladinTest extends AbstractUnitTest
             'on_disable_actions'    => [],
         ];
 
-        return $factory->create($data);
+        return $container->getEffectFactory()->create($data);
     }
 }

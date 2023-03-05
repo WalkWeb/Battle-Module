@@ -12,7 +12,6 @@ use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
-use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -108,8 +107,6 @@ class SuccubusTest extends AbstractUnitTest
         CommandInterface $command
     ): EffectInterface
     {
-        $effectFactory = new EffectFactory($container->getActionFactory());
-
         $data = [
             'name'                  => 'Poison',
             'icon'                  => '/images/icons/ability/202.png',
@@ -153,7 +150,7 @@ class SuccubusTest extends AbstractUnitTest
             'on_disable_actions'    => [],
         ];
 
-        return $effectFactory->create($data);
+        return $container->getEffectFactory()->create($data);
     }
 
     /**
@@ -171,8 +168,6 @@ class SuccubusTest extends AbstractUnitTest
         CommandInterface $command
     ): EffectInterface
     {
-        $effectFactory = new EffectFactory($container->getActionFactory());
-
         $data = [
             'name'                  => 'Paralysis',
             'icon'                  => '/images/icons/ability/086.png',
@@ -195,6 +190,6 @@ class SuccubusTest extends AbstractUnitTest
             'on_disable_actions'    => [],
         ];
 
-        return $effectFactory->create($data);
+        return $container->getEffectFactory()->create($data);
     }
 }

@@ -11,7 +11,6 @@ use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
-use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -125,8 +124,6 @@ class AlchemistTest extends AbstractUnitTest
         CommandInterface $command
     ): EffectInterface
     {
-        $effectFactory = new EffectFactory($container->getActionFactory());
-
         $data = [
             'name'                  => 'Healing Potion',
             'icon'                  => '/images/icons/ability/234.png',
@@ -149,7 +146,7 @@ class AlchemistTest extends AbstractUnitTest
             'on_disable_actions'    => [],
         ];
 
-        return $effectFactory->create($data);
+        return $container->getEffectFactory()->create($data);
     }
 
     /**

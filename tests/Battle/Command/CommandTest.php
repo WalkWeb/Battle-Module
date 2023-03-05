@@ -7,7 +7,6 @@ namespace Tests\Battle\Command;
 use Battle\Action\ActionInterface;
 use Battle\Action\EffectAction;
 use Battle\Command\CommandInterface;
-use Battle\Unit\Effect\EffectFactory;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
@@ -966,8 +965,6 @@ class CommandTest extends AbstractUnitTest
         CommandInterface $enemyCommand
     ): EffectInterface
     {
-        $factory = new EffectFactory($this->getContainer()->getActionFactory());
-
         $data = [
             'name'                  => 'Poison',
             'icon'                  => 'icon.png',
@@ -1010,7 +1007,7 @@ class CommandTest extends AbstractUnitTest
             'on_disable_actions'    => [],
         ];
 
-        return $factory->create($data);
+        return $this->getContainer()->getEffectFactory()->create($data);
     }
 
     /**
