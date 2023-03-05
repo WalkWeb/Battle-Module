@@ -20,6 +20,7 @@ interface ActionInterface
     public const EFFECT       = 6;
     public const RESURRECTION = 7;
     public const PARALYSIS    = 8;
+    public const MANA_RESTORE = 9;
 
     // Применяет событие на себя
     public const TARGET_SELF                  = 1;

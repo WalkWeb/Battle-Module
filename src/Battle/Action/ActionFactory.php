@@ -29,6 +29,7 @@ class ActionFactory
         ActionInterface::EFFECT       => 'createEffectAction',
         ActionInterface::RESURRECTION => 'createResurrectionAction',
         ActionInterface::PARALYSIS    => 'createParalysisAction',
+        ActionInterface::MANA_RESTORE => 'createManaRestoreAction',
     ];
 
     public function __construct(ContainerInterface $container, array $methodMap = [])
@@ -53,9 +54,7 @@ class ActionFactory
      *     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
      * ]
      *
-     * TODO Add ManaRestoreAction
-     *
-     * @uses createDamageAction, createHealAction, createWaitAction, createSummonAction, createBuffAction, createEffectAction, createResurrectionAction, createParalysisAction
+     * @uses createDamageAction, createHealAction, createWaitAction, createSummonAction, createBuffAction, createEffectAction, createResurrectionAction, createParalysisAction, createManaRestoreAction
      * @param array $data
      * @return ActionInterface
      * @throws Exception
@@ -74,6 +73,11 @@ class ActionFactory
             throw new ActionException(ActionException::UNKNOWN_FACTORY_METHOD);
         }
 
+        // Сразу проверяются общие для всех Action параметры
+        self::unit($data, 'action_unit', ActionException::INVALID_ACTION_UNIT_DATA);
+        self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA);
+        self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA);
+
         return $this->$factoryMethod($data);
     }
 
@@ -84,31 +88,22 @@ class ActionFactory
      */
     private function createDamageAction(array $data): DamageAction
     {
-        $actionUnit = self::unit($data, 'action_unit', ActionException::INVALID_ACTION_UNIT_DATA);
-        $enemyCommand = self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA);
-        $alliesCommand = self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA);
-        $icon = self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON);
-        $typeTarget = self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA);
-        $canBeAvoided = self::bool($data, 'can_be_avoided', ActionException::INVALID_CAN_BE_AVOIDED);
-        $name = self::string($data, 'name', ActionException::INVALID_NAME_DATA);
-        $animationMethod = self::string($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA);
-        $messageMethod = self::string($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD);
         $offenseData = self::arrayOrNull($data, 'offense', ActionException::INVALID_OFFENSE_DATA);
         $multipleOffenseData = self::arrayOrNull($data, 'multiple_offense', ActionException::INVALID_MULTIPLE_OFFENSE_DATA);
 
         return new DamageAction(
             $this->container,
-            $actionUnit,
-            $enemyCommand,
-            $alliesCommand,
-            $typeTarget,
-            $canBeAvoided,
-            $name,
-            $animationMethod,
-            $messageMethod,
+            $data['action_unit'],
+            $data['enemy_command'],
+            $data['allies_command'],
+            self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA),
+            self::bool($data, 'can_be_avoided', ActionException::INVALID_CAN_BE_AVOIDED),
+            self::string($data, 'name', ActionException::INVALID_NAME_DATA),
+            self::string($data, 'animation_method', ActionException::INVALID_ANIMATION_METHOD_DATA),
+            self::string($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA),
             $offenseData ? OffenseFactory::create($offenseData, $this->container) : null,
             $multipleOffenseData ? MultipleOffenseFactory::create($multipleOffenseData) : null,
-            $icon
+            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA)
         );
     }
 
@@ -121,15 +116,15 @@ class ActionFactory
     {
         return new HealAction(
             $this->container,
-            self::unit($data, 'action_unit', ActionException::INVALID_ACTION_UNIT_DATA),
-            self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA),
-            self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA),
+            $data['action_unit'],
+            $data['enemy_command'],
+            $data['allies_command'],
             self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA),
             self::int($data, 'power', ActionException::INVALID_POWER_DATA),
             self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA),
-            self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA),
-            self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD),
-            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON)
+            self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_METHOD_DATA),
+            self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA),
+            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA)
         );
     }
 
@@ -142,9 +137,9 @@ class ActionFactory
     {
         return new WaitAction(
             $this->container,
-            self::unit($data, 'action_unit', ActionException::INVALID_ACTION_UNIT_DATA),
-            self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA),
-            self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA)
+            $data['action_unit'],
+            $data['enemy_command'],
+            $data['allies_command'],
         );
     }
 
@@ -163,11 +158,11 @@ class ActionFactory
         return new SummonAction(
             $this->container,
             $actionUnit,
-            self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA),
-            self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA),
+            $data['enemy_command'],
+            $data['allies_command'],
             self::string($data, 'name', ActionException::INVALID_NAME_DATA),
             UnitFactory::create($summonData, $actionUnit->getContainer()),
-            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON)
+            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA)
         );
     }
 
@@ -180,14 +175,14 @@ class ActionFactory
     {
         return new BuffAction(
             $this->container,
-            self::unit($data, 'action_unit', ActionException::INVALID_ACTION_UNIT_DATA),
-            self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA),
-            self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA),
+            $data['action_unit'],
+            $data['enemy_command'],
+            $data['allies_command'],
             self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA),
             self::string($data, 'name', ActionException::INVALID_NAME_DATA),
             self::string($data, 'modify_method', ActionException::INVALID_MODIFY_METHOD_DATA),
             self::int($data, 'power', ActionException::INVALID_POWER_DATA),
-            self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD)
+            self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA)
         );
     }
 
@@ -204,15 +199,15 @@ class ActionFactory
 
         return new EffectAction(
             $this->container,
-            self::unit($data, 'action_unit', ActionException::INVALID_ACTION_UNIT_DATA),
-            self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA),
-            self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA),
+            $data['action_unit'],
+            $data['enemy_command'],
+            $data['allies_command'],
             self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA),
             self::string($data, 'name', ActionException::INVALID_NAME_DATA),
-            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON),
+            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA),
             $effectFactory->create($effectData),
-            self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_DATA),
-            self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD)
+            self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_METHOD_DATA),
+            self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA)
         );
     }
 
@@ -225,14 +220,14 @@ class ActionFactory
     {
         return new ResurrectionAction(
             $this->container,
-            self::unit($data, 'action_unit', ActionException::INVALID_ACTION_UNIT_DATA),
-            self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA),
-            self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA),
+            $data['action_unit'],
+            $data['enemy_command'],
+            $data['allies_command'],
             self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA),
             self::int($data, 'power', ActionException::INVALID_POWER_DATA),
             self::string($data, 'name', ActionException::INVALID_NAME_DATA),
-            self::string($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD),
-            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON)
+            self::string($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA),
+            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA)
         );
     }
 
@@ -245,10 +240,31 @@ class ActionFactory
     {
         return new ParalysisAction(
             $this->container,
-            self::unit($data, 'action_unit', ActionException::INVALID_ACTION_UNIT_DATA),
-            self::command($data, 'enemy_command', ActionException::INVALID_COMMAND_DATA),
-            self::command($data, 'allies_command', ActionException::INVALID_COMMAND_DATA),
-            self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD)
+            $data['action_unit'],
+            $data['enemy_command'],
+            $data['allies_command'],
+            self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA)
+        );
+    }
+
+    /**
+     * @param array $data
+     * @return ManaRestoreAction
+     * @throws Exception
+     */
+    private function createManaRestoreAction(array $data): ManaRestoreAction
+    {
+        return new ManaRestoreAction(
+            $this->container,
+            $data['action_unit'],
+            $data['enemy_command'],
+            $data['allies_command'],
+            self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA),
+            self::int($data, 'power', ActionException::INVALID_POWER_DATA),
+            self::string($data, 'name', ActionException::INVALID_NAME_DATA),
+            self::string($data, 'animation_method', ActionException::INVALID_ANIMATION_METHOD_DATA),
+            self::string($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA),
+            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA)
         );
     }
 }

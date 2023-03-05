@@ -11,6 +11,7 @@ use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
+use Battle\Action\ManaRestoreAction;
 use Battle\Action\ParalysisAction;
 use Battle\Action\ResurrectionAction;
 use Battle\Action\SummonAction;
@@ -625,6 +626,60 @@ class ActionFactoryTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на создание ManaRestoreAction из массива параметров
+     *
+     * @throws Exception
+     */
+    public function testActionFactoryCreateManaRestore(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $actionFactory = $this->getActionFactory();
+
+        // Минимальный набор данных (без icon)
+        $data = [
+            'type'             => ActionInterface::MANA_RESTORE,
+            'action_unit'      => $unit,
+            'enemy_command'    => $enemyCommand,
+            'allies_command'   => $command,
+            'type_target'      => ActionInterface::TARGET_SELF,
+            'power'            => $power = 50,
+            'name'             => $name = 'mana restore',
+            'animation_method' => $animationMethod = 'animation test',
+            'message_method'   => $messageMethod = 'message test',
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertInstanceOf(ManaRestoreAction::class, $action);
+        self::assertEquals($unit, $action->getActionUnit());
+        self::assertEquals(ActionInterface::TARGET_SELF, $action->getTypeTarget());
+        self::assertEquals($power, $action->getPower());
+        self::assertEquals($name, $action->getNameAction());
+        self::assertEquals($animationMethod, $action->getAnimationMethod());
+        self::assertEquals($messageMethod, $action->getMessageMethod());
+        self::assertEquals('', $action->getIcon());
+
+        // Полный набор данных (с icon)
+        $data = [
+            'type'             => ActionInterface::MANA_RESTORE,
+            'action_unit'      => $unit,
+            'enemy_command'    => $enemyCommand,
+            'allies_command'   => $command,
+            'type_target'      => ActionInterface::TARGET_SELF,
+            'power'            => $power = 50,
+            'name'             => $name = 'mana restore',
+            'animation_method' => $animationMethod = 'animation test',
+            'message_method'   => $messageMethod = 'message test',
+            'icon'             => $icon = 'icon test',
+        ];
+
+        $action = $actionFactory->create($data);
+
+        self::assertEquals($icon, $action->getIcon());
+    }
+
+    /**
      * Тесты на различные варианты невалидных данных для (перебираются некорректные варианты для всех видов Action)
      *
      * @dataProvider failDataProvider
@@ -650,7 +705,7 @@ class ActionFactoryTest extends AbstractUnitTest
 
         // Мы подменяем карту методов, передавая отсутствующий метод для создания DamageAction
         $methodMap = [
-            ActionInterface::DAMAGE => 'createDamageActionUnknown'
+            ActionInterface::DAMAGE => 'createDamageActionUnknown',
         ];
 
         $actionFactory = new ActionFactory($container, $methodMap);
@@ -1250,7 +1305,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'name'           => 'action name',
                     'message_method' => 'message test',
                 ],
-                ActionException::INVALID_ANIMATION_DATA,
+                ActionException::INVALID_ANIMATION_METHOD_DATA,
             ],
             [
                 // 17: animation_method некорректного типа [для DamageAction]
@@ -1285,7 +1340,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'animation_method' => null,
                     'message_method'   => 'message test',
                 ],
-                ActionException::INVALID_ANIMATION_DATA,
+                ActionException::INVALID_ANIMATION_METHOD_DATA,
             ],
             [
                 // 18: Отсутствует message_method [для DamageAction]
@@ -1319,7 +1374,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'name'             => 'action name',
                     'animation_method' => 'animation test',
                 ],
-                ActionException::INVALID_MESSAGE_METHOD,
+                ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
                 // 19: message_method некорректного типа [для DamageAction]
@@ -1354,7 +1409,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'animation_method' => 'animation test',
                     'message_method'   => null,
                 ],
-                ActionException::INVALID_MESSAGE_METHOD,
+                ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
                 // 20: Отсутствует type_target [для HealAction]
@@ -1689,7 +1744,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'power'          => 150,
                     'message_method' => 123,
                 ],
-                ActionException::INVALID_MESSAGE_METHOD,
+                ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             // EffectAction
             [
@@ -1733,7 +1788,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => 'self',
                     'name'           => 'Effect test',
-                    'effect'        => [
+                    'effect'         => [
                         [
                             'name'                  => 'Effect test #1',
                             'icon'                  => 'effect_icon_#1',
@@ -1765,7 +1820,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
-                    'effect'        => [
+                    'effect'         => [
                         [
                             'name'                  => 'Effect test #1',
                             'icon'                  => 'effect_icon_#1',
@@ -1798,7 +1853,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => true,
-                    'effect'        => [
+                    'effect'         => [
                         [
                             'name'                  => 'Effect test #1',
                             'icon'                  => 'effect_icon_#1',
@@ -1933,7 +1988,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     'name'           => 'name',
                     'power'          => 50,
                 ],
-                ActionException::INVALID_MESSAGE_METHOD,
+                ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
                 // 50: ResurrectionAction - message_method некорректного типа
@@ -1947,18 +2002,18 @@ class ActionFactoryTest extends AbstractUnitTest
                     'power'          => 50,
                     'message_method' => true,
                 ],
-                ActionException::INVALID_MESSAGE_METHOD,
+                ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
                 // 51: DamageAction - некорректный icon
                 [
-                    'type'           => ActionInterface::DAMAGE,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'icon'           => 123,
-                    'offense'        => [
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'icon'             => 123,
+                    'offense'          => [
                         'damage_type'         => 1,
                         'weapon_type'         => WeaponTypeInterface::SWORD,
                         'physical_damage'     => 10,
@@ -1979,9 +2034,34 @@ class ActionFactoryTest extends AbstractUnitTest
                         'vampirism'           => 0,
                         'magic_vampirism'     => 0,
                     ],
-                    'can_be_avoided' => true,
+                    'defense'          => [
+                        'physical_resist'     => 0,
+                        'fire_resist'         => 0,
+                        'water_resist'        => 0,
+                        'air_resist'          => 0,
+                        'earth_resist'        => 0,
+                        'life_resist'         => 0,
+                        'death_resist'        => 0,
+                        'defense'             => 100,
+                        'magic_defense'       => 50,
+                        'block'               => 0,
+                        'magic_block'         => 0,
+                        'mental_barrier'      => 0,
+                        'max_physical_resist' => 75,
+                        'max_fire_resist'     => 75,
+                        'max_water_resist'    => 75,
+                        'max_air_resist'      => 75,
+                        'max_earth_resist'    => 75,
+                        'max_life_resist'     => 75,
+                        'max_death_resist'    => 75,
+                        'global_resist'       => 0,
+                    ],
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
                 ],
-                ActionException::INVALID_ICON,
+                ActionException::INVALID_ICON_DATA,
             ],
             [
                 // 52: EffectAction - некорректный icon
@@ -2013,7 +2093,7 @@ class ActionFactoryTest extends AbstractUnitTest
                         'on_disable_actions'    => [],
                     ],
                 ],
-                ActionException::INVALID_ICON,
+                ActionException::INVALID_ICON_DATA,
             ],
             [
                 // 53: EffectAction - некорректный animation_method
@@ -2046,7 +2126,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     ],
                     'animation_method' => 123,
                 ],
-                ActionException::INVALID_ANIMATION_DATA,
+                ActionException::INVALID_ANIMATION_METHOD_DATA,
             ],
             [
                 // 54: EffectAction - некорректный message_method
@@ -2079,7 +2159,7 @@ class ActionFactoryTest extends AbstractUnitTest
                     ],
                     'message_method' => true,
                 ],
-                ActionException::INVALID_MESSAGE_METHOD,
+                ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
                 // 55: Некорректный power для HealAction
@@ -2127,6 +2207,179 @@ class ActionFactoryTest extends AbstractUnitTest
                     'message_method'   => 'test',
                 ],
                 ActionException::INVALID_MULTIPLE_OFFENSE_DATA,
+            ],
+
+            // ManaRestoreAction
+            [
+                // 58. Отсутствует type_target
+                [
+                    'type'             => ActionInterface::MANA_RESTORE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'power'            => 50,
+                    'name'             => 'mana restore',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
+                    'icon'             => 'icon test',
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            [
+                // 59. type_target некорректного типа
+                [
+                    'type'             => ActionInterface::MANA_RESTORE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => 'target',
+                    'power'            => 50,
+                    'name'             => 'mana restore',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
+                    'icon'             => 'icon test',
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            [
+                // 60. Отсутствует power
+                [
+                    'type'             => ActionInterface::MANA_RESTORE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'name'             => 'mana restore',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
+                    'icon'             => 'icon test',
+                ],
+                ActionException::INVALID_POWER_DATA,
+            ],
+            [
+                // 61. power некорректного типа
+                [
+                    'type'             => ActionInterface::MANA_RESTORE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'power'            => '50',
+                    'name'             => 'mana restore',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
+                    'icon'             => 'icon test',
+                ],
+                ActionException::INVALID_POWER_DATA,
+            ],
+            [
+                // 62. Отсутствует name
+                [
+                    'type'             => ActionInterface::MANA_RESTORE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'power'            => 50,
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
+                    'icon'             => 'icon test',
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            [
+                // 63. name некорректного типа
+                [
+                    'type'             => ActionInterface::MANA_RESTORE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'power'            => 50,
+                    'name'             => null,
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
+                    'icon'             => 'icon test',
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            [
+                // 64. Отсутствует animation_method
+                [
+                    'type'             => ActionInterface::MANA_RESTORE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'power'            => 50,
+                    'name'             => 'mana restore',
+                    'message_method'   => 'message test',
+                    'icon'             => 'icon test',
+                ],
+                ActionException::INVALID_ANIMATION_METHOD_DATA,
+            ],
+            [
+                // 65. animation_method некорректного типа
+                [
+                    'type'             => ActionInterface::MANA_RESTORE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'power'            => 50,
+                    'name'             => 'mana restore',
+                    'animation_method' => true,
+                    'message_method'   => 'message test',
+                    'icon'             => 'icon test',
+                ],
+                ActionException::INVALID_ANIMATION_METHOD_DATA,
+            ],
+            [
+                // 66. Отсутствует message_method
+                [
+                    'type'             => ActionInterface::MANA_RESTORE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'power'            => 50,
+                    'name'             => 'mana restore',
+                    'animation_method' => 'animation test',
+                    'icon'             => 'icon test',
+                ],
+                ActionException::INVALID_MESSAGE_METHOD_DATA,
+            ],
+            [
+                // 67. message_method некорректного типа
+                [
+                    'type'             => ActionInterface::MANA_RESTORE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'power'            => 50,
+                    'name'             => 'mana restore',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 123,
+                    'icon'             => 'icon test',
+                ],
+                ActionException::INVALID_MESSAGE_METHOD_DATA,
+            ],
+            [
+                // 68. icon некорректного типа
+                [
+                    'type'             => ActionInterface::MANA_RESTORE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_SELF,
+                    'power'            => 50,
+                    'name'             => 'mana restore',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
+                    'icon'             => ['icon'],
+                ],
+                ActionException::INVALID_ICON_DATA,
             ],
         ];
     }
