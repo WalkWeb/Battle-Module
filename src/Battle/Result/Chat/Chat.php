@@ -76,45 +76,42 @@ class Chat implements ChatInterface
      * 3. Нанесение урона + урон заблокирован, если было атаковано сразу несколько целей, и там были и те, кто получил
      *    урон и те, кто его заблокировал
      *
-     * TODO В текущей механике юниты запрашиваются два раза - в текущем методе, и потом еще раз при формировании
-     * TODO сообщения. Можно оптимизировать
-     *
      * @param ActionInterface $action
      * @return string
      * @throws ActionException
      */
     private function damage(ActionInterface $action): string
     {
-        $damagedUnits = $this->getTargetsName($action);
-        $blockedUnits = $this->getTargetsBlockedName($action);
-        $dodgedUnits = $this->getTargetsDodgedName($action);
+        $targetNames = $this->getTargetsName($action);
+        $blockedNames = $this->getTargetsBlockedName($action);
+        $dodgedNames = $this->getTargetsDodgedName($action);
 
-        if ($damagedUnits && $blockedUnits && $dodgedUnits) {
+        if ($targetNames && $blockedNames && $dodgedNames) {
             return
-                $this->getDamagedMessage($action) . '. ' . $this->getBlockedMessage($action) . ' ' . $this->getDodgedMessage($action);
+                $this->getDamagedMessage($action, $targetNames) . '. ' . $this->getBlockedMessage($action, $blockedNames) . ' ' . $this->getDodgedMessage($action, $dodgedNames);
         }
 
-        if ($damagedUnits && $blockedUnits) {
-            return $this->getDamagedMessage($action) . '. ' . $this->getBlockedMessage($action);
+        if ($targetNames && $blockedNames) {
+            return $this->getDamagedMessage($action, $targetNames) . '. ' . $this->getBlockedMessage($action, $blockedNames);
         }
 
-        if ($damagedUnits && $dodgedUnits) {
-            return $this->getDamagedMessage($action) . '. ' . $this->getDodgedMessage($action);
+        if ($targetNames && $dodgedNames) {
+            return $this->getDamagedMessage($action, $targetNames) . '. ' . $this->getDodgedMessage($action, $dodgedNames);
         }
 
-        if ($blockedUnits && $dodgedUnits) {
-            return $this->getBlockedMessage($action) . ' ' . $this->getDodgedMessage($action);
+        if ($blockedNames && $dodgedNames) {
+            return $this->getBlockedMessage($action, $blockedNames) . ' ' . $this->getDodgedMessage($action, $dodgedNames);
         }
 
-        if ($blockedUnits) {
-            return $this->getBlockedMessage($action);
+        if ($blockedNames) {
+            return $this->getBlockedMessage($action, $blockedNames);
         }
 
-        if ($dodgedUnits) {
-            return $this->getDodgedMessage($action);
+        if ($dodgedNames) {
+            return $this->getDodgedMessage($action, $dodgedNames);
         }
 
-        return $this->getDamagedMessage($action);
+        return $this->getDamagedMessage($action, $targetNames);
     }
 
     /**
@@ -128,36 +125,36 @@ class Chat implements ChatInterface
      */
     private function damageAbility(ActionInterface $action): string
     {
-        $damagedUnits = $this->getTargetsName($action);
-        $blockedUnits = $this->getTargetsBlockedName($action);
-        $dodgedUnits = $this->getTargetsDodgedName($action);
+        $targetNames = $this->getTargetsName($action);
+        $blockedNames = $this->getTargetsBlockedName($action);
+        $dodgedNames = $this->getTargetsDodgedName($action);
 
-        if ($damagedUnits && $blockedUnits && $dodgedUnits) {
+        if ($targetNames && $blockedNames && $dodgedNames) {
             return
-                $this->getDamagedAbilityMessage($action) . '. ' . $this->getBlockedAbilityMessage($action) . ' ' . $this->getDodgedAbilityMessage($action);
+                $this->getDamagedAbilityMessage($action, $targetNames) . '. ' . $this->getBlockedAbilityMessage($action, $blockedNames) . ' ' . $this->getDodgedAbilityMessage($action, $dodgedNames);
         }
 
-        if ($damagedUnits && $blockedUnits) {
-            return $this->getDamagedAbilityMessage($action) . '. ' . $this->getBlockedAbilityMessage($action);
+        if ($targetNames && $blockedNames) {
+            return $this->getDamagedAbilityMessage($action, $targetNames) . '. ' . $this->getBlockedAbilityMessage($action, $blockedNames);
         }
 
-        if ($damagedUnits && $dodgedUnits) {
-            return $this->getDamagedAbilityMessage($action) . '. ' . $this->getDodgedAbilityMessage($action);
+        if ($targetNames && $dodgedNames) {
+            return $this->getDamagedAbilityMessage($action, $targetNames) . '. ' . $this->getDodgedAbilityMessage($action, $dodgedNames);
         }
 
-        if ($blockedUnits && $dodgedUnits) {
-            return $this->getBlockedAbilityMessage($action) . ' ' . $this->getDodgedAbilityMessage($action);
+        if ($blockedNames && $dodgedNames) {
+            return $this->getBlockedAbilityMessage($action, $blockedNames) . ' ' . $this->getDodgedAbilityMessage($action, $dodgedNames);
         }
 
-        if ($blockedUnits) {
-            return $this->getBlockedAbilityMessage($action);
+        if ($blockedNames) {
+            return $this->getBlockedAbilityMessage($action, $blockedNames);
         }
 
-        if ($dodgedUnits) {
-            return $this->getDodgedAbilityMessage($action);
+        if ($dodgedNames) {
+            return $this->getDodgedAbilityMessage($action, $dodgedNames);
         }
 
-        return $this->getDamagedAbilityMessage($action);
+        return $this->getDamagedAbilityMessage($action, $targetNames);
     }
 
     /**
@@ -263,7 +260,7 @@ class Chat implements ChatInterface
     /**
      * В текущих способностях сам баф не формирует сообщение - его формирует эффект, от которого применяется баф.
      *
-     * TODO Просто удалить метод?
+     * Но метод оставляется на будущее, т.к. могут появиться способности где такой тип сообщения понадобится
      *
      * @param ActionInterface $action
      * @return string
@@ -522,10 +519,11 @@ class Chat implements ChatInterface
      * $unit [critical] hit for $damage damage against $targets
      *
      * @param ActionInterface $action
+     * @param string $targetNames
      * @return string
      * @throws ActionException
      */
-    private function getDamagedMessage(ActionInterface $action): string
+    private function getDamagedMessage(ActionInterface $action, string $targetNames): string
     {
         $message = $action->isCriticalDamage() ?
             '%s critical hit for %d damage against %s' : '%s hit for %d damage against %s';
@@ -534,7 +532,7 @@ class Chat implements ChatInterface
             $this->translation->trans($message),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $action->getFactualPower(),
-            $this->getTargetsName($action)
+            $targetNames
         ) . $this->getVampirismMessage($action);
     }
 
@@ -544,15 +542,15 @@ class Chat implements ChatInterface
      * $unit tried to strike, but $targets blocked it!
      *
      * @param ActionInterface $action
+     * @param string $blockedNames
      * @return string
-     * @throws ActionException
      */
-    private function getBlockedMessage(ActionInterface $action): string
+    private function getBlockedMessage(ActionInterface $action, string $blockedNames): string
     {
         return sprintf(
             $this->translation->trans('%s tried to strike, but %s blocked it!'),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
-            $this->getTargetsBlockedName($action)
+            $blockedNames
         );
     }
 
@@ -562,15 +560,15 @@ class Chat implements ChatInterface
      * $unit tried to strike, but $targets dodged!
      *
      * @param ActionInterface $action
+     * @param string $dodgedNames
      * @return string
-     * @throws ActionException
      */
-    private function getDodgedMessage(ActionInterface $action): string
+    private function getDodgedMessage(ActionInterface $action, string $dodgedNames): string
     {
         return sprintf(
             $this->translation->trans('%s tried to strike, but %s dodged!'),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
-            $this->getTargetsDodgedName($action)
+            $dodgedNames
         );
     }
 
@@ -580,10 +578,11 @@ class Chat implements ChatInterface
      * $unit use $icon $ability and [critical] hit for $damage damage against $targets
      *
      * @param ActionInterface $action
+     * @param string $targetNames
      * @return string
      * @throws ActionException
      */
-    private function getDamagedAbilityMessage(ActionInterface $action): string
+    private function getDamagedAbilityMessage(ActionInterface $action, string $targetNames): string
     {
         $message = $action->isCriticalDamage() ?
             '%s use %s %s and critical hit for %d damage against %s' : '%s use %s %s and hit for %d damage against %s';
@@ -594,7 +593,7 @@ class Chat implements ChatInterface
             $this->getIcon($action),
             '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
             $action->getFactualPower(),
-            $this->getTargetsName($action)
+            $targetNames
         ) . $this->getVampirismMessage($action);
     }
 
@@ -604,17 +603,17 @@ class Chat implements ChatInterface
      * $unit use $icon $ability but $targets blocked it!
      *
      * @param ActionInterface $action
+     * @param string $blockedNames
      * @return string
-     * @throws ActionException
      */
-    private function getBlockedAbilityMessage(ActionInterface $action): string
+    private function getBlockedAbilityMessage(ActionInterface $action, string $blockedNames): string
     {
         return sprintf(
             $this->translation->trans('%s use %s %s but %s blocked it!'),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $this->getIcon($action),
             '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
-            $this->getTargetsBlockedName($action)
+            $blockedNames
         );
     }
 
@@ -624,17 +623,17 @@ class Chat implements ChatInterface
      * $unit use $icon $ability but $targets dodged!
      *
      * @param ActionInterface $action
+     * @param string $dodgedNames
      * @return string
-     * @throws ActionException
      */
-    private function getDodgedAbilityMessage(ActionInterface $action): string
+    private function getDodgedAbilityMessage(ActionInterface $action, string $dodgedNames): string
     {
         return sprintf(
             $this->translation->trans('%s use %s %s but %s dodged!'),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $this->getIcon($action),
             '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
-            $this->getTargetsDodgedName($action)
+            $dodgedNames
         );
     }
 
