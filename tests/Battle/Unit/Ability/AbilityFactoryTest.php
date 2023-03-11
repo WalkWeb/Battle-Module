@@ -87,11 +87,11 @@ class AbilityFactoryTest extends AbstractUnitTest
             [
                 // Вариант с полным набором данных (с chance_activate и allowed_weapon_types)
                 [
-                    'name'            => 'Demo Ability #1',
-                    'icon'            => 'icon.png',
-                    'disposable'      => true,
-                    'type_activate'   => AbilityInterface::ACTIVATE_CONCENTRATION,
-                    'actions'         => [
+                    'name'                 => 'Demo Ability #1',
+                    'icon'                 => 'icon.png',
+                    'disposable'           => true,
+                    'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                    'actions'              => [
                         [
                             'type'             => ActionInterface::DAMAGE,
                             'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
@@ -127,7 +127,7 @@ class AbilityFactoryTest extends AbstractUnitTest
                         WeaponTypeInterface::STAFF,
                         WeaponTypeInterface::WAND,
                     ],
-                    'chance_activate' => 50,
+                    'chance_activate'      => 50,
                 ],
             ],
             [
@@ -442,6 +442,56 @@ class AbilityFactoryTest extends AbstractUnitTest
                     'chance_activate' => 50,
                 ],
                 AbilityException::INVALID_ACTION_DATA,
+            ],
+            // allowed_weapon_types некорректного типа
+            [
+                [
+                    'name'                 => 'Demo Ability',
+                    'icon'                 => 'icon.png',
+                    'disposable'           => true,
+                    'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                    'actions'              => [
+                        [
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
+                            'can_be_avoided'   => true,
+                            'name'             => 'Demo Ability',
+                            'animation_method' => 'damage',
+                            'message_method'   => 'damageAbility',
+                            'icon'             => 'icon.png',
+                        ],
+                    ],
+                    'chance_activate'      => 50,
+                    'allowed_weapon_types' => 'swords',
+                ],
+                AbilityException::INVALID_ALLOWED_WEAPON_DATA,
+            ],
+            // allowed_weapon_types содержит не массив int
+            [
+                [
+                    'name'            => 'Demo Ability',
+                    'icon'            => 'icon.png',
+                    'disposable'      => true,
+                    'type_activate'   => AbilityInterface::ACTIVATE_CONCENTRATION,
+                    'actions'         => [
+                        [
+                            'type'             => ActionInterface::HEAL,
+                            'type_target'      => ActionInterface::TARGET_SELF,
+                            'power'            => 50,
+                            'can_be_avoided'   => true,
+                            'name'             => 'Demo Ability',
+                            'animation_method' => 'damage',
+                            'message_method'   => 'damageAbility',
+                            'icon'             => 'icon.png',
+                        ],
+                    ],
+                    'chance_activate' => 50,
+                    'allowed_weapon_types' => [
+                        1, 2, 'abc',
+                    ],
+                ],
+                AbilityException::INVALID_ALLOWED_WEAPON_DATA,
             ],
         ];
     }
