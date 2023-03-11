@@ -6,9 +6,12 @@ namespace Tests\Battle\Unit\Ability;
 
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandFactory;
+use Battle\Container\Container;
 use Battle\Unit\Ability\Ability;
+use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -258,6 +261,30 @@ class AbilityTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ситуацию, когда тип оружия юнита не подходит для активации способности, и она не активируется несмотря
+     * на 100% заполненную концентрацию
+     *
+     * @throws Exception
+     */
+    public function testAbilityNotAllowedWeaponType(): void
+    {
+        $name = 'Heavy Strike';
+        $unit = UnitFactory::createByTemplate(40); // unit with staff weapon
+        $ability = $this->createAbilityByDataProvider($unit, $name);
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        // Up unit concentration
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection->update($unit);
+
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
      * @return array
      */
     public function invalidEffectDataProvider(): array
@@ -294,5 +321,22 @@ class AbilityTest extends AbstractUnitTest
                 ],
             ],
         ];
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param string $abilityName
+     * @param int $abilityLevel
+     * @return AbilityInterface
+     * @throws Exception
+     */
+    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    {
+        $container = new Container();
+
+        return $container->getAbilityFactory()->create(
+            $unit,
+            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+        );
     }
 }

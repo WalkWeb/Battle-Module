@@ -59,11 +59,19 @@ class Ability extends AbstractAbility
      */
     public function update(UnitInterface $unit, bool $testMode = false): void
     {
+        // Если способность одноразовая и уже была использована
         if ($this->disposable && $this->usage) {
             $this->ready = false;
             return;
         }
 
+        // Если тип оружия указан, и он не подходит
+        if (count($this->allowedWeaponTypes) !== 0 && !in_array($unit->getOffense()->getWeaponType()->getId(), $this->allowedWeaponTypes, true)) {
+            $this->ready = false;
+            return;
+        }
+
+        // Базовые проверки на активацию
         switch ($this->typeActivate) {
             case self::ACTIVATE_CONCENTRATION:
                 $this->ready = $unit->getConcentration() === UnitInterface::MAX_CONCENTRATION;

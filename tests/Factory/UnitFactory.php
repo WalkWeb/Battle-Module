@@ -2362,7 +2362,7 @@ class UnitFactory
             'race'                         => 1,
             'offense'                      => [
                 'damage_type'         => 1,
-                'weapon_type'         => 1,
+                'weapon_type'         => 7,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
                 'water_damage'        => 0,

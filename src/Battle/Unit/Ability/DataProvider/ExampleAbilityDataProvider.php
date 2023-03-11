@@ -21,6 +21,8 @@ use Battle\Weapon\Type\WeaponTypeInterface;
  * При этом можно сделать веб-интерфейс (в админ-панели), через который параметры способностей можно будет изменять
  * сразу в браузере.
  *
+ * TODO Пройтись по способностям и подумать над добавлением им требований к типу оружия
+ *
  * @package Battle\Unit\Ability\DataProvider
  */
 class ExampleAbilityDataProvider implements AbilityDataProviderInterface
@@ -28,11 +30,22 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
     private static array $data = [
         'Heavy Strike'   => [
             1 => [
-                'name'          => 'Heavy Strike',
-                'icon'          => '/images/icons/ability/335.png',
-                'disposable'    => false,
-                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
-                'actions'       => [
+                'name'                 => 'Heavy Strike',
+                'icon'                 => '/images/icons/ability/335.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::SWORD,
+                    WeaponTypeInterface::AXE,
+                    WeaponTypeInterface::MACE,
+                    WeaponTypeInterface::TWO_HAND_SWORD,
+                    WeaponTypeInterface::TWO_HAND_AXE,
+                    WeaponTypeInterface::TWO_HAND_MACE,
+                    WeaponTypeInterface::HEAVY_TWO_HAND_SWORD,
+                    WeaponTypeInterface::HEAVY_TWO_HAND_AXE,
+                    WeaponTypeInterface::HEAVY_TWO_HAND_MACE,
+                ],
+                'actions'              => [
                     [
                         'type'             => ActionInterface::DAMAGE,
                         'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
