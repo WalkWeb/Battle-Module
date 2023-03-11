@@ -356,6 +356,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_RAGE,
+            [],
             0
         );
     }

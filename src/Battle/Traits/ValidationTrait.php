@@ -115,6 +115,32 @@ trait ValidationTrait
      * @param array $data
      * @param string $filed
      * @param string $error
+     * @return array
+     * @throws BattleException
+     */
+    protected static function arrayIntOrNull(array $data, string $filed, string $error): array
+    {
+        if (!array_key_exists($filed, $data)) {
+            return [];
+        }
+
+        if (!is_array($data[$filed])) {
+            throw new BattleException($error);
+        }
+
+        foreach ($data[$filed] as $value) {
+            if (!is_int($value)) {
+                throw new BattleException($error);
+            }
+        }
+
+        return $data[$filed];
+    }
+    
+    /**
+     * @param array $data
+     * @param string $filed
+     * @param string $error
      * @return array|null
      * @throws BattleException
      */

@@ -233,6 +233,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_RAGE,
+            [],
             0
         );
     }

@@ -40,6 +40,7 @@ class AbilityFactory
         self::in($data['type_activate'], $this->typesActivate, AbilityException::UNKNOWN_ACTIVATE_TYPE . ': ' . $data['type_activate']);
         $chanceActivate = self::intOrMissing($data, 'chance_activate', AbilityException::INVALID_CHANCE_ACTIVATE_DATA);
         self::array($data, 'actions', AbilityException::INVALID_ACTIONS_DATA);
+        $allowedWeaponType = self::arrayIntOrNull($data, 'allowed_weapon_types', AbilityException::INVALID_ALLOWED_WEAPON_DATA);
 
         return new Ability(
             $unit,
@@ -48,6 +49,7 @@ class AbilityFactory
             $data['icon'],
             $data['actions'],
             $data['type_activate'],
+            $allowedWeaponType,
             $chanceActivate
         );
     }

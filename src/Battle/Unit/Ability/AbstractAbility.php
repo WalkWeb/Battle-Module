@@ -17,6 +17,7 @@ abstract class AbstractAbility implements AbilityInterface
         AbilityInterface::ACTIVATE_LOW_LIFE,
         AbilityInterface::ACTIVATE_DEAD,
     ];
+
     /**
      * @var string
      */
@@ -76,12 +77,20 @@ abstract class AbstractAbility implements AbilityInterface
     protected int $chanceActivate;
 
     /**
+     * Допустимые типы оружия для использования способности. Если пустой массив - значит нет требований к типу оружия
+     *
+     * @var int[]
+     */
+    protected array $allowedWeaponTypes;
+
+    /**
      * @param UnitInterface $unit
      * @param bool $disposable
      * @param string $name
      * @param string $icon
      * @param array $actionsData
      * @param int $typeActivate
+     * @param array $allowedWeaponType
      * @param int $chanceActivate
      * @throws Exception
      */
@@ -92,6 +101,7 @@ abstract class AbstractAbility implements AbilityInterface
         string $icon,
         array $actionsData,
         int $typeActivate,
+        array $allowedWeaponTypes,
         int $chanceActivate = 100
     )
     {
@@ -101,6 +111,7 @@ abstract class AbstractAbility implements AbilityInterface
         $this->container = $unit->getContainer();
         $this->name = $name;
         $this->icon = $icon;
+        $this->allowedWeaponTypes = $allowedWeaponTypes;
         $this->actionFactory = $this->container->getActionFactory();
         $this->typeActivate = $this->validateTypeActivate($typeActivate);
         $this->actionsData = $this->validateActionsData($actionsData);
@@ -165,6 +176,14 @@ abstract class AbstractAbility implements AbilityInterface
     public function getChanceActivate(): int
     {
         return $this->chanceActivate;
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getAllowedWeaponTypes(): array
+    {
+        return $this->allowedWeaponTypes;
     }
 
     /**

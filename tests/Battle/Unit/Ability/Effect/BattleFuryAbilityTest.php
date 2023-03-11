@@ -457,6 +457,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_RAGE,
+            [],
         );
     }
 

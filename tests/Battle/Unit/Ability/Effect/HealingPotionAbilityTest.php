@@ -644,6 +644,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_CONCENTRATION,
+            [],
             0
         );
     }

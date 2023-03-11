@@ -9,8 +9,6 @@ use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 
-// TODO Способностям добавить требование к типу оружия, если тип оружия не подходит - способность не активируется
-
 interface AbilityInterface
 {
     // Варианты активации способности
@@ -121,4 +119,11 @@ interface AbilityInterface
      * @return int
      */
     public function getChanceActivate(): int;
+
+    /**
+     * Возвращает допустимые типы оружия для использования данной способности
+     *
+     * @return int[]
+     */
+    public function getAllowedWeaponTypes(): array;
 }

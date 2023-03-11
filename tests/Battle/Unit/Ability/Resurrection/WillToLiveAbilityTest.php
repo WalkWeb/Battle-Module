@@ -369,6 +369,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_DEAD,
+            [],
             0
         );
     }

@@ -227,6 +227,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_RAGE,
+            [],
             0
         );
     }

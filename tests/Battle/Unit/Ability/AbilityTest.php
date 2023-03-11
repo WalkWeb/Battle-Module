@@ -9,6 +9,7 @@ use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
@@ -34,6 +35,11 @@ class AbilityTest extends AbstractUnitTest
         $icon = '/images/icons/ability/335.png';
         $disposable = false;
         $chanceActivate = 50;
+        $allowedWeaponType = [
+            WeaponTypeInterface::SWORD,
+            WeaponTypeInterface::AXE,
+            WeaponTypeInterface::MACE,
+        ];
 
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -68,6 +74,7 @@ class AbilityTest extends AbstractUnitTest
                 ],
             ],
             $typeActivate = AbilityInterface::ACTIVATE_RAGE,
+            $allowedWeaponType,
             $chanceActivate
         );
 
@@ -76,6 +83,7 @@ class AbilityTest extends AbstractUnitTest
         self::assertEquals($icon, $ability->getIcon());
         self::assertEquals($disposable, $ability->isDisposable());
         self::assertEquals($typeActivate, $ability->getTypeActivate());
+        self::assertEquals($allowedWeaponType, $ability->getAllowedWeaponTypes());
 
         // Проверка значений по-умолчанию:
         self::assertFalse($ability->isReady());
@@ -104,6 +112,7 @@ class AbilityTest extends AbstractUnitTest
                 'invalid_data',
             ],
             AbilityInterface::ACTIVATE_CONCENTRATION,
+            [],
             0
         );
     }
@@ -130,6 +139,7 @@ class AbilityTest extends AbstractUnitTest
                 [],
             ],
             $typeActivate,
+            [],
             0
         );
     }
@@ -165,6 +175,7 @@ class AbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_CONCENTRATION,
+            [],
             0
         );
 
@@ -224,6 +235,7 @@ class AbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_RAGE,
+            [],
             0
         );
 

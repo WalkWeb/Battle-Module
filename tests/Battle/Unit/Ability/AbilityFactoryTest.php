@@ -48,6 +48,12 @@ class AbilityFactoryTest extends AbstractUnitTest
             self::assertEquals(0, $ability->getChanceActivate());
         }
 
+        if (array_key_exists('allowed_weapon_types', $data)) {
+            self::assertEquals($data['allowed_weapon_types'], $ability->getAllowedWeaponTypes());
+        } else {
+            self::assertEquals([], $ability->getAllowedWeaponTypes());
+        }
+
         self::assertEquals(
             $this->createActionCollections($container, $unit, $enemyCommand, $command, $data['actions']),
             $ability->getActions($enemyCommand, $command)
@@ -79,7 +85,7 @@ class AbilityFactoryTest extends AbstractUnitTest
     {
         return [
             [
-                // Вариант с полным набором данных (с chance_activate)
+                // Вариант с полным набором данных (с chance_activate и allowed_weapon_types)
                 [
                     'name'            => 'Demo Ability #1',
                     'icon'            => 'icon.png',
@@ -116,6 +122,10 @@ class AbilityFactoryTest extends AbstractUnitTest
                             'message_method'   => 'damageAbility',
                             'icon'             => 'icon.png',
                         ],
+                    ],
+                    'allowed_weapon_types' => [
+                        WeaponTypeInterface::STAFF,
+                        WeaponTypeInterface::WAND,
                     ],
                     'chance_activate' => 50,
                 ],

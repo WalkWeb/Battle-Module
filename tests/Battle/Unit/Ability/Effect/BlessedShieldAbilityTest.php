@@ -483,6 +483,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_RAGE,
+            [],
             0
         );
     }

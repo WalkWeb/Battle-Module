@@ -82,6 +82,7 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_CONCENTRATION,
+            [],
             0
         );
 

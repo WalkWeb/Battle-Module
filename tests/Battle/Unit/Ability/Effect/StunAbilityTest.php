@@ -366,6 +366,7 @@ class StunAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_CONCENTRATION,
+            [],
         );
     }
 

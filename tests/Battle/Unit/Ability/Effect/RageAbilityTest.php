@@ -256,6 +256,7 @@ class RageAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_LOW_LIFE,
+            [],
             0
         );
     }
