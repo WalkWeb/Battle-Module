@@ -29,7 +29,10 @@ class BrokenPriestUnit extends Unit
             $enemyCommand,
             $alliesCommand,
             HealAction::TARGET_WOUNDED_ALLIES,
-            30
+            30,
+            '',
+            HealAction::UNIT_ANIMATION_METHOD,
+            HealAction::DEFAULT_MESSAGE_METHOD
         ));
 
         return $collection;

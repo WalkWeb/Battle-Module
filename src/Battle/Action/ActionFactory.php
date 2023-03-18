@@ -120,9 +120,9 @@ class ActionFactory
             $data['allies_command'],
             self::int($data, 'type_target', ActionException::INVALID_TYPE_TARGET_DATA),
             self::int($data, 'power', ActionException::INVALID_POWER_DATA),
-            self::stringOrNull($data, 'name', ActionException::INVALID_NAME_DATA),
-            self::stringOrNull($data, 'animation_method', ActionException::INVALID_ANIMATION_METHOD_DATA),
-            self::stringOrNull($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA),
+            self::string($data, 'name', ActionException::INVALID_NAME_DATA),
+            self::string($data, 'animation_method', ActionException::INVALID_ANIMATION_METHOD_DATA),
+            self::string($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA),
             self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA)
         );
     }

@@ -216,26 +216,6 @@ class ActionFactoryTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
         $container = $this->getContainer();
 
-        // Вариант с минимальным набором данных
-        $data = [
-            'type'           => ActionInterface::HEAL,
-            'action_unit'    => $unit,
-            'enemy_command'  => $enemyCommand,
-            'allies_command' => $command,
-            'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES,
-            'power'          => $power = 123,
-        ];
-
-        $action = $container->getActionFactory()->create($data);
-
-        self::assertInstanceOf(HealAction::class, $action);
-        self::assertEquals($unit, $action->getActionUnit());
-        self::assertEquals(ActionInterface::TARGET_WOUNDED_ALLIES, $action->getTypeTarget());
-        self::assertEquals($power, $action->getPower());
-        self::assertEquals('heal', $action->getNameAction());
-        self::assertEquals('', $action->getIcon());
-
-        // Полный набор данных
         $data = [
             'type'             => ActionInterface::HEAL,
             'action_unit'      => $unit,
@@ -245,6 +225,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'power'            => $power = 50,
             'name'             => $name = 'action name 123',
             'animation_method' => $animationMethod = 'effectHeal',
+            'message_method'   => $messageMethod = 'heal',
             'icon'             => $icon = 'icon.png',
         ];
 
@@ -256,6 +237,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($power, $action->getPower());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($animationMethod, $action->getAnimationMethod());
+        self::assertEquals($messageMethod, $action->getMessageMethod());
         self::assertEquals($icon, $action->getIcon());
     }
 
@@ -1412,45 +1394,6 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
-                // 20: Отсутствует type_target [для HealAction]
-                [
-                    'type'           => ActionInterface::HEAL,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'power'          => 50,
-                    'name'           => 'action name',
-                ],
-                ActionException::INVALID_TYPE_TARGET_DATA,
-            ],
-            [
-                // 21: type_target некорректного типа [для HealAction]
-                [
-                    'type'           => ActionInterface::HEAL,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => true,
-                    'power'          => 50,
-                    'name'           => 'action name',
-                ],
-                ActionException::INVALID_TYPE_TARGET_DATA,
-            ],
-            [
-                // 22: name некорректного типа [для HealAction]
-                [
-                    'type'           => ActionInterface::HEAL,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
-                    'power'          => 50,
-                    'can_be_avoided' => true,
-                    'name'           => 123,
-                ],
-                ActionException::INVALID_NAME_DATA,
-            ],
-            [
                 // 23: Отсутствует name [для SummonAction]
                 [
                     'type'           => ActionInterface::SUMMON,
@@ -1626,7 +1569,7 @@ class ActionFactoryTest extends AbstractUnitTest
             [
                 // 28: Отсутствует type_target [для BuffAction]
                 [
-                    'type'           => ActionInterface::HEAL,
+                    'type'           => ActionInterface::BUFF,
                     'action_unit'    => $actionUnit,
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
@@ -1639,7 +1582,7 @@ class ActionFactoryTest extends AbstractUnitTest
             [
                 // 29: type_target некорректного типа [для BuffAction]
                 [
-                    'type'           => ActionInterface::HEAL,
+                    'type'           => ActionInterface::BUFF,
                     'action_unit'    => $actionUnit,
                     'enemy_command'  => $enemyCommand,
                     'allies_command' => $command,
@@ -2161,23 +2104,11 @@ class ActionFactoryTest extends AbstractUnitTest
                 ],
                 ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
-            [
-                // 55: Некорректный power для HealAction
-                [
-                    'type'           => ActionInterface::HEAL,
-                    'action_unit'    => $actionUnit,
-                    'enemy_command'  => $enemyCommand,
-                    'allies_command' => $command,
-                    'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES,
-                    'power'          => true,
-                ],
-                ActionException::INVALID_POWER_DATA,
-            ],
 
             // offense и multiple_offense для DamageAction. Проверяем наличие параметра и что он null или array.
             // Остальная валидация происходит в OffenseFactory
             [
-                // 56: offense некорректного типа
+                // 55: offense некорректного типа
                 [
                     'type'             => ActionInterface::DAMAGE,
                     'action_unit'      => $actionUnit,
@@ -2193,7 +2124,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_OFFENSE_DATA,
             ],
             [
-                // 57: multiple_offense некорректного типа
+                // 56: multiple_offense некорректного типа
                 [
                     'type'             => ActionInterface::DAMAGE,
                     'action_unit'      => $actionUnit,
@@ -2211,7 +2142,7 @@ class ActionFactoryTest extends AbstractUnitTest
 
             // ManaRestoreAction
             [
-                // 58. Отсутствует type_target
+                // 57. Отсутствует type_target
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2226,7 +2157,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 59. type_target некорректного типа
+                // 58. type_target некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2242,7 +2173,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 60. Отсутствует power
+                // 59. Отсутствует power
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2257,7 +2188,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 61. power некорректного типа
+                // 60. power некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2273,7 +2204,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 62. Отсутствует name
+                // 61. Отсутствует name
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2288,7 +2219,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 63. name некорректного типа
+                // 62. name некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2304,22 +2235,22 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 64. Отсутствует animation_method
+                // 63. Отсутствует animation_method
                 [
-                    'type'             => ActionInterface::MANA_RESTORE,
-                    'action_unit'      => $actionUnit,
-                    'enemy_command'    => $enemyCommand,
-                    'allies_command'   => $command,
-                    'type_target'      => ActionInterface::TARGET_SELF,
-                    'power'            => 50,
-                    'name'             => 'mana restore',
-                    'message_method'   => 'message test',
-                    'icon'             => 'icon test',
+                    'type'           => ActionInterface::MANA_RESTORE,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'power'          => 50,
+                    'name'           => 'mana restore',
+                    'message_method' => 'message test',
+                    'icon'           => 'icon test',
                 ],
                 ActionException::INVALID_ANIMATION_METHOD_DATA,
             ],
             [
-                // 65. animation_method некорректного типа
+                // 64. animation_method некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2335,7 +2266,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ANIMATION_METHOD_DATA,
             ],
             [
-                // 66. Отсутствует message_method
+                // 65. Отсутствует message_method
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2350,7 +2281,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
-                // 67. message_method некорректного типа
+                // 66. message_method некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2366,7 +2297,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
-                // 68. icon некорректного типа
+                // 67. icon некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2378,6 +2309,184 @@ class ActionFactoryTest extends AbstractUnitTest
                     'animation_method' => 'animation test',
                     'message_method'   => 'message test',
                     'icon'             => ['icon'],
+                ],
+                ActionException::INVALID_ICON_DATA,
+            ],
+
+            // HealAction
+            [
+                // 20: Отсутствует type_target [для HealAction]
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'power'            => 50,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation',
+                    'message_method'   => 'message',
+                    'icon'             => 'icon.png',
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            [
+                // 21: type_target некорректного типа [для HealAction]
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => true,
+                    'power'            => 50,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation',
+                    'message_method'   => 'message',
+                    'icon'             => 'icon.png',
+                ],
+                ActionException::INVALID_TYPE_TARGET_DATA,
+            ],
+            [
+                // 58: Отсутствует power для HealAction
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                    'animation_method' => 'animation',
+                    'message_method'   => 'message',
+                    'icon'             => 'icon.png',
+                ],
+                ActionException::INVALID_POWER_DATA,
+            ],
+            [
+                // 58: Некорректный power для HealAction
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                    'power'            => true,
+                    'animation_method' => 'animation',
+                    'message_method'   => 'message',
+                    'icon'             => 'icon.png',
+                ],
+                ActionException::INVALID_POWER_DATA,
+            ],
+            [
+                // 22: Отсутствует name [для HealAction]
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'power'            => 50,
+                    'can_be_avoided'   => true,
+                    'animation_method' => 'animation',
+                    'message_method'   => 'message',
+                    'icon'             => 'icon.png',
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            [
+                // 22: name некорректного типа [для HealAction]
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'power'            => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => 123,
+                    'animation_method' => 'animation',
+                    'message_method'   => 'message',
+                    'icon'             => 'icon.png',
+                ],
+                ActionException::INVALID_NAME_DATA,
+            ],
+            [
+                // 22: Отсутствует animation_method [для HealAction]
+                [
+                    'type'           => ActionInterface::HEAL,
+                    'action_unit'    => $actionUnit,
+                    'enemy_command'  => $enemyCommand,
+                    'allies_command' => $command,
+                    'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'power'          => 50,
+                    'can_be_avoided' => true,
+                    'name'           => '',
+                    'message_method' => 'message',
+                    'icon'           => 'icon.png',
+                ],
+                ActionException::INVALID_ANIMATION_METHOD_DATA,
+            ],
+            [
+                // 22: animation_method некорректного типа [для HealAction]
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'power'            => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => '',
+                    'animation_method' => null,
+                    'message_method'   => 'message',
+                    'icon'             => 'icon.png',
+                ],
+                ActionException::INVALID_ANIMATION_METHOD_DATA,
+            ],
+            [
+                // 22: Отсутствует message_method [для HealAction]
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'power'            => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => '',
+                    'animation_method' => '',
+                    'icon'             => 'icon.png',
+                ],
+                ActionException::INVALID_MESSAGE_METHOD_DATA,
+            ],
+            [
+                // 22: message_method некорректного типа [для HealAction]
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'power'            => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => '',
+                    'animation_method' => '',
+                    'message_method'   => false,
+                    'icon'             => 'icon.png',
+                ],
+                ActionException::INVALID_MESSAGE_METHOD_DATA,
+            ],
+            [
+                // 22: icon некорректного типа [для HealAction]
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'power'            => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => '',
+                    'animation_method' => '',
+                    'message_method'   => '',
+                    'icon'             => 11.11,
                 ],
                 ActionException::INVALID_ICON_DATA,
             ],

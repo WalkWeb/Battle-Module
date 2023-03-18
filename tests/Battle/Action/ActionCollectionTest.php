@@ -77,7 +77,10 @@ class ActionCollectionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            20
+            20,
+            '',
+            HealAction::UNIT_ANIMATION_METHOD,
+            HealAction::DEFAULT_MESSAGE_METHOD
         );
 
         $actionCollection = new ActionCollection();

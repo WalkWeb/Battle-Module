@@ -464,7 +464,10 @@ class ScenarioTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             DamageAction::TARGET_ALL_WOUNDED_ALLIES,
-            35
+            35,
+            '',
+            HealAction::UNIT_ANIMATION_METHOD,
+            HealAction::DEFAULT_MESSAGE_METHOD
         );
 
         self::assertTrue($action->canByUsed());

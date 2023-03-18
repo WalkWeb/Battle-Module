@@ -50,7 +50,7 @@ class HealActionTest extends AbstractUnitTest
         }
 
         // Применяем лечение (получаем Action от способности GreatHealAbility)
-        $actions =  $priest->getActions($enemyCommand, $alliesCommand);
+        $actions = $priest->getActions($enemyCommand, $alliesCommand);
 
         foreach ($actions as $action) {
             self::assertEquals(HealAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
@@ -152,7 +152,10 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            20
+            20,
+            '',
+            HealAction::UNIT_ANIMATION_METHOD,
+            HealAction::DEFAULT_MESSAGE_METHOD
         );
 
         self::assertEquals($unit->getOffense()->getDamage($enemyUnit->getDefense()), $healAction->getPower());
@@ -206,7 +209,10 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            20
+            20,
+            '',
+            HealAction::UNIT_ANIMATION_METHOD,
+            HealAction::DEFAULT_MESSAGE_METHOD
         );
 
         $this->expectException(ActionException::class);
@@ -232,7 +238,10 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            20
+            20,
+            '',
+            HealAction::UNIT_ANIMATION_METHOD,
+            HealAction::DEFAULT_MESSAGE_METHOD
         );
 
         $this->expectException(ActionException::class);
@@ -285,7 +294,7 @@ class HealActionTest extends AbstractUnitTest
         $unit = UnitFactory::createByTemplate(1);
         $slightlyWoundedUnit = UnitFactory::createByTemplate(9);
         $badlyWoundedUnit = UnitFactory::createByTemplate(11);
-        $deadUnit =  UnitFactory::createByTemplate(10);
+        $deadUnit = UnitFactory::createByTemplate(10);
         $enemyUnit = UnitFactory::createByTemplate(2);
 
         $command = CommandFactory::create([$unit, $slightlyWoundedUnit, $badlyWoundedUnit, $deadUnit]);
@@ -300,7 +309,10 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_ALL_WOUNDED_ALLIES,
-            $power
+            $power,
+            '',
+            HealAction::UNIT_ANIMATION_METHOD,
+            HealAction::DEFAULT_MESSAGE_METHOD
         );
 
         $action->handle();
@@ -333,7 +345,10 @@ class HealActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             HealAction::TARGET_WOUNDED_ALLIES,
-            20
+            20,
+            '',
+            HealAction::UNIT_ANIMATION_METHOD,
+            HealAction::DEFAULT_MESSAGE_METHOD
         );
 
         self::assertFalse($healAction->isBlocked($enemyUnit));
@@ -366,14 +381,15 @@ class HealActionTest extends AbstractUnitTest
                 'on_apply_actions'      => [],
                 'on_next_round_actions' => [
                     [
-                        'type'            => ActionInterface::HEAL,
-                        'action_unit'     => $unit,
-                        'enemy_command'   => $enemyCommand,
-                        'allies_command'  => $command,
-                        'type_target'     => ActionInterface::TARGET_SELF,
-                        'name'            => null,
-                        'power'           => 100,
+                        'type'             => ActionInterface::HEAL,
+                        'action_unit'      => $unit,
+                        'enemy_command'    => $enemyCommand,
+                        'allies_command'   => $command,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'name'             => '',
+                        'power'            => 100,
                         'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                        'message_method'   => HealAction::DEFAULT_MESSAGE_METHOD,
                     ],
                 ],
                 'on_disable_actions'    => [],

@@ -449,6 +449,7 @@ class StrokeTest extends AbstractUnitTest
                         'name'             => 'Effect Heal',
                         'power'            => 15,
                         'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                        'message_method'   => HealAction::DEFAULT_MESSAGE_METHOD,
                     ],
                 ],
                 'on_disable_actions'    => [],

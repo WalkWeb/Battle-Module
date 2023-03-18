@@ -69,9 +69,6 @@ abstract class AbstractAbility implements AbilityInterface
     protected int $typeActivate;
 
     /**
-     * TODO Используется только в способностях с типом активации ACTIVATE_DEAD
-     * TODO При этом название свойства не отражает этой особенности, и может сбивать с толку
-     *
      * @var int
      */
     protected int $chanceActivate;
@@ -90,7 +87,7 @@ abstract class AbstractAbility implements AbilityInterface
      * @param string $icon
      * @param array $actionsData
      * @param int $typeActivate
-     * @param array $allowedWeaponType
+     * @param array $allowedWeaponTypes
      * @param int $chanceActivate
      * @throws Exception
      */

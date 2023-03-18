@@ -38,8 +38,6 @@ class HealAction extends AbstractAction
      */
     protected string $messageMethod;
 
-    // TODO Избавиться от null параметров в конструкторе
-
     public function __construct(
         ContainerInterface $container,
         UnitInterface $actionUnit,
@@ -47,9 +45,9 @@ class HealAction extends AbstractAction
         CommandInterface $alliesCommand,
         int $typeTarget,
         int $power,
-        ?string $name = null,
-        ?string $animationMethod = null,
-        ?string $messageMethod = null,
+        string $name,
+        string $animationMethod,
+        string $messageMethod,
         string $icon = ''
     )
     {
@@ -57,8 +55,8 @@ class HealAction extends AbstractAction
 
         $this->power = $power;
         $this->name = $name ?? self::NAME;
-        $this->animationMethod = $animationMethod ?? self::UNIT_ANIMATION_METHOD;
-        $this->messageMethod = $messageMethod ?? self::DEFAULT_MESSAGE_METHOD;
+        $this->animationMethod = $animationMethod;
+        $this->messageMethod = $messageMethod;
     }
 
     public function getHandleMethod(): string
