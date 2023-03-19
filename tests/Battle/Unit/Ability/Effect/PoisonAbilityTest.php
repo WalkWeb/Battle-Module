@@ -25,12 +25,12 @@ use Tests\Factory\UnitFactory;
 class PoisonAbilityTest extends AbstractUnitTest
 {
     // Сообщения применения на другого юнита
-    private const MESSAGE_APPLY_TO_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span> on <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_APPLY_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span> на <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_APPLY_TO_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_APPLY_TO_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span> на <span style="color: #1e72e3">unit_2</span>';
 
     // Сообщения применения эффекта на себя
-    private const MESSAGE_APPLY_SELF_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
-    private const MESSAGE_APPLY_SELF_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
+    private const MESSAGE_APPLY_SELF_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
+    private const MESSAGE_APPLY_SELF_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
 
     // Сообщения об уроне от эффекта
     private const MESSAGE_DAMAGE_EN = '<span style="color: #1e72e3">unit_2</span> received 8 damage from effect <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
@@ -50,7 +50,7 @@ class PoisonAbilityTest extends AbstractUnitTest
         $name = 'Poison';
         $icon = '/images/icons/ability/202.png';
 
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(4);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -94,7 +94,7 @@ class PoisonAbilityTest extends AbstractUnitTest
     public function testPoisonAbilityGetActions(): void
     {
         $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
+        $unit = UnitFactory::createByTemplate(4, $container);
         $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -115,7 +115,7 @@ class PoisonAbilityTest extends AbstractUnitTest
      */
     public function testPoisonAbilityCantByUsed(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(4);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -165,7 +165,7 @@ class PoisonAbilityTest extends AbstractUnitTest
     public function testPoisonAbilityApplySelfMessage(): void
     {
         $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
+        $unit = UnitFactory::createByTemplate(4, $container);
         $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -193,7 +193,7 @@ class PoisonAbilityTest extends AbstractUnitTest
         $name = 'Poison';
         $icon = '/images/icons/ability/202.png';
 
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(4);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -237,7 +237,7 @@ class PoisonAbilityTest extends AbstractUnitTest
     public function testPoisonAbilityDataProviderGetActions(): void
     {
         $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
+        $unit = UnitFactory::createByTemplate(4, $container);
         $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -258,7 +258,7 @@ class PoisonAbilityTest extends AbstractUnitTest
      */
     public function testPoisonAbilityDataProviderCantByUsed(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(4);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -446,7 +446,10 @@ class PoisonAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_CONCENTRATION,
-            [],
+            [
+                WeaponTypeInterface::STAFF,
+                WeaponTypeInterface::WAND,
+            ],
             0
         );
     }

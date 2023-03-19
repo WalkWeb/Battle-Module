@@ -13,14 +13,15 @@ use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
 class BackToLifeAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">Back to Life</span> and resurrected <span style="color: #1e72e3">dead_unit</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">Возвращение к жизни</span> и воскресил <span style="color: #1e72e3">dead_unit</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_5</span> use <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">Back to Life</span> and resurrected <span style="color: #1e72e3">dead_unit</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_5</span> использовал <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">Возвращение к жизни</span> и воскресил <span style="color: #1e72e3">dead_unit</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -37,7 +38,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
         $icon = '/images/icons/ability/053.png';
         $power = 30;
 
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(5);
         $deadUnit = UnitFactory::createByTemplate(10);
         $enemyUnit = UnitFactory::createByTemplate(2);
 
@@ -98,7 +99,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
      */
     public function testBackToLifeAbilityCantBeUsed(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(5);
         $woundedUnit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);
 
@@ -125,7 +126,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
         $icon = '/images/icons/ability/053.png';
         $power = 30;
 
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(5);
         $deadUnit = UnitFactory::createByTemplate(10);
         $enemyUnit = UnitFactory::createByTemplate(2);
 
@@ -189,7 +190,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
      */
     public function testBackToLifeAbilityDataProviderCantBeUsed(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(5);
         $woundedUnit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(2);
 
@@ -227,7 +228,10 @@ class BackToLifeAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_RAGE,
-            [],
+            [
+                WeaponTypeInterface::STAFF,
+                WeaponTypeInterface::WAND,
+            ],
             0
         );
     }

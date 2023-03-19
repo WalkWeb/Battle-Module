@@ -21,8 +21,6 @@ use Battle\Weapon\Type\WeaponTypeInterface;
  * При этом можно сделать веб-интерфейс (в админ-панели), через который параметры способностей можно будет изменять
  * сразу в браузере.
  *
- * TODO Пройтись по способностям и подумать над добавлением им требований к типу оружия
- *
  * @package Battle\Unit\Ability\DataProvider
  */
 class ExampleAbilityDataProvider implements AbilityDataProviderInterface
@@ -315,11 +313,16 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
         ],
         'Stun'           => [
             1 => [
-                'name'          => 'Stun',
-                'icon'          => '/images/icons/ability/186.png',
-                'disposable'    => false,
-                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
-                'actions'       => [
+                'name'                 => 'Stun',
+                'icon'                 => '/images/icons/ability/186.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::MACE,
+                    WeaponTypeInterface::TWO_HAND_MACE,
+                    WeaponTypeInterface::HEAVY_TWO_HAND_MACE,
+                ],
+                'actions'              => [
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
@@ -350,11 +353,15 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
         ],
         'Poison'         => [
             1 => [
-                'name'          => 'Poison',
-                'icon'          => '/images/icons/ability/202.png',
-                'disposable'    => false,
-                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
-                'actions'       => [
+                'name'                 => 'Poison',
+                'icon'                 => '/images/icons/ability/202.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
@@ -475,11 +482,15 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
         ],
         'General Heal'   => [
             1 => [
-                'name'          => 'General Heal',
-                'icon'          => '/images/icons/ability/452.png',
-                'disposable'    => false,
-                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
-                'actions'       => [
+                'name'                 => 'General Heal',
+                'icon'                 => '/images/icons/ability/452.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
                     [
                         'type'             => ActionInterface::HEAL,
                         'type_target'      => ActionInterface::TARGET_ALL_WOUNDED_ALLIES,
@@ -495,11 +506,15 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
         ],
         'Great Heal'     => [
             1 => [
-                'name'          => 'Great Heal',
-                'icon'          => '/images/icons/ability/196.png',
-                'disposable'    => false,
-                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
-                'actions'       => [
+                'name'                 => 'Great Heal',
+                'icon'                 => '/images/icons/ability/196.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
                     [
                         'type'             => ActionInterface::HEAL,
                         'type_target'      => ActionInterface::TARGET_ALL_WOUNDED_ALLIES,
@@ -515,11 +530,15 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
         ],
         'Back to Life'   => [
             1 => [
-                'name'          => 'Back to Life',
-                'icon'          => '/images/icons/ability/053.png',
-                'disposable'    => false,
-                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
-                'actions'       => [
+                'name'                 => 'Back to Life',
+                'icon'                 => '/images/icons/ability/053.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
                     [
                         'type'           => ActionInterface::RESURRECTION,
                         'type_target'    => ActionInterface::TARGET_DEAD_ALLIES,

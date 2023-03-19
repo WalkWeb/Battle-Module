@@ -16,6 +16,7 @@ use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
@@ -28,8 +29,8 @@ use Tests\Factory\UnitFactory;
  */
 class StunAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_APPLY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Stun</span> on <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_APPLY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Оглушение</span> на <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_APPLY_EN = '<span style="color: #1e72e3">unit_3</span> use <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Stun</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_APPLY_RU = '<span style="color: #1e72e3">unit_3</span> использовал <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Оглушение</span> на <span style="color: #1e72e3">unit_2</span>';
 
     private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> stunned and unable to move';
     private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> оглушен и не может двигаться';
@@ -49,7 +50,7 @@ class StunAbilityTest extends AbstractUnitTest
         $name = 'Stun';
         $icon = '/images/icons/ability/186.png';
 
-        $unit = UnitFactory::createByTemplate(1, $container);
+        $unit = UnitFactory::createByTemplate(3, $container);
         $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -97,7 +98,7 @@ class StunAbilityTest extends AbstractUnitTest
      */
     public function testStunAbilityUse(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(3);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -165,7 +166,7 @@ class StunAbilityTest extends AbstractUnitTest
         $name = 'Stun';
         $icon = '/images/icons/ability/186.png';
 
-        $unit = UnitFactory::createByTemplate(1, $container);
+        $unit = UnitFactory::createByTemplate(3, $container);
         $enemyUnit = UnitFactory::createByTemplate(2, $container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -213,7 +214,7 @@ class StunAbilityTest extends AbstractUnitTest
      */
     public function testStunAbilityDataProviderUse(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(3);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -366,7 +367,11 @@ class StunAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_CONCENTRATION,
-            [],
+            [
+                WeaponTypeInterface::MACE,
+                WeaponTypeInterface::TWO_HAND_MACE,
+                WeaponTypeInterface::HEAVY_TWO_HAND_MACE,
+            ],
         );
     }
 

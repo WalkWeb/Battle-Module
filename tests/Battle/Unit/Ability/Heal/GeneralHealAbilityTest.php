@@ -14,6 +14,7 @@ use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
@@ -25,8 +26,8 @@ class GeneralHealAbilityTest extends AbstractUnitTest
      *
      * Один из раненых юнитов имеет 90/100 здоровья, другой 1/100, соответственно лечение будет на 10 + 24 = 34
      */
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">General Heal</span> and heal <span style="color: #1e72e3">small_wounded_unit</span> and <span style="color: #1e72e3">wounded_unit</span> on 34 life';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">Общее исцеление</span> и вылечил <span style="color: #1e72e3">small_wounded_unit</span> и <span style="color: #1e72e3">wounded_unit</span> на 34 здоровья';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">General Heal</span> and heal <span style="color: #1e72e3">small_wounded_unit</span> and <span style="color: #1e72e3">wounded_unit</span> on 34 life';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">Общее исцеление</span> и вылечил <span style="color: #1e72e3">small_wounded_unit</span> и <span style="color: #1e72e3">wounded_unit</span> на 34 здоровья';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -42,7 +43,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         $name = 'General Heal';
         $icon = '/images/icons/ability/452.png';
 
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(4);
         $slightlyWoundedUnit = UnitFactory::createByTemplate(9);
         $badlyWoundedUnit = UnitFactory::createByTemplate(11);
         $deadUnit =  UnitFactory::createByTemplate(10);
@@ -104,7 +105,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
      */
     public function testGeneralHealAbilityCantByUsed(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(4);
         $enemyUnit = UnitFactory::createByTemplate(2);
 
         $command = CommandFactory::create([$unit]);
@@ -129,7 +130,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         $name = 'General Heal';
         $icon = '/images/icons/ability/452.png';
 
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(4);
         $slightlyWoundedUnit = UnitFactory::createByTemplate(9);
         $badlyWoundedUnit = UnitFactory::createByTemplate(11);
         $deadUnit =  UnitFactory::createByTemplate(10);
@@ -194,7 +195,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
      */
     public function testGeneralHealAbilityDataProviderCantByUsed(): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(4);
         $enemyUnit = UnitFactory::createByTemplate(2);
 
         $command = CommandFactory::create([$unit]);
@@ -233,8 +234,11 @@ class GeneralHealAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_RAGE,
-            [],
-            0
+            [
+                WeaponTypeInterface::STAFF,
+                WeaponTypeInterface::WAND,
+            ],
+            0,
         );
     }
 

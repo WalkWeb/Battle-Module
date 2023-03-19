@@ -11,6 +11,7 @@ use Battle\Result\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
@@ -21,8 +22,8 @@ use Battle\Unit\Ability\AbilityCollection;
 
 class GreatHealAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and heal <span style="color: #1e72e3">unit_1</span> on 30 life';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">unit_1</span> на 30 здоровья';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_5</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and heal <span style="color: #1e72e3">unit_5</span> on 30 life';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_5</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">unit_5</span> на 30 здоровья';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -38,7 +39,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
         $name = 'Great Heal';
         $icon = '/images/icons/ability/196.png';
 
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(5);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -69,10 +70,13 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         $damage->handle();
 
-        // После чего, способность может быть использована
+        // Проверяем, что юнит получил 30 урона
+        self::assertEquals($unit->getTotalLife() - 30, $unit->getLife());
+
+        // После чего, способность на лечение может быть использована
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        // Up concentration
+        // Активируем способность
         for ($i = 0; $i < 10; $i++) {
             $unit->newRound();
         }
@@ -92,11 +96,15 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertInstanceOf(HealAction::class, $action);
-            self::assertEquals($unit->getOffense()->getDamage($enemyUnit->getDefense()) * 3, $action->getPower());
+            self::assertEquals(60, $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();
+            self::assertEquals(30, $action->getFactualPowerByUnit($unit));
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
+
+            // Дополнительное проверяем, что по событию успешно создается анимация
+            (new Scenario())->addAnimation($action, new Statistic());
         }
 
         $ability->usage();
@@ -109,7 +117,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
      */
     public function testCreatHealAbilityCantByUsed(): void
     {
-        $unit = UnitFactory::createByTemplate(4);
+        $unit = UnitFactory::createByTemplate(5);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -129,7 +137,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
         $name = 'Great Heal';
         $icon = '/images/icons/ability/196.png';
 
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(5);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -160,10 +168,13 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         $damage->handle();
 
-        // После чего, способность может быть использована
+        // Проверяем, что юнит получил 30 урона
+        self::assertEquals($unit->getTotalLife() - 30, $unit->getLife());
+
+        // После чего, способность на лечение может быть использована
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
 
-        // Up concentration
+        // Активируем способность
         for ($i = 0; $i < 10; $i++) {
             $unit->newRound();
         }
@@ -183,9 +194,10 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         foreach ($actions as $action) {
             self::assertInstanceOf(HealAction::class, $action);
-            self::assertEquals($unit->getOffense()->getDamage($enemyUnit->getDefense()) * 3, $action->getPower());
+            self::assertEquals(60, $action->getPower());
             self::assertTrue($action->canByUsed());
             $action->handle();
+            self::assertEquals(30, $action->getFactualPowerByUnit($unit));
             self::assertEquals(self::MESSAGE_EN, $this->getChat()->addMessage($action));
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
 
@@ -203,7 +215,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
      */
     public function testGreatHealAbilityDataProviderCantByUsed(): void
     {
-        $unit = UnitFactory::createByTemplate(4);
+        $unit = UnitFactory::createByTemplate(5);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -245,7 +257,10 @@ class GreatHealAbilityTest extends AbstractUnitTest
                 ],
             ],
             AbilityInterface::ACTIVATE_CONCENTRATION,
-            [],
+            [
+                WeaponTypeInterface::STAFF,
+                WeaponTypeInterface::WAND,
+            ],
             0
         );
     }
