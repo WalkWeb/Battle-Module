@@ -317,7 +317,7 @@ class DamageAction extends AbstractAction
      * @param UnitInterface $unit
      * @return bool
      */
-    public function isDodged(UnitInterface $unit): bool
+    public function isEvaded(UnitInterface $unit): bool
     {
         if (!array_key_exists($unit->getId(), $this->dodgedByUnit)) {
             return false;

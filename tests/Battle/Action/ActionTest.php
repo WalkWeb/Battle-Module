@@ -183,7 +183,7 @@ class ActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $action = new WaitAction($this->getContainer(), $unit, $enemyCommand, $command);
 
-        self::assertFalse($action->isDodged($enemyUnit));
+        self::assertFalse($action->isEvaded($enemyUnit));
 
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::dodged');

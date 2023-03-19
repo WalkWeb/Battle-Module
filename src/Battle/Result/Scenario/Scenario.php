@@ -55,7 +55,7 @@ class Scenario implements ScenarioInterface
         foreach ($action->getTargetUnits() as $targetUnit) {
             if ($action->isBlocked($targetUnit)) {
                 $targetEffects[] = $this->createBlockedDamageTargetEffect($targetUnit);
-            } elseif ($action->isDodged($targetUnit)) {
+            } elseif ($action->isEvaded($targetUnit)) {
                 $targetEffects[] = $this->createDodgedDamageTargetEffect($targetUnit);
             } else {
                 $targetEffects[] = $this->createDamageTargetEffect($action, $targetUnit);

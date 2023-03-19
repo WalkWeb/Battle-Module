@@ -210,7 +210,7 @@ class Statistic implements StatisticInterface
     private function countingTakenDamage(ActionInterface $action): void
     {
         foreach ($action->getTargetUnits() as $targetUnit) {
-            if (!$action->isBlocked($targetUnit) && !$action->isDodged($targetUnit)) {
+            if (!$action->isBlocked($targetUnit) && !$action->isEvaded($targetUnit)) {
                 $unit = $this->getOrCreateUnitStatistic($targetUnit);
                 $unit->addTakenDamage($action->getFactualPowerByUnit($targetUnit));
             }
@@ -244,7 +244,7 @@ class Statistic implements StatisticInterface
     private function countingDodgedHits(ActionInterface $action): void
     {
         foreach ($action->getTargetUnits() as $targetUnit) {
-            if ($action->isDodged($targetUnit)) {
+            if ($action->isEvaded($targetUnit)) {
                 $unit = $this->getOrCreateUnitStatistic($targetUnit);
                 $unit->addDodgedHit();
             }

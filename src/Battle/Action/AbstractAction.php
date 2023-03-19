@@ -265,7 +265,7 @@ abstract class AbstractAction implements ActionInterface
      * @param UnitInterface $unit
      * @return bool
      */
-    public function isDodged(UnitInterface $unit): bool
+    public function isEvaded(UnitInterface $unit): bool
     {
         return false;
     }

@@ -410,7 +410,7 @@ class Chat implements ChatInterface
         $names = [];
 
         foreach ($action->getTargetUnits() as $target) {
-            if (!$action->isBlocked($target) && !$action->isDodged($target)) {
+            if (!$action->isBlocked($target) && !$action->isEvaded($target)) {
                 $names[] = '<span style="color: ' . $target->getRace()->getColor() . '">' . $target->getName() . '</span>';
             }
         }
@@ -446,7 +446,7 @@ class Chat implements ChatInterface
         $names = [];
 
         foreach ($action->getTargetUnits() as $target) {
-            if ($action->isDodged($target)) {
+            if ($action->isEvaded($target)) {
                 $names[] = '<span style="color: ' . $target->getRace()->getColor() . '">' . $target->getName() . '</span>';
             }
         }

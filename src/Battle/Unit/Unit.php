@@ -106,7 +106,7 @@ class Unit extends AbstractUnit
      */
     private function applyDamageAction(ActionInterface $action): ActionCollection
     {
-        if ($this->isDodged($action)) {
+        if ($this->isEvaded($action)) {
             $action->addFactualPower($this, 0);
             $action->dodged($this);
             return new ActionCollection();
@@ -497,7 +497,7 @@ class Unit extends AbstractUnit
      * @return bool
      * @throws Exception
      */
-    private function isDodged(ActionInterface $action): bool
+    private function isEvaded(ActionInterface $action): bool
     {
         if (!$action->isCanBeAvoided()) {
             return false;
@@ -505,6 +505,11 @@ class Unit extends AbstractUnit
 
         if ($this->isParalysis()) {
             return false;
+        }
+
+        // Механика dodge (в отличие от механики defense) не зависит от меткости противника
+        if ($this->defense->getDodge() > random_int(0, 100)) {
+            return true;
         }
 
         $chanceOfHit = $this->getChanceOfHit($action);

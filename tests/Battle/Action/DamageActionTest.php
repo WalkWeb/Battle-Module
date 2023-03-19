@@ -369,13 +369,13 @@ class DamageActionTest extends AbstractUnitTest
 
         $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
-        self::assertFalse($action->isDodged($enemyUnit));
+        self::assertFalse($action->isEvaded($enemyUnit));
 
         self::assertTrue($action->canByUsed());
 
         $action->handle();
 
-        self::assertFalse($action->isDodged($enemyUnit));
+        self::assertFalse($action->isEvaded($enemyUnit));
     }
 
     /**
@@ -394,13 +394,13 @@ class DamageActionTest extends AbstractUnitTest
 
         $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
-        self::assertFalse($action->isDodged($enemyUnit));
+        self::assertFalse($action->isEvaded($enemyUnit));
 
         self::assertTrue($action->canByUsed());
 
         $action->handle();
 
-        self::assertTrue($action->isDodged($enemyUnit));
+        self::assertTrue($action->isEvaded($enemyUnit));
     }
 
     /**
@@ -410,7 +410,7 @@ class DamageActionTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testDamageActionNoDodgedSpell(): void
+    public function testDamageActionNoEvadedSpell(): void
     {
         $unit = UnitFactory::createByTemplate(37);
         $enemyUnit = UnitFactory::createByTemplate(1);
@@ -419,13 +419,13 @@ class DamageActionTest extends AbstractUnitTest
 
         $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
-        self::assertFalse($action->isDodged($enemyUnit));
+        self::assertFalse($action->isEvaded($enemyUnit));
 
         self::assertTrue($action->canByUsed());
 
         $action->handle();
 
-        self::assertFalse($action->isDodged($enemyUnit));
+        self::assertFalse($action->isEvaded($enemyUnit));
     }
 
     /**
@@ -435,7 +435,7 @@ class DamageActionTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testDamageActionDodgedSpell(): void
+    public function testDamageActionEvadedSpell(): void
     {
         $unit = UnitFactory::createByTemplate(5);
         $enemyUnit = UnitFactory::createByTemplate(37);
@@ -444,13 +444,37 @@ class DamageActionTest extends AbstractUnitTest
 
         $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
-        self::assertFalse($action->isDodged($enemyUnit));
+        self::assertFalse($action->isEvaded($enemyUnit));
 
         self::assertTrue($action->canByUsed());
 
         $action->handle();
 
-        self::assertTrue($action->isDodged($enemyUnit));
+        self::assertTrue($action->isEvaded($enemyUnit));
+    }
+
+    /**
+     * Тест на механику Dodge - юнит со 100% dodge, но 1 обычной и магической защиты уклоняется от вражеского заклинания
+     * в 100% случаев
+     *
+     * @throws Exception
+     */
+    public function testDamageActionDodge(): void
+    {
+        $unit = UnitFactory::createByTemplate(37);
+        $enemyUnit = UnitFactory::createByTemplate(51);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertFalse($action->isEvaded($enemyUnit));
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertTrue($action->isEvaded($enemyUnit));
     }
 
     /**
@@ -479,7 +503,7 @@ class DamageActionTest extends AbstractUnitTest
         $action->handle();
 
         // Уклонение не сработало
-        self::assertFalse($action->isDodged($enemyUnit));
+        self::assertFalse($action->isEvaded($enemyUnit));
         self::assertEquals($unit->getOffense()->getDamage($enemyUnit->getDefense()), $action->getFactualPowerByUnit($enemyUnit));
     }
 

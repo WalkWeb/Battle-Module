@@ -320,7 +320,7 @@ interface ActionInterface
      * @param UnitInterface $unit
      * @return bool
      */
-    public function isDodged(UnitInterface $unit): bool;
+    public function isEvaded(UnitInterface $unit): bool;
 
     /**
      * Указывает, что юнит уклонился от данного события
