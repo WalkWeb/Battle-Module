@@ -39,6 +39,7 @@ class DefenseTest extends AbstractUnitTest
         $lifeMaxResist = 81;
         $deathMaxResist = 82;
         $globalResist = 5;
+        $dodge = 3;
 
         $defense = new Defense(
             $physicalResist,
@@ -60,7 +61,8 @@ class DefenseTest extends AbstractUnitTest
             $earthMaxResist,
             $lifeMaxResist,
             $deathMaxResist,
-            $globalResist
+            $globalResist,
+            $dodge
         );
 
         self::assertEquals($physicalResist, $defense->getPhysicalResist());
@@ -83,6 +85,7 @@ class DefenseTest extends AbstractUnitTest
         self::assertEquals($lifeMaxResist, $defense->getLifeMaxResist());
         self::assertEquals($deathMaxResist, $defense->getDeathMaxResist());
         self::assertEquals($globalResist, $defense->getGlobalResist());
+        self::assertEquals($dodge, $defense->getDodge());
     }
 
     /**
@@ -114,6 +117,7 @@ class DefenseTest extends AbstractUnitTest
         $defense->setLifeMaxResist($lifeMaxResist = 86);
         $defense->setDeathMaxResist($deathMaxResist = 87);
         $defense->setGlobalResist($globalResist = 10);
+        $defense->setDodge($dodge = 3);
 
         self::assertEquals($physicalResist, $defense->getPhysicalResist());
         self::assertEquals($fireResist, $defense->getFireResist());
@@ -135,6 +139,7 @@ class DefenseTest extends AbstractUnitTest
         self::assertEquals($lifeMaxResist, $defense->getLifeMaxResist());
         self::assertEquals($deathMaxResist, $defense->getDeathMaxResist());
         self::assertEquals($globalResist, $defense->getGlobalResist());
+        self::assertEquals($dodge, $defense->getDodge());
     }
 
     /**
@@ -698,6 +703,34 @@ class DefenseTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком низкое значение Dodge
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMinDodge(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_DODGE_VALUE . DefenseInterface::MIN_DODGE . '-' . DefenseInterface::MAX_DODGE
+        );
+        $this->createDefense()->setDodge(DefenseInterface::MIN_DODGE - 1);
+    }
+
+    /**
+     * Тест на ошибку, когда в Defense пытаются записать слишком большое значение Dodge
+     *
+     * @throws DefenseException
+     */
+    public function testDefenseSetUltraMaxDodge(): void
+    {
+        $this->expectException(DefenseException::class);
+        $this->expectExceptionMessage(
+            DefenseException::INCORRECT_DODGE_VALUE . DefenseInterface::MIN_DODGE . '-' . DefenseInterface::MAX_DODGE
+        );
+        $this->createDefense()->setDodge(DefenseInterface::MAX_DODGE + 1);
+    }
+
+    /**
      * @return DefenseInterface
      * @throws DefenseException
      */
@@ -723,6 +756,7 @@ class DefenseTest extends AbstractUnitTest
             75,
             75,
             75,
+            0,
             0
         );
     }

@@ -163,6 +163,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'max_life_resist'     => 75,
                             'max_death_resist'    => 75,
                             'global_resist'       => 0,
+                            'dodge'               => 0,
                         ],
                     ],
                     [
@@ -222,6 +223,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'max_life_resist'     => 75,
                             'max_death_resist'    => 75,
                             'global_resist'       => 0,
+                            'dodge'               => 0,
                         ],
                     ],
                 ],
@@ -293,6 +295,7 @@ class CommandFactoryTest extends AbstractUnitTest
                             'max_life_resist'     => 75,
                             'max_death_resist'    => 75,
                             'global_resist'       => 0,
+                            'dodge'               => 0,
                         ],
                     ],
                 ],
@@ -334,6 +337,7 @@ class CommandFactoryTest extends AbstractUnitTest
             75,
             75,
             75,
+            0,
             0
         );
     }

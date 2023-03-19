@@ -107,6 +107,11 @@ class Defense implements DefenseInterface
     private int $globalResist;
 
     /**
+     * @var int - Dodge. Вероятность уклониться от атаки/заклинания противника, не зависящее от меткости противника
+     */
+    private int $dodge;
+
+    /**
      * @param int $physicalResist
      * @param int $fireResist
      * @param int $waterResist
@@ -127,6 +132,7 @@ class Defense implements DefenseInterface
      * @param int $lifeMaxResist
      * @param int $deathMaxResist
      * @param int $globalResist
+     * @param int $dodge
      * @throws DefenseException
      */
     public function __construct(
@@ -149,7 +155,8 @@ class Defense implements DefenseInterface
         int $earthMaxResist,
         int $lifeMaxResist,
         int $deathMaxResist,
-        int $globalResist
+        int $globalResist,
+        int $dodge
     )
     {
         $this->setPhysicalResist($physicalResist);
@@ -172,6 +179,7 @@ class Defense implements DefenseInterface
         $this->setLifeMaxResist($lifeMaxResist);
         $this->setDeathMaxResist($deathMaxResist);
         $this->setGlobalResist($globalResist);
+        $this->setDodge($dodge);
     }
 
     /**
@@ -632,5 +640,28 @@ class Defense implements DefenseInterface
         }
 
         $this->globalResist = $globalResist;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDodge(): int
+    {
+        return $this->dodge;
+    }
+
+    /**
+     * @param int $dodge
+     * @throws DefenseException
+     */
+    public function setDodge(int $dodge): void
+    {
+        if ($dodge < self::MIN_DODGE || $dodge > self::MAX_DODGE) {
+            throw new DefenseException(
+                DefenseException::INCORRECT_DODGE_VALUE . DefenseInterface::MIN_DODGE . '-' . DefenseInterface::MAX_DODGE
+            );
+        }
+
+        $this->dodge = $dodge;
     }
 }

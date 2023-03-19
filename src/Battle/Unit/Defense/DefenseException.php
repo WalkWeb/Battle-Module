@@ -48,4 +48,6 @@ class DefenseException extends Exception
     public const INCORRECT_MAX_DEATH_RESIST_VALUE    = 'Incorrect "max_death_resist", should be min-max value: ';
     public const INCORRECT_GLOBAL_RESIST             = 'Incorrect "global_resist", it required and type int';
     public const INCORRECT_GLOBAL_RESIST_VALUE       = 'Incorrect "global_resist", should be min-max value: ';
+    public const INCORRECT_DODGE                     = 'Incorrect "dodge", it required and type int';
+    public const INCORRECT_DODGE_VALUE               = 'Incorrect "dodge", should be min-max value: ';
 }

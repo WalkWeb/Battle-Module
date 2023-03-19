@@ -83,6 +83,7 @@ class OffenseTest extends AbstractUnitTest
             75,
             75,
             75,
+            0,
             0
         );
 
@@ -148,6 +149,7 @@ class OffenseTest extends AbstractUnitTest
             75,
             75,
             75,
+            0,
             0
         );
 
@@ -794,7 +796,8 @@ class OffenseTest extends AbstractUnitTest
             75,
             75,
             75,
-            $resist['global_resist']
+            $resist['global_resist'],
+            0
         );
 
         self::assertEquals($exceptedDamage, $offense->getDamage($defense));

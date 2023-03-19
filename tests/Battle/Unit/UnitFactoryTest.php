@@ -117,49 +117,8 @@ class UnitFactoryTest extends AbstractUnitTest
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
             'add_rage_multiplier'          => 0,
-            'offense'                      => [
-                'damage_type'         => 1,
-                'weapon_type'         => WeaponTypeInterface::SWORD,
-                'physical_damage'     => 15,
-                'fire_damage'         => 0,
-                'water_damage'        => 0,
-                'air_damage'          => 0,
-                'earth_damage'        => 0,
-                'life_damage'         => 0,
-                'death_damage'        => 0,
-                'attack_speed'        => 1.2,
-                'cast_speed'          => 0,
-                'accuracy'            => 200,
-                'magic_accuracy'      => 100,
-                'block_ignoring'      => 0,
-                'critical_chance'     => 5,
-                'critical_multiplier' => 200,
-                'damage_multiplier'   => 100,
-                'vampirism'           => 0,
-                'magic_vampirism'     => 0,
-            ],
-            'defense'                      => [
-                'physical_resist'     => 0,
-                'fire_resist'         => 0,
-                'water_resist'        => 0,
-                'air_resist'          => 0,
-                'earth_resist'        => 0,
-                'life_resist'         => 0,
-                'death_resist'        => 0,
-                'defense'             => 100,
-                'magic_defense'       => 50,
-                'block'               => 20,
-                'magic_block'         => 10,
-                'mental_barrier'      => 5,
-                'max_physical_resist' => 75,
-                'max_fire_resist'     => 75,
-                'max_water_resist'    => 75,
-                'max_air_resist'      => 75,
-                'max_earth_resist'    => 75,
-                'max_life_resist'     => 75,
-                'max_death_resist'    => 75,
-                'global_resist'       => 0,
-            ],
+            'offense'                      => self::getDefaultOffenseData(),
+            'defense'                      => self::getDefaultDefenseData(),
         ];
 
         $unit = UnitFactory::create($data);
@@ -1482,6 +1441,7 @@ class UnitFactoryTest extends AbstractUnitTest
             75,
             75,
             75,
+            0,
             0
         );
     }
@@ -1534,6 +1494,7 @@ class UnitFactoryTest extends AbstractUnitTest
             'max_life_resist'     => 75,
             'max_death_resist'    => 75,
             'global_resist'       => 0,
+            'dodge'               => 0,
         ];
     }
 }

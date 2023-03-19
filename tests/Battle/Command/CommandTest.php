@@ -765,6 +765,7 @@ class CommandTest extends AbstractUnitTest
                             'max_life_resist'     => 75,
                             'max_death_resist'    => 75,
                             'global_resist'       => 0,
+                            'dodge'               => 0,
                         ],
                     ],
                     // Самый битый юнит - именно он должен выбираться для лечения
@@ -825,6 +826,7 @@ class CommandTest extends AbstractUnitTest
                             'max_life_resist'     => 75,
                             'max_death_resist'    => 75,
                             'global_resist'       => 0,
+                            'dodge'               => 0,
                         ],
                     ],
                     [
@@ -884,6 +886,7 @@ class CommandTest extends AbstractUnitTest
                             'max_life_resist'     => 75,
                             'max_death_resist'    => 75,
                             'global_resist'       => 0,
+                            'dodge'               => 0,
                         ],
                     ],
                     // Мертвый юнит - он выбираться не должен
@@ -944,6 +947,7 @@ class CommandTest extends AbstractUnitTest
                             'max_life_resist'     => 75,
                             'max_death_resist'    => 75,
                             'global_resist'       => 0,
+                            'dodge'               => 0,
                         ],
                     ],
                 ],

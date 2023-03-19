@@ -32,6 +32,9 @@ interface DefenseInterface
     public const MIN_MENTAL_BARRIER = -100;
     public const MAX_MENTAL_BARRIER = 100;
 
+    public const MIN_DODGE          = 0;
+    public const MAX_DODGE          = 100;
+
     /**
      * Возвращает сопротивление физическому урону
      *
@@ -332,4 +335,21 @@ interface DefenseInterface
      * @throws DefenseException
      */
     public function setGlobalResist(int $globalDamageResist): void;
+
+    /**
+     * Вероятность избежать удара или заклинания противника. Не зависит от меткости противника
+     *
+     * Сейчас используется только для реализации пассивной способности эльфов, которое дает им врожденную 20%
+     * способность уклониться от атак/заклинаний независимо от меткости противника
+     *
+     * @return int
+     */
+    public function getDodge(): int;
+
+    /**
+     * Устанавливает новое значение Dodge
+     *
+     * @param int $dodge
+     */
+    public function setDodge(int $dodge): void;
 }

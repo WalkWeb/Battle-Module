@@ -355,6 +355,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 'max_life_resist'     => 75,
                 'max_death_resist'    => 75,
                 'global_resist'       => 0,
+                'dodge'               => 0,
             ],
         ];
 
