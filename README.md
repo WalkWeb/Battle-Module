@@ -7,6 +7,23 @@
 Текущий проект является переписыванием с нуля старой версии боевой системы, написанной в 2017 году, посмотреть которую
 в работе можно на [сайте игры](https://dwdemo2.ru/registration/github).
 
+
+# Установка и запуск демо-боя
+
+`git clone https://github.com/WalkWeb/Battle-Module.git battle`
+
+`cd battle`
+
+`composer install`
+
+`cd public/`
+
+`php -S localhost:8000`
+
+В браузере открываем `http://localhost:8000/` - отобразится пример боя. Вы можете отредактировать параметры юнитов
+демо-боя в файле `public/index.php`
+
+
 ## Пример (1 на 1)
 
 ```php
@@ -152,11 +169,6 @@ echo $view->renderResult($result);
 Alchemist во время боя призвал Fire Elemental в свою команду – по этому в статистике появился дополнительный юнит
 
 ![alt text](public/images/statistics.png)
-
-
-Вы можете запустить и посмотреть пример боя открыв страницу:
-
-`public/index.php`
 
 
 ## 100% покрытие кода unit-тестами
