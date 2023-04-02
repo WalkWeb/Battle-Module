@@ -6,18 +6,18 @@ namespace Tests\Battle\Result;
 
 use Exception;
 use Battle\Container\Container;
-use Battle\Result\Chat\Chat;
-use Battle\Result\Scenario\Scenario;
+use Battle\Response\Chat\Chat;
+use Battle\Response\Scenario\Scenario;
 use Battle\Translation\Translation;
-use Battle\Result\Result;
+use Battle\Response\Response;
 use Tests\AbstractUnitTest;
 use Tests\Factory\CommandFactory;
-use Battle\Result\ResultException;
+use Battle\Response\ResponseException;
 
 class ResultTest extends AbstractUnitTest
 {
     /**
-     * @throws ResultException
+     * @throws ResponseException
      * @throws Exception
      */
     public function testCreateResultSuccess(): void
@@ -28,15 +28,15 @@ class ResultTest extends AbstractUnitTest
         $translation = new Translation();
         $scenario = new Scenario();
 
-        $result = new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 2, new Container());
+        $result = new Response($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 2, new Container());
 
-        self::assertInstanceOf(Result::class, $result);
+        self::assertInstanceOf(Response::class, $result);
         self::assertEquals($leftCommand, $result->getStartLeftCommand());
         self::assertEquals($rightCommand, $result->getStartRightCommand());
         self::assertEquals($leftCommand, $result->getEndLeftCommand());
         self::assertEquals($rightCommand, $result->getEndRightCommand());
         self::assertEquals($winner, $result->getWinner());
-        self::assertEquals(Result::RIGHT_COMMAND_WIN, $result->getWinnerText());
+        self::assertEquals(Response::RIGHT_COMMAND_WIN, $result->getWinnerText());
         self::assertEquals(1, $result->getStatistic()->getRoundNumber());
         self::assertEquals(1, $result->getStatistic()->getStrokeNumber());
         self::assertCount(0, $result->getFullLog()->getLog());
@@ -46,7 +46,7 @@ class ResultTest extends AbstractUnitTest
     }
 
     /**
-     * @throws ResultException
+     * @throws ResponseException
      * @throws Exception
      */
     public function testCreateResultFail(): void
@@ -54,7 +54,7 @@ class ResultTest extends AbstractUnitTest
         $leftCommand = CommandFactory::createLeftCommand();
         $rightCommand = CommandFactory::createRightCommand();
 
-        $this->expectException(ResultException::class);
-        new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 3, new Container());
+        $this->expectException(ResponseException::class);
+        new Response($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 3, new Container());
     }
 }

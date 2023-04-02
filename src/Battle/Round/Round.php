@@ -7,8 +7,8 @@ namespace Battle\Round;
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerException;
 use Battle\Container\ContainerInterface;
-use Battle\Result\Statistic\Statistic;
-use Battle\Result\Statistic\StatisticInterface;
+use Battle\Response\Statistic\Statistic;
+use Battle\Response\Statistic\StatisticInterface;
 use Battle\Stroke\StrokeInterface;
 use Exception;
 

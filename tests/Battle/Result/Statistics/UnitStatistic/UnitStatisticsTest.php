@@ -7,7 +7,7 @@ namespace Tests\Battle\Result\Statistics\UnitStatistic;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
-use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
+use Battle\Response\Statistic\UnitStatistic\UnitStatistic;
 
 class UnitStatisticsTest extends AbstractUnitTest
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Result\Chat;
+namespace Battle\Response\Chat;
 
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
@@ -11,7 +11,7 @@ use Battle\Container\ContainerInterface;
 use Battle\Translation\TranslationInterface;
 
 /**
- * @package Battle\Result\Chat
+ * @package Battle\Response\Chat
  */
 class Chat implements ChatInterface
 {

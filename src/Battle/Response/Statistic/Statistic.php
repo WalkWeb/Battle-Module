@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Result\Statistic;
+namespace Battle\Response\Statistic;
 
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
@@ -10,9 +10,9 @@ use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Action\ResurrectionAction;
 use Battle\Action\SummonAction;
-use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
-use Battle\Result\Statistic\UnitStatistic\UnitStatisticCollection;
-use Battle\Result\Statistic\UnitStatistic\UnitStatisticInterface;
+use Battle\Response\Statistic\UnitStatistic\UnitStatistic;
+use Battle\Response\Statistic\UnitStatistic\UnitStatisticCollection;
+use Battle\Response\Statistic\UnitStatistic\UnitStatisticInterface;
 use Battle\Unit\UnitInterface;
 
 /**

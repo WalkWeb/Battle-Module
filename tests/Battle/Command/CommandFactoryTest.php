@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Command;
 
 use Battle\Container\Container;
-use Battle\Result\FullLog\FullLog;
+use Battle\Response\FullLog\FullLog;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Defense\Defense;

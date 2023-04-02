@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\Statistics\UnitStatistic;
 
-use Battle\Result\Statistic\StatisticException;
-use Battle\Result\Statistic\UnitStatistic\UnitStatistic;
-use Battle\Result\Statistic\UnitStatistic\UnitStatisticCollection;
-use Battle\Result\Statistic\UnitStatistic\UnitStatisticInterface;
+use Battle\Response\Statistic\StatisticException;
+use Battle\Response\Statistic\UnitStatistic\UnitStatistic;
+use Battle\Response\Statistic\UnitStatistic\UnitStatisticCollection;
+use Battle\Response\Statistic\UnitStatistic\UnitStatisticInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;

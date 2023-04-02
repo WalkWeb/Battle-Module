@@ -1,15 +1,15 @@
 <?php
 
-namespace Battle\Result;
+namespace Battle\Response;
 
-use Battle\Result\Chat\ChatInterface;
+use Battle\Response\Chat\ChatInterface;
 use Battle\Command\CommandInterface;
-use Battle\Result\FullLog\FullLogInterface;
-use Battle\Result\Scenario\ScenarioInterface;
-use Battle\Result\Statistic\StatisticInterface;
+use Battle\Response\FullLog\FullLogInterface;
+use Battle\Response\Scenario\ScenarioInterface;
+use Battle\Response\Statistic\StatisticInterface;
 use Battle\Translation\TranslationInterface;
 
-interface ResultInterface
+interface ResponseInterface
 {
     public const LEFT_COMMAND_WIN  = 'Left command win';
     public const RIGHT_COMMAND_WIN = 'Right command win';

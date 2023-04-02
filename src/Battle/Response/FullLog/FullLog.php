@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Result\FullLog;
+namespace Battle\Response\FullLog;
 
 class FullLog implements FullLogInterface
 {

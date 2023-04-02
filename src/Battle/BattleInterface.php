@@ -3,7 +3,7 @@
 namespace Battle;
 
 use Battle\Container\ContainerInterface;
-use Battle\Result\ResultInterface;
+use Battle\Response\ResponseInterface;
 
 interface BattleInterface
 {
@@ -14,9 +14,9 @@ interface BattleInterface
     /**
      * Обрабатывает бой, возвращая результат выполнения
      *
-     * @return ResultInterface
+     * @return ResponseInterface
      */
-    public function handle(): ResultInterface;
+    public function handle(): ResponseInterface;
 
     /**
      * Возвращает контейнер

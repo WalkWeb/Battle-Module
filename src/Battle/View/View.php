@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Battle\View;
 
 use Battle\Command\CommandInterface;
-use Battle\Result\ResultInterface;
+use Battle\Response\ResponseInterface;
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationInterface;
 use Battle\Unit\UnitException;
@@ -32,6 +32,8 @@ class View implements ViewInterface
     private string $headTemplate;
 
     /**
+     * TODO rename battleTemplate
+     *
      * @var string
      */
     private string $resultTemplate;
@@ -110,15 +112,15 @@ class View implements ViewInterface
     /**
      * Генерирует html-код для отображения результата боя
      *
-     * @param ResultInterface $result
+     * @param ResponseInterface $response
      * @return string
      * @throws ViewException
      */
-    public function renderResult(ResultInterface $result): string
+    public function renderResult(ResponseInterface $response): string
     {
         $filePath = $this->templateDir . $this->resultTemplate;
 
-        $this->checkExistTemplate($filePath, 'Result Template');
+        $this->checkExistTemplate($filePath, 'Response Template');
 
         ob_start();
 

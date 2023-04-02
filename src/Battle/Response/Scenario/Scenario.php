@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Result\Scenario;
+namespace Battle\Response\Scenario;
 
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
@@ -12,7 +12,7 @@ use Battle\Action\HealAction;
 use Battle\Action\ResurrectionAction;
 use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
-use Battle\Result\Statistic\StatisticInterface;
+use Battle\Response\Statistic\StatisticInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use JsonException;

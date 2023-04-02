@@ -15,7 +15,7 @@ use Exception;
 use Battle\Action\DamageAction;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
-use Battle\Result\Statistic\Statistic;
+use Battle\Response\Statistic\Statistic;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 

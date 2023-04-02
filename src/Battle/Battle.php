@@ -6,8 +6,8 @@ namespace Battle;
 
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
-use Battle\Result\Result;
-use Battle\Result\ResultInterface;
+use Battle\Response\Response;
+use Battle\Response\ResponseInterface;
 use Exception;
 
 class Battle implements BattleInterface
@@ -67,10 +67,10 @@ class Battle implements BattleInterface
     /**
      * Обрабатывает бой, возвращая результат выполнения
      *
-     * @return ResultInterface
+     * @return ResponseInterface
      * @throws Exception
      */
-    public function handle(): ResultInterface
+    public function handle(): ResponseInterface
     {
         $i = 0;
 
@@ -151,12 +151,12 @@ class Battle implements BattleInterface
      * @param CommandInterface $startLeftCommand
      * @param CommandInterface $startRightCommand
      * @param int $winner
-     * @return ResultInterface
+     * @return ResponseInterface
      * @throws Exception
      */
-    private function getResult(CommandInterface $startLeftCommand, CommandInterface $startRightCommand, int $winner): ResultInterface
+    private function getResult(CommandInterface $startLeftCommand, CommandInterface $startRightCommand, int $winner): ResponseInterface
     {
-        return new Result(
+        return new Response(
             $startLeftCommand,
             $startRightCommand,
             $this->leftCommand,

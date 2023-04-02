@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Battle\Result;
+namespace Battle\Response;
 
 use Battle\Container\ContainerException;
 use Battle\Container\ContainerInterface;
-use Battle\Result\Chat\ChatInterface;
+use Battle\Response\Chat\ChatInterface;
 use Battle\Command\CommandInterface;
-use Battle\Result\FullLog\FullLogInterface;
-use Battle\Result\Scenario\ScenarioInterface;
-use Battle\Result\Statistic\StatisticInterface;
+use Battle\Response\FullLog\FullLogInterface;
+use Battle\Response\Scenario\ScenarioInterface;
+use Battle\Response\Statistic\StatisticInterface;
 use Battle\Translation\TranslationInterface;
 
-class Result implements ResultInterface
+class Response implements ResponseInterface
 {
     /**
      * @var CommandInterface
@@ -52,7 +52,7 @@ class Result implements ResultInterface
      * @param CommandInterface $endRightCommand
      * @param int $winner
      * @param ContainerInterface $container
-     * @throws ResultException
+     * @throws ResponseException
      */
     public function __construct(
         CommandInterface $startLeftCommand,
@@ -64,7 +64,7 @@ class Result implements ResultInterface
     )
     {
         if ($winner !== 1 && $winner !== 2) {
-            throw new ResultException(ResultException::INCORRECT_WINNER);
+            throw new ResponseException(ResponseException::INCORRECT_WINNER);
         }
 
         $this->winner = $winner;

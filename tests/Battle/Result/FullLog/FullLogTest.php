@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Result\FullLog;
 
-use Battle\Result\FullLog\FullLog;
+use Battle\Response\FullLog\FullLog;
 use Tests\AbstractUnitTest;
 
 class FullLogTest extends AbstractUnitTest

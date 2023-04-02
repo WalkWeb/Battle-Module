@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Battle\Result;
+namespace Battle\Response;
 
 use Exception;
 
-class ResultException extends Exception
+class ResponseException extends Exception
 {
     public const INCORRECT_WINNER = 'Incorrect winner';
 }

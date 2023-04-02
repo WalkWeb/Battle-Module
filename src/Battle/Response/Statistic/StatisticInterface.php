@@ -1,9 +1,9 @@
 <?php
 
-namespace Battle\Result\Statistic;
+namespace Battle\Response\Statistic;
 
 use Battle\Action\ActionInterface;
-use Battle\Result\Statistic\UnitStatistic\UnitStatisticCollection;
+use Battle\Response\Statistic\UnitStatistic\UnitStatisticCollection;
 
 interface StatisticInterface
 {

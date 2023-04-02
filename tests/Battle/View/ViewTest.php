@@ -7,7 +7,7 @@ namespace Tests\Battle\View;
 use Battle\Command\CommandFactory;
 use Battle\Container\Container;
 use Battle\Container\ContainerException;
-use Battle\Result\Result;
+use Battle\Response\Response;
 use Battle\Translation\Translation;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\View\View;
@@ -682,11 +682,11 @@ EOT;
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
 
-        $result = new Result($leftCommand, $rightCommand, $leftCommand, $rightCommand, 1, new Container());
+        $response = new Response($leftCommand, $rightCommand, $leftCommand, $rightCommand, 1, new Container());
 
         // Из-за вывода статистики, и подсчета времени выполнения в статистике, мы никогда не сможем точно узнать
         // какой код будет выведен. По этому просто проверяем, что рендер прошел без ошибок, и получили строку
-        self::assertIsString($this->getView()->renderResult($result));
+        self::assertIsString($this->getView()->renderResult($response));
     }
 
     /**

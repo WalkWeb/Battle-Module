@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Battle\Result\Scenario;
+namespace Battle\Response\Scenario;
 
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
-use Battle\Result\Statistic\StatisticInterface;
+use Battle\Response\Statistic\StatisticInterface;
 
 /**
  * Для анимации боя на фронте используется js-сценарий.

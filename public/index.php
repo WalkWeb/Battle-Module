@@ -309,11 +309,11 @@ $data = [
 
 try {
     $battle = BattleFactory::create($data);
-    $result = $battle->handle();
+    $response = $battle->handle();
 
     $view = $battle->getContainer()->getViewFactory()->create();
     echo $view->renderHead(); // example layout styles
-    echo $view->renderResult($result);
+    echo $view->renderResult($response);
 
 } catch (Exception $e) {
     die($e->getMessage());

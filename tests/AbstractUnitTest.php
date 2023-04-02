@@ -7,8 +7,8 @@ namespace Tests;
 use Battle\Container\Container;
 use Battle\Container\ContainerException;
 use Battle\Container\ContainerInterface;
-use Battle\Result\Chat\Chat;
-use Battle\Result\Chat\ChatInterface;
+use Battle\Response\Chat\Chat;
+use Battle\Response\Chat\ChatInterface;
 use Battle\Translation\Translation;
 use PHPUnit\Framework\TestCase;
 

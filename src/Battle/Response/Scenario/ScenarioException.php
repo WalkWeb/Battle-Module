@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Battle\Result\Scenario;
+namespace Battle\Response\Scenario;
 
 use Exception;
 

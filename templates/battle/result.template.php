@@ -1,31 +1,33 @@
 <?php
 
-use Battle\Result\ResultInterface;
+// TODO Rename to battle.template.php
+
+use Battle\Response\ResponseInterface;
 use Battle\View\ViewException;
 
-if (!isset($result) || !($result instanceof ResultInterface)) {
+if (!isset($response) || !($response instanceof ResponseInterface)) {
     throw new ViewException(ViewException::MISSING_RESULT);
 }
 
 ?>
 
 <p class="ptitle">
-    <?= $result->getTranslation()->trans('Round') ?> #<span id="num_step">1</span>,
-    <?= $result->getTranslation()->trans('Stroke') ?> #<span id="num_attack">1</span>
+    <?= $response->getTranslation()->trans('Round') ?> #<span id="num_step">1</span>,
+    <?= $response->getTranslation()->trans('Stroke') ?> #<span id="num_attack">1</span>
 </p>
 
-<?= $this->renderCommandView($result->getStartLeftCommand(), $result->getStartRightCommand()) ?>
+<?= $this->renderCommandView($response->getStartLeftCommand(), $response->getStartRightCommand()) ?>
 
 <div class="com_container">
     <div class="com_content" id="comment">
-        <?php foreach ($result->getChat()->getMessages() as $message): ?>
+        <?php foreach ($response->getChat()->getMessages() as $message): ?>
             <?= '<p class="none">' . $message . '</p>' ?>
         <?php endforeach; ?>
     </div>
 </div>
 
 <script> window.scenario = [
-        <?= $result->getScenario()->getJson() ?>
+        <?= $response->getScenario()->getJson() ?>
     ];
     document.addEventListener("DOMContentLoaded", function() {
         goScenario();
@@ -35,16 +37,16 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
 <div class="button_box">
     <div class="button_row">
         <div class="battle_button" onclick="showBattleLog([
-            '<?= $result->getTranslation()->trans('Show Battle Log') ?>',
-            '<?= $result->getTranslation()->trans('Hidden Battle Log') ?>'])" id="battle_log_button">
-            <?= $result->getTranslation()->trans('Show Battle Log') ?>
+            '<?= $response->getTranslation()->trans('Show Battle Log') ?>',
+            '<?= $response->getTranslation()->trans('Hidden Battle Log') ?>'])" id="battle_log_button">
+            <?= $response->getTranslation()->trans('Show Battle Log') ?>
         </div>
     </div>
     <div class="button_row">
         <div class="battle_button" onclick="showBattleStatistic([
-            '<?= $result->getTranslation()->trans('Show Battle Statistic') ?>',
-            '<?= $result->getTranslation()->trans('Hidden Battle Statistic') ?>'])" id="battle_statistic_button">
-            <?= $result->getTranslation()->trans('Show Battle Statistic') ?>
+            '<?= $response->getTranslation()->trans('Show Battle Statistic') ?>',
+            '<?= $response->getTranslation()->trans('Hidden Battle Statistic') ?>'])" id="battle_statistic_button">
+            <?= $response->getTranslation()->trans('Show Battle Statistic') ?>
         </div>
     </div>
 </div>
@@ -53,22 +55,22 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
     <div class="statistics_box">
         <table class="statistics">
             <tr class="header">
-                <td colspan="11"><p><?= $result->getTranslation()->trans('Statistics') ?></p></td>
+                <td colspan="11"><p><?= $response->getTranslation()->trans('Statistics') ?></p></td>
             </tr>
             <tr class="header">
-                <td><p><span class="stat_unit"><?= $result->getTranslation()->trans('Unit') ?></span></p></td>
-                <td><p><span class="stat_damage"><?= $result->getTranslation()->trans('Hits') ?></span></p></td>
-                <td><p><span class="stat_damage"><?= $result->getTranslation()->trans('Critical Hits') ?></span></p></td>
-                <td><p><span class="stat_damage"><?= $result->getTranslation()->trans('Caused Damage') ?></span></p></td>
-                <td><p><span class="stat_taken"><?= $result->getTranslation()->trans('Taken Damage') ?></span></p></td>
-                <td><p><span class="stat_taken"><?= $result->getTranslation()->trans('Blocked') ?></span></p></td>
-                <td><p><span class="stat_taken"><?= $result->getTranslation()->trans('Dodged') ?></span></p></td>
-                <td><p><span class="stat_heal"><?= $result->getTranslation()->trans('Heal') ?></span></p></td>
-                <td><p><span class="stat_kill"><?= $result->getTranslation()->trans('Killing') ?></span></p></td>
-                <td><p><span class="stat_kill"><?= $result->getTranslation()->trans('Summons') ?></span></p></td>
-                <td><p><span class="stat_kill"><?= $result->getTranslation()->trans('Resurrections') ?></span></p></td>
+                <td><p><span class="stat_unit"><?= $response->getTranslation()->trans('Unit') ?></span></p></td>
+                <td><p><span class="stat_damage"><?= $response->getTranslation()->trans('Hits') ?></span></p></td>
+                <td><p><span class="stat_damage"><?= $response->getTranslation()->trans('Critical Hits') ?></span></p></td>
+                <td><p><span class="stat_damage"><?= $response->getTranslation()->trans('Caused Damage') ?></span></p></td>
+                <td><p><span class="stat_taken"><?= $response->getTranslation()->trans('Taken Damage') ?></span></p></td>
+                <td><p><span class="stat_taken"><?= $response->getTranslation()->trans('Blocked') ?></span></p></td>
+                <td><p><span class="stat_taken"><?= $response->getTranslation()->trans('Dodged') ?></span></p></td>
+                <td><p><span class="stat_heal"><?= $response->getTranslation()->trans('Heal') ?></span></p></td>
+                <td><p><span class="stat_kill"><?= $response->getTranslation()->trans('Killing') ?></span></p></td>
+                <td><p><span class="stat_kill"><?= $response->getTranslation()->trans('Summons') ?></span></p></td>
+                <td><p><span class="stat_kill"><?= $response->getTranslation()->trans('Resurrections') ?></span></p></td>
             </tr>
-            <?php foreach ($result->getStatistic()->getUnitsStatistics() as $unit): ?>
+            <?php foreach ($response->getStatistic()->getUnitsStatistics() as $unit): ?>
                 <tr>
                     <td>
                         <p>
@@ -93,20 +95,20 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
                 </tr>
             <?php endforeach; ?>
             <tr>
-                <td><p class="right"><?= $result->getTranslation()->trans('Total rounds') ?>:</p></td>
-                <td colspan="10"><p class="left"><?= $result->getStatistic()->getRoundNumber() ?></p></td>
+                <td><p class="right"><?= $response->getTranslation()->trans('Total rounds') ?>:</p></td>
+                <td colspan="10"><p class="left"><?= $response->getStatistic()->getRoundNumber() ?></p></td>
             </tr>
             <tr>
-                <td><p class="right"><?= $result->getTranslation()->trans('Total stroke') ?>:</p></td>
-                <td colspan="10"><p class="left"><?= $result->getStatistic()->getStrokeNumber() ?></p></td>
+                <td><p class="right"><?= $response->getTranslation()->trans('Total stroke') ?>:</p></td>
+                <td colspan="10"><p class="left"><?= $response->getStatistic()->getStrokeNumber() ?></p></td>
             </tr>
             <tr>
-                <td><p class="right"><?= $result->getTranslation()->trans('Runtime') ?>:</p></td>
-                <td colspan="10"><p class="left"><?= $result->getStatistic()->getRuntime() ?> ms</p></td>
+                <td><p class="right"><?= $response->getTranslation()->trans('Runtime') ?>:</p></td>
+                <td colspan="10"><p class="left"><?= $response->getStatistic()->getRuntime() ?> ms</p></td>
             </tr>
             <tr>
-                <td><p class="right"><?= $result->getTranslation()->trans('Memory cost') ?>:</p></td>
-                <td colspan="10"><p class="left"><?= $result->getStatistic()->getMemoryCostClipped() ?></p></td>
+                <td><p class="right"><?= $response->getTranslation()->trans('Memory cost') ?>:</p></td>
+                <td colspan="10"><p class="left"><?= $response->getStatistic()->getMemoryCostClipped() ?></p></td>
             </tr>
         </table>
     </div>
@@ -115,10 +117,10 @@ if (!isset($result) || !($result instanceof ResultInterface)) {
 <div class="spoiler_cont" id="battle_log">
     <div class="full_log">
 
-        <?php foreach ($result->getFullLog()->getLog() as $row): ?>
+        <?php foreach ($response->getFullLog()->getLog() as $row): ?>
             <?= $row ?>
         <?php endforeach; ?>
 
-        <h1><?= $result->getTranslation()->trans($result->getWinnerText()) ?></h1>
+        <h1><?= $response->getTranslation()->trans($response->getWinnerText()) ?></h1>
     </div>
 </div>
