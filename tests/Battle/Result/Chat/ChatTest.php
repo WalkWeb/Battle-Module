@@ -31,8 +31,14 @@ class ChatTest extends AbstractUnitTest
     private const DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>';
     private const DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const DAMAGE_AND_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_vampire</span> hit for 50 damage against <span style="color: #1e72e3">unit_2</span> and restore 25 life';
-    private const DAMAGE_AND_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_vampire</span> нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span> и восстановил 25 здоровья';
+    private const DAMAGE_AND_LIFE_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_vampire</span> hit for 50 damage against <span style="color: #1e72e3">unit_2</span> and restore 25 life';
+    private const DAMAGE_AND_LIFE_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_vampire</span> нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span> и восстановил 25 здоровья';
+
+    private const DAMAGE_AND_MANA_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_2</span> hit for 30 damage against <span style="color: #1e72e3">unit_5</span> and restore 3 mana';
+    private const DAMAGE_AND_MANA_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_2</span> нанес удар на 30 урона по <span style="color: #1e72e3">unit_5</span> и восстановил 3 маны';
+
+    private const DAMAGE_AND_LIFE_AND_MANA_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_5</span> and restore 4 life and 4 mana';
+    private const DAMAGE_AND_LIFE_AND_MANA_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_5</span> и восстановил 4 здоровья и 4 маны';
 
     private const CRITICAL_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> critical hit for 40 damage against <span style="color: #1e72e3">unit_2</span>';
     private const CRITICAL_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес критический удар на 40 урона по <span style="color: #1e72e3">unit_2</span>';
@@ -146,11 +152,11 @@ class ChatTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на формирование сообщения об уроне с вампиризмом
+     * Тест на формирование сообщения об уроне с вампиризмом здоровья
      *
      * @throws Exception
      */
-    public function testChatAddMessageDamageVampirism(): void
+    public function testChatAddMessageLifeDamageVampirism(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(42, 2);
 
@@ -160,8 +166,46 @@ class ChatTest extends AbstractUnitTest
 
         $action->handle();
 
-        self::assertEquals(self::DAMAGE_AND_VAMPIRISM_EN, $this->getChat()->addMessage($action));
-        self::assertEquals(self::DAMAGE_AND_VAMPIRISM_RU, $this->getChatRu()->addMessage($action));
+        self::assertEquals(self::DAMAGE_AND_LIFE_VAMPIRISM_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::DAMAGE_AND_LIFE_VAMPIRISM_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения об уроне с вампиризмом маны
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageManaDamageVampirism(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(2, 5);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::DAMAGE_AND_MANA_VAMPIRISM_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::DAMAGE_AND_MANA_VAMPIRISM_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения об уроне с вампиризмом здоровья и маны
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageLifeAndManaDamageVampirism(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(52, 5);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::DAMAGE_AND_LIFE_AND_MANA_VAMPIRISM_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::DAMAGE_AND_LIFE_AND_MANA_VAMPIRISM_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**

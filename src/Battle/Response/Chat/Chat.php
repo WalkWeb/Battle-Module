@@ -10,9 +10,6 @@ use Battle\Container\ContainerException;
 use Battle\Container\ContainerInterface;
 use Battle\Translation\TranslationInterface;
 
-/**
- * @package Battle\Response\Chat
- */
 class Chat implements ChatInterface
 {
     /**
@@ -35,7 +32,7 @@ class Chat implements ChatInterface
     }
 
     /**
-     * Добавляет сообщение в чат на основе его типа и параметров
+     * Добавляет сообщение в чат на основе типа и параметров Action
      *
      * @param ActionInterface $action
      * @return string
@@ -638,8 +635,7 @@ class Chat implements ChatInterface
     }
 
     /**
-     * Формирует сообщение о восстановленном здоровье от удара, если такое было (т.е. юнит имел параметр вампиризма
-     * больше 0 и ему удалось восстановить >0 здоровье от удара)
+     * Формирует сообщение о восстановленном здоровье и/или маны от удара, если оно было
      *
      * @param ActionInterface $action
      * @return string
@@ -647,10 +643,25 @@ class Chat implements ChatInterface
      */
     private function getVampirismMessage(ActionInterface $action): string
     {
+        if ($action->getRestoreLifeFromVampirism() > 0 && $action->getRestoreManaFromMagicVampirism() > 0) {
+            return sprintf(
+                $this->translation->trans(' and restore %d life and %d mana'),
+                $action->getRestoreLifeFromVampirism(),
+                $action->getRestoreManaFromMagicVampirism()
+            );
+        }
+
         if ($action->getRestoreLifeFromVampirism() > 0) {
             return sprintf(
                 $this->translation->trans(' and restore %d life'),
                 $action->getRestoreLifeFromVampirism()
+            );
+        }
+
+        if ($action->getRestoreManaFromMagicVampirism() > 0) {
+            return sprintf(
+                $this->translation->trans(' and restore %d mana'),
+                $action->getRestoreManaFromMagicVampirism()
             );
         }
 

@@ -1,7 +1,5 @@
 <?php
 
-// TODO Rename to battle.template.php
-
 use Battle\Response\ResponseInterface;
 use Battle\View\ViewException;
 
