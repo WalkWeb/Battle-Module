@@ -686,7 +686,7 @@ EOT;
 
         // Из-за вывода статистики, и подсчета времени выполнения в статистике, мы никогда не сможем точно узнать
         // какой код будет выведен. По этому просто проверяем, что рендер прошел без ошибок, и получили строку
-        self::assertIsString($this->getView()->renderResult($response));
+        self::assertIsString($this->getView()->renderBattle($response));
     }
 
     /**
@@ -700,7 +700,7 @@ EOT;
             new Translation(),
             __DIR__ . '/../../../templates/',
             'battle/missed_file.php',
-            'battle/result.template.php',
+            'battle/battle.template.php',
             'battle/row.template.php',
             'battle/unit/unit.template.php',
             'battle/unit/unit_full_log.template.php',

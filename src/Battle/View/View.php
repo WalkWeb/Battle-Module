@@ -32,11 +32,9 @@ class View implements ViewInterface
     private string $headTemplate;
 
     /**
-     * TODO rename battleTemplate
-     *
      * @var string
      */
-    private string $resultTemplate;
+    private string $battleTemplate;
 
     /**
      * @var string
@@ -62,7 +60,7 @@ class View implements ViewInterface
      * @param TranslationInterface $translation
      * @param string $templateDir
      * @param string $headTemplate
-     * @param string $resultTemplate
+     * @param string $battleTemplate
      * @param string $rowTemplate
      * @param string $unitTemplate
      * @param string $unitFullLogTemplate
@@ -72,7 +70,7 @@ class View implements ViewInterface
         TranslationInterface $translation,
         string $templateDir,
         string $headTemplate,
-        string $resultTemplate,
+        string $battleTemplate,
         string $rowTemplate,
         string $unitTemplate,
         string $unitFullLogTemplate,
@@ -82,7 +80,7 @@ class View implements ViewInterface
         $this->translation = $translation;
         $this->templateDir = $templateDir;
         $this->headTemplate = $headTemplate;
-        $this->resultTemplate = $resultTemplate;
+        $this->battleTemplate = $battleTemplate;
         $this->rowTemplate = $rowTemplate;
         $this->unitFullLogTemplate = $unitFullLogTemplate;
         $this->unitTemplate = $unitTemplate;
@@ -116,9 +114,9 @@ class View implements ViewInterface
      * @return string
      * @throws ViewException
      */
-    public function renderResult(ResponseInterface $response): string
+    public function renderBattle(ResponseInterface $response): string
     {
-        $filePath = $this->templateDir . $this->resultTemplate;
+        $filePath = $this->templateDir . $this->battleTemplate;
 
         $this->checkExistTemplate($filePath, 'Response Template');
 

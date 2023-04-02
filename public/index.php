@@ -313,7 +313,7 @@ try {
 
     $view = $battle->getContainer()->getViewFactory()->create();
     echo $view->renderHead(); // example layout styles
-    echo $view->renderResult($response);
+    echo $view->renderBattle($response);
 
 } catch (Exception $e) {
     die($e->getMessage());

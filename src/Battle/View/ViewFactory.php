@@ -34,7 +34,7 @@ class ViewFactory
     public function create(
         string $templateDir = __DIR__ . '/../../../templates/',
         string $headTemplate = 'battle/head.template.php',
-        string $resultTemplate = 'battle/result.template.php',
+        string $resultTemplate = 'battle/battle.template.php',
         string $rowTemplate = 'battle/row.template.php',
         string $unitTemplate = 'battle/unit/unit.template.php',
         string $unitFullLogTemplate = 'battle/unit/unit_full_log.template.php',

@@ -12,8 +12,8 @@ use Battle\Unit\UnitInterface;
 interface ViewInterface
 {
     /**
-     * Генерирует html-код для отображения <head> страницы. Этот код нужен для демонстрации, но для генерации кода
-     * внутри существующего проекта он будет лишний
+     * Генерирует html-код для отображения <head> страницы. Этот код нужен только для демонстрации боя в рамках данного
+     * репозитория. В реальном проекте использоваться не должен.
      *
      * @return string
      */
@@ -22,12 +22,10 @@ interface ViewInterface
     /**
      * Генерирует html-код для отображения результата боя
      *
-     * TODO Rename to renderBattle
-     *
      * @param ResponseInterface $response
      * @return string
      */
-    public function renderResult(ResponseInterface $response): string;
+    public function renderBattle(ResponseInterface $response): string;
 
     /**
      * Генерирует html-код для отображения текущего состояния сражающихся команд

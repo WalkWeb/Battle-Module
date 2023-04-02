@@ -157,7 +157,7 @@ $response = $battle->handle();
 
 $view = $battle->getContainer()->getViewFactory()->create();
 echo $view->renderHead(); // example layout styles
-echo $view->renderResult($response);
+echo $view->renderBattle($response);
 ```
 
 ## Как выглядит бой (4 игрока против босса)
