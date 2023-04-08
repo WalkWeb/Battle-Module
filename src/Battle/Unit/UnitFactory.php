@@ -104,6 +104,7 @@ class UnitFactory
         self::int($data, 'race', UnitException::INCORRECT_RACE);
         self::int($data, 'command', UnitException::INCORRECT_COMMAND);
         self::int($data, 'add_concentration_multiplier', UnitException::INCORRECT_ADD_CONC_MULTIPLIER);
+        self::int($data, 'cunning_multiplier', UnitException::INCORRECT_CUNNING_MULTIPLIER);
         self::int($data, 'add_rage_multiplier', UnitException::INCORRECT_ADD_RAGE_MULTIPLIER);
 
         self::intMinMaxValue(
@@ -149,6 +150,13 @@ class UnitFactory
         );
 
         self::intMinMaxValue(
+            $data['cunning_multiplier'],
+            UnitInterface::MIN_RESOURCE_MULTIPLIER,
+            UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            UnitException::INCORRECT_CUNNING_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+        );
+
+        self::intMinMaxValue(
             $data['add_rage_multiplier'],
             UnitInterface::MIN_RESOURCE_MULTIPLIER,
             UnitInterface::MAX_RESOURCE_MULTIPLIER,
@@ -181,6 +189,7 @@ class UnitFactory
             $data['melee'],
             $data['command'],
             $data['add_concentration_multiplier'],
+            $data['cunning_multiplier'],
             $data['add_rage_multiplier'],
             OffenseFactory::create($data['offense'], $container),
             DefenseFactory::create($data['defense']),

@@ -52,19 +52,20 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($data['melee'], $unit->isMelee());
         self::assertEquals($data['race'], $unit->getRace()->getId());
         self::assertFalse($unit->isParalysis());
-        self::assertEquals(Unit::BASE_CUNNING, $unit->getCunning());
+        self::assertEquals((int)(Unit::BASE_CUNNING * ((100 + $data['cunning_multiplier']) / 100)), $unit->getCunning());
         self::assertEquals($data['add_concentration_multiplier'], $unit->getAddConcentrationMultiplier());
+        self::assertEquals($data['cunning_multiplier'], $unit->getCunningMultiplier());
         self::assertEquals($data['add_rage_multiplier'], $unit->getAddRageMultiplier());
 
         // Проверка метода getDamage подразумевает, что все юниты имеют 0 сопротивления
         self::assertEquals(
             ($data['offense']['physical_damage'] +
-            $data['offense']['fire_damage'] +
-            $data['offense']['water_damage'] +
-            $data['offense']['air_damage'] +
-            $data['offense']['earth_damage'] +
-            $data['offense']['life_damage'] +
-            $data['offense']['death_damage']) * ($data['offense']['damage_multiplier']/100),
+                $data['offense']['fire_damage'] +
+                $data['offense']['water_damage'] +
+                $data['offense']['air_damage'] +
+                $data['offense']['earth_damage'] +
+                $data['offense']['life_damage'] +
+                $data['offense']['death_damage']) * ($data['offense']['damage_multiplier'] / 100),
             $unit->getOffense()->getDamage($this->getDefense())
         );
 
@@ -81,17 +82,17 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals(
             round(
                 (
-                $data['offense']['physical_damage'] +
-                $data['offense']['fire_damage'] +
-                $data['offense']['water_damage'] +
-                $data['offense']['air_damage'] +
-                $data['offense']['earth_damage'] +
-                $data['offense']['life_damage'] +
-                $data['offense']['death_damage']
+                    $data['offense']['physical_damage'] +
+                    $data['offense']['fire_damage'] +
+                    $data['offense']['water_damage'] +
+                    $data['offense']['air_damage'] +
+                    $data['offense']['earth_damage'] +
+                    $data['offense']['life_damage'] +
+                    $data['offense']['death_damage']
                 )
                 * $speed
-                * ($data['offense']['damage_multiplier']/100)
-                * (1 + ($data['offense']['critical_chance']/100) * ($data['offense']['critical_multiplier']/100 - 1)),
+                * ($data['offense']['damage_multiplier'] / 100)
+                * (1 + ($data['offense']['critical_chance'] / 100) * ($data['offense']['critical_multiplier'] / 100 - 1)),
                 1
             ),
             $unit->getOffense()->getDPS()

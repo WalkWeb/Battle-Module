@@ -33,6 +33,8 @@ class UnitException extends Exception
     public const INCORRECT_COMMAND                   = 'Incorrect "command". It required int 1 or 2';
     public const INCORRECT_ADD_CONC_MULTIPLIER       = 'Incorrect unit "add_concentration_multiplier", it required and type int';
     public const INCORRECT_ADD_CONC_MULTIPLIER_VALUE = 'Incorrect unit "add_concentration_multiplier", should be min-max value: ';
+    public const INCORRECT_CUNNING_MULTIPLIER        = 'Incorrect unit "cunning_multiplier", it required and type int';
+    public const INCORRECT_CUNNING_MULTIPLIER_VALUE  = 'Incorrect unit "cunning_multiplier", should be min-max value: ';
     public const INCORRECT_ADD_RAGE_MULTIPLIER       = 'Incorrect unit "add_rage_multiplier", it required and type int';
     public const INCORRECT_ADD_RAGE_MULTIPLIER_VALUE = 'Incorrect unit "add_rage_multiplier", should be min-max value: ';
     public const NO_REDUCED_DAMAGE                   = 'No reduced damage';

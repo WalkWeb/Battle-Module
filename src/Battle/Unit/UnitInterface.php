@@ -238,6 +238,13 @@ interface UnitInterface
     public function getAddConcentrationMultiplier(): int;
 
     /**
+     * Возвращает множитель хитрости. Указывается в процентах (20 => +20%, -30 => -30%)
+     *
+     * @return int
+     */
+    public function getCunningMultiplier(): int;
+
+    /**
      * Возвращает множитель получаемой ярости. Указывается в процентах (20 => +20%, -30 => -30%)
      *
      * @return int

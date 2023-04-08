@@ -90,6 +90,11 @@ abstract class AbstractUnit implements UnitInterface
     protected int $addConcentrationMultiplier;
 
     /**
+     * @var int - Множитель хитрости. Указывается в процентах (20 => +20%, -30 => -30%)
+     */
+    protected int $cunningMultiplier;
+
+    /**
      * @var int - Множитель получаемой ярости. Указывается в процентах (20 => +20%, -30 => -30%)
      */
     protected int $addRageMultiplier;
@@ -141,6 +146,7 @@ abstract class AbstractUnit implements UnitInterface
      * @param bool $melee
      * @param int $command
      * @param int $addConcentrationMultiplier
+     * @param int $cunningMultiplier
      * @param int $addRageMultiplier
      * @param OffenseInterface $offense
      * @param DefenseInterface $defense
@@ -162,6 +168,7 @@ abstract class AbstractUnit implements UnitInterface
         bool $melee,
         int $command,
         int $addConcentrationMultiplier,
+        int $cunningMultiplier,
         int $addRageMultiplier,
         OffenseInterface $offense,
         DefenseInterface $defense,
@@ -183,6 +190,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->melee = $melee;
         $this->command = $command;
         $this->addConcentrationMultiplier = $addConcentrationMultiplier;
+        $this->cunningMultiplier = $cunningMultiplier;
         $this->addRageMultiplier = $addRageMultiplier;
         $this->offense = $offense;
         $this->defense = $defense;
@@ -262,7 +270,7 @@ abstract class AbstractUnit implements UnitInterface
 
     public function getCunning(): int
     {
-        return self::BASE_CUNNING;
+        return (int)(self::BASE_CUNNING * ((100 + $this->cunningMultiplier) / 100));
     }
 
     public function getCommand(): int
@@ -288,6 +296,11 @@ abstract class AbstractUnit implements UnitInterface
     public function getAddConcentrationMultiplier(): int
     {
         return $this->addConcentrationMultiplier;
+    }
+
+    public function getCunningMultiplier(): int
+    {
+        return $this->cunningMultiplier;
     }
 
     public function getAddRageMultiplier(): int
