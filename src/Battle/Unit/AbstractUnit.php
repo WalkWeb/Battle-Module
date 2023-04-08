@@ -260,6 +260,11 @@ abstract class AbstractUnit implements UnitInterface
         return $this->concentration;
     }
 
+    public function getCunning(): int
+    {
+        return self::BASE_CUNNING;
+    }
+
     public function getCommand(): int
     {
         return $this->command;

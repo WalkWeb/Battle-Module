@@ -63,6 +63,8 @@ interface UnitInterface
     public const MIN_HIT_CHANCE   = 5;
     public const MAX_HIT_CHANCE   = 95;
 
+    public const BASE_CUNNING     = 15;
+
     /**
      * UUID or random string
      *
@@ -213,6 +215,13 @@ interface UnitInterface
      * @return int
      */
     public function getConcentration(): int;
+
+    /**
+     * Возвращает хитрость юнита
+     *
+     * @return int
+     */
+    public function getCunning(): int;
 
     /**
      * Возвращает количество ярости юнита
