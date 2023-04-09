@@ -16,6 +16,7 @@ interface AbilityInterface
     public const ACTIVATE_RAGE          = 2;
     public const ACTIVATE_LOW_LIFE      = 3;
     public const ACTIVATE_DEAD          = 4;
+    public const ACTIVATE_CUNNING       = 5;
 
     /**
      * Название способности
@@ -78,6 +79,13 @@ interface AbilityInterface
      * @throws Exception
      */
     public function update(UnitInterface $unit, bool $testMode = false): void;
+
+    /**
+     * Способности с типом активации ACTIVATE_CUNNING активируются с некоторым шансом вначале каждого хода
+     *
+     * @param UnitInterface $unit
+     */
+    public function newRound(UnitInterface $unit): void;
 
     /**
      * Возвращает владельца способности

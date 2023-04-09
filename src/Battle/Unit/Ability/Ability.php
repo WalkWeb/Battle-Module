@@ -59,15 +59,7 @@ class Ability extends AbstractAbility
      */
     public function update(UnitInterface $unit, bool $testMode = false): void
     {
-        // Если способность одноразовая и уже была использована
-        if ($this->disposable && $this->usage) {
-            $this->ready = false;
-            return;
-        }
-
-        // Если тип оружия указан, и он не подходит
-        if (count($this->allowedWeaponTypes) !== 0 && !in_array($unit->getOffense()->getWeaponType()->getId(), $this->allowedWeaponTypes, true)) {
-            $this->ready = false;
+        if (!$this->checkActivateRequirements($unit)) {
             return;
         }
 
@@ -92,6 +84,25 @@ class Ability extends AbstractAbility
         }
     }
 
+    /**
+     * @param UnitInterface $unit
+     * @throws Exception
+     */
+    public function newRound(UnitInterface $unit): void
+    {
+        if ($this->typeActivate !== self::ACTIVATE_CUNNING) {
+            return;
+        }
+
+        if (!$this->checkActivateRequirements($unit)) {
+            return;
+        }
+
+        if ($unit->getCunning() >= random_int(1, 100)) {
+            $this->ready = true;
+        }
+    }
+
     public function usage(): void
     {
         $this->ready = false;
@@ -103,5 +114,20 @@ class Ability extends AbstractAbility
         if ($this->typeActivate === self::ACTIVATE_RAGE) {
             $this->unit->useRageAbility();
         }
+    }
+
+    private function checkActivateRequirements(UnitInterface $unit): bool
+    {
+        // Если способность одноразовая и уже была использована
+        if ($this->disposable && $this->usage) {
+            return false;
+        }
+
+        // Если тип оружия указан, и он не подходит
+        if (count($this->allowedWeaponTypes) !== 0 && !in_array($unit->getOffense()->getWeaponType()->getId(), $this->allowedWeaponTypes, true)) {
+            return false;
+        }
+
+        return true;
     }
 }

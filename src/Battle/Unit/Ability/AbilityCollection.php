@@ -57,4 +57,16 @@ class AbilityCollection implements Iterator, Countable
             $ability->update($unit, $this->testMode);
         }
     }
+
+    /**
+     * Сообщает всем способностям, что начался новый раунд. Некоторые способности активируются по этому событию
+     *
+     * @param UnitInterface $unit
+     */
+    public function newRound(UnitInterface $unit): void
+    {
+        foreach ($this->elements as $ability) {
+            $ability->newRound($unit);
+        }
+    }
 }

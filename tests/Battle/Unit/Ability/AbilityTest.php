@@ -285,6 +285,172 @@ class AbilityTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на активацию способности с типом активации = ACTIVATE_CUNNING
+     *
+     * @throws Exception
+     */
+    public function testAbilityActivateCunningSuccess(): void
+    {
+        // Юнит со 100+ хитрости
+        $unit = UnitFactory::createByTemplate(53);
+
+        // Создаем способность с типом активации = ACTIVATE_CUNNING
+        $ability = new Ability(
+            $unit,
+            false,
+            'Heavy Strike',
+            '/images/icons/ability/335.png',
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'Battle Fury',
+                    'icon'           => '/images/icons/ability/102.png',
+                    'message_method' => 'applyEffect',
+                    'effect'         => [
+                        'name'                  => 'Battle Fury',
+                        'icon'                  => '/images/icons/ability/102.png',
+                        'duration'              => 15,
+                        'on_apply_actions'      => [],
+                        'on_next_round_actions' => [],
+                        'on_disable_actions'    => [],
+                    ],
+                ],
+            ],
+            AbilityInterface::ACTIVATE_CUNNING,
+            [],
+            0
+        );
+
+        // Вначале способность неактивна
+        self::assertFalse($ability->isReady());
+
+        $abilities = new AbilityCollection();
+        $abilities->add($ability);
+
+        $abilities->newRound($unit);
+
+        // Способность активировалась
+        self::assertTrue($ability->isReady());
+    }
+
+    /**
+     * Тест аналогичен testAbilityActivateCunningSuccess(), но юнит имеет не тот тип оружия - соответственно способность
+     * не активируется
+     *
+     * @throws Exception
+     */
+    public function testAbilityActivateCunningIncorrectWeaponType(): void
+    {
+        // Юнит со 100+ хитрости
+        $unit = UnitFactory::createByTemplate(53);
+
+        // Создаем способность с типом активации = ACTIVATE_CUNNING
+        $ability = new Ability(
+            $unit,
+            false,
+            'Heavy Strike',
+            '/images/icons/ability/335.png',
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'Battle Fury',
+                    'icon'           => '/images/icons/ability/102.png',
+                    'message_method' => 'applyEffect',
+                    'effect'         => [
+                        'name'                  => 'Battle Fury',
+                        'icon'                  => '/images/icons/ability/102.png',
+                        'duration'              => 15,
+                        'on_apply_actions'      => [],
+                        'on_next_round_actions' => [],
+                        'on_disable_actions'    => [],
+                    ],
+                ],
+            ],
+            AbilityInterface::ACTIVATE_CUNNING,
+            [
+                WeaponTypeInterface::HEAVY_TWO_HAND_AXE,
+            ],
+            0
+        );
+
+        // Вначале способность неактивна
+        self::assertFalse($ability->isReady());
+
+        $abilities = new AbilityCollection();
+        $abilities->add($ability);
+
+        $abilities->newRound($unit);
+
+        // Способность все равно не активировалась - юнит имеет неподходящий тип оружия
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест аналогичен testAbilityActivateCunningSuccess(), но на этот раз проверяется то, что если способность
+     * одноразовая - второй раз она не активируется
+     *
+     * @throws Exception
+     */
+    public function testAbilityActivateCunningDisposable(): void
+    {
+        // Юнит со 100+ хитрости
+        $unit = UnitFactory::createByTemplate(53);
+
+        // Создаем способность с типом активации = ACTIVATE_CUNNING
+        $ability = new Ability(
+            $unit,
+            true,
+            'Heavy Strike',
+            '/images/icons/ability/335.png',
+            [
+                [
+                    'type'           => ActionInterface::EFFECT,
+                    'type_target'    => ActionInterface::TARGET_SELF,
+                    'name'           => 'Battle Fury',
+                    'icon'           => '/images/icons/ability/102.png',
+                    'message_method' => 'applyEffect',
+                    'effect'         => [
+                        'name'                  => 'Battle Fury',
+                        'icon'                  => '/images/icons/ability/102.png',
+                        'duration'              => 15,
+                        'on_apply_actions'      => [],
+                        'on_next_round_actions' => [],
+                        'on_disable_actions'    => [],
+                    ],
+                ],
+            ],
+            AbilityInterface::ACTIVATE_CUNNING,
+            [],
+            0
+        );
+
+        // Вначале способность неактивна
+        self::assertFalse($ability->isReady());
+
+        $abilities = new AbilityCollection();
+        $abilities->add($ability);
+
+        $abilities->newRound($unit);
+
+        // Способность активировалась
+        self::assertTrue($ability->isReady());
+
+        // Отмечаем её использованной
+        $ability->usage();
+
+        // Способность стала неактивной
+        self::assertFalse($ability->isReady());
+
+        // Еще раз начинаем новый раунд
+        $abilities->newRound($unit);
+
+        // Но способность больше не активируется
+        self::assertFalse($ability->isReady());
+    }
+
+    /**
      * @return array
      */
     public function invalidEffectDataProvider(): array
