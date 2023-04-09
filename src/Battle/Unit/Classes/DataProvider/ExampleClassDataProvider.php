@@ -26,7 +26,7 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
     private AbilityDataProviderInterface $abilityDataProvider;
 
     private static array $data = [
-        1 => [
+        1  => [
             'id'         => 1,
             'name'       => 'Warrior',
             'small_icon' => '/images/icons/small/warrior.png',
@@ -41,7 +41,7 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
                 ],
             ],
         ],
-        2 => [
+        2  => [
             'id'         => 2,
             'name'       => 'Priest',
             'small_icon' => '/images/icons/small/priest.png',
@@ -56,7 +56,7 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
                 ],
             ],
         ],
-        3 => [
+        3  => [
             'id'         => 3,
             'name'       => 'Dead Knight',
             'small_icon' => '/images/icons/small/dead-knight.png',
@@ -67,7 +67,7 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
                 ],
             ],
         ],
-        4 => [
+        4  => [
             'id'         => 4,
             'name'       => 'Dark Mage',
             'small_icon' => '/images/icons/small/dark-mage.png',
@@ -78,7 +78,7 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
                 ],
             ],
         ],
-        5 => [
+        5  => [
             'id'         => 5,
             'name'       => 'Titan',
             'small_icon' => '/images/icons/small/titan.png',
@@ -93,7 +93,7 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
                 ],
             ],
         ],
-        6 => [
+        6  => [
             'id'         => 6,
             'name'       => 'Alchemist',
             'small_icon' => '/images/icons/small/alchemist.png',
@@ -108,7 +108,7 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
                 ],
             ],
         ],
-        7 => [
+        7  => [
             'id'         => 7,
             'name'       => 'Succubus',
             'small_icon' => '/images/icons/small/dark-mage.png',
@@ -123,7 +123,7 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
                 ],
             ],
         ],
-        8 => [
+        8  => [
             'id'         => 8,
             'name'       => 'Paladin',
             'small_icon' => '/images/icons/small/paladin.png',
@@ -133,6 +133,12 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
                     'level' => 1,
                 ],
             ],
+        ],
+        9  => [
+            'id'         => 9,
+            'name'       => 'Seraphim',
+            'small_icon' => '/images/icons/small/seraphim.png',
+            'abilities'  => [],
         ],
         50 => [
             'id'         => 50,

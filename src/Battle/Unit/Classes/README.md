@@ -2,11 +2,11 @@
 # Планы по классам
 
 - Люди
-    - [ ] Паладин `Paladin`
+    - [x] Паладин `Paladin`
     - [ ] Убийца `Assassin`
     - [ ] Рейнджер `Ranger`
     - [ ] Маг Стихий `ElementalMage`
-    - [ ] Жрец `Priest`
+    - [x] Жрец `Priest`
 - Эльфы
     - [ ] Хранитель `Templar`
     - [ ] Дневной охотник `DayHunter`
@@ -15,7 +15,7 @@
     - [ ] Оракул `Oracle`
 - Орки
     - [ ] Разрушитель `Destroyer`
-    - [ ] Титан `Titan`
+    - [x] Титан `Titan`
     - [ ] Берсерк `Berserk`
     - [ ] Шаман `Shaman`
     - [ ] Боевой маг `BattleMage`
@@ -23,17 +23,17 @@
     - [ ] Страж `Guardian`
     - [ ] Искатель сокровищ `TreasureHunter`
     - [ ] Арбалетчик `CrossbowMan`
-    - [ ] Алхимик `Alchemist`
+    - [x] Алхимик `Alchemist`
     - [ ] Отшельник `Hermit`
 - Ангелы
     - [ ] Архангел `Archangel`
     - [ ] Малахим `Malachim`
     - [ ] Феникс `Phoenix`
-    - [ ] Серафим `Seraph`
+    - [x] Серафим `Seraphim`
     - [ ] Арелим `Arelim`
 - Демоны
     - [ ] Рыцарь ада `HellKnight`
     - [ ] Мститель `Avenger`
     - [ ] Архонт `Archont` (в будущем будет переименован в вампира)
     - [ ] Душегуб `SoulKiller`
-    - [ ] Суккуб/Инкуб `Succubus`
+    - [x] Суккуб/Инкуб `Succubus`
