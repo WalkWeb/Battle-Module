@@ -175,6 +175,13 @@ interface OffenseInterface
     public function setDeathDamage(int $deathDamage): void;
 
     /**
+     * Возвращает сумму всех типов урона
+     *
+     * @return int
+     */
+    public function getDamageSum(): int;
+
+    /**
      * Возвращает скорость атаки
      *
      * @return float

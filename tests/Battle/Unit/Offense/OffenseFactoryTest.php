@@ -40,6 +40,10 @@ class OffenseFactoryTest extends AbstractUnitTest
         self::assertEquals($data['earth_damage'], $offense->getEarthDamage());
         self::assertEquals($data['life_damage'], $offense->getLifeDamage());
         self::assertEquals($data['death_damage'], $offense->getDeathDamage());
+        self::assertEquals(
+            $data['physical_damage'] + $data['fire_damage'] + $data['water_damage'] + $data['air_damage'] + $data['earth_damage'] + $data['life_damage'] + $data['death_damage'],
+            $offense->getDamageSum()
+        );
 
         self::assertEquals($data['attack_speed'], $offense->getAttackSpeed());
         self::assertEquals($data['cast_speed'], $offense->getCastSpeed());

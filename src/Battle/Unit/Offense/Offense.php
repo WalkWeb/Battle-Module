@@ -302,6 +302,20 @@ class Offense implements OffenseInterface
     }
 
     /**
+     * @return int
+     */
+    public function getDamageSum(): int
+    {
+        return $this->physicalDamage +
+            $this->fireDamage +
+            $this->waterDamage +
+            $this->airDamage +
+            $this->earthDamage +
+            $this->lifeDamage +
+            $this->deathDamage;
+    }
+
+    /**
      * @return float
      */
     public function getAttackSpeed(): float

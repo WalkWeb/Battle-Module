@@ -39,6 +39,7 @@ class OffenseTest extends AbstractUnitTest
         $damageMultiplier = 100;
         $vampirism = 5;
         $magicVampirism = 6;
+        $damageSum = $physicalDamage + $fireDamage + $waterDamage + $airDamage + $earthDamage + $lifeDamage + $deathDamage;
 
         $offense = new Offense(
             $this->getContainer(),
@@ -101,6 +102,7 @@ class OffenseTest extends AbstractUnitTest
         self::assertEquals($earthDamage, $offense->getEarthDamage());
         self::assertEquals($lifeDamage, $offense->getLifeDamage());
         self::assertEquals($deathDamage, $offense->getDeathDamage());
+        self::assertEquals($damageSum, $offense->getDamageSum());
         self::assertEquals($attackSpeed, $offense->getAttackSpeed());
         self::assertEquals($castSpeed, $offense->getCastSpeed());
         self::assertEquals($accuracy, $offense->getAccuracy());
