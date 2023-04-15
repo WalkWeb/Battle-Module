@@ -45,4 +45,5 @@ class OffenseException extends Exception
     public const INCORRECT_VAMPIRISM_VALUE           = 'Incorrect "vampirism", should be min-max value: ';
     public const INCORRECT_MAGIC_VAMPIRISM           = 'Incorrect "magic_vampirism", it required and type int';
     public const INCORRECT_MAGIC_VAMPIRISM_VALUE     = 'Incorrect "magic_vampirism", should be min-max value: ';
+    public const INCORRECT_CONVERT_DAMAGE            = 'Incorrect damage type for convert';
 }

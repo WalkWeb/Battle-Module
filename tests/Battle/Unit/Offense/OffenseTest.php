@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Offense;
 
 use Battle\Unit\Defense\Defense;
+use Battle\Unit\Offense\MultipleOffense\MultipleOffenseInterface;
 use Battle\Unit\Offense\Offense;
 use Battle\Unit\Offense\OffenseException;
 use Battle\Unit\Offense\OffenseInterface;
@@ -741,6 +742,87 @@ class OffenseTest extends AbstractUnitTest
             OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
         );
         $offense->setMagicVampirism(OffenseInterface::MAX_VAMPIRE + 1);
+    }
+
+    /**
+     * Тест на конвертацию урона в урон указанного типа
+     *
+     * @dataProvider convertDataProvider
+     * @param string $convertTo
+     * @param int $expectedPhysicalDamage
+     * @param int $expectedFireDamage
+     * @param int $expectedWaterDamage
+     * @param int $expectedAirDamage
+     * @param int $expectedEarthDamage
+     * @param int $expectedLifeDamage
+     * @param int $expectedDeathDamage
+     * @throws Exception
+     */
+    public function testOffenseDamageConvertSuccess(
+        string $convertTo,
+        int $expectedPhysicalDamage,
+        int $expectedFireDamage,
+        int $expectedWaterDamage,
+        int $expectedAirDamage,
+        int $expectedEarthDamage,
+        int $expectedLifeDamage,
+        int $expectedDeathDamage
+    ): void
+    {
+        $physicalDamage = 10;
+        $fireDamage = 10;
+        $waterDamage = 10;
+        $airDamage = 10;
+        $earthDamage = 10;
+        $lifeDamage = 10;
+        $deathDamage = 10;
+
+        $offense = new Offense(
+            $this->getContainer(),
+            1,
+            1,
+            $physicalDamage,
+            $fireDamage,
+            $waterDamage,
+            $airDamage,
+            $earthDamage,
+            $lifeDamage,
+            $deathDamage,
+            1,
+            1,
+            100,
+            100,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        );
+
+        $offense->convertDamageTo($convertTo);
+
+        self::assertEquals($expectedPhysicalDamage, $offense->getPhysicalDamage());
+        self::assertEquals($expectedFireDamage, $offense->getFireDamage());
+        self::assertEquals($expectedWaterDamage, $offense->getWaterDamage());
+        self::assertEquals($expectedAirDamage, $offense->getAirDamage());
+        self::assertEquals($expectedEarthDamage, $offense->getEarthDamage());
+        self::assertEquals($expectedLifeDamage, $offense->getLifeDamage());
+        self::assertEquals($expectedDeathDamage, $offense->getDeathDamage());
+    }
+
+    /**
+     * Тест на некорректный тип урона для конвертации
+     *
+     * @throws Exception
+     */
+    public function testOffenseDamageConvertFail(): void
+    {
+        $convertTo = 'to_fire';
+
+        $this->expectException(OffenseException::class);
+        $this->expectExceptionMessage(OffenseException::INCORRECT_CONVERT_DAMAGE . ': ' . $convertTo);
+        $this->createOffence()->convertDamageTo($convertTo);
     }
 
     /**
@@ -1942,6 +2024,82 @@ class OffenseTest extends AbstractUnitTest
                 (int)(50 * 0.75),
             ],
 
+        ];
+    }
+
+    public function convertDataProvider(): array
+    {
+        return [
+            [
+                MultipleOffenseInterface::CONVERT_PHYSICAL,
+                70,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+            ],
+            [
+                MultipleOffenseInterface::CONVERT_FIRE,
+                0,
+                70,
+                0,
+                0,
+                0,
+                0,
+                0,
+            ],
+            [
+                MultipleOffenseInterface::CONVERT_WATER,
+                0,
+                0,
+                70,
+                0,
+                0,
+                0,
+                0,
+            ],
+            [
+                MultipleOffenseInterface::CONVERT_AIR,
+                0,
+                0,
+                0,
+                70,
+                0,
+                0,
+                0,
+            ],
+            [
+                MultipleOffenseInterface::CONVERT_EARTH,
+                0,
+                0,
+                0,
+                0,
+                70,
+                0,
+                0,
+            ],
+            [
+                MultipleOffenseInterface::CONVERT_LIFE,
+                0,
+                0,
+                0,
+                0,
+                0,
+                70,
+                0,
+            ],
+            [
+                MultipleOffenseInterface::CONVERT_DEATH,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                70,
+            ],
         ];
     }
 

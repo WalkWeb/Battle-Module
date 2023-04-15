@@ -6,6 +6,7 @@ namespace Battle\Unit\Offense;
 
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Defense\DefenseInterface;
+use Battle\Unit\Offense\MultipleOffense\MultipleOffenseInterface;
 use Battle\Weapon\Type\WeaponType;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
@@ -31,6 +32,17 @@ class Offense implements OffenseInterface
     private int $damageMultiplier;
     private int $vampirism;
     private int $magicVampirism;
+
+    // Этот массив используется для механики конвертации урона
+    private static array $convertMap = [
+        MultipleOffenseInterface::CONVERT_PHYSICAL => 'physicalDamage',
+        MultipleOffenseInterface::CONVERT_FIRE     => 'fireDamage',
+        MultipleOffenseInterface::CONVERT_WATER    => 'waterDamage',
+        MultipleOffenseInterface::CONVERT_AIR      => 'airDamage',
+        MultipleOffenseInterface::CONVERT_EARTH    => 'earthDamage',
+        MultipleOffenseInterface::CONVERT_LIFE     => 'lifeDamage',
+        MultipleOffenseInterface::CONVERT_DEATH    => 'deathDamage',
+    ];
 
     /**
      * @param ContainerInterface $container
@@ -313,6 +325,30 @@ class Offense implements OffenseInterface
             $this->earthDamage +
             $this->lifeDamage +
             $this->deathDamage;
+    }
+
+    /**
+     * @param string $damageType
+     * @throws OffenseException
+     */
+    public function convertDamageTo(string $damageType): void
+    {
+        if (!array_key_exists($damageType, self::$convertMap)) {
+            throw new OffenseException(OffenseException::INCORRECT_CONVERT_DAMAGE . ': ' . $damageType);
+        }
+
+        $damageProperty = self::$convertMap[$damageType];
+        $damageSum = $this->getDamageSum();
+
+        $this->physicalDamage = 0;
+        $this->fireDamage = 0;
+        $this->waterDamage = 0;
+        $this->airDamage = 0;
+        $this->earthDamage = 0;
+        $this->lifeDamage = 0;
+        $this->deathDamage = 0;
+
+        $this->$damageProperty = $damageSum;
     }
 
     /**

@@ -182,6 +182,14 @@ interface OffenseInterface
     public function getDamageSum(): int;
 
     /**
+     * Конвертирует все типы урона в урон указанного типа
+     *
+     * @param string $damageType
+     * @throws OffenseException
+     */
+    public function convertDamageTo(string $damageType): void;
+
+    /**
      * Возвращает скорость атаки
      *
      * @return float

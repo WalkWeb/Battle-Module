@@ -13,6 +13,7 @@ class MultipleOffense implements MultipleOffenseInterface
     private float $criticalMultiplierMultiplier;
     private string $damageConvertTo;
 
+    // Этот массив используется для валидации параметра при создании способности
     private static array $convertMap = [
         self::CONVERT_NONE,
         self::CONVERT_PHYSICAL,
