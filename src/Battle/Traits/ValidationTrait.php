@@ -82,6 +82,27 @@ trait ValidationTrait
     /**
      * @param array $data
      * @param string $filed
+     * @param string $default
+     * @param string $error
+     * @return string
+     * @throws BattleException
+     */
+    protected static function stringOrDefault(array $data, string $filed, string $default, string $error): string
+    {
+        if (!array_key_exists($filed, $data)) {
+            return $default;
+        }
+
+        if (!is_string($data[$filed])) {
+            throw new BattleException($error);
+        }
+
+        return $data[$filed];
+    }
+
+    /**
+     * @param array $data
+     * @param string $filed
      * @param string $error
      * @return bool
      * @throws BattleException

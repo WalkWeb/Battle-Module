@@ -26,6 +26,15 @@ interface MultipleOffenseInterface
     public const MIN_MULTIPLIER = 0;
     public const MAX_MULTIPLIER = 10;
 
+    public const CONVERT_NONE     = '';
+    public const CONVERT_PHYSICAL = 'convert_physical';
+    public const CONVERT_FIRE     = 'convert_fire';
+    public const CONVERT_WATER    = 'convert_water';
+    public const CONVERT_AIR      = 'convert_air';
+    public const CONVERT_EARTH    = 'convert_earth';
+    public const CONVERT_LIFE     = 'convert_life';
+    public const CONVERT_DEATH    = 'convert_death';
+
     /**
      * Возвращает множитель урона
      *
@@ -60,4 +69,9 @@ interface MultipleOffenseInterface
      * @return float
      */
     public function getCriticalMultiplierMultiplier(): float;
+
+    /**
+     * @return string
+     */
+    public function getDamageConvertTo(): string;
 }

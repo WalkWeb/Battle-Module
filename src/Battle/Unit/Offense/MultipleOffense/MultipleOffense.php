@@ -11,13 +11,35 @@ class MultipleOffense implements MultipleOffenseInterface
     private float $accuracyMultiplier;
     private float $criticalChanceMultiplier;
     private float $criticalMultiplierMultiplier;
+    private string $damageConvertTo;
 
+    private static array $convertMap = [
+        self::CONVERT_NONE,
+        self::CONVERT_PHYSICAL,
+        self::CONVERT_FIRE,
+        self::CONVERT_WATER,
+        self::CONVERT_AIR,
+        self::CONVERT_EARTH,
+        self::CONVERT_LIFE,
+        self::CONVERT_DEATH,
+    ];
+
+    /**
+     * @param float $damageMultiplier
+     * @param float $speedMultiplier
+     * @param float $accuracyMultiplier
+     * @param float $criticalChanceMultiplier
+     * @param float $criticalMultiplierMultiplier
+     * @param string $damageConvertTo
+     * @throws MultipleOffenseException
+     */
     public function __construct(
         float $damageMultiplier,
         float $speedMultiplier,
         float $accuracyMultiplier,
         float $criticalChanceMultiplier,
-        float $criticalMultiplierMultiplier
+        float $criticalMultiplierMultiplier,
+        string $damageConvertTo
     )
     {
         $this->damageMultiplier = $damageMultiplier;
@@ -25,6 +47,7 @@ class MultipleOffense implements MultipleOffenseInterface
         $this->accuracyMultiplier = $accuracyMultiplier;
         $this->criticalChanceMultiplier = $criticalChanceMultiplier;
         $this->criticalMultiplierMultiplier = $criticalMultiplierMultiplier;
+        $this->setDamageConvertTo($damageConvertTo);
     }
 
     /**
@@ -65,5 +88,23 @@ class MultipleOffense implements MultipleOffenseInterface
     public function getCriticalMultiplierMultiplier(): float
     {
         return $this->criticalMultiplierMultiplier;
+    }
+
+    public function getDamageConvertTo(): string
+    {
+        return $this->damageConvertTo;
+    }
+
+    /**
+     * @param string $damageConvertTo
+     * @throws MultipleOffenseException
+     */
+    private function setDamageConvertTo(string $damageConvertTo): void
+    {
+        if (!in_array($damageConvertTo, self::$convertMap, true)) {
+            throw new MultipleOffenseException(MultipleOffenseException::INVALID_CRITICAL_DAMAGE_CONVERT_VALUE . ': ' . $damageConvertTo);
+        }
+
+        $this->damageConvertTo = $damageConvertTo;
     }
 }
