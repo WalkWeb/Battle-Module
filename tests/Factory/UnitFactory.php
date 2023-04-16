@@ -3206,7 +3206,7 @@ class UnitFactory
                 'magic_vampirism'     => 20,
             ],
             'defense'                      => [
-                'physical_resist'     => 0,
+                'physical_resist'     => 50,
                 'fire_resist'         => 0,
                 'water_resist'        => 0,
                 'air_resist'          => 0,

@@ -91,7 +91,7 @@ class MultipleOffense implements MultipleOffenseInterface
         return $this->criticalMultiplierMultiplier;
     }
 
-    public function getDamageConvertTo(): string
+    public function getDamageConvert(): string
     {
         return $this->damageConvertTo;
     }

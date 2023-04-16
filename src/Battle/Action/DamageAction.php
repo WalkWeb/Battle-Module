@@ -391,7 +391,7 @@ class DamageAction extends AbstractAction
         MultipleOffenseInterface $multipleOffense
     ): OffenseInterface
     {
-        return new Offense(
+        $resultOffense = new Offense(
             $this->container,
             $offense->getDamageType(),
             $offense->getWeaponType()->getId(),
@@ -413,5 +413,11 @@ class DamageAction extends AbstractAction
             $offense->getVampirism(),
             $offense->getMagicVampirism()
         );
+
+        if ($multipleOffense->getDamageConvert()) {
+            $resultOffense->convertDamage($multipleOffense->getDamageConvert());
+        }
+
+        return $resultOffense;
     }
 }

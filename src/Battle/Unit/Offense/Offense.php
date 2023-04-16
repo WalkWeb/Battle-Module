@@ -331,7 +331,7 @@ class Offense implements OffenseInterface
      * @param string $damageType
      * @throws OffenseException
      */
-    public function convertDamageTo(string $damageType): void
+    public function convertDamage(string $damageType): void
     {
         if (!array_key_exists($damageType, self::$convertMap)) {
             throw new OffenseException(OffenseException::INCORRECT_CONVERT_DAMAGE . ': ' . $damageType);

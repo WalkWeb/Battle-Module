@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability;
 
 use Battle\Action\ActionInterface;
+use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Container\Container;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Offense\MultipleOffense\MultipleOffense;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
@@ -448,6 +450,77 @@ class AbilityTest extends AbstractUnitTest
 
         // Но способность больше не активируется
         self::assertFalse($ability->isReady());
+    }
+
+    /**
+     * Тест на конвертацию урона в способности
+     *
+     * @throws Exception
+     */
+    public function testAbilityConvertDamage(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = new Ability(
+            $unit,
+            false,
+            'Test Ability',
+            'icon.png',
+            [
+                [
+                    'type'             => ActionInterface::DAMAGE,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'multiple_offense'          => [
+                        'damage'              => 1.0,
+                        'speed'               => 1.0,
+                        'accuracy'            => 1.0,
+                        'critical_chance'     => 1.0,
+                        'critical_multiplier' => 1.0,
+                        'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                    ],
+                    'can_be_avoided'   => true,
+                    'name'             => 'Test Ability',
+                    'animation_method' => 'damage',
+                    'message_method'   => 'damageAbility',
+                    'icon'             => 'icon.png',
+                ],
+            ],
+            AbilityInterface::ACTIVATE_CONCENTRATION,
+            [],
+            0
+        );
+
+        // Активируем способность
+        for ($i = 0; $i < 10; $i++) {
+            $unit->newRound();
+        }
+
+        $collection = new AbilityCollection();
+        $collection->add($ability);
+
+        foreach ($collection as $item) {
+            self::assertEquals($ability, $item);
+        }
+
+        $collection->update($unit);
+
+        self::assertTrue($ability->isReady());
+
+        // Применяем способность
+        $actions = $ability->getActions($enemyCommand, $command);
+
+        foreach ($actions as $action) {
+            self::assertInstanceOf(DamageAction::class, $action);
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+        }
+
+        // Обычный урон должен нанести 10 урона за счет резиста, но так как урон конвертируется в урон огнем - будет
+        // нанесено 20 урона, т.к. сопротивление к огню 0%
+        self::assertEquals($enemyUnit->getTotalLife() - 20, $enemyUnit->getLife());
     }
 
     /**

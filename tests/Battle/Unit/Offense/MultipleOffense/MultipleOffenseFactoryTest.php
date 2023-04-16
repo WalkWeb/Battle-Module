@@ -29,8 +29,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
         self::assertEquals($data['critical_chance'], $multipleOffense->getCriticalChanceMultiplier());
         self::assertEquals($data['critical_multiplier'], $multipleOffense->getCriticalMultiplierMultiplier());
 
-        if (array_key_exists('damage_convert_to', $data)) {
-            self::assertEquals($data['damage_convert_to'], $multipleOffense->getDamageConvertTo());
+        if (array_key_exists('damage_convert', $data)) {
+            self::assertEquals($data['damage_convert'], $multipleOffense->getDamageConvert());
         }
     }
 
@@ -88,7 +88,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                     'accuracy'            => 3.0,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
-                    'damage_convert_to'   => MultipleOffenseInterface::CONVERT_PHYSICAL,
+                    'damage_convert'      => MultipleOffenseInterface::CONVERT_PHYSICAL,
                 ],
             ],
         ];
@@ -272,26 +272,26 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
             ],
 
             [
-                // damage_convert_to некорректного типа
+                // damage_convert некорректного типа
                 [
                     'damage'              => 2.0,
                     'speed'               => 2.1,
                     'accuracy'            => 3.0,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 2.0,
-                    'damage_convert_to'   => true,
+                    'damage_convert'      => true,
                 ],
                 MultipleOffenseException::INVALID_CRITICAL_DAMAGE_CONVERT,
             ],
             [
-                // damage_convert_to некорректного значения
+                // damage_convert некорректного значения
                 [
                     'damage'              => 2.0,
                     'speed'               => 2.1,
                     'accuracy'            => 3.0,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 2.0,
-                    'damage_convert_to'   => 'to_fire',
+                    'damage_convert'      => 'to_fire',
                 ],
                 MultipleOffenseException::INVALID_CRITICAL_DAMAGE_CONVERT_VALUE . ': to_fire',
             ],

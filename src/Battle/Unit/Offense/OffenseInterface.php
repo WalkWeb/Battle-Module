@@ -187,7 +187,7 @@ interface OffenseInterface
      * @param string $damageType
      * @throws OffenseException
      */
-    public function convertDamageTo(string $damageType): void;
+    public function convertDamage(string $damageType): void;
 
     /**
      * Возвращает скорость атаки

@@ -11,6 +11,7 @@ use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Offense\MultipleOffense\MultipleOffense;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -998,6 +999,51 @@ class DamageActionTest extends AbstractUnitTest
             $enemyUnit->getTotalLife() - 2 * $unit->getOffense()->getDamage($enemyUnit->getDefense()),
             $enemyUnit->getLife()
         );
+    }
+
+    /**
+     * Тест на конвертацию и применение урона
+     *
+     * @throws Exception
+     */
+    public function testDamageActionConvertDamage(): void
+    {
+        // Юнит с физическим уроном в 20 единиц
+        $unit = UnitFactory::createByTemplate(1);
+        // Юнит с резистом 50% к физическому урону
+        $enemyUnit = UnitFactory::createByTemplate(52);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            false,
+            '',
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            null,
+            MultipleOffenseFactory::create(
+                $multipleData = [
+                    'damage'              => 1.0,
+                    'speed'               => 1.0,
+                    'accuracy'            => 1.0,
+                    'critical_chance'     => 1.0,
+                    'critical_multiplier' => 1.0,
+                    'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                ]
+            )
+        );
+
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Обычный урон должен нанести 10 урона за счет резиста, но так как урон конвертируется в урон огнем - будет
+        // нанесено 20 урона, т.к. сопротивление к огню 0%
+        self::assertEquals($enemyUnit->getTotalLife() - 20, $enemyUnit->getLife());
     }
 
     /**

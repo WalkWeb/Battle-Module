@@ -29,7 +29,7 @@ class MultipleOffenseFactory
         $accuracy = self::floatOrDefault($data, 'accuracy', 1.0, MultipleOffenseException::INVALID_ACCURACY);
         $criticalChance = self::floatOrDefault($data, 'critical_chance', 1.0, MultipleOffenseException::INVALID_CRITICAL_CHANCE);
         $criticalMultiplier = self::floatOrDefault($data, 'critical_multiplier', 1.0, MultipleOffenseException::INVALID_CRITICAL_MULTIPLIER);
-        $damageConvertTo = self::stringOrDefault($data, 'damage_convert_to', '', MultipleOffenseException::INVALID_CRITICAL_DAMAGE_CONVERT);
+        $damageConvertTo = self::stringOrDefault($data, 'damage_convert', '', MultipleOffenseException::INVALID_CRITICAL_DAMAGE_CONVERT);
 
         self::floatMinMaxValue(
             $damage,

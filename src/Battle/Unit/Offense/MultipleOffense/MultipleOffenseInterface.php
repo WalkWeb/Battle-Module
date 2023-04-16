@@ -73,5 +73,5 @@ interface MultipleOffenseInterface
     /**
      * @return string
      */
-    public function getDamageConvertTo(): string;
+    public function getDamageConvert(): string;
 }

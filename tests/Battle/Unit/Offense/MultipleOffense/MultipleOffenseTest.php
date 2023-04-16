@@ -38,6 +38,6 @@ class MultipleOffenseTest extends AbstractUnitTest
         self::assertEquals($accuracyMultiplier, $multipleOffense->getAccuracyMultiplier());
         self::assertEquals($criticalChanceMultiplier, $multipleOffense->getCriticalChanceMultiplier());
         self::assertEquals($criticalMultiplierMultiplier, $multipleOffense->getCriticalMultiplierMultiplier());
-        self::assertEquals($damageConvertTo, $multipleOffense->getDamageConvertTo());
+        self::assertEquals($damageConvertTo, $multipleOffense->getDamageConvert());
     }
 }

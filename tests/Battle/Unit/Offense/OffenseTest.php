@@ -800,7 +800,7 @@ class OffenseTest extends AbstractUnitTest
             0
         );
 
-        $offense->convertDamageTo($convertTo);
+        $offense->convertDamage($convertTo);
 
         self::assertEquals($expectedPhysicalDamage, $offense->getPhysicalDamage());
         self::assertEquals($expectedFireDamage, $offense->getFireDamage());
@@ -822,7 +822,7 @@ class OffenseTest extends AbstractUnitTest
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(OffenseException::INCORRECT_CONVERT_DAMAGE . ': ' . $convertTo);
-        $this->createOffence()->convertDamageTo($convertTo);
+        $this->createOffence()->convertDamage($convertTo);
     }
 
     /**
