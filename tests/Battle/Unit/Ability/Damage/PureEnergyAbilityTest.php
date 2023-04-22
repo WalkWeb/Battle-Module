@@ -13,20 +13,20 @@ use Exception;
 use Tests\Battle\Unit\Ability\AbstractAbilityTest;
 use Tests\Factory\UnitFactory;
 
-class LightningAbilityTest extends AbstractAbilityTest
+class PureEnergyAbilityTest extends AbstractAbilityTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_5</span> use <img src="/images/icons/ability/075.png" alt="" /> <span class="ability">Lightning</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_5</span> использовал <img src="/images/icons/ability/075.png" alt="" /> <span class="ability">Молния</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_5</span> use <img src="/images/icons/ability/282.png" alt="" /> <span class="ability">Pure Energy</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_5</span> использовал <img src="/images/icons/ability/282.png" alt="" /> <span class="ability">Чистая энергия</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
     /**
-     * Тест на создание способности Lightning через AbilityDataProvider
+     * Тест на создание способности Pure Energy через AbilityDataProvider
      *
      * @throws Exception
      */
-    public function testLightningAbilityCreate(): void
+    public function testPureEnergyAbilityCreate(): void
     {
-        $name = 'Lightning';
-        $icon = '/images/icons/ability/075.png';
+        $name = 'Pure Energy';
+        $icon = '/images/icons/ability/282.png';
         $disposable = false;
 
         $unit = UnitFactory::createByTemplate(1);
@@ -61,7 +61,7 @@ class LightningAbilityTest extends AbstractAbilityTest
     }
 
     /**
-     * Тест на применение способности Lightning
+     * Тест на применение способности Pure Energy
      *
      * @dataProvider useDataProvider
      * @param int $level
@@ -69,14 +69,14 @@ class LightningAbilityTest extends AbstractAbilityTest
      * @param int $expectedAccuracy
      * @throws Exception
      */
-    public function testLightningAbilityUse(int $level, int $expectedDamage, int $expectedAccuracy): void
+    public function testPureEnergyAbilityUse(int $level, int $expectedDamage, int $expectedAccuracy): void
     {
         $unit = UnitFactory::createByTemplate(5);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Lightning', $level);
+        $ability = $this->createAbilityByDataProvider($unit, 'Pure Energy', $level);
 
         $this->activateAbility($ability, $unit);
 
@@ -110,28 +110,28 @@ class LightningAbilityTest extends AbstractAbilityTest
         return [
             [
                 1,
-                19,
-                280,
-            ],
-            [
-                2,
-                21,
+                18,
                 300,
             ],
             [
-                3,
-                22,
+                2,
+                19,
                 320,
             ],
             [
-                4,
-                24,
+                3,
+                21,
                 340,
             ],
             [
-                5,
-                25,
+                4,
+                22,
                 360,
+            ],
+            [
+                5,
+                24,
+                380,
             ],
         ];
     }

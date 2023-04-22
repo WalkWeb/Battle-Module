@@ -60,6 +60,8 @@ return [
     'Paralysis'                                                      => 'Паралич',
     'Stun'                                                           => 'Оглушение',
     'Bleeding'                                                       => 'Кровотечение',
+    'Lightning'                                                      => 'Молния',
+    'Pure Energy'                                                    => 'Чистая энергия',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

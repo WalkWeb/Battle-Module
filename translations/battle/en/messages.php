@@ -62,6 +62,8 @@ return [
     'Paralysis'                                                      => 'Paralysis',
     'Stun'                                                           => 'Stun',
     'Bleeding'                                                       => 'Bleeding',
+    'Lightning'                                                      => 'Lightning',
+    'Pure Energy'                                                    => 'Pure Energy',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
