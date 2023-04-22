@@ -18,6 +18,8 @@ interface AbilityInterface
     public const ACTIVATE_DEAD          = 4;
     public const ACTIVATE_CUNNING       = 5;
 
+    // TODO getDescription
+
     /**
      * Название способности
      *

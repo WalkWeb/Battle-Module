@@ -11,6 +11,7 @@ use Battle\Action\ParalysisAction;
 use Battle\Action\ResurrectionAction;
 use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityInterface;
+use Battle\Unit\Offense\MultipleOffense\MultipleOffense;
 use Battle\Weapon\Type\WeaponTypeInterface;
 
 /**
@@ -860,6 +861,148 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                 'dodge'               => 0,
                             ],
                         ],
+                    ],
+                ],
+            ],
+        ],
+        'Lightning'      => [
+            1 => [
+                'name'                 => 'Lightning',
+                'icon'                 => '/images/icons/ability/075.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                ],
+                'actions'              => [
+                    [
+                        'type'               => ActionInterface::DAMAGE,
+                        'type_target'        => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.3,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.4,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_AIR,
+                        ],
+                        'can_be_avoided'     => true,
+                        'name'               => 'Lightning',
+                        'animation_method'   => 'damage',
+                        'message_method'     => 'damageAbility',
+                        'icon'               => '/images/icons/ability/075.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Lightning',
+                'icon'                 => '/images/icons/ability/075.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                ],
+                'actions'              => [
+                    [
+                        'type'               => ActionInterface::DAMAGE,
+                        'type_target'        => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.4,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.5,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_AIR,
+                        ],
+                        'can_be_avoided'     => true,
+                        'name'               => 'Lightning',
+                        'animation_method'   => 'damage',
+                        'message_method'     => 'damageAbility',
+                        'icon'               => '/images/icons/ability/075.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Lightning',
+                'icon'                 => '/images/icons/ability/075.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                ],
+                'actions'              => [
+                    [
+                        'type'               => ActionInterface::DAMAGE,
+                        'type_target'        => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.5,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.6,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_AIR,
+                        ],
+                        'can_be_avoided'     => true,
+                        'name'               => 'Lightning',
+                        'animation_method'   => 'damage',
+                        'message_method'     => 'damageAbility',
+                        'icon'               => '/images/icons/ability/075.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Lightning',
+                'icon'                 => '/images/icons/ability/075.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                ],
+                'actions'              => [
+                    [
+                        'type'               => ActionInterface::DAMAGE,
+                        'type_target'        => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.6,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.7,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_AIR,
+                        ],
+                        'can_be_avoided'     => true,
+                        'name'               => 'Lightning',
+                        'animation_method'   => 'damage',
+                        'message_method'     => 'damageAbility',
+                        'icon'               => '/images/icons/ability/075.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Lightning',
+                'icon'                 => '/images/icons/ability/075.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                ],
+                'actions'              => [
+                    [
+                        'type'               => ActionInterface::DAMAGE,
+                        'type_target'        => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.7,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.8,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_AIR,
+                        ],
+                        'can_be_avoided'     => true,
+                        'name'               => 'Lightning',
+                        'animation_method'   => 'damage',
+                        'message_method'     => 'damageAbility',
+                        'icon'               => '/images/icons/ability/075.png',
                     ],
                 ],
             ],

@@ -7,6 +7,7 @@ namespace Tests\Factory;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\UnitInterface;
+use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Battle\Unit\UnitFactory as BaseUnitFactory;
 
@@ -278,7 +279,7 @@ class UnitFactory
             'race'                         => 1,
             'offense'                      => [
                 'damage_type'         => 2,
-                'weapon_type'         => 7,
+                'weapon_type'         => WeaponTypeInterface::STAFF,
                 'physical_damage'     => 15,
                 'fire_damage'         => 0,
                 'water_damage'        => 0,
