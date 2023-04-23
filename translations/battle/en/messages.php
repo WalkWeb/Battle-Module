@@ -64,6 +64,7 @@ return [
     'Bleeding'                                                       => 'Bleeding',
     'Lightning'                                                      => 'Lightning',
     'Pure Energy'                                                    => 'Pure Energy',
+    'Pentagram'                                                      => 'Pentagram',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

@@ -62,6 +62,7 @@ return [
     'Bleeding'                                                       => 'Кровотечение',
     'Lightning'                                                      => 'Молния',
     'Pure Energy'                                                    => 'Чистая энергия',
+    'Pentagram'                                                      => 'Пентаграмма',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
