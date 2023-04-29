@@ -63,6 +63,7 @@ return [
     'Lightning'                                                      => 'Молния',
     'Pure Energy'                                                    => 'Чистая энергия',
     'Pentagram'                                                      => 'Пентаграмма',
+    'Touch of Void'                                                  => 'Прикосновение пустоты',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

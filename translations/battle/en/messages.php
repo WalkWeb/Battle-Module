@@ -65,6 +65,7 @@ return [
     'Lightning'                                                      => 'Lightning',
     'Pure Energy'                                                    => 'Pure Energy',
     'Pentagram'                                                      => 'Pentagram',
+    'Touch of Void'                                                  => 'Touch of Void',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
