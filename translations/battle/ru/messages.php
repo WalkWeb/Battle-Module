@@ -64,6 +64,7 @@ return [
     'Pure Energy'                                                    => 'Чистая энергия',
     'Pentagram'                                                      => 'Пентаграмма',
     'Touch of Void'                                                  => 'Прикосновение пустоты',
+    'Breath of Phoenix'                                              => 'Дыхание феникса',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

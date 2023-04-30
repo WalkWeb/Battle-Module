@@ -66,6 +66,7 @@ return [
     'Pure Energy'                                                    => 'Pure Energy',
     'Pentagram'                                                      => 'Pentagram',
     'Touch of Void'                                                  => 'Touch of Void',
+    'Breath of Phoenix'                                              => 'Breath of Phoenix',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
