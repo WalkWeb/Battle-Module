@@ -71,6 +71,7 @@ return [
     'Ice Shards'                                                     => 'Осколки льда',
     'Slashing Blade'                                                 => 'Разящий клинок',
     'Ice Shot'                                                       => 'Ледяной выстрел',
+    'Ball Lightning'                                                 => 'Шаровая молния',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

@@ -21,8 +21,8 @@ use Tests\Factory\UnitFactory;
 
 class SummonSkeletonMageAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/503.png" alt="" /> <span class="ability">Skeleton Mage</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/503.png" alt="" /> <span class="ability">Скелета-мага</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/603.png" alt="" /> <span class="ability">Skeleton Mage</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/603.png" alt="" /> <span class="ability">Скелета-мага</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -36,7 +36,7 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
     public function testSummonSkeletonMageAbilityUse(): void
     {
         $name = 'Skeleton Mage';
-        $icon = '/images/icons/ability/503.png';
+        $icon = '/images/icons/ability/603.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -171,7 +171,7 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
     public function testSummonSkeletonMageAbilityDataProviderUse(): void
     {
         $name = 'Skeleton Mage';
-        $icon = '/images/icons/ability/503.png';
+        $icon = '/images/icons/ability/603.png';
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
