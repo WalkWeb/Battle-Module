@@ -74,6 +74,7 @@ return [
     'Slashing Blade'                                                 => 'Slashing Blade',
     'Ice Shot'                                                       => 'Ice Shot',
     'Ball Lightning'                                                 => 'Ball Lightning',
+    'Poison Spirit'                                                  => 'Poison Spirit',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

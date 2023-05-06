@@ -72,6 +72,7 @@ return [
     'Slashing Blade'                                                 => 'Разящий клинок',
     'Ice Shot'                                                       => 'Ледяной выстрел',
     'Ball Lightning'                                                 => 'Шаровая молния',
+    'Poison Spirit'                                                  => 'Ядовитый дух',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

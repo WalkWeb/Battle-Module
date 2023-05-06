@@ -2730,6 +2730,153 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Poison Spirit' => [
+            1 => [
+                'name'                 => 'Poison Spirit',
+                'icon'                 => '/images/icons/ability/379.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.3,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.4,
+                            'critical_chance'     => 1.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_DEATH,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Poison Spirit',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/379.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Poison Spirit',
+                'icon'                 => '/images/icons/ability/379.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.4,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.5,
+                            'critical_chance'     => 1.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_DEATH,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Poison Spirit',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/379.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Poison Spirit',
+                'icon'                 => '/images/icons/ability/379.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.5,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.6,
+                            'critical_chance'     => 1.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_DEATH,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Poison Spirit',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/379.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Poison Spirit',
+                'icon'                 => '/images/icons/ability/379.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.6,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.7,
+                            'critical_chance'     => 1.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_DEATH,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Poison Spirit',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/379.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Poison Spirit',
+                'icon'                 => '/images/icons/ability/379.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.7,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.8,
+                            'critical_chance'     => 1.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_DEATH,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Poison Spirit',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/379.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**
