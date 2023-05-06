@@ -73,6 +73,7 @@ return [
     'Ice Shot'                                                       => 'Ледяной выстрел',
     'Ball Lightning'                                                 => 'Шаровая молния',
     'Poison Spirit'                                                  => 'Ядовитый дух',
+    'Plasma Clot'                                                    => 'Сгусток плазмы',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

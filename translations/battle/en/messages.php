@@ -75,6 +75,7 @@ return [
     'Ice Shot'                                                       => 'Ice Shot',
     'Ball Lightning'                                                 => 'Ball Lightning',
     'Poison Spirit'                                                  => 'Poison Spirit',
+    'Plasma Clot'                                                    => 'Plasma Clot',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

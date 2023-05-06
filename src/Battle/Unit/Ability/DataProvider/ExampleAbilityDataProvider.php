@@ -2877,6 +2877,153 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Plasma Clot' => [
+            1 => [
+                'name'                 => 'Plasma Clot',
+                'icon'                 => '/images/icons/ability/525.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.4,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.1,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Plasma Clot',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/525.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Plasma Clot',
+                'icon'                 => '/images/icons/ability/525.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.5,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.2,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Plasma Clot',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/525.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Plasma Clot',
+                'icon'                 => '/images/icons/ability/525.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.6,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.3,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Plasma Clot',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/525.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Plasma Clot',
+                'icon'                 => '/images/icons/ability/525.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.7,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.4,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Plasma Clot',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/525.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Plasma Clot',
+                'icon'                 => '/images/icons/ability/525.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.8,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.5,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.0,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Plasma Clot',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/525.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**
