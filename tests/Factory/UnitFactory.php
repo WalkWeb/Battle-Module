@@ -444,6 +444,7 @@ class UnitFactory
                 'dodge'               => 0,
             ],
         ],
+        // Юнит для проверки класса Dead Knight
         8  => [
             'id'                           => 'f7e84eab-e4f6-463f-b0e3-f2f965f4fbce',
             'name'                         => 'unit_8',
@@ -462,7 +463,7 @@ class UnitFactory
             'race'                         => 1,
             'offense'                      => [
                 'damage_type'         => 1,
-                'weapon_type'         => 1,
+                'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
                 'water_damage'        => 0,
@@ -691,6 +692,7 @@ class UnitFactory
                 'dodge'               => 0,
             ],
         ],
+        // Юнит с огромным уроном
         12 => [
             'id'                           => '1aab367d-37e8-4544-9915-cb3d7779332b',
             'name'                         => 'unit_12',
@@ -752,6 +754,7 @@ class UnitFactory
                 'dodge'               => 0,
             ],
         ],
+        // Юнит с огромным уроном и 5 атаками за ход
         13 => [
             'id'                           => '1aab367d-37e8-4544-9915-cb3d7779332b',
             'name'                         => 'unit_13',
@@ -778,7 +781,7 @@ class UnitFactory
                 'earth_damage'        => 0,
                 'life_damage'         => 0,
                 'death_damage'        => 0,
-                'attack_speed'        => 5, // Не просто большой урон, но и 5 атак за ход
+                'attack_speed'        => 5,
                 'cast_speed'          => 0,
                 'accuracy'            => 200,
                 'magic_accuracy'      => 100,
@@ -813,6 +816,7 @@ class UnitFactory
                 'dodge'               => 0,
             ],
         ],
+        // Юнит с нулевой скоростью атаки
         14 => [
             'id'                           => '1aab367d-37e8-4544-9915-cb3d7779323b',
             'name'                         => 'unit_14',
@@ -839,7 +843,7 @@ class UnitFactory
                 'earth_damage'        => 0,
                 'life_damage'         => 0,
                 'death_damage'        => 0,
-                'attack_speed'        => 0, // нулевая скорость атаки
+                'attack_speed'        => 0,
                 'cast_speed'          => 0,
                 'accuracy'            => 200,
                 'magic_accuracy'      => 100,
@@ -2734,7 +2738,7 @@ class UnitFactory
                 'dodge'               => 0,
             ],
         ],
-        // Юнит со +40% получаемой концентрации и -20% получаемой ярости
+        // Юнит со +40% получаемой концентрации и -20% получаемой ярости + лук в качестве оружия
         45 => [
             'id'                           => '7c4bbcd2-601d-4322-8832-163f2b486886',
             'name'                         => 'Unit',
@@ -2753,7 +2757,7 @@ class UnitFactory
             'race'                         => 1,
             'offense'                      => [
                 'damage_type'         => 1,
-                'weapon_type'         => 1,
+                'weapon_type'         => WeaponTypeInterface::BOW,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
                 'water_damage'        => 0,

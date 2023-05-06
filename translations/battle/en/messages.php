@@ -68,6 +68,7 @@ return [
     'Touch of Void'                                                  => 'Touch of Void',
     'Breath of Phoenix'                                              => 'Breath of Phoenix',
     'Crushing Blow'                                                  => 'Crushing Blow',
+    'Explosive Shot'                                                 => 'Explosive Shot',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

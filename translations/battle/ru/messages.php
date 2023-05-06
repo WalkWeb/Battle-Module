@@ -66,6 +66,7 @@ return [
     'Touch of Void'                                                  => 'Прикосновение пустоты',
     'Breath of Phoenix'                                              => 'Дыхание феникса',
     'Crushing Blow'                                                  => 'Сокрушающий удар',
+    'Explosive Shot'                                                 => 'Взрывной выстрел',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
