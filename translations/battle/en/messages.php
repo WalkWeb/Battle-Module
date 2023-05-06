@@ -69,6 +69,7 @@ return [
     'Breath of Phoenix'                                              => 'Breath of Phoenix',
     'Crushing Blow'                                                  => 'Crushing Blow',
     'Explosive Shot'                                                 => 'Explosive Shot',
+    'Fire Ball'                                                      => 'Fire Ball',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

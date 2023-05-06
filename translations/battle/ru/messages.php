@@ -67,6 +67,7 @@ return [
     'Breath of Phoenix'                                              => 'Дыхание феникса',
     'Crushing Blow'                                                  => 'Сокрушающий удар',
     'Explosive Shot'                                                 => 'Взрывной выстрел',
+    'Fire Ball'                                                      => 'Огненный шар',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
