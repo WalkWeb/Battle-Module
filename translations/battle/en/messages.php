@@ -72,6 +72,7 @@ return [
     'Fire Ball'                                                      => 'Fire Ball',
     'Ice Shards'                                                     => 'Ice Shards',
     'Slashing Blade'                                                 => 'Slashing Blade',
+    'Ice Shot'                                                       => 'Ice Shot',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

@@ -70,6 +70,7 @@ return [
     'Fire Ball'                                                      => 'Огненный шар',
     'Ice Shards'                                                     => 'Осколки льда',
     'Slashing Blade'                                                 => 'Разящий клинок',
+    'Ice Shot'                                                       => 'Ледяной выстрел',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

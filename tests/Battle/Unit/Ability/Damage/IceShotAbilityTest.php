@@ -13,23 +13,23 @@ use Exception;
 use Tests\Battle\Unit\Ability\AbstractAbilityTest;
 use Tests\Factory\UnitFactory;
 
-class SlashingBladeAbilityTest extends AbstractAbilityTest
+class IceShotAbilityTest extends AbstractAbilityTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Slashing Blade</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Разящий клинок</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">Unit</span> use <img src="/images/icons/ability/190.png" alt="" /> <span class="ability">Ice Shot</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">Unit</span> использовал <img src="/images/icons/ability/190.png" alt="" /> <span class="ability">Ледяной выстрел</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
     /**
-     * Тест на создание способности Slashing Blade через AbilityDataProvider
+     * Тест на создание способности Ice Shot через AbilityDataProvider
      *
      * @throws Exception
      */
-    public function testSlashingBladeAbilityCreate(): void
+    public function testIceShotAbilityCreate(): void
     {
-        $name = 'Slashing Blade';
-        $icon = '/images/icons/ability/335.png';
+        $name = 'Ice Shot';
+        $icon = '/images/icons/ability/190.png';
         $disposable = false;
 
-        $unit = UnitFactory::createByTemplate(4);
+        $unit = UnitFactory::createByTemplate(45);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -45,15 +45,8 @@ class SlashingBladeAbilityTest extends AbstractAbilityTest
         self::assertFalse($ability->isUsage());
         self::assertEquals(
             [
-                WeaponTypeInterface::SWORD,
-                WeaponTypeInterface::AXE,
-                WeaponTypeInterface::MACE,
-                WeaponTypeInterface::TWO_HAND_SWORD,
-                WeaponTypeInterface::TWO_HAND_AXE,
-                WeaponTypeInterface::TWO_HAND_MACE,
-                WeaponTypeInterface::SPEAR,
-                WeaponTypeInterface::LANCE,
-                WeaponTypeInterface::DAGGER,
+                WeaponTypeInterface::BOW,
+                WeaponTypeInterface::CROSSBOW,
             ],
             $ability->getAllowedWeaponTypes()
         );
@@ -65,29 +58,28 @@ class SlashingBladeAbilityTest extends AbstractAbilityTest
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertEquals($name, $action->getNameAction());
             self::assertEquals($icon, $action->getIcon());
-            // Проверка отсутствия конвертации урона
-            self::assertTrue($action->getOffense()->getPhysicalDamage() > 0);
+            // Проверка конвертации физического урона в урон водой
+            self::assertTrue($action->getOffense()->getWaterDamage() > 0);
         }
     }
 
     /**
-     * Тест на применение способности Slashing Blade
+     * Тест на применение способности Ice Shot
      *
      * @dataProvider useDataProvider
      * @param int $level
      * @param int $expectedDamage
      * @param int $expectedAccuracy
-     * @param int $expectedCriticalChance
      * @throws Exception
      */
-    public function testSlashingBladeAbilityUse(int $level, int $expectedDamage, int $expectedAccuracy, int $expectedCriticalChance): void
+    public function testIceShotAbilityUse(int $level, int $expectedDamage, int $expectedAccuracy): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(45);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Slashing Blade', $level);
+        $ability = $this->createAbilityByDataProvider($unit, 'Ice Shot', $level);
 
         $this->activateAbility($ability, $unit);
 
@@ -101,7 +93,6 @@ class SlashingBladeAbilityTest extends AbstractAbilityTest
             $action->handle();
             self::assertEquals($expectedDamage, $action->getFactualPower());
             self::assertEquals($expectedAccuracy, $action->getOffense()->getAccuracy());
-            self::assertEquals($expectedCriticalChance, $action->getOffense()->getCriticalChance());
             self::assertEquals(sprintf(self::MESSAGE_EN, $expectedDamage), $this->getChat()->addMessage($action));
             self::assertEquals(sprintf(self::MESSAGE_RU, $expectedDamage), $this->getChatRu()->addMessage($action));
 
@@ -122,33 +113,28 @@ class SlashingBladeAbilityTest extends AbstractAbilityTest
         return [
             [
                 1,
-                22,
-                360,
-                15,
+                26,
+                300,
             ],
             [
                 2,
-                24,
-                360,
-                15,
+                28,
+                320,
             ],
             [
                 3,
-                26,
-                360,
-                15,
+                30,
+                340,
             ],
             [
                 4,
-                28,
+                32,
                 360,
-                15,
             ],
             [
                 5,
-                30,
-                360,
-                15,
+                34,
+                380,
             ],
         ];
     }
