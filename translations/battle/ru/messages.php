@@ -65,6 +65,7 @@ return [
     'Pentagram'                                                      => 'Пентаграмма',
     'Touch of Void'                                                  => 'Прикосновение пустоты',
     'Breath of Phoenix'                                              => 'Дыхание феникса',
+    'Crushing Blow'                                                  => 'Сокрушающий удар',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

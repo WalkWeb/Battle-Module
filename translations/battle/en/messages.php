@@ -67,6 +67,7 @@ return [
     'Pentagram'                                                      => 'Pentagram',
     'Touch of Void'                                                  => 'Touch of Void',
     'Breath of Phoenix'                                              => 'Breath of Phoenix',
+    'Crushing Blow'                                                  => 'Crushing Blow',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
