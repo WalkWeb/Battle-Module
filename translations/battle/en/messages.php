@@ -70,6 +70,7 @@ return [
     'Crushing Blow'                                                  => 'Crushing Blow',
     'Explosive Shot'                                                 => 'Explosive Shot',
     'Fire Ball'                                                      => 'Fire Ball',
+    'Ice Shards'                                                     => 'Ice Shards',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

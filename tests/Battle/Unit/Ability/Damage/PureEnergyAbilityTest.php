@@ -57,6 +57,8 @@ class PureEnergyAbilityTest extends AbstractAbilityTest
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertEquals($name, $action->getNameAction());
             self::assertEquals($icon, $action->getIcon());
+            // Проверка конвертации физического урона в урон магией жизни
+            self::assertTrue($action->getOffense()->getLifeDamage() > 0);
         }
     }
 

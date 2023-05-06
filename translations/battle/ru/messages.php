@@ -68,6 +68,7 @@ return [
     'Crushing Blow'                                                  => 'Сокрушающий удар',
     'Explosive Shot'                                                 => 'Взрывной выстрел',
     'Fire Ball'                                                      => 'Огненный шар',
+    'Ice Shards'                                                     => 'Осколки льда',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

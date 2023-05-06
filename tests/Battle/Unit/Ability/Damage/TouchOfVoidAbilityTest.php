@@ -57,6 +57,8 @@ class TouchOfVoidAbilityTest extends AbstractAbilityTest
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertEquals($name, $action->getNameAction());
             self::assertEquals($icon, $action->getIcon());
+            // Проверка конвертации физического урона в урон магии смерти
+            self::assertTrue($action->getOffense()->getDeathDamage() > 0);
         }
     }
 
