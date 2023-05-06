@@ -74,6 +74,7 @@ return [
     'Ball Lightning'                                                 => 'Шаровая молния',
     'Poison Spirit'                                                  => 'Ядовитый дух',
     'Plasma Clot'                                                    => 'Сгусток плазмы',
+    'Cleaving'                                                       => 'Разрубание',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

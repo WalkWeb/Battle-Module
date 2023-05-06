@@ -76,6 +76,7 @@ return [
     'Ball Lightning'                                                 => 'Ball Lightning',
     'Poison Spirit'                                                  => 'Poison Spirit',
     'Plasma Clot'                                                    => 'Plasma Clot',
+    'Cleaving'                                                       => 'Cleaving',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
