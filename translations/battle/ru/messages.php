@@ -76,6 +76,7 @@ return [
     'Plasma Clot'                                                    => 'Сгусток плазмы',
     'Cleaving'                                                       => 'Разрубание',
     'Explosive Potion'                                               => 'Взрывчатое зелье',
+    'Stone Hail'                                                     => 'Каменный град',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

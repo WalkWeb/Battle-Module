@@ -78,6 +78,7 @@ return [
     'Plasma Clot'                                                    => 'Plasma Clot',
     'Cleaving'                                                       => 'Cleaving',
     'Explosive Potion'                                               => 'Explosive Potion',
+    'Stone Hail'                                                     => 'Stone Hail',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
