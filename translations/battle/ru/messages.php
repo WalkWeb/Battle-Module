@@ -81,6 +81,7 @@ return [
     'Backstab'                                                       => 'Удар в спину',
     'Piercing Strike'                                                => 'Пронзающий удар',
     'Anger'                                                          => 'Гнев',
+    'Meteorite'                                                      => 'Метеорит',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

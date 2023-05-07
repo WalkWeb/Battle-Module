@@ -83,6 +83,7 @@ return [
     'Backstab'                                                       => 'Backstab',
     'Piercing Strike'                                                => 'Piercing Strike',
     'Anger'                                                          => 'Anger',
+    'Meteorite'                                                      => 'Meteorite',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

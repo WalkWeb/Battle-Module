@@ -4178,6 +4178,153 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Meteorite' => [
+            1 => [
+                'name'                 => 'Meteorite',
+                'icon'                 => '/images/icons/ability/036.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.9,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.6,
+                            'critical_chance'     => 1.5,
+                            'critical_multiplier' => 1.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Meteorite',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/036.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Meteorite',
+                'icon'                 => '/images/icons/ability/036.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.05,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.7,
+                            'critical_chance'     => 1.5,
+                            'critical_multiplier' => 1.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Meteorite',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/036.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Meteorite',
+                'icon'                 => '/images/icons/ability/036.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.2,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.8,
+                            'critical_chance'     => 1.5,
+                            'critical_multiplier' => 1.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Meteorite',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/036.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Meteorite',
+                'icon'                 => '/images/icons/ability/036.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.35,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.9,
+                            'critical_chance'     => 1.5,
+                            'critical_multiplier' => 1.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Meteorite',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/036.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Meteorite',
+                'icon'                 => '/images/icons/ability/036.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.5,
+                            'speed'               => 1.0,
+                            'accuracy'            => 2.0,
+                            'critical_chance'     => 1.5,
+                            'critical_multiplier' => 1.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Meteorite',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/036.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**
