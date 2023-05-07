@@ -81,6 +81,7 @@ return [
     'Stone Hail'                                                     => 'Stone Hail',
     'Punishing Light'                                                => 'Punishing Light',
     'Backstab'                                                       => 'Backstab',
+    'Piercing Strike'                                                => 'Piercing Strike',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

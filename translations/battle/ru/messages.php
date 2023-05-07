@@ -79,6 +79,7 @@ return [
     'Stone Hail'                                                     => 'Каменный град',
     'Punishing Light'                                                => 'Карающий свет',
     'Backstab'                                                       => 'Удар в спину',
+    'Piercing Strike'                                                => 'Пронзающий удар',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

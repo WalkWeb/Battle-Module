@@ -3839,6 +3839,148 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Piercing Strike' => [
+            1 => [
+                'name'                 => 'Piercing Strike',
+                'icon'                 => '/images/icons/ability/482.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.0,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.4,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_WATER,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Piercing Strike',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/482.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Piercing Strike',
+                'icon'                 => '/images/icons/ability/482.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.1,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.5,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_WATER,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Piercing Strike',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/482.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Piercing Strike',
+                'icon'                 => '/images/icons/ability/482.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.2,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.6,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_WATER,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Piercing Strike',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/482.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Piercing Strike',
+                'icon'                 => '/images/icons/ability/482.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.3,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.7,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_WATER,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Piercing Strike',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/482.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Piercing Strike',
+                'icon'                 => '/images/icons/ability/482.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.4,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.8,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_WATER,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Piercing Strike',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/482.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**
