@@ -77,6 +77,7 @@ return [
     'Poison Spirit'                                                  => 'Poison Spirit',
     'Plasma Clot'                                                    => 'Plasma Clot',
     'Cleaving'                                                       => 'Cleaving',
+    'Explosive Potion'                                               => 'Explosive Potion',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

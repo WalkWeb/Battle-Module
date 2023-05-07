@@ -75,6 +75,7 @@ return [
     'Poison Spirit'                                                  => 'Ядовитый дух',
     'Plasma Clot'                                                    => 'Сгусток плазмы',
     'Cleaving'                                                       => 'Разрубание',
+    'Explosive Potion'                                               => 'Взрывчатое зелье',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

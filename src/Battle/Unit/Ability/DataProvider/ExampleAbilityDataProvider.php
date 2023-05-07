@@ -3216,6 +3216,153 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Explosive Potion' => [
+            1 => [
+                'name'                 => 'Explosive Potion',
+                'icon'                 => '/images/icons/ability/390.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.4,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.6,
+                            'critical_chance'     => 0.5,
+                            'critical_multiplier' => 0.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Explosive Potion',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/390.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Explosive Potion',
+                'icon'                 => '/images/icons/ability/390.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.5,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.7,
+                            'critical_chance'     => 0.5,
+                            'critical_multiplier' => 0.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Explosive Potion',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/390.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Explosive Potion',
+                'icon'                 => '/images/icons/ability/390.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.6,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.8,
+                            'critical_chance'     => 0.5,
+                            'critical_multiplier' => 0.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Explosive Potion',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/390.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Explosive Potion',
+                'icon'                 => '/images/icons/ability/390.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.7,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.9,
+                            'critical_chance'     => 0.5,
+                            'critical_multiplier' => 0.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Explosive Potion',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/390.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Explosive Potion',
+                'icon'                 => '/images/icons/ability/390.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::STAFF,
+                    WeaponTypeInterface::WAND,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.8,
+                            'speed'               => 1.0,
+                            'accuracy'            => 2.0,
+                            'critical_chance'     => 0.5,
+                            'critical_multiplier' => 0.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_FIRE,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Explosive Potion',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/390.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**
