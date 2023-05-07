@@ -80,6 +80,7 @@ return [
     'Punishing Light'                                                => 'Карающий свет',
     'Backstab'                                                       => 'Удар в спину',
     'Piercing Strike'                                                => 'Пронзающий удар',
+    'Anger'                                                          => 'Гнев',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

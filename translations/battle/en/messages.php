@@ -82,6 +82,7 @@ return [
     'Punishing Light'                                                => 'Punishing Light',
     'Backstab'                                                       => 'Backstab',
     'Piercing Strike'                                                => 'Piercing Strike',
+    'Anger'                                                          => 'Anger',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
