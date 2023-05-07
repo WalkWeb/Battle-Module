@@ -29,6 +29,27 @@ trait ValidationTrait
     /**
      * @param array $data
      * @param string $filed
+     * @param int $default
+     * @param string $error
+     * @return int
+     * @throws BattleException
+     */
+    protected static function intOfDefault(array $data, string $filed, int $default, string $error): int
+    {
+        if (!array_key_exists($filed, $data)) {
+            return $default;
+        }
+
+        if (!is_int($data[$filed])) {
+            throw new BattleException($error);
+        }
+
+        return $data[$filed];
+    }
+
+    /**
+     * @param array $data
+     * @param string $filed
      * @param float $default
      * @param string $error
      * @return float

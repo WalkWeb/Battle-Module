@@ -1047,6 +1047,46 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ситуацию, когда используется параметр вампиризма из MultipleOffense
+     *
+     * @throws Exception
+     */
+    public function testDamageActionVampirismFromMultipleOffense(): void
+    {
+        // Юнит с 0% вампиризма
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new DamageAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            false,
+            '',
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            null,
+            MultipleOffenseFactory::create(
+                $multipleData = [
+                    'damage'              => 1.0,
+                    'speed'               => 1.0,
+                    'accuracy'            => 1.0,
+                    'critical_chance'     => 1.0,
+                    'critical_multiplier' => 1.0,
+                    'vampirism'           => $vampirism = 25,
+                ]
+            )
+        );
+
+        // Проверяем, что используется вампиризм из MultipleOffense
+        self::assertEquals($vampirism, $action->getOffense()->getVampirism());
+    }
+
+    /**
      * @return array
      */
     public function criticalDamageDataProvider(): array

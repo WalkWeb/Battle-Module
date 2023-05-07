@@ -27,8 +27,6 @@ interface MultipleOffenseInterface
 
     // TODO Изменение параметра игнорирования блока цели
 
-    // TODO Изменение вампиризма
-
     public const MIN_MULTIPLIER = 0;
     public const MAX_MULTIPLIER = 10;
 
@@ -75,6 +73,14 @@ interface MultipleOffenseInterface
      * @return float
      */
     public function getCriticalMultiplierMultiplier(): float;
+
+    /**
+     * Если указано значение больше 0 - то будет использоваться параметр вампиризма указанный в способности, а не
+     * базовый вампиризм юнита
+     *
+     * @return int
+     */
+    public function getVampirism(): int;
 
     /**
      * @return string

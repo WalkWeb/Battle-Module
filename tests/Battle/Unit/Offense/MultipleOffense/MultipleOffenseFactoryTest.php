@@ -7,6 +7,7 @@ namespace Tests\Battle\Unit\Offense\MultipleOffense;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseException;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseInterface;
+use Battle\Unit\Offense\OffenseInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 
@@ -32,10 +33,14 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
         if (array_key_exists('damage_convert', $data)) {
             self::assertEquals($data['damage_convert'], $multipleOffense->getDamageConvert());
         }
+
+        if (array_key_exists('vampirism', $data)) {
+            self::assertEquals($data['vampirism'], $multipleOffense->getVampirism());
+        }
     }
 
     /**
-     * Тест на заполнение MultipleOffense значениями по умолчанию (множителем х1)
+     * Тест на заполнение MultipleOffense значениями по умолчанию
      *
      * @throws Exception
      */
@@ -49,6 +54,8 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
         self::assertEquals(1.0, $multipleOffense->getAccuracyMultiplier());
         self::assertEquals(1.0, $multipleOffense->getCriticalChanceMultiplier());
         self::assertEquals(1.0, $multipleOffense->getCriticalMultiplierMultiplier());
+
+        self::assertEquals(0, $multipleOffense->getVampirism());
     }
 
     /**
@@ -89,6 +96,16 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                     'damage_convert'      => MultipleOffenseInterface::CONVERT_PHYSICAL,
+                ],
+            ],
+            [
+                [
+                    'damage'              => 2.1,
+                    'speed'               => 2.8,
+                    'accuracy'            => 3.0,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                    'vampirism'           => 15,
                 ],
             ],
         ];
@@ -294,6 +311,43 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                     'damage_convert'      => 'to_fire',
                 ],
                 MultipleOffenseException::INVALID_CRITICAL_DAMAGE_CONVERT_VALUE . ': to_fire',
+            ],
+
+            [
+                // vampirism некорректного типа
+                [
+                    'damage'              => 2.0,
+                    'speed'               => 2.1,
+                    'accuracy'            => 3.0,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 2.0,
+                    'vampirism'           => 2.0,
+                ],
+                MultipleOffenseException::INVALID_VAMPIRISM,
+            ],
+            [
+                // vampirism меньше минимального значения
+                [
+                    'damage'              => 2.0,
+                    'speed'               => 2.1,
+                    'accuracy'            => 3.0,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 2.0,
+                    'vampirism'           => OffenseInterface::MIN_VAMPIRE - 1,
+                ],
+                MultipleOffenseException::INVALID_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE,
+            ],
+            [
+                // vampirism больше максимального значения
+                [
+                    'damage'              => 2.0,
+                    'speed'               => 2.1,
+                    'accuracy'            => 3.0,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 2.0,
+                    'vampirism'           => OffenseInterface::MAX_VAMPIRE + 1,
+                ],
+                MultipleOffenseException::INVALID_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE,
             ],
         ];
     }

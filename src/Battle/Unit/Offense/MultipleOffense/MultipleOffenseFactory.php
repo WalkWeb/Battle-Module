@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit\Offense\MultipleOffense;
 
 use Battle\Traits\ValidationTrait;
+use Battle\Unit\Offense\OffenseInterface;
 use Exception;
 
 class MultipleOffenseFactory
@@ -29,6 +30,7 @@ class MultipleOffenseFactory
         $accuracy = self::floatOrDefault($data, 'accuracy', 1.0, MultipleOffenseException::INVALID_ACCURACY);
         $criticalChance = self::floatOrDefault($data, 'critical_chance', 1.0, MultipleOffenseException::INVALID_CRITICAL_CHANCE);
         $criticalMultiplier = self::floatOrDefault($data, 'critical_multiplier', 1.0, MultipleOffenseException::INVALID_CRITICAL_MULTIPLIER);
+        $vampirism = self::intOfDefault($data, 'vampirism', 0, MultipleOffenseException::INVALID_VAMPIRISM);
         $damageConvertTo = self::stringOrDefault($data, 'damage_convert', '', MultipleOffenseException::INVALID_CRITICAL_DAMAGE_CONVERT);
 
         self::floatMinMaxValue(
@@ -66,12 +68,20 @@ class MultipleOffenseFactory
             MultipleOffenseException::INVALID_CRITICAL_MULTIPLIER_VALUE . MultipleOffenseInterface::MIN_MULTIPLIER . '-' . MultipleOffenseInterface::MAX_MULTIPLIER
         );
 
+        self::intMinMaxValue(
+            $vampirism,
+            OffenseInterface::MIN_VAMPIRE,
+            OffenseInterface::MAX_VAMPIRE,
+            MultipleOffenseException::INVALID_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+        );
+
         return new MultipleOffense(
             $damage,
             $speed,
             $accuracy,
             $criticalChance,
             $criticalMultiplier,
+            $vampirism,
             $damageConvertTo
         );
     }

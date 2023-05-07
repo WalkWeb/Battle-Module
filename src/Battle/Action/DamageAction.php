@@ -410,7 +410,7 @@ class DamageAction extends AbstractAction
             (int)($offense->getCriticalChance() * $multipleOffense->getCriticalChanceMultiplier()),
             (int)($offense->getCriticalMultiplier() * $multipleOffense->getCriticalMultiplierMultiplier()),
             $offense->getDamageMultiplier(),
-            $offense->getVampirism(),
+            $multipleOffense->getVampirism() > 0 ? $multipleOffense->getVampirism() : $offense->getVampirism(),
             $offense->getMagicVampirism()
         );
 

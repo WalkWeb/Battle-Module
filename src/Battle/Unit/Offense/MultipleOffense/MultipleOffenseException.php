@@ -19,6 +19,8 @@ class MultipleOffenseException extends Exception
     public const INVALID_CRITICAL_CHANCE_VALUE         = 'MultipleOffenseFactory: Incorrect "critical_chance", it empty or type float';
     public const INVALID_CRITICAL_MULTIPLIER           = 'MultipleOffenseFactory: Incorrect "critical_multiplier", it empty or type float';
     public const INVALID_CRITICAL_MULTIPLIER_VALUE     = 'MultipleOffenseFactory: Incorrect "critical_multiplier", it empty or type float';
+    public const INVALID_VAMPIRISM                     = 'MultipleOffenseFactory: Incorrect "vampirism", it empty or type int';
+    public const INVALID_VAMPIRISM_VALUE               = 'MultipleOffenseFactory: Incorrect "vampirism", invalid value';
     public const INVALID_CRITICAL_DAMAGE_CONVERT       = 'MultipleOffenseFactory: Incorrect "damage_convert", it empty or type string';
     public const INVALID_CRITICAL_DAMAGE_CONVERT_VALUE = 'MultipleOffense: Incorrect "damage_convert", invalid value';
 }
