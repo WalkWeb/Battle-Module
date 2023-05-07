@@ -79,6 +79,7 @@ return [
     'Cleaving'                                                       => 'Cleaving',
     'Explosive Potion'                                               => 'Explosive Potion',
     'Stone Hail'                                                     => 'Stone Hail',
+    'Punishing Light'                                                => 'Punishing Light',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

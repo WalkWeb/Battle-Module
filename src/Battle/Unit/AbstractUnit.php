@@ -410,7 +410,7 @@ abstract class AbstractUnit implements UnitInterface
 
         $result = (int)floor($speed);
         $residue = $speed - $result;
-        if (($residue > 0) && ($residue * 100 > random_int(0, 100))) {
+        if (($residue > 0) && ($residue * 10000 > random_int(0, 10000))) {
             $result++;
         }
 

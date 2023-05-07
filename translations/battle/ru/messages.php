@@ -77,6 +77,7 @@ return [
     'Cleaving'                                                       => 'Разрубание',
     'Explosive Potion'                                               => 'Взрывчатое зелье',
     'Stone Hail'                                                     => 'Каменный град',
+    'Punishing Light'                                                => 'Карающий свет',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
