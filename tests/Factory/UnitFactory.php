@@ -32,7 +32,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -94,7 +94,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 30,
                 'fire_damage'         => 0,
@@ -155,7 +155,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 3,
                 'physical_damage'     => 15,
                 'fire_damage'         => 0,
@@ -216,7 +216,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 7,
                 'physical_damage'     => 15,
                 'fire_damage'         => 0,
@@ -339,7 +339,7 @@ class UnitFactory
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 12,
                 'fire_damage'         => 0,
@@ -400,7 +400,7 @@ class UnitFactory
             'class'                        => 4,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 15,
                 'fire_damage'         => 0,
@@ -462,7 +462,7 @@ class UnitFactory
             'class'                        => 3,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -524,7 +524,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 35,
                 'fire_damage'         => 0,
@@ -586,7 +586,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 35,
                 'fire_damage'         => 0,
@@ -648,7 +648,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 35,
                 'fire_damage'         => 0,
@@ -710,7 +710,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 3000,
                 'fire_damage'         => 0,
@@ -772,7 +772,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 3000,
                 'fire_damage'         => 0,
@@ -834,7 +834,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 32,
                 'fire_damage'         => 0,
@@ -896,7 +896,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 32,
                 'fire_damage'         => 0,
@@ -958,7 +958,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 32,
                 'fire_damage'         => 0,
@@ -1019,7 +1019,7 @@ class UnitFactory
             'cunning_multiplier'           => 0,
             'add_rage_multiplier'          => 0,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 23,
                 'fire_damage'         => 0,
@@ -1081,7 +1081,7 @@ class UnitFactory
             'cunning_multiplier'           => 0,
             'add_rage_multiplier'          => 0,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 10,
                 'fire_damage'         => 0,
@@ -1143,7 +1143,7 @@ class UnitFactory
             'cunning_multiplier'           => 0,
             'add_rage_multiplier'          => 0,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 13,
                 'fire_damage'         => 0,
@@ -1205,7 +1205,7 @@ class UnitFactory
             'cunning_multiplier'           => 0,
             'add_rage_multiplier'          => 0,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 16,
                 'fire_damage'         => 0,
@@ -1267,7 +1267,7 @@ class UnitFactory
             'class'                        => 5,
             'race'                         => 3,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 27,
                 'fire_damage'         => 0,
@@ -1329,7 +1329,7 @@ class UnitFactory
             'class'                        => 6,
             'race'                         => 4,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 13,
                 'fire_damage'         => 0,
@@ -1391,7 +1391,7 @@ class UnitFactory
             'class'                        => 7,
             'race'                         => 6,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 7,
                 'physical_damage'     => 11,
                 'fire_damage'         => 0,
@@ -1453,7 +1453,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 35,
                 'fire_damage'         => 0,
@@ -1515,7 +1515,7 @@ class UnitFactory
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 13,
                 'fire_damage'         => 0,
@@ -1577,7 +1577,7 @@ class UnitFactory
             'class'                        => null,
             'race'                         => 10,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 17,
                 'fire_damage'         => 0,
@@ -1639,7 +1639,7 @@ class UnitFactory
             'class'                        => 50,
             'race'                         => 9,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 40,
                 'fire_damage'         => 0,
@@ -1701,7 +1701,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -1763,7 +1763,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -1825,7 +1825,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -1887,7 +1887,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 3,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 35,
                 'fire_damage'         => 0,
@@ -1949,7 +1949,7 @@ class UnitFactory
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 15,
                 'fire_damage'         => 0,
@@ -2011,7 +2011,7 @@ class UnitFactory
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 15,
                 'fire_damage'         => 0,
@@ -2073,7 +2073,7 @@ class UnitFactory
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 15,
                 'fire_damage'         => 0,
@@ -2135,7 +2135,7 @@ class UnitFactory
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 15,
                 'fire_damage'         => 0,
@@ -2197,7 +2197,7 @@ class UnitFactory
             'class'                        => 2,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 15,
                 'fire_damage'         => 0,
@@ -2260,7 +2260,7 @@ class UnitFactory
             'race'                         => 1,
             'offense'                      => [
                 'damage_type'         => 2,
-                'weapon_type'         => 1,
+                'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 15,
                 'fire_damage'         => 0,
                 'water_damage'        => 0,
@@ -2321,7 +2321,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -2383,7 +2383,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -2445,7 +2445,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 7,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -2507,7 +2507,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -2569,7 +2569,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 50,
                 'fire_damage'         => 0,
@@ -2633,7 +2633,7 @@ class UnitFactory
             'race'                         => 1,
             'offense'                      => [
                 'damage_type'         => 2,
-                'weapon_type'         => 1,
+                'weapon_type'         => WeaponTypeInterface::SWORD,
                 'physical_damage'     => 20,
                 'fire_damage'         => 30,
                 'water_damage'        => 0,
@@ -2694,7 +2694,7 @@ class UnitFactory
             'class'                        => 8,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -2756,7 +2756,7 @@ class UnitFactory
             'class'                        => 8,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => WeaponTypeInterface::BOW,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -2818,7 +2818,7 @@ class UnitFactory
             'class'                        => 8,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -2880,7 +2880,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 3,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -2942,7 +2942,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 11,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -3004,7 +3004,7 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 14,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -3066,8 +3066,8 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
-                'weapon_type'         => 4,
+                'damage_type'         => WeaponTypeInterface::SWORD,
+                'weapon_type'         => WeaponTypeInterface::DAGGER,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
                 'water_damage'        => 0,
@@ -3128,8 +3128,8 @@ class UnitFactory
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
-                'weapon_type'         => 4,
+                'damage_type'         => WeaponTypeInterface::SWORD,
+                'weapon_type'         => WeaponTypeInterface::DAGGER,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
                 'water_damage'        => 0,
@@ -3190,7 +3190,7 @@ class UnitFactory
             'class'                        => 9,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,
@@ -3252,7 +3252,7 @@ class UnitFactory
             'class'                        => 9,
             'race'                         => 1,
             'offense'                      => [
-                'damage_type'         => 1,
+                'damage_type'         => WeaponTypeInterface::SWORD,
                 'weapon_type'         => 1,
                 'physical_damage'     => 20,
                 'fire_damage'         => 0,

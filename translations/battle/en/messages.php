@@ -80,6 +80,7 @@ return [
     'Explosive Potion'                                               => 'Explosive Potion',
     'Stone Hail'                                                     => 'Stone Hail',
     'Punishing Light'                                                => 'Punishing Light',
+    'Backstab'                                                       => 'Backstab',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

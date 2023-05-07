@@ -27,6 +27,8 @@ interface MultipleOffenseInterface
 
     // TODO Изменение параметра игнорирования блока цели
 
+    // TODO Изменение вампиризма
+
     public const MIN_MULTIPLIER = 0;
     public const MAX_MULTIPLIER = 10;
 

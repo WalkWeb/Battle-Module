@@ -3702,6 +3702,143 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Backstab' => [
+            1 => [
+                'name'                 => 'Backstab',
+                'icon'                 => '/images/icons/ability/349.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.6,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.5,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.5,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Backstab',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/349.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Backstab',
+                'icon'                 => '/images/icons/ability/349.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.7,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.6,
+                            'critical_chance'     => 2.3,
+                            'critical_multiplier' => 1.5,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Backstab',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/349.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Backstab',
+                'icon'                 => '/images/icons/ability/349.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.8,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.7,
+                            'critical_chance'     => 2.6,
+                            'critical_multiplier' => 1.5,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Backstab',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/349.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Backstab',
+                'icon'                 => '/images/icons/ability/349.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.9,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.8,
+                            'critical_chance'     => 2.9,
+                            'critical_multiplier' => 1.5,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Backstab',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/349.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Backstab',
+                'icon'                 => '/images/icons/ability/349.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.0,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.9,
+                            'critical_chance'     => 3.2,
+                            'critical_multiplier' => 1.5,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Backstab',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/349.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**
