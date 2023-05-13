@@ -82,6 +82,7 @@ return [
     'Piercing Strike'                                                => 'Пронзающий удар',
     'Anger'                                                          => 'Гнев',
     'Meteorite'                                                      => 'Метеорит',
+    'Bite'                                                           => 'Укус',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

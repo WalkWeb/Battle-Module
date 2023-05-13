@@ -84,6 +84,7 @@ return [
     'Piercing Strike'                                                => 'Piercing Strike',
     'Anger'                                                          => 'Anger',
     'Meteorite'                                                      => 'Meteorite',
+    'Bite'                                                           => 'Bite',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
