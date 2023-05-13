@@ -83,6 +83,7 @@ return [
     'Anger'                                                          => 'Гнев',
     'Meteorite'                                                      => 'Метеорит',
     'Bite'                                                           => 'Укус',
+    'Dishonest Exchange'                                             => 'Нечестный обмен',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
