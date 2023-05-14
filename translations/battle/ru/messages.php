@@ -84,6 +84,7 @@ return [
     'Meteorite'                                                      => 'Метеорит',
     'Bite'                                                           => 'Укус',
     'Dishonest Exchange'                                             => 'Нечестный обмен',
+    'Drawing Forces'                                                 => 'Вытягивание сил',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

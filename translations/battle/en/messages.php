@@ -86,6 +86,7 @@ return [
     'Meteorite'                                                      => 'Meteorite',
     'Bite'                                                           => 'Bite',
     'Dishonest Exchange'                                             => 'Dishonest Exchange',
+    'Drawing Forces'                                                 => 'Drawing Forces',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
