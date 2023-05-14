@@ -406,7 +406,7 @@ class DamageAction extends AbstractAction
             round($offense->getCastSpeed() * $multipleOffense->getSpeedMultiplier(), 2),
             (int)($offense->getAccuracy() * $multipleOffense->getAccuracyMultiplier()),
             (int)($offense->getMagicAccuracy() * $multipleOffense->getAccuracyMultiplier()),
-            $offense->getBlockIgnoring(),
+            $multipleOffense->getBlockIgnoring() > 0 ? $multipleOffense->getBlockIgnoring() : $offense->getBlockIgnoring(),
             (int)($offense->getCriticalChance() * $multipleOffense->getCriticalChanceMultiplier()),
             (int)($offense->getCriticalMultiplier() * $multipleOffense->getCriticalMultiplierMultiplier()),
             $offense->getDamageMultiplier(),

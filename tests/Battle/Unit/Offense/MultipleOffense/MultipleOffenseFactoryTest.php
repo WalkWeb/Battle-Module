@@ -37,6 +37,10 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
         if (array_key_exists('vampirism', $data)) {
             self::assertEquals($data['vampirism'], $multipleOffense->getVampirism());
         }
+
+        if (array_key_exists('block_ignoring', $data)) {
+            self::assertEquals($data['block_ignoring'], $multipleOffense->getBlockIgnoring());
+        }
     }
 
     /**
@@ -56,6 +60,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
         self::assertEquals(1.0, $multipleOffense->getCriticalMultiplierMultiplier());
 
         self::assertEquals(0, $multipleOffense->getVampirism());
+        self::assertEquals(0, $multipleOffense->getBlockIgnoring());
     }
 
     /**
@@ -106,6 +111,16 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 3.3,
                     'vampirism'           => 15,
+                ],
+            ],
+            [
+                [
+                    'damage'              => 2.1,
+                    'speed'               => 2.8,
+                    'accuracy'            => 3.0,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 3.3,
+                    'block_ignoring'      => 100,
                 ],
             ],
         ];
@@ -348,6 +363,43 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                     'vampirism'           => OffenseInterface::MAX_VAMPIRE + 1,
                 ],
                 MultipleOffenseException::INVALID_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE,
+            ],
+
+            [
+                // block_ignoring некорректного типа
+                [
+                    'damage'              => 2.0,
+                    'speed'               => 2.1,
+                    'accuracy'            => 3.0,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 2.0,
+                    'block_ignoring'      => null,
+                ],
+                MultipleOffenseException::INVALID_BLOCK_IGNORING,
+            ],
+            [
+                // block_ignoring меньше минимального значения
+                [
+                    'damage'              => 2.0,
+                    'speed'               => 2.1,
+                    'accuracy'            => 3.0,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 2.0,
+                    'block_ignoring'      => OffenseInterface::MIN_BLOCK_IGNORING - 1,
+                ],
+                MultipleOffenseException::INVALID_BLOCK_IGNORING_VALUE . OffenseInterface::MIN_BLOCK_IGNORING . '-' . OffenseInterface::MAX_BLOCK_IGNORING,
+            ],
+            [
+                // block_ignoring больше максимального значения
+                [
+                    'damage'              => 2.0,
+                    'speed'               => 2.1,
+                    'accuracy'            => 3.0,
+                    'critical_chance'     => 3.2,
+                    'critical_multiplier' => 2.0,
+                    'block_ignoring'      => OffenseInterface::MAX_BLOCK_IGNORING + 1,
+                ],
+                MultipleOffenseException::INVALID_BLOCK_IGNORING_VALUE . OffenseInterface::MIN_BLOCK_IGNORING . '-' . OffenseInterface::MAX_BLOCK_IGNORING,
             ],
         ];
     }

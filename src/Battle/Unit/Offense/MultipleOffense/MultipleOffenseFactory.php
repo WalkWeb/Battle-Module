@@ -31,6 +31,7 @@ class MultipleOffenseFactory
         $criticalChance = self::floatOrDefault($data, 'critical_chance', 1.0, MultipleOffenseException::INVALID_CRITICAL_CHANCE);
         $criticalMultiplier = self::floatOrDefault($data, 'critical_multiplier', 1.0, MultipleOffenseException::INVALID_CRITICAL_MULTIPLIER);
         $vampirism = self::intOfDefault($data, 'vampirism', 0, MultipleOffenseException::INVALID_VAMPIRISM);
+        $blockIgnoring = self::intOfDefault($data, 'block_ignoring', 0, MultipleOffenseException::INVALID_BLOCK_IGNORING);
         $damageConvertTo = self::stringOrDefault($data, 'damage_convert', '', MultipleOffenseException::INVALID_CRITICAL_DAMAGE_CONVERT);
 
         self::floatMinMaxValue(
@@ -75,6 +76,13 @@ class MultipleOffenseFactory
             MultipleOffenseException::INVALID_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
         );
 
+        self::intMinMaxValue(
+            $blockIgnoring,
+            OffenseInterface::MIN_BLOCK_IGNORING,
+            OffenseInterface::MAX_BLOCK_IGNORING,
+            MultipleOffenseException::INVALID_BLOCK_IGNORING_VALUE . OffenseInterface::MIN_BLOCK_IGNORING . '-' . OffenseInterface::MAX_BLOCK_IGNORING
+        );
+
         return new MultipleOffense(
             $damage,
             $speed,
@@ -82,6 +90,7 @@ class MultipleOffenseFactory
             $criticalChance,
             $criticalMultiplier,
             $vampirism,
+            $blockIgnoring,
             $damageConvertTo
         );
     }

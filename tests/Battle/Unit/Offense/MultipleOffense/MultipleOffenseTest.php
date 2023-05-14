@@ -23,6 +23,7 @@ class MultipleOffenseTest extends AbstractUnitTest
         $criticalChanceMultiplier = 2.2;
         $criticalMultiplierMultiplier = 2.2;
         $vampirism = 10;
+        $blockIgnoring = 100;
         $damageConvertTo = '';
 
         $multipleOffense = new MultipleOffense(
@@ -32,6 +33,7 @@ class MultipleOffenseTest extends AbstractUnitTest
             $criticalChanceMultiplier,
             $criticalMultiplierMultiplier,
             $vampirism,
+            $blockIgnoring,
             $damageConvertTo
         );
 
@@ -41,6 +43,7 @@ class MultipleOffenseTest extends AbstractUnitTest
         self::assertEquals($criticalChanceMultiplier, $multipleOffense->getCriticalChanceMultiplier());
         self::assertEquals($criticalMultiplierMultiplier, $multipleOffense->getCriticalMultiplierMultiplier());
         self::assertEquals($vampirism, $multipleOffense->getVampirism());
+        self::assertEquals($blockIgnoring, $multipleOffense->getBlockIgnoring());
         self::assertEquals($damageConvertTo, $multipleOffense->getDamageConvert());
     }
 }

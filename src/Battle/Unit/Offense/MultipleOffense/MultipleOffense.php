@@ -12,6 +12,7 @@ class MultipleOffense implements MultipleOffenseInterface
     private float $criticalChanceMultiplier;
     private float $criticalMultiplierMultiplier;
     private int $vampirism;
+    private int $blockIgnoring;
     private string $damageConvertTo;
 
     // Этот массив используется для валидации параметра при создании способности
@@ -33,6 +34,7 @@ class MultipleOffense implements MultipleOffenseInterface
      * @param float $criticalChanceMultiplier
      * @param float $criticalMultiplierMultiplier
      * @param int $vampirism
+     * @param int $blockIgnoring
      * @param string $damageConvertTo
      * @throws MultipleOffenseException
      */
@@ -43,6 +45,7 @@ class MultipleOffense implements MultipleOffenseInterface
         float $criticalChanceMultiplier,
         float $criticalMultiplierMultiplier,
         int $vampirism,
+        int $blockIgnoring,
         string $damageConvertTo
     )
     {
@@ -52,6 +55,7 @@ class MultipleOffense implements MultipleOffenseInterface
         $this->criticalChanceMultiplier = $criticalChanceMultiplier;
         $this->criticalMultiplierMultiplier = $criticalMultiplierMultiplier;
         $this->vampirism = $vampirism;
+        $this->blockIgnoring = $blockIgnoring;
         $this->setDamageConvertTo($damageConvertTo);
     }
 
@@ -104,6 +108,14 @@ class MultipleOffense implements MultipleOffenseInterface
     }
 
     /**
+     * @return int
+     */
+    public function getBlockIgnoring(): int
+    {
+        return $this->blockIgnoring;
+    }
+
+    /**
      * @return string
      */
     public function getDamageConvert(): string
@@ -123,4 +135,5 @@ class MultipleOffense implements MultipleOffenseInterface
 
         $this->damageConvertTo = $damageConvertTo;
     }
+
 }
