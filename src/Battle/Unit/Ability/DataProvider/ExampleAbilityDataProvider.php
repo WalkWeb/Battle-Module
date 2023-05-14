@@ -27,7 +27,7 @@ use Battle\Weapon\Type\WeaponTypeInterface;
 class ExampleAbilityDataProvider implements AbilityDataProviderInterface
 {
     private static array $data = [
-        'Heavy Strike'      => [
+        'Heavy Strike'       => [
             1 => [
                 'name'                 => 'Heavy Strike',
                 'icon'                 => '/images/icons/ability/335.png',
@@ -78,7 +78,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Hellfire'          => [
+        'Hellfire'           => [
             1 => [
                 'name'          => 'Hellfire',
                 'icon'          => '/images/icons/ability/276.png',
@@ -118,7 +118,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Blessed Shield'    => [
+        'Blessed Shield'     => [
             1 => [
                 'name'          => 'Blessed Shield',
                 'icon'          => '/images/icons/ability/271.png',
@@ -152,7 +152,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Battle Fury'       => [
+        'Battle Fury'        => [
             1 => [
                 'name'          => 'Battle Fury',
                 'icon'          => '/images/icons/ability/102.png',
@@ -186,7 +186,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Healing Potion'    => [
+        'Healing Potion'     => [
             1 => [
                 'name'          => 'Healing Potion',
                 'icon'          => '/images/icons/ability/234.png',
@@ -221,7 +221,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Incineration'      => [
+        'Incineration'       => [
             1 => [
                 'name'          => 'Incineration',
                 'icon'          => '/images/icons/ability/232.png',
@@ -277,7 +277,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Paralysis'         => [
+        'Paralysis'          => [
             1 => [
                 'name'          => 'Paralysis',
                 'icon'          => '/images/icons/ability/086.png',
@@ -312,7 +312,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Stun'              => [
+        'Stun'               => [
             1 => [
                 'name'                 => 'Stun',
                 'icon'                 => '/images/icons/ability/186.png',
@@ -352,7 +352,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Poison'            => [
+        'Poison'             => [
             1 => [
                 'name'                 => 'Poison',
                 'icon'                 => '/images/icons/ability/202.png',
@@ -412,7 +412,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Rage'              => [
+        'Rage'               => [
             1 => [
                 'name'          => 'Rage',
                 'icon'          => '/images/icons/ability/285.png',
@@ -447,7 +447,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Reserve Forces'    => [
+        'Reserve Forces'     => [
             1 => [
                 'name'          => 'Reserve Forces',
                 'icon'          => '/images/icons/ability/156.png',
@@ -481,7 +481,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'General Heal'      => [
+        'General Heal'       => [
             1 => [
                 'name'                 => 'General Heal',
                 'icon'                 => '/images/icons/ability/452.png',
@@ -505,7 +505,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Great Heal'        => [
+        'Great Heal'         => [
             1 => [
                 'name'                 => 'Great Heal',
                 'icon'                 => '/images/icons/ability/196.png',
@@ -529,7 +529,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Back to Life'      => [
+        'Back to Life'       => [
             1 => [
                 'name'                 => 'Back to Life',
                 'icon'                 => '/images/icons/ability/053.png',
@@ -551,7 +551,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Will to live'      => [
+        'Will to live'       => [
             1 => [
                 'name'          => 'Will to live',
                 'icon'          => '/images/icons/ability/429.png',
@@ -569,7 +569,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Fire Elemental'    => [
+        'Fire Elemental'     => [
             1 => [
                 'name'          => 'Fire Elemental',
                 'icon'          => '/images/icons/ability/198.png',
@@ -643,7 +643,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Imp'               => [
+        'Imp'                => [
             1 => [
                 'name'          => 'Imp',
                 'icon'          => '/images/icons/ability/275.png',
@@ -717,7 +717,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Skeleton'          => [
+        'Skeleton'           => [
             1 => [
                 'name'          => 'Skeleton',
                 'icon'          => '/images/icons/ability/338.png',
@@ -791,7 +791,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Skeleton Mage'     => [
+        'Skeleton Mage'      => [
             1 => [
                 'name'          => 'Skeleton Mage',
                 'icon'          => '/images/icons/ability/603.png',
@@ -865,7 +865,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Lightning'         => [
+        'Lightning'          => [
             1 => [
                 'name'                 => 'Lightning',
                 'icon'                 => '/images/icons/ability/075.png',
@@ -1008,7 +1008,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Pure Energy'       => [
+        'Pure Energy'        => [
             1 => [
                 'name'                 => 'Pure Energy',
                 'icon'                 => '/images/icons/ability/282.png',
@@ -1155,7 +1155,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Pentagram'         => [
+        'Pentagram'          => [
             1 => [
                 'name'                 => 'Pentagram',
                 'icon'                 => '/images/icons/ability/430.png',
@@ -1347,7 +1347,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Touch of Void'     => [
+        'Touch of Void'      => [
             1 => [
                 'name'                 => 'Touch of Void',
                 'icon'                 => '/images/icons/ability/310.png',
@@ -1494,7 +1494,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Breath of Phoenix' => [
+        'Breath of Phoenix'  => [
             1 => [
                 'name'                 => 'Breath of Phoenix',
                 'icon'                 => '/images/icons/ability/419.png',
@@ -1626,7 +1626,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Crushing Blow'     => [
+        'Crushing Blow'      => [
             1 => [
                 'name'                 => 'Crushing Blow',
                 'icon'                 => '/images/icons/ability/384.png',
@@ -1818,7 +1818,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Explosive Shot'    => [
+        'Explosive Shot'     => [
             1 => [
                 'name'                 => 'Explosive Shot',
                 'icon'                 => '/images/icons/ability/191.png',
@@ -1965,7 +1965,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Fire Ball'         => [
+        'Fire Ball'          => [
             1 => [
                 'name'                 => 'Fire Ball',
                 'icon'                 => '/images/icons/ability/233.png',
@@ -2112,7 +2112,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Ice Shards'        => [
+        'Ice Shards'         => [
             1 => [
                 'name'                 => 'Ice Shards',
                 'icon'                 => '/images/icons/ability/277.png',
@@ -2259,7 +2259,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Slashing Blade'    => [
+        'Slashing Blade'     => [
             1 => [
                 'name'                 => 'Slashing Blade',
                 'icon'                 => '/images/icons/ability/335.png',
@@ -2436,7 +2436,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Ice Shot'          => [
+        'Ice Shot'           => [
             1 => [
                 'name'                 => 'Ice Shot',
                 'icon'                 => '/images/icons/ability/190.png',
@@ -2583,7 +2583,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Ball Lightning'    => [
+        'Ball Lightning'     => [
             1 => [
                 'name'                 => 'Ball Lightning',
                 'icon'                 => '/images/icons/ability/503.png',
@@ -2730,7 +2730,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Poison Spirit'     => [
+        'Poison Spirit'      => [
             1 => [
                 'name'                 => 'Poison Spirit',
                 'icon'                 => '/images/icons/ability/379.png',
@@ -2877,7 +2877,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Plasma Clot'       => [
+        'Plasma Clot'        => [
             1 => [
                 'name'                 => 'Plasma Clot',
                 'icon'                 => '/images/icons/ability/525.png',
@@ -3024,7 +3024,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Cleaving'          => [
+        'Cleaving'           => [
             1 => [
                 'name'                 => 'Cleaving',
                 'icon'                 => '/images/icons/ability/121.png',
@@ -3216,7 +3216,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Explosive Potion'  => [
+        'Explosive Potion'   => [
             1 => [
                 'name'                 => 'Explosive Potion',
                 'icon'                 => '/images/icons/ability/390.png',
@@ -3363,7 +3363,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Stone Hail'        => [
+        'Stone Hail'         => [
             1 => [
                 'name'                 => 'Stone Hail',
                 'icon'                 => '/images/icons/ability/071.png',
@@ -3510,7 +3510,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Punishing Light'   => [
+        'Punishing Light'    => [
             1 => [
                 'name'                 => 'Punishing Light',
                 'icon'                 => '/images/icons/ability/051.png',
@@ -3702,7 +3702,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Backstab'          => [
+        'Backstab'           => [
             1 => [
                 'name'                 => 'Backstab',
                 'icon'                 => '/images/icons/ability/349.png',
@@ -3839,7 +3839,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Piercing Strike'   => [
+        'Piercing Strike'    => [
             1 => [
                 'name'                 => 'Piercing Strike',
                 'icon'                 => '/images/icons/ability/482.png',
@@ -3981,7 +3981,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Anger'             => [
+        'Anger'              => [
             1 => [
                 'name'                 => 'Anger',
                 'icon'                 => '/images/icons/ability/523.png',
@@ -4178,7 +4178,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Meteorite'         => [
+        'Meteorite'          => [
             1 => [
                 'name'                 => 'Meteorite',
                 'icon'                 => '/images/icons/ability/036.png',
@@ -4325,7 +4325,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Bite'              => [
+        'Bite'               => [
             1 => [
                 'name'                 => 'Bite',
                 'icon'                 => '/images/icons/ability/458.png',
@@ -4679,13 +4679,13 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        'Drawing Forces' => [
+        'Drawing Forces'     => [
             1 => [
-                'name'                 => 'Drawing Forces',
-                'icon'                 => '/images/icons/ability/220.png',
-                'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
-                'actions'              => [
+                'name'          => 'Drawing Forces',
+                'icon'          => '/images/icons/ability/220.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'actions'       => [
                     [
                         'type'             => ActionInterface::DAMAGE,
                         'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
@@ -4706,11 +4706,11 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
             2 => [
-                'name'                 => 'Drawing Forces',
-                'icon'                 => '/images/icons/ability/220.png',
-                'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
-                'actions'              => [
+                'name'          => 'Drawing Forces',
+                'icon'          => '/images/icons/ability/220.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'actions'       => [
                     [
                         'type'             => ActionInterface::DAMAGE,
                         'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
@@ -4731,11 +4731,11 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
             3 => [
-                'name'                 => 'Drawing Forces',
-                'icon'                 => '/images/icons/ability/220.png',
-                'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
-                'actions'              => [
+                'name'          => 'Drawing Forces',
+                'icon'          => '/images/icons/ability/220.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'actions'       => [
                     [
                         'type'             => ActionInterface::DAMAGE,
                         'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
@@ -4756,11 +4756,11 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
             4 => [
-                'name'                 => 'Drawing Forces',
-                'icon'                 => '/images/icons/ability/220.png',
-                'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
-                'actions'              => [
+                'name'          => 'Drawing Forces',
+                'icon'          => '/images/icons/ability/220.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'actions'       => [
                     [
                         'type'             => ActionInterface::DAMAGE,
                         'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
@@ -4781,11 +4781,11 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
             5 => [
-                'name'                 => 'Drawing Forces',
-                'icon'                 => '/images/icons/ability/220.png',
-                'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
-                'actions'              => [
+                'name'          => 'Drawing Forces',
+                'icon'          => '/images/icons/ability/220.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'actions'       => [
                     [
                         'type'             => ActionInterface::DAMAGE,
                         'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
@@ -4802,6 +4802,158 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'animation_method' => 'damage',
                         'message_method'   => 'damageAbility',
                         'icon'             => '/images/icons/ability/220.png',
+                    ],
+                ],
+            ],
+        ],
+        'Volley of Darkness' => [
+            1 => [
+                'name'                 => 'Volley of Darkness',
+                'icon'                 => '/images/icons/ability/360.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::BOW,
+                    WeaponTypeInterface::CROSSBOW,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.7,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.4,
+                            'critical_chance'     => 1.5,
+                            'critical_multiplier' => 1.2,
+                            'damage_convert'      => MultipleOffense::CONVERT_DEATH,
+                            'vampirism'           => 25,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Volley of Darkness',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/360.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Volley of Darkness',
+                'icon'                 => '/images/icons/ability/360.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::BOW,
+                    WeaponTypeInterface::CROSSBOW,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.8,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.5,
+                            'critical_chance'     => 1.5,
+                            'critical_multiplier' => 1.2,
+                            'damage_convert'      => MultipleOffense::CONVERT_DEATH,
+                            'vampirism'           => 25,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Volley of Darkness',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/360.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Volley of Darkness',
+                'icon'                 => '/images/icons/ability/360.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::BOW,
+                    WeaponTypeInterface::CROSSBOW,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.9,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.6,
+                            'critical_chance'     => 1.5,
+                            'critical_multiplier' => 1.2,
+                            'damage_convert'      => MultipleOffense::CONVERT_DEATH,
+                            'vampirism'           => 25,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Volley of Darkness',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/360.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Volley of Darkness',
+                'icon'                 => '/images/icons/ability/360.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::BOW,
+                    WeaponTypeInterface::CROSSBOW,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.0,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.7,
+                            'critical_chance'     => 1.5,
+                            'critical_multiplier' => 1.2,
+                            'damage_convert'      => MultipleOffense::CONVERT_DEATH,
+                            'vampirism'           => 25,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Volley of Darkness',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/360.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Volley of Darkness',
+                'icon'                 => '/images/icons/ability/360.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::BOW,
+                    WeaponTypeInterface::CROSSBOW,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 2.1,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.8,
+                            'critical_chance'     => 1.5,
+                            'critical_multiplier' => 1.2,
+                            'damage_convert'      => MultipleOffense::CONVERT_DEATH,
+                            'vampirism'           => 25,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Volley of Darkness',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/360.png',
                     ],
                 ],
             ],

@@ -85,6 +85,7 @@ return [
     'Bite'                                                           => 'Укус',
     'Dishonest Exchange'                                             => 'Нечестный обмен',
     'Drawing Forces'                                                 => 'Вытягивание сил',
+    'Volley of Darkness'                                             => 'Залп тьмы',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
