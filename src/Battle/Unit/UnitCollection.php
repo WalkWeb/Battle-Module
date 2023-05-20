@@ -15,9 +15,11 @@ class UnitCollection implements Iterator, Countable
     /**
      * @var UnitInterface[]
      */
-    private $elements = [];
+    private array $elements = [];
 
     /**
+     * Добавляет юнита в коллекцию
+     *
      * @param UnitInterface $unit
      * @throws UnitException
      */
@@ -30,6 +32,19 @@ class UnitCollection implements Iterator, Countable
         $this->elements[$unit->getId()] = $unit;
     }
 
+    /**
+     * Добавляет юнита в коллекцию если его там нет
+     *
+     * @param UnitInterface $unit
+     * @throws UnitException
+     */
+    public function addIfMissing(UnitInterface $unit): void
+    {
+        if (!$this->exist($unit->getId())) {
+            $this->add($unit);
+        }
+    }
+    
     /**
      * @return UnitInterface
      */

@@ -331,6 +331,11 @@ abstract class AbstractAction implements ActionInterface
         return $this->enemyCommand;
     }
 
+    public function targetTracking(): bool
+    {
+        return true;
+    }
+
     /**
      * Ищет юнита для применения события.
      *

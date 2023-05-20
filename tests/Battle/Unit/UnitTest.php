@@ -631,6 +631,8 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на работу методов addLastTarget() и clearLastTarget()
+     *
      * @throws UnitException
      * @throws Exception
      */
@@ -651,18 +653,49 @@ class UnitTest extends AbstractUnitTest
         $unit->clearLastTarget();
 
         self::assertEquals(new UnitCollection(), $unit->getLastTargets());
+    }
 
-        // Аналогичная итерация, но проверяем очистку последних целей через метод newRound()
+    /**
+     * Тест на автоматическое добавление последней цели при обработке события
+     *
+     * @throws Exception
+     */
+    public function testUnitTargetTracking(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit, $secondaryEnemyUnit]);
+
+        $action = new DamageAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            true,
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
+        );
+
+        $action->handle();
 
         $expectedTargets = new UnitCollection();
 
-        self::assertEquals($expectedTargets, $unit->getLastTargets());
+        // Проверяем, что в последние цели добавилась именно атакованная цель
+        if ($enemyUnit->getLife() < $enemyUnit->getTotalLife()) {
+            $expectedTargets->add($enemyUnit);
+            self::assertEquals($expectedTargets, $unit->getLastTargets());
+        }
+        if ($secondaryEnemyUnit->getLife() < $secondaryEnemyUnit->getTotalLife()) {
+            $expectedTargets->add($secondaryEnemyUnit);
+            self::assertEquals($expectedTargets, $unit->getLastTargets());
+        }
 
-        $unit->addLastTarget($enemyUnit);
-        $expectedTargets->add($enemyUnit);
-
-        self::assertEquals($expectedTargets, $unit->getLastTargets());
-
+        // Проверяем очистку последних целей при новом раунде
         $unit->newRound();
 
         self::assertEquals(new UnitCollection(), $unit->getLastTargets());

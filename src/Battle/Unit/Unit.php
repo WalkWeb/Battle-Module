@@ -91,6 +91,10 @@ class Unit extends AbstractUnit
         $this->addConcentration(self::ADD_CON_RECEIVING_UNIT);
         $this->addRage(self::ADD_RAGE_RECEIVING_UNIT);
 
+        if ($action->targetTracking()) {
+            $action->getActionUnit()->addLastTarget($this);
+        }
+
         return $this->$method($action);
     }
 

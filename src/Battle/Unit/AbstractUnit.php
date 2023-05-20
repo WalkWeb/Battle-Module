@@ -406,7 +406,7 @@ abstract class AbstractUnit implements UnitInterface
      */
     public function addLastTarget(UnitInterface $target): void
     {
-        $this->lastTargets->add($target);
+        $this->lastTargets->addIfMissing($target);
     }
 
     public function clearLastTarget(): void

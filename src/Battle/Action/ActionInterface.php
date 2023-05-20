@@ -388,4 +388,13 @@ interface ActionInterface
      * @return CommandInterface
      */
     public function getEnemyCommand(): CommandInterface;
+
+    /**
+     * Необходимо ли отслеживать цель (Unit->lastTargets)
+     *
+     * По умолчанию true, для событий от эффектов, например лечения/урона - false
+     * 
+     * @return bool
+     */
+    public function targetTracking(): bool;
 }

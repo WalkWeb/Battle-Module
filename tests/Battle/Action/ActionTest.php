@@ -326,6 +326,20 @@ class ActionTest extends AbstractUnitTest
     }
 
     /**
+     * Проверка метода targetTracking(), который по-умолчанию возвращает true
+     *
+     * @throws Exception
+     */
+    public function testActionTargetTracking(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command);
+
+        self::assertTrue($action->targetTracking());
+    }
+
+    /**
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
