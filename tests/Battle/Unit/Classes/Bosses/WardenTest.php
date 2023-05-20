@@ -138,6 +138,7 @@ class WardenTest extends AbstractUnitTest
                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                     'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
                     'icon'             => '/images/icons/ability/232.png',
+                    'target_tracking'  => false,
                 ],
             ],
             'on_disable_actions'    => [],

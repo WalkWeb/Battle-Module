@@ -104,6 +104,7 @@ class DamageAction extends AbstractAction
      * @param OffenseInterface|null $offense
      * @param MultipleOffenseInterface|null $multipleOffense
      * @param string $icon
+     * @param bool $targetTracking
      * @throws Exception
      */
     public function __construct(
@@ -118,10 +119,11 @@ class DamageAction extends AbstractAction
         string $messageMethod,
         OffenseInterface $offense = null,
         MultipleOffenseInterface $multipleOffense = null,
-        string $icon = ''
+        string $icon = '',
+        bool $targetTracking = true
     )
     {
-        parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
+        parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon, $targetTracking);
 
         if (is_null($offense)) {
             if (is_null($multipleOffense)) {

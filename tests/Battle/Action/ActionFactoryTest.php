@@ -88,8 +88,9 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
         self::assertEquals($animationMethod, $action->getAnimationMethod());
         self::assertEquals($messageMethod, $action->getMessageMethod());
+        self::assertEquals(true, $action->isTargetTracking());
 
-        // Полный набор данных (добавляется только icon)
+        // Полный набор данных (добавляется icon + target_tracking)
         $data = [
             'type'             => ActionInterface::DAMAGE,
             'action_unit'      => $unit,
@@ -102,6 +103,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'animation_method' => $animationMethod = 'effectDamage',
             'message_method'   => $messageMethod = 'damageAbility',
             'icon'             => $icon = 'icon.png',
+            'target_tracking'  => $targetTracking = false,
         ];
 
         $action = $container->getActionFactory()->create($data);
@@ -115,6 +117,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($messageMethod, $action->getMessageMethod());
         self::assertEquals($icon, $action->getIcon());
         self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
+        self::assertEquals($targetTracking, $action->isTargetTracking());
     }
 
     /**
@@ -216,6 +219,7 @@ class ActionFactoryTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
         $container = $this->getContainer();
 
+        // Минимальный набор данных
         $data = [
             'type'             => ActionInterface::HEAL,
             'action_unit'      => $unit,
@@ -226,7 +230,6 @@ class ActionFactoryTest extends AbstractUnitTest
             'name'             => $name = 'action name 123',
             'animation_method' => $animationMethod = 'effectHeal',
             'message_method'   => $messageMethod = 'heal',
-            'icon'             => $icon = 'icon.png',
         ];
 
         $action = $container->getActionFactory()->create($data);
@@ -238,7 +241,28 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($animationMethod, $action->getAnimationMethod());
         self::assertEquals($messageMethod, $action->getMessageMethod());
+        self::assertEquals('', $action->getIcon());
+        self::assertTrue($action->isTargetTracking());
+
+        // Полный набор данных (добавляется icon и target_tracking)
+        $data = [
+            'type'             => ActionInterface::HEAL,
+            'action_unit'      => $unit,
+            'enemy_command'    => $enemyCommand,
+            'allies_command'   => $command,
+            'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+            'power'            => $power = 50,
+            'name'             => $name = 'action name 123',
+            'animation_method' => $animationMethod = 'effectHeal',
+            'message_method'   => $messageMethod = 'heal',
+            'icon'             => $icon = 'icon.png',
+            'target_tracking'  => $targetTracking = false,
+        ];
+
+        $action = $container->getActionFactory()->create($data);
+
         self::assertEquals($icon, $action->getIcon());
+        self::assertEquals($targetTracking, $action->isTargetTracking());
     }
 
     /**
@@ -2009,6 +2033,65 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ICON_DATA,
             ],
             [
+                // 22: target_tracking некорректного типа [для DamageAction]
+                [
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'offense'          => [
+                        'damage_type'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
+                        'physical_damage'     => 10,
+                        'fire_damage'         => 0,
+                        'water_damage'        => 0,
+                        'air_damage'          => 0,
+                        'earth_damage'        => 0,
+                        'life_damage'         => 0,
+                        'death_damage'        => 0,
+                        'attack_speed'        => 1,
+                        'cast_speed'          => 0,
+                        'accuracy'            => 200,
+                        'magic_accuracy'      => 100,
+                        'block_ignoring'      => 0,
+                        'critical_chance'     => 5,
+                        'critical_multiplier' => 200,
+                        'damage_multiplier'   => 100,
+                        'vampirism'           => 0,
+                        'magic_vampirism'     => 0,
+                    ],
+                    'defense'          => [
+                        'physical_resist'     => 0,
+                        'fire_resist'         => 0,
+                        'water_resist'        => 0,
+                        'air_resist'          => 0,
+                        'earth_resist'        => 0,
+                        'life_resist'         => 0,
+                        'death_resist'        => 0,
+                        'defense'             => 100,
+                        'magic_defense'       => 50,
+                        'block'               => 0,
+                        'magic_block'         => 0,
+                        'mental_barrier'      => 0,
+                        'max_physical_resist' => 75,
+                        'max_fire_resist'     => 75,
+                        'max_water_resist'    => 75,
+                        'max_air_resist'      => 75,
+                        'max_earth_resist'    => 75,
+                        'max_life_resist'     => 75,
+                        'max_death_resist'    => 75,
+                        'global_resist'       => 0,
+                    ],
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
+                    'target_tracking'  => [],
+                ],
+                ActionException::INVALID_TARGET_TRACKING,
+            ],
+            [
                 // 52: EffectAction - некорректный icon
                 [
                     'type'           => ActionInterface::EFFECT,
@@ -2491,6 +2574,23 @@ class ActionFactoryTest extends AbstractUnitTest
                     'icon'             => 11.11,
                 ],
                 ActionException::INVALID_ICON_DATA,
+            ],
+            [
+                // 22: target_tracking некорректного типа [для HealAction]
+                [
+                    'type'             => ActionInterface::HEAL,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'power'            => 50,
+                    'can_be_avoided'   => true,
+                    'name'             => '',
+                    'animation_method' => '',
+                    'message_method'   => '',
+                    'target_tracking'  => 1,
+                ],
+                ActionException::INVALID_TARGET_TRACKING,
             ],
         ];
     }

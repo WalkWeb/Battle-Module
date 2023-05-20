@@ -75,13 +75,16 @@ abstract class AbstractAction implements ActionInterface
      */
     protected string $icon;
 
+    protected bool $targetTracking;
+
     public function __construct(
         ContainerInterface $container,
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         int $typeTarget,
-        string $icon = ''
+        string $icon = '',
+        bool $targetTracking = true
     )
     {
         $this->container = $container;
@@ -93,6 +96,7 @@ abstract class AbstractAction implements ActionInterface
         $this->alliesCommand = $alliesCommand;
         $this->typeTarget = $typeTarget;
         $this->icon = $icon;
+        $this->targetTracking = $targetTracking;
     }
 
     public function getCreatorUnit(): UnitInterface
@@ -331,9 +335,9 @@ abstract class AbstractAction implements ActionInterface
         return $this->enemyCommand;
     }
 
-    public function targetTracking(): bool
+    public function isTargetTracking(): bool
     {
-        return true;
+        return $this->targetTracking;
     }
 
     /**

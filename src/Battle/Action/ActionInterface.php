@@ -392,9 +392,10 @@ interface ActionInterface
     /**
      * Необходимо ли отслеживать цель (Unit->lastTargets)
      *
-     * По умолчанию true, для событий от эффектов, например лечения/урона - false
-     * 
+     * По умолчанию true, для событий от эффектов которые применяются каждый ход, например лечения/урона/паралича, нужно
+     * вручную указывать false
+     *
      * @return bool
      */
-    public function targetTracking(): bool;
+    public function isTargetTracking(): bool;
 }

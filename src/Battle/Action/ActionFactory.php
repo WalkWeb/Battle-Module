@@ -102,7 +102,8 @@ class ActionFactory
             self::string($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA),
             $offenseData ? OffenseFactory::create($offenseData, $this->container) : null,
             $multipleOffenseData ? MultipleOffenseFactory::create($multipleOffenseData) : null,
-            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA)
+            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA),
+            self::boolOrDefault($data, 'target_tracking', true, ActionException::INVALID_TARGET_TRACKING)
         );
     }
 
@@ -123,7 +124,8 @@ class ActionFactory
             self::string($data, 'name', ActionException::INVALID_NAME_DATA),
             self::string($data, 'animation_method', ActionException::INVALID_ANIMATION_METHOD_DATA),
             self::string($data, 'message_method', ActionException::INVALID_MESSAGE_METHOD_DATA),
-            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA)
+            self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA),
+            self::boolOrDefault($data, 'target_tracking', true, ActionException::INVALID_TARGET_TRACKING)
         );
     }
 

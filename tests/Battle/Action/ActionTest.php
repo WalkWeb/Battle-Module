@@ -336,7 +336,7 @@ class ActionTest extends AbstractUnitTest
 
         $action = $this->createDamageAction($unit, $enemyCommand, $command);
 
-        self::assertTrue($action->targetTracking());
+        self::assertTrue($action->isTargetTracking());
     }
 
     /**
