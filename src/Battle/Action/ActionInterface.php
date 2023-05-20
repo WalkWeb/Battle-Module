@@ -40,6 +40,9 @@ interface ActionInterface
     public const TARGET_ALL_ENEMY             = 8;
     // Применяет событие на всех раненых (но живых) союзников (для массового лечения по своим)
     public const TARGET_ALL_WOUNDED_ALLIES    = 9;
+    // Применяет событие на предыдущую цель, если такая была. Если предыдущее событие применялось сразу к нескольким
+    // юнитам - будет выбран последний
+    // TODO TARGET_LAST
 
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 

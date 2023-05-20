@@ -119,6 +119,7 @@ class UnitTest extends AbstractUnitTest
         }
 
         self::assertEquals($expectedAbilities, $unit->getAbilities());
+        self::assertEquals(new UnitCollection(), $unit->getLastTargets());
     }
 
     /**
@@ -627,6 +628,44 @@ class UnitTest extends AbstractUnitTest
                 self::assertEquals('Stun Weapon Effect', $callbackAction->getNameAction());
             }
         }
+    }
+
+    /**
+     * @throws UnitException
+     * @throws Exception
+     */
+    public function testUnitLastTargets(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+
+        $expectedTargets = new UnitCollection();
+
+        self::assertEquals($expectedTargets, $unit->getLastTargets());
+
+        $unit->addLastTarget($enemyUnit);
+        $expectedTargets->add($enemyUnit);
+
+        self::assertEquals($expectedTargets, $unit->getLastTargets());
+
+        $unit->clearLastTarget();
+
+        self::assertEquals(new UnitCollection(), $unit->getLastTargets());
+
+        // Аналогичная итерация, но проверяем очистку последних целей через метод newRound()
+
+        $expectedTargets = new UnitCollection();
+
+        self::assertEquals($expectedTargets, $unit->getLastTargets());
+
+        $unit->addLastTarget($enemyUnit);
+        $expectedTargets->add($enemyUnit);
+
+        self::assertEquals($expectedTargets, $unit->getLastTargets());
+
+        $unit->newRound();
+
+        self::assertEquals(new UnitCollection(), $unit->getLastTargets());
     }
 
     /**

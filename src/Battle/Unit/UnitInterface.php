@@ -344,4 +344,26 @@ interface UnitInterface
      * @return bool
      */
     public function isParalysis(): bool;
+
+    /**
+     * Возвращает коллекцию последних целей (в этом раунде) юнита
+     *
+     * Используется в механике, когда, например, на атакованную или вылеченную цель, следующем событием нужно наложить
+     * какой-то эффект
+     *
+     * @return UnitCollection
+     */
+    public function getLastTargets(): UnitCollection;
+
+    /**
+     * Добавляет новую последнюю цель текущего юнита
+     *
+     * @param UnitInterface $target
+     */
+    public function addLastTarget(UnitInterface $target): void;
+
+    /**
+     * Очищает коллекцию последних целей. Вызывается при каждом новом раунде
+     */
+    public function clearLastTarget(): void;
 }

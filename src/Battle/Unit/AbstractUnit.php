@@ -135,6 +135,11 @@ abstract class AbstractUnit implements UnitInterface
     protected DefenseInterface $defense;
 
     /**
+     * @var UnitCollection
+     */
+    protected UnitCollection $lastTargets;
+
+    /**
      * @param string $id
      * @param string $name
      * @param int $level
@@ -154,6 +159,7 @@ abstract class AbstractUnit implements UnitInterface
      * @param ContainerInterface $container
      * @param UnitClassInterface|null $class
      * @param EffectCollection|null $effects
+     * @param UnitCollection|null $lastTargets
      * @throws UnitException
      */
     public function __construct(
@@ -175,7 +181,8 @@ abstract class AbstractUnit implements UnitInterface
         RaceInterface $race,
         ContainerInterface $container,
         ?UnitClassInterface $class = null,
-        ?EffectCollection $effects = null
+        ?EffectCollection $effects = null,
+        ?UnitCollection $lastTargets = null
     )
     {
         $this->validateCommand($command);
@@ -199,6 +206,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->class = $class;
         $this->abilities = new AbilityCollection($this->container->isTestMode());
         $this->effects = $effects ?? new EffectCollection($this);
+        $this->lastTargets = $lastTargets ?? new UnitCollection();
         $this->addClassAbilities();
         $this->addRaceAbilities();
     }
@@ -342,6 +350,7 @@ abstract class AbstractUnit implements UnitInterface
         $this->addConcentration(self::ADD_CON_NEW_ROUND);
         $this->addRage(self::ADD_RAGE_NEW_ROUND);
         $this->abilities->newRound($this);
+        $this->clearLastTarget();
     }
 
     /**
@@ -367,9 +376,6 @@ abstract class AbstractUnit implements UnitInterface
         return $this->effects;
     }
 
-    /**
-     * @return ActionCollection
-     */
     public function getBeforeActions(): ActionCollection
     {
         return $this->effects->newRound();
@@ -384,12 +390,28 @@ abstract class AbstractUnit implements UnitInterface
         return $this->effects->nextRound();
     }
 
-    /**
-     * @return bool
-     */
     public function isParalysis(): bool
     {
         return $this->effects->existParalysis();
+    }
+
+    public function getLastTargets(): UnitCollection
+    {
+        return $this->lastTargets;
+    }
+
+    /**
+     * @param UnitInterface $target
+     * @throws UnitException
+     */
+    public function addLastTarget(UnitInterface $target): void
+    {
+        $this->lastTargets->add($target);
+    }
+
+    public function clearLastTarget(): void
+    {
+        $this->lastTargets = new UnitCollection();
     }
 
     /**
