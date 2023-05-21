@@ -14,23 +14,23 @@ use Exception;
 use Tests\Battle\Unit\Ability\AbstractAbilityTest;
 use Tests\Factory\UnitFactory;
 
-class BleedingWoundAbilityTest extends AbstractAbilityTest
+class PoisonStingAbilityTest extends AbstractAbilityTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">100_dodge</span> use <img src="/images/icons/ability/438.png" alt="" /> <span class="ability">Bleeding Wound</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">100_dodge</span> использовал <img src="/images/icons/ability/438.png" alt="" /> <span class="ability">Кровоточащая рана</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">100_dodge</span> use <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Poison Sting</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">100_dodge</span> использовал <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Отравляющее жало</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> received %d damage from effect <img src="/images/icons/ability/438.png" alt="" /> <span class="ability">Bleeding Wound</span>';
-    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> получил %d урона от эффекта <img src="/images/icons/ability/438.png" alt="" /> <span class="ability">Кровоточащая рана</span>';
+    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> received %d damage from effect <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Poison Sting</span>';
+    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> получил %d урона от эффекта <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Отравляющее жало</span>';
 
     /**
-     * Тест на создание способности Bleeding Wound через AbilityDataProvider
+     * Тест на создание способности Poison Sting через AbilityDataProvider
      *
      * @throws Exception
      */
-    public function testBleedingWoundAbilityCreate(): void
+    public function testPoisonStingAbilityCreate(): void
     {
-        $name = 'Bleeding Wound';
-        $icon = '/images/icons/ability/438.png';
+        $name = 'Poison Sting';
+        $icon = '/images/icons/ability/182.png';
         $disposable = false;
 
         $unit = UnitFactory::createByTemplate(51);
@@ -72,14 +72,14 @@ class BleedingWoundAbilityTest extends AbstractAbilityTest
                     self::assertEquals($name, $action->getNameAction());
                     self::assertEquals($icon, $action->getIcon());
                     // Проверка отсутствия конвертации физического урона (для урона от эффекта)
-                    self::assertTrue($effectDamage->getOffense()->getPhysicalDamage() > 0);
+                    self::assertTrue($effectDamage->getOffense()->getDeathDamage() > 0);
                 }
             }
         }
     }
 
     /**
-     * Тест на применение способности Bleeding Wound
+     * Тест на применение способности Poison Sting
      *
      * @dataProvider useDataProvider
      * @param int $level
@@ -89,7 +89,7 @@ class BleedingWoundAbilityTest extends AbstractAbilityTest
      * @param int $expectedEffectDuration
      * @throws Exception
      */
-    public function testBleedingWoundAbilityUse(
+    public function testPoisonStingAbilityUse(
         int $level,
         int $expectedDamage,
         int $expectedAccuracy,
@@ -103,7 +103,7 @@ class BleedingWoundAbilityTest extends AbstractAbilityTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Bleeding Wound', $level);
+        $ability = $this->createAbilityByDataProvider($unit, 'Poison Sting', $level);
 
         $this->activateAbility($ability, $unit);
 
@@ -175,38 +175,38 @@ class BleedingWoundAbilityTest extends AbstractAbilityTest
         return [
             [
                 1,
-                20,
-                280,
-                4,
-                4,
+                18,
+                260,
+                3,
+                5,
             ],
             [
                 2,
-                21,
-                300,
-                4,
-                4,
+                19,
+                280,
+                3,
+                5,
             ],
             [
                 3,
-                22,
+                20,
+                300,
+                3,
+                6,
+            ],
+            [
+                4,
+                21,
                 320,
-                4,
-                5,
+                3,
+                6,
             ],
             [
-                4,
-                23,
+                5,
+                22,
                 340,
-                4,
-                5,
-            ],
-            [
-                5,
-                24,
-                360,
-                4,
-                5,
+                3,
+                7,
             ],
         ];
     }

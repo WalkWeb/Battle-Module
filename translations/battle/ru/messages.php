@@ -87,6 +87,7 @@ return [
     'Drawing Forces'                                                 => 'Вытягивание сил',
     'Volley of Darkness'                                             => 'Залп тьмы',
     'Bleeding Wound'                                                 => 'Кровоточащая рана',
+    'Poison Sting'                                                   => 'Отравляющее жало',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

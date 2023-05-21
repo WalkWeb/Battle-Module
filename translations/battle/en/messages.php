@@ -89,6 +89,7 @@ return [
     'Drawing Forces'                                                 => 'Drawing Forces',
     'Volley of Darkness'                                             => 'Volley of Darkness',
     'Bleeding Wound'                                                 => 'Bleeding Wound',
+    'Poison Sting'                                                   => 'Poison Sting',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
