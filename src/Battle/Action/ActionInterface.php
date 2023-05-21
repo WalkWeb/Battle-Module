@@ -40,9 +40,8 @@ interface ActionInterface
     public const TARGET_ALL_ENEMY             = 8;
     // Применяет событие на всех раненых (но живых) союзников (для массового лечения по своим)
     public const TARGET_ALL_WOUNDED_ALLIES    = 9;
-    // Применяет событие на предыдущую цель, если такая была. Если предыдущее событие применялось сразу к нескольким
-    // юнитам - будет выбран последний
-    // TODO TARGET_LAST
+    // Применяет событие на последние живые цели в этом раунде
+    public const TARGET_LAST_ALIVE_TARGETS    = 10;
 
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 
@@ -394,6 +393,9 @@ interface ActionInterface
      *
      * По умолчанию true, для событий от эффектов которые применяются каждый ход, например лечения/урона/паралича, нужно
      * вручную указывать false
+     *
+     * TODO Можно сделать автоматическое добавление "'target_tracking'  => false" событиям, которые создаются в стадии
+     * TODO "on_next_round_actions"
      *
      * @return bool
      */

@@ -154,7 +154,7 @@ class EffectActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit, $otherEnemyUnit]);
 
-        $action = $this->getPoisonActionToEnemyTarget($container, $unit, $enemyCommand, $command, ActionInterface::TARGET_EFFECT_ENEMY);
+        $action = $this->getPoisonAction($container, $unit, $enemyCommand, $command, ActionInterface::TARGET_EFFECT_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -184,7 +184,7 @@ class EffectActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $otherUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = $this->getPoisonActionToEnemyTarget($container, $unit, $enemyCommand, $command, ActionInterface::TARGET_EFFECT_ALLIES);
+        $action = $this->getPoisonAction($container, $unit, $enemyCommand, $command, ActionInterface::TARGET_EFFECT_ALLIES);
 
         self::assertTrue($action->canByUsed());
 
@@ -284,6 +284,63 @@ class EffectActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на применение эффекта к последней цели
+     *
+     * @throws Exception
+     */
+    public function testEffectActionForLastTarget(): void
+    {
+        $container = new Container();
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit, $secondaryEnemyUnit]);
+
+        // Вначале наносим урон случайному противнику
+        $damage = new DamageAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            ActionInterface::TARGET_RANDOM_ENEMY,
+            false,
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
+        );
+
+        $damage->handle();
+
+        // Проверяем, что урон был нанесен
+        self::assertEquals(20, $damage->getFactualPower());
+
+        // Теперь применяем эффект к последней цели
+        $effect = $this->getPoisonAction(
+            $container,
+            $unit,
+            $enemyCommand,
+            $command,
+            ActionInterface::TARGET_LAST_ALIVE_TARGETS
+        );
+
+        self::assertTrue($effect->canByUsed());
+
+        $effect->handle();
+
+        // Проверяем, что эффект появился на том же юните, что и был атакован
+        if ($enemyUnit->getLife() < $enemyUnit->getTotalLife()) {
+            self::assertCount(1, $enemyUnit->getEffects());
+            self::assertCount(0, $secondaryEnemyUnit->getEffects());
+        }
+        if ($secondaryEnemyUnit->getLife() < $secondaryEnemyUnit->getTotalLife()) {
+            self::assertCount(0, $enemyUnit->getEffects());
+            self::assertCount(1, $secondaryEnemyUnit->getEffects());
+        }
+    }
+
+    /**
      * Создает и возвращает EffectAction
      *
      * @param ContainerInterface $container
@@ -380,7 +437,7 @@ class EffectActionTest extends AbstractUnitTest
      * @return ActionInterface
      * @throws Exception
      */
-    public function getPoisonActionToEnemyTarget(
+    public function getPoisonAction(
         ContainerInterface $container,
         UnitInterface $unit,
         CommandInterface $enemyCommand,
@@ -432,6 +489,7 @@ class EffectActionTest extends AbstractUnitTest
                         'can_be_avoided'   => false,
                         'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                         'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
+                        'target_tracking'  => false,
                     ],
                 ],
                 'on_disable_actions'    => [],

@@ -392,6 +392,13 @@ abstract class AbstractAction implements ActionInterface
                 // TODO Возможно имеет смысл и вовсе удалить
             case self::TARGET_ALL_WOUNDED_ALLIES:
                 return $this->alliesCommand->getAllWoundedUnits();
+            case self::TARGET_LAST_ALIVE_TARGETS:
+                foreach ($this->actionUnit->getLastTargets() as $unit) {
+                    if ($unit->isAlive()) {
+                        $units->add($unit);
+                    }
+                }
+                return $units;
         }
 
         throw new ActionException(ActionException::UNKNOWN_TYPE_TARGET . ': ' . $this->typeTarget);

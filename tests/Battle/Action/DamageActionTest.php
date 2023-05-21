@@ -149,7 +149,7 @@ class DamageActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $typeTarget = 10;
+        $typeTarget = 100;
 
         $action = new DamageAction(
             $this->getContainer(),
@@ -157,7 +157,7 @@ class DamageActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             $typeTarget,
-            true,
+            false,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD,
