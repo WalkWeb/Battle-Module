@@ -146,7 +146,7 @@ class WeaponType implements WeaponTypeInterface
                                 'damage'              => 0.25,
                                 'speed'               => 1.0,
                                 'accuracy'            => 1.0,
-                                'critical_chance'     => 1.0,
+                                'critical_chance'     => 0.0,
                                 'critical_multiplier' => 1.0,
                             ],
                             'can_be_avoided'   => false,

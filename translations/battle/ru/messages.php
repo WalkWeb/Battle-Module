@@ -86,6 +86,7 @@ return [
     'Dishonest Exchange'                                             => 'Нечестный обмен',
     'Drawing Forces'                                                 => 'Вытягивание сил',
     'Volley of Darkness'                                             => 'Залп тьмы',
+    'Bleeding Wound'                                                 => 'Кровоточащая рана',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

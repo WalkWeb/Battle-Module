@@ -9,10 +9,7 @@ use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
-use Battle\Stroke\StrokeException;
 use Battle\Unit\Ability\AbilityFactory;
-use Battle\Unit\Defense\Defense;
-use Battle\Unit\Offense\Offense;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
@@ -20,7 +17,6 @@ use Battle\Container\Container;
 use Battle\Command\CommandFactory;
 use Battle\Stroke\Stroke;
 use Tests\AbstractUnitTest;
-use Tests\Factory\Mock\BrokenPriestUnit;
 use Tests\Factory\UnitFactory;
 
 class StrokeTest extends AbstractUnitTest
@@ -75,92 +71,6 @@ class StrokeTest extends AbstractUnitTest
 
         // Но, на всякий случай проверяем, что противник умер
         self::assertEquals(0, $enemyUnit->getLife());
-    }
-
-    /**
-     * Сложный тест на эмуляцию ситуации, когда Stroke не может выполнить полученный Action
-     *
-     * Сложный тем, что юнит проверяет событие на возможность использование. Значит, делаем мок юнита, который вернет
-     * именно лечение, хотя и лечить некого
-     *
-     * @throws Exception
-     */
-    public function testStrokeCantByUsedActionException(): void
-    {
-        $enemyUnit = UnitFactory::createByTemplate(3);
-        $container = $enemyUnit->getContainer();
-
-        $brokenPriest = new BrokenPriestUnit(
-            'id',
-            'Broken Priest',
-            1,
-            'avatar',
-            20,
-            20,
-            10,
-            10,
-            true,
-            1,
-            0,
-            0,
-            0,
-            new Offense(
-                $this->getContainer(),
-                1,
-                1,
-                10,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                5,
-                0,
-                1,
-                100,
-                50,
-                5,
-                200,
-                100,
-                0,
-                0
-            ),
-            new Defense(
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                10,
-                10,
-                0,
-                0,
-                0,
-                75,
-                75,
-                75,
-                75,
-                75,
-                75,
-                75,
-                0,
-                0
-            ),
-            $container->getRaceFactory()->create($container->getRaceDataProvider()->get(1)),
-            $container
-        );
-
-        $alliesCommand = CommandFactory::create([$brokenPriest]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $stroke = new Stroke(1, $brokenPriest, $alliesCommand, $enemyCommand, new Container());
-
-        $this->expectException(StrokeException::class);
-        $this->expectExceptionMessage(StrokeException::CANT_BE_USED_ACTION);
-        $stroke->handle();
     }
 
     /**

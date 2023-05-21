@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit\Ability;
 
 use Battle\Action\ActionCollection;
+use Battle\Action\EffectAction;
 use Battle\Command\CommandInterface;
 use Battle\Traits\AbilityDataTrait;
 use Battle\Unit\UnitInterface;
@@ -27,6 +28,17 @@ class Ability extends AbstractAbility
         }
 
         foreach ($this->getActions($enemyCommand, $alliesCommand) as $action) {
+
+            // Есть способности, которые вторым событием накладывают какой-то эффект на ту же цель
+            // Но чтобы цель появилась - по ней должно быть совершено действие
+            // Текущая же проверка делается перед применением способности - и первое событие еще не произошло
+            // Получается замкнутый круг. По этому делаем допущение - если событие по последним целям - оно считается
+            // способным к применению всегда.
+            // TODO Можно добавить в Action параметр, который будет пропускать проверку и считать, что событие всегда доступно к применению
+            if ($action->getTypeTarget() === EffectAction::TARGET_LAST_ALIVE_TARGETS) {
+                return true;
+            }
+
             if (!$action->canByUsed()) {
                 return false;
             }

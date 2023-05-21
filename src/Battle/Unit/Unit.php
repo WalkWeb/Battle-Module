@@ -91,10 +91,6 @@ class Unit extends AbstractUnit
         $this->addConcentration(self::ADD_CON_RECEIVING_UNIT);
         $this->addRage(self::ADD_RAGE_RECEIVING_UNIT);
 
-        if ($action->isTargetTracking()) {
-            $action->getActionUnit()->addLastTarget($this);
-        }
-
         return $this->$method($action);
     }
 
@@ -155,6 +151,10 @@ class Unit extends AbstractUnit
             );
         }
 
+        if ($action->isTargetTracking()) {
+            $action->getActionUnit()->addLastTarget($this);
+        }
+
         return new ActionCollection();
     }
 
@@ -175,6 +175,10 @@ class Unit extends AbstractUnit
         }
 
         $action->addFactualPower($this, $this->life - $primordialLife);
+
+        if ($action->isTargetTracking()) {
+            $action->getActionUnit()->addLastTarget($this);
+        }
 
         return new ActionCollection();
     }

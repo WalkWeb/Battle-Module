@@ -88,6 +88,7 @@ return [
     'Dishonest Exchange'                                             => 'Dishonest Exchange',
     'Drawing Forces'                                                 => 'Drawing Forces',
     'Volley of Darkness'                                             => 'Volley of Darkness',
+    'Bleeding Wound'                                                 => 'Bleeding Wound',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
