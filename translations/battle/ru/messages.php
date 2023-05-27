@@ -89,6 +89,7 @@ return [
     'Bleeding Wound'                                                 => 'Кровоточащая рана',
     'Poison Sting'                                                   => 'Отравляющее жало',
     'Meteor Rain'                                                    => 'Метеоритный дождь',
+    'Vortex'                                                         => 'Вихрь',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

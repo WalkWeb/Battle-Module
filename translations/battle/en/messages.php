@@ -91,6 +91,7 @@ return [
     'Bleeding Wound'                                                 => 'Bleeding Wound',
     'Poison Sting'                                                   => 'Poison Sting',
     'Meteor Rain'                                                    => 'Meteor Rain',
+    'Vortex'                                                         => 'Vortex',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
