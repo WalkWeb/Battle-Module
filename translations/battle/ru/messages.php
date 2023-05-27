@@ -88,6 +88,7 @@ return [
     'Volley of Darkness'                                             => 'Залп тьмы',
     'Bleeding Wound'                                                 => 'Кровоточащая рана',
     'Poison Sting'                                                   => 'Отравляющее жало',
+    'Meteor Rain'                                                    => 'Метеоритный дождь',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

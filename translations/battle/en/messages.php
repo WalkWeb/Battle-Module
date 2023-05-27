@@ -90,6 +90,7 @@ return [
     'Volley of Darkness'                                             => 'Volley of Darkness',
     'Bleeding Wound'                                                 => 'Bleeding Wound',
     'Poison Sting'                                                   => 'Poison Sting',
+    'Meteor Rain'                                                    => 'Meteor Rain',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
