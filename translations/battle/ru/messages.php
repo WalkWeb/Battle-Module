@@ -90,6 +90,7 @@ return [
     'Poison Sting'                                                   => 'Отравляющее жало',
     'Meteor Rain'                                                    => 'Метеоритный дождь',
     'Vortex'                                                         => 'Вихрь',
+    'Hail of Blows'                                                  => 'Град ударов',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

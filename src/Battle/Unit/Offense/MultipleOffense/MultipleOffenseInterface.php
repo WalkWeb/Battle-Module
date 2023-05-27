@@ -44,6 +44,8 @@ interface MultipleOffenseInterface
     /**
      * Возвращает множитель скорости атаки
      *
+     * TODO Не используется - сложно реализовать. Несколько ударов в одной способности реализуется через несколько actions
+     *
      * @return float
      */
     public function getSpeedMultiplier(): float;

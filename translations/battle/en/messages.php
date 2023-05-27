@@ -92,6 +92,7 @@ return [
     'Poison Sting'                                                   => 'Poison Sting',
     'Meteor Rain'                                                    => 'Meteor Rain',
     'Vortex'                                                         => 'Vortex',
+    'Hail of Blows'                                                  => 'Hail of Blows',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
