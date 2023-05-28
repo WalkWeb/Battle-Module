@@ -93,6 +93,7 @@ return [
     'Meteor Rain'                                                    => 'Meteor Rain',
     'Vortex'                                                         => 'Vortex',
     'Hail of Blows'                                                  => 'Hail of Blows',
+    'Double Strike'                                                  => 'Double Strike',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

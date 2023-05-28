@@ -91,6 +91,7 @@ return [
     'Meteor Rain'                                                    => 'Метеоритный дождь',
     'Vortex'                                                         => 'Вихрь',
     'Hail of Blows'                                                  => 'Град ударов',
+    'Double Strike'                                                  => 'Парный удар',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
