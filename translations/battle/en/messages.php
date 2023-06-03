@@ -95,6 +95,7 @@ return [
     'Hail of Blows'                                                  => 'Hail of Blows',
     'Double Strike'                                                  => 'Double Strike',
     'Armor Piercing Bolt'                                            => 'Armor Piercing Bolt',
+    'Explosives'                                                     => 'Explosives',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

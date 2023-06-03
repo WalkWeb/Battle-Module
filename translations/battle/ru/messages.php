@@ -93,6 +93,7 @@ return [
     'Hail of Blows'                                                  => 'Град ударов',
     'Double Strike'                                                  => 'Парный удар',
     'Armor Piercing Bolt'                                            => 'Бронебойный болт',
+    'Explosives'                                                     => 'Взрывчатка',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
