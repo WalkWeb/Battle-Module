@@ -8,6 +8,7 @@ use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
+use Battle\Unit\Ability\AbilityInterface;
 use Exception;
 use Tests\Battle\Unit\Ability\AbstractAbilityTest;
 use Tests\Factory\UnitFactory;
@@ -42,6 +43,7 @@ class DrawingForcesAbilityTest extends AbstractAbilityTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
         self::assertEquals($disposable, $ability->isDisposable());
         self::assertFalse($ability->isUsage());
+        self::assertEquals(AbilityInterface::ACTIVATE_CONCENTRATION, $ability->getTypeActivate());
         self::assertEquals([], $ability->getAllowedWeaponTypes());
 
         $actions = $ability->getActions($enemyCommand, $command);

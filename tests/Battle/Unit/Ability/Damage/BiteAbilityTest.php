@@ -8,6 +8,8 @@ use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
+use Battle\Unit\Ability\AbilityCollection;
+use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\Battle\Unit\Ability\AbstractAbilityTest;
@@ -29,7 +31,7 @@ class BiteAbilityTest extends AbstractAbilityTest
         $icon = '/images/icons/ability/458.png';
         $disposable = false;
 
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(53);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -43,6 +45,7 @@ class BiteAbilityTest extends AbstractAbilityTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
         self::assertEquals($disposable, $ability->isDisposable());
         self::assertFalse($ability->isUsage());
+        self::assertEquals(AbilityInterface::ACTIVATE_CUNNING, $ability->getTypeActivate());
         self::assertEquals(
             [
                 WeaponTypeInterface::SWORD,
@@ -92,14 +95,16 @@ class BiteAbilityTest extends AbstractAbilityTest
         int $expectedLifeSteal
     ): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(53);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $ability = $this->createAbilityByDataProvider($unit, 'Bite', $level);
 
-        $this->activateAbility($ability, $unit);
+        $abilities = new AbilityCollection();
+        $abilities->add($ability);
+        $abilities->newRound($unit);
 
         self::assertTrue($ability->isReady());
 

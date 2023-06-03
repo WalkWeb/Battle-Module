@@ -37,7 +37,7 @@ abstract class AbstractAbilityTest extends AbstractUnitTest
      */
     protected function activateAbility(AbilityInterface $ability, UnitInterface $unit): void
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 25; $i++) {
             $unit->newRound();
         }
 

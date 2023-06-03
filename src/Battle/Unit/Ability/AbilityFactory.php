@@ -17,6 +17,7 @@ class AbilityFactory
         AbilityInterface::ACTIVATE_RAGE,
         AbilityInterface::ACTIVATE_LOW_LIFE,
         AbilityInterface::ACTIVATE_DEAD,
+        AbilityInterface::ACTIVATE_CUNNING,
     ];
 
     /**

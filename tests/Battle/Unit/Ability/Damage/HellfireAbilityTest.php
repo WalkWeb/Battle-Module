@@ -96,6 +96,7 @@ class HellfireAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
         self::assertFalse($ability->isDisposable());
         self::assertFalse($ability->isUsage());
+        self::assertEquals(AbilityInterface::ACTIVATE_CONCENTRATION, $ability->getTypeActivate());
 
         // Up rage
         for ($i = 0; $i < 20; $i++) {

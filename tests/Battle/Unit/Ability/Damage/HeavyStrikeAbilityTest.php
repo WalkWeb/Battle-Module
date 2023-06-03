@@ -93,6 +93,7 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
         self::assertEquals($disposable, $ability->isDisposable());
         self::assertFalse($ability->isUsage());
+        self::assertEquals(AbilityInterface::ACTIVATE_CONCENTRATION, $ability->getTypeActivate());
 
         // Up concentration
         for ($i = 0; $i < 10; $i++) {

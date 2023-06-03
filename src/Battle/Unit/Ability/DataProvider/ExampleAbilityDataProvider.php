@@ -3712,7 +3712,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Backstab',
                 'icon'                 => '/images/icons/ability/349.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::DAGGER,
                 ],
@@ -3739,7 +3739,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Backstab',
                 'icon'                 => '/images/icons/ability/349.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::DAGGER,
                 ],
@@ -3766,7 +3766,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Backstab',
                 'icon'                 => '/images/icons/ability/349.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::DAGGER,
                 ],
@@ -3793,7 +3793,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Backstab',
                 'icon'                 => '/images/icons/ability/349.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::DAGGER,
                 ],
@@ -3820,7 +3820,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Backstab',
                 'icon'                 => '/images/icons/ability/349.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::DAGGER,
                 ],
@@ -3849,7 +3849,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Piercing Strike',
                 'icon'                 => '/images/icons/ability/482.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::DAGGER,
                 ],
@@ -3877,7 +3877,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Piercing Strike',
                 'icon'                 => '/images/icons/ability/482.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::DAGGER,
                 ],
@@ -3905,7 +3905,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Piercing Strike',
                 'icon'                 => '/images/icons/ability/482.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::DAGGER,
                 ],
@@ -3933,7 +3933,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Piercing Strike',
                 'icon'                 => '/images/icons/ability/482.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::DAGGER,
                 ],
@@ -3961,7 +3961,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Piercing Strike',
                 'icon'                 => '/images/icons/ability/482.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::DAGGER,
                 ],
@@ -4188,7 +4188,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Meteorite',
                 'icon'                 => '/images/icons/ability/036.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -4217,7 +4217,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Meteorite',
                 'icon'                 => '/images/icons/ability/036.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -4246,7 +4246,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Meteorite',
                 'icon'                 => '/images/icons/ability/036.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -4275,7 +4275,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Meteorite',
                 'icon'                 => '/images/icons/ability/036.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -4304,7 +4304,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Meteorite',
                 'icon'                 => '/images/icons/ability/036.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -4335,7 +4335,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Bite',
                 'icon'                 => '/images/icons/ability/458.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::SWORD,
                     WeaponTypeInterface::AXE,
@@ -4375,7 +4375,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Bite',
                 'icon'                 => '/images/icons/ability/458.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::SWORD,
                     WeaponTypeInterface::AXE,
@@ -4415,7 +4415,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Bite',
                 'icon'                 => '/images/icons/ability/458.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::SWORD,
                     WeaponTypeInterface::AXE,
@@ -4455,7 +4455,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Bite',
                 'icon'                 => '/images/icons/ability/458.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::SWORD,
                     WeaponTypeInterface::AXE,
@@ -4495,7 +4495,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Bite',
                 'icon'                 => '/images/icons/ability/458.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::SWORD,
                     WeaponTypeInterface::AXE,
@@ -4816,7 +4816,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Volley of Darkness',
                 'icon'                 => '/images/icons/ability/360.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::BOW,
                     WeaponTypeInterface::CROSSBOW,
@@ -4846,7 +4846,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Volley of Darkness',
                 'icon'                 => '/images/icons/ability/360.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::BOW,
                     WeaponTypeInterface::CROSSBOW,
@@ -4876,7 +4876,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Volley of Darkness',
                 'icon'                 => '/images/icons/ability/360.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::BOW,
                     WeaponTypeInterface::CROSSBOW,
@@ -4906,7 +4906,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Volley of Darkness',
                 'icon'                 => '/images/icons/ability/360.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::BOW,
                     WeaponTypeInterface::CROSSBOW,
@@ -4936,7 +4936,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Volley of Darkness',
                 'icon'                 => '/images/icons/ability/360.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::BOW,
                     WeaponTypeInterface::CROSSBOW,
@@ -5587,7 +5587,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Meteor Rain',
                 'icon'                 => '/images/icons/ability/276.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -5650,7 +5650,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Meteor Rain',
                 'icon'                 => '/images/icons/ability/276.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -5713,7 +5713,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Meteor Rain',
                 'icon'                 => '/images/icons/ability/276.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -5776,7 +5776,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Meteor Rain',
                 'icon'                 => '/images/icons/ability/276.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -5839,7 +5839,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Meteor Rain',
                 'icon'                 => '/images/icons/ability/276.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -5904,7 +5904,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Vortex',
                 'icon'                 => '/images/icons/ability/214.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -5950,7 +5950,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Vortex',
                 'icon'                 => '/images/icons/ability/214.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -5996,7 +5996,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Vortex',
                 'icon'                 => '/images/icons/ability/214.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -6042,7 +6042,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Vortex',
                 'icon'                 => '/images/icons/ability/214.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,
@@ -6088,7 +6088,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'name'                 => 'Vortex',
                 'icon'                 => '/images/icons/ability/214.png',
                 'disposable'           => false,
-                'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
                 'allowed_weapon_types' => [
                     WeaponTypeInterface::STAFF,
                     WeaponTypeInterface::WAND,

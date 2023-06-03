@@ -8,6 +8,7 @@ use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
+use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\Battle\Unit\Ability\AbstractAbilityTest;
@@ -43,6 +44,7 @@ class AngerAbilityTest extends AbstractAbilityTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
         self::assertEquals($disposable, $ability->isDisposable());
         self::assertFalse($ability->isUsage());
+        self::assertEquals(AbilityInterface::ACTIVATE_CONCENTRATION, $ability->getTypeActivate());
         self::assertEquals(
             [
                 WeaponTypeInterface::SWORD,
