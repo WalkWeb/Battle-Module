@@ -92,6 +92,7 @@ return [
     'Vortex'                                                         => 'Вихрь',
     'Hail of Blows'                                                  => 'Град ударов',
     'Double Strike'                                                  => 'Парный удар',
+    'Armor Piercing Bolt'                                            => 'Бронебойный болт',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

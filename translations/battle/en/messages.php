@@ -94,6 +94,7 @@ return [
     'Vortex'                                                         => 'Vortex',
     'Hail of Blows'                                                  => 'Hail of Blows',
     'Double Strike'                                                  => 'Double Strike',
+    'Armor Piercing Bolt'                                            => 'Armor Piercing Bolt',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

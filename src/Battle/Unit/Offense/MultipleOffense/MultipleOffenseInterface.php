@@ -20,8 +20,6 @@ interface MultipleOffenseInterface
 {
     // TODO Добавить параметр изменяющий тип урона, в атаку или заклинание
 
-    // TODO Изменение скорости атаки
-
     public const MIN_MULTIPLIER = 0;
     public const MAX_MULTIPLIER = 10;
 
