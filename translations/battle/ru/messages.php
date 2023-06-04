@@ -94,6 +94,7 @@ return [
     'Double Strike'                                                  => 'Парный удар',
     'Armor Piercing Bolt'                                            => 'Бронебойный болт',
     'Explosives'                                                     => 'Взрывчатка',
+    'Heavenly Justice'                                               => 'Небесное правосудие',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
