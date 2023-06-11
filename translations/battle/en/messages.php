@@ -97,6 +97,7 @@ return [
     'Armor Piercing Bolt'                                            => 'Armor Piercing Bolt',
     'Explosives'                                                     => 'Explosives',
     'Heavenly Justice'                                               => 'Heavenly Justice',
+    'Ignition'                                                       => 'Ignition',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

@@ -95,6 +95,7 @@ return [
     'Armor Piercing Bolt'                                            => 'Бронебойный болт',
     'Explosives'                                                     => 'Взрывчатка',
     'Heavenly Justice'                                               => 'Небесное правосудие',
+    'Ignition'                                                       => 'Воспламенение',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
