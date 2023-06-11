@@ -98,6 +98,7 @@ return [
     'Explosives'                                                     => 'Explosives',
     'Heavenly Justice'                                               => 'Heavenly Justice',
     'Ignition'                                                       => 'Ignition',
+    'Poison Blade'                                                   => 'Poison Blade',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

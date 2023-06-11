@@ -49,5 +49,6 @@ abstract class AbstractAbilityTest extends AbstractUnitTest
         }
 
         $collection->update($unit);
+        $collection->newRound($unit);
     }
 }

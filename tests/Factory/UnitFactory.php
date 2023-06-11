@@ -199,6 +199,7 @@ class UnitFactory
                 'dodge'               => 0,
             ],
         ],
+        // Юнит с посохом и 800% множителем хитрости
         4  => [
             'id'                           => 'c310ce86-7bb2-44b0-b634-ea0d28fb1180',
             'name'                         => 'unit_4',
@@ -211,7 +212,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
-            'cunning_multiplier'           => 0,
+            'cunning_multiplier'           => 800,
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
@@ -3110,7 +3111,7 @@ class UnitFactory
                 'dodge'               => 0,
             ],
         ],
-        // Юнит с кинжалом и 100% dodge
+        // Юнит с кинжалом и 100% dodge и 800% множителем хитрости
         51  => [
             'id'                           => 'e4518018-5022-4b46-8901-7a6131e2e745',
             'name'                         => '100_dodge',
@@ -3123,7 +3124,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
-            'cunning_multiplier'           => 0,
+            'cunning_multiplier'           => 800,
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,

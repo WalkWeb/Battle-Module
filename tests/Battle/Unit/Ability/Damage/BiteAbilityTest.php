@@ -8,7 +8,6 @@ use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
-use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
@@ -102,9 +101,7 @@ class BiteAbilityTest extends AbstractAbilityTest
 
         $ability = $this->createAbilityByDataProvider($unit, 'Bite', $level);
 
-        $abilities = new AbilityCollection();
-        $abilities->add($ability);
-        $abilities->newRound($unit);
+        $this->activateAbility($ability, $unit);
 
         self::assertTrue($ability->isReady());
 
