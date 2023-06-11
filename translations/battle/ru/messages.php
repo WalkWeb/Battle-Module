@@ -96,7 +96,8 @@ return [
     'Explosives'                                                     => 'Взрывчатка',
     'Heavenly Justice'                                               => 'Небесное правосудие',
     'Ignition'                                                       => 'Воспламенение',
-    'Отравленный клинок'                                             => 'Poison Blade',
+    'Poison Blade'                                                   => 'Отравленный клинок',
+    'Agony'                                                          => 'Агония',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

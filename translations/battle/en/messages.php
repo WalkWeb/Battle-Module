@@ -99,6 +99,7 @@ return [
     'Heavenly Justice'                                               => 'Heavenly Justice',
     'Ignition'                                                       => 'Ignition',
     'Poison Blade'                                                   => 'Poison Blade',
+    'Agony'                                                          => 'Agony',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
