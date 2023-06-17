@@ -8157,6 +8157,98 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Healing' => [
+            1 => [
+                'name'                 => 'Healing',
+                'icon'                 => '/images/icons/ability/452.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 104,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Healing',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/452.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Healing',
+                'icon'                 => '/images/icons/ability/452.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 188,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Healing',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/452.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Healing',
+                'icon'                 => '/images/icons/ability/452.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 314,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Healing',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/452.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Healing',
+                'icon'                 => '/images/icons/ability/452.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 436,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Healing',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/452.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Healing',
+                'icon'                 => '/images/icons/ability/452.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 765,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Healing',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/452.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**

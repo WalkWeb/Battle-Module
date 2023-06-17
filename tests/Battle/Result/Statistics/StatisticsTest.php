@@ -292,7 +292,7 @@ class StatisticsTest extends AbstractUnitTest
             $statistics->addUnitAction($action);
         }
 
-        self::assertEquals(99, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
+        self::assertEquals(120, $statistics->getUnitsStatistics()->get($priest->getId())->getHeal());
     }
 
     /**

@@ -98,6 +98,7 @@ return [
     'Ignition'                                                       => 'Воспламенение',
     'Poison Blade'                                                   => 'Отравленный клинок',
     'Agony'                                                          => 'Агония',
+    'Healing'                                                        => 'Исцеление',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

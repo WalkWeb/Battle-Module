@@ -638,7 +638,7 @@ class UnitFactory
             'level'                        => 1,
             'avatar'                       => '/images/avas/monsters/005.png',
             'life'                         => 1,
-            'total_life'                   => 100,
+            'total_life'                   => 1000,
             'mana'                         => 50,
             'total_mana'                   => 50,
             'melee'                        => true,

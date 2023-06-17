@@ -100,6 +100,7 @@ return [
     'Ignition'                                                       => 'Ignition',
     'Poison Blade'                                                   => 'Poison Blade',
     'Agony'                                                          => 'Agony',
+    'Healing'                                                        => 'Healing',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
