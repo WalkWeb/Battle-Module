@@ -102,6 +102,7 @@ return [
     'Agony'                                                          => 'Agony',
     'Healing'                                                        => 'Healing',
     'Reserve Heal'                                                   => 'Reserve Heal',
+    'Combat Support'                                                 => 'Combat Support',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

@@ -8341,6 +8341,98 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Combat Support' => [
+            1 => [
+                'name'                 => 'Combat Support',
+                'icon'                 => '/images/icons/ability/355.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 52,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Combat Support',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/355.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Combat Support',
+                'icon'                 => '/images/icons/ability/355.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 94,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Combat Support',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/355.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Combat Support',
+                'icon'                 => '/images/icons/ability/355.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 146,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Combat Support',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/355.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Combat Support',
+                'icon'                 => '/images/icons/ability/355.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 224,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Combat Support',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/355.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Combat Support',
+                'icon'                 => '/images/icons/ability/355.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 346,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Combat Support',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/355.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**

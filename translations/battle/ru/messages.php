@@ -100,6 +100,7 @@ return [
     'Agony'                                                          => 'Агония',
     'Healing'                                                        => 'Исцеление',
     'Reserve Heal'                                                   => 'Резервное Лечение',
+    'Combat Support'                                                 => 'Боевая поддержка',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
