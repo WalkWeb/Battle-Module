@@ -101,6 +101,7 @@ return [
     'Poison Blade'                                                   => 'Poison Blade',
     'Agony'                                                          => 'Agony',
     'Healing'                                                        => 'Healing',
+    'Reserve Heal'                                                   => 'Reserve Heal',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

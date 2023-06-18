@@ -99,6 +99,7 @@ return [
     'Poison Blade'                                                   => 'Отравленный клинок',
     'Agony'                                                          => 'Агония',
     'Healing'                                                        => 'Исцеление',
+    'Reserve Heal'                                                   => 'Резервное Лечение',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

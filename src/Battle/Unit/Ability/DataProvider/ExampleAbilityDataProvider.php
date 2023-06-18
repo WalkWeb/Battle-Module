@@ -8249,6 +8249,98 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Reserve Heal' => [
+            1 => [
+                'name'                 => 'Reserve Heal',
+                'icon'                 => '/images/icons/ability/432.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 24,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Reserve Heal',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/432.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Reserve Heal',
+                'icon'                 => '/images/icons/ability/432.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 37,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Reserve Heal',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/432.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Reserve Heal',
+                'icon'                 => '/images/icons/ability/432.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 62,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Reserve Heal',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/432.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Reserve Heal',
+                'icon'                 => '/images/icons/ability/432.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 98,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Reserve Heal',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/432.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Reserve Heal',
+                'icon'                 => '/images/icons/ability/432.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 141,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Reserve Heal',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/432.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**
