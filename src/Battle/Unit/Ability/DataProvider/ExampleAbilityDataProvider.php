@@ -8525,6 +8525,98 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Heaven Support' => [
+            1 => [
+                'name'                 => 'Heaven Support',
+                'icon'                 => '/images/icons/ability/053.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 46,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Heaven Support',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/053.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Heaven Support',
+                'icon'                 => '/images/icons/ability/053.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 74,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Heaven Support',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/053.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Heaven Support',
+                'icon'                 => '/images/icons/ability/053.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 104,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Heaven Support',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/053.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Heaven Support',
+                'icon'                 => '/images/icons/ability/053.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 174,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Heaven Support',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/053.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Heaven Support',
+                'icon'                 => '/images/icons/ability/053.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_WOUNDED_ALLIES,
+                        'power'            => 246,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Heaven Support',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/053.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**

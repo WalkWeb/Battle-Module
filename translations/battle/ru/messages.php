@@ -102,6 +102,7 @@ return [
     'Reserve Heal'                                                   => 'Резервное Лечение',
     'Combat Support'                                                 => 'Боевая поддержка',
     'Spirit of Phoenix'                                              => 'Дух феникса',
+    'Heaven Support'                                                 => 'Поддержка небес',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
