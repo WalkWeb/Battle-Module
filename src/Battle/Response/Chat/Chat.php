@@ -173,8 +173,8 @@ class Chat implements ChatInterface
     }
 
     /**
-     * Формирует сообщение о использовании лечения со способности:
-     * $unit use $icon $ability and heal $unit on $power life
+     * Формирует сообщение о использовании лечения со способности. Сообщение будет разным для ситуаций, когда лечение
+     * применяется на себя или на другие цели.
      *
      * @param ActionInterface $action
      * @return string
@@ -182,12 +182,51 @@ class Chat implements ChatInterface
      */
     public function healAbility(ActionInterface $action): string
     {
+        if (count($action->getTargetUnits()) === 1) {
+            foreach ($action->getTargetUnits() as $targetUnit) {
+                if ($action->getActionUnit()->getId() === $targetUnit->getId()) {
+                    return $this->healAbilitySelfTarget($action);
+                }
+            }
+        }
+
+        return $this->healAbilityOtherTarget($action);
+    }
+
+    /**
+     * Формирует сообщение о лечении со способности по другой цели:
+     * $unit use $icon $ability and heal $unit on $power life
+     *
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    private function healAbilityOtherTarget(ActionInterface $action): string
+    {
         return sprintf(
             $this->translation->trans('%s use %s %s and heal %s on %d life'),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $this->getIcon($action),
             '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
             $this->getTargetsName($action),
+            $action->getFactualPower()
+        );
+    }
+
+    /**
+     * Формирует сообщение о лечении со способности себя:
+     * $unit use $icon $ability and healed itself on $power life
+     *
+     * @param ActionInterface $action
+     * @return string
+     */
+    private function healAbilitySelfTarget(ActionInterface $action): string
+    {
+        return sprintf(
+            $this->translation->trans('%s use %s %s and healed itself on %d life'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
             $action->getFactualPower()
         );
     }

@@ -8433,6 +8433,98 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Spirit of Phoenix' => [
+            1 => [
+                'name'                 => 'Spirit of Phoenix',
+                'icon'                 => '/images/icons/ability/416.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'power'            => 48,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Spirit of Phoenix',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/416.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Spirit of Phoenix',
+                'icon'                 => '/images/icons/ability/416.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'power'            => 74,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Spirit of Phoenix',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/416.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Spirit of Phoenix',
+                'icon'                 => '/images/icons/ability/416.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'power'            => 108,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Spirit of Phoenix',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/416.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Spirit of Phoenix',
+                'icon'                 => '/images/icons/ability/416.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'power'            => 174,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Spirit of Phoenix',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/416.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Spirit of Phoenix',
+                'icon'                 => '/images/icons/ability/416.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'power'            => 262,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Spirit of Phoenix',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/416.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**

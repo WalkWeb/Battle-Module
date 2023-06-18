@@ -631,7 +631,7 @@ class UnitFactory
                 'dodge'               => 0,
             ],
         ],
-        // Сильно раненый юнит
+        // Сильно раненый юнит + 800% хитрости
         11 => [
             'id'                           => '92e7b39c-dbfc-4493-b563-50314c524c3c',
             'name'                         => 'wounded_unit',
@@ -644,7 +644,7 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 1,
             'add_concentration_multiplier' => 0,
-            'cunning_multiplier'           => 0,
+            'cunning_multiplier'           => 800,
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,

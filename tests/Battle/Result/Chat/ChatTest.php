@@ -97,8 +97,11 @@ class ChatTest extends AbstractUnitTest
     private const HEAL_EN = '<span style="color: #1e72e3">unit_1</span> heal <span style="color: #1e72e3">wounded_unit</span> on 20 life';
     private const HEAL_RU = '<span style="color: #1e72e3">unit_1</span> вылечил <span style="color: #1e72e3">wounded_unit</span> на 20 здоровья';
 
-    private const HEAL_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and heal <span style="color: #1e72e3">wounded_unit</span> on 60 life';
-    private const HEAL_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">wounded_unit</span> на 60 здоровья';
+    private const HEAL_ABILITY_OTHER_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and heal <span style="color: #1e72e3">wounded_unit</span> on 60 life';
+    private const HEAL_ABILITY_OTHER_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">wounded_unit</span> на 60 здоровья';
+
+    private const HEAL_ABILITY_SELF_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and healed itself on 60 life';
+    private const HEAL_ABILITY_SELF_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил себя на 60 здоровья';
 
     private const SUMMON_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Imp</span>';
     private const SUMMON_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Беса</span>';
@@ -394,11 +397,11 @@ class ChatTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на формирование сообщения о лечении от способности
+     * Тест на формирование сообщения о лечении от способности другого юнита
      *
      * @throws Exception
      */
-    public function testChatAddMessageHealAbility(): void
+    public function testChatAddMessageHealOtherAbility(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $otherUnit = UnitFactory::createByTemplate(11);
@@ -423,8 +426,41 @@ class ChatTest extends AbstractUnitTest
 
         $action->handle();
 
-        self::assertEquals(self::HEAL_ABILITY_EN, $this->getChat()->addMessage($action));
-        self::assertEquals(self::HEAL_ABILITY_RU, $this->getChatRu()->addMessage($action));
+        self::assertEquals(self::HEAL_ABILITY_OTHER_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::HEAL_ABILITY_OTHER_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения о лечении себя от способности
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageHealSelfAbility(): void
+    {
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new HealAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_SELF,
+            60,
+            'Great Heal',
+            'heal',
+            'healAbility',
+            '/images/icons/ability/196.png'
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::HEAL_ABILITY_SELF_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::HEAL_ABILITY_SELF_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**

@@ -22,8 +22,8 @@ use Battle\Unit\Ability\AbilityCollection;
 
 class GreatHealAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_5</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and heal <span style="color: #1e72e3">unit_5</span> on 30 life';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_5</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">unit_5</span> на 30 здоровья';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_5</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and healed itself on 30 life';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_5</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил себя на 30 здоровья';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------

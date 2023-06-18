@@ -103,6 +103,7 @@ return [
     'Healing'                                                        => 'Healing',
     'Reserve Heal'                                                   => 'Reserve Heal',
     'Combat Support'                                                 => 'Combat Support',
+    'Spirit of Phoenix'                                              => 'Spirit of Phoenix',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
@@ -253,4 +254,6 @@ return [
     ' and restore %d life'                                           => ' and restore %d life',
     // and restore $restore mana
     ' and restore %d mana'                                           => ' and restore %d mana',
+    // $unit use $icon $ability and healed itself on $power life
+    '%s use %s %s and healed itself on %d life'                      => '%s use %s %s and healed itself on %d life',
 ];

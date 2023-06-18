@@ -101,6 +101,7 @@ return [
     'Healing'                                                        => 'Исцеление',
     'Reserve Heal'                                                   => 'Резервное Лечение',
     'Combat Support'                                                 => 'Боевая поддержка',
+    'Spirit of Phoenix'                                              => 'Дух феникса',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
@@ -251,4 +252,6 @@ return [
     ' and restore %d life'                                           => ' и восстановил %d здоровья',
     // and restore $restore mana
     ' and restore %d mana'                                           => ' и восстановил %d маны',
+    // $unit use $icon $ability and healed itself on $power life
+    '%s use %s %s and healed itself on %d life'                      => '%s использовал %s %s и вылечил себя на %d здоровья',
 ];
