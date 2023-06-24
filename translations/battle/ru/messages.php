@@ -104,6 +104,7 @@ return [
     'Spirit of Phoenix'                                              => 'Дух феникса',
     'Heaven Support'                                                 => 'Поддержка небес',
     'Water Support'                                                  => 'Поддержка воды',
+    'Recovery'                                                       => 'Восстановление',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
