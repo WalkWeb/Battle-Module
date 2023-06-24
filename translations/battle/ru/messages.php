@@ -103,6 +103,7 @@ return [
     'Combat Support'                                                 => 'Боевая поддержка',
     'Spirit of Phoenix'                                              => 'Дух феникса',
     'Heaven Support'                                                 => 'Поддержка небес',
+    'Water Support'                                                  => 'Поддержка воды',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

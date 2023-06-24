@@ -8617,6 +8617,178 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Water Support' => [
+            1 => [
+                'name'          => 'Water Support',
+                'icon'          => '/images/icons/ability/497.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Water Support',
+                        'icon'           => '/images/icons/ability/497.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Water Support',
+                            'icon'                  => '/images/icons/ability/497.png',
+                            'duration'              => 4,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Water Support',
+                                    'power'            => 13,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/497.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            2 => [
+                'name'          => 'Water Support',
+                'icon'          => '/images/icons/ability/497.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Water Support',
+                        'icon'           => '/images/icons/ability/497.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Water Support',
+                            'icon'                  => '/images/icons/ability/497.png',
+                            'duration'              => 4,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Water Support',
+                                    'power'            => 18,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/497.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            3 => [
+                'name'          => 'Water Support',
+                'icon'          => '/images/icons/ability/497.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Water Support',
+                        'icon'           => '/images/icons/ability/497.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Water Support',
+                            'icon'                  => '/images/icons/ability/497.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Water Support',
+                                    'power'            => 27,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/497.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            4 => [
+                'name'          => 'Water Support',
+                'icon'          => '/images/icons/ability/497.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Water Support',
+                        'icon'           => '/images/icons/ability/497.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Water Support',
+                            'icon'                  => '/images/icons/ability/497.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Water Support',
+                                    'power'            => 38,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/497.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            5 => [
+                'name'          => 'Water Support',
+                'icon'          => '/images/icons/ability/497.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Water Support',
+                        'icon'           => '/images/icons/ability/497.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Water Support',
+                            'icon'                  => '/images/icons/ability/497.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Water Support',
+                                    'power'            => 47,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/497.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**

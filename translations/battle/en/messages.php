@@ -105,6 +105,7 @@ return [
     'Combat Support'                                                 => 'Combat Support',
     'Spirit of Phoenix'                                              => 'Spirit of Phoenix',
     'Heaven Support'                                                 => 'Heaven Support',
+    'Water Support'                                                  => 'Water Support',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
