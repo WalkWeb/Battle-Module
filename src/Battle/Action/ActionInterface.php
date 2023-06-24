@@ -24,6 +24,7 @@ interface ActionInterface
 
     // Применяет событие на себя
     public const TARGET_SELF                  = 1;
+    // TODO Добавить тип цели TARGET_WOUNDED_SELF - на себя при ранении
     // Применяет событие на случайного врага
     public const TARGET_RANDOM_ENEMY          = 2;
     // Применяет событие на самого раненого союзника

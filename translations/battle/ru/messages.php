@@ -107,6 +107,7 @@ return [
     'Recovery'                                                       => 'Восстановление',
     'Fortifying Potion'                                              => 'Укрепляющее снадобье',
     'Spare Potion'                                                   => 'Запасное зелье',
+    'Regeneration'                                                   => 'Регенерация',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

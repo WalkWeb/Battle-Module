@@ -109,6 +109,7 @@ return [
     'Recovery'                                                       => 'Recovery',
     'Fortifying Potion'                                              => 'Fortifying Potion',
     'Spare Potion'                                                   => 'Spare Potion',
+    'Regeneration'                                                   => 'Regeneration',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

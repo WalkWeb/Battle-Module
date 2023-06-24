@@ -9305,6 +9305,178 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Regeneration' => [
+            1 => [
+                'name'          => 'Regeneration',
+                'icon'          => '/images/icons/ability/204.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Regeneration',
+                        'icon'           => '/images/icons/ability/204.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Regeneration',
+                            'icon'                  => '/images/icons/ability/204.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Regeneration',
+                                    'power'            => 9,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/204.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            2 => [
+                'name'          => 'Regeneration',
+                'icon'          => '/images/icons/ability/204.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Regeneration',
+                        'icon'           => '/images/icons/ability/204.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Regeneration',
+                            'icon'                  => '/images/icons/ability/204.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Regeneration',
+                                    'power'            => 14,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/204.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            3 => [
+                'name'          => 'Regeneration',
+                'icon'          => '/images/icons/ability/204.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Regeneration',
+                        'icon'           => '/images/icons/ability/204.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Regeneration',
+                            'icon'                  => '/images/icons/ability/204.png',
+                            'duration'              => 7,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Regeneration',
+                                    'power'            => 20,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/204.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            4 => [
+                'name'          => 'Regeneration',
+                'icon'          => '/images/icons/ability/204.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Regeneration',
+                        'icon'           => '/images/icons/ability/204.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Regeneration',
+                            'icon'                  => '/images/icons/ability/204.png',
+                            'duration'              => 7,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Regeneration',
+                                    'power'            => 29,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/204.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            5 => [
+                'name'          => 'Regeneration',
+                'icon'          => '/images/icons/ability/204.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Regeneration',
+                        'icon'           => '/images/icons/ability/204.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Regeneration',
+                            'icon'                  => '/images/icons/ability/204.png',
+                            'duration'              => 8,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Regeneration',
+                                    'power'            => 39,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/204.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**
