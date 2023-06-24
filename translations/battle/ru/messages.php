@@ -105,6 +105,7 @@ return [
     'Heaven Support'                                                 => 'Поддержка небес',
     'Water Support'                                                  => 'Поддержка воды',
     'Recovery'                                                       => 'Восстановление',
+    'Fortifying Potion'                                              => 'Укрепляющее снадобье',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

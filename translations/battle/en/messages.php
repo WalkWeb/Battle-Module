@@ -107,6 +107,7 @@ return [
     'Heaven Support'                                                 => 'Heaven Support',
     'Water Support'                                                  => 'Water Support',
     'Recovery'                                                       => 'Recovery',
+    'Fortifying Potion'                                              => 'Fortifying Potion',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

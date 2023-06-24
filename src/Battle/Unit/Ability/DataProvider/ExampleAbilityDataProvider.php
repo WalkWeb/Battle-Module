@@ -8961,6 +8961,178 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Fortifying Potion' => [
+            1 => [
+                'name'          => 'Fortifying Potion',
+                'icon'          => '/images/icons/ability/324.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Fortifying Potion',
+                        'icon'           => '/images/icons/ability/324.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Fortifying Potion',
+                            'icon'                  => '/images/icons/ability/324.png',
+                            'duration'              => 3,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Fortifying Potion',
+                                    'power'            => 18,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/324.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            2 => [
+                'name'          => 'Fortifying Potion',
+                'icon'          => '/images/icons/ability/324.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Fortifying Potion',
+                        'icon'           => '/images/icons/ability/324.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Fortifying Potion',
+                            'icon'                  => '/images/icons/ability/324.png',
+                            'duration'              => 3,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Fortifying Potion',
+                                    'power'            => 27,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/324.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            3 => [
+                'name'          => 'Fortifying Potion',
+                'icon'          => '/images/icons/ability/324.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Fortifying Potion',
+                        'icon'           => '/images/icons/ability/324.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Fortifying Potion',
+                            'icon'                  => '/images/icons/ability/324.png',
+                            'duration'              => 4,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Fortifying Potion',
+                                    'power'            => 38,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/324.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            4 => [
+                'name'          => 'Fortifying Potion',
+                'icon'          => '/images/icons/ability/324.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Fortifying Potion',
+                        'icon'           => '/images/icons/ability/324.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Fortifying Potion',
+                            'icon'                  => '/images/icons/ability/324.png',
+                            'duration'              => 4,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Fortifying Potion',
+                                    'power'            => 57,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/324.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            5 => [
+                'name'          => 'Fortifying Potion',
+                'icon'          => '/images/icons/ability/324.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Fortifying Potion',
+                        'icon'           => '/images/icons/ability/324.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Fortifying Potion',
+                            'icon'                  => '/images/icons/ability/324.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Fortifying Potion',
+                                    'power'            => 70,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/324.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**
