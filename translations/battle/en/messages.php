@@ -108,6 +108,7 @@ return [
     'Water Support'                                                  => 'Water Support',
     'Recovery'                                                       => 'Recovery',
     'Fortifying Potion'                                              => 'Fortifying Potion',
+    'Spare Potion'                                                   => 'Spare Potion',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

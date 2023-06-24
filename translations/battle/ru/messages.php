@@ -106,6 +106,7 @@ return [
     'Water Support'                                                  => 'Поддержка воды',
     'Recovery'                                                       => 'Восстановление',
     'Fortifying Potion'                                              => 'Укрепляющее снадобье',
+    'Spare Potion'                                                   => 'Запасное зелье',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
