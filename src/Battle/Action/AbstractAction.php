@@ -399,6 +399,11 @@ abstract class AbstractAction implements ActionInterface
                     }
                 }
                 return $units;
+            case self::TARGET_WOUNDED_SELF:
+                if ($this->actionUnit->getLife() < $this->actionUnit->getTotalLife()) {
+                    $units->add($this->actionUnit);
+                }
+                return $units;
         }
 
         throw new ActionException(ActionException::UNKNOWN_TYPE_TARGET . ': ' . $this->typeTarget);

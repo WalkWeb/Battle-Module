@@ -31,11 +31,11 @@ class HealActionTest extends AbstractUnitTest
         $priest = UnitFactory::createByTemplate(5);
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(3);
-        $alliesCommand = CommandFactory::create([$unit, $priest]);
+        $command = CommandFactory::create([$unit, $priest]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         // Наносим урон
-        $damages = $enemyUnit->getActions($alliesCommand, $enemyCommand);
+        $damages = $enemyUnit->getActions($command, $enemyCommand);
 
         foreach ($damages as $damage) {
             $damage->handle();
@@ -50,7 +50,7 @@ class HealActionTest extends AbstractUnitTest
         }
 
         // Применяем лечение (получаем Action от способности GreatHealAbility)
-        $actions = $priest->getActions($enemyCommand, $alliesCommand);
+        $actions = $priest->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertEquals(HealAction::UNIT_ANIMATION_METHOD, $action->getAnimationMethod());
@@ -75,19 +75,19 @@ class HealActionTest extends AbstractUnitTest
      */
     public function testHealActionSimple(): void
     {
-        $actionUnit = UnitFactory::createByTemplate(5);
+        $unit = UnitFactory::createByTemplate(5);
         $woundedUnit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(3);
-        $actionCommand = CommandFactory::create([$actionUnit, $woundedUnit]);
+        $command = CommandFactory::create([$unit, $woundedUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         // Накапливаем концентрацию
         for ($i = 0; $i < 10; $i++) {
-            $actionCommand->newRound();
+            $command->newRound();
         }
 
         // Применяем лечение
-        $actions = $actionUnit->getActions($enemyCommand, $actionCommand);
+        $actions = $unit->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             self::assertEquals(new ActionCollection(), $action->handle());
@@ -107,16 +107,16 @@ class HealActionTest extends AbstractUnitTest
         $unit = UnitFactory::createByTemplate(5);
         $woundedUnit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(3);
-        $actionCommand = CommandFactory::create([$unit, $woundedUnit]);
+        $command = CommandFactory::create([$unit, $woundedUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         // Накапливаем концентрацию
         for ($i = 0; $i < 10; $i++) {
-            $actionCommand->newRound();
+            $command->newRound();
         }
 
         // Применяем лечение
-        $actions = $unit->getActions($enemyCommand, $actionCommand);
+        $actions = $unit->getActions($enemyCommand, $command);
 
         foreach ($actions as $action) {
             $action->handle();
@@ -284,6 +284,46 @@ class HealActionTest extends AbstractUnitTest
                 self::assertFalse($action->canByUsed());
             }
         }
+    }
+
+    /**
+     * Тест на механику выбора цели TARGET_WOUNDED_SELF
+     *
+     * @throws Exception
+     */
+    public function testHealActionTargetWoundedSelf(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new HealAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_WOUNDED_SELF,
+            20,
+            '',
+            HealAction::UNIT_ANIMATION_METHOD,
+            HealAction::DEFAULT_MESSAGE_METHOD
+        );
+
+        // Цель не ранена - событие не может примениться
+        self::assertEquals($unit->getLife(), $unit->getTotalLife());
+        self::assertFalse($action->canByUsed());
+
+        // Наносим урон
+        $damages = $enemyUnit->getActions($command, $enemyCommand);
+
+        foreach ($damages as $damage) {
+            $damage->handle();
+        }
+
+        // Теперь цель ранена - событие может примениться
+        self::assertTrue($unit->getLife() < $unit->getTotalLife());
+        self::assertTrue($action->canByUsed());
     }
 
     /**

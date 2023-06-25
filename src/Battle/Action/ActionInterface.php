@@ -24,7 +24,6 @@ interface ActionInterface
 
     // Применяет событие на себя
     public const TARGET_SELF                  = 1;
-    // TODO Добавить тип цели TARGET_WOUNDED_SELF - на себя при ранении
     // Применяет событие на случайного врага
     public const TARGET_RANDOM_ENEMY          = 2;
     // Применяет событие на самого раненого союзника
@@ -43,6 +42,8 @@ interface ActionInterface
     public const TARGET_ALL_WOUNDED_ALLIES    = 9;
     // Применяет событие на последние живые цели в этом раунде
     public const TARGET_LAST_ALIVE_TARGETS    = 10;
+    // Применяет событие  на раненого себя
+    public const TARGET_WOUNDED_SELF          = 11;
 
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 

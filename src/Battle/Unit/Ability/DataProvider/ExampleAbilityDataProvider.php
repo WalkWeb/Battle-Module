@@ -9314,7 +9314,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'actions'       => [
                     [
                         'type'           => ActionInterface::EFFECT,
-                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_SELF,
                         'name'           => 'Regeneration',
                         'icon'           => '/images/icons/ability/204.png',
                         'message_method' => 'applyEffect',
@@ -9348,7 +9348,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'actions'       => [
                     [
                         'type'           => ActionInterface::EFFECT,
-                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_SELF,
                         'name'           => 'Regeneration',
                         'icon'           => '/images/icons/ability/204.png',
                         'message_method' => 'applyEffect',
@@ -9382,7 +9382,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'actions'       => [
                     [
                         'type'           => ActionInterface::EFFECT,
-                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_SELF,
                         'name'           => 'Regeneration',
                         'icon'           => '/images/icons/ability/204.png',
                         'message_method' => 'applyEffect',
@@ -9416,7 +9416,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'actions'       => [
                     [
                         'type'           => ActionInterface::EFFECT,
-                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_SELF,
                         'name'           => 'Regeneration',
                         'icon'           => '/images/icons/ability/204.png',
                         'message_method' => 'applyEffect',
@@ -9450,7 +9450,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 'actions'       => [
                     [
                         'type'           => ActionInterface::EFFECT,
-                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_SELF,
                         'name'           => 'Regeneration',
                         'icon'           => '/images/icons/ability/204.png',
                         'message_method' => 'applyEffect',
