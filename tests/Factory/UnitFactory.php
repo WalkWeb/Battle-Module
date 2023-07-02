@@ -631,7 +631,7 @@ class UnitFactory
                 'dodge'               => 0,
             ],
         ],
-        // Сильно раненый юнит + 800% хитрости
+        // Сильно раненый юнит с 0 маны и800% хитрости
         11 => [
             'id'                           => '92e7b39c-dbfc-4493-b563-50314c524c3c',
             'name'                         => 'wounded_unit',
@@ -639,7 +639,7 @@ class UnitFactory
             'avatar'                       => '/images/avas/monsters/005.png',
             'life'                         => 1,
             'total_life'                   => 1000,
-            'mana'                         => 50,
+            'mana'                         => 0,
             'total_mana'                   => 50,
             'melee'                        => true,
             'command'                      => 1,

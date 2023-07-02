@@ -9477,6 +9477,228 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Restore Potion' => [
+            1 => [
+                'name'          => 'Restore Potion',
+                'icon'          => '/images/icons/ability/234.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Restore Potion',
+                        'icon'           => '/images/icons/ability/234.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Restore Potion',
+                            'icon'                  => '/images/icons/ability/234.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Restore Potion',
+                                    'power'            => 10,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/234.png',
+                                    'target_tracking'  => false,
+                                ],
+                                [
+                                    'type'             => ActionInterface::MANA_RESTORE,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Restore Potion',
+                                    'power'            => 7,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD, // TODO
+                                    'message_method'   => ActionInterface::SKIP_MESSAGE_METHOD, // TODO
+                                    'icon'             => '/images/icons/ability/234.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            2 => [
+                'name'          => 'Restore Potion',
+                'icon'          => '/images/icons/ability/234.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Restore Potion',
+                        'icon'           => '/images/icons/ability/234.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Restore Potion',
+                            'icon'                  => '/images/icons/ability/234.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Restore Potion',
+                                    'power'            => 17,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/234.png',
+                                    'target_tracking'  => false,
+                                ],
+                                [
+                                    'type'             => ActionInterface::MANA_RESTORE,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Restore Potion',
+                                    'power'            => 9,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD, // TODO
+                                    'message_method'   => ActionInterface::SKIP_MESSAGE_METHOD, // TODO
+                                    'icon'             => '/images/icons/ability/234.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            3 => [
+                'name'          => 'Restore Potion',
+                'icon'          => '/images/icons/ability/234.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Restore Potion',
+                        'icon'           => '/images/icons/ability/234.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Restore Potion',
+                            'icon'                  => '/images/icons/ability/234.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Restore Potion',
+                                    'power'            => 28,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/234.png',
+                                    'target_tracking'  => false,
+                                ],
+                                [
+                                    'type'             => ActionInterface::MANA_RESTORE,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Restore Potion',
+                                    'power'            => 12,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD, // TODO
+                                    'message_method'   => ActionInterface::SKIP_MESSAGE_METHOD, // TODO
+                                    'icon'             => '/images/icons/ability/234.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            4 => [
+                'name'          => 'Restore Potion',
+                'icon'          => '/images/icons/ability/234.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Restore Potion',
+                        'icon'           => '/images/icons/ability/234.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Restore Potion',
+                            'icon'                  => '/images/icons/ability/234.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Restore Potion',
+                                    'power'            => 40,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/234.png',
+                                    'target_tracking'  => false,
+                                ],
+                                [
+                                    'type'             => ActionInterface::MANA_RESTORE,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Restore Potion',
+                                    'power'            => 17,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD, // TODO
+                                    'message_method'   => ActionInterface::SKIP_MESSAGE_METHOD, // TODO
+                                    'icon'             => '/images/icons/ability/234.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            5 => [
+                'name'          => 'Restore Potion',
+                'icon'          => '/images/icons/ability/234.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_WOUNDED_ALLIES_EFFECT,
+                        'name'           => 'Restore Potion',
+                        'icon'           => '/images/icons/ability/234.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Restore Potion',
+                            'icon'                  => '/images/icons/ability/234.png',
+                            'duration'              => 7,
+                            'on_apply_actions'      => [],
+                            'on_next_round_actions' => [
+                                [
+                                    'type'             => ActionInterface::HEAL,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Restore Potion',
+                                    'power'            => 48,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD,
+                                    'message_method'   => HealAction::EFFECT_MESSAGE_METHOD,
+                                    'icon'             => '/images/icons/ability/234.png',
+                                    'target_tracking'  => false,
+                                ],
+                                [
+                                    'type'             => ActionInterface::MANA_RESTORE,
+                                    'type_target'      => ActionInterface::TARGET_SELF,
+                                    'name'             => 'Restore Potion',
+                                    'power'            => 21,
+                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD, // TODO
+                                    'message_method'   => ActionInterface::SKIP_MESSAGE_METHOD, // TODO
+                                    'icon'             => '/images/icons/ability/234.png',
+                                    'target_tracking'  => false,
+                                ],
+                            ],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**

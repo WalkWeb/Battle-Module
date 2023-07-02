@@ -110,6 +110,7 @@ return [
     'Fortifying Potion'                                              => 'Fortifying Potion',
     'Spare Potion'                                                   => 'Spare Potion',
     'Regeneration'                                                   => 'Regeneration',
+    'Restore Potion'                                                 => 'Restore Potion',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
