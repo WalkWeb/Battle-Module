@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Result;
+namespace Tests\Battle\Response;
 
 use Exception;
 use Battle\Container\Container;
@@ -14,7 +14,7 @@ use Tests\AbstractUnitTest;
 use Tests\Factory\CommandFactory;
 use Battle\Response\ResponseException;
 
-class ResultTest extends AbstractUnitTest
+class ResponseTest extends AbstractUnitTest
 {
     /**
      * @throws ResponseException

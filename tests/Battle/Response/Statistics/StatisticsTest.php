@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Result\Statistics;
+namespace Tests\Battle\Response\Statistics;
 
 use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;

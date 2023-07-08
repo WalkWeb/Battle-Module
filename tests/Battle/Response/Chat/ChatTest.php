@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Result\Chat;
+namespace Tests\Battle\Response\Chat;
 
 use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;

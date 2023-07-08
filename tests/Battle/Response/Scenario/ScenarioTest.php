@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Result\Scenario;
+namespace Tests\Battle\Response\Scenario;
 
 use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;

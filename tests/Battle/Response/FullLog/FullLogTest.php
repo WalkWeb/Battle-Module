@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Result\FullLog;
+namespace Tests\Battle\Response\FullLog;
 
 use Battle\Response\FullLog\FullLog;
 use Tests\AbstractUnitTest;

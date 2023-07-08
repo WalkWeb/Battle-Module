@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Result\Statistics\UnitStatistic;
+namespace Tests\Battle\Response\Statistics\UnitStatistic;
 
 use Exception;
 use Tests\AbstractUnitTest;
