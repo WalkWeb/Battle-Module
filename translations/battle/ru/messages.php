@@ -263,4 +263,6 @@ return [
     '%s use %s %s and healed itself on %d life'                      => '%s использовал %s %s и вылечил себя на %d здоровья',
     // $unit restore $unit $power mana
     '%s restore %s %d mana'                                          => '%s восстановил %s %d маны',
+    // $unit use $icon $ability and restore $unit $power mana
+    '%s use %s %s and restore %s %d mana'                            => '%s использовал %s %s и восстановил %s %d маны',
 ];

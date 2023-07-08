@@ -37,7 +37,7 @@ class Chat implements ChatInterface
      * @param ActionInterface $action
      * @return string
      * @throws ChatException
-     * @uses damage, damageAbility, heal, healAbility, manaRestore, summon, wait, paralysis, stunned, buff, resurrected, selfRaceResurrected, applyEffect, effectDamage, effectHeal, skip
+     * @uses damage, damageAbility, heal, healAbility, manaRestore, manaRestoreAbility, summon, wait, paralysis, stunned, buff, resurrected, selfRaceResurrected, applyEffect, effectDamage, effectHeal, skip
      */
     public function addMessage(ActionInterface $action): string
     {
@@ -244,6 +244,26 @@ class Chat implements ChatInterface
         return sprintf(
             $this->translation->trans('%s restore %s %d mana'),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getTargetsName($action),
+            $action->getFactualPower()
+        );
+    }
+
+    /**
+     * Формирует сообщение о восстановлении маны от способности в формате:
+     * $unit use $icon $ability and restore $unit $power mana
+     *
+     * @param ActionInterface $action
+     * @return string
+     * @throws ActionException
+     */
+    private function manaRestoreAbility(ActionInterface $action): string
+    {
+        return sprintf(
+            $this->translation->trans('%s use %s %s and restore %s %d mana'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',
             $this->getTargetsName($action),
             $action->getFactualPower()
         );

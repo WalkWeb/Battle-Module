@@ -15,6 +15,7 @@ class ManaRestoreAction extends AbstractAction
     public const NAME                    = 'restore mana';
     private const HANDLE_METHOD          = 'applyManaRestoreAction';
     public const DEFAULT_MESSAGE_METHOD  = 'manaRestore';
+    public const ABILITY_MESSAGE_METHOD  = 'manaRestoreAbility';
 
     /**
      * @var int

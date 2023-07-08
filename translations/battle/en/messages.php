@@ -265,4 +265,6 @@ return [
     '%s use %s %s and healed itself on %d life'                      => '%s use %s %s and healed itself on %d life',
     // $unit restore $unit $power mana
     '%s restore %s %d mana'                                          => '%s restore %s %d mana',
+    // $unit use $icon $ability and restore $unit $power mana
+    '%s use %s %s and restore %s %d mana'                            => '%s use %s %s and restore %s %d mana',
 ];

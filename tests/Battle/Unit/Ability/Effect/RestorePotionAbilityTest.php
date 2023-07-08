@@ -23,9 +23,9 @@ class RestorePotionAbilityTest extends AbstractAbilityTest
     private const MESSAGE_HEAL_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored %d life from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span>';
     private const MESSAGE_HEAL_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил %d здоровья от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span>';
 
-    // TODO Генерация сообщения о восстановлении маны в Chat будет добавлено позже
-    private const MESSAGE_MANA_EFFECT_EN = '';
-    private const MESSAGE_MANA_EFFECT_RU = '';
+    // TODO Переделать на сообщение от эффекта
+    private const MESSAGE_MANA_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span> and restore <span style="color: #1e72e3">wounded_unit</span> %d mana';
+    private const MESSAGE_MANA_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span> и восстановил <span style="color: #1e72e3">wounded_unit</span> %d маны';
 
     /**
      * Тест на создание способности Recovery через AbilityDataProvider
