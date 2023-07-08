@@ -6,12 +6,15 @@ namespace Battle\Action;
 
 use Battle\Command\CommandInterface;
 use Battle\Container\ContainerInterface;
+use Battle\Unit\UnitCollection;
+use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 
 class ManaRestoreAction extends AbstractAction
 {
-    public const NAME           = 'restore mana';
-    private const HANDLE_METHOD = 'applyManaRestoreAction';
+    public const NAME                    = 'restore mana';
+    private const HANDLE_METHOD          = 'applyManaRestoreAction';
+    public const DEFAULT_MESSAGE_METHOD  = 'manaRestore';
 
     /**
      * @var int
@@ -80,8 +83,8 @@ class ManaRestoreAction extends AbstractAction
     }
 
     /**
-     * На данный момент ManaRestoreAction применяется только в механике магического вампиризма, соответственно Action
-     * применяется только к себе
+     * TODO На данный момент ManaRestoreAction применяется только в механике магического вампиризма, соответственно
+     * TODO Action применяется только к себе
      */
     public function handle(): ActionCollection
     {
@@ -154,5 +157,18 @@ class ManaRestoreAction extends AbstractAction
     public function getMessageMethod(): string
     {
         return $this->messageMethod;
+    }
+
+    /**
+     * TODO Пока только на себя
+     *
+     * @return UnitCollection
+     * @throws UnitException
+     */
+    public function getTargetUnits(): UnitCollection
+    {
+        $units = new UnitCollection();
+        $units->add($this->actionUnit);
+        return $units;
     }
 }

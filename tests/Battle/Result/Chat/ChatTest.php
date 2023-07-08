@@ -9,6 +9,7 @@ use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
+use Battle\Action\ManaRestoreAction;
 use Battle\Action\ParalysisAction;
 use Battle\Action\ResurrectionAction;
 use Battle\Action\SummonAction;
@@ -102,6 +103,9 @@ class ChatTest extends AbstractUnitTest
 
     private const HEAL_ABILITY_SELF_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and healed itself on 60 life';
     private const HEAL_ABILITY_SELF_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил себя на 60 здоровья';
+
+    private const MANA_RESTORE_EN = '<span style="color: #1e72e3">wounded_unit</span> restore <span style="color: #1e72e3">wounded_unit</span> 20 mana';
+    private const MANA_RESTORE_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил <span style="color: #1e72e3">wounded_unit</span> 20 маны';
 
     private const SUMMON_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Imp</span>';
     private const SUMMON_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Беса</span>';
@@ -461,6 +465,38 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::HEAL_ABILITY_SELF_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::HEAL_ABILITY_SELF_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения о восстановлении маны
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageManRestoreDefault(): void
+    {
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new ManaRestoreAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_SELF,
+            20,
+            ManaRestoreAction::NAME,
+            ManaRestoreAction::SKIP_ANIMATION_METHOD,
+            ManaRestoreAction::DEFAULT_MESSAGE_METHOD
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::MANA_RESTORE_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::MANA_RESTORE_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
