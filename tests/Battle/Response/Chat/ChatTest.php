@@ -110,6 +110,9 @@ class ChatTest extends AbstractUnitTest
     private const MANA_RESTORE_ABILITY_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span> and restore <span style="color: #1e72e3">wounded_unit</span> 20 mana';
     private const MANA_RESTORE_ABILITY_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span> и восстановил <span style="color: #1e72e3">wounded_unit</span> 20 маны';
 
+    private const MANA_RESTORE_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 20 mana from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span>';
+    private const MANA_RESTORE_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 20 маны от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span>';
+
     private const SUMMON_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Imp</span>';
     private const SUMMON_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Беса</span>';
 
@@ -773,6 +776,39 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::EFFECT_HEAL_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::EFFECT_HEAL_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения о восстановлении маны от эффекта
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageEffectManaRestore(): void
+    {
+        $unit = UnitFactory::createByTemplate(11);
+        $enemyUnit = UnitFactory::createByTemplate(1);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new ManaRestoreAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            HealAction::TARGET_SELF,
+            20,
+            'Restore Potion',
+            ManaRestoreAction::SKIP_ANIMATION_METHOD,
+            ManaRestoreAction::EFFECT_MESSAGE_METHOD,
+            '/images/icons/ability/234.png'
+        );
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::MANA_RESTORE_EFFECT_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::MANA_RESTORE_EFFECT_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**

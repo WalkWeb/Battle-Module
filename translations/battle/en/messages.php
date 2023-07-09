@@ -267,4 +267,6 @@ return [
     '%s restore %s %d mana'                                          => '%s restore %s %d mana',
     // $unit use $icon $ability and restore $unit $power mana
     '%s use %s %s and restore %s %d mana'                            => '%s use %s %s and restore %s %d mana',
+    // $unit restored $power mana from effect $icon $name
+    '%s restored %d mana from effect %s %s'                          => '%s restored %d mana from effect %s %s',
 ];

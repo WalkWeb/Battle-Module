@@ -37,7 +37,7 @@ class Chat implements ChatInterface
      * @param ActionInterface $action
      * @return string
      * @throws ChatException
-     * @uses damage, damageAbility, heal, healAbility, manaRestore, manaRestoreAbility, summon, wait, paralysis, stunned, buff, resurrected, selfRaceResurrected, applyEffect, effectDamage, effectHeal, skip
+     * @uses damage, damageAbility, heal, healAbility, manaRestore, manaRestoreAbility, summon, wait, paralysis, stunned, buff, resurrected, selfRaceResurrected, applyEffect, effectDamage, effectHeal, effectManaRestore, skip
      */
     public function addMessage(ActionInterface $action): string
     {
@@ -439,7 +439,7 @@ class Chat implements ChatInterface
 
     /**
      * Формирует сообщение здоровья от эффекта в формате:
-     * "$name восстановил $power здоровья, от эффекта $effectName"
+     * "$name восстановил $power здоровья от эффекта $effectName"
      *
      * @param ActionInterface $action
      * @return string
@@ -448,6 +448,24 @@ class Chat implements ChatInterface
     {
         return sprintf(
             $this->translation->trans('%s restored %d life from effect %s %s'),
+            '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
+            $action->getFactualPower(),
+            $this->getIcon($action),
+            '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>'
+        );
+    }
+
+    /**
+     * Формирует сообщение восстановления маны от эффекта в формате:
+     * "$name восстановил $power маны от эффекта $effectName"
+     *
+     * @param ActionInterface $action
+     * @return string
+     */
+    private function effectManaRestore(ActionInterface $action): string
+    {
+        return sprintf(
+            $this->translation->trans('%s restored %d mana from effect %s %s'),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $action->getFactualPower(),
             $this->getIcon($action),

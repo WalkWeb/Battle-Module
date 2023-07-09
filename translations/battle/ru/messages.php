@@ -265,4 +265,6 @@ return [
     '%s restore %s %d mana'                                          => '%s восстановил %s %d маны',
     // $unit use $icon $ability and restore $unit $power mana
     '%s use %s %s and restore %s %d mana'                            => '%s использовал %s %s и восстановил %s %d маны',
+    // $unit restored $power mana from effect $icon $name
+    '%s restored %d mana from effect %s %s'                          => '%s восстановил %d маны от эффекта %s %s',
 ];

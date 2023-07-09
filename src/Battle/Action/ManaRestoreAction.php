@@ -16,6 +16,7 @@ class ManaRestoreAction extends AbstractAction
     private const HANDLE_METHOD          = 'applyManaRestoreAction';
     public const DEFAULT_MESSAGE_METHOD  = 'manaRestore';
     public const ABILITY_MESSAGE_METHOD  = 'manaRestoreAbility';
+    public const EFFECT_MESSAGE_METHOD   = 'effectManaRestore';
 
     /**
      * @var int
