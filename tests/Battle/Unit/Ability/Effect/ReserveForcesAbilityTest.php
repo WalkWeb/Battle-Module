@@ -551,21 +551,4 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
             0
         );
     }
-
-    /**
-     * @param UnitInterface $unit
-     * @param string $abilityName
-     * @param int $abilityLevel
-     * @return AbilityInterface
-     * @throws Exception
-     */
-    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
-    {
-        $container = new Container();
-
-        return $container->getAbilityFactory()->create(
-            $unit,
-            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
-        );
-    }
 }

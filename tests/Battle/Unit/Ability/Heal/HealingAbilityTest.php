@@ -10,10 +10,10 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\Battle\Unit\Ability\AbstractAbilityTest;
+use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class HealingAbilityTest extends AbstractAbilityTest
+class HealingAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">Healing</span> and heal <span style="color: #1e72e3">wounded_unit</span> on %d life';
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">Исцеление</span> и вылечил <span style="color: #1e72e3">wounded_unit</span> на %d здоровья';

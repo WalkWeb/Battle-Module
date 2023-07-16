@@ -11,10 +11,10 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\Battle\Unit\Ability\AbstractAbilityTest;
+use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class VolleyOfDarknessAbilityTest extends AbstractAbilityTest
+class VolleyOfDarknessAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">Unit</span> use <img src="/images/icons/ability/360.png" alt="" /> <span class="ability">Volley of Darkness</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span> and restore %d life';
     private const MESSAGE_RU = '<span style="color: #1e72e3">Unit</span> использовал <img src="/images/icons/ability/360.png" alt="" /> <span class="ability">Залп тьмы</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span> и восстановил %d здоровья';

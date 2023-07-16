@@ -11,10 +11,10 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\Battle\Unit\Ability\AbstractAbilityTest;
+use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class BiteAbilityTest extends AbstractAbilityTest
+class BiteAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/458.png" alt="" /> <span class="ability">Bite</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span> and restore %d life';
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/458.png" alt="" /> <span class="ability">Укус</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span> и восстановил %d здоровья';

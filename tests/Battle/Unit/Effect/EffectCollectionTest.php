@@ -9,12 +9,9 @@ use Battle\Action\ActionException;
 use Battle\Action\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Container\Container;
-use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitException;
-use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
@@ -264,22 +261,5 @@ class EffectCollectionTest extends AbstractUnitTest
         }
 
         self::assertTrue($enemyUnit->getEffects()->existParalysis());
-    }
-
-    /**
-     * @param UnitInterface $unit
-     * @param string $abilityName
-     * @param int $abilityLevel
-     * @return AbilityInterface
-     * @throws Exception
-     */
-    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
-    {
-        $container = new Container();
-
-        return $container->getAbilityFactory()->create(
-            $unit,
-            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
-        );
     }
 }

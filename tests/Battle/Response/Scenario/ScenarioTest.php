@@ -732,9 +732,8 @@ class ScenarioTest extends AbstractUnitTest
                         'unit_rage_bar2' => 14,
                         'unit_effects'   => [
                             [
-                                // TODO Путь должен начинаться с / а длительность должна быть строкой
-                                'icon'     => 'images/icons/ability/156.png',
-                                'duration' => 8,
+                                'icon'     => '/images/icons/ability/156.png',
+                                'duration' => '8',
                             ],
                         ],
                         'targets'        => [
@@ -746,8 +745,8 @@ class ScenarioTest extends AbstractUnitTest
                                 'unit_hp_bar_width' => 100,
                                 'unit_effects'      => [
                                     [
-                                        'icon'     => 'images/icons/ability/156.png',
-                                        'duration' => 8,
+                                        'icon'     => '/images/icons/ability/156.png',
+                                        'duration' => '8',
                                     ],
                                 ],
                             ],
@@ -829,7 +828,6 @@ class ScenarioTest extends AbstractUnitTest
             ];
 
             self::assertEquals($expectedData, $scenario->getArray());
-
         }
     }
 
@@ -878,7 +876,7 @@ class ScenarioTest extends AbstractUnitTest
                                 'unit_hp_bar_width' => 100,
                                 'unit_effects'      => [
                                     [
-                                        'icon'     => 'images/icons/ability/156.png',
+                                        'icon'     => '/images/icons/ability/156.png',
                                         'duration' => '8',
                                     ],
                                 ],
@@ -891,7 +889,7 @@ class ScenarioTest extends AbstractUnitTest
                                 'unit_hp_bar_width' => 100,
                                 'unit_effects'      => [
                                     [
-                                        'icon'     => 'images/icons/ability/156.png',
+                                        'icon'     => '/images/icons/ability/156.png',
                                         'duration' => '8',
                                     ],
                                 ],
@@ -1152,7 +1150,7 @@ class ScenarioTest extends AbstractUnitTest
             'name'           => 'use Reserve Forces',
             'effect'         => [
                 'name'                  => 'Effect#123',
-                'icon'                  => 'images/icons/ability/156.png',
+                'icon'                  => '/images/icons/ability/156.png',
                 'duration'              => 8,
                 'on_apply_actions'      => [
                     [

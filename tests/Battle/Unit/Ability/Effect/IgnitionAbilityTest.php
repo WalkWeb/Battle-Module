@@ -12,10 +12,10 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\Battle\Unit\Ability\AbstractAbilityTest;
+use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class IgnitionAbilityTest extends AbstractAbilityTest
+class IgnitionAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/232.png" alt="" /> <span class="ability">Ignition</span> on <span style="color: #1e72e3">unit_2</span>';
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/232.png" alt="" /> <span class="ability">Воспламенение</span> на <span style="color: #1e72e3">unit_2</span>';

@@ -10,10 +10,10 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\Battle\Unit\Ability\AbstractAbilityTest;
+use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class ExplosivesAbilityTest extends AbstractAbilityTest
+class ExplosivesAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/100.png" alt="" /> <span class="ability">Explosives</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/100.png" alt="" /> <span class="ability">Взрывчатка</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';

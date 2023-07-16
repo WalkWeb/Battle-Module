@@ -9,8 +9,6 @@ use Battle\Action\DamageAction;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
-use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffense;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
 use Battle\Unit\UnitInterface;
@@ -1173,23 +1171,6 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD,
             $unit->getOffense()
-        );
-    }
-
-    /**
-     * @param UnitInterface $unit
-     * @param string $abilityName
-     * @param int $abilityLevel
-     * @return AbilityInterface
-     * @throws Exception
-     */
-    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
-    {
-        $container = new Container();
-
-        return $container->getAbilityFactory()->create(
-            $unit,
-            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
         );
     }
 }

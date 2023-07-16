@@ -11,10 +11,10 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\Battle\Unit\Ability\AbstractAbilityTest;
+use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class StoneHailAbilityTest extends AbstractAbilityTest
+class StoneHailAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/071.png" alt="" /> <span class="ability">Stone Hail</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/071.png" alt="" /> <span class="ability">Каменный град</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';

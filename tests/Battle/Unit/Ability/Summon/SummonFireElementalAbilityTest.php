@@ -7,13 +7,11 @@ namespace Tests\Battle\Unit\Ability\Summon;
 use Battle\Action\ActionInterface;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
-use Battle\Container\Container;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
-use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -213,22 +211,5 @@ class SummonFireElementalAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isUsage());
         self::assertFalse($ability->isReady());
         self::assertEquals(0, $unit->getRage());
-    }
-
-    /**
-     * @param UnitInterface $unit
-     * @param string $abilityName
-     * @param int $abilityLevel
-     * @return AbilityInterface
-     * @throws Exception
-     */
-    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
-    {
-        $container = new Container();
-
-        return $container->getAbilityFactory()->create(
-            $unit,
-            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
-        );
     }
 }

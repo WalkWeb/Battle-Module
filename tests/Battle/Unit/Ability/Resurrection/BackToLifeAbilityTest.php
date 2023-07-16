@@ -7,7 +7,6 @@ namespace Tests\Battle\Unit\Ability\Resurrection;
 use Battle\Action\ActionInterface;
 use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandFactory;
-use Battle\Container\Container;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
@@ -233,23 +232,6 @@ class BackToLifeAbilityTest extends AbstractUnitTest
                 WeaponTypeInterface::WAND,
             ],
             0
-        );
-    }
-
-    /**
-     * @param UnitInterface $unit
-     * @param string $abilityName
-     * @param int $abilityLevel
-     * @return AbilityInterface
-     * @throws Exception
-     */
-    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
-    {
-        $container = new Container();
-
-        return $container->getAbilityFactory()->create(
-            $unit,
-            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
         );
     }
 }

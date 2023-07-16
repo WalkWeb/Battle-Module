@@ -6,7 +6,6 @@ namespace Tests\Battle\Unit\Ability\Effect;
 
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandFactory;
-use Battle\Container\Container;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
@@ -258,23 +257,6 @@ class RageAbilityTest extends AbstractUnitTest
             AbilityInterface::ACTIVATE_LOW_LIFE,
             [],
             0
-        );
-    }
-
-    /**
-     * @param UnitInterface $unit
-     * @param string $abilityName
-     * @param int $abilityLevel
-     * @return AbilityInterface
-     * @throws Exception
-     */
-    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
-    {
-        $container = new Container();
-
-        return $container->getAbilityFactory()->create(
-            $unit,
-            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
         );
     }
 }

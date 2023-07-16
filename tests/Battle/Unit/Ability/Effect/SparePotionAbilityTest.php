@@ -11,10 +11,10 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\Battle\Unit\Ability\AbstractAbilityTest;
+use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class SparePotionAbilityTest extends AbstractAbilityTest
+class SparePotionAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/299.png" alt="" /> <span class="ability">Spare Potion</span> on <span style="color: #1e72e3">wounded_unit</span>';
     private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/299.png" alt="" /> <span class="ability">Запасное зелье</span> на <span style="color: #1e72e3">wounded_unit</span>';

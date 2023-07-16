@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability\Damage;
 
 use Battle\Action\ActionInterface;
-use Battle\Container\Container;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityInterface;
-use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Battle\Action\DamageAction;
@@ -190,22 +188,5 @@ class HeavyStrikeAbilityTest extends AbstractUnitTest
         $ability->usage();
         self::assertTrue($ability->isUsage());
         self::assertFalse($ability->isReady());
-    }
-
-    /**
-     * @param UnitInterface $unit
-     * @param string $abilityName
-     * @param int $abilityLevel
-     * @return AbilityInterface
-     * @throws Exception
-     */
-    private function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
-    {
-        $container = new Container();
-
-        return $container->getAbilityFactory()->create(
-            $unit,
-            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
-        );
     }
 }

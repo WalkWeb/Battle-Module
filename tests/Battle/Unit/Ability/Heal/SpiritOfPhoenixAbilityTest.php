@@ -10,10 +10,10 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\Battle\Unit\Ability\AbstractAbilityTest;
+use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class SpiritOfPhoenixAbilityTest extends AbstractAbilityTest
+class SpiritOfPhoenixAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/416.png" alt="" /> <span class="ability">Spirit of Phoenix</span> and healed itself on %d life';
     private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/416.png" alt="" /> <span class="ability">Дух феникса</span> и вылечил себя на %d здоровья';
