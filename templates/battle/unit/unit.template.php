@@ -12,11 +12,13 @@ if ($unit->getMana() > 0 && $unit->getDefense()->getMentalBarrier() > 0) {
     $totalLife = $unit->getTotalMana();
     $hpBarClassBackground = 'unit_hp_bar_mana';
     $hpBarClass = 'unit_hp_bar2_mana';
+    $hpBarWidth = $this->getWidth($unit->getMana(), $unit->getTotalMana());
 } else {
     $life = $unit->getLife();
     $totalLife = $unit->getTotalLife();
     $hpBarClassBackground = 'unit_hp_bar';
     $hpBarClass = 'unit_hp_bar2';
+    $hpBarWidth = $this->getWidth($unit->getLife(), $unit->getTotalLife());
 }
 
 ?>
@@ -29,7 +31,7 @@ if ($unit->getMana() > 0 && $unit->getDefense()->getMentalBarrier() > 0) {
                         <div class="unit_box1_right4">
                             <div class="unit_hp">
                                 <div id="hp_bar_bg_<?= $unit->getId() ?>" class="<?= $hpBarClassBackground ?>">
-                                    <div id="hp_bar_<?= $unit->getId() ?>" class="<?= $hpBarClass ?>" style="width: <?= $this->getWidth($unit->getLife(), $unit->getTotalLife()) ?>%;"></div>
+                                    <div id="hp_bar_<?= $unit->getId() ?>" class="<?= $hpBarClass ?>" style="width: <?= $hpBarWidth ?>%;"></div>
                                 </div>
                                 <div class="unit_hp_text">
                                     <span class="hp"><?= $life ?></span> / <span class="thp"><?= $totalLife ?></span>

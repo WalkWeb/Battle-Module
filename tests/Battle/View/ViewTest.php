@@ -16,6 +16,7 @@ use Battle\View\ViewFactory;
 use Battle\View\ViewInterface;
 use Exception;
 use Tests\AbstractUnitTest;
+use Tests\Factory\BaseFactory;
 use Tests\Factory\CommandFactory as TestCommandFactory;
 use Tests\Factory\UnitFactory;
 
@@ -710,6 +711,84 @@ EOT;
         $this->expectException(ViewException::class);
         $this->expectExceptionMessage(ViewException::MISSING_TEMPLATE . ': Head Template');
         $view->renderHead();
+    }
+
+    /**
+     * Тест на корректность отображения полоски маны, когда юнит имеет ментальный барьер и неполное здоровье
+     *
+     * (тест на ошибку, когда длина полоски считалась из размера здоровья, а не маны)
+     *
+     * @throws Exception
+     */
+    public function testViewMentalBarrierNoFullLife(): void
+    {
+        // 50% здоровья, 100% маны - полоска должна быть на 100%
+        $unit = UnitFactory::createByTemplate(32);
+
+        $expectHtml = <<<EOT
+<div align="center">
+    <div class="unit_main_box" id="usr_5ab57a34-232f-4d94-a2c9-bb19f41b4e25">
+        <div class="unit_box1">
+            <div class="unit_box1_right">
+                <div class="unit_box1_right2">
+                    <div class="unit_box1_right3">
+                        <div class="unit_box1_right4">
+                            <div class="unit_hp">
+                                <div id="hp_bar_bg_5ab57a34-232f-4d94-a2c9-bb19f41b4e25" class="unit_hp_bar_mana">
+                                    <div id="hp_bar_5ab57a34-232f-4d94-a2c9-bb19f41b4e25" class="unit_hp_bar2_mana" style="width: 100%;"></div>
+                                </div>
+                                <div class="unit_hp_text">
+                                    <span class="hp">100</span> / <span class="thp">100</span>
+                                </div>
+                                <div class="unit_hp_text_add">
+                                    <span class="recdam"></span>
+                                </div>
+                            </div>
+                                                        <div class="unit_cons">
+                                <div class="unit_cons_bar2" style="width: 0%;"></div>
+                            </div>
+                            <div class="unit_rage">
+                                <div class="unit_rage_bar2" style="width: 0%;"></div>
+                            </div>
+                                                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="unit_box1_left">
+                <div class="unit_box1_left2">
+                    <div class="unit_ava" style="background-image: url(/images/avas/monsters/003.png);">
+                        <div id="ava_5ab57a34-232f-4d94-a2c9-bb19f41b4e25" class="unit_ava_blank"></div>
+                        <div id="avas_5ab57a34-232f-4d94-a2c9-bb19f41b4e25" class="unit_ava_blank"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="unit_box2">
+            <div class="unit_box2_right">
+                <div class="unit_box2_right2">
+                    <div class="unit_box2_right3">
+                        <p><span style="color: #1e72e3">unit_5</span></p>
+                    </div>
+                </div>
+                <div class="unit_effect_container">
+                    <p id="unit_effects_5ab57a34-232f-4d94-a2c9-bb19f41b4e25"></p>
+                </div>
+            </div>
+            <div class="unit_box2_left">
+                <div class="unit_icon">
+                    <div class="unit_icon_left">1</div>
+                    <div class="unit_icon_right">
+                        <img src="/images/icons/small/priest.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+EOT;
+
+        self::assertEquals($expectHtml, $this->getView()->getUnitView($unit));
     }
 
     /**

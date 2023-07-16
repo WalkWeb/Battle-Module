@@ -626,12 +626,14 @@ class DamageActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
+        // Здоровье до удара
+        self::assertEquals(50, $enemyUnit->getLife());
         $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
 
         $action->handle();
 
         // Здоровье не изменилось
-        self::assertEquals($enemyUnit->getTotalLife(), $enemyUnit->getLife());
+        self::assertEquals(50, $enemyUnit->getLife());
         // А вот мана уменьшилась
         self::assertEquals($enemyUnit->getTotalMana() - $unit->getOffense()->getDamage($enemyUnit->getDefense()), $enemyUnit->getMana());
     }
