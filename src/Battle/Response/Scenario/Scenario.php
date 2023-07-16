@@ -267,11 +267,12 @@ class Scenario implements ScenarioInterface
 
         foreach ($action->getTargetUnits() as $targetUnit) {
             $targetEffects[] = [
-                'type'         => 'change',
-                'user_id'      => $targetUnit->getId(),
-                'hp'           => $targetUnit->getLife(),
-                'thp'          => $targetUnit->getTotalLife(),
-                'unit_effects' => $this->getUnitEffects($targetUnit),
+                'type'              => 'change',
+                'user_id'           => $targetUnit->getId(),
+                'hp'                => $this->getLife($targetUnit),
+                'thp'               => $this->getTotalLife($targetUnit),
+                'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
+                'unit_effects'      => $this->getUnitEffects($targetUnit),
             ];
         }
 

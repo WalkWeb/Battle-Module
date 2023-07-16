@@ -11,6 +11,8 @@ use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 
+// TODO Перенести методы в AbstractUnitTest, а этот класс удалить
+
 abstract class AbstractAbilityTest extends AbstractUnitTest
 {
     /**

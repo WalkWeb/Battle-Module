@@ -701,7 +701,7 @@ class ScenarioTest extends AbstractUnitTest
     /**
      * @throws Exception
      */
-    public function testScenarioAddEffect(): void
+    public function testScenarioAddEffectDefault(): void
     {
         $statistic = new Statistic();
         $unit = UnitFactory::createByTemplate(1);
@@ -732,17 +732,19 @@ class ScenarioTest extends AbstractUnitTest
                         'unit_rage_bar2' => 14,
                         'unit_effects'   => [
                             [
+                                // TODO Путь должен начинаться с / а длительность должна быть строкой
                                 'icon'     => 'images/icons/ability/156.png',
                                 'duration' => 8,
                             ],
                         ],
                         'targets'        => [
                             [
-                                'type'         => 'change',
-                                'user_id'      => $action->getActionUnit()->getId(),
-                                'hp'           => $action->getActionUnit()->getLife(),
-                                'thp'          => $action->getActionUnit()->getTotalLife(),
-                                'unit_effects' => [
+                                'type'              => 'change',
+                                'user_id'           => $action->getActionUnit()->getId(),
+                                'hp'                => $action->getActionUnit()->getLife(),
+                                'thp'               => $action->getActionUnit()->getTotalLife(),
+                                'unit_hp_bar_width' => 100,
+                                'unit_effects'      => [
                                     [
                                         'icon'     => 'images/icons/ability/156.png',
                                         'duration' => 8,
@@ -756,6 +758,79 @@ class ScenarioTest extends AbstractUnitTest
         ];
 
         self::assertEquals($expectedData, $scenario->getArray());
+    }
+
+    /**
+     * Тест на ситуацию, когда эффект накладывается на цель имеющую ману и ментальный барьер
+     *
+     * (тест на ошибку, когда в момент наложения эффекта отображались цифры здоровья, хотя должны отображаться цифры маны)
+     *
+     * @throws Exception
+     */
+    public function testScenarioAddEffectMentalBarrier(): void
+    {
+        $container = new Container();
+        $statistic = new Statistic();
+        $scenario = new Scenario();
+        $unit = UnitFactory::createByTemplate(8);
+        $alliesUnit = UnitFactory::createByTemplate(32);
+        $enemyUnit = UnitFactory::createByTemplate(3);
+        $command = CommandFactory::create([$unit, $alliesUnit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $container->getAbilityFactory()->create(
+            $unit,
+            $container->getAbilityDataProvider()->get('Restore Potion', 1)
+        );
+
+        $unit->newRound();
+
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertCount(1, $ability->getActions($enemyCommand, $command));
+
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
+            self::assertInstanceOf(EffectAction::class, $action);
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+
+            $scenario->addAnimation($action, $statistic);
+
+            $expectedData = [
+                [
+                    'step'    => $statistic->getRoundNumber(),
+                    'attack'  => $statistic->getStrokeNumber(),
+                    'effects' => [
+                        [
+                            'user_id'        => $unit->getId(),
+                            'class'          => 'd_buff',
+                            'hp'             => 100,
+                            'thp'            => 100,
+                            'unit_cons_bar2' => 20,
+                            'unit_rage_bar2' => 5,
+                            'unit_effects'   => [],
+                            'targets'        => [
+                                [
+                                    'type'              => 'change',
+                                    'user_id'           => $alliesUnit->getId(),
+                                    'hp'                => $alliesUnit->getMana(),
+                                    'thp'               => $alliesUnit->getTotalMana(),
+                                    'unit_hp_bar_width' => 100,
+                                    'unit_effects'      => [
+                                        [
+                                            'icon'     => '/images/icons/ability/234.png',
+                                            'duration' => '5',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ];
+
+            self::assertEquals($expectedData, $scenario->getArray());
+
+        }
     }
 
     /**
@@ -796,11 +871,12 @@ class ScenarioTest extends AbstractUnitTest
                         'unit_effects'   => [],
                         'targets'        => [
                             [
-                                'type'         => 'change',
-                                'user_id'      => '1aab367d-37e8-4544-9915-cb3d7779308b',
-                                'hp'           => 325,
-                                'thp'          => 325,
-                                'unit_effects' => [
+                                'type'              => 'change',
+                                'user_id'           => '1aab367d-37e8-4544-9915-cb3d7779308b',
+                                'hp'                => 325,
+                                'thp'               => 325,
+                                'unit_hp_bar_width' => 100,
+                                'unit_effects'      => [
                                     [
                                         'icon'     => 'images/icons/ability/156.png',
                                         'duration' => '8',
@@ -808,11 +884,12 @@ class ScenarioTest extends AbstractUnitTest
                                 ],
                             ],
                             [
-                                'type'         => 'change',
-                                'user_id'      => '72df87f5-b3a7-4574-9526-45a20aa77119',
-                                'hp'           => 156,
-                                'thp'          => 156,
-                                'unit_effects' => [
+                                'type'              => 'change',
+                                'user_id'           => '72df87f5-b3a7-4574-9526-45a20aa77119',
+                                'hp'                => 156,
+                                'thp'               => 156,
+                                'unit_hp_bar_width' => 100,
+                                'unit_effects'      => [
                                     [
                                         'icon'     => 'images/icons/ability/156.png',
                                         'duration' => '8',
