@@ -1994,13 +1994,13 @@ class UnitFactory
                 'dodge'               => 0,
             ],
         ],
-        // Юнит со 100% ментальным барьером и 0 маны
+        // Юнит со 100% ментальным барьером и 0 маны (и неполным здоровьем)
         33 => [
             'id'                           => '87fc2e80-360c-46df-956d-6a8811b43805',
             'name'                         => 'unit_5',
             'level'                        => 1,
             'avatar'                       => '/images/avas/monsters/003.png',
-            'life'                         => 100,
+            'life'                         => 50,
             'total_life'                   => 100,
             'mana'                         => 0,
             'total_mana'                   => 100,

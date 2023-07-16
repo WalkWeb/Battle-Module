@@ -653,7 +653,7 @@ class DamageActionTest extends AbstractUnitTest
         $action->handle();
 
         // Так как маны не было - урон по здоровью прошел, не смотря на 100% ментальный барьер
-        self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()), $enemyUnit->getLife());
+        self::assertEquals(30, $enemyUnit->getLife());
         // Мана как была 0 так и осталась
         self::assertEquals(0, $enemyUnit->getMana());
     }

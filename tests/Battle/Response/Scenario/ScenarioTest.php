@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Battle\Response\Scenario;
 
 use Battle\Action\ActionInterface;
+use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
+use Battle\Action\ManaRestoreAction;
 use Battle\Container\Container;
 use Battle\Response\Scenario\ScenarioException;
 use Battle\Unit\Ability\AbilityFactory;
@@ -566,6 +568,71 @@ class ScenarioTest extends AbstractUnitTest
                             'hp'                => 16,
                             'thp'               => 1000,
                             'unit_hp_bar_width' => 1,
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $container->getScenario()->getArray()[1]);
+    }
+
+    /**
+     * Тест на создание эффекта по восстановлению маны от эффекта
+     *
+     * @throws Exception
+     */
+    public function testScenarioAddEffectManaRestore(): void
+    {
+        $abilityFactory = new AbilityFactory();
+        $container = new Container();
+        [$unit, $command, $enemyCommand] = BaseFactory::create(33, 2, $container);
+
+        $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Restore Potion', 1));
+
+        // Применение эффекта
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
+            self::assertInstanceOf(EffectAction::class, $action);
+            self::assertTrue($action->canByUsed());
+            $action->handle();
+            $container->getScenario()->addAnimation($action, $container->getStatistic());
+        }
+
+        // Применение эффекта от восстановления маны
+        $i = 0;
+        foreach ($unit->getBeforeActions() as $action) {
+            // Первым эффектом будет лечение, его пропускаем
+            if ($i === 1) {
+                self::assertInstanceOf(ManaRestoreAction::class, $action);
+                if ($action->canByUsed()) {
+                    $action->handle();
+                    $container->getScenario()->addAnimation($action, $container->getStatistic());
+                }
+            }
+            $i++;
+        }
+
+        $expectedData = [
+            'step'    => $container->getStatistic()->getRoundNumber(),
+            'attack'  => $container->getStatistic()->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'      => $unit->getId(),
+                    'unit_effects' => [
+                        [
+                            'icon'     => '/images/icons/ability/234.png',
+                            'duration' => 5,
+                        ],
+                    ],
+                    'targets'      => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => $unit->getId(),
+                            'ava'               => 'unit_ava_blue',
+                            'recdam'            => '+7',
+                            'hp'                => 7,
+                            'thp'               => 100,
+                            'unit_hp_bar_width' => 7,
                         ],
                     ],
                 ],

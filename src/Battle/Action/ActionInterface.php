@@ -45,6 +45,8 @@ interface ActionInterface
     // Применяет событие  на раненого себя
     public const TARGET_WOUNDED_SELF          = 11;
 
+    // TODO Подумать над отдельным таргетом для целей которые или ранены или имеют неполную ману
+
     public const ROLLBACK_METHOD_SUFFIX = 'Revert';
 
     // Пропуск создания сообщения в чате

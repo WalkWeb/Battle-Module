@@ -9512,7 +9512,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'      => ActionInterface::TARGET_SELF,
                                     'name'             => 'Restore Potion',
                                     'power'            => 7,
-                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD, // TODO
+                                    'animation_method' => ManaRestoreAction::EFFECT_ANIMATION_METHOD,
                                     'message_method'   => ManaRestoreAction::EFFECT_MESSAGE_METHOD,
                                     'icon'             => '/images/icons/ability/234.png',
                                     'target_tracking'  => false,
@@ -9556,7 +9556,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'      => ActionInterface::TARGET_SELF,
                                     'name'             => 'Restore Potion',
                                     'power'            => 9,
-                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD, // TODO
+                                    'animation_method' => ManaRestoreAction::EFFECT_ANIMATION_METHOD,
                                     'message_method'   => ManaRestoreAction::EFFECT_MESSAGE_METHOD,
                                     'icon'             => '/images/icons/ability/234.png',
                                     'target_tracking'  => false,
@@ -9600,7 +9600,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'      => ActionInterface::TARGET_SELF,
                                     'name'             => 'Restore Potion',
                                     'power'            => 12,
-                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD, // TODO
+                                    'animation_method' => ManaRestoreAction::EFFECT_ANIMATION_METHOD,
                                     'message_method'   => ManaRestoreAction::EFFECT_MESSAGE_METHOD,
                                     'icon'             => '/images/icons/ability/234.png',
                                     'target_tracking'  => false,
@@ -9644,7 +9644,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'      => ActionInterface::TARGET_SELF,
                                     'name'             => 'Restore Potion',
                                     'power'            => 17,
-                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD, // TODO
+                                    'animation_method' => ManaRestoreAction::EFFECT_ANIMATION_METHOD,
                                     'message_method'   => ManaRestoreAction::EFFECT_MESSAGE_METHOD,
                                     'icon'             => '/images/icons/ability/234.png',
                                     'target_tracking'  => false,
@@ -9688,7 +9688,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'      => ActionInterface::TARGET_SELF,
                                     'name'             => 'Restore Potion',
                                     'power'            => 21,
-                                    'animation_method' => HealAction::EFFECT_ANIMATION_METHOD, // TODO
+                                    'animation_method' => ManaRestoreAction::EFFECT_ANIMATION_METHOD,
                                     'message_method'   => ManaRestoreAction::EFFECT_MESSAGE_METHOD,
                                     'icon'             => '/images/icons/ability/234.png',
                                     'target_tracking'  => false,

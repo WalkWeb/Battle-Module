@@ -9,6 +9,7 @@ use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
+use Battle\Action\ManaRestoreAction;
 use Battle\Action\ResurrectionAction;
 use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
@@ -30,7 +31,7 @@ class Scenario implements ScenarioInterface
      * @param ActionInterface $action
      * @param StatisticInterface $statistic
      * @throws Exception
-     * @uses damage, heal, effectHeal, summon, effect, wait, skip, resurrected
+     * @uses damage, heal, effectHeal, effectManaRestore, summon, effect, wait, skip, resurrected
      */
     public function addAnimation(ActionInterface $action, StatisticInterface $statistic): void
     {
@@ -157,6 +158,40 @@ class Scenario implements ScenarioInterface
                 'type'              => 'change',
                 'user_id'           => $action->getActionUnit()->getId(),
                 'ava'               => 'unit_ava_green',
+                'recdam'            => '+' . $action->getFactualPowerByUnit($targetUnit),
+                'hp'                => $this->getLife($targetUnit),
+                'thp'               => $this->getTotalLife($targetUnit),
+                'unit_hp_bar_width' => $this->getLifeBarWidth($targetUnit),
+            ];
+        }
+
+        $this->scenario[] = [
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'      => $action->getActionUnit()->getId(),
+                    'unit_effects' => $this->getUnitEffects($action->getActionUnit()),
+                    'targets'      => $targetEffects,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @param ManaRestoreAction $action
+     * @param StatisticInterface $statistic
+     * @throws Exception
+     */
+    private function effectManaRestore(ManaRestoreAction $action, StatisticInterface $statistic): void
+    {
+        $targetEffects = [];
+
+        foreach ($action->getTargetUnits() as $targetUnit) {
+            $targetEffects[] = [
+                'type'              => 'change',
+                'user_id'           => $action->getActionUnit()->getId(),
+                'ava'               => 'unit_ava_blue',
                 'recdam'            => '+' . $action->getFactualPowerByUnit($targetUnit),
                 'hp'                => $this->getLife($targetUnit),
                 'thp'               => $this->getTotalLife($targetUnit),
@@ -480,6 +515,9 @@ class Scenario implements ScenarioInterface
             'unit_effects' => $this->getUnitEffects($targetUnit),
         ];
     }
+
+    // TODO С одной стороны стоит отказаться от Life и заменить на Resource (т.е. это может быть или мана или здоровье)
+    // TODO С другой стороны в будущем возможно в интерфейсе будет отдельные полоски здоровья и маны
 
     /**
      * Возвращает значения "здоровья" на полоске со здоровьем. Если юнит имеет ментальный барьер и ману - то будет
