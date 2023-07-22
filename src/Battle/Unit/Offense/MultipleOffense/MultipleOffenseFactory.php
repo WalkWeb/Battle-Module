@@ -71,9 +71,9 @@ class MultipleOffenseFactory
 
         self::intMinMaxValue(
             $vampirism,
-            OffenseInterface::MIN_VAMPIRE,
-            OffenseInterface::MAX_VAMPIRE,
-            MultipleOffenseException::INVALID_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+            OffenseInterface::MIN_VAMPIRISM,
+            OffenseInterface::MAX_VAMPIRISM,
+            MultipleOffenseException::INVALID_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM
         );
 
         self::intMinMaxValue(

@@ -44,9 +44,8 @@ interface OffenseInterface
     public const MIN_DAMAGE_MULTIPLIER   = 0;
     public const MAX_DAMAGE_MULTIPLIER   = 10000;
 
-    // TODO Rename to MIN_VAMPIRISM/MAX_VAMPIRISM
-    public const MIN_VAMPIRE             = 0;
-    public const MAX_VAMPIRE             = 100;
+    public const MIN_VAMPIRISM           = 0;
+    public const MAX_VAMPIRISM           = 100;
 
     /**
      * Возвращает тип урона: атака или заклинание

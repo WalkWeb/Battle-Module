@@ -480,9 +480,9 @@ class Offense implements OffenseInterface
      */
     public function setVampirism(int $vampirism): void
     {
-        if ($vampirism < self::MIN_VAMPIRE || $vampirism > self::MAX_VAMPIRE) {
+        if ($vampirism < self::MIN_VAMPIRISM || $vampirism > self::MAX_VAMPIRISM) {
             throw new OffenseException(
-                OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+                OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM
             );
         }
 
@@ -503,9 +503,9 @@ class Offense implements OffenseInterface
      */
     public function setMagicVampirism(int $magicVampirism): void
     {
-        if ($magicVampirism < self::MIN_VAMPIRE || $magicVampirism > self::MAX_VAMPIRE) {
+        if ($magicVampirism < self::MIN_VAMPIRISM || $magicVampirism > self::MAX_VAMPIRISM) {
             throw new OffenseException(
-                OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+                OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM
             );
         }
 

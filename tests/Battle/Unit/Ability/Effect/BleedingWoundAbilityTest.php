@@ -16,11 +16,11 @@ use Tests\Factory\UnitFactory;
 
 class BleedingWoundAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">100_dodge</span> use <img src="/images/icons/ability/438.png" alt="" /> <span class="ability">Bleeding Wound</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">100_dodge</span> использовал <img src="/images/icons/ability/438.png" alt="" /> <span class="ability">Кровоточащая рана</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">100_dodge</span> use <img src="/images/icons/ability/229.png" alt="" /> <span class="ability">Bleeding Wound</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">100_dodge</span> использовал <img src="/images/icons/ability/229.png" alt="" /> <span class="ability">Кровоточащая рана</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> received %d damage from effect <img src="/images/icons/ability/438.png" alt="" /> <span class="ability">Bleeding Wound</span>';
-    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> получил %d урона от эффекта <img src="/images/icons/ability/438.png" alt="" /> <span class="ability">Кровоточащая рана</span>';
+    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> received %d damage from effect <img src="/images/icons/ability/229.png" alt="" /> <span class="ability">Bleeding Wound</span>';
+    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> получил %d урона от эффекта <img src="/images/icons/ability/229.png" alt="" /> <span class="ability">Кровоточащая рана</span>';
 
     /**
      * Тест на создание способности Bleeding Wound через AbilityDataProvider
@@ -30,7 +30,7 @@ class BleedingWoundAbilityTest extends AbstractUnitTest
     public function testBleedingWoundAbilityCreate(): void
     {
         $name = 'Bleeding Wound';
-        $icon = '/images/icons/ability/438.png';
+        $icon = '/images/icons/ability/229.png';
         $disposable = false;
 
         $unit = UnitFactory::createByTemplate(51);

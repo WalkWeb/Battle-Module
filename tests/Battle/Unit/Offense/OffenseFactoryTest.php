@@ -1822,10 +1822,10 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'critical_chance'     => 5,
                     'critical_multiplier' => 200,
                     'damage_multiplier'   => 100,
-                    'vampirism'           => OffenseInterface::MIN_VAMPIRE - 1,
+                    'vampirism'           => OffenseInterface::MIN_VAMPIRISM - 1,
                     'magic_vampirism'     => 0,
                 ],
-                OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE,
+                OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM,
             ],
             [
                 // vampirism больше максимального значения
@@ -1847,10 +1847,10 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'critical_chance'     => 5,
                     'critical_multiplier' => 200,
                     'damage_multiplier'   => 100,
-                    'vampirism'           => OffenseInterface::MAX_VAMPIRE + 1,
+                    'vampirism'           => OffenseInterface::MAX_VAMPIRISM + 1,
                     'magic_vampirism'     => 0,
                 ],
-                OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE,
+                OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM,
             ],
 
             // weapon_type
@@ -1975,9 +1975,9 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'critical_multiplier' => 200,
                     'damage_multiplier'   => 100,
                     'vampirism'           => 0,
-                    'magic_vampirism'     => OffenseInterface::MIN_VAMPIRE - 1,
+                    'magic_vampirism'     => OffenseInterface::MIN_VAMPIRISM - 1,
                 ],
-                OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE,
+                OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM,
             ],
             [
                 // magic_vampirism больше максимального значения
@@ -2000,9 +2000,9 @@ class OffenseFactoryTest extends AbstractUnitTest
                     'critical_multiplier' => 200,
                     'damage_multiplier'   => 100,
                     'vampirism'           => 0,
-                    'magic_vampirism'     => OffenseInterface::MAX_VAMPIRE + 1,
+                    'magic_vampirism'     => OffenseInterface::MAX_VAMPIRISM + 1,
                 ],
-                OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE,
+                OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM,
             ],
 
         ];

@@ -348,9 +348,9 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                     'accuracy'            => 3.0,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 2.0,
-                    'vampirism'           => OffenseInterface::MIN_VAMPIRE - 1,
+                    'vampirism'           => OffenseInterface::MIN_VAMPIRISM - 1,
                 ],
-                MultipleOffenseException::INVALID_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE,
+                MultipleOffenseException::INVALID_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM,
             ],
             [
                 // vampirism больше максимального значения
@@ -360,9 +360,9 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
                     'accuracy'            => 3.0,
                     'critical_chance'     => 3.2,
                     'critical_multiplier' => 2.0,
-                    'vampirism'           => OffenseInterface::MAX_VAMPIRE + 1,
+                    'vampirism'           => OffenseInterface::MAX_VAMPIRISM + 1,
                 ],
-                MultipleOffenseException::INVALID_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE,
+                MultipleOffenseException::INVALID_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM,
             ],
 
             [

@@ -345,7 +345,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'      => ActionInterface::TARGET_SELF,
                                     'name'             => 'Stun',
                                     'can_be_avoided'   => false,
-                                    'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD, // TODO Способность не должна обращаться к чужим константам
+                                    'animation_method' => ParalysisAction::EFFECT_ANIMATION_METHOD,
                                     'message_method'   => ParalysisAction::STUN_MESSAGE_METHOD,
                                     'icon'             => '/images/icons/ability/186.png',
                                     'target_tracking'  => false,
@@ -4967,7 +4967,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
         'Bleeding Wound'     => [
             1 => [
                 'name'                 => 'Bleeding Wound',
-                'icon'                 => '/images/icons/ability/438.png',
+                'icon'                 => '/images/icons/ability/229.png',
                 'disposable'           => false,
                 'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
                 'allowed_weapon_types' => [
@@ -4988,18 +4988,18 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Bleeding Wound',
                         'animation_method' => 'damage',
                         'message_method'   => 'damageAbility',
-                        'icon'             => '/images/icons/ability/438.png',
+                        'icon'             => '/images/icons/ability/229.png',
                     ],
                     [
                         'type'             => ActionInterface::EFFECT,
                         'type_target'      => ActionInterface::TARGET_LAST_ALIVE_TARGETS,
                         'name'             => 'Bleeding Wound',
-                        'icon'             => '/images/icons/ability/438.png',
+                        'icon'             => '/images/icons/ability/229.png',
                         'message_method'   => 'skip',
                         'animation_method' => 'skip',
                         'effect'           => [
                             'name'                  => 'Bleeding Wound',
-                            'icon'                  => '/images/icons/ability/438.png',
+                            'icon'                  => '/images/icons/ability/229.png',
                             'duration'              => 4,
                             'on_apply_actions'      => [],
                             'on_next_round_actions' => [
@@ -5017,7 +5017,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'can_be_avoided'   => false,
                                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                                     'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
-                                    'icon'             => '/images/icons/ability/438.png',
+                                    'icon'             => '/images/icons/ability/229.png',
                                     'target_tracking'  => false,
                                 ],
                             ],
@@ -5028,7 +5028,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             2 => [
                 'name'                 => 'Bleeding Wound',
-                'icon'                 => '/images/icons/ability/438.png',
+                'icon'                 => '/images/icons/ability/229.png',
                 'disposable'           => false,
                 'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
                 'allowed_weapon_types' => [
@@ -5049,18 +5049,18 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Bleeding Wound',
                         'animation_method' => 'damage',
                         'message_method'   => 'damageAbility',
-                        'icon'             => '/images/icons/ability/438.png',
+                        'icon'             => '/images/icons/ability/229.png',
                     ],
                     [
                         'type'             => ActionInterface::EFFECT,
                         'type_target'      => ActionInterface::TARGET_LAST_ALIVE_TARGETS,
                         'name'             => 'Bleeding Wound',
-                        'icon'             => '/images/icons/ability/438.png',
+                        'icon'             => '/images/icons/ability/229.png',
                         'message_method'   => 'skip',
                         'animation_method' => 'skip',
                         'effect'           => [
                             'name'                  => 'Bleeding Wound',
-                            'icon'                  => '/images/icons/ability/438.png',
+                            'icon'                  => '/images/icons/ability/229.png',
                             'duration'              => 4,
                             'on_apply_actions'      => [],
                             'on_next_round_actions' => [
@@ -5078,7 +5078,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'can_be_avoided'   => false,
                                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                                     'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
-                                    'icon'             => '/images/icons/ability/438.png',
+                                    'icon'             => '/images/icons/ability/229.png',
                                     'target_tracking'  => false,
                                 ],
                             ],
@@ -5089,7 +5089,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             3 => [
                 'name'                 => 'Bleeding Wound',
-                'icon'                 => '/images/icons/ability/438.png',
+                'icon'                 => '/images/icons/ability/229.png',
                 'disposable'           => false,
                 'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
                 'allowed_weapon_types' => [
@@ -5110,18 +5110,18 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Bleeding Wound',
                         'animation_method' => 'damage',
                         'message_method'   => 'damageAbility',
-                        'icon'             => '/images/icons/ability/438.png',
+                        'icon'             => '/images/icons/ability/229.png',
                     ],
                     [
                         'type'             => ActionInterface::EFFECT,
                         'type_target'      => ActionInterface::TARGET_LAST_ALIVE_TARGETS,
                         'name'             => 'Bleeding Wound',
-                        'icon'             => '/images/icons/ability/438.png',
+                        'icon'             => '/images/icons/ability/229.png',
                         'message_method'   => 'skip',
                         'animation_method' => 'skip',
                         'effect'           => [
                             'name'                  => 'Bleeding Wound',
-                            'icon'                  => '/images/icons/ability/438.png',
+                            'icon'                  => '/images/icons/ability/229.png',
                             'duration'              => 5,
                             'on_apply_actions'      => [],
                             'on_next_round_actions' => [
@@ -5139,7 +5139,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'can_be_avoided'   => false,
                                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                                     'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
-                                    'icon'             => '/images/icons/ability/438.png',
+                                    'icon'             => '/images/icons/ability/229.png',
                                     'target_tracking'  => false,
                                 ],
                             ],
@@ -5150,7 +5150,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             4 => [
                 'name'                 => 'Bleeding Wound',
-                'icon'                 => '/images/icons/ability/438.png', // TODO Заменить иконку, потому что она совпадает с иконкой от базового кровотечения от критических ударов с кинжала
+                'icon'                 => '/images/icons/ability/229.png',
                 'disposable'           => false,
                 'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
                 'allowed_weapon_types' => [
@@ -5171,18 +5171,18 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Bleeding Wound',
                         'animation_method' => 'damage',
                         'message_method'   => 'damageAbility',
-                        'icon'             => '/images/icons/ability/438.png',
+                        'icon'             => '/images/icons/ability/229.png',
                     ],
                     [
                         'type'             => ActionInterface::EFFECT,
                         'type_target'      => ActionInterface::TARGET_LAST_ALIVE_TARGETS,
                         'name'             => 'Bleeding Wound',
-                        'icon'             => '/images/icons/ability/438.png',
+                        'icon'             => '/images/icons/ability/229.png',
                         'message_method'   => 'skip',
                         'animation_method' => 'skip',
                         'effect'           => [
                             'name'                  => 'Bleeding Wound',
-                            'icon'                  => '/images/icons/ability/438.png',
+                            'icon'                  => '/images/icons/ability/229.png',
                             'duration'              => 5,
                             'on_apply_actions'      => [],
                             'on_next_round_actions' => [
@@ -5200,7 +5200,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'can_be_avoided'   => false,
                                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                                     'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
-                                    'icon'             => '/images/icons/ability/438.png',
+                                    'icon'             => '/images/icons/ability/229.png',
                                     'target_tracking'  => false,
                                 ],
                             ],
@@ -5211,7 +5211,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             5 => [
                 'name'                 => 'Bleeding Wound',
-                'icon'                 => '/images/icons/ability/438.png',
+                'icon'                 => '/images/icons/ability/229.png',
                 'disposable'           => false,
                 'type_activate'        => AbilityInterface::ACTIVATE_CONCENTRATION,
                 'allowed_weapon_types' => [
@@ -5232,18 +5232,18 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Bleeding Wound',
                         'animation_method' => 'damage',
                         'message_method'   => 'damageAbility',
-                        'icon'             => '/images/icons/ability/438.png',
+                        'icon'             => '/images/icons/ability/229.png',
                     ],
                     [
                         'type'             => ActionInterface::EFFECT,
                         'type_target'      => ActionInterface::TARGET_LAST_ALIVE_TARGETS,
                         'name'             => 'Bleeding Wound',
-                        'icon'             => '/images/icons/ability/438.png',
+                        'icon'             => '/images/icons/ability/229.png',
                         'message_method'   => 'skip',
                         'animation_method' => 'skip',
                         'effect'           => [
                             'name'                  => 'Bleeding Wound',
-                            'icon'                  => '/images/icons/ability/438.png',
+                            'icon'                  => '/images/icons/ability/229.png',
                             'duration'              => 5,
                             'on_apply_actions'      => [],
                             'on_next_round_actions' => [
@@ -5261,7 +5261,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'can_be_avoided'   => false,
                                     'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                                     'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
-                                    'icon'             => '/images/icons/ability/438.png',
+                                    'icon'             => '/images/icons/ability/229.png',
                                     'target_tracking'  => false,
                                 ],
                             ],

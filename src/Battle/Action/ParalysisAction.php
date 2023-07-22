@@ -25,6 +25,7 @@ class ParalysisAction extends AbstractAction
     public const DEFAULT_ANIMATION_METHOD = 'wait';
     public const PARALYSIS_MESSAGE_METHOD = 'paralysis';
     public const STUN_MESSAGE_METHOD      = 'stunned';
+    public const EFFECT_ANIMATION_METHOD  = 'effectDamage';
 
     /**
      * @var string

@@ -691,9 +691,9 @@ class OffenseTest extends AbstractUnitTest
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
-            OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+            OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM
         );
-        $offense->setVampirism(OffenseInterface::MIN_VAMPIRE - 1);
+        $offense->setVampirism(OffenseInterface::MIN_VAMPIRISM - 1);
     }
 
     /**
@@ -707,9 +707,9 @@ class OffenseTest extends AbstractUnitTest
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
-            OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+            OffenseException::INCORRECT_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM
         );
-        $offense->setVampirism(OffenseInterface::MAX_VAMPIRE + 1);
+        $offense->setVampirism(OffenseInterface::MAX_VAMPIRISM + 1);
     }
 
     /**
@@ -723,9 +723,9 @@ class OffenseTest extends AbstractUnitTest
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
-            OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+            OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM
         );
-        $offense->setMagicVampirism(OffenseInterface::MIN_VAMPIRE - 1);
+        $offense->setMagicVampirism(OffenseInterface::MIN_VAMPIRISM - 1);
     }
 
     /**
@@ -739,9 +739,9 @@ class OffenseTest extends AbstractUnitTest
 
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(
-            OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRE . '-' . OffenseInterface::MAX_VAMPIRE
+            OffenseException::INCORRECT_MAGIC_VAMPIRISM_VALUE . OffenseInterface::MIN_VAMPIRISM . '-' . OffenseInterface::MAX_VAMPIRISM
         );
-        $offense->setMagicVampirism(OffenseInterface::MAX_VAMPIRE + 1);
+        $offense->setMagicVampirism(OffenseInterface::MAX_VAMPIRISM + 1);
     }
 
     /**
