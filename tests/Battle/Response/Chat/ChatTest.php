@@ -670,7 +670,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             BuffAction::TARGET_SELF,
             'Reserve Forces',
-            'multiplierMaxLife',
+            BuffAction::MAX_LIFE,
             130
         );
 
@@ -829,7 +829,7 @@ class ChatTest extends AbstractUnitTest
             $command,
             BuffAction::TARGET_SELF,
             'test name',
-            'multiplierMaxLife',
+            BuffAction::MAX_LIFE,
             200,
             BuffAction::SKIP_MESSAGE_METHOD
         );
@@ -1150,7 +1150,7 @@ class ChatTest extends AbstractUnitTest
                         'allies_command' => $command,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'use Reserve Forces',
-                        'modify_method'  => 'multiplierMaxLife',
+                        'modify_method'  => BuffAction::MAX_LIFE,
                         'power'          => 130,
                     ],
                 ],

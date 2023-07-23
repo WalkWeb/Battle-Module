@@ -6,6 +6,7 @@ namespace Tests\Battle\Unit;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityCollection;
@@ -748,7 +749,7 @@ class UnitTest extends AbstractUnitTest
                         'allies_command' => $alliesCommand,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Rage',
-                        'modify_method'  => 'multiplierPhysicalDamage',
+                        'modify_method'  => BuffAction::PHYSICAL_DAMAGE,
                         'power'          => 80,
                         'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                     ],

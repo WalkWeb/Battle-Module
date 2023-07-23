@@ -7,6 +7,7 @@ namespace Tests\Battle\Action;
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Command\CommandFactory;
@@ -378,7 +379,7 @@ class EffectActionTest extends AbstractUnitTest
                         'allies_command' => $command,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'use Reserve Forces',
-                        'modify_method'  => 'multiplierMaxLife',
+                        'modify_method'  => BuffAction::MAX_LIFE,
                         'power'          => 130,
                     ],
                 ],
@@ -417,7 +418,7 @@ class EffectActionTest extends AbstractUnitTest
                     'allies_command' => $command,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'use Reserve Forces',
-                    'modify_method'  => 'multiplierMaxLife',
+                    'modify_method'  => BuffAction::MAX_LIFE,
                     'power'          => 130,
                 ],
             ],

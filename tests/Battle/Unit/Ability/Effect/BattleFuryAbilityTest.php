@@ -6,6 +6,7 @@ namespace Tests\Battle\Unit\Ability\Effect;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
@@ -400,7 +401,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
                         'allies_command' => $command,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Battle Fury',
-                        'modify_method'  => 'multiplierAttackSpeed',
+                        'modify_method'  => BuffAction::ATTACK_SPEED,
                         'power'          => 140,
                         'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                     ],
@@ -446,7 +447,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
                                 'type'           => ActionInterface::BUFF,
                                 'type_target'    => ActionInterface::TARGET_SELF,
                                 'name'           => $name,
-                                'modify_method'  => 'multiplierAttackSpeed',
+                                'modify_method'  => BuffAction::ATTACK_SPEED,
                                 'power'          => 140,
                                 'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                             ],

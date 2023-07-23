@@ -28,7 +28,6 @@ class BuffActionTest extends AbstractUnitTest
     public function testBuffActionMaximumLifeSuccess(): void
     {
         $name = 'use Reserve Forces';
-        $modifyMethod = 'multiplierMaxLife';
         $power = 130;
 
         $unit = UnitFactory::createByTemplate(1);
@@ -38,7 +37,16 @@ class BuffActionTest extends AbstractUnitTest
 
         $oldLife = $unit->getTotalLife();
 
-        $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            $name,
+            BuffAction::MAX_LIFE,
+            $power
+        );
 
         self::assertEquals(BuffAction::SKIP_ANIMATION_METHOD, $action->getAnimationMethod());
         self::assertEquals('buff', $action->getMessageMethod());
@@ -75,7 +83,6 @@ class BuffActionTest extends AbstractUnitTest
     public function testBuffActionMaximumLifeReduced(): void
     {
         $name = 'use Reserve Forces';
-        $modifyMethod = 'multiplierMaxLife';
         $power = 50;
 
         $unit = UnitFactory::createByTemplate(1);
@@ -83,7 +90,16 @@ class BuffActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            $name,
+            BuffAction::MAX_LIFE,
+            $power
+        );
 
         $this->expectException(UnitException::class);
         $this->expectErrorMessage(UnitException::NO_REDUCED_MAXIMUM_LIFE);
@@ -101,7 +117,6 @@ class BuffActionTest extends AbstractUnitTest
     public function testBuffActionAttackSpeedSuccess(): void
     {
         $name = 'use Battle Fury';
-        $modifyMethod = 'multiplierAttackSpeed';
         $power = 125;
 
         $unit = UnitFactory::createByTemplate(1);
@@ -111,7 +126,16 @@ class BuffActionTest extends AbstractUnitTest
 
         $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
 
-        $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            $name,
+            BuffAction::ATTACK_SPEED,
+            $power
+        );
 
         self::assertEquals(ActionInterface::SKIP_ANIMATION_METHOD, $action->getAnimationMethod());
         self::assertEquals('buff', $action->getMessageMethod());
@@ -144,7 +168,6 @@ class BuffActionTest extends AbstractUnitTest
     public function testBuffActionAttackSpeedReduced(): void
     {
         $name = 'use Battle Fury';
-        $modifyMethod = 'multiplierAttackSpeed';
         $power = 50;
 
         $unit = UnitFactory::createByTemplate(1);
@@ -152,7 +175,16 @@ class BuffActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            $name,
+            BuffAction::ATTACK_SPEED,
+            $power
+        );
 
         $this->expectException(UnitException::class);
         $this->expectErrorMessage(UnitException::NO_REDUCED_ATTACK_SPEED);
@@ -194,7 +226,6 @@ class BuffActionTest extends AbstractUnitTest
     public function testBuffActionNoTargetForBuff(): void
     {
         $name = 'use Reserve Forces';
-        $modifyMethod = 'multiplierMaxLife';
         $power = 130;
 
         $unit = UnitFactory::createByTemplate(1);
@@ -203,7 +234,16 @@ class BuffActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         // Цель бафа - случайный противник, но противник мертв
-        $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_RANDOM_ENEMY, $name, $modifyMethod, $power);
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_RANDOM_ENEMY,
+            $name,
+            BuffAction::MAX_LIFE,
+            $power
+        );
 
         // Применяем баф и получаем исключение - нет цели для применения бафа
 

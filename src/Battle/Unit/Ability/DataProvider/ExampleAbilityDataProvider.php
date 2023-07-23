@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Battle\Unit\Ability\DataProvider;
 
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Action\HealAction;
 use Battle\Action\ManaRestoreAction;
@@ -141,7 +142,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type'           => ActionInterface::BUFF,
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Blessed Shield',
-                                    'modify_method'  => 'addBlock',
+                                    'modify_method'  => BuffAction::ADD_BLOCK,
                                     'power'          => 15,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
@@ -175,7 +176,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type'           => ActionInterface::BUFF,
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Battle Fury',
-                                    'modify_method'  => 'multiplierAttackSpeed',
+                                    'modify_method'  => BuffAction::ATTACK_SPEED,
                                     'power'          => 140,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
@@ -440,7 +441,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type'           => ActionInterface::BUFF,
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Rage',
-                                    'modify_method'  => 'multiplierPhysicalDamage',
+                                    'modify_method'  => BuffAction::PHYSICAL_DAMAGE,
                                     'power'          => 200,
                                     'icon'           => '/images/icons/ability/285.png',
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
@@ -475,7 +476,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type'           => ActionInterface::BUFF,
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Reserve Forces',
-                                    'modify_method'  => 'multiplierMaxLife',
+                                    'modify_method'  => BuffAction::MAX_LIFE,
                                     'power'          => 130,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],

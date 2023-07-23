@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability;
 
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Ability;
@@ -229,7 +230,7 @@ class AbilityTest extends AbstractUnitTest
                                 'type'           => ActionInterface::BUFF,
                                 'type_target'    => ActionInterface::TARGET_SELF,
                                 'name'           => $name,
-                                'modify_method'  => $modifyMethod = 'multiplierAttackSpeed',
+                                'modify_method'  => BuffAction::ATTACK_SPEED,
                                 'power'          => $power = 140,
                                 'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                             ],
@@ -254,7 +255,7 @@ class AbilityTest extends AbstractUnitTest
             self::assertEquals($icon, $effect->getIcon());
 
             foreach ($effect->getOnDisableActions() as $onDisableAction) {
-                self::assertEquals($modifyMethod, $onDisableAction->getModifyMethod());
+                self::assertEquals(BuffAction::ATTACK_SPEED, $onDisableAction->getModifyMethod());
                 self::assertEquals($power, $onDisableAction->getPower());
             }
         }

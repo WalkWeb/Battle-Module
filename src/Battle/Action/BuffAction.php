@@ -11,6 +11,11 @@ use Battle\Unit\UnitInterface;
 
 class BuffAction extends AbstractAction
 {
+    public const MAX_LIFE                = 'multiplierMaxLife';
+    public const PHYSICAL_DAMAGE         = 'multiplierPhysicalDamage';
+    public const ATTACK_SPEED            = 'multiplierAttackSpeed';
+    public const ADD_BLOCK               = 'addBlock';
+
     private const HANDLE_METHOD          = 'applyBuffAction';
     private const DEFAULT_MESSAGE_METHOD = 'buff';
 

@@ -6,6 +6,7 @@ namespace Tests\Battle\Unit\Ability\Effect;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
@@ -426,7 +427,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
                         'allies_command' => $alliesCommand,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Blessed Shield',
-                        'modify_method'  => 'addBlock',
+                        'modify_method'  => BuffAction::ADD_BLOCK,
                         'power'          => 15,
                         'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                     ],
@@ -472,7 +473,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
                                 'type'           => ActionInterface::BUFF,
                                 'type_target'    => ActionInterface::TARGET_SELF,
                                 'name'           => $name,
-                                'modify_method'  => 'addBlock',
+                                'modify_method'  => BuffAction::ADD_BLOCK,
                                 'power'          => 15,
                                 'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                             ],

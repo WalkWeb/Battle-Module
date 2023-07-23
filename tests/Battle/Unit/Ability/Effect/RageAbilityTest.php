@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability\Effect;
 
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Command\CommandFactory;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
@@ -243,7 +244,7 @@ class RageAbilityTest extends AbstractUnitTest
                                 'type'           => ActionInterface::BUFF,
                                 'type_target'    => ActionInterface::TARGET_SELF,
                                 'name'           => $name,
-                                'modify_method'  => 'multiplierPhysicalDamage',
+                                'modify_method'  => BuffAction::PHYSICAL_DAMAGE,
                                 'power'          => 200,
                                 'icon'           => $icon,
                                 'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,

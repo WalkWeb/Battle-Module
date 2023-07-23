@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Effect;
 
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Unit\Effect\EffectException;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -81,7 +82,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'allies_command' => $command,
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
+                            'modify_method'  => BuffAction::MAX_LIFE,
                             'power'          => 130,
                         ]
                     ],
@@ -114,7 +115,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'allies_command' => $command,
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
+                            'modify_method'  => BuffAction::MAX_LIFE,
                             'power'          => 130,
                         ]
                     ],
@@ -137,7 +138,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'allies_command' => $command,
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
+                            'modify_method'  => BuffAction::MAX_LIFE,
                             'power'          => 130,
                         ]
                     ],
@@ -159,7 +160,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'allies_command' => $command,
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
+                            'modify_method'  => BuffAction::MAX_LIFE,
                             'power'          => 130,
                         ]
                     ],
@@ -182,7 +183,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'allies_command' => $command,
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
+                            'modify_method'  => BuffAction::MAX_LIFE,
                             'power'          => 130,
                         ]
                     ],
@@ -204,7 +205,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'allies_command' => $command,
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
+                            'modify_method'  => BuffAction::MAX_LIFE,
                             'power'          => 130,
                         ]
                     ],
@@ -227,7 +228,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'allies_command' => $command,
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
+                            'modify_method'  => BuffAction::MAX_LIFE,
                             'power'          => 130,
                         ]
                     ],
@@ -273,7 +274,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'allies_command' => $command,
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
+                            'modify_method'  => BuffAction::MAX_LIFE,
                             'power'          => 130,
                         ]
                     ],
@@ -295,7 +296,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'allies_command' => $command,
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
+                            'modify_method'  => BuffAction::MAX_LIFE,
                             'power'          => 130,
                         ]
                     ],
@@ -318,7 +319,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'allies_command' => $command,
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
+                            'modify_method'  => BuffAction::MAX_LIFE,
                             'power'          => 130,
                         ]
                     ],
@@ -340,7 +341,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'allies_command' => $command,
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
-                            'modify_method'  => 'multiplierMaxLife',
+                            'modify_method'  => BuffAction::MAX_LIFE,
                             'power'          => 130,
                         ]
                     ],

@@ -6,6 +6,7 @@ namespace Tests\Battle\Unit\Ability\Effect;
 
 use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
@@ -490,7 +491,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
                         'allies_command' => $alliesCommand,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => $name,
-                        'modify_method'  => 'multiplierMaxLife',
+                        'modify_method'  => BuffAction::MAX_LIFE,
                         'power'          => 130,
                         'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                     ],
@@ -536,7 +537,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
                                 'type'           => ActionInterface::BUFF,
                                 'type_target'    => ActionInterface::TARGET_SELF,
                                 'name'           => $name,
-                                'modify_method'  => 'multiplierMaxLife',
+                                'modify_method'  => BuffAction::MAX_LIFE,
                                 'power'          => 130,
                                 'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                             ],

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Classes\Orc;
 
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
@@ -94,7 +95,7 @@ class TitanTest extends AbstractUnitTest
                     'allies_command' => $alliesCommand,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'Reserve Forces',
-                    'modify_method'  => 'multiplierMaxLife',
+                    'modify_method'  => BuffAction::MAX_LIFE,
                     'power'          => 130,
                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                 ],
@@ -133,7 +134,7 @@ class TitanTest extends AbstractUnitTest
                     'allies_command' => $alliesCommand,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'Battle Fury',
-                    'modify_method'  => 'multiplierAttackSpeed',
+                    'modify_method'  => BuffAction::ATTACK_SPEED,
                     'power'          => 140,
                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                 ],

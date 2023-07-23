@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Response\Scenario;
 
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Action\ManaRestoreAction;
@@ -1160,7 +1161,7 @@ class ScenarioTest extends AbstractUnitTest
                         'allies_command' => $command,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'use Reserve Forces',
-                        'modify_method'  => 'multiplierMaxLife',
+                        'modify_method'  => BuffAction::MAX_LIFE,
                         'power'          => 130,
                     ],
                 ],

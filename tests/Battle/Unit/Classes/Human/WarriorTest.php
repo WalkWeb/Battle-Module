@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Classes\Human;
 
 use Battle\Action\ActionInterface;
+use Battle\Action\BuffAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
@@ -133,7 +134,7 @@ class WarriorTest extends AbstractUnitTest
                     'allies_command' => $alliesCommand,
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'Blessed Shield',
-                    'modify_method'  => 'addBlock',
+                    'modify_method'  => BuffAction::ADD_BLOCK,
                     'power'          => 15,
                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                 ],
