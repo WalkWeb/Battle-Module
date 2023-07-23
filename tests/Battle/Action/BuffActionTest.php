@@ -179,15 +179,14 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на увеличение меткости
+     * Тест на увеличение/уменьшение меткости
      *
+     * @dataProvider multiplierAccuracyDataProvider
+     * @param int $power
      * @throws Exception
      */
-    public function testBuffActionIncreasedAccuracySuccess(): void
+    public function testBuffActionMultiplierAccuracySuccess(int $power): void
     {
-        $name = 'increased accuracy';
-        $power = 150;
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -199,7 +198,7 @@ class BuffActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            $name,
+            'multiplier accuracy',
             BuffAction::ACCURACY,
             $power
         );
@@ -221,14 +220,14 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на уменьшение меткости (пока такая возможность недоступна)
+     * Тест на чрезмерное уменьшение меткости
      *
      * @throws Exception
      */
-    public function testBuffActionReducedAccuracy(): void
+    public function testBuffActionOverReducedAccuracy(): void
     {
         $name = 'increased accuracy';
-        $power = 50;
+        $power = 5;
 
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -247,7 +246,7 @@ class BuffActionTest extends AbstractUnitTest
         );
 
         $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::NO_REDUCED_ACCURACY);
+        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
         $action->handle();
     }
 
@@ -304,5 +303,18 @@ class BuffActionTest extends AbstractUnitTest
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::NO_TARGET_FOR_BUFF);
         $action->handle();
+    }
+
+    /**
+     * @return array
+     */
+    public function multiplierAccuracyDataProvider(): array
+    {
+        return [
+            [200],
+            [111],
+            [87],
+            [32],
+        ];
     }
 }

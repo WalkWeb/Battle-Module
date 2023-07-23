@@ -354,8 +354,8 @@ class Unit extends AbstractUnit
      */
     private function multiplierAccuracy(ActionInterface $action): void
     {
-        if ($action->getPower() <= 100) {
-            throw new UnitException(UnitException::NO_REDUCED_ACCURACY);
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
         }
 
         $multiplier = $action->getPower() / 100;

@@ -55,6 +55,9 @@ interface ActionInterface
     // Пропуск создания анимации
     public const SKIP_ANIMATION_METHOD  = 'skip';
 
+    // Максимальное уменьшение характеристики юнита - 90%
+    public const MIN_MULTIPLIER         = 10;
+
     /**
      * Название метода в классе Unit, который будет обрабатывать данное событие
      *
