@@ -8,22 +8,18 @@ use Battle\Action\ActionCollection;
 use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
-use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
+use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
-use Tests\Factory\UnitFactoryException;
 
 class BuffActionTest extends AbstractUnitTest
 {
     /**
      * Тест на баф, который увеличит здоровье юнита на 30%, а потом откат изменения
      *
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
-     * @throws ActionException
+     * @throws Exception
      */
     public function testBuffActionMaximumLifeSuccess(): void
     {
@@ -75,10 +71,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на попытку уменьшения здоровья - пока такой вариант не допустим (нужно проработать отдельно)
      *
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
-     * @throws ActionException
+     * @throws Exception
      */
     public function testBuffActionMaximumLifeReduced(): void
     {
@@ -109,10 +102,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение скорости атаки юнита
      *
-     * @throws ActionException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testBuffActionAttackSpeedSuccess(): void
     {
@@ -160,10 +150,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на уменьшение скорости атаки - такая механика пока недоступна
      *
-     * @throws ActionException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testBuffActionAttackSpeedReduced(): void
     {
@@ -192,12 +179,82 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на увеличение меткости
+     *
+     * @throws Exception
+     */
+    public function testBuffActionIncreasedAccuracySuccess(): void
+    {
+        $name = 'increased accuracy';
+        $power = 150;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            $name,
+            BuffAction::ACCURACY,
+            $power
+        );
+
+        $oldAccuracy = $unit->getOffense()->getAccuracy();
+
+        $multiplier = $power / 100;
+        $newAccuracy = $unit->getOffense()->getAccuracy() * $multiplier;
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        self::assertEquals($newAccuracy, $unit->getOffense()->getAccuracy());
+
+        // Откатываем баф
+        $action->getRevertAction()->handle();
+        self::assertEquals($oldAccuracy, $unit->getOffense()->getAccuracy());
+    }
+
+    /**
+     * Тест на уменьшение меткости (пока такая возможность недоступна)
+     *
+     * @throws Exception
+     */
+    public function testBuffActionReducedAccuracy(): void
+    {
+        $name = 'increased accuracy';
+        $power = 50;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            $name,
+            BuffAction::ACCURACY,
+            $power
+        );
+
+        $this->expectException(UnitException::class);
+        $this->expectErrorMessage(UnitException::NO_REDUCED_ACCURACY);
+        $action->handle();
+    }
+
+    /**
      * Тест на ситуацию, когда указан неизвестный метод модификации характеристики
      *
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
-     * @throws ActionException
+     * @throws Exception
      */
     public function testBuffActionUndefinedModifyMethod(): void
     {
@@ -218,10 +275,7 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * @throws ActionException
-     * @throws CommandException
-     * @throws UnitException
-     * @throws UnitFactoryException
+     * @throws Exception
      */
     public function testBuffActionNoTargetForBuff(): void
     {

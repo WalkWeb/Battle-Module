@@ -289,7 +289,7 @@ class Unit extends AbstractUnit
      * При этом само событие указывает, в getModifyMethod(), какой метод должен обработать текущее изменение
      * характеристик
      *
-     * @uses multiplierPhysicalDamage, multiplierPhysicalDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert
+     * @uses multiplierPhysicalDamage, multiplierPhysicalDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert, multiplierAccuracy, multiplierAccuracyRevert
      * @param ActionInterface $action - ожидается BuffAction
      * @return ActionCollection
      * @throws ActionException
@@ -342,6 +342,44 @@ class Unit extends AbstractUnit
     private function multiplierPhysicalDamageRevert(ActionInterface $action): void
     {
         $this->offense->setPhysicalDamage($this->offense->getPhysicalDamage() - $action->getRevertValue());
+    }
+
+    /**
+     * Увеличивает меткость юнита
+     *
+     * @param ActionInterface $action
+     * @throws ActionException
+     * @throws OffenseException
+     * @throws UnitException
+     */
+    private function multiplierAccuracy(ActionInterface $action): void
+    {
+        if ($action->getPower() <= 100) {
+            throw new UnitException(UnitException::NO_REDUCED_ACCURACY);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldAccuracy = $this->offense->getAccuracy();
+        $newAccuracy = (int)($this->offense->getAccuracy() * $multiplier);
+
+        $bonus = $newAccuracy - $oldAccuracy;
+
+        $this->offense->setAccuracy($newAccuracy);
+
+        $action->setRevertValue($bonus);
+    }
+
+    /**
+     * Откатывает изменение меткости
+     *
+     * @param ActionInterface $action
+     * @throws ActionException
+     * @throws OffenseException
+     */
+    private function multiplierAccuracyRevert(ActionInterface $action): void
+    {
+        $this->offense->setAccuracy($this->offense->getAccuracy() - $action->getRevertValue());
     }
 
     /**
