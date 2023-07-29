@@ -289,7 +289,7 @@ class Unit extends AbstractUnit
      * При этом само событие указывает, в getModifyMethod(), какой метод должен обработать текущее изменение
      * характеристик
      *
-     * @uses multiplierPhysicalDamage, multiplierPhysicalDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert, multiplierAccuracy, multiplierAccuracyRevert
+     * @uses multiplierPhysicalDamage, multiplierPhysicalDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert, multiplierAccuracy, multiplierAccuracyRevert, multiplierMagicAccuracy, multiplierMagicAccuracyRevert
      * @param ActionInterface $action - ожидается BuffAction
      * @return ActionCollection
      * @throws ActionException
@@ -345,7 +345,7 @@ class Unit extends AbstractUnit
     }
 
     /**
-     * Увеличивает меткость юнита
+     * Изменяет меткость юнита
      *
      * @param ActionInterface $action
      * @throws ActionException
@@ -380,6 +380,44 @@ class Unit extends AbstractUnit
     private function multiplierAccuracyRevert(ActionInterface $action): void
     {
         $this->offense->setAccuracy($this->offense->getAccuracy() - $action->getRevertValue());
+    }
+
+    /**
+     * Изменяет магическую меткость юнита
+     *
+     * @param ActionInterface $action
+     * @throws ActionException
+     * @throws OffenseException
+     * @throws UnitException
+     */
+    private function multiplierMagicAccuracy(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldMagicAccuracy = $this->offense->getMagicAccuracy();
+        $newMagicAccuracy = (int)($this->offense->getMagicAccuracy() * $multiplier);
+
+        $bonus = $newMagicAccuracy - $oldMagicAccuracy;
+
+        $this->offense->setMagicAccuracy($newMagicAccuracy);
+
+        $action->setRevertValue($bonus);
+    }
+
+    /**
+     * Откатывает изменение магической меткости
+     *
+     * @param ActionInterface $action
+     * @throws ActionException
+     * @throws OffenseException
+     */
+    private function multiplierMagicAccuracyRevert(ActionInterface $action): void
+    {
+        $this->offense->setMagicAccuracy($this->offense->getMagicAccuracy() - $action->getRevertValue());
     }
 
     /**

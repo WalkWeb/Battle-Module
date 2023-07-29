@@ -15,6 +15,7 @@ class BuffAction extends AbstractAction
     public const PHYSICAL_DAMAGE         = 'multiplierPhysicalDamage';
     public const ATTACK_SPEED            = 'multiplierAttackSpeed';
     public const ACCURACY                = 'multiplierAccuracy';
+    public const MAGIC_ACCURACY          = 'multiplierMagicAccuracy';
     public const ADD_BLOCK               = 'addBlock';
 
     private const HANDLE_METHOD          = 'applyBuffAction';

@@ -147,8 +147,8 @@ $effect = $this->getFactory()->create($data);
 - [ ] `death damage max resist` – reduced
 - [x] `accuracy` – increased
 - [x] `accuracy` – reduced
-- [ ] `magic accuracy` – increased
-- [ ] `magic accuracy` – reduced
+- [x] `magic accuracy` – increased
+- [x] `magic accuracy` – reduced
 - [ ] `defense` – increased
 - [ ] `defense` – reduced
 - [ ] `magic defense` – increased

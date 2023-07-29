@@ -226,7 +226,7 @@ class BuffActionTest extends AbstractUnitTest
      */
     public function testBuffActionOverReducedAccuracy(): void
     {
-        $name = 'increased accuracy';
+        $name = 'reduced magic accuracy';
         $power = 5;
 
         $unit = UnitFactory::createByTemplate(1);
@@ -242,6 +242,78 @@ class BuffActionTest extends AbstractUnitTest
             BuffAction::TARGET_SELF,
             $name,
             BuffAction::ACCURACY,
+            $power
+        );
+
+        $this->expectException(UnitException::class);
+        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
+        $action->handle();
+    }
+
+    /**
+     * Тест на увеличение/уменьшение магической меткости
+     *
+     * @dataProvider multiplierAccuracyDataProvider
+     * @param int $power
+     * @throws Exception
+     */
+    public function testBuffActionMultiplierMagicAccuracySuccess(int $power): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier magic accuracy',
+            BuffAction::MAGIC_ACCURACY,
+            $power
+        );
+
+        $oldMagicAccuracy = $unit->getOffense()->getMagicAccuracy();
+
+        $multiplier = $power / 100;
+        $newMagicAccuracy = $unit->getOffense()->getMagicAccuracy() * $multiplier;
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        self::assertEquals($newMagicAccuracy, $unit->getOffense()->getMagicAccuracy());
+
+        // Откатываем баф
+        $action->getRevertAction()->handle();
+        self::assertEquals($oldMagicAccuracy, $unit->getOffense()->getMagicAccuracy());
+    }
+
+    /**
+     * Тест на чрезмерное уменьшение магической меткости
+     *
+     * @throws Exception
+     */
+    public function testBuffActionOverReducedMagicAccuracy(): void
+    {
+        $name = 'reduced magic accuracy';
+        $power = 5;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            $name,
+            BuffAction::MAGIC_ACCURACY,
             $power
         );
 
