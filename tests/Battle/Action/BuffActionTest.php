@@ -276,7 +276,7 @@ class BuffActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            'multiplier accuracy',
+            'multiplier magic accuracy',
             BuffAction::MAGIC_ACCURACY,
             $power
         );
@@ -324,6 +324,83 @@ class BuffActionTest extends AbstractUnitTest
             BuffAction::TARGET_SELF,
             $name,
             BuffAction::MAGIC_ACCURACY,
+            $power
+        );
+
+        $this->expectException(UnitException::class);
+        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
+        $action->handle();
+    }
+
+    /**
+     * Тест на увеличение/уменьшение защиты
+     *
+     * @dataProvider multiplierDefenseDataProvider
+     * @param int $power
+     * @param int $newDefense
+     * @throws Exception
+     */
+    public function testBuffActionMultiplierDefenseSuccess(int $power, int $newDefense): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier defense',
+            BuffAction::DEFENSE,
+            $power
+        );
+
+        // Изначальная защита
+        self::assertEquals(275, $unit->getDefense()->getDefense());
+
+        $oldDefense = $unit->getDefense()->getDefense();
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленную защиту
+        self::assertEquals($newDefense, $unit->getDefense()->getDefense());
+
+        // Проверяем обновленную защиту от множителя (на всякий случай)
+        self::assertEquals((int)($oldDefense * ($power / 100)), $unit->getDefense()->getDefense());
+
+        // Откатываем баф и проверяем, что защита вернулась к исходной
+        $action->getRevertAction()->handle();
+        self::assertEquals(275, $unit->getDefense()->getDefense());
+    }
+
+    /**
+     * Тест на чрезмерное уменьшение меткости
+     *
+     * @throws Exception
+     */
+    public function testBuffActionOverReducedDefense(): void
+    {
+        $name = 'reduced defense';
+        $power = 5;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            $name,
+            BuffAction::DEFENSE,
             $power
         );
 
@@ -436,4 +513,30 @@ class BuffActionTest extends AbstractUnitTest
             ],
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function multiplierDefenseDataProvider(): array
+    {
+        return [
+            [
+                200,
+                550,
+            ],
+            [
+                111,
+                305,
+            ],
+            [
+                87,
+                239,
+            ],
+            [
+                32,
+                88,
+            ],
+        ];
+    }
+
 }

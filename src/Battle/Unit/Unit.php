@@ -289,7 +289,7 @@ class Unit extends AbstractUnit
      * При этом само событие указывает, в getModifyMethod(), какой метод должен обработать текущее изменение
      * характеристик
      *
-     * @uses multiplierPhysicalDamage, multiplierPhysicalDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert, multiplierAccuracy, multiplierAccuracyRevert, multiplierMagicAccuracy, multiplierMagicAccuracyRevert
+     * @uses multiplierPhysicalDamage, multiplierPhysicalDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert, multiplierAccuracy, multiplierAccuracyRevert, multiplierMagicAccuracy, multiplierMagicAccuracyRevert, multiplierDefense, multiplierDefenseRevert
      * @param ActionInterface $action - ожидается BuffAction
      * @return ActionCollection
      * @throws ActionException
@@ -418,6 +418,41 @@ class Unit extends AbstractUnit
     private function multiplierMagicAccuracyRevert(ActionInterface $action): void
     {
         $this->offense->setMagicAccuracy($this->offense->getMagicAccuracy() - $action->getRevertValue());
+    }
+
+    /**
+     * Изменяет защиту юнита
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierDefense(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldDefense = $this->defense->getDefense();
+        $newDefense = (int)($this->defense->getDefense() * $multiplier);
+
+        $bonus = $newDefense - $oldDefense;
+
+        $this->defense->setDefense($newDefense);
+
+        $action->setRevertValue($bonus);
+    }
+
+    /**
+     * Откатывает изменение защиты
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierDefenseRevert(ActionInterface $action): void
+    {
+        $this->defense->setDefense($this->defense->getDefense() - $action->getRevertValue());
     }
 
     /**
