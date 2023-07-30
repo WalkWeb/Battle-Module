@@ -183,11 +183,12 @@ class BuffActionTest extends AbstractUnitTest
      *
      * @dataProvider multiplierAccuracyDataProvider
      * @param int $power
+     * @param int $newAccuracy
      * @throws Exception
      */
-    public function testBuffActionMultiplierAccuracySuccess(int $power): void
+    public function testBuffActionMultiplierAccuracySuccess(int $power, int $newAccuracy): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(12);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -203,20 +204,24 @@ class BuffActionTest extends AbstractUnitTest
             $power
         );
 
-        $oldAccuracy = $unit->getOffense()->getAccuracy();
+        // Изначальная меткость
+        self::assertEquals(213, $unit->getOffense()->getAccuracy());
 
-        $multiplier = $power / 100;
-        $newAccuracy = $unit->getOffense()->getAccuracy() * $multiplier;
+        $oldAccuracy = $unit->getOffense()->getAccuracy();
 
         // Применяем баф
         self::assertTrue($action->canByUsed());
         $action->handle();
 
+        // Проверяем обновленную меткость
         self::assertEquals($newAccuracy, $unit->getOffense()->getAccuracy());
 
-        // Откатываем баф
+        // Проверяем обновленную меткость от множителя (на всякий случай)
+        self::assertEquals((int)($oldAccuracy * ($power / 100)), $unit->getOffense()->getAccuracy());
+
+        // Откатываем баф и проверяем, что меткость вернулась к исходной
         $action->getRevertAction()->handle();
-        self::assertEquals($oldAccuracy, $unit->getOffense()->getAccuracy());
+        self::assertEquals(213, $unit->getOffense()->getAccuracy());
     }
 
     /**
@@ -253,13 +258,14 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение магической меткости
      *
-     * @dataProvider multiplierAccuracyDataProvider
+     * @dataProvider multiplierMagicAccuracyDataProvider
      * @param int $power
+     * @param int $newAccuracy
      * @throws Exception
      */
-    public function testBuffActionMultiplierMagicAccuracySuccess(int $power): void
+    public function testBuffActionMultiplierMagicAccuracySuccess(int $power, int $newAccuracy): void
     {
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate(12);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -270,25 +276,29 @@ class BuffActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            'multiplier magic accuracy',
+            'multiplier accuracy',
             BuffAction::MAGIC_ACCURACY,
             $power
         );
 
-        $oldMagicAccuracy = $unit->getOffense()->getMagicAccuracy();
+        // Изначальная меткость
+        self::assertEquals(114, $unit->getOffense()->getMagicAccuracy());
 
-        $multiplier = $power / 100;
-        $newMagicAccuracy = $unit->getOffense()->getMagicAccuracy() * $multiplier;
+        $oldAccuracy = $unit->getOffense()->getMagicAccuracy();
 
         // Применяем баф
         self::assertTrue($action->canByUsed());
         $action->handle();
 
-        self::assertEquals($newMagicAccuracy, $unit->getOffense()->getMagicAccuracy());
+        // Проверяем обновленную меткость
+        self::assertEquals($newAccuracy, $unit->getOffense()->getMagicAccuracy());
 
-        // Откатываем баф
+        // Проверяем обновленную меткость от множителя (на всякий случай)
+        self::assertEquals((int)($oldAccuracy * ($power / 100)), $unit->getOffense()->getMagicAccuracy());
+
+        // Откатываем баф и проверяем, что меткость вернулась к исходной
         $action->getRevertAction()->handle();
-        self::assertEquals($oldMagicAccuracy, $unit->getOffense()->getMagicAccuracy());
+        self::assertEquals(114, $unit->getOffense()->getMagicAccuracy());
     }
 
     /**
@@ -383,10 +393,47 @@ class BuffActionTest extends AbstractUnitTest
     public function multiplierAccuracyDataProvider(): array
     {
         return [
-            [200],
-            [111],
-            [87],
-            [32],
+            [
+                200,
+                426,
+            ],
+            [
+                111,
+                236,
+            ],
+            [
+                87,
+                185,
+            ],
+            [
+                32,
+                68,
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function multiplierMagicAccuracyDataProvider(): array
+    {
+        return [
+            [
+                200,
+                228,
+            ],
+            [
+                111,
+                126,
+            ],
+            [
+                87,
+                99,
+            ],
+            [
+                32,
+                36,
+            ],
         ];
     }
 }
