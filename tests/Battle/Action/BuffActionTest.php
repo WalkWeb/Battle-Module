@@ -469,6 +469,80 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на увеличение/уменьшение магической защиты
+     *
+     * @dataProvider multiplierCriticalChanceDataProvider
+     * @param int $power
+     * @param int $newCriticalChance
+     * @throws Exception
+     */
+    public function testBuffActionMultiplierCriticalChanceSuccess(int $power, int $newCriticalChance): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier critical chance',
+            BuffAction::CRITICAL_CHANCE,
+            $power
+        );
+
+        // Изначальный шанс критического удара
+        self::assertEquals(15, $unit->getOffense()->getCriticalChance());
+
+        $oldCriticalChance = $unit->getOffense()->getCriticalChance();
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный шанс критического удара
+        self::assertEquals($newCriticalChance, $unit->getOffense()->getCriticalChance());
+
+        // Проверяем обновленный шанс критического удара от множителя (на всякий случай)
+        self::assertEquals((int)($oldCriticalChance * ($power / 100)), $unit->getOffense()->getCriticalChance());
+
+        // Откатываем баф и проверяем, что шанс критического удара вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(15, $unit->getOffense()->getCriticalChance());
+    }
+
+    /**
+     * Тест на чрезмерное уменьшение магической защиты
+     *
+     * @throws Exception
+     */
+    public function testBuffActionOverReducedCriticalChance(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier critical chance',
+            BuffAction::CRITICAL_CHANCE,
+            5
+        );
+
+        $this->expectException(UnitException::class);
+        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
+        $action->handle();
+    }
+
+    /**
      * Тест на ситуацию, когда указан неизвестный метод модификации характеристики
      *
      * @throws Exception
@@ -619,6 +693,31 @@ class BuffActionTest extends AbstractUnitTest
             [
                 32,
                 41,
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function multiplierCriticalChanceDataProvider(): array
+    {
+        return [
+            [
+                200,
+                30,
+            ],
+            [
+                111,
+                16,
+            ],
+            [
+                87,
+                13,
+            ],
+            [
+                32,
+                4,
             ],
         ];
     }

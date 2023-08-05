@@ -725,7 +725,7 @@ class UnitFactory
                 'accuracy'            => 213,
                 'magic_accuracy'      => 114,
                 'block_ignoring'      => 0,
-                'critical_chance'     => 5,
+                'critical_chance'     => 15,
                 'critical_multiplier' => 200,
                 'damage_multiplier'   => 100,
                 'vampirism'           => 0,

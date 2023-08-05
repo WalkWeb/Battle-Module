@@ -306,4 +306,39 @@ trait ModifyStatsTrait
         $block -= $action->getRevertValue();
         $this->defense->setBlock($block);
     }
+
+    /**
+     * Изменяет шанс критического удара юнита
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierCriticalChance(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldCriticalChance = $this->offense->getCriticalChance();
+        $newCriticalChance = (int)($this->offense->getCriticalChance() * $multiplier);
+
+        $bonus = $newCriticalChance - $oldCriticalChance;
+
+        $this->offense->setCriticalChance($newCriticalChance);
+
+        $action->setRevertValue($bonus);
+    }
+
+    /**
+     * Откатывает изменение шанса критического удара
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierCriticalChanceRevert(ActionInterface $action): void
+    {
+        $this->offense->setCriticalChance($this->offense->getCriticalChance() - $action->getRevertValue());
+    }
 }
