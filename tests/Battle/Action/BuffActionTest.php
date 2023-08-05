@@ -469,7 +469,7 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на увеличение/уменьшение магической защиты
+     * Тест на увеличение/уменьшение шанса критического удара
      *
      * @dataProvider multiplierCriticalChanceDataProvider
      * @param int $power
@@ -515,7 +515,7 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на чрезмерное уменьшение магической защиты
+     * Тест на чрезмерное уменьшение шанса критического удара
      *
      * @throws Exception
      */
@@ -534,6 +534,80 @@ class BuffActionTest extends AbstractUnitTest
             BuffAction::TARGET_SELF,
             'multiplier critical chance',
             BuffAction::CRITICAL_CHANCE,
+            5
+        );
+
+        $this->expectException(UnitException::class);
+        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
+        $action->handle();
+    }
+
+    /**
+     * Тест на увеличение/уменьшение силы критического удара
+     *
+     * @dataProvider multiplierCriticalMultiplierDataProvider
+     * @param int $power
+     * @param int $newCriticalMultiplier
+     * @throws Exception
+     */
+    public function testBuffActionMultiplierCriticalMultiplierSuccess(int $power, int $newCriticalMultiplier): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier critical multiplier',
+            BuffAction::CRITICAL_MULTIPLIER,
+            $power
+        );
+
+        // Изначальный силы критического удара
+        self::assertEquals(200, $unit->getOffense()->getCriticalMultiplier());
+
+        $oldCriticalMultiplier = $unit->getOffense()->getCriticalMultiplier();
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленную силу критического удара
+        self::assertEquals($newCriticalMultiplier, $unit->getOffense()->getCriticalMultiplier());
+
+        // Проверяем обновленную силу критического удара от множителя (на всякий случай)
+        self::assertEquals((int)($oldCriticalMultiplier * ($power / 100)), $unit->getOffense()->getCriticalMultiplier());
+
+        // Откатываем баф и проверяем, что сила критического удара вернулась к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(200, $unit->getOffense()->getCriticalMultiplier());
+    }
+
+    /**
+     * Тест на чрезмерное уменьшение силы критического удара
+     *
+     * @throws Exception
+     */
+    public function testBuffActionOverReducedCriticalMultiplier(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier critical multiplier',
+            BuffAction::CRITICAL_MULTIPLIER,
             5
         );
 
@@ -718,6 +792,31 @@ class BuffActionTest extends AbstractUnitTest
             [
                 32,
                 4,
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function multiplierCriticalMultiplierDataProvider(): array
+    {
+        return [
+            [
+                200,
+                400,
+            ],
+            [
+                111,
+                222,
+            ],
+            [
+                87,
+                174,
+            ],
+            [
+                32,
+                64,
             ],
         ];
     }
