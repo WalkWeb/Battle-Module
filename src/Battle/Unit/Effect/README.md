@@ -151,8 +151,8 @@ $effect = $this->getFactory()->create($data);
 - [x] `magic accuracy` – reduced
 - [x] `defense` – increased
 - [x] `defense` – reduced
-- [ ] `magic defense` – increased
-- [ ] `magic defense` – reduced
+- [x] `magic defense` – increased
+- [x] `magic defense` – reduced
 - [ ] `critical chance` – increased
 - [ ] `critical chance` – reduced
 - [ ] `critical multiplier` – increased

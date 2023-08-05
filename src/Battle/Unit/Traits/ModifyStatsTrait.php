@@ -164,6 +164,41 @@ trait ModifyStatsTrait
     }
 
     /**
+     * Изменяет магическую защиту юнита
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierMagicDefense(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldMagicDefense = $this->defense->getMagicDefense();
+        $newMagicDefense = (int)($this->defense->getMagicDefense() * $multiplier);
+
+        $bonus = $newMagicDefense - $oldMagicDefense;
+
+        $this->defense->setMagicDefense($newMagicDefense);
+
+        $action->setRevertValue($bonus);
+    }
+
+    /**
+     * Откатывает изменение магической защиты
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierMagicDefenseRevert(ActionInterface $action): void
+    {
+        $this->defense->setMagicDefense($this->defense->getMagicDefense() - $action->getRevertValue());
+    }
+
+    /**
      * Увеличивает здоровье юнита (можно сделать и уменьшение, но пока делаем только увеличение)
      *
      * @param ActionInterface $action - ожидается BuffAction

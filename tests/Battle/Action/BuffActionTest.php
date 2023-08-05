@@ -75,9 +75,6 @@ class BuffActionTest extends AbstractUnitTest
      */
     public function testBuffActionMaximumLifeReduced(): void
     {
-        $name = 'use Reserve Forces';
-        $power = 50;
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -89,9 +86,9 @@ class BuffActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            $name,
+            'use Reserve Forces',
             BuffAction::MAX_LIFE,
-            $power
+            50
         );
 
         $this->expectException(UnitException::class);
@@ -154,9 +151,6 @@ class BuffActionTest extends AbstractUnitTest
      */
     public function testBuffActionAttackSpeedReduced(): void
     {
-        $name = 'use Battle Fury';
-        $power = 50;
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -168,9 +162,9 @@ class BuffActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            $name,
+            'use Battle Fury',
             BuffAction::ATTACK_SPEED,
-            $power
+            50
         );
 
         $this->expectException(UnitException::class);
@@ -231,9 +225,6 @@ class BuffActionTest extends AbstractUnitTest
      */
     public function testBuffActionOverReducedAccuracy(): void
     {
-        $name = 'reduced magic accuracy';
-        $power = 5;
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -245,9 +236,9 @@ class BuffActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            $name,
+            'reduced accuracy',
             BuffAction::ACCURACY,
-            $power
+            5
         );
 
         $this->expectException(UnitException::class);
@@ -308,9 +299,6 @@ class BuffActionTest extends AbstractUnitTest
      */
     public function testBuffActionOverReducedMagicAccuracy(): void
     {
-        $name = 'reduced magic accuracy';
-        $power = 5;
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -322,9 +310,9 @@ class BuffActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            $name,
+            'reduced magic accuracy',
             BuffAction::MAGIC_ACCURACY,
-            $power
+            5
         );
 
         $this->expectException(UnitException::class);
@@ -379,15 +367,12 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на чрезмерное уменьшение меткости
+     * Тест на чрезмерное уменьшение защиты
      *
      * @throws Exception
      */
     public function testBuffActionOverReducedDefense(): void
     {
-        $name = 'reduced defense';
-        $power = 5;
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -399,9 +384,83 @@ class BuffActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            $name,
+            'reduced defense',
             BuffAction::DEFENSE,
+            5
+        );
+
+        $this->expectException(UnitException::class);
+        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
+        $action->handle();
+    }
+
+    /**
+     * Тест на увеличение/уменьшение магической защиты
+     *
+     * @dataProvider multiplierMagicDefenseDataProvider
+     * @param int $power
+     * @param int $newDefense
+     * @throws Exception
+     */
+    public function testBuffActionMultiplierMagicDefenseSuccess(int $power, int $newDefense): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier magic defense',
+            BuffAction::MAGIC_DEFENSE,
             $power
+        );
+
+        // Изначальная магическая защита
+        self::assertEquals(131, $unit->getDefense()->getMagicDefense());
+
+        $oldMagicDefense = $unit->getDefense()->getMagicDefense();
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленную магическую защиту
+        self::assertEquals($newDefense, $unit->getDefense()->getMagicDefense());
+
+        // Проверяем обновленную магическую защиту от множителя (на всякий случай)
+        self::assertEquals((int)($oldMagicDefense * ($power / 100)), $unit->getDefense()->getMagicDefense());
+
+        // Откатываем баф и проверяем, что магическая защита вернулась к исходной
+        $action->getRevertAction()->handle();
+        self::assertEquals(131, $unit->getDefense()->getMagicDefense());
+    }
+
+    /**
+     * Тест на чрезмерное уменьшение магической защиты
+     *
+     * @throws Exception
+     */
+    public function testBuffActionOverReducedMagicDefense(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'reduced magic defense',
+            BuffAction::MAGIC_DEFENSE,
+            5
         );
 
         $this->expectException(UnitException::class);
@@ -539,4 +598,28 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
+    /**
+     * @return array
+     */
+    public function multiplierMagicDefenseDataProvider(): array
+    {
+        return [
+            [
+                200,
+                262,
+            ],
+            [
+                111,
+                145,
+            ],
+            [
+                87,
+                113,
+            ],
+            [
+                32,
+                41,
+            ],
+        ];
+    }
 }

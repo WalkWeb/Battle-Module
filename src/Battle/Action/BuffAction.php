@@ -17,6 +17,7 @@ class BuffAction extends AbstractAction
     public const ACCURACY                = 'multiplierAccuracy';
     public const MAGIC_ACCURACY          = 'multiplierMagicAccuracy';
     public const DEFENSE                 = 'multiplierDefense';
+    public const MAGIC_DEFENSE           = 'multiplierMagicDefense';
     public const ADD_BLOCK               = 'addBlock';
 
     private const HANDLE_METHOD          = 'applyBuffAction';

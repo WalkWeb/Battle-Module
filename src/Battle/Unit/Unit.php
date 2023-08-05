@@ -289,7 +289,7 @@ class Unit extends AbstractUnit
      * При этом само событие указывает, в getModifyMethod(), какой метод должен обработать текущее изменение
      * характеристик
      *
-     * @uses multiplierPhysicalDamage, multiplierPhysicalDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert, multiplierAccuracy, multiplierAccuracyRevert, multiplierMagicAccuracy, multiplierMagicAccuracyRevert, multiplierDefense, multiplierDefenseRevert
+     * @uses multiplierPhysicalDamage, multiplierPhysicalDamageRevert, multiplierMaxLife, multiplierMaxLifeRevert, multiplierAttackSpeed, multiplierAttackSpeedRevert, addBlock, addBlockRevert, multiplierAccuracy, multiplierAccuracyRevert, multiplierMagicAccuracy, multiplierMagicAccuracyRevert, multiplierDefense, multiplierDefenseRevert, multiplierMagicDefense, multiplierMagicDefenseRevert
      * @param ActionInterface $action - ожидается BuffAction
      * @return ActionCollection
      * @throws ActionException
