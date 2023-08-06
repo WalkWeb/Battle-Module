@@ -376,4 +376,39 @@ trait ModifyStatsTrait
     {
         $this->offense->setCriticalMultiplier($this->offense->getCriticalMultiplier() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет урон огнем юнита
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierFireDamage(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldFireDamage = $this->offense->getFireDamage();
+        $newFireDamage = (int)($this->offense->getFireDamage() * $multiplier);
+
+        $bonus = $newFireDamage - $oldFireDamage;
+
+        $this->offense->setFireDamage($newFireDamage);
+
+        $action->setRevertValue($bonus);
+    }
+
+    /**
+     * Откатывает изменение урона огнем
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierFireDamageRevert(ActionInterface $action): void
+    {
+        $this->offense->setFireDamage($this->offense->getFireDamage() - $action->getRevertValue());
+    }
 }

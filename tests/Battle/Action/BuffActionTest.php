@@ -568,7 +568,7 @@ class BuffActionTest extends AbstractUnitTest
             $power
         );
 
-        // Изначальный силы критического удара
+        // Изначальная сила критического удара
         self::assertEquals(200, $unit->getOffense()->getCriticalMultiplier());
 
         $oldCriticalMultiplier = $unit->getOffense()->getCriticalMultiplier();
@@ -608,6 +608,80 @@ class BuffActionTest extends AbstractUnitTest
             BuffAction::TARGET_SELF,
             'multiplier critical multiplier',
             BuffAction::CRITICAL_MULTIPLIER,
+            5
+        );
+
+        $this->expectException(UnitException::class);
+        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
+        $action->handle();
+    }
+
+    /**
+     * Тест на увеличение/уменьшение урона огнем
+     *
+     * @dataProvider multiplierFireDamageDataProvider
+     * @param int $power
+     * @param int $newFireDamage
+     * @throws Exception
+     */
+    public function testBuffActionMultiplierFireDamageSuccess(int $power, int $newFireDamage): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier fire damage',
+            BuffAction::FIRE_DAMAGE,
+            $power
+        );
+
+        // Изначальный урон огнем
+        self::assertEquals(65, $unit->getOffense()->getFireDamage());
+
+        $oldFireDamage = $unit->getOffense()->getFireDamage();
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный урон огнем
+        self::assertEquals($newFireDamage, $unit->getOffense()->getFireDamage());
+
+        // Проверяем обновленный урон огнем от множителя (на всякий случай)
+        self::assertEquals((int)($oldFireDamage * ($power / 100)), $unit->getOffense()->getFireDamage());
+
+        // Откатываем баф и проверяем, что урон огнем вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(65, $unit->getOffense()->getFireDamage());
+    }
+
+    /**
+     * Тест на чрезмерное уменьшение урона огнем
+     *
+     * @throws Exception
+     */
+    public function testBuffActionOverReducedFireDamage(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier fire damage',
+            BuffAction::FIRE_DAMAGE,
             5
         );
 
@@ -817,6 +891,31 @@ class BuffActionTest extends AbstractUnitTest
             [
                 32,
                 64,
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function multiplierFireDamageDataProvider(): array
+    {
+        return [
+            [
+                200,
+                130,
+            ],
+            [
+                111,
+                72,
+            ],
+            [
+                87,
+                56,
+            ],
+            [
+                32,
+                20,
             ],
         ];
     }

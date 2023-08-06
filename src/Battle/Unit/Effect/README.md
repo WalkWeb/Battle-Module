@@ -14,8 +14,7 @@
 - Удаление эффекта
 
 Возвращают ActionCollection, которые будут применяться к юниту. При этом, как уже говорилось ранее, это может быть что 
-угодно — урон, лечене, баф и 
-даже другой эффект.
+угодно — урон, лечение, баф и даже другой эффект.
 
 Все это в сумме позволяет создавать эффекты, которые, например, будут:
 
@@ -95,8 +94,6 @@ $effect = $this->getFactory()->create($data);
 При этом они будут разные для увеличения и уменьшения. Чтобы отслеживать прогресс по этому процессу сделан список ниже.
 Также указано название способности, где можно посмотреть пример реализации изменения данной характеристики.
 
-- [ ] `side` – 
-- [ ] `row` – 
 - [x] `life` – increased. Пример в способности "Reserve Forces"
 - [ ] `life` – reduced
 - [ ] `mana` – increased
@@ -105,8 +102,8 @@ $effect = $this->getFactory()->create($data);
 - [ ] `mental barrier` – reduced
 - [x] `physical damage` – increased. Пример в способности "Rage"
 - [ ] `physical damage` – reduced
-- [ ] `fire damage` – increased
-- [ ] `fire damage` – reduced
+- [x] `fire damage` – increased
+- [x] `fire damage` – reduced
 - [ ] `water damage` – increased
 - [ ] `water damage` – reduced
 - [ ] `air damage` – increased
@@ -157,10 +154,6 @@ $effect = $this->getFactory()->create($data);
 - [x] `critical chance` – reduced
 - [x] `critical multiplier` – increased
 - [x] `critical multiplier` – reduced
-- [ ] `damage type` – increased
-- [ ] `damage type` – reduced
-- [ ] `weapon type` – increased
-- [ ] `weapon type` – reduced
 - [x] `attack speed` – increased. Пример в способности "Battle Fury"
 - [ ] `attack speed` – reduced
 - [ ] `cast speed` – increased
@@ -171,8 +164,6 @@ $effect = $this->getFactory()->create($data);
 - [ ] `magic block` – reduced
 - [ ] `block ignore` – increased
 - [ ] `block ignore` – reduced
-- [ ] `dodge` – increased
-- [ ] `dodge` – reduced
 - [ ] `add concentration` – increased
 - [ ] `add concentration` – reduced
 - [ ] `add cunning` – increased
