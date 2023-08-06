@@ -219,34 +219,6 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на чрезмерное уменьшение меткости
-     *
-     * @throws Exception
-     */
-    public function testBuffActionOverReducedAccuracy(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new BuffAction(
-            $this->getContainer(),
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'reduced accuracy',
-            BuffAction::ACCURACY,
-            5
-        );
-
-        $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
-        $action->handle();
-    }
-
-    /**
      * Тест на увеличение/уменьшение магической меткости
      *
      * @dataProvider multiplierMagicAccuracyDataProvider
@@ -290,34 +262,6 @@ class BuffActionTest extends AbstractUnitTest
         // Откатываем баф и проверяем, что меткость вернулась к исходной
         $action->getRevertAction()->handle();
         self::assertEquals(114, $unit->getOffense()->getMagicAccuracy());
-    }
-
-    /**
-     * Тест на чрезмерное уменьшение магической меткости
-     *
-     * @throws Exception
-     */
-    public function testBuffActionOverReducedMagicAccuracy(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new BuffAction(
-            $this->getContainer(),
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'reduced magic accuracy',
-            BuffAction::MAGIC_ACCURACY,
-            5
-        );
-
-        $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
-        $action->handle();
     }
 
     /**
@@ -367,34 +311,6 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на чрезмерное уменьшение защиты
-     *
-     * @throws Exception
-     */
-    public function testBuffActionOverReducedDefense(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new BuffAction(
-            $this->getContainer(),
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'reduced defense',
-            BuffAction::DEFENSE,
-            5
-        );
-
-        $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
-        $action->handle();
-    }
-
-    /**
      * Тест на увеличение/уменьшение магической защиты
      *
      * @dataProvider multiplierMagicDefenseDataProvider
@@ -438,34 +354,6 @@ class BuffActionTest extends AbstractUnitTest
         // Откатываем баф и проверяем, что магическая защита вернулась к исходной
         $action->getRevertAction()->handle();
         self::assertEquals(131, $unit->getDefense()->getMagicDefense());
-    }
-
-    /**
-     * Тест на чрезмерное уменьшение магической защиты
-     *
-     * @throws Exception
-     */
-    public function testBuffActionOverReducedMagicDefense(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new BuffAction(
-            $this->getContainer(),
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'reduced magic defense',
-            BuffAction::MAGIC_DEFENSE,
-            5
-        );
-
-        $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
-        $action->handle();
     }
 
     /**
@@ -515,34 +403,6 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на чрезмерное уменьшение шанса критического удара
-     *
-     * @throws Exception
-     */
-    public function testBuffActionOverReducedCriticalChance(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new BuffAction(
-            $this->getContainer(),
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'multiplier critical chance',
-            BuffAction::CRITICAL_CHANCE,
-            5
-        );
-
-        $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
-        $action->handle();
-    }
-
-    /**
      * Тест на увеличение/уменьшение силы критического удара
      *
      * @dataProvider multiplierCriticalMultiplierDataProvider
@@ -586,34 +446,6 @@ class BuffActionTest extends AbstractUnitTest
         // Откатываем баф и проверяем, что сила критического удара вернулась к исходному значению
         $action->getRevertAction()->handle();
         self::assertEquals(200, $unit->getOffense()->getCriticalMultiplier());
-    }
-
-    /**
-     * Тест на чрезмерное уменьшение силы критического удара
-     *
-     * @throws Exception
-     */
-    public function testBuffActionOverReducedCriticalMultiplier(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new BuffAction(
-            $this->getContainer(),
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'multiplier critical multiplier',
-            BuffAction::CRITICAL_MULTIPLIER,
-            5
-        );
-
-        $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
-        $action->handle();
     }
 
     /**
@@ -663,11 +495,13 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на чрезмерное уменьшение урона огнем
+     * Тест на чрезмерное уменьшение характеристики
      *
+     * @dataProvider overReducedStatDataProvider
+     * @param string $modifyMethod
      * @throws Exception
      */
-    public function testBuffActionOverReducedFireDamage(): void
+    public function testBuffActionOverReducedStat(string $modifyMethod): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -680,8 +514,8 @@ class BuffActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            'multiplier fire damage',
-            BuffAction::FIRE_DAMAGE,
+            'OverReducedStat',
+            $modifyMethod,
             5
         );
 
@@ -917,6 +751,19 @@ class BuffActionTest extends AbstractUnitTest
                 32,
                 20,
             ],
+        ];
+    }
+
+    public function overReducedStatDataProvider(): array
+    {
+        return [
+            [BuffAction::FIRE_DAMAGE],
+            [BuffAction::CRITICAL_MULTIPLIER],
+            [BuffAction::CRITICAL_CHANCE],
+            [BuffAction::MAGIC_DEFENSE],
+            [BuffAction::DEFENSE],
+            [BuffAction::MAGIC_ACCURACY],
+            [BuffAction::ACCURACY],
         ];
     }
 }
