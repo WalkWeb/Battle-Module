@@ -411,4 +411,39 @@ trait ModifyStatsTrait
     {
         $this->offense->setFireDamage($this->offense->getFireDamage() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет урон водой юнита
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierWaterDamage(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldWaterDamage = $this->offense->getWaterDamage();
+        $newWaterDamage = (int)($this->offense->getWaterDamage() * $multiplier);
+
+        $bonus = $newWaterDamage - $oldWaterDamage;
+
+        $this->offense->setWaterDamage($newWaterDamage);
+
+        $action->setRevertValue($bonus);
+    }
+
+    /**
+     * Откатывает изменение урона водой
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierWaterDamageRevert(ActionInterface $action): void
+    {
+        $this->offense->setWaterDamage($this->offense->getWaterDamage() - $action->getRevertValue());
+    }
 }

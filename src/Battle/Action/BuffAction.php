@@ -14,6 +14,7 @@ class BuffAction extends AbstractAction
     public const MAX_LIFE                = 'multiplierMaxLife';
     public const PHYSICAL_DAMAGE         = 'multiplierPhysicalDamage';
     public const FIRE_DAMAGE             = 'multiplierFireDamage';
+    public const WATER_DAMAGE            = 'multiplierWaterDamage';
     public const ATTACK_SPEED            = 'multiplierAttackSpeed';
     public const ACCURACY                = 'multiplierAccuracy';
     public const MAGIC_ACCURACY          = 'multiplierMagicAccuracy';

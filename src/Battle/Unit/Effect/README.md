@@ -104,8 +104,8 @@ $effect = $this->getFactory()->create($data);
 - [ ] `physical damage` – reduced
 - [x] `fire damage` – increased
 - [x] `fire damage` – reduced
-- [ ] `water damage` – increased
-- [ ] `water damage` – reduced
+- [x] `water damage` – increased
+- [x] `water damage` – reduced
 - [ ] `air damage` – increased
 - [ ] `air damage` – reduced
 - [ ] `earth damage` – increased

@@ -495,6 +495,52 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на увеличение/уменьшение урона водой
+     *
+     * @dataProvider multiplierWaterDamageDataProvider
+     * @param int $power
+     * @param int $newWaterDamage
+     * @throws Exception
+     */
+    public function testBuffActionMultiplierWaterDamageSuccess(int $power, int $newWaterDamage): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier water damage',
+            BuffAction::WATER_DAMAGE,
+            $power
+        );
+
+        // Изначальный урон водой
+        self::assertEquals(87, $unit->getOffense()->getWaterDamage());
+
+        $oldWaterDamage = $unit->getOffense()->getWaterDamage();
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный урон водой
+        self::assertEquals($newWaterDamage, $unit->getOffense()->getWaterDamage());
+
+        // Проверяем обновленный урон водой от множителя (на всякий случай)
+        self::assertEquals((int)($oldWaterDamage * ($power / 100)), $unit->getOffense()->getWaterDamage());
+
+        // Откатываем баф и проверяем, что урон водой вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(87, $unit->getOffense()->getWaterDamage());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -754,10 +800,36 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
+    /**
+     * @return array
+     */
+    public function multiplierWaterDamageDataProvider(): array
+    {
+        return [
+            [
+                200,
+                174,
+            ],
+            [
+                111,
+                96,
+            ],
+            [
+                87,
+                75,
+            ],
+            [
+                32,
+                27,
+            ],
+        ];
+    }
+
     public function overReducedStatDataProvider(): array
     {
         return [
             [BuffAction::FIRE_DAMAGE],
+            [BuffAction::WATER_DAMAGE],
             [BuffAction::CRITICAL_MULTIPLIER],
             [BuffAction::CRITICAL_CHANCE],
             [BuffAction::MAGIC_DEFENSE],
