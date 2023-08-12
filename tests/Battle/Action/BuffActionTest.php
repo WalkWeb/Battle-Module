@@ -541,6 +541,52 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на увеличение/уменьшение урона воздухом
+     *
+     * @dataProvider multiplierAirDamageDataProvider
+     * @param int $power
+     * @param int $newAirDamage
+     * @throws Exception
+     */
+    public function testBuffActionMultiplierAirDamageSuccess(int $power, int $newAirDamage): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier air damage',
+            BuffAction::AIR_DAMAGE,
+            $power
+        );
+
+        // Изначальный урон воздухом
+        self::assertEquals(54, $unit->getOffense()->getAirDamage());
+
+        $oldAirDamage = $unit->getOffense()->getAirDamage();
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный урон воздухом
+        self::assertEquals($newAirDamage, $unit->getOffense()->getAirDamage());
+
+        // Проверяем обновленный урон воздухом от множителя (на всякий случай)
+        self::assertEquals((int)($oldAirDamage * ($power / 100)), $unit->getOffense()->getAirDamage());
+
+        // Откатываем баф и проверяем, что урон воздухом вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(54, $unit->getOffense()->getAirDamage());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -825,11 +871,37 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
+    /**
+     * @return array
+     */
+    public function multiplierAirDamageDataProvider(): array
+    {
+        return [
+            [
+                200,
+                108,
+            ],
+            [
+                111,
+                59,
+            ],
+            [
+                87,
+                46,
+            ],
+            [
+                32,
+                17,
+            ],
+        ];
+    }
+
     public function overReducedStatDataProvider(): array
     {
         return [
             [BuffAction::FIRE_DAMAGE],
             [BuffAction::WATER_DAMAGE],
+            [BuffAction::AIR_DAMAGE],
             [BuffAction::CRITICAL_MULTIPLIER],
             [BuffAction::CRITICAL_CHANCE],
             [BuffAction::MAGIC_DEFENSE],

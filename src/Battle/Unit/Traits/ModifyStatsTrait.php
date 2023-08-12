@@ -446,4 +446,39 @@ trait ModifyStatsTrait
     {
         $this->offense->setWaterDamage($this->offense->getWaterDamage() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет урон воздухом юнита
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierAirDamage(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldAirDamage = $this->offense->getAirDamage();
+        $newAirDamage = (int)($this->offense->getAirDamage() * $multiplier);
+
+        $bonus = $newAirDamage - $oldAirDamage;
+
+        $this->offense->setAirDamage($newAirDamage);
+
+        $action->setRevertValue($bonus);
+    }
+
+    /**
+     * Откатывает изменение урона воздухом
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierAirDamageRevert(ActionInterface $action): void
+    {
+        $this->offense->setAirDamage($this->offense->getAirDamage() - $action->getRevertValue());
+    }
 }
