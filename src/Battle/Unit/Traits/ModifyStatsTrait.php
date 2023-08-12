@@ -40,11 +40,9 @@ trait ModifyStatsTrait
         $oldDamage = $this->offense->getPhysicalDamage();
         $newDamage = (int)($this->offense->getPhysicalDamage() * $multiplier);
 
-        $bonus = $newDamage - $oldDamage;
-
         $this->offense->setPhysicalDamage($newDamage);
 
-        $action->setRevertValue($bonus);
+        $action->setRevertValue($newDamage - $oldDamage);
     }
 
     /**
@@ -75,11 +73,9 @@ trait ModifyStatsTrait
         $oldAccuracy = $this->offense->getAccuracy();
         $newAccuracy = (int)($this->offense->getAccuracy() * $multiplier);
 
-        $bonus = $newAccuracy - $oldAccuracy;
-
         $this->offense->setAccuracy($newAccuracy);
 
-        $action->setRevertValue($bonus);
+        $action->setRevertValue($newAccuracy - $oldAccuracy);
     }
 
     /**
@@ -110,11 +106,9 @@ trait ModifyStatsTrait
         $oldMagicAccuracy = $this->offense->getMagicAccuracy();
         $newMagicAccuracy = (int)($this->offense->getMagicAccuracy() * $multiplier);
 
-        $bonus = $newMagicAccuracy - $oldMagicAccuracy;
-
         $this->offense->setMagicAccuracy($newMagicAccuracy);
 
-        $action->setRevertValue($bonus);
+        $action->setRevertValue($newMagicAccuracy - $oldMagicAccuracy);
     }
 
     /**
@@ -145,11 +139,9 @@ trait ModifyStatsTrait
         $oldDefense = $this->defense->getDefense();
         $newDefense = (int)($this->defense->getDefense() * $multiplier);
 
-        $bonus = $newDefense - $oldDefense;
-
         $this->defense->setDefense($newDefense);
 
-        $action->setRevertValue($bonus);
+        $action->setRevertValue($newDefense - $oldDefense);
     }
 
     /**
@@ -180,11 +172,9 @@ trait ModifyStatsTrait
         $oldMagicDefense = $this->defense->getMagicDefense();
         $newMagicDefense = (int)($this->defense->getMagicDefense() * $multiplier);
 
-        $bonus = $newMagicDefense - $oldMagicDefense;
-
         $this->defense->setMagicDefense($newMagicDefense);
 
-        $action->setRevertValue($bonus);
+        $action->setRevertValue($newMagicDefense - $oldMagicDefense);
     }
 
     /**
@@ -256,10 +246,8 @@ trait ModifyStatsTrait
         $oldAttackSpeed = $attackSpeed;
         $newAttackSpeed = $attackSpeed * $multiplier;
 
-        $bonus = $newAttackSpeed - $oldAttackSpeed;
-
         $this->offense->setAttackSpeed($newAttackSpeed);
-        $action->setRevertValue($bonus);
+        $action->setRevertValue($newAttackSpeed - $oldAttackSpeed);
     }
 
     /**
@@ -324,11 +312,9 @@ trait ModifyStatsTrait
         $oldCriticalChance = $this->offense->getCriticalChance();
         $newCriticalChance = (int)($this->offense->getCriticalChance() * $multiplier);
 
-        $bonus = $newCriticalChance - $oldCriticalChance;
-
         $this->offense->setCriticalChance($newCriticalChance);
 
-        $action->setRevertValue($bonus);
+        $action->setRevertValue($newCriticalChance - $oldCriticalChance);
     }
 
     /**
@@ -359,11 +345,9 @@ trait ModifyStatsTrait
         $oldCriticalMultiplier = $this->offense->getCriticalMultiplier();
         $newCriticalMultiplier = (int)($this->offense->getCriticalMultiplier() * $multiplier);
 
-        $bonus = $newCriticalMultiplier - $oldCriticalMultiplier;
-
         $this->offense->setCriticalMultiplier($newCriticalMultiplier);
 
-        $action->setRevertValue($bonus);
+        $action->setRevertValue($newCriticalMultiplier - $oldCriticalMultiplier);
     }
 
     /**
@@ -394,11 +378,9 @@ trait ModifyStatsTrait
         $oldFireDamage = $this->offense->getFireDamage();
         $newFireDamage = (int)($this->offense->getFireDamage() * $multiplier);
 
-        $bonus = $newFireDamage - $oldFireDamage;
-
         $this->offense->setFireDamage($newFireDamage);
 
-        $action->setRevertValue($bonus);
+        $action->setRevertValue($newFireDamage - $oldFireDamage);
     }
 
     /**
@@ -429,11 +411,9 @@ trait ModifyStatsTrait
         $oldWaterDamage = $this->offense->getWaterDamage();
         $newWaterDamage = (int)($this->offense->getWaterDamage() * $multiplier);
 
-        $bonus = $newWaterDamage - $oldWaterDamage;
-
         $this->offense->setWaterDamage($newWaterDamage);
 
-        $action->setRevertValue($bonus);
+        $action->setRevertValue($newWaterDamage - $oldWaterDamage);
     }
 
     /**
@@ -464,11 +444,9 @@ trait ModifyStatsTrait
         $oldAirDamage = $this->offense->getAirDamage();
         $newAirDamage = (int)($this->offense->getAirDamage() * $multiplier);
 
-        $bonus = $newAirDamage - $oldAirDamage;
-
         $this->offense->setAirDamage($newAirDamage);
 
-        $action->setRevertValue($bonus);
+        $action->setRevertValue($newAirDamage - $oldAirDamage);
     }
 
     /**
@@ -480,5 +458,38 @@ trait ModifyStatsTrait
     private function multiplierAirDamageRevert(ActionInterface $action): void
     {
         $this->offense->setAirDamage($this->offense->getAirDamage() - $action->getRevertValue());
+    }
+
+    /**
+     * Изменяет урон воздухом землей
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierEarthDamage(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldEarthDamage = $this->offense->getEarthDamage();
+        $newEarthDamage = (int)($this->offense->getEarthDamage() * $multiplier);
+
+        $this->offense->setEarthDamage($newEarthDamage);
+
+        $action->setRevertValue($newEarthDamage - $oldEarthDamage);
+    }
+
+    /**
+     * Откатывает изменение урона землей
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierEarthDamageRevert(ActionInterface $action): void
+    {
+        $this->offense->setEarthDamage($this->offense->getEarthDamage() - $action->getRevertValue());
     }
 }
