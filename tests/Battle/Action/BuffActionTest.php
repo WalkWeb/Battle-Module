@@ -679,6 +679,52 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на увеличение/уменьшение урона магией смерти
+     *
+     * @dataProvider multiplierDeathDamageDataProvider
+     * @param int $power
+     * @param int $newDeathDamage
+     * @throws Exception
+     */
+    public function testBuffActionMultiplierDeathDamageSuccess(int $power, int $newDeathDamage): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier death damage',
+            BuffAction::DEATH_DAMAGE,
+            $power
+        );
+
+        // Изначальный урон магией смерти
+        self::assertEquals(59, $unit->getOffense()->getDeathDamage());
+
+        $oldLifeDamage = $unit->getOffense()->getDeathDamage();
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный урон магией смерти
+        self::assertEquals($newDeathDamage, $unit->getOffense()->getDeathDamage());
+
+        // Проверяем обновленный урон магией смерти от множителя (на всякий случай)
+        self::assertEquals((int)($oldLifeDamage * ($power / 100)), $unit->getOffense()->getDeathDamage());
+
+        // Откатываем баф и проверяем, что урон магией смерти вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(59, $unit->getOffense()->getDeathDamage());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -1038,6 +1084,31 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
+    /**
+     * @return array
+     */
+    public function multiplierDeathDamageDataProvider(): array
+    {
+        return [
+            [
+                200,
+                118,
+            ],
+            [
+                111,
+                65,
+            ],
+            [
+                87,
+                51,
+            ],
+            [
+                32,
+                18,
+            ],
+        ];
+    }
+
     public function overReducedStatDataProvider(): array
     {
         return [
@@ -1046,6 +1117,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::AIR_DAMAGE],
             [BuffAction::EARTH_DAMAGE],
             [BuffAction::LIFE_DAMAGE],
+            [BuffAction::DEATH_DAMAGE],
             [BuffAction::CRITICAL_MULTIPLIER],
             [BuffAction::CRITICAL_CHANCE],
             [BuffAction::MAGIC_DEFENSE],

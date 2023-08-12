@@ -525,4 +525,37 @@ trait ModifyStatsTrait
     {
         $this->offense->setLifeDamage($this->offense->getLifeDamage() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет урон магией смерти
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierDeathDamage(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldDeathDamage = $this->offense->getDeathDamage();
+        $newDeathDamage = (int)($this->offense->getDeathDamage() * $multiplier);
+
+        $this->offense->setDeathDamage($newDeathDamage);
+
+        $action->setRevertValue($newDeathDamage - $oldDeathDamage);
+    }
+
+    /**
+     * Откатывает изменение урона магией смерти
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierDeathDamageRevert(ActionInterface $action): void
+    {
+        $this->offense->setDeathDamage($this->offense->getDeathDamage() - $action->getRevertValue());
+    }
 }
