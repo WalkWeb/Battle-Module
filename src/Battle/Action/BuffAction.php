@@ -27,6 +27,7 @@ class BuffAction extends AbstractAction
     public const CRITICAL_CHANCE         = 'multiplierCriticalChance';
     public const CRITICAL_MULTIPLIER     = 'multiplierCriticalMultiplier';
     public const ADD_BLOCK               = 'addBlock';
+    public const ADD_PHYSICAL_RESIST     = 'addPhysicalResist';
 
     private const HANDLE_METHOD          = 'applyBuffAction';
     private const DEFAULT_MESSAGE_METHOD = 'buff';

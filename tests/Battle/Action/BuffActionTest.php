@@ -725,6 +725,54 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на плоское увеличение/уменьшение сопротивления физическому урону
+     *
+     * @dataProvider addPhysicalResistDataProvider
+     * @param int $unitId
+     * @param int $power
+     * @param int $oldPhysicalResist
+     * @param int $newPhysicalResist
+     * @throws Exception
+     */
+    public function testBuffActionAddPhysicalResistSuccess(
+        int $unitId,
+        int $power,
+        int $oldPhysicalResist,
+        int $newPhysicalResist
+    ): void
+    {
+        $unit = UnitFactory::createByTemplate($unitId);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'add physical resist',
+            BuffAction::ADD_PHYSICAL_RESIST,
+            $power
+        );
+
+        // Изначальное сопротивление физическому урону
+        self::assertEquals($oldPhysicalResist, $unit->getDefense()->getPhysicalResist());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленное сопротивление физическому урону
+        self::assertEquals($newPhysicalResist, $unit->getDefense()->getPhysicalResist());
+
+        // Откатываем баф и проверяем, что урон магией смерти вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals($oldPhysicalResist, $unit->getDefense()->getPhysicalResist());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -1105,6 +1153,60 @@ class BuffActionTest extends AbstractUnitTest
             [
                 32,
                 18,
+            ],
+        ];
+    }
+
+    public function addPhysicalResistDataProvider(): array
+    {
+        return [
+            [
+                1,
+                10,
+                0,
+                10,
+            ],
+            [
+                1,
+                -20,
+                0,
+                -20,
+            ],
+            [
+                1,
+                100,
+                0,
+                75,
+            ],
+            [
+                12,
+                10,
+                60,
+                70,
+            ],
+            [
+                12,
+                20,
+                60,
+                75,
+            ],
+            [
+                12,
+                -20,
+                60,
+                40,
+            ],
+            [
+                12,
+                100,
+                60,
+                75,
+            ],
+            [
+                12,
+                -2000,
+                60,
+                -1000,
             ],
         ];
     }

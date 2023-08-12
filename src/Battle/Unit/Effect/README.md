@@ -114,8 +114,8 @@ $effect = $this->getFactory()->create($data);
 - [x] `life damage` – reduced
 - [x] `death damage` – increased
 - [x] `death damage` – reduced
-- [ ] `physical resist` – increased
-- [ ] `physical resist` – reduced
+- [x] `physical resist` – increased
+- [x] `physical resist` – reduced
 - [ ] `fire resist` – increased
 - [ ] `fire resist` – reduced
 - [ ] `water resist` – increased

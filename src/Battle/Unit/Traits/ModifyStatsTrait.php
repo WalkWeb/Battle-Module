@@ -558,4 +558,38 @@ trait ModifyStatsTrait
     {
         $this->offense->setDeathDamage($this->offense->getDeathDamage() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет урон магией смерти
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addPhysicalResist(ActionInterface $action): void
+    {
+        $oldPhysicalResist = $this->defense->getPhysicalResist();
+        $newPhysicalResist = $this->defense->getPhysicalResist() + $action->getPower();
+
+        if ($newPhysicalResist > $this->defense->getPhysicalMaxResist()) {
+            $newPhysicalResist = $this->defense->getPhysicalMaxResist();
+        }
+
+        if ($newPhysicalResist < DefenseInterface::MIN_RESISTANCE) {
+            $newPhysicalResist = DefenseInterface::MIN_RESISTANCE;
+        }
+
+        $this->defense->setPhysicalResist($newPhysicalResist);
+        $action->setRevertValue($newPhysicalResist - $oldPhysicalResist);
+    }
+
+    /**
+     * Откатывает изменение урона магией смерти
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addPhysicalResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setPhysicalResist($this->defense->getPhysicalResist() - $action->getRevertValue());
+    }
 }
