@@ -633,6 +633,52 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на увеличение/уменьшение урона магией жизни
+     *
+     * @dataProvider multiplierLifeDamageDataProvider
+     * @param int $power
+     * @param int $newLifeDamage
+     * @throws Exception
+     */
+    public function testBuffActionMultiplierLifeDamageSuccess(int $power, int $newLifeDamage): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier life damage',
+            BuffAction::LIFE_DAMAGE,
+            $power
+        );
+
+        // Изначальный урон магией жизни
+        self::assertEquals(71, $unit->getOffense()->getLifeDamage());
+
+        $oldLifeDamage = $unit->getOffense()->getLifeDamage();
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный урон магией жизни
+        self::assertEquals($newLifeDamage, $unit->getOffense()->getLifeDamage());
+
+        // Проверяем обновленный урон магией жизни от множителя (на всякий случай)
+        self::assertEquals((int)($oldLifeDamage * ($power / 100)), $unit->getOffense()->getLifeDamage());
+
+        // Откатываем баф и проверяем, что урон магией жизни вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(71, $unit->getOffense()->getLifeDamage());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -967,6 +1013,31 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
+    /**
+     * @return array
+     */
+    public function multiplierLifeDamageDataProvider(): array
+    {
+        return [
+            [
+                200,
+                142,
+            ],
+            [
+                111,
+                78,
+            ],
+            [
+                87,
+                61,
+            ],
+            [
+                32,
+                22,
+            ],
+        ];
+    }
+
     public function overReducedStatDataProvider(): array
     {
         return [
@@ -974,6 +1045,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::WATER_DAMAGE],
             [BuffAction::AIR_DAMAGE],
             [BuffAction::EARTH_DAMAGE],
+            [BuffAction::LIFE_DAMAGE],
             [BuffAction::CRITICAL_MULTIPLIER],
             [BuffAction::CRITICAL_CHANCE],
             [BuffAction::MAGIC_DEFENSE],

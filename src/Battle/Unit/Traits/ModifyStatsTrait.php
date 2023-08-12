@@ -461,7 +461,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет урон воздухом землей
+     * Изменяет урон землей
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -491,5 +491,38 @@ trait ModifyStatsTrait
     private function multiplierEarthDamageRevert(ActionInterface $action): void
     {
         $this->offense->setEarthDamage($this->offense->getEarthDamage() - $action->getRevertValue());
+    }
+
+    /**
+     * Изменяет урон магией жизни
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierLifeDamage(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldLifeDamage = $this->offense->getLifeDamage();
+        $newLifeDamage = (int)($this->offense->getLifeDamage() * $multiplier);
+
+        $this->offense->setLifeDamage($newLifeDamage);
+
+        $action->setRevertValue($newLifeDamage - $oldLifeDamage);
+    }
+
+    /**
+     * Откатывает изменение урона магией жизни
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierLifeDamageRevert(ActionInterface $action): void
+    {
+        $this->offense->setLifeDamage($this->offense->getLifeDamage() - $action->getRevertValue());
     }
 }
