@@ -560,7 +560,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет урон магией смерти
+     * Изменяет сопротивление физическому урону
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -583,7 +583,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Откатывает изменение урона магией смерти
+     * Откатывает изменение сопротивление физическому урону
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -591,5 +591,39 @@ trait ModifyStatsTrait
     private function addPhysicalResistRevert(ActionInterface $action): void
     {
         $this->defense->setPhysicalResist($this->defense->getPhysicalResist() - $action->getRevertValue());
+    }
+
+    /**
+     * Изменяет сопротивление урону огнем
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addFireResist(ActionInterface $action): void
+    {
+        $oldFireResist = $this->defense->getFireResist();
+        $newFireResist = $this->defense->getFireResist() + $action->getPower();
+
+        if ($newFireResist > $this->defense->getFireMaxResist()) {
+            $newFireResist = $this->defense->getFireMaxResist();
+        }
+
+        if ($newFireResist < DefenseInterface::MIN_RESISTANCE) {
+            $newFireResist = DefenseInterface::MIN_RESISTANCE;
+        }
+
+        $this->defense->setFireResist($newFireResist);
+        $action->setRevertValue($newFireResist - $oldFireResist);
+    }
+
+    /**
+     * Откатывает изменение сопротивление урону огнем
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addFireResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setFireResist($this->defense->getFireResist() - $action->getRevertValue());
     }
 }

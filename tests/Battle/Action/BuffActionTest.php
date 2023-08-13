@@ -725,51 +725,59 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на плоское увеличение/уменьшение сопротивления физическому урону
+     * Тест на плоское увеличение/уменьшение сопротивления урону
      *
-     * @dataProvider addPhysicalResistDataProvider
+     * @dataProvider addResistDataProvider
      * @param int $unitId
      * @param int $power
-     * @param int $oldPhysicalResist
-     * @param int $newPhysicalResist
+     * @param int $oldResist
+     * @param int $newResist
      * @throws Exception
      */
-    public function testBuffActionAddPhysicalResistSuccess(
-        int $unitId,
-        int $power,
-        int $oldPhysicalResist,
-        int $newPhysicalResist
-    ): void
+    public function testBuffActionAddResistSuccess(int $unitId, int $power, int $oldResist, int $newResist): void
     {
         $unit = UnitFactory::createByTemplate($unitId);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction(
-            $this->getContainer(),
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'add physical resist',
-            BuffAction::ADD_PHYSICAL_RESIST,
-            $power
-        );
+        $resists = [
+            'physical' => [
+                'buff' => BuffAction::ADD_PHYSICAL_RESIST,
+                'getter' => 'getPhysicalResist',
+            ],
+            'fire' => [
+                'buff' => BuffAction::ADD_FIRE_RESIST,
+                'getter' => 'getFireResist',
+            ],
+        ];
 
-        // Изначальное сопротивление физическому урону
-        self::assertEquals($oldPhysicalResist, $unit->getDefense()->getPhysicalResist());
+        foreach ($resists as $resist) {
+            $action = new BuffAction(
+                $this->getContainer(),
+                $unit,
+                $enemyCommand,
+                $command,
+                BuffAction::TARGET_SELF,
+                '',
+                $resist['buff'],
+                $power
+            );
 
-        // Применяем баф
-        self::assertTrue($action->canByUsed());
-        $action->handle();
+            // Изначальное сопротивление
+            self::assertEquals($oldResist, $unit->getDefense()->{$resist['getter']}());
 
-        // Проверяем обновленное сопротивление физическому урону
-        self::assertEquals($newPhysicalResist, $unit->getDefense()->getPhysicalResist());
+            // Применяем баф
+            self::assertTrue($action->canByUsed());
+            $action->handle();
 
-        // Откатываем баф и проверяем, что урон магией смерти вернулся к исходному значению
-        $action->getRevertAction()->handle();
-        self::assertEquals($oldPhysicalResist, $unit->getDefense()->getPhysicalResist());
+            // Проверяем обновленное сопротивление
+            self::assertEquals($newResist, $unit->getDefense()->{$resist['getter']}());
+
+            // Откатываем баф и проверяем, что сопротивление вернулось к исходному значению
+            $action->getRevertAction()->handle();
+            self::assertEquals($oldResist, $unit->getDefense()->{$resist['getter']}());
+        }
     }
 
     /**
@@ -1157,7 +1165,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addPhysicalResistDataProvider(): array
+    public function addResistDataProvider(): array
     {
         return [
             [
