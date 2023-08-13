@@ -916,4 +916,34 @@ trait ModifyStatsTrait
     {
         $this->defense->setAirMaxResist($this->defense->getAirMaxResist() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет максимальное сопротивление урону землей
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addEarthMaxResist(ActionInterface $action): void
+    {
+        $oldMaxResist = $this->defense->getEarthMaxResist();
+        $newMaxResist = $this->defense->getEarthMaxResist() + $action->getPower();
+
+        if ($newMaxResist > DefenseInterface::MAX_RESISTANCE) {
+            $newMaxResist = DefenseInterface::MAX_RESISTANCE;
+        }
+
+        $this->defense->setEarthMaxResist($newMaxResist);
+        $action->setRevertValue($newMaxResist - $oldMaxResist);
+    }
+
+    /**
+     * Откатывает изменения максимального сопротивления урону землей
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addEarthMaxResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setEarthMaxResist($this->defense->getEarthMaxResist() - $action->getRevertValue());
+    }
 }

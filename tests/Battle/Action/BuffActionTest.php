@@ -832,6 +832,10 @@ class BuffActionTest extends AbstractUnitTest
                 'buff' => BuffAction::ADD_AIR_MAX_RESIST,
                 'getter' => 'getAirMaxResist',
             ],
+            'earth' => [
+                'buff' => BuffAction::ADD_EARTH_MAX_RESIST,
+                'getter' => 'getEarthMaxResist',
+            ],
         ];
 
         foreach ($resists as $resist) {

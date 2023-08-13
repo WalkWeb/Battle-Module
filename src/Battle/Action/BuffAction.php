@@ -38,6 +38,7 @@ class BuffAction extends AbstractAction
     public const ADD_FIRE_MAX_RESIST     = 'addFireMaxResist';
     public const ADD_WATER_MAX_RESIST    = 'addWaterMaxResist';
     public const ADD_AIR_MAX_RESIST      = 'addAirMaxResist';
+    public const ADD_EARTH_MAX_RESIST    = 'addEarthMaxResist';
 
     private const HANDLE_METHOD          = 'applyBuffAction';
     private const DEFAULT_MESSAGE_METHOD = 'buff';
