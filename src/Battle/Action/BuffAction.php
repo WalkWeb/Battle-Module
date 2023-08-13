@@ -29,6 +29,7 @@ class BuffAction extends AbstractAction
     public const ADD_BLOCK               = 'addBlock';
     public const ADD_PHYSICAL_RESIST     = 'addPhysicalResist';
     public const ADD_FIRE_RESIST         = 'addFireResist';
+    public const ADD_WATER_RESIST        = 'addWaterResist';
 
     private const HANDLE_METHOD          = 'applyBuffAction';
     private const DEFAULT_MESSAGE_METHOD = 'buff';

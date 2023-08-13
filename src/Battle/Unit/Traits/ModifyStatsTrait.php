@@ -601,19 +601,19 @@ trait ModifyStatsTrait
      */
     private function addFireResist(ActionInterface $action): void
     {
-        $oldFireResist = $this->defense->getFireResist();
-        $newFireResist = $this->defense->getFireResist() + $action->getPower();
+        $oldResist = $this->defense->getFireResist();
+        $newResist = $this->defense->getFireResist() + $action->getPower();
 
-        if ($newFireResist > $this->defense->getFireMaxResist()) {
-            $newFireResist = $this->defense->getFireMaxResist();
+        if ($newResist > $this->defense->getFireMaxResist()) {
+            $newResist = $this->defense->getFireMaxResist();
         }
 
-        if ($newFireResist < DefenseInterface::MIN_RESISTANCE) {
-            $newFireResist = DefenseInterface::MIN_RESISTANCE;
+        if ($newResist < DefenseInterface::MIN_RESISTANCE) {
+            $newResist = DefenseInterface::MIN_RESISTANCE;
         }
 
-        $this->defense->setFireResist($newFireResist);
-        $action->setRevertValue($newFireResist - $oldFireResist);
+        $this->defense->setFireResist($newResist);
+        $action->setRevertValue($newResist - $oldResist);
     }
 
     /**
@@ -625,5 +625,39 @@ trait ModifyStatsTrait
     private function addFireResistRevert(ActionInterface $action): void
     {
         $this->defense->setFireResist($this->defense->getFireResist() - $action->getRevertValue());
+    }
+
+    /**
+     * Изменяет сопротивление урону водой
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addWaterResist(ActionInterface $action): void
+    {
+        $oldResist = $this->defense->getWaterResist();
+        $newResist = $this->defense->getWaterResist() + $action->getPower();
+
+        if ($newResist > $this->defense->getWaterMaxResist()) {
+            $newResist = $this->defense->getWaterMaxResist();
+        }
+
+        if ($newResist < DefenseInterface::MIN_RESISTANCE) {
+            $newResist = DefenseInterface::MIN_RESISTANCE;
+        }
+
+        $this->defense->setWaterResist($newResist);
+        $action->setRevertValue($newResist - $oldResist);
+    }
+
+    /**
+     * Откатывает изменение сопротивление урону водой
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addWaterResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setWaterResist($this->defense->getWaterResist() - $action->getRevertValue());
     }
 }
