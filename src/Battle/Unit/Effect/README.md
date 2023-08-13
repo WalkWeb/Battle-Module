@@ -124,8 +124,8 @@ $effect = $this->getFactory()->create($data);
 - [x] `air resist` – reduced
 - [x] `earth resist` – increased
 - [x] `earth resist` – reduced
-- [ ] `life resist` – increased
-- [ ] `life resist` – reduced
+- [x] `life resist` – increased
+- [x] `life resist` – reduced
 - [ ] `death resist` – increased
 - [ ] `death resist` – reduced
 - [ ] `physical max resist` – increased

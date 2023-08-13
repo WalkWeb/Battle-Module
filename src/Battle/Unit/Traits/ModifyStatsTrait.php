@@ -728,4 +728,38 @@ trait ModifyStatsTrait
     {
         $this->defense->setEarthResist($this->defense->getEarthResist() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет сопротивление урону воздухом
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addLifeResist(ActionInterface $action): void
+    {
+        $oldResist = $this->defense->getLifeResist();
+        $newResist = $this->defense->getLifeResist() + $action->getPower();
+
+        if ($newResist > $this->defense->getLifeMaxResist()) {
+            $newResist = $this->defense->getLifeMaxResist();
+        }
+
+        if ($newResist < DefenseInterface::MIN_RESISTANCE) {
+            $newResist = DefenseInterface::MIN_RESISTANCE;
+        }
+
+        $this->defense->setLifeResist($newResist);
+        $action->setRevertValue($newResist - $oldResist);
+    }
+
+    /**
+     * Откатывает изменение сопротивление урону воздухом
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addLifeResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setLifeResist($this->defense->getLifeResist() - $action->getRevertValue());
+    }
 }
