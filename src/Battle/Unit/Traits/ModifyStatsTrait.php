@@ -856,4 +856,34 @@ trait ModifyStatsTrait
     {
         $this->defense->setFireMaxResist($this->defense->getFireMaxResist() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет максимальное сопротивление урону водой
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addWaterMaxResist(ActionInterface $action): void
+    {
+        $oldMaxResist = $this->defense->getWaterMaxResist();
+        $newMaxResist = $this->defense->getWaterMaxResist() + $action->getPower();
+
+        if ($newMaxResist > DefenseInterface::MAX_RESISTANCE) {
+            $newMaxResist = DefenseInterface::MAX_RESISTANCE;
+        }
+
+        $this->defense->setWaterMaxResist($newMaxResist);
+        $action->setRevertValue($newMaxResist - $oldMaxResist);
+    }
+
+    /**
+     * Откатывает изменения максимального сопротивления урону водой
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addWaterMaxResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setWaterMaxResist($this->defense->getWaterMaxResist() - $action->getRevertValue());
+    }
 }

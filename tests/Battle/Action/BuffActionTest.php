@@ -824,6 +824,10 @@ class BuffActionTest extends AbstractUnitTest
                 'buff' => BuffAction::ADD_FIRE_MAX_RESIST,
                 'getter' => 'getFireMaxResist',
             ],
+            'water' => [
+                'buff' => BuffAction::ADD_WATER_MAX_RESIST,
+                'getter' => 'getWaterMaxResist',
+            ],
         ];
 
         foreach ($resists as $resist) {
