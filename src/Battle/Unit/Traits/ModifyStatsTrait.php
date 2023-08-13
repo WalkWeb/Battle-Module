@@ -660,4 +660,38 @@ trait ModifyStatsTrait
     {
         $this->defense->setWaterResist($this->defense->getWaterResist() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет сопротивление урону воздухом
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addAirResist(ActionInterface $action): void
+    {
+        $oldResist = $this->defense->getAirResist();
+        $newResist = $this->defense->getAirResist() + $action->getPower();
+
+        if ($newResist > $this->defense->getAirMaxResist()) {
+            $newResist = $this->defense->getAirMaxResist();
+        }
+
+        if ($newResist < DefenseInterface::MIN_RESISTANCE) {
+            $newResist = DefenseInterface::MIN_RESISTANCE;
+        }
+
+        $this->defense->setAirResist($newResist);
+        $action->setRevertValue($newResist - $oldResist);
+    }
+
+    /**
+     * Откатывает изменение сопротивление урону воздухом
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addAirResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setAirResist($this->defense->getAirResist() - $action->getRevertValue());
+    }
 }

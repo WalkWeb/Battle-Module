@@ -754,6 +754,10 @@ class BuffActionTest extends AbstractUnitTest
                 'buff' => BuffAction::ADD_WATER_RESIST,
                 'getter' => 'getWaterResist',
             ],
+            'air' => [
+                'buff' => BuffAction::ADD_AIR_RESIST,
+                'getter' => 'getAirResist',
+            ],
         ];
 
         foreach ($resists as $resist) {
