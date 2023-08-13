@@ -766,6 +766,10 @@ class BuffActionTest extends AbstractUnitTest
                 'buff' => BuffAction::ADD_LIFE_RESIST,
                 'getter' => 'getLifeResist',
             ],
+            'death' => [
+                'buff' => BuffAction::ADD_DEATH_RESIST,
+                'getter' => 'getDeathResist',
+            ],
         ];
 
         foreach ($resists as $resist) {

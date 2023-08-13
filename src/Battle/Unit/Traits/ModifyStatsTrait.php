@@ -762,4 +762,38 @@ trait ModifyStatsTrait
     {
         $this->defense->setLifeResist($this->defense->getLifeResist() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет сопротивление урону воздухом
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addDeathResist(ActionInterface $action): void
+    {
+        $oldResist = $this->defense->getDeathResist();
+        $newResist = $this->defense->getDeathResist() + $action->getPower();
+
+        if ($newResist > $this->defense->getDeathMaxResist()) {
+            $newResist = $this->defense->getDeathMaxResist();
+        }
+
+        if ($newResist < DefenseInterface::MIN_RESISTANCE) {
+            $newResist = DefenseInterface::MIN_RESISTANCE;
+        }
+
+        $this->defense->setDeathResist($newResist);
+        $action->setRevertValue($newResist - $oldResist);
+    }
+
+    /**
+     * Откатывает изменение сопротивление урону воздухом
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addDeathResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setDeathResist($this->defense->getDeathResist() - $action->getRevertValue());
+    }
 }

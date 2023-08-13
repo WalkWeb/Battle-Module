@@ -33,6 +33,7 @@ class BuffAction extends AbstractAction
     public const ADD_AIR_RESIST          = 'addAirResist';
     public const ADD_EARTH_RESIST        = 'addEarthResist';
     public const ADD_LIFE_RESIST         = 'addLifeResist';
+    public const ADD_DEATH_RESIST        = 'addDeathResist';
 
     private const HANDLE_METHOD          = 'applyBuffAction';
     private const DEFAULT_MESSAGE_METHOD = 'buff';
