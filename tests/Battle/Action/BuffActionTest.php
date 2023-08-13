@@ -815,30 +815,43 @@ class BuffActionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = new BuffAction(
-            $this->getContainer(),
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'change max resist',
-            BuffAction::ADD_PHYSICAL_MAX_RESIST,
-            $power
-        );
+        $resists = [
+            'physical' => [
+                'buff' => BuffAction::ADD_PHYSICAL_MAX_RESIST,
+                'getter' => 'getPhysicalMaxResist',
+            ],
+            'fire' => [
+                'buff' => BuffAction::ADD_FIRE_MAX_RESIST,
+                'getter' => 'getFireMaxResist',
+            ],
+        ];
 
-        // Изначальное максимальное сопротивление
-        self::assertEquals(75, $unit->getDefense()->getPhysicalMaxResist());
+        foreach ($resists as $resist) {
+            $action = new BuffAction(
+                $this->getContainer(),
+                $unit,
+                $enemyCommand,
+                $command,
+                BuffAction::TARGET_SELF,
+                'change max resist',
+                $resist['buff'],
+                $power
+            );
 
-        // Применяем баф
-        self::assertTrue($action->canByUsed());
-        $action->handle();
+            // Изначальное максимальное сопротивление
+            self::assertEquals(75, $unit->getDefense()->{$resist['getter']}());
 
-        // Проверяем обновленное максимальное сопротивление
-        self::assertEquals($newResist, $unit->getDefense()->getPhysicalMaxResist());
+            // Применяем баф
+            self::assertTrue($action->canByUsed());
+            $action->handle();
 
-        // Откатываем баф и проверяем, что максимальное сопротивление вернулось к исходному значению
-        $action->getRevertAction()->handle();
-        self::assertEquals(75, $unit->getDefense()->getPhysicalMaxResist());
+            // Проверяем обновленное максимальное сопротивление
+            self::assertEquals($newResist, $unit->getDefense()->{$resist['getter']}());
+
+            // Откатываем баф и проверяем, что максимальное сопротивление вернулось к исходному значению
+            $action->getRevertAction()->handle();
+            self::assertEquals(75, $unit->getDefense()->{$resist['getter']}());
+        }
     }
 
     /**

@@ -35,6 +35,7 @@ class BuffAction extends AbstractAction
     public const ADD_LIFE_RESIST         = 'addLifeResist';
     public const ADD_DEATH_RESIST        = 'addDeathResist';
     public const ADD_PHYSICAL_MAX_RESIST = 'addPhysicalMaxResist';
+    public const ADD_FIRE_MAX_RESIST     = 'addFireMaxResist';
 
     private const HANDLE_METHOD          = 'applyBuffAction';
     private const DEFAULT_MESSAGE_METHOD = 'buff';
