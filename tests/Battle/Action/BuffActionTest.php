@@ -758,6 +758,10 @@ class BuffActionTest extends AbstractUnitTest
                 'buff' => BuffAction::ADD_AIR_RESIST,
                 'getter' => 'getAirResist',
             ],
+            'earth' => [
+                'buff' => BuffAction::ADD_EARTH_RESIST,
+                'getter' => 'getEarthResist',
+            ],
         ];
 
         foreach ($resists as $resist) {
@@ -767,7 +771,7 @@ class BuffActionTest extends AbstractUnitTest
                 $enemyCommand,
                 $command,
                 BuffAction::TARGET_SELF,
-                '',
+                'change resist',
                 $resist['buff'],
                 $power
             );
