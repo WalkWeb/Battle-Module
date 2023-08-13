@@ -801,6 +801,47 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение максимального сопротивления
+     *
+     * @dataProvider addMaxResistDataProvider
+     * @param int $power
+     * @param int $newResist
+     * @throws Exception
+     */
+    public function testBuffActionAddMaxResistSuccess(int $power, int $newResist): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change max resist',
+            BuffAction::ADD_PHYSICAL_MAX_RESIST,
+            $power
+        );
+
+        // Изначальное максимальное сопротивление
+        self::assertEquals(75, $unit->getDefense()->getPhysicalMaxResist());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленное максимальное сопротивление
+        self::assertEquals($newResist, $unit->getDefense()->getPhysicalMaxResist());
+
+        // Откатываем баф и проверяем, что максимальное сопротивление вернулось к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(75, $unit->getDefense()->getPhysicalMaxResist());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -1235,6 +1276,25 @@ class BuffActionTest extends AbstractUnitTest
                 -2000,
                 60,
                 -1000,
+            ],
+        ];
+    }
+
+
+    public function addMaxResistDataProvider(): array
+    {
+        return [
+            [
+                5,
+                80,
+            ],
+            [
+                15,
+                90,
+            ],
+            [
+                50,
+                100
             ],
         ];
     }

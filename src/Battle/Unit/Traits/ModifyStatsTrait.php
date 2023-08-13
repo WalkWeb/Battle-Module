@@ -796,4 +796,34 @@ trait ModifyStatsTrait
     {
         $this->defense->setDeathResist($this->defense->getDeathResist() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет максимальное сопротивление физическому урону
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addPhysicalMaxResist(ActionInterface $action): void
+    {
+        $oldMaxResist = $this->defense->getPhysicalMaxResist();
+        $newMaxResist = $this->defense->getPhysicalMaxResist() + $action->getPower();
+
+        if ($newMaxResist > DefenseInterface::MAX_RESISTANCE) {
+            $newMaxResist = DefenseInterface::MAX_RESISTANCE;
+        }
+
+        $this->defense->setPhysicalMaxResist($newMaxResist);
+        $action->setRevertValue($newMaxResist - $oldMaxResist);
+    }
+
+    /**
+     * Откатывает изменения максимального сопротивления физическому урону
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addPhysicalMaxResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setPhysicalMaxResist($this->defense->getPhysicalMaxResist() - $action->getRevertValue());
+    }
 }
