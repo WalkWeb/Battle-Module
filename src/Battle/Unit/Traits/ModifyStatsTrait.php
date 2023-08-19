@@ -946,4 +946,34 @@ trait ModifyStatsTrait
     {
         $this->defense->setEarthMaxResist($this->defense->getEarthMaxResist() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет максимальное сопротивление урону магией жизни
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addLifeMaxResist(ActionInterface $action): void
+    {
+        $oldMaxResist = $this->defense->getLifeMaxResist();
+        $newMaxResist = $this->defense->getLifeMaxResist() + $action->getPower();
+
+        if ($newMaxResist > DefenseInterface::MAX_RESISTANCE) {
+            $newMaxResist = DefenseInterface::MAX_RESISTANCE;
+        }
+
+        $this->defense->setLifeMaxResist($newMaxResist);
+        $action->setRevertValue($newMaxResist - $oldMaxResist);
+    }
+
+    /**
+     * Откатывает изменения максимального сопротивления урону магией жизни
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addLifeMaxResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setLifeMaxResist($this->defense->getLifeMaxResist() - $action->getRevertValue());
+    }
 }
