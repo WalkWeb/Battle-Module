@@ -976,4 +976,34 @@ trait ModifyStatsTrait
     {
         $this->defense->setLifeMaxResist($this->defense->getLifeMaxResist() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет максимальное сопротивление урону магией смерти
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addDeathMaxResist(ActionInterface $action): void
+    {
+        $oldMaxResist = $this->defense->getDeathMaxResist();
+        $newMaxResist = $this->defense->getDeathMaxResist() + $action->getPower();
+
+        if ($newMaxResist > DefenseInterface::MAX_RESISTANCE) {
+            $newMaxResist = DefenseInterface::MAX_RESISTANCE;
+        }
+
+        $this->defense->setDeathMaxResist($newMaxResist);
+        $action->setRevertValue($newMaxResist - $oldMaxResist);
+    }
+
+    /**
+     * Откатывает изменения максимального сопротивления урону магией смерти
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addDeathMaxResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setDeathMaxResist($this->defense->getDeathMaxResist() - $action->getRevertValue());
+    }
 }
