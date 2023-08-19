@@ -160,8 +160,8 @@ $effect = $this->getFactory()->create($data);
 - [x] `cast speed` – reduced
 - [x] `block` – increased. Пример в способности "Blessed Shield"
 - [ ] `block` – reduced
-- [ ] `magic block` – increased
-- [ ] `magic block` – reduced
+- [x] `magic block` – increased
+- [x] `magic block` – reduced
 - [ ] `block ignore` – increased
 - [ ] `block ignore` – reduced
 - [ ] `add concentration` – increased

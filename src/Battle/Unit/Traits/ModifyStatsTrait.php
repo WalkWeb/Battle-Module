@@ -264,7 +264,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Увеличивает блок юнита на фиксированную величину
+     * Увеличивает блок на фиксированную величину
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -283,16 +283,48 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Возвращает блок юнита к исходному значению
+     * Возвращает блок к исходному значению
      *
      * @param ActionInterface $action
      * @throws Exception
      */
     private function addBlockRevert(ActionInterface $action): void
     {
-        $block = $this->defense->getBlock();
-        $block -= $action->getRevertValue();
-        $this->defense->setBlock($block);
+        $this->defense->setBlock($this->defense->getBlock() - $action->getRevertValue());
+    }
+
+    /**
+     * Изменяет магический блок на фиксированную величину
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMagicBlock(ActionInterface $action): void
+    {
+        $oldMagicBlock = $this->defense->getMagicBlock();
+        $newMagicBlock = $oldMagicBlock + $action->getPower();
+
+        if ($newMagicBlock > DefenseInterface::MAX_BLOCK) {
+            $newMagicBlock = DefenseInterface::MAX_BLOCK;
+        }
+
+        if ($newMagicBlock < DefenseInterface::MIN_BLOCK) {
+            $newMagicBlock = DefenseInterface::MIN_BLOCK;
+        }
+
+        $this->defense->setMagicBlock($newMagicBlock);
+        $action->setRevertValue($newMagicBlock - $oldMagicBlock);
+    }
+
+    /**
+     * Откатывает изменение магического блока
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMagicBlockRevert(ActionInterface $action): void
+    {
+        $this->defense->setMagicBlock($this->defense->getMagicBlock() - $action->getRevertValue());
     }
 
     /**

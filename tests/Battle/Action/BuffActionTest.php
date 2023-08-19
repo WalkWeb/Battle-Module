@@ -9,6 +9,7 @@ use Battle\Action\ActionException;
 use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Command\CommandFactory;
+use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\UnitException;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -919,6 +920,47 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение магического блока
+     *
+     * @dataProvider addMagicBlockDataProvider
+     * @param int $addMagicBlock
+     * @param int $expectedBlock
+     * @throws Exception
+     */
+    public function testBuffActionAddMagicBlockSuccess(int $addMagicBlock, int $expectedBlock): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change magic block',
+            BuffAction::ADD_MAGIC_BLOCK,
+            $addMagicBlock
+        );
+
+        // Изначальный магический блок
+        self::assertEquals(40, $unit->getDefense()->getMagicBlock());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный магический блок
+        self::assertEquals($expectedBlock, $unit->getDefense()->getMagicBlock());
+
+        // Откатываем баф и проверяем, что магический блок вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(40, $unit->getDefense()->getMagicBlock());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -1372,6 +1414,28 @@ class BuffActionTest extends AbstractUnitTest
             [
                 50,
                 100
+            ],
+        ];
+    }
+
+    public function addMagicBlockDataProvider(): array
+    {
+        return [
+            [
+                10,
+                50,
+            ],
+            [
+                200,
+                DefenseInterface::MAX_BLOCK,
+            ],
+            [
+                -10,
+                30,
+            ],
+            [
+                -300,
+                DefenseInterface::MIN_BLOCK,
             ],
         ];
     }
