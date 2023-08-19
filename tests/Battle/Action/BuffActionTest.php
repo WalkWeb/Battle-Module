@@ -25,7 +25,6 @@ class BuffActionTest extends AbstractUnitTest
      */
     public function testBuffActionMaximumLifeSuccess(): void
     {
-        $name = 'use Reserve Forces';
         $power = 130;
 
         $unit = UnitFactory::createByTemplate(1);
@@ -41,7 +40,7 @@ class BuffActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            $name,
+            'change maximum life',
             BuffAction::MAX_LIFE,
             $power
         );
@@ -68,6 +67,59 @@ class BuffActionTest extends AbstractUnitTest
 
         self::assertEquals($oldLife, $unit->getTotalLife());
         self::assertEquals($oldLife, $unit->getLife());
+    }
+
+    /**
+     * Тест на изменение максимальной маны
+     *
+     * @dataProvider multiplierMaxMana
+     * @param int $unitId
+     * @param int $defaultMaxMana
+     * @param int $power
+     * @param int $expectedMaxMana
+     * @param int $expectedMana
+     * @throws Exception
+     */
+    public function testBuffActionMaximumManaSuccess(
+        int $unitId,
+        int $defaultMaxMana,
+        int $power,
+        int $expectedMaxMana,
+        int $expectedMana
+    ): void
+    {
+        $unit = UnitFactory::createByTemplate($unitId);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change max mana',
+            BuffAction::MAX_MANA,
+            $power
+        );
+
+        // Проверяем изначальное значение максимальной маны
+        self::assertEquals($defaultMaxMana, $unit->getTotalMana());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $callbackActions = $action->handle();
+
+        self::assertEquals(new ActionCollection(), $callbackActions);
+
+        self::assertEquals($expectedMaxMana, $unit->getTotalMana());
+        self::assertEquals($expectedMana, $unit->getMana());
+
+        // Откатываем изменения и проверяем, что мана вернулась к исходному значению
+        $action->getRevertAction()->handle();
+
+        self::assertEquals($defaultMaxMana, $unit->getTotalMana());
     }
 
     /**
@@ -1563,6 +1615,61 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
+    public function multiplierMaxMana(): array
+    {
+        return [
+            [
+                1,
+                50,
+                110,
+                55,
+                55,
+            ],
+            [
+                1,
+                50,
+                200,
+                100,
+                100,
+            ],
+            [
+                1,
+                50,
+                137,
+                68,
+                68,
+            ],
+            [
+                1,
+                50,
+                21,
+                10,
+                10,
+            ],
+            [
+                2,
+                50,
+                200,
+                100,
+                70, // 20 маны изначально + 50 на значение которого мана выросла
+            ],
+            [
+                2,
+                50,
+                11,
+                5,
+                5, // 20 изначальной маны уменьшились до максимального значения
+            ],
+            [
+                23,
+                3,
+                11,
+                1, // 3 * 0.11 - округлится до 0, но мы не позволяем максимальной мане быть меньше 1
+                1,
+            ],
+        ];
+    }
+
     public function overReducedStatDataProvider(): array
     {
         return [
@@ -1579,6 +1686,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::MAGIC_ACCURACY],
             [BuffAction::ACCURACY],
             [BuffAction::CAST_SPEED],
+            [BuffAction::MAX_MANA],
         ];
     }
 }

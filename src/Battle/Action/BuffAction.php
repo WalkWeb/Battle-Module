@@ -12,6 +12,7 @@ use Battle\Unit\UnitInterface;
 class BuffAction extends AbstractAction
 {
     public const MAX_LIFE                = 'multiplierMaxLife';
+    public const MAX_MANA                = 'multiplierMaxMana';
     public const PHYSICAL_DAMAGE         = 'multiplierPhysicalDamage';
     public const FIRE_DAMAGE             = 'multiplierFireDamage';
     public const WATER_DAMAGE            = 'multiplierWaterDamage';

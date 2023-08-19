@@ -230,6 +230,57 @@ trait ModifyStatsTrait
     }
 
     /**
+     * Изменяет максимальный запас маны
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierMaxMana(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldMana = $this->totalMana;
+        $newManaMax = (int)($this->totalMana * $multiplier);
+
+        if ($newManaMax < 1) {
+            $newManaMax = 1;
+        }
+
+        $bonus = $newManaMax - $oldMana;
+
+        $this->totalMana += $bonus;
+
+        if ($action->getPower() > 100) {
+            $this->mana += $bonus;
+        }
+
+        if ($this->mana > $this->totalMana) {
+            $this->mana = $this->totalMana;
+        }
+
+        $action->setRevertValue($bonus);
+    }
+
+    /**
+     * Откатывает изменения максимальной маны
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierMaxManaRevert(ActionInterface $action): void
+    {
+        $this->totalMana -= $action->getRevertValue();
+
+        if ($this->mana > $this->totalMana) {
+            $this->mana = $this->totalMana;
+        }
+    }
+
+    /**
      * Увеличивает скорость атаки юнита
      *
      * @param ActionInterface $action
