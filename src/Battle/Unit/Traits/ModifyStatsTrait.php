@@ -1070,4 +1070,38 @@ trait ModifyStatsTrait
     {
         $this->offense->setCastSpeed($this->offense->getCastSpeed() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет игнорирование блока на фиксированную величину
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addBlockIgnore(ActionInterface $action): void
+    {
+        $oldBlockIgnore = $this->offense->getBlockIgnoring();
+        $newBlockIgnore = $oldBlockIgnore + $action->getPower();
+
+        if ($newBlockIgnore > DefenseInterface::MAX_BLOCK_IGNORE) {
+            $newBlockIgnore = DefenseInterface::MAX_BLOCK_IGNORE;
+        }
+
+        if ($newBlockIgnore < DefenseInterface::MIN_BLOCK_IGNORE) {
+            $newBlockIgnore = DefenseInterface::MIN_BLOCK_IGNORE;
+        }
+
+        $this->offense->setBlockIgnoring($newBlockIgnore);
+        $action->setRevertValue($newBlockIgnore - $oldBlockIgnore);
+    }
+
+    /**
+     * Откатывает изменение игнорирование блока
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addBlockIgnoreRevert(ActionInterface $action): void
+    {
+        $this->offense->setBlockIgnoring($this->offense->getBlockIgnoring() - $action->getRevertValue());
+    }
 }

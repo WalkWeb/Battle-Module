@@ -961,6 +961,47 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение магического блока
+     *
+     * @dataProvider addBlockIgnoreDataProvider
+     * @param int $addBlockIgnore
+     * @param int $expectedBlockIgnore
+     * @throws Exception
+     */
+    public function testBuffActionAddBlockIgnoreSuccess(int $addBlockIgnore, int $expectedBlockIgnore): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change block ignore',
+            BuffAction::ADD_BLOCK_IGNORE,
+            $addBlockIgnore
+        );
+
+        // Изначальный показатель игнорирования блока
+        self::assertEquals(30, $unit->getOffense()->getBlockIgnoring());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный показатель игнорирования блока
+        self::assertEquals($expectedBlockIgnore, $unit->getOffense()->getBlockIgnoring());
+
+        // Откатываем баф и проверяем, что обновленный показатель игнорирования блока вернулся к исходному
+        $action->getRevertAction()->handle();
+        self::assertEquals(30, $unit->getOffense()->getBlockIgnoring());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -1436,6 +1477,24 @@ class BuffActionTest extends AbstractUnitTest
             [
                 -300,
                 DefenseInterface::MIN_BLOCK,
+            ],
+        ];
+    }
+
+    public function addBlockIgnoreDataProvider(): array
+    {
+        return [
+            [
+                5,
+                35,
+            ],
+            [
+                100,
+                100,
+            ],
+            [
+                -50,
+                0,
             ],
         ];
     }

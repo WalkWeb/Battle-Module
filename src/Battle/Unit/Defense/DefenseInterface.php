@@ -35,6 +35,9 @@ interface DefenseInterface
     public const MIN_DODGE          = 0;
     public const MAX_DODGE          = 100;
 
+    public const MIN_BLOCK_IGNORE   = 0;
+    public const MAX_BLOCK_IGNORE   = 100;
+
     /**
      * Возвращает сопротивление физическому урону
      *

@@ -724,7 +724,7 @@ class UnitFactory
                 'cast_speed'          => 0,
                 'accuracy'            => 213,
                 'magic_accuracy'      => 114,
-                'block_ignoring'      => 0,
+                'block_ignoring'      => 30,
                 'critical_chance'     => 15,
                 'critical_multiplier' => 200,
                 'damage_multiplier'   => 100,

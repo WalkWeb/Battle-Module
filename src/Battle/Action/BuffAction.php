@@ -29,6 +29,7 @@ class BuffAction extends AbstractAction
     public const CRITICAL_MULTIPLIER     = 'multiplierCriticalMultiplier';
     public const ADD_BLOCK               = 'addBlock';
     public const ADD_MAGIC_BLOCK         = 'addMagicBlock';
+    public const ADD_BLOCK_IGNORE        = 'addBlockIgnore';
     public const ADD_PHYSICAL_RESIST     = 'addPhysicalResist';
     public const ADD_FIRE_RESIST         = 'addFireResist';
     public const ADD_WATER_RESIST        = 'addWaterResist';
