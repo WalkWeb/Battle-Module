@@ -728,8 +728,8 @@ class UnitFactory
                 'critical_chance'     => 15,
                 'critical_multiplier' => 200,
                 'damage_multiplier'   => 100,
-                'vampirism'           => 0,
-                'magic_vampirism'     => 0,
+                'vampirism'           => 10,
+                'magic_vampirism'     => 20,
             ],
             'defense'                      => [
                 'physical_resist'     => 60,

@@ -6,6 +6,7 @@ namespace Battle\Unit\Traits;
 
 use Battle\Action\ActionInterface;
 use Battle\Unit\Defense\DefenseInterface;
+use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitException;
 use Exception;
 
@@ -1103,5 +1104,39 @@ trait ModifyStatsTrait
     private function addBlockIgnoreRevert(ActionInterface $action): void
     {
         $this->offense->setBlockIgnoring($this->offense->getBlockIgnoring() - $action->getRevertValue());
+    }
+
+    /**
+     * Изменяет показатель вампиризма
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addVampirism(ActionInterface $action): void
+    {
+        $oldVampirism = $this->offense->getVampirism();
+        $newVampirism = $oldVampirism + $action->getPower();
+
+        if ($newVampirism > OffenseInterface::MAX_VAMPIRISM) {
+            $newVampirism = OffenseInterface::MAX_VAMPIRISM;
+        }
+
+        if ($newVampirism < OffenseInterface::MIN_VAMPIRISM) {
+            $newVampirism = OffenseInterface::MIN_VAMPIRISM;
+        }
+
+        $this->offense->setVampirism($newVampirism);
+        $action->setRevertValue($newVampirism - $oldVampirism);
+    }
+
+    /**
+     * Откатывает изменение показателя вампиризма
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addVampirismRevert(ActionInterface $action): void
+    {
+        $this->offense->setVampirism($this->offense->getVampirism() - $action->getRevertValue());
     }
 }

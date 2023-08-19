@@ -10,6 +10,7 @@ use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Defense\DefenseInterface;
+use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitException;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -1002,6 +1003,47 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение показателя вампиризма
+     *
+     * @dataProvider addVampirismDataProvider
+     * @param int $addVampirism
+     * @param int $expectedVampirism
+     * @throws Exception
+     */
+    public function testBuffActionAddVampirismSuccess(int $addVampirism, int $expectedVampirism): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change vampirism',
+            BuffAction::ADD_VAMPIRISM,
+            $addVampirism
+        );
+
+        // Изначальный вампиризм
+        self::assertEquals(10, $unit->getOffense()->getVampirism());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный вампиризм
+        self::assertEquals($expectedVampirism, $unit->getOffense()->getVampirism());
+
+        // Откатываем баф и проверяем, что вампиризм вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(10, $unit->getOffense()->getVampirism());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -1495,6 +1537,28 @@ class BuffActionTest extends AbstractUnitTest
             [
                 -50,
                 0,
+            ],
+        ];
+    }
+
+    public function addVampirismDataProvider(): array
+    {
+        return [
+            [
+                5,
+                15,
+            ],
+            [
+                200,
+                OffenseInterface::MAX_VAMPIRISM,
+            ],
+            [
+                -5,
+                5,
+            ],
+            [
+                -50,
+                OffenseInterface::MIN_VAMPIRISM,
             ],
         ];
     }
