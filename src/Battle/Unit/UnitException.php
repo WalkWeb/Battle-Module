@@ -39,7 +39,6 @@ class UnitException extends Exception
     public const INCORRECT_ADD_RAGE_MULTIPLIER_VALUE = 'Incorrect unit "add_rage_multiplier", should be min-max value: ';
     public const OVER_REDUCED                        = 'Over reduced unit parameter, mim value: ';
     public const NO_REDUCED_DAMAGE                   = 'No reduced damage';
-    public const NO_REDUCED_MAXIMUM_LIFE             = 'No reduced maximum life';
     public const NO_REDUCED_ATTACK_SPEED             = 'No reduced attack speed';
     public const UNDEFINED_MODIFY_METHOD             = 'Undefined modify method';
     public const INCORRECT_DEFENSE                   = 'Incorrect defense, it required and type array';

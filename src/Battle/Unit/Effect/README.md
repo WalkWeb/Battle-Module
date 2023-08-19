@@ -95,7 +95,7 @@ $effect = $this->getFactory()->create($data);
 Также указано название способности, где можно посмотреть пример реализации изменения данной характеристики.
 
 - [x] `life` – increased. Пример в способности "Reserve Forces"
-- [ ] `life` – reduced
+- [x] `life` – reduced
 - [x] `mana` – increased
 - [x] `mana` – reduced
 - [ ] `mental barrier` – increased

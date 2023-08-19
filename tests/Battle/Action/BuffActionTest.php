@@ -19,20 +19,28 @@ use Tests\Factory\UnitFactory;
 class BuffActionTest extends AbstractUnitTest
 {
     /**
-     * Тест на баф, который увеличит здоровье юнита на 30%, а потом откат изменения
+     * Тест на изменение максимального здоровья
      *
+     * @dataProvider multiplierMaxLifeDataProvider
+     * @param int $unitId
+     * @param int $defaultMaxLife
+     * @param int $power
+     * @param int $expectedMaxLife
+     * @param int $expectedLife
      * @throws Exception
      */
-    public function testBuffActionMaximumLifeSuccess(): void
+    public function testBuffActionMaximumLifeSuccess(
+        int $unitId,
+        int $defaultMaxLife,
+        int $power,
+        int $expectedMaxLife,
+        int $expectedLife
+    ): void
     {
-        $power = 130;
-
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate($unitId);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $oldLife = $unit->getTotalLife();
 
         $action = new BuffAction(
             $this->getContainer(),
@@ -45,34 +53,28 @@ class BuffActionTest extends AbstractUnitTest
             $power
         );
 
-        self::assertEquals(BuffAction::SKIP_ANIMATION_METHOD, $action->getAnimationMethod());
-        self::assertEquals('buff', $action->getMessageMethod());
-
-        $multiplier = $power / 100;
-        $newLife = (int)($unit->getTotalLife() * $multiplier);
-
-        // BuffAction всегда готов примениться (а EffectAction - только если аналогичный эффект на юните отсутствует)
-        self::assertTrue($action->canByUsed());
+        // Проверяем изначальное значение максимального здоровья
+        self::assertEquals($defaultMaxLife, $unit->getTotalLife());
 
         // Применяем баф
+        self::assertTrue($action->canByUsed());
         $callbackActions = $action->handle();
 
         self::assertEquals(new ActionCollection(), $callbackActions);
 
-        self::assertEquals($newLife, $unit->getTotalLife());
-        self::assertEquals($newLife, $unit->getLife());
+        self::assertEquals($expectedMaxLife, $unit->getTotalLife());
+        self::assertEquals($expectedLife, $unit->getLife());
 
-        // Откат изменения
+        // Откатываем изменения и проверяем, что максимальное здоровье вернулось к исходному значению
         $action->getRevertAction()->handle();
 
-        self::assertEquals($oldLife, $unit->getTotalLife());
-        self::assertEquals($oldLife, $unit->getLife());
+        self::assertEquals($defaultMaxLife, $unit->getTotalLife());
     }
 
     /**
      * Тест на изменение максимальной маны
      *
-     * @dataProvider multiplierMaxMana
+     * @dataProvider multiplierMaxManaDataProvider
      * @param int $unitId
      * @param int $defaultMaxMana
      * @param int $power
@@ -120,34 +122,6 @@ class BuffActionTest extends AbstractUnitTest
         $action->getRevertAction()->handle();
 
         self::assertEquals($defaultMaxMana, $unit->getTotalMana());
-    }
-
-    /**
-     * Тест на попытку уменьшения здоровья - пока такой вариант не допустим (нужно проработать отдельно)
-     *
-     * @throws Exception
-     */
-    public function testBuffActionMaximumLifeReduced(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new BuffAction(
-            $this->getContainer(),
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'use Reserve Forces',
-            BuffAction::MAX_LIFE,
-            50
-        );
-
-        $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::NO_REDUCED_MAXIMUM_LIFE);
-        $action->handle();
     }
 
     /**
@@ -1615,7 +1589,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function multiplierMaxMana(): array
+    public function multiplierMaxManaDataProvider(): array
     {
         return [
             [
@@ -1670,6 +1644,47 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
+    public function multiplierMaxLifeDataProvider(): array
+    {
+        return [
+            [
+                1,
+                100,
+                110,
+                110,
+                110,
+            ],
+            [
+                2,
+                250,
+                137,
+                342,
+                342,
+            ],
+            [
+                9,
+                100,
+                125,
+                125,
+                115,
+            ],
+            [
+                9,
+                100,
+                70,
+                70,
+                70,
+            ],
+            [
+                23,
+                3,
+                11,
+                1, // 3 * 0.11 - округлится до 0, но мы не позволяем максимальной мане быть меньше 1
+                1,
+            ],
+        ];
+    }
+
     public function overReducedStatDataProvider(): array
     {
         return [
@@ -1687,6 +1702,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::ACCURACY],
             [BuffAction::CAST_SPEED],
             [BuffAction::MAX_MANA],
+            [BuffAction::MAX_LIFE],
         ];
     }
 }

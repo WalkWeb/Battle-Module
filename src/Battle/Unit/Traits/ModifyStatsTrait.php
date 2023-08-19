@@ -25,7 +25,7 @@ use Exception;
 trait ModifyStatsTrait
 {
     /**
-     * Увеличивает урон юнита (можно сделать и уменьшение, но пока делаем только увеличение)
+     * Увеличивает физический урон (можно сделать и уменьшение, но пока делаем только увеличение)
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -47,7 +47,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Откатывает изменение урона юнита
+     * Откатывает изменение физического урона
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -58,7 +58,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет меткость юнита
+     * Изменяет меткость
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -91,7 +91,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет магическую меткость юнита
+     * Изменяет магическую меткость
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -124,7 +124,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет защиту юнита
+     * Изменяет защиту
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -157,7 +157,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет магическую защиту юнита
+     * Изменяет магическую защиту
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -190,26 +190,37 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Увеличивает здоровье юнита (можно сделать и уменьшение, но пока делаем только увеличение)
+     * Увеличивает здоровье
      *
      * @param ActionInterface $action
      * @throws Exception
      */
     private function multiplierMaxLife(ActionInterface $action): void
     {
-        if ($action->getPower() <= 100) {
-            throw new UnitException(UnitException::NO_REDUCED_MAXIMUM_LIFE);
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
         }
 
         $multiplier = $action->getPower() / 100;
 
-        $oldLife = $this->totalLife;
-        $newHpMax = (int)($this->totalLife * $multiplier);
+        $oldMaxLife = $this->totalLife;
+        $newMaxLife = (int)($this->totalLife * $multiplier);
 
-        $bonus = $newHpMax - $oldLife;
+        if ($newMaxLife < 1) {
+            $newMaxLife = 1;
+        }
 
-        $this->life += $bonus;
+        $bonus = $newMaxLife - $oldMaxLife;
+
         $this->totalLife += $bonus;
+
+        if ($action->getPower() > 100) {
+            $this->life += $bonus;
+        }
+
+        if ($this->life > $this->totalLife) {
+            $this->life = $this->totalLife;
+        }
 
         $action->setRevertValue($bonus);
     }
@@ -243,14 +254,14 @@ trait ModifyStatsTrait
 
         $multiplier = $action->getPower() / 100;
 
-        $oldMana = $this->totalMana;
-        $newManaMax = (int)($this->totalMana * $multiplier);
+        $oldMaxMana = $this->totalMana;
+        $newMaxMana = (int)($this->totalMana * $multiplier);
 
-        if ($newManaMax < 1) {
-            $newManaMax = 1;
+        if ($newMaxMana < 1) {
+            $newMaxMana = 1;
         }
 
-        $bonus = $newManaMax - $oldMana;
+        $bonus = $newMaxMana - $oldMaxMana;
 
         $this->totalMana += $bonus;
 
@@ -281,7 +292,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Увеличивает скорость атаки юнита
+     * Увеличивает скорость атаки
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -380,7 +391,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет шанс критического удара юнита
+     * Изменяет шанс критического удара
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -413,7 +424,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет силу критического удара юнита
+     * Изменяет силу критического удара
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -446,7 +457,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет урон огнем юнита
+     * Изменяет урон огнем
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -479,7 +490,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет урон водой юнита
+     * Изменяет урон водой
      *
      * @param ActionInterface $action
      * @throws Exception
@@ -512,7 +523,7 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет урон воздухом юнита
+     * Изменяет урон воздухом
      *
      * @param ActionInterface $action
      * @throws Exception
