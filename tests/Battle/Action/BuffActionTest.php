@@ -145,6 +145,50 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение скорости создания заклинаний юнита
+     *
+     * @throws Exception
+     */
+    public function testBuffActionCastSpeedSuccess(): void
+    {
+        $power = 130;
+
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $oldCastSpeed = $unit->getOffense()->getCastSpeed();
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change cast speed',
+            BuffAction::CAST_SPEED,
+            $power
+        );
+
+        self::assertEquals(ActionInterface::SKIP_ANIMATION_METHOD, $action->getAnimationMethod());
+        self::assertEquals('buff', $action->getMessageMethod());
+
+        $newCastSpeed = $unit->getOffense()->getCastSpeed() * $power / 100;
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        self::assertEquals($newCastSpeed, $unit->getOffense()->getCastSpeed());
+
+        // Откат изменения
+        $action->getRevertAction()->handle();
+
+        self::assertEquals($oldCastSpeed, $unit->getOffense()->getCastSpeed());
+    }
+
+    /**
      * Тест на уменьшение скорости атаки - такая механика пока недоступна
      *
      * @throws Exception
@@ -1347,6 +1391,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::DEFENSE],
             [BuffAction::MAGIC_ACCURACY],
             [BuffAction::ACCURACY],
+            [BuffAction::CAST_SPEED],
         ];
     }
 }

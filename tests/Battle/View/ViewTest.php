@@ -539,7 +539,7 @@ EOT;
                 <td><p>5%</p></td>
                 <td><p>200%</p></td>
                 <td><p>1</p></td>
-                <td><p>0</p></td>
+                <td><p>1.2</p></td>
             </tr>
             <tr class="header">
                 <td><p>Concentration</p></td>

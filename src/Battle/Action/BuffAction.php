@@ -20,6 +20,7 @@ class BuffAction extends AbstractAction
     public const LIFE_DAMAGE             = 'multiplierLifeDamage';
     public const DEATH_DAMAGE            = 'multiplierDeathDamage';
     public const ATTACK_SPEED            = 'multiplierAttackSpeed';
+    public const CAST_SPEED              = 'multiplierCastSpeed';
     public const ACCURACY                = 'multiplierAccuracy';
     public const MAGIC_ACCURACY          = 'multiplierMagicAccuracy';
     public const DEFENSE                 = 'multiplierDefense';

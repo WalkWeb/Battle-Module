@@ -26,7 +26,7 @@ trait ModifyStatsTrait
     /**
      * Увеличивает урон юнита (можно сделать и уменьшение, но пока делаем только увеличение)
      *
-     * @param ActionInterface $action - ожидается BuffAction
+     * @param ActionInterface $action
      * @throws Exception
      */
     private function multiplierPhysicalDamage(ActionInterface $action): void
@@ -48,7 +48,7 @@ trait ModifyStatsTrait
     /**
      * Откатывает изменение урона юнита
      *
-     * @param ActionInterface $action - ожидается BuffAction
+     * @param ActionInterface $action
      * @throws Exception
      */
     private function multiplierPhysicalDamageRevert(ActionInterface $action): void
@@ -191,7 +191,7 @@ trait ModifyStatsTrait
     /**
      * Увеличивает здоровье юнита (можно сделать и уменьшение, но пока делаем только увеличение)
      *
-     * @param ActionInterface $action - ожидается BuffAction
+     * @param ActionInterface $action
      * @throws Exception
      */
     private function multiplierMaxLife(ActionInterface $action): void
@@ -216,7 +216,7 @@ trait ModifyStatsTrait
     /**
      * Откатывает изменения по здоровью
      *
-     * @param ActionInterface $action - ожидается BuffAction
+     * @param ActionInterface $action
      * @throws Exception
      */
     private function multiplierMaxLifeRevert(ActionInterface $action): void
@@ -231,7 +231,7 @@ trait ModifyStatsTrait
     /**
      * Увеличивает скорость атаки юнита
      *
-     * @param ActionInterface $action - ожидается BuffAction
+     * @param ActionInterface $action
      * @throws Exception
      */
     private function multiplierAttackSpeed(ActionInterface $action): void
@@ -253,7 +253,7 @@ trait ModifyStatsTrait
     /**
      * Откатывает обратно увеличенную скорость атаки
      *
-     * @param ActionInterface $action - ожидается BuffAction
+     * @param ActionInterface $action
      * @throws Exception
      */
     private function multiplierAttackSpeedRevert(ActionInterface $action): void
@@ -266,7 +266,7 @@ trait ModifyStatsTrait
     /**
      * Увеличивает блок юнита на фиксированную величину
      *
-     * @param ActionInterface $action - ожидается BuffAction
+     * @param ActionInterface $action
      * @throws Exception
      */
     private function addBlock(ActionInterface $action): void
@@ -285,7 +285,7 @@ trait ModifyStatsTrait
     /**
      * Возвращает блок юнита к исходному значению
      *
-     * @param ActionInterface $action - ожидается BuffAction
+     * @param ActionInterface $action
      * @throws Exception
      */
     private function addBlockRevert(ActionInterface $action): void
@@ -1005,5 +1005,37 @@ trait ModifyStatsTrait
     private function addDeathMaxResistRevert(ActionInterface $action): void
     {
         $this->defense->setDeathMaxResist($this->defense->getDeathMaxResist() - $action->getRevertValue());
+    }
+
+    /**
+     * Увеличивает скорость создания заклинаний
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierCastSpeed(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldCastSpeed = $this->offense->getCastSpeed();
+        $newCastSpeed = $oldCastSpeed * $multiplier;
+
+        $this->offense->setCastSpeed($newCastSpeed);
+        $action->setRevertValue($newCastSpeed - $oldCastSpeed);
+    }
+
+    /**
+     * Откатывает обратно увеличенную скорость атаки
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierCastSpeedRevert(ActionInterface $action): void
+    {
+        $this->offense->setCastSpeed($this->offense->getCastSpeed() - $action->getRevertValue());
     }
 }

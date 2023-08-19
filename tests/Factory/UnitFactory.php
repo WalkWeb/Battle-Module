@@ -42,7 +42,7 @@ class UnitFactory
                 'life_damage'         => 0,
                 'death_damage'        => 0,
                 'attack_speed'        => 1.00,
-                'cast_speed'          => 0,
+                'cast_speed'          => 1.2,
                 'accuracy'            => 200,
                 'magic_accuracy'      => 100,
                 'block_ignoring'      => 0,

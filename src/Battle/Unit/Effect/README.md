@@ -156,8 +156,8 @@ $effect = $this->getFactory()->create($data);
 - [x] `critical multiplier` – reduced
 - [x] `attack speed` – increased. Пример в способности "Battle Fury"
 - [ ] `attack speed` – reduced
-- [ ] `cast speed` – increased
-- [ ] `cast speed` – reduced
+- [x] `cast speed` – increased
+- [x] `cast speed` – reduced
 - [x] `block` – increased. Пример в способности "Blessed Shield"
 - [ ] `block` – reduced
 - [ ] `magic block` – increased
