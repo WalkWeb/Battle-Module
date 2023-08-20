@@ -450,32 +450,6 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на ситуацию, когда идет попытка уменьшения физического урона (на данный момент урон может только увеличиваться)
-     *
-     * @throws Exception
-     */
-    public function testUnitMultiplierPhysicalDamageInvalidPower(): void
-    {
-        $unit = UnitFactory::createByTemplate(11);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $actions = $this->getRageActions($unit, $enemyCommand, $command);
-
-        self::assertCount(1, $actions);
-
-        // Применяем способность
-        foreach ($actions as $action) {
-            self::assertTrue($action->canByUsed());
-
-            $this->expectException(UnitException::class);
-            $this->expectExceptionMessage(UnitException::NO_REDUCED_DAMAGE);
-            $action->handle();
-        }
-    }
-
-    /**
      * Тест на ситуацию, когда у мертвого юнита запрашиваются действия - получаем ошибку
      *
      * @throws Exception

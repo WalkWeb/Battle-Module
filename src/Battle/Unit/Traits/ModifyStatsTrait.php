@@ -25,39 +25,6 @@ use Exception;
 trait ModifyStatsTrait
 {
     /**
-     * Увеличивает физический урон (можно сделать и уменьшение, но пока делаем только увеличение)
-     *
-     * @param ActionInterface $action
-     * @throws Exception
-     */
-    private function multiplierPhysicalDamage(ActionInterface $action): void
-    {
-        if ($action->getPower() <= 100) {
-            throw new UnitException(UnitException::NO_REDUCED_DAMAGE);
-        }
-
-        $multiplier = $action->getPower() / 100;
-
-        $oldDamage = $this->offense->getPhysicalDamage();
-        $newDamage = (int)($this->offense->getPhysicalDamage() * $multiplier);
-
-        $this->offense->setPhysicalDamage($newDamage);
-
-        $action->setRevertValue($newDamage - $oldDamage);
-    }
-
-    /**
-     * Откатывает изменение физического урона
-     *
-     * @param ActionInterface $action
-     * @throws Exception
-     */
-    private function multiplierPhysicalDamageRevert(ActionInterface $action): void
-    {
-        $this->offense->setPhysicalDamage($this->offense->getPhysicalDamage() - $action->getRevertValue());
-    }
-
-    /**
      * Изменяет меткость
      *
      * @param ActionInterface $action
@@ -454,6 +421,39 @@ trait ModifyStatsTrait
     private function multiplierCriticalMultiplierRevert(ActionInterface $action): void
     {
         $this->offense->setCriticalMultiplier($this->offense->getCriticalMultiplier() - $action->getRevertValue());
+    }
+
+    /**
+     * Изменяет физический урон
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierPhysicalDamage(ActionInterface $action): void
+    {
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        }
+
+        $multiplier = $action->getPower() / 100;
+
+        $oldPhysicalDamage = $this->offense->getPhysicalDamage();
+        $newPhysicalDamage = (int)($this->offense->getPhysicalDamage() * $multiplier);
+
+        $this->offense->setPhysicalDamage($newPhysicalDamage);
+
+        $action->setRevertValue($newPhysicalDamage - $oldPhysicalDamage);
+    }
+
+    /**
+     * Откатывает изменение физического урона
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function multiplierPhysicalDamageRevert(ActionInterface $action): void
+    {
+        $this->offense->setPhysicalDamage($this->offense->getPhysicalDamage() - $action->getRevertValue());
     }
 
     /**

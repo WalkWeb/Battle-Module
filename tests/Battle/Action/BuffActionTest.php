@@ -521,6 +521,52 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на увеличение/уменьшение физического урона
+     *
+     * @dataProvider multiplierPhysicalDamageDataProvider
+     * @param int $power
+     * @param int $newPhysicalDamage
+     * @throws Exception
+     */
+    public function testBuffActionMultiplierPhysicalDamageSuccess(int $power, int $newPhysicalDamage): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'multiplier physical damage',
+            BuffAction::PHYSICAL_DAMAGE,
+            $power
+        );
+
+        // Изначальный физический урон
+        self::assertEquals(3000, $unit->getOffense()->getPhysicalDamage());
+
+        $oldPhysicalDamage = $unit->getOffense()->getPhysicalDamage();
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный физический урон
+        self::assertEquals($newPhysicalDamage, $unit->getOffense()->getPhysicalDamage());
+
+        // Проверяем обновленный физический урон от множителя (на всякий случай)
+        self::assertEquals((int)($oldPhysicalDamage * ($power / 100)), $unit->getOffense()->getPhysicalDamage());
+
+        // Откатываем баф и проверяем, что физический урон вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(3000, $unit->getOffense()->getPhysicalDamage());
+    }
+
+    /**
      * Тест на увеличение/уменьшение урона огнем
      *
      * @dataProvider multiplierFireDamageDataProvider
@@ -1304,6 +1350,28 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
+    public function multiplierPhysicalDamageDataProvider(): array
+    {
+        return [
+            [
+                200,
+                6000,
+            ],
+            [
+                111,
+                3330,
+            ],
+            [
+                87,
+                2610,
+            ],
+            [
+                32,
+                960,
+            ],
+        ];
+    }
+
     /**
      * @return array
      */
@@ -1688,6 +1756,7 @@ class BuffActionTest extends AbstractUnitTest
     public function overReducedStatDataProvider(): array
     {
         return [
+            [BuffAction::PHYSICAL_DAMAGE],
             [BuffAction::FIRE_DAMAGE],
             [BuffAction::WATER_DAMAGE],
             [BuffAction::AIR_DAMAGE],
