@@ -1116,6 +1116,47 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение показателя магического вампиризма
+     *
+     * @dataProvider addMagicVampirismDataProvider
+     * @param int $addMagicVampirism
+     * @param int $expectedMagicVampirism
+     * @throws Exception
+     */
+    public function testBuffActionAddMagicVampirismSuccess(int $addMagicVampirism, int $expectedMagicVampirism): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change magic vampirism',
+            BuffAction::ADD_MAGIC_VAMPIRISM,
+            $addMagicVampirism
+        );
+
+        // Изначальный магический вампиризм
+        self::assertEquals(20, $unit->getOffense()->getMagicVampirism());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный магический вампиризм
+        self::assertEquals($expectedMagicVampirism, $unit->getOffense()->getMagicVampirism());
+
+        // Откатываем баф и проверяем, что магический вампиризм вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(20, $unit->getOffense()->getMagicVampirism());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -1649,6 +1690,28 @@ class BuffActionTest extends AbstractUnitTest
             [
                 -5,
                 5,
+            ],
+            [
+                -50,
+                OffenseInterface::MIN_VAMPIRISM,
+            ],
+        ];
+    }
+
+    public function addMagicVampirismDataProvider(): array
+    {
+        return [
+            [
+                5,
+                25,
+            ],
+            [
+                200,
+                OffenseInterface::MAX_VAMPIRISM,
+            ],
+            [
+                -5,
+                15,
             ],
             [
                 -50,

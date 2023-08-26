@@ -1201,4 +1201,38 @@ trait ModifyStatsTrait
     {
         $this->offense->setVampirism($this->offense->getVampirism() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет показатель магического вампиризма
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMagicVampirism(ActionInterface $action): void
+    {
+        $oldMagicVampirism = $this->offense->getMagicVampirism();
+        $newMagicVampirism = $oldMagicVampirism + $action->getPower();
+
+        if ($newMagicVampirism > OffenseInterface::MAX_VAMPIRISM) {
+            $newMagicVampirism = OffenseInterface::MAX_VAMPIRISM;
+        }
+
+        if ($newMagicVampirism < OffenseInterface::MIN_VAMPIRISM) {
+            $newMagicVampirism = OffenseInterface::MIN_VAMPIRISM;
+        }
+
+        $this->offense->setMagicVampirism($newMagicVampirism);
+        $action->setRevertValue($newMagicVampirism - $oldMagicVampirism);
+    }
+
+    /**
+     * Откатывает изменение показателя магического вампиризма
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMagicVampirismRevert(ActionInterface $action): void
+    {
+        $this->offense->setMagicVampirism($this->offense->getMagicVampirism() - $action->getRevertValue());
+    }
 }

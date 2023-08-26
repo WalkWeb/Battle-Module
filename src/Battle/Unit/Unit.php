@@ -78,7 +78,7 @@ class Unit extends AbstractUnit
      * @param ActionInterface $action
      * @return ActionCollection
      * @throws Exception
-     * @uses applyDamageAction, applyHealAction, applyManaRestoreAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction, applyResurrectionAction, applyParalysisAction
+     * @uses applyDamageAction, applyHealAction, applyManaRestoreAction, applySummonAction, applyWaitAction, applyBuffAction, applyEffectAction, applyResurrectionAction, applyParalysisAction, addMagicVampirism, addMagicVampirismRevert
      */
     public function applyAction(ActionInterface $action): ActionCollection
     {

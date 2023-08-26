@@ -32,6 +32,7 @@ class BuffAction extends AbstractAction
     public const ADD_MAGIC_BLOCK         = 'addMagicBlock';
     public const ADD_BLOCK_IGNORE        = 'addBlockIgnore';
     public const ADD_VAMPIRISM           = 'addVampirism';
+    public const ADD_MAGIC_VAMPIRISM     = 'addMagicVampirism';
     public const ADD_PHYSICAL_RESIST     = 'addPhysicalResist';
     public const ADD_FIRE_RESIST         = 'addFireResist';
     public const ADD_WATER_RESIST        = 'addWaterResist';
