@@ -308,6 +308,10 @@ trait ModifyStatsTrait
             $block = DefenseInterface::MAX_BLOCK;
         }
 
+        if ($block < DefenseInterface::MIN_BLOCK) {
+            $block = DefenseInterface::MIN_BLOCK;
+        }
+
         $this->defense->setBlock($block);
         $action->setRevertValue($block - $oldBlock);
     }

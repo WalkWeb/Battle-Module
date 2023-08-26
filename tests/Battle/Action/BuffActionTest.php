@@ -993,6 +993,47 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение блока
+     *
+     * @dataProvider addBlockDataProvider
+     * @param int $addMagicBlock
+     * @param int $expectedBlock
+     * @throws Exception
+     */
+    public function testBuffActionAddBlockSuccess(int $addMagicBlock, int $expectedBlock): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change block',
+            BuffAction::ADD_BLOCK,
+            $addMagicBlock
+        );
+
+        // Изначальный блок
+        self::assertEquals(30, $unit->getDefense()->getBlock());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный блок
+        self::assertEquals($expectedBlock, $unit->getDefense()->getBlock());
+
+        // Откатываем баф и проверяем, что блок вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(30, $unit->getDefense()->getBlock());
+    }
+
+    /**
      * Тест на изменение магического блока
      *
      * @dataProvider addMagicBlockDataProvider
@@ -1632,6 +1673,28 @@ class BuffActionTest extends AbstractUnitTest
             [
                 50,
                 100
+            ],
+        ];
+    }
+
+    public function addBlockDataProvider(): array
+    {
+        return [
+            [
+                10,
+                40,
+            ],
+            [
+                200,
+                DefenseInterface::MAX_BLOCK,
+            ],
+            [
+                -10,
+                20,
+            ],
+            [
+                -300,
+                DefenseInterface::MIN_BLOCK,
             ],
         ];
     }
