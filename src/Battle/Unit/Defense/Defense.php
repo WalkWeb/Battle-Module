@@ -183,6 +183,8 @@ class Defense implements DefenseInterface
     }
 
     /**
+     * TODO Добавить проверки, что текущее сопротивление ниже максимального, если выше - возвращаем максимальное сопротивление, оставляя текущее больше максимального
+     *
      * @return int
      */
     public function getPhysicalResist(): int

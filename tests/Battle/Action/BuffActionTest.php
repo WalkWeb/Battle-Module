@@ -125,21 +125,20 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на увеличение скорости атаки юнита
+     * Тест на изменение скорости атаки юнита
      *
+     * @dataProvider multiplierAttackSpeedDataProvider
+     * @param int $unitId
+     * @param int $power
+     * @param float $expectedAttackSpeed
      * @throws Exception
      */
-    public function testBuffActionAttackSpeedSuccess(): void
+    public function testBuffActionAttackSpeedSuccess(int $unitId, int $power, float $expectedAttackSpeed): void
     {
-        $name = 'use Battle Fury';
-        $power = 125;
-
-        $unit = UnitFactory::createByTemplate(1);
+        $unit = UnitFactory::createByTemplate($unitId);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
 
         $action = new BuffAction(
             $this->getContainer(),
@@ -147,7 +146,7 @@ class BuffActionTest extends AbstractUnitTest
             $enemyCommand,
             $command,
             BuffAction::TARGET_SELF,
-            $name,
+            'change attack speed',
             BuffAction::ATTACK_SPEED,
             $power
         );
@@ -155,8 +154,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals(ActionInterface::SKIP_ANIMATION_METHOD, $action->getAnimationMethod());
         self::assertEquals('buff', $action->getMessageMethod());
 
-        $multiplier = $power / 100;
-        $newAttackSpeed = $unit->getOffense()->getAttackSpeed() * $multiplier;
+        $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
 
         // BuffAction всегда готов примениться (а EffectAction - только если аналогичный эффект на юните отсутствует)
         self::assertTrue($action->canByUsed());
@@ -164,9 +162,13 @@ class BuffActionTest extends AbstractUnitTest
         // Применяем баф
         $action->handle();
 
-        self::assertEquals($newAttackSpeed, $unit->getOffense()->getAttackSpeed());
+        // Проверяем обновленную скорость атаки
+        self::assertEquals($expectedAttackSpeed, $unit->getOffense()->getAttackSpeed());
 
-        // Откат изменения
+        // Проверка скорости атаки через множитель (на всякий случай)
+        self::assertEquals($oldAttackSpeed * ($power / 100), $unit->getOffense()->getAttackSpeed());
+
+        // Откатываем изменение и проверяем, что скорость атаки изменилась к исходной
         $action->getRevertAction()->handle();
 
         self::assertEquals($oldAttackSpeed, $unit->getOffense()->getAttackSpeed());
@@ -214,34 +216,6 @@ class BuffActionTest extends AbstractUnitTest
         $action->getRevertAction()->handle();
 
         self::assertEquals($oldCastSpeed, $unit->getOffense()->getCastSpeed());
-    }
-
-    /**
-     * Тест на уменьшение скорости атаки - такая механика пока недоступна
-     *
-     * @throws Exception
-     */
-    public function testBuffActionAttackSpeedReduced(): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new BuffAction(
-            $this->getContainer(),
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'use Battle Fury',
-            BuffAction::ATTACK_SPEED,
-            50
-        );
-
-        $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::NO_REDUCED_ATTACK_SPEED);
-        $action->handle();
     }
 
     /**
@@ -1879,6 +1853,37 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
+    public function multiplierAttackSpeedDataProvider(): array
+    {
+        return [
+            [
+                1,
+                110,
+                1.1,
+            ],
+            [
+                1,
+                85,
+                0.85,
+            ],
+            [
+                39,
+                120,
+                1.5,
+            ],
+            [
+                39,
+                64,
+                0.8,
+            ],
+            [
+                39,
+                37,
+                0.4625,
+            ],
+        ];
+    }
+
     public function overReducedStatDataProvider(): array
     {
         return [
@@ -1898,6 +1903,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::CAST_SPEED],
             [BuffAction::MAX_MANA],
             [BuffAction::MAX_LIFE],
+            [BuffAction::ATTACK_SPEED],
         ];
     }
 }

@@ -2393,7 +2393,7 @@ class UnitFactory
                 'earth_damage'        => 0,
                 'life_damage'         => 0,
                 'death_damage'        => 0,
-                'attack_speed'        => 1.00,
+                'attack_speed'        => 1.25,
                 'cast_speed'          => 0,
                 'accuracy'            => 200,
                 'magic_accuracy'      => 100,

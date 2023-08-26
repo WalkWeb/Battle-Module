@@ -266,17 +266,17 @@ trait ModifyStatsTrait
      */
     private function multiplierAttackSpeed(ActionInterface $action): void
     {
-        if ($action->getPower() <= 100) {
-            throw new UnitException(UnitException::NO_REDUCED_ATTACK_SPEED);
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
         }
 
         $multiplier = $action->getPower() / 100;
 
-        $attackSpeed = $this->offense->getAttackSpeed();
-        $oldAttackSpeed = $attackSpeed;
-        $newAttackSpeed = $attackSpeed * $multiplier;
+        $oldAttackSpeed = $this->offense->getAttackSpeed();
+        $newAttackSpeed = $oldAttackSpeed * $multiplier;
 
         $this->offense->setAttackSpeed($newAttackSpeed);
+
         $action->setRevertValue($newAttackSpeed - $oldAttackSpeed);
     }
 
