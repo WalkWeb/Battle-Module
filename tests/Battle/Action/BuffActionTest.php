@@ -970,11 +970,11 @@ class BuffActionTest extends AbstractUnitTest
      * Тест на изменение блока
      *
      * @dataProvider addBlockDataProvider
-     * @param int $addMagicBlock
+     * @param int $power
      * @param int $expectedBlock
      * @throws Exception
      */
-    public function testBuffActionAddBlockSuccess(int $addMagicBlock, int $expectedBlock): void
+    public function testBuffActionAddBlockSuccess(int $power, int $expectedBlock): void
     {
         $unit = UnitFactory::createByTemplate(12);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -989,7 +989,7 @@ class BuffActionTest extends AbstractUnitTest
             BuffAction::TARGET_SELF,
             'change block',
             BuffAction::ADD_BLOCK,
-            $addMagicBlock
+            $power
         );
 
         // Изначальный блок
@@ -1011,11 +1011,11 @@ class BuffActionTest extends AbstractUnitTest
      * Тест на изменение магического блока
      *
      * @dataProvider addMagicBlockDataProvider
-     * @param int $addMagicBlock
+     * @param int $power
      * @param int $expectedBlock
      * @throws Exception
      */
-    public function testBuffActionAddMagicBlockSuccess(int $addMagicBlock, int $expectedBlock): void
+    public function testBuffActionAddMagicBlockSuccess(int $power, int $expectedBlock): void
     {
         $unit = UnitFactory::createByTemplate(12);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -1030,7 +1030,7 @@ class BuffActionTest extends AbstractUnitTest
             BuffAction::TARGET_SELF,
             'change magic block',
             BuffAction::ADD_MAGIC_BLOCK,
-            $addMagicBlock
+            $power
         );
 
         // Изначальный магический блок
@@ -1052,11 +1052,11 @@ class BuffActionTest extends AbstractUnitTest
      * Тест на изменение магического блока
      *
      * @dataProvider addBlockIgnoreDataProvider
-     * @param int $addBlockIgnore
+     * @param int $power
      * @param int $expectedBlockIgnore
      * @throws Exception
      */
-    public function testBuffActionAddBlockIgnoreSuccess(int $addBlockIgnore, int $expectedBlockIgnore): void
+    public function testBuffActionAddBlockIgnoreSuccess(int $power, int $expectedBlockIgnore): void
     {
         $unit = UnitFactory::createByTemplate(12);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -1071,7 +1071,7 @@ class BuffActionTest extends AbstractUnitTest
             BuffAction::TARGET_SELF,
             'change block ignore',
             BuffAction::ADD_BLOCK_IGNORE,
-            $addBlockIgnore
+            $power
         );
 
         // Изначальный показатель игнорирования блока
@@ -1093,11 +1093,11 @@ class BuffActionTest extends AbstractUnitTest
      * Тест на изменение показателя вампиризма
      *
      * @dataProvider addVampirismDataProvider
-     * @param int $addVampirism
+     * @param int $power
      * @param int $expectedVampirism
      * @throws Exception
      */
-    public function testBuffActionAddVampirismSuccess(int $addVampirism, int $expectedVampirism): void
+    public function testBuffActionAddVampirismSuccess(int $power, int $expectedVampirism): void
     {
         $unit = UnitFactory::createByTemplate(12);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -1112,7 +1112,7 @@ class BuffActionTest extends AbstractUnitTest
             BuffAction::TARGET_SELF,
             'change vampirism',
             BuffAction::ADD_VAMPIRISM,
-            $addVampirism
+            $power
         );
 
         // Изначальный вампиризм
@@ -1134,11 +1134,11 @@ class BuffActionTest extends AbstractUnitTest
      * Тест на изменение показателя магического вампиризма
      *
      * @dataProvider addMagicVampirismDataProvider
-     * @param int $addMagicVampirism
+     * @param int $power
      * @param int $expectedMagicVampirism
      * @throws Exception
      */
-    public function testBuffActionAddMagicVampirismSuccess(int $addMagicVampirism, int $expectedMagicVampirism): void
+    public function testBuffActionAddMagicVampirismSuccess(int $power, int $expectedMagicVampirism): void
     {
         $unit = UnitFactory::createByTemplate(12);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -1153,7 +1153,7 @@ class BuffActionTest extends AbstractUnitTest
             BuffAction::TARGET_SELF,
             'change magic vampirism',
             BuffAction::ADD_MAGIC_VAMPIRISM,
-            $addMagicVampirism
+            $power
         );
 
         // Изначальный магический вампиризм
@@ -1169,6 +1169,47 @@ class BuffActionTest extends AbstractUnitTest
         // Откатываем баф и проверяем, что магический вампиризм вернулся к исходному значению
         $action->getRevertAction()->handle();
         self::assertEquals(20, $unit->getOffense()->getMagicVampirism());
+    }
+
+    /**
+     * Тест на изменение показателя общего сопротивления урону
+     *
+     * @dataProvider addGlobalResistDataProvider
+     * @param int $power
+     * @param int $expectedGlobalResist
+     * @throws Exception
+     */
+    public function testBuffActionAddGlobalResistSuccess(int $power, int $expectedGlobalResist): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change global damage resist',
+            BuffAction::ADD_GLOBAL_RESIST,
+            $power
+        );
+
+        // Изначальное общее сопротивление урону
+        self::assertEquals(0, $unit->getDefense()->getGlobalResist());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленное общее сопротивление урону
+        self::assertEquals($expectedGlobalResist, $unit->getDefense()->getGlobalResist());
+
+        // Откатываем баф и проверяем, что магический вампиризм вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(0, $unit->getDefense()->getGlobalResist());
     }
 
     /**
@@ -1753,6 +1794,28 @@ class BuffActionTest extends AbstractUnitTest
             [
                 -50,
                 OffenseInterface::MIN_VAMPIRISM,
+            ],
+        ];
+    }
+
+    public function addGlobalResistDataProvider(): array
+    {
+        return [
+            [
+                10,
+                10,
+            ],
+            [
+                -30,
+                -30,
+            ],
+            [
+                200,
+                DefenseInterface::MAX_RESISTANCE,
+            ],
+            [
+                -2000,
+                DefenseInterface::MIN_RESISTANCE,
             ],
         ];
     }

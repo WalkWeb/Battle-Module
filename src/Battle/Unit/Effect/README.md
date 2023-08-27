@@ -170,8 +170,8 @@ $effect = $this->getFactory()->create($data);
 - [ ] `add cunning` – reduced
 - [ ] `add rage` – increased
 - [ ] `add rage` – reduced
-- [ ] `global damage resist` – increased
-- [ ] `global damage resist` – reduced
+- [x] `global damage resist` – increased
+- [x] `global damage resist` – reduced
 - [x] `vampirism` – increased
 - [x] `vampirism` – reduced
 - [x] `magic vampirism` – increased

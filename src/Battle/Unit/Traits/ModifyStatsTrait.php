@@ -1239,4 +1239,38 @@ trait ModifyStatsTrait
     {
         $this->offense->setMagicVampirism($this->offense->getMagicVampirism() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет показатель общего сопротивления урону
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addGlobalResist(ActionInterface $action): void
+    {
+        $oldDamageResist = $this->defense->getGlobalResist();
+        $newDamageResist = $oldDamageResist + $action->getPower();
+
+        if ($newDamageResist > DefenseInterface::MAX_RESISTANCE) {
+            $newDamageResist = DefenseInterface::MAX_RESISTANCE;
+        }
+
+        if ($newDamageResist < DefenseInterface::MIN_RESISTANCE) {
+            $newDamageResist = DefenseInterface::MIN_RESISTANCE;
+        }
+
+        $this->defense->setGlobalResist($newDamageResist);
+        $action->setRevertValue($newDamageResist - $oldDamageResist);
+    }
+
+    /**
+     * Откатывает изменение показателя магического вампиризма
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addGlobalResistRevert(ActionInterface $action): void
+    {
+        $this->defense->setGlobalResist($this->defense->getGlobalResist() - $action->getRevertValue());
+    }
 }
