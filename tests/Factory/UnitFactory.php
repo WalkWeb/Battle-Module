@@ -743,7 +743,7 @@ class UnitFactory
                 'magic_defense'       => 131,
                 'block'               => 30,
                 'magic_block'         => 40,
-                'mental_barrier'      => 0,
+                'mental_barrier'      => 20,
                 'max_physical_resist' => 75,
                 'max_fire_resist'     => 75,
                 'max_water_resist'    => 75,

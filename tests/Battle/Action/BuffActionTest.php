@@ -1213,6 +1213,47 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение показателя ментального барьера
+     *
+     * @dataProvider addMentalBarrierDataProvider
+     * @param int $power
+     * @param int $expectedMentalBarrier
+     * @throws Exception
+     */
+    public function testBuffActionAddMentalBarrierSuccess(int $power, int $expectedMentalBarrier): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change mental barrier',
+            BuffAction::ADD_MENTAL_BARRIER,
+            $power
+        );
+
+        // Изначальный ментальный барьер
+        self::assertEquals(20, $unit->getDefense()->getMentalBarrier());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный ментальный барьер
+        self::assertEquals($expectedMentalBarrier, $unit->getDefense()->getMentalBarrier());
+
+        // Откатываем баф и проверяем, что ментальный барьер вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(20, $unit->getDefense()->getMentalBarrier());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -1816,6 +1857,28 @@ class BuffActionTest extends AbstractUnitTest
             [
                 -2000,
                 DefenseInterface::MIN_RESISTANCE,
+            ],
+        ];
+    }
+
+    public function addMentalBarrierDataProvider(): array
+    {
+        return [
+            [
+                10,
+                30,
+            ],
+            [
+                -50,
+                -30,
+            ],
+            [
+                300,
+                DefenseInterface::MAX_MENTAL_BARRIER,
+            ],
+            [
+                -300,
+                DefenseInterface::MIN_MENTAL_BARRIER,
             ],
         ];
     }

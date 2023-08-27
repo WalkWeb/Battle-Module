@@ -98,8 +98,8 @@ $effect = $this->getFactory()->create($data);
 - [x] `life` – reduced
 - [x] `mana` – increased
 - [x] `mana` – reduced
-- [ ] `mental barrier` – increased
-- [ ] `mental barrier` – reduced
+- [x] `mental barrier` – increased
+- [x] `mental barrier` – reduced
 - [x] `physical damage` – increased. Пример в способности "Rage"
 - [x] `physical damage` – reduced
 - [x] `fire damage` – increased

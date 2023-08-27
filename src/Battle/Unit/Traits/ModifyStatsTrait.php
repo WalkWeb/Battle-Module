@@ -1273,4 +1273,38 @@ trait ModifyStatsTrait
     {
         $this->defense->setGlobalResist($this->defense->getGlobalResist() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет показатель ментального барьера
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMentalBarrier(ActionInterface $action): void
+    {
+        $oldMentalBarrier = $this->defense->getMentalBarrier();
+        $newMentalBarrier = $oldMentalBarrier + $action->getPower();
+
+        if ($newMentalBarrier > DefenseInterface::MAX_MENTAL_BARRIER) {
+            $newMentalBarrier = DefenseInterface::MAX_MENTAL_BARRIER;
+        }
+
+        if ($newMentalBarrier < DefenseInterface::MIN_MENTAL_BARRIER) {
+            $newMentalBarrier = DefenseInterface::MIN_MENTAL_BARRIER;
+        }
+
+        $this->defense->setMentalBarrier($newMentalBarrier);
+        $action->setRevertValue($newMentalBarrier - $oldMentalBarrier);
+    }
+
+    /**
+     * Откатывает изменение показателя ментального барьера
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMentalBarrierRevert(ActionInterface $action): void
+    {
+        $this->defense->setMentalBarrier($this->defense->getMentalBarrier() - $action->getRevertValue());
+    }
 }
