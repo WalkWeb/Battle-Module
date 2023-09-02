@@ -306,6 +306,27 @@ abstract class AbstractUnit implements UnitInterface
         return $this->addConcentrationMultiplier;
     }
 
+    /**
+     * @param int $addConcentrationMultiplier
+     * @throws UnitException
+     */
+    public function setAddConcentrationMultiplier(int $addConcentrationMultiplier): void
+    {
+        if ($addConcentrationMultiplier < self::MIN_RESOURCE_MULTIPLIER) {
+            throw new UnitException(
+                UnitException::INCORRECT_ADD_CONC_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+            );
+        }
+
+        if ($addConcentrationMultiplier > self::MAX_RESOURCE_MULTIPLIER) {
+            throw new UnitException(
+                UnitException::INCORRECT_ADD_CONC_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+            );
+        }
+
+        $this->addConcentrationMultiplier = $addConcentrationMultiplier;
+    }
+
     public function getCunningMultiplier(): int
     {
         return $this->cunningMultiplier;

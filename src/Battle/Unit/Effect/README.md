@@ -164,8 +164,8 @@ $effect = $this->getFactory()->create($data);
 - [x] `magic block` – reduced
 - [x] `block ignore` – increased
 - [x] `block ignore` – reduced
-- [ ] `add concentration` – increased
-- [ ] `add concentration` – reduced
+- [x] `add concentration` – increased
+- [x] `add concentration` – reduced
 - [ ] `add cunning` – increased
 - [ ] `add cunning` – reduced
 - [ ] `add rage` – increased

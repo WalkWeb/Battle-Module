@@ -12,6 +12,7 @@ use Battle\Command\CommandFactory;
 use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitException;
+use Battle\Unit\UnitInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
@@ -1254,6 +1255,54 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение показателя множителя получаемой концентрации
+     *
+     * @dataProvider addMultiplierConcentrationDataProvider
+     * @param int $unitId
+     * @param int $baseMultiplierConcentration
+     * @param int $power
+     * @param int $expectedMultiplierConcentration
+     * @throws Exception
+     */
+    public function testBuffActionAddMultiplierConcentrationSuccess(
+        int $unitId,
+        int $baseMultiplierConcentration,
+        int $power,
+        int $expectedMultiplierConcentration
+    ): void
+    {
+        $unit = UnitFactory::createByTemplate($unitId);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change multiplier add concentration',
+            BuffAction::ADD_CONCENTRATION,
+            $power
+        );
+
+        // Изначальный множитель получаемой концентрации
+        self::assertEquals($baseMultiplierConcentration, $unit->getAddConcentrationMultiplier());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный множитель получаемой концентрации
+        self::assertEquals($expectedMultiplierConcentration, $unit->getAddConcentrationMultiplier());
+
+        // Откатываем баф и проверяем, что множитель получаемой концентрации вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals($baseMultiplierConcentration, $unit->getAddConcentrationMultiplier());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -1879,6 +1928,60 @@ class BuffActionTest extends AbstractUnitTest
             [
                 -300,
                 DefenseInterface::MIN_MENTAL_BARRIER,
+            ],
+        ];
+    }
+
+    public function addMultiplierConcentrationDataProvider(): array
+    {
+        return [
+            [
+                1,
+                0,
+                30,
+                30,
+            ],
+            [
+                1,
+                0,
+                -50,
+                -50,
+            ],
+            [
+                12,
+                30,
+                30,
+                60,
+            ],
+            [
+                12,
+                30,
+                -50,
+                -20,
+            ],
+            [
+                1,
+                0,
+                3000,
+                UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            ],
+            [
+                1,
+                0,
+                -500,
+                UnitInterface::MIN_RESOURCE_MULTIPLIER,
+            ],
+            [
+                12,
+                30,
+                3000,
+                UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            ],
+            [
+                12,
+                30,
+                -500,
+                UnitInterface::MIN_RESOURCE_MULTIPLIER,
             ],
         ];
     }

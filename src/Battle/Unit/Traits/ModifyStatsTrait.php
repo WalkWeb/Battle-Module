@@ -8,6 +8,7 @@ use Battle\Action\ActionInterface;
 use Battle\Unit\Defense\DefenseInterface;
 use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitException;
+use Battle\Unit\UnitInterface;
 use Exception;
 
 /**
@@ -1306,5 +1307,39 @@ trait ModifyStatsTrait
     private function addMentalBarrierRevert(ActionInterface $action): void
     {
         $this->defense->setMentalBarrier($this->defense->getMentalBarrier() - $action->getRevertValue());
+    }
+
+    /**
+     * Изменяет показатель добавляемой концентрации
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMultiplierConcentration(ActionInterface $action): void
+    {
+        $oldMultiplierConcentration = $this->getAddConcentrationMultiplier();
+        $newMultiplierConcentration = $oldMultiplierConcentration + $action->getPower();
+
+        if ($newMultiplierConcentration > UnitInterface::MAX_RESOURCE_MULTIPLIER) {
+            $newMultiplierConcentration = UnitInterface::MAX_RESOURCE_MULTIPLIER;
+        }
+
+        if ($newMultiplierConcentration < UnitInterface::MIN_RESOURCE_MULTIPLIER) {
+            $newMultiplierConcentration = UnitInterface::MIN_RESOURCE_MULTIPLIER;
+        }
+
+        $this->setAddConcentrationMultiplier($newMultiplierConcentration);
+        $action->setRevertValue($newMultiplierConcentration - $oldMultiplierConcentration);
+    }
+
+    /**
+     * Откатывает изменение показателя добавляемой концентрации
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMultiplierConcentrationRevert(ActionInterface $action): void
+    {
+        $this->setAddConcentrationMultiplier($this->getAddConcentrationMultiplier() - $action->getRevertValue());
     }
 }

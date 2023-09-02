@@ -705,7 +705,7 @@ class UnitFactory
             'total_mana'                   => 50,
             'melee'                        => true,
             'command'                      => 2,
-            'add_concentration_multiplier' => 0,
+            'add_concentration_multiplier' => 30,
             'cunning_multiplier'           => 0,
             'add_rage_multiplier'          => 0,
             'class'                        => 1,

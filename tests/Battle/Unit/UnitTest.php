@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit;
 
 use Battle\Action\ActionCollection;
-use Battle\Action\ActionInterface;
-use Battle\Action\BuffAction;
-use Battle\Command\CommandInterface;
 use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Defense\Defense;
@@ -25,6 +22,7 @@ use Tests\Factory\UnitFactory;
 use Battle\Action\DamageAction;
 use Tests\Factory\Mock\ActionMockFactory;
 use Tests\Factory\CommandFactory as CommandFactoryTest;
+use Tests\Factory\UnitFactoryException;
 
 class UnitTest extends AbstractUnitTest
 {
@@ -676,6 +674,38 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на установку множителя получаемой концентрации меньше минимального значения
+     *
+     * @throws UnitFactoryException
+     */
+    public function testUnitOverMinAddConcentrationMultiplier(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        $this->expectException(UnitException::class);
+        $this->expectExceptionMessage(
+            UnitException::INCORRECT_ADD_CONC_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+        );
+        $unit->setAddConcentrationMultiplier(UnitInterface::MIN_RESOURCE_MULTIPLIER - 1);
+    }
+
+    /**
+     * Тест на установку множителя получаемой концентрации больше максимального значения
+     *
+     * @throws UnitFactoryException
+     */
+    public function testUnitOverMaxAddConcentrationMultiplier(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        $this->expectException(UnitException::class);
+        $this->expectExceptionMessage(
+            UnitException::INCORRECT_ADD_CONC_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+        );
+        $unit->setAddConcentrationMultiplier(UnitInterface::MAX_RESOURCE_MULTIPLIER + 1);
+    }
+
+    /**
      * @return array
      */
     public function createDataProvider(): array
@@ -685,57 +715,6 @@ class UnitTest extends AbstractUnitTest
             [21], [22], [23], [24], [25], [26], [27], [28], [29], [30], [31], [32], [33], [34], [35], [36], [37], [38],
             [39], [40], [41], [42], [43], [44], [45], [46], [47], [48], [49], [50], [51], [52],
         ];
-    }
-
-    /**
-     * @param UnitInterface $unit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     * @return ActionCollection
-     * @throws Exception
-     */
-    private function getRageActions(
-        UnitInterface $unit,
-        CommandInterface $enemyCommand,
-        CommandInterface $alliesCommand
-    ): ActionCollection
-    {
-        $collection = new ActionCollection();
-
-        $data = [
-            'type'           => ActionInterface::EFFECT,
-            'action_unit'    => $unit,
-            'enemy_command'  => $enemyCommand,
-            'allies_command' => $alliesCommand,
-            'type_target'    => ActionInterface::TARGET_SELF,
-            'name'           => 'Rage',
-            'icon'           => '/images/icons/ability/285.png',
-            'message_method' => 'applyEffect',
-            'effect'         => [
-                'name'                  => 'Rage',
-                'icon'                  => '/images/icons/ability/285.png',
-                'duration'              => 8,
-                'on_apply_actions'      => [
-                    [
-                        'type'           => ActionInterface::BUFF,
-                        'action_unit'    => $unit,
-                        'enemy_command'  => $enemyCommand,
-                        'allies_command' => $alliesCommand,
-                        'type_target'    => ActionInterface::TARGET_SELF,
-                        'name'           => 'Rage',
-                        'modify_method'  => BuffAction::PHYSICAL_DAMAGE,
-                        'power'          => 80,
-                        'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
-                    ],
-                ],
-                'on_next_round_actions' => [],
-                'on_disable_actions'    => [],
-            ],
-        ];
-
-        $collection->add($this->getContainer()->getActionFactory()->create($data));
-
-        return $collection;
     }
 
     /**

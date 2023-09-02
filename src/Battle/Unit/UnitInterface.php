@@ -238,6 +238,13 @@ interface UnitInterface
     public function getAddConcentrationMultiplier(): int;
 
     /**
+     * Устанавливает новое значение множителя получаемой концентрации
+     *
+     * @param int $addConcentrationMultiplier
+     */
+    public function setAddConcentrationMultiplier(int $addConcentrationMultiplier): void;
+
+    /**
      * Возвращает множитель хитрости. Указывается в процентах (20 => +20%, -30 => -30%)
      *
      * @return int
