@@ -111,6 +111,7 @@ return [
     'Spare Potion'                                                   => 'Spare Potion',
     'Regeneration'                                                   => 'Regeneration',
     'Restore Potion'                                                 => 'Restore Potion',
+    'Wind Support'                                                   => 'Wind Support',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

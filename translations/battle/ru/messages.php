@@ -109,6 +109,7 @@ return [
     'Spare Potion'                                                   => 'Запасное зелье',
     'Regeneration'                                                   => 'Регенерация',
     'Restore Potion'                                                 => 'Зелье оздоровления',
+    'Wind Support'                                                   => 'Поддержка ветра',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
