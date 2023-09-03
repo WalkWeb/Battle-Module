@@ -1342,4 +1342,38 @@ trait ModifyStatsTrait
     {
         $this->setAddConcentrationMultiplier($this->getAddConcentrationMultiplier() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет множитель хитрости
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMultiplierCunning(ActionInterface $action): void
+    {
+        $oldCunningMultiplier = $this->getCunningMultiplier();
+        $newCunningMultiplier = $oldCunningMultiplier + $action->getPower();
+
+        if ($newCunningMultiplier > UnitInterface::MAX_RESOURCE_MULTIPLIER) {
+            $newCunningMultiplier = UnitInterface::MAX_RESOURCE_MULTIPLIER;
+        }
+
+        if ($newCunningMultiplier < UnitInterface::MIN_RESOURCE_MULTIPLIER) {
+            $newCunningMultiplier = UnitInterface::MIN_RESOURCE_MULTIPLIER;
+        }
+
+        $this->setCunningMultiplier($newCunningMultiplier);
+        $action->setRevertValue($newCunningMultiplier - $oldCunningMultiplier);
+    }
+
+    /**
+     * Откатывает изменение множителя хитрости
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMultiplierCunningRevert(ActionInterface $action): void
+    {
+        $this->setCunningMultiplier($this->getCunningMultiplier() - $action->getRevertValue());
+    }
 }

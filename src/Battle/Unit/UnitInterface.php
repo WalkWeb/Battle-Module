@@ -252,6 +252,13 @@ interface UnitInterface
     public function getCunningMultiplier(): int;
 
     /**
+     * Устанавливает новое значения множителя хитрости
+     *
+     * @param int $cunningMultiplier
+     */
+    public function setCunningMultiplier(int $cunningMultiplier): void;
+
+    /**
      * Возвращает множитель получаемой ярости. Указывается в процентах (20 => +20%, -30 => -30%)
      *
      * @return int

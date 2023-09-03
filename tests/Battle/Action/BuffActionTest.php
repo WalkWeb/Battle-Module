@@ -1303,6 +1303,54 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение показателя множителя хитрости
+     *
+     * @dataProvider addMultiplierCunningDataProvider
+     * @param int $unitId
+     * @param int $baseMultiplierCunning
+     * @param int $power
+     * @param int $expectedMultiplierCunning
+     * @throws Exception
+     */
+    public function testBuffActionAddMultiplierCunningSuccess(
+        int $unitId,
+        int $baseMultiplierCunning,
+        int $power,
+        int $expectedMultiplierCunning
+    ): void
+    {
+        $unit = UnitFactory::createByTemplate($unitId);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change multiplier cunning',
+            BuffAction::ADD_CUNNING,
+            $power
+        );
+
+        // Изначальный множитель хитрости
+        self::assertEquals($baseMultiplierCunning, $unit->getCunningMultiplier());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный множитель хитрости
+        self::assertEquals($expectedMultiplierCunning, $unit->getCunningMultiplier());
+
+        // Откатываем баф и проверяем, что множитель хитрости вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals($baseMultiplierCunning, $unit->getCunningMultiplier());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -1980,6 +2028,60 @@ class BuffActionTest extends AbstractUnitTest
             [
                 12,
                 30,
+                -500,
+                UnitInterface::MIN_RESOURCE_MULTIPLIER,
+            ],
+        ];
+    }
+
+    public function addMultiplierCunningDataProvider(): array
+    {
+        return [
+            [
+                1,
+                0,
+                25,
+                25,
+            ],
+            [
+                1,
+                0,
+                -35,
+                -35,
+            ],
+            [
+                12,
+                20,
+                25,
+                45,
+            ],
+            [
+                12,
+                20,
+                -50,
+                -30,
+            ],
+            [
+                1,
+                0,
+                3000,
+                UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            ],
+            [
+                1,
+                0,
+                -500,
+                UnitInterface::MIN_RESOURCE_MULTIPLIER,
+            ],
+            [
+                12,
+                20,
+                3000,
+                UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            ],
+            [
+                12,
+                20,
                 -500,
                 UnitInterface::MIN_RESOURCE_MULTIPLIER,
             ],

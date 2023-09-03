@@ -706,8 +706,8 @@ class UnitFactory
             'melee'                        => true,
             'command'                      => 2,
             'add_concentration_multiplier' => 30,
-            'cunning_multiplier'           => 0,
-            'add_rage_multiplier'          => 0,
+            'cunning_multiplier'           => 20,
+            'add_rage_multiplier'          => 40,
             'class'                        => 1,
             'race'                         => 1,
             'offense'                      => [

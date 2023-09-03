@@ -166,8 +166,8 @@ $effect = $this->getFactory()->create($data);
 - [x] `block ignore` – reduced
 - [x] `add concentration` – increased
 - [x] `add concentration` – reduced
-- [ ] `add cunning` – increased
-- [ ] `add cunning` – reduced
+- [x] `add cunning` – increased
+- [x] `add cunning` – reduced
 - [ ] `add rage` – increased
 - [ ] `add rage` – reduced
 - [x] `global damage resist` – increased

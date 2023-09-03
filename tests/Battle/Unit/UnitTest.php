@@ -706,6 +706,38 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на установку множителя хитрости меньше минимального значения
+     *
+     * @throws UnitFactoryException
+     */
+    public function testUnitOverMinAddCunningMultiplier(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        $this->expectException(UnitException::class);
+        $this->expectExceptionMessage(
+            UnitException::INCORRECT_CUNNING_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+        );
+        $unit->setCunningMultiplier(UnitInterface::MIN_RESOURCE_MULTIPLIER - 1);
+    }
+
+    /**
+     * Тест на установку множителя хитрости больше максимального значения
+     *
+     * @throws UnitFactoryException
+     */
+    public function testUnitOverMaxAddCunningMultiplier(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        $this->expectException(UnitException::class);
+        $this->expectExceptionMessage(
+            UnitException::INCORRECT_CUNNING_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+        );
+        $unit->setCunningMultiplier(UnitInterface::MAX_RESOURCE_MULTIPLIER + 1);
+    }
+
+    /**
      * @return array
      */
     public function createDataProvider(): array

@@ -332,6 +332,27 @@ abstract class AbstractUnit implements UnitInterface
         return $this->cunningMultiplier;
     }
 
+    /**
+     * @param int $cunningMultiplier
+     * @throws UnitException
+     */
+    public function setCunningMultiplier(int $cunningMultiplier): void
+    {
+        if ($cunningMultiplier < self::MIN_RESOURCE_MULTIPLIER) {
+            throw new UnitException(
+                UnitException::INCORRECT_CUNNING_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+            );
+        }
+
+        if ($cunningMultiplier > self::MAX_RESOURCE_MULTIPLIER) {
+            throw new UnitException(
+                UnitException::INCORRECT_CUNNING_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+            );
+        }
+
+        $this->cunningMultiplier = $cunningMultiplier;
+    }
+
     public function getAddRageMultiplier(): int
     {
         return $this->addRageMultiplier;
