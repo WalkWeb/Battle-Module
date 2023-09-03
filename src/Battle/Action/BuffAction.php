@@ -51,6 +51,7 @@ class BuffAction extends AbstractAction
     public const ADD_MENTAL_BARRIER      = 'addMentalBarrier';
     public const ADD_CONCENTRATION       = 'addMultiplierConcentration';
     public const ADD_CUNNING             = 'addMultiplierCunning';
+    public const ADD_RAGE                = 'addMultiplierRage';
 
     private const HANDLE_METHOD          = 'applyBuffAction';
     private const DEFAULT_MESSAGE_METHOD = 'buff';

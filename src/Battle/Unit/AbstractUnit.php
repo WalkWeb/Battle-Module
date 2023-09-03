@@ -358,6 +358,27 @@ abstract class AbstractUnit implements UnitInterface
         return $this->addRageMultiplier;
     }
 
+    /**
+     * @param int $addRageMultiplier
+     * @throws UnitException
+     */
+    public function setAddRageMultiplier(int $addRageMultiplier): void
+    {
+        if ($addRageMultiplier < self::MIN_RESOURCE_MULTIPLIER) {
+            throw new UnitException(
+                UnitException::INCORRECT_ADD_RAGE_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+            );
+        }
+
+        if ($addRageMultiplier > self::MAX_RESOURCE_MULTIPLIER) {
+            throw new UnitException(
+                UnitException::INCORRECT_ADD_RAGE_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+            );
+        }
+
+        $this->addRageMultiplier = $addRageMultiplier;
+    }
+
     public function getClass(): ?UnitClassInterface
     {
         return $this->class;

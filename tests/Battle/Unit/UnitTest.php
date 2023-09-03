@@ -738,6 +738,38 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на установку множителя получаемой ярости меньше минимального значения
+     *
+     * @throws UnitFactoryException
+     */
+    public function testUnitOverMinAddRageMultiplier(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        $this->expectException(UnitException::class);
+        $this->expectExceptionMessage(
+            UnitException::INCORRECT_ADD_RAGE_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+        );
+        $unit->setAddRageMultiplier(UnitInterface::MIN_RESOURCE_MULTIPLIER - 1);
+    }
+
+    /**
+     * Тест на установку множителя получаемой ярости больше максимального значения
+     *
+     * @throws UnitFactoryException
+     */
+    public function testUnitOverMaxAddRageMultiplier(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+
+        $this->expectException(UnitException::class);
+        $this->expectExceptionMessage(
+            UnitException::INCORRECT_ADD_RAGE_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER
+        );
+        $unit->setAddRageMultiplier(UnitInterface::MAX_RESOURCE_MULTIPLIER + 1);
+    }
+
+    /**
      * @return array
      */
     public function createDataProvider(): array

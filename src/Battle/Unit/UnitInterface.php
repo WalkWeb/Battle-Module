@@ -266,6 +266,13 @@ interface UnitInterface
     public function getAddRageMultiplier(): int;
 
     /**
+     * Устанавливает новое значение множителя получаемой ярости
+     *
+     * @param int $addRageMultiplier
+     */
+    public function setAddRageMultiplier(int $addRageMultiplier): void;
+
+    /**
      * Возвращает класс юнита, или null, если класса нет
      *
      * @return UnitClassInterface|null

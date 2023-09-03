@@ -1376,4 +1376,39 @@ trait ModifyStatsTrait
     {
         $this->setCunningMultiplier($this->getCunningMultiplier() - $action->getRevertValue());
     }
+
+    /**
+     * Изменяет показатель добавляемой ярости
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMultiplierRage(ActionInterface $action): void
+    {
+        $oldMultiplierRage = $this->getAddRageMultiplier();
+        $newMultiplierRage = $oldMultiplierRage + $action->getPower();
+
+        if ($newMultiplierRage > UnitInterface::MAX_RESOURCE_MULTIPLIER) {
+            $newMultiplierRage = UnitInterface::MAX_RESOURCE_MULTIPLIER;
+        }
+
+        if ($newMultiplierRage < UnitInterface::MIN_RESOURCE_MULTIPLIER) {
+            $newMultiplierRage = UnitInterface::MIN_RESOURCE_MULTIPLIER;
+        }
+
+        $this->setAddRageMultiplier($newMultiplierRage);
+        $action->setRevertValue($newMultiplierRage - $oldMultiplierRage);
+    }
+
+    /**
+     * Откатывает изменение показателя добавляемой ярости
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addMultiplierRageRevert(ActionInterface $action): void
+    {
+        $this->setAddRageMultiplier($this->getAddRageMultiplier() - $action->getRevertValue());
+    }
+
 }

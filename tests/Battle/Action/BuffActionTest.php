@@ -1351,6 +1351,54 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение показателя множителя получаемой ярости
+     *
+     * @dataProvider addMultiplierRageDataProvider
+     * @param int $unitId
+     * @param int $baseMultiplierRage
+     * @param int $power
+     * @param int $expectedMultiplierRage
+     * @throws Exception
+     */
+    public function testBuffActionAddMultiplierRageSuccess(
+        int $unitId,
+        int $baseMultiplierRage,
+        int $power,
+        int $expectedMultiplierRage
+    ): void
+    {
+        $unit = UnitFactory::createByTemplate($unitId);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'change multiplier add rage',
+            BuffAction::ADD_RAGE,
+            $power
+        );
+
+        // Изначальный множитель получаемой ярости
+        self::assertEquals($baseMultiplierRage, $unit->getAddRageMultiplier());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный множитель получаемой ярости
+        self::assertEquals($expectedMultiplierRage, $unit->getAddRageMultiplier());
+
+        // Откатываем баф и проверяем, что множитель получаемой ярости вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals($baseMultiplierRage, $unit->getAddRageMultiplier());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -2082,6 +2130,60 @@ class BuffActionTest extends AbstractUnitTest
             [
                 12,
                 20,
+                -500,
+                UnitInterface::MIN_RESOURCE_MULTIPLIER,
+            ],
+        ];
+    }
+
+    public function addMultiplierRageDataProvider(): array
+    {
+        return [
+            [
+                1,
+                0,
+                15,
+                15,
+            ],
+            [
+                1,
+                0,
+                -25,
+                -25,
+            ],
+            [
+                12,
+                40,
+                33,
+                73,
+            ],
+            [
+                12,
+                40,
+                -80,
+                -40,
+            ],
+            [
+                1,
+                0,
+                3000,
+                UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            ],
+            [
+                1,
+                0,
+                -500,
+                UnitInterface::MIN_RESOURCE_MULTIPLIER,
+            ],
+            [
+                12,
+                40,
+                3000,
+                UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            ],
+            [
+                12,
+                40,
                 -500,
                 UnitInterface::MIN_RESOURCE_MULTIPLIER,
             ],
