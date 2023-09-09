@@ -110,6 +110,7 @@ return [
     'Regeneration'                                                   => 'Регенерация',
     'Restore Potion'                                                 => 'Зелье оздоровления',
     'Wind Support'                                                   => 'Поддержка ветра',
+    'Spider Web'                                                     => 'Паучья сеть',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

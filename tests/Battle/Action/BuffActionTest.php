@@ -167,7 +167,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals($expectedAttackSpeed, $unit->getOffense()->getAttackSpeed());
 
         // Проверка скорости атаки через множитель (на всякий случай)
-        self::assertEquals($oldAttackSpeed * ($power / 100), $unit->getOffense()->getAttackSpeed());
+        self::assertEquals(round($oldAttackSpeed * ($power / 100), 2), $unit->getOffense()->getAttackSpeed());
 
         // Откатываем изменение и проверяем, что скорость атаки изменилась к исходной
         $action->getRevertAction()->handle();
@@ -2312,7 +2312,7 @@ class BuffActionTest extends AbstractUnitTest
             [
                 39,
                 37,
-                0.4625,
+                0.46,
             ],
         ];
     }

@@ -358,7 +358,7 @@ class Offense implements OffenseInterface
      */
     public function getAttackSpeed(): float
     {
-        return $this->attackSpeed;
+        return round($this->attackSpeed, 2);
     }
 
     /**
@@ -381,7 +381,7 @@ class Offense implements OffenseInterface
      */
     public function getCastSpeed(): float
     {
-        return $this->castSpeed;
+        return round($this->castSpeed, 2);
     }
 
     /**

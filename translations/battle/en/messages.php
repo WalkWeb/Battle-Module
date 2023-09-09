@@ -112,6 +112,7 @@ return [
     'Regeneration'                                                   => 'Regeneration',
     'Restore Potion'                                                 => 'Restore Potion',
     'Wind Support'                                                   => 'Wind Support',
+    'Spider Web'                                                     => 'Spider Web',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

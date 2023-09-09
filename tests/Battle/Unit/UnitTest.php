@@ -69,8 +69,8 @@ class UnitTest extends AbstractUnitTest
 
         // Здесь проверяется лишь несколько параметров Offense, все проверяются в OffenseFactoryTest
         self::assertEquals($data['offense']['physical_damage'], $unit->getOffense()->getPhysicalDamage());
-        self::assertEquals($data['offense']['attack_speed'], $unit->getOffense()->getAttackSpeed());
-        self::assertEquals($data['offense']['cast_speed'], $unit->getOffense()->getCastSpeed());
+        self::assertEquals(round($data['offense']['attack_speed'], 2), $unit->getOffense()->getAttackSpeed());
+        self::assertEquals(round($data['offense']['cast_speed'], 2), $unit->getOffense()->getCastSpeed());
         self::assertEquals($data['offense']['accuracy'], $unit->getOffense()->getAccuracy());
         self::assertEquals($data['offense']['block_ignoring'], $unit->getOffense()->getBlockIgnoring());
 
