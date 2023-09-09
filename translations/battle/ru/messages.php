@@ -112,6 +112,7 @@ return [
     'Wind Support'                                                   => 'Поддержка ветра',
     'Spider Web'                                                     => 'Паучья сеть',
     'Circular Defense'                                               => 'Круговая оборона',
+    'Unity with Wind'                                                => 'Единство с ветром',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
