@@ -113,6 +113,7 @@ return [
     'Restore Potion'                                                 => 'Restore Potion',
     'Wind Support'                                                   => 'Wind Support',
     'Spider Web'                                                     => 'Spider Web',
+    'Circular Defense'                                               => 'Circular Defense',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

@@ -111,6 +111,7 @@ return [
     'Restore Potion'                                                 => 'Зелье оздоровления',
     'Wind Support'                                                   => 'Поддержка ветра',
     'Spider Web'                                                     => 'Паучья сеть',
+    'Circular Defense'                                               => 'Круговая оборона',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
