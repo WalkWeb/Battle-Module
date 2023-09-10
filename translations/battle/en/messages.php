@@ -116,6 +116,7 @@ return [
     'Circular Defense'                                               => 'Circular Defense',
     'Unity with Wind'                                                => 'Unity with Wind',
     'Determination'                                                  => 'Determination',
+    'Battle Cry'                                                     => 'Battle Cry',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

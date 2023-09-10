@@ -11071,6 +11071,168 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Battle Cry' => [
+            1 => [
+                'name'          => 'Battle Cry',
+                'icon'          => '/images/icons/ability/219.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Battle Cry',
+                        'icon'           => '/images/icons/ability/219.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Battle Cry',
+                            'icon'                  => '/images/icons/ability/219.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Determination',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => 20,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            2 => [
+                'name'          => 'Battle Cry',
+                'icon'          => '/images/icons/ability/219.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Battle Cry',
+                        'icon'           => '/images/icons/ability/219.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Battle Cry',
+                            'icon'                  => '/images/icons/ability/219.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Determination',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => 23,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            3 => [
+                'name'          => 'Battle Cry',
+                'icon'          => '/images/icons/ability/219.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Battle Cry',
+                        'icon'           => '/images/icons/ability/219.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Battle Cry',
+                            'icon'                  => '/images/icons/ability/219.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Determination',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => 26,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            4 => [
+                'name'          => 'Battle Cry',
+                'icon'          => '/images/icons/ability/219.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Battle Cry',
+                        'icon'           => '/images/icons/ability/219.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Battle Cry',
+                            'icon'                  => '/images/icons/ability/219.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Determination',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => 29,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            5 => [
+                'name'          => 'Battle Cry',
+                'icon'          => '/images/icons/ability/219.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Battle Cry',
+                        'icon'           => '/images/icons/ability/219.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Battle Cry',
+                            'icon'                  => '/images/icons/ability/219.png',
+                            'duration'              => 7,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Determination',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => 32,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**

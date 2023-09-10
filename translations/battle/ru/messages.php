@@ -114,6 +114,7 @@ return [
     'Circular Defense'                                               => 'Круговая оборона',
     'Unity with Wind'                                                => 'Единство с ветром',
     'Determination'                                                  => 'Решимость',
+    'Battle Cry'                                                     => 'Боевой клич',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
