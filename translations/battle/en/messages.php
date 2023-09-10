@@ -115,6 +115,7 @@ return [
     'Spider Web'                                                     => 'Spider Web',
     'Circular Defense'                                               => 'Circular Defense',
     'Unity with Wind'                                                => 'Unity with Wind',
+    'Determination'                                                  => 'Determination',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

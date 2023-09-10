@@ -113,6 +113,7 @@ return [
     'Spider Web'                                                     => 'Паучья сеть',
     'Circular Defense'                                               => 'Круговая оборона',
     'Unity with Wind'                                                => 'Единство с ветром',
+    'Determination'                                                  => 'Решимость',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
