@@ -1399,6 +1399,54 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на изменение общего множителя наносимого урона
+     *
+     * @dataProvider addMultiplierDamageDataProvider
+     * @param int $unitId
+     * @param int $power
+     * @param int $baseDamageMultiplier
+     * @param int $exceptedDamageMultiplier
+     * @throws Exception
+     */
+    public function testBuffActionAddMultiplierDamageSuccess(
+        int $unitId,
+        int $power,
+        int $baseDamageMultiplier,
+        int $exceptedDamageMultiplier
+    ): void
+    {
+        $unit = UnitFactory::createByTemplate($unitId);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->getContainer(),
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'add multiplier damage',
+            BuffAction::ADD_DAMAGE_MULTIPLIER,
+            $power
+        );
+
+        // Изначальный общий множитель урона
+        self::assertEquals($baseDamageMultiplier, $unit->getOffense()->getDamageMultiplier());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный множитель урона
+        self::assertEquals($exceptedDamageMultiplier, $unit->getOffense()->getDamageMultiplier());
+
+        // Откатываем баф и проверяем, что множитель урона вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals($baseDamageMultiplier, $unit->getOffense()->getDamageMultiplier());
+    }
+
+    /**
      * Тест на чрезмерное уменьшение характеристики
      *
      * @dataProvider overReducedStatDataProvider
@@ -2186,6 +2234,36 @@ class BuffActionTest extends AbstractUnitTest
                 40,
                 -500,
                 UnitInterface::MIN_RESOURCE_MULTIPLIER,
+            ],
+        ];
+    }
+
+    public function addMultiplierDamageDataProvider(): array
+    {
+        return [
+            [
+                1,
+                10,
+                100,
+                110,
+            ],
+            [
+                1,
+                -25,
+                100,
+                75,
+            ],
+            [
+                1,
+                -250,
+                100,
+                OffenseInterface::MIN_DAMAGE_MULTIPLIER,
+            ],
+            [
+                1,
+                10000000,
+                100,
+                OffenseInterface::MAX_DAMAGE_MULTIPLIER,
             ],
         ];
     }

@@ -429,6 +429,41 @@ trait ModifyStatsTrait
     }
 
     /**
+     * Изменяет общий множитель урона
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addDamageMultiplier(ActionInterface $action): void
+    {
+        $oldDamageMultiplier = $this->offense->getDamageMultiplier();
+        $newDamageMultiplier = (int)($this->offense->getDamageMultiplier() + $action->getPower());
+
+        if ($newDamageMultiplier > OffenseInterface::MAX_DAMAGE_MULTIPLIER) {
+            $newDamageMultiplier =  OffenseInterface::MAX_DAMAGE_MULTIPLIER;
+        }
+
+        if ($newDamageMultiplier < OffenseInterface::MIN_DAMAGE_MULTIPLIER) {
+            $newDamageMultiplier =  OffenseInterface::MIN_DAMAGE_MULTIPLIER;
+        }
+
+        $this->offense->setDamageMultiplier($newDamageMultiplier);
+
+        $action->setRevertValue($newDamageMultiplier - $oldDamageMultiplier);
+    }
+
+    /**
+     * Откатывает изменение общего множителя урона
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addDamageMultiplierRevert(ActionInterface $action): void
+    {
+        $this->offense->setDamageMultiplier($this->offense->getDamageMultiplier() - $action->getRevertValue());
+    }
+
+    /**
      * Изменяет физический урон
      *
      * @param ActionInterface $action
@@ -1410,5 +1445,4 @@ trait ModifyStatsTrait
     {
         $this->setAddRageMultiplier($this->getAddRageMultiplier() - $action->getRevertValue());
     }
-
 }
