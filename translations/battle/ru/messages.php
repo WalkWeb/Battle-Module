@@ -118,6 +118,7 @@ return [
     'Combat Trance'                                                  => 'Боевой транс',
     'Lycanthropy'                                                    => 'Ликантропия',
     'Veteran Experience'                                             => 'Опыт ветерана',
+    'Potion of Power'                                                => 'Зелье мощи',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

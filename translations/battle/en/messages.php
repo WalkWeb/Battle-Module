@@ -120,6 +120,7 @@ return [
     'Combat Trance'                                                  => 'Combat Trance',
     'Lycanthropy'                                                    => 'Lycanthropy',
     'Veteran Experience'                                             => 'Veteran Experience',
+    'Potion of Power'                                                => 'Potion of Power',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
