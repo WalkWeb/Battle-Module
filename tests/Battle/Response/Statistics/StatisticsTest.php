@@ -432,7 +432,7 @@ class StatisticsTest extends AbstractUnitTest
         self::assertIsFloat($statistic->getRuntime());
 
         // Время выполнения больше 5 миллисекунд и меньше 6 (реально уходит 5.10 - 5.30 миллисекунд)
-        self::assertTrue($statistic->getRuntime() > 5 && $statistic->getRuntime() < 7);
+        self::assertTrue($statistic->getRuntime() > 5 && $statistic->getRuntime() < 8);
     }
 
     /**

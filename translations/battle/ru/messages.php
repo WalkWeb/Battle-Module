@@ -115,6 +115,7 @@ return [
     'Unity with Wind'                                                => 'Единство с ветром',
     'Determination'                                                  => 'Решимость',
     'Battle Cry'                                                     => 'Боевой клич',
+    'Combat Trance'                                                  => 'Боевой транс',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

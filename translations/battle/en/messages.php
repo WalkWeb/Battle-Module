@@ -117,6 +117,7 @@ return [
     'Unity with Wind'                                                => 'Unity with Wind',
     'Determination'                                                  => 'Determination',
     'Battle Cry'                                                     => 'Battle Cry',
+    'Combat Trance'                                                  => 'Combat Trance',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
