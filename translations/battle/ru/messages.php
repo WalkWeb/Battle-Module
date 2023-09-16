@@ -116,6 +116,7 @@ return [
     'Determination'                                                  => 'Решимость',
     'Battle Cry'                                                     => 'Боевой клич',
     'Combat Trance'                                                  => 'Боевой транс',
+    'Lycanthropy'                                                    => 'Ликантропия',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

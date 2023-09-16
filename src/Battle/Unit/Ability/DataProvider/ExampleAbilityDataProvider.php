@@ -11435,6 +11435,168 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Lycanthropy' => [
+            1 => [
+                'name'          => 'Lycanthropy',
+                'icon'          => '/images/icons/ability/148.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Lycanthropy',
+                        'icon'           => '/images/icons/ability/148.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Lycanthropy',
+                            'icon'                  => '/images/icons/ability/148.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Lycanthropy',
+                                    'modify_method'  => BuffAction::ATTACK_SPEED,
+                                    'power'          => 120,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            2 => [
+                'name'          => 'Lycanthropy',
+                'icon'          => '/images/icons/ability/148.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Lycanthropy',
+                        'icon'           => '/images/icons/ability/148.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Lycanthropy',
+                            'icon'                  => '/images/icons/ability/148.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Lycanthropy',
+                                    'modify_method'  => BuffAction::ATTACK_SPEED,
+                                    'power'          => 123,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            3 => [
+                'name'          => 'Lycanthropy',
+                'icon'          => '/images/icons/ability/148.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Lycanthropy',
+                        'icon'           => '/images/icons/ability/148.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Lycanthropy',
+                            'icon'                  => '/images/icons/ability/148.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Lycanthropy',
+                                    'modify_method'  => BuffAction::ATTACK_SPEED,
+                                    'power'          => 126,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            4 => [
+                'name'          => 'Lycanthropy',
+                'icon'          => '/images/icons/ability/148.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Lycanthropy',
+                        'icon'           => '/images/icons/ability/148.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Lycanthropy',
+                            'icon'                  => '/images/icons/ability/148.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Lycanthropy',
+                                    'modify_method'  => BuffAction::ATTACK_SPEED,
+                                    'power'          => 129,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            5 => [
+                'name'          => 'Lycanthropy',
+                'icon'          => '/images/icons/ability/148.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Lycanthropy',
+                        'icon'           => '/images/icons/ability/148.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Lycanthropy',
+                            'icon'                  => '/images/icons/ability/148.png',
+                            'duration'              => 7,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Lycanthropy',
+                                    'modify_method'  => BuffAction::ATTACK_SPEED,
+                                    'power'          => 132,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**
