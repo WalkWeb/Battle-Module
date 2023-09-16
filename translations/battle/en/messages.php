@@ -119,6 +119,7 @@ return [
     'Battle Cry'                                                     => 'Battle Cry',
     'Combat Trance'                                                  => 'Combat Trance',
     'Lycanthropy'                                                    => 'Lycanthropy',
+    'Veteran Experience'                                             => 'Veteran Experience',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

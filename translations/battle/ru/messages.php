@@ -117,6 +117,7 @@ return [
     'Battle Cry'                                                     => 'Боевой клич',
     'Combat Trance'                                                  => 'Боевой транс',
     'Lycanthropy'                                                    => 'Ликантропия',
+    'Veteran Experience'                                             => 'Опыт ветерана',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
