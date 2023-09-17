@@ -121,6 +121,7 @@ return [
     'Potion of Power'                                                => 'Зелье мощи',
     'Inaccessibility'                                                => 'Неприступность',
     'Body Curse'                                                     => 'Проклятье тела',
+    'Primordial Form'                                                => 'Изначальная форма',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

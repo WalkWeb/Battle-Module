@@ -123,6 +123,7 @@ return [
     'Potion of Power'                                                => 'Potion of Power',
     'Inaccessibility'                                                => 'Inaccessibility',
     'Body Curse'                                                     => 'Body Curse',
+    'Primordial Form'                                                => 'Primordial Form',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
