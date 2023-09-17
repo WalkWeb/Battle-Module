@@ -121,6 +121,7 @@ return [
     'Lycanthropy'                                                    => 'Lycanthropy',
     'Veteran Experience'                                             => 'Veteran Experience',
     'Potion of Power'                                                => 'Potion of Power',
+    'Inaccessibility'                                                => 'Inaccessibility',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

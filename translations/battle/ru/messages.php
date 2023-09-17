@@ -119,6 +119,7 @@ return [
     'Lycanthropy'                                                    => 'Ликантропия',
     'Veteran Experience'                                             => 'Опыт ветерана',
     'Potion of Power'                                                => 'Зелье мощи',
+    'Inaccessibility'                                                => 'Неприступность',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
