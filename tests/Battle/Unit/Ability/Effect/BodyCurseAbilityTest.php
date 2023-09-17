@@ -14,20 +14,20 @@ use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class InaccessibilityAbilityTest extends AbstractUnitTest
+class BodyCurseAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/052.png" alt="" /> <span class="ability">Inaccessibility</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/052.png" alt="" /> <span class="ability">Неприступность</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Body Curse</span> on <span style="color: #1e72e3">unit_1</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Проклятье тела</span> на <span style="color: #1e72e3">unit_1</span>';
 
     /**
-     * Тест на создание способности Inaccessibility через AbilityDataProvider
+     * Тест на создание способности Body Curse через AbilityDataProvider
      *
      * @throws Exception
      */
-    public function testInaccessibilityAbilityCreate(): void
+    public function testBodyCurseAbilityCreate(): void
     {
-        $name = 'Inaccessibility';
-        $icon = '/images/icons/ability/052.png';
+        $name = 'Body Curse';
+        $icon = '/images/icons/ability/110.png';
         $disposable = false;
 
         $unit = UnitFactory::createByTemplate(4);
@@ -62,19 +62,23 @@ class InaccessibilityAbilityTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на применение способности Inaccessibility
+     * Тест на применение способности Body Curse
      *
      * @dataProvider useDataProvider
      * @param int $level
-     * @param int $expectedBlock
-     * @param int $expectedMagicBlock
+     * @param float $expectedAttackSpeed
+     * @param float $expectedCastSpeed
+     * @param int $expectedAccuracy
+     * @param int $expectedMagicAccuracy
      * @param int $expectedEffectDuration
      * @throws Exception
      */
-    public function testInaccessibilityAbilityUse(
+    public function testBodyCurseAbilityUse(
         int $level,
-        int $expectedBlock,
-        int $expectedMagicBlock,
+        float $expectedAttackSpeed,
+        float $expectedCastSpeed,
+        int $expectedAccuracy,
+        int $expectedMagicAccuracy,
         int $expectedEffectDuration
     ): void
     {
@@ -84,7 +88,7 @@ class InaccessibilityAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Inaccessibility', $level);
+        $ability = $this->createAbilityByDataProvider($unit, 'Body Curse', $level);
 
         $this->activateAbility($ability, $unit);
 
@@ -111,16 +115,18 @@ class InaccessibilityAbilityTest extends AbstractUnitTest
         }
 
         // Проверяем наличие эффекта
-        self::assertCount(1, $unit->getEffects());
+        self::assertCount(1, $enemyUnit->getEffects());
 
         // Проверяем длительность эффекта
-        foreach ($unit->getEffects() as $effect) {
+        foreach ($enemyUnit->getEffects() as $effect) {
             self::assertEquals($expectedEffectDuration, $effect->getDuration());
         }
 
         // Проверяем обновленные параметры
-        self::assertEquals($expectedBlock, $unit->getDefense()->getBlock());
-        self::assertEquals($expectedMagicBlock, $unit->getDefense()->getMagicBlock());
+        self::assertEquals($expectedAttackSpeed, $enemyUnit->getOffense()->getAttackSpeed());
+        self::assertEquals($expectedCastSpeed, $enemyUnit->getOffense()->getCastSpeed());
+        self::assertEquals($expectedAccuracy, $enemyUnit->getOffense()->getAccuracy());
+        self::assertEquals($expectedMagicAccuracy, $enemyUnit->getOffense()->getMagicAccuracy());
 
         $ability->usage();
         self::assertTrue($ability->isUsage());
@@ -135,32 +141,42 @@ class InaccessibilityAbilityTest extends AbstractUnitTest
         return [
             [
                 1,
-                12,
-                12,
+                0.85,
+                1.02,
+                170,
+                85,
                 5,
             ],
             [
                 2,
-                14,
-                14,
+                0.83,
+                1.0,
+                166,
+                83,
                 5,
             ],
             [
                 3,
-                16,
-                16,
+                0.81,
+                0.97,
+                162,
+                81,
                 6,
             ],
             [
                 4,
-                18,
-                18,
+                0.79,
+                0.95,
+                158,
+                79,
                 6,
             ],
             [
                 5,
-                20,
-                20,
+                0.77,
+                0.92,
+                154,
+                77,
                 7,
             ],
         ];

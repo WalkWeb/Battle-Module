@@ -120,6 +120,7 @@ return [
     'Veteran Experience'                                             => 'Опыт ветерана',
     'Potion of Power'                                                => 'Зелье мощи',
     'Inaccessibility'                                                => 'Неприступность',
+    'Body Curse'                                                     => 'Проклятье тела',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

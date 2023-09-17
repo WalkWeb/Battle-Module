@@ -122,6 +122,7 @@ return [
     'Veteran Experience'                                             => 'Veteran Experience',
     'Potion of Power'                                                => 'Potion of Power',
     'Inaccessibility'                                                => 'Inaccessibility',
+    'Body Curse'                                                     => 'Body Curse',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
