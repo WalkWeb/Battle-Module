@@ -124,6 +124,7 @@ return [
     'Inaccessibility'                                                => 'Inaccessibility',
     'Body Curse'                                                     => 'Body Curse',
     'Primordial Form'                                                => 'Primordial Form',
+    'Vanguard'                                                       => 'Vanguard',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

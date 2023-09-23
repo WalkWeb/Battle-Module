@@ -122,6 +122,7 @@ return [
     'Inaccessibility'                                                => 'Неприступность',
     'Body Curse'                                                     => 'Проклятье тела',
     'Primordial Form'                                                => 'Изначальная форма',
+    'Vanguard'                                                       => 'Авангард',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
