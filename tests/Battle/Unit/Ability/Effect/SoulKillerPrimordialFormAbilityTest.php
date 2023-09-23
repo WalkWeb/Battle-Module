@@ -15,10 +15,7 @@ use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-// TODO Подумать как объединить сообщение в одно
-// TODO Если юнит не ранен - то способность не применится. Надо подумать над типом лечения, которое всегда может примениться
-
-class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
+class SoulKillerPrimordialFormAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';
     private const MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Изначальная форма</span> и вылечил себя на %d здоровья';
@@ -27,13 +24,13 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
     private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Изначальная форма</span>';
 
     /**
-     * Тест на создание способности Succubus Primordial Form через AbilityDataProvider
+     * Тест на создание способности Soul Killer Primordial Form через AbilityDataProvider
      *
      * @throws Exception
      */
-    public function testSuccubusPrimordialFormAbilityCreate(): void
+    public function testSoulKillerPrimordialFormAbilityCreate(): void
     {
-        $name = 'Succubus Primordial Form';
+        $name = 'Soul Killer Primordial Form';
 
         // Для пользователя отображается как просто Primordial Form
         $nameForUser = 'Primordial Form';
@@ -78,25 +75,35 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на применение способности Succubus Primordial Form
+     * Тест на применение способности Soul Killer Primordial Form
      *
      * @dataProvider useDataProvider
      * @param int $level
      * @param int $expectedHealPower
      * @param int $baseDamage
      * @param int $expectedDamage
-     * @param float $expectedAttackSpeed
-     * @param float $expectedCastSpeed
+     * @param int $expectedPhysicalResist
+     * @param int $expectedFireResist
+     * @param int $expectedWaterResist
+     * @param int $expectedAirResist
+     * @param int $expectedEarthResist
+     * @param int $expectedLifeResist
+     * @param int $expectedDeathResist
      * @param int $expectedEffectDuration
      * @throws Exception
      */
-    public function testSuccubusPrimordialFormAbilityUse(
+    public function testSoulKillerPrimordialFormAbilityUse(
         int $level,
         int $expectedHealPower,
         int $baseDamage,
         int $expectedDamage,
-        float $expectedAttackSpeed,
-        float $expectedCastSpeed,
+        int $expectedPhysicalResist,
+        int $expectedFireResist,
+        int $expectedWaterResist,
+        int $expectedAirResist,
+        int $expectedEarthResist,
+        int $expectedLifeResist,
+        int $expectedDeathResist,
         int $expectedEffectDuration
     ): void
     {
@@ -106,7 +113,7 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Succubus Primordial Form', $level);
+        $ability = $this->createAbilityByDataProvider($unit, 'Soul Killer Primordial Form', $level);
 
         // Изначальный урон
         self::assertEquals($baseDamage, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
@@ -162,8 +169,13 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
 
         // Проверяем обновленные параметры
         self::assertEquals($expectedDamage, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
-        self::assertEquals($expectedAttackSpeed, $unit->getOffense()->getAttackSpeed());
-        self::assertEquals($expectedCastSpeed, $unit->getOffense()->getCastSpeed());
+        self::assertEquals($expectedPhysicalResist, $unit->getDefense()->getPhysicalResist());
+        self::assertEquals($expectedFireResist, $unit->getDefense()->getFireResist());
+        self::assertEquals($expectedWaterResist, $unit->getDefense()->getWaterResist());
+        self::assertEquals($expectedAirResist, $unit->getDefense()->getAirResist());
+        self::assertEquals($expectedEarthResist, $unit->getDefense()->getEarthResist());
+        self::assertEquals($expectedLifeResist, $unit->getDefense()->getLifeResist());
+        self::assertEquals($expectedDeathResist, $unit->getDefense()->getDeathResist());
 
         $ability->usage();
         self::assertTrue($ability->isUsage());
@@ -181,8 +193,13 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
                 68,
                 35,
                 39,
-                1.12,
-                1.12,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10,
                 5,
             ],
             [
@@ -190,8 +207,13 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
                 114,
                 35,
                 39,
-                1.14,
-                1.14,
+                12,
+                12,
+                12,
+                12,
+                12,
+                12,
+                12,
                 6,
             ],
             [
@@ -199,8 +221,13 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
                 161,
                 35,
                 40,
-                1.16,
-                1.16,
+                14,
+                14,
+                14,
+                14,
+                14,
+                14,
+                14,
                 7,
             ],
             [
@@ -208,8 +235,13 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
                 225,
                 35,
                 41,
-                1.18,
-                1.18,
+                16,
+                16,
+                16,
+                16,
+                16,
+                16,
+                16,
                 8,
             ],
             [
@@ -217,8 +249,13 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
                 306,
                 35,
                 42,
-                1.2,
-                1.2,
+                18,
+                18,
+                18,
+                18,
+                18,
+                18,
+                18,
                 9,
             ],
         ];
