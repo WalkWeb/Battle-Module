@@ -125,6 +125,7 @@ return [
     'Body Curse'                                                     => 'Body Curse',
     'Primordial Form'                                                => 'Primordial Form',
     'Vanguard'                                                       => 'Vanguard',
+    'Power of Darkness'                                              => 'Power of Darkness',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

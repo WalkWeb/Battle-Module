@@ -123,6 +123,7 @@ return [
     'Body Curse'                                                     => 'Проклятье тела',
     'Primordial Form'                                                => 'Изначальная форма',
     'Vanguard'                                                       => 'Авангард',
+    'Power of Darkness'                                              => 'Сила тьмы',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
