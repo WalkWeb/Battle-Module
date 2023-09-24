@@ -15554,6 +15554,168 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Vampirism' => [
+            1 => [
+                'name'          => 'Vampirism',
+                'icon'          => '/images/icons/ability/346.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Vampirism',
+                        'icon'           => '/images/icons/ability/346.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Vampirism',
+                            'icon'                  => '/images/icons/ability/346.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Vampirism',
+                                    'modify_method'  => BuffAction::ADD_VAMPIRISM,
+                                    'power'          => 12,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            2 => [
+                'name'          => 'Vampirism',
+                'icon'          => '/images/icons/ability/346.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Vampirism',
+                        'icon'           => '/images/icons/ability/346.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Vampirism',
+                            'icon'                  => '/images/icons/ability/346.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Vampirism',
+                                    'modify_method'  => BuffAction::ADD_VAMPIRISM,
+                                    'power'          => 14,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            3 => [
+                'name'          => 'Vampirism',
+                'icon'          => '/images/icons/ability/346.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Vampirism',
+                        'icon'           => '/images/icons/ability/346.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Vampirism',
+                            'icon'                  => '/images/icons/ability/346.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Vampirism',
+                                    'modify_method'  => BuffAction::ADD_VAMPIRISM,
+                                    'power'          => 16,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            4 => [
+                'name'          => 'Vampirism',
+                'icon'          => '/images/icons/ability/346.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Vampirism',
+                        'icon'           => '/images/icons/ability/346.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Vampirism',
+                            'icon'                  => '/images/icons/ability/346.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Vampirism',
+                                    'modify_method'  => BuffAction::ADD_VAMPIRISM,
+                                    'power'          => 18,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            5 => [
+                'name'          => 'Vampirism',
+                'icon'          => '/images/icons/ability/346.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Vampirism',
+                        'icon'           => '/images/icons/ability/346.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Vampirism',
+                            'icon'                  => '/images/icons/ability/346.png',
+                            'duration'              => 7,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Vampirism',
+                                    'modify_method'  => BuffAction::ADD_VAMPIRISM,
+                                    'power'          => 20,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**
