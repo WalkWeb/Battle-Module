@@ -128,6 +128,7 @@ return [
     'Power of Darkness'                                              => 'Power of Darkness',
     'Dirty Reception'                                                => 'Dirty Reception',
     'Split'                                                          => 'Split',
+    'Enchanted Blade'                                                => 'Enchanted Blade',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

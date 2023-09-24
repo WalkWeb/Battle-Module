@@ -16275,6 +16275,148 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Enchanted Blade' => [
+            1 => [
+                'name'                 => 'Enchanted Blade',
+                'icon'                 => '/images/icons/ability/336.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.7,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.5,
+                            'critical_chance'     => 2.0,
+                            'critical_multiplier' => 1.3,
+                            'damage_convert'      => MultipleOffense::CONVERT_EARTH,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Enchanted Blade',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/336.png',
+                    ],
+                ],
+            ],
+            2 => [
+                'name'                 => 'Enchanted Blade',
+                'icon'                 => '/images/icons/ability/336.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.75,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.6,
+                            'critical_chance'     => 2.2,
+                            'critical_multiplier' => 1.4,
+                            'damage_convert'      => MultipleOffense::CONVERT_EARTH,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Enchanted Blade',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/336.png',
+                    ],
+                ],
+            ],
+            3 => [
+                'name'                 => 'Enchanted Blade',
+                'icon'                 => '/images/icons/ability/336.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.8,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.7,
+                            'critical_chance'     => 2.4,
+                            'critical_multiplier' => 1.5,
+                            'damage_convert'      => MultipleOffense::CONVERT_EARTH,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Enchanted Blade',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/336.png',
+                    ],
+                ],
+            ],
+            4 => [
+                'name'                 => 'Enchanted Blade',
+                'icon'                 => '/images/icons/ability/336.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.85,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.8,
+                            'critical_chance'     => 2.6,
+                            'critical_multiplier' => 1.6,
+                            'damage_convert'      => MultipleOffense::CONVERT_EARTH,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Enchanted Blade',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/336.png',
+                    ],
+                ],
+            ],
+            5 => [
+                'name'                 => 'Enchanted Blade',
+                'icon'                 => '/images/icons/ability/336.png',
+                'disposable'           => false,
+                'type_activate'        => AbilityInterface::ACTIVATE_RAGE,
+                'allowed_weapon_types' => [
+                    WeaponTypeInterface::DAGGER,
+                ],
+                'actions'              => [
+                    [
+                        'type'             => ActionInterface::DAMAGE,
+                        'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                        'multiple_offense' => [
+                            'damage'              => 1.9,
+                            'speed'               => 1.0,
+                            'accuracy'            => 1.9,
+                            'critical_chance'     => 2.8,
+                            'critical_multiplier' => 1.7,
+                            'damage_convert'      => MultipleOffense::CONVERT_EARTH,
+                        ],
+                        'can_be_avoided'   => true,
+                        'name'             => 'Enchanted Blade',
+                        'animation_method' => 'damage',
+                        'message_method'   => 'damageAbility',
+                        'icon'             => '/images/icons/ability/336.png',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**

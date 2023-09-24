@@ -126,6 +126,7 @@ return [
     'Power of Darkness'                                              => 'Сила тьмы',
     'Dirty Reception'                                                => 'Грязный прием',
     'Split'                                                          => 'Расщепление',
+    'Enchanted Blade'                                                => 'Зачарованный клинок',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
