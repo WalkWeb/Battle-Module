@@ -126,6 +126,7 @@ return [
     'Primordial Form'                                                => 'Primordial Form',
     'Vanguard'                                                       => 'Vanguard',
     'Power of Darkness'                                              => 'Power of Darkness',
+    'Dirty Reception'                                                => 'Dirty Reception',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

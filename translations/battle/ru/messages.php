@@ -124,6 +124,7 @@ return [
     'Primordial Form'                                                => 'Изначальная форма',
     'Vanguard'                                                       => 'Авангард',
     'Power of Darkness'                                              => 'Сила тьмы',
+    'Dirty Reception'                                                => 'Грязный прием',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
