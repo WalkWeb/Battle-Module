@@ -125,6 +125,7 @@ return [
     'Vanguard'                                                       => 'Авангард',
     'Power of Darkness'                                              => 'Сила тьмы',
     'Dirty Reception'                                                => 'Грязный прием',
+    'Split'                                                          => 'Расщепление',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

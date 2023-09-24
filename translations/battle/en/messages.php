@@ -127,6 +127,7 @@ return [
     'Vanguard'                                                       => 'Vanguard',
     'Power of Darkness'                                              => 'Power of Darkness',
     'Dirty Reception'                                                => 'Dirty Reception',
+    'Split'                                                          => 'Split',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
