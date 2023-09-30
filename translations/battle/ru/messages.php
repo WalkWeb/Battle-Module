@@ -128,6 +128,7 @@ return [
     'Split'                                                          => 'Расщепление',
     'Enchanted Blade'                                                => 'Зачарованный клинок',
     'Fortress'                                                       => 'Крепость',
+    'Protective Stand'                                               => 'Защитная стойка',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

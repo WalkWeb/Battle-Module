@@ -130,6 +130,7 @@ return [
     'Split'                                                          => 'Split',
     'Enchanted Blade'                                                => 'Enchanted Blade',
     'Fortress'                                                       => 'Fortress',
+    'Protective Stand'                                               => 'Protective Stand',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
