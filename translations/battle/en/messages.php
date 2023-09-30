@@ -132,6 +132,7 @@ return [
     'Fortress'                                                       => 'Fortress',
     'Protective Stand'                                               => 'Protective Stand',
     'Stone Skin'                                                     => 'Stone Skin',
+    'Clarity'                                                        => 'Clarity',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

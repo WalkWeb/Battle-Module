@@ -130,6 +130,7 @@ return [
     'Fortress'                                                       => 'Крепость',
     'Protective Stand'                                               => 'Защитная стойка',
     'Stone Skin'                                                     => 'Каменная кожа',
+    'Clarity'                                                        => 'Ясность',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
