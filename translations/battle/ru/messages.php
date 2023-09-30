@@ -131,6 +131,7 @@ return [
     'Protective Stand'                                               => 'Защитная стойка',
     'Stone Skin'                                                     => 'Каменная кожа',
     'Clarity'                                                        => 'Ясность',
+    'Overflowing Energy'                                             => 'Переполняющая энергия',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

@@ -133,6 +133,7 @@ return [
     'Protective Stand'                                               => 'Protective Stand',
     'Stone Skin'                                                     => 'Stone Skin',
     'Clarity'                                                        => 'Clarity',
+    'Overflowing Energy'                                             => 'Overflowing Energy',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
