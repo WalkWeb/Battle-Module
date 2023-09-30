@@ -19546,6 +19546,168 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
+        'Hand Injury' => [
+            1 => [
+                'name'          => 'Hand Injury',
+                'icon'          => '/images/icons/ability/279.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
+                        'name'           => 'Hand Injury',
+                        'icon'           => '/images/icons/ability/279.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Hand Injury',
+                            'icon'                  => '/images/icons/ability/279.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Hand Injury',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => -14,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            2 => [
+                'name'          => 'Hand Injury',
+                'icon'          => '/images/icons/ability/279.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
+                        'name'           => 'Hand Injury',
+                        'icon'           => '/images/icons/ability/279.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Hand Injury',
+                            'icon'                  => '/images/icons/ability/279.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Hand Injury',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => -16,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            3 => [
+                'name'          => 'Hand Injury',
+                'icon'          => '/images/icons/ability/279.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
+                        'name'           => 'Hand Injury',
+                        'icon'           => '/images/icons/ability/279.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Hand Injury',
+                            'icon'                  => '/images/icons/ability/279.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Hand Injury',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => -18,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            4 => [
+                'name'          => 'Hand Injury',
+                'icon'          => '/images/icons/ability/279.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
+                        'name'           => 'Hand Injury',
+                        'icon'           => '/images/icons/ability/279.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Hand Injury',
+                            'icon'                  => '/images/icons/ability/279.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Hand Injury',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => -20,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            5 => [
+                'name'          => 'Hand Injury',
+                'icon'          => '/images/icons/ability/279.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_CUNNING,
+                'actions'       => [
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_EFFECT_ENEMY,
+                        'name'           => 'Hand Injury',
+                        'icon'           => '/images/icons/ability/279.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Hand Injury',
+                            'icon'                  => '/images/icons/ability/279.png',
+                            'duration'              => 7,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Hand Injury',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => -22,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     /**

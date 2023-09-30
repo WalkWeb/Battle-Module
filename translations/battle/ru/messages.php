@@ -132,6 +132,7 @@ return [
     'Stone Skin'                                                     => 'Каменная кожа',
     'Clarity'                                                        => 'Ясность',
     'Overflowing Energy'                                             => 'Переполняющая энергия',
+    'Hand Injury'                                                    => 'Повреждение рук',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

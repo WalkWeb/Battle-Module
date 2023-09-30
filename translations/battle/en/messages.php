@@ -134,6 +134,7 @@ return [
     'Stone Skin'                                                     => 'Stone Skin',
     'Clarity'                                                        => 'Clarity',
     'Overflowing Energy'                                             => 'Overflowing Energy',
+    'Hand Injury'                                                    => 'Hand Injury',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
