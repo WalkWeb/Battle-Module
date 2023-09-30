@@ -12733,7 +12733,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
         'Succubus Primordial Form' => [
             1 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -12745,17 +12745,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 5,
                             'on_apply_actions'      => [
                                 [
@@ -12791,7 +12791,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             2 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -12803,17 +12803,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 6,
                             'on_apply_actions'      => [
                                 [
@@ -12849,7 +12849,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             3 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -12861,17 +12861,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 7,
                             'on_apply_actions'      => [
                                 [
@@ -12907,7 +12907,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             4 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -12919,17 +12919,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 8,
                             'on_apply_actions'      => [
                                 [
@@ -12965,7 +12965,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             5 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -12977,17 +12977,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 9,
                             'on_apply_actions'      => [
                                 [
@@ -13025,7 +13025,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
         'Soul Killer Primordial Form' => [
             1 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -13037,17 +13037,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 5,
                             'on_apply_actions'      => [
                                 [
@@ -13123,7 +13123,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             2 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -13135,17 +13135,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 6,
                             'on_apply_actions'      => [
                                 [
@@ -13221,7 +13221,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             3 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -13233,17 +13233,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 7,
                             'on_apply_actions'      => [
                                 [
@@ -13319,7 +13319,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             4 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -13331,17 +13331,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 8,
                             'on_apply_actions'      => [
                                 [
@@ -13417,7 +13417,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             5 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -13429,17 +13429,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 9,
                             'on_apply_actions'      => [
                                 [
@@ -13517,7 +13517,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
         'Hell Knight Primordial Form' => [
             1 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -13529,17 +13529,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 5,
                             'on_apply_actions'      => [
                                 [
@@ -13615,7 +13615,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             2 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -13627,17 +13627,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 6,
                             'on_apply_actions'      => [
                                 [
@@ -13713,7 +13713,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             3 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -13725,17 +13725,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 7,
                             'on_apply_actions'      => [
                                 [
@@ -13811,7 +13811,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             4 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -13823,17 +13823,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 8,
                             'on_apply_actions'      => [
                                 [
@@ -13909,7 +13909,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             5 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -13921,17 +13921,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 9,
                             'on_apply_actions'      => [
                                 [
@@ -14009,7 +14009,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
         'Avenger Primordial Form' => [
             1 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -14021,17 +14021,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 5,
                             'on_apply_actions'      => [
                                 [
@@ -14067,7 +14067,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             2 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -14079,17 +14079,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 6,
                             'on_apply_actions'      => [
                                 [
@@ -14125,7 +14125,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             3 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -14137,17 +14137,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 7,
                             'on_apply_actions'      => [
                                 [
@@ -14183,7 +14183,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             4 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -14195,17 +14195,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 8,
                             'on_apply_actions'      => [
                                 [
@@ -14241,7 +14241,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
             ],
             5 => [
                 'name'          => 'Primordial Form',
-                'icon'          => '/images/icons/ability/110.png',
+                'icon'          => '/images/icons/ability/527.png',
                 'disposable'    => false,
                 'type_activate' => AbilityInterface::ACTIVATE_RAGE,
                 'actions'       => [
@@ -14253,17 +14253,17 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                         'name'             => 'Primordial Form',
                         'animation_method' => 'heal',
                         'message_method'   => 'healAbility',
-                        'icon'             => '/images/icons/ability/110.png',
+                        'icon'             => '/images/icons/ability/527.png',
                     ],
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
                         'name'           => 'Primordial Form',
-                        'icon'           => '/images/icons/ability/110.png',
+                        'icon'           => '/images/icons/ability/527.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
                             'name'                  => 'Primordial Form',
-                            'icon'                  => '/images/icons/ability/110.png',
+                            'icon'                  => '/images/icons/ability/527.png',
                             'duration'              => 9,
                             'on_apply_actions'      => [
                                 [
@@ -14318,7 +14318,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
-                        'name'           => 'Primordial Form',
+                        'name'           => 'Vanguard',
                         'icon'           => '/images/icons/ability/253.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
@@ -14464,7 +14464,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
-                        'name'           => 'Primordial Form',
+                        'name'           => 'Vanguard',
                         'icon'           => '/images/icons/ability/253.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
@@ -14610,7 +14610,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
-                        'name'           => 'Primordial Form',
+                        'name'           => 'Vanguard',
                         'icon'           => '/images/icons/ability/253.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
@@ -14756,7 +14756,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
-                        'name'           => 'Primordial Form',
+                        'name'           => 'Vanguard',
                         'icon'           => '/images/icons/ability/253.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
@@ -14902,7 +14902,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                     [
                         'type'           => ActionInterface::EFFECT,
                         'type_target'    => ActionInterface::TARGET_SELF,
-                        'name'           => 'Primordial Form',
+                        'name'           => 'Vanguard',
                         'icon'           => '/images/icons/ability/253.png',
                         'message_method' => 'applyEffect',
                         'effect'         => [
@@ -18188,6 +18188,498 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'name'           => 'Stone Skin',
                                     'modify_method'  => BuffAction::ADD_EARTH_MAX_RESIST,
                                     'power'          => 8,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'Archangel Primordial Form' => [
+            1 => [
+                'name'          => 'Primordial Form',
+                'icon'          => '/images/icons/ability/526.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'power'            => 68,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Primordial Form',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/526.png',
+                    ],
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Primordial Form',
+                        'icon'           => '/images/icons/ability/526.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Primordial Form',
+                            'icon'                  => '/images/icons/ability/526.png',
+                            'duration'              => 5,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => 12,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_PHYSICAL_RESIST,
+                                    'power'          => 14,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_FIRE_RESIST,
+                                    'power'          => 14,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_WATER_RESIST,
+                                    'power'          => 14,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_AIR_RESIST,
+                                    'power'          => 14,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_EARTH_RESIST,
+                                    'power'          => 14,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_LIFE_RESIST,
+                                    'power'          => 14,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_DEATH_RESIST,
+                                    'power'          => 14,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            2 => [
+                'name'          => 'Primordial Form',
+                'icon'          => '/images/icons/ability/526.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'power'            => 114,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Primordial Form',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/526.png',
+                    ],
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Primordial Form',
+                        'icon'           => '/images/icons/ability/526.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Primordial Form',
+                            'icon'                  => '/images/icons/ability/526.png',
+                            'duration'              => 6,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => 14,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_PHYSICAL_RESIST,
+                                    'power'          => 16,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_FIRE_RESIST,
+                                    'power'          => 16,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_WATER_RESIST,
+                                    'power'          => 16,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_AIR_RESIST,
+                                    'power'          => 16,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_EARTH_RESIST,
+                                    'power'          => 16,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_LIFE_RESIST,
+                                    'power'          => 16,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_DEATH_RESIST,
+                                    'power'          => 16,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            3 => [
+                'name'          => 'Primordial Form',
+                'icon'          => '/images/icons/ability/526.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'power'            => 161,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Primordial Form',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/526.png',
+                    ],
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Primordial Form',
+                        'icon'           => '/images/icons/ability/526.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Primordial Form',
+                            'icon'                  => '/images/icons/ability/526.png',
+                            'duration'              => 7,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => 16,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_PHYSICAL_RESIST,
+                                    'power'          => 18,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_FIRE_RESIST,
+                                    'power'          => 18,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_WATER_RESIST,
+                                    'power'          => 18,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_AIR_RESIST,
+                                    'power'          => 18,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_EARTH_RESIST,
+                                    'power'          => 18,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_LIFE_RESIST,
+                                    'power'          => 18,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_DEATH_RESIST,
+                                    'power'          => 18,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            4 => [
+                'name'          => 'Primordial Form',
+                'icon'          => '/images/icons/ability/526.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'power'            => 225,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Primordial Form',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/526.png',
+                    ],
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Primordial Form',
+                        'icon'           => '/images/icons/ability/526.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Primordial Form',
+                            'icon'                  => '/images/icons/ability/526.png',
+                            'duration'              => 8,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => 18,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_PHYSICAL_RESIST,
+                                    'power'          => 20,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_FIRE_RESIST,
+                                    'power'          => 20,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_WATER_RESIST,
+                                    'power'          => 20,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_AIR_RESIST,
+                                    'power'          => 20,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_EARTH_RESIST,
+                                    'power'          => 20,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_LIFE_RESIST,
+                                    'power'          => 20,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_DEATH_RESIST,
+                                    'power'          => 20,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                            ],
+                            'on_next_round_actions' => [],
+                            'on_disable_actions'    => [],
+                        ],
+                    ],
+                ],
+            ],
+            5 => [
+                'name'          => 'Primordial Form',
+                'icon'          => '/images/icons/ability/526.png',
+                'disposable'    => false,
+                'type_activate' => AbilityInterface::ACTIVATE_RAGE,
+                'actions'       => [
+                    [
+                        'type'             => ActionInterface::HEAL,
+                        'type_target'      => ActionInterface::TARGET_SELF,
+                        'power'            => 306,
+                        'can_be_avoided'   => true,
+                        'name'             => 'Primordial Form',
+                        'animation_method' => 'heal',
+                        'message_method'   => 'healAbility',
+                        'icon'             => '/images/icons/ability/526.png',
+                    ],
+                    [
+                        'type'           => ActionInterface::EFFECT,
+                        'type_target'    => ActionInterface::TARGET_SELF,
+                        'name'           => 'Primordial Form',
+                        'icon'           => '/images/icons/ability/526.png',
+                        'message_method' => 'applyEffect',
+                        'effect'         => [
+                            'name'                  => 'Primordial Form',
+                            'icon'                  => '/images/icons/ability/526.png',
+                            'duration'              => 9,
+                            'on_apply_actions'      => [
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
+                                    'power'          => 20,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_PHYSICAL_RESIST,
+                                    'power'          => 22,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_FIRE_RESIST,
+                                    'power'          => 22,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_WATER_RESIST,
+                                    'power'          => 22,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_AIR_RESIST,
+                                    'power'          => 22,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_EARTH_RESIST,
+                                    'power'          => 22,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_LIFE_RESIST,
+                                    'power'          => 22,
+                                    'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
+                                ],
+                                [
+                                    'type'           => ActionInterface::BUFF,
+                                    'type_target'    => ActionInterface::TARGET_SELF,
+                                    'name'           => 'Primordial Form',
+                                    'modify_method'  => BuffAction::ADD_DEATH_RESIST,
+                                    'power'          => 22,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                             ],

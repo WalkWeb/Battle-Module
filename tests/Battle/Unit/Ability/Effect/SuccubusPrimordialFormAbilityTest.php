@@ -20,11 +20,11 @@ use Tests\Factory\UnitFactory;
 
 class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';
-    private const MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Изначальная форма</span> и вылечил себя на %d здоровья';
+    private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';
+    private const MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Изначальная форма</span> и вылечил себя на %d здоровья';
 
-    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Primordial Form</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Изначальная форма</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Primordial Form</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Изначальная форма</span>';
 
     /**
      * Тест на создание способности Succubus Primordial Form через AbilityDataProvider
@@ -37,7 +37,7 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
 
         // Для пользователя отображается как просто Primordial Form
         $nameForUser = 'Primordial Form';
-        $icon = '/images/icons/ability/110.png';
+        $icon = '/images/icons/ability/527.png';
 
         $unit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(1);

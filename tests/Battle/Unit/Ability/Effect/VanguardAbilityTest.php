@@ -20,8 +20,8 @@ class VanguardAbilityTest extends AbstractUnitTest
     private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Vanguard</span> and healed itself on %d life';
     private const MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Авангард</span> и вылечил себя на %d здоровья';
 
-    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Primordial Form</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Изначальная форма</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Vanguard</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Авангард</span>';
 
     /**
      * Тест на создание способности Vanguard через AbilityDataProvider
@@ -62,10 +62,12 @@ class VanguardAbilityTest extends AbstractUnitTest
             }
             if ($i === 1) {
                 self::assertInstanceOf(EffectAction::class, $action);
+                self::assertEquals($name, $action->getNameAction());
+                self::assertEquals($icon, $action->getIcon());
                 foreach ($action->getEffect()->getOnNextRoundActions() as $effectDamage) {
                     self::assertInstanceOf(BuffAction::class, $effectDamage);
-                    self::assertEquals($name, $action->getNameAction());
-                    self::assertEquals($icon, $action->getIcon());
+                    self::assertEquals($name, $effectDamage->getNameAction());
+                    self::assertEquals($icon, $effectDamage->getIcon());
                 }
             }
         }

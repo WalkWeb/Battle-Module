@@ -15,28 +15,26 @@ use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-// TODO Сейчас финальная форма Soul Killer и Hell Knight абсолютно одинаковы. Надо подумать над уникализацией.
-
-class HellKnightPrimordialFormAbilityTest extends AbstractUnitTest
+class ArchangelPrimordialFormAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';
-    private const MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Изначальная форма</span> и вылечил себя на %d здоровья';
+    private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/526.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';
+    private const MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/526.png" alt="" /> <span class="ability">Изначальная форма</span> и вылечил себя на %d здоровья';
 
-    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Primordial Form</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Изначальная форма</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/526.png" alt="" /> <span class="ability">Primordial Form</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/526.png" alt="" /> <span class="ability">Изначальная форма</span>';
 
     /**
-     * Тест на создание способности Hell Knight Primordial Form через AbilityDataProvider
+     * Тест на создание способности Archangel Primordial Form через AbilityDataProvider
      *
      * @throws Exception
      */
-    public function testHellKnightPrimordialFormAbilityCreate(): void
+    public function testArchangelPrimordialFormAbilityCreate(): void
     {
-        $name = 'Hell Knight Primordial Form';
+        $name = 'Archangel Primordial Form';
 
         // Для пользователя отображается как просто Primordial Form
         $nameForUser = 'Primordial Form';
-        $icon = '/images/icons/ability/527.png';
+        $icon = '/images/icons/ability/526.png';
 
         $unit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(1);
@@ -77,12 +75,11 @@ class HellKnightPrimordialFormAbilityTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на применение способности Hell Knight Primordial Form
+     * Тест на применение способности Archangel Primordial Form
      *
      * @dataProvider useDataProvider
      * @param int $level
      * @param int $expectedHealPower
-     * @param int $baseDamage
      * @param int $expectedDamage
      * @param int $expectedPhysicalResist
      * @param int $expectedFireResist
@@ -94,10 +91,9 @@ class HellKnightPrimordialFormAbilityTest extends AbstractUnitTest
      * @param int $expectedEffectDuration
      * @throws Exception
      */
-    public function testHellKnightPrimordialFormAbilityUse(
+    public function testArchangelPrimordialFormAbilityUse(
         int $level,
         int $expectedHealPower,
-        int $baseDamage,
         int $expectedDamage,
         int $expectedPhysicalResist,
         int $expectedFireResist,
@@ -115,10 +111,10 @@ class HellKnightPrimordialFormAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Hell Knight Primordial Form', $level);
+        $ability = $this->createAbilityByDataProvider($unit, 'Archangel Primordial Form', $level);
 
         // Изначальный урон
-        self::assertEquals($baseDamage, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
+        self::assertEquals(35, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
 
         $this->activateAbility($ability, $unit);
 
@@ -193,71 +189,66 @@ class HellKnightPrimordialFormAbilityTest extends AbstractUnitTest
             [
                 1,
                 68,
-                35,
                 39,
-                10,
-                10,
-                10,
-                10,
-                10,
-                10,
-                10,
+                14,
+                14,
+                14,
+                14,
+                14,
+                14,
+                14,
                 5,
             ],
             [
                 2,
                 114,
-                35,
                 39,
-                12,
-                12,
-                12,
-                12,
-                12,
-                12,
-                12,
+                16,
+                16,
+                16,
+                16,
+                16,
+                16,
+                16,
                 6,
             ],
             [
                 3,
                 161,
-                35,
                 40,
-                14,
-                14,
-                14,
-                14,
-                14,
-                14,
-                14,
+                18,
+                18,
+                18,
+                18,
+                18,
+                18,
+                18,
                 7,
             ],
             [
                 4,
                 225,
-                35,
                 41,
-                16,
-                16,
-                16,
-                16,
-                16,
-                16,
-                16,
+                20,
+                20,
+                20,
+                20,
+                20,
+                20,
+                20,
                 8,
             ],
             [
                 5,
                 306,
-                35,
                 42,
-                18,
-                18,
-                18,
-                18,
-                18,
-                18,
-                18,
+                22,
+                22,
+                22,
+                22,
+                22,
+                22,
+                22,
                 9,
             ],
         ];
