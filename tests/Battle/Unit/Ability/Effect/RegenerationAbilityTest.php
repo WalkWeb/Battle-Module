@@ -121,7 +121,6 @@ class RegenerationAbilityTest extends AbstractUnitTest
                 self::assertEquals(sprintf(self::MESSAGE_EFFECT_EN, $expectedPower), $this->getChat()->addMessage($effectAction));
                 self::assertEquals(sprintf(self::MESSAGE_EFFECT_RU, $expectedPower), $this->getChatRu()->addMessage($effectAction));
             }
-
         }
 
         $ability->usage();

@@ -127,6 +127,7 @@ return [
     'Dirty Reception'                                                => 'Грязный прием',
     'Split'                                                          => 'Расщепление',
     'Enchanted Blade'                                                => 'Зачарованный клинок',
+    'Fortress'                                                       => 'Крепость',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

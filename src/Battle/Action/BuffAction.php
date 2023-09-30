@@ -29,6 +29,8 @@ class BuffAction extends AbstractAction
     public const MAGIC_DEFENSE           = 'multiplierMagicDefense';
     public const CRITICAL_CHANCE         = 'multiplierCriticalChance';
     public const CRITICAL_MULTIPLIER     = 'multiplierCriticalMultiplier';
+    // TODO ADD_CRITICAL_CHANCE
+    // TODO ADD_CRITICAL_MULTIPLIER
     public const ADD_BLOCK               = 'addBlock';
     public const ADD_MAGIC_BLOCK         = 'addMagicBlock';
     public const ADD_BLOCK_IGNORE        = 'addBlockIgnore';

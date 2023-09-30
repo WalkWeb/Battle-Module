@@ -129,6 +129,7 @@ return [
     'Dirty Reception'                                                => 'Dirty Reception',
     'Split'                                                          => 'Split',
     'Enchanted Blade'                                                => 'Enchanted Blade',
+    'Fortress'                                                       => 'Fortress',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
