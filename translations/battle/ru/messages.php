@@ -133,6 +133,7 @@ return [
     'Clarity'                                                        => 'Ясность',
     'Overflowing Energy'                                             => 'Переполняющая энергия',
     'Hand Injury'                                                    => 'Повреждение рук',
+    'Good Position'                                                  => 'Хорошая позиция',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

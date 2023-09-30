@@ -135,6 +135,7 @@ return [
     'Clarity'                                                        => 'Clarity',
     'Overflowing Energy'                                             => 'Overflowing Energy',
     'Hand Injury'                                                    => 'Hand Injury',
+    'Good Position'                                                  => 'Good Position',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
