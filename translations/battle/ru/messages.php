@@ -129,6 +129,7 @@ return [
     'Enchanted Blade'                                                => 'Зачарованный клинок',
     'Fortress'                                                       => 'Крепость',
     'Protective Stand'                                               => 'Защитная стойка',
+    'Stone Skin'                                                     => 'Каменная кожа',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

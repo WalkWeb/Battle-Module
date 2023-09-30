@@ -131,6 +131,7 @@ return [
     'Enchanted Blade'                                                => 'Enchanted Blade',
     'Fortress'                                                       => 'Fortress',
     'Protective Stand'                                               => 'Protective Stand',
+    'Stone Skin'                                                     => 'Stone Skin',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
