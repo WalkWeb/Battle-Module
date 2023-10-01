@@ -135,6 +135,7 @@ return [
     'Hand Injury'                                                    => 'Повреждение рук',
     'Good Position'                                                  => 'Хорошая позиция',
     'Stunning Strike'                                                => 'Оглушающий удар',
+    'Kick'                                                           => 'Удар ногой',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

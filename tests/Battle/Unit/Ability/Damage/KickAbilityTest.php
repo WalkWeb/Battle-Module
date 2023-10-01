@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Unit\Ability\Effect;
+namespace Tests\Battle\Unit\Ability\Damage;
 
 use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
@@ -11,28 +11,27 @@ use Battle\Command\CommandFactory;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
-use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class StunningStrikeAbilityTest extends AbstractUnitTest
+class KickAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">Paladin</span> use <img src="/images/icons/ability/181.png" alt="" /> <span class="ability">Stunning Strike</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">Paladin</span> использовал <img src="/images/icons/ability/181.png" alt="" /> <span class="ability">Оглушающий удар</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">Paladin</span> use <img src="/images/icons/ability/017.png" alt="" /> <span class="ability">Kick</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">Paladin</span> использовал <img src="/images/icons/ability/017.png" alt="" /> <span class="ability">Удар ногой</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const MESSAGE_STUN_EN = '';
-    private const MESSAGE_STUN_RU = '';
+    private const MESSAGE_STUN_EN = '<span style="color: #1e72e3">unit_2</span> stunned and unable to move';
+    private const MESSAGE_STUN_RU = '<span style="color: #1e72e3">unit_2</span> оглушен и не может двигаться';
 
     /**
-     * Тест на создание способности Stunning Strike через AbilityDataProvider
+     * Тест на создание способности Kick через AbilityDataProvider
      *
      * @throws Exception
      */
-    public function testStunningStrikeAbilityCreate(): void
+    public function testKickAbilityCreate(): void
     {
-        $name = 'Stunning Strike';
-        $icon = '/images/icons/ability/181.png';
+        $name = 'Kick';
+        $icon = '/images/icons/ability/017.png';
         $disposable = false;
 
         $unit = UnitFactory::createByTemplate(54);
@@ -49,15 +48,8 @@ class StunningStrikeAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
         self::assertEquals($disposable, $ability->isDisposable());
         self::assertFalse($ability->isUsage());
-        self::assertEquals(AbilityInterface::ACTIVATE_CUNNING, $ability->getTypeActivate());
-        self::assertEquals(
-            [
-                WeaponTypeInterface::MACE,
-                WeaponTypeInterface::TWO_HAND_MACE,
-                WeaponTypeInterface::HEAVY_TWO_HAND_MACE,
-            ],
-            $ability->getAllowedWeaponTypes()
-        );
+        self::assertEquals(AbilityInterface::ACTIVATE_CONCENTRATION, $ability->getTypeActivate());
+        self::assertEquals([], $ability->getAllowedWeaponTypes());
 
         $actions = $ability->getActions($enemyCommand, $command);
 
@@ -96,9 +88,10 @@ class StunningStrikeAbilityTest extends AbstractUnitTest
      * @param int $level
      * @param int $expectedDamage
      * @param int $expectedAccuracy
+     * @param int $expectedDuration
      * @throws Exception
      */
-    public function testStunningStrikeAbilityUse(
+    public function testKickAbilityUse(
         int $level,
         int $expectedDamage,
         int $expectedAccuracy,
@@ -110,7 +103,7 @@ class StunningStrikeAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Stunning Strike', $level);
+        $ability = $this->createAbilityByDataProvider($unit, 'Kick', $level);
 
         $this->activateAbility($ability, $unit);
 
@@ -142,10 +135,18 @@ class StunningStrikeAbilityTest extends AbstractUnitTest
 
                 foreach ($effects as $effect) {
                     self::assertEquals($expectedDuration, $effect->getDuration());
-                }
 
-                self::assertEquals(self::MESSAGE_STUN_EN, $this->getChat()->addMessage($action));
-                self::assertEquals(self::MESSAGE_STUN_RU, $this->getChatRu()->addMessage($action));
+                    $onNextRoundActions = $effect->getOnNextRoundActions();
+
+                    self::assertCount(1, $onNextRoundActions);
+
+                    foreach ($onNextRoundActions as $onNextRoundAction) {
+                        self::assertInstanceOf(ParalysisAction::class, $onNextRoundAction);
+
+                        self::assertEquals(self::MESSAGE_STUN_EN, $this->getChat()->addMessage($onNextRoundAction));
+                        self::assertEquals(self::MESSAGE_STUN_RU, $this->getChatRu()->addMessage($onNextRoundAction));
+                    }
+                }
             }
         }
 

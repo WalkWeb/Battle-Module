@@ -137,6 +137,7 @@ return [
     'Hand Injury'                                                    => 'Hand Injury',
     'Good Position'                                                  => 'Good Position',
     'Stunning Strike'                                                => 'Stunning Strike',
+    'Kick'                                                           => 'Kick',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
