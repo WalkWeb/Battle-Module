@@ -137,6 +137,7 @@ return [
     'Stunning Strike'                                                => 'Оглушающий удар',
     'Kick'                                                           => 'Удар ногой',
     'Hail of Arrows'                                                 => 'Град стрел',
+    'Rage of Ancestors'                                              => 'Ярость предков',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',

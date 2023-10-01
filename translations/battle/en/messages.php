@@ -139,6 +139,7 @@ return [
     'Stunning Strike'                                                => 'Stunning Strike',
     'Kick'                                                           => 'Kick',
     'Hail of Arrows'                                                 => 'Hail of Arrows',
+    'Rage of Ancestors'                                              => 'Rage of Ancestors',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',
