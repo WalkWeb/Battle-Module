@@ -136,6 +136,7 @@ return [
     'Overflowing Energy'                                             => 'Overflowing Energy',
     'Hand Injury'                                                    => 'Hand Injury',
     'Good Position'                                                  => 'Good Position',
+    'Stunning Strike'                                                => 'Stunning Strike',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

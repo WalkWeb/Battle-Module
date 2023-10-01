@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Ability\Damage;
 
 use Battle\Action\DamageAction;
+use Battle\Action\EffectAction;
 use Battle\Command\CommandFactory;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
@@ -58,6 +59,7 @@ class FireBallAbilityTest extends AbstractUnitTest
         self::assertCount(1, $actions);
 
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
+            self::assertInstanceOf(DamageAction::class, $action);
             self::assertEquals($name, $action->getNameAction());
             self::assertEquals($icon, $action->getIcon());
             // Проверка конвертации физического урона в урон огнем

@@ -134,6 +134,7 @@ return [
     'Overflowing Energy'                                             => 'Переполняющая энергия',
     'Hand Injury'                                                    => 'Повреждение рук',
     'Good Position'                                                  => 'Хорошая позиция',
+    'Stunning Strike'                                                => 'Оглушающий удар',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
