@@ -14,23 +14,23 @@ use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class DoubleStrikeAbilityTest extends AbstractUnitTest
+class HailOfArrowsAbilityTest extends AbstractUnitTest
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">100_dodge</span> use <img src="/images/icons/ability/341.png" alt="" /> <span class="ability">Double Strike</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">100_dodge</span> использовал <img src="/images/icons/ability/341.png" alt="" /> <span class="ability">Парный удар</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_EN = '<span style="color: #1e72e3">Unit</span> use <img src="/images/icons/ability/242.png" alt="" /> <span class="ability">Hail of Arrows</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">Unit</span> использовал <img src="/images/icons/ability/242.png" alt="" /> <span class="ability">Град стрел</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
     /**
-     * Тест на создание способности Double Strike через AbilityDataProvider
+     * Тест на создание способности Hail of Arrows через AbilityDataProvider
      *
      * @throws Exception
      */
-    public function testDoubleStrikeCreate(): void
+    public function testHailOfArrowsCreate(): void
     {
-        $name = 'Double Strike';
-        $icon = '/images/icons/ability/341.png';
+        $name = 'Hail of Arrows';
+        $icon = '/images/icons/ability/242.png';
         $disposable = false;
 
-        $unit = UnitFactory::createByTemplate(51);
+        $unit = UnitFactory::createByTemplate(45);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -44,16 +44,17 @@ class DoubleStrikeAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
         self::assertEquals($disposable, $ability->isDisposable());
         self::assertFalse($ability->isUsage());
-        self::assertEquals(AbilityInterface::ACTIVATE_CONCENTRATION, $ability->getTypeActivate());
+        self::assertEquals(AbilityInterface::ACTIVATE_RAGE, $ability->getTypeActivate());
         self::assertEquals([
-            WeaponTypeInterface::DAGGER,
+            WeaponTypeInterface::BOW,
+            WeaponTypeInterface::CROSSBOW,
         ],
             $ability->getAllowedWeaponTypes()
         );
 
         $actions = $ability->getActions($enemyCommand, $command);
 
-        self::assertCount(2, $actions);
+        self::assertCount(3, $actions);
 
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertEquals($name, $action->getNameAction());
@@ -64,28 +65,26 @@ class DoubleStrikeAbilityTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на применение способности Double Strike
+     * Тест на применение способности Hail of Arrows
      *
      * @dataProvider useDataProvider
      * @param int $level
      * @param int $expectedDamage
      * @param int $expectedAccuracy
-     * @param int $expectedCriticalChance
      * @throws Exception
      */
-    public function testDoubleStrikeAbilityUse(
+    public function testHailOfArrowsAbilityUse(
         int $level,
         int $expectedDamage,
-        int $expectedAccuracy,
-        int $expectedCriticalChance
+        int $expectedAccuracy
     ): void
     {
-        $unit = UnitFactory::createByTemplate(51);
+        $unit = UnitFactory::createByTemplate(45);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Double Strike', $level);
+        $ability = $this->createAbilityByDataProvider($unit, 'Hail of Arrows', $level);
 
         $this->activateAbility($ability, $unit);
 
@@ -99,7 +98,7 @@ class DoubleStrikeAbilityTest extends AbstractUnitTest
             $action->handle();
             self::assertEquals($expectedDamage, $action->getFactualPower());
             self::assertEquals($expectedAccuracy, $action->getOffense()->getAccuracy());
-            self::assertEquals($expectedCriticalChance, $action->getOffense()->getCriticalChance());
+
             self::assertEquals(sprintf(self::MESSAGE_EN, $expectedDamage), $this->getChat()->addMessage($action));
             self::assertEquals(sprintf(self::MESSAGE_RU, $expectedDamage), $this->getChatRu()->addMessage($action));
 
@@ -121,32 +120,27 @@ class DoubleStrikeAbilityTest extends AbstractUnitTest
             [
                 1,
                 14,
-                280,
-                15,
+                240,
             ],
             [
                 2,
-                15,
-                300,
                 16,
+                260,
             ],
             [
                 3,
-                16,
-                320,
-                17,
+                18,
+                280,
             ],
             [
                 4,
-                17,
-                340,
-                18,
+                20,
+                300,
             ],
             [
                 5,
-                18,
-                360,
-                19,
+                22,
+                320,
             ],
         ];
     }

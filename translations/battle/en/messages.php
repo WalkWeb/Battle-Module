@@ -138,6 +138,7 @@ return [
     'Good Position'                                                  => 'Good Position',
     'Stunning Strike'                                                => 'Stunning Strike',
     'Kick'                                                           => 'Kick',
+    'Hail of Arrows'                                                 => 'Hail of Arrows',
     // Statistics
     'Statistics'                                                     => 'Statistics',
     'Unit'                                                           => 'Unit',

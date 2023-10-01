@@ -136,6 +136,7 @@ return [
     'Good Position'                                                  => 'Хорошая позиция',
     'Stunning Strike'                                                => 'Оглушающий удар',
     'Kick'                                                           => 'Удар ногой',
+    'Hail of Arrows'                                                 => 'Град стрел',
     // Statistics
     'Statistics'                                                     => 'Статистика',
     'Unit'                                                           => 'Кто',
