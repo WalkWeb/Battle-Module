@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Ability\Effect;
 
-use Battle\Action\BuffAction;
 use Battle\Action\EffectAction;
 use Battle\Command\CommandFactory;
 use Battle\Response\Scenario\Scenario;
@@ -26,38 +25,12 @@ class ProtectiveStandAbilityTest extends AbstractUnitTest
      */
     public function testProtectiveStandAbilityCreate(): void
     {
-        $name = 'Protective Stand';
-        $icon = '/images/icons/ability/266.png';
-
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
-
-        self::assertEquals($name, $ability->getName());
-        self::assertEquals($icon, $ability->getIcon());
-        self::assertEquals($unit, $ability->getUnit());
-        self::assertFalse($ability->isReady());
-        self::assertTrue($ability->canByUsed($enemyCommand, $command));
-        self::assertFalse($ability->isDisposable());
-        self::assertFalse($ability->isUsage());
-        self::assertEquals(AbilityInterface::ACTIVATE_RAGE, $ability->getTypeActivate());
-        self::assertEquals([], $ability->getAllowedWeaponTypes());
-
-        $actions = $ability->getActions($enemyCommand, $command);
-
-        self::assertCount(1, $actions);
-
-        foreach ($ability->getActions($enemyCommand, $command) as $i => $action) {
-            self::assertInstanceOf(EffectAction::class, $action);
-            foreach ($action->getEffect()->getOnNextRoundActions() as $effectDamage) {
-                self::assertInstanceOf(BuffAction::class, $effectDamage);
-                self::assertEquals($name, $action->getNameAction());
-                self::assertEquals($icon, $action->getIcon());
-            }
-        }
+        $this->assertCreateEffectAbility(
+            4,
+            'Protective Stand',
+            '/images/icons/ability/266.png',
+            AbilityInterface::ACTIVATE_RAGE
+        );
     }
 
     /**

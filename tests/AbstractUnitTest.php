@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use Battle\Action\BuffAction;
+use Battle\Action\EffectAction;
+use Battle\Command\CommandFactory;
 use Battle\Container\Container;
 use Battle\Container\ContainerException;
 use Battle\Container\ContainerInterface;
@@ -15,6 +18,7 @@ use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
+use Tests\Factory\UnitFactory;
 
 abstract class AbstractUnitTest extends TestCase
 {
@@ -95,5 +99,56 @@ abstract class AbstractUnitTest extends TestCase
 
         $collection->update($unit);
         $collection->newRound($unit);
+    }
+
+    /**
+     * Проверка создания базового эффекта (способности с каким-то одним простым эффектом)
+     *
+     * @param int $unitId
+     * @param string $name
+     * @param string $icon
+     * @param bool $disposable
+     * @param int $typeActivate
+     * @param array $allowedWeaponTypes
+     * @throws Exception
+     */
+    protected function assertCreateEffectAbility(
+        int $unitId,
+        string $name,
+        string $icon,
+        int $typeActivate,
+        array $allowedWeaponTypes = [],
+        bool $disposable = false
+    ): void
+    {
+        $unit = UnitFactory::createByTemplate($unitId);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+
+        self::assertEquals($name, $ability->getName());
+        self::assertEquals($icon, $ability->getIcon());
+        self::assertEquals($unit, $ability->getUnit());
+        self::assertFalse($ability->isReady());
+        self::assertTrue($ability->canByUsed($enemyCommand, $command));
+        self::assertEquals($disposable, $ability->isDisposable());
+        self::assertFalse($ability->isUsage());
+        self::assertEquals($typeActivate, $ability->getTypeActivate());
+        self::assertEquals($allowedWeaponTypes, $ability->getAllowedWeaponTypes());
+
+        $actions = $ability->getActions($enemyCommand, $command);
+
+        self::assertCount(1, $actions);
+
+        foreach ($ability->getActions($enemyCommand, $command) as $i => $action) {
+            self::assertInstanceOf(EffectAction::class, $action);
+            foreach ($action->getEffect()->getOnNextRoundActions() as $effect) {
+                self::assertInstanceOf(BuffAction::class, $effect);
+                self::assertEquals($name, $action->getNameAction());
+                self::assertEquals($icon, $action->getIcon());
+            }
+        }
     }
 }
