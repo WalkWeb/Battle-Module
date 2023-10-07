@@ -15,26 +15,28 @@ use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class SoulKillerPrimordialFormAbilityTest extends AbstractUnitTest
-{
-    private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';
-    private const MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Изначальная форма</span> и вылечил себя на %d здоровья';
+// TODO Способность Серафимы полностью соответствует способности Мстителя - нужно уникализировать
 
-    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Primordial Form</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Изначальная форма</span>';
+class SeraphPrimordialFormAbilityTest extends AbstractUnitTest
+{
+    private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/526.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';
+    private const MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/526.png" alt="" /> <span class="ability">Изначальная форма</span> и вылечил себя на %d здоровья';
+
+    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/526.png" alt="" /> <span class="ability">Primordial Form</span>';
+    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/526.png" alt="" /> <span class="ability">Изначальная форма</span>';
 
     /**
-     * Тест на создание способности Soul Killer Primordial Form через AbilityDataProvider
+     * Тест на создание способности Seraph Primordial Form через AbilityDataProvider
      *
      * @throws Exception
      */
-    public function testSoulKillerPrimordialFormAbilityCreate(): void
+    public function testSeraphPrimordialFormAbilityCreate(): void
     {
-        $name = 'Soul Killer Primordial Form';
+        $name = 'Seraph Primordial Form';
 
         // Для пользователя отображается как просто Primordial Form
         $nameForUser = 'Primordial Form';
-        $icon = '/images/icons/ability/527.png';
+        $icon = '/images/icons/ability/526.png';
 
         $unit = UnitFactory::createByTemplate(11);
         $enemyUnit = UnitFactory::createByTemplate(1);
@@ -75,33 +77,23 @@ class SoulKillerPrimordialFormAbilityTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на применение способности Soul Killer Primordial Form
+     * Тест на применение способности Seraph Primordial Form
      *
      * @dataProvider useDataProvider
      * @param int $level
      * @param int $expectedHealPower
      * @param int $expectedDamage
-     * @param int $expectedPhysicalResist
-     * @param int $expectedFireResist
-     * @param int $expectedWaterResist
-     * @param int $expectedAirResist
-     * @param int $expectedEarthResist
-     * @param int $expectedLifeResist
-     * @param int $expectedDeathResist
+     * @param float $expectedAttackSpeed
+     * @param float $expectedCastSpeed
      * @param int $expectedEffectDuration
      * @throws Exception
      */
-    public function testSoulKillerPrimordialFormAbilityUse(
+    public function testSeraphPrimordialFormAbilityUse(
         int $level,
         int $expectedHealPower,
         int $expectedDamage,
-        int $expectedPhysicalResist,
-        int $expectedFireResist,
-        int $expectedWaterResist,
-        int $expectedAirResist,
-        int $expectedEarthResist,
-        int $expectedLifeResist,
-        int $expectedDeathResist,
+        float $expectedAttackSpeed,
+        float $expectedCastSpeed,
         int $expectedEffectDuration
     ): void
     {
@@ -111,7 +103,7 @@ class SoulKillerPrimordialFormAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Soul Killer Primordial Form', $level);
+        $ability = $this->createAbilityByDataProvider($unit, 'Seraph Primordial Form', $level);
 
         // Изначальный урон
         self::assertEquals(35, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
@@ -167,13 +159,8 @@ class SoulKillerPrimordialFormAbilityTest extends AbstractUnitTest
 
         // Проверяем обновленные параметры
         self::assertEquals($expectedDamage, $unit->getOffense()->getDamage($enemyUnit->getDefense()));
-        self::assertEquals($expectedPhysicalResist, $unit->getDefense()->getPhysicalResist());
-        self::assertEquals($expectedFireResist, $unit->getDefense()->getFireResist());
-        self::assertEquals($expectedWaterResist, $unit->getDefense()->getWaterResist());
-        self::assertEquals($expectedAirResist, $unit->getDefense()->getAirResist());
-        self::assertEquals($expectedEarthResist, $unit->getDefense()->getEarthResist());
-        self::assertEquals($expectedLifeResist, $unit->getDefense()->getLifeResist());
-        self::assertEquals($expectedDeathResist, $unit->getDefense()->getDeathResist());
+        self::assertEquals($expectedAttackSpeed, $unit->getOffense()->getAttackSpeed());
+        self::assertEquals($expectedCastSpeed, $unit->getOffense()->getCastSpeed());
 
         $ability->usage();
         self::assertTrue($ability->isUsage());
@@ -190,65 +177,40 @@ class SoulKillerPrimordialFormAbilityTest extends AbstractUnitTest
                 1,
                 68,
                 39,
-                10,
-                10,
-                10,
-                10,
-                10,
-                10,
-                10,
+                1.14,
+                1.14,
                 5,
             ],
             [
                 2,
                 114,
-                39,
-                12,
-                12,
-                12,
-                12,
-                12,
-                12,
-                12,
+                40,
+                1.16,
+                1.16,
                 6,
             ],
             [
                 3,
                 161,
-                40,
-                14,
-                14,
-                14,
-                14,
-                14,
-                14,
-                14,
+                41,
+                1.18,
+                1.18,
                 7,
             ],
             [
                 4,
                 225,
-                41,
-                16,
-                16,
-                16,
-                16,
-                16,
-                16,
-                16,
+                42,
+                1.20,
+                1.20,
                 8,
             ],
             [
                 5,
                 306,
                 42,
-                18,
-                18,
-                18,
-                18,
-                18,
-                18,
-                18,
+                1.22,
+                1.22,
                 9,
             ],
         ];
