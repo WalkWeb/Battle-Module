@@ -28,6 +28,8 @@
 
 ```php
 use Battle\BattleFactory;
+use Battle\Container\Container;
+use Battle\Response\Statistic\Statistic;
 
 $data = [
     [
@@ -154,7 +156,12 @@ $data = [
     ],
 ];
 
-$battle = BattleFactory::create($data);
+$statistic = new Statistic();
+$container = new Container();
+$container->set('Statistic', $statistic);
+
+$battle = BattleFactory::create($data, $container);
+
 $response = $battle->handle();
 
 $view = $battle->getContainer()->getViewFactory()->create();

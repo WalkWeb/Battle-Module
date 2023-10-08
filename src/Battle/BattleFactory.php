@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Battle;
 
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Response\Statistic\Statistic;
 use Battle\Unit\UnitException;
 use Exception;
 
@@ -86,24 +84,15 @@ class BattleFactory
      * ];
      *
      * @param array $data
-     * @param ContainerInterface|null $container
-     * @param bool $testMode
+     * @param ContainerInterface $container
      * @return BattleInterface
      * @throws Exception
      */
     public static function create(
         array $data,
-        ?ContainerInterface $container = null,
-        bool $testMode = false
+        ContainerInterface $container
     ): BattleInterface
     {
-        if (!$container) {
-            // Statistic создается первым, чтобы подсчет времени выполнения скрипта и расход памяти был максимально полным
-            $statistic = new Statistic();
-            $container = new Container($testMode);
-            $container->set('Statistic', $statistic);
-        }
-
         return new Battle(
             self::createCommand($data, BattleInterface::LEFT_COMMAND, $container),
             self::createCommand($data, BattleInterface::RIGHT_COMMAND, $container),

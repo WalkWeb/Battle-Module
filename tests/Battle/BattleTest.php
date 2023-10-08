@@ -173,7 +173,7 @@ class BattleTest extends AbstractUnitTest
             ],
         ];
 
-        $battle = BattleFactory::create($data);
+        $battle = BattleFactory::create($data, $this->getContainer());
 
         $result = $battle->handle();
 
@@ -324,7 +324,7 @@ class BattleTest extends AbstractUnitTest
 
         $this->expectException(BattleException::class);
         $this->expectExceptionMessage(BattleException::DOUBLE_UNIT_ID);
-        BattleFactory::create($data);
+        BattleFactory::create($data, $this->getContainer());
     }
 
     /**

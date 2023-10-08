@@ -24,7 +24,7 @@ class BattleFactoryTest extends AbstractUnitTest
      */
     public function testBattleFactoryCreateSuccess(array $data): void
     {
-        $battle = BattleFactory::create($data);
+        $battle = BattleFactory::create($data, $this->getContainer());
         $result = $battle->handle();
         self::assertIsInt($result->getWinner());
     }
@@ -36,7 +36,7 @@ class BattleFactoryTest extends AbstractUnitTest
     {
         $this->expectException(CommandException::class);
         $this->expectExceptionMessage(CommandException::NO_UNITS);
-        BattleFactory::create([]);
+        BattleFactory::create([], $this->getContainer());
     }
 
     /**
@@ -65,7 +65,7 @@ class BattleFactoryTest extends AbstractUnitTest
     {
         $this->expectException(BattleException::class);
         $this->expectExceptionMessage($error);
-        BattleFactory::create($data);
+        BattleFactory::create($data, $this->getContainer());
     }
 
     /**

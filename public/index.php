@@ -3,6 +3,8 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Battle\BattleFactory;
+use Battle\Container\Container;
+use Battle\Response\Statistic\Statistic;
 
 $data = [
     [
@@ -313,7 +315,12 @@ $data = [
 ];
 
 try {
-    $battle = BattleFactory::create($data);
+    // Statistic создается первым, чтобы подсчет времени выполнения скрипта и расход памяти был максимально полным
+    $statistic = new Statistic();
+    $container = new Container();
+    $container->set('Statistic', $statistic);
+
+    $battle = BattleFactory::create($data, $container);
     $response = $battle->handle();
 
     $view = $battle->getContainer()->getViewFactory()->create();
