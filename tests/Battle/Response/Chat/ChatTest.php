@@ -16,7 +16,6 @@ use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Response\Chat\Chat;
 use Battle\Response\Chat\ChatException;
 use Battle\Unit\Offense\OffenseFactory;
@@ -819,8 +818,7 @@ class ChatTest extends AbstractUnitTest
      */
     public function testChatSkipMessage(): void
     {
-        $container = new Container();
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $this->container);
 
         $action = new BuffAction(
            $this->container,
@@ -848,7 +846,7 @@ class ChatTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
-        $chat = new Chat(new Container());
+        $chat = new Chat($this->container);
 
         $action = new DamageAction(
            $this->container,

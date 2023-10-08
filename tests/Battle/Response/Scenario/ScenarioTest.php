@@ -9,7 +9,6 @@ use Battle\Action\BuffAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Action\ManaRestoreAction;
-use Battle\Container\Container;
 use Battle\Response\Scenario\ScenarioException;
 use Battle\Unit\Ability\AbilityFactory;
 use Exception;
@@ -322,29 +321,28 @@ class ScenarioTest extends AbstractUnitTest
     public function testScenarioAddEffectDamage(): void
     {
         $abilityFactory = new AbilityFactory();
-        $container = new Container(true);
-        [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(23, 2, $container);
+        [$unit, $command, $enemyCommand, $enemyUnit] = BaseFactory::create(23, 2, $this->container);
 
-        $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Poison', 1));
+        $ability = $abilityFactory->create($unit, $this->container->getAbilityDataProvider()->get('Poison', 1));
 
         // Применение эффекта
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
-            $container->getScenario()->addAnimation($action, $container->getStatistic());
+            $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
         }
 
         // Применение эффекта от урона
         foreach ($enemyUnit->getBeforeActions() as $action) {
             if ($action->canByUsed()) {
                 $action->handle();
-                $container->getScenario()->addAnimation($action, $container->getStatistic());
+                $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
             }
         }
 
         $expectedData = [
-            'step'    => $container->getStatistic()->getRoundNumber(),
-            'attack'  => $container->getStatistic()->getStrokeNumber(),
+            'step'    => $this->container->getStatistic()->getRoundNumber(),
+            'attack'  => $this->container->getStatistic()->getStrokeNumber(),
             'effects' => [
                 [
                     'user_id'      => $enemyUnit->getId(),
@@ -380,7 +378,7 @@ class ScenarioTest extends AbstractUnitTest
             ],
         ];
 
-        self::assertEquals($expectedData, $container->getScenario()->getArray()[1]);
+        self::assertEquals($expectedData, $this->container->getScenario()->getArray()[1]);
     }
 
     /**
@@ -528,29 +526,28 @@ class ScenarioTest extends AbstractUnitTest
     public function testScenarioAddEffectHeal(): void
     {
         $abilityFactory = new AbilityFactory();
-        $container = new Container();
-        [$unit, $command, $enemyCommand] = BaseFactory::create(11, 2, $container);
+        [$unit, $command, $enemyCommand] = BaseFactory::create(11, 2, $this->container);
 
-        $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Healing Potion', 1));
+        $ability = $abilityFactory->create($unit, $this->container->getAbilityDataProvider()->get('Healing Potion', 1));
 
         // Применение эффекта
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
-            $container->getScenario()->addAnimation($action, $container->getStatistic());
+            $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
         }
 
         // Применение эффекта от лечения
         foreach ($unit->getBeforeActions() as $action) {
             if ($action->canByUsed()) {
                 $action->handle();
-                $container->getScenario()->addAnimation($action, $container->getStatistic());
+                $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
             }
         }
 
         $expectedData = [
-            'step'    => $container->getStatistic()->getRoundNumber(),
-            'attack'  => $container->getStatistic()->getStrokeNumber(),
+            'step'    => $this->container->getStatistic()->getRoundNumber(),
+            'attack'  => $this->container->getStatistic()->getStrokeNumber(),
             'effects' => [
                 [
                     'user_id'      => $unit->getId(),
@@ -575,7 +572,7 @@ class ScenarioTest extends AbstractUnitTest
             ],
         ];
 
-        self::assertEquals($expectedData, $container->getScenario()->getArray()[1]);
+        self::assertEquals($expectedData, $this->container->getScenario()->getArray()[1]);
     }
 
     /**
@@ -586,17 +583,16 @@ class ScenarioTest extends AbstractUnitTest
     public function testScenarioAddEffectManaRestore(): void
     {
         $abilityFactory = new AbilityFactory();
-        $container = new Container();
-        [$unit, $command, $enemyCommand] = BaseFactory::create(33, 2, $container);
+        [$unit, $command, $enemyCommand] = BaseFactory::create(33, 2, $this->container);
 
-        $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Restore Potion', 1));
+        $ability = $abilityFactory->create($unit, $this->container->getAbilityDataProvider()->get('Restore Potion', 1));
 
         // Применение эффекта
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertInstanceOf(EffectAction::class, $action);
             self::assertTrue($action->canByUsed());
             $action->handle();
-            $container->getScenario()->addAnimation($action, $container->getStatistic());
+            $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
         }
 
         // Применение эффекта от восстановления маны
@@ -607,15 +603,15 @@ class ScenarioTest extends AbstractUnitTest
                 self::assertInstanceOf(ManaRestoreAction::class, $action);
                 if ($action->canByUsed()) {
                     $action->handle();
-                    $container->getScenario()->addAnimation($action, $container->getStatistic());
+                    $this->container->getScenario()->addAnimation($action, $this->container->getStatistic());
                 }
             }
             $i++;
         }
 
         $expectedData = [
-            'step'    => $container->getStatistic()->getRoundNumber(),
-            'attack'  => $container->getStatistic()->getStrokeNumber(),
+            'step'    => $this->container->getStatistic()->getRoundNumber(),
+            'attack'  => $this->container->getStatistic()->getStrokeNumber(),
             'effects' => [
                 [
                     'user_id'      => $unit->getId(),
@@ -640,7 +636,7 @@ class ScenarioTest extends AbstractUnitTest
             ],
         ];
 
-        self::assertEquals($expectedData, $container->getScenario()->getArray()[1]);
+        self::assertEquals($expectedData, $this->container->getScenario()->getArray()[1]);
     }
 
     /**
@@ -769,7 +765,6 @@ class ScenarioTest extends AbstractUnitTest
      */
     public function testScenarioAddEffectMentalBarrier(): void
     {
-        $container = new Container();
         $statistic = new Statistic();
         $scenario = new Scenario();
         $unit = UnitFactory::createByTemplate(8);
@@ -778,9 +773,9 @@ class ScenarioTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $alliesUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $container->getAbilityFactory()->create(
+        $ability = $this->container->getAbilityFactory()->create(
             $unit,
-            $container->getAbilityDataProvider()->get('Restore Potion', 1)
+            $this->container->getAbilityDataProvider()->get('Restore Potion', 1)
         );
 
         $unit->newRound();

@@ -12,7 +12,6 @@ use Battle\Action\HealAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Exception;
@@ -256,10 +255,9 @@ class HealActionTest extends AbstractUnitTest
      */
     public function testHealActionNoCanByUsedSelf(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $otherUnit = UnitFactory::createByTemplate(11, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $otherUnit = UnitFactory::createByTemplate(11, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit, $otherUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 

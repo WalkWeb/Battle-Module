@@ -12,7 +12,6 @@ use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectCollection;
@@ -30,15 +29,14 @@ class EffectActionTest extends AbstractUnitTest
      */
     public function testEffectActionCreate(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $name = 'use Reserve Forces';
-        $action = $this->getReserveForcesAction($container, $unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
-        $effect = $this->getReserveForcesEffect($container, $unit, $enemyCommand, $command);
+        $action = $this->getReserveForcesAction($this->container, $unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
+        $effect = $this->getReserveForcesEffect($this->container, $unit, $enemyCommand, $command);
 
         self::assertEquals('applyEffectAction', $action->getHandleMethod());
         self::assertEquals('effect', $action->getAnimationMethod());
@@ -52,15 +50,14 @@ class EffectActionTest extends AbstractUnitTest
      */
     public function testEffectActionApply(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $unitBaseLife = $unit->getTotalLife();
 
-        $effectAction = $this->getReserveForcesAction($container, $unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
+        $effectAction = $this->getReserveForcesAction($this->container, $unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
 
         // Пока эффекта на юните нет - событие может примениться
         self::assertTrue($effectAction->canByUsed());
@@ -107,13 +104,12 @@ class EffectActionTest extends AbstractUnitTest
      */
     public function testEffectActionNoTargetForEffect(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(10, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(10, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = $this->getReserveForcesAction($container, $unit, $enemyCommand, $command, EffectAction::TARGET_RANDOM_ENEMY);
+        $action = $this->getReserveForcesAction($this->container, $unit, $enemyCommand, $command, EffectAction::TARGET_RANDOM_ENEMY);
 
         // При вызове canByUsed() происходит поиск цели
         self::assertFalse($action->canByUsed());
@@ -128,13 +124,12 @@ class EffectActionTest extends AbstractUnitTest
      */
     public function testEffectActionMessageTo(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = $this->getReserveForcesAction($container, $unit, $enemyCommand, $command, EffectAction::TARGET_RANDOM_ENEMY);
+        $action = $this->getReserveForcesAction($this->container, $unit, $enemyCommand, $command, EffectAction::TARGET_RANDOM_ENEMY);
 
         // При вызове canByUsed() происходит поиск цели
         self::assertTrue($action->canByUsed());
@@ -148,14 +143,13 @@ class EffectActionTest extends AbstractUnitTest
      */
     public function testEffectActionTargetEffectEnemy(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $otherEnemyUnit = UnitFactory::createByTemplate(10);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit, $otherEnemyUnit]);
 
-        $action = $this->getPoisonAction($container, $unit, $enemyCommand, $command, ActionInterface::TARGET_EFFECT_ENEMY);
+        $action = $this->getPoisonAction($this->container, $unit, $enemyCommand, $command, ActionInterface::TARGET_EFFECT_ENEMY);
 
         self::assertTrue($action->canByUsed());
 
@@ -178,14 +172,13 @@ class EffectActionTest extends AbstractUnitTest
      */
     public function testEffectActionTargetEffectAllies(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $otherUnit = UnitFactory::createByTemplate(10, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $otherUnit = UnitFactory::createByTemplate(10, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit, $otherUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $action = $this->getPoisonAction($container, $unit, $enemyCommand, $command, ActionInterface::TARGET_EFFECT_ALLIES);
+        $action = $this->getPoisonAction($this->container, $unit, $enemyCommand, $command, ActionInterface::TARGET_EFFECT_ALLIES);
 
         self::assertTrue($action->canByUsed());
 
@@ -208,9 +201,8 @@ class EffectActionTest extends AbstractUnitTest
      */
     public function testEffectActionDefaultValue(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -218,7 +210,7 @@ class EffectActionTest extends AbstractUnitTest
         $icon = 'icon.png';
         $duration = 10;
 
-        $action = $this->getReserveForcesAction($container, $unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
+        $action = $this->getReserveForcesAction($this->container, $unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
 
         $actionCollection = new ActionCollection();
         $actionCollection->add($action);
@@ -247,9 +239,8 @@ class EffectActionTest extends AbstractUnitTest
      */
     public function testEffectActionCustomValue(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -260,7 +251,7 @@ class EffectActionTest extends AbstractUnitTest
         $animationMethod = 'custom_animate_method';
         $messageMethod = 'custom_message_method';
 
-        $action = $this->getReserveForcesAction($container, $unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
+        $action = $this->getReserveForcesAction($this->container, $unit, $enemyCommand, $command, EffectAction::TARGET_SELF);
 
         $actionCollection = new ActionCollection();
         $actionCollection->add($action);
@@ -291,10 +282,9 @@ class EffectActionTest extends AbstractUnitTest
      */
     public function testEffectActionForLastTarget(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
-        $secondaryEnemyUnit = UnitFactory::createByTemplate(3, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
+        $secondaryEnemyUnit = UnitFactory::createByTemplate(3, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit, $secondaryEnemyUnit]);
 
@@ -319,7 +309,7 @@ class EffectActionTest extends AbstractUnitTest
 
         // Теперь применяем эффект к последней цели
         $effect = $this->getPoisonAction(
-            $container,
+            $this->container,
             $unit,
             $enemyCommand,
             $command,

@@ -7,7 +7,6 @@ namespace Tests\Battle\Unit\Classes\Orc;
 use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectInterface;
@@ -24,9 +23,8 @@ class TitanTest extends AbstractUnitTest
      */
     public function testCreateTitanClass(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(21, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(21, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -47,7 +45,7 @@ class TitanTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createReserveForcesEffect($container, $unit, $enemyCommand, $command),
+                        $this->createReserveForcesEffect($this->container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }
@@ -60,7 +58,7 @@ class TitanTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createBattleFuryEffect($container, $unit, $enemyCommand, $command),
+                        $this->createBattleFuryEffect($this->container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }

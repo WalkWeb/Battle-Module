@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit;
 
 use Battle\Action\ActionCollection;
-use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Defense\Defense;
 use Battle\Unit\Defense\DefenseInterface;
@@ -33,7 +32,6 @@ class UnitTest extends AbstractUnitTest
      */
     public function testUniCreate(int $template): void
     {
-        $container = new Container();
         $unit = UnitFactory::createByTemplate($template);
         $data = UnitFactory::getData($template);
 
@@ -105,14 +103,14 @@ class UnitTest extends AbstractUnitTest
         $expectedAbilities = new AbilityCollection(true);
 
         if ($data['class']) {
-            $classData = $container->getClassDataProvider()->get($data['class']);
-            foreach ($container->getUnitClassFactory()->create($classData)->getAbilities($unit) as $ability) {
+            $classData = $this->container->getClassDataProvider()->get($data['class']);
+            foreach ($this->container->getUnitClassFactory()->create($classData)->getAbilities($unit) as $ability) {
                 $expectedAbilities->add($ability);
             }
         }
 
-        $classData = $container->getRaceDataProvider()->get($data['race']);
-        foreach ($container->getRaceFactory()->create($classData)->getAbilities($unit) as $ability) {
+        $classData = $this->container->getRaceDataProvider()->get($data['race']);
+        foreach ($this->container->getRaceFactory()->create($classData)->getAbilities($unit) as $ability) {
             $expectedAbilities->add($ability);
         }
 

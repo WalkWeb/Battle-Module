@@ -7,7 +7,6 @@ namespace Tests\Battle\Round;
 use Exception;
 use Battle\Round\Round;
 use Battle\Round\RoundException;
-use Battle\Container\Container;
 use Battle\Command\CommandFactory;
 use Tests\AbstractUnitTest;
 use Tests\Factory\CommandFactory as TestCommandFactory;
@@ -30,7 +29,7 @@ class RoundTest extends AbstractUnitTest
         // Юниты делают по одному ходу, соответственно следующий, после раунда, ход будет 3
         $nextNumberStroke = 3;
 
-        $round = new Round($command, $enemyCommand, $startCommand, new Container());
+        $round = new Round($command, $enemyCommand, $startCommand, $this->container);
         self::assertEquals($nextCommand, $round->handle());
         self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }
@@ -54,7 +53,7 @@ class RoundTest extends AbstractUnitTest
         // В этом раунде походит только юнит из правой команды, соответственно счетчик увеличится только на 1
         $nextNumberStroke = 2;
 
-        $round = new Round($command, $enemyCommand, $startCommand, new Container());
+        $round = new Round($command, $enemyCommand, $startCommand, $this->container);
         self::assertEquals($nextCommand, $round->handle());
         self::assertEquals($nextNumberStroke, $round->getStatistics()->getStrokeNumber());
     }
@@ -73,7 +72,7 @@ class RoundTest extends AbstractUnitTest
 
         $this->expectException(RoundException::class);
         $this->expectExceptionMessage(RoundException::INCORRECT_START_COMMAND);
-        new Round($command, $enemyCommand, $startCommand, new Container());
+        new Round($command, $enemyCommand, $startCommand, $this->container);
     }
 
     /**
@@ -84,7 +83,7 @@ class RoundTest extends AbstractUnitTest
         $command = TestCommandFactory::createVeryBigCommand();
         $enemyCommand = TestCommandFactory::createVeryBigCommand();
 
-        $round = new Round($command, $enemyCommand, 1, new Container());
+        $round = new Round($command, $enemyCommand, 1, $this->container);
 
         $this->expectException(RoundException::class);
         $this->expectExceptionMessage(RoundException::UNEXPECTED_ENDING);

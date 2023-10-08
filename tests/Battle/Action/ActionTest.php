@@ -6,7 +6,6 @@ namespace Tests\Battle\Action;
 
 use Battle\Action\WaitAction;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Action\ActionException;
@@ -353,7 +352,7 @@ class ActionTest extends AbstractUnitTest
     ): DamageAction
     {
         return new DamageAction(
-            new Container(),
+            $this->container,
             $unit,
             $enemyCommand,
             $command,

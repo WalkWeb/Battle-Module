@@ -3365,7 +3365,7 @@ class UnitFactory
 
     /**
      * @param int $template
-     * @param ContainerInterface|null $container
+     * @param ContainerInterface|null $container TODO Убрать nullable
      * @return UnitInterface
      * @throws UnitFactoryException
      * @throws Exception

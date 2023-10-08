@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\DataProvider;
 
-use Battle\Container\Container;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassException;
@@ -28,7 +27,7 @@ class ExampleClassDataProviderTest extends AbstractUnitTest
     {
         $classId = 1;
         $classData = $this->getDataProvider()->get($classId);
-        $class = (new Container())->getUnitClassFactory()->create($classData);
+        $class = $this->container->getUnitClassFactory()->create($classData);
 
         // Детальная проверка созданного класса делается в отдельных тестах по каждому классу
         // В текущем же случае нам достаточно того, что класс успешно создался. И делаем одну простую проверку
@@ -51,6 +50,6 @@ class ExampleClassDataProviderTest extends AbstractUnitTest
      */
     private function getDataProvider(): ClassDataProviderInterface
     {
-        return new ExampleClassDataProvider(new Container());
+        return new ExampleClassDataProvider($this->container);
     }
 }

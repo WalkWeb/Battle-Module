@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Race;
 
-use Battle\Container\Container;
 use Battle\Unit\Race\Race;
 use Tests\AbstractUnitTest;
 
@@ -19,7 +18,7 @@ class RaceTest extends AbstractUnitTest
         $icon = 'icon.png';
         $abilities = [];
 
-        $race = new Race($id, $name, $singleName, $color, $icon, $abilities, new Container());
+        $race = new Race($id, $name, $singleName, $color, $icon, $abilities, $this->container);
 
         self::assertEquals($id, $race->getId());
         self::assertEquals($name, $race->getName());

@@ -9,7 +9,6 @@ use Battle\BattleInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\BattleException;
-use Battle\Container\Container;
 use Battle\Unit\UnitException;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
@@ -50,8 +49,8 @@ class BattleFactoryTest extends AbstractUnitTest
      */
     public function testBattleFactoryCreateCommandSuccess(array $data, array $expectedData, int $command): void
     {
-        $command = BattleFactory::createCommand($data, $command, new Container());
-        $expectCommand = CommandFactory::create($expectedData);
+        $command = BattleFactory::createCommand($data, $command, $this->container);
+        $expectCommand = CommandFactory::create($expectedData, $this->container);
         self::assertEquals($expectCommand, $command);
     }
 

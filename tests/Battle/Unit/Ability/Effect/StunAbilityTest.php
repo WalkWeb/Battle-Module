@@ -10,7 +10,6 @@ use Battle\Action\DamageAction;
 use Battle\Action\ParalysisAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityCollection;
@@ -46,12 +45,11 @@ class StunAbilityTest extends AbstractUnitTest
      */
     public function testStunAbilityCreate(): void
     {
-        $container = new Container();
         $name = 'Stun';
         $icon = '/images/icons/ability/186.png';
 
-        $unit = UnitFactory::createByTemplate(3, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(3, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -82,7 +80,7 @@ class StunAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getStunActions($container, $unit, $enemyCommand, $command),
+            $this->getStunActions($this->container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -162,12 +160,11 @@ class StunAbilityTest extends AbstractUnitTest
      */
     public function testStunAbilityDataProviderCreate(): void
     {
-        $container = new Container();
         $name = 'Stun';
         $icon = '/images/icons/ability/186.png';
 
-        $unit = UnitFactory::createByTemplate(3, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(3, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -198,7 +195,7 @@ class StunAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getStunActions($container, $unit, $enemyCommand, $command),
+            $this->getStunActions($this->container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 

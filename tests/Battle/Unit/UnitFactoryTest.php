@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit;
 
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Classes\UnitClassInterface;
 use Battle\Unit\Defense\Defense;
@@ -28,10 +27,9 @@ class UnitFactoryTest extends AbstractUnitTest
      */
     public function testUnitFactorySuccess(array $data): void
     {
-        $container = new Container();
         $unit = UnitFactory::create($data);
-        $class = $this->createClass($data, $container);
-        $race = $this->createRace($data['race'], $container);
+        $class = $this->createClass($data, $this->container);
+        $race = $this->createRace($data['race'], $this->container);
 
         self::assertEquals($data['name'], $unit->getName());
         self::assertEquals($data['level'], $unit->getLevel());

@@ -10,7 +10,6 @@ use Battle\Action\EffectAction;
 use Battle\Action\ParalysisAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectInterface;
@@ -28,9 +27,8 @@ class PaladinTest extends AbstractUnitTest
      */
     public function testPaladinCreateClass(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(44, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(44, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -54,7 +52,7 @@ class PaladinTest extends AbstractUnitTest
                 self::assertContainsOnlyInstancesOf(EffectAction::class, [$action]);
 
                 self::assertEquals(
-                    $this->createStunEffect($container, $unit, $enemyCommand, $command),
+                    $this->createStunEffect($this->container, $unit, $enemyCommand, $command),
                     $action->getEffect()
                 );
             }

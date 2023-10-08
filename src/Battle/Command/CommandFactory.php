@@ -18,7 +18,7 @@ class CommandFactory
      * Создает команду на основании массива юнитов или данных по юнитам
      *
      * @param array $data
-     * @param ContainerInterface|null $container
+     * @param ContainerInterface|null $container TODO Убрать nullable
      * @return CommandInterface
      * @throws CommandException
      * @throws UnitException

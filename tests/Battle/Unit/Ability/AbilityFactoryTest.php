@@ -8,7 +8,6 @@ use Battle\Action\ActionCollection;
 use Battle\Action\ActionInterface;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityFactory;
@@ -30,9 +29,8 @@ class AbilityFactoryTest extends AbstractUnitTest
      */
     public function testAbilityFactoryCreateSuccess(array $data): void
     {
-        $container = new Container(true);
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -55,7 +53,7 @@ class AbilityFactoryTest extends AbstractUnitTest
         }
 
         self::assertEquals(
-            $this->createActionCollections($container, $unit, $enemyCommand, $command, $data['actions']),
+            $this->createActionCollections($this->container, $unit, $enemyCommand, $command, $data['actions']),
             $ability->getActions($enemyCommand, $command)
         );
     }

@@ -9,7 +9,6 @@ use Battle\Action\DamageAction;
 use Battle\Action\ParalysisAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectInterface;
@@ -27,9 +26,8 @@ class SuccubusTest extends AbstractUnitTest
      */
     public function testSuccubusCreate(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(23, $container);
-        $enemyUnit = UnitFactory::createByTemplate(1, $container);
+        $unit = UnitFactory::createByTemplate(23, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(1, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -50,7 +48,7 @@ class SuccubusTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createEffectPoison($container, $unit, $enemyCommand, $command),
+                        $this->createEffectPoison($this->container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }
@@ -63,7 +61,7 @@ class SuccubusTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createEffectParalysis($container, $unit, $enemyCommand, $command),
+                        $this->createEffectParalysis($this->container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }

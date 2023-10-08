@@ -10,7 +10,6 @@ use Battle\Action\DamageAction;
 use Battle\Action\ParalysisAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
@@ -50,9 +49,8 @@ class ParalysisAbilityTest extends AbstractUnitTest
         $name = 'Paralysis';
         $icon = '/images/icons/ability/086.png';
 
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -83,7 +81,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getParalysisActions($container, $unit, $enemyCommand, $command),
+            $this->getParalysisActions($this->container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -166,9 +164,8 @@ class ParalysisAbilityTest extends AbstractUnitTest
         $name = 'Paralysis';
         $icon = '/images/icons/ability/086.png';
 
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(21, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(21, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -199,7 +196,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getParalysisActions($container, $unit, $enemyCommand, $command),
+            $this->getParalysisActions($this->container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 

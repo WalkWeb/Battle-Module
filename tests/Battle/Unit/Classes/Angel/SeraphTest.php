@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes\Angel;
 
-use Battle\Container\Container;
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
@@ -16,8 +15,7 @@ class SeraphTest extends AbstractUnitTest
      */
     public function testSeraphCreate(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(52, $container);
+        $unit = UnitFactory::createByTemplate(52, $this->container);
 
         $succubus = $unit->getClass();
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Classes;
 
 use Battle\Command\CommandFactory;
-use Battle\Container\Container;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClass;
@@ -23,7 +22,6 @@ class UnitClassTest extends AbstractUnitTest
      */
     public function testUnitClassCreate(): void
     {
-        $container = new Container();
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -36,7 +34,7 @@ class UnitClassTest extends AbstractUnitTest
             $classData['name'],
             $classData['small_icon'],
             $classData['abilities'],
-            $container
+            $this->container
         );
 
         // Проверяем базовые параметры
@@ -71,7 +69,6 @@ class UnitClassTest extends AbstractUnitTest
      */
     public function testUnitClassInvalidAbilitiesData(): void
     {
-        $container = new Container();
         $this->expectException(UnitClassException::class);
         $this->expectExceptionMessage(UnitClassException::INVALID_ABILITY_DATA);
 
@@ -80,7 +77,7 @@ class UnitClassTest extends AbstractUnitTest
             'Demo Class',
             'icon.png',
             ['invalid_data'],
-            $container
+            $this->container
         );
     }
 
@@ -89,6 +86,6 @@ class UnitClassTest extends AbstractUnitTest
      */
     private function getClassDataProvider(): ClassDataProviderInterface
     {
-        return new ExampleClassDataProvider(new Container());
+        return new ExampleClassDataProvider($this->container);
     }
 }

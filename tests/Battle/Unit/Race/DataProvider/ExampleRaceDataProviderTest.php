@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Race\DataProvider;
 
-use Battle\Container\Container;
 use Battle\Unit\Race\DataProvider\ExampleRaceDataProvider;
 use Battle\Unit\Race\RaceException;
 use Exception;
@@ -21,10 +20,9 @@ class ExampleRaceDataProviderTest extends AbstractUnitTest
      */
     public function testExampleRaceDataProviderGetSuccess(int $raceId): void
     {
-        $container = new Container();
         $data = $this->getDataProvider()->get($raceId);
 
-        $race = $container->getRaceFactory()->create($data);
+        $race = $this->container->getRaceFactory()->create($data);
 
         self::assertEquals($data['id'], $race->getId());
         self::assertEquals($data['name'], $race->getName());
@@ -70,6 +68,6 @@ class ExampleRaceDataProviderTest extends AbstractUnitTest
      */
     private function getDataProvider(): ExampleRaceDataProvider
     {
-        return new ExampleRaceDataProvider(new Container());
+        return new ExampleRaceDataProvider($this->container);
     }
 }

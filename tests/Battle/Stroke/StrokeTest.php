@@ -12,7 +12,6 @@ use Battle\Command\CommandInterface;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Battle\Container\Container;
 use Battle\Command\CommandFactory;
 use Battle\Stroke\Stroke;
 use Tests\AbstractUnitTest;
@@ -233,15 +232,14 @@ class StrokeTest extends AbstractUnitTest
      */
     public function testStrokeDeadAbilitiesUse(): void
     {
-        $container = new Container(true);
         // Юнит с ударом 3000
-        $unit = UnitFactory::createByTemplate(12, $container);
+        $unit = UnitFactory::createByTemplate(12, $this->container);
         // Юнит с хп 250
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $this->container);
 
         $stroke->handle();
 
@@ -249,7 +247,7 @@ class StrokeTest extends AbstractUnitTest
         self::assertEquals($enemyUnit->getTotalLife() / 2, $enemyUnit->getLife());
 
         // Проверяем, что сгенерировано две анимации - удара и оживления
-        self::assertCount(2, $container->getScenario()->getArray());
+        self::assertCount(2, $this->container->getScenario()->getArray());
     }
 
     /**

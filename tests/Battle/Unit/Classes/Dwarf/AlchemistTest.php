@@ -8,7 +8,6 @@ use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectInterface;
@@ -24,9 +23,8 @@ class AlchemistTest extends AbstractUnitTest
      */
     public function testAlchemistCreate(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(22, $container);
-        $enemyUnit = UnitFactory::createByTemplate(1, $container);
+        $unit = UnitFactory::createByTemplate(22, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(1, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -47,7 +45,7 @@ class AlchemistTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createEffect($container, $unit, $enemyCommand, $command),
+                        $this->createEffect($this->container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }

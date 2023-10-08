@@ -9,7 +9,6 @@ use Battle\Action\BuffAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectInterface;
@@ -28,9 +27,8 @@ class WarriorTest extends AbstractUnitTest
      */
     public function testWarriorCreateClass(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -62,7 +60,7 @@ class WarriorTest extends AbstractUnitTest
 
                 foreach ($actions as $action) {
                     self::assertEquals(
-                        $this->createBlessedShieldEffect($container, $unit, $enemyCommand, $command),
+                        $this->createBlessedShieldEffect($this->container, $unit, $enemyCommand, $command),
                         $action->getEffect()
                     );
                 }

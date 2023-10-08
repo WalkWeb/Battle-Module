@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Command;
 
-use Battle\Container\Container;
 use Battle\Response\FullLog\FullLog;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -25,15 +24,14 @@ class CommandFactoryTest extends AbstractUnitTest
      */
     public function testCommandFactoryCreateFromDataSuccess(array $data): void
     {
-        $container = new Container();
         $command = CommandFactory::create($data);
 
         self::assertSameSize($data, $command->getUnits());
 
         $i = 0;
         foreach ($command->getUnits() as $unit) {
-            $class = $container->getUnitClassFactory()->create(
-                $container->getClassDataProvider()->get($data[$i]['class'])
+            $class = $this->container->getUnitClassFactory()->create(
+                $this->container->getClassDataProvider()->get($data[$i]['class'])
             );
 
             self::assertEquals($data[$i]['name'], $unit->getName());

@@ -339,7 +339,7 @@ class BattleTest extends AbstractUnitTest
 
         $this->expectException(BattleException::class);
         $this->expectExceptionMessage(BattleException::DOUBLE_UNIT_ID);
-        new Battle($command, $enemyCommand, new Container());
+        new Battle($command, $enemyCommand, $this->container);
     }
 
     /**
@@ -370,12 +370,11 @@ class BattleTest extends AbstractUnitTest
         $enemyUnit = UnitFactory::createByTemplate(17);
         $command = \Battle\Command\CommandFactory::create([$actionUnit]);
         $enemyCommand = \Battle\Command\CommandFactory::create([$enemyUnit]);
-        $container = new Container(true);
 
         // Начинает левая команда, т.е. $actionUnit
         $actionCommand = 1;
 
-        $battle = new Battle($command, $enemyCommand, $container, $actionCommand);
+        $battle = new Battle($command, $enemyCommand, $this->container, $actionCommand);
         $result = $battle->handle();
 
         $scenario = $result->getScenario();
@@ -395,11 +394,9 @@ class BattleTest extends AbstractUnitTest
         $command = CommandFactory::createLeftCommand();
         $enemyCommand = CommandFactory::createRightCommand();
 
-        $container = new Container();
-
         $this->expectException(BattleException::class);
         $this->expectExceptionMessage(BattleException::INCORRECT_START_COMMAND);
-        new Battle($command, $enemyCommand, $container, 3);
+        new Battle($command, $enemyCommand, $this->container, 3);
     }
 
     /**

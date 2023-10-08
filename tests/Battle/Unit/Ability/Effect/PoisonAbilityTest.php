@@ -9,7 +9,6 @@ use Battle\Action\ActionInterface;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
@@ -93,16 +92,15 @@ class PoisonAbilityTest extends AbstractUnitTest
      */
     public function testPoisonAbilityGetActions(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(4, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(4, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $ability = $this->createAbility($unit);
 
         self::assertEquals(
-            $this->createActions($container, $unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
+            $this->createActions($this->container, $unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
             $ability->getActions($enemyCommand, $command)
         );
     }
@@ -164,14 +162,13 @@ class PoisonAbilityTest extends AbstractUnitTest
      */
     public function testPoisonAbilityApplySelfMessage(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(4, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(4, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         // Применяем эффект
-        foreach ($this->createActions($container, $unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ALLIES) as $action) {
+        foreach ($this->createActions($this->container, $unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ALLIES) as $action) {
             self::assertTrue($action->canByUsed());
             $action->handle();
             self::assertEquals(self::MESSAGE_APPLY_SELF_EN, $this->getChat()->addMessage($action));
@@ -236,16 +233,15 @@ class PoisonAbilityTest extends AbstractUnitTest
      */
     public function testPoisonAbilityDataProviderGetActions(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(4, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(4, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $ability = $this->getAbility($unit, 'Poison');
 
         self::assertEquals(
-            $this->createActions($container, $unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
+            $this->createActions($this->container, $unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
             $ability->getActions($enemyCommand, $command)
         );
     }

@@ -9,7 +9,6 @@ use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
@@ -40,9 +39,8 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         $name = 'Blessed Shield';
         $icon = '/images/icons/ability/271.png';
 
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(21, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(21, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -73,7 +71,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getBlessedShieldActions($container, $unit, $enemyCommand, $command),
+            $this->getBlessedShieldActions($this->container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 

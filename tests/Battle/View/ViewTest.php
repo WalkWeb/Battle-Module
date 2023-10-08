@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\View;
 
 use Battle\Command\CommandFactory;
-use Battle\Container\Container;
 use Battle\Container\ContainerException;
 use Battle\Response\Response;
 use Battle\Translation\Translation;
@@ -16,7 +15,6 @@ use Battle\View\ViewFactory;
 use Battle\View\ViewInterface;
 use Exception;
 use Tests\AbstractUnitTest;
-use Tests\Factory\BaseFactory;
 use Tests\Factory\CommandFactory as TestCommandFactory;
 use Tests\Factory\UnitFactory;
 
@@ -323,13 +321,12 @@ EOT;
     public function testViewRenderFullLogUnit(): void
     {
         $abilityFactory = new AbilityFactory();
-        $container = new Container();
         $unit = UnitFactory::createByTemplate(21);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Reserve Forces', 1));
+        $ability = $abilityFactory->create($unit, $this->container->getAbilityDataProvider()->get('Reserve Forces', 1));
 
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
@@ -683,7 +680,7 @@ EOT;
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
 
-        $response = new Response($leftCommand, $rightCommand, $leftCommand, $rightCommand, 1, new Container());
+        $response = new Response($leftCommand, $rightCommand, $leftCommand, $rightCommand, 1, $this->container);
 
         // Из-за вывода статистики, и подсчета времени выполнения в статистике, мы никогда не сможем точно узнать
         // какой код будет выведен. По этому просто проверяем, что рендер прошел без ошибок, и получили строку

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Race;
 
 use Battle\BattleException;
-use Battle\Container\Container;
-use Battle\Container\ContainerException;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Race\DataProvider\RaceDataProviderInterface;
@@ -28,9 +26,8 @@ class RaceFactoryTest extends AbstractUnitTest
      */
     public function testRaceFactorySuccess(int $id): void
     {
-        $container = new Container();
         $data = $this->getDataProvider()->get($id);
-        $race = $container->getRaceFactory()->create($data);
+        $race = $this->container->getRaceFactory()->create($data);
 
         self::assertEquals($data['id'], $race->getId());
         self::assertEquals($data['name'], $race->getName());
@@ -65,10 +62,9 @@ class RaceFactoryTest extends AbstractUnitTest
      */
     public function testRaceFactoryFail(array $data, string $error): void
     {
-        $container = new Container();
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        $container->getRaceFactory()->create($data);
+        $this->container->getRaceFactory()->create($data);
     }
 
     /**
@@ -236,11 +232,10 @@ class RaceFactoryTest extends AbstractUnitTest
 
     /**
      * @return RaceDataProviderInterface
-     * @throws ContainerException
      */
     private function getDataProvider(): RaceDataProviderInterface
     {
-        return (new Container())->getRaceDataProvider();
+        return $this->container->getRaceDataProvider();
     }
 
     /**

@@ -9,7 +9,6 @@ use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
@@ -37,12 +36,11 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
      */
     public function testReserveForcesAbilityUse(): void
     {
-        $container = new Container();
         $name = 'Reserve Forces';
         $icon = '/images/icons/ability/156.png';
 
-        $unit = UnitFactory::createByTemplate(21, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(21, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -73,7 +71,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getReserveForcesActions($container, $unit, $enemyCommand, $command),
+            $this->getReserveForcesActions($this->container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -89,9 +87,8 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
      */
     public function testReserveForcesAbilityApply(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(21, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(21, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -247,12 +244,11 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
      */
     public function testReserveForcesAbilityDataProviderUse(): void
     {
-        $container = new Container();
         $name = 'Reserve Forces';
         $icon = '/images/icons/ability/156.png';
 
-        $unit = UnitFactory::createByTemplate(21, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(21, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -283,7 +279,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getReserveForcesActions($container, $unit, $enemyCommand, $command),
+            $this->getReserveForcesActions($this->container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -299,9 +295,8 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
      */
     public function testReserveForcesAbilityDataProviderApply(): void
     {
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(21, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(21, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 

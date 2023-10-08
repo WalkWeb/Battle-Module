@@ -11,7 +11,6 @@ use Battle\Unit\Effect\EffectInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Battle\Battle;
-use Battle\Container\Container;
 use Battle\Command\Command;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
@@ -271,7 +270,7 @@ class CommandTest extends AbstractUnitTest
         $leftCommand = TestCommandFactory::createLeftCommand();
         $rightCommand = TestCommandFactory::createRightCommand();
 
-        $battle = new Battle($leftCommand, $rightCommand, new Container());
+        $battle = new Battle($leftCommand, $rightCommand, $this->container);
         $result = $battle->handle();
 
         // Проверяем клонирование команд
