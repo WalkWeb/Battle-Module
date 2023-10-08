@@ -19,7 +19,7 @@ use Exception;
  * Defense.
  *
  * Но делаются отдельные методы на каждый параметр, чтобы через покрытие авто-тестами можно было убедиться, что
- * изменения всех параметров покрыты тесты.
+ * изменения всех параметров покрыты тестами.
  *
  * @package Battle\Unit\Traits
  */
@@ -66,11 +66,11 @@ trait ModifyStatsTrait
      */
     private function multiplierMagicAccuracy(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        if ($action->getPower() <= ActionInterface::MEW_MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MEW_MIN_MULTIPLIER);
         }
 
-        $multiplier = $action->getPower() / 100;
+        $multiplier = ($action->getPower() + 100) / 100;
 
         $oldMagicAccuracy = $this->offense->getMagicAccuracy();
         $newMagicAccuracy = (int)($this->offense->getMagicAccuracy() * $multiplier);

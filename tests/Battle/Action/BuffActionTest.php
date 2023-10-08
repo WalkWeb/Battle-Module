@@ -304,7 +304,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals($newAccuracy, $unit->getOffense()->getMagicAccuracy());
 
         // Проверяем обновленную меткость от множителя (на всякий случай)
-        self::assertEquals((int)($oldAccuracy * ($power / 100)), $unit->getOffense()->getMagicAccuracy());
+        self::assertEquals((int)($oldAccuracy * (($power + 100) / 100)), $unit->getOffense()->getMagicAccuracy());
 
         // Откатываем баф и проверяем, что меткость вернулась к исходной
         $action->getRevertAction()->handle();
@@ -1593,19 +1593,19 @@ class BuffActionTest extends AbstractUnitTest
     {
         return [
             [
-                200,
+                100,
                 228,
             ],
             [
-                111,
+                11,
                 126,
             ],
             [
-                87,
+                -13,
                 99,
             ],
             [
-                32,
+                -68,
                 36,
             ],
         ];
@@ -2439,7 +2439,6 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::CRITICAL_CHANCE],
             [BuffAction::MAGIC_DEFENSE],
             [BuffAction::DEFENSE],
-            [BuffAction::MAGIC_ACCURACY],
             [BuffAction::CAST_SPEED],
             [BuffAction::MAX_MANA],
             [BuffAction::MAX_LIFE],
@@ -2451,6 +2450,7 @@ class BuffActionTest extends AbstractUnitTest
     {
         return [
             [BuffAction::ACCURACY],
+            [BuffAction::MAGIC_ACCURACY],
         ];
     }
 }
