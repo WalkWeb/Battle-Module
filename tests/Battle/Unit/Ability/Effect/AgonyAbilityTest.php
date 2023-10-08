@@ -30,56 +30,27 @@ class AgonyAbilityTest extends AbstractUnitTest
      */
     public function testAgonyAbilityCreate(): void
     {
-        $name = 'Agony';
-        $icon = '/images/icons/ability/083.png';
-        $disposable = false;
-
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
-
-        self::assertEquals($name, $ability->getName());
-        self::assertEquals($icon, $ability->getIcon());
-        self::assertEquals($unit, $ability->getUnit());
-        self::assertFalse($ability->isReady());
-        self::assertTrue($ability->canByUsed($enemyCommand, $command));
-        self::assertEquals($disposable, $ability->isDisposable());
-        self::assertFalse($ability->isUsage());
-        self::assertEquals(AbilityInterface::ACTIVATE_CONCENTRATION, $ability->getTypeActivate());
-        self::assertEquals([
-            WeaponTypeInterface::SWORD,
-            WeaponTypeInterface::AXE,
-            WeaponTypeInterface::MACE,
-            WeaponTypeInterface::TWO_HAND_SWORD,
-            WeaponTypeInterface::TWO_HAND_AXE,
-            WeaponTypeInterface::TWO_HAND_MACE,
-            WeaponTypeInterface::HEAVY_TWO_HAND_SWORD,
-            WeaponTypeInterface::HEAVY_TWO_HAND_AXE,
-            WeaponTypeInterface::HEAVY_TWO_HAND_MACE,
-            WeaponTypeInterface::SPEAR,
-            WeaponTypeInterface::LANCE,
-            WeaponTypeInterface::DAGGER,
-        ],
-            $ability->getAllowedWeaponTypes()
+        $this->assertCreateEffectAbility(
+            4,
+            'Agony',
+            '/images/icons/ability/083.png',
+            AbilityInterface::ACTIVATE_CONCENTRATION,
+            [
+                WeaponTypeInterface::SWORD,
+                WeaponTypeInterface::AXE,
+                WeaponTypeInterface::MACE,
+                WeaponTypeInterface::TWO_HAND_SWORD,
+                WeaponTypeInterface::TWO_HAND_AXE,
+                WeaponTypeInterface::TWO_HAND_MACE,
+                WeaponTypeInterface::HEAVY_TWO_HAND_SWORD,
+                WeaponTypeInterface::HEAVY_TWO_HAND_AXE,
+                WeaponTypeInterface::HEAVY_TWO_HAND_MACE,
+                WeaponTypeInterface::SPEAR,
+                WeaponTypeInterface::LANCE,
+                WeaponTypeInterface::DAGGER,
+            ],
+            DamageAction::class
         );
-
-        $actions = $ability->getActions($enemyCommand, $command);
-
-        self::assertCount(1, $actions);
-
-        foreach ($ability->getActions($enemyCommand, $command) as $i => $action) {
-            self::assertInstanceOf(EffectAction::class, $action);
-            foreach ($action->getEffect()->getOnNextRoundActions() as $effectDamage) {
-                self::assertInstanceOf(DamageAction::class, $effectDamage);
-                self::assertEquals($name, $action->getNameAction());
-                self::assertEquals($icon, $action->getIcon());
-                // Проверка конвертации физического урона в урон магии смерти
-                self::assertTrue($effectDamage->getOffense()->getDeathDamage() > 0);
-            }
-        }
     }
 
     /**

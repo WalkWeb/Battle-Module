@@ -217,49 +217,12 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
      */
     public function testBlessedShieldAbilityDataProviderUse(): void
     {
-        $name = 'Blessed Shield';
-        $icon = '/images/icons/ability/271.png';
-
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(21, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = $this->createAbilityByDataProvider($unit, 'Blessed Shield');
-
-        self::assertEquals($name, $ability->getName());
-        self::assertEquals($icon, $ability->getIcon());
-        self::assertEquals($unit, $ability->getUnit());
-        self::assertFalse($ability->isReady());
-        self::assertTrue($ability->canByUsed($enemyCommand, $command));
-        self::assertFalse($ability->isDisposable());
-        self::assertFalse($ability->isUsage());
-
-        // Up rage
-        for ($i = 0; $i < 20; $i++) {
-            $unit->newRound();
-        }
-
-        $collection = new AbilityCollection();
-        $collection->add($ability);
-
-        foreach ($collection as $item) {
-            self::assertEquals($ability, $item);
-        }
-
-        $collection->update($unit);
-
-        self::assertTrue($ability->isReady());
-
-        self::assertEquals(
-            $this->getBlessedShieldActions($container, $unit, $enemyCommand, $command),
-            $ability->getActions($enemyCommand, $command)
+        $this->assertCreateEffectAbility(
+            21,
+            'Blessed Shield',
+            '/images/icons/ability/271.png',
+            AbilityInterface::ACTIVATE_CONCENTRATION
         );
-
-        $ability->usage();
-        self::assertTrue($ability->isUsage());
-        self::assertFalse($ability->isReady());
     }
 
     /**

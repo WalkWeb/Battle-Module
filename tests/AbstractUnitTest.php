@@ -102,14 +102,16 @@ abstract class AbstractUnitTest extends TestCase
     }
 
     /**
-     * Проверка создания базового эффекта (способности с каким-то одним простым эффектом)
+     * Проверка создания эффекта (способности с каким-то одним простым эффектом)
      *
      * @param int $unitId
      * @param string $name
      * @param string $icon
-     * @param bool $disposable
      * @param int $typeActivate
      * @param array $allowedWeaponTypes
+     * @param string $effectClass
+     * @param bool $disposable
+     * @return AbilityInterface
      * @throws Exception
      */
     protected function assertCreateEffectAbility(
@@ -118,8 +120,9 @@ abstract class AbstractUnitTest extends TestCase
         string $icon,
         int $typeActivate,
         array $allowedWeaponTypes = [],
+        string $effectClass = BuffAction::class,
         bool $disposable = false
-    ): void
+    ): AbilityInterface
     {
         $unit = UnitFactory::createByTemplate($unitId);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -144,11 +147,16 @@ abstract class AbstractUnitTest extends TestCase
 
         foreach ($ability->getActions($enemyCommand, $command) as $i => $action) {
             self::assertInstanceOf(EffectAction::class, $action);
+            self::assertEquals($name, $action->getNameAction());
+            self::assertEquals($icon, $action->getIcon());
+
             foreach ($action->getEffect()->getOnNextRoundActions() as $effect) {
-                self::assertInstanceOf(BuffAction::class, $effect);
-                self::assertEquals($name, $action->getNameAction());
-                self::assertEquals($icon, $action->getIcon());
+                self::assertInstanceOf($effectClass, $effect);
+                self::assertEquals($name, $effect->getNameAction());
+                self::assertEquals($icon, $effect->getIcon());
             }
         }
+
+        return $ability;
     }
 }

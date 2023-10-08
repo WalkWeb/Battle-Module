@@ -68,7 +68,12 @@ class BreathOfPhoenixAbilityTest extends AbstractUnitTest
      * @param int $expectedCriticalChance
      * @throws Exception
      */
-    public function testBreathOfPhoenixAbilityUse(int $level, int $expectedDamage, int $expectedAccuracy, int $expectedCriticalChance): void
+    public function testBreathOfPhoenixAbilityUse(
+        int $level,
+        int $expectedDamage,
+        int $expectedAccuracy,
+        int $expectedCriticalChance
+    ): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);

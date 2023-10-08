@@ -218,50 +218,12 @@ class BattleFuryAbilityTest extends AbstractUnitTest
      */
     public function testBattleFuryAbilityDataProviderCreate(): void
     {
-        $name = 'Battle Fury';
-        $icon = '/images/icons/ability/102.png';
-        $disposable = false;
-
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(21, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $ability = $this->createAbilityByDataProvider($unit, 'Battle Fury');
-
-        self::assertEquals($name, $ability->getName());
-        self::assertEquals($icon, $ability->getIcon());
-        self::assertEquals($unit, $ability->getUnit());
-        self::assertFalse($ability->isReady());
-        self::assertTrue($ability->canByUsed($enemyCommand, $command));
-        self::assertEquals($disposable, $ability->isDisposable());
-        self::assertFalse($ability->isUsage());
-
-        // Up concentration
-        for ($i = 0; $i < 20; $i++) {
-            $unit->newRound();
-        }
-
-        $collection = new AbilityCollection();
-        $collection->add($ability);
-
-        foreach ($collection as $item) {
-            self::assertEquals($ability, $item);
-        }
-
-        $collection->update($unit);
-
-        self::assertTrue($ability->isReady());
-
-        self::assertEquals(
-            $this->getBattleFuryActions($container, $unit, $enemyCommand, $command),
-            $ability->getActions($enemyCommand, $command)
+        $this->assertCreateEffectAbility(
+            21,
+            'Battle Fury',
+            '/images/icons/ability/102.png',
+            AbilityInterface::ACTIVATE_RAGE
         );
-
-        $ability->usage();
-        self::assertTrue($ability->isUsage());
-        self::assertFalse($ability->isReady());
     }
 
     /**
