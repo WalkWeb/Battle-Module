@@ -9942,7 +9942,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Spider Web',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 85,
+                                    'power'          => -15,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -9998,7 +9998,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Spider Web',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 83,
+                                    'power'          => -17,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10054,7 +10054,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Spider Web',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 81,
+                                    'power'          => -19,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10110,7 +10110,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Spider Web',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 79,
+                                    'power'          => -21,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10166,7 +10166,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Spider Web',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 77,
+                                    'power'          => -23,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10426,7 +10426,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Unity with Wind',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 110,
+                                    'power'          => 10,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10498,7 +10498,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Unity with Wind',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 112,
+                                    'power'          => 12,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10570,7 +10570,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Unity with Wind',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 114,
+                                    'power'          => 14,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10642,7 +10642,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Unity with Wind',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 116,
+                                    'power'          => 16,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10714,7 +10714,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Unity with Wind',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 118,
+                                    'power'          => 18,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10780,7 +10780,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Determination',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 110,
+                                    'power'          => 10,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10844,7 +10844,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Determination',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 113,
+                                    'power'          => 13,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10908,7 +10908,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Determination',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 116,
+                                    'power'          => 16,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -10972,7 +10972,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Determination',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 119,
+                                    'power'          => 19,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -11036,7 +11036,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Determination',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 122,
+                                    'power'          => 22,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -11628,7 +11628,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Veteran Experience',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 115,
+                                    'power'          => 15,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                             ],
@@ -11668,7 +11668,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Veteran Experience',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 118,
+                                    'power'          => 18,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                             ],
@@ -11708,7 +11708,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Veteran Experience',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 121,
+                                    'power'          => 21,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                             ],
@@ -11748,7 +11748,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Veteran Experience',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 124,
+                                    'power'          => 24,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                             ],
@@ -11788,7 +11788,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Veteran Experience',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 127,
+                                    'power'          => 27,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                             ],
@@ -12471,7 +12471,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Body Curse',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 85,
+                                    'power'          => -15,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -12527,7 +12527,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Body Curse',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 83,
+                                    'power'          => -17,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -12583,7 +12583,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Body Curse',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 81,
+                                    'power'          => -19,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -12639,7 +12639,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Body Curse',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 79,
+                                    'power'          => -21,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -12695,7 +12695,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Body Curse',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 77,
+                                    'power'          => -23,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -15053,7 +15053,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Power of Darkness',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 120,
+                                    'power'          => 20,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -15109,7 +15109,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Power of Darkness',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 124,
+                                    'power'          => 24,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -15165,7 +15165,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Power of Darkness',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 128,
+                                    'power'          => 28,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -15221,7 +15221,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Power of Darkness',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 132,
+                                    'power'          => 32,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -15277,7 +15277,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Power of Darkness',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 136,
+                                    'power'          => 36,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -18729,7 +18729,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Clarity',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 110,
+                                    'power'          => 10,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -18801,7 +18801,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Clarity',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 112,
+                                    'power'          => 12,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -18873,7 +18873,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Clarity',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 114,
+                                    'power'          => 14,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -18945,7 +18945,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Clarity',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 116,
+                                    'power'          => 16,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -19017,7 +19017,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Clarity',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 118,
+                                    'power'          => 18,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -19731,7 +19731,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Good Position',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 114,
+                                    'power'          => 14,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -19787,7 +19787,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Good Position',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 116,
+                                    'power'          => 16,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -19843,7 +19843,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Good Position',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 118,
+                                    'power'          => 18,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -19899,7 +19899,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Good Position',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 120,
+                                    'power'          => 20,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -19955,7 +19955,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Good Position',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 122,
+                                    'power'          => 22,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -21471,7 +21471,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 122,
+                                    'power'          => 22,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -21529,7 +21529,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 124,
+                                    'power'          => 24,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -21587,7 +21587,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 126,
+                                    'power'          => 26,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -21645,7 +21645,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 128,
+                                    'power'          => 28,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -21703,7 +21703,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 130,
+                                    'power'          => 30,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -21771,7 +21771,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 112,
+                                    'power'          => 12,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -21854,7 +21854,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 114,
+                                    'power'          => 14,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -21937,7 +21937,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 116,
+                                    'power'          => 16,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -22020,7 +22020,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 118,
+                                    'power'          => 18,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -22103,7 +22103,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::ACCURACY,
-                                    'power'          => 120,
+                                    'power'          => 20,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [

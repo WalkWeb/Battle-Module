@@ -55,8 +55,12 @@ interface ActionInterface
     // Пропуск создания анимации
     public const SKIP_ANIMATION_METHOD  = 'skip';
 
+    // TODO В будущем удалится
     // Максимальное уменьшение характеристики юнита - 90%
     public const MIN_MULTIPLIER         = 10;
+
+    // Практика показала, что изменение характеристики в -22 (-22%) более понятно, чем 78
+    public const MEW_MIN_MULTIPLIER     = -90;
 
     /**
      * Название метода в классе Unit, который будет обрабатывать данное событие

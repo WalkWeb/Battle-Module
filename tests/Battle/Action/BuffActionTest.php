@@ -258,7 +258,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals($newAccuracy, $unit->getOffense()->getAccuracy());
 
         // Проверяем обновленную меткость от множителя (на всякий случай)
-        self::assertEquals((int)($oldAccuracy * ($power / 100)), $unit->getOffense()->getAccuracy());
+        self::assertEquals((int)($oldAccuracy * (($power + 100) / 100)), $unit->getOffense()->getAccuracy());
 
         // Откатываем баф и проверяем, что меткость вернулась к исходной
         $action->getRevertAction()->handle();
@@ -1449,11 +1449,11 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на чрезмерное уменьшение характеристики
      *
-     * @dataProvider overReducedStatDataProvider
+     * @dataProvider overReducedStatDataProviderOld
      * @param string $modifyMethod
      * @throws Exception
      */
-    public function testBuffActionOverReducedStat(string $modifyMethod): void
+    public function testBuffActionOverReducedStatOld(string $modifyMethod): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
@@ -1473,6 +1473,36 @@ class BuffActionTest extends AbstractUnitTest
 
         $this->expectException(UnitException::class);
         $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
+        $action->handle();
+    }
+
+    /**
+     * Тест на чрезмерное уменьшение характеристики (вариант для новой механики, где
+     *
+     * @dataProvider overReducedStatDataProviderNew
+     * @param string $modifyMethod
+     * @throws Exception
+     */
+    public function testBuffActionOverReducedStatNew(string $modifyMethod): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->container,
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'OverReducedStat',
+            $modifyMethod,
+            -95
+        );
+
+        $this->expectException(UnitException::class);
+        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MEW_MIN_MULTIPLIER);
         $action->handle();
     }
 
@@ -1538,19 +1568,19 @@ class BuffActionTest extends AbstractUnitTest
     {
         return [
             [
-                200,
+                100,
                 426,
             ],
             [
-                111,
+                11,
                 236,
             ],
             [
-                87,
+                -13,
                 185,
             ],
             [
-                32,
+                -68,
                 68,
             ],
         ];
@@ -2395,7 +2425,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function overReducedStatDataProvider(): array
+    public function overReducedStatDataProviderOld(): array
     {
         return [
             [BuffAction::PHYSICAL_DAMAGE],
@@ -2410,11 +2440,17 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::MAGIC_DEFENSE],
             [BuffAction::DEFENSE],
             [BuffAction::MAGIC_ACCURACY],
-            [BuffAction::ACCURACY],
             [BuffAction::CAST_SPEED],
             [BuffAction::MAX_MANA],
             [BuffAction::MAX_LIFE],
             [BuffAction::ATTACK_SPEED],
+        ];
+    }
+
+    public function overReducedStatDataProviderNew(): array
+    {
+        return [
+            [BuffAction::ACCURACY],
         ];
     }
 }
