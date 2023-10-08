@@ -70,7 +70,7 @@ class AgonyAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Agony', $level);
+        $ability = $this->getAbility($unit, 'Agony', $level);
 
         $this->activateAbility($ability, $unit);
 

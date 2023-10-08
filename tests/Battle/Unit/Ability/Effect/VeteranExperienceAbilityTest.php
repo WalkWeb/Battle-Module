@@ -56,7 +56,7 @@ class VeteranExperienceAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Veteran Experience', $level);
+        $ability = $this->getAbility($unit, 'Veteran Experience', $level);
 
         $this->activateAbility($ability, $unit);
 

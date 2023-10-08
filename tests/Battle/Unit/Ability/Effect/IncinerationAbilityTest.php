@@ -163,7 +163,7 @@ class IncinerationAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Incineration');
+        $ability = $this->getAbility($unit, 'Incineration');
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());

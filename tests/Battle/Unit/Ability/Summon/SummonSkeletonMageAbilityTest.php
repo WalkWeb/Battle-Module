@@ -175,7 +175,7 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name);
+        $ability = $this->getAbility($unit, $name);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());

@@ -55,7 +55,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         // Наносим урон юниту, чтобы способность перешла в "возможную для использования"
         $damage = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $enemyUnit,
             $command,
             $enemyCommand,
@@ -141,7 +141,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name);
+        $ability = $this->getAbility($unit, $name);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -153,7 +153,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
 
         // Наносим урон юниту, чтобы способность перешла в "возможную для использования"
         $damage = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $enemyUnit,
             $command,
             $enemyCommand,
@@ -219,7 +219,7 @@ class GreatHealAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Great Heal');
+        $ability = $this->getAbility($unit, 'Great Heal');
 
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
     }

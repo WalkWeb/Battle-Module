@@ -70,7 +70,7 @@ class ProtectiveStandAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Protective Stand', $level);
+        $ability = $this->getAbility($unit, 'Protective Stand', $level);
 
         $this->activateAbility($ability, $unit);
 

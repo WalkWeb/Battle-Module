@@ -26,7 +26,7 @@ class ParalysisActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$unit]);
 
         $action = new ParalysisAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -56,7 +56,7 @@ class ParalysisActionTest extends AbstractUnitTest
         self::assertFalse($unit->isAction());
 
         $action = new ParalysisAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,

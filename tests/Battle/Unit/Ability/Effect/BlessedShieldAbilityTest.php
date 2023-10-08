@@ -237,7 +237,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Blessed Shield');
+        $ability = $this->getAbility($unit, 'Blessed Shield');
 
         // Up rage
         for ($i = 0; $i < 20; $i++) {
@@ -308,7 +308,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Blessed Shield');
+        $ability = $this->getAbility($unit, 'Blessed Shield');
 
         // Up rage
         for ($i = 0; $i < 20; $i++) {

@@ -35,7 +35,7 @@ class BackstabAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -88,7 +88,7 @@ class BackstabAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Backstab', $level);
+        $ability = $this->getAbility($unit, 'Backstab', $level);
 
         $this->activateAbility($ability, $unit);
 

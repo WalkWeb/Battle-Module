@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Battle\Response;
 
 use Exception;
-use Battle\Container\Container;
 use Battle\Response\Chat\Chat;
 use Battle\Response\Scenario\Scenario;
 use Battle\Translation\Translation;
@@ -24,11 +23,11 @@ class ResponseTest extends AbstractUnitTest
     {
         $leftCommand = CommandFactory::createLeftCommand();
         $rightCommand = CommandFactory::createRightCommand();
-        $chat = new Chat(new Container());
+        $chat = new Chat($this->container);
         $translation = new Translation();
         $scenario = new Scenario();
 
-        $result = new Response($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 2, new Container());
+        $result = new Response($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 2, $this->container);
 
         self::assertInstanceOf(Response::class, $result);
         self::assertEquals($leftCommand, $result->getStartLeftCommand());
@@ -55,6 +54,6 @@ class ResponseTest extends AbstractUnitTest
         $rightCommand = CommandFactory::createRightCommand();
 
         $this->expectException(ResponseException::class);
-        new Response($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 3, new Container());
+        new Response($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 3, $this->container);
     }
 }

@@ -271,7 +271,7 @@ class AbilityTest extends AbstractUnitTest
     {
         $name = 'Heavy Strike';
         $unit = UnitFactory::createByTemplate(40); // unit with staff weapon
-        $ability = $this->createAbilityByDataProvider($unit, $name);
+        $ability = $this->getAbility($unit, $name);
         $collection = new AbilityCollection();
         $collection->add($ability);
 

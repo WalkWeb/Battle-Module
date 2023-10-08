@@ -22,7 +22,7 @@ class EffectFactoryTest extends AbstractUnitTest
      */
     public function testEffectFactoryCreateSuccess(array $data): void
     {
-        $effect = $this->getContainer()->getEffectFactory()->create($data);
+        $effect = $this->container->getEffectFactory()->create($data);
 
         self::assertEquals($data['name'], $effect->getName());
         self::assertEquals($data['icon'], $effect->getIcon());
@@ -57,7 +57,7 @@ class EffectFactoryTest extends AbstractUnitTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        $this->getContainer()->getEffectFactory()->create($data);
+        $this->container->getEffectFactory()->create($data);
     }
 
     /**

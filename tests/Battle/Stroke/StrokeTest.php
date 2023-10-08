@@ -9,7 +9,6 @@ use Battle\Action\DamageAction;
 use Battle\Action\EffectAction;
 use Battle\Action\HealAction;
 use Battle\Command\CommandInterface;
-use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
@@ -30,13 +29,12 @@ class StrokeTest extends AbstractUnitTest
      */
     public function testStrokeHandle(): void
     {
-        $container = new Container(true);
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $this->container);
         $stroke->handle();
 
         self::assertEquals($enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()), $enemyUnit->getLife());
@@ -48,7 +46,7 @@ class StrokeTest extends AbstractUnitTest
             self::MESSAGE,
         ];
 
-        self::assertEquals($chatResultMessages, $container->getChat()->getMessages());
+        self::assertEquals($chatResultMessages, $this->container->getChat()->getMessages());
     }
 
     /**
@@ -64,7 +62,7 @@ class StrokeTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $stroke = new Stroke(1, $unit, $command, $enemyCommand, new Container());
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $this->container);
 
         // Для теста достаточно того, что выполнение хода завершилось без ошибок
         $stroke->handle();
@@ -84,7 +82,6 @@ class StrokeTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
-        $container = new Container();
 
         $effectAction = $this->getHealEffectAction($unit, $command, $enemyCommand);
 
@@ -95,7 +92,7 @@ class StrokeTest extends AbstractUnitTest
         self::assertCount(1, $unit->getEffects());
         self::assertEquals(1, $unit->getLife());
 
-        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $this->container);
         $stroke->handle();
 
         self::assertEquals(16, $unit->getLife());
@@ -112,7 +109,6 @@ class StrokeTest extends AbstractUnitTest
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
-        $container = new Container();
 
         $action = $this->getDamageEffectAction($unit, $command, $enemyCommand);
 
@@ -120,18 +116,18 @@ class StrokeTest extends AbstractUnitTest
             $unit->applyAction($action);
         }
 
-        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $this->container);
         $stroke->handle();
 
-        $scenario = $container->getScenario()->getArray();
+        $scenario = $this->container->getScenario()->getArray();
 
         // В сценарии должна быть только одна запись - о нанесении урона
         self::assertCount(1, $scenario);
 
         // Проверяем, что эта запись - именно об эффекте
         $expectedData = [
-            'step'    => $container->getStatistic()->getRoundNumber(),
-            'attack'  => $container->getStatistic()->getStrokeNumber(),
+            'step'    => $this->container->getStatistic()->getRoundNumber(),
+            'attack'  => $this->container->getStatistic()->getStrokeNumber(),
             'effects' => [
                 [
                     'user_id'      => $unit->getId(),
@@ -157,7 +153,7 @@ class StrokeTest extends AbstractUnitTest
             ],
         ];
 
-        self::assertEquals($expectedData, $container->getScenario()->getArray()[0]);
+        self::assertEquals($expectedData, $this->container->getScenario()->getArray()[0]);
     }
 
     /**
@@ -172,7 +168,6 @@ class StrokeTest extends AbstractUnitTest
         $enemyUnit = UnitFactory::createByTemplate(3);
         $command = CommandFactory::create([$unit, $otherUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
-        $container = new Container();
 
         $effectDamage = $this->getDamageEffectAction($unit, $command, $enemyCommand);
 
@@ -188,10 +183,10 @@ class StrokeTest extends AbstractUnitTest
 
         self::assertCount(2, $unit->getEffects());
 
-        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $this->container);
         $stroke->handle();
 
-        $scenario = $container->getScenario()->getArray();
+        $scenario = $this->container->getScenario()->getArray();
 
         // На всякий случай проверяем, что эффект полечил не того, на кого наложен, а другого юнита
         self::assertEquals(1, $otherUnit->getLife());
@@ -201,8 +196,8 @@ class StrokeTest extends AbstractUnitTest
 
         // Проверяем, что эта запись - именно об эффекте
         $expectedData = [
-            'step'    => $container->getStatistic()->getRoundNumber(),
-            'attack'  => $container->getStatistic()->getStrokeNumber(),
+            'step'    => $this->container->getStatistic()->getRoundNumber(),
+            'attack'  => $this->container->getStatistic()->getStrokeNumber(),
             'effects' => [
                 [
                     'user_id'      => $unit->getId(),
@@ -228,7 +223,7 @@ class StrokeTest extends AbstractUnitTest
             ],
         ];
 
-        self::assertEquals($expectedData, $container->getScenario()->getArray()[0]);
+        self::assertEquals($expectedData, $this->container->getScenario()->getArray()[0]);
     }
 
     /**
@@ -264,8 +259,6 @@ class StrokeTest extends AbstractUnitTest
      */
     public function testStrokeHandleAfterActionUnit(): void
     {
-        $abilityFactory = new AbilityFactory();
-        $container = new Container();
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
@@ -274,7 +267,7 @@ class StrokeTest extends AbstractUnitTest
         $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
 
         // Накладываем на юнита баф
-        $ability = $abilityFactory->create($unit, $container->getAbilityDataProvider()->get('Battle Fury', 1));
+        $ability = $this->getAbility($unit, 'Battle Fury', 1);
 
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
@@ -289,7 +282,7 @@ class StrokeTest extends AbstractUnitTest
         // Проверяем, что эффект еще есть
         self::assertCount(1, $unit->getEffects());
 
-        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $this->container);
 
         $stroke->handle();
 
@@ -307,13 +300,12 @@ class StrokeTest extends AbstractUnitTest
      */
     public function testStrokeStunEffectFromWeapon(): void
     {
-        $container = new Container();
         $unit = UnitFactory::createByTemplate(47);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $container);
+        $stroke = new Stroke(1, $unit, $command, $enemyCommand, $this->container);
 
         $stroke->handle();
 
@@ -368,7 +360,7 @@ class StrokeTest extends AbstractUnitTest
             ],
         ];
 
-        return $this->getContainer()->getActionFactory()->create($data);
+        return $this->container->getActionFactory()->create($data);
     }
 
     /**
@@ -434,6 +426,6 @@ class StrokeTest extends AbstractUnitTest
             ],
         ];
 
-        return $this->getContainer()->getActionFactory()->create($data);
+        return $this->container->getActionFactory()->create($data);
     }
 }

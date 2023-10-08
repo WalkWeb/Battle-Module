@@ -39,7 +39,7 @@ class SplitAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -89,7 +89,7 @@ class SplitAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Split', $level);
+        $ability = $this->getAbility($unit, 'Split', $level);
 
         $this->activateAbility($ability, $unit);
 

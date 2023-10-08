@@ -226,7 +226,7 @@ class EffectActionTest extends AbstractUnitTest
         $effect = new Effect($name, $icon, $duration, new ActionCollection(), $actionCollection, new ActionCollection());
 
         $effectAction = new EffectAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -268,7 +268,7 @@ class EffectActionTest extends AbstractUnitTest
         $effect = new Effect($name, $icon, $duration, new ActionCollection(), $actionCollection, new ActionCollection());
 
         $effectAction = new EffectAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -300,7 +300,7 @@ class EffectActionTest extends AbstractUnitTest
 
         // Вначале наносим урон случайному противнику
         $damage = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,

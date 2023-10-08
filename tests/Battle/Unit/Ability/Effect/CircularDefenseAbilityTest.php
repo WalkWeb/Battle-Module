@@ -56,7 +56,7 @@ class CircularDefenseAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Circular Defense', $level);
+        $ability = $this->getAbility($unit, 'Circular Defense', $level);
 
         $this->activateAbility($ability, $unit);
 

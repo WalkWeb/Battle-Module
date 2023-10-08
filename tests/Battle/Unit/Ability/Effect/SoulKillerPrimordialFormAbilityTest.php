@@ -41,7 +41,7 @@ class SoulKillerPrimordialFormAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($nameForUser, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -111,7 +111,7 @@ class SoulKillerPrimordialFormAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Soul Killer Primordial Form', $level);
+        $ability = $this->getAbility($unit, 'Soul Killer Primordial Form', $level);
 
         // Изначальный урон
         self::assertEquals(35, $unit->getOffense()->getDamage($enemyUnit->getDefense()));

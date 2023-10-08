@@ -41,7 +41,7 @@ class AvengerPrimordialFormAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($nameForUser, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -103,7 +103,7 @@ class AvengerPrimordialFormAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Avenger Primordial Form', $level);
+        $ability = $this->getAbility($unit, 'Avenger Primordial Form', $level);
 
         // Изначальный урон
         self::assertEquals($baseDamage, $unit->getOffense()->getDamage($enemyUnit->getDefense()));

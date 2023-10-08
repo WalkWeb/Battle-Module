@@ -62,11 +62,10 @@ class StatisticTest extends AbstractUnitTest
      */
     public function testStatisticsUnitCausedDamage(): void
     {
-        $container = $this->getContainer();
-        $statistics = $container->getStatistic();
+        $statistics = $this->container->getStatistic();
 
-        $attackUnit = UnitFactory::createByTemplate(1, $container);
-        $defendUnit = UnitFactory::createByTemplate(2, $container);
+        $attackUnit = UnitFactory::createByTemplate(1, $this->container);
+        $defendUnit = UnitFactory::createByTemplate(2, $this->container);
         $enemyCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$attackUnit]);
 
@@ -351,7 +350,7 @@ class StatisticTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new ResurrectionAction(
-            $this->getContainer(),
+            $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -491,7 +490,7 @@ class StatisticTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$firstEnemyUnit, $secondaryEnemyUnit, $thirdEnemyUnit]);
 
         $action = new DamageAction(
-            $this->getContainer(),
+            $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -520,7 +519,7 @@ class StatisticTest extends AbstractUnitTest
                 'damage_multiplier'   => 100,
                 'vampirism'           => 0,
                 'magic_vampirism'     => 0,
-            ], $this->getContainer()),
+            ], $this->container),
         );
 
         $action->handle();
@@ -538,11 +537,10 @@ class StatisticTest extends AbstractUnitTest
      */
     public function testStatisticsUnitCriticalHits(): void
     {
-        $container = $this->getContainer();
-        $statistics = $container->getStatistic();
+        $statistics = $this->container->getStatistic();
 
-        $attackUnit = UnitFactory::createByTemplate(40, $container);
-        $defendUnit = UnitFactory::createByTemplate(2, $container);
+        $attackUnit = UnitFactory::createByTemplate(40, $this->container);
+        $defendUnit = UnitFactory::createByTemplate(2, $this->container);
         $enemyCommand = CommandFactory::create([$defendUnit]);
         $alliesCommand = CommandFactory::create([$attackUnit]);
 
@@ -632,7 +630,7 @@ class StatisticTest extends AbstractUnitTest
             ],
         ];
 
-        return $this->getContainer()->getActionFactory()->create($data);
+        return $this->container->getActionFactory()->create($data);
     }
 
     /**
@@ -680,7 +678,7 @@ class StatisticTest extends AbstractUnitTest
             ],
         ];
 
-        return $this->getContainer()->getActionFactory()->create($data);
+        return $this->container->getActionFactory()->create($data);
     }
 
     /**
@@ -697,7 +695,7 @@ class StatisticTest extends AbstractUnitTest
     ): DamageAction
     {
         return new DamageAction(
-            $this->getContainer(),
+            $this->container,
             $unit,
             $enemyCommand,
             $command,

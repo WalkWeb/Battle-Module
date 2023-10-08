@@ -245,7 +245,7 @@ class EffectTest extends AbstractUnitTest
             ],
         ];
 
-        return $this->getContainer()->getEffectFactory()->create($data);
+        return $this->container->getEffectFactory()->create($data);
     }
 
     /**
@@ -314,6 +314,6 @@ class EffectTest extends AbstractUnitTest
             ],
         ];
 
-        return $this->getContainer()->getActionFactory()->create($data);
+        return $this->container->getActionFactory()->create($data);
     }
 }

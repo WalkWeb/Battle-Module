@@ -35,7 +35,7 @@ class RageOfAncestorsAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -86,7 +86,7 @@ class RageOfAncestorsAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Rage of Ancestors', $level);
+        $ability = $this->getAbility($unit, 'Rage of Ancestors', $level);
 
         $this->activateAbility($ability, $unit);
 

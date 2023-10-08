@@ -178,7 +178,7 @@ class SummonSkeletonAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Skeleton');
+        $ability = $this->getAbility($unit, 'Skeleton');
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());

@@ -44,7 +44,7 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($nameForUser, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -106,7 +106,7 @@ class SuccubusPrimordialFormAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Succubus Primordial Form', $level);
+        $ability = $this->getAbility($unit, 'Succubus Primordial Form', $level);
 
         // Изначальный урон
         self::assertEquals($baseDamage, $unit->getOffense()->getDamage($enemyUnit->getDefense()));

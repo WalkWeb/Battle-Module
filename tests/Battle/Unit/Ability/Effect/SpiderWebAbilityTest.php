@@ -60,7 +60,7 @@ class SpiderWebAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Spider Web', $level);
+        $ability = $this->getAbility($unit, 'Spider Web', $level);
 
         $this->activateAbility($ability, $unit);
 

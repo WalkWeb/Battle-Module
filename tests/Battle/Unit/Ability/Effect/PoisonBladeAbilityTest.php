@@ -39,7 +39,7 @@ class PoisonBladeAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -105,7 +105,7 @@ class PoisonBladeAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Poison Blade', $level);
+        $ability = $this->getAbility($unit, 'Poison Blade', $level);
 
         $this->activateAbility($ability, $unit);
 

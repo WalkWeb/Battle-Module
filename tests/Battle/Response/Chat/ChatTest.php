@@ -387,7 +387,7 @@ class ChatTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -420,7 +420,7 @@ class ChatTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -453,7 +453,7 @@ class ChatTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -486,7 +486,7 @@ class ChatTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new ManaRestoreAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -518,7 +518,7 @@ class ChatTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new ManaRestoreAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -550,7 +550,7 @@ class ChatTest extends AbstractUnitTest
         $icon = '/images/icons/ability/275.png';
 
         $action = new SummonAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -577,7 +577,7 @@ class ChatTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
         $action = new WaitAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command
@@ -601,7 +601,7 @@ class ChatTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
         $action = new ParalysisAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -664,7 +664,7 @@ class ChatTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
         $action = new BuffAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -697,7 +697,7 @@ class ChatTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new ResurrectionAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -726,7 +726,7 @@ class ChatTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -758,7 +758,7 @@ class ChatTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(11, 2);
 
         $action = new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -791,7 +791,7 @@ class ChatTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new ManaRestoreAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -823,7 +823,7 @@ class ChatTest extends AbstractUnitTest
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
 
         $action = new BuffAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -851,7 +851,7 @@ class ChatTest extends AbstractUnitTest
         $chat = new Chat(new Container());
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -1159,7 +1159,7 @@ class ChatTest extends AbstractUnitTest
             ],
         ];
 
-        return $this->getContainer()->getActionFactory()->create($data);
+        return $this->container->getActionFactory()->create($data);
     }
 
     /**
@@ -1178,7 +1178,7 @@ class ChatTest extends AbstractUnitTest
     ): DamageAction
     {
         return new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -1207,7 +1207,7 @@ class ChatTest extends AbstractUnitTest
     ): ActionInterface
     {
         return new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -1236,7 +1236,7 @@ class ChatTest extends AbstractUnitTest
                 'damage_multiplier'   => 100,
                 'vampirism'           => 0,
                 'magic_vampirism'     => 0,
-            ], $this->getContainer()),
+            ], $this->container),
             null,
             '/images/icons/ability/335.png'
         );
@@ -1258,7 +1258,7 @@ class ChatTest extends AbstractUnitTest
     ): ActionInterface
     {
         return new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -1287,7 +1287,7 @@ class ChatTest extends AbstractUnitTest
                 'damage_multiplier'   => 100,
                 'vampirism'           => 50,
                 'magic_vampirism'     => 0,
-            ], $this->getContainer()),
+            ], $this->container),
             null,
             '/images/icons/ability/335.png'
         );
@@ -1309,7 +1309,7 @@ class ChatTest extends AbstractUnitTest
     ): ActionInterface
     {
         return new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -1338,7 +1338,7 @@ class ChatTest extends AbstractUnitTest
                 'damage_multiplier'   => 100,
                 'vampirism'           => 0,
                 'magic_vampirism'     => 0,
-            ], $this->getContainer()),
+            ], $this->container),
             null,
             '/images/icons/ability/335.png'
         );

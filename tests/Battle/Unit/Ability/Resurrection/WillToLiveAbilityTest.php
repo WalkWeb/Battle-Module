@@ -9,7 +9,6 @@ use Battle\Action\ActionInterface;
 use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
-use Battle\Container\Container;
 use Battle\Container\ContainerInterface;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
@@ -39,9 +38,8 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $name = 'Will to live';
         $icon = '/images/icons/ability/429.png';
 
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(10, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(10, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -61,7 +59,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getWillToLiveActions($container, $unit, $enemyCommand, $command),
+            $this->getWillToLiveActions($this->container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -179,13 +177,12 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $name = 'Will to live';
         $icon = '/images/icons/ability/429.png';
 
-        $container = new Container();
-        $unit = UnitFactory::createByTemplate(10, $container);
-        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $unit = UnitFactory::createByTemplate(10, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name);
+        $ability = $this->getAbility($unit, $name);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -201,7 +198,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->isReady());
 
         self::assertEquals(
-            $this->getWillToLiveActions($container, $unit, $enemyCommand, $command),
+            $this->getWillToLiveActions($this->container, $unit, $enemyCommand, $command),
             $ability->getActions($enemyCommand, $command)
         );
 
@@ -222,7 +219,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Will to live');
+        $ability = $this->getAbility($unit, 'Will to live');
 
         // Изначально юнит мертв
         self::assertEquals(0, $unit->getLife());
@@ -261,7 +258,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Will to live');
+        $ability = $this->getAbility($unit, 'Will to live');
 
         // Изначально юнит мертв
         self::assertEquals(0, $unit->getLife());

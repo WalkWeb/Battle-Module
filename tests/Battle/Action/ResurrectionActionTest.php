@@ -32,7 +32,7 @@ class ResurrectionActionTest extends AbstractUnitTest
         $messageMethod = 'message_method';
 
         $action = new ResurrectionAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -74,7 +74,7 @@ class ResurrectionActionTest extends AbstractUnitTest
         $typeTarget = ResurrectionAction::TARGET_DEAD_ALLIES;
 
         $action = new ResurrectionAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -112,7 +112,7 @@ class ResurrectionActionTest extends AbstractUnitTest
         $typeTarget = ResurrectionAction::TARGET_DEAD_ALLIES;
 
         $action = new ResurrectionAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -162,7 +162,7 @@ class ResurrectionActionTest extends AbstractUnitTest
         $typeTarget = ResurrectionAction::TARGET_DEAD_ALLIES;
 
         $action = new ResurrectionAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -198,7 +198,7 @@ class ResurrectionActionTest extends AbstractUnitTest
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage('ResurrectionAction: invalid power: min: 1, max: 100');
         new ResurrectionAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -224,7 +224,7 @@ class ResurrectionActionTest extends AbstractUnitTest
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::INVALID_RESURRECTED_TARGET);
         new ResurrectionAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,

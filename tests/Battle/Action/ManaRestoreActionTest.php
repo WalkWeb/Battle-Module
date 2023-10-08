@@ -29,7 +29,7 @@ class ManaRestoreActionTest extends AbstractUnitTest
         $power = 20;
 
         $action = new ManaRestoreAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $alliesCommand,
@@ -64,7 +64,7 @@ class ManaRestoreActionTest extends AbstractUnitTest
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::INVALID_MANA_RESTORE_TARGET);
         new ManaRestoreAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $alliesCommand,
@@ -95,7 +95,7 @@ class ManaRestoreActionTest extends AbstractUnitTest
         $power = 20;
 
         $action = new ManaRestoreAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $alliesCommand,
@@ -121,7 +121,7 @@ class ManaRestoreActionTest extends AbstractUnitTest
 
         // Создаем и применяем способность еще раз
         $action = new ManaRestoreAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $alliesCommand,
@@ -156,7 +156,7 @@ class ManaRestoreActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new ManaRestoreAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $alliesCommand,

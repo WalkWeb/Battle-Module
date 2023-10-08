@@ -38,7 +38,7 @@ class WaterSupportAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $alliesUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -82,7 +82,7 @@ class WaterSupportAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Water Support', $level);
+        $ability = $this->getAbility($unit, 'Water Support', $level);
 
         $this->activateAbility($ability, $unit);
 

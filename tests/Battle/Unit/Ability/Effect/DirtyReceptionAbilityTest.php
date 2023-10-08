@@ -58,7 +58,7 @@ class DirtyReceptionAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Dirty Reception', $level);
+        $ability = $this->getAbility($unit, 'Dirty Reception', $level);
 
         $this->activateAbility($ability, $unit);
 

@@ -134,7 +134,7 @@ class UnitTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -153,7 +153,7 @@ class UnitTest extends AbstractUnitTest
         self::assertEquals($defendLife - $unit->getOffense()->getDamage($enemyUnit->getDefense()), $enemyUnit->getLife());
 
         $action2 = new DamageAction(
-            $this->getContainer(),
+            $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -425,7 +425,7 @@ class UnitTest extends AbstractUnitTest
 
         // Убиваем юнита
         $damageAction = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $enemyUnit,
             $command,
             $enemyCommand,
@@ -497,7 +497,7 @@ class UnitTest extends AbstractUnitTest
         self::assertFalse($enemyUnit->isParalysis());
 
         // Накладываем паралич на $unit
-        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+        $ability = $this->getAbility($unit, 'Paralysis');
 
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
@@ -576,9 +576,8 @@ class UnitTest extends AbstractUnitTest
      */
     public function testUnitApplyActionCallbackActionsStun(): void
     {
-        $container = $this->getContainer();
-        $unit = UnitFactory::createByTemplate(1, $container);
-        $enemyUnit = UnitFactory::createByTemplate(47, $container);
+        $unit = UnitFactory::createByTemplate(1, $this->container);
+        $enemyUnit = UnitFactory::createByTemplate(47, $this->container);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -601,6 +600,7 @@ class UnitTest extends AbstractUnitTest
             }
         }
     }
+
 
     /**
      * Тест на работу методов addLastTarget() и clearLastTarget()
@@ -641,7 +641,7 @@ class UnitTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit, $secondaryEnemyUnit]);
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,

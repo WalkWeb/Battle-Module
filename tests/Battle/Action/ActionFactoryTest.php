@@ -18,7 +18,6 @@ use Battle\Action\SummonAction;
 use Battle\Action\WaitAction;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
-use Battle\Container\Container;
 use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitException;
 use Battle\Weapon\Type\WeaponTypeInterface;
@@ -38,8 +37,7 @@ class ActionFactoryTest extends AbstractUnitTest
      */
     public function testActionFactoryCreateDamageSuccess(): void
     {
-        $container = $this->getContainer();
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $this->container);
 
         $offenseData = [
             'damage_type'         => 1,
@@ -77,12 +75,12 @@ class ActionFactoryTest extends AbstractUnitTest
             'message_method'   => $messageMethod = 'message test',
         ];
 
-        $action = $container->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         self::assertInstanceOf(DamageAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_RANDOM_ENEMY, $action->getTypeTarget());
-        self::assertEquals(OffenseFactory::create($offenseData, $container), $action->getOffense());
+        self::assertEquals(OffenseFactory::create($offenseData, $this->container), $action->getOffense());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals('', $action->getIcon());
         self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
@@ -106,12 +104,12 @@ class ActionFactoryTest extends AbstractUnitTest
             'target_tracking'  => $targetTracking = false,
         ];
 
-        $action = $container->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         self::assertInstanceOf(DamageAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
         self::assertEquals(ActionInterface::TARGET_RANDOM_ENEMY, $action->getTypeTarget());
-        self::assertEquals(OffenseFactory::create($offenseData, $container), $action->getOffense());
+        self::assertEquals(OffenseFactory::create($offenseData, $this->container), $action->getOffense());
         self::assertEquals($name, $action->getNameAction());
         self::assertEquals($animationMethod, $action->getAnimationMethod());
         self::assertEquals($messageMethod, $action->getMessageMethod());
@@ -127,8 +125,7 @@ class ActionFactoryTest extends AbstractUnitTest
      */
     public function testActionFactoryCreateMultipleDamageSuccess(): void
     {
-        $container = $this->getContainer();
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $this->container);
 
         $multipleOffense = [
             'damage'              => 2.0,
@@ -152,7 +149,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'message_method'   => $messageMethod = 'message test',
         ];
 
-        $action = $container->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         // Проверяем, что Offense взялся на основе параметров атакующего юнита, но был изменены в %
         self::assertEquals(
@@ -217,7 +214,6 @@ class ActionFactoryTest extends AbstractUnitTest
     public function testActionFactoryCreateHealSuccess(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
-        $container = $this->getContainer();
 
         // Минимальный набор данных
         $data = [
@@ -232,7 +228,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'message_method'   => $messageMethod = 'heal',
         ];
 
-        $action = $container->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         self::assertInstanceOf(HealAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
@@ -259,7 +255,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'target_tracking'  => $targetTracking = false,
         ];
 
-        $action = $container->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         self::assertEquals($icon, $action->getIcon());
         self::assertEquals($targetTracking, $action->isTargetTracking());
@@ -281,7 +277,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'allies_command' => $command,
         ];
 
-        $action = $this->getContainer()->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         self::assertInstanceOf(WaitAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
@@ -306,7 +302,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'message_method' => ParalysisAction::PARALYSIS_MESSAGE_METHOD,
         ];
 
-        $action = $this->getContainer()->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         self::assertInstanceOf(ParalysisAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
@@ -393,7 +389,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'summon'         => $summonData,
         ];
 
-        $action = $this->getContainer()->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         self::assertInstanceOf(SummonAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
@@ -448,7 +444,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
         ];
 
-        $action = $this->getContainer()->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         self::assertInstanceOf(BuffAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
@@ -470,7 +466,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'power'          => $power = 150,
         ];
 
-        $action = $this->getContainer()->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         self::assertInstanceOf(BuffAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
@@ -503,7 +499,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'message_method' => $messageMethod = 'message method test',
         ];
 
-        $action = $this->getContainer()->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         self::assertInstanceOf(ResurrectionAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
@@ -525,7 +521,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'message_method' => $messageMethod = 'message method test',
         ];
 
-        $action = $this->getContainer()->getActionFactory()->create($data);
+        $action = $this->container->getActionFactory()->create($data);
 
         self::assertInstanceOf(ResurrectionAction::class, $action);
         self::assertEquals($unit, $action->getActionUnit());
@@ -545,8 +541,8 @@ class ActionFactoryTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
-        $actionFactory = $this->getContainer()->getActionFactory();
-        $effectFactory = $this->getContainer()->getEffectFactory();
+        $actionFactory = $this->container->getActionFactory();
+        $effectFactory = $this->container->getEffectFactory();
 
         // Минимальный набор данных
         $data = [
@@ -642,7 +638,7 @@ class ActionFactoryTest extends AbstractUnitTest
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
-        $actionFactory = $this->getContainer()->getActionFactory();
+        $actionFactory = $this->container->getActionFactory();
 
         // Минимальный набор данных (без icon)
         $data = [
@@ -699,7 +695,7 @@ class ActionFactoryTest extends AbstractUnitTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        $this->getContainer()->getActionFactory()->create($data);
+        $this->container->getActionFactory()->create($data);
     }
 
     /**
@@ -709,15 +705,13 @@ class ActionFactoryTest extends AbstractUnitTest
      */
     public function testActionFactoryUnknownFactoryMethod(): void
     {
-        $container = new Container();
-
         // Мы подменяем карту методов, передавая отсутствующий метод для создания DamageAction
         $methodMap = [
             ActionInterface::DAMAGE => 'createDamageActionUnknown',
         ];
 
-        $actionFactory = new ActionFactory($container, $methodMap);
-        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $container);
+        $actionFactory = new ActionFactory($this->container, $methodMap);
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2, $this->container);
 
         $offenseData = [
             'damage_type'         => 1,

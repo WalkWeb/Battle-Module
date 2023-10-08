@@ -60,7 +60,7 @@ class GoodPositionAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Good Position', $level);
+        $ability = $this->getAbility($unit, 'Good Position', $level);
 
         $this->activateAbility($ability, $unit);
 

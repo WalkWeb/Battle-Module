@@ -256,7 +256,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Reserve Forces');
+        $ability = $this->getAbility($unit, 'Reserve Forces');
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -312,7 +312,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Reserve Forces');
+        $ability = $this->getAbility($unit, 'Reserve Forces');
 
         $collection = new AbilityCollection();
         $collection->add($ability);
@@ -360,7 +360,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Reserve Forces');
+        $ability = $this->getAbility($unit, 'Reserve Forces');
 
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
@@ -404,7 +404,7 @@ class ReserveForcesAbilityTest extends AbstractUnitTest
             $unit->newRound();
         }
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Reserve Forces');
+        $ability = $this->getAbility($unit, 'Reserve Forces');
 
         $collection = new AbilityCollection();
         $collection->add($ability);

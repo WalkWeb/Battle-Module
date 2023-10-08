@@ -54,7 +54,7 @@ class BattleCryAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Battle Cry', $level);
+        $ability = $this->getAbility($unit, 'Battle Cry', $level);
 
         $this->activateAbility($ability, $unit);
 

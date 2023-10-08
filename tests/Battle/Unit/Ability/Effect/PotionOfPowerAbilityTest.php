@@ -68,7 +68,7 @@ class PotionOfPowerAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Potion of Power', $level);
+        $ability = $this->getAbility($unit, 'Potion of Power', $level);
 
         $this->activateAbility($ability, $unit);
 

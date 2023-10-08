@@ -171,7 +171,7 @@ class StunAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Stun');
+        $ability = $this->getAbility($unit, 'Stun');
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -219,7 +219,7 @@ class StunAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Stun');
+        $ability = $this->getAbility($unit, 'Stun');
 
         // Изначально эффектов на юните нет
         self::assertCount(0, $enemyUnit->getEffects());

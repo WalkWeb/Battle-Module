@@ -56,7 +56,7 @@ class CombatTranceAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Combat Trance', $level);
+        $ability = $this->getAbility($unit, 'Combat Trance', $level);
 
         $this->activateAbility($ability, $unit);
 

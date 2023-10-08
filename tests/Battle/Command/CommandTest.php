@@ -226,7 +226,7 @@ class CommandTest extends AbstractUnitTest
 
         // убиваем первого юнита ($alliesCommand и $enemyCommand переставлены местами - это правильно, ходит вражеская команда)
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $enemyUnit,
             $alliesCommand,
             $enemyCommand,
@@ -301,7 +301,7 @@ class CommandTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $damage = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $enemyUnit,
             $command,
             $enemyCommand,
@@ -757,7 +757,7 @@ class CommandTest extends AbstractUnitTest
             'on_disable_actions'    => [],
         ];
 
-        return $this->getContainer()->getEffectFactory()->create($data);
+        return $this->container->getEffectFactory()->create($data);
     }
 
     /**
@@ -777,7 +777,7 @@ class CommandTest extends AbstractUnitTest
     ): ActionInterface
     {
         return new EffectAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,

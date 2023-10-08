@@ -149,7 +149,7 @@ class EffectCollectionTest extends AbstractUnitTest
         $actions = new ActionCollection();
 
         $actions->add(new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -197,7 +197,7 @@ class EffectCollectionTest extends AbstractUnitTest
         $actions = new ActionCollection();
 
         $actions->add(new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -253,7 +253,7 @@ class EffectCollectionTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+        $ability = $this->getAbility($unit, 'Paralysis');
 
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());

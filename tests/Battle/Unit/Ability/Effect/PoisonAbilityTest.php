@@ -198,7 +198,7 @@ class PoisonAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Poison');
+        $ability = $this->getAbility($unit, 'Poison');
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -242,7 +242,7 @@ class PoisonAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Poison');
+        $ability = $this->getAbility($unit, 'Poison');
 
         self::assertEquals(
             $this->createActions($container, $unit, $command, $enemyCommand, ActionInterface::TARGET_EFFECT_ENEMY),
@@ -263,7 +263,7 @@ class PoisonAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Poison');
+        $ability = $this->getAbility($unit, 'Poison');
 
         // Up concentration
         for ($i = 0; $i < 10; $i++) {

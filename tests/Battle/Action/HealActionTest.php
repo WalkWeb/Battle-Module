@@ -147,7 +147,7 @@ class HealActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $healAction = new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -204,7 +204,7 @@ class HealActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -233,7 +233,7 @@ class HealActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -299,7 +299,7 @@ class HealActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -344,7 +344,7 @@ class HealActionTest extends AbstractUnitTest
         $oldLife = $badlyWoundedUnit->getLife();
 
         $action = new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -380,7 +380,7 @@ class HealActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $healAction = new HealAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -436,6 +436,6 @@ class HealActionTest extends AbstractUnitTest
             ],
         ];
 
-        return $this->getContainer()->getActionFactory()->create($data);
+        return $this->container->getActionFactory()->create($data);
     }
 }

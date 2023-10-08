@@ -56,7 +56,7 @@ class WindSupportAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Wind Support', $level);
+        $ability = $this->getAbility($unit, 'Wind Support', $level);
 
         $this->activateAbility($ability, $unit);
 

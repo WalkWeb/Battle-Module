@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Unit\Classes;
 
-use Battle\Container\Container;
 use Battle\Unit\Classes\UnitClassException;
 use Exception;
 use Tests\AbstractUnitTest;
@@ -20,9 +19,8 @@ class UnitClassFactoryTest extends AbstractUnitTest
      */
     public function testUnitClassFactoryCreateByIdSuccess(int $classId): void
     {
-        $container = new Container();
-        $class = $container->getUnitClassFactory()->create(
-            $container->getClassDataProvider()->get($classId)
+        $class = $this->container->getUnitClassFactory()->create(
+            $this->container->getClassDataProvider()->get($classId)
         );
         self::assertEquals($classId, $class->getId());
     }
@@ -32,12 +30,11 @@ class UnitClassFactoryTest extends AbstractUnitTest
      */
     public function testUnitClassFactoryCreateByIdFail(): void
     {
-        $container = new Container();
         $classId = 55;
         $this->expectException(UnitClassException::class);
         $this->expectExceptionMessage(UnitClassException::UNDEFINED_CLASS_ID . ': ' . $classId);
-        $container->getUnitClassFactory()->create(
-            $container->getClassDataProvider()->get($classId)
+        $this->container->getUnitClassFactory()->create(
+            $this->container->getClassDataProvider()->get($classId)
         );
     }
 
@@ -50,7 +47,7 @@ class UnitClassFactoryTest extends AbstractUnitTest
      */
     public function testUnitClassFactoryCreateByArraySuccess(array $data): void
     {
-        $class = (new Container())->getUnitClassFactory()->create($data);
+        $class = ($this->container)->getUnitClassFactory()->create($data);
 
         // Проверка базовых параметров
         self::assertEquals($data['id'], $class->getId());
@@ -72,7 +69,7 @@ class UnitClassFactoryTest extends AbstractUnitTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        (new Container())->getUnitClassFactory()->create($data);
+        $this->container->getUnitClassFactory()->create($data);
     }
 
     /**

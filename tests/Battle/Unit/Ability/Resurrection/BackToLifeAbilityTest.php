@@ -132,7 +132,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $deadUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name);
+        $ability = $this->getAbility($unit, $name);
 
         // Сверяем базовые параметры
         self::assertEquals($name, $ability->getName());
@@ -196,7 +196,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $woundedUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Back to Life');
+        $ability = $this->getAbility($unit, 'Back to Life');
 
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
     }

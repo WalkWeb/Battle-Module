@@ -41,7 +41,7 @@ class ArelimPrimordialFormAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($nameForUser, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -107,7 +107,7 @@ class ArelimPrimordialFormAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Arelim Primordial Form', $level);
+        $ability = $this->getAbility($unit, 'Arelim Primordial Form', $level);
 
         $this->activateAbility($ability, $unit);
 

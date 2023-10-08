@@ -35,7 +35,7 @@ class ReserveHealAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $alliesUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -74,7 +74,7 @@ class ReserveHealAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $alliesUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Reserve Heal', $level);
+        $ability = $this->getAbility($unit, 'Reserve Heal', $level);
 
         $this->activateAbility($ability, $unit);
 

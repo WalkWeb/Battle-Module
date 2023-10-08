@@ -283,7 +283,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Healing Potion');
+        $ability = $this->getAbility($unit, 'Healing Potion');
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -357,7 +357,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Healing Potion');
+        $ability = $this->getAbility($unit, 'Healing Potion');
 
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
@@ -417,7 +417,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $power = 15;
-        $ability = $this->createAbilityByDataProvider($unit, 'Healing Potion');
+        $ability = $this->getAbility($unit, 'Healing Potion');
 
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
@@ -473,7 +473,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Healing Potion');
+        $ability = $this->getAbility($unit, 'Healing Potion');
 
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
@@ -512,7 +512,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Healing Potion');
+        $ability = $this->getAbility($unit, 'Healing Potion');
 
         // Up concentration
         for ($i = 0; $i < 10; $i++) {

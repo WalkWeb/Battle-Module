@@ -74,7 +74,7 @@ class StoneSkinAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Stone Skin', $level);
+        $ability = $this->getAbility($unit, 'Stone Skin', $level);
 
         $this->activateAbility($ability, $unit);
 

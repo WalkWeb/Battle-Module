@@ -22,14 +22,20 @@ use Tests\Factory\UnitFactory;
 
 abstract class AbstractUnitTest extends TestCase
 {
+    protected ContainerInterface $container;
+
+    public function setUp(): void
+    {
+        $this->container = $this->getContainer();
+    }
+
     /**
      * @return ContainerInterface
-     * @throws ContainerException
      */
     protected function getContainerWithRuLanguage(): ContainerInterface
     {
         $translation = new Translation('ru');
-        $container = new Container(true);
+        $container = $this->getContainer();
         $container->set(Translation::class, $translation);
         return $container;
     }
@@ -40,7 +46,7 @@ abstract class AbstractUnitTest extends TestCase
      */
     protected function getChat(): ChatInterface
     {
-        return new Chat(new Container());
+        return new Chat($this->getContainer());
     }
 
     /**
@@ -49,7 +55,7 @@ abstract class AbstractUnitTest extends TestCase
      */
     protected function getChatRu(): ChatInterface
     {
-        $container = new Container();
+        $container = $this->getContainer();
         $container->set(Translation::class, new Translation('ru'));
         return new Chat($container);
     }
@@ -69,13 +75,11 @@ abstract class AbstractUnitTest extends TestCase
      * @return AbilityInterface
      * @throws Exception
      */
-    protected function createAbilityByDataProvider(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
+    protected function getAbility(UnitInterface $unit, string $abilityName, int $abilityLevel = 1): AbilityInterface
     {
-        $container = new Container();
-
-        return $container->getAbilityFactory()->create(
+        return $this->container->getAbilityFactory()->create(
             $unit,
-            $container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
+            $this->container->getAbilityDataProvider()->get($abilityName, $abilityLevel)
         );
     }
 
@@ -129,7 +133,7 @@ abstract class AbstractUnitTest extends TestCase
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());

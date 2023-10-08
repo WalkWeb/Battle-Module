@@ -138,7 +138,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit, $slightlyWoundedUnit, $badlyWoundedUnit, $deadUnit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name);
+        $ability = $this->getAbility($unit, $name);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -200,7 +200,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'General Heal');
+        $ability = $this->getAbility($unit, 'General Heal');
 
         self::assertFalse($ability->canByUsed($enemyCommand, $command));
     }

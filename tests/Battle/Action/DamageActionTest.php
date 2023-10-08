@@ -150,7 +150,7 @@ class DamageActionTest extends AbstractUnitTest
         $typeTarget = 100;
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -336,7 +336,7 @@ class DamageActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         // Накладываем паралич на $enemyUnit
-        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+        $ability = $this->getAbility($unit, 'Paralysis');
 
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
@@ -490,7 +490,7 @@ class DamageActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         // Накладываем паралич на $enemyUnit
-        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+        $ability = $this->getAbility($unit, 'Paralysis');
 
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());
@@ -540,7 +540,7 @@ class DamageActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -886,7 +886,7 @@ class DamageActionTest extends AbstractUnitTest
         $this->expectException(ActionException::class);
         $this->expectExceptionMessage(ActionException::EMPTY_OFFENSE_AND_MULTIPLE);
         new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -914,7 +914,7 @@ class DamageActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -1016,7 +1016,7 @@ class DamageActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -1060,7 +1060,7 @@ class DamageActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -1100,7 +1100,7 @@ class DamageActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -1161,7 +1161,7 @@ class DamageActionTest extends AbstractUnitTest
     ): DamageAction
     {
         return new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,

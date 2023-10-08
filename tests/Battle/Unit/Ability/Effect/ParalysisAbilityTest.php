@@ -172,7 +172,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+        $ability = $this->getAbility($unit, 'Paralysis');
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -218,7 +218,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Paralysis');
+        $ability = $this->getAbility($unit, 'Paralysis');
 
         // Изначально эффектов на юните нет
         self::assertCount(0, $enemyUnit->getEffects());

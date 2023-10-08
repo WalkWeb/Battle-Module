@@ -34,7 +34,7 @@ class BreathOfPhoenixAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name, 1);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
@@ -80,7 +80,7 @@ class BreathOfPhoenixAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Breath of Phoenix', $level);
+        $ability = $this->getAbility($unit, 'Breath of Phoenix', $level);
 
         $this->activateAbility($ability, $unit);
 

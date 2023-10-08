@@ -60,7 +60,7 @@ class PowerOfDarknessAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Power of Darkness', $level);
+        $ability = $this->getAbility($unit, 'Power of Darkness', $level);
 
         $this->activateAbility($ability, $unit);
 

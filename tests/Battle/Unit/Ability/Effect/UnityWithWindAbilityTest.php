@@ -64,7 +64,7 @@ class UnityWithWindAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Unity with Wind', $level);
+        $ability = $this->getAbility($unit, 'Unity with Wind', $level);
 
         $this->activateAbility($ability, $unit);
 

@@ -54,7 +54,7 @@ class VampirismAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Vampirism', $level);
+        $ability = $this->getAbility($unit, 'Vampirism', $level);
 
         $this->activateAbility($ability, $unit);
 

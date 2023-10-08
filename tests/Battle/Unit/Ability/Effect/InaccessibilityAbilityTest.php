@@ -56,7 +56,7 @@ class InaccessibilityAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Inaccessibility', $level);
+        $ability = $this->getAbility($unit, 'Inaccessibility', $level);
 
         $this->activateAbility($ability, $unit);
 

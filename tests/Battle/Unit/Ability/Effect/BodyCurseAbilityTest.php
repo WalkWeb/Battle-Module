@@ -60,7 +60,7 @@ class BodyCurseAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Body Curse', $level);
+        $ability = $this->getAbility($unit, 'Body Curse', $level);
 
         $this->activateAbility($ability, $unit);
 

@@ -37,7 +37,7 @@ class WeaponTypeTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $weaponType = new WeaponType($id, $this->getContainer());
+        $weaponType = new WeaponType($id, $this->container);
 
         self::assertEquals($id, $weaponType->getId());
         self::assertEquals($expectedName, $weaponType->getName());
@@ -49,7 +49,7 @@ class WeaponTypeTest extends AbstractUnitTest
         } elseif ($id === WeaponTypeInterface::HEAVY_TWO_HAND_MACE) {
             self::assertEquals($this->createStunAction($unit, $enemyCommand, $command, 3), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
         } elseif ($id === WeaponTypeInterface::DAGGER) {
-            self::assertEquals($this->createBleedingAction($unit, $enemyCommand, $command, 3), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
+            self::assertEquals($this->createBleedingAction($unit, $enemyCommand, $command), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
         } else {
             self::assertEquals(new ActionCollection(), $weaponType->getOnCriticalAction($unit, $enemyCommand, $command));
         }
@@ -75,7 +75,7 @@ class WeaponTypeTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -116,7 +116,7 @@ class WeaponTypeTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new DamageAction(
-            $this->getContainer(),
+           $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -153,7 +153,7 @@ class WeaponTypeTest extends AbstractUnitTest
     {
         $this->expectException(WeaponTypeException::class);
         $this->expectExceptionMessage(WeaponTypeException::UNKNOWN_WEAPON_TYPE_ID . ': 55');
-        new WeaponType(55, $this->getContainer());
+        new WeaponType(55, $this->container);
     }
 
     /**
@@ -317,15 +317,13 @@ class WeaponTypeTest extends AbstractUnitTest
      * @param UnitInterface $unit
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
-     * @param int $stunDuration
      * @return ActionCollection
      * @throws Exception
      */
     private function createBleedingAction(
         UnitInterface $unit,
         CommandInterface $enemyCommand,
-        CommandInterface $command,
-        int $stunDuration
+        CommandInterface $command
     ): ActionCollection
     {
         $data = [

@@ -43,7 +43,7 @@ class OffenseTest extends AbstractUnitTest
         $damageSum = $physicalDamage + $fireDamage + $waterDamage + $airDamage + $earthDamage + $lifeDamage + $deathDamage;
 
         $offense = new Offense(
-            $this->getContainer(),
+            $this->container,
             $typeDamage,
             $weaponTypeId,
             $physicalDamage,
@@ -593,7 +593,7 @@ class OffenseTest extends AbstractUnitTest
         $this->expectException(OffenseException::class);
         $this->expectExceptionMessage(OffenseException::INCORRECT_DAMAGE_TYPE_VALUE);
         new Offense(
-            $this->getContainer(),
+            $this->container,
             3,
             1,
             10,
@@ -778,7 +778,7 @@ class OffenseTest extends AbstractUnitTest
         $deathDamage = 10;
 
         $offense = new Offense(
-            $this->getContainer(),
+            $this->container,
             1,
             1,
             $physicalDamage,
@@ -838,7 +838,7 @@ class OffenseTest extends AbstractUnitTest
     public function testOffenseGetDamage(array $damage, array $resist, int $damageMultiplier, int $exceptedDamage): void
     {
         $offense = new Offense(
-            $this->getContainer(),
+            $this->container,
             1,
             1,
             $damage['physical_damage'],
@@ -2110,7 +2110,7 @@ class OffenseTest extends AbstractUnitTest
     private function createOffence(): OffenseInterface
     {
         return new Offense(
-            $this->getContainer(),
+            $this->container,
             1,
             1,
             20,

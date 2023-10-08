@@ -54,7 +54,7 @@ class HandInjuryAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Hand Injury', $level);
+        $ability = $this->getAbility($unit, 'Hand Injury', $level);
 
         $this->activateAbility($ability, $unit);
 

@@ -132,7 +132,7 @@ class RageAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Rage');
+        $ability = $this->getAbility($unit, 'Rage');
 
         // Активируем - созданный юнит изначально сильно ранен и имеет здоровье < 30%
         $collection = new AbilityCollection();
@@ -189,7 +189,7 @@ class RageAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Rage');
+        $ability = $this->getAbility($unit, 'Rage');
 
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));

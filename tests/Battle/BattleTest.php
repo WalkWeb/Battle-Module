@@ -29,15 +29,14 @@ class BattleTest extends AbstractUnitTest
         $command = CommandFactory::createLeftCommand();
         $enemyCommand = CommandFactory::createRightCommand();
 
-        $container = new Container();
-        $battle = new Battle($command, $enemyCommand, $container);
+        $battle = new Battle($command, $enemyCommand, $this->container);
         $result = $battle->handle();
 
         self::assertEquals(2, $result->getWinner());
         self::assertInstanceOf(Battle::class, $battle);
         self::assertTrue($result->getStatistic()->getRoundNumber() > 2);
         self::assertTrue($result->getStatistic()->getStrokeNumber() > 4);
-        self::assertEquals($container, $battle->getContainer());
+        self::assertEquals($this->container, $battle->getContainer());
     }
 
     /**
@@ -173,7 +172,7 @@ class BattleTest extends AbstractUnitTest
             ],
         ];
 
-        $battle = BattleFactory::create($data, $this->getContainer());
+        $battle = BattleFactory::create($data, $this->container);
 
         $result = $battle->handle();
 
@@ -324,7 +323,7 @@ class BattleTest extends AbstractUnitTest
 
         $this->expectException(BattleException::class);
         $this->expectExceptionMessage(BattleException::DOUBLE_UNIT_ID);
-        BattleFactory::create($data, $this->getContainer());
+        BattleFactory::create($data, $this->container);
     }
 
     /**

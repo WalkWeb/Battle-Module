@@ -242,7 +242,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
 
         $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Battle Fury');
+        $ability = $this->getAbility($unit, 'Battle Fury');
 
         // Up concentration
         for ($i = 0; $i < 20; $i++) {
@@ -299,7 +299,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Battle Fury');
+        $ability = $this->getAbility($unit, 'Battle Fury');
 
         // Перед применением способности эффекта на юните еще нет - способность может быть применена
         self::assertTrue($ability->canByUsed($enemyCommand, $command));

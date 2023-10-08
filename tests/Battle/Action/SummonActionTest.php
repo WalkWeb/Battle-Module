@@ -63,7 +63,7 @@ class SummonActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new SummonAction(
-            $this->getContainer(),
+           $this->container,
             $actionUnit,
             $alliesCommand,
             $enemyCommand,
@@ -93,7 +93,7 @@ class SummonActionTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new SummonAction(
-            $this->getContainer(),
+           $this->container,
             $actionUnit,
             $alliesCommand,
             $enemyCommand,

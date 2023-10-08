@@ -56,7 +56,7 @@ class OverflowingEnergyAbilityTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
         $statistics = new Statistic();
 
-        $ability = $this->createAbilityByDataProvider($unit, 'Overflowing Energy', $level);
+        $ability = $this->getAbility($unit, 'Overflowing Energy', $level);
 
         $this->activateAbility($ability, $unit);
 
