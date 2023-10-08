@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Response\Statistics\UnitStatistic;
+namespace Tests\Battle\Response\Statistic\UnitStatistic;
 
 use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 use Battle\Response\Statistic\UnitStatistic\UnitStatistic;
 
-class UnitStatisticsTest extends AbstractUnitTest
+class UnitStatisticTest extends AbstractUnitTest
 {
     /**
      * @throws Exception

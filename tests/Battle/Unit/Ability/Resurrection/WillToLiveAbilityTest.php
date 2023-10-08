@@ -148,9 +148,6 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         // Проверяем, что способность больше не активна
         self::assertFalse($ability->isReady());
 
-//        var_dump($unit->getLife());
-//        var_dump($enemyUnit->getLife());
-
         // Убиваем юнита повторно
         $actions = $enemyUnit->getActions($command, $enemyCommand);
 

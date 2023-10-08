@@ -9,6 +9,7 @@ use Battle\Container\ContainerInterface;
 use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Response\Statistic\Statistic;
 use Battle\Unit\UnitException;
 use Exception;
 
@@ -86,15 +87,22 @@ class BattleFactory
      *
      * @param array $data
      * @param ContainerInterface|null $container
+     * @param bool $testMode
      * @return BattleInterface
      * @throws Exception
      */
     public static function create(
         array $data,
-        ?ContainerInterface $container = null
+        ?ContainerInterface $container = null,
+        bool $testMode = false
     ): BattleInterface
     {
-        $container = $container ?? new Container();
+        if (!$container) {
+            // Statistic создается первым, чтобы подсчет времени выполнения скрипта и расход памяти был максимально полным
+            $statistic = new Statistic();
+            $container = new Container($testMode);
+            $container->set('Statistic', $statistic);
+        }
 
         return new Battle(
             self::createCommand($data, BattleInterface::LEFT_COMMAND, $container),

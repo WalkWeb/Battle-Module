@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Response\Statistics\UnitStatistic;
+namespace Tests\Battle\Response\Statistic\UnitStatistic;
 
 use Battle\Response\Statistic\StatisticException;
 use Battle\Response\Statistic\UnitStatistic\UnitStatistic;

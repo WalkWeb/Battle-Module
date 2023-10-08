@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Battle\Response\Statistics;
+namespace Tests\Battle\Response\Statistic;
 
 use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;
@@ -19,7 +19,7 @@ use Battle\Response\Statistic\Statistic;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class StatisticsTest extends AbstractUnitTest
+class StatisticTest extends AbstractUnitTest
 {
     public function testStatisticsRoundNumber(): void
     {
@@ -440,7 +440,7 @@ class StatisticsTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testStatisticsMemoryCost(): void
+    public function testStatisticsMemoryCostBase(): void
     {
         $statistic = new Statistic();
 
