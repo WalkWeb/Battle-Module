@@ -350,7 +350,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals($newDefense, $unit->getDefense()->getDefense());
 
         // Проверяем обновленную защиту от множителя (на всякий случай)
-        self::assertEquals((int)($oldDefense * ($power / 100)), $unit->getDefense()->getDefense());
+        self::assertEquals((int)($oldDefense * (($power + 100) / 100)), $unit->getDefense()->getDefense());
 
         // Откатываем баф и проверяем, что защита вернулась к исходной
         $action->getRevertAction()->handle();
@@ -1618,19 +1618,19 @@ class BuffActionTest extends AbstractUnitTest
     {
         return [
             [
-                200,
+                100,
                 550,
             ],
             [
-                111,
+                11,
                 305,
             ],
             [
-                87,
+                -13,
                 239,
             ],
             [
-                32,
+                -68,
                 88,
             ],
         ];
@@ -2438,7 +2438,6 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::CRITICAL_MULTIPLIER],
             [BuffAction::CRITICAL_CHANCE],
             [BuffAction::MAGIC_DEFENSE],
-            [BuffAction::DEFENSE],
             [BuffAction::CAST_SPEED],
             [BuffAction::MAX_MANA],
             [BuffAction::MAX_LIFE],
@@ -2451,6 +2450,7 @@ class BuffActionTest extends AbstractUnitTest
         return [
             [BuffAction::ACCURACY],
             [BuffAction::MAGIC_ACCURACY],
+            [BuffAction::DEFENSE],
         ];
     }
 }

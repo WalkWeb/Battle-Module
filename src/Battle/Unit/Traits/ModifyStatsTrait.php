@@ -99,11 +99,11 @@ trait ModifyStatsTrait
      */
     private function multiplierDefense(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
+        if ($action->getPower() <= ActionInterface::MEW_MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MEW_MIN_MULTIPLIER);
         }
 
-        $multiplier = $action->getPower() / 100;
+        $multiplier = ($action->getPower() + 100) / 100;
 
         $oldDefense = $this->defense->getDefense();
         $newDefense = (int)($this->defense->getDefense() * $multiplier);
