@@ -83,7 +83,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
                             'modify_method'  => BuffAction::MAX_LIFE,
-                            'power'          => 130,
+                            'power'          => 30,
                         ]
                     ],
                     'on_next_round_actions' => [],
@@ -116,7 +116,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
                             'modify_method'  => BuffAction::MAX_LIFE,
-                            'power'          => 130,
+                            'power'          => 30,
                         ]
                     ],
                     'on_next_round_actions' => [],
@@ -139,7 +139,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
                             'modify_method'  => BuffAction::MAX_LIFE,
-                            'power'          => 130,
+                            'power'          => 30,
                         ]
                     ],
                     'on_next_round_actions' => [],
@@ -161,7 +161,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
                             'modify_method'  => BuffAction::MAX_LIFE,
-                            'power'          => 130,
+                            'power'          => 30,
                         ]
                     ],
                     'on_next_round_actions' => [],
@@ -184,7 +184,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
                             'modify_method'  => BuffAction::MAX_LIFE,
-                            'power'          => 130,
+                            'power'          => 30,
                         ]
                     ],
                     'on_next_round_actions' => [],
@@ -206,7 +206,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
                             'modify_method'  => BuffAction::MAX_LIFE,
-                            'power'          => 130,
+                            'power'          => 30,
                         ]
                     ],
                     'on_next_round_actions' => [],
@@ -229,7 +229,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
                             'modify_method'  => BuffAction::MAX_LIFE,
-                            'power'          => 130,
+                            'power'          => 30,
                         ]
                     ],
                     'on_next_round_actions' => [],
@@ -275,7 +275,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
                             'modify_method'  => BuffAction::MAX_LIFE,
-                            'power'          => 130,
+                            'power'          => 30,
                         ]
                     ],
                     'on_disable_actions'    => [],
@@ -297,7 +297,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
                             'modify_method'  => BuffAction::MAX_LIFE,
-                            'power'          => 130,
+                            'power'          => 30,
                         ]
                     ],
                     'on_next_round_actions' => '[]',
@@ -320,7 +320,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
                             'modify_method'  => BuffAction::MAX_LIFE,
-                            'power'          => 130,
+                            'power'          => 30,
                         ]
                     ],
                     'on_next_round_actions' => [],
@@ -342,7 +342,7 @@ class EffectFactoryTest extends AbstractUnitTest
                             'type_target'    => ActionInterface::TARGET_SELF,
                             'name'           => 'use Reserve Forces',
                             'modify_method'  => BuffAction::MAX_LIFE,
-                            'power'          => 130,
+                            'power'          => 30,
                         ]
                     ],
                     'on_next_round_actions' => [],

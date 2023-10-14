@@ -477,7 +477,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Reserve Forces',
                                     'modify_method'  => BuffAction::MAX_LIFE,
-                                    'power'          => 130,
+                                    'power'          => 30,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                             ],

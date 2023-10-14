@@ -2359,35 +2359,35 @@ class BuffActionTest extends AbstractUnitTest
             [
                 1,
                 100,
-                110,
+                10,
                 110,
                 110,
             ],
             [
                 2,
                 250,
-                137,
+                37,
                 342,
                 342,
             ],
             [
                 9,
                 100,
-                125,
+                25,
                 125,
                 115,
             ],
             [
                 9,
                 100,
-                70,
+                -30,
                 70,
                 70,
             ],
             [
                 23,
                 3,
-                11,
+                -89,
                 1, // 3 * 0.11 - округлится до 0, но мы не позволяем максимальной мане быть меньше 1
                 1,
             ],
@@ -2439,7 +2439,6 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::CRITICAL_CHANCE],
             [BuffAction::CAST_SPEED],
             [BuffAction::MAX_MANA],
-            [BuffAction::MAX_LIFE],
             [BuffAction::ATTACK_SPEED],
         ];
     }
@@ -2451,6 +2450,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::MAGIC_ACCURACY],
             [BuffAction::DEFENSE],
             [BuffAction::MAGIC_DEFENSE],
+            [BuffAction::MAX_LIFE],
         ];
     }
 }
