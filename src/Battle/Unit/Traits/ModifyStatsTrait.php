@@ -33,14 +33,8 @@ trait ModifyStatsTrait
      */
     private function multiplierAccuracy(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MEW_MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MEW_MIN_MULTIPLIER);
-        }
-
-        $multiplier = ($action->getPower() + 100) / 100;
-
         $oldAccuracy = $this->offense->getAccuracy();
-        $newAccuracy = (int)($this->offense->getAccuracy() * $multiplier);
+        $newAccuracy = (int)($this->offense->getAccuracy() * $this->getMultiplier($action));
 
         $this->offense->setAccuracy($newAccuracy);
 
@@ -66,14 +60,8 @@ trait ModifyStatsTrait
      */
     private function multiplierMagicAccuracy(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MEW_MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MEW_MIN_MULTIPLIER);
-        }
-
-        $multiplier = ($action->getPower() + 100) / 100;
-
         $oldMagicAccuracy = $this->offense->getMagicAccuracy();
-        $newMagicAccuracy = (int)($this->offense->getMagicAccuracy() * $multiplier);
+        $newMagicAccuracy = (int)($this->offense->getMagicAccuracy() * $this->getMultiplier($action));
 
         $this->offense->setMagicAccuracy($newMagicAccuracy);
 
@@ -99,14 +87,8 @@ trait ModifyStatsTrait
      */
     private function multiplierDefense(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MEW_MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MEW_MIN_MULTIPLIER);
-        }
-
-        $multiplier = ($action->getPower() + 100) / 100;
-
         $oldDefense = $this->defense->getDefense();
-        $newDefense = (int)($this->defense->getDefense() * $multiplier);
+        $newDefense = (int)($this->defense->getDefense() * $this->getMultiplier($action));
 
         $this->defense->setDefense($newDefense);
 
@@ -132,14 +114,8 @@ trait ModifyStatsTrait
      */
     private function multiplierMagicDefense(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MEW_MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MEW_MIN_MULTIPLIER);
-        }
-
-        $multiplier = ($action->getPower() + 100) / 100;
-
         $oldMagicDefense = $this->defense->getMagicDefense();
-        $newMagicDefense = (int)($this->defense->getMagicDefense() * $multiplier);
+        $newMagicDefense = (int)($this->defense->getMagicDefense() * $this->getMultiplier($action));
 
         $this->defense->setMagicDefense($newMagicDefense);
 
@@ -165,11 +141,7 @@ trait ModifyStatsTrait
      */
     private function multiplierMaxLife(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MEW_MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MEW_MIN_MULTIPLIER);
-        }
-
-        $multiplier = ($action->getPower() + 100) / 100;
+        $multiplier = $this->getMultiplier($action);
 
         $oldMaxLife = $this->totalLife;
         $newMaxLife = (int)($this->totalLife * $multiplier);
@@ -216,11 +188,7 @@ trait ModifyStatsTrait
      */
     private function multiplierMaxMana(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MEW_MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MEW_MIN_MULTIPLIER);
-        }
-
-        $multiplier = ($action->getPower() + 100) / 100;
+        $multiplier = $this->getMultiplier($action);
 
         $oldMaxMana = $this->totalMana;
         $newMaxMana = (int)($this->totalMana * $multiplier);
@@ -267,14 +235,8 @@ trait ModifyStatsTrait
      */
     private function multiplierAttackSpeed(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
-        }
-
-        $multiplier = $action->getPower() / 100;
-
         $oldAttackSpeed = $this->offense->getAttackSpeed();
-        $newAttackSpeed = $oldAttackSpeed * $multiplier;
+        $newAttackSpeed = $oldAttackSpeed * $this->getMultiplier($action);
 
         $this->offense->setAttackSpeed($newAttackSpeed);
 
@@ -1444,5 +1406,19 @@ trait ModifyStatsTrait
     private function addMultiplierRageRevert(ActionInterface $action): void
     {
         $this->setAddRageMultiplier($this->getAddRageMultiplier() - $action->getRevertValue());
+    }
+
+    /**
+     * @param ActionInterface $action
+     * @return float
+     * @throws Exception
+     */
+    private function getMultiplier(ActionInterface $action): float
+    {
+        if ($action->getPower() <= ActionInterface::MEW_MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MEW_MIN_MULTIPLIER);
+        }
+
+        return ($action->getPower() + 100) / 100;
     }
 }

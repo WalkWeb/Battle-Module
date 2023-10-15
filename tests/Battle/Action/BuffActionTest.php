@@ -167,7 +167,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals($expectedAttackSpeed, $unit->getOffense()->getAttackSpeed());
 
         // Проверка скорости атаки через множитель (на всякий случай)
-        self::assertEquals(round($oldAttackSpeed * ($power / 100), 2), $unit->getOffense()->getAttackSpeed());
+        self::assertEquals(round($oldAttackSpeed * (($power + 100) / 100), 2), $unit->getOffense()->getAttackSpeed());
 
         // Откатываем изменение и проверяем, что скорость атаки изменилась к исходной
         $action->getRevertAction()->handle();
@@ -2399,27 +2399,27 @@ class BuffActionTest extends AbstractUnitTest
         return [
             [
                 1,
-                110,
+                10,
                 1.1,
             ],
             [
                 1,
-                85,
+                -15,
                 0.85,
             ],
             [
                 39,
-                120,
+                20,
                 1.5,
             ],
             [
                 39,
-                64,
+                -36,
                 0.8,
             ],
             [
                 39,
-                37,
+                -63,
                 0.46,
             ],
         ];
@@ -2438,7 +2438,6 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::CRITICAL_MULTIPLIER],
             [BuffAction::CRITICAL_CHANCE],
             [BuffAction::CAST_SPEED],
-            [BuffAction::ATTACK_SPEED],
         ];
     }
 
@@ -2451,6 +2450,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::MAGIC_DEFENSE],
             [BuffAction::MAX_LIFE],
             [BuffAction::MAX_MANA],
+            [BuffAction::ATTACK_SPEED],
         ];
     }
 }

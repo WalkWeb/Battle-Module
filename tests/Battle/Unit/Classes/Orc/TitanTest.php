@@ -133,7 +133,7 @@ class TitanTest extends AbstractUnitTest
                     'type_target'    => ActionInterface::TARGET_SELF,
                     'name'           => 'Battle Fury',
                     'modify_method'  => BuffAction::ATTACK_SPEED,
-                    'power'          => 140,
+                    'power'          => 40,
                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                 ],
             ],
