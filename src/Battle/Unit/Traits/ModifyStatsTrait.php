@@ -541,14 +541,8 @@ trait ModifyStatsTrait
      */
     private function multiplierEarthDamage(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
-        }
-
-        $multiplier = $action->getPower() / 100;
-
         $oldEarthDamage = $this->offense->getEarthDamage();
-        $newEarthDamage = (int)($this->offense->getEarthDamage() * $multiplier);
+        $newEarthDamage = (int)($this->offense->getEarthDamage() * $this->getMultiplier($action));
 
         $this->offense->setEarthDamage($newEarthDamage);
 
