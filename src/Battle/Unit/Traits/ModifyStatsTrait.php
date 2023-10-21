@@ -460,14 +460,8 @@ trait ModifyStatsTrait
      */
     private function multiplierFireDamage(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
-        }
-
-        $multiplier = $action->getPower() / 100;
-
         $oldFireDamage = $this->offense->getFireDamage();
-        $newFireDamage = (int)($this->offense->getFireDamage() * $multiplier);
+        $newFireDamage = (int)($this->offense->getFireDamage() * $this->getMultiplier($action));
 
         $this->offense->setFireDamage($newFireDamage);
 
