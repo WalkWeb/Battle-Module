@@ -433,14 +433,8 @@ trait ModifyStatsTrait
      */
     private function multiplierPhysicalDamage(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
-        }
-
-        $multiplier = $action->getPower() / 100;
-
         $oldPhysicalDamage = $this->offense->getPhysicalDamage();
-        $newPhysicalDamage = (int)($this->offense->getPhysicalDamage() * $multiplier);
+        $newPhysicalDamage = (int)($this->offense->getPhysicalDamage() * $this->getMultiplier($action));
 
         $this->offense->setPhysicalDamage($newPhysicalDamage);
 

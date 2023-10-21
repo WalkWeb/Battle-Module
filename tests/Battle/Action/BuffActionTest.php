@@ -534,7 +534,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals($newPhysicalDamage, $unit->getOffense()->getPhysicalDamage());
 
         // Проверяем обновленный физический урон от множителя (на всякий случай)
-        self::assertEquals((int)($oldPhysicalDamage * ($power / 100)), $unit->getOffense()->getPhysicalDamage());
+        self::assertEquals((int)($oldPhysicalDamage * (($power + 100) / 100)), $unit->getOffense()->getPhysicalDamage());
 
         // Откатываем баф и проверяем, что физический урон вернулся к исходному значению
         $action->getRevertAction()->handle();
@@ -1715,19 +1715,19 @@ class BuffActionTest extends AbstractUnitTest
     {
         return [
             [
-                200,
+                100,
                 6000,
             ],
             [
-                111,
+                11,
                 3330,
             ],
             [
-                87,
+                -13,
                 2610,
             ],
             [
-                32,
+                -68,
                 960,
             ],
         ];
@@ -2428,7 +2428,6 @@ class BuffActionTest extends AbstractUnitTest
     public function overReducedStatDataProviderOld(): array
     {
         return [
-            [BuffAction::PHYSICAL_DAMAGE],
             [BuffAction::FIRE_DAMAGE],
             [BuffAction::WATER_DAMAGE],
             [BuffAction::AIR_DAMAGE],
@@ -2451,6 +2450,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::MAX_LIFE],
             [BuffAction::MAX_MANA],
             [BuffAction::ATTACK_SPEED],
+            [BuffAction::PHYSICAL_DAMAGE],
         ];
     }
 }
