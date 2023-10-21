@@ -178,21 +178,20 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение скорости создания заклинаний юнита
      *
+     * @dataProvider multiplierCastSpeedDataProvider
+     * @param int $power
+     * @param float $expectedAttackSpeed
      * @throws Exception
      */
-    public function testBuffActionCastSpeedSuccess(): void
+    public function testBuffActionCastSpeedSuccess(int $power, float $expectedAttackSpeed): void
     {
-        $power = 130;
-
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $oldCastSpeed = $unit->getOffense()->getCastSpeed();
-
         $action = new BuffAction(
-           $this->container,
+            $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -205,15 +204,21 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals(ActionInterface::SKIP_ANIMATION_METHOD, $action->getAnimationMethod());
         self::assertEquals('buff', $action->getMessageMethod());
 
-        $newCastSpeed = $unit->getOffense()->getCastSpeed() * $power / 100;
+        $oldCastSpeed = $unit->getOffense()->getCastSpeed();
+
+        // BuffAction всегда готов примениться (а EffectAction - только если аналогичный эффект на юните отсутствует)
+        self::assertTrue($action->canByUsed());
 
         // Применяем баф
-        self::assertTrue($action->canByUsed());
         $action->handle();
 
-        self::assertEquals($newCastSpeed, $unit->getOffense()->getCastSpeed());
+        // Проверяем обновленную скорость создания заклинаний
+        self::assertEquals($expectedAttackSpeed, $unit->getOffense()->getCastSpeed());
 
-        // Откат изменения
+        // Проверка скорости создания заклинаний через множитель (на всякий случай)
+        self::assertEquals(round($oldCastSpeed * (($power + 100) / 100), 2), $unit->getOffense()->getCastSpeed());
+
+        // Откатываем изменение и проверяем, что скорость создания заклинаний изменилась к исходной
         $action->getRevertAction()->handle();
 
         self::assertEquals($oldCastSpeed, $unit->getOffense()->getCastSpeed());
@@ -1449,36 +1454,6 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на чрезмерное уменьшение характеристики
      *
-     * @dataProvider overReducedStatDataProviderOld
-     * @param string $modifyMethod
-     * @throws Exception
-     */
-    public function testBuffActionOverReducedStatOld(string $modifyMethod): void
-    {
-        $unit = UnitFactory::createByTemplate(1);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new BuffAction(
-           $this->container,
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'OverReducedStat',
-            $modifyMethod,
-            5
-        );
-
-        $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
-        $action->handle();
-    }
-
-    /**
-     * Тест на чрезмерное уменьшение характеристики (вариант для новой механики, где
-     *
      * @dataProvider overReducedStatDataProviderNew
      * @param string $modifyMethod
      * @throws Exception
@@ -1502,7 +1477,7 @@ class BuffActionTest extends AbstractUnitTest
         );
 
         $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MEW_MIN_MULTIPLIER);
+        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
         $action->handle();
     }
 
@@ -2425,10 +2400,29 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function overReducedStatDataProviderOld(): array
+    public function multiplierCastSpeedDataProvider(): array
     {
         return [
-            [BuffAction::CAST_SPEED],
+            [
+                10,
+                1.32,
+            ],
+            [
+                25,
+                1.5,
+            ],
+            [
+                -30,
+                0.84,
+            ],
+            [
+                -68,
+                0.38,
+            ],
+            [
+                158,
+                3.1,
+            ],
         ];
     }
 
@@ -2451,6 +2445,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::DEATH_DAMAGE],
             [BuffAction::CRITICAL_MULTIPLIER],
             [BuffAction::CRITICAL_CHANCE],
+            [BuffAction::CAST_SPEED],
         ];
     }
 }

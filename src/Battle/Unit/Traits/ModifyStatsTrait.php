@@ -1058,14 +1058,8 @@ trait ModifyStatsTrait
      */
     private function multiplierCastSpeed(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
-        }
-
-        $multiplier = $action->getPower() / 100;
-
         $oldCastSpeed = $this->offense->getCastSpeed();
-        $newCastSpeed = $oldCastSpeed * $multiplier;
+        $newCastSpeed = $oldCastSpeed * $this->getMultiplier($action);
 
         $this->offense->setCastSpeed($newCastSpeed);
         $action->setRevertValue($newCastSpeed - $oldCastSpeed);
@@ -1361,8 +1355,8 @@ trait ModifyStatsTrait
      */
     private function getMultiplier(ActionInterface $action): float
     {
-        if ($action->getPower() <= ActionInterface::MEW_MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MEW_MIN_MULTIPLIER);
+        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
+            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
         }
 
         return ($action->getPower() + 100) / 100;
