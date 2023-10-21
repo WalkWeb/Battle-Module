@@ -442,7 +442,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals($newCriticalChance, $unit->getOffense()->getCriticalChance());
 
         // Проверяем обновленный шанс критического удара от множителя (на всякий случай)
-        self::assertEquals((int)($oldCriticalChance * ($power / 100)), $unit->getOffense()->getCriticalChance());
+        self::assertEquals((int)($oldCriticalChance * (($power + 100) / 100)), $unit->getOffense()->getCriticalChance());
 
         // Откатываем баф и проверяем, что шанс критического удара вернулся к исходному значению
         $action->getRevertAction()->handle();
@@ -1668,19 +1668,19 @@ class BuffActionTest extends AbstractUnitTest
     {
         return [
             [
-                200,
+                100,
                 30,
             ],
             [
-                111,
+                11,
                 16,
             ],
             [
-                87,
+                -13,
                 13,
             ],
             [
-                32,
+                -68,
                 4,
             ],
         ];
@@ -2428,7 +2428,6 @@ class BuffActionTest extends AbstractUnitTest
     public function overReducedStatDataProviderOld(): array
     {
         return [
-            [BuffAction::CRITICAL_CHANCE],
             [BuffAction::CAST_SPEED],
         ];
     }
@@ -2451,6 +2450,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::LIFE_DAMAGE],
             [BuffAction::DEATH_DAMAGE],
             [BuffAction::CRITICAL_MULTIPLIER],
+            [BuffAction::CRITICAL_CHANCE],
         ];
     }
 }

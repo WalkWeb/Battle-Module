@@ -15766,7 +15766,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::CRITICAL_CHANCE,
-                                    'power'          => 120,
+                                    'power'          => 20,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -15832,7 +15832,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::CRITICAL_CHANCE,
-                                    'power'          => 130,
+                                    'power'          => 30,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -15898,7 +15898,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::CRITICAL_CHANCE,
-                                    'power'          => 140,
+                                    'power'          => 40,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -15964,7 +15964,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::CRITICAL_CHANCE,
-                                    'power'          => 150,
+                                    'power'          => 50,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -16030,7 +16030,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Primordial Form',
                                     'modify_method'  => BuffAction::CRITICAL_CHANCE,
-                                    'power'          => 160,
+                                    'power'          => 60,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -19076,7 +19076,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Overflowing Energy',
                                     'modify_method'  => BuffAction::CRITICAL_CHANCE,
-                                    'power'          => 120,
+                                    'power'          => 20,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -19116,7 +19116,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Overflowing Energy',
                                     'modify_method'  => BuffAction::CRITICAL_CHANCE,
-                                    'power'          => 130,
+                                    'power'          => 30,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -19156,7 +19156,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Overflowing Energy',
                                     'modify_method'  => BuffAction::CRITICAL_CHANCE,
-                                    'power'          => 140,
+                                    'power'          => 40,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -19196,7 +19196,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Overflowing Energy',
                                     'modify_method'  => BuffAction::CRITICAL_CHANCE,
-                                    'power'          => 150,
+                                    'power'          => 50,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [
@@ -19236,7 +19236,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Overflowing Energy',
                                     'modify_method'  => BuffAction::CRITICAL_CHANCE,
-                                    'power'          => 160,
+                                    'power'          => 60,
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
                                 ],
                                 [

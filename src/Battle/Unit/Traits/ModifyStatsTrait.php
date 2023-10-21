@@ -332,14 +332,8 @@ trait ModifyStatsTrait
      */
     private function multiplierCriticalChance(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
-        }
-
-        $multiplier = $action->getPower() / 100;
-
         $oldCriticalChance = $this->offense->getCriticalChance();
-        $newCriticalChance = (int)($this->offense->getCriticalChance() * $multiplier);
+        $newCriticalChance = (int)($this->offense->getCriticalChance() * $this->getMultiplier($action));
 
         $this->offense->setCriticalChance($newCriticalChance);
 
