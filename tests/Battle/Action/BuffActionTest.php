@@ -764,7 +764,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals($newLifeDamage, $unit->getOffense()->getLifeDamage());
 
         // Проверяем обновленный урон магией жизни от множителя (на всякий случай)
-        self::assertEquals((int)($oldLifeDamage * ($power / 100)), $unit->getOffense()->getLifeDamage());
+        self::assertEquals((int)($oldLifeDamage * (($power + 100) / 100)), $unit->getOffense()->getLifeDamage());
 
         // Откатываем баф и проверяем, что урон магией жизни вернулся к исходному значению
         $action->getRevertAction()->handle();
@@ -1840,19 +1840,19 @@ class BuffActionTest extends AbstractUnitTest
     {
         return [
             [
-                200,
+                100,
                 142,
             ],
             [
-                111,
+                11,
                 78,
             ],
             [
-                87,
+                -13,
                 61,
             ],
             [
-                32,
+                -68,
                 22,
             ],
         ];
@@ -2428,7 +2428,6 @@ class BuffActionTest extends AbstractUnitTest
     public function overReducedStatDataProviderOld(): array
     {
         return [
-            [BuffAction::LIFE_DAMAGE],
             [BuffAction::DEATH_DAMAGE],
             [BuffAction::CRITICAL_MULTIPLIER],
             [BuffAction::CRITICAL_CHANCE],
@@ -2451,6 +2450,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::WATER_DAMAGE],
             [BuffAction::AIR_DAMAGE],
             [BuffAction::EARTH_DAMAGE],
+            [BuffAction::LIFE_DAMAGE],
         ];
     }
 }

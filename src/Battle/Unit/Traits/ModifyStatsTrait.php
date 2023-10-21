@@ -568,14 +568,8 @@ trait ModifyStatsTrait
      */
     private function multiplierLifeDamage(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
-        }
-
-        $multiplier = $action->getPower() / 100;
-
         $oldLifeDamage = $this->offense->getLifeDamage();
-        $newLifeDamage = (int)($this->offense->getLifeDamage() * $multiplier);
+        $newLifeDamage = (int)($this->offense->getLifeDamage() * $this->getMultiplier($action));
 
         $this->offense->setLifeDamage($newLifeDamage);
 
