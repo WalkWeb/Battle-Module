@@ -488,7 +488,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals($newCriticalMultiplier, $unit->getOffense()->getCriticalMultiplier());
 
         // Проверяем обновленную силу критического удара от множителя (на всякий случай)
-        self::assertEquals((int)($oldCriticalMultiplier * ($power / 100)), $unit->getOffense()->getCriticalMultiplier());
+        self::assertEquals((int)($oldCriticalMultiplier * (($power + 100) / 100)), $unit->getOffense()->getCriticalMultiplier());
 
         // Откатываем баф и проверяем, что сила критического удара вернулась к исходному значению
         $action->getRevertAction()->handle();
@@ -1693,19 +1693,19 @@ class BuffActionTest extends AbstractUnitTest
     {
         return [
             [
-                200,
+                100,
                 400,
             ],
             [
-                111,
+                11,
                 222,
             ],
             [
-                87,
+                -13,
                 174,
             ],
             [
-                32,
+                -68,
                 64,
             ],
         ];
@@ -2428,7 +2428,6 @@ class BuffActionTest extends AbstractUnitTest
     public function overReducedStatDataProviderOld(): array
     {
         return [
-            [BuffAction::CRITICAL_MULTIPLIER],
             [BuffAction::CRITICAL_CHANCE],
             [BuffAction::CAST_SPEED],
         ];
@@ -2451,6 +2450,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::EARTH_DAMAGE],
             [BuffAction::LIFE_DAMAGE],
             [BuffAction::DEATH_DAMAGE],
+            [BuffAction::CRITICAL_MULTIPLIER],
         ];
     }
 }
