@@ -626,7 +626,7 @@ class BuffActionTest extends AbstractUnitTest
         self::assertEquals($newWaterDamage, $unit->getOffense()->getWaterDamage());
 
         // Проверяем обновленный урон водой от множителя (на всякий случай)
-        self::assertEquals((int)($oldWaterDamage * ($power / 100)), $unit->getOffense()->getWaterDamage());
+        self::assertEquals((int)($oldWaterDamage * (($power + 100) / 100)), $unit->getOffense()->getWaterDamage());
 
         // Откатываем баф и проверяем, что урон водой вернулся к исходному значению
         $action->getRevertAction()->handle();
@@ -1765,19 +1765,19 @@ class BuffActionTest extends AbstractUnitTest
     {
         return [
             [
-                200,
+                100,
                 174,
             ],
             [
-                111,
+                11,
                 96,
             ],
             [
-                87,
+                -13,
                 75,
             ],
             [
-                32,
+                -68,
                 27,
             ],
         ];
@@ -2428,7 +2428,6 @@ class BuffActionTest extends AbstractUnitTest
     public function overReducedStatDataProviderOld(): array
     {
         return [
-            [BuffAction::WATER_DAMAGE],
             [BuffAction::AIR_DAMAGE],
             [BuffAction::EARTH_DAMAGE],
             [BuffAction::LIFE_DAMAGE],
@@ -2451,6 +2450,7 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::ATTACK_SPEED],
             [BuffAction::PHYSICAL_DAMAGE],
             [BuffAction::FIRE_DAMAGE],
+            [BuffAction::WATER_DAMAGE],
         ];
     }
 }

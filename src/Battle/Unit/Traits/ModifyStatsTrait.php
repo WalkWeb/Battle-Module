@@ -487,14 +487,8 @@ trait ModifyStatsTrait
      */
     private function multiplierWaterDamage(ActionInterface $action): void
     {
-        if ($action->getPower() <= ActionInterface::MIN_MULTIPLIER) {
-            throw new UnitException(UnitException::OVER_REDUCED . ActionInterface::MIN_MULTIPLIER);
-        }
-
-        $multiplier = $action->getPower() / 100;
-
         $oldWaterDamage = $this->offense->getWaterDamage();
-        $newWaterDamage = (int)($this->offense->getWaterDamage() * $multiplier);
+        $newWaterDamage = (int)($this->offense->getWaterDamage() * $this->getMultiplier($action));
 
         $this->offense->setWaterDamage($newWaterDamage);
 
