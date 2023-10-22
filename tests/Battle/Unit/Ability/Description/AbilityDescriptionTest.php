@@ -25,7 +25,7 @@ class AbilityDescriptionTest extends AbstractUnitTest
             $this->getContainer()->getTranslation()
         );
 
-        self::assertEquals((string)$abilityDescription, $expectedDescription);
+        self::assertEquals($expectedDescription, (string)$abilityDescription);
     }
 
     public function successAbilityDescriptionDataProvider(): array

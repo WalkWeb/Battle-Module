@@ -20,4 +20,7 @@ class AbilityException extends Exception
     public const UNKNOWN_ACTIVATE_TYPE         = 'Unknown activate type';
     public const INVALID_CHANCE_ACTIVATE_DATA  = 'Invalid "chance_activate" data: absence or int expected';
     public const INVALID_ALLOWED_WEAPON_DATA   = 'Invalid "allowed_weapon_types" data: absence or int[] expected';
+    public const INVALID_VALUE_DATA            = 'AbilityDescriptionFactory: invalid value data: expected numeric[]';
+    public const INVALID_VALUES_DATA           = 'AbilityDescriptionFactory: invalid values data: expected array';
+    public const INVALID_DESCRIPTION_DATA      = 'AbilityDescriptionFactory: invalid description: string expected';
 }
