@@ -15,6 +15,7 @@ use Battle\Stroke\StrokeFactory;
 use Battle\Translation\TranslationInterface;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
+use Battle\Unit\Ability\Description\AbilityDescriptionFactory;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\UnitClassFactory;
 use Battle\Unit\Effect\EffectFactory;
@@ -144,6 +145,11 @@ interface ContainerInterface
      */
     public function getEffectFactory(): EffectFactory;
 
+    /**
+     * @return AbilityDescriptionFactory
+     */
+    public function getAbilityDescriptionFactory(): AbilityDescriptionFactory;
+    
     /**
      * Поставщик данных классов юнитов
      *

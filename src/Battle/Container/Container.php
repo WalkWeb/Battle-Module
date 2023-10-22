@@ -21,6 +21,7 @@ use Battle\Translation\TranslationInterface;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
 use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
+use Battle\Unit\Ability\Description\AbilityDescriptionFactory;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassFactory;
@@ -80,6 +81,9 @@ class Container implements ContainerInterface
         EffectFactory::class                => EffectFactory::class,
         'EffectFactory'                     => EffectFactory::class,
 
+        AbilityDescriptionFactory::class    => AbilityDescriptionFactory::class,
+        'AbilityDescriptionFactory'         => AbilityDescriptionFactory::class,
+
         // Ниже идут примеры поставщиков. Подразумевается, что в реальном проекте эти поставщики будут подменены
         // через метод в контейнере set()
         ExampleClassDataProvider::class     => ExampleClassDataProvider::class,
@@ -108,6 +112,7 @@ class Container implements ContainerInterface
         ViewFactory::class,
         ExampleClassDataProvider::class,
         ExampleRaceDataProvider::class,
+        AbilityDescriptionFactory::class,
     ];
 
     private array $storage = [];
@@ -321,6 +326,17 @@ class Container implements ContainerInterface
     {
         /** @var EffectFactory $service */
         $service = $this->get(EffectFactory::class);
+        return $service;
+    }
+
+    /**
+     * @return AbilityDescriptionFactory
+     * @throws ContainerException
+     */
+    public function getAbilityDescriptionFactory(): AbilityDescriptionFactory
+    {
+        /** @var AbilityDescriptionFactory $service */
+        $service = $this->get(AbilityDescriptionFactory::class);
         return $service;
     }
 

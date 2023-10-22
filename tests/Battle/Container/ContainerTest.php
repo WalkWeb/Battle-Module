@@ -24,6 +24,7 @@ use Battle\Translation\TranslationInterface;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
 use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
+use Battle\Unit\Ability\Description\AbilityDescriptionFactory;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassFactory;
@@ -291,6 +292,23 @@ class ContainerTest extends AbstractUnitTest
 
         $effectFactory = $container->getEffectFactory();
         self::assertInstanceOf(EffectFactory::class, $effectFactory);
+    }
+
+    /**
+     * @throws ContainerException
+     */
+    public function testContainerGetAbilityDescriptionFactory(): void
+    {
+        $container = new Container();
+
+        $abilityDescriptionFactory = $container->get(AbilityDescriptionFactory::class);
+        self::assertInstanceOf(AbilityDescriptionFactory::class, $abilityDescriptionFactory);
+
+        $abilityDescriptionFactory = $container->get('AbilityDescriptionFactory');
+        self::assertInstanceOf(AbilityDescriptionFactory::class, $abilityDescriptionFactory);
+
+        $abilityDescriptionFactory = $container->getAbilityDescriptionFactory();
+        self::assertInstanceOf(AbilityDescriptionFactory::class, $abilityDescriptionFactory);
     }
 
     /**
