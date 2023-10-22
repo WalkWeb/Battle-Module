@@ -244,7 +244,7 @@ class RageAbilityTest extends AbstractUnitTest
                                 'type'           => ActionInterface::BUFF,
                                 'type_target'    => ActionInterface::TARGET_SELF,
                                 'name'           => $name,
-                                'modify_method'  => BuffAction::PHYSICAL_DAMAGE,
+                                'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
                                 'power'          => 100,
                                 'icon'           => $icon,
                                 'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,

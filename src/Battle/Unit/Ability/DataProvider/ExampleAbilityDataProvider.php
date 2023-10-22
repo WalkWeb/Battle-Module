@@ -419,7 +419,6 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                 ],
             ],
         ],
-        // TODO Изменить на x2 множитель общего урона
         'Rage'               => [
             1 => [
                 'name'          => 'Rage',
@@ -442,7 +441,7 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
                                     'type'           => ActionInterface::BUFF,
                                     'type_target'    => ActionInterface::TARGET_SELF,
                                     'name'           => 'Rage',
-                                    'modify_method'  => BuffAction::PHYSICAL_DAMAGE,
+                                    'modify_method'  => BuffAction::ADD_DAMAGE_MULTIPLIER,
                                     'power'          => 100,
                                     'icon'           => '/images/icons/ability/285.png',
                                     'message_method' => ActionInterface::SKIP_MESSAGE_METHOD,
