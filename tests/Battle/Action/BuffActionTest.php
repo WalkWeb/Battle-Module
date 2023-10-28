@@ -409,7 +409,7 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на увеличение/уменьшение шанса критического удара
+     * Тест на увеличение/уменьшение шанса критического удара на %
      *
      * @dataProvider multiplierCriticalChanceDataProvider
      * @param int $power
@@ -448,6 +448,47 @@ class BuffActionTest extends AbstractUnitTest
 
         // Проверяем обновленный шанс критического удара от множителя (на всякий случай)
         self::assertEquals((int)($oldCriticalChance * (($power + 100) / 100)), $unit->getOffense()->getCriticalChance());
+
+        // Откатываем баф и проверяем, что шанс критического удара вернулся к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(15, $unit->getOffense()->getCriticalChance());
+    }
+
+    /**
+     * Тест на увеличение/уменьшение шанса критического удара на фиксированную величину
+     *
+     * @dataProvider addCriticalChanceDataProvider
+     * @param int $power
+     * @param int $newCriticalChance
+     * @throws Exception
+     */
+    public function testBuffActionAddCriticalChanceSuccess(int $power, int $newCriticalChance): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->container,
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'add critical chance',
+            BuffAction::ADD_CRITICAL_CHANCE,
+            $power
+        );
+
+        // Изначальный шанс критического удара
+        self::assertEquals(15, $unit->getOffense()->getCriticalChance());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленный шанс критического удара
+        self::assertEquals($newCriticalChance, $unit->getOffense()->getCriticalChance());
 
         // Откатываем баф и проверяем, что шанс критического удара вернулся к исходному значению
         $action->getRevertAction()->handle();
@@ -1657,6 +1698,24 @@ class BuffActionTest extends AbstractUnitTest
             [
                 -68,
                 4,
+            ],
+        ];
+    }
+
+    public function addCriticalChanceDataProvider(): array
+    {
+        return [
+            [
+                10,
+                25,
+            ],
+            [
+                1500,
+                100,
+            ],
+            [
+                -50,
+                0,
             ],
         ];
     }

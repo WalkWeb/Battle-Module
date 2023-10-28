@@ -352,6 +352,40 @@ trait ModifyStatsTrait
     }
 
     /**
+     * Изменяет шанс критического удара на фиксированную величину
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    protected function addCriticalChance(ActionInterface $action): void
+    {
+        $oldCriticalChance = $this->offense->getCriticalChance();
+        $newCriticalChance = $oldCriticalChance + $action->getPower();
+
+        if ($newCriticalChance > OffenseInterface::MAX_CRITICAL_CHANCE) {
+            $newCriticalChance = OffenseInterface::MAX_CRITICAL_CHANCE;
+        }
+
+        if ($newCriticalChance < OffenseInterface::MIN_CRITICAL_CHANCE) {
+            $newCriticalChance = OffenseInterface::MIN_CRITICAL_CHANCE;
+        }
+
+        $this->offense->setCriticalChance($newCriticalChance);
+        $action->setRevertValue($newCriticalChance - $oldCriticalChance);
+    }
+
+    /**
+     * Откатывает изменение шанса критического удара
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addCriticalChanceRevert(ActionInterface $action): void
+    {
+        $this->offense->setCriticalChance($this->offense->getCriticalChance() - $action->getRevertValue());
+    }
+
+    /**
      * Изменяет силу критического удара
      *
      * @param ActionInterface $action
