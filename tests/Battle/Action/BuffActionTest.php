@@ -542,6 +542,47 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на увеличение/уменьшение силы критического удара на фиксированную величину
+     *
+     * @dataProvider addCriticalMultiplierDataProvider
+     * @param int $power
+     * @param int $newCriticalMultiplier
+     * @throws Exception
+     */
+    public function testBuffActionAddCriticalMultiplierSuccess(int $power, int $newCriticalMultiplier): void
+    {
+        $unit = UnitFactory::createByTemplate(12);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = new BuffAction(
+            $this->container,
+            $unit,
+            $enemyCommand,
+            $command,
+            BuffAction::TARGET_SELF,
+            'add critical multiplier',
+            BuffAction::ADD_CRITICAL_MULTIPLIER,
+            $power
+        );
+
+        // Изначальная сила критического удара
+        self::assertEquals(200, $unit->getOffense()->getCriticalMultiplier());
+
+        // Применяем баф
+        self::assertTrue($action->canByUsed());
+        $action->handle();
+
+        // Проверяем обновленную силу критического удара
+        self::assertEquals($newCriticalMultiplier, $unit->getOffense()->getCriticalMultiplier());
+
+        // Откатываем баф и проверяем, что сила критического удара вернулась к исходному значению
+        $action->getRevertAction()->handle();
+        self::assertEquals(200, $unit->getOffense()->getCriticalMultiplier());
+    }
+
+    /**
      * Тест на увеличение/уменьшение физического урона
      *
      * @dataProvider multiplierPhysicalDamageDataProvider
@@ -1741,6 +1782,32 @@ class BuffActionTest extends AbstractUnitTest
             [
                 -68,
                 64,
+            ],
+        ];
+    }
+
+    public function addCriticalMultiplierDataProvider(): array
+    {
+        return [
+            [
+                10,
+                210,
+            ],
+            [
+                1000,
+                1200,
+            ],
+            [
+                100000,
+                OffenseInterface::MAX_CRITICAL_MULTIPLIER,
+            ],
+            [
+                -50,
+                150,
+            ],
+            [
+                -250,
+                0,
             ],
         ];
     }

@@ -413,6 +413,40 @@ trait ModifyStatsTrait
     }
 
     /**
+     * Увеличивает силу критического удара на фиксированную величину
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addCriticalMultiplier(ActionInterface $action): void
+    {
+        $oldCriticalMultiplier = $this->offense->getCriticalMultiplier();
+        $newCriticalMultiplier = $oldCriticalMultiplier + $action->getPower();
+
+        if ($newCriticalMultiplier > OffenseInterface::MAX_CRITICAL_MULTIPLIER) {
+            $newCriticalMultiplier = OffenseInterface::MAX_CRITICAL_MULTIPLIER;
+        }
+
+        if ($newCriticalMultiplier < OffenseInterface::MIN_CRITICAL_MULTIPLIER) {
+            $newCriticalMultiplier = OffenseInterface::MIN_CRITICAL_MULTIPLIER;
+        }
+
+        $this->offense->setCriticalMultiplier($newCriticalMultiplier);
+        $action->setRevertValue($newCriticalMultiplier - $oldCriticalMultiplier);
+    }
+
+    /**
+     * Откатывает изменение силы критического удара
+     *
+     * @param ActionInterface $action
+     * @throws Exception
+     */
+    private function addCriticalMultiplierRevert(ActionInterface $action): void
+    {
+        $this->offense->setCriticalMultiplier($this->offense->getCriticalMultiplier() - $action->getRevertValue());
+    }
+
+    /**
      * Изменяет общий множитель урона
      *
      * @param ActionInterface $action
