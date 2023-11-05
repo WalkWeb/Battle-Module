@@ -177,7 +177,7 @@ class ArchontPrimordialFormAbilityTest extends AbstractUnitTest
                 1.1,
                 1.1,
                 6,
-                220,
+                210,
                 5,
             ],
             [
@@ -186,7 +186,7 @@ class ArchontPrimordialFormAbilityTest extends AbstractUnitTest
                 1.12,
                 1.12,
                 6,
-                224,
+                220,
                 6,
             ],
             [
@@ -195,7 +195,7 @@ class ArchontPrimordialFormAbilityTest extends AbstractUnitTest
                 1.14,
                 1.14,
                 7,
-                227,
+                230,
                 7,
             ],
             [
@@ -204,7 +204,7 @@ class ArchontPrimordialFormAbilityTest extends AbstractUnitTest
                 1.16,
                 1.16,
                 7,
-                231,
+                240,
                 8,
             ],
             [
@@ -213,7 +213,7 @@ class ArchontPrimordialFormAbilityTest extends AbstractUnitTest
                 1.18,
                 1.18,
                 8,
-                236,
+                250,
                 9,
             ],
         ];
