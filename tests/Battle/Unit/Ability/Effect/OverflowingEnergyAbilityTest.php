@@ -108,31 +108,31 @@ class OverflowingEnergyAbilityTest extends AbstractUnitTest
             [
                 1,
                 6,
-                220,
+                210,
                 5,
             ],
             [
                 2,
                 6,
-                229,
+                220,
                 5,
             ],
             [
                 3,
                 7,
-                240,
+                230,
                 6,
             ],
             [
                 4,
                 7,
-                250,
+                240,
                 6,
             ],
             [
                 5,
                 8,
-                260,
+                250,
                 7,
             ],
         ];
