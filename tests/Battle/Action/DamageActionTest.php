@@ -360,7 +360,7 @@ class DamageActionTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testDamageActionNoDodgedAttack(): void
+    public function testDamageActionNoEvadedAttack(): void
     {
         $unit = UnitFactory::createByTemplate(30);
         $enemyUnit = UnitFactory::createByTemplate(1);
@@ -385,7 +385,7 @@ class DamageActionTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testDamageActionDodgedAttack(): void
+    public function testDamageActionEvadedAttack(): void
     {
         $unit = UnitFactory::createByTemplate(1);
         $enemyUnit = UnitFactory::createByTemplate(30);
@@ -463,6 +463,29 @@ class DamageActionTest extends AbstractUnitTest
     {
         $unit = UnitFactory::createByTemplate(37);
         $enemyUnit = UnitFactory::createByTemplate(51);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        self::assertFalse($action->isEvaded($enemyUnit));
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertTrue($action->isEvaded($enemyUnit));
+    }
+
+    /**
+     * Этот тест проверяет уклонения от удара в обычном (не test-mode) режиме при 100% шансе dodge у цели
+     *
+     * @throws Exception
+     */
+    public function testDamageActionDodgeNoTestMode(): void
+    {
+        $unit = UnitFactory::createByTemplate(37, new Container());
+        $enemyUnit = UnitFactory::createByTemplate(51, new Container());
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
@@ -1212,7 +1235,7 @@ class DamageActionTest extends AbstractUnitTest
     ): DamageAction
     {
         return new DamageAction(
-           $this->container,
+            $this->container,
             $unit,
             $enemyCommand,
             $command,

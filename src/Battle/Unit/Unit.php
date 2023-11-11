@@ -354,6 +354,8 @@ class Unit extends AbstractUnit
      */
     private function isEvaded(ActionInterface $action): bool
     {
+        $testMode = $this->container->isTestMode();
+
         if (!$action->isCanBeAvoided()) {
             return false;
         }
@@ -364,11 +366,11 @@ class Unit extends AbstractUnit
 
         // Механика dodge (в отличие от механики defense) не зависит от меткости противника
         // В режиме тестов фактор случайности не используется
-        if ($this->container->isTestMode() && (bool)(int)round($this->defense->getDodge())) {
+        if ($testMode && (bool)(int)round($this->defense->getDodge())) {
             return true;
         }
 
-        if (!$this->container->isTestMode() && $this->defense->getDodge() >= random_int(0, 100)) {
+        if (!$testMode && $this->defense->getDodge() >= random_int(0, 100)) {
             return true;
         }
 
@@ -376,7 +378,7 @@ class Unit extends AbstractUnit
         $chanceOfHit = $this->getChanceOfHit($action);
 
         // В режиме тестов фактор случайности не используется
-        if ($this->container->isTestMode()) {
+        if ($testMode) {
             return !(bool)(int)round($chanceOfHit/100);
         }
 
