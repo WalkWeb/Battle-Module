@@ -386,33 +386,6 @@ trait ModifyStatsTrait
     }
 
     /**
-     * Изменяет силу критического удара
-     *
-     * @param ActionInterface $action
-     * @throws Exception
-     */
-    private function multiplierCriticalMultiplier(ActionInterface $action): void
-    {
-        $oldCriticalMultiplier = $this->offense->getCriticalMultiplier();
-        $newCriticalMultiplier = (int)($this->offense->getCriticalMultiplier() * $this->getMultiplier($action));
-
-        $this->offense->setCriticalMultiplier($newCriticalMultiplier);
-
-        $action->setRevertValue($newCriticalMultiplier - $oldCriticalMultiplier);
-    }
-
-    /**
-     * Откатывает изменение силы критического удара
-     *
-     * @param ActionInterface $action
-     * @throws Exception
-     */
-    private function multiplierCriticalMultiplierRevert(ActionInterface $action): void
-    {
-        $this->offense->setCriticalMultiplier($this->offense->getCriticalMultiplier() - $action->getRevertValue());
-    }
-
-    /**
      * Увеличивает силу критического удара на фиксированную величину
      *
      * @param ActionInterface $action

@@ -496,52 +496,6 @@ class BuffActionTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на увеличение/уменьшение силы критического удара
-     *
-     * @dataProvider multiplierCriticalMultiplierDataProvider
-     * @param int $power
-     * @param int $newCriticalMultiplier
-     * @throws Exception
-     */
-    public function testBuffActionMultiplierCriticalMultiplierSuccess(int $power, int $newCriticalMultiplier): void
-    {
-        $unit = UnitFactory::createByTemplate(12);
-        $enemyUnit = UnitFactory::createByTemplate(2);
-        $command = CommandFactory::create([$unit]);
-        $enemyCommand = CommandFactory::create([$enemyUnit]);
-
-        $action = new BuffAction(
-           $this->container,
-            $unit,
-            $enemyCommand,
-            $command,
-            BuffAction::TARGET_SELF,
-            'multiplier critical multiplier',
-            BuffAction::CRITICAL_MULTIPLIER,
-            $power
-        );
-
-        // Изначальная сила критического удара
-        self::assertEquals(200, $unit->getOffense()->getCriticalMultiplier());
-
-        $oldCriticalMultiplier = $unit->getOffense()->getCriticalMultiplier();
-
-        // Применяем баф
-        self::assertTrue($action->canByUsed());
-        $action->handle();
-
-        // Проверяем обновленную силу критического удара
-        self::assertEquals($newCriticalMultiplier, $unit->getOffense()->getCriticalMultiplier());
-
-        // Проверяем обновленную силу критического удара от множителя (на всякий случай)
-        self::assertEquals((int)($oldCriticalMultiplier * (($power + 100) / 100)), $unit->getOffense()->getCriticalMultiplier());
-
-        // Откатываем баф и проверяем, что сила критического удара вернулась к исходному значению
-        $action->getRevertAction()->handle();
-        self::assertEquals(200, $unit->getOffense()->getCriticalMultiplier());
-    }
-
-    /**
      * Тест на увеличение/уменьшение силы критического удара на фиксированную величину
      *
      * @dataProvider addCriticalMultiplierDataProvider
@@ -1761,31 +1715,6 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function multiplierCriticalMultiplierDataProvider(): array
-    {
-        return [
-            [
-                100,
-                400,
-            ],
-            [
-                11,
-                222,
-            ],
-            [
-                -13,
-                174,
-            ],
-            [
-                -68,
-                64,
-            ],
-        ];
-    }
-
     public function addCriticalMultiplierDataProvider(): array
     {
         return [
@@ -2569,7 +2498,6 @@ class BuffActionTest extends AbstractUnitTest
             [BuffAction::EARTH_DAMAGE],
             [BuffAction::LIFE_DAMAGE],
             [BuffAction::DEATH_DAMAGE],
-            [BuffAction::CRITICAL_MULTIPLIER],
             [BuffAction::CRITICAL_CHANCE],
             [BuffAction::CAST_SPEED],
         ];
