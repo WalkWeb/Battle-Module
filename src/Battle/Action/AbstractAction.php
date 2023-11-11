@@ -320,6 +320,15 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * @return float
+     * @throws ActionException
+     */
+    public function getRandomDamageMultiplier(): float
+    {
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
+    }
+
+    /**
      * @return CommandInterface
      */
     public function getAlliesCommand(): CommandInterface

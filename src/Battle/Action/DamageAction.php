@@ -92,6 +92,13 @@ class DamageAction extends AbstractAction
     protected int $restoreManaFromMagicVampirism = 0;
 
     /**
+     * Случайный множитель урона. От 0.5 до 1.6
+     *
+     * @var float
+     */
+    protected float $damageMultiplier = 1.0;
+
+    /**
      * @param ContainerInterface $container
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
@@ -141,6 +148,7 @@ class DamageAction extends AbstractAction
         $this->animationMethod = $animationMethod;
         $this->messageMethod = $messageMethod;
         $this->calculateCriticalDamage();
+        $this->calculateDamageMultiplier();
     }
 
     /**
@@ -369,6 +377,14 @@ class DamageAction extends AbstractAction
     }
 
     /**
+     * @return float
+     */
+    public function getRandomDamageMultiplier(): float
+    {
+        return $this->damageMultiplier;
+    }
+
+    /**
      * В режиме тестов шанс критического удара считается не случайно, а округляется
      *
      * @throws Exception
@@ -379,6 +395,18 @@ class DamageAction extends AbstractAction
             $this->criticalDamage = (bool)(int)round($this->offense->getCriticalChance() / 100);
         } else {
             $this->criticalDamage = $this->offense->getCriticalChance() > random_int(0, 100);
+        }
+    }
+
+    /**
+     * В режиме тестов случайной множитель урона не применяется
+     *
+     * @throws Exception
+     */
+    private function calculateDamageMultiplier(): void
+    {
+        if (!$this->container->isTestMode()) {
+            $this->damageMultiplier = random_int(5, 16) * 0.1;
         }
     }
 

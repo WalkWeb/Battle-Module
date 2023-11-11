@@ -9,6 +9,7 @@ use Battle\Action\DamageAction;
 use Battle\Action\ActionException;
 use Battle\Command\CommandFactory;
 use Battle\Command\CommandInterface;
+use Battle\Container\Container;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffense;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
 use Battle\Unit\UnitInterface;
@@ -458,7 +459,7 @@ class DamageActionTest extends AbstractUnitTest
      *
      * @throws Exception
      */
-    public function testDamageActionDodge(): void
+    public function testDamageActionDodgeDefault(): void
     {
         $unit = UnitFactory::createByTemplate(37);
         $enemyUnit = UnitFactory::createByTemplate(51);
@@ -1124,6 +1125,56 @@ class DamageActionTest extends AbstractUnitTest
 
         // Проверяем, что используется block_ignoring из MultipleOffense
         self::assertEquals($blockIgnoring, $action->getOffense()->getBlockIgnoring());
+    }
+
+    /**
+     * Тест на генерацию случайного множителя урона
+     *
+     * @throws Exception
+     */
+    public function testDamageActionGetRandomDamageMultiplier(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Вариант для TestMode - DamageMultiplier = 1
+        $action = new DamageAction(
+            $this->container,
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            false,
+            '',
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
+        );
+
+        self::assertEquals(1, $action->getRandomDamageMultiplier());
+
+        // Обычный вариант
+        $action = new DamageAction(
+            new Container(),
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            false,
+            '',
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense()
+        );
+
+        self::assertTrue($action->getRandomDamageMultiplier() >= 0.5);
+        self::assertTrue($action->getRandomDamageMultiplier() <= 1.6);
+
+        // Проверяем, что DamageMultiplier не меняется
+        $oldValue = $action->getRandomDamageMultiplier();
+        self::assertEquals($oldValue, $action->getRandomDamageMultiplier());
     }
 
     /**

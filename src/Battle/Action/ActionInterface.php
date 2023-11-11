@@ -407,4 +407,11 @@ interface ActionInterface
      * @return bool
      */
     public function isTargetTracking(): bool;
+
+    /**
+     * Возвращает случайный множитель урона (только для DamageAction, вызов метода у других событий бросит Exception)
+     *
+     * @return float
+     */
+    public function getRandomDamageMultiplier(): float;
 }

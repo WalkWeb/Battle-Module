@@ -280,6 +280,24 @@ class ActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ситуацию, когда у не-DamageAction вызывается метод getDamageMultiplier()
+     *
+     * @throws Exception
+     */
+    public function testActionGetRandomDamageMultiplier(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new WaitAction($this->getContainer(), $unit, $defendCommand, $alliesCommand);
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::getRandomDamageMultiplier');
+        $action->getRandomDamageMultiplier();
+    }
+
+    /**
      * Тест на изменение $actionUnit в Action
      *
      * @throws Exception
