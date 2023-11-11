@@ -363,12 +363,19 @@ class Unit extends AbstractUnit
         }
 
         // Механика dodge (в отличие от механики defense) не зависит от меткости противника
-        if ($this->defense->getDodge() > random_int(0, 100)) {
+        // В режиме тестов фактор случайности не используется
+        if ($this->container->isTestMode() && (bool)(int)round($this->defense->getDodge())) {
             return true;
         }
 
+        if (!$this->container->isTestMode() && $this->defense->getDodge() >= random_int(0, 100)) {
+            return true;
+        }
+
+        // Механика обычного уклонения
         $chanceOfHit = $this->getChanceOfHit($action);
 
+        // В режиме тестов фактор случайности не используется
         if ($this->container->isTestMode()) {
             return !(bool)(int)round($chanceOfHit/100);
         }
