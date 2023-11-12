@@ -388,8 +388,6 @@ class Unit extends AbstractUnit
     /**
      * Рассчитывает шанс попадания по текущему юниту
      *
-     * TODO Брать меткость нападающего не от юнита, а от Offense
-     *
      * @param ActionInterface $action - ожидается DamageAction
      * @return int
      * @throws Exception
@@ -398,10 +396,10 @@ class Unit extends AbstractUnit
     {
         // Если атака - используется обычная меткость и защита, если заклинание - магическая меткость и защита
         if ($action->getActionUnit()->getOffense()->getDamageType() === OffenseInterface::TYPE_ATTACK) {
-            $accuracy = $action->getActionUnit()->getOffense()->getAccuracy();
+            $accuracy = $action->getOffense()->getAccuracy();
             $defense = $this->defense->getDefense();
         } else {
-            $accuracy = $action->getActionUnit()->getOffense()->getMagicAccuracy();
+            $accuracy = $action->getOffense()->getMagicAccuracy();
             $defense = $this->defense->getMagicDefense();
         }
 
