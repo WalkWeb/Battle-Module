@@ -298,6 +298,24 @@ class ActionTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на ситуацию, когда у не-DamageAction вызывается метод isRandomDamage()
+     *
+     * @throws Exception
+     */
+    public function testActionIsRandomDamage(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $defendUnit = UnitFactory::createByTemplate(2);
+        $defendCommand = CommandFactory::create([$defendUnit]);
+        $alliesCommand = CommandFactory::create([$unit]);
+        $action = new WaitAction($this->getContainer(), $unit, $defendCommand, $alliesCommand);
+
+        $this->expectException(ActionException::class);
+        $this->expectExceptionMessage('Action: No method: Battle\Action\AbstractAction::Battle\Action\AbstractAction::isRandomDamage');
+        $action->isRandomDamage();
+    }
+
+    /**
      * Тест на изменение $actionUnit в Action
      *
      * @throws Exception

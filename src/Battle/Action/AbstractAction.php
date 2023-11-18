@@ -329,6 +329,15 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * @return bool
+     * @throws ActionException
+     */
+    public function isRandomDamage(): bool
+    {
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
+    }
+
+    /**
      * @return CommandInterface
      */
     public function getAlliesCommand(): CommandInterface

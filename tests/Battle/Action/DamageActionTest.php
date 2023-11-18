@@ -44,6 +44,7 @@ class DamageActionTest extends AbstractUnitTest
         self::assertFalse($action->isCriticalDamage());
         self::assertEquals($command, $action->getAlliesCommand());
         self::assertEquals($enemyCommand, $action->getEnemyCommand());
+        self::assertTrue($action->isRandomDamage());
     }
 
     /**

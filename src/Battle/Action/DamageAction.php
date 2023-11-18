@@ -99,6 +99,13 @@ class DamageAction extends AbstractAction
     protected float $damageMultiplier = 1.0;
 
     /**
+     * Необходимо ли рандомизировать урон от этого события
+     *
+     * @var bool
+     */
+    protected bool $randomDamage;
+
+    /**
      * @param ContainerInterface $container
      * @param UnitInterface $actionUnit
      * @param CommandInterface $enemyCommand
@@ -127,7 +134,8 @@ class DamageAction extends AbstractAction
         OffenseInterface $offense = null,
         MultipleOffenseInterface $multipleOffense = null,
         string $icon = '',
-        bool $targetTracking = true
+        bool $targetTracking = true,
+        bool $randomDamage = true
     )
     {
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon, $targetTracking);
@@ -147,6 +155,7 @@ class DamageAction extends AbstractAction
         $this->name = $name;
         $this->animationMethod = $animationMethod;
         $this->messageMethod = $messageMethod;
+        $this->randomDamage = $randomDamage;
         $this->calculateCriticalDamage();
         $this->calculateDamageMultiplier();
     }
@@ -382,6 +391,14 @@ class DamageAction extends AbstractAction
     public function getRandomDamageMultiplier(): float
     {
         return $this->damageMultiplier;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRandomDamage(): bool
+    {
+        return $this->randomDamage;
     }
 
     /**
