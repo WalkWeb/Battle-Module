@@ -119,7 +119,8 @@ class DamageAction extends AbstractAction
      * @param MultipleOffenseInterface|null $multipleOffense
      * @param string $icon
      * @param bool $targetTracking
-     * @throws Exception
+     * @param bool $randomDamage
+     * @throws ActionException
      */
     public function __construct(
         ContainerInterface $container,

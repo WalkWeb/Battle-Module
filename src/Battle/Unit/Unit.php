@@ -461,7 +461,11 @@ class Unit extends AbstractUnit
         $oldLife = $this->life;
         $oldMana = $this->mana;
 
-        $baseDamage = (int)($action->getRandomDamageMultiplier() * $action->getOffense()->getDamage($this->defense));
+        if ($action->isRandomDamage()) {
+            $baseDamage = (int)($action->getRandomDamageMultiplier() * $action->getOffense()->getDamage($this->defense));
+        } else {
+            $baseDamage = $action->getOffense()->getDamage($this->defense);
+        }
 
         $damage = $action->isCriticalDamage() ?
             (int)($baseDamage * ($this->getOffense()->getCriticalMultiplier() / 100)) :

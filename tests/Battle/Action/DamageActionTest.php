@@ -1202,6 +1202,37 @@ class DamageActionTest extends AbstractUnitTest
     }
 
     /**
+     * Проверка применения урона с отсутствием рандомизации урона.
+     *
+     * @throws Exception
+     */
+    public function testDamageActionNoRandomDamage(): void
+    {
+        $unit = UnitFactory::createByTemplate(1);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        for ($i = 0; $i < 10; $i++) {
+            $action = $this->createDamageAction(
+                $unit,
+                $enemyCommand,
+                $command,
+                DamageAction::TARGET_RANDOM_ENEMY,
+                false
+            );
+
+            $action->handle();
+        }
+
+        // Проверяем, что за все 10 ударов суммарно нанесено ровно 200 урона, и у противника осталось 50 хп
+        self::assertEquals(
+            50,
+            $enemyUnit->getLife()
+        );
+    }
+
+    /**
      * @return array
      */
     public function criticalDamageDataProvider(): array
@@ -1225,14 +1256,16 @@ class DamageActionTest extends AbstractUnitTest
      * @param CommandInterface $enemyCommand
      * @param CommandInterface $command
      * @param int $typeTarget
+     * @param bool $randomDamage
      * @return DamageAction
-     * @throws Exception
+     * @throws ActionException
      */
     private function createDamageAction(
         UnitInterface $unit,
         CommandInterface $enemyCommand,
         CommandInterface $command,
-        int $typeTarget
+        int $typeTarget,
+        bool $randomDamage = true
     ): DamageAction
     {
         return new DamageAction(
@@ -1245,7 +1278,11 @@ class DamageActionTest extends AbstractUnitTest
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
             DamageAction::DEFAULT_MESSAGE_METHOD,
-            $unit->getOffense()
+            $unit->getOffense(),
+            null,
+            '',
+            true,
+            $randomDamage
         );
     }
 }
