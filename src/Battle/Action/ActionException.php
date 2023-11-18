@@ -18,6 +18,7 @@ class ActionException extends Exception
     public const UNKNOWN_TYPE_TARGET           = 'Action: Unknown type target';
     public const NO_POWER_BY_UNIT              = 'Action: No power by unit';
     public const INVALID_TARGET_TRACKING       = 'Action: Invalid "target_tracking" data: bool expected';
+    public const INVALID_RANDOM_DAMAGE         = 'Action: Invalid "random_damage" data: bool expected';
     public const UNKNOWN_TYPE_ACTION           = 'ActionFactory: Unknown type action';
     public const UNKNOWN_FACTORY_METHOD        = 'ActionFactory: Unknown factory method';
     public const INVALID_TYPE_DATA             = 'ActionFactory: Invalid "type" data: int expected';

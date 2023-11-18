@@ -103,7 +103,8 @@ class ActionFactory
             $offenseData ? OffenseFactory::create($offenseData, $this->container) : null,
             $multipleOffenseData ? MultipleOffenseFactory::create($multipleOffenseData) : null,
             self::stringOrMissing($data, 'icon', ActionException::INVALID_ICON_DATA),
-            self::boolOrDefault($data, 'target_tracking', true, ActionException::INVALID_TARGET_TRACKING)
+            self::boolOrDefault($data, 'target_tracking', true, ActionException::INVALID_TARGET_TRACKING),
+            self::boolOrDefault($data, 'random_damage', true, ActionException::INVALID_RANDOM_DAMAGE)
         );
     }
 

@@ -88,7 +88,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($messageMethod, $action->getMessageMethod());
         self::assertEquals(true, $action->isTargetTracking());
 
-        // Полный набор данных (добавляется icon + target_tracking)
+        // Полный набор данных (добавляется icon + target_tracking + random_damage)
         $data = [
             'type'             => ActionInterface::DAMAGE,
             'action_unit'      => $unit,
@@ -102,6 +102,7 @@ class ActionFactoryTest extends AbstractUnitTest
             'message_method'   => $messageMethod = 'damageAbility',
             'icon'             => $icon = 'icon.png',
             'target_tracking'  => $targetTracking = false,
+            'random_damage'    => false,
         ];
 
         $action = $this->container->getActionFactory()->create($data);
@@ -116,6 +117,7 @@ class ActionFactoryTest extends AbstractUnitTest
         self::assertEquals($icon, $action->getIcon());
         self::assertEquals($canBeAvoided, $action->isCanBeAvoided());
         self::assertEquals($targetTracking, $action->isTargetTracking());
+        self::assertFalse($action->isRandomDamage());
     }
 
     /**
@@ -2027,7 +2029,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ICON_DATA,
             ],
             [
-                // 22: target_tracking некорректного типа [для DamageAction]
+                // 52: target_tracking некорректного типа [для DamageAction]
                 [
                     'type'             => ActionInterface::DAMAGE,
                     'action_unit'      => $actionUnit,
@@ -2086,7 +2088,66 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TARGET_TRACKING,
             ],
             [
-                // 52: EffectAction - некорректный icon
+                // 53: random_damage некорректного типа [для DamageAction]
+                [
+                    'type'             => ActionInterface::DAMAGE,
+                    'action_unit'      => $actionUnit,
+                    'enemy_command'    => $enemyCommand,
+                    'allies_command'   => $command,
+                    'type_target'      => ActionInterface::TARGET_RANDOM_ENEMY,
+                    'offense'          => [
+                        'damage_type'         => 1,
+                        'weapon_type'         => WeaponTypeInterface::SWORD,
+                        'physical_damage'     => 10,
+                        'fire_damage'         => 0,
+                        'water_damage'        => 0,
+                        'air_damage'          => 0,
+                        'earth_damage'        => 0,
+                        'life_damage'         => 0,
+                        'death_damage'        => 0,
+                        'attack_speed'        => 1,
+                        'cast_speed'          => 0,
+                        'accuracy'            => 200,
+                        'magic_accuracy'      => 100,
+                        'block_ignoring'      => 0,
+                        'critical_chance'     => 5,
+                        'critical_multiplier' => 200,
+                        'damage_multiplier'   => 100,
+                        'vampirism'           => 0,
+                        'magic_vampirism'     => 0,
+                    ],
+                    'defense'          => [
+                        'physical_resist'     => 0,
+                        'fire_resist'         => 0,
+                        'water_resist'        => 0,
+                        'air_resist'          => 0,
+                        'earth_resist'        => 0,
+                        'life_resist'         => 0,
+                        'death_resist'        => 0,
+                        'defense'             => 100,
+                        'magic_defense'       => 50,
+                        'block'               => 0,
+                        'magic_block'         => 0,
+                        'mental_barrier'      => 0,
+                        'max_physical_resist' => 75,
+                        'max_fire_resist'     => 75,
+                        'max_water_resist'    => 75,
+                        'max_air_resist'      => 75,
+                        'max_earth_resist'    => 75,
+                        'max_life_resist'     => 75,
+                        'max_death_resist'    => 75,
+                        'global_resist'       => 0,
+                    ],
+                    'can_be_avoided'   => true,
+                    'name'             => 'action name',
+                    'animation_method' => 'animation test',
+                    'message_method'   => 'message test',
+                    'random_damage'    => 123,
+                ],
+                ActionException::INVALID_RANDOM_DAMAGE,
+            ],
+            [
+                // 54: EffectAction - некорректный icon
                 [
                     'type'           => ActionInterface::EFFECT,
                     'action_unit'    => $actionUnit,
@@ -2118,7 +2179,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ICON_DATA,
             ],
             [
-                // 53: EffectAction - некорректный animation_method
+                // 55: EffectAction - некорректный animation_method
                 [
                     'type'             => ActionInterface::EFFECT,
                     'action_unit'      => $actionUnit,
@@ -2151,7 +2212,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ANIMATION_METHOD_DATA,
             ],
             [
-                // 54: EffectAction - некорректный message_method
+                // 56: EffectAction - некорректный message_method
                 [
                     'type'           => ActionInterface::EFFECT,
                     'action_unit'    => $actionUnit,
@@ -2187,7 +2248,7 @@ class ActionFactoryTest extends AbstractUnitTest
             // offense и multiple_offense для DamageAction. Проверяем наличие параметра и что он null или array.
             // Остальная валидация происходит в OffenseFactory
             [
-                // 55: offense некорректного типа
+                // 57: offense некорректного типа
                 [
                     'type'             => ActionInterface::DAMAGE,
                     'action_unit'      => $actionUnit,
@@ -2203,7 +2264,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_OFFENSE_DATA,
             ],
             [
-                // 56: multiple_offense некорректного типа
+                // 58: multiple_offense некорректного типа
                 [
                     'type'             => ActionInterface::DAMAGE,
                     'action_unit'      => $actionUnit,
@@ -2221,7 +2282,7 @@ class ActionFactoryTest extends AbstractUnitTest
 
             // ManaRestoreAction
             [
-                // 57. Отсутствует type_target
+                // 59. Отсутствует type_target
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2236,7 +2297,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 58. type_target некорректного типа
+                // 60. type_target некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2252,7 +2313,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 59. Отсутствует power
+                // 61. Отсутствует power
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2267,7 +2328,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 60. power некорректного типа
+                // 62. power некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2283,7 +2344,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 61. Отсутствует name
+                // 63. Отсутствует name
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2298,7 +2359,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 62. name некорректного типа
+                // 64. name некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2314,7 +2375,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 63. Отсутствует animation_method
+                // 65. Отсутствует animation_method
                 [
                     'type'           => ActionInterface::MANA_RESTORE,
                     'action_unit'    => $actionUnit,
@@ -2329,7 +2390,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ANIMATION_METHOD_DATA,
             ],
             [
-                // 64. animation_method некорректного типа
+                // 66. animation_method некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2345,7 +2406,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ANIMATION_METHOD_DATA,
             ],
             [
-                // 65. Отсутствует message_method
+                // 67. Отсутствует message_method
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2360,7 +2421,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
-                // 66. message_method некорректного типа
+                // 68. message_method некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2376,7 +2437,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
-                // 67. icon некорректного типа
+                // 69. icon некорректного типа
                 [
                     'type'             => ActionInterface::MANA_RESTORE,
                     'action_unit'      => $actionUnit,
@@ -2394,7 +2455,7 @@ class ActionFactoryTest extends AbstractUnitTest
 
             // HealAction
             [
-                // 20: Отсутствует type_target [для HealAction]
+                // 70: Отсутствует type_target [для HealAction]
                 [
                     'type'             => ActionInterface::HEAL,
                     'action_unit'      => $actionUnit,
@@ -2409,7 +2470,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 21: type_target некорректного типа [для HealAction]
+                // 71: type_target некорректного типа [для HealAction]
                 [
                     'type'             => ActionInterface::HEAL,
                     'action_unit'      => $actionUnit,
@@ -2425,7 +2486,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_TYPE_TARGET_DATA,
             ],
             [
-                // 58: Отсутствует power для HealAction
+                // 72: Отсутствует power для HealAction
                 [
                     'type'             => ActionInterface::HEAL,
                     'action_unit'      => $actionUnit,
@@ -2439,7 +2500,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 58: Некорректный power для HealAction
+                // 73: Некорректный power для HealAction
                 [
                     'type'             => ActionInterface::HEAL,
                     'action_unit'      => $actionUnit,
@@ -2454,7 +2515,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_POWER_DATA,
             ],
             [
-                // 22: Отсутствует name [для HealAction]
+                // 74: Отсутствует name [для HealAction]
                 [
                     'type'             => ActionInterface::HEAL,
                     'action_unit'      => $actionUnit,
@@ -2470,7 +2531,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 22: name некорректного типа [для HealAction]
+                // 75: name некорректного типа [для HealAction]
                 [
                     'type'             => ActionInterface::HEAL,
                     'action_unit'      => $actionUnit,
@@ -2487,7 +2548,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_NAME_DATA,
             ],
             [
-                // 22: Отсутствует animation_method [для HealAction]
+                // 76: Отсутствует animation_method [для HealAction]
                 [
                     'type'           => ActionInterface::HEAL,
                     'action_unit'    => $actionUnit,
@@ -2503,7 +2564,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ANIMATION_METHOD_DATA,
             ],
             [
-                // 22: animation_method некорректного типа [для HealAction]
+                // 77: animation_method некорректного типа [для HealAction]
                 [
                     'type'             => ActionInterface::HEAL,
                     'action_unit'      => $actionUnit,
@@ -2520,7 +2581,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ANIMATION_METHOD_DATA,
             ],
             [
-                // 22: Отсутствует message_method [для HealAction]
+                // 78: Отсутствует message_method [для HealAction]
                 [
                     'type'             => ActionInterface::HEAL,
                     'action_unit'      => $actionUnit,
@@ -2536,7 +2597,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
-                // 22: message_method некорректного типа [для HealAction]
+                // 79: message_method некорректного типа [для HealAction]
                 [
                     'type'             => ActionInterface::HEAL,
                     'action_unit'      => $actionUnit,
@@ -2553,7 +2614,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_MESSAGE_METHOD_DATA,
             ],
             [
-                // 22: icon некорректного типа [для HealAction]
+                // 80: icon некорректного типа [для HealAction]
                 [
                     'type'             => ActionInterface::HEAL,
                     'action_unit'      => $actionUnit,
@@ -2570,7 +2631,7 @@ class ActionFactoryTest extends AbstractUnitTest
                 ActionException::INVALID_ICON_DATA,
             ],
             [
-                // 22: target_tracking некорректного типа [для HealAction]
+                // 81: target_tracking некорректного типа [для HealAction]
                 [
                     'type'             => ActionInterface::HEAL,
                     'action_unit'      => $actionUnit,
