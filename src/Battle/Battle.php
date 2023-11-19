@@ -12,7 +12,7 @@ use Exception;
 
 class Battle implements BattleInterface
 {
-    public const LIMIT_ROUND_MESSAGE = 'Limit round. Winner by max life';
+    public const LIMIT_STROKE_MESSAGE = 'Limit stroke. Winner by max life';
 
     /**
      * @var CommandInterface
@@ -32,11 +32,9 @@ class Battle implements BattleInterface
     private int $actionCommand;
 
     /**
-     * TODO Лучше переделать на лимит Stroke
-     *
      * @var int
      */
-    private int $maxRound = 100;
+    private int $maxStroke = 200;
 
     /**
      * @var ContainerInterface
@@ -72,15 +70,13 @@ class Battle implements BattleInterface
      */
     public function handle(): ResponseInterface
     {
-        $i = 0;
-
         $startLeftCommand = clone $this->leftCommand;
         $startRightCommand = clone $this->rightCommand;
 
         $roundFactory = $this->container->getRoundFactory();
         $statistics = $this->container->getStatistic();
 
-        while ($i < $this->maxRound) {
+        while ($this->container->getStatistic()->getStrokeNumber() < $this->maxStroke) {
             $round = $roundFactory->create(
                 $this->leftCommand,
                 $this->rightCommand,
@@ -97,12 +93,11 @@ class Battle implements BattleInterface
             }
 
             $statistics->increasedRound();
-            $i++;
         }
 
-        if ($i === $this->maxRound) {
+        if ($this->container->getStatistic()->getStrokeNumber() >= $this->maxStroke) {
             $this->container->getFullLog()->addText(
-                $this->container->getTranslation()->trans(self::LIMIT_ROUND_MESSAGE)
+                $this->container->getTranslation()->trans(self::LIMIT_STROKE_MESSAGE)
             );
         }
 

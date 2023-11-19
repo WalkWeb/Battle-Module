@@ -185,7 +185,7 @@ class BattleTest extends AbstractUnitTest
             $fullLog .= $log;
         }
 
-        self::assertIsInt(strripos($fullLog, Battle::LIMIT_ROUND_MESSAGE));
+        self::assertIsInt(strripos($fullLog, Battle::LIMIT_STROKE_MESSAGE));
     }
 
     /**
