@@ -176,6 +176,23 @@ class Container implements ContainerInterface
     }
 
     /**
+     * @return int
+     * @throws ContainerException
+     */
+    public function getDamageMultiplier(): int
+    {
+        if ($this->getStatistic()->getRoundNumber() > 40) {
+            return 4;
+        }
+
+        if ($this->getStatistic()->getRoundNumber() > 30) {
+            return 2;
+        }
+
+        return 1;
+    }
+
+    /**
      * @return StatisticInterface
      * @throws ContainerException
      */

@@ -8,6 +8,8 @@ use Battle\Unit\UnitInterface;
 
 interface EffectInterface
 {
+    // TODO getDescription
+
     /**
      * Возвращает имя эффекта
      *

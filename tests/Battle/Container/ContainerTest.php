@@ -425,4 +425,26 @@ class ContainerTest extends AbstractUnitTest
 
         self::assertTrue($container->isTestMode());
     }
+
+    /**
+     * @throws ContainerException
+     */
+    public function testContainerGetDamageMultiplier(): void
+    {
+        $container = new Container();
+
+        self::assertEquals(1, $container->getDamageMultiplier());
+
+        for ($i = 0; $i < 30; $i++) {
+            $container->getStatistic()->increasedRound();
+        }
+
+        self::assertEquals(2, $container->getDamageMultiplier());
+
+        for ($i = 0; $i < 10; $i++) {
+            $container->getStatistic()->increasedRound();
+        }
+
+        self::assertEquals(4, $container->getDamageMultiplier());
+    }
 }

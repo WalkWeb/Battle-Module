@@ -67,6 +67,20 @@ interface ContainerInterface
     public function isTestMode(): bool;
 
     /**
+     * Множитель урона
+     *
+     * Для случаев, когда у сражающихся юнитов низкий урон, но при этом высокая защита - используется общий множитель
+     * урона, который увеличивается при большом количестве раундов
+     *
+     * Раундов больше 30 => множитель x2
+     * Раундов больше 40 => множитель x4
+     *
+     * @return int
+     * @throws ContainerException
+     */
+    public function getDamageMultiplier(): int;
+
+    /**
      * @return StatisticInterface
      * @throws ContainerException
      */
