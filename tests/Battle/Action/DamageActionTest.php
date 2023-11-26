@@ -1258,7 +1258,7 @@ class DamageActionTest extends AbstractUnitTest
      * @param int $typeTarget
      * @param bool $randomDamage
      * @return DamageAction
-     * @throws ActionException
+     * @throws Exception
      */
     private function createDamageAction(
         UnitInterface $unit,

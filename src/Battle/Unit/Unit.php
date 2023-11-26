@@ -471,12 +471,14 @@ class Unit extends AbstractUnit
             (int)($baseDamage * ($this->getOffense()->getCriticalMultiplier() / 100)) :
             $baseDamage;
 
+        $finalDamage = $damage * $this->container->getDamageMultiplier();
+
         if ($this->defense->getMentalBarrier() > 0) {
-            $damageByMana = (int)($damage / (100 / $this->defense->getMentalBarrier()));
-            $damageByLife = $damage - $damageByMana;
+            $damageByMana = (int)($finalDamage / (100 / $this->defense->getMentalBarrier()));
+            $damageByLife = $finalDamage - $damageByMana;
         } else {
             $damageByMana = 0;
-            $damageByLife = $damage;
+            $damageByLife = $finalDamage;
         }
 
         if ($damageByMana > 0) {

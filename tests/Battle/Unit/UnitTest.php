@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit;
 
 use Battle\Action\ActionCollection;
+use Battle\Command\CommandInterface;
+use Battle\Container\Container;
 use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Defense\Defense;
 use Battle\Unit\Defense\DefenseInterface;
@@ -768,6 +770,43 @@ class UnitTest extends AbstractUnitTest
     }
 
     /**
+     * @throws Exception
+     */
+    public function testUnitIncreasedDamageInLongBattle(): void
+    {
+        $container = new Container(true);
+        $unit = UnitFactory::createByTemplate(1, $container);
+        $enemyUnit = UnitFactory::createByTemplate(2, $container);
+        $command = CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        // Проверяем изначальное здоровье
+        self::assertEquals(250, $enemyUnit->getLife());
+
+        // Удар на первом раунде наносит х1 урон = 20
+        $this->createDamageAction($unit, $enemyCommand, $command)->handle();
+        self::assertEquals(230, $enemyUnit->getLife());
+
+        for ($i = 0; $i < 30; $i++) {
+            $container->getStatistic()->increasedRound();
+        }
+
+        // На 30+ раунде удар наносит х2 урона = 40
+        $this->createDamageAction($unit, $enemyCommand, $command)->handle();
+
+        self::assertEquals(190, $enemyUnit->getLife());
+
+        for ($i = 0; $i < 10; $i++) {
+            $container->getStatistic()->increasedRound();
+        }
+
+        // На 40+ раунде удар наносит х4 урона = 80
+        $this->createDamageAction($unit, $enemyCommand, $command)->handle();
+
+        self::assertEquals(110, $enemyUnit->getLife());
+    }
+
+    /**
      * @return array
      */
     public function createDataProvider(): array
@@ -807,6 +846,37 @@ class UnitTest extends AbstractUnitTest
             75,
             0,
             0
+        );
+    }
+
+    /**
+     * @param UnitInterface $unit
+     * @param CommandInterface $enemyCommand
+     * @param CommandInterface $command
+     * @return DamageAction
+     * @throws Exception
+     */
+    private function createDamageAction(
+        UnitInterface $unit,
+        CommandInterface $enemyCommand,
+        CommandInterface $command
+    ): DamageAction
+    {
+        return new DamageAction(
+            $this->container,
+            $unit,
+            $enemyCommand,
+            $command,
+            DamageAction::TARGET_RANDOM_ENEMY,
+            true,
+            DamageAction::DEFAULT_NAME,
+            DamageAction::UNIT_ANIMATION_METHOD,
+            DamageAction::DEFAULT_MESSAGE_METHOD,
+            $unit->getOffense(),
+            null,
+            '',
+            true,
+            false
         );
     }
 }

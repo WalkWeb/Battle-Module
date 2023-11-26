@@ -120,7 +120,7 @@ class DamageAction extends AbstractAction
      * @param string $icon
      * @param bool $targetTracking
      * @param bool $randomDamage
-     * @throws ActionException
+     * @throws Exception
      */
     public function __construct(
         ContainerInterface $container,
