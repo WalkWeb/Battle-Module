@@ -617,8 +617,15 @@ class Chat implements ChatInterface
      */
     private function getDamagedMessage(ActionInterface $action, string $targetNames): string
     {
-        $message = $action->isCriticalDamage() ?
-            '%s critical hit for %d damage against %s' : '%s hit for %d damage against %s';
+        if ($action->isCriticalDamage()) {
+            $message = '%s critical hit for %d damage against %s';
+        } elseif ($action->getRandomDamageMultiplier() > 1.5) {
+            $message = '%s hit for %d <i>crushing</i> damage against %s';
+        } elseif ($action->getRandomDamageMultiplier() < 0.6) {
+            $message = '%s hit for %d <i>unlucky</i> damage against %s';
+        } else {
+            $message = '%s hit for %d damage against %s';
+        }
 
         return sprintf(
             $this->translation->trans($message),

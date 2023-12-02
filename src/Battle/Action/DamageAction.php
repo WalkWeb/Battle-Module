@@ -395,6 +395,14 @@ class DamageAction extends AbstractAction
     }
 
     /**
+     * @param float $damageMultiplier
+     */
+    public function setRandomDamageMultiplier(float $damageMultiplier): void
+    {
+        $this->damageMultiplier = $damageMultiplier;
+    }
+
+    /**
      * @return bool
      */
     public function isRandomDamage(): bool

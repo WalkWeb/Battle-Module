@@ -244,8 +244,12 @@ return [
     // Full-text messages
     // $unit received $power damage from effect $icon $ability
     '%s received %d damage from effect %s %s'                        => '%s получил %d урона от эффекта %s %s',
-    // $unit hit for $damage damage against $targets
+    // $unit hit for # $damage damage against $targets
     '%s hit for %d damage against %s'                                => '%s нанес удар на %d урона по %s',
+    // $unit hit for $damage crushing damage against $targets
+    '%s hit for %d <i>crushing</i> damage against %s'                => '%s нанес <i>сокрушительный</i> удар на %d урона по %s',
+    // $unit hit for $damage unlucky damage against $targets
+    '%s hit for %d <i>unlucky</i> damage against %s'                 => '%s нанес <i>неудачный</i> удар на %d урона по %s',
     // $unit critical hit for $damage damage against $targets
     '%s critical hit for %d damage against %s'                       => '%s нанес критический удар на %d урона по %s',
     // $unit heal $unit on $power life

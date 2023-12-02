@@ -418,6 +418,16 @@ interface ActionInterface
     public function getRandomDamageMultiplier(): float;
 
     /**
+     * Устанавливает множитель урона
+     *
+     * Метод необходим только для тестов - чтобы указать фиксированное значение и проверить корректность формирования
+     * сообщения о сокрушительном/неудачном ударах
+     *
+     * @param float $damageMultiplier
+     */
+    public function setRandomDamageMultiplier(float $damageMultiplier): void;
+
+    /**
      * Необходимо ли рандомизировать урон от этого события
      *
      * (только для DamageAction, вызов метода у других событий бросит Exception)

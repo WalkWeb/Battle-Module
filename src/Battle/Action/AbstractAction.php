@@ -329,6 +329,15 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * @param float $damageMultiplier
+     * @throws ActionException
+     */
+    public function setRandomDamageMultiplier(float $damageMultiplier): void
+    {
+        throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
+    }
+
+    /**
      * @return bool
      * @throws ActionException
      */
