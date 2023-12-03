@@ -608,7 +608,7 @@ class Chat implements ChatInterface
 
     /**
      * Формирует сообщение о юнитах, которые получили урон в формате:
-     * $unit [critical] hit for $damage damage against $targets
+     * $unit [crushing/unlucky] [critical] hit for $damage damage against $targets
      *
      * @param ActionInterface $action
      * @param string $targetNames
@@ -617,24 +617,43 @@ class Chat implements ChatInterface
      */
     private function getDamagedMessage(ActionInterface $action, string $targetNames): string
     {
-        if ($action->isCriticalDamage()) {
-            $message = '%s critical hit for %d damage against %s';
-        } elseif ($action->getRandomDamageMultiplier() > 1.5) {
-            $message = '%s hit for %d <i>crushing</i> damage against %s';
-        } elseif ($action->getRandomDamageMultiplier() < 0.6) {
-            $message = '%s hit for %d <i>unlucky</i> damage against %s';
-        } else {
-            $message = '%s hit for %d damage against %s';
-        }
-
         return sprintf(
-            $this->translation->trans($message),
+            $this->translation->trans($this->getCrushingOrUnluckyMessage($action)),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $action->getFactualPower(),
             $targetNames
         ) . $this->getVampirismMessage($action);
     }
 
+    /**
+     * Добавляет crushing/unlucky к сообщению урона, если это необходимо
+     *
+     * @param ActionInterface $action
+     * @return string
+     */
+    private function getCrushingOrUnluckyMessage(ActionInterface $action): string
+    {
+        $isCritical = $action->isCriticalDamage();
+        $damageMultiplier = $action->getRandomDamageMultiplier();
+
+        if ($isCritical && $damageMultiplier > 1.5) {
+            return '%s <i>crushing</i> critical hit for %d damage against %s';
+        }
+        if ($isCritical && $damageMultiplier < 0.6) {
+            return '%s <i>unlucky</i> critical hit for %d damage against %s';
+        }
+        if ($isCritical) {
+            return '%s critical hit for %d damage against %s';
+        }
+        if ($damageMultiplier > 1.5) {
+            return '%s hit for %d <i>crushing</i> damage against %s';
+        }
+        if ($damageMultiplier < 0.6) {
+            return '%s hit for %d <i>unlucky</i> damage against %s';
+        }
+        return '%s hit for %d damage against %s';
+    }
+    
     /**
      * Формирует сообщение о юнитах которые заблокировали удар.
      *

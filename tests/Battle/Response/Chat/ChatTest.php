@@ -49,6 +49,12 @@ class ChatTest extends AbstractUnitTest
     private const CRITICAL_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> critical hit for 40 damage against <span style="color: #1e72e3">unit_2</span>';
     private const CRITICAL_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес критический удар на 40 урона по <span style="color: #1e72e3">unit_2</span>';
 
+    private const CRUSHING_CRITICAL_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> <i>crushing</i> critical hit for 64 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const CRUSHING_CRITICAL_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес <i>сокрушительный</i> критический удар на 64 урона по <span style="color: #1e72e3">unit_2</span>';
+
+    private const UNLUCKY_CRITICAL_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> <i>unlucky</i> critical hit for 20 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const UNLUCKY_CRITICAL_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес <i>неудачный</i> критический удар на 20 урона по <span style="color: #1e72e3">unit_2</span>';
+
     private const BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
     private const BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
@@ -285,6 +291,48 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::CRITICAL_DAMAGE_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::CRITICAL_DAMAGE_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения о сокрушительном критическом уроне
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageCrushingCriticalDamage(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(40, 2);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->setRandomDamageMultiplier(1.6);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::CRUSHING_CRITICAL_DAMAGE_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::CRUSHING_CRITICAL_DAMAGE_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения о неудачном критическом уроне
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageUnluckyCriticalDamage(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(40, 2);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->setRandomDamageMultiplier(0.5);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::UNLUCKY_CRITICAL_DAMAGE_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::UNLUCKY_CRITICAL_DAMAGE_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**

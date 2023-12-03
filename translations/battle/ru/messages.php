@@ -252,6 +252,10 @@ return [
     '%s hit for %d <i>unlucky</i> damage against %s'                 => '%s нанес <i>неудачный</i> удар на %d урона по %s',
     // $unit critical hit for $damage damage against $targets
     '%s critical hit for %d damage against %s'                       => '%s нанес критический удар на %d урона по %s',
+    // $unit crushing critical hit for $damage damage against $targets
+    '%s <i>crushing</i> critical hit for %d damage against %s'       => '%s нанес <i>сокрушительный</i> критический удар на %d урона по %s',
+    // $unit unlucky critical hit for $damage damage against $targets
+    '%s <i>unlucky</i> critical hit for %d damage against %s'        => '%s нанес <i>неудачный</i> критический удар на %d урона по %s',
     // $unit heal $unit on $power life
     '%s heal %s on %d life'                                          => '%s вылечил %s на %d здоровья',
     // $unit use $icon $ability and heal $unit on $power life
