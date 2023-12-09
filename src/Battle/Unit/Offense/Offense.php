@@ -352,8 +352,6 @@ class Offense implements OffenseInterface
     }
 
     /**
-     * TODO Добавить округление до двух цифр после запятой
-     *
      * @return float
      */
     public function getAttackSpeed(): float

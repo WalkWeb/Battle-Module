@@ -629,29 +629,35 @@ class Chat implements ChatInterface
      * Добавляет crushing/unlucky к сообщению урона, если это необходимо
      *
      * @param ActionInterface $action
+     * @param bool $ability
      * @return string
      */
-    private function getCrushingOrUnluckyMessage(ActionInterface $action): string
+    private function getCrushingOrUnluckyMessage(ActionInterface $action, bool $ability = false): string
     {
         $isCritical = $action->isCriticalDamage();
         $damageMultiplier = $action->getRandomDamageMultiplier();
 
         if ($isCritical && $damageMultiplier > 1.5) {
-            return '%s <i>crushing</i> critical hit for %d damage against %s';
+            return $ability ? '%s use %s %s and <i>crushing</i> critical hit for %d damage against %s' :
+                '%s <i>crushing</i> critical hit for %d damage against %s';
         }
         if ($isCritical && $damageMultiplier < 0.6) {
-            return '%s <i>unlucky</i> critical hit for %d damage against %s';
+            return $ability ? '%s use %s %s and <i>unlucky</i> critical hit for %d damage against %s' :
+                '%s <i>unlucky</i> critical hit for %d damage against %s';
         }
         if ($isCritical) {
-            return '%s critical hit for %d damage against %s';
+            return $ability ? '%s use %s %s and critical hit for %d damage against %s' :
+                '%s critical hit for %d damage against %s';
         }
         if ($damageMultiplier > 1.5) {
-            return '%s hit for %d <i>crushing</i> damage against %s';
+            return $ability ? '%s use %s %s and hit for %d <i>crushing</i> damage against %s' :
+                '%s hit for %d <i>crushing</i> damage against %s';
         }
         if ($damageMultiplier < 0.6) {
-            return '%s hit for %d <i>unlucky</i> damage against %s';
+            return $ability ? '%s use %s %s and hit for %d <i>unlucky</i> damage against %s' :
+                '%s hit for %d <i>unlucky</i> damage against %s';
         }
-        return '%s hit for %d damage against %s';
+        return $ability ? '%s use %s %s and hit for %d damage against %s' : '%s hit for %d damage against %s';
     }
     
     /**
@@ -702,11 +708,8 @@ class Chat implements ChatInterface
      */
     private function getDamagedAbilityMessage(ActionInterface $action, string $targetNames): string
     {
-        $message = $action->isCriticalDamage() ?
-            '%s use %s %s and critical hit for %d damage against %s' : '%s use %s %s and hit for %d damage against %s';
-
         return sprintf(
-            $this->translation->trans($message),
+            $this->translation->trans($this->getCrushingOrUnluckyMessage($action, true)),
             '<span style="color: ' . $action->getActionUnit()->getRace()->getColor() . '">' . $action->getActionUnit()->getName() . '</span>',
             $this->getIcon($action),
             '<span class="ability">' . $this->translation->trans($action->getNameAction()) . '</span>',

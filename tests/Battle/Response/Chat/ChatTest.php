@@ -82,11 +82,23 @@ class ChatTest extends AbstractUnitTest
     private const DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span>';
     private const DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const DAMAGE_ABILITY_AND_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span> and restore 25 life';
-    private const DAMAGE_ABILITY_AND_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span> и восстановил 25 здоровья';
+    private const CRUSHING_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 80 <i>crushing</i> damage against <span style="color: #1e72e3">unit_2</span>';
+    private const CRUSHING_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>сокрушительный</i> удар на 80 урона по <span style="color: #1e72e3">unit_2</span>';
+
+    private const UNLUCKY_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 25 <i>unlucky</i> damage against <span style="color: #1e72e3">unit_2</span>';
+    private const UNLUCKY_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>неудачный</i> удар на 25 урона по <span style="color: #1e72e3">unit_2</span>';
 
     private const CRITICAL_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and critical hit for 100 damage against <span style="color: #1e72e3">unit_2</span>';
     private const CRITICAL_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес критический удар на 100 урона по <span style="color: #1e72e3">unit_2</span>';
+
+    private const CRUSHING_CRITICAL_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>crushing</i> critical hit for 160 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const CRUSHING_CRITICAL_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>сокрушительный</i> критический удар на 160 урона по <span style="color: #1e72e3">unit_2</span>';
+
+    private const UNLUCKY_CRITICAL_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>unlucky</i> critical hit for 50 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const UNLUCKY_CRITICAL_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>неудачный</i> критический удар на 50 урона по <span style="color: #1e72e3">unit_2</span>';
+
+    private const DAMAGE_ABILITY_AND_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span> and restore 25 life';
+    private const DAMAGE_ABILITY_AND_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span> и восстановил 25 здоровья';
 
     private const DAMAGE_ABILITY_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it!';
     private const DAMAGE_ABILITY_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его!';
@@ -393,6 +405,48 @@ class ChatTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на формирование сообщения о сокрушительном уроне со способности
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageDamageAbilityCrushing(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $action = $this->createAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->setRandomDamageMultiplier(1.6);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::CRUSHING_DAMAGE_ABILITY_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::CRUSHING_DAMAGE_ABILITY_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения о неудачном уроне со способности
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageDamageAbilityUnlucky(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
+
+        $action = $this->createAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->setRandomDamageMultiplier(0.5);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::UNLUCKY_DAMAGE_ABILITY_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::UNLUCKY_DAMAGE_ABILITY_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
      * Тест на формирование сообщения об уроне со способности с вампиризмом
      *
      * @throws Exception
@@ -412,11 +466,11 @@ class ChatTest extends AbstractUnitTest
     }
 
     /**
-     * Тест на формирование сообщения об уроне со способности
+     * Тест на формирование сообщения о критическом уроне со способности
      *
      * @throws Exception
      */
-    public function testChatAddMessageCriticalDamageAbility(): void
+    public function testChatAddMessageCriticalDamageAbilityDefault(): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(40, 2);
 
@@ -428,6 +482,48 @@ class ChatTest extends AbstractUnitTest
 
         self::assertEquals(self::CRITICAL_DAMAGE_ABILITY_EN, $this->getChat()->addMessage($action));
         self::assertEquals(self::CRITICAL_DAMAGE_ABILITY_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения о сокрушительном критическом уроне со способности
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageCriticalDamageAbilityCrushing(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(40, 2);
+
+        $action = $this->createCriticalAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->setRandomDamageMultiplier(1.6);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::CRUSHING_CRITICAL_DAMAGE_ABILITY_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::CRUSHING_CRITICAL_DAMAGE_ABILITY_RU, $this->getChatRu()->addMessage($action));
+    }
+
+    /**
+     * Тест на формирование сообщения о неудачном критическом уроне со способности
+     *
+     * @throws Exception
+     */
+    public function testChatAddMessageCriticalDamageAbilityUnlucky(): void
+    {
+        [$unit, $command, $enemyCommand] = BaseFactory::create(40, 2);
+
+        $action = $this->createCriticalAbilityDamage($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->setRandomDamageMultiplier(0.5);
+
+        self::assertTrue($action->canByUsed());
+
+        $action->handle();
+
+        self::assertEquals(self::UNLUCKY_CRITICAL_DAMAGE_ABILITY_EN, $this->getChat()->addMessage($action));
+        self::assertEquals(self::UNLUCKY_CRITICAL_DAMAGE_ABILITY_RU, $this->getChatRu()->addMessage($action));
     }
 
     /**
