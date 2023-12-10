@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Response;
 
+use Battle\Container\Container;
 use Exception;
 use Battle\Response\Chat\Chat;
 use Battle\Response\Scenario\Scenario;
@@ -21,27 +22,29 @@ class ResponseTest extends AbstractUnitTest
      */
     public function testCreateResultSuccess(): void
     {
+        $container = new Container(true);
         $leftCommand = CommandFactory::createLeftCommand();
         $rightCommand = CommandFactory::createRightCommand();
         $chat = new Chat($this->container);
         $translation = new Translation();
         $scenario = new Scenario();
 
-        $result = new Response($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 2, $this->container);
+        $response = new Response($leftCommand, $rightCommand, $leftCommand, $rightCommand, $winner = 2, $container);
 
-        self::assertInstanceOf(Response::class, $result);
-        self::assertEquals($leftCommand, $result->getStartLeftCommand());
-        self::assertEquals($rightCommand, $result->getStartRightCommand());
-        self::assertEquals($leftCommand, $result->getEndLeftCommand());
-        self::assertEquals($rightCommand, $result->getEndRightCommand());
-        self::assertEquals($winner, $result->getWinner());
-        self::assertEquals(Response::RIGHT_COMMAND_WIN, $result->getWinnerText());
-        self::assertEquals(1, $result->getStatistic()->getRoundNumber());
-        self::assertEquals(1, $result->getStatistic()->getStrokeNumber());
-        self::assertCount(0, $result->getFullLog()->getLog());
-        self::assertEquals($chat, $result->getChat());
-        self::assertEquals($translation, $result->getTranslation());
-        self::assertEquals($scenario, $result->getScenario());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals($leftCommand, $response->getStartLeftCommand());
+        self::assertEquals($rightCommand, $response->getStartRightCommand());
+        self::assertEquals($leftCommand, $response->getEndLeftCommand());
+        self::assertEquals($rightCommand, $response->getEndRightCommand());
+        self::assertEquals($winner, $response->getWinner());
+        self::assertEquals(Response::RIGHT_COMMAND_WIN, $response->getWinnerText());
+        self::assertEquals(1, $response->getStatistic()->getRoundNumber());
+        self::assertEquals(1, $response->getStatistic()->getStrokeNumber());
+        self::assertCount(0, $response->getFullLog()->getLog());
+        self::assertEquals($chat, $response->getChat());
+        self::assertEquals($translation, $response->getTranslation());
+        self::assertEquals($scenario, $response->getScenario());
+        self::assertEquals($container, $response->getContainer());
     }
 
     /**

@@ -447,4 +447,16 @@ class ContainerTest extends AbstractUnitTest
 
         self::assertEquals(4, $container->getDamageMultiplier());
     }
+
+    public function testContainerSetBattleLink(): void
+    {
+        $container = new Container();
+        $link = 'https://site.com/fight/1000';
+
+        self::assertEquals('', $container->getBattleLink());
+
+        $container->setBattleLink($link);
+
+        self::assertEquals($link, $container->getBattleLink());
+    }
 }

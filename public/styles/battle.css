@@ -898,3 +898,7 @@ table.units_stats .header td {
 span.ability {
     color: #9e6821;
 }
+
+.link_battle {
+    text-decoration: none;
+}

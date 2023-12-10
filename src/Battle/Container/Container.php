@@ -119,6 +119,8 @@ class Container implements ContainerInterface
 
     private bool $testMode;
 
+    private string $battleLink = '';
+
     public function __construct(bool $testMode = false)
     {
         $this->testMode = $testMode;
@@ -190,6 +192,22 @@ class Container implements ContainerInterface
         }
 
         return 1;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBattleLink(): string
+    {
+        return $this->battleLink;
+    }
+
+    /**
+     * @param string $battleLink
+     */
+    public function setBattleLink(string $battleLink): void
+    {
+        $this->battleLink = $battleLink;
     }
 
     /**

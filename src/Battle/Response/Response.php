@@ -149,4 +149,12 @@ class Response implements ResponseInterface
     {
         return $this->container->getScenario();
     }
+
+    /**
+     * @return ContainerInterface
+     */
+    public function getContainer(): ContainerInterface
+    {
+        return $this->container;
+    }
 }

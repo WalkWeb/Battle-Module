@@ -81,6 +81,24 @@ interface ContainerInterface
     public function getDamageMultiplier(): int;
 
     /**
+     * Каждый бой записывается в базу и его можно пересмотреть по ссылке. Если ссылка на бой не задана - вернет пустую
+     * строку.
+     *
+     * Ссылка задается вручную, после того, как бой выполнен, но до того, как он отображается для пользователя. Если
+     * ссылка не указана - кнопка со ссылкой на бой отображаться не будет.
+     *
+     * @return string
+     */
+    public function getBattleLink(): string;
+
+    /**
+     * Устанавливает ссылку на бой
+     *
+     * @param string $battleLink
+     */
+    public function setBattleLink(string $battleLink): void;
+
+    /**
      * @return StatisticInterface
      * @throws ContainerException
      */

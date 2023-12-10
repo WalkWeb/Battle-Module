@@ -13,6 +13,7 @@ return [
     'Show Battle Statistic'                                                  => 'Показать статистику боя',
     'Hidden Battle Log'                                                      => 'Скрыть детализацию боя',
     'Hidden Battle Statistic'                                                => 'Скрыть статистику боя',
+    'Link to Battle'                                                         => 'Ссылка на бой',
     'Limit stroke. Winner by max life'                                       => 'Достигнут лимит ходов. Победитель выбирается по максимальному оставшемся здоровью',
     'Left command win'                                                       => 'Победила левая команда',
     'Right command win'                                                      => 'Победила правая команда',

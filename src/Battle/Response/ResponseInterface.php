@@ -2,6 +2,7 @@
 
 namespace Battle\Response;
 
+use Battle\Container\ContainerInterface;
 use Battle\Response\Chat\ChatInterface;
 use Battle\Command\CommandInterface;
 use Battle\Response\FullLog\FullLogInterface;
@@ -90,4 +91,11 @@ interface ResponseInterface
      * @return ScenarioInterface
      */
     public function getScenario(): ScenarioInterface;
+
+    /**
+     * Возвращает контейнер
+     *
+     * @return ContainerInterface
+     */
+    public function getContainer(): ContainerInterface;
 }

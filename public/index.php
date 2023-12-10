@@ -323,6 +323,9 @@ try {
     $battle = BattleFactory::create($data, $container);
     $response = $battle->handle();
 
+    // Link to save battle log in database
+    //$container->setBattleLink('https://site.com/fight/1000');
+
     $view = $battle->getContainer()->getViewFactory()->create();
     echo $view->renderHead(); // example layout styles
     echo $view->renderBattle($response);

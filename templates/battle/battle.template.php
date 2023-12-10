@@ -47,6 +47,15 @@ if (!isset($response) || !($response instanceof ResponseInterface)) {
             <?= $response->getTranslation()->trans('Show Battle Statistic') ?>
         </div>
     </div>
+    <?php if ($response->getContainer()->getBattleLink()): ?>
+        <div class="button_row">
+            <a href="<?= $response->getContainer()->getBattleLink() ?>" title="" target="_blank" class="link_battle">
+                <div class="battle_button">
+                    <?= $response->getTranslation()->trans('Link to Battle') ?>
+                </div>
+            </a>
+        </div>
+    <?php endif; ?>
 </div>
 
 <div class="spoiler_cont" id="battle_statistic">
