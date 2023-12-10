@@ -287,9 +287,9 @@ return [
     // $unit use $icon $ability and hit for $damage damage against $targets
     '%s use %s %s and hit for %d damage against %s'                          => '%s use %s %s and hit for %d damage against %s',
     // $unit use $icon $ability and hit for crushing $damage damage against $targets
-    '%s use %s %s and hit for %d <i>crushing</i> damage against %s'          => '%s use %s %s and hit for %d <i>crushing</i> damage against %s',
+    '%s use %s %s and <i>crushing</i> hit for %d damage against %s'          => '%s use %s %s and <i>crushing</i> hit for %d damage against %s',
     // $unit use $icon $ability and hit for unlucky $damage damage against $targets
-    '%s use %s %s and hit for %d <i>unlucky</i> damage against %s'           => '%s use %s %s and hit for %d <i>unlucky</i> damage against %s',
+    '%s use %s %s and <i>unlucky</i> hit for %d damage against %s'           => '%s use %s %s and <i>unlucky</i> hit for %d damage against %s',
     // $unit use $icon $ability and critical hit for $damage damage against $targets
     '%s use %s %s and critical hit for %d damage against %s'                 => '%s use %s %s and critical hit for %d damage against %s',
     // $unit use $icon $ability and crushing critical hit for $damage damage against $targets

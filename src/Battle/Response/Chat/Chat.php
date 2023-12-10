@@ -650,11 +650,11 @@ class Chat implements ChatInterface
                 '%s critical hit for %d damage against %s';
         }
         if ($damageMultiplier > 1.5) {
-            return $ability ? '%s use %s %s and hit for %d <i>crushing</i> damage against %s' :
+            return $ability ? '%s use %s %s and <i>crushing</i> hit for %d damage against %s' :
                 '%s hit for %d <i>crushing</i> damage against %s';
         }
         if ($damageMultiplier < 0.6) {
-            return $ability ? '%s use %s %s and hit for %d <i>unlucky</i> damage against %s' :
+            return $ability ? '%s use %s %s and <i>unlucky</i> hit for %d damage against %s' :
                 '%s hit for %d <i>unlucky</i> damage against %s';
         }
         return $ability ? '%s use %s %s and hit for %d damage against %s' : '%s hit for %d damage against %s';

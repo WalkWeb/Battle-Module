@@ -82,10 +82,10 @@ class ChatTest extends AbstractUnitTest
     private const DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span>';
     private const DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const CRUSHING_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 80 <i>crushing</i> damage against <span style="color: #1e72e3">unit_2</span>';
+    private const CRUSHING_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>crushing</i> hit for 80 damage against <span style="color: #1e72e3">unit_2</span>';
     private const CRUSHING_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>сокрушительный</i> удар на 80 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const UNLUCKY_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 25 <i>unlucky</i> damage against <span style="color: #1e72e3">unit_2</span>';
+    private const UNLUCKY_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>unlucky</i> hit for 25 damage against <span style="color: #1e72e3">unit_2</span>';
     private const UNLUCKY_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>неудачный</i> удар на 25 урона по <span style="color: #1e72e3">unit_2</span>';
 
     private const CRITICAL_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and critical hit for 100 damage against <span style="color: #1e72e3">unit_2</span>';
