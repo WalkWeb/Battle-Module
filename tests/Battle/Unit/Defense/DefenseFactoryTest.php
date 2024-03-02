@@ -23,13 +23,48 @@ class DefenseFactoryTest extends AbstractUnitTest
     {
         $defense = $this->getFactory()->create($data);
 
-        self::assertEquals($data['physical_resist'], $defense->getPhysicalResist());
-        self::assertEquals($data['fire_resist'], $defense->getFireResist());
-        self::assertEquals($data['water_resist'], $defense->getWaterResist());
-        self::assertEquals($data['air_resist'], $defense->getAirResist());
-        self::assertEquals($data['earth_resist'], $defense->getEarthResist());
-        self::assertEquals($data['life_resist'], $defense->getLifeResist());
-        self::assertEquals($data['death_resist'], $defense->getDeathResist());
+        if ($data['physical_resist'] > $data['max_physical_resist']) {
+            self::assertEquals($data['max_physical_resist'], $defense->getPhysicalResist());
+        } else {
+            self::assertEquals($data['physical_resist'], $defense->getPhysicalResist());
+        }
+
+        if ($data['fire_resist'] > $data['max_fire_resist']) {
+            self::assertEquals($data['max_fire_resist'], $defense->getFireResist());
+        } else {
+            self::assertEquals($data['fire_resist'], $defense->getFireResist());
+        }
+
+        if ($data['water_resist'] > $data['max_water_resist']) {
+            self::assertEquals($data['max_water_resist'], $defense->getWaterResist());
+        } else {
+            self::assertEquals($data['water_resist'], $defense->getWaterResist());
+        }
+
+        if ($data['air_resist'] > $data['max_air_resist']) {
+            self::assertEquals($data['max_air_resist'], $defense->getAirResist());
+        } else {
+            self::assertEquals($data['air_resist'], $defense->getAirResist());
+        }
+
+        if ($data['earth_resist'] > $data['max_earth_resist']) {
+            self::assertEquals($data['max_earth_resist'], $defense->getEarthResist());
+        } else {
+            self::assertEquals($data['earth_resist'], $defense->getEarthResist());
+        }
+
+        if ($data['life_resist'] > $data['max_life_resist']) {
+            self::assertEquals($data['max_life_resist'], $defense->getLifeResist());
+        } else {
+            self::assertEquals($data['life_resist'], $defense->getLifeResist());
+        }
+
+        if ($data['death_resist'] > $data['max_death_resist']) {
+            self::assertEquals($data['max_death_resist'], $defense->getDeathResist());
+        } else {
+            self::assertEquals($data['death_resist'], $defense->getDeathResist());
+        }
+
         self::assertEquals($data['defense'], $defense->getDefense());
         self::assertEquals($data['magic_defense'], $defense->getMagicDefense());
         self::assertEquals($data['block'], $defense->getBlock());
@@ -100,6 +135,31 @@ class DefenseFactoryTest extends AbstractUnitTest
                     'earth_resist'        => 20,
                     'life_resist'         => 25,
                     'death_resist'        => 30,
+                    'defense'             => 654,
+                    'magic_defense'       => 150,
+                    'block'               => 34,
+                    'magic_block'         => 24,
+                    'mental_barrier'      => 100,
+                    'max_physical_resist' => 75,
+                    'max_fire_resist'     => 75,
+                    'max_water_resist'    => 75,
+                    'max_air_resist'      => 75,
+                    'max_earth_resist'    => 75,
+                    'max_life_resist'     => 75,
+                    'max_death_resist'    => 75,
+                    'global_resist'       => 0,
+                    'dodge'               => 98,
+                ],
+            ],
+            [
+                [
+                    'physical_resist'     => 100,
+                    'fire_resist'         => 92,
+                    'water_resist'        => 93,
+                    'air_resist'          => 94,
+                    'earth_resist'        => 95,
+                    'life_resist'         => 96,
+                    'death_resist'        => 97,
                     'defense'             => 654,
                     'magic_defense'       => 150,
                     'block'               => 34,

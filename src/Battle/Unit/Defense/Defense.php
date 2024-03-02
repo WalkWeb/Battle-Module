@@ -183,12 +183,14 @@ class Defense implements DefenseInterface
     }
 
     /**
-     * TODO Добавить проверки, что текущее сопротивление ниже максимального, если выше - возвращаем максимальное сопротивление, оставляя текущее больше максимального
-     *
      * @return int
      */
     public function getPhysicalResist(): int
     {
+        if ($this->physicalResist > $this->physicalMaxResist) {
+            return $this->physicalMaxResist;
+        }
+
         return $this->physicalResist;
     }
 
@@ -212,6 +214,10 @@ class Defense implements DefenseInterface
      */
     public function getFireResist(): int
     {
+        if ($this->fireResist > $this->fireMaxResist) {
+            return $this->fireMaxResist;
+        }
+
         return $this->fireResist;
     }
 
@@ -235,6 +241,10 @@ class Defense implements DefenseInterface
      */
     public function getWaterResist(): int
     {
+        if ($this->waterResist > $this->waterMaxResist) {
+            return $this->waterMaxResist;
+        }
+
         return $this->waterResist;
     }
 
@@ -258,6 +268,10 @@ class Defense implements DefenseInterface
      */
     public function getAirResist(): int
     {
+        if ($this->airResist > $this->airMaxResist) {
+            return $this->airMaxResist;
+        }
+
         return $this->airResist;
     }
 
@@ -281,6 +295,10 @@ class Defense implements DefenseInterface
      */
     public function getEarthResist(): int
     {
+        if ($this->earthResist > $this->earthMaxResist) {
+            return $this->earthMaxResist;
+        }
+
         return $this->earthResist;
     }
 
@@ -304,6 +322,10 @@ class Defense implements DefenseInterface
      */
     public function getLifeResist(): int
     {
+        if ($this->lifeResist > $this->lifeMaxResist) {
+            return $this->lifeMaxResist;
+        }
+
         return $this->lifeResist;
     }
 
@@ -327,6 +349,10 @@ class Defense implements DefenseInterface
      */
     public function getDeathResist(): int
     {
+        if ($this->deathResist > $this->deathMaxResist) {
+            return $this->deathMaxResist;
+        }
+
         return $this->deathResist;
     }
 
