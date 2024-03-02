@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Classes;
 
 use Battle\Command\CommandFactory;
+use Battle\Container\ContainerInterface;
 use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClass;
@@ -33,7 +34,7 @@ class UnitClassTest extends AbstractUnitTest
             $classData['id'],
             $classData['name'],
             $classData['small_icon'],
-            $classData['abilities'],
+            $this->convertAbilityData($classData['abilities'], $this->container),
             $this->container
         );
 
@@ -86,6 +87,22 @@ class UnitClassTest extends AbstractUnitTest
      */
     private function getClassDataProvider(): ClassDataProviderInterface
     {
-        return new ExampleClassDataProvider($this->container);
+        return new ExampleClassDataProvider();
+    }
+
+    /**
+     * @param array $abilitiesData
+     * @param ContainerInterface $container
+     * @return array
+     */
+    private function convertAbilityData(array $abilitiesData, ContainerInterface $container): array
+    {
+        $abilities = [];
+
+        foreach ($abilitiesData as $i => $abilityData) {
+            $abilities[$i] = $container->getAbilityDataProvider()->get($abilityData['name'], $abilityData['level']);
+        }
+
+        return $abilities;
     }
 }

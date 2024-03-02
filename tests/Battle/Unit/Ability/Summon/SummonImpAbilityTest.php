@@ -65,6 +65,7 @@ class SummonImpAbilityTest extends AbstractUnitTest
                         'add_concentration_multiplier' => 0,
                         'cunning_multiplier'           => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::UNARMED,

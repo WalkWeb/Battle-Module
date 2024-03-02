@@ -53,10 +53,10 @@ class ActionFactory
      *     'type_target'    => ActionInterface::TARGET_RANDOM_ENEMY,
      * ]
      *
-     * @uses createDamageAction, createHealAction, createWaitAction, createSummonAction, createBuffAction, createEffectAction, createResurrectionAction, createParalysisAction, createManaRestoreAction
      * @param array $data
      * @return ActionInterface
      * @throws Exception
+     * @uses createDamageAction, createHealAction, createWaitAction, createSummonAction, createBuffAction, createEffectAction, createResurrectionAction, createParalysisAction, createManaRestoreAction
      */
     public function create(array $data): ActionInterface
     {

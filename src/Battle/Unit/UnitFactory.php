@@ -40,6 +40,16 @@ class UnitFactory
      *     'add_rage_multiplier'          => 0,
      *     'class'                        => 1,
      *     'race'                         => 1,
+     *     'abilities'                    => [
+     *         [
+     *             'name'  => 'Heavy Strike',
+     *             'level' => 1,
+     *         ],
+     *         [
+     *             'name'  => 'Blessed Shield',
+     *             'level' => 1,
+     *         ],
+     *     ],
      *     'offense'                      => [
      *         'damage_type'         => 2,
      *         'weapon_type'         => 1,
@@ -168,6 +178,13 @@ class UnitFactory
 
         self::array($data, 'offense', UnitException::INCORRECT_OFFENSE);
         self::array($data, 'defense', UnitException::INCORRECT_DEFENSE);
+        self::array($data, 'abilities', UnitException::INCORRECT_ABILITIES_DATA);
+
+        foreach ($data['abilities'] as $abilityData) {
+            if (!is_array($abilityData)) {
+                throw new UnitException(UnitException::INCORRECT_ABILITY_DATA);
+            }
+        }
 
         if ($data['life'] > $data['total_life']) {
             throw new UnitException(UnitException::LIFE_MORE_TOTAL_LIFE);
@@ -194,6 +211,7 @@ class UnitFactory
             OffenseFactory::create($data['offense'], $container),
             DefenseFactory::create($data['defense']),
             self::getRace($data['race'], $container),
+            self::convertAbilityData($data['abilities'], $container),
             $container,
             self::getClass($data, $container)
         );
@@ -235,5 +253,36 @@ class UnitFactory
         return $container->getRaceFactory()->create(
             $container->getRaceDataProvider()->get($raceId)
         );
+    }
+
+    /**
+     * Преобразует массив с данными о способностями из массива вида:
+     *
+     * 'abilities'  => [
+     *     [
+     *         'name'  => 'Heavy Strike',
+     *         'level' => 1,
+     *     ],
+     *     [
+     *         'name'  => 'Blessed Shield',
+     *         'level' => 1,
+     *     ],
+     * ],
+     *
+     * В массив с полными данными о способностях, для их дальнейшего создания через фабрику
+     *
+     * @param array $abilitiesData
+     * @param ContainerInterface $container
+     * @return array
+     */
+    private static function convertAbilityData(array $abilitiesData, ContainerInterface $container): array
+    {
+        $abilities = [];
+
+        foreach ($abilitiesData as $i => $abilityData) {
+            $abilities[$i] = $container->getAbilityDataProvider()->get($abilityData['name'], $abilityData['level']);
+        }
+
+        return $abilities;
     }
 }

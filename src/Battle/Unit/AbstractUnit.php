@@ -156,6 +156,7 @@ abstract class AbstractUnit implements UnitInterface
      * @param OffenseInterface $offense
      * @param DefenseInterface $defense
      * @param RaceInterface $race
+     * @param array $abilitiesData
      * @param ContainerInterface $container
      * @param UnitClassInterface|null $class
      * @param EffectCollection|null $effects
@@ -179,6 +180,7 @@ abstract class AbstractUnit implements UnitInterface
         OffenseInterface $offense,
         DefenseInterface $defense,
         RaceInterface $race,
+        array $abilitiesData,
         ContainerInterface $container,
         ?UnitClassInterface $class = null,
         ?EffectCollection $effects = null,
@@ -204,9 +206,10 @@ abstract class AbstractUnit implements UnitInterface
         $this->race = $race;
         $this->container = $container;
         $this->class = $class;
-        $this->abilities = new AbilityCollection($this->container->isTestMode());
+        $this->abilities = new AbilityCollection($container->isTestMode());
         $this->effects = $effects ?? new EffectCollection($this);
         $this->lastTargets = $lastTargets ?? new UnitCollection();
+        $this->addAbilities($abilitiesData);
         $this->addClassAbilities();
         $this->addRaceAbilities();
     }
@@ -564,6 +567,21 @@ abstract class AbstractUnit implements UnitInterface
     {
         if ($command !== 1 && $command !== 2) {
             throw new UnitException(UnitException::INCORRECT_COMMAND);
+        }
+    }
+
+    /**
+     * @param array $abilitiesData
+     * @throws Exception
+     */
+    private function addAbilities(array $abilitiesData): void
+    {
+        $abilityFactory = $this->container->getAbilityFactory();
+
+        foreach ($abilitiesData as $abilityData) {
+            $this->abilities->add(
+                $abilityFactory->create($this, $abilityData)
+            );
         }
     }
 

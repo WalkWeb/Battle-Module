@@ -91,6 +91,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'add_concentration_multiplier' => 0,
                         'cunning_multiplier'           => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -152,6 +153,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'add_concentration_multiplier' => 0,
                         'cunning_multiplier'           => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -227,6 +229,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'add_concentration_multiplier' => 0,
                         'cunning_multiplier'           => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -291,6 +294,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'add_concentration_multiplier' => 0,
                         'cunning_multiplier'           => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -359,6 +363,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'add_concentration_multiplier' => 0,
                         'cunning_multiplier'           => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -420,6 +425,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'add_concentration_multiplier' => 0,
                         'cunning_multiplier'           => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -484,6 +490,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'add_concentration_multiplier' => 0,
                         'cunning_multiplier'           => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -552,6 +559,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'add_concentration_multiplier' => 0,
                         'cunning_multiplier'           => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -613,6 +621,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'add_concentration_multiplier' => 0,
                         'cunning_multiplier'           => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -677,6 +686,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'add_concentration_multiplier' => 0,
                         'cunning_multiplier'           => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -756,6 +766,7 @@ class BattleFactoryTest extends AbstractUnitTest
                         'race'                         => 8,
                         'add_concentration_multiplier' => 0,
                         'add_rage_multiplier'          => 0,
+                        'abilities'                    => [],
                         'offense'                      => [
                             'damage_type'         => 1,
                             'weapon_type'         => WeaponTypeInterface::SWORD,

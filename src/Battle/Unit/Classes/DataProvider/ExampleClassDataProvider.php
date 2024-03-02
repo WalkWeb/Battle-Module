@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Battle\Unit\Classes\DataProvider;
 
-use Battle\Container\ContainerInterface;
-use Battle\Unit\Ability\DataProvider\AbilityDataProviderInterface;
 use Battle\Unit\Classes\UnitClassException;
 
 /**
@@ -20,11 +18,6 @@ use Battle\Unit\Classes\UnitClassException;
  */
 class ExampleClassDataProvider implements ClassDataProviderInterface
 {
-    /**
-     * @var AbilityDataProviderInterface
-     */
-    private AbilityDataProviderInterface $abilityDataProvider;
-
     private static array $data = [
         1  => [
             'id'         => 1,
@@ -157,11 +150,6 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
         ],
     ];
 
-    public function __construct(ContainerInterface $container)
-    {
-        $this->abilityDataProvider = $container->getAbilityDataProvider();
-    }
-
     /**
      * Сам ClassDataProvider не хранит данные по способностям, он содержит только названия и уровни способностей (в
      * будущем уровни способности будут браться из $unit), а уже при формировании массива параметров запрашиваются
@@ -177,12 +165,6 @@ class ExampleClassDataProvider implements ClassDataProviderInterface
             throw new UnitClassException(UnitClassException::UNDEFINED_CLASS_ID . ': ' . $id);
         }
 
-        $data = self::$data[$id];
-
-        foreach ($data['abilities'] as $i => $ability) {
-            $data['abilities'][$i] = $this->abilityDataProvider->get($ability['name'], $ability['level']);
-        }
-
-        return $data;
+        return self::$data[$id];
     }
 }

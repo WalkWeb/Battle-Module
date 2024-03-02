@@ -42,5 +42,7 @@ class UnitException extends Exception
     public const UNDEFINED_MODIFY_METHOD             = 'Undefined modify method';
     public const INCORRECT_DEFENSE                   = 'Incorrect defense, it required and type array';
     public const INCORRECT_OFFENSE                   = 'Incorrect offense, it required and type array';
+    public const INCORRECT_ABILITIES_DATA            = 'Incorrect abilities, it required and type array';
+    public const INCORRECT_ABILITY_DATA              = 'Incorrect abilities: []array excepted';
     public const CANNOT_ACTION                       = 'Unit cannot action. He died or already action';
 }

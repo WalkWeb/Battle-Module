@@ -7,6 +7,7 @@ namespace Tests\Battle\Unit\Classes;
 use Battle\Unit\Classes\UnitClassException;
 use Exception;
 use Tests\AbstractUnitTest;
+use Tests\Factory\UnitFactory;
 
 class UnitClassFactoryTest extends AbstractUnitTest
 {
@@ -47,12 +48,14 @@ class UnitClassFactoryTest extends AbstractUnitTest
      */
     public function testUnitClassFactoryCreateByArraySuccess(array $data): void
     {
+        $unit = UnitFactory::createByTemplate(1);
         $class = ($this->container)->getUnitClassFactory()->create($data);
 
         // Проверка базовых параметров
         self::assertEquals($data['id'], $class->getId());
         self::assertEquals($data['name'], $class->getName());
         self::assertEquals($data['small_icon'], $class->getSmallIcon());
+        self::assertSameSize($data['abilities'], $class->getAbilities($unit));
 
         // Проверка способностей делается в UnitClassTest::testUnitClassCreate()
     }
@@ -105,6 +108,23 @@ class UnitClassFactoryTest extends AbstractUnitTest
                     'name'       => 'Warrior',
                     'small_icon' => '/images/icons/small/warrior.png',
                     'abilities'  => [],
+                ],
+            ],
+            [
+                [
+                    'id'         => 1,
+                    'name'       => 'Warrior',
+                    'small_icon' => '/images/icons/small/warrior.png',
+                    'abilities'  => [
+                        [
+                            'name'  => 'Heavy Strike',
+                            'level' => 1,
+                        ],
+                        [
+                            'name'  => 'Blessed Shield',
+                            'level' => 1,
+                        ],
+                    ],
                 ],
             ],
         ];

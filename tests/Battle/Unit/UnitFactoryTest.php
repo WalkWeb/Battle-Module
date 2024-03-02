@@ -25,7 +25,7 @@ class UnitFactoryTest extends AbstractUnitTest
      * @param array $data
      * @throws Exception
      */
-    public function testUnitFactorySuccess(array $data): void
+    public function testUnitFactoryCreateSuccess(array $data): void
     {
         $unit = UnitFactory::create($data);
         $class = $this->createClass($data, $this->container);
@@ -38,7 +38,7 @@ class UnitFactoryTest extends AbstractUnitTest
         self::assertEquals($data['life'], $unit->getLife());
         self::assertEquals($data['melee'], $unit->isMelee());
         self::assertEquals($data['command'], $unit->getCommand());
-        self::assertEquals((int)(UnitInterface::BASE_CUNNING * ((100 + $unit->getCunningMultiplier())/100)), $unit->getCunning());
+        self::assertEquals((int)(UnitInterface::BASE_CUNNING * ((100 + $unit->getCunningMultiplier()) / 100)), $unit->getCunning());
         self::assertEquals($data['add_concentration_multiplier'], $unit->getAddConcentrationMultiplier());
         self::assertEquals($data['cunning_multiplier'], $unit->getCunningMultiplier());
         self::assertEquals($data['add_rage_multiplier'], $unit->getAddRageMultiplier());
@@ -78,6 +78,15 @@ class UnitFactoryTest extends AbstractUnitTest
         self::assertEquals($data['defense']['block'], $unit->getDefense()->getBlock());
         self::assertEquals($data['defense']['magic_block'], $unit->getDefense()->getMagicBlock());
         self::assertEquals($data['defense']['mental_barrier'], $unit->getDefense()->getMentalBarrier());
+
+        // Проверка актуальна только для одного кейса CustomAbility
+        if (array_key_exists('class', $data) && $data['class'] === null && $data['abilities'] !== []) {
+            self::assertSameSize($data['abilities'], $unit->getAbilities());
+
+            foreach ($unit->getAbilities() as $i => $ability) {
+                self::assertEquals($data['abilities'][$i]['name'], $ability->getName());
+            }
+        }
     }
 
     /**
@@ -88,7 +97,7 @@ class UnitFactoryTest extends AbstractUnitTest
      * @param string $error
      * @throws Exception
      */
-    public function testUnitFactoryFail(array $data, string $error): void
+    public function testUnitFactoryCreateFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
         $this->expectErrorMessage($error);
@@ -120,6 +129,7 @@ class UnitFactoryTest extends AbstractUnitTest
             'add_rage_multiplier'          => 0,
             'offense'                      => self::getDefaultOffenseData(),
             'defense'                      => self::getDefaultDefenseData(),
+            'abilities'                    => [],
         ];
 
         $unit = UnitFactory::create($data);
@@ -153,6 +163,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
             ],
             [
@@ -175,6 +186,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
             ],
             [
@@ -196,6 +208,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
             ],
             [
@@ -218,6 +231,39 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
+                ],
+            ],
+            [
+                // класс = null + переданы способности напрямую
+                [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'CustomAbility',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => null,
+                    'race'                         => 2,
+                    'command'                      => 2,
+                    'add_concentration_multiplier' => 0,
+                    'cunning_multiplier'           => 0,
+                    'add_rage_multiplier'          => 0,
+                    'offense'                      => self::getDefaultOffenseData(),
+                    'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [
+                        [
+                            'name'  => 'Heavy Strike',
+                            'level' => 1,
+                        ],
+                        [
+                            'name'  => 'Blessed Shield',
+                            'level' => 1,
+                        ],
+                    ],
                 ],
             ],
         ];
@@ -248,6 +294,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_ID,
             ],
@@ -271,6 +318,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_ID,
             ],
@@ -294,6 +342,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH,
             ],
@@ -317,6 +366,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_ID_VALUE . UnitInterface::MIN_ID_LENGTH . '-' . UnitInterface::MAX_ID_LENGTH,
             ],
@@ -339,6 +389,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_NAME,
             ],
@@ -362,6 +413,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_NAME,
             ],
@@ -385,6 +437,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH,
             ],
@@ -408,6 +461,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_NAME_VALUE . UnitInterface::MIN_NAME_LENGTH . '-' . UnitInterface::MAX_NAME_LENGTH,
             ],
@@ -430,6 +484,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_AVATAR,
             ],
@@ -453,6 +508,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_AVATAR,
             ],
@@ -475,6 +531,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_LIFE,
             ],
@@ -498,6 +555,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_LIFE,
             ],
@@ -521,6 +579,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE,
             ],
@@ -544,6 +603,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_LIFE_VALUE . UnitInterface::MIN_LIFE . '-' . UnitInterface::MAX_LIFE,
             ],
@@ -566,6 +626,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_TOTAL_LIFE,
             ],
@@ -589,6 +650,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_TOTAL_LIFE,
             ],
@@ -612,6 +674,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE,
             ],
@@ -635,6 +698,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_TOTAL_LIFE_VALUE . UnitInterface::MIN_TOTAL_LIFE . '-' . UnitInterface::MAX_TOTAL_LIFE,
             ],
@@ -657,6 +721,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_MELEE,
             ],
@@ -680,6 +745,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_MELEE,
             ],
@@ -703,6 +769,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_CLASS,
             ],
@@ -726,6 +793,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::LIFE_MORE_TOTAL_LIFE,
             ],
@@ -748,6 +816,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_LEVEL,
             ],
@@ -771,6 +840,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_LEVEL,
             ],
@@ -794,6 +864,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL,
             ],
@@ -817,6 +888,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_LEVEL_VALUE . UnitInterface::MIN_LEVEL . '-' . UnitInterface::MAX_LEVEL,
             ],
@@ -839,6 +911,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_RACE,
             ],
@@ -862,6 +935,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_RACE,
             ],
@@ -884,6 +958,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_COMMAND,
             ],
@@ -907,6 +982,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_COMMAND,
             ],
@@ -930,6 +1006,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_COMMAND,
             ],
@@ -952,6 +1029,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'cunning_multiplier'           => 0,
                     'add_rage_multiplier'          => 0,
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_OFFENSE,
             ],
@@ -975,6 +1053,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => true,
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_OFFENSE,
             ],
@@ -1017,6 +1096,7 @@ class UnitFactoryTest extends AbstractUnitTest
                         'vampirism'           => 0,
                         'magic_vampirism'     => 0,
                     ],
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_DEFENSE,
             ],
@@ -1040,6 +1120,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => 100,
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_DEFENSE,
             ],
@@ -1063,6 +1144,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_MANA,
             ],
@@ -1086,6 +1168,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_MANA,
             ],
@@ -1109,6 +1192,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_MANA_VALUE . UnitInterface::MIN_MANA . '-' . UnitInterface::MAX_MANA,
             ],
@@ -1132,6 +1216,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_MANA_VALUE . UnitInterface::MIN_MANA . '-' . UnitInterface::MAX_MANA,
             ],
@@ -1154,6 +1239,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_TOTAL_MANA,
             ],
@@ -1177,6 +1263,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_TOTAL_MANA,
             ],
@@ -1200,6 +1287,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_TOTAL_MANA_VALUE . UnitInterface::MIN_TOTAL_MANA . '-' . UnitInterface::MAX_TOTAL_MANA,
             ],
@@ -1223,6 +1311,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_TOTAL_MANA_VALUE . UnitInterface::MIN_TOTAL_MANA . '-' . UnitInterface::MAX_TOTAL_MANA,
             ],
@@ -1246,6 +1335,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::MANA_MORE_TOTAL_MANA,
             ],
@@ -1267,9 +1357,10 @@ class UnitFactoryTest extends AbstractUnitTest
                     'race'                => 1,
                     'command'             => 1,
                     'add_rage_multiplier' => 0,
-                    'cunning_multiplier'           => 0,
-                    'offense'                      => self::getDefaultOffenseData(),
-                    'defense'                      => self::getDefaultDefenseData(),
+                    'cunning_multiplier'  => 0,
+                    'offense'             => self::getDefaultOffenseData(),
+                    'defense'             => self::getDefaultDefenseData(),
+                    'abilities'           => [],
                 ],
                 UnitException::INCORRECT_ADD_CONC_MULTIPLIER,
             ],
@@ -1293,6 +1384,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_ADD_CONC_MULTIPLIER,
             ],
@@ -1316,6 +1408,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'cunning_multiplier'           => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_ADD_CONC_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER,
             ],
@@ -1339,6 +1432,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_ADD_CONC_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER,
             ],
@@ -1363,6 +1457,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_CUNNING_MULTIPLIER,
             ],
@@ -1386,6 +1481,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_CUNNING_MULTIPLIER,
             ],
@@ -1409,6 +1505,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_CUNNING_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER,
             ],
@@ -1432,6 +1529,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_CUNNING_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER,
             ],
@@ -1456,6 +1554,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'cunning_multiplier'           => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_ADD_RAGE_MULTIPLIER,
             ],
@@ -1479,6 +1578,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'cunning_multiplier'           => 0,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_ADD_RAGE_MULTIPLIER,
             ],
@@ -1502,6 +1602,7 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => UnitInterface::MIN_RESOURCE_MULTIPLIER - 1,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_ADD_RAGE_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER,
             ],
@@ -1525,8 +1626,80 @@ class UnitFactoryTest extends AbstractUnitTest
                     'add_rage_multiplier'          => UnitInterface::MAX_RESOURCE_MULTIPLIER + 1,
                     'offense'                      => self::getDefaultOffenseData(),
                     'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => [],
                 ],
                 UnitException::INCORRECT_ADD_RAGE_MULTIPLIER_VALUE . UnitInterface::MIN_RESOURCE_MULTIPLIER . ' - ' . UnitInterface::MAX_RESOURCE_MULTIPLIER,
+            ],
+            [
+                // Отсутствует abilities
+                [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'cunning_multiplier'           => 0,
+                    'add_rage_multiplier'          => 0,
+                    'offense'                      => self::getDefaultOffenseData(),
+                    'defense'                      => self::getDefaultDefenseData(),
+                ],
+                UnitException::INCORRECT_ABILITIES_DATA,
+            ],
+            [
+                // abilities некорректного типа
+                [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'cunning_multiplier'           => 0,
+                    'add_rage_multiplier'          => 0,
+                    'offense'                      => self::getDefaultOffenseData(),
+                    'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => false,
+                ],
+                UnitException::INCORRECT_ABILITIES_DATA,
+            ],
+            [
+                // abilities содержит не массивы
+                [
+                    'id'                           => '5a9e559a-954d-4b7c-98fe-4e9609523e6e',
+                    'name'                         => 'Skeleton',
+                    'level'                        => 3,
+                    'avatar'                       => '/images/avas/monsters/003.png',
+                    'life'                         => 80,
+                    'total_life'                   => 80,
+                    'mana'                         => 50,
+                    'total_mana'                   => 50,
+                    'melee'                        => true,
+                    'class'                        => 1,
+                    'race'                         => 1,
+                    'command'                      => 1,
+                    'add_concentration_multiplier' => 0,
+                    'cunning_multiplier'           => 0,
+                    'add_rage_multiplier'          => 0,
+                    'offense'                      => self::getDefaultOffenseData(),
+                    'defense'                      => self::getDefaultDefenseData(),
+                    'abilities'                    => ['invalid_data'],
+                ],
+                UnitException::INCORRECT_ABILITY_DATA,
             ],
         ];
     }

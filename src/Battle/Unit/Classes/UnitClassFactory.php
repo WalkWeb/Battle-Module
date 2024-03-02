@@ -38,6 +38,14 @@ class UnitClassFactory
         self::string($data, 'small_icon', UnitClassException::INVALID_SMALL_ICON_DATA);
         self::array($data, 'abilities', UnitClassException::INVALID_ABILITIES_DATA);
 
+        foreach ($data['abilities'] as $i => $ability) {
+            if (!is_array($ability)) {
+                throw new UnitClassException(UnitClassException::INVALID_ABILITY_DATA);
+            }
+
+            $data['abilities'][$i] = $this->container->getAbilityDataProvider()->get($ability['name'], $ability['level']);
+        }
+
         return new UnitClass(
             $data['id'],
             $data['name'],

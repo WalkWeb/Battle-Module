@@ -31,6 +31,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -93,6 +94,7 @@ class UnitFactory
             'melee'                        => true,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -154,6 +156,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::MACE,
@@ -218,6 +221,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 2,
                 'weapon_type'         => WeaponTypeInterface::STAFF,
@@ -280,6 +284,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 2,
                 'weapon_type'         => WeaponTypeInterface::STAFF,
@@ -341,6 +346,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -402,6 +408,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 4,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -464,6 +471,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 3,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -526,6 +534,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::CROSSBOW,
@@ -588,6 +597,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -650,6 +660,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -712,6 +723,7 @@ class UnitFactory
             'add_rage_multiplier'          => 40,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -774,6 +786,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -836,6 +849,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -898,6 +912,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -960,6 +975,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1021,6 +1037,7 @@ class UnitFactory
             'add_concentration_multiplier' => 0,
             'cunning_multiplier'           => 0,
             'add_rage_multiplier'          => 0,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1083,6 +1100,7 @@ class UnitFactory
             'add_concentration_multiplier' => 0,
             'cunning_multiplier'           => 0,
             'add_rage_multiplier'          => 0,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1145,6 +1163,7 @@ class UnitFactory
             'add_concentration_multiplier' => 0,
             'cunning_multiplier'           => 0,
             'add_rage_multiplier'          => 0,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1207,6 +1226,7 @@ class UnitFactory
             'add_concentration_multiplier' => 0,
             'cunning_multiplier'           => 0,
             'add_rage_multiplier'          => 0,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1269,6 +1289,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 5,
             'race'                         => 3,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1331,6 +1352,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 6,
             'race'                         => 4,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1393,6 +1415,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 7,
             'race'                         => 6,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => 7,
@@ -1455,6 +1478,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1517,6 +1541,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1579,6 +1604,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => null,
             'race'                         => 10,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1641,6 +1667,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 50,
             'race'                         => 9,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1703,6 +1730,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1765,6 +1793,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1827,6 +1856,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1889,6 +1919,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 3,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -1951,6 +1982,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2013,6 +2045,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2075,6 +2108,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2137,6 +2171,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2199,6 +2234,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2261,6 +2297,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 2,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 2,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2323,6 +2360,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2385,6 +2423,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2447,6 +2486,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => 7,
@@ -2509,6 +2549,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2571,6 +2612,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2634,6 +2676,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 2,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2696,6 +2739,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 8,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2758,6 +2802,7 @@ class UnitFactory
             'add_rage_multiplier'          => -20,
             'class'                        => 8,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::BOW,
@@ -2820,6 +2865,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 8,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -2882,6 +2928,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => 3,
@@ -2944,6 +2991,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => 11,
@@ -3006,6 +3054,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => 14,
@@ -3068,6 +3117,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::DAGGER,
@@ -3130,6 +3180,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::DAGGER,
@@ -3192,6 +3243,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 9,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -3254,6 +3306,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 9,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::SWORD,
@@ -3316,6 +3369,7 @@ class UnitFactory
             'add_rage_multiplier'          => 0,
             'class'                        => 1,
             'race'                         => 1,
+            'abilities'                    => [],
             'offense'                      => [
                 'damage_type'         => 1,
                 'weapon_type'         => WeaponTypeInterface::MACE,
