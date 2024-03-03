@@ -48,6 +48,4 @@ trait CollectionTrait
     {
         return count($this->elements);
     }
-
-
 }
