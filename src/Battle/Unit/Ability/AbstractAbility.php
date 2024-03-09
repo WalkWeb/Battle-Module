@@ -70,6 +70,8 @@ abstract class AbstractAbility implements AbilityInterface
     protected int $typeActivate;
 
     /**
+     * Шанс активации способности. Например для способностей которые активируются при смерти
+     *
      * @var int
      */
     protected int $chanceActivate;

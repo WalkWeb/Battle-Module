@@ -562,11 +562,12 @@ class ExampleAbilityDataProvider implements AbilityDataProviderInterface
         ],
         'Will to live'       => [
             1 => [
-                'name'          => 'Will to live',
-                'icon'          => '/images/icons/ability/429.png',
-                'disposable'    => true,
-                'type_activate' => AbilityInterface::ACTIVATE_DEAD,
-                'actions'       => [
+                'name'            => 'Will to live',
+                'icon'            => '/images/icons/ability/429.png',
+                'disposable'      => true,
+                'type_activate'   => AbilityInterface::ACTIVATE_DEAD,
+                'chance_activate' => 25,
+                'actions'         => [
                     [
                         'type'           => ActionInterface::RESURRECTION,
                         'type_target'    => ActionInterface::TARGET_SELF,

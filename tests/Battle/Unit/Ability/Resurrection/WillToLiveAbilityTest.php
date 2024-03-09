@@ -52,6 +52,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
         self::assertTrue($ability->isDisposable());
         self::assertFalse($ability->isUsage());
+        self::assertEquals(25, $ability->getChanceActivate());
 
         // Активируем - созданный юнит изначально мертв
         $ability->update($unit, true);
@@ -191,6 +192,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
         self::assertTrue($ability->isDisposable());
         self::assertFalse($ability->isUsage());
+        self::assertEquals(25, $ability->getChanceActivate());
 
         // Активируем - созданный юнит изначально мертв
         $ability->update($unit, true);
@@ -360,17 +362,17 @@ class WillToLiveAbilityTest extends AbstractUnitTest
             $icon,
             [
                 [
-                    'type'           => ActionInterface::RESURRECTION,
-                    'type_target'    => ActionInterface::TARGET_SELF,
-                    'power'          => 50,
-                    'name'           => $name,
-                    'icon'           => $icon,
-                    'message_method' => $messageMethod,
+                    'type'            => ActionInterface::RESURRECTION,
+                    'type_target'     => ActionInterface::TARGET_SELF,
+                    'power'           => 50,
+                    'name'            => $name,
+                    'icon'            => $icon,
+                    'message_method'  => $messageMethod,
                 ],
             ],
             AbilityInterface::ACTIVATE_DEAD,
             [],
-            0
+            25
         );
     }
 }
