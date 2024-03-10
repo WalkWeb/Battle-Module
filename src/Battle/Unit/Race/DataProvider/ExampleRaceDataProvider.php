@@ -83,7 +83,7 @@ class ExampleRaceDataProvider implements RaceDataProviderInterface
             'id'          => 7,
             'name'        => 'Animals',
             'single_name' => 'Animal',
-            'color'       => '#000000',
+            'color'       => '#953b39',
             'icon'        => '/images/icons/small/base-animal.png',
             'abilities'   => [],
         ],

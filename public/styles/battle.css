@@ -231,6 +231,7 @@ div.life_text {
     font-size: 17px;
     color: #c1c1c1;
     text-align: left !important;
+    white-space: nowrap;
 }
 
 .unit_box2_left {
