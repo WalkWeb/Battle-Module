@@ -11,17 +11,17 @@ use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-class SewerWormDeathAbilityTest extends AbstractUnitTest
+class PartOfWormDeathAbilityTest extends AbstractUnitTest
 {
     /**
      * @throws Exception
      */
-    public function testSummonSewerWormDeathUse(): void
+    public function testSummonPartOfWormDeathUse(): void
     {
-        $name = 'Sewer Worm Death';
+        $name = 'Part of Worm Death';
         $icon = '/images/icons/ability/170.png';
 
-        $unit = UnitFactory::createByTemplate(55);
+        $unit = UnitFactory::createByTemplate(56);
         $enemyUnit = UnitFactory::createByTemplate(12);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
@@ -64,9 +64,9 @@ class SewerWormDeathAbilityTest extends AbstractUnitTest
 
             foreach ($actions as $action) {
                 self::assertInstanceOf(SummonAction::class, $action);
-                self::assertEquals('Part of Worm', $action->getSummonUnit()->getName());
-                self::assertEquals('/images/avas/monsters/011.png', $action->getSummonUnit()->getAvatar());
-                self::assertEquals(4, $action->getSummonUnit()->getLevel());
+                self::assertEquals('Small Part of Worm', $action->getSummonUnit()->getName());
+                self::assertEquals('/images/avas/monsters/012.png', $action->getSummonUnit()->getAvatar());
+                self::assertEquals(2, $action->getSummonUnit()->getLevel());
             }
         }
     }
