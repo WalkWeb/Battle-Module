@@ -15,8 +15,6 @@ use Exception;
 use Tests\AbstractUnitTest;
 use Tests\Factory\UnitFactory;
 
-// TODO Сейчас финальная форма Soul Killer и Hell Knight абсолютно одинаковы. Надо подумать над уникализацией.
-
 class HellKnightPrimordialFormAbilityTest extends AbstractUnitTest
 {
     private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';

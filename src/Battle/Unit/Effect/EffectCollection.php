@@ -19,14 +19,14 @@ class EffectCollection implements Iterator, Countable
     /**
      * @var EffectInterface[]
      */
-    private $elements = [];
+    private array $elements = [];
 
     /**
      * Юнит, к которому относится данная коллекция эффектов
      *
      * @var UnitInterface
      */
-    private $parentUnit;
+    private UnitInterface $parentUnit;
 
     public function __construct(UnitInterface $parentUnit)
     {
