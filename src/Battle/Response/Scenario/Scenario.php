@@ -63,6 +63,10 @@ class Scenario implements ScenarioInterface
             }
         }
 
+        if ($action->getRestoreLifeFromVampirism() > 0) {
+            $targetEffects[] = $this->createVampirismEffect($action);
+        }
+
         $this->scenario[] = [
             'step'    => $statistic->getRoundNumber(),
             'attack'  => $statistic->getStrokeNumber(),
@@ -514,6 +518,24 @@ class Scenario implements ScenarioInterface
             'user_id'      => $targetUnit->getId(),
             'class'        => $targetUnit->getCommand() === 1 ? 'd_evasion_s2' : 'd_evasion',
             'unit_effects' => $this->getUnitEffects($targetUnit),
+        ];
+    }
+
+    /**
+     * @param ActionInterface $action
+     * @return array
+     * @throws ActionException
+     */
+    private function createVampirismEffect(ActionInterface $action): array
+    {
+        return [
+            'type'              => 'change',
+            'user_id'           => $action->getActionUnit()->getId(),
+            'ava'               => 'unit_ava_green',
+            'recdam'            => '+' . $action->getRestoreLifeFromVampirism(),
+            'hp'                => $this->getLife($action->getActionUnit()),
+            'thp'               => $this->getTotalLife($action->getActionUnit()),
+            'unit_hp_bar_width' => $this->getLifeBarWidth($action->getActionUnit()),
         ];
     }
 

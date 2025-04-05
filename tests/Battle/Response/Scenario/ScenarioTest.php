@@ -85,6 +85,69 @@ class ScenarioTest extends AbstractUnitTest
     }
 
     /**
+     * Тест на урон + лечение от вампиризма
+     *
+     * @throws Exception
+     */
+    public function testScenarioAddDamageAndVampirism(): void
+    {
+        $statistic = new Statistic();
+        $unit = UnitFactory::createByTemplate(42);
+        $enemyUnit = UnitFactory::createByTemplate(2);
+        $command =CommandFactory::create([$unit]);
+        $enemyCommand = CommandFactory::create([$enemyUnit]);
+
+        $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
+
+        $action->handle();
+
+        $scenario = new Scenario();
+        $scenario->addAnimation($action, $statistic);
+
+        $expectedData = [
+            'step'    => $statistic->getRoundNumber(),
+            'attack'  => $statistic->getStrokeNumber(),
+            'effects' => [
+                [
+                    'user_id'        => $unit->getId(),
+                    'class'          => 'd_attack',
+                    'unit_cons_bar2' => 10,
+                    'unit_rage_bar2' => 7,
+                    'unit_effects'   => [],
+                    'targets'        => [
+                        [
+                            'type'              => 'change',
+                            'user_id'           => $enemyUnit->getId(),
+                            'hp'                => $enemyUnit->getTotalLife() - $unit->getOffense()->getDamage($enemyUnit->getDefense()),
+                            'thp'               => $enemyUnit->getTotalLife(),
+                            'hp_bar_class'      => 'unit_hp_bar',
+                            'hp_bar_class2'     => 'unit_hp_bar2',
+                            'recdam'            => '-50',
+                            'unit_hp_bar_width' => 80,
+                            'unit_cons_bar2'    => 10,
+                            'unit_rage_bar2'    => 7,
+                            'ava'               => 'unit_ava_red',
+                            'avas'              => 'unit_ava_blank',
+                            'unit_effects'      => [],
+                        ],
+                        [
+                            'type'              => 'change',
+                            'user_id'           => '91cc27a4-0120-4d6b-9ad2-fca05c8aa3d7',
+                            'ava'               => 'unit_ava_green',
+                            'recdam'            => '+25',
+                            'hp'                => 75,
+                            'thp'               => 100,
+                            'unit_hp_bar_width' => 75,
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($expectedData, $scenario->getArray()[0]);
+    }
+
+    /**
      * Тест на создание анимации урона по юниту с ментальным барьером и маной
      *
      * @throws Exception
