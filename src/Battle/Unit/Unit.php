@@ -468,7 +468,7 @@ class Unit extends AbstractUnit
         }
 
         $damage = $action->isCriticalDamage() ?
-            (int)($baseDamage * ($this->getOffense()->getCriticalMultiplier() / 100)) :
+            (int)($baseDamage * ($action->getActionUnit()->getOffense()->getCriticalMultiplier() / 100)) :
             $baseDamage;
 
         $finalDamage = $damage * $this->container->getDamageMultiplier();
