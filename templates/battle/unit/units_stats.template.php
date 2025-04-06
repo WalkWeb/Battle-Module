@@ -44,7 +44,7 @@ $yesTitle = $this->getTranslation()->trans('Yes');
 $noTitle = $this->getTranslation()->trans('No');
 $concentrationTitle = $this->getTranslation()->trans('Concentration');
 $rageTitle = $this->getTranslation()->trans('Rage');
-$levelTitle = $this->getTranslation()->trans('Level');
+$globalResistTitle = $this->getTranslation()->trans('Global Resist');
 $mentalBarrierTitle = $this->getTranslation()->trans('Mental Barrier');
 $damageTypeTitle = $this->getTranslation()->trans('Damage Type');
 $weaponTypeTitle = $this->getTranslation()->trans('Weapon Type');
@@ -112,7 +112,7 @@ $vampirismTitle = $this->getTranslation()->trans('Vampirism');
             <tr class="header">
                 <td><p><?= $concentrationTitle ?></p></td>
                 <td><p><?= $rageTitle ?></p></td>
-                <td><p><?= $levelTitle ?></p></td>
+                <td><p><abbr title="<?= $globalResistTitle ?>"><img src="/images/battle/stats_icon/gr.png" alt=""></abbr></p></td>
                 <td><p><abbr title="<?= $mentalBarrierTitle ?>"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
                 <td><p><?= $damageTypeTitle ?></p></td>
                 <td><p><?= $weaponTypeTitle ?></p></td>
@@ -133,7 +133,7 @@ $vampirismTitle = $this->getTranslation()->trans('Vampirism');
             <tr>
                 <td><p><?= $unit->getConcentration() ?>/<?= $unit::MAX_CONCENTRATION ?></p></td>
                 <td><p><?= $unit->getRage() ?>/<?= $unit::MAX_RAGE ?></p></td>
-                <td><p><?= $unit->getLevel() ?></p></td>
+                <td><p><?= $unit->getDefense()->getGlobalResist() ?>%</p></td>
                 <td><p><?= $unit->getDefense()->getMentalBarrier() ?>%</p></td>
                 <td><p><?= ($unit->getOffense()->getDamageType() === OffenseInterface::TYPE_ATTACK ? $this->getTranslation()->trans('Attack') : $this->getTranslation()->trans('Spell')) ?></p></td>
                 <td><p><?= $this->getTranslation()->trans($unit->getOffense()->getWeaponType()->getName()) ?></p></td>

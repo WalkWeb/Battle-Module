@@ -541,7 +541,7 @@ EOT;
             <tr class="header">
                 <td><p>Concentration</p></td>
                 <td><p>Rage</p></td>
-                <td><p>Level</p></td>
+                <td><p><abbr title="Global Resist"><img src="/images/battle/stats_icon/gr.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Mental Barrier"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
                 <td><p>Damage Type</p></td>
                 <td><p>Weapon Type</p></td>
@@ -562,7 +562,7 @@ EOT;
             <tr>
                 <td><p>0/1000</p></td>
                 <td><p>0/1000</p></td>
-                <td><p>1</p></td>
+                <td><p>0%</p></td>
                 <td><p>0%</p></td>
                 <td><p>Attack</p></td>
                 <td><p>Sword</p></td>
@@ -626,7 +626,7 @@ EOT;
             <tr class="header">
                 <td><p>Concentration</p></td>
                 <td><p>Rage</p></td>
-                <td><p>Level</p></td>
+                <td><p><abbr title="Global Resist"><img src="/images/battle/stats_icon/gr.png" alt=""></abbr></p></td>
                 <td><p><abbr title="Mental Barrier"><img src="/images/battle/stats_icon/mental_barrier.png" alt=""></abbr></p></td>
                 <td><p>Damage Type</p></td>
                 <td><p>Weapon Type</p></td>
@@ -647,7 +647,7 @@ EOT;
             <tr>
                 <td><p>0/1000</p></td>
                 <td><p>0/1000</p></td>
-                <td><p>1</p></td>
+                <td><p>0%</p></td>
                 <td><p>0%</p></td>
                 <td><p>Attack</p></td>
                 <td><p>Sword</p></td>

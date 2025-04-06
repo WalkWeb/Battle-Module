@@ -206,6 +206,7 @@ return [
     'Life'                                                                   => 'Life',
     'Mana'                                                                   => 'Mana',
     'Mental Barrier'                                                         => 'Mental Barrier',
+    'Global Resist'                                                          => 'Global Resist',
     'Damage'                                                                 => 'Damage',
     'Damage Type'                                                            => 'Damage Type',
     'Weapon Type'                                                            => 'Weapon Type',

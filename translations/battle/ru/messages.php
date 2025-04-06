@@ -204,6 +204,7 @@ return [
     'Life'                                                                   => 'Здоровье',
     'Mana'                                                                   => 'Мана',
     'Mental Barrier'                                                         => 'Ментальный барьер',
+    'Global Resist'                                                          => 'Общее сопротивление урону',
     'Damage'                                                                 => 'Урон',
     'Damage Type'                                                            => 'Тип урона',
     'Weapon Type'                                                            => 'Тип оружия',
