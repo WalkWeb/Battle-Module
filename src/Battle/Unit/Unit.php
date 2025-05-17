@@ -88,9 +88,6 @@ class Unit extends AbstractUnit
             throw new UnitException(UnitException::UNDEFINED_ACTION_METHOD);
         }
 
-        $this->addConcentration(self::ADD_CON_RECEIVING_UNIT);
-        $this->addRage(self::ADD_RAGE_RECEIVING_UNIT);
-
         return $this->$method($action);
     }
 
@@ -154,6 +151,9 @@ class Unit extends AbstractUnit
         if ($action->isTargetTracking()) {
             $action->getActionUnit()->addLastTarget($this);
         }
+
+        $this->addConcentration(self::ADD_CON_RECEIVING_UNIT);
+        $this->addRage(self::ADD_RAGE_RECEIVING_UNIT);
 
         return new ActionCollection();
     }

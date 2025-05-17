@@ -94,7 +94,7 @@ class ScenarioTest extends AbstractUnitTest
         $statistic = new Statistic();
         $unit = UnitFactory::createByTemplate(42);
         $enemyUnit = UnitFactory::createByTemplate(2);
-        $command =CommandFactory::create([$unit]);
+        $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = $this->createDamageAction($unit, $enemyCommand, $command, DamageAction::TARGET_RANDOM_ENEMY);
@@ -111,8 +111,8 @@ class ScenarioTest extends AbstractUnitTest
                 [
                     'user_id'        => $unit->getId(),
                     'class'          => 'd_attack',
-                    'unit_cons_bar2' => 10,
-                    'unit_rage_bar2' => 7,
+                    'unit_cons_bar2' => 0,
+                    'unit_rage_bar2' => 0,
                     'unit_effects'   => [],
                     'targets'        => [
                         [
@@ -427,8 +427,8 @@ class ScenarioTest extends AbstractUnitTest
                             'avas'              => 'unit_ava_blank',
                             'hp_bar_class'      => 'unit_hp_bar',
                             'hp_bar_class2'     => 'unit_hp_bar2',
-                            'unit_cons_bar2'    => 20,
-                            'unit_rage_bar2'    => 14,
+                            'unit_cons_bar2'    => 10,
+                            'unit_rage_bar2'    => 7,
                             'unit_effects'      => [
                                 [
                                     'icon'     => '/images/icons/ability/202.png',
@@ -523,7 +523,7 @@ class ScenarioTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new HealAction(
-           $this->container,
+            $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -548,8 +548,8 @@ class ScenarioTest extends AbstractUnitTest
                 [
                     'user_id'        => '5e5c15fb-fa29-4bf0-8a0d-f2be9f90ca9d',
                     'class'          => 'd_buff',
-                    'unit_cons_bar2' => 10,
-                    'unit_rage_bar2' => 7,
+                    'unit_cons_bar2' => 0,
+                    'unit_rage_bar2' => 0,
                     'targets'        => [
                         [
                             'type'              => 'change',
@@ -788,8 +788,8 @@ class ScenarioTest extends AbstractUnitTest
                         'class'          => 'd_buff',
                         'hp'             => 130,
                         'thp'            => 130,
-                        'unit_cons_bar2' => 20,
-                        'unit_rage_bar2' => 14,
+                        'unit_cons_bar2' => 0,
+                        'unit_rage_bar2' => 0,
                         'unit_effects'   => [
                             [
                                 'icon'     => '/images/icons/ability/156.png',
@@ -974,7 +974,7 @@ class ScenarioTest extends AbstractUnitTest
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
         $action = new WaitAction(
-           $this->container,
+            $this->container,
             $actionUnit,
             $enemyCommand,
             $actionCommand
@@ -1115,7 +1115,7 @@ class ScenarioTest extends AbstractUnitTest
         $animationMethod = 'undefinedAnimationMethod';
 
         $action = new DamageAction(
-           $this->container,
+            $this->container,
             $unit,
             $enemyCommand,
             $command,
@@ -1148,7 +1148,7 @@ class ScenarioTest extends AbstractUnitTest
     ): SummonAction
     {
         return new SummonAction(
-           $this->container,
+            $this->container,
             $actionUnit,
             $enemyCommand,
             $actionCommand,
@@ -1173,7 +1173,7 @@ class ScenarioTest extends AbstractUnitTest
     ): SummonAction
     {
         return new SummonAction(
-           $this->container,
+            $this->container,
             $actionUnit,
             $enemyCommand,
             $actionCommand,
@@ -1246,7 +1246,7 @@ class ScenarioTest extends AbstractUnitTest
     ): DamageAction
     {
         return new DamageAction(
-           $this->container,
+            $this->container,
             $unit,
             $enemyCommand,
             $command,

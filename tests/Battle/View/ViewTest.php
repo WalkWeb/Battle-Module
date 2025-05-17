@@ -357,10 +357,10 @@ EOT;
                                 </div>
                             </div>
                                                             <div class="unit_cons">
-                                    <div class="unit_cons_bar2" style="width: 20%;"></div>
+                                    <div class="unit_cons_bar2" style="width: 0%;"></div>
                                 </div>
                                 <div class="unit_rage">
-                                    <div class="unit_rage_bar2" style="width: 14%;"></div>
+                                    <div class="unit_rage_bar2" style="width: 0%;"></div>
                                 </div>
                                                     </div>
                     </div>

@@ -496,7 +496,7 @@ abstract class AbstractUnit implements UnitInterface
             $speed = $this->offense->getCastSpeed();
         }
 
-        $result = (int)floor($speed);
+        $result = (int)$speed;
         $residue = $speed - $result;
         if (($residue > 0) && ($residue * 10000 > random_int(0, 10000))) {
             $result++;
