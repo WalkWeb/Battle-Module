@@ -351,6 +351,7 @@ class WeaponTypeTest extends AbstractUnitTest
                                 'critical_multiplier' => 1.0,
                             ],
                             'can_be_avoided'   => false,
+                            'target_tracking'  => false,
                             'animation_method' => DamageAction::EFFECT_ANIMATION_METHOD,
                             'message_method'   => DamageAction::EFFECT_MESSAGE_METHOD,
                             'icon'             => '/images/icons/ability/438.png',
