@@ -51,8 +51,7 @@ class UnitClass implements UnitClassInterface
         string $smallIcon,
         array $abilitiesData,
         ContainerInterface $container
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->smallIcon = $smallIcon;

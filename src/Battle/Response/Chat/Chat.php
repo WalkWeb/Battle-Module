@@ -659,7 +659,7 @@ class Chat implements ChatInterface
         }
         return $ability ? '%s use %s %s and hit for %d damage against %s' : '%s hit for %d damage against %s';
     }
-    
+
     /**
      * Формирует сообщение о юнитах которые заблокировали удар.
      *

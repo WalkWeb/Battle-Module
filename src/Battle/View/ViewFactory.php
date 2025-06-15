@@ -39,9 +39,7 @@ class ViewFactory
         string $unitTemplate = 'battle/unit/unit.template.php',
         string $unitFullLogTemplate = 'battle/unit/unit_full_log.template.php',
         string $unitsStatsTemplate = 'battle/unit/units_stats.template.php'
-
-    ): ViewInterface
-    {
+    ): ViewInterface {
         return new View(
             $this->container->getTranslation(),
             $templateDir,

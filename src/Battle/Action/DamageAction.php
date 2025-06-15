@@ -137,8 +137,7 @@ class DamageAction extends AbstractAction
         string $icon = '',
         bool $targetTracking = true,
         bool $randomDamage = true
-    )
-    {
+    ) {
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon, $targetTracking);
 
         if (is_null($offense)) {
@@ -445,8 +444,7 @@ class DamageAction extends AbstractAction
     private function createMultipleOffense(
         OffenseInterface $offense,
         MultipleOffenseInterface $multipleOffense
-    ): OffenseInterface
-    {
+    ): OffenseInterface {
         $resultOffense = new Offense(
             $this->container,
             $offense->getDamageType(),

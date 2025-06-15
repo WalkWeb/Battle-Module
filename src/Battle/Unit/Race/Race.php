@@ -55,8 +55,7 @@ class Race implements RaceInterface
         string $icon,
         array $abilitiesData,
         ContainerInterface $container
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->singleName = $singleName;

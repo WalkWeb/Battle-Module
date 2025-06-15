@@ -63,8 +63,7 @@ class ManaRestoreAction extends AbstractAction
         string $animationMethod,
         string $messageMethod,
         string $icon = ''
-    )
-    {
+    ) {
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
 
         if ($this->typeTarget !== self::TARGET_SELF) {

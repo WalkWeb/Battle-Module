@@ -185,8 +185,7 @@ abstract class AbstractUnit implements UnitInterface
         ?UnitClassInterface $class = null,
         ?EffectCollection $effects = null,
         ?UnitCollection $lastTargets = null
-    )
-    {
+    ) {
         $this->validateCommand($command);
         $this->id = $id;
         $this->name = $name;

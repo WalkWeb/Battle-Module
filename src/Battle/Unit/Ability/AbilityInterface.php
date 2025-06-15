@@ -60,7 +60,7 @@ interface AbilityInterface
      * @return bool
      */
     public function canByUsed(CommandInterface $enemyCommand, CommandInterface $alliesCommand): bool;
-    
+
     /**
      * Возвращает коллекцию действия данной способности
      *

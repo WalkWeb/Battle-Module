@@ -88,8 +88,7 @@ class Offense implements OffenseInterface
         int $damageMultiplier,
         int $vampirism,
         int $magicVampirism
-    )
-    {
+    ) {
         $this->setDamageType($damageType);
         $this->weaponType = new WeaponType($weaponTypeId, $container);
         $this->setPhysicalDamage($physicalDamage);

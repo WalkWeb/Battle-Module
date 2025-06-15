@@ -50,8 +50,7 @@ class HealAction extends AbstractAction
         string $messageMethod,
         string $icon = '',
         bool $targetTracking = true
-    )
-    {
+    ) {
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon, $targetTracking);
 
         $this->power = $power;

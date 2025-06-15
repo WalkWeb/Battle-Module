@@ -36,8 +36,7 @@ class WaitAction extends AbstractAction
         UnitInterface $actionUnit,
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand
-    )
-    {
+    ) {
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF);
     }
 

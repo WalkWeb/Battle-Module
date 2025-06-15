@@ -47,8 +47,7 @@ class EffectAction extends AbstractAction
         EffectInterface $effect,
         ?string $animationMethod = null,
         ?string $messageMethod = null
-    )
-    {
+    ) {
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->name = $name;
         $this->effect = $effect;

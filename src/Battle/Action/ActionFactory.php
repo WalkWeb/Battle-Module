@@ -14,10 +14,9 @@ use Exception;
 
 class ActionFactory
 {
-    protected ContainerInterface $container;
-
     use ValidationTrait;
     use IdTrait;
+    protected ContainerInterface $container;
 
     private array $methodMap = [
         ActionInterface::DAMAGE       => 'createDamageAction',

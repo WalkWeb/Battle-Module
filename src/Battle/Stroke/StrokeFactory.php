@@ -28,8 +28,7 @@ class StrokeFactory
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         ContainerInterface $container
-    ): StrokeInterface
-    {
+    ): StrokeInterface {
         return new Stroke(
             $actionCommand,
             $actionUnit,

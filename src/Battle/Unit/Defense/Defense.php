@@ -157,8 +157,7 @@ class Defense implements DefenseInterface
         int $deathMaxResist,
         int $globalResist,
         int $dodge
-    )
-    {
+    ) {
         $this->setPhysicalResist($physicalResist);
         $this->setFireResist($fireResist);
         $this->setWaterResist($waterResist);

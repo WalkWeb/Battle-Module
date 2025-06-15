@@ -44,7 +44,7 @@ class UnitCollection implements Iterator, Countable
             $this->add($unit);
         }
     }
-    
+
     /**
      * @return UnitInterface
      */

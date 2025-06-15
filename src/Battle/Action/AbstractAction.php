@@ -85,8 +85,7 @@ abstract class AbstractAction implements ActionInterface
         int $typeTarget,
         string $icon = '',
         bool $targetTracking = true
-    )
-    {
+    ) {
         $this->container = $container;
         // По умолчанию creatorUnit равен actionUnit, и только у Action от эффектов actionUnit меняется когда эффект
         // применяется к цели, а creatorUnit остается неизменным
@@ -168,7 +167,9 @@ abstract class AbstractAction implements ActionInterface
      * @param UnitInterface $unit
      * @param int $factualPower
      */
-    public function addFactualPower(UnitInterface $unit, int $factualPower): void {}
+    public function addFactualPower(UnitInterface $unit, int $factualPower): void
+    {
+    }
 
     /**
      * @param UnitInterface $unit

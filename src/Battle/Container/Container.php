@@ -426,7 +426,7 @@ class Container implements ContainerInterface
         }
 
         // У одного сервиса есть отдельная зависимость на другой сервис
-        $object = $class === EffectFactory::class ? new $class($this->getActionFactory()) : new $class;
+        $object = $class === EffectFactory::class ? new $class($this->getActionFactory()) : new $class();
         $this->storage[$this->map[$class]] = $object;
 
         return $object;

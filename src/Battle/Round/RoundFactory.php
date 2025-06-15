@@ -26,8 +26,7 @@ class RoundFactory
         CommandInterface $rightCommand,
         int $actionCommand,
         ContainerInterface $container
-    ): RoundInterface
-    {
+    ): RoundInterface {
         return new Round(
             $leftCommand,
             $rightCommand,

@@ -96,7 +96,7 @@ interface CommandInterface
      *
      * @return UnitInterface|null
      */
-    public function getUnitForResurrection():? UnitInterface;
+    public function getUnitForResurrection(): ?UnitInterface;
 
     /**
      * Возвращает всех живых юнитов в команде

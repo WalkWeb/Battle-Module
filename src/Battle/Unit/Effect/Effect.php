@@ -53,8 +53,7 @@ class Effect implements EffectInterface
         ActionCollection $onApplyActions,
         ActionCollection $onNextRoundActions,
         ActionCollection $onDisableActions
-    )
-    {
+    ) {
         $this->name = $name;
         $this->icon = $icon;
         $this->baseDuration = $duration;
@@ -136,7 +135,7 @@ class Effect implements EffectInterface
             $action->clearFactualPower();
         }
     }
-    
+
     public function nextRound(): void
     {
         $this->duration--;

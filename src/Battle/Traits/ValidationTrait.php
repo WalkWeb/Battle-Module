@@ -199,7 +199,7 @@ trait ValidationTrait
 
         return $data[$filed];
     }
-    
+
     /**
      * @param array $data
      * @param string $filed

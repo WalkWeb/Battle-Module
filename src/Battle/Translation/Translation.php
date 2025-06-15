@@ -34,8 +34,8 @@ class Translation implements TranslationInterface
         ?string $language = null,
         ?array $messages = null,
         ?string $directory = null,
-        ?string $defaultLanguage = null)
-    {
+        ?string $defaultLanguage = null
+    ) {
         if ($directory === null) {
             $directory = self::DIR;
         }

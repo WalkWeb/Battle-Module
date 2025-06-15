@@ -58,8 +58,7 @@ class Stroke implements StrokeInterface
         CommandInterface $leftCommand,
         CommandInterface $rightCommand,
         ContainerInterface $container
-    )
-    {
+    ) {
         $this->actionCommand = $actionCommand;
         $this->actionUnit = $actionUnit;
         $this->leftCommand = $leftCommand;

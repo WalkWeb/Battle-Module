@@ -53,8 +53,7 @@ class Battle implements BattleInterface
         CommandInterface $rightCommand,
         ContainerInterface $container,
         ?int $actionCommand = null
-    )
-    {
+    ) {
         $this->checkDoubleUnitId($leftCommand, $rightCommand);
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;

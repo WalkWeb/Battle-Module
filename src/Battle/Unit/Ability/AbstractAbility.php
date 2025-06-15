@@ -103,8 +103,7 @@ abstract class AbstractAbility implements AbilityInterface
         int $typeActivate,
         array $allowedWeaponTypes,
         int $chanceActivate = 100
-    )
-    {
+    ) {
         $this->unit = $unit;
         $this->disposable = $disposable;
         $this->chanceActivate = $chanceActivate;

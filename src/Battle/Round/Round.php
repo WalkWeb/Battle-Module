@@ -65,8 +65,7 @@ class Round implements RoundInterface
         CommandInterface $rightCommand,
         int $actionCommand,
         ContainerInterface $container
-    )
-    {
+    ) {
         $this->validateActionCommand($actionCommand);
         $this->leftCommand = $leftCommand;
         $this->rightCommand = $rightCommand;

@@ -256,7 +256,7 @@ class Unit extends AbstractUnit
      */
     private function applyResurrectionAction(ActionInterface $action): ActionCollection
     {
-        $restoreLife = (int)($this->totalLife * ($action->getPower()/100));
+        $restoreLife = (int)($this->totalLife * ($action->getPower() / 100));
 
         // Если максимальное здоровье и power небольшие, то простое округление даст 0, соответственно делаем 1
         if ($restoreLife === 0) {
@@ -379,7 +379,7 @@ class Unit extends AbstractUnit
 
         // В режиме тестов фактор случайности не используется
         if ($testMode) {
-            return !(bool)(int)round($chanceOfHit/100);
+            return !(bool)(int)round($chanceOfHit / 100);
         }
 
         return $chanceOfHit <= random_int(0, 100);

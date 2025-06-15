@@ -1,5 +1,6 @@
 .idea/
 /vendor/
+.php-cs-fixer.cache
 
 # result mutations test (usage: https://infection.github.io/guide/usage.html)
 # export PATH=~/.composer/vendor/bin:$PATH && infection

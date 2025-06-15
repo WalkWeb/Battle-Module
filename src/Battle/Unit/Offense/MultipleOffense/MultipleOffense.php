@@ -47,8 +47,7 @@ class MultipleOffense implements MultipleOffenseInterface
         int $vampirism,
         int $blockIgnoring,
         string $damageConvertTo
-    )
-    {
+    ) {
         $this->damageMultiplier = $damageMultiplier;
         $this->speedMultiplier = $speedMultiplier;
         $this->accuracyMultiplier = $accuracyMultiplier;

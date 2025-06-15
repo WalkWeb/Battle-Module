@@ -59,8 +59,7 @@ class ResurrectionAction extends AbstractAction
         string $name,
         string $messageMethod,
         string $icon = ''
-    )
-    {
+    ) {
         $typeTarget = $this->validateTypeTarget($typeTarget);
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, $typeTarget, $icon);
         $this->name = $name;

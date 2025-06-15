@@ -61,8 +61,7 @@ class Response implements ResponseInterface
         CommandInterface $endRightCommand,
         int $winner,
         ContainerInterface $container
-    )
-    {
+    ) {
         if ($winner !== 1 && $winner !== 2) {
             throw new ResponseException(ResponseException::INCORRECT_WINNER);
         }

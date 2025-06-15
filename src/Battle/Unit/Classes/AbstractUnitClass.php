@@ -6,5 +6,4 @@ namespace Battle\Unit\Classes;
 
 abstract class AbstractUnitClass implements UnitClassInterface
 {
-
 }

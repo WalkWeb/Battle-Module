@@ -181,7 +181,7 @@ interface ContainerInterface
      * @return AbilityDescriptionFactory
      */
     public function getAbilityDescriptionFactory(): AbilityDescriptionFactory;
-    
+
     /**
      * Поставщик данных классов юнитов
      *

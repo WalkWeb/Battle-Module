@@ -18,3 +18,6 @@ coverage:
 
 stan:
 	@$(DOCKER_COMP) exec php-8.4 php vendor/bin/phpstan analyse src
+
+cs:
+	@$(DOCKER_COMP) exec -e PHP_CS_FIXER_IGNORE_ENV=1 php-8.4 vendor/bin/php-cs-fixer fix src

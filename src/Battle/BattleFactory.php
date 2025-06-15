@@ -91,8 +91,7 @@ class BattleFactory
     public static function create(
         array $data,
         ContainerInterface $container
-    ): BattleInterface
-    {
+    ): BattleInterface {
         return new Battle(
             self::createCommand($data, BattleInterface::LEFT_COMMAND, $container),
             self::createCommand($data, BattleInterface::RIGHT_COMMAND, $container),

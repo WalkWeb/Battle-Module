@@ -47,8 +47,7 @@ class ParalysisAction extends AbstractAction
         CommandInterface $enemyCommand,
         CommandInterface $alliesCommand,
         string $messageMethod
-    )
-    {
+    ) {
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF);
 
         $this->messageMethod = $messageMethod;

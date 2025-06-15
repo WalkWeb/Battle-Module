@@ -44,8 +44,7 @@ class SummonAction extends AbstractAction
         string $name,
         UnitInterface $summon,
         string $icon = ''
-    )
-    {
+    ) {
         parent::__construct($container, $actionUnit, $enemyCommand, $alliesCommand, self::TARGET_SELF, $icon);
         $this->name = $name;
         $this->summon = $summon;

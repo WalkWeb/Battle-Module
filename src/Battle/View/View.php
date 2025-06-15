@@ -75,8 +75,7 @@ class View implements ViewInterface
         string $unitTemplate,
         string $unitFullLogTemplate,
         string $unitsStatsTemplate
-    )
-    {
+    ) {
         $this->translation = $translation;
         $this->templateDir = $templateDir;
         $this->headTemplate = $headTemplate;
