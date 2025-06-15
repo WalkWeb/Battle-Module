@@ -2,9 +2,6 @@
 .phpunit.result.cache
 vendor/
 
-# result code coverage (php vendor/bin/phpunit --coverage-html html)
-html/
-
 # result mutations test (usage: https://infection.github.io/guide/usage.html)
 # export PATH=~/.composer/vendor/bin:$PATH && infection
 infection.log
