@@ -14,17 +14,17 @@ use Battle\Unit\UnitFactory;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 
-class UnitFactoryTest extends AbstractUnitTest
+class UnitFactoryTest extends AbstractTestCase
 {
     /**
      * Тест на успешное создание юнита через UnitFactory
      *
-     * @dataProvider successDataProvider
-     * @param array $data
      * @throws Exception
      */
+    #[DataProvider('successDataProvider')]
     public function testUnitFactoryCreateSuccess(array $data): void
     {
         $unit = UnitFactory::create($data);
@@ -92,15 +92,13 @@ class UnitFactoryTest extends AbstractUnitTest
     /**
      * Тесты на различные варианты невалидных данных для создания юнита
      *
-     * @dataProvider failDataProvider
-     * @param array $data
-     * @param string $error
      * @throws Exception
      */
+    #[DataProvider('failDataProvider')]
     public function testUnitFactoryCreateFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
-        $this->expectErrorMessage($error);
+        $this->expectExceptionMessage($error);
         UnitFactory::create($data);
     }
 
@@ -140,7 +138,7 @@ class UnitFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         return [
             [
@@ -272,7 +270,7 @@ class UnitFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function failDataProvider(): array
+    public static function failDataProvider(): array
     {
         return [
             [

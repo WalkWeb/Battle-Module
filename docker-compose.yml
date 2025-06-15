@@ -1,9 +1,9 @@
 
 services:
 
-  php-7.4:
-    build: ./docker/php-7.4
-    container_name: php-7.4
+  php-8.4:
+    build: ./docker/php-8.4
+    container_name: php-8.4
     volumes:
       - ./:/app
-      - ./docker/php-7.4/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+      - ./docker/php-8.4/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini

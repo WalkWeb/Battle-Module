@@ -10,11 +10,12 @@ use Battle\Action\ActionInterface;
 use Battle\Action\ResurrectionAction;
 use Battle\Command\CommandFactory;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\BaseFactory;
 use Tests\Factory\UnitFactory;
 
-class ResurrectionActionTest extends AbstractUnitTest
+class ResurrectionActionTest extends AbstractTestCase
 {
     /**
      * Тест на создание ResurrectionAction
@@ -186,11 +187,9 @@ class ResurrectionActionTest extends AbstractUnitTest
     /**
      * Тест на различные варианты некорректной силы ResurrectionAction - меньше 1 или больше 100
      *
-     * @dataProvider invalidPowerDataProvider
-     * @param int $power
-     * @throws ActionException
      * @throws Exception
      */
+    #[DataProvider('invalidPowerDataProvider')]
     public function testResurrectionActionInvalidPower(int $power): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(10, 2);
@@ -212,11 +211,9 @@ class ResurrectionActionTest extends AbstractUnitTest
     /**
      * Тест на различные варианты некорректного типа выбора цели для воскрешения. Доступен только TARGET_DEAD_ALLIES
      *
-     * @dataProvider invalidTypeTargetDataProvider
-     * @param int $typeTarget
-     * @throws ActionException
      * @throws Exception
      */
+    #[DataProvider('invalidTypeTargetDataProvider')]
     public function testResurrectionActionInvalidTypeTarget(int $typeTarget): void
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(10, 2);
@@ -238,7 +235,7 @@ class ResurrectionActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function invalidPowerDataProvider(): array
+    public static function invalidPowerDataProvider(): array
     {
         return [
             [
@@ -259,7 +256,7 @@ class ResurrectionActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function invalidTypeTargetDataProvider(): array
+    public static function invalidTypeTargetDataProvider(): array
     {
         return [
             [

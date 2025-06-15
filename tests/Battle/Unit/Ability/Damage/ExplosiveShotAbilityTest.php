@@ -11,13 +11,14 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class ExplosiveShotAbilityTest extends AbstractUnitTest
+class ExplosiveShotAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">Unit</span> use <img src="/images/icons/ability/191.png" alt="" /> <span class="ability">Explosive Shot</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">Unit</span> использовал <img src="/images/icons/ability/191.png" alt="" /> <span class="ability">Взрывной выстрел</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">Unit</span> use <img src="/images/icons/ability/191.png" alt="" /> <span class="ability">Explosive Shot</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">Unit</span> использовал <img src="/images/icons/ability/191.png" alt="" /> <span class="ability">Взрывной выстрел</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
     /**
      * Тест на создание способности Explosive Shot через AbilityDataProvider
@@ -68,12 +69,9 @@ class ExplosiveShotAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Explosive Shot
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedDamage
-     * @param int $expectedAccuracy
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testExplosiveShotAbilityUse(int $level, int $expectedDamage, int $expectedAccuracy): void
     {
         $unit = UnitFactory::createByTemplate(45);
@@ -99,7 +97,7 @@ class ExplosiveShotAbilityTest extends AbstractUnitTest
             self::assertEquals(sprintf(self::MESSAGE_RU, $expectedDamage), $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();
@@ -110,7 +108,7 @@ class ExplosiveShotAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class PowerOfDarknessAbilityTest extends AbstractUnitTest
+class PowerOfDarknessAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/226.png" alt="" /> <span class="ability">Power of Darkness</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/226.png" alt="" /> <span class="ability">Сила тьмы</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/226.png" alt="" /> <span class="ability">Power of Darkness</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/226.png" alt="" /> <span class="ability">Сила тьмы</span>';
 
     /**
      * Тест на создание способности Power of Darkness через AbilityDataProvider
@@ -36,15 +37,9 @@ class PowerOfDarknessAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Power of Darkness
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param float $expectedAttackSpeed
-     * @param float $expectedCastSpeed
-     * @param int $expectedAccuracy
-     * @param int $expectedMagicAccuracy
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testPowerOfDarknessAbilityUse(
         int $level,
         float $expectedAttackSpeed,
@@ -108,7 +103,7 @@ class PowerOfDarknessAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

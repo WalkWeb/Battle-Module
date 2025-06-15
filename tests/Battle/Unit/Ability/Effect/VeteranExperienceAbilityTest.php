@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class VeteranExperienceAbilityTest extends AbstractUnitTest
+class VeteranExperienceAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/070.png" alt="" /> <span class="ability">Veteran Experience</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/070.png" alt="" /> <span class="ability">Опыт ветерана</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/070.png" alt="" /> <span class="ability">Veteran Experience</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/070.png" alt="" /> <span class="ability">Опыт ветерана</span>';
 
     /**
      * Тест на создание способности Veteran Experience через AbilityDataProvider
@@ -36,13 +37,9 @@ class VeteranExperienceAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Veteran Experience
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedDamage
-     * @param int $expectedAccuracy
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testVeteranExperienceAbilityUse(
         int $level,
         int $expectedDamage,
@@ -102,7 +99,7 @@ class VeteranExperienceAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

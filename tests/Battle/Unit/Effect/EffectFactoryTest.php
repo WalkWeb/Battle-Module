@@ -8,18 +8,18 @@ use Battle\Action\ActionInterface;
 use Battle\Action\BuffAction;
 use Battle\Unit\Effect\EffectException;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\BaseFactory;
 
-class EffectFactoryTest extends AbstractUnitTest
+class EffectFactoryTest extends AbstractTestCase
 {
     /**
      * Тест на успешный вариант создания эффекта из массива параметров
      *
-     * @dataProvider successDataProvider
-     * @param array $data
      * @throws Exception
      */
+    #[DataProvider('successDataProvider')]
     public function testEffectFactoryCreateSuccess(array $data): void
     {
         $effect = $this->container->getEffectFactory()->create($data);
@@ -48,11 +48,9 @@ class EffectFactoryTest extends AbstractUnitTest
     /**
      * Тест на некорректные варианты данных для создания эффекта
      *
-     * @dataProvider failDataProvider
-     * @param array $data
-     * @param string $error
      * @throws Exception
      */
+    #[DataProvider('failDataProvider')]
     public function testEffectFactoryCreateFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
@@ -64,7 +62,7 @@ class EffectFactoryTest extends AbstractUnitTest
      * @return array
      * @throws Exception
      */
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 
@@ -97,7 +95,7 @@ class EffectFactoryTest extends AbstractUnitTest
      * @return array
      * @throws Exception
      */
-    public function failDataProvider(): array
+    public static function failDataProvider(): array
     {
         [$unit, $command, $enemyCommand] = BaseFactory::create(1, 2);
 

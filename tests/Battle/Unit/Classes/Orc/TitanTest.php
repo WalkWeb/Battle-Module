@@ -13,10 +13,10 @@ use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
 use Battle\Command\CommandFactory;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class TitanTest extends AbstractUnitTest
+class TitanTest extends AbstractTestCase
 {
     /**
      * @throws Exception

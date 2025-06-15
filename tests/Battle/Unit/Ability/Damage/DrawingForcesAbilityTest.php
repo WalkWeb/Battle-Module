@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class DrawingForcesAbilityTest extends AbstractUnitTest
+class DrawingForcesAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/220.png" alt="" /> <span class="ability">Drawing Forces</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span> and restore %d life';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/220.png" alt="" /> <span class="ability">Вытягивание сил</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span> и восстановил %d здоровья';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/220.png" alt="" /> <span class="ability">Drawing Forces</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span> and restore %d life';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/220.png" alt="" /> <span class="ability">Вытягивание сил</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span> и восстановил %d здоровья';
 
     /**
      * Тест на создание способности Drawing Forces через AbilityDataProvider
@@ -61,14 +62,9 @@ class DrawingForcesAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Drawing Forces
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedDamage
-     * @param int $expectedAccuracy
-     * @param int $expectedCriticalChance
-     * @param int $expectedLifeSteal
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testDrawingForcesAbilityUse(
         int $level,
         int $expectedDamage,
@@ -104,7 +100,7 @@ class DrawingForcesAbilityTest extends AbstractUnitTest
             self::assertEquals(50, $action->getOffense()->getVampirism());
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();
@@ -115,7 +111,7 @@ class DrawingForcesAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

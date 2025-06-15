@@ -17,12 +17,12 @@ use Battle\Command\CommandFactory;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitInterface;
 use Battle\Action\DamageAction;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 use Tests\Factory\Mock\UnitMockFactory;
 use Tests\Factory\CommandFactory as TestCommandFactory;
 
-class CommandTest extends AbstractUnitTest
+class CommandTest extends AbstractTestCase
 {
     /**
      * Проверяем успешное создание команды
@@ -249,11 +249,11 @@ class CommandTest extends AbstractUnitTest
      * Тест на необычную ситуацию, когда юниты в команде вначале сообщают, что есть готовые ходить, а при попытке
      * вернуть такого юнита - его нет
      *
-     * @throws Exception
+     * @throws Exception|\PHPUnit\Framework\MockObject\Exception
      */
     public function testCommandGetUnitForActionBroken(): void
     {
-        $factory = new UnitMockFactory();
+        $factory = new UnitMockFactory('');
         $unit = $factory->create();
         $command = CommandFactory::create([$unit]);
 

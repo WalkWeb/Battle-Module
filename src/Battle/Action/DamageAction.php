@@ -132,8 +132,8 @@ class DamageAction extends AbstractAction
         string $name,
         string $animationMethod,
         string $messageMethod,
-        OffenseInterface $offense = null,
-        MultipleOffenseInterface $multipleOffense = null,
+        ?OffenseInterface $offense = null,
+        ?MultipleOffenseInterface $multipleOffense = null,
         string $icon = '',
         bool $targetTracking = true,
         bool $randomDamage = true

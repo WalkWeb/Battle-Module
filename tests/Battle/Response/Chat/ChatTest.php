@@ -22,151 +22,151 @@ use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\BaseFactory;
 use Tests\Factory\UnitFactory;
 
-class ChatTest extends AbstractUnitTest
+class ChatTest extends AbstractTestCase
 {
-    private const DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>';
-    private const DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const CRUSHING_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 32 <i>crushing</i> damage against <span style="color: #1e72e3">unit_2</span>';
-    private const CRUSHING_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес <i>сокрушительный</i> удар на 32 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string CRUSHING_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 32 <i>crushing</i> damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string CRUSHING_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес <i>сокрушительный</i> удар на 32 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const UNLUCKY_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 10 <i>unlucky</i> damage against <span style="color: #1e72e3">unit_2</span>';
-    private const UNLUCKY_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес <i>неудачный</i> удар на 10 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string UNLUCKY_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 10 <i>unlucky</i> damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string UNLUCKY_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес <i>неудачный</i> удар на 10 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const DAMAGE_AND_LIFE_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_vampire</span> hit for 50 damage against <span style="color: #1e72e3">unit_2</span> and restore 25 life';
-    private const DAMAGE_AND_LIFE_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_vampire</span> нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span> и восстановил 25 здоровья';
+    private const string DAMAGE_AND_LIFE_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_vampire</span> hit for 50 damage against <span style="color: #1e72e3">unit_2</span> and restore 25 life';
+    private const string DAMAGE_AND_LIFE_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_vampire</span> нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span> и восстановил 25 здоровья';
 
-    private const DAMAGE_AND_MANA_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_2</span> hit for 30 damage against <span style="color: #1e72e3">unit_5</span> and restore 3 mana';
-    private const DAMAGE_AND_MANA_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_2</span> нанес удар на 30 урона по <span style="color: #1e72e3">unit_5</span> и восстановил 3 маны';
+    private const string DAMAGE_AND_MANA_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_2</span> hit for 30 damage against <span style="color: #1e72e3">unit_5</span> and restore 3 mana';
+    private const string DAMAGE_AND_MANA_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_2</span> нанес удар на 30 урона по <span style="color: #1e72e3">unit_5</span> и восстановил 3 маны';
 
-    private const DAMAGE_AND_LIFE_AND_MANA_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_5</span> and restore 4 life and 4 mana';
-    private const DAMAGE_AND_LIFE_AND_MANA_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_5</span> и восстановил 4 здоровья и 4 маны';
+    private const string DAMAGE_AND_LIFE_AND_MANA_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_5</span> and restore 4 life and 4 mana';
+    private const string DAMAGE_AND_LIFE_AND_MANA_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_5</span> и восстановил 4 здоровья и 4 маны';
 
-    private const CRITICAL_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> critical hit for 40 damage against <span style="color: #1e72e3">unit_2</span>';
-    private const CRITICAL_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес критический удар на 40 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string CRITICAL_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> critical hit for 40 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string CRITICAL_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес критический удар на 40 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const CRUSHING_CRITICAL_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> <i>crushing</i> critical hit for 64 damage against <span style="color: #1e72e3">unit_2</span>';
-    private const CRUSHING_CRITICAL_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес <i>сокрушительный</i> критический удар на 64 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string CRUSHING_CRITICAL_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> <i>crushing</i> critical hit for 64 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string CRUSHING_CRITICAL_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес <i>сокрушительный</i> критический удар на 64 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const UNLUCKY_CRITICAL_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> <i>unlucky</i> critical hit for 20 damage against <span style="color: #1e72e3">unit_2</span>';
-    private const UNLUCKY_CRITICAL_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес <i>неудачный</i> критический удар на 20 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string UNLUCKY_CRITICAL_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> <i>unlucky</i> critical hit for 20 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string UNLUCKY_CRITICAL_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес <i>неудачный</i> критический удар на 20 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
-    private const BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
+    private const string BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
+    private const string BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
-    private const DODGE_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
-    private const DODGE_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
+    private const string DODGE_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const string DODGE_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const DAMAGE_TWO_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> hit for 40 damage against <span style="color: #1e72e3">unit_2</span> and <span style="color: #1e72e3">unit_3</span>';
-    private const DAMAGE_TWO_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 40 урона по <span style="color: #1e72e3">unit_2</span> и <span style="color: #1e72e3">unit_3</span>';
+    private const string DAMAGE_TWO_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> hit for 40 damage against <span style="color: #1e72e3">unit_2</span> and <span style="color: #1e72e3">unit_3</span>';
+    private const string DAMAGE_TWO_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 40 урона по <span style="color: #1e72e3">unit_2</span> и <span style="color: #1e72e3">unit_3</span>';
 
-    private const DAMAGE_AND_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
-    private const DAMAGE_AND_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
+    private const string DAMAGE_AND_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it!';
+    private const string DAMAGE_AND_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
-    private const DAMAGE_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
-    private const DAMAGE_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
+    private const string DAMAGE_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const string DAMAGE_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
-    private const BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
+    private const string BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const string BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const DAMAGE_AND_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
-    private const DAMAGE_AND_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
+    private const string DAMAGE_AND_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> tried to strike, but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const string DAMAGE_AND_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 20 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> попытался нанести удар, но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const DAMAGE_THREE_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> hit for 60 damage against <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> and <span style="color: #1e72e3">unit_4</span>';
-    private const DAMAGE_THREE_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 60 урона по <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> и <span style="color: #1e72e3">unit_4</span>';
+    private const string DAMAGE_THREE_TARGET_EN = '<span style="color: #1e72e3">unit_1</span> hit for 60 damage against <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> and <span style="color: #1e72e3">unit_4</span>';
+    private const string DAMAGE_THREE_TARGET_RU = '<span style="color: #1e72e3">unit_1</span> нанес удар на 60 урона по <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> и <span style="color: #1e72e3">unit_4</span>';
 
-    private const DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span>';
-    private const DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const CRUSHING_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>crushing</i> hit for 80 damage against <span style="color: #1e72e3">unit_2</span>';
-    private const CRUSHING_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>сокрушительный</i> удар на 80 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string CRUSHING_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>crushing</i> hit for 80 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string CRUSHING_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>сокрушительный</i> удар на 80 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const UNLUCKY_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>unlucky</i> hit for 25 damage against <span style="color: #1e72e3">unit_2</span>';
-    private const UNLUCKY_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>неудачный</i> удар на 25 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string UNLUCKY_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>unlucky</i> hit for 25 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string UNLUCKY_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>неудачный</i> удар на 25 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const CRITICAL_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and critical hit for 100 damage against <span style="color: #1e72e3">unit_2</span>';
-    private const CRITICAL_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес критический удар на 100 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string CRITICAL_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and critical hit for 100 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string CRITICAL_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес критический удар на 100 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const CRUSHING_CRITICAL_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>crushing</i> critical hit for 160 damage against <span style="color: #1e72e3">unit_2</span>';
-    private const CRUSHING_CRITICAL_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>сокрушительный</i> критический удар на 160 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string CRUSHING_CRITICAL_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>crushing</i> critical hit for 160 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string CRUSHING_CRITICAL_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>сокрушительный</i> критический удар на 160 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const UNLUCKY_CRITICAL_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>unlucky</i> critical hit for 50 damage against <span style="color: #1e72e3">unit_2</span>';
-    private const UNLUCKY_CRITICAL_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>неудачный</i> критический удар на 50 урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string UNLUCKY_CRITICAL_DAMAGE_ABILITY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and <i>unlucky</i> critical hit for 50 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string UNLUCKY_CRITICAL_DAMAGE_ABILITY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес <i>неудачный</i> критический удар на 50 урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const DAMAGE_ABILITY_AND_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span> and restore 25 life';
-    private const DAMAGE_ABILITY_AND_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span> и восстановил 25 здоровья';
+    private const string DAMAGE_ABILITY_AND_VAMPIRISM_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span> and restore 25 life';
+    private const string DAMAGE_ABILITY_AND_VAMPIRISM_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span> и восстановил 25 здоровья';
 
-    private const DAMAGE_ABILITY_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it!';
-    private const DAMAGE_ABILITY_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его!';
+    private const string DAMAGE_ABILITY_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it!';
+    private const string DAMAGE_ABILITY_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
-    private const DAMAGE_ABILITY_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
-    private const DAMAGE_ABILITY_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
+    private const string DAMAGE_ABILITY_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const string DAMAGE_ABILITY_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const ABILITY_DAMAGE_AND_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it!';
-    private const ABILITY_DAMAGE_AND_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его!';
+    private const string ABILITY_DAMAGE_AND_BLOCK_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it!';
+    private const string ABILITY_DAMAGE_AND_BLOCK_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его!';
 
-    private const ABILITY_DAMAGE_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
-    private const ABILITY_DAMAGE_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
+    private const string ABILITY_DAMAGE_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const string ABILITY_DAMAGE_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const ABILITY_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
-    private const ABILITY_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
+    private const string ABILITY_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const string ABILITY_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const ABILITY_DAMAGE_AND_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
-    private const ABILITY_DAMAGE_AND_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
+    private const string ABILITY_DAMAGE_AND_BLOCK_AND_DODGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> and hit for 50 damage against <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">100_block</span> blocked it! <span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Heavy Strike</span> but <span style="color: #1e72e3">nimble_unit</span> dodged!';
+    private const string ABILITY_DAMAGE_AND_BLOCK_AND_DODGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> и нанес удар на 50 урона по <span style="color: #1e72e3">unit_2</span>. <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">100_block</span> заблокировал его! <span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/335.png" alt="" /> <span class="ability">Тяжелый Удар</span> но <span style="color: #1e72e3">nimble_unit</span> уклонился!';
 
-    private const HEAL_EN = '<span style="color: #1e72e3">unit_1</span> heal <span style="color: #1e72e3">wounded_unit</span> on 20 life';
-    private const HEAL_RU = '<span style="color: #1e72e3">unit_1</span> вылечил <span style="color: #1e72e3">wounded_unit</span> на 20 здоровья';
+    private const string HEAL_EN = '<span style="color: #1e72e3">unit_1</span> heal <span style="color: #1e72e3">wounded_unit</span> on 20 life';
+    private const string HEAL_RU = '<span style="color: #1e72e3">unit_1</span> вылечил <span style="color: #1e72e3">wounded_unit</span> на 20 здоровья';
 
-    private const HEAL_ABILITY_OTHER_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and heal <span style="color: #1e72e3">wounded_unit</span> on 60 life';
-    private const HEAL_ABILITY_OTHER_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">wounded_unit</span> на 60 здоровья';
+    private const string HEAL_ABILITY_OTHER_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and heal <span style="color: #1e72e3">wounded_unit</span> on 60 life';
+    private const string HEAL_ABILITY_OTHER_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил <span style="color: #1e72e3">wounded_unit</span> на 60 здоровья';
 
-    private const HEAL_ABILITY_SELF_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and healed itself on 60 life';
-    private const HEAL_ABILITY_SELF_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил себя на 60 здоровья';
+    private const string HEAL_ABILITY_SELF_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Great Heal</span> and healed itself on 60 life';
+    private const string HEAL_ABILITY_SELF_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/196.png" alt="" /> <span class="ability">Сильное Лечение</span> и вылечил себя на 60 здоровья';
 
-    private const MANA_RESTORE_EN = '<span style="color: #1e72e3">wounded_unit</span> restore <span style="color: #1e72e3">wounded_unit</span> 20 mana';
-    private const MANA_RESTORE_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил <span style="color: #1e72e3">wounded_unit</span> 20 маны';
+    private const string MANA_RESTORE_EN = '<span style="color: #1e72e3">wounded_unit</span> restore <span style="color: #1e72e3">wounded_unit</span> 20 mana';
+    private const string MANA_RESTORE_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил <span style="color: #1e72e3">wounded_unit</span> 20 маны';
 
-    private const MANA_RESTORE_ABILITY_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span> and restore <span style="color: #1e72e3">wounded_unit</span> 20 mana';
-    private const MANA_RESTORE_ABILITY_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span> и восстановил <span style="color: #1e72e3">wounded_unit</span> 20 маны';
+    private const string MANA_RESTORE_ABILITY_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span> and restore <span style="color: #1e72e3">wounded_unit</span> 20 mana';
+    private const string MANA_RESTORE_ABILITY_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span> и восстановил <span style="color: #1e72e3">wounded_unit</span> 20 маны';
 
-    private const MANA_RESTORE_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 20 mana from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span>';
-    private const MANA_RESTORE_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 20 маны от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span>';
+    private const string MANA_RESTORE_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 20 mana from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span>';
+    private const string MANA_RESTORE_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 20 маны от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span>';
 
-    private const SUMMON_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Imp</span>';
-    private const SUMMON_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Беса</span>';
+    private const string SUMMON_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Imp</span>';
+    private const string SUMMON_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/275.png" alt="" /> <span class="ability">Беса</span>';
 
-    private const WAIT_EN = '<span style="color: #1e72e3">unit_1</span> preparing to attack';
-    private const WAIT_RU = '<span style="color: #1e72e3">unit_1</span> готовится к атаке';
+    private const string WAIT_EN = '<span style="color: #1e72e3">unit_1</span> preparing to attack';
+    private const string WAIT_RU = '<span style="color: #1e72e3">unit_1</span> готовится к атаке';
 
-    private const PARALYSIS_EN = '<span style="color: #1e72e3">unit_1</span> paralyzed and unable to move';
-    private const PARALYSIS_RU = '<span style="color: #1e72e3">unit_1</span> парализован и не может двигаться';
+    private const string PARALYSIS_EN = '<span style="color: #1e72e3">unit_1</span> paralyzed and unable to move';
+    private const string PARALYSIS_RU = '<span style="color: #1e72e3">unit_1</span> парализован и не может двигаться';
 
-    private const EFFECT_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> received 20 damage from effect <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
-    private const EFFECT_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> получил 20 урона от эффекта <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
+    private const string EFFECT_DAMAGE_EN = '<span style="color: #1e72e3">unit_1</span> received 20 damage from effect <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
+    private const string EFFECT_DAMAGE_RU = '<span style="color: #1e72e3">unit_1</span> получил 20 урона от эффекта <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
 
     // В текущих способностях сообщение от BuffAction не формируется, оно формируется через EffectAction
     // По этому это сообщение выглядит кривовато, но это нормально
-    private const BUFF_EN = '<span style="color: #1e72e3">unit_1</span> Reserve Forces';
-    private const BUFF_RU = '<span style="color: #1e72e3">unit_1</span> Резервные Силы';
+    private const string BUFF_EN = '<span style="color: #1e72e3">unit_1</span> Reserve Forces';
+    private const string BUFF_RU = '<span style="color: #1e72e3">unit_1</span> Резервные Силы';
 
     // Сейчас сообщения выглядят некорректно, т.к. сообщение о воскрешении подразумевает, что воскрешение использовано со способности
-    private const RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">ExampleActionName</span> and resurrected <span style="color: #1e72e3">dead_unit</span>';
-    private const RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">ExampleActionName</span> и воскресил <span style="color: #1e72e3">dead_unit</span>';
+    private const string RESURRECTION_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">ExampleActionName</span> and resurrected <span style="color: #1e72e3">dead_unit</span>';
+    private const string RESURRECTION_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">ExampleActionName</span> и воскресил <span style="color: #1e72e3">dead_unit</span>';
 
-    private const EFFECT_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Healing Potion</span>';
-    private const EFFECT_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Лечебное зелье</span>';
+    private const string EFFECT_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Healing Potion</span>';
+    private const string EFFECT_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Лечебное зелье</span>';
 
-    private const APPLY_EFFECT_SELF_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Reserve Forces</span>';
-    private const APPLY_EFFECT_SELF_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Резервные Силы</span>';
+    private const string APPLY_EFFECT_SELF_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Reserve Forces</span>';
+    private const string APPLY_EFFECT_SELF_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Резервные Силы</span>';
 
-    private const APPLY_EFFECT_TO_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Reserve Forces</span> on <span style="color: #1e72e3">unit_2</span>';
-    private const APPLY_EFFECT_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Резервные Силы</span> на <span style="color: #1e72e3">unit_2</span>';
+    private const string APPLY_EFFECT_TO_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Reserve Forces</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const string APPLY_EFFECT_TO_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/156.png" alt="" /> <span class="ability">Резервные Силы</span> на <span style="color: #1e72e3">unit_2</span>';
 
-    private const SKIP_MESSAGE = '';
+    private const string SKIP_MESSAGE = '';
 
     /**
      * Тест на формирование сообщения об уроне

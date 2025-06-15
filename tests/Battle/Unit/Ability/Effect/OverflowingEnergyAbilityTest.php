@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class OverflowingEnergyAbilityTest extends AbstractUnitTest
+class OverflowingEnergyAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/403.png" alt="" /> <span class="ability">Overflowing Energy</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/403.png" alt="" /> <span class="ability">Переполняющая энергия</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/403.png" alt="" /> <span class="ability">Overflowing Energy</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/403.png" alt="" /> <span class="ability">Переполняющая энергия</span>';
 
     /**
      * Тест на создание способности Overflowing Energy через AbilityDataProvider
@@ -36,13 +37,9 @@ class OverflowingEnergyAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Overflowing Energy
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedCriticalChance
-     * @param int $expectedCriticalMultiplier
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testOverflowingEnergyAbilityUse(
         int $level,
         int $expectedCriticalChance,
@@ -102,7 +99,7 @@ class OverflowingEnergyAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

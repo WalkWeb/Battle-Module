@@ -14,13 +14,13 @@ use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class HellfireAbilityTest extends AbstractUnitTest
+class HellfireAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/276.png" alt="" /> <span class="ability">Hellfire</span> and hit for 80 damage against <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> and <span style="color: #1e72e3">unit_4</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/276.png" alt="" /> <span class="ability">Адское пламя</span> и нанес удар на 80 урона по <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> и <span style="color: #1e72e3">unit_4</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/276.png" alt="" /> <span class="ability">Hellfire</span> and hit for 80 damage against <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> and <span style="color: #1e72e3">unit_4</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/276.png" alt="" /> <span class="ability">Адское пламя</span> и нанес удар на 80 урона по <span style="color: #1e72e3">unit_2</span>, <span style="color: #1e72e3">unit_3</span> и <span style="color: #1e72e3">unit_4</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -189,7 +189,7 @@ class HellfireAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();

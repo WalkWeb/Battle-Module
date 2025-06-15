@@ -9,17 +9,17 @@ use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseInterface;
 use Battle\Unit\Offense\OffenseInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 
-class MultipleOffenseFactoryTest extends AbstractUnitTest
+class MultipleOffenseFactoryTest extends AbstractTestCase
 {
     /**
      * Тест на успешное создание MultipleOffense на основе массива параметров
      *
-     * @dataProvider successDataProvider
-     * @param array $data
      * @throws Exception
      */
+    #[DataProvider('successDataProvider')]
     public function testMultipleOffenseFactoryCreateSuccess(array $data): void
     {
         $multipleOffense = MultipleOffenseFactory::create($data);
@@ -66,11 +66,9 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
     /**
      * Тесты на различные варианты невалидных данных
      *
-     * @dataProvider failDataProvider
-     * @param array $data
-     * @param string $error
      * @throws Exception
      */
+    #[DataProvider('failDataProvider')]
     public function testMultipleOffenseFactoryCreateFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
@@ -81,7 +79,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         return [
             [
@@ -129,7 +127,7 @@ class MultipleOffenseFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function failDataProvider(): array
+    public static function failDataProvider(): array
     {
         return [
             [

@@ -12,18 +12,19 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
 // TODO Сейчас способность аналогична Hell Knight Primordial Form и похожа на танка. Хотя класс больше дд
 
-class SoulKillerPrimordialFormAbilityTest extends AbstractUnitTest
+class SoulKillerPrimordialFormAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';
-    private const MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Изначальная форма</span> и вылечил себя на %d здоровья';
+    private const string MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';
+    private const string MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Изначальная форма</span> и вылечил себя на %d здоровья';
 
-    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Primordial Form</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Изначальная форма</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Primordial Form</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/527.png" alt="" /> <span class="ability">Изначальная форма</span>';
 
     /**
      * Тест на создание способности Soul Killer Primordial Form через AbilityDataProvider
@@ -79,20 +80,9 @@ class SoulKillerPrimordialFormAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Soul Killer Primordial Form
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedHealPower
-     * @param int $expectedDamage
-     * @param int $expectedPhysicalResist
-     * @param int $expectedFireResist
-     * @param int $expectedWaterResist
-     * @param int $expectedAirResist
-     * @param int $expectedEarthResist
-     * @param int $expectedLifeResist
-     * @param int $expectedDeathResist
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testSoulKillerPrimordialFormAbilityUse(
         int $level,
         int $expectedHealPower,
@@ -185,7 +175,7 @@ class SoulKillerPrimordialFormAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

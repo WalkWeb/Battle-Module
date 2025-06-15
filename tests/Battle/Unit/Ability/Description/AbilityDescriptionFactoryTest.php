@@ -9,31 +9,28 @@ use Battle\Container\ContainerException;
 use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\Description\AbilityDescriptionFactory;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 
-class AbilityDescriptionFactoryTest extends AbstractUnitTest
+class AbilityDescriptionFactoryTest extends AbstractTestCase
 {
     /**
-     * @dataProvider successDataProvider
-     * @param array $data
-     * @param string $expectedDescription
      * @throws AbilityException
      * @throws BattleException
      * @throws ContainerException
      */
+    #[DataProvider('successDataProvider')]
     public function testAbilityDescriptionFactoryCreateSuccess(array $data, string $expectedDescription): void
     {
         self::assertEquals($expectedDescription, (string)$this->getFactory()->create($data));
     }
 
     /**
-     * @dataProvider failDataProvider
-     * @param array $data
-     * @param string $error
      * @throws AbilityException
      * @throws BattleException
      * @throws ContainerException
      */
+    #[DataProvider('failDataProvider')]
     public function testAbilityDescriptionFactoryCreateFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
@@ -41,7 +38,7 @@ class AbilityDescriptionFactoryTest extends AbstractUnitTest
         $this->getFactory()->create($data);
     }
 
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         return [
             [
@@ -61,7 +58,7 @@ class AbilityDescriptionFactoryTest extends AbstractUnitTest
         ];
     }
 
-    public function failDataProvider(): array
+    public static function failDataProvider(): array
     {
         return [
             // Отсутствует description

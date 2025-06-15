@@ -9,10 +9,10 @@ use Battle\Response\Statistic\UnitStatistic\UnitStatistic;
 use Battle\Response\Statistic\UnitStatistic\UnitStatisticCollection;
 use Battle\Response\Statistic\UnitStatistic\UnitStatisticInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class UnitStatisticCollectionTest extends AbstractUnitTest
+class UnitStatisticCollectionTest extends AbstractTestCase
 {
     /**
      * @throws Exception

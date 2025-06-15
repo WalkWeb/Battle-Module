@@ -8,10 +8,10 @@ use Battle\Unit\Ability\AbilityException;
 use Battle\Unit\Ability\AbilityFactory;
 use Battle\Unit\Ability\DataProvider\ExampleAbilityDataProvider;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class ExampleAbilityDataProviderTest extends AbstractUnitTest
+class ExampleAbilityDataProviderTest extends AbstractTestCase
 {
     /**
      * Тест на успешное получение данных через ExampleAbilityDataProvider и создание из него способности

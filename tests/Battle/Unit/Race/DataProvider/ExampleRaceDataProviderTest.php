@@ -7,17 +7,17 @@ namespace Tests\Battle\Unit\Race\DataProvider;
 use Battle\Unit\Race\DataProvider\ExampleRaceDataProvider;
 use Battle\Unit\Race\RaceException;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 
-class ExampleRaceDataProviderTest extends AbstractUnitTest
+class ExampleRaceDataProviderTest extends AbstractTestCase
 {
     /**
      * Тест на успешное создание расы юнита на основе данных из RaceDataProvider
      *
-     * @dataProvider successDataProvider
-     * @param int $raceId
      * @throws Exception
      */
+    #[DataProvider('successDataProvider')]
     public function testExampleRaceDataProviderGetSuccess(int $raceId): void
     {
         $data = $this->getDataProvider()->get($raceId);
@@ -47,7 +47,7 @@ class ExampleRaceDataProviderTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         return [
             [1],

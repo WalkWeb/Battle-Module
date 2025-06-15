@@ -12,15 +12,15 @@ use Battle\BattleException;
 use Battle\Unit\UnitException;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 
-class BattleFactoryTest extends AbstractUnitTest
+class BattleFactoryTest extends AbstractTestCase
 {
     /**
-     * @dataProvider successDataProvider
-     * @param array $data
      * @throws Exception
      */
+    #[DataProvider('successDataProvider')]
     public function testBattleFactoryCreateSuccess(array $data): void
     {
         $battle = BattleFactory::create($data, $this->container);
@@ -39,14 +39,11 @@ class BattleFactoryTest extends AbstractUnitTest
     }
 
     /**
-     * @dataProvider successLeftCommandDataProvider
-     * @param array $data
-     * @param array $expectedData
-     * @param int $command
      * @throws BattleException
      * @throws CommandException
      * @throws UnitException
      */
+    #[DataProvider('successLeftCommandDataProvider')]
     public function testBattleFactoryCreateCommandSuccess(array $data, array $expectedData, int $command): void
     {
         $command = BattleFactory::createCommand($data, $command, $this->container);
@@ -55,11 +52,9 @@ class BattleFactoryTest extends AbstractUnitTest
     }
 
     /**
-     * @dataProvider failDataProvider
-     * @param array $data
-     * @param string $error
      * @throws Exception
      */
+    #[DataProvider('failDataProvider')]
     public function testBattleFactoryCreateCommandFail(array $data, string $error): void
     {
         $this->expectException(BattleException::class);
@@ -70,7 +65,7 @@ class BattleFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         return [
             [
@@ -207,7 +202,7 @@ class BattleFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function successLeftCommandDataProvider(): array
+    public static function successLeftCommandDataProvider(): array
     {
         return [
             [
@@ -741,7 +736,7 @@ class BattleFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function failDataProvider(): array
+    public static function failDataProvider(): array
     {
         return [
             [

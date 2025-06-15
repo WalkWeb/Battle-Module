@@ -8,9 +8,9 @@ use Battle\Unit\Defense\Defense;
 use Battle\Unit\Defense\DefenseException;
 use Battle\Unit\Defense\DefenseInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 
-class DefenseTest extends AbstractUnitTest
+class DefenseTest extends AbstractTestCase
 {
     /**
      * Тест на создание Defense

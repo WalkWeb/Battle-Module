@@ -11,11 +11,11 @@ use Exception;
 use Battle\Action\ActionException;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\BaseFactory;
 use Tests\Factory\UnitFactory;
 
-class ActionTest extends AbstractUnitTest
+class ActionTest extends AbstractTestCase
 {
     /**
      * Тест на ситуацию, когда у не-SummonAction вызывают метод getSummonUnit()

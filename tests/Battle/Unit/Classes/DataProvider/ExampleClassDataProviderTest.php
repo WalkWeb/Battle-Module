@@ -8,7 +8,7 @@ use Battle\Unit\Classes\DataProvider\ClassDataProviderInterface;
 use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClassException;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 
 /**
  * Так как классов много, хранить тесты на их все в одном файле неразумно, по этому тесты под конкретные классы делаются
@@ -18,7 +18,7 @@ use Tests\AbstractUnitTest;
  *
  * @package Tests\Battle\Unit\Classes\DataProvider
  */
-class ExampleClassDataProviderTest extends AbstractUnitTest
+class ExampleClassDataProviderTest extends AbstractTestCase
 {
     /**
      * @throws Exception
@@ -50,6 +50,6 @@ class ExampleClassDataProviderTest extends AbstractUnitTest
      */
     private function getDataProvider(): ClassDataProviderInterface
     {
-        return new ExampleClassDataProvider($this->container);
+        return new ExampleClassDataProvider();
     }
 }

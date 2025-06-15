@@ -18,22 +18,22 @@ use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class PoisonAbilityTest extends AbstractUnitTest
+class PoisonAbilityTest extends AbstractTestCase
 {
     // Сообщения применения на другого юнита
-    private const MESSAGE_APPLY_TO_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span> on <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_APPLY_TO_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span> на <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_APPLY_TO_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_APPLY_TO_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span> на <span style="color: #1e72e3">unit_2</span>';
 
     // Сообщения применения эффекта на себя
-    private const MESSAGE_APPLY_SELF_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
-    private const MESSAGE_APPLY_SELF_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
+    private const string MESSAGE_APPLY_SELF_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
+    private const string MESSAGE_APPLY_SELF_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
 
     // Сообщения об уроне от эффекта
-    private const MESSAGE_DAMAGE_EN = '<span style="color: #1e72e3">unit_2</span> received 8 damage from effect <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
-    private const MESSAGE_DAMAGE_RU = '<span style="color: #1e72e3">unit_2</span> получил 8 урона от эффекта <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
+    private const string MESSAGE_DAMAGE_EN = '<span style="color: #1e72e3">unit_2</span> received 8 damage from effect <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Poison</span>';
+    private const string MESSAGE_DAMAGE_RU = '<span style="color: #1e72e3">unit_2</span> получил 8 урона от эффекта <img src="/images/icons/ability/202.png" alt="" /> <span class="ability">Отравление</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -276,7 +276,7 @@ class PoisonAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_APPLY_TO_RU, $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         // Теперь эффект у противника есть, и больше способность примениться не может
@@ -297,7 +297,7 @@ class PoisonAbilityTest extends AbstractUnitTest
                 self::assertEquals(self::MESSAGE_DAMAGE_RU, $this->getChatRu()->addMessage($action));
 
                 // Дополнительное проверяем, что по событию успешно создается анимация
-                (new Scenario())->addAnimation($action, new Statistic());
+                new Scenario()->addAnimation($action, new Statistic());
             }
         }
     }

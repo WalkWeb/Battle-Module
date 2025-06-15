@@ -11,19 +11,19 @@ use Battle\Unit\Race\DataProvider\RaceDataProviderInterface;
 use Battle\Unit\Race\RaceException;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class RaceFactoryTest extends AbstractUnitTest
+class RaceFactoryTest extends AbstractTestCase
 {
     /**
      * Тест на успешное создание расы
      *
-     * @dataProvider successDataProvider
-     * @param int $id
      * @throws BattleException
      * @throws Exception
      */
+    #[DataProvider('successDataProvider')]
     public function testRaceFactorySuccess(int $id): void
     {
         $data = $this->getDataProvider()->get($id);
@@ -55,11 +55,9 @@ class RaceFactoryTest extends AbstractUnitTest
     /**
      * Тест на различные варианты невалидных данных для создания расы
      *
-     * @dataProvider failDataProvider
-     * @param array $data
-     * @param string $error
      * @throws Exception
      */
+    #[DataProvider('failDataProvider')]
     public function testRaceFactoryFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
@@ -70,7 +68,7 @@ class RaceFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         return [
             [1],
@@ -86,7 +84,7 @@ class RaceFactoryTest extends AbstractUnitTest
         ];
     }
 
-    public function failDataProvider(): array
+    public static function failDataProvider(): array
     {
         return [
             [

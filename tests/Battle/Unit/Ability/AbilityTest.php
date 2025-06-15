@@ -15,7 +15,8 @@ use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffense;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
 /**
@@ -26,7 +27,7 @@ use Tests\Factory\UnitFactory;
  *
  * @package Tests\Battle\Unit\Ability
  */
-class AbilityTest extends AbstractUnitTest
+class AbilityTest extends AbstractTestCase
 {
     /**
      * Тест на проверку базовых параметров способностей: name, icon, unit, disposable
@@ -152,10 +153,9 @@ class AbilityTest extends AbstractUnitTest
      * Тест на ситуацию, когда передан невалидный массив параметров для создания эффекта - нет on_apply_actions,
      * on_next_round_actions или on_disable_actions
      *
-     * @dataProvider invalidEffectDataProvider
-     * @param array $effectData
      * @throws Exception
      */
+    #[DataProvider('invalidEffectDataProvider')]
     public function testAbilityInvalidEffectActionData(array $effectData): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -525,7 +525,7 @@ class AbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function invalidEffectDataProvider(): array
+    public static function invalidEffectDataProvider(): array
     {
         return [
             [

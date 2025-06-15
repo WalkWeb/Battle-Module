@@ -11,10 +11,10 @@ use Battle\Command\CommandException;
 use Battle\Command\CommandFactory;
 use Battle\Unit\UnitException;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class SummonActionTest extends AbstractUnitTest
+class SummonActionTest extends AbstractTestCase
 {
     /**
      * @throws CommandException

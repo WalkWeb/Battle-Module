@@ -11,10 +11,10 @@ use Battle\Unit\Classes\DataProvider\ExampleClassDataProvider;
 use Battle\Unit\Classes\UnitClass;
 use Battle\Unit\Classes\UnitClassException;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class UnitClassTest extends AbstractUnitTest
+class UnitClassTest extends AbstractTestCase
 {
     /**
      * Тест на успешное создание класса юнита через универсальный класс UnitClass
@@ -51,7 +51,7 @@ class UnitClassTest extends AbstractUnitTest
 
         $expectedAbilities = [];
 
-        foreach ($unit->getClass()->getAbilities($unit) as $i => $ability) {
+        foreach ($unit->getClass()->getAbilities($unit) as $ability) {
             $expectedAbilities[] = $ability;
         }
 
@@ -97,12 +97,8 @@ class UnitClassTest extends AbstractUnitTest
      */
     private function convertAbilityData(array $abilitiesData, ContainerInterface $container): array
     {
-        $abilities = [];
-
-        foreach ($abilitiesData as $i => $abilityData) {
-            $abilities[$i] = $container->getAbilityDataProvider()->get($abilityData['name'], $abilityData['level']);
-        }
-
-        return $abilities;
+        return array_map(function ($abilityData) use ($container) {
+            return $container->getAbilityDataProvider()->get($abilityData['name'], $abilityData['level']);
+        }, $abilitiesData);
     }
 }

@@ -11,13 +11,14 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class BallLightningAbilityTest extends AbstractUnitTest
+class BallLightningAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/503.png" alt="" /> <span class="ability">Ball Lightning</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/503.png" alt="" /> <span class="ability">Шаровая молния</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/503.png" alt="" /> <span class="ability">Ball Lightning</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/503.png" alt="" /> <span class="ability">Шаровая молния</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
     /**
      * Тест на создание способности Ball Lightning через AbilityDataProvider
@@ -28,21 +29,20 @@ class BallLightningAbilityTest extends AbstractUnitTest
     {
         $name = 'Ball Lightning';
         $icon = '/images/icons/ability/503.png';
-        $disposable = false;
 
         $unit = UnitFactory::createByTemplate(4);
         $enemyUnit = UnitFactory::createByTemplate(2);
         $command = CommandFactory::create([$unit]);
         $enemyCommand = CommandFactory::create([$enemyUnit]);
 
-        $ability = $this->getAbility($unit, $name, 1);
+        $ability = $this->getAbility($unit, $name);
 
         self::assertEquals($name, $ability->getName());
         self::assertEquals($icon, $ability->getIcon());
         self::assertEquals($unit, $ability->getUnit());
         self::assertFalse($ability->isReady());
         self::assertTrue($ability->canByUsed($enemyCommand, $command));
-        self::assertEquals($disposable, $ability->isDisposable());
+        self::assertFalse($ability->isDisposable());
         self::assertFalse($ability->isUsage());
         self::assertEquals(AbilityInterface::ACTIVATE_CONCENTRATION, $ability->getTypeActivate());
         self::assertEquals(
@@ -68,14 +68,9 @@ class BallLightningAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Ball Lightning
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedDamage
-     * @param int $expectedAccuracy
-     * @param int $expectedCriticalChance
-     * @param int $expectedCriticalMultiplier
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testBallLightningAbilityUse(
         int $level,
         int $expectedDamage,
@@ -109,7 +104,7 @@ class BallLightningAbilityTest extends AbstractUnitTest
             self::assertEquals(sprintf(self::MESSAGE_RU, $expectedDamage), $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();
@@ -120,7 +115,7 @@ class BallLightningAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

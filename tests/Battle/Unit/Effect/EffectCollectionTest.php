@@ -13,11 +13,11 @@ use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectCollection;
 use Battle\Unit\UnitException;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 use Tests\Factory\UnitFactoryException;
 
-class EffectCollectionTest extends AbstractUnitTest
+class EffectCollectionTest extends AbstractTestCase
 {
     /**
      * @throws UnitFactoryException

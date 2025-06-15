@@ -15,18 +15,18 @@ use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class GeneralHealAbilityTest extends AbstractUnitTest
+class GeneralHealAbilityTest extends AbstractTestCase
 {
     /**
      * Сила заклинания = 24
      *
      * Один из раненых юнитов имеет 90/100 здоровья, другой 1/100, соответственно лечение будет на 10 + 24 = 34
      */
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">General Heal</span> and heal <span style="color: #1e72e3">small_wounded_unit</span> and <span style="color: #1e72e3">wounded_unit</span> on 34 life';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">Общее исцеление</span> и вылечил <span style="color: #1e72e3">small_wounded_unit</span> и <span style="color: #1e72e3">wounded_unit</span> на 34 здоровья';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">General Heal</span> and heal <span style="color: #1e72e3">small_wounded_unit</span> and <span style="color: #1e72e3">wounded_unit</span> on 34 life';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">Общее исцеление</span> и вылечил <span style="color: #1e72e3">small_wounded_unit</span> и <span style="color: #1e72e3">wounded_unit</span> на 34 здоровья';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -179,7 +179,7 @@ class GeneralHealAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();

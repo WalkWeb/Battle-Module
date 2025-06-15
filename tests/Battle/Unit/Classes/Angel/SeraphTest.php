@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Classes\Angel;
 
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class SeraphTest extends AbstractUnitTest
+class SeraphTest extends AbstractTestCase
 {
     /**
      * @throws Exception

@@ -11,16 +11,17 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class RegenerationAbilityTest extends AbstractUnitTest
+class RegenerationAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/204.png" alt="" /> <span class="ability">Regeneration</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/204.png" alt="" /> <span class="ability">Регенерация</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/204.png" alt="" /> <span class="ability">Regeneration</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/204.png" alt="" /> <span class="ability">Регенерация</span>';
 
-    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored %d life from effect <img src="/images/icons/ability/204.png" alt="" /> <span class="ability">Regeneration</span>';
-    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил %d здоровья от эффекта <img src="/images/icons/ability/204.png" alt="" /> <span class="ability">Регенерация</span>';
+    private const string MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored %d life from effect <img src="/images/icons/ability/204.png" alt="" /> <span class="ability">Regeneration</span>';
+    private const string MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил %d здоровья от эффекта <img src="/images/icons/ability/204.png" alt="" /> <span class="ability">Регенерация</span>';
 
     /**
      * Тест на создание способности Regeneration через AbilityDataProvider
@@ -66,12 +67,9 @@ class RegenerationAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Regeneration
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedPower
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testRegenerationAbilityUse(int $level, int $expectedPower, int $expectedEffectDuration): void
     {
         $unit = UnitFactory::createByTemplate(11);
@@ -131,7 +129,7 @@ class RegenerationAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

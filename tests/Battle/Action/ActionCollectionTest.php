@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Battle\Action;
 
+use Battle\Action\ActionInterface;
 use Battle\Action\HealAction;
 use Exception;
 use Battle\Action\ActionCollection;
 use Battle\Action\DamageAction;
 use Battle\Command\CommandFactory;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class ActionCollectionTest extends AbstractUnitTest
+class ActionCollectionTest extends AbstractTestCase
 {
     /**
      * @throws Exception
@@ -29,7 +30,7 @@ class ActionCollectionTest extends AbstractUnitTest
             $unit,
             $enemyCommand,
             $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
+            ActionInterface::TARGET_RANDOM_ENEMY,
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -60,7 +61,7 @@ class ActionCollectionTest extends AbstractUnitTest
             $unit,
             $enemyCommand,
             $command,
-            DamageAction::TARGET_RANDOM_ENEMY,
+            ActionInterface::TARGET_RANDOM_ENEMY,
             true,
             DamageAction::DEFAULT_NAME,
             DamageAction::UNIT_ANIMATION_METHOD,
@@ -73,7 +74,7 @@ class ActionCollectionTest extends AbstractUnitTest
             $unit,
             $enemyCommand,
             $command,
-            HealAction::TARGET_WOUNDED_ALLIES,
+            ActionInterface::TARGET_WOUNDED_ALLIES,
             20,
             '',
             HealAction::UNIT_ANIMATION_METHOD,

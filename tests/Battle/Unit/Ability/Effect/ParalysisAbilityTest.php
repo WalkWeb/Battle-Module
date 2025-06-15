@@ -18,7 +18,7 @@ use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
 /**
@@ -27,13 +27,13 @@ use Tests\Factory\UnitFactory;
  *
  * @package Tests\Battle\Unit\Ability\Effect
  */
-class ParalysisAbilityTest extends AbstractUnitTest
+class ParalysisAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_APPLY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/086.png" alt="" /> <span class="ability">Paralysis</span> on <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_APPLY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/086.png" alt="" /> <span class="ability">Паралич</span> на <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_APPLY_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/086.png" alt="" /> <span class="ability">Paralysis</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_APPLY_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/086.png" alt="" /> <span class="ability">Паралич</span> на <span style="color: #1e72e3">unit_2</span>';
 
-    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> paralyzed and unable to move';
-    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> парализован и не может двигаться';
+    private const string MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> paralyzed and unable to move';
+    private const string MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> парализован и не может двигаться';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -228,7 +228,7 @@ class ParalysisAbilityTest extends AbstractUnitTest
             $action->handle();
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         // Эффект появляется

@@ -6,20 +6,19 @@ namespace Tests\Battle\Traits;
 
 use Battle\Traits\IdTrait;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 
-class IdTraitTest extends AbstractUnitTest
+class IdTraitTest extends AbstractTestCase
 {
     use IdTrait;
 
     /**
      * Тест на генерацию случайной строки
      *
-     * @dataProvider successDataProvider
-     * @param int $length
-     * @param int $expectedLength
      * @throws Exception
      */
+    #[DataProvider('successDataProvider')]
     public function testIdTraitLimitLength(int $length, int $expectedLength): void
     {
         $string = self::generateId($length);
@@ -30,7 +29,7 @@ class IdTraitTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         return [
             [

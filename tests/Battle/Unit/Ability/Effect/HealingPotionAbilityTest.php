@@ -14,22 +14,22 @@ use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class HealingPotionAbilityTest extends AbstractUnitTest
+class HealingPotionAbilityTest extends AbstractTestCase
 {
     // Сообщения применение эффекта на себя
-    private const MESSAGE_APPLY_SELF_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Healing Potion</span>';
-    private const MESSAGE_APPLY_SELF_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Лечебное зелье</span>';
+    private const string MESSAGE_APPLY_SELF_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Healing Potion</span>';
+    private const string MESSAGE_APPLY_SELF_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Лечебное зелье</span>';
 
     // Сообщения применения эффекта на другого юнита
-    private const MESSAGE_APPLY_TO_EN   = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Healing Potion</span> on <span style="color: #1e72e3">wounded_unit</span>';
-    private const MESSAGE_APPLY_TO_RU   = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Лечебное зелье</span> на <span style="color: #1e72e3">wounded_unit</span>';
+    private const string MESSAGE_APPLY_TO_EN   = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Healing Potion</span> on <span style="color: #1e72e3">wounded_unit</span>';
+    private const string MESSAGE_APPLY_TO_RU   = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Лечебное зелье</span> на <span style="color: #1e72e3">wounded_unit</span>';
 
     // Сообщения о лечении от эффекта
-    private const MESSAGE_HEAL_EN       = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Healing Potion</span>';
-    private const MESSAGE_HEAL_RU       = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Лечебное зелье</span>';
+    private const string MESSAGE_HEAL_EN       = '<span style="color: #1e72e3">wounded_unit</span> restored 15 life from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Healing Potion</span>';
+    private const string MESSAGE_HEAL_RU       = '<span style="color: #1e72e3">wounded_unit</span> восстановил 15 здоровья от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Лечебное зелье</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -317,7 +317,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_APPLY_SELF_EN, $this->getChat()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $effects = $unit->getEffects();
@@ -333,7 +333,7 @@ class HealingPotionAbilityTest extends AbstractUnitTest
                 self::assertEquals(self::MESSAGE_HEAL_EN, $this->getChat()->addMessage($effectAction));
 
                 // Дополнительное проверяем, что по событию успешно создается анимация
-                (new Scenario())->addAnimation($action, new Statistic());
+                new Scenario()->addAnimation($action, new Statistic());
             }
         }
 

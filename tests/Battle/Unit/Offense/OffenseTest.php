@@ -10,9 +10,10 @@ use Battle\Unit\Offense\Offense;
 use Battle\Unit\Offense\OffenseException;
 use Battle\Unit\Offense\OffenseInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 
-class OffenseTest extends AbstractUnitTest
+class OffenseTest extends AbstractTestCase
 {
     /**
      * Тест на создание Offense
@@ -747,17 +748,9 @@ class OffenseTest extends AbstractUnitTest
     /**
      * Тест на конвертацию урона в урон указанного типа
      *
-     * @dataProvider convertDataProvider
-     * @param string $convertTo
-     * @param int $expectedPhysicalDamage
-     * @param int $expectedFireDamage
-     * @param int $expectedWaterDamage
-     * @param int $expectedAirDamage
-     * @param int $expectedEarthDamage
-     * @param int $expectedLifeDamage
-     * @param int $expectedDeathDamage
      * @throws Exception
      */
+    #[DataProvider('convertDataProvider')]
     public function testOffenseDamageConvertSuccess(
         string $convertTo,
         int $expectedPhysicalDamage,
@@ -828,13 +821,9 @@ class OffenseTest extends AbstractUnitTest
     /**
      * Тест на корректный расчет наносимого урона
      *
-     * @dataProvider resistDataProvider
-     * @param array $damage
-     * @param array $resist
-     * @param int $damageMultiplier
-     * @param int $exceptedDamage
      * @throws Exception
      */
+    #[DataProvider('resistDataProvider')]
     public function testOffenseGetDamage(array $damage, array $resist, int $damageMultiplier, int $exceptedDamage): void
     {
         $offense = new Offense(
@@ -890,7 +879,7 @@ class OffenseTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function resistDataProvider(): array
+    public static function resistDataProvider(): array
     {
         return [
 
@@ -2027,7 +2016,7 @@ class OffenseTest extends AbstractUnitTest
         ];
     }
 
-    public function convertDataProvider(): array
+    public static function convertDataProvider(): array
     {
         return [
             [

@@ -11,16 +11,17 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class PoisonStingAbilityTest extends AbstractUnitTest
+class PoisonStingAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">100_dodge</span> use <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Poison Sting</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">100_dodge</span> использовал <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Отравляющее жало</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">100_dodge</span> use <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Poison Sting</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">100_dodge</span> использовал <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Отравляющее жало</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> received %d damage from effect <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Poison Sting</span>';
-    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> получил %d урона от эффекта <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Отравляющее жало</span>';
+    private const string MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> received %d damage from effect <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Poison Sting</span>';
+    private const string MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> получил %d урона от эффекта <img src="/images/icons/ability/182.png" alt="" /> <span class="ability">Отравляющее жало</span>';
 
     /**
      * Тест на создание способности Poison Sting через AbilityDataProvider
@@ -81,14 +82,9 @@ class PoisonStingAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Poison Sting
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedDamage
-     * @param int $expectedAccuracy
-     * @param int $expectedEffectDamage
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testPoisonStingAbilityUse(
         int $level,
         int $expectedDamage,
@@ -170,7 +166,7 @@ class PoisonStingAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

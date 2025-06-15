@@ -12,16 +12,17 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class FortressAbilityTest extends AbstractUnitTest
+class FortressAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored %d life from effect <img src="/images/icons/ability/409.png" alt="" /> <span class="ability">Fortress</span>';
-    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил %d здоровья от эффекта <img src="/images/icons/ability/409.png" alt="" /> <span class="ability">Крепость</span>';
+    private const string MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored %d life from effect <img src="/images/icons/ability/409.png" alt="" /> <span class="ability">Fortress</span>';
+    private const string MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил %d здоровья от эффекта <img src="/images/icons/ability/409.png" alt="" /> <span class="ability">Крепость</span>';
 
-    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/409.png" alt="" /> <span class="ability">Fortress</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/409.png" alt="" /> <span class="ability">Крепость</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/409.png" alt="" /> <span class="ability">Fortress</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/409.png" alt="" /> <span class="ability">Крепость</span>';
 
     /**
      * Тест на создание способности Fortress через AbilityDataProvider
@@ -78,26 +79,9 @@ class FortressAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Fortress
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedHealPower
-     * @param int $expectedPhysicalResist
-     * @param int $expectedFireResist
-     * @param int $expectedWaterResist
-     * @param int $expectedAirResist
-     * @param int $expectedEarthResist
-     * @param int $expectedLifeResist
-     * @param int $expectedDeathResist
-     * @param int $expectedPhysicalMaxResist
-     * @param int $expectedFireMaxResist
-     * @param int $expectedWaterMaxResist
-     * @param int $expectedAirMaxResist
-     * @param int $expectedEarthMaxResist
-     * @param int $expectedLifeMaxResist
-     * @param int $expectedDeathMaxResist
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testFortressAbilityUse(
         int $level,
         int $expectedHealPower,
@@ -193,7 +177,7 @@ class FortressAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

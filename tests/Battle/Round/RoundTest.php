@@ -8,11 +8,11 @@ use Exception;
 use Battle\Round\Round;
 use Battle\Round\RoundException;
 use Battle\Command\CommandFactory;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\CommandFactory as TestCommandFactory;
 use Tests\Factory\UnitFactory;
 
-class RoundTest extends AbstractUnitTest
+class RoundTest extends AbstractTestCase
 {
     /**
      * Проверяем корректную смену действующий команды

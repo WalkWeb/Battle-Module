@@ -17,13 +17,13 @@ use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class BlessedShieldAbilityTest extends AbstractUnitTest
+class BlessedShieldAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/271.png" alt="" /> <span class="ability">Blessed Shield</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/271.png" alt="" /> <span class="ability">Благословенный щит</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/271.png" alt="" /> <span class="ability">Blessed Shield</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/271.png" alt="" /> <span class="ability">Благословенный щит</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -268,7 +268,7 @@ class BlessedShieldAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         // Проверяем, что способность больше не может быть использована, т.к. аналогичный эффект уже есть

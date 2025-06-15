@@ -1,5 +1,5 @@
 # Base official PHP image
-FROM php:7.4-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 # Install base package
 RUN apk upgrade --update && apk add --no-cache \
@@ -32,7 +32,7 @@ RUN docker-php-ext-configure zip \
     && docker-php-ext-install intl
 
 # Install Image Processing and GD
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+RUN docker-php-ext-configure gd -with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
   && docker-php-ext-install -j "$(nproc)" gd
 
 # Install Composer
@@ -40,10 +40,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN composer --version
 
 # Install xDebug
-RUN pecl install xdebug-2.9.0 \
-    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini \
+RUN  apk add --update linux-headers \
+    && pecl channel-update pecl.php.net \
+    && pecl install xdebug-3.4.0 \
     && docker-php-ext-enable xdebug
 
 # Create and change workdir

@@ -14,11 +14,12 @@ use Battle\Unit\Offense\MultipleOffense\MultipleOffense;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseFactory;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\Mock\CommandMockFactory;
 use Tests\Factory\UnitFactory;
 
-class DamageActionTest extends AbstractUnitTest
+class DamageActionTest extends AbstractTestCase
 {
     /**
      * @throws Exception
@@ -128,7 +129,7 @@ class DamageActionTest extends AbstractUnitTest
     {
         $attackerUnit = UnitFactory::createByTemplate(2);
         $alliesCommand = CommandFactory::create([$attackerUnit]);
-        $enemyCommand = (new CommandMockFactory())->createAliveAndNoDefinedUnit();
+        $enemyCommand = new CommandMockFactory('')->createAliveAndNoDefinedUnit();
 
         $actionCollection = $attackerUnit->getActions($enemyCommand, $alliesCommand);
 
@@ -782,11 +783,9 @@ class DamageActionTest extends AbstractUnitTest
      * Один юнит с шансом критического удара 50% (будет округлен в 100%, т.к. тестовый режим) - всегда наносит удар
      * Другой юнит с шансом критического удара 49% (будет округлен в 0%, т.к. тестовый режим) - всегда обычный удар
      *
-     * @dataProvider criticalDamageDataProvider
-     * @param int $unitId
-     * @param bool $isCritical
      * @throws Exception
      */
+    #[DataProvider(methodName: 'criticalDamageDataProvider')]
     public function testDamageActionCriticalDamage(int $unitId, bool $isCritical): void
     {
         $unit = UnitFactory::createByTemplate($unitId);
@@ -1235,7 +1234,7 @@ class DamageActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function criticalDamageDataProvider(): array
+    public static function criticalDamageDataProvider(): array
     {
         return [
             // Этот юнит нанесет критический удар

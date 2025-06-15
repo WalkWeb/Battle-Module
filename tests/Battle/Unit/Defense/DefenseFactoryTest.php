@@ -8,17 +8,17 @@ use Battle\Unit\Defense\DefenseException;
 use Battle\Unit\Defense\DefenseFactory;
 use Battle\Unit\Defense\DefenseInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 
-class DefenseFactoryTest extends AbstractUnitTest
+class DefenseFactoryTest extends AbstractTestCase
 {
     /**
      * Тест на успешное создание Defense на основе массива с данными
      *
-     * @dataProvider successDataProvider
-     * @param array $data
      * @throws Exception
      */
+    #[DataProvider('successDataProvider')]
     public function testDefenseFactoryCreateSuccess(array $data): void
     {
         $defense = $this->getFactory()->create($data);
@@ -83,11 +83,8 @@ class DefenseFactoryTest extends AbstractUnitTest
 
     /**
      * Тест на некорректные данные для создания Defense
-     *
-     * @dataProvider failDataProvider
-     * @param array $data
-     * @param string $error
      */
+    #[DataProvider('failDataProvider')]
     public function testDefenseFactoryCreateFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
@@ -98,7 +95,7 @@ class DefenseFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         return [
             [
@@ -182,7 +179,7 @@ class DefenseFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function failDataProvider(): array
+    public static function failDataProvider(): array
     {
         return [
 

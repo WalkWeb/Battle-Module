@@ -15,10 +15,10 @@ use Battle\Command\CommandInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class HealActionTest extends AbstractUnitTest
+class HealActionTest extends AbstractTestCase
 {
     /**
      * @throws CommandException

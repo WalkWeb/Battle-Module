@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class InaccessibilityAbilityTest extends AbstractUnitTest
+class InaccessibilityAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/052.png" alt="" /> <span class="ability">Inaccessibility</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/052.png" alt="" /> <span class="ability">Неприступность</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/052.png" alt="" /> <span class="ability">Inaccessibility</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/052.png" alt="" /> <span class="ability">Неприступность</span>';
 
     /**
      * Тест на создание способности Inaccessibility через AbilityDataProvider
@@ -36,13 +37,9 @@ class InaccessibilityAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Inaccessibility
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedBlock
-     * @param int $expectedMagicBlock
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testInaccessibilityAbilityUse(
         int $level,
         int $expectedBlock,
@@ -102,7 +99,7 @@ class InaccessibilityAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

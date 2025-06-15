@@ -12,19 +12,20 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class RestorePotionAbilityTest extends AbstractUnitTest
+class RestorePotionAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span> on <span style="color: #1e72e3">wounded_unit</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span> на <span style="color: #1e72e3">wounded_unit</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span> on <span style="color: #1e72e3">wounded_unit</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span> на <span style="color: #1e72e3">wounded_unit</span>';
 
-    private const MESSAGE_HEAL_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored %d life from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span>';
-    private const MESSAGE_HEAL_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил %d здоровья от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span>';
+    private const string MESSAGE_HEAL_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored %d life from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span>';
+    private const string MESSAGE_HEAL_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил %d здоровья от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span>';
 
-    private const MESSAGE_MANA_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored %d mana from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span>';
-    private const MESSAGE_MANA_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил %d маны от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span>';
+    private const string MESSAGE_MANA_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored %d mana from effect <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Restore Potion</span>';
+    private const string MESSAGE_MANA_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил %d маны от эффекта <img src="/images/icons/ability/234.png" alt="" /> <span class="ability">Зелье оздоровления</span>';
 
     /**
      * Тест на создание способности Recovery через AbilityDataProvider
@@ -83,13 +84,9 @@ class RestorePotionAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Recovery
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedHealPower
-     * @param int $expectedManaPower
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testRestorePotionAbilityUse(int $level, int $expectedHealPower, int $expectedManaPower, int $expectedEffectDuration): void
     {
         $unit = UnitFactory::createByTemplate(4);
@@ -162,7 +159,7 @@ class RestorePotionAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

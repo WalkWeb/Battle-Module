@@ -6,9 +6,9 @@ namespace Tests\Battle\Translation;
 
 use Battle\Translation\Translation;
 use Battle\Translation\TranslationException;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 
-class TranslationTest extends AbstractUnitTest
+class TranslationTest extends AbstractTestCase
 {
     /**
      * Тест на стандартный успешный перевод сообщения

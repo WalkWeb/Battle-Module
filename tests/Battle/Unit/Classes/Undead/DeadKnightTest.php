@@ -9,10 +9,10 @@ use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\Ability;
 use Battle\Unit\UnitException;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class DeadKnightTest extends AbstractUnitTest
+class DeadKnightTest extends AbstractTestCase
 {
     /**
      * @throws CommandException

@@ -8,10 +8,10 @@ use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class PartOfWormDeathAbilityTest extends AbstractUnitTest
+class PartOfWormDeathAbilityTest extends AbstractTestCase
 {
     /**
      * @throws Exception

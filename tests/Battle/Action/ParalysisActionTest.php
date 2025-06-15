@@ -8,10 +8,10 @@ use Battle\Action\ActionCollection;
 use Battle\Action\ParalysisAction;
 use Battle\Command\CommandFactory;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class ParalysisActionTest extends AbstractUnitTest
+class ParalysisActionTest extends AbstractTestCase
 {
     /**
      * Тест на создание ParalysisAction

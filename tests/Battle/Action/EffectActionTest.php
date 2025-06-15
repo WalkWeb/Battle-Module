@@ -19,10 +19,10 @@ use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class EffectActionTest extends AbstractUnitTest
+class EffectActionTest extends AbstractTestCase
 {
     /**
      * @throws Exception

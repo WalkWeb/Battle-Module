@@ -6,18 +6,18 @@ namespace Tests\Battle\Unit\Classes;
 
 use Battle\Unit\Classes\UnitClassException;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class UnitClassFactoryTest extends AbstractUnitTest
+class UnitClassFactoryTest extends AbstractTestCase
 {
     /**
      * Тест на создание класса по ID класса
      *
-     * @dataProvider createByIdSuccessDataProvider
-     * @param int $classId
      * @throws Exception
      */
+    #[DataProvider('createByIdSuccessDataProvider')]
     public function testUnitClassFactoryCreateByIdSuccess(int $classId): void
     {
         $class = $this->container->getUnitClassFactory()->create(
@@ -42,10 +42,9 @@ class UnitClassFactoryTest extends AbstractUnitTest
     /**
      * Тест на создание класса на основе массива параметров
      *
-     * @dataProvider createByArraySuccessDataProvider
-     * @param array $data
      * @throws Exception
      */
+    #[DataProvider('createByArraySuccessDataProvider')]
     public function testUnitClassFactoryCreateByArraySuccess(array $data): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -63,11 +62,9 @@ class UnitClassFactoryTest extends AbstractUnitTest
     /**
      * Тесты на различные варианты невалидных данных
      *
-     * @dataProvider createByArrayFailDataProvider
-     * @param array $data
-     * @param string $error
      * @throws Exception
      */
+    #[DataProvider('createByArrayFailDataProvider')]
     public function testUnitClassFactoryCreateByArrayFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
@@ -78,7 +75,7 @@ class UnitClassFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function createByIdSuccessDataProvider(): array
+    public static function createByIdSuccessDataProvider(): array
     {
         return [
             [
@@ -99,7 +96,7 @@ class UnitClassFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function createByArraySuccessDataProvider(): array
+    public static function createByArraySuccessDataProvider(): array
     {
         return [
             [
@@ -133,7 +130,7 @@ class UnitClassFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function createByArrayFailDataProvider(): array
+    public static function createByArrayFailDataProvider(): array
     {
         return [
             [

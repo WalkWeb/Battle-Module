@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class HealingAbilityTest extends AbstractUnitTest
+class HealingAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">Healing</span> and heal <span style="color: #1e72e3">wounded_unit</span> on %d life';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">Исцеление</span> и вылечил <span style="color: #1e72e3">wounded_unit</span> на %d здоровья';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">Healing</span> and heal <span style="color: #1e72e3">wounded_unit</span> on %d life';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/452.png" alt="" /> <span class="ability">Исцеление</span> и вылечил <span style="color: #1e72e3">wounded_unit</span> на %d здоровья';
 
     /**
      * Тест на создание способности Healing через AbilityDataProvider
@@ -61,11 +62,9 @@ class HealingAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Healing
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedPower
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testHealingAbilityUse(int $level, int $expectedPower): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -90,7 +89,7 @@ class HealingAbilityTest extends AbstractUnitTest
             self::assertEquals(sprintf(self::MESSAGE_RU, $expectedPower), $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();
@@ -101,7 +100,7 @@ class HealingAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

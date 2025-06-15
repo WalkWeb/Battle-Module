@@ -6,6 +6,7 @@ namespace Tests\Factory\Mock;
 
 use Battle\Unit\Unit;
 use Battle\Unit\UnitInterface;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 
 class UnitMockFactory extends TestCase
@@ -17,38 +18,19 @@ class UnitMockFactory extends TestCase
      * вернуть такого юнита - его нет
      *
      * @return UnitInterface
+     * @throws Exception
      */
     public function create(): UnitInterface
     {
         $mock = $this->createMock(Unit::class);
 
-        $mock->expects(self::at(0))
+        $mock->expects($this->any())
             ->method('getId')
-            ->willReturn('123');
+            ->willReturn('123', '456');
 
-        $mock->expects(self::at(1))
-            ->method('getId')
-            ->willReturn('456');
-
-        $mock->expects(self::at(2))
+        $mock->expects($this->any())
             ->method('isAlive')
-            ->willReturn(true);
-
-        $mock->expects(self::at(3))
-            ->method('isAction')
-            ->willReturn(false);
-
-        $mock->expects(self::at(4))
-            ->method('isAlive')
-            ->willReturn(true);
-
-        $mock->expects(self::at(5))
-            ->method('isAlive')
-            ->willReturn(true);
-
-        $mock->expects(self::at(6))
-            ->method('isAction')
-            ->willReturn(true);
+            ->willReturn(true, true, false);
 
         return $mock;
     }

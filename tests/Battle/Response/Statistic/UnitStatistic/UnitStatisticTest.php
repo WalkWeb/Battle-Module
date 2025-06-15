@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Tests\Battle\Response\Statistic\UnitStatistic;
 
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 use Battle\Response\Statistic\UnitStatistic\UnitStatistic;
 
-class UnitStatisticTest extends AbstractUnitTest
+class UnitStatisticTest extends AbstractTestCase
 {
     /**
      * @throws Exception

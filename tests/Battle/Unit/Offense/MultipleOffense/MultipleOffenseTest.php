@@ -6,9 +6,9 @@ namespace Tests\Battle\Unit\Offense\MultipleOffense;
 
 use Battle\Unit\Offense\MultipleOffense\MultipleOffense;
 use Battle\Unit\Offense\MultipleOffense\MultipleOffenseException;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 
-class MultipleOffenseTest extends AbstractUnitTest
+class MultipleOffenseTest extends AbstractTestCase
 {
     /**
      * Тест на создание MultipleOffense

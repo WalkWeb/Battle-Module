@@ -16,13 +16,13 @@ use Battle\Unit\Ability\Ability;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class WillToLiveAbilityTest extends AbstractUnitTest
+class WillToLiveAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">dead_unit</span> died, but due to the innate ability <img src="/images/icons/ability/429.png" alt="" /> <span class="ability">Will to live</span> came back to life';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">dead_unit</span> умер, но за счет врожденной способности <img src="/images/icons/ability/429.png" alt="" /> <span class="ability">Воля к жизни</span> вернулся к жизни';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">dead_unit</span> died, but due to the innate ability <img src="/images/icons/ability/429.png" alt="" /> <span class="ability">Will to live</span> came back to life';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">dead_unit</span> умер, но за счет врожденной способности <img src="/images/icons/ability/429.png" alt="" /> <span class="ability">Воля к жизни</span> вернулся к жизни';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -279,7 +279,7 @@ class WillToLiveAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();

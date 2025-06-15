@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class ProtectiveStandAbilityTest extends AbstractUnitTest
+class ProtectiveStandAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/266.png" alt="" /> <span class="ability">Protective Stand</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/266.png" alt="" /> <span class="ability">Защитная стойка</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/266.png" alt="" /> <span class="ability">Protective Stand</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/266.png" alt="" /> <span class="ability">Защитная стойка</span>';
 
     /**
      * Тест на создание способности Protective Stand через AbilityDataProvider
@@ -36,20 +37,9 @@ class ProtectiveStandAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Protective Stand
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedPhysicalResist
-     * @param int $expectedFireResist
-     * @param int $expectedWaterResist
-     * @param int $expectedAirResist
-     * @param int $expectedEarthResist
-     * @param int $expectedLifeResist
-     * @param int $expectedDeathResist
-     * @param int $expectedPhysicalMaxResist
-     * @param int $expectedFireMaxResist
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testProtectiveStandAbilityUse(
         int $level,
         int $expectedPhysicalResist,
@@ -123,7 +113,7 @@ class ProtectiveStandAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

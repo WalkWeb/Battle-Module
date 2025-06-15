@@ -11,16 +11,17 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class WaterSupportAbilityTest extends AbstractUnitTest
+class WaterSupportAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/497.png" alt="" /> <span class="ability">Water Support</span> on <span style="color: #1e72e3">wounded_unit</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/497.png" alt="" /> <span class="ability">Поддержка воды</span> на <span style="color: #1e72e3">wounded_unit</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/497.png" alt="" /> <span class="ability">Water Support</span> on <span style="color: #1e72e3">wounded_unit</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/497.png" alt="" /> <span class="ability">Поддержка воды</span> на <span style="color: #1e72e3">wounded_unit</span>';
 
-    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored %d life from effect <img src="/images/icons/ability/497.png" alt="" /> <span class="ability">Water Support</span>';
-    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил %d здоровья от эффекта <img src="/images/icons/ability/497.png" alt="" /> <span class="ability">Поддержка воды</span>';
+    private const string MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">wounded_unit</span> restored %d life from effect <img src="/images/icons/ability/497.png" alt="" /> <span class="ability">Water Support</span>';
+    private const string MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">wounded_unit</span> восстановил %d здоровья от эффекта <img src="/images/icons/ability/497.png" alt="" /> <span class="ability">Поддержка воды</span>';
 
     /**
      * Тест на создание способности Water Support через AbilityDataProvider
@@ -67,12 +68,9 @@ class WaterSupportAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Water Support
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedPower
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testWaterSupportAbilityUse(int $level, int $expectedPower, int $expectedEffectDuration): void
     {
         $unit = UnitFactory::createByTemplate(4);
@@ -134,7 +132,7 @@ class WaterSupportAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

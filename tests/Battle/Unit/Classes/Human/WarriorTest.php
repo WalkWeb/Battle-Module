@@ -15,10 +15,10 @@ use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class WarriorTest extends AbstractUnitTest
+class WarriorTest extends AbstractTestCase
 {
     /**
      * Тест на создание класса Warrior и проверка его способностей

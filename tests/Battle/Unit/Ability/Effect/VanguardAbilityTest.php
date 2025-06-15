@@ -12,16 +12,17 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class VanguardAbilityTest extends AbstractUnitTest
+class VanguardAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Vanguard</span> and healed itself on %d life';
-    private const MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Авангард</span> и вылечил себя на %d здоровья';
+    private const string MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Vanguard</span> and healed itself on %d life';
+    private const string MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Авангард</span> и вылечил себя на %d здоровья';
 
-    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Vanguard</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Авангард</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Vanguard</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/253.png" alt="" /> <span class="ability">Авангард</span>';
 
     /**
      * Тест на создание способности Vanguard через AbilityDataProvider
@@ -76,26 +77,9 @@ class VanguardAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Vanguard
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedHealPower
-     * @param int $expectedPhysicalResist
-     * @param int $expectedFireResist
-     * @param int $expectedWaterResist
-     * @param int $expectedAirResist
-     * @param int $expectedEarthResist
-     * @param int $expectedLifeResist
-     * @param int $expectedDeathResist
-     * @param int $expectedPhysicalMaxResist
-     * @param int $expectedFireMaxResist
-     * @param int $expectedWaterMaxResist
-     * @param int $expectedAirMaxResist
-     * @param int $expectedEarthMaxResist
-     * @param int $expectedLifeMaxResist
-     * @param int $expectedDeathMaxResist
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testVanguardAbilityUse(
         int $level,
         int $expectedHealPower,
@@ -197,7 +181,7 @@ class VanguardAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

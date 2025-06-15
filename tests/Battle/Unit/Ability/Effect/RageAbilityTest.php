@@ -14,13 +14,13 @@ use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class RageAbilityTest extends AbstractUnitTest
+class RageAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #ae882d">wounded_orc</span> use <img src="/images/icons/ability/285.png" alt="" /> <span class="ability">Rage</span>';
-    private const MESSAGE_RU = '<span style="color: #ae882d">wounded_orc</span> использовал <img src="/images/icons/ability/285.png" alt="" /> <span class="ability">Ярость</span>';
+    private const string MESSAGE_EN = '<span style="color: #ae882d">wounded_orc</span> use <img src="/images/icons/ability/285.png" alt="" /> <span class="ability">Rage</span>';
+    private const string MESSAGE_RU = '<span style="color: #ae882d">wounded_orc</span> использовал <img src="/images/icons/ability/285.png" alt="" /> <span class="ability">Ярость</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -157,7 +157,7 @@ class RageAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         // Проверяем, что урон вырос в 2 раза

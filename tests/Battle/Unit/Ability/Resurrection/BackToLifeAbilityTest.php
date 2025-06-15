@@ -14,13 +14,13 @@ use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class BackToLifeAbilityTest extends AbstractUnitTest
+class BackToLifeAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_5</span> use <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">Back to Life</span> and resurrected <span style="color: #1e72e3">dead_unit</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_5</span> использовал <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">Возвращение к жизни</span> и воскресил <span style="color: #1e72e3">dead_unit</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_5</span> use <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">Back to Life</span> and resurrected <span style="color: #1e72e3">dead_unit</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_5</span> использовал <img src="/images/icons/ability/053.png" alt="" /> <span class="ability">Возвращение к жизни</span> и воскресил <span style="color: #1e72e3">dead_unit</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -167,7 +167,7 @@ class BackToLifeAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         // После применения способности юнит восстановил 30% здоровья (30 здоровья от 100 максимальных)

@@ -6,17 +6,15 @@ namespace Tests\Battle\Unit\Ability\Description;
 
 use Battle\Container\ContainerException;
 use Battle\Unit\Ability\Description\AbilityDescription;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 
-class AbilityDescriptionTest extends AbstractUnitTest
+class AbilityDescriptionTest extends AbstractTestCase
 {
     /**
-     * @dataProvider successAbilityDescriptionDataProvider
-     * @param string $description
-     * @param array $values
-     * @param string $expectedDescription
      * @throws ContainerException
      */
+    #[DataProvider('successAbilityDescriptionDataProvider')]
     public function testAbilityDescriptionSuccess(string $description, array $values, string $expectedDescription): void
     {
         $abilityDescription = new AbilityDescription(
@@ -28,7 +26,7 @@ class AbilityDescriptionTest extends AbstractUnitTest
         self::assertEquals($expectedDescription, (string)$abilityDescription);
     }
 
-    public function successAbilityDescriptionDataProvider(): array
+    public static function successAbilityDescriptionDataProvider(): array
     {
         return [
             [

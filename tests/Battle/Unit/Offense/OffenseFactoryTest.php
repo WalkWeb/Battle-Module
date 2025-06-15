@@ -10,17 +10,17 @@ use Battle\Unit\Offense\OffenseException;
 use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\Offense\OffenseInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 
-class OffenseFactoryTest extends AbstractUnitTest
+class OffenseFactoryTest extends AbstractTestCase
 {
     /**
      * Тест на успешное создание Offense
      *
-     * @dataProvider successDataProvider
-     * @param array $data
      * @throws Exception
      */
+    #[DataProvider('successDataProvider')]
     public function testOffenseFactoryCreateSuccess(array $data): void
     {
         $offense = $this->getFactory()->create($data, $this->container);
@@ -61,11 +61,9 @@ class OffenseFactoryTest extends AbstractUnitTest
     /**
      * Тест на некорректные данные для создания Offense
      *
-     * @dataProvider failDataProvider
-     * @param array $data
-     * @param string $error
      * @throws Exception
      */
+    #[DataProvider('failDataProvider')]
     public function testOffenseFactoryCreateFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
@@ -76,7 +74,7 @@ class OffenseFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         return [
             [
@@ -157,7 +155,7 @@ class OffenseFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function failDataProvider(): array
+    public static function failDataProvider(): array
     {
         return [
 

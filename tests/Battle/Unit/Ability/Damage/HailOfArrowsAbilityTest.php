@@ -11,13 +11,14 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class HailOfArrowsAbilityTest extends AbstractUnitTest
+class HailOfArrowsAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">Unit</span> use <img src="/images/icons/ability/242.png" alt="" /> <span class="ability">Hail of Arrows</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">Unit</span> использовал <img src="/images/icons/ability/242.png" alt="" /> <span class="ability">Град стрел</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">Unit</span> use <img src="/images/icons/ability/242.png" alt="" /> <span class="ability">Hail of Arrows</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">Unit</span> использовал <img src="/images/icons/ability/242.png" alt="" /> <span class="ability">Град стрел</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
     /**
      * Тест на создание способности Hail of Arrows через AbilityDataProvider
@@ -67,12 +68,9 @@ class HailOfArrowsAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Hail of Arrows
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedDamage
-     * @param int $expectedAccuracy
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testHailOfArrowsAbilityUse(
         int $level,
         int $expectedDamage,
@@ -103,7 +101,7 @@ class HailOfArrowsAbilityTest extends AbstractUnitTest
             self::assertEquals(sprintf(self::MESSAGE_RU, $expectedDamage), $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();
@@ -114,7 +112,7 @@ class HailOfArrowsAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

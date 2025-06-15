@@ -9,10 +9,10 @@ use Battle\Action\ActionException;
 use Battle\Action\ManaRestoreAction;
 use Battle\Command\CommandFactory;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class ManaRestoreActionTest extends AbstractUnitTest
+class ManaRestoreActionTest extends AbstractTestCase
 {
     /**
      * Тест на успешное создание ManaRestoreAction

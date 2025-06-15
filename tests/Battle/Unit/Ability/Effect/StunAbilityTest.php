@@ -17,7 +17,7 @@ use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
 /**
@@ -26,13 +26,13 @@ use Tests\Factory\UnitFactory;
  *
  * @package Tests\Battle\Unit\Ability\Effect
  */
-class StunAbilityTest extends AbstractUnitTest
+class StunAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_APPLY_EN = '<span style="color: #1e72e3">unit_3</span> use <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Stun</span> on <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_APPLY_RU = '<span style="color: #1e72e3">unit_3</span> использовал <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Оглушение</span> на <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_APPLY_EN = '<span style="color: #1e72e3">unit_3</span> use <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Stun</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_APPLY_RU = '<span style="color: #1e72e3">unit_3</span> использовал <img src="/images/icons/ability/186.png" alt="" /> <span class="ability">Оглушение</span> на <span style="color: #1e72e3">unit_2</span>';
 
-    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> stunned and unable to move';
-    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> оглушен и не может двигаться';
+    private const string MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> stunned and unable to move';
+    private const string MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> оглушен и не может двигаться';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------

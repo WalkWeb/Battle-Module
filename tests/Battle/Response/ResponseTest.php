@@ -10,11 +10,11 @@ use Battle\Response\Chat\Chat;
 use Battle\Response\Scenario\Scenario;
 use Battle\Translation\Translation;
 use Battle\Response\Response;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\CommandFactory;
 use Battle\Response\ResponseException;
 
-class ResponseTest extends AbstractUnitTest
+class ResponseTest extends AbstractTestCase
 {
     /**
      * @throws ResponseException

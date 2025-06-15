@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class UnityWithWindAbilityTest extends AbstractUnitTest
+class UnityWithWindAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/500.png" alt="" /> <span class="ability">Unity with Wind</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/500.png" alt="" /> <span class="ability">Единство с ветром</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/500.png" alt="" /> <span class="ability">Unity with Wind</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/500.png" alt="" /> <span class="ability">Единство с ветром</span>';
 
     /**
      * Тест на создание способности Unity with Wind через AbilityDataProvider
@@ -36,17 +37,9 @@ class UnityWithWindAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Unity with Wind
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param float $expectedAttackSpeed
-     * @param float $expectedCastSpeed
-     * @param int $expectedAccuracy
-     * @param int $expectedMagicAccuracy
-     * @param int $expectedDefense
-     * @param int $expectedMagicDefense
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testUnityWithWindAbilityUse(
         int $level,
         float $expectedAttackSpeed,
@@ -114,7 +107,7 @@ class UnityWithWindAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

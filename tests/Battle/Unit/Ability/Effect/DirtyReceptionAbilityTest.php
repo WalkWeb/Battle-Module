@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class DirtyReceptionAbilityTest extends AbstractUnitTest
+class DirtyReceptionAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/248.png" alt="" /> <span class="ability">Dirty Reception</span> on <span style="color: #1e72e3">unit_1</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/248.png" alt="" /> <span class="ability">Грязный прием</span> на <span style="color: #1e72e3">unit_1</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/248.png" alt="" /> <span class="ability">Dirty Reception</span> on <span style="color: #1e72e3">unit_1</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/248.png" alt="" /> <span class="ability">Грязный прием</span> на <span style="color: #1e72e3">unit_1</span>';
 
     /**
      * Тест на создание способности Dirty Reception через AbilityDataProvider
@@ -36,14 +37,9 @@ class DirtyReceptionAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Dirty Reception
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param float $expectedAttackSpeed
-     * @param float $expectedCastSpeed
-     * @param int $expectedDefense
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testDirtyReceptionAbilityUse(
         int $level,
         float $expectedAttackSpeed,
@@ -105,7 +101,7 @@ class DirtyReceptionAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

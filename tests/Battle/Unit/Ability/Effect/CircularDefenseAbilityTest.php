@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class CircularDefenseAbilityTest extends AbstractUnitTest
+class CircularDefenseAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/128.png" alt="" /> <span class="ability">Circular Defense</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/128.png" alt="" /> <span class="ability">Круговая оборона</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/128.png" alt="" /> <span class="ability">Circular Defense</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/128.png" alt="" /> <span class="ability">Круговая оборона</span>';
 
     /**
      * Тест на создание способности Circular Defense через AbilityDataProvider
@@ -36,13 +37,9 @@ class CircularDefenseAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Circular Defense
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param float $expectedBlock
-     * @param float $expectedMagicBlock
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testCircularDefenseAbilityUse(
         int $level,
         float $expectedBlock,
@@ -102,7 +99,7 @@ class CircularDefenseAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

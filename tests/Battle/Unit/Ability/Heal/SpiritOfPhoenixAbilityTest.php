@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class SpiritOfPhoenixAbilityTest extends AbstractUnitTest
+class SpiritOfPhoenixAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/416.png" alt="" /> <span class="ability">Spirit of Phoenix</span> and healed itself on %d life';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/416.png" alt="" /> <span class="ability">Дух феникса</span> и вылечил себя на %d здоровья';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/416.png" alt="" /> <span class="ability">Spirit of Phoenix</span> and healed itself on %d life';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/416.png" alt="" /> <span class="ability">Дух феникса</span> и вылечил себя на %d здоровья';
 
     /**
      * Тест на создание способности Spirit of Phoenix через AbilityDataProvider
@@ -60,11 +61,9 @@ class SpiritOfPhoenixAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Spirit of Phoenix
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedPower
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testSpiritOfPhoenixAbilityUse(int $level, int $expectedPower): void
     {
         $unit = UnitFactory::createByTemplate(11);
@@ -88,7 +87,7 @@ class SpiritOfPhoenixAbilityTest extends AbstractUnitTest
             self::assertEquals(sprintf(self::MESSAGE_RU, $expectedPower), $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();
@@ -99,7 +98,7 @@ class SpiritOfPhoenixAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

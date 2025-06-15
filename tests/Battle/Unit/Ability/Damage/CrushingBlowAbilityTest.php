@@ -11,13 +11,14 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class CrushingBlowAbilityTest extends AbstractUnitTest
+class CrushingBlowAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/384.png" alt="" /> <span class="ability">Crushing Blow</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/384.png" alt="" /> <span class="ability">Сокрушающий удар</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/384.png" alt="" /> <span class="ability">Crushing Blow</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/384.png" alt="" /> <span class="ability">Сокрушающий удар</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
     /**
      * Тест на создание способности Crushing Blow через AbilityDataProvider
@@ -75,12 +76,9 @@ class CrushingBlowAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Crushing Blow
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedDamage
-     * @param int $expectedAccuracy
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testCrushingBlowAbilityUse(int $level, int $expectedDamage, int $expectedAccuracy): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -106,7 +104,7 @@ class CrushingBlowAbilityTest extends AbstractUnitTest
             self::assertEquals(sprintf(self::MESSAGE_RU, $expectedDamage), $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();
@@ -117,7 +115,7 @@ class CrushingBlowAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

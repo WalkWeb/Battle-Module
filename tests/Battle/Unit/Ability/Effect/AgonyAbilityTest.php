@@ -12,16 +12,17 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class AgonyAbilityTest extends AbstractUnitTest
+class AgonyAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/083.png" alt="" /> <span class="ability">Agony</span> on <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/083.png" alt="" /> <span class="ability">Агония</span> на <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/083.png" alt="" /> <span class="ability">Agony</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/083.png" alt="" /> <span class="ability">Агония</span> на <span style="color: #1e72e3">unit_2</span>';
 
-    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> received %d damage from effect <img src="/images/icons/ability/083.png" alt="" /> <span class="ability">Agony</span>';
-    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> получил %d урона от эффекта <img src="/images/icons/ability/083.png" alt="" /> <span class="ability">Агония</span>';
+    private const string MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> received %d damage from effect <img src="/images/icons/ability/083.png" alt="" /> <span class="ability">Agony</span>';
+    private const string MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> получил %d урона от эффекта <img src="/images/icons/ability/083.png" alt="" /> <span class="ability">Агония</span>';
 
     /**
      * Тест на создание способности Agony через AbilityDataProvider
@@ -56,12 +57,9 @@ class AgonyAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Agony
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedEffectDamage
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testAgonyAbilityUse(int $level, int $expectedEffectDamage, int $expectedEffectDuration): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -122,7 +120,7 @@ class AgonyAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

@@ -12,16 +12,17 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class SplitAbilityTest extends AbstractUnitTest
+class SplitAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/304.png" alt="" /> <span class="ability">Split</span> on <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/304.png" alt="" /> <span class="ability">Расщепление</span> на <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/304.png" alt="" /> <span class="ability">Split</span> on <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/304.png" alt="" /> <span class="ability">Расщепление</span> на <span style="color: #1e72e3">unit_2</span>';
 
-    private const MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> received %d damage from effect <img src="/images/icons/ability/304.png" alt="" /> <span class="ability">Split</span>';
-    private const MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> получил %d урона от эффекта <img src="/images/icons/ability/304.png" alt="" /> <span class="ability">Расщепление</span>';
+    private const string MESSAGE_EFFECT_EN = '<span style="color: #1e72e3">unit_2</span> received %d damage from effect <img src="/images/icons/ability/304.png" alt="" /> <span class="ability">Split</span>';
+    private const string MESSAGE_EFFECT_RU = '<span style="color: #1e72e3">unit_2</span> получил %d урона от эффекта <img src="/images/icons/ability/304.png" alt="" /> <span class="ability">Расщепление</span>';
 
     /**
      * Тест на создание способности Split через AbilityDataProvider
@@ -75,12 +76,9 @@ class SplitAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Split
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedEffectDamage
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testSplitAbilityUse(int $level, int $expectedEffectDamage, int $expectedEffectDuration): void
     {
         $unit = UnitFactory::createByTemplate(4);
@@ -141,7 +139,7 @@ class SplitAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

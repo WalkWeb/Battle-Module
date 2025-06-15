@@ -18,20 +18,20 @@ use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Battle\Command\CommandFactory;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 use Battle\Action\DamageAction;
 use Tests\Factory\Mock\ActionMockFactory;
 use Tests\Factory\CommandFactory as CommandFactoryTest;
 use Tests\Factory\UnitFactoryException;
 
-class UnitTest extends AbstractUnitTest
+class UnitTest extends AbstractTestCase
 {
     /**
-     * @dataProvider createDataProvider
-     * @param int $template
      * @throws Exception
      */
+    #[DataProvider('createDataProvider')]
     public function testUniCreate(int $template): void
     {
         $unit = UnitFactory::createByTemplate($template);
@@ -176,7 +176,7 @@ class UnitTest extends AbstractUnitTest
      */
     public function testUnitUnknownAction(): void
     {
-        $factory = new ActionMockFactory();
+        $factory = new ActionMockFactory('');
         $action = $factory->createDamageActionMock('unknownMethod');
         $unit = UnitFactory::createByTemplate(1);
 
@@ -809,7 +809,7 @@ class UnitTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function createDataProvider(): array
+    public static function createDataProvider(): array
     {
         return [
             [1], [2], [3], [4], [5], [6], [7], [8], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20],

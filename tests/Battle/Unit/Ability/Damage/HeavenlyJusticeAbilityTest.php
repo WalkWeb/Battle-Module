@@ -11,13 +11,14 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class HeavenlyJusticeAbilityTest extends AbstractUnitTest
+class HeavenlyJusticeAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/388.png" alt="" /> <span class="ability">Heavenly Justice</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/388.png" alt="" /> <span class="ability">Небесное правосудие</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/388.png" alt="" /> <span class="ability">Heavenly Justice</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/388.png" alt="" /> <span class="ability">Небесное правосудие</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
     /**
      * Тест на создание способности Heavenly Justice через AbilityDataProvider
@@ -77,12 +78,9 @@ class HeavenlyJusticeAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Heavenly Justice
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedDamage
-     * @param int $expectedAccuracy
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testHeavenlyJusticeAbilityUse(int $level, int $expectedDamage, int $expectedAccuracy): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -108,7 +106,7 @@ class HeavenlyJusticeAbilityTest extends AbstractUnitTest
             self::assertEquals(sprintf(self::MESSAGE_RU, $expectedDamage), $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();
@@ -119,7 +117,7 @@ class HeavenlyJusticeAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

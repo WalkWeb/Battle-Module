@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class BattleCryAbilityTest extends AbstractUnitTest
+class BattleCryAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/219.png" alt="" /> <span class="ability">Battle Cry</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/219.png" alt="" /> <span class="ability">Боевой клич</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/219.png" alt="" /> <span class="ability">Battle Cry</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/219.png" alt="" /> <span class="ability">Боевой клич</span>';
 
     /**
      * Тест на создание способности Battle Cry через AbilityDataProvider
@@ -36,12 +37,9 @@ class BattleCryAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Battle Cry
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedDamageMultiplier
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testBattleCryAbilityUse(
         int $level,
         int $expectedDamageMultiplier,
@@ -99,7 +97,7 @@ class BattleCryAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

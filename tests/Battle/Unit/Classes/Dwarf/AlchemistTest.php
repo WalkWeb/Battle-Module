@@ -13,10 +13,10 @@ use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class AlchemistTest extends AbstractUnitTest
+class AlchemistTest extends AbstractTestCase
 {
     /**
      * @throws Exception

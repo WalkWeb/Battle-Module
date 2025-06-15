@@ -14,22 +14,18 @@ use Battle\Unit\Offense\OffenseInterface;
 use Battle\Unit\UnitException;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class BuffActionTest extends AbstractUnitTest
+class BuffActionTest extends AbstractTestCase
 {
     /**
      * Тест на изменение максимального здоровья
      *
-     * @dataProvider multiplierMaxLifeDataProvider
-     * @param int $unitId
-     * @param int $defaultMaxLife
-     * @param int $power
-     * @param int $expectedMaxLife
-     * @param int $expectedLife
      * @throws Exception
      */
+    #[DataProvider('multiplierMaxLifeDataProvider')]
     public function testBuffActionMaximumLifeSuccess(
         int $unitId,
         int $defaultMaxLife,
@@ -75,14 +71,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение максимальной маны
      *
-     * @dataProvider multiplierMaxManaDataProvider
-     * @param int $unitId
-     * @param int $defaultMaxMana
-     * @param int $power
-     * @param int $expectedMaxMana
-     * @param int $expectedMana
      * @throws Exception
      */
+    #[DataProvider('multiplierMaxManaDataProvider')]
     public function testBuffActionMaximumManaSuccess(
         int $unitId,
         int $defaultMaxMana,
@@ -128,12 +119,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение скорости атаки юнита
      *
-     * @dataProvider multiplierAttackSpeedDataProvider
-     * @param int $unitId
-     * @param int $power
-     * @param float $expectedAttackSpeed
      * @throws Exception
      */
+    #[DataProvider('multiplierAttackSpeedDataProvider')]
     public function testBuffActionAttackSpeedSuccess(int $unitId, int $power, float $expectedAttackSpeed): void
     {
         $unit = UnitFactory::createByTemplate($unitId);
@@ -178,11 +166,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение скорости создания заклинаний юнита
      *
-     * @dataProvider multiplierCastSpeedDataProvider
-     * @param int $power
-     * @param float $expectedAttackSpeed
      * @throws Exception
      */
+    #[DataProvider('multiplierCastSpeedDataProvider')]
     public function testBuffActionCastSpeedSuccess(int $power, float $expectedAttackSpeed): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -227,11 +213,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение меткости
      *
-     * @dataProvider multiplierAccuracyDataProvider
-     * @param int $power
-     * @param int $newAccuracy
      * @throws Exception
      */
+    #[DataProvider('multiplierAccuracyDataProvider')]
     public function testBuffActionMultiplierAccuracySuccess(int $power, int $newAccuracy): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -273,11 +257,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение магической меткости
      *
-     * @dataProvider multiplierMagicAccuracyDataProvider
-     * @param int $power
-     * @param int $newAccuracy
      * @throws Exception
      */
+    #[DataProvider('multiplierMagicAccuracyDataProvider')]
     public function testBuffActionMultiplierMagicAccuracySuccess(int $power, int $newAccuracy): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -319,11 +301,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение защиты
      *
-     * @dataProvider multiplierDefenseDataProvider
-     * @param int $power
-     * @param int $newDefense
      * @throws Exception
      */
+    #[DataProvider('multiplierDefenseDataProvider')]
     public function testBuffActionMultiplierDefenseSuccess(int $power, int $newDefense): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -365,11 +345,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение магической защиты
      *
-     * @dataProvider multiplierMagicDefenseDataProvider
-     * @param int $power
-     * @param int $newDefense
      * @throws Exception
      */
+    #[DataProvider('multiplierMagicDefenseDataProvider')]
     public function testBuffActionMultiplierMagicDefenseSuccess(int $power, int $newDefense): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -411,11 +389,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение шанса критического удара на %
      *
-     * @dataProvider multiplierCriticalChanceDataProvider
-     * @param int $power
-     * @param int $newCriticalChance
      * @throws Exception
      */
+    #[DataProvider('multiplierCriticalChanceDataProvider')]
     public function testBuffActionMultiplierCriticalChanceSuccess(int $power, int $newCriticalChance): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -457,11 +433,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение шанса критического удара на фиксированную величину
      *
-     * @dataProvider addCriticalChanceDataProvider
-     * @param int $power
-     * @param int $newCriticalChance
      * @throws Exception
      */
+    #[DataProvider('addCriticalChanceDataProvider')]
     public function testBuffActionAddCriticalChanceSuccess(int $power, int $newCriticalChance): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -498,11 +472,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение силы критического удара на фиксированную величину
      *
-     * @dataProvider addCriticalMultiplierDataProvider
-     * @param int $power
-     * @param int $newCriticalMultiplier
      * @throws Exception
      */
+    #[DataProvider('addCriticalMultiplierDataProvider')]
     public function testBuffActionAddCriticalMultiplierSuccess(int $power, int $newCriticalMultiplier): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -539,11 +511,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение физического урона
      *
-     * @dataProvider multiplierPhysicalDamageDataProvider
-     * @param int $power
-     * @param int $newPhysicalDamage
      * @throws Exception
      */
+    #[DataProvider('multiplierPhysicalDamageDataProvider')]
     public function testBuffActionMultiplierPhysicalDamageSuccess(int $power, int $newPhysicalDamage): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -585,11 +555,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение урона огнем
      *
-     * @dataProvider multiplierFireDamageDataProvider
-     * @param int $power
-     * @param int $newFireDamage
      * @throws Exception
      */
+    #[DataProvider('multiplierFireDamageDataProvider')]
     public function testBuffActionMultiplierFireDamageSuccess(int $power, int $newFireDamage): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -631,11 +599,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение урона водой
      *
-     * @dataProvider multiplierWaterDamageDataProvider
-     * @param int $power
-     * @param int $newWaterDamage
      * @throws Exception
      */
+    #[DataProvider('multiplierWaterDamageDataProvider')]
     public function testBuffActionMultiplierWaterDamageSuccess(int $power, int $newWaterDamage): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -677,11 +643,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение урона воздухом
      *
-     * @dataProvider multiplierAirDamageDataProvider
-     * @param int $power
-     * @param int $newAirDamage
      * @throws Exception
      */
+    #[DataProvider('multiplierAirDamageDataProvider')]
     public function testBuffActionMultiplierAirDamageSuccess(int $power, int $newAirDamage): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -723,11 +687,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение урона землей
      *
-     * @dataProvider multiplierEarthDamageDataProvider
-     * @param int $power
-     * @param int $newEarthDamage
      * @throws Exception
      */
+    #[DataProvider('multiplierEarthDamageDataProvider')]
     public function testBuffActionMultiplierEarthDamageSuccess(int $power, int $newEarthDamage): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -769,11 +731,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение урона магией жизни
      *
-     * @dataProvider multiplierLifeDamageDataProvider
-     * @param int $power
-     * @param int $newLifeDamage
      * @throws Exception
      */
+    #[DataProvider('multiplierLifeDamageDataProvider')]
     public function testBuffActionMultiplierLifeDamageSuccess(int $power, int $newLifeDamage): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -815,11 +775,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на увеличение/уменьшение урона магией смерти
      *
-     * @dataProvider multiplierDeathDamageDataProvider
-     * @param int $power
-     * @param int $newDeathDamage
      * @throws Exception
      */
+    #[DataProvider('multiplierDeathDamageDataProvider')]
     public function testBuffActionMultiplierDeathDamageSuccess(int $power, int $newDeathDamage): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -861,13 +819,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на плоское увеличение/уменьшение сопротивления урону
      *
-     * @dataProvider addResistDataProvider
-     * @param int $unitId
-     * @param int $power
-     * @param int $oldResist
-     * @param int $newResist
      * @throws Exception
      */
+    #[DataProvider('addResistDataProvider')]
     public function testBuffActionAddResistSuccess(int $unitId, int $power, int $oldResist, int $newResist): void
     {
         $unit = UnitFactory::createByTemplate($unitId);
@@ -937,11 +891,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение максимального сопротивления
      *
-     * @dataProvider addMaxResistDataProvider
-     * @param int $power
-     * @param int $newResist
      * @throws Exception
      */
+    #[DataProvider('addMaxResistDataProvider')]
     public function testBuffActionAddMaxResistSuccess(int $power, int $newResist): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -1011,11 +963,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение блока
      *
-     * @dataProvider addBlockDataProvider
-     * @param int $power
-     * @param int $expectedBlock
      * @throws Exception
      */
+    #[DataProvider('addBlockDataProvider')]
     public function testBuffActionAddBlockSuccess(int $power, int $expectedBlock): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -1052,11 +1002,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение магического блока
      *
-     * @dataProvider addMagicBlockDataProvider
-     * @param int $power
-     * @param int $expectedBlock
      * @throws Exception
      */
+    #[DataProvider('addMagicBlockDataProvider')]
     public function testBuffActionAddMagicBlockSuccess(int $power, int $expectedBlock): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -1093,11 +1041,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение магического блока
      *
-     * @dataProvider addBlockIgnoreDataProvider
-     * @param int $power
-     * @param int $expectedBlockIgnore
      * @throws Exception
      */
+    #[DataProvider('addBlockIgnoreDataProvider')]
     public function testBuffActionAddBlockIgnoreSuccess(int $power, int $expectedBlockIgnore): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -1134,11 +1080,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение показателя вампиризма
      *
-     * @dataProvider addVampirismDataProvider
-     * @param int $power
-     * @param int $expectedVampirism
      * @throws Exception
      */
+    #[DataProvider('addVampirismDataProvider')]
     public function testBuffActionAddVampirismSuccess(int $power, int $expectedVampirism): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -1175,11 +1119,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение показателя магического вампиризма
      *
-     * @dataProvider addMagicVampirismDataProvider
-     * @param int $power
-     * @param int $expectedMagicVampirism
      * @throws Exception
      */
+    #[DataProvider('addMagicVampirismDataProvider')]
     public function testBuffActionAddMagicVampirismSuccess(int $power, int $expectedMagicVampirism): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -1216,11 +1158,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение показателя общего сопротивления урону
      *
-     * @dataProvider addGlobalResistDataProvider
-     * @param int $power
-     * @param int $expectedGlobalResist
      * @throws Exception
      */
+    #[DataProvider('addGlobalResistDataProvider')]
     public function testBuffActionAddGlobalResistSuccess(int $power, int $expectedGlobalResist): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -1257,11 +1197,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение показателя ментального барьера
      *
-     * @dataProvider addMentalBarrierDataProvider
-     * @param int $power
-     * @param int $expectedMentalBarrier
      * @throws Exception
      */
+    #[DataProvider('addMentalBarrierDataProvider')]
     public function testBuffActionAddMentalBarrierSuccess(int $power, int $expectedMentalBarrier): void
     {
         $unit = UnitFactory::createByTemplate(12);
@@ -1298,13 +1236,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение показателя множителя получаемой концентрации
      *
-     * @dataProvider addMultiplierConcentrationDataProvider
-     * @param int $unitId
-     * @param int $baseMultiplierConcentration
-     * @param int $power
-     * @param int $expectedMultiplierConcentration
      * @throws Exception
      */
+    #[DataProvider('addMultiplierConcentrationDataProvider')]
     public function testBuffActionAddMultiplierConcentrationSuccess(
         int $unitId,
         int $baseMultiplierConcentration,
@@ -1346,13 +1280,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение показателя множителя хитрости
      *
-     * @dataProvider addMultiplierCunningDataProvider
-     * @param int $unitId
-     * @param int $baseMultiplierCunning
-     * @param int $power
-     * @param int $expectedMultiplierCunning
      * @throws Exception
      */
+    #[DataProvider('addMultiplierCunningDataProvider')]
     public function testBuffActionAddMultiplierCunningSuccess(
         int $unitId,
         int $baseMultiplierCunning,
@@ -1394,13 +1324,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение показателя множителя получаемой ярости
      *
-     * @dataProvider addMultiplierRageDataProvider
-     * @param int $unitId
-     * @param int $baseMultiplierRage
-     * @param int $power
-     * @param int $expectedMultiplierRage
      * @throws Exception
      */
+    #[DataProvider('addMultiplierRageDataProvider')]
     public function testBuffActionAddMultiplierRageSuccess(
         int $unitId,
         int $baseMultiplierRage,
@@ -1442,13 +1368,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на изменение общего множителя наносимого урона
      *
-     * @dataProvider addMultiplierDamageDataProvider
-     * @param int $unitId
-     * @param int $power
-     * @param int $baseDamageMultiplier
-     * @param int $exceptedDamageMultiplier
      * @throws Exception
      */
+    #[DataProvider('addMultiplierDamageDataProvider')]
     public function testBuffActionAddMultiplierDamageSuccess(
         int $unitId,
         int $power,
@@ -1490,10 +1412,9 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * Тест на чрезмерное уменьшение характеристики
      *
-     * @dataProvider overReducedStatDataProviderNew
-     * @param string $modifyMethod
      * @throws Exception
      */
+    #[DataProvider('overReducedStatDataProviderNew')]
     public function testBuffActionOverReducedStatNew(string $modifyMethod): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -1513,7 +1434,7 @@ class BuffActionTest extends AbstractUnitTest
         );
 
         $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
+        $this->expectExceptionMessage(UnitException::OVER_REDUCED . BuffAction::MIN_MULTIPLIER);
         $action->handle();
     }
 
@@ -1536,7 +1457,7 @@ class BuffActionTest extends AbstractUnitTest
         $action = new BuffAction($this->getContainer(), $unit, $enemyCommand, $command, BuffAction::TARGET_SELF, $name, $modifyMethod, $power);
 
         $this->expectException(UnitException::class);
-        $this->expectErrorMessage(UnitException::UNDEFINED_MODIFY_METHOD . ': ' . $modifyMethod);
+        $this->expectExceptionMessage(UnitException::UNDEFINED_MODIFY_METHOD . ': ' . $modifyMethod);
         $action->handle();
     }
 
@@ -1575,7 +1496,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function multiplierAccuracyDataProvider(): array
+    public static function multiplierAccuracyDataProvider(): array
     {
         return [
             [
@@ -1600,7 +1521,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function multiplierMagicAccuracyDataProvider(): array
+    public static function multiplierMagicAccuracyDataProvider(): array
     {
         return [
             [
@@ -1625,7 +1546,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function multiplierDefenseDataProvider(): array
+    public static function multiplierDefenseDataProvider(): array
     {
         return [
             [
@@ -1650,7 +1571,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function multiplierMagicDefenseDataProvider(): array
+    public static function multiplierMagicDefenseDataProvider(): array
     {
         return [
             [
@@ -1675,7 +1596,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function multiplierCriticalChanceDataProvider(): array
+    public static function multiplierCriticalChanceDataProvider(): array
     {
         return [
             [
@@ -1697,7 +1618,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addCriticalChanceDataProvider(): array
+    public static function addCriticalChanceDataProvider(): array
     {
         return [
             [
@@ -1715,7 +1636,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addCriticalMultiplierDataProvider(): array
+    public static function addCriticalMultiplierDataProvider(): array
     {
         return [
             [
@@ -1741,7 +1662,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function multiplierPhysicalDamageDataProvider(): array
+    public static function multiplierPhysicalDamageDataProvider(): array
     {
         return [
             [
@@ -1766,7 +1687,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function multiplierFireDamageDataProvider(): array
+    public static function multiplierFireDamageDataProvider(): array
     {
         return [
             [
@@ -1791,7 +1712,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function multiplierWaterDamageDataProvider(): array
+    public static function multiplierWaterDamageDataProvider(): array
     {
         return [
             [
@@ -1816,7 +1737,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function multiplierAirDamageDataProvider(): array
+    public static function multiplierAirDamageDataProvider(): array
     {
         return [
             [
@@ -1841,7 +1762,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function multiplierEarthDamageDataProvider(): array
+    public static function multiplierEarthDamageDataProvider(): array
     {
         return [
             [
@@ -1866,7 +1787,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function multiplierLifeDamageDataProvider(): array
+    public static function multiplierLifeDamageDataProvider(): array
     {
         return [
             [
@@ -1891,7 +1812,7 @@ class BuffActionTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function multiplierDeathDamageDataProvider(): array
+    public static function multiplierDeathDamageDataProvider(): array
     {
         return [
             [
@@ -1913,7 +1834,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addResistDataProvider(): array
+    public static function addResistDataProvider(): array
     {
         return [
             [
@@ -1968,7 +1889,7 @@ class BuffActionTest extends AbstractUnitTest
     }
 
 
-    public function addMaxResistDataProvider(): array
+    public static function addMaxResistDataProvider(): array
     {
         return [
             [
@@ -1986,7 +1907,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addBlockDataProvider(): array
+    public static function addBlockDataProvider(): array
     {
         return [
             [
@@ -2008,7 +1929,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addMagicBlockDataProvider(): array
+    public static function addMagicBlockDataProvider(): array
     {
         return [
             [
@@ -2030,7 +1951,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addBlockIgnoreDataProvider(): array
+    public static function addBlockIgnoreDataProvider(): array
     {
         return [
             [
@@ -2048,7 +1969,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addVampirismDataProvider(): array
+    public static function addVampirismDataProvider(): array
     {
         return [
             [
@@ -2070,7 +1991,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addMagicVampirismDataProvider(): array
+    public static function addMagicVampirismDataProvider(): array
     {
         return [
             [
@@ -2092,7 +2013,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addGlobalResistDataProvider(): array
+    public static function addGlobalResistDataProvider(): array
     {
         return [
             [
@@ -2114,7 +2035,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addMentalBarrierDataProvider(): array
+    public static function addMentalBarrierDataProvider(): array
     {
         return [
             [
@@ -2136,7 +2057,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addMultiplierConcentrationDataProvider(): array
+    public static function addMultiplierConcentrationDataProvider(): array
     {
         return [
             [
@@ -2190,7 +2111,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addMultiplierCunningDataProvider(): array
+    public static function addMultiplierCunningDataProvider(): array
     {
         return [
             [
@@ -2244,7 +2165,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addMultiplierRageDataProvider(): array
+    public static function addMultiplierRageDataProvider(): array
     {
         return [
             [
@@ -2298,7 +2219,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function addMultiplierDamageDataProvider(): array
+    public static function addMultiplierDamageDataProvider(): array
     {
         return [
             [
@@ -2328,7 +2249,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function multiplierMaxManaDataProvider(): array
+    public static function multiplierMaxManaDataProvider(): array
     {
         return [
             [
@@ -2383,7 +2304,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function multiplierMaxLifeDataProvider(): array
+    public static function multiplierMaxLifeDataProvider(): array
     {
         return [
             [
@@ -2424,7 +2345,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function multiplierAttackSpeedDataProvider(): array
+    public static function multiplierAttackSpeedDataProvider(): array
     {
         return [
             [
@@ -2455,7 +2376,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function multiplierCastSpeedDataProvider(): array
+    public static function multiplierCastSpeedDataProvider(): array
     {
         return [
             [
@@ -2481,7 +2402,7 @@ class BuffActionTest extends AbstractUnitTest
         ];
     }
 
-    public function overReducedStatDataProviderNew(): array
+    public static function overReducedStatDataProviderNew(): array
     {
         return [
             [BuffAction::ACCURACY],

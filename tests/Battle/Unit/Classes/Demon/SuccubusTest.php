@@ -14,10 +14,10 @@ use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class SuccubusTest extends AbstractUnitTest
+class SuccubusTest extends AbstractTestCase
 {
     /**
      * Тест на создание класса Succubus

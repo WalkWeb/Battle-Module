@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Battle\Unit\Race;
 
 use Battle\Unit\Race\Race;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 
-class RaceTest extends AbstractUnitTest
+class RaceTest extends AbstractTestCase
 {
     public function testRaceCreate(): void
     {

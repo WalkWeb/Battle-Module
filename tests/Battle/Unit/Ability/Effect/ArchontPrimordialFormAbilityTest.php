@@ -12,16 +12,17 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class ArchontPrimordialFormAbilityTest extends AbstractUnitTest
+class ArchontPrimordialFormAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';
-    private const MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Изначальная форма</span> и вылечил себя на %d здоровья';
+    private const string MESSAGE_HEAL_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Primordial Form</span> and healed itself on %d life';
+    private const string MESSAGE_HEAL_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Изначальная форма</span> и вылечил себя на %d здоровья';
 
-    private const MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Primordial Form</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Изначальная форма</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">wounded_unit</span> use <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Primordial Form</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">wounded_unit</span> использовал <img src="/images/icons/ability/110.png" alt="" /> <span class="ability">Изначальная форма</span>';
 
     /**
      * Тест на создание способности Archont Primordial Form через AbilityDataProvider
@@ -77,16 +78,9 @@ class ArchontPrimordialFormAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Archont Primordial Form
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedHealPower
-     * @param float $expectedAttackSpeed
-     * @param float $expectedCastSpeed
-     * @param int $expectedCriticalChance
-     * @param int $expectedCriticalMultiplier
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testArchontPrimordialFormAbilityUse(
         int $level,
         int $expectedHealPower,
@@ -168,7 +162,7 @@ class ArchontPrimordialFormAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

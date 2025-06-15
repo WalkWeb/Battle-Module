@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class StoneSkinAbilityTest extends AbstractUnitTest
+class StoneSkinAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/478.png" alt="" /> <span class="ability">Stone Skin</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/478.png" alt="" /> <span class="ability">Каменная кожа</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> use <img src="/images/icons/ability/478.png" alt="" /> <span class="ability">Stone Skin</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> использовал <img src="/images/icons/ability/478.png" alt="" /> <span class="ability">Каменная кожа</span>';
 
     /**
      * Тест на создание способности Stone Skin через AbilityDataProvider
@@ -36,22 +37,9 @@ class StoneSkinAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Stone Skin
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedPhysicalResist
-     * @param int $expectedFireResist
-     * @param int $expectedWaterResist
-     * @param int $expectedAirResist
-     * @param int $expectedEarthResist
-     * @param int $expectedLifeResist
-     * @param int $expectedDeathResist
-     * @param int $expectedFireMaxResist
-     * @param int $expectedWaterMaxResist
-     * @param int $expectedAirMaxResist
-     * @param int $expectedEarthMaxResist
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testStoneSkinAbilityUse(
         int $level,
         int $expectedPhysicalResist,
@@ -129,7 +117,7 @@ class StoneSkinAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

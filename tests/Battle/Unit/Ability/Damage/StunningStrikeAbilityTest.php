@@ -13,16 +13,17 @@ use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class StunningStrikeAbilityTest extends AbstractUnitTest
+class StunningStrikeAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">Paladin</span> use <img src="/images/icons/ability/181.png" alt="" /> <span class="ability">Stunning Strike</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">Paladin</span> использовал <img src="/images/icons/ability/181.png" alt="" /> <span class="ability">Оглушающий удар</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">Paladin</span> use <img src="/images/icons/ability/181.png" alt="" /> <span class="ability">Stunning Strike</span> and hit for %d damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">Paladin</span> использовал <img src="/images/icons/ability/181.png" alt="" /> <span class="ability">Оглушающий удар</span> и нанес удар на %d урона по <span style="color: #1e72e3">unit_2</span>';
 
-    private const MESSAGE_STUN_EN = '<span style="color: #1e72e3">unit_2</span> stunned and unable to move';
-    private const MESSAGE_STUN_RU = '<span style="color: #1e72e3">unit_2</span> оглушен и не может двигаться';
+    private const string MESSAGE_STUN_EN = '<span style="color: #1e72e3">unit_2</span> stunned and unable to move';
+    private const string MESSAGE_STUN_RU = '<span style="color: #1e72e3">unit_2</span> оглушен и не может двигаться';
 
     /**
      * Тест на создание способности Stunning Strike через AbilityDataProvider
@@ -92,13 +93,9 @@ class StunningStrikeAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Stunning Strike
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedDamage
-     * @param int $expectedAccuracy
-     * @param int $expectedDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testStunningStrikeAbilityUse(
         int $level,
         int $expectedDamage,
@@ -130,7 +127,7 @@ class StunningStrikeAbilityTest extends AbstractUnitTest
                 self::assertEquals(sprintf(self::MESSAGE_RU, $expectedDamage), $this->getChatRu()->addMessage($action));
 
                 // Дополнительное проверяем, что по событию успешно создается анимация
-                (new Scenario())->addAnimation($action, new Statistic());
+                new Scenario()->addAnimation($action, new Statistic());
             }
             if ($i === 1) {
                 self::assertInstanceOf(EffectAction::class, $action);
@@ -166,7 +163,7 @@ class StunningStrikeAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

@@ -15,21 +15,20 @@ use Battle\Weapon\Type\WeaponType;
 use Battle\Weapon\Type\WeaponTypeException;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class WeaponTypeTest extends AbstractUnitTest
+class WeaponTypeTest extends AbstractTestCase
 {
     use AbilityDataTrait;
 
     /**
      * Тест на создание типа оружия
      *
-     * @dataProvider createDataProvider
-     * @param int $id
-     * @param string $expectedName
      * @throws Exception
      */
+    #[DataProvider('createDataProvider')]
     public function testWeaponTypeCreate(int $id, string $expectedName): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -62,11 +61,9 @@ class WeaponTypeTest extends AbstractUnitTest
      * двуручные булавы - оглушение на 2 хода
      * тяжелые двуручные булавы - оглушение на 3 хода
      *
-     * @dataProvider maceDataProvider
-     * @param int $unitId
-     * @param int $stunDuration
      * @throws Exception
      */
+    #[DataProvider('maceDataProvider')]
     public function testWeaponTypeMaceEffect(int $unitId, int $stunDuration): void
     {
         $unit = UnitFactory::createByTemplate($unitId);
@@ -159,7 +156,7 @@ class WeaponTypeTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function createDataProvider(): array
+    public static function createDataProvider(): array
     {
         return [
             [
@@ -237,7 +234,7 @@ class WeaponTypeTest extends AbstractUnitTest
         ];
     }
 
-    public function maceDataProvider(): array
+    public static function maceDataProvider(): array
     {
         return [
             [

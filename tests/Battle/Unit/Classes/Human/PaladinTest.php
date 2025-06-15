@@ -15,10 +15,10 @@ use Battle\Unit\Ability\Ability;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class PaladinTest extends AbstractUnitTest
+class PaladinTest extends AbstractTestCase
 {
     /**
      * Тест на создание класса Paladin
@@ -42,7 +42,7 @@ class PaladinTest extends AbstractUnitTest
 
         self::assertCount(1, $abilities);
 
-        foreach ($abilities as $i => $ability) {
+        foreach ($abilities as $ability) {
 
             self::assertContainsOnlyInstancesOf(Ability::class, [$ability]);
 

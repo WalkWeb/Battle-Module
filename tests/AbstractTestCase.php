@@ -20,7 +20,7 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use Tests\Factory\UnitFactory;
 
-abstract class AbstractUnitTest extends TestCase
+abstract class AbstractTestCase extends TestCase
 {
     protected ContainerInterface $container;
 

@@ -20,11 +20,11 @@ use Battle\Action\WaitAction;
 use Battle\Command\CommandFactory;
 use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\BaseFactory;
 use Tests\Factory\UnitFactory;
 
-class ScenarioTest extends AbstractUnitTest
+class ScenarioTest extends AbstractTestCase
 {
     /**
      * Тест на создание анимации урона по юниту (без ментального барьера)

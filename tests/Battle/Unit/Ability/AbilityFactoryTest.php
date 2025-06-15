@@ -15,18 +15,18 @@ use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class AbilityFactoryTest extends AbstractUnitTest
+class AbilityFactoryTest extends AbstractTestCase
 {
     /**
      * Тест на успешное создание способности на основе массива параметров
      *
-     * @dataProvider successDataProvider
-     * @param array $data
      * @throws Exception
      */
+    #[DataProvider('successDataProvider')]
     public function testAbilityFactoryCreateSuccess(array $data): void
     {
         $unit = UnitFactory::createByTemplate(1, $this->container);
@@ -61,11 +61,9 @@ class AbilityFactoryTest extends AbstractUnitTest
     /**
      * Тесты на различные невалидные варианты данных
      *
-     * @dataProvider failDataProvider
-     * @param array $data
-     * @param string $error
      * @throws Exception
      */
+    #[DataProvider('failDataProvider')]
     public function testAbilityFactoryCreateFail(array $data, string $error): void
     {
         $unit = UnitFactory::createByTemplate(1);
@@ -79,7 +77,7 @@ class AbilityFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function successDataProvider(): array
+    public static function successDataProvider(): array
     {
         return [
             [
@@ -175,7 +173,7 @@ class AbilityFactoryTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function failDataProvider(): array
+    public static function failDataProvider(): array
     {
         return [
             // Отсутствует name

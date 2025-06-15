@@ -14,12 +14,12 @@ use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
 use Battle\Command\CommandFactory;
 use Battle\Stroke\Stroke;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class StrokeTest extends AbstractUnitTest
+class StrokeTest extends AbstractTestCase
 {
-    private const MESSAGE = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>';
+    private const string MESSAGE = '<span style="color: #1e72e3">unit_1</span> hit for 20 damage against <span style="color: #1e72e3">unit_2</span>';
 
     /**
      * Тест на базовую обработку одного хода
@@ -265,7 +265,7 @@ class StrokeTest extends AbstractUnitTest
         $oldAttackSpeed = $unit->getOffense()->getAttackSpeed();
 
         // Накладываем на юнита баф
-        $ability = $this->getAbility($unit, 'Battle Fury', 1);
+        $ability = $this->getAbility($unit, 'Battle Fury');
 
         foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertTrue($action->canByUsed());

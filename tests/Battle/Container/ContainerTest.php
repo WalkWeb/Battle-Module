@@ -35,9 +35,9 @@ use Battle\Unit\Race\RaceFactory;
 use Battle\Unit\Unit;
 use Battle\View\ViewFactory;
 use stdClass;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 
-class ContainerTest extends AbstractUnitTest
+class ContainerTest extends AbstractTestCase
 {
     /**
      * @throws ContainerException

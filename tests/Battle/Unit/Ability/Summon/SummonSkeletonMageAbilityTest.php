@@ -14,13 +14,13 @@ use Exception;
 use Battle\Action\SummonAction;
 use Battle\Command\CommandFactory;
 use Battle\Unit\Ability\AbilityCollection;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class SummonSkeletonMageAbilityTest extends AbstractUnitTest
+class SummonSkeletonMageAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/603.png" alt="" /> <span class="ability">Skeleton Mage</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/603.png" alt="" /> <span class="ability">Скелета-мага</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_1</span> summon <img src="/images/icons/ability/603.png" alt="" /> <span class="ability">Skeleton Mage</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_1</span> призвал <img src="/images/icons/ability/603.png" alt="" /> <span class="ability">Скелета-мага</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -212,7 +212,7 @@ class SummonSkeletonMageAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         $ability->usage();

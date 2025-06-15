@@ -13,11 +13,11 @@ use Battle\Command\CommandException;
 use Battle\Container\Container;
 use Battle\Unit\UnitCollection;
 use Battle\Battle;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\CommandFactory;
 use Tests\Factory\UnitFactory;
 
-class BattleTest extends AbstractUnitTest
+class BattleTest extends AbstractTestCase
 {
     /**
      * Тест на успешную обработку боя

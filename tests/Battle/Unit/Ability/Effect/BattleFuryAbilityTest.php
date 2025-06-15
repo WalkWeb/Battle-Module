@@ -17,13 +17,13 @@ use Battle\Unit\Ability\AbilityCollection;
 use Battle\Unit\Ability\AbilityInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class BattleFuryAbilityTest extends AbstractUnitTest
+class BattleFuryAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/102.png" alt="" /> <span class="ability">Battle Fury</span>';
-    private const MESSAGE_RU = '<span style="color: #ae882d">Titan</span> использовал <img src="/images/icons/ability/102.png" alt="" /> <span class="ability">Ярость битвы</span>';
+    private const string MESSAGE_EN = '<span style="color: #ae882d">Titan</span> use <img src="/images/icons/ability/102.png" alt="" /> <span class="ability">Battle Fury</span>';
+    private const string MESSAGE_RU = '<span style="color: #ae882d">Titan</span> использовал <img src="/images/icons/ability/102.png" alt="" /> <span class="ability">Ярость битвы</span>';
 
     // -----------------------------------------------------------------------------------------------------------------
     // ------------------------------------------   Тесты через Ability   ----------------------------------------------
@@ -122,7 +122,7 @@ class BattleFuryAbilityTest extends AbstractUnitTest
         }
 
         // Проверяем, что скорость атаки юнита выросла
-        self::assertEquals($oldAttackSpeed * $power , $unit->getOffense()->getAttackSpeed());
+        self::assertEquals(round($oldAttackSpeed * $power, 2), $unit->getOffense()->getAttackSpeed());
 
         // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 30; $i++) {
@@ -263,11 +263,11 @@ class BattleFuryAbilityTest extends AbstractUnitTest
             self::assertEquals(self::MESSAGE_RU, $this->getChatRu()->addMessage($action));
 
             // Дополнительное проверяем, что по событию успешно создается анимация
-            (new Scenario())->addAnimation($action, new Statistic());
+            new Scenario()->addAnimation($action, new Statistic());
         }
 
         // Проверяем, что скорость атаки юнита выросла
-        self::assertEquals($oldAttackSpeed * $power , $unit->getOffense()->getAttackSpeed());
+        self::assertEquals(round($oldAttackSpeed * $power, 2), $unit->getOffense()->getAttackSpeed());
 
         // Обновляем длительность эффектов. Длительность эффектов обновляется в getAfterActions()
         for ($i = 0; $i < 30; $i++) {

@@ -10,13 +10,14 @@ use Battle\Response\Scenario\Scenario;
 use Battle\Response\Statistic\Statistic;
 use Battle\Unit\Ability\AbilityInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 
-class VampirismAbilityTest extends AbstractUnitTest
+class VampirismAbilityTest extends AbstractTestCase
 {
-    private const MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/346.png" alt="" /> <span class="ability">Vampirism</span>';
-    private const MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/346.png" alt="" /> <span class="ability">Вампиризм</span>';
+    private const string MESSAGE_EN = '<span style="color: #1e72e3">unit_4</span> use <img src="/images/icons/ability/346.png" alt="" /> <span class="ability">Vampirism</span>';
+    private const string MESSAGE_RU = '<span style="color: #1e72e3">unit_4</span> использовал <img src="/images/icons/ability/346.png" alt="" /> <span class="ability">Вампиризм</span>';
 
     /**
      * Тест на создание способности Vampirism через AbilityDataProvider
@@ -36,12 +37,9 @@ class VampirismAbilityTest extends AbstractUnitTest
     /**
      * Тест на применение способности Vampirism
      *
-     * @dataProvider useDataProvider
-     * @param int $level
-     * @param int $expectedVampirism
-     * @param int $expectedEffectDuration
      * @throws Exception
      */
+    #[DataProvider('useDataProvider')]
     public function testVampirismAbilityUse(
         int $level,
         int $expectedVampirism,
@@ -99,7 +97,7 @@ class VampirismAbilityTest extends AbstractUnitTest
     /**
      * @return array
      */
-    public function useDataProvider(): array
+    public static function useDataProvider(): array
     {
         return [
             [

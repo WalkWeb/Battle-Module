@@ -7,11 +7,11 @@ namespace Tests\Battle\Unit;
 use Battle\Unit\UnitCollection;
 use Battle\Unit\UnitException;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\UnitFactory;
 use Tests\Factory\UnitFactoryException;
 
-class UnitCollectionTest extends AbstractUnitTest
+class UnitCollectionTest extends AbstractTestCase
 {
     /**
      * @throws UnitException

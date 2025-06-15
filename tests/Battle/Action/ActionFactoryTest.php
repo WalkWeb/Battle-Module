@@ -22,13 +22,14 @@ use Battle\Unit\Offense\OffenseFactory;
 use Battle\Unit\UnitException;
 use Battle\Weapon\Type\WeaponTypeInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\AbstractTestCase;
 use Tests\Factory\BaseFactory;
 use Tests\Factory\UnitFactory as TestUnitFactory;
 use Tests\Factory\UnitFactoryException;
 use Battle\Unit\UnitFactory;
 
-class ActionFactoryTest extends AbstractUnitTest
+class ActionFactoryTest extends AbstractTestCase
 {
     /**
      * Тест на успешное создание DamageAction на основе массива с данными
@@ -674,10 +675,10 @@ class ActionFactoryTest extends AbstractUnitTest
             'enemy_command'    => $enemyCommand,
             'allies_command'   => $command,
             'type_target'      => ActionInterface::TARGET_SELF,
-            'power'            => $power = 50,
-            'name'             => $name = 'mana restore',
-            'animation_method' => $animationMethod = 'animation test',
-            'message_method'   => $messageMethod = 'message test',
+            'power'            => 50,
+            'name'             => 'mana restore',
+            'animation_method' => 'animation test',
+            'message_method'   => 'message test',
             'icon'             => $icon = 'icon test',
         ];
 
@@ -689,11 +690,9 @@ class ActionFactoryTest extends AbstractUnitTest
     /**
      * Тесты на различные варианты невалидных данных для (перебираются некорректные варианты для всех видов Action)
      *
-     * @dataProvider failDataProvider
-     * @param array $data
-     * @param string $error
      * @throws Exception
      */
+    #[DataProvider('failDataProvider')]
     public function testActionFactoryCreateFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
@@ -763,7 +762,7 @@ class ActionFactoryTest extends AbstractUnitTest
      * @throws UnitException
      * @throws UnitFactoryException
      */
-    public function failDataProvider(): array
+    public static function failDataProvider(): array
     {
         $actionUnit = TestUnitFactory::createByTemplate(1);
         $enemyUnit = TestUnitFactory::createByTemplate(2);

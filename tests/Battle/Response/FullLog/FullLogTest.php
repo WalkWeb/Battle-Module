@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Battle\Response\FullLog;
 
 use Battle\Response\FullLog\FullLog;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 
-class FullLogTest extends AbstractUnitTest
+class FullLogTest extends AbstractTestCase
 {
     public function testFullLogAddDefault(): void
     {

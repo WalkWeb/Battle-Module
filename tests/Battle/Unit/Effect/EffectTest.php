@@ -14,11 +14,11 @@ use Battle\Unit\Effect\Effect;
 use Battle\Unit\Effect\EffectInterface;
 use Battle\Unit\UnitInterface;
 use Exception;
-use Tests\AbstractUnitTest;
+use Tests\AbstractTestCase;
 use Tests\Factory\BaseFactory;
 use Tests\Factory\UnitFactory;
 
-class EffectTest extends AbstractUnitTest
+class EffectTest extends AbstractTestCase
 {
     /**
      * @throws ActionException
