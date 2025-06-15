@@ -20,12 +20,12 @@ use Battle\Unit\UnitInterface;
  */
 class ParalysisAction extends AbstractAction
 {
-    private const HANDLE_METHOD           = 'applyParalysisAction';
+    private const string HANDLE_METHOD           = 'applyParalysisAction';
 
-    public const DEFAULT_ANIMATION_METHOD = 'wait';
-    public const PARALYSIS_MESSAGE_METHOD = 'paralysis';
-    public const STUN_MESSAGE_METHOD      = 'stunned';
-    public const EFFECT_ANIMATION_METHOD  = 'effectDamage';
+    public const string DEFAULT_ANIMATION_METHOD = 'wait';
+    public const string PARALYSIS_MESSAGE_METHOD = 'paralysis';
+    public const string STUN_MESSAGE_METHOD      = 'stunned';
+    public const string EFFECT_ANIMATION_METHOD  = 'effectDamage';
 
     /**
      * @var string

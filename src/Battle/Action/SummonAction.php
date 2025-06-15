@@ -11,9 +11,9 @@ use Battle\Unit\UnitInterface;
 
 class SummonAction extends AbstractAction
 {
-    private const HANDLE_METHOD            = 'applySummonAction';
-    private const DEFAULT_ANIMATION_METHOD = 'summon';
-    private const DEFAULT_MESSAGE_METHOD   = 'summon';
+    private const string HANDLE_METHOD            = 'applySummonAction';
+    private const string DEFAULT_ANIMATION_METHOD = 'summon';
+    private const string DEFAULT_MESSAGE_METHOD   = 'summon';
 
     /**
      * @var string

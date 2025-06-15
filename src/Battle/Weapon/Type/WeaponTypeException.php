@@ -8,5 +8,5 @@ use Exception;
 
 class WeaponTypeException extends Exception
 {
-    public const UNKNOWN_WEAPON_TYPE_ID = 'Unknown weapon type id';
+    public const string UNKNOWN_WEAPON_TYPE_ID = 'Unknown weapon type id';
 }

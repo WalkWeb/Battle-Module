@@ -8,5 +8,5 @@ use Exception;
 
 class ResponseException extends Exception
 {
-    public const INCORRECT_WINNER = 'Incorrect winner';
+    public const string INCORRECT_WINNER = 'Incorrect winner';
 }

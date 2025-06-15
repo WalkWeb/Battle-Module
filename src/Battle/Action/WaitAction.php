@@ -19,9 +19,9 @@ use Battle\Unit\UnitInterface;
  */
 class WaitAction extends AbstractAction
 {
-    private const HANDLE_METHOD            = 'applyWaitAction';
-    private const DEFAULT_ANIMATION_METHOD = 'wait';
-    private const DEFAULT_MESSAGE_METHOD   = 'wait';
+    private const string HANDLE_METHOD            = 'applyWaitAction';
+    private const string DEFAULT_ANIMATION_METHOD = 'wait';
+    private const string DEFAULT_MESSAGE_METHOD   = 'wait';
 
     /**
      * В отличие от прочих событий, WaitAction всегда применяется к себе и не требует $typeTarget в конструктор

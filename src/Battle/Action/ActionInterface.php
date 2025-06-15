@@ -12,51 +12,51 @@ use Battle\Unit\UnitInterface;
 
 interface ActionInterface
 {
-    public const DAMAGE       = 1;
-    public const HEAL         = 2;
-    public const WAIT         = 3;
-    public const SUMMON       = 4;
-    public const BUFF         = 5;
-    public const EFFECT       = 6;
-    public const RESURRECTION = 7;
-    public const PARALYSIS    = 8;
-    public const MANA_RESTORE = 9;
+    public const int DAMAGE       = 1;
+    public const int HEAL         = 2;
+    public const int WAIT         = 3;
+    public const int SUMMON       = 4;
+    public const int BUFF         = 5;
+    public const int EFFECT       = 6;
+    public const int RESURRECTION = 7;
+    public const int PARALYSIS    = 8;
+    public const int MANA_RESTORE = 9;
 
     // Применяет событие на себя
-    public const TARGET_SELF                  = 1;
+    public const int TARGET_SELF                  = 1;
     // Применяет событие на случайного врага
-    public const TARGET_RANDOM_ENEMY          = 2;
+    public const int TARGET_RANDOM_ENEMY          = 2;
     // Применяет событие на самого раненого союзника
-    public const TARGET_WOUNDED_ALLIES        = 3;
+    public const int TARGET_WOUNDED_ALLIES        = 3;
     // Применяет событие (эффект) на случайного противника, не имеющего данного эффекта
-    public const TARGET_EFFECT_ENEMY          = 4;
+    public const int TARGET_EFFECT_ENEMY          = 4;
     // Применяет событие (эффект) на случайного дружеского юнита, не имеющего данного эффекта
-    public const TARGET_EFFECT_ALLIES         = 5;
+    public const int TARGET_EFFECT_ALLIES         = 5;
     // Применяет эффект на самого раненого союзника не имеющего данного эффекта
-    public const TARGET_WOUNDED_ALLIES_EFFECT = 6;
+    public const int TARGET_WOUNDED_ALLIES_EFFECT = 6;
     // Применяет событие-воскрешение на случайного мертвого союзного юнита
-    public const TARGET_DEAD_ALLIES           = 7;
+    public const int TARGET_DEAD_ALLIES           = 7;
     // Применяет событие на всех живых противников (для массовой атаки по всем врагам)
-    public const TARGET_ALL_ENEMY             = 8;
+    public const int TARGET_ALL_ENEMY             = 8;
     // Применяет событие на всех раненых (но живых) союзников (для массового лечения по своим)
-    public const TARGET_ALL_WOUNDED_ALLIES    = 9;
+    public const int TARGET_ALL_WOUNDED_ALLIES    = 9;
     // Применяет событие на последние живые цели в этом раунде
-    public const TARGET_LAST_ALIVE_TARGETS    = 10;
-    // Применяет событие  на раненого себя
-    public const TARGET_WOUNDED_SELF          = 11;
+    public const int TARGET_LAST_ALIVE_TARGETS    = 10;
+    // Применяет событие на раненого себя
+    public const int TARGET_WOUNDED_SELF          = 11;
 
     // TODO Подумать над отдельным таргетом для целей которые или ранены или имеют неполную ману
 
-    public const ROLLBACK_METHOD_SUFFIX = 'Revert';
+    public const string ROLLBACK_METHOD_SUFFIX = 'Revert';
 
     // Пропуск создания сообщения в чате
-    public const SKIP_MESSAGE_METHOD    = 'skip';
+    public const string SKIP_MESSAGE_METHOD    = 'skip';
 
     // Пропуск создания анимации
-    public const SKIP_ANIMATION_METHOD  = 'skip';
+    public const string SKIP_ANIMATION_METHOD  = 'skip';
 
     // Максимальное уменьшение характеристики юнита -90%
-    public const MIN_MULTIPLIER     = -90;
+    public const int MIN_MULTIPLIER            = -90;
 
     /**
      * Название метода в классе Unit, который будет обрабатывать данное событие
@@ -162,14 +162,13 @@ interface ActionInterface
      *
      * Этот параметр необходим для статистики и, например, для корректного расчета вампиризма - когда лечение
      * рассчитывает от фактически нанесенного урона, а не от самого показателя удара
-
      * Например, у юнита осталось 5 здоровья и он получает 50 удара. В этом случае фактический удар будет на 5 здоровья
      *
      * По умолчанию, в Action у которых нет никакой силы (например, призыв существ), возвращает 0
      *
      * @param UnitInterface $unit
      * @param int $factualPower
-     * @return mixed
+     * @return void
      */
     public function addFactualPower(UnitInterface $unit, int $factualPower): void;
 
@@ -221,10 +220,10 @@ interface ActionInterface
      *
      * Используется только в BuffAction, при вызове у других Action будет брошено исключение
      *
-     * @param int|float $revertValue
+     * @param float|int $revertValue
      * @throws ActionException
      */
-    public function setRevertValue($revertValue): void;
+    public function setRevertValue(float|int $revertValue): void;
 
     /**
      * Используется только в BuffAction, при вызове у других Action будет брошено исключение
@@ -232,7 +231,7 @@ interface ActionInterface
      * @return int|float
      * @throws ActionException
      */
-    public function getRevertValue();
+    public function getRevertValue(): float|int;
 
     /**
      * BuffAction создает BuffAction для отката своих изменений характеристик юнита

@@ -6,8 +6,8 @@ namespace Battle\Translation;
 
 class Translation implements TranslationInterface
 {
-    private const DIR              = 'translations/battle/';
-    private const DEFAULT_LANGUAGE = 'en';
+    private const string DIR              = 'translations/battle/';
+    private const string DEFAULT_LANGUAGE = 'en';
 
     /**
      * Массив переводов в формате:

@@ -11,14 +11,14 @@ use Battle\Unit\UnitInterface;
 
 class ResurrectionAction extends AbstractAction
 {
-    private const MIM_POWER = 1;
-    private const MAX_POWER = 100;
+    private const int MIM_POWER = 1;
+    private const int MAX_POWER = 100;
 
-    private const HANDLE_METHOD          = 'applyResurrectionAction';
+    private const string HANDLE_METHOD          = 'applyResurrectionAction';
 
-    public const DEFAULT_NAME            = 'resurrected';
-    public const DEFAULT_MESSAGE_METHOD  = 'resurrected';
-    private const ANIMATION_METHOD       = 'resurrected';
+    public const string DEFAULT_NAME            = 'resurrected';
+    public const string DEFAULT_MESSAGE_METHOD  = 'resurrected';
+    private const string ANIMATION_METHOD       = 'resurrected';
 
     /**
      * @var string

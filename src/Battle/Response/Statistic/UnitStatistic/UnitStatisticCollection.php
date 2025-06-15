@@ -16,7 +16,7 @@ class UnitStatisticCollection implements Iterator, Countable
     /**
      * @var UnitStatisticInterface[]
      */
-    private $elements = [];
+    private array $elements = [];
 
     /**
      * @param UnitStatisticInterface $unitStatistic

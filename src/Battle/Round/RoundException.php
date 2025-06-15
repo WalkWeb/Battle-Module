@@ -8,6 +8,6 @@ use Exception;
 
 class RoundException extends Exception
 {
-    public const INCORRECT_START_COMMAND = 'Некорректное указание команды, начинающей раунд';
-    public const UNEXPECTED_ENDING       = 'Неожиданное завершение раунда';
+    public const string INCORRECT_START_COMMAND = 'Некорректное указание команды, начинающей раунд';
+    public const string UNEXPECTED_ENDING       = 'Неожиданное завершение раунда';
 }

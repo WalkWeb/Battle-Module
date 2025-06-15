@@ -12,8 +12,8 @@ use Battle\Translation\TranslationInterface;
 
 interface ResponseInterface
 {
-    public const LEFT_COMMAND_WIN  = 'Left command win';
-    public const RIGHT_COMMAND_WIN = 'Right command win';
+    public const string LEFT_COMMAND_WIN  = 'Left command win';
+    public const string RIGHT_COMMAND_WIN = 'Right command win';
 
     /**
      * Возвращает левую команду с характеристиками на начало боя

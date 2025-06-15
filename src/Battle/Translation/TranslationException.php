@@ -8,6 +8,5 @@ use Exception;
 
 class TranslationException extends Exception
 {
-    public const DEFAULT_MESSAGES_NOT_FOUND = 'Default language messages file not found';
-    public const MESSAGE_SHOULD_BE_STRING   = 'Message should be a string';
+    public const string DEFAULT_MESSAGES_NOT_FOUND = 'Default language messages file not found';
 }

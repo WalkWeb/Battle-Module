@@ -8,6 +8,6 @@ use Exception;
 
 class StatisticException extends Exception
 {
-    public const NO_UNIT   = 'Undefined unit';
-    public const DOUBLE_ID = 'Double UnitStatistic ID';
+    public const string NO_UNIT   = 'Undefined unit';
+    public const string DOUBLE_ID = 'Double UnitStatistic ID';
 }

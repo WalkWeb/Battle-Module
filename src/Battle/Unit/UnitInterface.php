@@ -25,45 +25,45 @@ use Exception;
  */
 interface UnitInterface
 {
-    public const ADD_CON_NEW_ROUND       = 200;
-    public const ADD_CON_ACTION_UNIT     = 180;
-    public const ADD_CON_RECEIVING_UNIT  = 100;
-    public const ADD_RAGE_NEW_ROUND      = 50;
-    public const ADD_RAGE_ACTION_UNIT    = 90;
-    public const ADD_RAGE_RECEIVING_UNIT = 70;
-    public const MAX_CONCENTRATION       = 1000;
-    public const MAX_RAGE                = 1000;
+    public const int ADD_CON_NEW_ROUND       = 200;
+    public const int ADD_CON_ACTION_UNIT     = 180;
+    public const int ADD_CON_RECEIVING_UNIT  = 100;
+    public const int ADD_RAGE_NEW_ROUND      = 50;
+    public const int ADD_RAGE_ACTION_UNIT    = 90;
+    public const int ADD_RAGE_RECEIVING_UNIT = 70;
+    public const int MAX_CONCENTRATION       = 1000;
+    public const int MAX_RAGE                = 1000;
 
     // Максимально/минимальные множители получаемой концентрации/хитрости/ярости
-    public const MAX_RESOURCE_MULTIPLIER = 1000;
-    public const MIN_RESOURCE_MULTIPLIER = -100;
+    public const int MAX_RESOURCE_MULTIPLIER = 1000;
+    public const int MIN_RESOURCE_MULTIPLIER = -100;
 
-    public const MIN_LIFE         = 0;
-    public const MAX_LIFE         = 100000;
+    public const int MIN_LIFE         = 0;
+    public const int MAX_LIFE         = 100000;
 
-    public const MIN_TOTAL_LIFE   = 1;
-    public const MAX_TOTAL_LIFE   = 100000;
+    public const int MIN_TOTAL_LIFE   = 1;
+    public const int MAX_TOTAL_LIFE   = 100000;
 
-    public const MIN_MANA         = 0;
-    public const MAX_MANA         = 100000;
+    public const int MIN_MANA         = 0;
+    public const int MAX_MANA         = 100000;
 
-    public const MIN_TOTAL_MANA   = 0;
-    public const MAX_TOTAL_MANA   = 100000;
+    public const int MIN_TOTAL_MANA   = 0;
+    public const int MAX_TOTAL_MANA   = 100000;
 
-    public const MIN_LEVEL        = 1;
-    public const MAX_LEVEL        = 1000;
+    public const int MIN_LEVEL        = 1;
+    public const int MAX_LEVEL        = 1000;
 
     // Помимо ограничения на символы, слишком длинное имя обрезается в css, на случай WWWWW-имен
-    public const MIN_NAME_LENGTH  = 1;
-    public const MAX_NAME_LENGTH  = 20;
+    public const int MIN_NAME_LENGTH  = 1;
+    public const int MAX_NAME_LENGTH  = 20;
 
-    public const MIN_ID_LENGTH    = 1;
-    public const MAX_ID_LENGTH    = 36;
+    public const int MIN_ID_LENGTH    = 1;
+    public const int MAX_ID_LENGTH    = 36;
 
-    public const MIN_HIT_CHANCE   = 5;
-    public const MAX_HIT_CHANCE   = 95;
+    public const int MIN_HIT_CHANCE   = 5;
+    public const int MAX_HIT_CHANCE   = 95;
 
-    public const BASE_CUNNING     = 15;
+    public const int BASE_CUNNING     = 15;
 
     /**
      * UUID or random string

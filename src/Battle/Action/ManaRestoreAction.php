@@ -12,12 +12,12 @@ use Battle\Unit\UnitInterface;
 
 class ManaRestoreAction extends AbstractAction
 {
-    public const NAME                    = 'restore mana';
-    private const HANDLE_METHOD          = 'applyManaRestoreAction';
-    public const DEFAULT_MESSAGE_METHOD  = 'manaRestore';
-    public const ABILITY_MESSAGE_METHOD  = 'manaRestoreAbility';
-    public const EFFECT_MESSAGE_METHOD   = 'effectManaRestore';
-    public const EFFECT_ANIMATION_METHOD = 'effectManaRestore';
+    public const string NAME                    = 'restore mana';
+    private const string HANDLE_METHOD          = 'applyManaRestoreAction';
+    public const string DEFAULT_MESSAGE_METHOD  = 'manaRestore';
+    public const string ABILITY_MESSAGE_METHOD  = 'manaRestoreAbility';
+    public const string EFFECT_MESSAGE_METHOD   = 'effectManaRestore';
+    public const string EFFECT_ANIMATION_METHOD = 'effectManaRestore';
 
     /**
      * @var int

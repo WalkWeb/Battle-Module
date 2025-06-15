@@ -162,7 +162,7 @@ class Container implements ContainerInterface
         try {
             $class = $this->getNameService($class);
             return array_key_exists($class, $this->storage);
-        } catch (ContainerException $e) {
+        } catch (ContainerException) {
             // Контейнер может иметь только фиксированный набор сервисов. Если указан неизвестный - значит он не может
             // быть добавлен.
             return false;

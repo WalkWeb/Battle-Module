@@ -75,7 +75,7 @@ trait ValidationTrait
      * @return int|float
      * @throws BattleException
      */
-    protected static function intOrFloat(array $data, string $filed, string $error)
+    protected static function intOrFloat(array $data, string $filed, string $error): float|int
     {
         if (!array_key_exists($filed, $data) || (!is_float($data[$filed]) && !is_int($data[$filed]))) {
             throw new BattleException($error);

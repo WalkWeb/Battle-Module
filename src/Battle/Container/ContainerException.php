@@ -8,5 +8,5 @@ use Exception;
 
 class ContainerException extends Exception
 {
-    public const UNKNOWN_SERVICE = 'Unknown service';
+    public const string UNKNOWN_SERVICE = 'Unknown service';
 }

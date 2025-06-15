@@ -6,7 +6,7 @@ namespace Battle\Response\FullLog;
 
 class FullLog implements FullLogInterface
 {
-    private const LINE = '<hr>';
+    private const string LINE = '<hr>';
 
     /**
      * @var string[]

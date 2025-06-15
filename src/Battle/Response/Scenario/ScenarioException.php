@@ -8,5 +8,5 @@ use Exception;
 
 class ScenarioException extends Exception
 {
-    public const UNDEFINED_ANIMATION_METHOD = 'Scenario: Undefined animation method';
+    public const string UNDEFINED_ANIMATION_METHOD = 'Scenario: Undefined animation method';
 }

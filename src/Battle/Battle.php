@@ -12,7 +12,7 @@ use Exception;
 
 class Battle implements BattleInterface
 {
-    public const LIMIT_STROKE_MESSAGE = 'Limit stroke. Winner by max life';
+    public const string LIMIT_STROKE_MESSAGE = 'Limit stroke. Winner by max life';
 
     /**
      * @var CommandInterface

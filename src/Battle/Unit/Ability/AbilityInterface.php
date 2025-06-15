@@ -12,11 +12,11 @@ use Exception;
 interface AbilityInterface
 {
     // Варианты активации способности
-    public const ACTIVATE_CONCENTRATION = 1;
-    public const ACTIVATE_RAGE          = 2;
-    public const ACTIVATE_LOW_LIFE      = 3;
-    public const ACTIVATE_DEAD          = 4;
-    public const ACTIVATE_CUNNING       = 5;
+    public const int ACTIVATE_CONCENTRATION = 1;
+    public const int ACTIVATE_RAGE          = 2;
+    public const int ACTIVATE_LOW_LIFE      = 3;
+    public const int ACTIVATE_DEAD          = 4;
+    public const int ACTIVATE_CUNNING       = 5;
 
     // TODO getDescription
 

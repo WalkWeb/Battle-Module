@@ -15,12 +15,12 @@ use Exception;
 
 class DamageAction extends AbstractAction
 {
-    public const HANDLE_METHOD           = 'applyDamageAction';
-    public const DEFAULT_NAME            = 'attack';
-    public const UNIT_ANIMATION_METHOD   = 'damage';
-    public const EFFECT_ANIMATION_METHOD = 'effectDamage';
-    public const DEFAULT_MESSAGE_METHOD  = 'damage';
-    public const EFFECT_MESSAGE_METHOD   = 'effectDamage';
+    public const string HANDLE_METHOD           = 'applyDamageAction';
+    public const string DEFAULT_NAME            = 'attack';
+    public const string UNIT_ANIMATION_METHOD   = 'damage';
+    public const string EFFECT_ANIMATION_METHOD = 'effectDamage';
+    public const string DEFAULT_MESSAGE_METHOD  = 'damage';
+    public const string EFFECT_MESSAGE_METHOD   = 'effectDamage';
 
     /**
      * @var OffenseInterface

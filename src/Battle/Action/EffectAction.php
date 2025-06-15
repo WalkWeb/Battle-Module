@@ -12,9 +12,9 @@ use Battle\Unit\UnitInterface;
 
 class EffectAction extends AbstractAction
 {
-    private const HANDLE_METHOD            = 'applyEffectAction';
-    public const DEFAULT_ANIMATION_METHOD = 'effect';
-    public const DEFAULT_MESSAGE_METHOD   = 'applyEffect';
+    private const string HANDLE_METHOD           = 'applyEffectAction';
+    public const string DEFAULT_ANIMATION_METHOD = 'effect';
+    public const string DEFAULT_MESSAGE_METHOD   = 'applyEffect';
 
     /**
      * @var string

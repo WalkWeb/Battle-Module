@@ -200,10 +200,10 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
-     * @param int|float $revertValue
+     * @param float|int $revertValue
      * @throws ActionException
      */
-    public function setRevertValue($revertValue): void
+    public function setRevertValue(float|int $revertValue): void
     {
         throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }
@@ -211,7 +211,7 @@ abstract class AbstractAction implements ActionInterface
     /**
      * @throws ActionException
      */
-    public function getRevertValue()
+    public function getRevertValue(): float|int
     {
         throw new ActionException(ActionException::NO_METHOD . ': ' . __CLASS__ . '::' . __METHOD__);
     }

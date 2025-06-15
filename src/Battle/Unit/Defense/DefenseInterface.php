@@ -11,32 +11,32 @@ namespace Battle\Unit\Defense;
  */
 interface DefenseInterface
 {
-    public const MIN_RESISTANCE     = -1000;
-    public const MAX_RESISTANCE     = 100;
+    public const int MIN_RESISTANCE     = -1000;
+    public const int MAX_RESISTANCE     = 100;
 
-    public const MIN_DEFENSE        = 1;
-    public const MAX_DEFENSE        = 1000000;
+    public const int MIN_DEFENSE        = 1;
+    public const int MAX_DEFENSE        = 1000000;
 
-    public const MIN_MAGIC_DEFENSE  = 1;
-    public const MAX_MAGIC_DEFENSE  = 1000000;
+    public const int MIN_MAGIC_DEFENSE  = 1;
+    public const int MAX_MAGIC_DEFENSE  = 1000000;
 
     // Может быть отрицательным до -100% (штраф)
-    public const MIN_BLOCK          = -100;
-    public const MAX_BLOCK          = 100;
+    public const int MIN_BLOCK          = -100;
+    public const int MAX_BLOCK          = 100;
 
     // Аналогично
-    public const MIN_MAGIC_BLOCK    = -100;
-    public const MAX_MAGIC_BLOCK    = 100;
+    public const int MIN_MAGIC_BLOCK    = -100;
+    public const int MAX_MAGIC_BLOCK    = 100;
 
     // Аналогично
-    public const MIN_MENTAL_BARRIER = -100;
-    public const MAX_MENTAL_BARRIER = 100;
+    public const int MIN_MENTAL_BARRIER = -100;
+    public const int MAX_MENTAL_BARRIER = 100;
 
-    public const MIN_DODGE          = 0;
-    public const MAX_DODGE          = 100;
+    public const int MIN_DODGE          = 0;
+    public const int MAX_DODGE          = 100;
 
-    public const MIN_BLOCK_IGNORE   = 0;
-    public const MAX_BLOCK_IGNORE   = 100;
+    public const int MIN_BLOCK_IGNORE   = 0;
+    public const int MAX_BLOCK_IGNORE   = 100;
 
     /**
      * Возвращает сопротивление физическому урону

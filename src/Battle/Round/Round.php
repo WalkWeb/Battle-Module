@@ -14,11 +14,11 @@ use Exception;
 
 class Round implements RoundInterface
 {
-    private const END          = 'Battle end';
-    private const START_ROUND  = 'Start new round';
-    private const END_ROUND    = 'All command actions. New round';
-    private const START_STROKE = 'Start Stroke';
-    private const END_STROKE   = 'End Stroke';
+    private const string END          = 'Battle end';
+    private const string START_ROUND  = 'Start new round';
+    private const string END_ROUND    = 'All command actions. New round';
+    private const string START_STROKE = 'Start Stroke';
+    private const string END_STROKE   = 'End Stroke';
 
     /**
      * Левая команда

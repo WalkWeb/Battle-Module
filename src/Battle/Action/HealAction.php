@@ -11,12 +11,12 @@ use Battle\Unit\UnitInterface;
 
 class HealAction extends AbstractAction
 {
-    private const NAME                   = 'heal';
-    private const HANDLE_METHOD          = 'applyHealAction';
-    public const UNIT_ANIMATION_METHOD   = 'heal';
-    public const EFFECT_ANIMATION_METHOD = 'effectHeal';
-    public const DEFAULT_MESSAGE_METHOD  = 'heal';
-    public const EFFECT_MESSAGE_METHOD   = 'effectHeal';
+    private const string NAME                   = 'heal';
+    private const string HANDLE_METHOD          = 'applyHealAction';
+    public const string UNIT_ANIMATION_METHOD   = 'heal';
+    public const string EFFECT_ANIMATION_METHOD = 'effectHeal';
+    public const string DEFAULT_MESSAGE_METHOD  = 'heal';
+    public const string EFFECT_MESSAGE_METHOD   = 'effectHeal';
 
     /**
      * @var int

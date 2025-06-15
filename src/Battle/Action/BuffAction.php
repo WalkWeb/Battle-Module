@@ -11,52 +11,52 @@ use Battle\Unit\UnitInterface;
 
 class BuffAction extends AbstractAction
 {
-    public const MAX_LIFE                = 'multiplierMaxLife';
-    public const MAX_MANA                = 'multiplierMaxMana';
-    public const ADD_DAMAGE_MULTIPLIER   = 'addDamageMultiplier';
-    public const PHYSICAL_DAMAGE         = 'multiplierPhysicalDamage';
-    public const FIRE_DAMAGE             = 'multiplierFireDamage';
-    public const WATER_DAMAGE            = 'multiplierWaterDamage';
-    public const AIR_DAMAGE              = 'multiplierAirDamage';
-    public const EARTH_DAMAGE            = 'multiplierEarthDamage';
-    public const LIFE_DAMAGE             = 'multiplierLifeDamage';
-    public const DEATH_DAMAGE            = 'multiplierDeathDamage';
-    public const ATTACK_SPEED            = 'multiplierAttackSpeed';
-    public const CAST_SPEED              = 'multiplierCastSpeed';
-    public const ACCURACY                = 'multiplierAccuracy';
-    public const MAGIC_ACCURACY          = 'multiplierMagicAccuracy';
-    public const DEFENSE                 = 'multiplierDefense';
-    public const MAGIC_DEFENSE           = 'multiplierMagicDefense';
-    public const CRITICAL_CHANCE         = 'multiplierCriticalChance';
-    public const ADD_CRITICAL_CHANCE     = 'addCriticalChance';
-    public const ADD_CRITICAL_MULTIPLIER = 'addCriticalMultiplier';
-    public const ADD_BLOCK               = 'addBlock';
-    public const ADD_MAGIC_BLOCK         = 'addMagicBlock';
-    public const ADD_BLOCK_IGNORE        = 'addBlockIgnore';
-    public const ADD_VAMPIRISM           = 'addVampirism';
-    public const ADD_MAGIC_VAMPIRISM     = 'addMagicVampirism';
-    public const ADD_PHYSICAL_RESIST     = 'addPhysicalResist';
-    public const ADD_FIRE_RESIST         = 'addFireResist';
-    public const ADD_WATER_RESIST        = 'addWaterResist';
-    public const ADD_AIR_RESIST          = 'addAirResist';
-    public const ADD_EARTH_RESIST        = 'addEarthResist';
-    public const ADD_LIFE_RESIST         = 'addLifeResist';
-    public const ADD_DEATH_RESIST        = 'addDeathResist';
-    public const ADD_PHYSICAL_MAX_RESIST = 'addPhysicalMaxResist';
-    public const ADD_FIRE_MAX_RESIST     = 'addFireMaxResist';
-    public const ADD_WATER_MAX_RESIST    = 'addWaterMaxResist';
-    public const ADD_AIR_MAX_RESIST      = 'addAirMaxResist';
-    public const ADD_EARTH_MAX_RESIST    = 'addEarthMaxResist';
-    public const ADD_LIFE_MAX_RESIST     = 'addLifeMaxResist';
-    public const ADD_DEATH_MAX_RESIST    = 'addDeathMaxResist';
-    public const ADD_GLOBAL_RESIST       = 'addGlobalResist';
-    public const ADD_MENTAL_BARRIER      = 'addMentalBarrier';
-    public const ADD_CONCENTRATION       = 'addMultiplierConcentration';
-    public const ADD_CUNNING             = 'addMultiplierCunning';
-    public const ADD_RAGE                = 'addMultiplierRage';
+    public const string MAX_LIFE                = 'multiplierMaxLife';
+    public const string MAX_MANA                = 'multiplierMaxMana';
+    public const string ADD_DAMAGE_MULTIPLIER   = 'addDamageMultiplier';
+    public const string PHYSICAL_DAMAGE         = 'multiplierPhysicalDamage';
+    public const string FIRE_DAMAGE             = 'multiplierFireDamage';
+    public const string WATER_DAMAGE            = 'multiplierWaterDamage';
+    public const string AIR_DAMAGE              = 'multiplierAirDamage';
+    public const string EARTH_DAMAGE            = 'multiplierEarthDamage';
+    public const string LIFE_DAMAGE             = 'multiplierLifeDamage';
+    public const string DEATH_DAMAGE            = 'multiplierDeathDamage';
+    public const string ATTACK_SPEED            = 'multiplierAttackSpeed';
+    public const string CAST_SPEED              = 'multiplierCastSpeed';
+    public const string ACCURACY                = 'multiplierAccuracy';
+    public const string MAGIC_ACCURACY          = 'multiplierMagicAccuracy';
+    public const string DEFENSE                 = 'multiplierDefense';
+    public const string MAGIC_DEFENSE           = 'multiplierMagicDefense';
+    public const string CRITICAL_CHANCE         = 'multiplierCriticalChance';
+    public const string ADD_CRITICAL_CHANCE     = 'addCriticalChance';
+    public const string ADD_CRITICAL_MULTIPLIER = 'addCriticalMultiplier';
+    public const string ADD_BLOCK               = 'addBlock';
+    public const string ADD_MAGIC_BLOCK         = 'addMagicBlock';
+    public const string ADD_BLOCK_IGNORE        = 'addBlockIgnore';
+    public const string ADD_VAMPIRISM           = 'addVampirism';
+    public const string ADD_MAGIC_VAMPIRISM     = 'addMagicVampirism';
+    public const string ADD_PHYSICAL_RESIST     = 'addPhysicalResist';
+    public const string ADD_FIRE_RESIST         = 'addFireResist';
+    public const string ADD_WATER_RESIST        = 'addWaterResist';
+    public const string ADD_AIR_RESIST          = 'addAirResist';
+    public const string ADD_EARTH_RESIST        = 'addEarthResist';
+    public const string ADD_LIFE_RESIST         = 'addLifeResist';
+    public const string ADD_DEATH_RESIST        = 'addDeathResist';
+    public const string ADD_PHYSICAL_MAX_RESIST = 'addPhysicalMaxResist';
+    public const string ADD_FIRE_MAX_RESIST     = 'addFireMaxResist';
+    public const string ADD_WATER_MAX_RESIST    = 'addWaterMaxResist';
+    public const string ADD_AIR_MAX_RESIST      = 'addAirMaxResist';
+    public const string ADD_EARTH_MAX_RESIST    = 'addEarthMaxResist';
+    public const string ADD_LIFE_MAX_RESIST     = 'addLifeMaxResist';
+    public const string ADD_DEATH_MAX_RESIST    = 'addDeathMaxResist';
+    public const string ADD_GLOBAL_RESIST       = 'addGlobalResist';
+    public const string ADD_MENTAL_BARRIER      = 'addMentalBarrier';
+    public const string ADD_CONCENTRATION       = 'addMultiplierConcentration';
+    public const string ADD_CUNNING             = 'addMultiplierCunning';
+    public const string ADD_RAGE                = 'addMultiplierRage';
 
-    private const HANDLE_METHOD          = 'applyBuffAction';
-    private const DEFAULT_MESSAGE_METHOD = 'buff';
+    private const string HANDLE_METHOD          = 'applyBuffAction';
+    private const string DEFAULT_MESSAGE_METHOD = 'buff';
 
     /**
      * @var string
@@ -76,7 +76,7 @@ class BuffAction extends AbstractAction
     /**
      * @var float|int
      */
-    private $revertValue;
+    private float|int $revertValue = 0;
 
     /**
      * @var string
@@ -140,7 +140,7 @@ class BuffAction extends AbstractAction
         return $this->modifyMethod;
     }
 
-    public function setRevertValue($revertValue): void
+    public function setRevertValue(float|int $revertValue): void
     {
         $this->revertValue = $revertValue;
     }
@@ -148,7 +148,7 @@ class BuffAction extends AbstractAction
     /**
      * @return float|int
      */
-    public function getRevertValue()
+    public function getRevertValue(): float|int
     {
         return $this->revertValue;
     }

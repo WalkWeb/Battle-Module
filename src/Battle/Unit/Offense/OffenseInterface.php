@@ -14,38 +14,38 @@ use Battle\Weapon\Type\WeaponTypeInterface;
  */
 interface OffenseInterface
 {
-    public const TYPE_ATTACK             = 1;
-    public const TYPE_SPELL              = 2;
+    public const int TYPE_ATTACK             = 1;
+    public const int TYPE_SPELL              = 2;
 
-    public const MIN_DAMAGE              = 0;
-    public const MAX_DAMAGE              = 100000;
+    public const int MIN_DAMAGE              = 0;
+    public const int MAX_DAMAGE              = 100000;
 
-    public const MIN_ATTACK_SPEED        = 0.0;
-    public const MAX_ATTACK_SPEED        = 10;
+    public const float MIN_ATTACK_SPEED      = 0.0;
+    public const int MAX_ATTACK_SPEED        = 10;
 
-    public const MIN_CAST_SPEED          = 0.0;
-    public const MAX_CAST_SPEED          = 10;
+    public const float MIN_CAST_SPEED        = 0.0;
+    public const int MAX_CAST_SPEED          = 10;
 
-    public const MIN_ACCURACY            = 1;
-    public const MAX_ACCURACY            = 1000000;
+    public const int MIN_ACCURACY            = 1;
+    public const int MAX_ACCURACY            = 1000000;
 
-    public const MIN_MAGIC_ACCURACY      = 1;
-    public const MAX_MAGIC_ACCURACY      = 1000000;
+    public const int MIN_MAGIC_ACCURACY      = 1;
+    public const int MAX_MAGIC_ACCURACY      = 1000000;
 
-    public const MIN_BLOCK_IGNORING      = 0;
-    public const MAX_BLOCK_IGNORING      = 100;
+    public const int MIN_BLOCK_IGNORING      = 0;
+    public const int MAX_BLOCK_IGNORING      = 100;
 
-    public const MIN_CRITICAL_CHANCE     = 0;
-    public const MAX_CRITICAL_CHANCE     = 100;
+    public const int MIN_CRITICAL_CHANCE     = 0;
+    public const int MAX_CRITICAL_CHANCE     = 100;
 
-    public const MIN_CRITICAL_MULTIPLIER = 0;
-    public const MAX_CRITICAL_MULTIPLIER = 10000;
+    public const int MIN_CRITICAL_MULTIPLIER = 0;
+    public const int MAX_CRITICAL_MULTIPLIER = 10000;
 
-    public const MIN_DAMAGE_MULTIPLIER   = 0;
-    public const MAX_DAMAGE_MULTIPLIER   = 10000;
+    public const int MIN_DAMAGE_MULTIPLIER   = 0;
+    public const int MAX_DAMAGE_MULTIPLIER   = 10000;
 
-    public const MIN_VAMPIRISM           = 0;
-    public const MAX_VAMPIRISM           = 100;
+    public const int MIN_VAMPIRISM           = 0;
+    public const int MAX_VAMPIRISM           = 100;
 
     /**
      * Возвращает тип урона: атака или заклинание
@@ -203,7 +203,7 @@ interface OffenseInterface
     public function setAttackSpeed(float $attackSpeed): void;
 
     /**
-     * Возвращает скорость создания заклинаний (параметр аналогичный скорости атаки но для типа урона заклинание
+     * Возвращает скорость создания заклинаний (параметр аналогичный скорости атаки, но для типа урона заклинание
      *
      * @return float
      */

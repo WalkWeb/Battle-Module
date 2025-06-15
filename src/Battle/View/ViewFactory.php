@@ -21,13 +21,13 @@ class ViewFactory
      *
      * Фабрика простая, и создана для того, чтобы в Stroke отвязаться от конкретной реализации
      *
-     * @param string|null $templateDir
-     * @param string|null $headTemplate
-     * @param string|null $resultTemplate
-     * @param string|null $rowTemplate
-     * @param string|null $unitTemplate
+     * @param string $templateDir
+     * @param string $headTemplate
+     * @param string $resultTemplate
+     * @param string $rowTemplate
+     * @param string $unitTemplate
      * @param string $unitFullLogTemplate
-     * @param string|null $unitsStatsTemplate
+     * @param string $unitsStatsTemplate
      * @return ViewInterface
      * @throws ContainerException
      */

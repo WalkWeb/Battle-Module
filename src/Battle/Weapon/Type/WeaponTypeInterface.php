@@ -42,24 +42,24 @@ use Exception;
  */
 interface WeaponTypeInterface
 {
-    public const NONE                 = 0; // Отсутствие типа оружия, например в уроне от эффекта
-    public const SWORD                = 1;
-    public const AXE                  = 2;
-    public const MACE                 = 3;
-    public const DAGGER               = 4;
-    public const SPEAR                = 5;
-    public const BOW                  = 6;
-    public const STAFF                = 7;
-    public const WAND                 = 8;
-    public const TWO_HAND_SWORD       = 9;
-    public const TWO_HAND_AXE         = 10;
-    public const TWO_HAND_MACE        = 11;
-    public const HEAVY_TWO_HAND_SWORD = 12;
-    public const HEAVY_TWO_HAND_AXE   = 13;
-    public const HEAVY_TWO_HAND_MACE  = 14;
-    public const LANCE                = 15;
-    public const CROSSBOW             = 16;
-    public const UNARMED              = 17; // При сражении простыми кулаками
+    public const int NONE                 = 0; // Отсутствие типа оружия, например в уроне от эффекта
+    public const int SWORD                = 1;
+    public const int AXE                  = 2;
+    public const int MACE                 = 3;
+    public const int DAGGER               = 4;
+    public const int SPEAR                = 5;
+    public const int BOW                  = 6;
+    public const int STAFF                = 7;
+    public const int WAND                 = 8;
+    public const int TWO_HAND_SWORD       = 9;
+    public const int TWO_HAND_AXE         = 10;
+    public const int TWO_HAND_MACE        = 11;
+    public const int HEAVY_TWO_HAND_SWORD = 12;
+    public const int HEAVY_TWO_HAND_AXE   = 13;
+    public const int HEAVY_TWO_HAND_MACE  = 14;
+    public const int LANCE                = 15;
+    public const int CROSSBOW             = 16;
+    public const int UNARMED              = 17; // При сражении простыми кулаками
 
     /**
      * Возвращает ID типа оружия
