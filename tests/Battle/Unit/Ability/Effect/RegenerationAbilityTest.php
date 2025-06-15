@@ -54,7 +54,7 @@ class RegenerationAbilityTest extends AbstractTestCase
 
         self::assertCount(1, $actions);
 
-        foreach ($ability->getActions($enemyCommand, $command) as $i => $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertInstanceOf(EffectAction::class, $action);
             foreach ($action->getEffect()->getOnNextRoundActions() as $effectDamage) {
                 self::assertInstanceOf(HealAction::class, $effectDamage);
@@ -88,7 +88,7 @@ class RegenerationAbilityTest extends AbstractTestCase
 
         self::assertCount(1, $actions);
 
-        foreach ($actions as $i => $action) {
+        foreach ($actions as $action) {
             $scenario = new Scenario();
 
             self::assertInstanceOf(EffectAction::class, $action);

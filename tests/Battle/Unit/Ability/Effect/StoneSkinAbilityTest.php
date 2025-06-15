@@ -72,7 +72,7 @@ class StoneSkinAbilityTest extends AbstractTestCase
 
         self::assertCount(1, $actions);
 
-        foreach ($actions as $i => $action) {
+        foreach ($actions as $action) {
             $scenario = new Scenario();
 
             self::assertInstanceOf(EffectAction::class, $action);

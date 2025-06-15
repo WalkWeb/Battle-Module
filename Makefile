@@ -21,3 +21,8 @@ stan:
 
 cs:
 	@$(DOCKER_COMP) exec -e PHP_CS_FIXER_IGNORE_ENV=1 php-8.4 vendor/bin/php-cs-fixer fix src
+
+rector:
+	@$(DOCKER_COMP) exec php-8.4 vendor/bin/rector
+
+make test: phpunit stan rector cs

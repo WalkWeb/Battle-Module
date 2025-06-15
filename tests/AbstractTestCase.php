@@ -149,7 +149,7 @@ abstract class AbstractTestCase extends TestCase
 
         self::assertCount(1, $actions);
 
-        foreach ($ability->getActions($enemyCommand, $command) as $i => $action) {
+        foreach ($ability->getActions($enemyCommand, $command) as $action) {
             self::assertInstanceOf(EffectAction::class, $action);
             self::assertEquals($name, $action->getNameAction());
             self::assertEquals($icon, $action->getIcon());

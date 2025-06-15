@@ -50,7 +50,7 @@ class EffectCollectionTest extends AbstractTestCase
         $namesExpected = ['Effect#1', 'Effect#2'];
 
         $i = 0;
-        foreach ($collection as $key => $effect) {
+        foreach ($collection as $effect) {
             self::assertEquals($namesExpected[$i], $effect->getName());
             $i++;
         }
