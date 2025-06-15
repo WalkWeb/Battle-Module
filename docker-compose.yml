@@ -1,9 +1,32 @@
 
 services:
 
-  php-8.4:
+  app:
     build: ./docker/php-8.4
-    container_name: php-8.4
+    container_name: app
     volumes:
       - ./:/app
       - ./docker/php-8.4/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+    networks:
+      - battle-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    environment:
+      TZ: "Europe/Moscow"
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/app
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./docker/nginx/ssl/:/etc/nginx/ssl/
+    links:
+      - app
+    networks:
+      - battle-network
+
+networks:
+  battle-network:
+    driver: bridge
+    name: battle-network

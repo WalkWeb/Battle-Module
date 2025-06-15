@@ -7,17 +7,11 @@
 
 # Установка и запуск демо-боя
 
-`git clone https://github.com/WalkWeb/Battle-Module.git battle`
+`git clone https://github.com/WalkWeb/Battle-Module.git .`
 
-`cd battle`
+`make install`
 
-`composer install`
-
-`cd public/`
-
-`php -S localhost:8000`
-
-В браузере открываем `http://localhost:8000/` - отобразится пример боя. Вы можете отредактировать параметры юнитов
+В браузере открываем `http://app.loc/` - отобразится пример боя. Вы можете отредактировать параметры юнитов
 демо-боя в файле `public/index.php`
 
 
