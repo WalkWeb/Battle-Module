@@ -1,18 +1,37 @@
-image: kibatic/symfony
+# Created by WalkWeb, 2025
 
-build:
+image: walkweb/php-8.4-mysql
+
+cache:
+  paths:
+    - vendor/
+
+stages:
+  - build
+  - static analysis
+  - tests
+
+composer install:
   stage: build
-  tags:
-    - gitlab-org
   script:
     - composer install
-  artifacts:
-    paths:
-      - vendor/
 
-test:
-  stage: test
-  tags:
-    - gitlab-org
+code style:
+  stage: static analysis
+  script:
+    - PHP_CS_FIXER_IGNORE_ENV=1 php vendor/bin/php-cs-fixer check src
+
+phpstan:
+  stage: static analysis
+  script:
+    - php -d memory_limit=512M vendor/bin/phpstan analyse src
+
+rector:
+  stage: static analysis
+  script:
+    - php vendor/bin/rector
+
+unit tests:
+  stage: tests
   script:
     - php vendor/bin/phpunit
