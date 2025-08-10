@@ -7,8 +7,6 @@ use Battle\Response\Statistic\UnitStatistic\UnitStatisticCollection;
 
 interface StatisticInterface
 {
-    // Добавить статистику по критическим ударам
-
     /**
      * Увеличивает количество раундов в бою на 1
      */

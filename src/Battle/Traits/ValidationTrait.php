@@ -151,7 +151,7 @@ trait ValidationTrait
             return $default;
         }
 
-        if (array_key_exists($filed, $data) && !is_bool($data[$filed])) {
+        if (!is_bool($data[$filed])) {
             throw new BattleException($error);
         }
 
@@ -342,7 +342,7 @@ trait ValidationTrait
      * @return mixed
      * @throws BattleException
      */
-    protected static function in($param, array $values, string $error)
+    protected static function in($param, array $values, string $error): mixed
     {
         if (in_array($param, $values, true)) {
             return $param;

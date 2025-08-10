@@ -24,10 +24,6 @@ trait AbilityDataTrait
      * Но для создания Actions уже нужна информация по юниту, который делает ход, и о командах. По этому нужные
      * параметры добавляются в момент запроса Actions, когда юнит и команды уже существуют
      *
-     * @param array $data
-     * @param UnitInterface $unit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
      * @throws AbilityException
      */
     private function addParameters(array &$data, UnitInterface $unit, CommandInterface $enemyCommand, CommandInterface $alliesCommand): void
@@ -53,12 +49,6 @@ trait AbilityDataTrait
         }
     }
 
-    /**
-     * @param array $data
-     * @param UnitInterface $unit
-     * @param CommandInterface $enemyCommand
-     * @param CommandInterface $alliesCommand
-     */
     private function addStageParameters(array &$data, UnitInterface $unit, CommandInterface $enemyCommand, CommandInterface $alliesCommand): void
     {
         $data['action_unit'] = $unit;
@@ -72,7 +62,6 @@ trait AbilityDataTrait
      * "on_next_round_actions"
      * "on_disable_actions"
      *
-     * @param array $data
      * @throws AbilityException
      */
     private function validateEffectData(array $data): void

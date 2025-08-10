@@ -24,7 +24,7 @@ class Statistic implements StatisticInterface
      * Дублируется со счетчиком в Battle по той причине, что статистики в бою может и не быть, но подсчет раундов в
      * любом случае нужен
      *
-     * @var int - Количество раундов
+     * Количество раундов
      */
     private int $roundNumber = 1;
 
@@ -32,33 +32,27 @@ class Statistic implements StatisticInterface
      * Дублируется со счетчиком в Battle по той причине, что статистики в бою может и не быть, но подсчет ходов в любом
      * случае нужен
      *
-     * @var int - Количество ходов
+     * Количество ходов
      */
     private int $strokeNumber = 1;
 
     /**
-     * @var UnitStatisticCollection - Статистика по юнитам
+     * Статистика по юнитам
      */
     private UnitStatisticCollection $unitsStatistics;
 
     /**
      * Время начала боя
-     *
-     * @var float
      */
-    private $startTime;
+    private float $startTime;
 
     /**
      * Затраченное время на выполнения боя
-     *
-     * @var float|null
      */
     private ?float $runtime = null;
 
     /**
      * Затраченная память на начало боя
-     *
-     * @var int
      */
     private int $startMemory;
 
@@ -99,7 +93,6 @@ class Statistic implements StatisticInterface
     /**
      * Добавляет действие юнита для расчета суммарного полученного и нанесенного урона
      *
-     * @param ActionInterface $action
      * @throws ActionException
      * @throws StatisticException
      */
@@ -124,17 +117,12 @@ class Statistic implements StatisticInterface
 
     /**
      * Возвращает статистику по всем юнитам
-     *
-     * @return UnitStatisticCollection
      */
     public function getUnitsStatistics(): UnitStatisticCollection
     {
         return $this->unitsStatistics;
     }
 
-    /**
-     * @return float
-     */
     public function getRuntime(): float
     {
         if ($this->runtime === null) {
@@ -144,9 +132,6 @@ class Statistic implements StatisticInterface
         return $this->runtime;
     }
 
-    /**
-     * @return int
-     */
     public function getMemoryCost(): int
     {
         if ($this->memoryCost === null) {
@@ -156,9 +141,6 @@ class Statistic implements StatisticInterface
         return $this->memoryCost;
     }
 
-    /**
-     * @return string
-     */
     public function getMemoryCostClipped(): string
     {
         return $this->convert($this->getMemoryCost());
@@ -167,8 +149,6 @@ class Statistic implements StatisticInterface
     /**
      * Возвращает статистику по конкретному юниту
      *
-     * @param string $name
-     * @return UnitStatisticInterface
      * @throws StatisticException
      */
     private function getUnitStatistics(string $name): UnitStatisticInterface
@@ -179,7 +159,6 @@ class Statistic implements StatisticInterface
     /**
      * Суммирует нанесенный юнитом урон
      *
-     * @param ActionInterface $action
      * @throws StatisticException
      * @throws ActionException
      */
@@ -203,7 +182,6 @@ class Statistic implements StatisticInterface
     /**
      * Суммирует полученный урон юнитом
      *
-     * @param ActionInterface $action
      * @throws ActionException
      * @throws StatisticException
      */
@@ -220,7 +198,6 @@ class Statistic implements StatisticInterface
     /**
      * Подсчитывает заблокированные удары
      *
-     * @param ActionInterface $action
      * @throws ActionException
      * @throws StatisticException
      */
@@ -237,7 +214,6 @@ class Statistic implements StatisticInterface
     /**
      * Подсчитывает удары от которых юнит уклонился
      *
-     * @param ActionInterface $action
      * @throws ActionException
      * @throws StatisticException
      */
@@ -254,7 +230,6 @@ class Statistic implements StatisticInterface
     /**
      * Суммирует суммарное лечение юнитом
      *
-     * @param ActionInterface $action
      * @throws StatisticException
      */
     private function countingHeal(ActionInterface $action): void
@@ -268,7 +243,6 @@ class Statistic implements StatisticInterface
     }
 
     /**
-     * @param ActionInterface $action
      * @throws StatisticException
      */
     private function countingSummons(ActionInterface $action): void
@@ -288,7 +262,6 @@ class Statistic implements StatisticInterface
      *
      * Соответственно UnitStatistic всегда будет создан, и ему достаточно добавить количество воскрешений
      *
-     * @param ActionInterface $action
      * @throws StatisticException
      */
     private function countingResurrections(ActionInterface $action): void
@@ -297,10 +270,6 @@ class Statistic implements StatisticInterface
         $unit->addResurrection();
     }
 
-    /**
-     * @param int $size
-     * @return string
-     */
     private function convert(int $size): string
     {
         $unit = ['byte', 'kb', 'mb', 'gb', 'tb', 'pb'];
@@ -309,8 +278,6 @@ class Statistic implements StatisticInterface
     }
 
     /**
-     * @param UnitInterface $unit
-     * @return UnitStatisticInterface
      * @throws StatisticException
      */
     private function getOrCreateUnitStatistic(UnitInterface $unit): UnitStatisticInterface

@@ -12,7 +12,7 @@ COMPOSER = $(PHP_CONT) composer
 
 install:
 	docker compose up -d
-	@$(PHP_CONT) composer install
+	@$(COMPOSER) install
 
 up:
 	docker compose up -d

@@ -110,7 +110,7 @@ class Stroke implements StrokeInterface
                 $this->runAction($action);
             }
 
-            // Если юнит умер после применении эффекта - дальнейшие эффекты применять не нужно
+            // Если юнит умер после применения эффекта - дальнейшие эффекты применять не нужно
             if (!$this->actionUnit->isAlive()) {
                 break;
             }

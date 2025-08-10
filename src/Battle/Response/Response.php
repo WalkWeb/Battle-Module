@@ -15,34 +15,19 @@ use Battle\Translation\TranslationInterface;
 
 class Response implements ResponseInterface
 {
-    /**
-     * @var CommandInterface
-     */
     private CommandInterface $startLeftCommand;
 
-    /**
-     * @var CommandInterface
-     */
     private CommandInterface $startRightCommand;
 
-    /**
-     * @var CommandInterface
-     */
     private CommandInterface $endLeftCommand;
 
-    /**
-     * @var CommandInterface
-     */
     private CommandInterface $endRightCommand;
 
     /**
-     * @var int - Победившая команда: 1 - левая команда, 2 - правая команда
+     * Победившая команда: 1 - левая команда, 2 - правая команда
      */
     private int $winner;
 
-    /**
-     * @var ContainerInterface
-     */
     private ContainerInterface $container;
 
     /**
@@ -105,7 +90,6 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return FullLogInterface
      * @throws ContainerException
      */
     public function getFullLog(): FullLogInterface
@@ -114,7 +98,6 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return ChatInterface
      * @throws ContainerException
      */
     public function getChat(): ChatInterface
@@ -123,7 +106,6 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return StatisticInterface
      * @throws ContainerException
      */
     public function getStatistic(): StatisticInterface
@@ -132,7 +114,6 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return TranslationInterface
      * @throws ContainerException
      */
     public function getTranslation(): TranslationInterface
@@ -141,7 +122,6 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return ScenarioInterface
      * @throws ContainerException
      */
     public function getScenario(): ScenarioInterface
@@ -149,9 +129,6 @@ class Response implements ResponseInterface
         return $this->container->getScenario();
     }
 
-    /**
-     * @return ContainerInterface
-     */
     public function getContainer(): ContainerInterface
     {
         return $this->container;

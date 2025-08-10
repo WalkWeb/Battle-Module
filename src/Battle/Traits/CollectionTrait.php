@@ -24,7 +24,7 @@ namespace Battle\Traits;
  */
 trait CollectionTrait
 {
-    public function key(): mixed
+    public function key(): string|int|null
     {
         return key($this->elements);
     }

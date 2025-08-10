@@ -31,26 +31,17 @@ class UnitStatisticCollection implements Iterator, Countable
         $this->elements[$unitStatistic->getUnit()->getId()] = $unitStatistic;
     }
 
-    /**
-     * @return UnitStatisticInterface
-     */
     public function current(): UnitStatisticInterface
     {
         return current($this->elements);
     }
 
-    /**
-     * @param string $id
-     * @return bool
-     */
     public function exist(string $id): bool
     {
         return array_key_exists($id, $this->elements);
     }
 
     /**
-     * @param string $id
-     * @return UnitStatisticInterface
      * @throws StatisticException
      */
     public function get(string $id): UnitStatisticInterface
