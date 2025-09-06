@@ -29,7 +29,7 @@ phpstan:
 rector:
   stage: static analysis
   script:
-    - php vendor/bin/rector
+    - php vendor/bin/rector -n
 
 unit tests:
   stage: tests
